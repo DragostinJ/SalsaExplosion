@@ -1,0 +1,219 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Required for Supabase connection pooling (PgBouncer)
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+enum DanceLevel {
+  BEGINNER
+  IMPROVER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum DanceStyle {
+  CUBAN_SALSA
+}
+
+enum DanceRole {
+  LEAD
+  FOLLOW
+  SOLO // For footwork/styling classes
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  ATTENDED
+  NO_SHOW
+  WAITLISTED
+}
+
+enum SubmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  INCOMPLETE
+}
+
+enum TransactionType {
+  CREDIT_PACK_PURCHASE
+  SUBSCRIPTION_RENEWAL
+  CLASS_BOOKING_DEDUCTION
+  CLASS_CANCELLATION_REFUND
+  ADMIN_ADJUSTMENT
+}
+
+// ==========================================
+// MODELS
+// ==========================================
+
+model User {
+  id               String     @id @default(cuid())
+  clerkId          String     @unique
+  email            String     @unique
+  firstName        String
+  lastName         String
+  avatarUrl        String?
+  role             Role       @default(STUDENT)
+  
+  // Progression & Credits
+  currentLevel     DanceLevel @default(BEGINNER)
+  preferredRole    DanceRole  @default(LEAD)
+  classCredits     Int        @default(0)
+  
+  // Stripe Integration
+  stripeCustomerId String?    @unique
+
+  // Relations
+  taughtClasses    ClassSession[]    @relation("InstructorClasses")
+  bookings         Booking[]
+  submissions      VideoSubmission[] @relation("StudentSubmissions")
+  reviews          VideoSubmission[] @relation("InstructorReviews")
+  subscription     Subscription?
+  transactions     CreditLedger[]
+
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  @@index([clerkId])
+  @@index([role])
+}
+
+model ClassSession {
+  id             String     @id @default(cuid())
+  title          String     // e.g., "Cuban Salsa Casino & Rueda"
+  description    String?
+  style          DanceStyle @default(CUBAN_SALSA)
+  minLevel       DanceLevel @default(BEGINNER)
+  
+  // Scheduling
+  startTime      DateTime
+  endTime        DateTime
+  room           String     @default("Studio A")
+  
+  // Capacity Management
+  maxCapacity    Int        // Total hard cap
+  maxLeads       Int?       // Optional cap for Leads
+  maxFollows     Int?       // Optional cap for Follows
+  bookedCount    Int        @default(0) // Denormalized for fast read locks
+  
+  // Pricing
+  creditCost     Int        @default(1)
+  isCancelled    Boolean    @default(false)
+
+  // Relations
+  instructorId   String
+  instructor     User       @relation("InstructorClasses", fields: [instructorId], references: [id], onDelete: Restrict)
+  bookings       Booking[]
+
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@index([startTime, style, minLevel])
+  @@index([instructorId])
+}
+
+model Booking {
+  id             String        @id @default(cuid())
+  userId         String
+  classSessionId String
+  danceRole      DanceRole     // Role booked for this specific class
+  status         BookingStatus @default(CONFIRMED)
+  
+  checkedInAt    DateTime?
+  cancelledAt    DateTime?
+
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classSession   ClassSession  @relation(fields: [classSessionId], references: [id], onDelete: Cascade)
+
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  // Prevent double-booking the exact same class
+  @@unique([userId, classSessionId])
+  @@index([classSessionId, status])
+  @@index([userId, status])
+}
+
+model VideoSubmission {
+  id             String           @id @default(cuid())
+  studentId      String
+  instructorId   String?          // Populated when an instructor claims/grades it
+  
+  style          DanceStyle       @default(CUBAN_SALSA)
+  currentLevel   DanceLevel       // Snapshot of student's level at submission
+  targetLevel    DanceLevel       // Level the student is applying for
+  
+  videoUrl       String           // Supabase Storage path or Mux Playback ID
+  studentNotes   String?          @db.Text
+  
+  status         SubmissionStatus @default(PENDING)
+  feedback       String?          @db.Text // Required if REJECTED
+  reviewedAt     DateTime?
+
+  student        User             @relation("StudentSubmissions", fields: [studentId], references: [id], onDelete: Cascade)
+  instructor     User?            @relation("InstructorReviews", fields: [instructorId], references: [id], onDelete: SetNull)
+
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@index([studentId, status])
+  @@index([status, createdAt])
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String             @unique
+  stripeSubscriptionId String             @unique
+  stripePriceId        String
+  status               SubscriptionStatus
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean            @default(false)
+
+  user                 User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+}
+
+model CreditLedger {
+  id                    String          @id @default(cuid())
+  userId                String
+  amount                Int             // Positive for additions, negative for deductions
+  balanceAfter          Int             // Snapshot of user.classCredits after tx
+  type                  TransactionType
+  description           String?
+  
+  // Idempotency & Audit Links
+  stripePaymentIntentId String?         @unique
+  bookingId             String?
+
+  user                  User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt             DateTime        @default(now())
+
+  @@index([userId, createdAt])
+}

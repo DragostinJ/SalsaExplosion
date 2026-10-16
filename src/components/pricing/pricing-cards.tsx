@@ -1,6 +1,8 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Check,
   Sparkles,
@@ -8,6 +10,7 @@ import {
   Loader2,
   AlertCircle,
   Settings,
+  CalendarDays,
 } from "lucide-react";
 import {
   createCheckoutSessionAction,
@@ -38,6 +41,7 @@ export function PricingCards({
   hasActiveSubscription,
   currentCredits,
 }: PricingCardsProps) {
+  const router = useRouter();
   const [activePackageId, setActivePackageId] = React.useState<
     PackageId | "PORTAL" | null
   >(null);
@@ -59,7 +63,12 @@ export function PricingCards({
         return;
       }
 
-      window.location.assign(response.data.url);
+      if (response.data.url.startsWith("/")) {
+        router.push(response.data.url);
+        router.refresh();
+      } else {
+        window.location.assign(response.data.url);
+      }
     });
   };
 
@@ -76,7 +85,11 @@ export function PricingCards({
         return;
       }
 
-      window.location.assign(response.data.url);
+      if (response.data.url.startsWith("/")) {
+        router.push(response.data.url);
+      } else {
+        window.location.assign(response.data.url);
+      }
     });
   };
 
@@ -91,28 +104,37 @@ export function PricingCards({
             <strong className="font-semibold">{currentCredits} Credits</strong>
           </span>
           {hasActiveSubscription && (
-            <Badge className="bg-emerald-600 text-white">
+            <Badge className="bg-emerald-700 text-white">
               Unlimited Membership Active
             </Badge>
           )}
         </div>
 
-        {hasActiveSubscription && (
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            disabled={isPending}
-            onClick={handleOpenBillingPortal}
-          >
-            {isPending && activePackageId === "PORTAL" ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              <Settings className="mr-2 h-4 w-4" />
-            )}
-            Manage Subscription in Stripe
+        <div className="flex flex-wrap items-center gap-2">
+          <Button variant="outline" size="sm" asChild className="text-xs font-semibold">
+            <Link href="/dashboard/schedule">
+              <CalendarDays className="mr-1.5 h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+              Go to Class Schedule
+            </Link>
           </Button>
-        )}
+
+          {hasActiveSubscription && (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={isPending}
+              onClick={handleOpenBillingPortal}
+            >
+              {isPending && activePackageId === "PORTAL" ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Settings className="mr-2 h-4 w-4" />
+              )}
+              Manage Subscription in Stripe
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Error Alert */}

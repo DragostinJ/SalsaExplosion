@@ -11,10 +11,12 @@ import {
   CalendarCheck,
   X,
   ArrowRight,
+  HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { updateMyDanceRolePreferenceAction } from "@/actions/management.actions";
+import { triggerStudioTutorial } from "@/components/onboarding/interactive-tutorial-modal";
 
 interface NewDancerOnboardingProps {
   studentName: string;
@@ -54,10 +56,10 @@ export function NewDancerOnboarding({
 
   return (
     <section className="relative overflow-hidden rounded-3xl border border-amber-500/35 bg-gradient-to-br from-amber-500/[0.08] via-background to-orange-500/[0.05] p-6 shadow-sm">
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
         <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/15 px-3 py-1 text-xs font-bold text-amber-600 dark:text-amber-400">
-            <Flame className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/15 px-3 py-1 text-xs font-bold text-amber-800 dark:text-amber-300">
+            <Flame className="h-3.5 w-3.5 fill-amber-500 text-amber-600" />
             <span>First 60 Seconds • New Dancer Welcome Guide</span>
           </div>
           <h2 className="text-lg font-extrabold tracking-tight sm:text-xl">
@@ -68,16 +70,27 @@ export function NewDancerOnboarding({
           </p>
         </div>
 
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => setDismissed(true)}
-          className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground shrink-0"
-        >
-          <X className="h-4 w-4 mr-1" />
-          Hide Guide
-        </Button>
+        <div className="flex items-center gap-2 shrink-0">
+          <Button
+            type="button"
+            size="sm"
+            onClick={triggerStudioTutorial}
+            className="h-8 bg-amber-500 text-zinc-950 hover:bg-amber-400 text-xs font-bold shadow-xs"
+          >
+            <HelpCircle className="h-3.5 w-3.5 mr-1.5" />
+            Interactive Studio Tour
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => setDismissed(true)}
+            className="h-8 px-2 text-xs text-muted-foreground hover:text-foreground shrink-0"
+          >
+            <X className="h-4 w-4 mr-1" />
+            Hide
+          </Button>
+        </div>
       </div>
 
       {/* 3-Step Visual Progression */}

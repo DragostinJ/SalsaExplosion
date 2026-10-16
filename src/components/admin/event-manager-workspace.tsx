@@ -268,6 +268,7 @@ export function EventManagerWorkspace({
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <input
                   type="text"
+                  aria-label="Scan or search QR hash or dancer name"
                   value={searchQrOrName}
                   onChange={(e) => setSearchQrOrName(e.target.value)}
                   placeholder="Scan or search QR hash (RF-PASS-...) or dancer name..."
@@ -296,8 +297,8 @@ export function EventManagerWorkspace({
                         <Badge
                           className={
                             reg.role === DanceRole.LEAD
-                              ? "bg-blue-600 text-white text-[10px]"
-                              : "bg-rose-500 text-white text-[10px]"
+                              ? "bg-blue-700 text-white text-[10px]"
+                              : "bg-rose-700 text-white text-[10px]"
                           }
                         >
                           {reg.role}
@@ -319,8 +320,8 @@ export function EventManagerWorkspace({
                       }
                       className={
                         reg.checkedIn
-                          ? "border-emerald-500/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-bold text-xs"
-                          : "bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
+                          ? "border-emerald-500/40 bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 font-bold text-xs"
+                          : "bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs"
                       }
                     >
                       {reg.checkedIn ? (
@@ -343,14 +344,14 @@ export function EventManagerWorkspace({
 
           {/* Published Events List */}
           <div className="space-y-2.5">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground px-1">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground px-1">
               Published Guest Artist Events ({initialEvents.length})
-            </h3>
+            </h2>
             {initialEvents.map((ev) => (
               <Card key={ev.id} className="border shadow-xs">
                 <CardContent className="p-4 flex items-center justify-between gap-4">
                   <div>
-                    <h4 className="text-sm font-bold">{ev.title}</h4>
+                    <h3 className="text-sm font-bold">{ev.title}</h3>
                     <p className="text-xs text-muted-foreground">
                       {ev.guestArtists.join(" • ")} — {ev.totalRegistrations}{" "}
                       passes sold (£{ev.grossRevenuePounds})
@@ -388,6 +389,7 @@ export function EventManagerWorkspace({
                   <label className="font-semibold">Event Title</label>
                   <input
                     type="text"
+                    aria-label="Event Title"
                     required
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -399,6 +401,7 @@ export function EventManagerWorkspace({
                   <label className="font-semibold">URL Slug</label>
                   <input
                     type="text"
+                    aria-label="URL Slug"
                     required
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
@@ -412,6 +415,7 @@ export function EventManagerWorkspace({
                   </label>
                   <input
                     type="text"
+                    aria-label="Guest Artists"
                     required
                     value={guestArtistsCsv}
                     onChange={(e) => setGuestArtistsCsv(e.target.value)}
@@ -424,6 +428,7 @@ export function EventManagerWorkspace({
                     <label className="font-semibold">Venue Name</label>
                     <input
                       type="text"
+                      aria-label="Venue Name"
                       required
                       value={venueName}
                       onChange={(e) => setVenueName(e.target.value)}
@@ -434,6 +439,7 @@ export function EventManagerWorkspace({
                     <label className="font-semibold">Venue Address</label>
                     <input
                       type="text"
+                      aria-label="Venue Address"
                       required
                       value={venueAddress}
                       onChange={(e) => setVenueAddress(e.target.value)}
@@ -447,6 +453,7 @@ export function EventManagerWorkspace({
                     <label className="font-semibold">Start Date</label>
                     <input
                       type="date"
+                      aria-label="Start Date"
                       required
                       value={startDateIso}
                       onChange={(e) => setStartDateIso(e.target.value)}
@@ -457,6 +464,7 @@ export function EventManagerWorkspace({
                     <label className="font-semibold">End Date</label>
                     <input
                       type="date"
+                      aria-label="End Date"
                       required
                       value={endDateIso}
                       onChange={(e) => setEndDateIso(e.target.value)}
@@ -470,6 +478,7 @@ export function EventManagerWorkspace({
                     <label className="font-semibold">Full Pass Price (£)</label>
                     <input
                       type="number"
+                      aria-label="Full Pass Price"
                       min={10}
                       value={fullPassPricePounds}
                       onChange={(e) =>
@@ -484,6 +493,7 @@ export function EventManagerWorkspace({
                     </label>
                     <input
                       type="number"
+                      aria-label="Full Pass Capacity"
                       min={10}
                       value={fullPassCapacity}
                       onChange={(e) =>
@@ -499,6 +509,7 @@ export function EventManagerWorkspace({
                     <label className="font-semibold">Party Pass Price (£)</label>
                     <input
                       type="number"
+                      aria-label="Party Pass Price"
                       min={5}
                       value={partyPassPricePounds}
                       onChange={(e) =>
@@ -511,6 +522,7 @@ export function EventManagerWorkspace({
                     <label className="font-semibold">Party Pass Capacity</label>
                     <input
                       type="number"
+                      aria-label="Party Pass Capacity"
                       min={10}
                       value={partyPassCapacity}
                       onChange={(e) =>
@@ -525,6 +537,7 @@ export function EventManagerWorkspace({
                   <label className="font-semibold">Description</label>
                   <textarea
                     rows={3}
+                    aria-label="Event Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     className="w-full rounded-xl border bg-background px-3 py-2"

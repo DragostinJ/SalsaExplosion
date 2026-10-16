@@ -20,6 +20,7 @@ import {
 
 import type { Role } from "@prisma/client";
 import { switchMyAccountRoleAction } from "@/actions/management.actions";
+import { InteractiveTutorialModal } from "@/components/onboarding/interactive-tutorial-modal";
 
 interface SiteHeaderProps {
   role: Role | null;
@@ -125,16 +126,16 @@ export function SiteHeader({ role }: SiteHeaderProps) {
             </div>
             <div className="flex flex-col">
               <span className="text-base font-extrabold leading-none tracking-tight">
-                Ritmo<span className="text-amber-500">Flow</span>
+                Ritmo<span className="text-amber-700 dark:text-amber-400">Flow</span>
               </span>
-              <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest mt-0.5">
+              <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
                 Cuban Salsa
               </span>
             </div>
           </Link>
 
           {/* Desktop Segmented Navigation: Student | Instructor | Admin */}
-          <nav className="hidden xl:flex items-center gap-3">
+          <nav aria-label="Primary Navigation" className="hidden xl:flex items-center gap-3">
             {/* Student Links */}
             <div className="flex items-center gap-0.5">
               {studentLinks.map((item) => {
@@ -145,7 +146,7 @@ export function SiteHeader({ role }: SiteHeaderProps) {
                     href={item.href}
                     className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                       item.active
-                        ? "bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold"
+                        ? "bg-amber-500/20 text-amber-900 dark:text-amber-300 font-bold"
                         : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
                     }`}
                   >
@@ -160,64 +161,68 @@ export function SiteHeader({ role }: SiteHeaderProps) {
 
             {/* Instructor Menu Group */}
             {isStaff && (
-            <div className="flex items-center gap-1 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] px-2 py-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 px-1.5">
-                Instructor:
-              </span>
-              {instructorLinks.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors ${
-                      item.active
-                        ? "bg-emerald-600 text-white shadow-xs"
-                        : "text-muted-foreground hover:bg-emerald-500/10 hover:text-foreground"
-                    }`}
-                  >
-                    <Icon className="h-3 w-3" />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
+              <div className="flex items-center gap-1 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.05] px-2 py-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 px-1.5">
+                  Instructor:
+                </span>
+                {instructorLinks.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors ${
+                        item.active
+                          ? "bg-emerald-700 text-white shadow-xs"
+                          : "text-muted-foreground hover:bg-emerald-500/10 hover:text-foreground"
+                      }`}
+                    >
+                      <Icon className="h-3 w-3" />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             )}
 
             {/* Admin Menu Group */}
             {isAdmin && (
-            <div className="flex items-center gap-1 rounded-xl border border-amber-500/25 bg-amber-500/[0.05] px-2 py-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 px-1.5">
-                Admin:
-              </span>
-              {adminLinks.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors ${
-                      item.active
-                        ? "bg-amber-500 text-white shadow-xs"
-                        : "text-muted-foreground hover:bg-amber-500/10 hover:text-foreground"
-                    }`}
-                  >
-                    <Icon className="h-3 w-3" />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
+              <div className="flex items-center gap-1 rounded-xl border border-amber-500/30 bg-amber-500/[0.06] px-2 py-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300 px-1.5">
+                  Admin:
+                </span>
+                {adminLinks.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors ${
+                        item.active
+                          ? "bg-amber-500 text-zinc-950 font-bold shadow-xs"
+                          : "text-muted-foreground hover:bg-amber-500/10 hover:text-foreground"
+                      }`}
+                    >
+                      <Icon className="h-3 w-3" />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             )}
           </nav>
         </div>
 
         {/* Right side Actions & User Profile */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2.5 shrink-0">
+          <InteractiveTutorialModal />
+
           {isSignedIn ? (
             <div className="flex items-center gap-2.5">
               {/* Interactive Studio Demo Role Switcher */}
               <div
+                role="group"
+                aria-label="Portal Role Switcher"
                 className="hidden sm:inline-flex items-center rounded-lg border bg-muted/40 p-0.5 text-[11px]"
                 title="Switch active portal role for studio demo"
               >
@@ -232,9 +237,9 @@ export function SiteHeader({ role }: SiteHeaderProps) {
                       className={`rounded-md px-2 py-1 font-bold transition-colors ${
                         isActive
                           ? r === "ADMIN"
-                            ? "bg-amber-500 text-white shadow-xs"
+                            ? "bg-amber-500 text-zinc-950 shadow-xs"
                             : r === "INSTRUCTOR"
-                              ? "bg-emerald-600 text-white shadow-xs"
+                              ? "bg-emerald-700 text-white shadow-xs"
                               : "bg-primary text-primary-foreground shadow-xs"
                           : "text-muted-foreground hover:text-foreground"
                       }`}
@@ -277,8 +282,15 @@ export function SiteHeader({ role }: SiteHeaderProps) {
       </div>
 
       {/* Tablet & Mobile Horizontal Bar */}
-      <div className="flex xl:hidden overflow-x-auto border-t px-4 py-2 gap-1.5 bg-muted/20 scrollbar-none items-center">
-        {[...studentLinks, ...(isStaff ? instructorLinks : []), ...(isAdmin ? adminLinks : [])].map((item) => {
+      <nav
+        aria-label="Mobile Navigation"
+        className="flex xl:hidden overflow-x-auto border-t px-4 py-2 gap-1.5 bg-muted/20 scrollbar-none items-center"
+      >
+        {[
+          ...studentLinks,
+          ...(isStaff ? instructorLinks : []),
+          ...(isAdmin ? adminLinks : []),
+        ].map((item) => {
           const Icon = item.icon;
           return (
             <Link
@@ -286,7 +298,7 @@ export function SiteHeader({ role }: SiteHeaderProps) {
               href={item.href}
               className={`inline-flex items-center gap-1 shrink-0 rounded-md px-2.5 py-1 text-xs font-medium ${
                 item.active
-                  ? "bg-amber-500 text-white font-semibold"
+                  ? "bg-amber-500 text-zinc-950 font-bold"
                   : "bg-background text-muted-foreground border"
               }`}
             >
@@ -295,7 +307,7 @@ export function SiteHeader({ role }: SiteHeaderProps) {
             </Link>
           );
         })}
-      </div>
+      </nav>
     </header>
   );
 }

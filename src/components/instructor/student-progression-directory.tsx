@@ -198,6 +198,7 @@ export function StudentProgressionDirectory({
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
+            aria-label="Search dancer by name or email"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search dancer by name or email..."
@@ -207,6 +208,7 @@ export function StudentProgressionDirectory({
 
         <div className="flex flex-wrap items-center gap-2">
           <select
+            aria-label="Filter dancers by syllabus level"
             value={levelFilter}
             onChange={(e) => setLevelFilter(e.target.value)}
             className="rounded-xl border bg-background px-3 py-2 text-xs font-semibold"
@@ -219,6 +221,7 @@ export function StudentProgressionDirectory({
           </select>
 
           <select
+            aria-label="Filter dancers by dance role"
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
             className="rounded-xl border bg-background px-3 py-2 text-xs font-semibold"
@@ -232,6 +235,7 @@ export function StudentProgressionDirectory({
 
       {/* Student Progression Cards */}
       <div className="space-y-4">
+        <h2 className="sr-only">Dancer Progression Directory</h2>
         {filteredStudents.length === 0 ? (
           <Card className="py-12 text-center">
             <CardContent>
@@ -255,7 +259,7 @@ export function StudentProgressionDirectory({
                     {/* Col 1-4: Student Identity & Role */}
                     <div className="lg:col-span-4 space-y-2">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold text-sm">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-amber-900 dark:text-amber-300 font-bold text-sm">
                           {student.firstName[0]}
                           {student.lastName[0]}
                         </div>
@@ -281,8 +285,8 @@ export function StudentProgressionDirectory({
                         <Badge
                           className={
                             student.preferredRole === DanceRole.LEAD
-                              ? "bg-blue-600 text-white"
-                              : "bg-rose-500 text-white"
+                              ? "bg-blue-700 text-white"
+                              : "bg-rose-700 text-white"
                           }
                         >
                           {student.preferredRole}
@@ -294,7 +298,7 @@ export function StudentProgressionDirectory({
                         {student.pendingSubmissionsCount > 0 && (
                           <Badge
                             variant="outline"
-                            className="border-amber-500 text-amber-600 flex items-center gap-1"
+                            className="border-amber-600 text-amber-800 dark:text-amber-300 flex items-center gap-1"
                           >
                             <Clock className="h-3 w-3" />
                             {student.pendingSubmissionsCount} Video Pending
@@ -309,7 +313,7 @@ export function StudentProgressionDirectory({
                         <span className="font-semibold text-muted-foreground">
                           Syllabus Tier:
                         </span>
-                        <span className="font-extrabold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                        <span className="font-extrabold text-amber-800 dark:text-amber-300 flex items-center gap-1">
                           <Sparkles className="h-3.5 w-3.5" />
                           {student.currentLevel}
                         </span>
@@ -329,7 +333,7 @@ export function StudentProgressionDirectory({
                                 }`}
                               />
                               <span
-                                className={`block text-[9px] text-center font-semibold uppercase ${
+                                className={`block text-[10px] text-center font-semibold uppercase ${
                                   idx === currentStepIndex
                                     ? "text-foreground font-bold"
                                     : "text-muted-foreground"
@@ -358,9 +362,9 @@ export function StudentProgressionDirectory({
                                   student.preferredRole
                                 )
                               }
-                              className={`rounded-md px-2 py-1 text-[10px] font-semibold transition-all ${
+                              className={`rounded-md px-2 py-1 text-[10px] font-bold transition-all ${
                                 isCurrent
-                                  ? "bg-amber-500 text-white shadow-xs cursor-default"
+                                  ? "bg-amber-500 text-zinc-950 shadow-xs cursor-default"
                                   : "border bg-background text-muted-foreground hover:border-amber-500 hover:text-foreground"
                               }`}
                             >
@@ -400,7 +404,7 @@ export function StudentProgressionDirectory({
                           <span>Class Credits:</span>
                         </div>
                         {student.hasActiveSubscription ? (
-                          <Badge className="bg-emerald-600 text-white text-[10px]">
+                          <Badge className="bg-emerald-700 text-white text-[10px]">
                             <ShieldCheck className="mr-1 h-3 w-3" />
                             Unlimited Member
                           </Badge>
@@ -426,7 +430,7 @@ export function StudentProgressionDirectory({
                           }
                           className="h-7 flex-1 text-[11px] font-semibold"
                         >
-                          <PlusCircle className="mr-1 h-3 w-3 text-emerald-500" />
+                          <PlusCircle className="mr-1 h-3 w-3 text-emerald-600" />
                           +1 Pass
                         </Button>
                         <Button
@@ -443,13 +447,15 @@ export function StudentProgressionDirectory({
                           }
                           className="h-7 flex-1 text-[11px] font-semibold"
                         >
-                          <PlusCircle className="mr-1 h-3 w-3 text-amber-500" />
+                          <PlusCircle className="mr-1 h-3 w-3 text-amber-600" />
                           +5 Pack
                         </Button>
                         <Button
                           type="button"
                           variant="outline"
                           size="sm"
+                          aria-label={`Deduct 1 class credit from ${student.firstName} ${student.lastName}`}
+                          title="Deduct 1 Class Credit (-1)"
                           disabled={isPending || student.classCredits <= 0}
                           onClick={() =>
                             handleAdjustCredits(
@@ -460,7 +466,7 @@ export function StudentProgressionDirectory({
                           }
                           className="h-7 px-2 text-[11px] font-semibold"
                         >
-                          <MinusCircle className="h-3 w-3 text-rose-500" />
+                          <MinusCircle className="h-3 w-3 text-rose-600" />
                         </Button>
                       </div>
                     </div>

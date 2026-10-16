@@ -133,6 +133,7 @@ export function ClassManagerWorkspace({
                 <label className="font-semibold">Class Title</label>
                 <input
                   type="text"
+                  aria-label="Class Title"
                   required
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -144,6 +145,7 @@ export function ClassManagerWorkspace({
                 <div className="space-y-1.5">
                   <label className="font-semibold">Syllabus Tier</label>
                   <select
+                    aria-label="Syllabus Tier"
                     value={minLevel}
                     onChange={(e) => setMinLevel(e.target.value as DanceLevel)}
                     className="w-full rounded-xl border bg-background px-3 py-2 font-semibold"
@@ -159,6 +161,7 @@ export function ClassManagerWorkspace({
                   <label className="font-semibold">Studio Room</label>
                   <input
                     type="text"
+                    aria-label="Studio Room"
                     required
                     value={room}
                     onChange={(e) => setRoom(e.target.value)}
@@ -172,6 +175,7 @@ export function ClassManagerWorkspace({
                   <label className="font-semibold">Start Date & Time</label>
                   <input
                     type="datetime-local"
+                    aria-label="Start Date and Time"
                     required
                     value={startTimeIso}
                     onChange={(e) => setStartTimeIso(e.target.value)}
@@ -183,6 +187,7 @@ export function ClassManagerWorkspace({
                   <label className="font-semibold">Duration (Mins)</label>
                   <input
                     type="number"
+                    aria-label="Duration in minutes"
                     min={30}
                     max={240}
                     value={durationMinutes}
@@ -197,6 +202,7 @@ export function ClassManagerWorkspace({
                   <label className="font-semibold">Total Cap</label>
                   <input
                     type="number"
+                    aria-label="Total Capacity"
                     min={4}
                     max={200}
                     value={maxCapacity}
@@ -205,11 +211,12 @@ export function ClassManagerWorkspace({
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="font-semibold text-blue-600 dark:text-blue-400">
+                  <label className="font-semibold text-blue-700 dark:text-blue-300">
                     Max Leads
                   </label>
                   <input
                     type="number"
+                    aria-label="Max Leads"
                     min={2}
                     max={100}
                     value={maxLeads}
@@ -218,11 +225,12 @@ export function ClassManagerWorkspace({
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <label className="font-semibold text-rose-600 dark:text-rose-400">
+                  <label className="font-semibold text-rose-700 dark:text-rose-300">
                     Max Follows
                   </label>
                   <input
                     type="number"
+                    aria-label="Max Follows"
                     min={2}
                     max={100}
                     value={maxFollows}
@@ -236,6 +244,7 @@ export function ClassManagerWorkspace({
                 <label className="font-semibold">Class Description</label>
                 <textarea
                   rows={3}
+                  aria-label="Class Description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   className="w-full rounded-xl border bg-background px-3 py-2"

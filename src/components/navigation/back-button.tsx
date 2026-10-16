@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -12,28 +12,21 @@ interface BackButtonProps {
 
 export function BackButton({
   fallbackUrl = "/dashboard/schedule",
-  label = "Back",
+  label = "Back to Schedule",
   className = "",
 }: BackButtonProps) {
-  const router = useRouter();
-
-  const handleBack = () => {
-    if (typeof window !== "undefined" && window.history.length > 1) {
-      router.back();
-    } else {
-      router.push(fallbackUrl);
-    }
-  };
-
   return (
     <Button
       variant="ghost"
       size="sm"
-      onClick={handleBack}
-      className={`inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground ${className}`}
+      asChild
+      className={`inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground ${className}`}
     >
-      <ArrowLeft className="h-4 w-4" />
-      <span>{label}</span>
+      <Link href={fallbackUrl}>
+        <ArrowLeft className="h-4 w-4" />
+        <span>{label}</span>
+      </Link>
     </Button>
   );
 }
+

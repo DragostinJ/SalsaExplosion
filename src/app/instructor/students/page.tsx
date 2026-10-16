@@ -91,7 +91,7 @@ export default async function InstructorStudentsPage() {
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Student Progression & Studio Directory
             </h1>
-            <Badge className="bg-emerald-600 text-white font-semibold">
+            <Badge className="bg-emerald-700 text-white font-semibold">
               <Users className="mr-1 h-3.5 w-3.5" />
               {serializedStudents.length} Dancers
             </Badge>

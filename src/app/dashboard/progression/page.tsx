@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { auth, currentUser } from "@clerk/nextjs/server";
-import { DanceLevel, DanceRole, Role, SubmissionStatus } from "@prisma/client";
+import { DanceLevel, SubmissionStatus } from "@prisma/client";
 import {
   Sparkles,
   Clock,
@@ -13,7 +12,9 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { StudentVideoUploadDropzone } from "@/components/progression/video-upload-dropzone";
+import { PromotionCertificateCard } from "@/components/progression/promotion-certificate-card";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,44 +27,9 @@ import {
 } from "@/components/ui/card";
 
 export default async function ProgressionPage() {
-  const { userId: clerkId } = await auth();
-  if (!clerkId) {
-    redirect("/sign-in");
-  }
-
-  let user = await prisma.user.findUnique({
-    where: { clerkId },
-    select: {
-      id: true,
-      firstName: true,
-      currentLevel: true,
-      preferredRole: true,
-    },
-  });
-
+  const user = await getOrProvisionCurrentUser();
   if (!user) {
-    const clerkUser = await currentUser();
-    const primaryEmail =
-      clerkUser?.emailAddresses[0]?.emailAddress || `${clerkId}@example.com`;
-
-    user = await prisma.user.create({
-      data: {
-        clerkId,
-        email: primaryEmail,
-        firstName: clerkUser?.firstName || "Salsero",
-        lastName: clerkUser?.lastName || "Dancer",
-        role: Role.STUDENT,
-        currentLevel: DanceLevel.BEGINNER,
-        preferredRole: DanceRole.LEAD,
-        classCredits: 1,
-      },
-      select: {
-        id: true,
-        firstName: true,
-        currentLevel: true,
-        preferredRole: true,
-      },
-    });
+    redirect("/sign-in");
   }
 
   // Fetch all historical submissions for this student (newest first)
@@ -83,6 +49,10 @@ export default async function ProgressionPage() {
   const pendingSubmission = submissions.find(
     (s) => s.status === SubmissionStatus.PENDING
   );
+
+  const approvedCount = submissions.filter(
+    (s) => s.status === SubmissionStatus.APPROVED
+  ).length;
 
   const isMaxLevel = user.currentLevel === DanceLevel.ADVANCED;
 
@@ -116,6 +86,14 @@ export default async function ProgressionPage() {
           </div>
         </div>
       </div>
+
+      {/* Verified Dancer Milestone Certificate / Social Badge */}
+      <PromotionCertificateCard
+        studentName={`${user.firstName} ${user.lastName}`}
+        currentLevel={user.currentLevel}
+        preferredRole={user.preferredRole}
+        approvedCount={approvedCount}
+      />
 
       {/* State 1: Max Level Reached */}
       {isMaxLevel ? (

@@ -1,16 +1,24 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { auth, currentUser } from "@clerk/nextjs/server";
 import {
   BookingStatus,
   DanceLevel,
   DanceRole,
   DanceStyle,
-  Role,
   SubscriptionStatus,
 } from "@prisma/client";
-import { Sparkles, CreditCard, ShieldCheck } from "lucide-react";
+import {
+  Sparkles,
+  CreditCard,
+  ShieldCheck,
+  Users,
+  Video,
+  QrCode,
+  BarChart3,
+  CalendarPlus,
+} from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import {
   ClassScheduleCard,
   ClassScheduleItem,
@@ -32,9 +40,9 @@ const VALID_LEVELS = new Set<string>(Object.values(DanceLevel));
 export default async function StudentSchedulePage({
   searchParams,
 }: SchedulePageProps) {
-  // 1. Authenticate Request
-  const { userId: clerkId } = await auth();
-  if (!clerkId) {
+  // 1. Authenticate & Provision User
+  const user = await getOrProvisionCurrentUser();
+  if (!user) {
     redirect("/sign-in");
   }
 
@@ -49,32 +57,6 @@ export default async function StudentSchedulePage({
     resolvedParams.level && VALID_LEVELS.has(resolvedParams.level)
       ? (resolvedParams.level as DanceLevel)
       : undefined;
-
-  // 3. Fetch Student Profile & Subscription State (with auto-provision fallback)
-  let user = await prisma.user.findUnique({
-    where: { clerkId },
-    include: { subscription: true },
-  });
-
-  if (!user) {
-    const clerkUser = await currentUser();
-    const primaryEmail =
-      clerkUser?.emailAddresses[0]?.emailAddress || `${clerkId}@example.com`;
-
-    user = await prisma.user.create({
-      data: {
-        clerkId,
-        email: primaryEmail,
-        firstName: clerkUser?.firstName || "Salsero",
-        lastName: clerkUser?.lastName || "Dancer",
-        role: Role.STUDENT,
-        currentLevel: DanceLevel.BEGINNER,
-        preferredRole: DanceRole.LEAD,
-        classCredits: 1,
-      },
-      include: { subscription: true },
-    });
-  }
 
   const now = new Date();
   const hasActiveSubscription =
@@ -197,6 +179,71 @@ export default async function StudentSchedulePage({
                 </Link>
               </>
             )}
+          </div>
+        </div>
+      </div>
+
+      {/* Instructor & Studio Admin Quick-Access Command Bar */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="flex flex-col justify-between gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/[0.04] p-4 sm:flex-row sm:items-center">
+          <div>
+            <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+              Instructor Portal
+            </span>
+            <h2 className="text-sm font-bold">
+              Teaching Desk, Progression & QR Roster
+            </h2>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
+              <Link href="/instructor/students">
+                <Users className="mr-1.5 h-3.5 w-3.5 text-emerald-600" />
+                Students
+              </Link>
+            </Button>
+            <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
+              <Link href="/instructor/submissions">
+                <Video className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                Video Queue
+              </Link>
+            </Button>
+            <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
+              <Link href="/instructor/roster">
+                <QrCode className="mr-1.5 h-3.5 w-3.5 text-blue-500" />
+                QR Roster
+              </Link>
+            </Button>
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-between gap-3 rounded-2xl border border-amber-500/30 bg-amber-500/[0.04] p-4 sm:flex-row sm:items-center">
+          <div>
+            <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+              Studio Owner Admin
+            </span>
+            <h2 className="text-sm font-bold">
+              Revenue Charts, Classes & Events
+            </h2>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
+              <Link href="/admin/analytics">
+                <BarChart3 className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                Analytics
+              </Link>
+            </Button>
+            <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
+              <Link href="/admin/classes">
+                <CalendarPlus className="mr-1.5 h-3.5 w-3.5 text-emerald-500" />
+                Classes
+              </Link>
+            </Button>
+            <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
+              <Link href="/admin/events">
+                <Sparkles className="mr-1.5 h-3.5 w-3.5 text-orange-500" />
+                Events Admin
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

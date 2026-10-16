@@ -11,13 +11,17 @@ import {
   BarChart3,
   ClipboardCheck,
   Flame,
+  Users,
+  QrCode,
+  CalendarPlus,
+  ShieldCheck,
 } from "lucide-react";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const { isSignedIn } = useUser();
 
-  const navLinks = [
+  const studentLinks = [
     {
       href: "/dashboard/schedule",
       label: "Schedule",
@@ -28,11 +32,11 @@ export function SiteHeader() {
       href: "/dashboard/progression",
       label: "Progression",
       icon: Award,
-      active: pathname === "/dashboard/progression",
+      active: pathname.startsWith("/dashboard/progression"),
     },
     {
       href: "/events",
-      label: "Events & Artists",
+      label: "Events",
       icon: Sparkles,
       active: pathname.startsWith("/events"),
     },
@@ -42,28 +46,58 @@ export function SiteHeader() {
       icon: CreditCard,
       active: pathname === "/pricing",
     },
+  ];
+
+  const instructorLinks = [
+    {
+      href: "/instructor/students",
+      label: "Students",
+      icon: Users,
+      active: pathname.startsWith("/instructor/students"),
+    },
+    {
+      href: "/instructor/submissions",
+      label: "Video Grading",
+      icon: ClipboardCheck,
+      active: pathname.startsWith("/instructor/submissions"),
+    },
+    {
+      href: "/instructor/roster",
+      label: "QR Roster",
+      icon: QrCode,
+      active: pathname.startsWith("/instructor/roster"),
+    },
+  ];
+
+  const adminLinks = [
     {
       href: "/admin/analytics",
       label: "Analytics",
       icon: BarChart3,
-      active: pathname.startsWith("/admin"),
+      active: pathname.startsWith("/admin/analytics"),
     },
     {
-      href: "/instructor/submissions",
-      label: "Instructor Desk",
-      icon: ClipboardCheck,
-      active: pathname.startsWith("/instructor"),
+      href: "/admin/classes",
+      label: "Classes",
+      icon: CalendarPlus,
+      active: pathname.startsWith("/admin/classes"),
+    },
+    {
+      href: "/admin/events",
+      label: "Events Admin",
+      icon: ShieldCheck,
+      active: pathname.startsWith("/admin/events"),
     },
   ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 gap-4">
         {/* Brand Logo */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 lg:gap-6">
           <Link
             href="/dashboard/schedule"
-            className="flex items-center gap-2 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85"
+            className="flex items-center gap-2 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85 shrink-0"
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-600 to-orange-500 text-white shadow-sm shadow-amber-500/20">
               <Flame className="h-5 w-5 fill-white" />
@@ -78,30 +112,83 @@ export function SiteHeader() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-                    item.active
-                      ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold"
-                      : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
-                  }`}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
+          {/* Desktop Segmented Navigation: Student | Instructor | Admin */}
+          <nav className="hidden xl:flex items-center gap-3">
+            {/* Student Links */}
+            <div className="flex items-center gap-0.5">
+              {studentLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+                      item.active
+                        ? "bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold"
+                        : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                    }`}
+                  >
+                    <Icon className="h-3.5 w-3.5" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+
+            <div className="h-4 w-px bg-border" />
+
+            {/* Instructor Menu Group */}
+            <div className="flex items-center gap-1 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] px-2 py-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 px-1.5">
+                Instructor:
+              </span>
+              {instructorLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors ${
+                      item.active
+                        ? "bg-emerald-600 text-white shadow-xs"
+                        : "text-muted-foreground hover:bg-emerald-500/10 hover:text-foreground"
+                    }`}
+                  >
+                    <Icon className="h-3 w-3" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Admin Menu Group */}
+            <div className="flex items-center gap-1 rounded-xl border border-amber-500/25 bg-amber-500/[0.05] px-2 py-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 px-1.5">
+                Admin:
+              </span>
+              {adminLinks.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors ${
+                      item.active
+                        ? "bg-amber-500 text-white shadow-xs"
+                        : "text-muted-foreground hover:bg-amber-500/10 hover:text-foreground"
+                    }`}
+                  >
+                    <Icon className="h-3 w-3" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </nav>
         </div>
 
         {/* Right side Actions & User Profile */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           {isSignedIn ? (
             <div className="flex items-center gap-3">
               <UserButton
@@ -131,9 +218,9 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* Mobile Navigation Bar */}
-      <div className="flex md:hidden overflow-x-auto border-t px-4 py-2 gap-2 bg-muted/20 scrollbar-none">
-        {navLinks.map((item) => {
+      {/* Tablet & Mobile Horizontal Bar */}
+      <div className="flex xl:hidden overflow-x-auto border-t px-4 py-2 gap-1.5 bg-muted/20 scrollbar-none items-center">
+        {[...studentLinks, ...instructorLinks, ...adminLinks].map((item) => {
           const Icon = item.icon;
           return (
             <Link

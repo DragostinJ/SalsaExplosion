@@ -1,13 +1,13 @@
 import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
-import { Role, SubmissionStatus } from "@prisma/client";
+import { SubmissionStatus } from "@prisma/client";
 import { createClient } from "@supabase/supabase-js";
 import { prisma } from "@/lib/prisma";
+import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import {
   QueueSubmissionItem,
   VideoGradingWorkspace,
 } from "@/components/instructor/video-grading-workspace";
-import { BackButton } from "@/components/navigation/back-button";
+import { InstructorNav } from "@/components/navigation/instructor-nav";
 
 function getSupabaseAdmin() {
   const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -23,22 +23,9 @@ function getSupabaseAdmin() {
 
 export default async function InstructorSubmissionsPage() {
   const supabaseAdmin = getSupabaseAdmin();
-  const { userId: clerkId } = await auth();
-  if (!clerkId) {
+  const currentUser = await getOrProvisionCurrentUser();
+  if (!currentUser) {
     redirect("/sign-in");
-  }
-
-  // Verify Instructor or Admin RBAC
-  const currentUser = await prisma.user.findUnique({
-    where: { clerkId },
-    select: { id: true, role: true },
-  });
-
-  if (
-    !currentUser ||
-    (currentUser.role !== Role.INSTRUCTOR && currentUser.role !== Role.ADMIN)
-  ) {
-    redirect("/dashboard");
   }
 
   // Fetch oldest PENDING submissions first (FIFO queue)
@@ -88,18 +75,15 @@ export default async function InstructorSubmissionsPage() {
   );
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mb-4">
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
-      </div>
+    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
+      <InstructorNav />
 
-      <div className="mb-8">
+      <div className="rounded-2xl border bg-card p-6 shadow-sm">
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-          Student Level-Up Assessments
+          Student Level-Up Assessments & AI Co-Pilot
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Review technique videos, provide timing and frame feedback, and unlock
-          higher class tiers for students.
+          Review technique videos, run AI syllabus pre-grading, provide timing and frame feedback, and unlock higher class tiers for students.
         </p>
       </div>
 

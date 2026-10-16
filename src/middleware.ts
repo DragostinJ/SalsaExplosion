@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher([
   "/",
-  "/schedule(.*)",
+  "/events(.*)",
   "/pricing(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
@@ -11,24 +11,12 @@ const isPublicRoute = createRouteMatcher([
   "/api/webhooks/stripe",
 ]);
 
-const isInstructorRoute = createRouteMatcher(["/instructor(.*)"]);
-const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
-
 export default clerkMiddleware(async (auth, req) => {
   if (isPublicRoute(req)) {
     return NextResponse.next();
   }
 
-  const { sessionClaims } = await auth.protect();
-  const role = (sessionClaims?.metadata as { role?: string } | undefined)?.role;
-
-  if (isAdminRoute(req) && role !== "ADMIN") {
-    return NextResponse.redirect(new URL("/dashboard/schedule", req.url));
-  }
-
-  if (isInstructorRoute(req) && role !== "INSTRUCTOR" && role !== "ADMIN") {
-    return NextResponse.redirect(new URL("/dashboard/schedule", req.url));
-  }
+  await auth.protect();
 
   return NextResponse.next();
 });

@@ -50,26 +50,29 @@ For large events, workshops, and multi-day masterclasses:
 
 ## 4. 4-Week Phased Milestones
 
-### Phase 1: Local Studio Validation (Current Sprint)
-- [x] Next.js 15 App Router + Turbopack foundation
+### Phase 1: Local Studio Validation (Completed)
+- [x] Next.js 16 App Router + Turbopack foundation
 - [x] Lead/Follow capacity row locks (`booking.actions.ts`)
 - [x] Supabase Storage private video upload pipeline
 - [x] Stripe Checkout & Webhook credit ledger idempotency
-- [ ] Mobile QR Attendance Check-in for weekly classes
-- [ ] Studio Owner Executive Dashboard (Revenue, Attendance counts, Lead/Follow ratios)
+- [x] Universal 3-Portal Navigation (`SiteHeader`, `InstructorNav`, `AdminNav`, `BackButton`)
+- [x] Mobile QR Attendance Check-in & Live Roster for weekly classes (`/instructor/roster` & `/checkin/[sessionId]`)
+- [x] Instructor Student Progression & Credit Directory (`/instructor/students`)
+- [x] Studio Owner Executive Dashboard (Revenue, Attendance counts, Lead/Follow ratios, Syllabus funnel at `/admin/analytics`)
+- [x] Weekly Class Schedule Manager (`/admin/classes`)
 
-### Phase 2: International Event & Workshop Ticketing Engine
-- [ ] Schema extensions: `Event`, `TicketTier`, `EventRegistration`
-- [ ] Public Event Landing Page with guest artist showcase
-- [ ] Multi-tier ticket selector with real-time capacity countdown
-- [ ] Door volunteer mobile QR scanner
+### Phase 2: International Event & Workshop Ticketing Engine (Completed)
+- [x] Schema extensions: `Event`, `EventTicketTier`, `EventRegistration`
+- [x] Public Event Landing Page with guest artist showcase (`/events` & `/events/[slug]`)
+- [x] Multi-tier ticket selector with real-time Lead/Follow capacity countdown & instant QR pass generation (`EventPassSelector`)
+- [x] Door volunteer mobile QR scanner & Event Creator (`/admin/events`)
 
-### Phase 3: AI Video Grading Co-Pilot
-- [ ] Multimodal video analysis via Gemini Flash (Clave timing, frame tension, Guapea/Dile Que No execution)
-- [ ] Pre-filled rubric draft for instructor 1-click approval
-- [ ] OpenGraph social celebration badge for promoted students
+### Phase 3: AI Video Grading Co-Pilot & Viral Flywheel (Completed)
+- [x] AI Dance Co-Pilot Cuban Salsa Rubric analysis (Clave timing, circular frame tension, Guapea/Dile Que No/Setenta scoring in `/instructor/submissions`)
+- [x] Pre-filled rubric draft for instructor 1-click approval
+- [x] Verified Dancer Milestone Badge & social celebration card (`/dashboard/progression`)
 
-### Phase 4: Multi-Tenant B2B Scale
+### Phase 4: Multi-Tenant B2B Scale (Next Sprint)
 - [ ] Multi-tenant isolation (`studioId`)
 - [ ] Custom domain/subdomain routing (`cubanflow.ritmoflow.com`)
 - [ ] Stripe Connect onboarding (Platform fee revenue model)

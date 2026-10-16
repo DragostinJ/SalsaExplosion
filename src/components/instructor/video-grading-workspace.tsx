@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { DanceLevel, DanceStyle, SubmissionStatus } from "@prisma/client";
 import { gradeSubmissionAction } from "@/actions/grading.actions";
+import { analyzeSubmissionWithAiAction } from "@/actions/management.actions";
+import { AiRubricEvaluation } from "@/lib/constants/management";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
@@ -80,6 +82,8 @@ export function VideoGradingWorkspace({
   );
   const [feedback, setFeedback] = React.useState<string>("");
   const [playbackRate, setPlaybackRate] = React.useState<number>(1);
+  const [aiEvaluation, setAiEvaluation] =
+    React.useState<AiRubricEvaluation | null>(null);
   const [statusBanner, setStatusBanner] = React.useState<{
     type: "success" | "error";
     text: string;
@@ -103,8 +107,32 @@ export function VideoGradingWorkspace({
   const handleSelectSubmission = (id: string) => {
     setSelectedId(id);
     setFeedback("");
+    setAiEvaluation(null);
     setStatusBanner(null);
     setPlaybackRate(1);
+  };
+
+  const handleRunAiCoPilot = () => {
+    if (!activeSubmission) return;
+    setStatusBanner(null);
+    startTransition(async () => {
+      const res = await analyzeSubmissionWithAiAction({
+        submissionId: activeSubmission.id,
+      });
+      if (res.success) {
+        setAiEvaluation(res.data);
+        setFeedback(res.data.suggestedInstructorFeedback);
+        setStatusBanner({
+          type: "success",
+          text: "AI Co-Pilot pre-graded the video and drafted feedback below!",
+        });
+      } else {
+        setStatusBanner({
+          type: "error",
+          text: res.error.message,
+        });
+      }
+    });
   };
 
   const handleAppendRubric = (snippet: string) => {
@@ -344,6 +372,90 @@ export function VideoGradingWorkspace({
                     </p>
                   </div>
                 )}
+
+                {/* AI Dance Co-Pilot Pre-Grader */}
+                <div className="rounded-2xl border border-amber-500/30 bg-amber-500/[0.04] p-4 space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="h-4 w-4 text-amber-500" />
+                        <span className="text-xs font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-300">
+                          AI Dance Co-Pilot (Cuban Salsa Syllabus Pre-Grader)
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        Evaluates Clave timing (1-2-3 / 5-6-7), circular frame tension, and required {activeSubmission.targetLevel} syllabus figures.
+                      </p>
+                    </div>
+                    <Button
+                      type="button"
+                      size="sm"
+                      disabled={isPending}
+                      onClick={handleRunAiCoPilot}
+                      className="bg-gradient-to-r from-amber-600 to-orange-500 text-white text-xs font-bold shrink-0"
+                    >
+                      {isPending ? (
+                        <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+                      ) : (
+                        <Sparkles className="mr-1.5 h-3.5 w-3.5" />
+                      )}
+                      {aiEvaluation ? "Re-Run AI Co-Pilot" : "Run AI Pre-Grade"}
+                    </Button>
+                  </div>
+
+                  {aiEvaluation && (
+                    <div className="space-y-3 border-t border-amber-500/20 pt-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                        <div className="rounded-xl border bg-background p-2.5">
+                          <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+                            Overall Score
+                          </span>
+                          <span className="text-lg font-extrabold text-amber-600 dark:text-amber-400">
+                            {aiEvaluation.overallScore}/100
+                          </span>
+                        </div>
+                        <div className="rounded-xl border bg-background p-2.5">
+                          <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+                            Clave Timing
+                          </span>
+                          <span className="text-lg font-extrabold text-emerald-600 dark:text-emerald-400">
+                            {aiEvaluation.claveTimingScore}%
+                          </span>
+                        </div>
+                        <div className="rounded-xl border bg-background p-2.5">
+                          <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+                            Circular Frame
+                          </span>
+                          <span className="text-lg font-extrabold text-blue-600 dark:text-blue-400">
+                            {aiEvaluation.circularFrameScore}%
+                          </span>
+                        </div>
+                        <div className="rounded-xl border bg-background p-2.5">
+                          <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+                            Cuban Motion
+                          </span>
+                          <span className="text-lg font-extrabold text-purple-600 dark:text-purple-400">
+                            {aiEvaluation.cubanMotionScore}%
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5">
+                        {aiEvaluation.figureBreakdown.map((fig) => (
+                          <div
+                            key={fig.figureName}
+                            className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 rounded-lg border bg-background/80 px-3 py-2 text-xs"
+                          >
+                            <span className="font-bold">{fig.figureName}</span>
+                            <span className="text-muted-foreground text-[11px]">
+                              {fig.observation} ({fig.score}%)
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
 
                 {/* Quick Rubric Chips */}
                 <div className="space-y-2">

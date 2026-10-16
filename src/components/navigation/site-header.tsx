@@ -4,6 +4,7 @@ import { useTransition } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
+import dynamic from "next/dynamic";
 import {
   CalendarDays,
   Award,
@@ -16,11 +17,21 @@ import {
   QrCode,
   CalendarPlus,
   ShieldCheck,
+  Video,
+  Compass,
 } from "lucide-react";
 
 import type { Role } from "@prisma/client";
 import { switchMyAccountRoleAction } from "@/actions/management.actions";
-import { InteractiveTutorialModal } from "@/components/onboarding/interactive-tutorial-modal";
+
+// Lazy-load tutorial modal so it is not in the critical path bundle
+const InteractiveTutorialModal = dynamic(
+  () =>
+    import("@/components/onboarding/interactive-tutorial-modal").then(
+      (m) => m.InteractiveTutorialModal
+    ),
+  { ssr: false }
+);
 
 interface SiteHeaderProps {
   role: Role | null;
@@ -51,6 +62,12 @@ export function SiteHeader({ role }: SiteHeaderProps) {
       active: pathname === "/dashboard/schedule",
     },
     {
+      href: "/dashboard/recaps",
+      label: "Recaps",
+      icon: Video,
+      active: pathname.startsWith("/dashboard/recaps"),
+    },
+    {
       href: "/dashboard/progression",
       label: "Progression",
       icon: Award,
@@ -67,6 +84,12 @@ export function SiteHeader({ role }: SiteHeaderProps) {
       label: "Passes",
       icon: CreditCard,
       active: pathname === "/pricing",
+    },
+    {
+      href: "/about",
+      label: "About",
+      icon: Compass,
+      active: pathname.startsWith("/about"),
     },
   ];
 

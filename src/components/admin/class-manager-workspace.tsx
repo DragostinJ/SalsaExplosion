@@ -8,12 +8,12 @@ import {
   CalendarPlus,
   Calendar,
   MapPin,
-  Users,
   QrCode,
   Sparkles,
   CheckCircle2,
 } from "lucide-react";
 import { createClassSessionAction } from "@/actions/management.actions";
+import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +37,7 @@ interface ManagedClassItem {
   leadsBooked: number;
   followsBooked: number;
   instructorName: string;
+  instructorAvatarUrl?: string | null;
 }
 
 interface ClassManagerWorkspaceProps {
@@ -60,11 +61,9 @@ export function ClassManagerWorkspace({
   const [maxLeads, setMaxLeads] = useState(12);
   const [maxFollows, setMaxFollows] = useState(12);
   const [creditCost, setCreditCost] = useState(1);
-
-  const defaultTomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
-    .toISOString()
-    .slice(0, 16);
-  const [startTimeIso, setStartTimeIso] = useState(defaultTomorrow);
+  const [startTimeIso, setStartTimeIso] = useState(() =>
+    new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16)
+  );
 
   const [banner, setBanner] = useState<{
     type: "success" | "error";
@@ -170,8 +169,8 @@ export function ClassManagerWorkspace({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="space-y-1.5 sm:col-span-1">
                   <label className="font-semibold">Start Date & Time</label>
                   <input
                     type="datetime-local"
@@ -192,6 +191,19 @@ export function ClassManagerWorkspace({
                     max={240}
                     value={durationMinutes}
                     onChange={(e) => setDurationMinutes(Number(e.target.value))}
+                    className="w-full rounded-xl border bg-background px-3 py-2"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="font-semibold text-amber-700 dark:text-amber-400">Credits</label>
+                  <input
+                    type="number"
+                    aria-label="Credit cost"
+                    min={1}
+                    max={10}
+                    value={creditCost}
+                    onChange={(e) => setCreditCost(Number(e.target.value))}
                     className="w-full rounded-xl border bg-background px-3 py-2"
                   />
                 </div>
@@ -290,7 +302,7 @@ export function ClassManagerWorkspace({
                 <CardContent className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <Badge className="bg-amber-500 text-white text-[10px]">
+                      <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px]">
                         {cls.minLevel}
                       </Badge>
                       <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -303,15 +315,23 @@ export function ClassManagerWorkspace({
                       </span>
                     </div>
                     <h3 className="text-sm font-bold">{cls.title}</h3>
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground pt-1">
-                      <span className="font-semibold text-blue-600 dark:text-blue-400">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground pt-1">
+                      <span className="font-semibold text-blue-700 dark:text-blue-300">
                         Leads: {cls.leadsBooked}/{cls.maxLeads ?? cls.maxCapacity}
                       </span>
-                      <span className="font-semibold text-rose-600 dark:text-rose-400">
+                      <span className="font-semibold text-rose-700 dark:text-rose-300">
                         Follows: {cls.followsBooked}/
                         {cls.maxFollows ?? cls.maxCapacity}
                       </span>
-                      <span>• Instructor: {cls.instructorName}</span>
+                      <span className="flex items-center gap-1.5 font-medium text-foreground">
+                        <TeacherAvatar
+                          name={cls.instructorName}
+                          avatarUrl={cls.instructorAvatarUrl}
+                          size="xs"
+                          showBadge={false}
+                        />
+                        <span>Maestro {cls.instructorName}</span>
+                      </span>
                     </div>
                   </div>
 

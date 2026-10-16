@@ -92,7 +92,13 @@ export default function Home() {
                     <Link href="/dashboard/schedule">Schedule</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
+                    <Link href="/dashboard/recaps">Recaps</Link>
+                  </Button>
+                  <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/dashboard/progression">Progression</Link>
+                  </Button>
+                  <Button size="sm" variant="outline" asChild className="text-xs">
+                    <Link href="/about">About Studio</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/events">Events</Link>

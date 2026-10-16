@@ -4,8 +4,6 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
   Flame,
-  Users,
-  CreditCard,
   Award,
   QrCode,
   Sparkles,
@@ -52,6 +50,7 @@ export function InteractiveTutorialModal({
     }
   }, []);
 
+  // Listen for global trigger event
   useEffect(() => {
     const onOpenEvent = () => {
       setStep(0);
@@ -62,27 +61,42 @@ export function InteractiveTutorialModal({
     return () => window.removeEventListener(OPEN_TUTORIAL_EVENT, onOpenEvent);
   }, []);
 
+  // Auto-open only if explicitly requested and never seen before
   useEffect(() => {
     if (!autoOpenForNewDancer) return;
-    try {
-      const alreadySeen = window.localStorage.getItem(TUTORIAL_STORAGE_KEY);
-      if (!alreadySeen) {
-        setIsOpen(true);
+    const timer = setTimeout(() => {
+      try {
+        const alreadySeen = window.localStorage.getItem(TUTORIAL_STORAGE_KEY);
+        if (!alreadySeen) {
+          setIsOpen(true);
+        }
+      } catch {
+        // Ignore storage errors
       }
-    } catch {
-      // Ignore storage errors
-    }
+    }, 100);
+    return () => clearTimeout(timer);
   }, [autoOpenForNewDancer]);
 
+  // Lock body scroll and handle keyboard navigation when modal is open
   useEffect(() => {
     if (!isOpen) return;
+
+    // Prevent background page from scrolling on mobile & desktop
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = "hidden";
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") handleClose();
       if (e.key === "ArrowRight" && step < 3) setStep((s) => s + 1);
       if (e.key === "ArrowLeft" && step > 0) setStep((s) => s - 1);
     };
+
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, [isOpen, step, handleClose]);
 
   const tiers = [
@@ -122,51 +136,55 @@ export function InteractiveTutorialModal({
           setIsOpen(true);
         }}
         aria-label="Open interactive studio tutorial"
-        className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/35 bg-amber-500/10 px-2.5 py-1.5 text-xs font-bold text-amber-800 dark:text-amber-300 transition-colors hover:bg-amber-500/20"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/35 bg-amber-500/10 px-2 sm:px-2.5 py-1.5 text-xs font-bold text-amber-800 dark:text-amber-300 transition-colors hover:bg-amber-500/20"
       >
-        <HelpCircle className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
-        <span className="hidden md:inline">How It Works</span>
+        <HelpCircle className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+        <span className="hidden sm:inline">How It Works</span>
       </button>
 
-      {/* Modal Backdrop */}
+      {/* Modal Backdrop & Container */}
       {isOpen && (
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="studio-tutorial-title"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-xs"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleClose();
+          }}
+          className="fixed inset-0 z-50 flex flex-col justify-end sm:justify-center sm:items-center bg-black/75 p-0 sm:p-4 backdrop-blur-xs transition-opacity"
         >
-          <div className="relative w-full max-w-2xl overflow-hidden rounded-3xl border border-amber-500/30 bg-card text-card-foreground shadow-2xl">
-            {/* Top Progress Bar */}
-            <div className="grid grid-cols-4 gap-1 bg-muted/50 p-1.5">
+          {/* Card: Bottom Sheet on Mobile, Centered Dialog on Desktop */}
+          <div className="relative flex flex-col w-full max-w-2xl max-h-[92dvh] sm:max-h-[85vh] rounded-t-3xl sm:rounded-3xl border border-amber-500/30 bg-card text-card-foreground shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
+            {/* Top Step Indicators */}
+            <div className="grid grid-cols-4 gap-1.5 bg-muted/60 px-4 py-2 shrink-0">
               {[0, 1, 2, 3].map((idx) => (
                 <button
                   key={idx}
                   type="button"
                   aria-label={`Go to tutorial step ${idx + 1}`}
                   onClick={() => setStep(idx)}
-                  className={`h-2 rounded-full transition-all ${
+                  className={`h-1.5 sm:h-2 rounded-full transition-all ${
                     idx <= step
                       ? "bg-gradient-to-r from-amber-500 to-orange-500"
-                      : "bg-muted-foreground/20"
+                      : "bg-muted-foreground/25"
                   }`}
                 />
               ))}
             </div>
 
-            {/* Modal Header */}
-            <div className="flex items-center justify-between border-b px-6 py-4">
-              <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-600 to-orange-500 text-white shadow-xs">
-                  <Flame className="h-5 w-5 fill-white" />
+            {/* Sticky Header */}
+            <div className="flex items-center justify-between border-b px-4 sm:px-6 py-3 sm:py-4 shrink-0 bg-card">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-600 to-orange-500 text-white shadow-xs">
+                  <Flame className="h-4 w-4 sm:h-5 sm:w-5 fill-white" />
                 </div>
-                <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-700 dark:text-amber-400">
+                <div className="min-w-0">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-700 dark:text-amber-400 block truncate">
                     Interactive Dancer Guide • Step {step + 1} of 4
                   </span>
                   <h2
                     id="studio-tutorial-title"
-                    className="text-base font-extrabold tracking-tight sm:text-lg"
+                    className="text-sm sm:text-base font-extrabold tracking-tight truncate"
                   >
                     {step === 0 && "1. Partner Balance: No Partner Required!"}
                     {step === 1 && "2. Studio Wallet, Credits & Free Refunds"}
@@ -182,14 +200,14 @@ export function InteractiveTutorialModal({
                 size="sm"
                 aria-label="Close tutorial modal"
                 onClick={handleClose}
-                className="h-8 w-8 rounded-full p-0"
+                className="h-8 w-8 rounded-full p-0 shrink-0 ml-2 text-muted-foreground hover:text-foreground"
               >
                 <X className="h-4 w-4" />
               </Button>
             </div>
 
-            {/* Modal Body: 4 Interactive Steps */}
-            <div className="p-6 space-y-5 max-h-[75vh] overflow-y-auto">
+            {/* Scrollable Body */}
+            <div className="p-4 sm:p-6 space-y-4 overflow-y-auto overscroll-contain flex-1">
               {step === 0 && (
                 <div className="space-y-4">
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
@@ -197,58 +215,58 @@ export function InteractiveTutorialModal({
                   </p>
 
                   {/* Interactive Role Simulator */}
-                  <div className="rounded-2xl border bg-muted/30 p-4 space-y-3">
+                  <div className="rounded-2xl border bg-muted/30 p-3 sm:p-4 space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold">
-                        Try switching your preferred dance role:
+                        Try switching your dance role:
                       </span>
                       <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px]">
                         Interactive Preview
                       </Badge>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3">
                       <button
                         type="button"
                         onClick={() => setDemoRole("LEAD")}
-                        className={`rounded-xl border p-3 text-left transition-all ${
+                        className={`rounded-xl border p-2.5 sm:p-3 text-left transition-all ${
                           demoRole === "LEAD"
                             ? "border-blue-600 bg-blue-500/15 ring-2 ring-blue-500/30"
                             : "bg-card hover:bg-muted/50"
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-extrabold text-blue-700 dark:text-blue-300">
+                          <span className="text-xs sm:text-sm font-extrabold text-blue-700 dark:text-blue-300">
                             🕺 Lead Role
                           </span>
                           {demoRole === "LEAD" && (
-                            <CheckCircle2 className="h-4 w-4 text-blue-600" />
+                            <CheckCircle2 className="h-3.5 w-3.5 text-blue-600 shrink-0" />
                           )}
                         </div>
-                        <p className="mt-1 text-[11px] text-muted-foreground">
-                          Initiates turn signals, guides partner flow, and responds to Rueda calls.
+                        <p className="mt-1 text-[10px] sm:text-[11px] text-muted-foreground leading-snug">
+                          Guides turn signals and responds to Rueda calls.
                         </p>
                       </button>
 
                       <button
                         type="button"
                         onClick={() => setDemoRole("FOLLOW")}
-                        className={`rounded-xl border p-3 text-left transition-all ${
+                        className={`rounded-xl border p-2.5 sm:p-3 text-left transition-all ${
                           demoRole === "FOLLOW"
                             ? "border-rose-600 bg-rose-500/15 ring-2 ring-rose-500/30"
                             : "bg-card hover:bg-muted/50"
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-extrabold text-rose-700 dark:text-rose-300">
+                          <span className="text-xs sm:text-sm font-extrabold text-rose-700 dark:text-rose-300">
                             💃 Follow Role
                           </span>
                           {demoRole === "FOLLOW" && (
-                            <CheckCircle2 className="h-4 w-4 text-rose-600" />
+                            <CheckCircle2 className="h-3.5 w-3.5 text-rose-600 shrink-0" />
                           )}
                         </div>
-                        <p className="mt-1 text-[11px] text-muted-foreground">
-                          Completes circular turns, adds Cuban body movement, and rotates in the Rueda.
+                        <p className="mt-1 text-[10px] sm:text-[11px] text-muted-foreground leading-snug">
+                          Adds Cuban body movement and rotates in the Rueda.
                         </p>
                       </button>
                     </div>
@@ -291,46 +309,46 @@ export function InteractiveTutorialModal({
                     Forget fumbling for cash at the studio door. Your <strong>Studio Wallet</strong> holds your class credits and membership status so booking takes <strong>1 tap</strong>.
                   </p>
 
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    <div className="rounded-2xl border bg-muted/20 p-3.5 space-y-1.5">
+                  <div className="grid gap-2.5 sm:grid-cols-3">
+                    <div className="rounded-2xl border bg-muted/20 p-3 space-y-1">
                       <Badge variant="secondary" className="text-[10px] font-bold">
                         Drop-In Pass
                       </Badge>
-                      <div className="text-base font-extrabold">1 Credit • £12</div>
-                      <p className="text-[11px] text-muted-foreground">
+                      <div className="text-sm sm:text-base font-extrabold">1 Credit • £12</div>
+                      <p className="text-[10px] sm:text-[11px] text-muted-foreground">
                         Great for trying your first Cuban Salsa evening class.
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-amber-500/40 bg-amber-500/[0.06] p-3.5 space-y-1.5">
+                    <div className="rounded-2xl border border-amber-500/40 bg-amber-500/[0.06] p-3 space-y-1">
                       <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px]">
                         Most Popular
                       </Badge>
-                      <div className="text-base font-extrabold">5 or 10 Pack</div>
-                      <p className="text-[11px] text-muted-foreground">
+                      <div className="text-sm sm:text-base font-extrabold">5 or 10 Pack</div>
+                      <p className="text-[10px] sm:text-[11px] text-muted-foreground">
                         Save up to 25% per class. Credits never expire during the term!
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-emerald-500/40 bg-emerald-500/[0.06] p-3.5 space-y-1.5">
+                    <div className="rounded-2xl border border-emerald-500/40 bg-emerald-500/[0.06] p-3 space-y-1">
                       <Badge className="bg-emerald-700 text-white text-[10px]">
                         Unlimited
                       </Badge>
-                      <div className="text-base font-extrabold">£99 / month</div>
-                      <p className="text-[11px] text-muted-foreground">
-                        Book unlimited weekly classes without spending a single credit.
+                      <div className="text-sm sm:text-base font-extrabold">£99 / month</div>
+                      <p className="text-[10px] sm:text-[11px] text-muted-foreground">
+                        Book unlimited weekly classes without spending credits.
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-xs">
-                    <ShieldCheck className="h-5 w-5 text-emerald-700 dark:text-emerald-300 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-2.5 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs">
+                    <ShieldCheck className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-700 dark:text-emerald-300 shrink-0 mt-0.5" />
                     <div>
                       <strong className="font-bold text-emerald-800 dark:text-emerald-200">
                         Fair 12-Hour Cancellation Guarantee:
                       </strong>{" "}
                       <span className="text-muted-foreground">
-                        Plans changed? Cancel your booking at least 12 hours before class starts and your credit is <strong>automatically refunded</strong> to your wallet.
+                        Cancel at least 12 hours before class starts and your credit is <strong>automatically refunded</strong> to your wallet.
                       </span>
                     </div>
                   </div>
@@ -340,7 +358,7 @@ export function InteractiveTutorialModal({
               {step === 2 && (
                 <div className="space-y-4">
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    We use a structured <strong>4-Tier Cuban Salsa Curriculum</strong> so beginners feel completely safe and advanced classes stay fast-paced. Click any tier below to explore:
+                    We use a structured <strong>4-Tier Cuban Salsa Curriculum</strong> so beginners feel completely safe and advanced classes stay fast-paced:
                   </p>
 
                   {/* Interactive 4-Tier Explorer */}
@@ -350,7 +368,7 @@ export function InteractiveTutorialModal({
                         key={t.name}
                         type="button"
                         onClick={() => setDemoTierIndex(idx)}
-                        className={`rounded-xl border px-3 py-2.5 text-xs font-extrabold transition-all ${
+                        className={`rounded-xl border px-2.5 py-2 text-xs font-extrabold transition-all ${
                           demoTierIndex === idx
                             ? "bg-amber-500 text-zinc-950 border-amber-600 shadow-xs"
                             : "bg-muted/30 text-muted-foreground hover:text-foreground"
@@ -361,12 +379,12 @@ export function InteractiveTutorialModal({
                     ))}
                   </div>
 
-                  <div className="rounded-2xl border bg-muted/30 p-4 space-y-2.5">
+                  <div className="rounded-2xl border bg-muted/30 p-3.5 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-extrabold text-amber-700 dark:text-amber-400">
+                      <span className="text-xs sm:text-sm font-extrabold text-amber-700 dark:text-amber-400">
                         {tiers[demoTierIndex].name} — {tiers[demoTierIndex].subtitle}
                       </span>
-                      <Award className="h-4 w-4 text-amber-600" />
+                      <Award className="h-4 w-4 text-amber-600 shrink-0" />
                     </div>
                     <p className="text-xs font-semibold">
                       Key Figures: <span className="font-normal text-muted-foreground">{tiers[demoTierIndex].moves}</span>
@@ -376,12 +394,12 @@ export function InteractiveTutorialModal({
                     </p>
                   </div>
 
-                  <div className="flex items-start gap-3 rounded-2xl border bg-card p-3.5 text-xs">
-                    <Video className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-2.5 rounded-2xl border bg-card p-3 text-xs">
+                    <Video className="h-4 w-4 sm:h-5 sm:w-5 text-amber-600 shrink-0 mt-0.5" />
                     <div>
                       <strong className="font-bold">Two Ways to Level Up:</strong>{" "}
                       <span className="text-muted-foreground">
-                        Your teacher can promote you in 1 tap during class, <em>or</em> you can submit a 30-second video on the <strong>Progression</strong> tab for instant <strong>AI Dance Co-Pilot + Instructor</strong> feedback!
+                        Your teacher can promote you during class, <em>or</em> you can submit a 30-second practice clip on the <strong>Progression</strong> tab for instant <strong>AI Dance Co-Pilot + Instructor</strong> feedback!
                       </span>
                     </div>
                   </div>
@@ -391,12 +409,12 @@ export function InteractiveTutorialModal({
               {step === 3 && (
                 <div className="space-y-4">
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    When you arrive at the studio on Friday night, skip the paper queue! Scan the studio&apos;s QR code (or show your pass) to check in instantly.
+                    When you arrive at the studio on Friday night, skip the paper clipboard! Show your QR code or scan the studio door pass to check in instantly.
                   </p>
 
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="grid gap-3 sm:grid-cols-2">
                     {/* Interactive QR Check-in Simulation */}
-                    <div className="rounded-2xl border bg-muted/30 p-4 flex flex-col justify-between space-y-3">
+                    <div className="rounded-2xl border bg-muted/30 p-3.5 flex flex-col justify-between space-y-3">
                       <div className="space-y-1">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground">
@@ -424,12 +442,12 @@ export function InteractiveTutorialModal({
                       >
                         {demoQrCheckedIn ? (
                           <>
-                            <CheckCircle2 className="mr-1.5 h-4 w-4" />
+                            <CheckCircle2 className="mr-1.5 h-3.5 w-3.5" />
                             Checked In! Welcome to the Floor ✓
                           </>
                         ) : (
                           <>
-                            <QrCode className="mr-1.5 h-4 w-4" />
+                            <QrCode className="mr-1.5 h-3.5 w-3.5" />
                             Simulate 1-Tap Door Check-In
                           </>
                         )}
@@ -437,7 +455,7 @@ export function InteractiveTutorialModal({
                     </div>
 
                     {/* Shareable 9:16 Social Milestone Preview */}
-                    <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-br from-zinc-950 via-zinc-900 to-amber-950 p-4 text-white flex flex-col justify-between space-y-3">
+                    <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-br from-zinc-950 via-zinc-900 to-amber-950 p-3.5 text-white flex flex-col justify-between space-y-3">
                       <div className="space-y-1">
                         <div className="flex items-center justify-between">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400">
@@ -446,10 +464,10 @@ export function InteractiveTutorialModal({
                           <Share2 className="h-3.5 w-3.5 text-amber-400" />
                         </div>
                         <p className="text-xs font-extrabold">
-                          Brag About Your Level Promotions!
+                          Share Your Salsa Milestone!
                         </p>
                         <p className="text-[11px] text-zinc-300">
-                          Every time you unlock a new Cuban Salsa tier, you get a personalized 9:16 Story Badge to share on Instagram & WhatsApp.
+                          Each time you unlock a new Cuban Salsa tier, you get a personalized 9:16 Story Badge to share on Instagram & WhatsApp.
                         </p>
                       </div>
 
@@ -471,8 +489,8 @@ export function InteractiveTutorialModal({
               )}
             </div>
 
-            {/* Modal Footer */}
-            <div className="flex items-center justify-between border-t bg-muted/20 px-6 py-4">
+            {/* Sticky Footer */}
+            <div className="flex items-center justify-between border-t bg-muted/30 px-4 sm:px-6 py-3 shrink-0">
               <Button
                 type="button"
                 variant="outline"
@@ -481,7 +499,7 @@ export function InteractiveTutorialModal({
                 onClick={() => setStep((s) => Math.max(0, s - 1))}
                 className="text-xs font-semibold"
               >
-                <ArrowLeft className="mr-1.5 h-3.5 w-3.5" />
+                <ArrowLeft className="mr-1 h-3.5 w-3.5" />
                 Previous
               </Button>
 
@@ -493,8 +511,8 @@ export function InteractiveTutorialModal({
                     onClick={() => setStep((s) => s + 1)}
                     className="bg-amber-500 text-zinc-950 hover:bg-amber-400 font-bold text-xs"
                   >
-                    <span>Next Step</span>
-                    <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                    <span>Next</span>
+                    <ArrowRight className="ml-1 h-3.5 w-3.5" />
                   </Button>
                 ) : (
                   <Button

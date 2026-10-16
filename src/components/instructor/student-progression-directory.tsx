@@ -8,7 +8,6 @@ import {
   Users,
   PlusCircle,
   MinusCircle,
-  CheckCircle2,
   Clock,
   Sparkles,
   CreditCard,
@@ -19,15 +18,10 @@ import {
   updateStudentProgressionAction,
 } from "@/actions/management.actions";
 import { StudentProgressionRow } from "@/lib/constants/management";
+import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 const LEVEL_ORDER: DanceLevel[] = [
   DanceLevel.BEGINNER,
@@ -259,10 +253,12 @@ export function StudentProgressionDirectory({
                     {/* Col 1-4: Student Identity & Role */}
                     <div className="lg:col-span-4 space-y-2">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-amber-900 dark:text-amber-300 font-bold text-sm">
-                          {student.firstName[0]}
-                          {student.lastName[0]}
-                        </div>
+                        <TeacherAvatar
+                          name={`${student.firstName} ${student.lastName}`}
+                          avatarUrl={student.avatarUrl}
+                          size="md"
+                          showBadge={student.role === "INSTRUCTOR" || student.role === "ADMIN"}
+                        />
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
                             <h3 className="text-sm font-bold truncate">

@@ -3,6 +3,18 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "commondatastorage.googleapis.com",
+      },
+    ],
+  },
   turbopack: {
     rules: {
       "*.css": {
@@ -23,10 +35,6 @@ const nextConfig: NextConfig = {
           {
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
           },
         ],
       },

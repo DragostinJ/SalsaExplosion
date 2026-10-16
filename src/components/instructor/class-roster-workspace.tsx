@@ -7,14 +7,16 @@ import {
   QrCode,
   CheckCircle2,
   Users,
-  Clock,
   MapPin,
   ExternalLink,
   UserCheck,
-  Sparkles,
+  Video,
+  X,
 } from "lucide-react";
 import { toggleBookingCheckInAction } from "@/actions/management.actions";
+import { attachClassRecapAction } from "@/actions/recap.actions";
 import { ClassRosterSummary } from "@/lib/constants/management";
+import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,8 +39,22 @@ export function ClassRosterWorkspace({
     initialClasses[0]?.id ?? ""
   );
   const [showQrModal, setShowQrModal] = useState<boolean>(false);
+  const [showRecapModal, setShowRecapModal] = useState<boolean>(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+
+  // Recap Form State
+  const [recapVideoUrl, setRecapVideoUrl] = useState("");
+  const [recapFiguresCsv, setRecapFiguresCsv] = useState(
+    "Guapea, Dile Que No, Enchufla Doble con Mambo, Vacilala"
+  );
+  const [recapNotes, setRecapNotes] = useState(
+    "Great work today! Remember to prep the circular turn on count 1."
+  );
+  const [recapFeedback, setRecapFeedback] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   const activeClass =
     classes.find((c) => c.id === selectedClassId) ?? classes[0] ?? null;
@@ -111,6 +127,45 @@ export function ClassRosterWorkspace({
 
   const checkInPath = `/checkin/${activeClass.id}`;
 
+  const handleSaveRecap = (e: React.FormEvent) => {
+    e.preventDefault();
+    setRecapFeedback(null);
+
+    const figures = recapFiguresCsv
+      .split(",")
+      .map((f) => f.trim())
+      .filter(Boolean);
+
+    startTransition(async () => {
+      const res = await attachClassRecapAction({
+        classSessionId: activeClass.id,
+        recapVideoUrl,
+        recapNotes,
+        recapFigures: figures.length > 0 ? figures : ["Casino Partnerwork Basics"],
+        recapPublished: true,
+      });
+
+      if (res.success) {
+        setRecapFeedback({ type: "success", text: res.message });
+        setClasses((prev) =>
+          prev.map((c) =>
+            c.id === activeClass.id
+              ? {
+                  ...c,
+                  recapVideoUrl: res.data.recapVideoUrl,
+                  recapFigures: res.data.recapFigures,
+                  recapPublished: res.data.recapPublished,
+                }
+              : c
+          )
+        );
+        setTimeout(() => setShowRecapModal(false), 1800);
+      } else {
+        setRecapFeedback({ type: "error", text: res.error.message });
+      }
+    });
+  };
+
   return (
     <div className="grid gap-6 lg:grid-cols-12">
       {/* Left Sidebar: Class Session Selector (4 Cols) */}
@@ -157,7 +212,15 @@ export function ClassRosterWorkspace({
                 <h3 className="text-sm font-bold line-clamp-1">{cls.title}</h3>
                 <div className="mt-2 flex items-center justify-between text-[11px] text-muted-foreground">
                   <span>{formattedDate}</span>
-                  <span>{cls.room}</span>
+                  <span className="flex items-center gap-1">
+                    <TeacherAvatar
+                      name={cls.instructorName}
+                      avatarUrl={cls.instructorAvatarUrl}
+                      size="xs"
+                      showBadge={false}
+                    />
+                    <span>{cls.room}</span>
+                  </span>
                 </div>
               </button>
             );
@@ -172,31 +235,57 @@ export function ClassRosterWorkspace({
           <CardHeader className="pb-4">
             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
               <div>
-                <div className="flex items-center gap-2">
-                  <Badge className="bg-amber-500 text-white">
+                <div className="flex items-center gap-2.5">
+                  <TeacherAvatar
+                    name={activeClass.instructorName}
+                    avatarUrl={activeClass.instructorAvatarUrl}
+                    size="sm"
+                  />
+                  <Badge className="bg-amber-500 text-zinc-950 font-bold">
                     {activeClass.minLevel}
                   </Badge>
                   <span className="text-xs font-medium text-muted-foreground flex items-center gap-1">
                     <MapPin className="h-3.5 w-3.5" />
-                    {activeClass.room} • Instructor: {activeClass.instructorName}
+                    {activeClass.room} • Maestro {activeClass.instructorName}
                   </span>
                 </div>
                 <CardTitle className="mt-2 text-xl font-extrabold">
                   {activeClass.title}
                 </CardTitle>
                 <CardDescription className="text-xs mt-1">
-                  Check dancers in as they arrive at the door or display the class QR code for self-service check-in.
+                  Check dancers in as they arrive at the door, display the door QR code, and publish the end-of-class recap video.
                 </CardDescription>
               </div>
 
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setRecapVideoUrl(activeClass.recapVideoUrl ?? "");
+                    setRecapFiguresCsv(
+                      activeClass.recapFigures?.join(", ") ??
+                        "Guapea, Dile Que No, Enchufla Doble, Vacilala"
+                    );
+                    setRecapNotes(
+                      activeClass.recapNotes ??
+                        "Great work today! Remember to prep the circular turn on count 1."
+                    );
+                    setShowRecapModal(true);
+                  }}
+                  className="text-xs font-semibold"
+                >
+                  <Video className="mr-1.5 h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                  {activeClass.recapPublished ? "Edit Recap Video" : "Attach Recap Video"}
+                </Button>
                 <Button
                   type="button"
                   onClick={() => setShowQrModal((prev) => !prev)}
                   className="bg-gradient-to-r from-amber-600 to-orange-500 text-white text-xs font-semibold"
                 >
                   <QrCode className="mr-1.5 h-4 w-4" />
-                  {showQrModal ? "Hide Door QR Code" : "Display Door QR Code"}
+                  {showQrModal ? "Hide QR" : "Door QR"}
                 </Button>
                 <Button variant="outline" size="sm" asChild className="text-xs">
                   <Link href={checkInPath}>
@@ -422,6 +511,108 @@ export function ClassRosterWorkspace({
           </CardContent>
         </Card>
       </div>
+
+      {/* Attach End-of-Class Recap Video Dialog */}
+      {showRecapModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-xs"
+        >
+          <div className="relative w-full max-w-lg rounded-3xl border border-amber-500/30 bg-card p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b pb-3">
+              <div className="flex items-center gap-2">
+                <Video className="h-5 w-5 text-amber-600" />
+                <h3 className="text-base font-extrabold">Attach Class Recap Video</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowRecapModal(false)}
+                className="rounded-full p-1 text-muted-foreground hover:text-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {recapFeedback && (
+              <div
+                className={`rounded-xl border p-3 text-xs font-semibold ${
+                  recapFeedback.type === "success"
+                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300"
+                    : "border-destructive/40 bg-destructive/10 text-destructive"
+                }`}
+              >
+                {recapFeedback.text}
+              </div>
+            )}
+
+            <form onSubmit={handleSaveRecap} className="space-y-3.5 text-xs">
+              <div className="space-y-1">
+                <label className="font-semibold">Class Session</label>
+                <div className="rounded-xl border bg-muted/40 p-2.5 font-bold">
+                  [{activeClass.minLevel}] {activeClass.title}
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-semibold">Recap Video URL</label>
+                <input
+                  type="url"
+                  required
+                  placeholder="https://... (Direct MP4, Supabase Video, YouTube, Vimeo)"
+                  value={recapVideoUrl}
+                  onChange={(e) => setRecapVideoUrl(e.target.value)}
+                  className="w-full rounded-xl border bg-background px-3 py-2"
+                />
+                <p className="text-[10px] text-muted-foreground">
+                  Attended students will be able to review this video in their Recaps vault.
+                </p>
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-semibold">Figures & Combinations Practiced (comma-separated)</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Guapea, Dile Que No, Enchufla Doble, Vacilala"
+                  value={recapFiguresCsv}
+                  onChange={(e) => setRecapFiguresCsv(e.target.value)}
+                  className="w-full rounded-xl border bg-background px-3 py-2"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-semibold">Maestro Coaching Tips & Notes</label>
+                <textarea
+                  rows={3}
+                  value={recapNotes}
+                  onChange={(e) => setRecapNotes(e.target.value)}
+                  className="w-full rounded-xl border bg-background px-3 py-2"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowRecapModal(false)}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  size="sm"
+                  disabled={isPending}
+                  className="bg-amber-500 text-zinc-950 font-bold hover:bg-amber-400"
+                >
+                  {isPending ? "Publishing Recap..." : "Publish Recap to Attended Students"}
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

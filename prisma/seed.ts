@@ -48,12 +48,16 @@ async function main() {
   }
 
   // 2. Create Admin / Studio Owner
-  const admin = await prisma.user.create({
+  await prisma.user.create({
     data: {
       clerkId: "user_seed_admin_001",
       email: "owner@ritmoflow.studio",
       firstName: "Carlos",
       lastName: "Santana",
+      avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      bio: "Founder and Artistic Director of RitmoFlow. Born in Havana, Carlos has spent 18+ years sharing authentic Cuban Casino culture, complex turn knot styling, and high-energy Rueda de Casino across Europe.",
+      specialty: "Timba Mastery & Rueda Calls",
+      yearsDancing: 18,
       role: Role.ADMIN,
       currentLevel: DanceLevel.ADVANCED,
       preferredRole: DanceRole.LEAD,
@@ -68,6 +72,10 @@ async function main() {
       email: "elena@ritmoflow.studio",
       firstName: "Elena",
       lastName: "Reyes",
+      avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      bio: "Havana National Dance School graduate. Elena specializes in Cuban Casino styling, sensual Afro-Cuban body movement (Rumba Yambu & Guaguanco), and circular Follow frame connection.",
+      specialty: "Casino Follow Styling & Afro-Cuban Movement",
+      yearsDancing: 12,
       role: Role.INSTRUCTOR,
       currentLevel: DanceLevel.ADVANCED,
       preferredRole: DanceRole.FOLLOW,
@@ -80,6 +88,10 @@ async function main() {
       email: "marcos@ritmoflow.studio",
       firstName: "Marcos",
       lastName: "Valdes",
+      avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+      bio: "Direct from Santiago de Cuba, Marcos brings dynamic Son Cubano Contratiempo timing, lightning-fast Rueda switching, and infectious Havana social energy to every class.",
+      specialty: "Son Cubano & Rueda de Casino",
+      yearsDancing: 15,
       role: Role.INSTRUCTOR,
       currentLevel: DanceLevel.ADVANCED,
       preferredRole: DanceRole.LEAD,
@@ -207,6 +219,44 @@ async function main() {
   });
 
   // 5. Create Dance Class Sessions
+  const twoDaysAgo = new Date();
+  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+  twoDaysAgo.setHours(19, 0, 0, 0);
+
+  const twoDaysAgoEnd = new Date(twoDaysAgo);
+  twoDaysAgoEnd.setHours(20, 15, 0, 0);
+
+  const class0_past = await prisma.classSession.create({
+    data: {
+      title: "Cuban Salsa Casino: Circular Flow & Dile Que No Mastery",
+      description:
+        "Comprehensive breakdown of authentic circular Guapea tension, the Dile Que No transition, and Enchufla Doble con Mambo.",
+      style: DanceStyle.CUBAN_SALSA,
+      minLevel: DanceLevel.BEGINNER,
+      startTime: twoDaysAgo,
+      endTime: twoDaysAgoEnd,
+      room: "Main Havana Studio",
+      maxCapacity: 24,
+      maxLeads: 12,
+      maxFollows: 12,
+      bookedCount: 6,
+      creditCost: 1,
+      instructorId: instructor1.id,
+      recapVideoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      recapNotes:
+        "¡Excelente clase equipo! Focus on keeping your left arm relaxed during the Enchufla turn. Leads: prep the turn on count 1 with a slight push-pull, do not rush count 3. Follows: keep your steps small and circular. Practiced: Guapea, Dile Que No, Enchufla Doble, Dame Dos, and Vacilala.",
+      recapFigures: [
+        "Guapea Basic Timing",
+        "Dile Que No (Circular Transition)",
+        "Enchufla Doble con Mambo",
+        "Dame Dos (Rueda Call)",
+        "Vacilala y Paseala",
+      ],
+      recapRecordedAt: twoDaysAgoEnd,
+      recapPublished: true,
+    },
+  });
+
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   tomorrow.setHours(18, 30, 0, 0);
@@ -288,6 +338,29 @@ async function main() {
   // Seed Class Bookings for Roster & Check-in testing
   await prisma.booking.createMany({
     data: [
+      // Attended past class with recap video
+      {
+        userId: student1.id,
+        classSessionId: class0_past.id,
+        danceRole: DanceRole.FOLLOW,
+        status: BookingStatus.ATTENDED,
+        checkedInAt: twoDaysAgo,
+      },
+      {
+        userId: student2.id,
+        classSessionId: class0_past.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.ATTENDED,
+        checkedInAt: twoDaysAgo,
+      },
+      {
+        userId: student4.id,
+        classSessionId: class0_past.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.ATTENDED,
+        checkedInAt: twoDaysAgo,
+      },
+      // Upcoming class1 bookings
       {
         userId: student1.id,
         classSessionId: class1.id,

@@ -36,6 +36,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { TeacherAvatar } from "@/components/ui/teacher-avatar";
+
 // ==========================================
 // TYPES & INTERFACES
 // ==========================================
@@ -180,8 +182,11 @@ export function ClassScheduleCard({
   );
 
   const startDate = new Date(session.startTime);
-  const hoursUntilStart =
-    (startDate.getTime() - Date.now()) / (1000 * 60 * 60);
+  const [isWithinCancellationWindow] = React.useState(() => {
+    const startTimeMs = new Date(session.startTime).getTime();
+    const hours = (startTimeMs - Date.now()) / (1000 * 60 * 60);
+    return hours < CANCELLATION_WINDOW_HOURS;
+  });
 
   const isLevelUnlocked =
     LEVEL_WEIGHT[student.currentLevel] >= LEVEL_WEIGHT[session.minLevel];
@@ -304,13 +309,22 @@ export function ClassScheduleCard({
           )}
         </div>
 
-        {/* Title & Instructor */}
-        <div>
-          <CardTitle className="text-lg leading-snug">{session.title}</CardTitle>
-          <CardDescription className="mt-1">
-            With Instructor {session.instructor.firstName}{" "}
-            {session.instructor.lastName}
-          </CardDescription>
+        {/* Title & Instructor with Avatar */}
+        <div className="flex items-start gap-3">
+          <TeacherAvatar
+            name={`${session.instructor.firstName} ${session.instructor.lastName}`}
+            avatarUrl={session.instructor.avatarUrl}
+            size="md"
+            className="mt-0.5"
+          />
+          <div className="min-w-0">
+            <CardTitle className="text-base sm:text-lg leading-snug font-bold">
+              {session.title}
+            </CardTitle>
+            <CardDescription className="text-xs mt-1 font-medium text-muted-foreground flex items-center gap-1">
+              <span>Maestro {session.instructor.firstName} {session.instructor.lastName}</span>
+            </CardDescription>
+          </div>
         </div>
       </CardHeader>
 
@@ -504,7 +518,7 @@ export function ClassScheduleCard({
                 ) : (
                   <XCircle className="mr-1.5 h-3.5 w-3.5" />
                 )}
-                {hoursUntilStart < CANCELLATION_WINDOW_HOURS &&
+                {isWithinCancellationWindow &&
                 !student.hasActiveSubscription
                   ? "Cancel (No Refund)"
                   : "Cancel Spot"}

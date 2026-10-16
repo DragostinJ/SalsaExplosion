@@ -77,6 +77,9 @@ model User {
   firstName        String
   lastName         String
   avatarUrl        String?
+  bio              String?    @db.Text
+  specialty        String?    // e.g. "Rueda de Casino & Afro-Cuban Bodymovement"
+  yearsDancing     Int?       @default(8)
   role             Role       @default(STUDENT)
   
   // Progression & Credits
@@ -125,6 +128,13 @@ model ClassSession {
   creditCost     Int        @default(1)
   isCancelled    Boolean    @default(false)
 
+  // End-of-class Teacher Recap Video & Figures Practiced
+  recapVideoUrl  String?
+  recapNotes     String?    @db.Text
+  recapFigures   String[]   @default([])
+  recapRecordedAt DateTime?
+  recapPublished Boolean    @default(false)
+
   // Relations
   instructorId   String
   instructor     User       @relation("InstructorClasses", fields: [instructorId], references: [id], onDelete: Restrict)
@@ -135,6 +145,7 @@ model ClassSession {
 
   @@index([startTime, style, minLevel])
   @@index([instructorId])
+  @@index([recapPublished])
 }
 
 model Booking {

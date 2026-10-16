@@ -11,7 +11,6 @@ import {
   Search,
   ExternalLink,
   UserCheck,
-  DollarSign,
 } from "lucide-react";
 import {
   createGuestArtistEventAction,
@@ -80,14 +79,12 @@ export function EventManagerWorkspace({
   const [partyPassPricePounds, setPartyPassPricePounds] = useState(20);
   const [partyPassCapacity, setPartyPassCapacity] = useState(150);
 
-  const defaultStart = new Date(Date.now() + 21 * 24 * 60 * 60 * 1000)
-    .toISOString()
-    .slice(0, 10);
-  const defaultEnd = new Date(Date.now() + 23 * 24 * 60 * 60 * 1000)
-    .toISOString()
-    .slice(0, 10);
-  const [startDateIso, setStartDateIso] = useState(defaultStart);
-  const [endDateIso, setEndDateIso] = useState(defaultEnd);
+  const [startDateIso, setStartDateIso] = useState(() =>
+    new Date(Date.now() + 21 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+  );
+  const [endDateIso, setEndDateIso] = useState(() =>
+    new Date(Date.now() + 23 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+  );
 
   const [banner, setBanner] = useState<{
     type: "success" | "error";

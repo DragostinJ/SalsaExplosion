@@ -21,7 +21,7 @@ export default async function AdminClassesPage() {
     take: 30,
     include: {
       instructor: {
-        select: { firstName: true, lastName: true },
+        select: { firstName: true, lastName: true, avatarUrl: true },
       },
       bookings: {
         where: {
@@ -47,6 +47,7 @@ export default async function AdminClassesPage() {
     followsBooked: c.bookings.filter((b) => b.danceRole === DanceRole.FOLLOW)
       .length,
     instructorName: `${c.instructor.firstName} ${c.instructor.lastName}`,
+    instructorAvatarUrl: c.instructor.avatarUrl,
   }));
 
   return (

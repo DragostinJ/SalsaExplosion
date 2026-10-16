@@ -22,7 +22,7 @@ export default async function InstructorRosterPage() {
     take: 25,
     include: {
       instructor: {
-        select: { firstName: true, lastName: true },
+        select: { firstName: true, lastName: true, avatarUrl: true },
       },
       bookings: {
         where: {
@@ -70,6 +70,7 @@ export default async function InstructorRosterPage() {
       endTime: cls.endTime.toISOString(),
       room: cls.room,
       instructorName: `${cls.instructor.firstName} ${cls.instructor.lastName}`,
+      instructorAvatarUrl: cls.instructor.avatarUrl,
       maxCapacity: cls.maxCapacity,
       maxLeads: cls.maxLeads,
       maxFollows: cls.maxFollows,
@@ -77,6 +78,10 @@ export default async function InstructorRosterPage() {
       confirmedFollows,
       checkedInLeads,
       checkedInFollows,
+      recapVideoUrl: cls.recapVideoUrl,
+      recapNotes: cls.recapNotes,
+      recapFigures: cls.recapFigures,
+      recapPublished: cls.recapPublished,
       bookings: cls.bookings.map((b) => ({
         id: b.id,
         userId: b.user.id,

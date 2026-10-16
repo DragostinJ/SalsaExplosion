@@ -6,7 +6,6 @@ import {
   XCircle,
   RotateCcw,
   Sparkles,
-  User as UserIcon,
   Calendar,
   ArrowRight,
   Loader2,
@@ -16,6 +15,7 @@ import { DanceLevel, DanceStyle, SubmissionStatus } from "@prisma/client";
 import { gradeSubmissionAction } from "@/actions/grading.actions";
 import { analyzeSubmissionWithAiAction } from "@/actions/management.actions";
 import { AiRubricEvaluation } from "@/lib/constants/management";
+import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
@@ -248,10 +248,11 @@ export function VideoGradingWorkspace({
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2.5">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
-                        {item.student.firstName[0]}
-                        {item.student.lastName[0]}
-                      </div>
+                      <TeacherAvatar
+                        name={`${item.student.firstName} ${item.student.lastName}`}
+                        avatarUrl={item.student.avatarUrl}
+                        size="sm"
+                      />
                       <div>
                         <p className="text-sm font-semibold leading-none">
                           {item.student.firstName} {item.student.lastName}
@@ -303,14 +304,22 @@ export function VideoGradingWorkspace({
                         </span>
                       </div>
                     </div>
-                    <CardTitle className="mt-2 flex items-center gap-2 text-xl">
-                      <UserIcon className="h-5 w-5 text-muted-foreground" />
-                      {activeSubmission.student.firstName}{" "}
-                      {activeSubmission.student.lastName}
-                    </CardTitle>
-                    <CardDescription>
-                      {activeSubmission.student.email}
-                    </CardDescription>
+                    <div className="mt-3 flex items-center gap-3">
+                      <TeacherAvatar
+                        name={`${activeSubmission.student.firstName} ${activeSubmission.student.lastName}`}
+                        avatarUrl={activeSubmission.student.avatarUrl}
+                        size="md"
+                      />
+                      <div>
+                        <CardTitle className="text-xl">
+                          {activeSubmission.student.firstName}{" "}
+                          {activeSubmission.student.lastName}
+                        </CardTitle>
+                        <CardDescription>
+                          {activeSubmission.student.email}
+                        </CardDescription>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Playback Speed & Instant Rewind Controls */}

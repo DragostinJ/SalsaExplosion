@@ -48,6 +48,7 @@ export interface ClassRosterSummary {
   endTime: string;
   room: string;
   instructorName: string;
+  instructorAvatarUrl?: string | null;
   maxCapacity: number;
   maxLeads: number | null;
   maxFollows: number | null;
@@ -55,6 +56,10 @@ export interface ClassRosterSummary {
   confirmedFollows: number;
   checkedInLeads: number;
   checkedInFollows: number;
+  recapVideoUrl?: string | null;
+  recapNotes?: string | null;
+  recapFigures?: string[];
+  recapPublished?: boolean;
   bookings: RosterBookingItem[];
 }
 

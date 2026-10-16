@@ -35,11 +35,17 @@ async function main() {
     where: { clerkId: { startsWith: "user_seed_" } },
   });
 
-  // Ensure any existing real logged-in Clerk users have ADMIN privileges and credits for testing
-  await prisma.user.updateMany({
-    where: { NOT: { clerkId: { startsWith: "user_seed_" } } },
-    data: { role: Role.ADMIN },
-  });
+  // Promote only explicitly allow-listed real accounts (ADMIN_EMAILS in .env)
+  const adminEmails = (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  if (adminEmails.length > 0) {
+    await prisma.user.updateMany({
+      where: { email: { in: adminEmails } },
+      data: { role: Role.ADMIN },
+    });
+  }
 
   // 2. Create Admin / Studio Owner
   const admin = await prisma.user.create({

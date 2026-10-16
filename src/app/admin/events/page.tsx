@@ -1,7 +1,6 @@
-import { redirect } from "next/navigation";
 import { Sparkles } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import { AdminNav } from "@/components/navigation/admin-nav";
 import {
   AdminEventRegistrationItem,
@@ -17,10 +16,7 @@ export const metadata = {
 };
 
 export default async function AdminEventsPage() {
-  const user = await getOrProvisionCurrentUser();
-  if (!user) {
-    redirect("/sign-in");
-  }
+  await requireRole(STAFF_ROLES);
 
   const [events, registrations] = await Promise.all([
     prisma.event.findMany({

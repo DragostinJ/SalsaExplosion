@@ -1,8 +1,7 @@
-import { redirect } from "next/navigation";
 import { BookingStatus, DanceRole } from "@prisma/client";
 import { QrCode, Users } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import { ClassRosterSummary } from "@/lib/constants/management";
 import { InstructorNav } from "@/components/navigation/instructor-nav";
 import { ClassRosterWorkspace } from "@/components/instructor/class-roster-workspace";
@@ -15,10 +14,7 @@ export const metadata = {
 };
 
 export default async function InstructorRosterPage() {
-  const currentUser = await getOrProvisionCurrentUser();
-  if (!currentUser) {
-    redirect("/sign-in");
-  }
+  await requireRole(STAFF_ROLES);
 
   const classes = await prisma.classSession.findMany({
     where: { isCancelled: false },

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { prisma } from "@/lib/prisma";
 import { SiteHeader } from "@/components/navigation/site-header";
 import "./globals.css";
 
@@ -19,11 +21,20 @@ export const metadata: Metadata = {
   description: "Production-grade platform for Cuban Salsa classes, level progression, and international guest artist masterclasses.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Role lookup only (no provisioning) — cheap indexed read on clerkId
+  const { userId } = await auth();
+  const viewer = userId
+    ? await prisma.user.findUnique({
+        where: { clerkId: userId },
+        select: { role: true },
+      })
+    : null;
+
   return (
     <ClerkProvider>
       <html
@@ -31,7 +42,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
         <body className="min-h-full flex flex-col bg-background text-foreground">
-          <SiteHeader />
+          <SiteHeader role={viewer?.role ?? null} />
           <div className="flex-1">{children}</div>
         </body>
       </html>

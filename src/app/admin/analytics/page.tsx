@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import {
   BookingStatus,
   DanceLevel,
@@ -8,7 +7,7 @@ import {
 } from "@prisma/client";
 import { ShieldCheck, Download } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { requireRole, ADMIN_ONLY } from "@/lib/auth-user";
 import { AdminNav } from "@/components/navigation/admin-nav";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,10 +20,7 @@ export const metadata = {
 };
 
 export default async function AdminAnalyticsPage() {
-  const user = await getOrProvisionCurrentUser();
-  if (!user) {
-    redirect("/sign-in");
-  }
+  await requireRole(ADMIN_ONLY);
 
   // Aggregate Key Business Metrics from PostgreSQL
   const [

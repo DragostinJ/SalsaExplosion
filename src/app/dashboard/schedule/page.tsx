@@ -24,6 +24,7 @@ import {
   ClassScheduleItem,
   StudentContext,
 } from "@/components/schedule/class-schedule-card";
+import { NewDancerOnboarding } from "@/components/schedule/new-dancer-onboarding";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -248,6 +249,15 @@ export default async function StudentSchedulePage({
         </div>
       </div>
 
+      {/* First 60 Seconds: New Dancer Interactive Onboarding Guide */}
+      <NewDancerOnboarding
+        studentName={user.firstName}
+        currentRole={user.preferredRole}
+        currentLevel={user.currentLevel}
+        classCredits={user.classCredits}
+        hasActiveBooking={scheduleItems.some((s) => s.userBooking !== null)}
+      />
+
       {/* URL Search Param Filter Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-4">
         <div className="flex items-center gap-2">
@@ -313,7 +323,10 @@ export default async function StudentSchedulePage({
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          id="schedule-classes-grid"
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
           {scheduleItems.map((session) => (
             <ClassScheduleCard
               key={session.id}

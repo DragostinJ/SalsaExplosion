@@ -503,6 +503,9 @@ export async function registerForEventTierAction(rawInput: {
     const { eventId, ticketTierId, role } = parsed.data;
 
     const result = await prisma.$transaction(async (tx) => {
+      // Acquire PostgreSQL row-level lock on EventTicketTier to prevent concurrent capacity/role race conditions
+      await tx.$queryRaw`SELECT id FROM "EventTicketTier" WHERE id = ${ticketTierId} FOR UPDATE`;
+
       const tier = await tx.eventTicketTier.findUnique({
         where: { id: ticketTierId },
         include: {
@@ -929,3 +932,55 @@ export async function analyzeSubmissionWithAiAction(rawInput: {
     };
   }
 }
+
+// ==========================================
+// 11. STUDENT SELF-ONBOARDING: PREFERRED ROLE
+// ==========================================
+
+const UpdateMyDanceRoleSchema = z.object({
+  preferredRole: z.enum([DanceRole.LEAD, DanceRole.FOLLOW, DanceRole.SOLO]),
+});
+
+export async function updateMyDanceRolePreferenceAction(rawInput: {
+  preferredRole: DanceRole;
+}): Promise<ManagementActionResponse<{ preferredRole: DanceRole }>> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user) {
+      return {
+        success: false,
+        error: { code: "UNAUTHORIZED", message: "Please sign in first." },
+      };
+    }
+
+    const parsed = UpdateMyDanceRoleSchema.safeParse(rawInput);
+    if (!parsed.success) {
+      return {
+        success: false,
+        error: { code: "VALIDATION_ERROR", message: "Invalid dance role." },
+      };
+    }
+
+    const updated = await prisma.user.update({
+      where: { id: user.id },
+      data: { preferredRole: parsed.data.preferredRole },
+      select: { preferredRole: true },
+    });
+
+    revalidatePath("/dashboard/schedule");
+    revalidatePath("/dashboard/progression");
+
+    return {
+      success: true,
+      data: { preferredRole: updated.preferredRole },
+      message: `Preferred dance role updated to ${updated.preferredRole}.`,
+    };
+  } catch (error) {
+    console.error("[updateMyDanceRolePreferenceAction]", error);
+    return {
+      success: false,
+      error: { code: "INTERNAL_ERROR", message: "Could not save role preference." },
+    };
+  }
+}
+

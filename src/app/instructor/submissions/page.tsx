@@ -1,8 +1,7 @@
-import { redirect } from "next/navigation";
 import { SubmissionStatus } from "@prisma/client";
 import { createClient } from "@supabase/supabase-js";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import {
   QueueSubmissionItem,
   VideoGradingWorkspace,
@@ -23,10 +22,7 @@ function getSupabaseAdmin() {
 
 export default async function InstructorSubmissionsPage() {
   const supabaseAdmin = getSupabaseAdmin();
-  const currentUser = await getOrProvisionCurrentUser();
-  if (!currentUser) {
-    redirect("/sign-in");
-  }
+  await requireRole(STAFF_ROLES);
 
   // Fetch oldest PENDING submissions first (FIFO queue)
   const rawSubmissions = await prisma.videoSubmission.findMany({

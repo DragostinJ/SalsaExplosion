@@ -1,8 +1,7 @@
-import { redirect } from "next/navigation";
 import { BookingStatus, DanceRole } from "@prisma/client";
 import { CalendarPlus } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import { AdminNav } from "@/components/navigation/admin-nav";
 import { ClassManagerWorkspace } from "@/components/admin/class-manager-workspace";
 import { Badge } from "@/components/ui/badge";
@@ -14,10 +13,7 @@ export const metadata = {
 };
 
 export default async function AdminClassesPage() {
-  const user = await getOrProvisionCurrentUser();
-  if (!user) {
-    redirect("/sign-in");
-  }
+  await requireRole(STAFF_ROLES);
 
   const classes = await prisma.classSession.findMany({
     where: { isCancelled: false },

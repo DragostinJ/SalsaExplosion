@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import {
   BookingStatus,
   SubmissionStatus,
@@ -6,7 +5,7 @@ import {
 } from "@prisma/client";
 import { Users, Award } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import { StudentProgressionRow } from "@/lib/constants/management";
 import { InstructorNav } from "@/components/navigation/instructor-nav";
 import { StudentProgressionDirectory } from "@/components/instructor/student-progression-directory";
@@ -19,10 +18,7 @@ export const metadata = {
 };
 
 export default async function InstructorStudentsPage() {
-  const currentUser = await getOrProvisionCurrentUser();
-  if (!currentUser) {
-    redirect("/sign-in");
-  }
+  await requireRole(STAFF_ROLES);
 
   const allUsers = await prisma.user.findMany({
     orderBy: [{ role: "asc" }, { createdAt: "desc" }],

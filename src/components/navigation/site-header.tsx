@@ -1,7 +1,8 @@
 "use client";
 
+import { useTransition } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
 import {
   CalendarDays,
@@ -17,9 +18,29 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
-export function SiteHeader() {
+import type { Role } from "@prisma/client";
+import { switchMyAccountRoleAction } from "@/actions/management.actions";
+
+interface SiteHeaderProps {
+  role: Role | null;
+}
+
+export function SiteHeader({ role }: SiteHeaderProps) {
+  const isStaff = role === "INSTRUCTOR" || role === "ADMIN";
+  const isAdmin = role === "ADMIN";
   const pathname = usePathname();
+  const router = useRouter();
   const { isSignedIn } = useUser();
+  const [isPending, startTransition] = useTransition();
+
+  const handleRoleSwitch = (targetRole: Role) => {
+    startTransition(async () => {
+      const res = await switchMyAccountRoleAction({ targetRole });
+      if (res.success) {
+        router.refresh();
+      }
+    });
+  };
 
   const studentLinks = [
     {
@@ -135,9 +156,10 @@ export function SiteHeader() {
               })}
             </div>
 
-            <div className="h-4 w-px bg-border" />
+            {isStaff && <div className="h-4 w-px bg-border" />}
 
             {/* Instructor Menu Group */}
+            {isStaff && (
             <div className="flex items-center gap-1 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] px-2 py-1">
               <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 px-1.5">
                 Instructor:
@@ -160,8 +182,10 @@ export function SiteHeader() {
                 );
               })}
             </div>
+            )}
 
             {/* Admin Menu Group */}
+            {isAdmin && (
             <div className="flex items-center gap-1 rounded-xl border border-amber-500/25 bg-amber-500/[0.05] px-2 py-1">
               <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 px-1.5">
                 Admin:
@@ -184,13 +208,47 @@ export function SiteHeader() {
                 );
               })}
             </div>
+            )}
           </nav>
         </div>
 
         {/* Right side Actions & User Profile */}
         <div className="flex items-center gap-3 shrink-0">
           {isSignedIn ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
+              {/* Interactive Studio Demo Role Switcher */}
+              <div
+                className="hidden sm:inline-flex items-center rounded-lg border bg-muted/40 p-0.5 text-[11px]"
+                title="Switch active portal role for studio demo"
+              >
+                {(["STUDENT", "INSTRUCTOR", "ADMIN"] as Role[]).map((r) => {
+                  const isActive = role === r;
+                  return (
+                    <button
+                      key={r}
+                      type="button"
+                      disabled={isPending}
+                      onClick={() => handleRoleSwitch(r)}
+                      className={`rounded-md px-2 py-1 font-bold transition-colors ${
+                        isActive
+                          ? r === "ADMIN"
+                            ? "bg-amber-500 text-white shadow-xs"
+                            : r === "INSTRUCTOR"
+                              ? "bg-emerald-600 text-white shadow-xs"
+                              : "bg-primary text-primary-foreground shadow-xs"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {r === "ADMIN"
+                        ? "Owner"
+                        : r === "INSTRUCTOR"
+                          ? "Teacher"
+                          : "Dancer"}
+                    </button>
+                  );
+                })}
+              </div>
+
               <UserButton
                 appearance={{
                   elements: {
@@ -220,7 +278,7 @@ export function SiteHeader() {
 
       {/* Tablet & Mobile Horizontal Bar */}
       <div className="flex xl:hidden overflow-x-auto border-t px-4 py-2 gap-1.5 bg-muted/20 scrollbar-none items-center">
-        {[...studentLinks, ...instructorLinks, ...adminLinks].map((item) => {
+        {[...studentLinks, ...(isStaff ? instructorLinks : []), ...(isAdmin ? adminLinks : [])].map((item) => {
           const Icon = item.icon;
           return (
             <Link

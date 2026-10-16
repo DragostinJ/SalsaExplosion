@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { SubscriptionStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { PricingCards } from "@/components/pricing/pricing-cards";
+import { BackButton } from "@/components/navigation/back-button";
 
 export default async function PricingPage() {
   const { userId: clerkId } = await auth();
@@ -26,7 +27,11 @@ export default async function PricingPage() {
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mb-4">
+        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+      </div>
+
       <div className="mb-10 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
           Class Passes & Memberships

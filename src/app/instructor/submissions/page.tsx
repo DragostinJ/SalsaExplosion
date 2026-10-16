@@ -7,6 +7,7 @@ import {
   QueueSubmissionItem,
   VideoGradingWorkspace,
 } from "@/components/instructor/video-grading-workspace";
+import { BackButton } from "@/components/navigation/back-button";
 
 function getSupabaseAdmin() {
   const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -88,6 +89,10 @@ export default async function InstructorSubmissionsPage() {
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mb-4">
+        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+      </div>
+
       <div className="mb-8">
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
           Student Level-Up Assessments

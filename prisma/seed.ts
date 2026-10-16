@@ -4,6 +4,7 @@ import {
   DanceLevel,
   DanceStyle,
   DanceRole,
+  EventStatus,
   SubmissionStatus,
   TransactionType,
 } from "@prisma/client";
@@ -14,6 +15,9 @@ async function main() {
   console.log("🌱 Seeding RitmoFlow database...");
 
   // 1. Clean existing records (in reverse relation order)
+  await prisma.eventRegistration.deleteMany();
+  await prisma.eventTicketTier.deleteMany();
+  await prisma.event.deleteMany();
   await prisma.creditLedger.deleteMany();
   await prisma.subscription.deleteMany();
   await prisma.videoSubmission.deleteMany();
@@ -200,12 +204,61 @@ async function main() {
     },
   });
 
+  // 7. Create Premiere Guest Artist Event
+  const guestEvent = await prisma.event.create({
+    data: {
+      slug: "havana-rueda-mastery-intensive",
+      title: "Havana Rueda & Afro-Cuban Weekend Intensive",
+      description:
+        "An exclusive 2-day immersive masterclass featuring world-renowned Cuban maestros. Dive deep into complex Casino knot combinations, authentic Rumba Columbia body isolation, and dynamic Rueda de Casino calling dynamics.",
+      venueName: "Gran Teatro Havana Hall",
+      venueAddress: "142 Rhythm Way, Central Studio Complex, London",
+      startDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
+      endDate: new Date(Date.now() + 16 * 24 * 60 * 60 * 1000),
+      guestArtists: ["Maestro Alberto Valdes", "Maestra Yanet Fuentes"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Full Weekend Pass (Early Bird)",
+            description:
+              "All workshops (Saturday & Sunday) + Saturday Night Gala Social Party + Workshop Certificate",
+            priceInCents: 9500,
+            totalCapacity: 80,
+            maxLeads: 40,
+            maxFollows: 40,
+            salesEndAt: new Date(Date.now() + 13 * 24 * 60 * 60 * 1000),
+          },
+          {
+            name: "Saturday Bootcamp Only",
+            description:
+              "Saturday 4-hour Cuban Masterclass intensive (Casino turns & dynamic partnering)",
+            priceInCents: 6000,
+            totalCapacity: 50,
+            maxLeads: 25,
+            maxFollows: 25,
+            salesEndAt: new Date(Date.now() + 13 * 24 * 60 * 60 * 1000),
+          },
+          {
+            name: "Saturday Night Social Party Pass",
+            description:
+              "Entry to Saturday Night Gala Social with live Timba DJ & guest artist performances",
+            priceInCents: 2000,
+            totalCapacity: 150,
+            salesEndAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
+          },
+        ],
+      },
+    },
+  });
+
   console.log("✅ RitmoFlow database seeded successfully!");
   console.log({
     admin: admin.email,
     instructors: [instructor1.email, instructor2.email],
     students: [student1.email, student2.email],
     classes: [class1.title, class2.title],
+    event: guestEvent.title,
   });
 }
 

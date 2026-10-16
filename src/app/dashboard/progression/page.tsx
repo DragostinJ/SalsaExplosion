@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { StudentVideoUploadDropzone } from "@/components/progression/video-upload-dropzone";
+import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -86,7 +87,11 @@ export default async function ProgressionPage() {
   const isMaxLevel = user.currentLevel === DanceLevel.ADVANCED;
 
   return (
-    <main className="mx-auto max-w-5xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-5xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
+      <div>
+        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+      </div>
+
       {/* Header */}
       <div className="flex flex-col justify-between gap-4 rounded-2xl border bg-card p-6 shadow-sm sm:flex-row sm:items-center">
         <div>

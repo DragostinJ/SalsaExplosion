@@ -94,6 +94,7 @@ model User {
   reviews          VideoSubmission[] @relation("InstructorReviews")
   subscription     Subscription?
   transactions     CreditLedger[]
+  eventRegistrations EventRegistration[]
 
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
@@ -216,4 +217,91 @@ model CreditLedger {
   createdAt             DateTime        @default(now())
 
   @@index([userId, createdAt])
+}
+
+// ==========================================
+// GUEST ARTIST WORKSHOPS & EVENT TICKETING
+// ==========================================
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  COMPLETED
+  CANCELLED
+}
+
+enum TicketPaymentStatus {
+  PENDING
+  PAID
+  REFUNDED
+}
+
+model Event {
+  id            String              @id @default(cuid())
+  slug          String              @unique
+  title         String
+  description   String              @db.Text
+  coverImageUrl String?
+  venueName     String
+  venueAddress  String
+  startDate     DateTime
+  endDate       DateTime
+  guestArtists  String[]
+  status        EventStatus         @default(DRAFT)
+
+  ticketTiers   EventTicketTier[]
+  registrations EventRegistration[]
+
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  @@index([status, startDate])
+}
+
+model EventTicketTier {
+  id            String              @id @default(cuid())
+  eventId       String
+  event         Event               @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  name          String              // e.g. "Full Weekend Pass", "Bootcamp Intensive", "Saturday Party Only"
+  description   String?
+  priceInCents  Int                 // e.g. 7500 = £75.00
+  totalCapacity Int
+  maxLeads      Int?
+  maxFollows    Int?
+  salesStartAt  DateTime            @default(now())
+  salesEndAt    DateTime
+
+  registrations EventRegistration[]
+
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  @@index([eventId])
+}
+
+model EventRegistration {
+  id                 String              @id @default(cuid())
+  userId             String
+  eventId            String
+  ticketTierId       String
+  role               DanceRole           @default(LEAD)
+  qrCodeHash         String              @unique @default(cuid())
+  paymentStatus      TicketPaymentStatus @default(PAID)
+  amountPaidInCents  Int
+  checkedIn          Boolean             @default(false)
+  checkedInAt        DateTime?
+  stripeSessionId    String?             @unique
+
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event              Event               @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  ticketTier         EventTicketTier     @relation(fields: [ticketTierId], references: [id], onDelete: Cascade)
+
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  @@index([userId])
+  @@index([eventId, role])
+  @@index([ticketTierId])
+  @@index([qrCodeHash])
 }

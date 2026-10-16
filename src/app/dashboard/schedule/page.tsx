@@ -32,6 +32,8 @@ interface SchedulePageProps {
   searchParams: Promise<{
     style?: string;
     level?: string;
+    checkout?: string;
+    pkg?: string;
   }>;
 }
 
@@ -58,6 +60,8 @@ export default async function StudentSchedulePage({
     resolvedParams.level && VALID_LEVELS.has(resolvedParams.level)
       ? (resolvedParams.level as DanceLevel)
       : undefined;
+
+  const checkoutStatus = resolvedParams.checkout;
 
   const now = new Date();
   const hasActiveSubscription =
@@ -91,11 +95,14 @@ export default async function StudentSchedulePage({
         },
       },
       bookings: {
-        where: { status: BookingStatus.CONFIRMED },
+        where: {
+          status: { in: [BookingStatus.CONFIRMED, BookingStatus.ATTENDED] },
+        },
         select: {
           id: true,
           userId: true,
           danceRole: true,
+          status: true,
         },
       },
     },
@@ -105,13 +112,21 @@ export default async function StudentSchedulePage({
   const scheduleItems: ClassScheduleItem[] = upcomingClasses.map((session) => {
     let currentLeadsCount = 0;
     let currentFollowsCount = 0;
-    let userBooking: { id: string; danceRole: DanceRole } | null = null;
+    let userBooking: {
+      id: string;
+      danceRole: DanceRole;
+      status: BookingStatus;
+    } | null = null;
 
     for (const b of session.bookings) {
       if (b.danceRole === DanceRole.LEAD) currentLeadsCount++;
       if (b.danceRole === DanceRole.FOLLOW) currentFollowsCount++;
       if (b.userId === user.id) {
-        userBooking = { id: b.id, danceRole: b.danceRole };
+        userBooking = {
+          id: b.id,
+          danceRole: b.danceRole,
+          status: b.status,
+        };
       }
     }
 
@@ -139,6 +154,17 @@ export default async function StudentSchedulePage({
 
   return (
     <main className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
+      {(checkoutStatus === "success" || checkoutStatus === "demo_success") && (
+        <div className="flex items-center justify-between rounded-2xl border border-emerald-500/40 bg-emerald-500/10 px-5 py-3.5 text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-300">
+          <span>
+            🎉 Pass activated! Your studio wallet has been updated ({user.classCredits} credits available). Select any class below to book your spot!
+          </span>
+          <Link href="/dashboard/schedule" className="underline ml-4 text-xs">
+            Dismiss
+          </Link>
+        </div>
+      )}
+
       {/* Header & Student Wallet / Progression Status Bar */}
       <div className="flex flex-col justify-between gap-4 rounded-2xl border bg-card p-6 shadow-sm sm:flex-row sm:items-center">
         <div>

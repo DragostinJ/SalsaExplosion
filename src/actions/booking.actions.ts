@@ -1,6 +1,5 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import {
@@ -11,6 +10,7 @@ import {
   TransactionType,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import {
   ActionResponse,
   BookingDomainError,
@@ -23,14 +23,14 @@ import {
 // ==========================================
 
 const BookClassSchema = z.object({
-  classSessionId: z.string().cuid({ message: "Invalid class session ID format." }),
-  danceRole: z.nativeEnum(DanceRole, {
+  classSessionId: z.string().min(1, { message: "Invalid class session ID." }),
+  danceRole: z.enum([DanceRole.LEAD, DanceRole.FOLLOW, DanceRole.SOLO], {
     message: "Please select a valid dance role (LEAD, FOLLOW, or SOLO).",
   }),
 });
 
 const CancelBookingSchema = z.object({
-  bookingId: z.string().cuid({ message: "Invalid booking ID format." }),
+  bookingId: z.string().min(1, { message: "Invalid booking ID." }),
 });
 
 export type BookClassInput = z.infer<typeof BookClassSchema>;
@@ -44,9 +44,9 @@ export async function bookClassAction(
   rawInput: BookClassInput
 ): Promise<ActionResponse<{ bookingId: string; usedSubscription: boolean; remainingCredits: number }>> {
   try {
-    // 1. Authenticate Request (Next.js 15 async auth())
-    const { userId: clerkId } = await auth();
-    if (!clerkId) {
+    // 1. Authenticate & Ensure Provisioned User
+    const provisionedUser = await getOrProvisionCurrentUser();
+    if (!provisionedUser) {
       throw new BookingDomainError("UNAUTHORIZED", "You must be signed in to book a class.");
     }
 
@@ -65,7 +65,7 @@ export async function bookClassAction(
       async (tx) => {
         // 3a. Fetch User with Subscription state
         const user = await tx.user.findUnique({
-          where: { clerkId },
+          where: { id: provisionedUser.id },
           include: { subscription: true },
         });
 
@@ -115,8 +115,15 @@ export async function bookClassAction(
           },
         });
 
-        if (existingBooking && existingBooking.status === BookingStatus.CONFIRMED) {
-          throw new BookingDomainError("ALREADY_BOOKED", "You already have a confirmed spot in this class.");
+        if (
+          existingBooking &&
+          (existingBooking.status === BookingStatus.CONFIRMED ||
+            existingBooking.status === BookingStatus.ATTENDED)
+        ) {
+          throw new BookingDomainError(
+            "ALREADY_BOOKED",
+            "You already have a confirmed spot in this class."
+          );
         }
 
         // 3e. Acquire Row-Level Lock on ClassSession & Enforce Total Capacity
@@ -148,7 +155,7 @@ export async function bookClassAction(
             where: {
               classSessionId: classSession.id,
               danceRole: DanceRole.LEAD,
-              status: BookingStatus.CONFIRMED,
+              status: { in: [BookingStatus.CONFIRMED, BookingStatus.ATTENDED] },
             },
           });
 
@@ -165,7 +172,7 @@ export async function bookClassAction(
             where: {
               classSessionId: classSession.id,
               danceRole: DanceRole.FOLLOW,
-              status: BookingStatus.CONFIRMED,
+              status: { in: [BookingStatus.CONFIRMED, BookingStatus.ATTENDED] },
             },
           });
 
@@ -257,8 +264,11 @@ export async function bookClassAction(
 
     // 4. Revalidate Cache Paths
     revalidatePath("/dashboard/schedule");
-    revalidatePath("/dashboard/bookings");
-    revalidatePath(`/instructor/classes/${classSessionId}`);
+    revalidatePath("/instructor/roster");
+    revalidatePath("/instructor/students");
+    revalidatePath("/admin/classes");
+    revalidatePath("/admin/analytics");
+    revalidatePath(`/checkin/${classSessionId}`);
 
     return {
       success: true,
@@ -294,9 +304,9 @@ export async function cancelBookingAction(
   rawInput: CancelBookingInput
 ): Promise<ActionResponse<{ refundedCredits: number; remainingCredits: number; isLateCancellation: boolean }>> {
   try {
-    // 1. Authenticate Request
-    const { userId: clerkId } = await auth();
-    if (!clerkId) {
+    // 1. Authenticate & Ensure Provisioned User
+    const provisionedUser = await getOrProvisionCurrentUser();
+    if (!provisionedUser) {
       throw new BookingDomainError("UNAUTHORIZED", "You must be signed in to cancel a booking.");
     }
 
@@ -313,7 +323,7 @@ export async function cancelBookingAction(
     // 3. Execute Atomic Cancellation Transaction
     const result = await prisma.$transaction(async (tx) => {
       const user = await tx.user.findUnique({
-        where: { clerkId },
+        where: { id: provisionedUser.id },
       });
 
       if (!user) {
@@ -430,8 +440,11 @@ export async function cancelBookingAction(
 
     // 4. Revalidate Cache Paths
     revalidatePath("/dashboard/schedule");
-    revalidatePath("/dashboard/bookings");
-    revalidatePath(`/instructor/classes/${result.classSessionId}`);
+    revalidatePath("/instructor/roster");
+    revalidatePath("/instructor/students");
+    revalidatePath("/admin/classes");
+    revalidatePath("/admin/analytics");
+    revalidatePath(`/checkin/${result.classSessionId}`);
 
     return {
       success: true,

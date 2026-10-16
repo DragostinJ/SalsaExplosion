@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo } from "react";
-import { Users, TrendingUp, Award, DollarSign } from "lucide-react";
+import { Users, TrendingUp, Award, DollarSign, Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 interface AnalyticsData {
@@ -20,8 +21,45 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
     return Math.max(...data.revenueByMonth.map((m) => m.amount), 1);
   }, [data.revenueByMonth]);
 
+  const handleExportCsv = () => {
+    const rows = [
+      ["Metric Category", "Label", "Value", "Share (%)"],
+      ["Summary", "Total Revenue (GBP)", data.totalRevenueInPounds.toFixed(2), "100%"],
+      ["Summary", "Enrolled Students", String(data.totalStudents), "-"],
+      ["Summary", "Active Class Bookings", String(data.activeBookingsCount), "-"],
+      ["Summary", "Pending Video Assessments", String(data.pendingReviewsCount), "-"],
+      ...data.revenueByMonth.map((m) => ["Monthly Revenue", m.month, String(m.amount), "-"]),
+      ...data.roleDistribution.map((r) => ["Partner Role", r.role, String(r.count), `${r.percentage}%`]),
+      ...data.levelDistribution.map((l) => ["Syllabus Tier", l.level, String(l.count), `${l.percentage}%`]),
+    ];
+
+    const csvContent = rows.map((r) => r.join(",")).join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "ritmoflow-studio-analytics.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="space-y-8">
+      <div className="flex justify-end">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={handleExportCsv}
+          className="text-xs font-semibold"
+        >
+          <Download className="mr-1.5 h-3.5 w-3.5" />
+          Export Studio CSV Report
+        </Button>
+      </div>
+
       {/* 4 Top KPI Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="border shadow-sm">

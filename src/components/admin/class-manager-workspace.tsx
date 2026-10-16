@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { DanceLevel } from "@prisma/client";
 import {
   CalendarPlus,
@@ -45,6 +46,7 @@ interface ClassManagerWorkspaceProps {
 export function ClassManagerWorkspace({
   initialClasses,
 }: ClassManagerWorkspaceProps) {
+  const router = useRouter();
   const [title, setTitle] = useState(
     "Cuban Salsa Casino & Rueda Partnerwork"
   );
@@ -90,6 +92,7 @@ export function ClassManagerWorkspace({
 
       if (res.success) {
         setBanner({ type: "success", text: res.message });
+        router.refresh();
       } else {
         setBanner({ type: "error", text: res.error.message });
       }

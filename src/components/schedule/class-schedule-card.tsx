@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Calendar,
   Clock,
@@ -13,8 +14,9 @@ import {
   Loader2,
   Sparkles,
   AlertTriangle,
+  QrCode,
 } from "lucide-react";
-import { DanceLevel, DanceRole, DanceStyle } from "@prisma/client";
+import { BookingStatus, DanceLevel, DanceRole, DanceStyle } from "@prisma/client";
 import {
   bookClassAction,
   cancelBookingAction,
@@ -63,6 +65,7 @@ export interface ClassScheduleItem {
   userBooking: {
     id: string;
     danceRole: DanceRole;
+    status?: BookingStatus;
   } | null;
 }
 
@@ -113,6 +116,7 @@ export function ClassScheduleCard({
   session,
   student,
 }: ClassScheduleCardProps) {
+  const router = useRouter();
   const isSoloClass =
     session.maxLeads === null && session.maxFollows === null;
 
@@ -226,6 +230,7 @@ export function ClassScheduleCard({
         type: "success",
         message: result.message,
       });
+      router.refresh();
     });
   };
 
@@ -252,6 +257,7 @@ export function ClassScheduleCard({
         type: result.data.isLateCancellation ? "warning" : "success",
         message: result.message,
       });
+      router.refresh();
     });
   };
 
@@ -463,25 +469,48 @@ export function ClassScheduleCard({
             </Link>
           </Button>
         ) : optimisticState.isBooked ? (
-          <div className="w-full space-y-2">
+          session.userBooking?.status === BookingStatus.ATTENDED ? (
             <Button
-              type="button"
-              variant="outline"
-              disabled={isPending}
-              onClick={handleCancel}
-              className="w-full border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive"
+              asChild
+              variant="secondary"
+              className="w-full border border-emerald-500/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-bold"
             >
-              {isPending ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <XCircle className="mr-2 h-4 w-4" />
-              )}
-              {hoursUntilStart < CANCELLATION_WINDOW_HOURS &&
-              !student.hasActiveSubscription
-                ? "Cancel Spot (Late - No Credit Refund)"
-                : "Cancel Booking"}
+              <Link href={`/checkin/${session.id}`}>
+                <CheckCircle2 className="mr-2 h-4 w-4" />
+                Checked In at Door ✓ (View QR Pass)
+              </Link>
             </Button>
-          </div>
+          ) : (
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <Button
+                asChild
+                variant="secondary"
+                className="w-full font-semibold text-xs"
+              >
+                <Link href={`/checkin/${session.id}`}>
+                  <QrCode className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                  Door QR Pass
+                </Link>
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                disabled={isPending}
+                onClick={handleCancel}
+                className="w-full border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive text-xs"
+              >
+                {isPending ? (
+                  <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <XCircle className="mr-1.5 h-3.5 w-3.5" />
+                )}
+                {hoursUntilStart < CANCELLATION_WINDOW_HOURS &&
+                !student.hasActiveSubscription
+                  ? "Cancel (No Refund)"
+                  : "Cancel Spot"}
+              </Button>
+            </div>
+          )
         ) : !canAfford ? (
           <Button asChild variant="secondary" className="w-full">
             <Link href="/pricing">

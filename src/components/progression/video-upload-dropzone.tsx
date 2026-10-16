@@ -74,6 +74,23 @@ function uploadVideoToSupabaseSignedUrl(
   file: File,
   onProgress: (percentage: number) => void
 ): Promise<void> {
+  if (signedUrl === "DEMO_DIRECT_BYPASS") {
+    return new Promise((resolve) => {
+      let pct = 20;
+      onProgress(pct);
+      const timer = setInterval(() => {
+        pct += 25;
+        if (pct >= 100) {
+          clearInterval(timer);
+          onProgress(100);
+          resolve();
+        } else {
+          onProgress(pct);
+        }
+      }, 120);
+    });
+  }
+
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", signedUrl, true);

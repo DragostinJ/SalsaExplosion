@@ -2,6 +2,7 @@
 
 import { useState, useTransition, useMemo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { DanceRole } from "@prisma/client";
 import {
   Sparkles,
@@ -58,6 +59,7 @@ export function EventManagerWorkspace({
   initialEvents,
   initialRegistrations,
 }: EventManagerWorkspaceProps) {
+  const router = useRouter();
   const [registrations, setRegistrations] =
     useState<AdminEventRegistrationItem[]>(initialRegistrations);
   const [searchQrOrName, setSearchQrOrName] = useState("");
@@ -154,6 +156,8 @@ export function EventManagerWorkspace({
 
       if (res.success) {
         setBanner({ type: "success", text: res.message });
+        setSlug(`cuban-timba-weekender-${Math.floor(100 + Math.random() * 900)}`);
+        router.refresh();
       } else {
         setBanner({ type: "error", text: res.error.message });
       }

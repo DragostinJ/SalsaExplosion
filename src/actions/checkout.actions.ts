@@ -1,10 +1,12 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server";
+import { randomUUID } from "crypto";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import Stripe from "stripe";
-import { SubscriptionStatus } from "@prisma/client";
+import { SubscriptionStatus, TransactionType } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { stripe } from "@/lib/stripe";
 import {
   PackageId,
@@ -42,6 +44,17 @@ function getAppBaseUrl(): string {
   return "http://localhost:3000";
 }
 
+function isLiveStripeConfigured(priceId: string): boolean {
+  const key = process.env.STRIPE_SECRET_KEY ?? "";
+  if (!key || key.includes("placeholder") || key.includes("...")) {
+    return false;
+  }
+  if (!priceId || priceId.includes("placeholder") || priceId.includes("...")) {
+    return false;
+  }
+  return true;
+}
+
 // ==========================================
 // 1. CREATE STRIPE CHECKOUT SESSION ACTION
 // ==========================================
@@ -50,9 +63,9 @@ export async function createCheckoutSessionAction(
   rawInput: CreateCheckoutInput
 ): Promise<CheckoutActionResponse> {
   try {
-    // 1. Verify Authentication
-    const { userId: clerkId } = await auth();
-    if (!clerkId) {
+    // 1. Verify Authentication & Provision User
+    const user = await getOrProvisionCurrentUser();
+    if (!user) {
       throw new CheckoutDomainError(
         "UNAUTHORIZED",
         "Please sign in to purchase a class pass or membership."
@@ -69,22 +82,11 @@ export async function createCheckoutSessionAction(
     }
 
     const pkg = PRICING_CATALOG[parsed.data.packageId as PackageId];
-    const stripePriceId = process.env[pkg.stripePriceIdEnvVar] || `price_${pkg.id.toLowerCase()}_placeholder`;
+    const stripePriceId =
+      process.env[pkg.stripePriceIdEnvVar] ||
+      `price_${pkg.id.toLowerCase()}_placeholder`;
 
-    // 3. Fetch User & Existing Subscription State
-    const user = await prisma.user.findUnique({
-      where: { clerkId },
-      include: { subscription: true },
-    });
-
-    if (!user) {
-      throw new CheckoutDomainError(
-        "USER_NOT_FOUND",
-        "Student account record not found."
-      );
-    }
-
-    // 4. Guard Against Duplicate Active Subscriptions
+    // 3. Guard Against Duplicate Active Subscriptions
     const now = new Date();
     const hasActiveSubscription =
       user.subscription !== null &&
@@ -96,6 +98,63 @@ export async function createCheckoutSessionAction(
         "ALREADY_SUBSCRIBED",
         "You already have an active Unlimited Studio Membership."
       );
+    }
+
+    // 4. Local / Studio Demo Direct Fulfillment Mode (when Stripe Price IDs or Keys are placeholders)
+    if (!isLiveStripeConfigured(stripePriceId)) {
+      await prisma.$transaction(async (tx) => {
+        if (pkg.mode === "subscription") {
+          const periodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+          await tx.subscription.upsert({
+            where: { userId: user.id },
+            update: {
+              status: SubscriptionStatus.ACTIVE,
+              stripePriceId,
+              currentPeriodStart: now,
+              currentPeriodEnd: periodEnd,
+              cancelAtPeriodEnd: false,
+            },
+            create: {
+              userId: user.id,
+              stripeSubscriptionId: `sub_demo_${randomUUID().slice(0, 10)}`,
+              stripePriceId,
+              status: SubscriptionStatus.ACTIVE,
+              currentPeriodStart: now,
+              currentPeriodEnd: periodEnd,
+              cancelAtPeriodEnd: false,
+            },
+          });
+        } else {
+          const updatedUser = await tx.user.update({
+            where: { id: user.id },
+            data: { classCredits: { increment: pkg.creditAmount } },
+            select: { classCredits: true },
+          });
+
+          await tx.creditLedger.create({
+            data: {
+              userId: user.id,
+              amount: pkg.creditAmount,
+              balanceAfter: updatedUser.classCredits,
+              type: TransactionType.CREDIT_PACK_PURCHASE,
+              stripePaymentIntentId: `pi_demo_${randomUUID()}`,
+              description: `Purchased ${pkg.name} (+${pkg.creditAmount} credits)`,
+            },
+          });
+        }
+      });
+
+      revalidatePath("/dashboard/schedule");
+      revalidatePath("/pricing");
+      revalidatePath("/instructor/students");
+      revalidatePath("/admin/analytics");
+
+      return {
+        success: true,
+        data: {
+          url: `/dashboard/schedule?checkout=demo_success&pkg=${pkg.id}`,
+        },
+      };
     }
 
     // 5. Ensure User Has a Linked Stripe Customer ID
@@ -201,23 +260,18 @@ export async function createCheckoutSessionAction(
 
 export async function createBillingPortalSessionAction(): Promise<CheckoutActionResponse> {
   try {
-    const { userId: clerkId } = await auth();
-    if (!clerkId) {
+    const user = await getOrProvisionCurrentUser();
+    if (!user) {
       throw new CheckoutDomainError(
         "UNAUTHORIZED",
         "You must be signed in to manage your billing."
       );
     }
 
-    const user = await prisma.user.findUnique({
-      where: { clerkId },
-      select: { stripeCustomerId: true },
-    });
-
-    if (!user?.stripeCustomerId) {
+    if (!user.stripeCustomerId) {
       throw new CheckoutDomainError(
         "USER_NOT_FOUND",
-        "No active billing profile found for your account."
+        "Your Unlimited Studio Membership is currently managed in local demo mode."
       );
     }
 

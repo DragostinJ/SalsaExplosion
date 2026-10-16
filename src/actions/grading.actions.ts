@@ -1,16 +1,15 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { DanceLevel, Role, SubmissionStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { LEVEL_WEIGHT } from "@/lib/constants/booking";
 
 import {
   GradingDomainError,
   type GradingActionResponse,
-  type GradingErrorCode,
 } from "@/lib/constants/grading";
 
 // ==========================================
@@ -19,7 +18,7 @@ import {
 
 const GradeSubmissionSchema = z
   .object({
-    submissionId: z.string().cuid({ message: "Invalid submission ID." }),
+    submissionId: z.string().min(1, { message: "Invalid submission ID." }),
     decision: z.enum([SubmissionStatus.APPROVED, SubmissionStatus.REJECTED] as const, {
       message: "Decision must be APPROVED or REJECTED.",
     }),
@@ -61,9 +60,9 @@ export async function gradeSubmissionAction(
   }>
 > {
   try {
-    // 1. Authenticate Request
-    const { userId: clerkId } = await auth();
-    if (!clerkId) {
+    // 1. Authenticate & Ensure Provisioned Reviewer
+    const provisionedReviewer = await getOrProvisionCurrentUser();
+    if (!provisionedReviewer) {
       throw new GradingDomainError(
         "UNAUTHORIZED",
         "You must be signed in to review submissions."
@@ -85,7 +84,7 @@ export async function gradeSubmissionAction(
     const result = await prisma.$transaction(async (tx) => {
       // 3a. Verify Reviewer Role in Database (Zero-Trust Check)
       const reviewer = await tx.user.findUnique({
-        where: { clerkId },
+        where: { id: provisionedReviewer.id },
         select: { id: true, role: true },
       });
 
@@ -187,6 +186,8 @@ export async function gradeSubmissionAction(
 
     // 4. Revalidate Relevant Cache Routes
     revalidatePath("/instructor/submissions");
+    revalidatePath("/instructor/students");
+    revalidatePath("/admin/analytics");
     revalidatePath("/dashboard/progression");
     revalidatePath("/dashboard/schedule");
 

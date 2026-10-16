@@ -1,29 +1,21 @@
-import { auth } from "@clerk/nextjs/server";
 import { SubscriptionStatus } from "@prisma/client";
-import { prisma } from "@/lib/prisma";
+import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { PricingCards } from "@/components/pricing/pricing-cards";
 import { BackButton } from "@/components/navigation/back-button";
 
 export default async function PricingPage() {
-  const { userId: clerkId } = await auth();
+  const user = await getOrProvisionCurrentUser();
 
   let hasActiveSubscription = false;
   let currentCredits = 0;
 
-  if (clerkId) {
-    const user = await prisma.user.findUnique({
-      where: { clerkId },
-      include: { subscription: true },
-    });
-
-    if (user) {
-      currentCredits = user.classCredits;
-      const now = new Date();
-      hasActiveSubscription =
-        user.subscription !== null &&
-        user.subscription.status === SubscriptionStatus.ACTIVE &&
-        user.subscription.currentPeriodEnd > now;
-    }
+  if (user) {
+    currentCredits = user.classCredits;
+    const now = new Date();
+    hasActiveSubscription =
+      user.subscription !== null &&
+      user.subscription.status === SubscriptionStatus.ACTIVE &&
+      user.subscription.currentPeriodEnd > now;
   }
 
   return (

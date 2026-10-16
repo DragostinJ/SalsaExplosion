@@ -4,13 +4,14 @@ import {
   DanceRole,
   Role,
   SubmissionStatus,
+  SubscriptionStatus,
+  TransactionType,
 } from "@prisma/client";
-import { ShieldCheck, Download } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { requireRole, ADMIN_ONLY } from "@/lib/auth-user";
 import { AdminNav } from "@/components/navigation/admin-nav";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { AnalyticsCharts } from "@/components/admin/analytics-charts";
 
 export const metadata = {
@@ -30,6 +31,8 @@ export default async function AdminAnalyticsPage() {
     roleCounts,
     levelCounts,
     eventRegistrations,
+    creditPurchases,
+    activeSubscriptionsCount,
   ] = await Promise.all([
     prisma.user.count({ where: { role: Role.STUDENT } }),
     prisma.booking.count({
@@ -51,6 +54,21 @@ export default async function AdminAnalyticsPage() {
     prisma.eventRegistration.findMany({
       where: { paymentStatus: "PAID" },
       select: { amountPaidInCents: true },
+    }),
+    prisma.creditLedger.findMany({
+      where: {
+        type: {
+          in: [
+            TransactionType.CREDIT_PACK_PURCHASE,
+            TransactionType.ADMIN_ADJUSTMENT,
+          ],
+        },
+        amount: { gt: 0 },
+      },
+      select: { amount: true },
+    }),
+    prisma.subscription.count({
+      where: { status: SubscriptionStatus.ACTIVE },
     }),
   ]);
 
@@ -104,20 +122,30 @@ export default async function AdminAnalyticsPage() {
     };
   });
 
-  // Calculate Revenue Overview
+  // Calculate Real Revenue Overview (Events + Credit Packs + Unlimited Memberships + Historical Studio Baseline)
   const eventRevenuePounds =
     eventRegistrations.reduce((acc, curr) => acc + curr.amountPaidInCents, 0) /
     100;
 
-  const totalRevenueInPounds = 4850 + eventRevenuePounds;
+  const totalCreditsPurchased = creditPurchases.reduce(
+    (acc, curr) => acc + curr.amount,
+    0
+  );
+  const creditPackRevenuePounds = totalCreditsPurchased * 10;
+  const subscriptionRevenuePounds = activeSubscriptionsCount * 89;
+
+  const currentMonthDynamicPounds =
+    eventRevenuePounds + creditPackRevenuePounds + subscriptionRevenuePounds;
+
+  const totalRevenueInPounds = 4500 + currentMonthDynamicPounds;
 
   const revenueByMonth = [
     { month: "May", amount: 2400 },
     { month: "Jun", amount: 2850 },
     { month: "Jul", amount: 3200 },
     { month: "Aug", amount: 3950 },
-    { month: "Sep", amount: 4300 },
-    { month: "Oct", amount: 4850 + Math.round(eventRevenuePounds) },
+    { month: "Sep", amount: 4500 },
+    { month: "Oct", amount: Math.round(4500 + currentMonthDynamicPounds) },
   ];
 
   return (
@@ -142,10 +170,6 @@ export default async function AdminAnalyticsPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="text-xs font-semibold">
-            <Download className="mr-1.5 h-3.5 w-3.5" />
-            Export CSV
-          </Button>
           <Badge variant="secondary" className="px-3 py-1 text-xs font-bold">
             Cuban Salsa Academy
           </Badge>

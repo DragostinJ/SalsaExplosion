@@ -130,6 +130,21 @@ export async function switchMyAccountRoleAction(rawInput: {
       };
     }
 
+    // Security: Guard against unauthorized privilege escalation in production
+    const isDemoAllowed =
+      process.env.NODE_ENV !== "production" ||
+      process.env.ALLOW_DEMO_ROLE_SWITCHING === "true";
+
+    if (!isDemoAllowed && user.role !== Role.ADMIN) {
+      return {
+        success: false,
+        error: {
+          code: "FORBIDDEN",
+          message: "Role switching is restricted to administrators in production.",
+        },
+      };
+    }
+
     const updated = await prisma.user.update({
       where: { id: user.id },
       data: { role: parsed.data.targetRole },
@@ -420,7 +435,14 @@ export async function selfCheckInClassQrAction(rawInput: {
         },
       },
       include: {
-        classSession: { select: { title: true } },
+        classSession: {
+          select: {
+            title: true,
+            startTime: true,
+            endTime: true,
+            isCancelled: true,
+          },
+        },
       },
     });
 
@@ -435,6 +457,43 @@ export async function selfCheckInClassQrAction(rawInput: {
           code: "NO_ACTIVE_BOOKING",
           message:
             "You do not have a confirmed booking for this class yet. Book your spot on the schedule first!",
+        },
+      };
+    }
+
+    if (booking.classSession.isCancelled) {
+      return {
+        success: false,
+        error: {
+          code: "CLASS_CANCELLED",
+          message: "This class has been cancelled by the studio.",
+        },
+      };
+    }
+
+    // Security: Check-in window validation (opens 90 minutes before, closes 60 minutes after class end)
+    const now = new Date();
+    const startTimeMs = booking.classSession.startTime.getTime();
+    const endTimeMs = booking.classSession.endTime.getTime();
+    const earliestCheckIn = startTimeMs - 90 * 60 * 1000;
+    const latestCheckIn = endTimeMs + 60 * 60 * 1000;
+
+    if (now.getTime() < earliestCheckIn) {
+      return {
+        success: false,
+        error: {
+          code: "CHECK_IN_NOT_OPEN",
+          message: "Check-in for this class opens 90 minutes before class start time.",
+        },
+      };
+    }
+
+    if (now.getTime() > latestCheckIn) {
+      return {
+        success: false,
+        error: {
+          code: "CLASS_ENDED",
+          message: "This class has already concluded and self check-in is closed.",
         },
       };
     }
@@ -550,6 +609,17 @@ export async function registerForEventTierAction(rawInput: {
             "Follow spots for this tier are currently full to maintain partner balance."
           );
         }
+      }
+
+      // Security: Paid tiers must be processed through Stripe Checkout in production
+      const isDemoRegistrationAllowed =
+        process.env.NODE_ENV !== "production" ||
+        process.env.ALLOW_DEMO_EVENT_REGISTRATION === "true";
+
+      if (tier.priceInCents > 0 && !isDemoRegistrationAllowed) {
+        throw new Error(
+          "Direct registration is only available for free tiers or RSVPs. Paid passes must be purchased via Stripe checkout."
+        );
       }
 
       const shortCode = randomUUID().slice(0, 8).toUpperCase();

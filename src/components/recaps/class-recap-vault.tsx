@@ -36,6 +36,42 @@ interface ClassRecapVaultProps {
   activeClassesForStaff?: Array<{ id: string; title: string; minLevel: DanceLevel }>;
 }
 
+function getSafeVideoEmbed(rawUrl: string): { type: "youtube" | "html5" | "invalid"; safeUrl: string } {
+  try {
+    const url = new URL(rawUrl);
+    if (url.protocol !== "https:" && url.protocol !== "http:") {
+      return { type: "invalid", safeUrl: "" };
+    }
+
+    const host = url.hostname.toLowerCase();
+    // Validate YouTube
+    if (host === "www.youtube.com" || host === "youtube.com" || host === "m.youtube.com") {
+      const v = url.searchParams.get("v");
+      if (v && /^[a-zA-Z0-9_-]{11}$/.test(v)) {
+        return { type: "youtube", safeUrl: `https://www.youtube-nocookie.com/embed/${v}` };
+      }
+      const match = url.pathname.match(/^\/embed\/([a-zA-Z0-9_-]{11})/);
+      if (match) {
+        return { type: "youtube", safeUrl: `https://www.youtube-nocookie.com/embed/${match[1]}` };
+      }
+    } else if (host === "youtu.be") {
+      const id = url.pathname.slice(1).split("/")[0]?.split("?")[0];
+      if (id && /^[a-zA-Z0-9_-]{11}$/.test(id)) {
+        return { type: "youtube", safeUrl: `https://www.youtube-nocookie.com/embed/${id}` };
+      }
+    }
+
+    // Direct video stream (mp4, webm, etc.) - must be HTTPS
+    if (url.protocol === "https:") {
+      return { type: "html5", safeUrl: url.toString() };
+    }
+
+    return { type: "invalid", safeUrl: "" };
+  } catch {
+    return { type: "invalid", safeUrl: "" };
+  }
+}
+
 export function ClassRecapVault({
   initialRecaps,
   allStudioRecaps = [],
@@ -182,25 +218,37 @@ export function ClassRecapVault({
             <Card className="border shadow-md overflow-hidden">
               {/* Responsive Video Container */}
               <div className="relative aspect-video w-full bg-black">
-                {selectedRecap.recapVideoUrl.includes("youtube.com") ||
-                selectedRecap.recapVideoUrl.includes("youtu.be") ? (
-                  <iframe
-                    src={selectedRecap.recapVideoUrl.replace("watch?v=", "embed/")}
-                    title={selectedRecap.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="h-full w-full border-0"
-                  />
-                ) : (
-                  <video
-                    id="recap-video-player"
-                    key={selectedRecap.recapVideoUrl}
-                    controls
-                    playsInline
-                    className="h-full w-full object-contain"
-                    src={selectedRecap.recapVideoUrl}
-                  />
-                )}
+                {(() => {
+                  const embed = getSafeVideoEmbed(selectedRecap.recapVideoUrl);
+                  if (embed.type === "youtube") {
+                    return (
+                      <iframe
+                        src={embed.safeUrl}
+                        title={selectedRecap.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="h-full w-full border-0"
+                      />
+                    );
+                  }
+                  if (embed.type === "html5") {
+                    return (
+                      <video
+                        id="recap-video-player"
+                        key={embed.safeUrl}
+                        controls
+                        playsInline
+                        className="h-full w-full object-contain"
+                        src={embed.safeUrl}
+                      />
+                    );
+                  }
+                  return (
+                    <div className="flex h-full w-full items-center justify-center p-6 text-center text-sm text-muted-foreground">
+                      <span>Video format not supported or invalid URL.</span>
+                    </div>
+                  );
+                })()}
               </div>
 
               {/* Video Playback Speed Toolbar */}

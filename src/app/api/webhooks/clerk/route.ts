@@ -28,8 +28,8 @@ export async function POST(req: Request) {
     );
   }
 
-  const payload = await req.json();
-  const body = JSON.stringify(payload);
+  // 1. Read Raw Text Body for cryptographic HMAC integrity
+  const body = await req.text();
 
   const wh = new Webhook(WEBHOOK_SECRET);
   let evt: WebhookEvent;
@@ -38,6 +38,7 @@ export async function POST(req: Request) {
     evt = wh.verify(body, {
       "svix-id": svix_id,
       "svix-timestamp": svix_timestamp,
+      "svix-signature": svix_signature,
     }) as unknown as WebhookEvent;
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
@@ -59,7 +60,7 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Missing email address in payload" }, { status: 400 });
       }
 
-      const assignedRole = (public_metadata?.role as Role) || Role.STUDENT;
+      const assignedRole = public_metadata?.role as Role | undefined;
 
       await prisma.user.upsert({
         where: { clerkId: id },
@@ -68,7 +69,7 @@ export async function POST(req: Request) {
           firstName: first_name || "",
           lastName: last_name || "",
           avatarUrl: image_url || null,
-          role: assignedRole,
+          ...(assignedRole ? { role: assignedRole } : {}),
         },
         create: {
           clerkId: id,
@@ -76,7 +77,7 @@ export async function POST(req: Request) {
           firstName: first_name || "",
           lastName: last_name || "",
           avatarUrl: image_url || null,
-          role: assignedRole,
+          role: assignedRole || Role.STUDENT,
         },
       });
     }

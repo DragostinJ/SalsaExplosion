@@ -102,6 +102,16 @@ export async function createCheckoutSessionAction(
 
     // 4. Local / Studio Demo Direct Fulfillment Mode (when Stripe Price IDs or Keys are placeholders)
     if (!isLiveStripeConfigured(stripePriceId)) {
+      if (
+        process.env.NODE_ENV === "production" &&
+        process.env.ALLOW_DEMO_PAYMENTS !== "true"
+      ) {
+        throw new CheckoutDomainError(
+          "MISSING_STRIPE_CONFIG",
+          "Live payment processing is not configured for this package. Contact the studio administrator."
+        );
+      }
+
       await prisma.$transaction(async (tx) => {
         if (pkg.mode === "subscription") {
           const periodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);

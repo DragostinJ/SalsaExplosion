@@ -18,7 +18,18 @@ const AttachRecapSchema = z.object({
   classSessionId: z.string().min(1, "Class Session ID is required"),
   recapVideoUrl: z
     .string()
-    .url("Please provide a valid video URL (e.g. YouTube, Vimeo, Supabase MP4)"),
+    .url("Please provide a valid video URL (e.g. YouTube, Vimeo, Supabase MP4)")
+    .refine(
+      (val) => {
+        try {
+          const u = new URL(val);
+          return u.protocol === "https:";
+        } catch {
+          return false;
+        }
+      },
+      { message: "Video URL must use secure https protocol." }
+    ),
   recapNotes: z.string().max(2000, "Notes cannot exceed 2000 characters"),
   recapFigures: z
     .array(z.string().min(1).max(100))

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import {
   Flame,
@@ -36,6 +37,11 @@ export function InteractiveTutorialModal({
   autoOpenForNewDancer = false,
 }: InteractiveTutorialModalProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   const [step, setStep] = useState(0);
   const [demoRole, setDemoRole] = useState<"LEAD" | "FOLLOW">("LEAD");
   const [demoTierIndex, setDemoTierIndex] = useState(0);
@@ -139,11 +145,11 @@ export function InteractiveTutorialModal({
         className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/35 bg-amber-500/10 px-2 sm:px-2.5 py-1.5 text-xs font-bold text-amber-800 dark:text-amber-300 transition-colors hover:bg-amber-500/20"
       >
         <HelpCircle className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
-        <span className="hidden sm:inline">How It Works</span>
+        <span className="inline">How It Works</span>
       </button>
 
-      {/* Modal Backdrop & Container */}
-      {isOpen && (
+      {/* Modal Backdrop & Container Portaled to document.body */}
+      {isOpen && mounted && typeof document !== "undefined" && createPortal(
         <div
           role="dialog"
           aria-modal="true"
@@ -151,7 +157,7 @@ export function InteractiveTutorialModal({
           onClick={(e) => {
             if (e.target === e.currentTarget) handleClose();
           }}
-          className="fixed inset-0 z-50 flex flex-col justify-end sm:justify-center sm:items-center bg-black/75 p-0 sm:p-4 backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 z-[9999] flex flex-col justify-end sm:justify-center sm:items-center bg-black/80 p-0 sm:p-4 backdrop-blur-sm transition-opacity"
         >
           {/* Card: Bottom Sheet on Mobile, Centered Dialog on Desktop */}
           <div className="relative flex flex-col w-full max-w-2xl max-h-[92dvh] sm:max-h-[85vh] rounded-t-3xl sm:rounded-3xl border border-amber-500/30 bg-card text-card-foreground shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
@@ -194,16 +200,29 @@ export function InteractiveTutorialModal({
                 </div>
               </div>
 
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                aria-label="Close tutorial modal"
-                onClick={handleClose}
-                className="h-8 w-8 rounded-full p-0 shrink-0 ml-2 text-muted-foreground hover:text-foreground"
-              >
-                <X className="h-4 w-4" />
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="hidden sm:inline-flex h-7 px-2.5 text-[11px] font-semibold border-amber-500/30 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
+                >
+                  <Link href="/how-it-works" onClick={handleClose}>
+                    Handbook Page
+                    <ArrowRight className="ml-1 h-3 w-3" />
+                  </Link>
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  aria-label="Close tutorial modal"
+                  onClick={handleClose}
+                  className="h-8 w-8 rounded-full p-0 shrink-0 text-muted-foreground hover:text-foreground"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
 
             {/* Scrollable Body */}
@@ -528,7 +547,8 @@ export function InteractiveTutorialModal({
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

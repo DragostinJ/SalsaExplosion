@@ -4,7 +4,6 @@ import { useTransition } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
-import dynamic from "next/dynamic";
 import {
   CalendarDays,
   Award,
@@ -19,19 +18,12 @@ import {
   ShieldCheck,
   Video,
   Compass,
+  HelpCircle,
 } from "lucide-react";
 
 import type { Role } from "@prisma/client";
 import { switchMyAccountRoleAction } from "@/actions/management.actions";
-
-// Lazy-load tutorial modal so it is not in the critical path bundle
-const InteractiveTutorialModal = dynamic(
-  () =>
-    import("@/components/onboarding/interactive-tutorial-modal").then(
-      (m) => m.InteractiveTutorialModal
-    ),
-  { ssr: false }
-);
+import { InteractiveTutorialModal } from "@/components/onboarding/interactive-tutorial-modal";
 
 interface SiteHeaderProps {
   role: Role | null;
@@ -60,6 +52,12 @@ export function SiteHeader({ role }: SiteHeaderProps) {
       label: "Schedule",
       icon: CalendarDays,
       active: pathname === "/dashboard/schedule",
+    },
+    {
+      href: "/how-it-works",
+      label: "How It Works",
+      icon: HelpCircle,
+      active: pathname.startsWith("/how-it-works"),
     },
     {
       href: "/dashboard/recaps",

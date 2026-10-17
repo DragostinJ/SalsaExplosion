@@ -60,6 +60,14 @@ export default function Home() {
               </Button>
               <Button
                 asChild
+                variant="outline"
+                size="lg"
+                className="h-12 px-7 text-sm font-semibold border-amber-500/30 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
+              >
+                <Link href="/how-it-works">How It Works</Link>
+              </Button>
+              <Button
+                asChild
                 variant="secondary"
                 size="lg"
                 className="h-12 px-7 text-sm font-semibold"
@@ -99,6 +107,9 @@ export default function Home() {
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/about">About Studio</Link>
+                  </Button>
+                  <Button size="sm" variant="outline" asChild className="text-xs border-amber-500/30 text-amber-700 dark:text-amber-300">
+                    <Link href="/how-it-works">How It Works</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/events">Events</Link>

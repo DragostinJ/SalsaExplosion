@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useTransition } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { DanceLevel, DanceRole } from "@prisma/client";
 import {
@@ -88,16 +89,26 @@ export function NewDancerOnboarding({
           <Flame className="h-3.5 w-3.5 text-amber-600" />
           <span>Need a refresher on partner roles or passes?</span>
         </span>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={triggerStudioTutorial}
-          className="h-7 text-xs font-bold text-amber-700 dark:text-amber-300 hover:text-amber-800"
-        >
-          <HelpCircle className="h-3 w-3 mr-1" />
-          Open Studio Guide
-        </Button>
+        <div className="flex items-center gap-1.5">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={triggerStudioTutorial}
+            className="h-7 text-xs font-bold text-amber-700 dark:text-amber-300 hover:text-amber-800"
+          >
+            <HelpCircle className="h-3 w-3 mr-1" />
+            Quick Tour
+          </Button>
+          <Button
+            asChild
+            variant="link"
+            size="sm"
+            className="h-7 text-xs font-semibold text-muted-foreground hover:text-foreground p-0"
+          >
+            <Link href="/how-it-works">How It Works →</Link>
+          </Button>
+        </div>
       </div>
     );
   }
@@ -127,6 +138,15 @@ export function NewDancerOnboarding({
           >
             <HelpCircle className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1" />
             <span className="hidden xs:inline">Interactive</span> Tour
+          </Button>
+
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="hidden sm:inline-flex h-7 sm:h-8 text-xs font-semibold px-2.5 sm:px-3 border-amber-500/30 text-amber-700 dark:text-amber-300"
+          >
+            <Link href="/how-it-works">How It Works</Link>
           </Button>
 
           <Button

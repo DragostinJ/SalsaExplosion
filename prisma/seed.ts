@@ -47,17 +47,17 @@ async function main() {
     });
   }
 
-  // 2. Create Admin / Studio Owner
+  // 2. Create Admin / Studio Owner (Enrique Perez Valdes)
   await prisma.user.create({
     data: {
       clerkId: "user_seed_admin_001",
-      email: "owner@ritmoflow.studio",
-      firstName: "Carlos",
-      lastName: "Santana",
+      email: "enrique@salsaexplosion.co.uk",
+      firstName: "Enrique",
+      lastName: "Perez Valdes",
       avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-      bio: "Founder and Artistic Director of RitmoFlow. Born in Havana, Carlos has spent 18+ years sharing authentic Cuban Casino culture, complex turn knot styling, and high-energy Rueda de Casino across Europe.",
-      specialty: "Timba Mastery & Rueda Calls",
-      yearsDancing: 18,
+      bio: "Founder & Artistic Director of Salsa Explosion. Born in Cuba, Enrique has been promoting authentic Cuban Salsa, Rueda de Casino, and Afro-Cuban culture across the UK for over 25 years. Awarded the Salsa UK Lifetime Achievement Award and voted UK's Most Popular Salsa Promoter.",
+      specialty: "Cuban Salsa, Rueda de Casino, Timba & Afro-Cuban",
+      yearsDancing: 28,
       role: Role.ADMIN,
       currentLevel: DanceLevel.ADVANCED,
       preferredRole: DanceRole.LEAD,
@@ -65,36 +65,36 @@ async function main() {
     },
   });
 
-  // 3. Create Instructors
+  // 3. Create Instructors (Yaniel Castillo & Elena Reyes)
   const instructor1 = await prisma.user.create({
     data: {
       clerkId: "user_seed_instructor_001",
-      email: "elena@ritmoflow.studio",
-      firstName: "Elena",
-      lastName: "Reyes",
-      avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-      bio: "Havana National Dance School graduate. Elena specializes in Cuban Casino styling, sensual Afro-Cuban body movement (Rumba Yambu & Guaguanco), and circular Follow frame connection.",
-      specialty: "Casino Follow Styling & Afro-Cuban Movement",
-      yearsDancing: 12,
+      email: "yaniel@salsaexplosion.co.uk",
+      firstName: "Yaniel",
+      lastName: "Castillo",
+      avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+      bio: "Guest Cuban Maestro from Havana. Renowned international artist specializing in high-tempo Timba footwork, Afro-Cuban body isolation, and dynamic Casino turn patterns.",
+      specialty: "Cuban Timba Mastery & Afro-Cuban Body Isolation",
+      yearsDancing: 16,
       role: Role.INSTRUCTOR,
       currentLevel: DanceLevel.ADVANCED,
-      preferredRole: DanceRole.FOLLOW,
+      preferredRole: DanceRole.LEAD,
     },
   });
 
   const instructor2 = await prisma.user.create({
     data: {
       clerkId: "user_seed_instructor_002",
-      email: "marcos@ritmoflow.studio",
-      firstName: "Marcos",
-      lastName: "Valdes",
-      avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-      bio: "Direct from Santiago de Cuba, Marcos brings dynamic Son Cubano Contratiempo timing, lightning-fast Rueda switching, and infectious Havana social energy to every class.",
-      specialty: "Son Cubano & Rueda de Casino",
-      yearsDancing: 15,
+      email: "elena@salsaexplosion.co.uk",
+      firstName: "Elena",
+      lastName: "Reyes",
+      avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+      bio: "Resident Salsa Explosion instructor. Elena specializes in circular Follow frame tension, sensual Son Cubano styling, and authentic Havana social connection.",
+      specialty: "Casino Follow Styling & Son Cubano",
+      yearsDancing: 12,
       role: Role.INSTRUCTOR,
       currentLevel: DanceLevel.ADVANCED,
-      preferredRole: DanceRole.LEAD,
+      preferredRole: DanceRole.FOLLOW,
     },
   });
 
@@ -235,7 +235,7 @@ async function main() {
       minLevel: DanceLevel.BEGINNER,
       startTime: twoDaysAgo,
       endTime: twoDaysAgoEnd,
-      room: "Main Havana Studio",
+      room: "BOH Studios (Main Ballroom), Bournemouth",
       maxCapacity: 24,
       maxLeads: 12,
       maxFollows: 12,
@@ -273,7 +273,7 @@ async function main() {
       minLevel: DanceLevel.BEGINNER,
       startTime: tomorrow,
       endTime: tomorrowEnd,
-      room: "Main Havana Studio",
+      room: "BOH Studios (Ballroom), Bournemouth",
       maxCapacity: 24,
       maxLeads: 12,
       maxFollows: 12,
@@ -299,7 +299,7 @@ async function main() {
       minLevel: DanceLevel.IMPROVER,
       startTime: nextDay,
       endTime: nextDayEnd,
-      room: "Studio B (Mirrors)",
+      room: "Pavilion Dance Studio, Bournemouth",
       maxCapacity: 20,
       maxLeads: 10,
       maxFollows: 10,
@@ -325,13 +325,13 @@ async function main() {
       minLevel: DanceLevel.INTERMEDIATE,
       startTime: dayThree,
       endTime: dayThreeEnd,
-      room: "Main Havana Studio",
+      room: "BOH Studios (Main Ballroom), Bournemouth",
       maxCapacity: 16,
       maxLeads: 8,
       maxFollows: 8,
       bookedCount: 2,
       creditCost: 1,
-      instructorId: instructor2.id,
+      instructorId: instructor1.id,
     },
   });
 
@@ -465,25 +465,25 @@ async function main() {
     },
   });
 
-  // 7. Create Premiere Guest Artist Event
+  // 7. Create Premiere Guest Artist Event (Bournemouth Summer Cuban Salsa Congress)
   const guestEvent = await prisma.event.create({
     data: {
-      slug: "havana-rueda-mastery-intensive",
-      title: "Havana Rueda & Afro-Cuban Weekend Intensive",
+      slug: "bournemouth-summer-cuban-salsa-congress-2026",
+      title: "Bournemouth Summer Cuban Salsa Congress 2026",
       description:
-        "An exclusive 2-day immersive masterclass featuring world-renowned Cuban maestros. Dive deep into complex Casino knot combinations, authentic Rumba Columbia body isolation, and dynamic Rueda de Casino calling dynamics.",
-      venueName: "Gran Teatro Havana Hall",
-      venueAddress: "142 Rhythm Way, Central Studio Complex, London",
+        "The UK's flagship Cuban dance festival! 3 days of intensive Cuban Salsa, Rueda de Casino, and Afro-Cuban masterclasses with world-class maestros from Cuba, culminating in our legendary Havana Fiesta Gala Party nights overlooking Bournemouth beach.",
+      venueName: "The Roundhouse Hotel & BOH Studios",
+      venueAddress: "Meyrick Road, Bournemouth, BH1 2PR",
       startDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
       endDate: new Date(Date.now() + 16 * 24 * 60 * 60 * 1000),
-      guestArtists: ["Maestro Alberto Valdes", "Maestra Yanet Fuentes"],
+      guestArtists: ["Enrique Perez Valdes", "Yaniel Castillo", "Fredy Clan", "DJ Enrique"],
       status: EventStatus.PUBLISHED,
       ticketTiers: {
         create: [
           {
-            name: "Full Weekend Pass (Early Bird)",
+            name: "Full 3-Day Congress Pass (Early Bird)",
             description:
-              "All workshops (Saturday & Sunday) + Saturday Night Gala Social Party + Workshop Certificate",
+              "All workshops (Friday, Saturday & Sunday) + All Night Parties + Masterclass Certificate",
             priceInCents: 9500,
             totalCapacity: 80,
             maxLeads: 40,
@@ -491,9 +491,9 @@ async function main() {
             salesEndAt: new Date(Date.now() + 13 * 24 * 60 * 60 * 1000),
           },
           {
-            name: "Saturday Bootcamp Only",
+            name: "Saturday Masterclass Bootcamp",
             description:
-              "Saturday 4-hour Cuban Masterclass intensive (Casino turns & dynamic partnering)",
+              "Saturday 5-hour Cuban Masterclass intensive (Casino turns, Afro-Cuban isolation & dynamic partnerwork)",
             priceInCents: 6000,
             totalCapacity: 50,
             maxLeads: 25,
@@ -501,9 +501,9 @@ async function main() {
             salesEndAt: new Date(Date.now() + 13 * 24 * 60 * 60 * 1000),
           },
           {
-            name: "Saturday Night Social Party Pass",
+            name: "Saturday Night Havana Fiesta Pass",
             description:
-              "Entry to Saturday Night Gala Social with live Timba DJ & guest artist performances",
+              "Entry to the Saturday Night Gala Fiesta with live Timba DJ sets, Cuban dance shows & social dancing",
             priceInCents: 2000,
             totalCapacity: 150,
             salesEndAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),

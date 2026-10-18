@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 import { SiteHeader } from "@/components/navigation/site-header";
+import { SiteFooter } from "@/components/navigation/site-footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,8 +20,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RitmoFlow | Cuban Salsa Studio Operating System",
-  description: "Production-grade platform for Cuban Salsa classes, level progression, and international guest artist masterclasses.",
+  title: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
+  description:
+    "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth, Rueda de Casino, end-of-class recaps, and congress passes.",
 };
 
 export default async function RootLayout({
@@ -46,6 +48,7 @@ export default async function RootLayout({
         <body className="min-h-full flex flex-col bg-background text-foreground">
           <SiteHeader role={viewer?.role ?? null} />
           <div className="flex-1">{children}</div>
+          <SiteFooter />
         </body>
       </html>
     </ClerkProvider>

@@ -24,9 +24,9 @@ import {
 } from "@/components/ui/card";
 
 export const metadata = {
-  title: "About RitmoFlow | Cuban Salsa Academy & Social Dance Community",
+  title: "About Salsa Explosion | Cuban Salsa Academy & Community • Bournemouth, UK",
   description:
-    "Discover the authentic culture of Cuban Salsa (Casino & Rueda de Casino), meet our Havana-trained maestras and maestros, and explore our class photo galleries.",
+    "Discover Salsa Explosion UK, founded by Cuban maestro Enrique Perez Valdes. Learn authentic Cuban Salsa (Casino & Rueda de Casino) at BOH Studios Bournemouth.",
 };
 
 export default async function AboutPage() {
@@ -54,16 +54,16 @@ export default async function AboutPage() {
       <section className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-500/[0.08] via-background to-orange-500/[0.05] p-6 sm:p-12 shadow-sm text-center space-y-4">
         <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/15 px-3.5 py-1 text-xs font-bold text-amber-800 dark:text-amber-300">
           <Flame className="h-4 w-4 fill-amber-500 text-amber-600" />
-          <span>Authentic Cuban Salsa • Casino & Rueda de Casino</span>
+          <span>Salsa Explosion UK • Directed by Enrique Perez Valdes (Cuba)</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight">
-          Havana Rhythm. Circular Flow.{" "}
-          <span className="text-amber-700 dark:text-amber-400">Zero Intimidation.</span>
+          Bournemouth&apos;s Cuban Rhythm.{" "}
+          <span className="text-amber-700 dark:text-amber-400">Authentic Cuban Soul.</span>
         </h1>
 
         <p className="max-w-2xl mx-auto text-sm sm:text-base text-muted-foreground leading-relaxed">
-          RitmoFlow is London&apos;s premier Cuban Salsa academy. We believe dance is a shared conversation, not an audition. No partner required, two left feet welcomed, and authentic Cuban musicality taught from your first step.
+          Salsa Explosion is the UK&apos;s premier Cuban dance academy and promoter, based in Bournemouth, Dorset. Founded by Cuban maestro Enrique Perez Valdes, we have introduced thousands of dancers to the joy of authentic Casino, dynamic Rueda de Casino, Timba, and Afro-Cuban rhythms for over 25 years.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -288,12 +288,12 @@ export default async function AboutPage() {
               </CardHeader>
               <CardContent className="space-y-3 text-xs">
                 <div className="rounded-xl border bg-muted/30 p-3 space-y-1">
-                  <span className="font-bold">Address:</span>
-                  <p className="text-muted-foreground">
-                    142 Rhythm Way, Central Havana Hall, London EC1R 4TY
+                  <span className="font-bold">Main Academy Studio & Congress Venues:</span>
+                  <p className="text-foreground font-semibold">
+                    BOH Studios, Bournemouth, Dorset, UK
                   </p>
                   <p className="text-[11px] text-muted-foreground">
-                    (2 minutes walk from Farringdon / Chancery Lane stations)
+                    Festival & Congress Gala Venue: The Roundhouse Hotel, Meyrick Road, Bournemouth BH1 2PR
                   </p>
                 </div>
 
@@ -304,16 +304,16 @@ export default async function AboutPage() {
                   </span>
                   <div className="grid grid-cols-2 gap-2 text-muted-foreground pt-1">
                     <div>
-                      <strong>Tue & Thu:</strong> 18:30 – 22:00
+                      <strong>Tuesday Classes:</strong> 19:30 – 22:30
                     </div>
                     <div>
-                      <strong>Friday Socials:</strong> 19:00 – 01:00
+                      <strong>Thursday Classes:</strong> 19:30 – 22:30
                     </div>
                     <div>
-                      <strong>Saturday Workshops:</strong> 14:00 – 18:00
+                      <strong>Monthly Social Fiesta:</strong> 20:00 – 01:00
                     </div>
                     <div>
-                      <strong>Sunday Rueda Jam:</strong> 15:00 – 19:00
+                      <strong>Weekend Congresses:</strong> Annual Summer Festival
                     </div>
                   </div>
                 </div>
@@ -329,7 +329,7 @@ export default async function AboutPage() {
           Ready to Step Into the Circle?
         </h2>
         <p className="max-w-xl mx-auto text-xs sm:text-sm text-amber-50 leading-relaxed">
-          Book your first Cuban Salsa class today. Zero experience necessary. We guarantee you&apos;ll be smiling and dancing in your very first hour!
+          Book your first Cuban Salsa class with Enrique Perez Valdes and the Salsa Explosion team in Bournemouth. Zero experience necessary. We guarantee you&apos;ll be smiling and dancing in your very first hour!
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Button
@@ -349,27 +349,6 @@ export default async function AboutPage() {
           </Button>
         </div>
       </section>
-
-      {/* 7. Footer */}
-      <footer className="border-t pt-8 pb-12 text-xs text-muted-foreground flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
-          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-tr from-amber-600 to-orange-500 text-white">
-            <Flame className="h-3.5 w-3.5 fill-white" />
-          </div>
-          <span className="font-extrabold text-foreground">
-            Ritmo<span className="text-amber-700 dark:text-amber-400">Flow</span>
-          </span>
-          <span>© {new Date().getFullYear()} RitmoFlow Cuban Salsa Studio. All rights reserved.</span>
-        </div>
-
-        <div className="flex items-center gap-4 font-semibold">
-          <Link href="/about" className="hover:text-foreground">About</Link>
-          <Link href="/dashboard/schedule" className="hover:text-foreground">Schedule</Link>
-          <Link href="/dashboard/recaps" className="hover:text-foreground">Recaps</Link>
-          <Link href="/pricing" className="hover:text-foreground">Passes</Link>
-          <Link href="/events" className="hover:text-foreground">Events</Link>
-        </div>
-      </footer>
     </main>
   );
 }

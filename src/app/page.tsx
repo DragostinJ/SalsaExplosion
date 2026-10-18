@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   Calendar,
-  Sparkles,
   Award,
   Video,
   ArrowRight,
@@ -9,6 +8,9 @@ import {
   BarChart3,
   Users,
   ShieldCheck,
+  MapPin,
+  Flame,
+  CheckCircle2,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,38 +18,80 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
-      {/* Hero Section */}
       <main className="flex-1">
-        <section className="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-b from-amber-500/[0.06] to-background">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-b from-amber-500/[0.08] via-orange-500/[0.03] to-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-            <Badge
-              variant="outline"
-              className="mb-6 border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300 px-3.5 py-1 text-xs font-semibold"
-            >
-              <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-              Cuban Salsa (Casino & Rueda de Casino) Studio Operating System
-            </Badge>
+            {/* Social Proof & Award Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
+              <Badge
+                variant="outline"
+                className="border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300 px-3.5 py-1 text-xs font-semibold"
+              >
+                <Award className="mr-1.5 h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                Salsa UK Lifetime Achievement Award Winner
+              </Badge>
+              <Badge
+                variant="outline"
+                className="border-orange-500/40 bg-orange-500/10 text-orange-700 dark:text-orange-300 px-3.5 py-1 text-xs font-semibold"
+              >
+                <MapPin className="mr-1.5 h-3.5 w-3.5 text-orange-600 dark:text-orange-400" />
+                Home Hub: BOH Studios Bournemouth
+              </Badge>
+            </div>
 
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl max-w-3xl mx-auto leading-tight">
-              Master the Clave. <br />
-              <span className="bg-gradient-to-r from-amber-600 to-orange-500 bg-clip-text text-transparent">
-                Run the Entire Academy.
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl max-w-4xl mx-auto leading-tight">
+              Bournemouth&apos;s Authentic Cuban Salsa Academy.{" "}
+              <span className="block mt-1 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-500 bg-clip-text text-transparent">
+                Directed by Enrique Perez Valdes.
               </span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              RitmoFlow combines role-balanced class bookings, 4-tier Cuban Salsa syllabus progression, AI-assisted video grading, QR door check-ins, and zero-commission guest artist event ticketing.
+              Welcome to Salsa Explosion UK. Experience 25+ years of authentic Cuban Casino, Rueda de Casino, and Son. Powered by the RitmoFlow operating system with role-balanced partner rotations, 4-tier syllabus tracking, student recap videos, and official congress passes.
             </p>
 
+            {/* Quick Stats Pill Bar */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-muted-foreground font-medium">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <span>4,200+ Dancers in Community</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <span>25+ Years Cuban Salsa Heritage</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <span>Zero Partner Required</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <span>Strict Lead/Follow Balance</span>
+              </div>
+            </div>
+
+            {/* Main Action Buttons */}
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Button
                 asChild
                 size="lg"
-                className="h-12 px-7 text-sm font-bold bg-gradient-to-r from-amber-600 to-orange-500 text-white"
+                className="h-12 px-7 text-sm font-bold bg-gradient-to-r from-amber-600 to-orange-500 text-white shadow-md hover:from-amber-700 hover:to-orange-600"
               >
                 <Link href="/dashboard/schedule">
-                  Class Schedule
+                  View Weekly Classes
                   <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="h-12 px-7 text-sm font-semibold border-amber-500/40 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
+              >
+                <Link href="/events">
+                  <Flame className="mr-2 h-4 w-4 text-orange-500" />
+                  Bournemouth Congress 2026
                 </Link>
               </Button>
               <Button
@@ -56,15 +100,7 @@ export default function Home() {
                 size="lg"
                 className="h-12 px-7 text-sm font-semibold"
               >
-                <Link href="/events">Guest Artist Events</Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="h-12 px-7 text-sm font-semibold border-amber-500/30 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
-              >
-                <Link href="/how-it-works">How It Works</Link>
+                <Link href="/about">Maestro Enrique Story</Link>
               </Button>
               <Button
                 asChild
@@ -72,27 +108,80 @@ export default function Home() {
                 size="lg"
                 className="h-12 px-7 text-sm font-semibold"
               >
-                <Link href="/instructor/students">Instructor & Admin Hub</Link>
+                <Link href="/instructor/students">Instructor Desk</Link>
               </Button>
             </div>
           </div>
         </section>
 
-        {/* 3-Portal Interactive Showcase */}
-        <section className="py-12 border-t bg-muted/20">
+        {/* Featured Congress Callout Banner */}
+        <section className="py-8 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="rounded-2xl border border-amber-500/30 bg-card/60 backdrop-blur-sm p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
+              <div className="space-y-2 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2">
+                  <Badge className="bg-amber-600 text-white font-bold text-xs uppercase tracking-wider">
+                    Official Flagship Event
+                  </Badge>
+                  <span className="text-xs text-muted-foreground font-medium">July 17–19, 2026</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
+                  Bournemouth Summer Cuban Salsa Congress 2026
+                </h2>
+                <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl">
+                  3 days of authentic Cuban masterclasses, Rueda de Casino, Havana nights social dancing, and world-class guest artists featuring Enrique Perez Valdes, Yaniel Castillo, and Elena Reyes at The Roundhouse Hotel & BOH Studios Bournemouth.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+                <Button
+                  asChild
+                  className="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-white font-bold px-6"
+                >
+                  <Link href="/events">
+                    Reserve Passes (From £20)
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full sm:w-auto"
+                >
+                  <Link href="/events">View Artist Lineup</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 3-Portal Interactive Showcase */}
+        <section className="py-14 border-t bg-muted/20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <Badge variant="outline" className="text-xs font-semibold mb-2">
+                Unified Ecosystem
+              </Badge>
+              <h2 className="text-2xl font-extrabold sm:text-3xl">
+                One Platform for Dancers, Instructors & Academy Owners
+              </h2>
+              <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
+                Built specifically for Cuban Salsa academies with distinct role permissions and live multi-tenant isolation.
+              </p>
+            </div>
+
             <div className="grid gap-6 md:grid-cols-3">
               {/* Portal 1: Student Experience */}
-              <div className="rounded-2xl border bg-card p-6 shadow-xs flex flex-col justify-between space-y-4">
+              <div className="rounded-2xl border bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-amber-500/40 transition-colors">
                 <div className="space-y-2">
                   <Badge variant="secondary" className="text-xs font-bold">
                     1. Dancer Experience
                   </Badge>
-                  <h2 className="text-lg font-extrabold">
-                    Bookings, Syllabus & Passes
-                  </h2>
+                  <h3 className="text-lg font-extrabold">
+                    Bookings, Syllabus & Recaps
+                  </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Book Lead or Follow spots, track your Cuban Salsa figures, upload assessment videos, and register for visiting maestro weekenders.
+                    Reserve Lead or Follow spots with automatic ratio protection, watch post-class video recaps from Maestro Enrique, track your 4-tier Cuban syllabus, and store your Congress QR pass.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -112,22 +201,22 @@ export default function Home() {
                     <Link href="/how-it-works">How It Works</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/events">Events</Link>
+                    <Link href="/events">Congress Passes</Link>
                   </Button>
                 </div>
               </div>
 
               {/* Portal 2: Instructor Desk */}
-              <div className="rounded-2xl border border-emerald-500/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4">
+              <div className="rounded-2xl border border-emerald-500/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-emerald-500/60 transition-colors">
                 <div className="space-y-2">
                   <Badge className="bg-emerald-600 text-white text-xs font-bold">
                     2. Instructor Teaching Desk
                   </Badge>
-                  <h2 className="text-lg font-extrabold">
+                  <h3 className="text-lg font-extrabold">
                     Progression, AI Co-Pilot & QR Roster
-                  </h2>
+                  </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    View every student&apos;s level, promote dancers in 1 click, grade videos with AI rubric assistance, and check in classes via QR code.
+                    View every student&apos;s level, promote dancers in 1 click across Beginner to Advanced, grade video assessments with AI rubric feedback, and run lightning-fast QR door check-ins.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -153,16 +242,16 @@ export default function Home() {
               </div>
 
               {/* Portal 3: Studio Owner Admin */}
-              <div className="rounded-2xl border border-amber-500/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4">
+              <div className="rounded-2xl border border-amber-500/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-amber-500/60 transition-colors">
                 <div className="space-y-2">
                   <Badge className="bg-amber-500 text-white text-xs font-bold">
                     3. Studio Owner Command
                   </Badge>
-                  <h2 className="text-lg font-extrabold">
-                    Revenue Charts, Classes & Events
-                  </h2>
+                  <h3 className="text-lg font-extrabold">
+                    Revenue Charts, Classes & Festivals
+                  </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Monitor monthly revenue, Lead/Follow balance, syllabus retention funnel, publish guest artist festivals, and scan door passes.
+                    Monitor monthly recurring revenue, track Lead/Follow retention curves, schedule weekly Cuban classes at BOH Studios, and publish ticket tiers for visiting maestros.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -199,7 +288,7 @@ export default function Home() {
                   Balanced Lead & Follow Ratios
                 </h3>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Row-locked PostgreSQL transactions enforce strict Lead and Follow caps on both weekly classes and weekend bootcamps.
+                  Row-locked PostgreSQL transactions enforce strict Lead and Follow caps on both weekly classes at BOH Studios and weekend congress bootcamps.
                 </p>
               </div>
 
@@ -211,7 +300,7 @@ export default function Home() {
                   4-Tier Cuban Salsa Syllabus
                 </h3>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Clear progression from Beginner to Improver, Intermediate, and Advanced covering Guapea, Dile Que No, Setenta, and Vacilala.
+                  Clear progression from Beginner to Improver, Intermediate, and Advanced covering Guapea, Dile Que No, Setenta, Vacilala, and Rueda command mastery.
                 </p>
               </div>
 
@@ -220,23 +309,16 @@ export default function Home() {
                   <QrCode className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold">
-                  Zero-Commission Event Ticketing
+                  Zero-Commission Congress Passes
                 </h3>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Sell Full Passes and Party Passes for visiting international Cuban maestros directly via Stripe with 1-second QR door verification.
+                  Sell Full Passes and Havana Fiesta social passes directly with Stripe integration and instant 1-second camera QR door verification.
                 </p>
               </div>
             </div>
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="border-t py-8 text-center text-xs text-muted-foreground">
-        <div className="mx-auto max-w-7xl px-4">
-          © {new Date().getFullYear()} RitmoFlow Studio Operating System. Built for Cuban Salsa & Rueda de Casino.
-        </div>
-      </footer>
     </div>
   );
 }

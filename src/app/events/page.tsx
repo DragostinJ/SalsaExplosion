@@ -14,8 +14,8 @@ import {
 import { BackButton } from "@/components/navigation/back-button";
 
 export const metadata = {
-  title: "Guest Artist Events & Masterclasses | RitmoFlow",
-  description: "Exclusive Cuban Salsa weekend intensives, bootcamps, and festivals with international maestras and maestros.",
+  title: "Salsa Explosion Congresses & Masterclasses | Bournemouth",
+  description: "Official Cuban Salsa congresses, weekend bootcamps, and Havana Fiesta socials directed by Maestro Enrique Perez Valdes in Bournemouth.",
 };
 
 export default async function EventsDirectoryPage() {
@@ -40,12 +40,12 @@ export default async function EventsDirectoryPage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Guest Artist Masterclasses & Festivals
+              Salsa Explosion Congresses & Masterclasses
             </h1>
-            <Badge className="bg-amber-500 text-white font-semibold">Special Events</Badge>
+            <Badge className="bg-amber-500 text-white font-semibold">Bournemouth & Dorset</Badge>
           </div>
           <p className="mt-1 text-sm text-muted-foreground">
-            Immersive weekend bootcamps, Afro-Cuban intensives, and social galas featuring world-class dancers.
+            Immersive Cuban Salsa congresses, Afro-Cuban weekend bootcamps, and Havana Fiesta socials featuring world-class artists.
           </p>
         </div>
       </div>

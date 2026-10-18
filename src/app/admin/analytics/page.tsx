@@ -13,6 +13,7 @@ import { requireRole, ADMIN_ONLY } from "@/lib/auth-user";
 import { AdminNav } from "@/components/navigation/admin-nav";
 import { Badge } from "@/components/ui/badge";
 import { AnalyticsCharts } from "@/components/admin/analytics-charts";
+import { CsvExportToolbar } from "@/components/admin/csv-export-toolbar";
 
 export const metadata = {
   title: "Studio Analytics & Executive Intelligence | RitmoFlow",
@@ -175,6 +176,9 @@ export default async function AdminAnalyticsPage() {
           </Badge>
         </div>
       </div>
+
+      {/* CSV Accountant & Data Exporter */}
+      <CsvExportToolbar />
 
       {/* Analytics Visualizations */}
       <AnalyticsCharts

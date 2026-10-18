@@ -92,6 +92,11 @@ export function SiteFooter() {
                   Drop-ins & Monthly Passes
                 </Link>
               </li>
+              <li>
+                <Link href="/private-lessons" className="hover:text-foreground transition-colors text-amber-700 dark:text-amber-400 font-semibold">
+                  1-on-1 Private Coaching
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -119,6 +124,16 @@ export function SiteFooter() {
               <li>
                 <Link href="/about" className="hover:text-foreground transition-colors">
                   About Enrique & Academy
+                </Link>
+              </li>
+              <li>
+                <Link href="/music" className="hover:text-foreground transition-colors text-amber-700 dark:text-amber-400 font-semibold">
+                  Cuban Music & Playlists
+                </Link>
+              </li>
+              <li>
+                <Link href="/shop" className="hover:text-foreground transition-colors text-amber-700 dark:text-amber-400 font-semibold">
+                  Merch & Dance Shoes
                 </Link>
               </li>
             </ul>

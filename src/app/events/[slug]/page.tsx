@@ -22,6 +22,8 @@ import {
   EventPassSelector,
   SerializedEventTier,
 } from "@/components/events/event-pass-selector";
+import { AddToCalendarButton } from "@/components/calendar/add-to-calendar-button";
+import { CongressTravelGuide } from "@/components/events/congress-travel-guide";
 
 interface EventDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -148,6 +150,19 @@ export default async function EventDetailPage({
               </span>
             </div>
           </div>
+
+          <div className="pt-2">
+            <AddToCalendarButton
+              event={{
+                title: event.title,
+                description: `${event.description}\n\nVenue: ${event.venueName}, ${event.venueAddress}\nDirected by Maestro Enrique Perez Valdes (Salsa Explosion UK)`,
+                location: `${event.venueName}, ${event.venueAddress}`,
+                startDate: event.startDate,
+                endDate: event.endDate,
+              }}
+              className="bg-white/10 text-white hover:bg-white/20 border-white/30"
+            />
+          </div>
         </div>
       </div>
 
@@ -218,6 +233,9 @@ export default async function EventDetailPage({
           defaultPreferredRole={currentUser?.preferredRole ?? DanceRole.LEAD}
         />
       </div>
+
+      {/* Bournemouth Congress Hotel, Travel & Festival Guide */}
+      <CongressTravelGuide />
     </main>
   );
 }

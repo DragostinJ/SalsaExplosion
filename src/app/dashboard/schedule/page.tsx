@@ -25,6 +25,7 @@ import {
   StudentContext,
 } from "@/components/schedule/class-schedule-card";
 import { NewDancerOnboarding } from "@/components/schedule/new-dancer-onboarding";
+import { PartnerMatchWaitlist } from "@/components/schedule/partner-match-waitlist";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -282,6 +283,12 @@ export default async function StudentSchedulePage({
         currentLevel={user.currentLevel}
         classCredits={user.classCredits}
         hasActiveBooking={scheduleItems.some((s) => s.userBooking !== null)}
+      />
+
+      {/* Partner-Match Priority Waitlist & Bypass Protocol */}
+      <PartnerMatchWaitlist
+        userRole={user.preferredRole}
+        userName={user.firstName}
       />
 
       {/* URL Search Param Filter Bar */}

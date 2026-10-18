@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/card";
 
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
+import { AddToCalendarButton } from "@/components/calendar/add-to-calendar-button";
 
 // ==========================================
 // TYPES & INTERFACES
@@ -495,34 +496,46 @@ export function ClassScheduleCard({
               </Link>
             </Button>
           ) : (
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <Button
-                asChild
-                variant="secondary"
-                className="w-full font-semibold text-xs"
-              >
-                <Link href={`/checkin/${session.id}`}>
-                  <QrCode className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
-                  Door QR Pass
-                </Link>
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                disabled={isPending}
-                onClick={handleCancel}
-                className="w-full border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive text-xs"
-              >
-                {isPending ? (
-                  <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
-                ) : (
-                  <XCircle className="mr-1.5 h-3.5 w-3.5" />
-                )}
-                {isWithinCancellationWindow &&
-                !student.hasActiveSubscription
-                  ? "Cancel (No Refund)"
-                  : "Cancel Spot"}
-              </Button>
+            <div className="w-full space-y-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <Button
+                  asChild
+                  variant="secondary"
+                  className="w-full font-semibold text-xs"
+                >
+                  <Link href={`/checkin/${session.id}`}>
+                    <QrCode className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                    Door QR Pass
+                  </Link>
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  disabled={isPending}
+                  onClick={handleCancel}
+                  className="w-full border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive text-xs"
+                >
+                  {isPending ? (
+                    <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+                  ) : (
+                    <XCircle className="mr-1.5 h-3.5 w-3.5" />
+                  )}
+                  {isWithinCancellationWindow &&
+                  !student.hasActiveSubscription
+                    ? "Cancel (No Refund)"
+                    : "Cancel Spot"}
+                </Button>
+              </div>
+              <AddToCalendarButton
+                event={{
+                  title: `${session.title} — Salsa Explosion UK`,
+                  description: `Cuban Salsa & Rueda de Casino class at BOH Studios Bournemouth with ${session.instructor.firstName} ${session.instructor.lastName}. Role: ${optimisticState.bookedRole || selectedRole}.`,
+                  location: `BOH Studios Bournemouth, 12-14 Post Office Rd, Bournemouth BH1 1DH, UK`,
+                  startDate: new Date(session.startTime),
+                  endDate: new Date(session.endTime),
+                }}
+                className="w-full justify-center"
+              />
             </div>
           )
         ) : !canAfford ? (

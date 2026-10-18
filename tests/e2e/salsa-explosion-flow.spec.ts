@@ -112,4 +112,108 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       ).toBeVisible();
     }
   });
+
+  test("4. Venues directory renders BOH Studios Bournemouth and Roundhouse Hotel", async ({
+    page,
+  }) => {
+    await page.goto("/venues");
+
+    await expect(
+      page.getByText("BOH Studios Bournemouth")
+    ).toBeVisible();
+    await expect(
+      page.getByText("The Roundhouse Hotel Bournemouth")
+    ).toBeVisible();
+    await expect(page.getByText("12-14 Post Office Rd")).toBeVisible();
+  });
+
+  test("5. Referrals page renders referral invite links and credit rewards", async ({
+    page,
+  }) => {
+    await page.goto("/dashboard/referrals");
+
+    await expect(
+      page.getByText("Invite Friends, Earn Free Class Credits")
+    ).toBeVisible();
+    await expect(
+      page.getByText("Your Personal Dancer Invite Link")
+    ).toBeVisible();
+  });
+
+  test("6. Cuban Clave & Rhythm Trainer renders tempo controls and Web Audio drills", async ({
+    page,
+  }) => {
+    await page.goto("/dashboard/rhythm");
+
+    await expect(
+      page.getByText("Cuban Clave & Rhythm Trainer")
+    ).toBeVisible();
+    await expect(page.getByText("2-3 Son Clave")).toBeVisible();
+    await expect(page.getByText("3-2 Son Clave")).toBeVisible();
+    await expect(page.getByText("Campana (Cowbell)")).toBeVisible();
+  });
+
+  test("7. Rueda de Casino Call Dictionary renders authentic calls, hand signals, and level filter", async ({
+    page,
+  }) => {
+    await page.goto("/dashboard/rueda");
+
+    await expect(
+      page.getByText("Rueda de Casino Call Dictionary")
+    ).toBeVisible();
+    await expect(page.getByText("Guapea").first()).toBeVisible();
+    await expect(page.getByText("Dame").first()).toBeVisible();
+    await expect(page.getByText("Enchufla").first()).toBeVisible();
+  });
+
+  test("8. 1-on-1 Private Lessons page renders instructors and coaching packages", async ({
+    page,
+  }) => {
+    await page.goto("/private-lessons");
+
+    await expect(
+      page.getByText("1-on-1 Private Lessons & Coaching")
+    ).toBeVisible();
+    await expect(
+      page.getByText("Maestro Enrique Perez Valdes")
+    ).toBeVisible();
+    await expect(page.getByText("1-Hour Single Session")).toBeVisible();
+    await expect(page.getByText("5-Hour Intensive Block")).toBeVisible();
+  });
+
+  test("9. Cuban Music & Social Playlist Hub renders curated tracks and BPM categories", async ({
+    page,
+  }) => {
+    await page.goto("/music");
+
+    await expect(
+      page.getByText("Cuban Music & Social Playlist Hub")
+    ).toBeVisible();
+    await expect(
+      page.getByText("Slow Cuban Son (80-90 BPM)")
+    ).toBeVisible();
+    await expect(
+      page.getByText("High-Energy Timba & Reparto (105+ BPM)")
+    ).toBeVisible();
+  });
+
+  test("10. Merch & Dance Essentials storefront renders items and Click-and-Collect details", async ({
+    page,
+  }) => {
+    await page.goto("/shop");
+
+    await expect(
+      page.getByText("Salsa Explosion Merch & Dance Essentials")
+    ).toBeVisible();
+    await expect(
+      page.getByText("Salsa Explosion Full-Zip Hoodie")
+    ).toBeVisible();
+    await expect(
+      page.getByText("Hand-Crafted Cuban Flag Abanico")
+    ).toBeVisible();
+    await expect(
+      page.getByText("Suede-Sole Practice Dance Shoes")
+    ).toBeVisible();
+  });
 });
+

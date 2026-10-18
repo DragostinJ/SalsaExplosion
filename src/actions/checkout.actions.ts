@@ -313,3 +313,183 @@ export async function createBillingPortalSessionAction(): Promise<CheckoutAction
     };
   }
 }
+
+// ==========================================
+// 3. CREATE EVENT TICKET STRIPE CHECKOUT ACTION
+// ==========================================
+
+const CreateEventCheckoutSchema = z.object({
+  eventId: z.string().min(1, "Event ID is required"),
+  ticketTierId: z.string().min(1, "Ticket tier ID is required"),
+  role: z.enum(["LEAD", "FOLLOW"] as const, {
+    message: "Dance role must be LEAD or FOLLOW",
+  }),
+});
+
+export type CreateEventCheckoutInput = z.infer<typeof CreateEventCheckoutSchema>;
+
+export async function createEventCheckoutSessionAction(
+  rawInput: CreateEventCheckoutInput
+): Promise<CheckoutActionResponse> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user) {
+      throw new CheckoutDomainError(
+        "UNAUTHORIZED",
+        "Please sign in to purchase an event pass."
+      );
+    }
+
+    const parsed = CreateEventCheckoutSchema.safeParse(rawInput);
+    if (!parsed.success) {
+      throw new CheckoutDomainError(
+        "VALIDATION_ERROR",
+        parsed.error.issues[0]?.message ?? "Invalid event pass selection."
+      );
+    }
+
+    const { eventId, ticketTierId, role } = parsed.data;
+
+    const tier = await prisma.eventTicketTier.findUnique({
+      where: { id: ticketTierId },
+      include: {
+        event: { select: { id: true, slug: true, title: true } },
+        registrations: {
+          where: { paymentStatus: "PAID" },
+          select: { id: true, userId: true, role: true },
+        },
+      },
+    });
+
+    if (!tier || tier.eventId !== eventId) {
+      throw new CheckoutDomainError("USER_NOT_FOUND", "Ticket tier not found.");
+    }
+
+    const existingUserPass = tier.registrations.find((r) => r.userId === user.id);
+    if (existingUserPass) {
+      throw new CheckoutDomainError(
+        "ALREADY_SUBSCRIBED",
+        "You already hold an active pass for this tier!"
+      );
+    }
+
+    if (tier.registrations.length >= tier.totalCapacity) {
+      throw new CheckoutDomainError(
+        "PLAN_UNAVAILABLE",
+        "This ticket tier is completely sold out."
+      );
+    }
+
+    if (role === "LEAD" && tier.maxLeads !== null) {
+      const leads = tier.registrations.filter((r) => r.role === "LEAD").length;
+      if (leads >= tier.maxLeads) {
+        throw new CheckoutDomainError(
+          "PLAN_UNAVAILABLE",
+          "Lead spots for this tier are currently full."
+        );
+      }
+    }
+
+    if (role === "FOLLOW" && tier.maxFollows !== null) {
+      const follows = tier.registrations.filter((r) => r.role === "FOLLOW").length;
+      if (follows >= tier.maxFollows) {
+        throw new CheckoutDomainError(
+          "PLAN_UNAVAILABLE",
+          "Follow spots for this tier are currently full."
+        );
+      }
+    }
+
+    const baseUrl = getAppBaseUrl();
+
+    // Check if live Stripe is configured
+    if (!isLiveStripeConfigured("live")) {
+      return {
+        success: true,
+        data: {
+          url: `${baseUrl}/events/${tier.event.slug}?checkout=demo_registered&tier=${tier.id}`,
+        },
+      };
+    }
+
+    // Ensure Stripe Customer exists
+    let stripeCustomerId = user.stripeCustomerId;
+    if (!stripeCustomerId) {
+      const customer = await stripe.customers.create({
+        email: user.email,
+        name: [user.firstName, user.lastName].filter(Boolean).join(" ") || undefined,
+        metadata: { userId: user.id, clerkId: user.clerkId },
+      });
+      stripeCustomerId = customer.id;
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { stripeCustomerId },
+      });
+    }
+
+    const checkoutSession = await stripe.checkout.sessions.create({
+      customer: stripeCustomerId,
+      client_reference_id: user.id,
+      mode: "payment",
+      line_items: [
+        {
+          price_data: {
+            currency: "gbp",
+            unit_amount: tier.priceInCents,
+            product_data: {
+              name: `${tier.event.title} — ${tier.name}`,
+              description: `${tier.description ?? "Congress Pass"} [Dance Role: ${role}]`,
+            },
+          },
+          quantity: 1,
+        },
+      ],
+      metadata: {
+        mode: "event_registration",
+        eventId: tier.event.id,
+        ticketTierId: tier.id,
+        role,
+        userId: user.id,
+      },
+      payment_intent_data: {
+        metadata: {
+          mode: "event_registration",
+          eventId: tier.event.id,
+          ticketTierId: tier.id,
+          role,
+          userId: user.id,
+        },
+      },
+      success_url: `${baseUrl}/events/${tier.event.slug}?checkout=success&tier=${tier.id}`,
+      cancel_url: `${baseUrl}/events/${tier.event.slug}?checkout=cancelled`,
+    });
+
+    if (!checkoutSession.url) {
+      throw new CheckoutDomainError(
+        "STRIPE_API_ERROR",
+        "Failed to generate a Stripe Checkout redirect URL."
+      );
+    }
+
+    return {
+      success: true,
+      data: { url: checkoutSession.url },
+    };
+  } catch (error) {
+    if (error instanceof CheckoutDomainError) {
+      return {
+        success: false,
+        error: { code: error.code, message: error.message },
+      };
+    }
+
+    console.error("[createEventCheckoutSessionAction Error]:", error);
+    return {
+      success: false,
+      error: {
+        code: "STRIPE_API_ERROR",
+        message: "Unable to connect to payment processor. Please try again.",
+      },
+    };
+  }
+}

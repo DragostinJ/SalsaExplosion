@@ -88,6 +88,7 @@ export type CheckoutErrorCode =
   | "VALIDATION_ERROR"
   | "USER_NOT_FOUND"
   | "ALREADY_SUBSCRIBED"
+  | "PLAN_UNAVAILABLE"
   | "MISSING_STRIPE_CONFIG"
   | "STRIPE_API_ERROR";
 

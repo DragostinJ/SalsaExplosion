@@ -1,10 +1,13 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
+import { randomUUID } from "crypto";
 import Stripe from "stripe";
 import {
   Prisma,
   SubscriptionStatus,
   TransactionType,
+  TicketPaymentStatus,
+  DanceRole,
 } from "@prisma/client";
 import { stripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
@@ -74,22 +77,12 @@ async function upsertSubscriptionFromStripe(
   }
 
   const mappedStatus = mapStripeSubscriptionStatus(stripeSub.status);
-  const subAny = stripeSub as unknown as {
-    current_period_start?: number;
-    current_period_end?: number;
-    period_start?: number;
-    period_end?: number;
-    start_date?: number;
-  };
   const periodStart =
-    subAny.current_period_start ??
-    subAny.period_start ??
-    subAny.start_date ??
+    primaryItem?.current_period_start ??
+    stripeSub.start_date ??
     Math.floor(Date.now() / 1000);
   const periodEnd =
-    subAny.current_period_end ??
-    subAny.period_end ??
-    periodStart + 30 * 24 * 60 * 60;
+    primaryItem?.current_period_end ?? periodStart + 30 * 24 * 60 * 60;
 
   const currentPeriodStart = new Date(periodStart * 1000);
   const currentPeriodEnd = new Date(periodEnd * 1000);
@@ -160,11 +153,26 @@ export async function POST(req: Request): Promise<NextResponse> {
     );
   }
 
+  // 2.5 Check Idempotency via ProcessedWebhookEvent table to skip replayed events
+  const alreadyProcessed = await prisma.processedWebhookEvent.findUnique({
+    where: { id: event.id },
+  });
+
+  if (alreadyProcessed) {
+    console.info(
+      `[Stripe Webhook]: Skipping replayed event ${event.id} (${event.type})`
+    );
+    return NextResponse.json(
+      { received: true, idempotent: true },
+      { status: 200 }
+    );
+  }
+
   // 3. Handle Verified Stripe Events
   try {
     switch (event.type) {
       // ----------------------------------------------------------------
-      // A. CHECKOUT SESSION COMPLETED (One-Time Credit Packs & Initial Subs)
+      // A. CHECKOUT SESSION COMPLETED (Event Tickets, Credit Packs & Subs)
       // ----------------------------------------------------------------
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
@@ -175,7 +183,106 @@ export async function POST(req: Request): Promise<NextResponse> {
             ? session.customer
             : session.customer?.id ?? null;
 
-        // Branch 1: One-Time Class Pass Purchase (Credits)
+        // Branch 1: Event Ticket Registration Checkout Completed
+        if (session.metadata?.mode === "event_registration") {
+          if (session.payment_status !== "paid") {
+            break;
+          }
+
+          const eventId = session.metadata.eventId;
+          const ticketTierId = session.metadata.ticketTierId;
+          const role = session.metadata.role as DanceRole;
+
+          if (!userId || !eventId || !ticketTierId || !role) {
+            console.error(
+              "[Stripe Webhook]: Missing event registration metadata in session:",
+              session.id
+            );
+            return NextResponse.json(
+              { error: "Invalid event registration metadata" },
+              { status: 400 }
+            );
+          }
+
+          try {
+            await prisma.$transaction(async (tx) => {
+              // Row lock on tier to eliminate race conditions
+              await tx.$queryRaw`SELECT id FROM "EventTicketTier" WHERE id = ${ticketTierId} FOR UPDATE`;
+
+              const tier = await tx.eventTicketTier.findUnique({
+                where: { id: ticketTierId },
+                include: {
+                  registrations: {
+                    where: { paymentStatus: TicketPaymentStatus.PAID },
+                    select: { id: true, userId: true, role: true },
+                  },
+                },
+              });
+
+              if (!tier || tier.eventId !== eventId) {
+                throw new Error(`Ticket tier ${ticketTierId} not found.`);
+              }
+
+              // Check existing registration for this session
+              const existingReg = await tx.eventRegistration.findFirst({
+                where: {
+                  OR: [
+                    { stripeSessionId: session.id },
+                    {
+                      userId,
+                      ticketTierId,
+                      paymentStatus: TicketPaymentStatus.PAID,
+                    },
+                  ],
+                },
+              });
+
+              if (!existingReg) {
+                const shortCode = randomUUID().slice(0, 8).toUpperCase();
+                const qrCodeHash = `RF-PASS-${shortCode}`;
+
+                await tx.eventRegistration.create({
+                  data: {
+                    userId,
+                    eventId,
+                    ticketTierId,
+                    role,
+                    qrCodeHash,
+                    paymentStatus: TicketPaymentStatus.PAID,
+                    amountPaidInCents:
+                      session.amount_total ?? tier.priceInCents,
+                    stripeSessionId: session.id,
+                  },
+                });
+              }
+
+              await tx.processedWebhookEvent.create({
+                data: {
+                  id: event.id,
+                  eventType: event.type,
+                },
+              });
+            });
+
+            return NextResponse.json(
+              { received: true, eventRegistration: true },
+              { status: 200 }
+            );
+          } catch (txError) {
+            if (
+              txError instanceof Prisma.PrismaClientKnownRequestError &&
+              txError.code === "P2002"
+            ) {
+              return NextResponse.json(
+                { received: true, idempotent: true },
+                { status: 200 }
+              );
+            }
+            throw txError;
+          }
+        }
+
+        // Branch 2: One-Time Class Pass Purchase (Credits)
         if (session.mode === "payment") {
           if (session.payment_status !== "paid") {
             break;
@@ -191,7 +298,12 @@ export async function POST(req: Request): Promise<NextResponse> {
               ? session.payment_intent
               : session.payment_intent?.id;
 
-          if (!userId || !paymentIntentId || Number.isNaN(creditAmount) || creditAmount <= 0) {
+          if (
+            !userId ||
+            !paymentIntentId ||
+            Number.isNaN(creditAmount) ||
+            creditAmount <= 0
+          ) {
             console.error(
               "[Stripe Webhook]: Missing userId, paymentIntentId, or valid creditAmount in session metadata:",
               session.id
@@ -223,6 +335,13 @@ export async function POST(req: Request): Promise<NextResponse> {
                   description: `Purchased ${packName} (+${creditAmount} credits)`,
                 },
               });
+
+              await tx.processedWebhookEvent.create({
+                data: {
+                  id: event.id,
+                  eventType: event.type,
+                },
+              });
             });
           } catch (txError) {
             if (
@@ -232,13 +351,16 @@ export async function POST(req: Request): Promise<NextResponse> {
               console.info(
                 `[Stripe Webhook]: Idempotent skip — PaymentIntent ${paymentIntentId} already credited.`
               );
-              return NextResponse.json({ received: true, idempotent: true }, { status: 200 });
+              return NextResponse.json(
+                { received: true, idempotent: true },
+                { status: 200 }
+              );
             }
             throw txError;
           }
         }
 
-        // Branch 2: Recurring Membership Checkout Completed
+        // Branch 3: Recurring Membership Checkout Completed
         if (session.mode === "subscription" && session.subscription) {
           const subscriptionId =
             typeof session.subscription === "string"
@@ -247,6 +369,15 @@ export async function POST(req: Request): Promise<NextResponse> {
 
           const stripeSub = await stripe.subscriptions.retrieve(subscriptionId);
           await upsertSubscriptionFromStripe(stripeSub, userId ?? undefined);
+
+          await prisma.processedWebhookEvent
+            .create({
+              data: {
+                id: event.id,
+                eventType: event.type,
+              },
+            })
+            .catch(() => {});
         }
 
         break;
@@ -257,24 +388,20 @@ export async function POST(req: Request): Promise<NextResponse> {
       // ----------------------------------------------------------------
       case "invoice.paid": {
         const invoice = event.data.object as Stripe.Invoice;
-        const invoiceAny = invoice as unknown as {
-          subscription?: string | { id: string };
-          parent?: { subscription_details?: { subscription?: string | { id: string } } };
-          payment_intent?: string | { id: string };
-        };
-
-        const rawSub = invoiceAny.subscription ?? invoiceAny.parent?.subscription_details?.subscription;
-        const subscriptionId = typeof rawSub === "string" ? rawSub : rawSub?.id;
+        const rawSub = invoice.parent?.subscription_details?.subscription;
+        const subscriptionId =
+          typeof rawSub === "string" ? rawSub : rawSub?.id;
 
         if (subscriptionId) {
           const stripeSub = await stripe.subscriptions.retrieve(subscriptionId);
           await upsertSubscriptionFromStripe(stripeSub);
 
-          const rawPaymentIntent = invoiceAny.payment_intent;
+          const rawPayment =
+            invoice.payments?.data?.[0]?.payment?.payment_intent;
           const paymentIntentId =
-            typeof rawPaymentIntent === "string"
-              ? rawPaymentIntent
-              : rawPaymentIntent?.id;
+            typeof rawPayment === "string"
+              ? rawPayment
+              : rawPayment?.id ?? invoice.id;
 
           if (paymentIntentId) {
             const subRecord = await prisma.subscription.findUnique({
@@ -307,6 +434,16 @@ export async function POST(req: Request): Promise<NextResponse> {
             }
           }
         }
+
+        await prisma.processedWebhookEvent
+          .create({
+            data: {
+              id: event.id,
+              eventType: event.type,
+            },
+          })
+          .catch(() => {});
+
         break;
       }
 
@@ -317,6 +454,16 @@ export async function POST(req: Request): Promise<NextResponse> {
       case "customer.subscription.deleted": {
         const stripeSub = event.data.object as Stripe.Subscription;
         await upsertSubscriptionFromStripe(stripeSub);
+
+        await prisma.processedWebhookEvent
+          .create({
+            data: {
+              id: event.id,
+              eventType: event.type,
+            },
+          })
+          .catch(() => {});
+
         break;
       }
 

@@ -5,7 +5,12 @@ import { prisma } from "@/lib/prisma";
 
 function formatCsvCell(value: string | number | boolean | null | undefined): string {
   if (value === null || value === undefined) return '""';
-  const stringified = String(value).replace(/"/g, '""');
+  let str = String(value);
+  // Neutralize CSV / formula injection (Excel / Google Sheets trigger chars: = + - @ \t \r)
+  if (/^[=+\-@\t\r]/.test(str)) {
+    str = `'${str}`;
+  }
+  const stringified = str.replace(/"/g, '""');
   return `"${stringified}"`;
 }
 

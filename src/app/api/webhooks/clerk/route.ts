@@ -4,6 +4,7 @@ import { WebhookEvent } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { Role } from "@prisma/client";
+import { isBootstrapAdmin } from "@/lib/auth-user";
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -53,14 +54,15 @@ export async function POST(req: Request) {
 
   try {
     if (eventType === "user.created") {
-      const { id, email_addresses, first_name, last_name, image_url, public_metadata } = evt.data;
+      const { id, email_addresses, first_name, last_name, image_url } = evt.data;
       const primaryEmail = email_addresses?.[0]?.email_address;
 
       if (!primaryEmail) {
         return NextResponse.json({ error: "Missing email address in payload" }, { status: 400 });
       }
 
-      const assignedRole = public_metadata?.role as Role | undefined;
+      // Security: Roles are server-controlled. Only whitelisted emails can become ADMIN.
+      const initialRole = isBootstrapAdmin(primaryEmail) ? Role.ADMIN : Role.STUDENT;
 
       await prisma.user.upsert({
         where: { clerkId: id },
@@ -69,7 +71,6 @@ export async function POST(req: Request) {
           firstName: first_name || "",
           lastName: last_name || "",
           avatarUrl: image_url || null,
-          ...(assignedRole ? { role: assignedRole } : {}),
         },
         create: {
           clerkId: id,
@@ -77,16 +78,16 @@ export async function POST(req: Request) {
           firstName: first_name || "",
           lastName: last_name || "",
           avatarUrl: image_url || null,
-          role: assignedRole || Role.STUDENT,
+          role: initialRole,
         },
       });
     }
 
     if (eventType === "user.updated") {
-      const { id, email_addresses, first_name, last_name, image_url, public_metadata } = evt.data;
+      const { id, email_addresses, first_name, last_name, image_url } = evt.data;
       const primaryEmail = email_addresses?.[0]?.email_address;
-      const assignedRole = public_metadata?.role as Role | undefined;
 
+      // Security: user.updated NEVER mutates roles. Roles can only be adjusted via admin server actions.
       await prisma.user.updateMany({
         where: { clerkId: id },
         data: {
@@ -94,7 +95,6 @@ export async function POST(req: Request) {
           firstName: first_name || "",
           lastName: last_name || "",
           avatarUrl: image_url || null,
-          ...(assignedRole ? { role: assignedRole } : {}),
         },
       });
     }

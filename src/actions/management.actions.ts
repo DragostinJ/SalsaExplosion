@@ -14,7 +14,7 @@ import {
   TransactionType,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isBootstrapAdmin } from "@/lib/auth-user";
 import { CUBAN_SALSA_SYLLABUS } from "@/lib/constants/submission";
 import {
   AiRubricEvaluation,
@@ -130,17 +130,18 @@ export async function switchMyAccountRoleAction(rawInput: {
       };
     }
 
-    // Security: Guard against unauthorized privilege escalation in production
-    const isDemoAllowed =
-      process.env.NODE_ENV !== "production" ||
-      process.env.ALLOW_DEMO_ROLE_SWITCHING === "true";
+    // Security: Guard against unauthorized privilege escalation
+    // 1. In production, role switching is strictly forbidden for all users.
+    // 2. In non-production, only users whose email is explicitly whitelisted in ADMIN_EMAILS can switch roles.
+    const isProd = process.env.NODE_ENV === "production";
+    const isWhitelisted = isBootstrapAdmin(user.email);
 
-    if (!isDemoAllowed && user.role !== Role.ADMIN) {
+    if (isProd || !isWhitelisted) {
       return {
         success: false,
         error: {
           code: "FORBIDDEN",
-          message: "Role switching is restricted to administrators in production.",
+          message: "Role switching is strictly disabled.",
         },
       };
     }

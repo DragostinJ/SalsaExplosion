@@ -10,17 +10,21 @@ export const WELCOME_CREDITS = 1;
  * Comma-separated list of emails that are bootstrapped as ADMIN on first sign-in
  * (e.g. ADMIN_EMAILS="you@example.com,owner@studio.com").
  * Every other new account is a STUDENT. Never grant elevated roles by default.
+ * STRICTLY FAIL-CLOSED: If ADMIN_EMAILS is empty or missing, returns false in ALL environments.
  */
-function isBootstrapAdmin(email: string): boolean {
+export function isBootstrapAdmin(email?: string | null): boolean {
+  if (!email) return false;
   const raw = (process.env.ADMIN_EMAILS ?? "").trim();
   if (!raw) {
-    return process.env.NODE_ENV !== "production";
+    return false; // Fail-closed in all environments
   }
-  return raw
-    .split(",")
-    .map((e) => e.trim().toLowerCase())
-    .filter(Boolean)
-    .includes(email.toLowerCase());
+  const adminSet = new Set(
+    raw
+      .split(",")
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean)
+  );
+  return adminSet.has(email.trim().toLowerCase());
 }
 
 export async function getOrProvisionCurrentUser() {

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { SocialProofGrid } from "@/components/marketing/social-proof-grid";
 
 export default function Home() {
   return (
@@ -154,6 +155,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Interactive Social Proof & Media Grid */}
+        <SocialProofGrid />
 
         {/* 3-Portal Interactive Showcase */}
         <section className="py-14 border-t bg-muted/20">

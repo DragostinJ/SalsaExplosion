@@ -15,6 +15,7 @@ import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { StudentVideoUploadDropzone } from "@/components/progression/video-upload-dropzone";
 import { PromotionCertificateCard } from "@/components/progression/promotion-certificate-card";
+import { AttendanceMilestonesCard } from "@/components/progression/attendance-milestones-card";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -53,6 +54,44 @@ export default async function ProgressionPage() {
   const approvedCount = submissions.filter(
     (s) => s.status === SubmissionStatus.APPROVED
   ).length;
+
+  // Fetch student attendance for streaks & milestones
+  const attendedBookings = await prisma.booking.findMany({
+    where: {
+      userId: user.id,
+      status: "ATTENDED",
+    },
+    include: {
+      classSession: {
+        select: { startTime: true },
+      },
+    },
+    orderBy: {
+      classSession: { startTime: "desc" },
+    },
+  });
+
+  // Calculate streak in active weeks
+  const weekSet = new Set<string>();
+  for (const b of attendedBookings) {
+    const d = new Date(b.classSession.startTime);
+    const oneJan = new Date(d.getFullYear(), 0, 1);
+    const numberOfDays = Math.floor(
+      (d.getTime() - oneJan.getTime()) / (24 * 60 * 60 * 1000)
+    );
+    const weekNum = Math.ceil((d.getDay() + 1 + numberOfDays) / 7);
+    weekSet.add(`${d.getFullYear()}-W${weekNum}`);
+  }
+  const streakWeeks = weekSet.size;
+
+  // Check congress event registration
+  const congressReg = await prisma.eventRegistration.findFirst({
+    where: {
+      userId: user.id,
+      paymentStatus: "PAID",
+    },
+  });
+  const hasCongressPass = Boolean(congressReg);
 
   const isMaxLevel = user.currentLevel === DanceLevel.ADVANCED;
 
@@ -93,6 +132,14 @@ export default async function ProgressionPage() {
         currentLevel={user.currentLevel}
         preferredRole={user.preferredRole}
         approvedCount={approvedCount}
+      />
+
+      {/* Dancer Attendance Milestones & Streaks Card */}
+      <AttendanceMilestonesCard
+        attendedCount={attendedBookings.length}
+        streakWeeks={streakWeeks}
+        currentLevel={user.currentLevel}
+        hasCongressPass={hasCongressPass}
       />
 
       {/* State 1: Max Level Reached */}

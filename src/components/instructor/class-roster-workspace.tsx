@@ -12,6 +12,7 @@ import {
   UserCheck,
   Video,
   X,
+  Printer,
 } from "lucide-react";
 import { toggleBookingCheckInAction } from "@/actions/management.actions";
 import { attachClassRecapAction } from "@/actions/recap.actions";
@@ -286,6 +287,12 @@ export function ClassRosterWorkspace({
                 >
                   <QrCode className="mr-1.5 h-4 w-4" />
                   {showQrModal ? "Hide QR" : "Door QR"}
+                </Button>
+                <Button variant="outline" size="sm" asChild className="text-xs">
+                  <Link href={`/instructor/roster/print?sessionId=${activeClass.id}`} target="_blank">
+                    <Printer className="mr-1.5 h-3.5 w-3.5 text-blue-600" />
+                    Print A4 Sheet
+                  </Link>
                 </Button>
                 <Button variant="outline" size="sm" asChild className="text-xs">
                   <Link href={checkInPath}>

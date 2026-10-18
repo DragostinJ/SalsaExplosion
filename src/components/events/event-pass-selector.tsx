@@ -8,6 +8,9 @@ import {
   Sparkles,
   Loader2,
   Ticket,
+  Shirt,
+  GraduationCap,
+  X,
 } from "lucide-react";
 import { registerForEventTierAction } from "@/actions/management.actions";
 import { Badge } from "@/components/ui/badge";
@@ -55,7 +58,28 @@ export function EventPassSelector({
     type: "success" | "error";
     text: string;
   } | null>(null);
+  const [upsellTarget, setUpsellTarget] = useState<{
+    tier: SerializedEventTier;
+    role: DanceRole;
+  } | null>(null);
+  const [addShirt, setAddShirt] = useState(false);
+  const [addMasterclass, setAddMasterclass] = useState(false);
   const [isPending, startTransition] = useTransition();
+
+  const onInitiateBooking = (tier: SerializedEventTier, role: DanceRole) => {
+    const isCongressPass =
+      tier.name.toLowerCase().includes("full") ||
+      tier.name.toLowerCase().includes("congress") ||
+      tier.name.toLowerCase().includes("bootcamp");
+
+    if (isCongressPass) {
+      setUpsellTarget({ tier, role });
+      setAddShirt(false);
+      setAddMasterclass(false);
+    } else {
+      handleRegister(tier.eventId, tier.id, role);
+    }
+  };
 
   const handleRegister = (
     eventId: string,
@@ -243,7 +267,7 @@ export function EventPassSelector({
                         (remainingLeads !== null && remainingLeads <= 0)
                       }
                       onClick={() =>
-                        handleRegister(tier.eventId, tier.id, DanceRole.LEAD)
+                        onInitiateBooking(tier, DanceRole.LEAD)
                       }
                       variant={
                         defaultPreferredRole === DanceRole.LEAD
@@ -269,7 +293,7 @@ export function EventPassSelector({
                         (remainingFollows !== null && remainingFollows <= 0)
                       }
                       onClick={() =>
-                        handleRegister(tier.eventId, tier.id, DanceRole.FOLLOW)
+                        onInitiateBooking(tier, DanceRole.FOLLOW)
                       }
                       variant={
                         defaultPreferredRole === DanceRole.FOLLOW
@@ -293,7 +317,7 @@ export function EventPassSelector({
                     type="button"
                     disabled={isPending || isSoldOut}
                     onClick={() =>
-                      handleRegister(tier.eventId, tier.id, DanceRole.SOLO)
+                      onInitiateBooking(tier, DanceRole.SOLO)
                     }
                     className="w-full bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-semibold shadow-sm text-xs"
                   >
@@ -306,6 +330,193 @@ export function EventPassSelector({
           );
         })}
       </div>
+
+      {/* Congress VIP Upsell Modal / Drawer */}
+      {upsellTarget && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          onClick={() => setUpsellTarget(null)}
+        >
+          <div
+            className="relative w-full max-w-lg rounded-2xl border bg-card p-6 shadow-2xl space-y-5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-start justify-between pb-3 border-b">
+              <div>
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-0.5 text-[11px] font-bold text-amber-800 dark:text-amber-300 mb-1">
+                  <Sparkles className="h-3 w-3 text-amber-600" />
+                  VIP Congress Upgrade
+                </div>
+                <h3 className="text-lg font-black tracking-tight text-foreground">
+                  Upgrade Your Bournemouth Congress Pass
+                </h3>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Base Selection:{" "}
+                  <span className="font-bold text-foreground">
+                    {upsellTarget.tier.name} ({upsellTarget.role}) — £
+                    {(upsellTarget.tier.priceInCents / 100).toFixed(0)}
+                  </span>
+                </p>
+              </div>
+              <button
+                type="button"
+                aria-label="Close dialog"
+                onClick={() => setUpsellTarget(null)}
+                className="rounded-full p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Add-ons options */}
+            <div className="space-y-3">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                Official Festival Add-Ons (Optional):
+              </span>
+
+              {/* Add-on 1: Official Congress T-Shirt */}
+              <div
+                onClick={() => setAddShirt((prev) => !prev)}
+                className={`cursor-pointer rounded-xl border p-3.5 flex items-start gap-3 transition-all ${
+                  addShirt
+                    ? "border-amber-500 bg-amber-500/[0.08] ring-1 ring-amber-500/30"
+                    : "border-border hover:bg-muted/30"
+                }`}
+              >
+                <div
+                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
+                    addShirt ? "bg-amber-600 text-white" : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  <Shirt className="h-4 w-4" />
+                </div>
+                <div className="flex-1 space-y-0.5 text-xs">
+                  <div className="flex items-center justify-between font-bold">
+                    <span>Official 2026 Congress T-Shirt</span>
+                    <span className="text-amber-700 dark:text-amber-400 font-extrabold">+£20</span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                    100% organic cotton Salsa Explosion UK festival tee. Sizes S–XXL collected at the BOH Studios welcome desk.
+                  </p>
+                </div>
+                <div
+                  className={`h-4 w-4 rounded-xs border-2 flex items-center justify-center text-[10px] font-bold ${
+                    addShirt ? "border-amber-600 bg-amber-600 text-white" : "border-muted-foreground"
+                  }`}
+                >
+                  {addShirt ? "✓" : ""}
+                </div>
+              </div>
+
+              {/* Add-on 2: Maestro Private Masterclass */}
+              <div
+                onClick={() => setAddMasterclass((prev) => !prev)}
+                className={`cursor-pointer rounded-xl border p-3.5 flex items-start gap-3 transition-all ${
+                  addMasterclass
+                    ? "border-amber-500 bg-amber-500/[0.08] ring-1 ring-amber-500/30"
+                    : "border-border hover:bg-muted/30"
+                }`}
+              >
+                <div
+                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
+                    addMasterclass ? "bg-amber-600 text-white" : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  <GraduationCap className="h-4 w-4" />
+                </div>
+                <div className="flex-1 space-y-0.5 text-xs">
+                  <div className="flex items-center justify-between font-bold">
+                    <span>Maestro Private Masterclass</span>
+                    <span className="text-amber-700 dark:text-amber-400 font-extrabold">+£35</span>
+                  </div>
+                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                    Exclusive 45-minute small-group footwork & body isolation clinic with Maestro Enrique Perez Valdes. Limited to 12 Casineros.
+                  </p>
+                </div>
+                <div
+                  className={`h-4 w-4 rounded-xs border-2 flex items-center justify-center text-[10px] font-bold ${
+                    addMasterclass ? "border-amber-600 bg-amber-600 text-white" : "border-muted-foreground"
+                  }`}
+                >
+                  {addMasterclass ? "✓" : ""}
+                </div>
+              </div>
+            </div>
+
+            {/* Total breakdown */}
+            <div className="rounded-xl border bg-muted/40 p-3 space-y-1.5 text-xs">
+              <div className="flex justify-between text-muted-foreground">
+                <span>{upsellTarget.tier.name} ({upsellTarget.role})</span>
+                <span>£{(upsellTarget.tier.priceInCents / 100).toFixed(0)}</span>
+              </div>
+              {addShirt && (
+                <div className="flex justify-between text-muted-foreground">
+                  <span>Official Congress T-Shirt</span>
+                  <span>+£20</span>
+                </div>
+              )}
+              {addMasterclass && (
+                <div className="flex justify-between text-muted-foreground">
+                  <span>Maestro Private Masterclass</span>
+                  <span>+£35</span>
+                </div>
+              )}
+              <div className="pt-1.5 border-t flex justify-between font-extrabold text-sm text-foreground">
+                <span>Total Amount:</span>
+                <span className="text-amber-700 dark:text-amber-400">
+                  £
+                  {upsellTarget.tier.priceInCents / 100 +
+                    (addShirt ? 20 : 0) +
+                    (addMasterclass ? 35 : 0)}
+                </span>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row items-center gap-2 pt-2 border-t">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="w-full sm:w-auto text-xs"
+                onClick={() => {
+                  handleRegister(
+                    upsellTarget.tier.eventId,
+                    upsellTarget.tier.id,
+                    upsellTarget.role
+                  );
+                  setUpsellTarget(null);
+                }}
+              >
+                Pass Only (£{(upsellTarget.tier.priceInCents / 100).toFixed(0)})
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                className="w-full sm:flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs"
+                onClick={() => {
+                  handleRegister(
+                    upsellTarget.tier.eventId,
+                    upsellTarget.tier.id,
+                    upsellTarget.role
+                  );
+                  setUpsellTarget(null);
+                }}
+              >
+                <Sparkles className="mr-1.5 h-3.5 w-3.5" />
+                Confirm & Proceed (£
+                {upsellTarget.tier.priceInCents / 100 +
+                  (addShirt ? 20 : 0) +
+                  (addMasterclass ? 35 : 0)}
+                )
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

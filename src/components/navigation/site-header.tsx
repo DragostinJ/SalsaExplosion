@@ -19,11 +19,13 @@ import {
   Video,
   Compass,
   HelpCircle,
+  MapPin,
 } from "lucide-react";
 
 import type { Role } from "@prisma/client";
 import { switchMyAccountRoleAction } from "@/actions/management.actions";
 import { InteractiveTutorialModal } from "@/components/onboarding/interactive-tutorial-modal";
+import { AdminNotificationBell } from "@/components/navigation/admin-notification-bell";
 
 interface SiteHeaderProps {
   role: Role | null;
@@ -82,6 +84,12 @@ export function SiteHeader({ role }: SiteHeaderProps) {
       label: "Passes",
       icon: CreditCard,
       active: pathname === "/pricing",
+    },
+    {
+      href: "/venues",
+      label: "Venues",
+      icon: MapPin,
+      active: pathname.startsWith("/venues"),
     },
     {
       href: "/about",
@@ -265,6 +273,8 @@ export function SiteHeader({ role }: SiteHeaderProps) {
           </div>
 
           <InteractiveTutorialModal />
+
+          {isAdmin && <AdminNotificationBell />}
 
           {isSignedIn ? (
             <div className="flex items-center gap-2.5">

@@ -144,6 +144,14 @@ export function SiteFooter() {
                   Weekly Cuban Salsa & Rueda de Casino every Tuesday & Thursday night.
                 </span>
               </div>
+              <div className="pt-1">
+                <Link
+                  href="/venues"
+                  className="font-bold text-amber-700 dark:text-amber-400 hover:underline inline-flex items-center gap-1"
+                >
+                  Venues & Parking Guide →
+                </Link>
+              </div>
             </div>
           </div>
         </div>

@@ -56,12 +56,30 @@ interface VideoGradingWorkspaceProps {
 const PLAYBACK_SPEEDS = [0.5, 0.75, 1, 1.25] as const;
 
 const RUBRIC_QUICK_TAGS = [
-  "Watch on-beat timing (counts 1 & 5)",
-  "Keep tension in the frame during turns",
-  "Complete weight transfer before stepping",
-  "Clean Enchufla & Dile Que No execution",
-  "Strong Cuban motion & ribcage isolation",
-  "Maintain grounding through the basic step",
+  "Clave timing: Keep strict 1-2-3 / 5-6-7 cadence; don't rush beat 4/8",
+  "Cuban motion: Engage ribcage & despelote Afro-styling into your hips",
+  "Guapea connection: Maintain constant spring tension in left-to-right hand",
+  "Rueda readiness: Respond instantly to Cantante calls without looking down",
+  "Clean Dile Que No circular travel and solid Lead frame",
+  "Smooth Setenta & Vacilala transitions without breaking partner posture",
+] as const;
+
+const MAESTRO_FEEDBACK_TEMPLATES = [
+  {
+    id: "approved",
+    title: "Level Promotion Approved",
+    text: "¡Excelente trabajo! Your Clave timing (1-2-3 / 5-6-7) is rock-solid and your circular frame in Guapea has great elastic tension. Your Cuban motion through the hips is natural and grounded. Welcome to the next syllabus level at BOH Studios! — Maestro Enrique Perez Valdes",
+  },
+  {
+    id: "timing",
+    title: "Timing & Clave Polish Needed",
+    text: "Good energy on the floor! However, on counts 3 and 7 you are stepping slightly ahead of the Clave. Practice the Guapea basic to a slow Son or Timba beat, keeping your grounding deep before turning. Submit another 30s clip once your count 1 prep is settled. — Maestro Enrique",
+  },
+  {
+    id: "tension",
+    title: "Frame Tension & Rueda Cantante",
+    text: "Strong figures, but keep your left arm relaxed and responsive during the Dile Que No and Setenta transitions. In Rueda de Casino, staying relaxed prevents tiring your follower and lets you hear the Cantante calls clearly. Keep practicing and resubmit! — Maestro Enrique",
+  },
 ] as const;
 
 const STYLE_LABELS: Record<DanceStyle, string> = {
@@ -482,6 +500,29 @@ export function VideoGradingWorkspace({
                         className="rounded-full border bg-secondary/40 px-3 py-1 text-xs font-medium text-secondary-foreground transition-colors hover:bg-secondary"
                       >
                         + {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Maestro Enrique Feedback Templates */}
+                <div className="space-y-2 rounded-xl border border-amber-500/30 bg-amber-500/[0.04] p-3">
+                  <div className="flex items-center justify-between text-xs font-bold text-amber-800 dark:text-amber-300">
+                    <span className="flex items-center gap-1.5">
+                      <Sparkles className="h-3.5 w-3.5 text-amber-600" />
+                      Maestro Enrique Templates (1-Click Fill):
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {MAESTRO_FEEDBACK_TEMPLATES.map((tmpl) => (
+                      <button
+                        key={tmpl.id}
+                        type="button"
+                        disabled={isPending}
+                        onClick={() => setFeedback(tmpl.text)}
+                        className="rounded-lg border border-amber-500/40 bg-background px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-amber-500/10 hover:border-amber-500 transition-colors"
+                      >
+                        {tmpl.title}
                       </button>
                     ))}
                   </div>

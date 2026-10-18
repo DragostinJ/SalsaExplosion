@@ -26,6 +26,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+import {
+  joinPartnerWaitlistAction,
+  invitePartnerBypassAction,
+} from "@/actions/waitlist.actions";
+
 interface PartnerMatchWaitlistProps {
   userRole?: DanceRole;
   userName?: string;
@@ -40,6 +45,8 @@ export function PartnerMatchWaitlist({
   const [copiedLink, setCopiedLink] = useState(false);
   const [waitlistJoined, setWaitlistJoined] = useState(false);
   const [bypassSent, setBypassSent] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState(false);
 
   const oppositeRole = selectedRole === DanceRole.LEAD ? DanceRole.FOLLOW : DanceRole.LEAD;
 
@@ -53,15 +60,44 @@ export function PartnerMatchWaitlist({
     setTimeout(() => setCopiedLink(false), 2500);
   }
 
-  function handleJoinWaitlist(e: React.FormEvent) {
+  async function handleJoinWaitlist(e: React.FormEvent) {
     e.preventDefault();
-    setWaitlistJoined(true);
+    setIsPending(true);
+    setErrorMessage(null);
+    try {
+      const res = await joinPartnerWaitlistAction({ role: selectedRole });
+      if (res.success) {
+        setWaitlistJoined(true);
+      } else {
+        setErrorMessage(res.error ?? "Could not join priority waitlist.");
+      }
+    } catch {
+      setErrorMessage("Network error connecting to waitlist.");
+    } finally {
+      setIsPending(false);
+    }
   }
 
-  function handleSendBypassInvite(e: React.FormEvent) {
+  async function handleSendBypassInvite(e: React.FormEvent) {
     e.preventDefault();
     if (!partnerEmail.trim()) return;
-    setBypassSent(true);
+    setIsPending(true);
+    setErrorMessage(null);
+    try {
+      const res = await invitePartnerBypassAction({
+        partnerEmail: partnerEmail.trim(),
+        role: selectedRole,
+      });
+      if (res.success) {
+        setBypassSent(true);
+      } else {
+        setErrorMessage(res.error ?? "Could not dispatch bypass invite.");
+      }
+    } catch {
+      setErrorMessage("Network error sending partner invite.");
+    } finally {
+      setIsPending(false);
+    }
   }
 
   return (
@@ -153,8 +189,19 @@ export function PartnerMatchWaitlist({
                     </div>
                   </div>
 
-                  <Button type="submit" size="sm" className="w-full text-xs font-semibold">
-                    Join Priority Waitlist
+                  {errorMessage && (
+                    <p className="text-[11px] font-semibold text-destructive">
+                      {errorMessage}
+                    </p>
+                  )}
+
+                  <Button
+                    type="submit"
+                    size="sm"
+                    disabled={isPending}
+                    className="w-full text-xs font-semibold"
+                  >
+                    {isPending ? "Connecting to Queue..." : "Join Priority Waitlist"}
                     <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                   </Button>
                 </form>
@@ -205,9 +252,9 @@ export function PartnerMatchWaitlist({
                         size="sm"
                         variant="secondary"
                         className="h-8 shrink-0 text-xs font-semibold"
-                        disabled={!partnerEmail.trim()}
+                        disabled={!partnerEmail.trim() || isPending}
                       >
-                        Invite
+                        {isPending ? "Inviting..." : "Invite"}
                       </Button>
                     </div>
                   </div>

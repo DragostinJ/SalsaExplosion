@@ -13,6 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { reserveMerchItemAction } from "@/actions/shop.actions";
 
 interface ShopItem {
   id: string;
@@ -93,6 +94,8 @@ export function ShopClient() {
   const [activeReservation, setActiveReservation] = useState<ShopItem | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [isReserved, setIsReserved] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const filteredItems = SHOP_ITEMS.filter((item) =>
     selectedCategory === "ALL" ? true : item.category === selectedCategory
@@ -102,6 +105,30 @@ export function ShopClient() {
     setActiveReservation(item);
     setSelectedSize(item.sizes ? item.sizes[0] : "");
     setIsReserved(false);
+    setErrorMessage(null);
+  };
+
+  const handleConfirmReservation = async () => {
+    if (!activeReservation) return;
+    setIsSubmitting(true);
+    setErrorMessage(null);
+    try {
+      const res = await reserveMerchItemAction({
+        itemId: activeReservation.id,
+        itemName: activeReservation.name,
+        size: selectedSize || null,
+        pricePounds: activeReservation.pricePounds,
+      });
+      if (res.success) {
+        setIsReserved(true);
+      } else {
+        setErrorMessage(res.error ?? "Failed to reserve item.");
+      }
+    } catch {
+      setErrorMessage("Network error processing reservation.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -319,20 +346,28 @@ export function ShopClient() {
                   </p>
                 </div>
 
+                {errorMessage && (
+                  <p className="text-right text-[11px] font-semibold text-destructive">
+                    {errorMessage}
+                  </p>
+                )}
+
                 <div className="flex items-center justify-end gap-2 pt-2 border-t">
                   <Button
                     variant="outline"
                     size="sm"
+                    disabled={isSubmitting}
                     onClick={() => setActiveReservation(null)}
                   >
                     Cancel
                   </Button>
                   <Button
                     size="sm"
-                    onClick={() => setIsReserved(true)}
+                    disabled={isSubmitting}
+                    onClick={handleConfirmReservation}
                     className="bg-amber-600 hover:bg-amber-700 text-white font-bold"
                   >
-                    Confirm Desk Reservation
+                    {isSubmitting ? "Holding Item..." : "Confirm Desk Reservation"}
                   </Button>
                 </div>
               </div>

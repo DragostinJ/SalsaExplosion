@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
+import { bookPrivateLessonAction } from "@/actions/lessons.actions";
 
 interface InstructorProfile {
   id: string;
@@ -78,6 +79,8 @@ export function PrivateLessonsClient() {
   const [selectedDay, setSelectedDay] = useState<string>("Thursday Evening");
   const [notes, setNotes] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const activeInstructor =
     INSTRUCTORS.find((i) => i.id === selectedInstructor) ?? INSTRUCTORS[0];
@@ -87,9 +90,29 @@ export function PrivateLessonsClient() {
       ? activeInstructor.hourlyRatePounds
       : activeInstructor.blockRatePounds;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMessage(null);
+    try {
+      const res = await bookPrivateLessonAction({
+        instructorName: activeInstructor.name,
+        focusTopic: selectedTopic,
+        packageType: selectedPackage === "SINGLE" ? "SINGLE_1HR" : "BLOCK_5HR",
+        preferredSlot: selectedDay,
+        totalPricePounds: price,
+      });
+
+      if (res.success) {
+        setIsSubmitted(true);
+      } else {
+        setErrorMessage(res.error ?? "Failed to book lesson.");
+      }
+    } catch {
+      setErrorMessage("Network error booking private lesson.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -343,7 +366,12 @@ export function PrivateLessonsClient() {
               </span>
             </div>
 
-            <div className="flex items-center gap-4 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+              {errorMessage && (
+                <span className="text-xs font-semibold text-destructive">
+                  {errorMessage}
+                </span>
+              )}
               <div className="text-right">
                 <span className="text-2xl font-black text-foreground block">£{price}.00</span>
                 <span className="text-[10px] text-muted-foreground">No upfront payment required</span>
@@ -351,9 +379,10 @@ export function PrivateLessonsClient() {
               <Button
                 type="submit"
                 size="lg"
+                disabled={isSubmitting}
                 className="flex-1 sm:flex-none bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs sm:text-sm px-6"
               >
-                Request Coaching Slot
+                {isSubmitting ? "Submitting..." : "Request Coaching Slot"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>

@@ -23,11 +23,26 @@ import {
   ClipboardList,
 } from "lucide-react";
 
+import dynamic from "next/dynamic";
 import type { Role } from "@prisma/client";
 import { switchMyAccountRoleAction } from "@/actions/management.actions";
 import { InteractiveTutorialModal } from "@/components/onboarding/interactive-tutorial-modal";
-import { AdminNotificationBell } from "@/components/navigation/admin-notification-bell";
-import { MobileNavSheet } from "@/components/navigation/mobile-nav-sheet";
+
+const AdminNotificationBell = dynamic(
+  () =>
+    import("@/components/navigation/admin-notification-bell").then(
+      (mod) => mod.AdminNotificationBell
+    ),
+  { ssr: false }
+);
+
+const MobileNavSheet = dynamic(
+  () =>
+    import("@/components/navigation/mobile-nav-sheet").then(
+      (mod) => mod.MobileNavSheet
+    ),
+  { ssr: false }
+);
 
 import { toast } from "sonner";
 
@@ -43,11 +58,15 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
   const { isSignedIn } = useUser();
   const [isPending, startTransition] = useTransition();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [hasMobileNavOpened, setHasMobileNavOpened] = useState(false);
 
   // Allow bottom nav bar to trigger the mobile drawer
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const handleOpen = () => setIsMobileNavOpen(true);
+      const handleOpen = () => {
+        setHasMobileNavOpened(true);
+        setIsMobileNavOpen(true);
+      };
       window.addEventListener("open-mobile-nav-drawer", handleOpen);
       return () => window.removeEventListener("open-mobile-nav-drawer", handleOpen);
     }
@@ -420,7 +439,10 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
           {/* Hamburger Menu Toggle (Mobile & Tablet < xl) */}
           <button
             type="button"
-            onClick={() => setIsMobileNavOpen(true)}
+            onClick={() => {
+              setHasMobileNavOpened(true);
+              setIsMobileNavOpen(true);
+            }}
             aria-label="Open mobile navigation menu"
             aria-expanded={isMobileNavOpen}
             className="flex xl:hidden h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-text-muted hover:text-foreground hover:bg-muted/70 transition-colors shrink-0 shadow-xs"
@@ -430,15 +452,17 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
         </div>
       </div>
 
-      {/* Slide-In Accessible Mobile Navigation Sheet */}
-      <MobileNavSheet
-        isOpen={isMobileNavOpen}
-        onClose={() => setIsMobileNavOpen(false)}
-        role={role}
-        canSwitchRoles={canSwitchRoles}
-        handleRoleSwitch={handleRoleSwitch}
-        isPending={isPending}
-      />
+      {/* Slide-In Accessible Mobile Navigation Sheet (Mounted only upon first open to eliminate initial mobile TBT & DOM bloat) */}
+      {(hasMobileNavOpened || isMobileNavOpen) && (
+        <MobileNavSheet
+          isOpen={isMobileNavOpen}
+          onClose={() => setIsMobileNavOpen(false)}
+          role={role}
+          canSwitchRoles={canSwitchRoles}
+          handleRoleSwitch={handleRoleSwitch}
+          isPending={isPending}
+        />
+      )}
     </header>
   );
 }

@@ -25,6 +25,8 @@ export const metadata: Metadata = {
     "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth, Rueda de Casino, end-of-class recaps, and congress passes.",
 };
 
+import { canSwitchRoles } from "@/lib/auth-user";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -35,9 +37,11 @@ export default async function RootLayout({
   const viewer = userId
     ? await prisma.user.findUnique({
         where: { clerkId: userId },
-        select: { role: true },
+        select: { role: true, email: true },
       })
     : null;
+
+  const userCanSwitchRoles = viewer ? canSwitchRoles(viewer.email) : false;
 
   return (
     <ClerkProvider>
@@ -46,7 +50,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
         <body className="min-h-full flex flex-col bg-background text-foreground">
-          <SiteHeader role={viewer?.role ?? null} />
+          <SiteHeader role={viewer?.role ?? null} canSwitchRoles={userCanSwitchRoles} />
           <div className="flex-1">{children}</div>
           <SiteFooter />
         </body>

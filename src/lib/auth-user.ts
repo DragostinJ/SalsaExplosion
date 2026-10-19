@@ -27,6 +27,30 @@ export function isBootstrapAdmin(email?: string | null): boolean {
   return adminSet.has(email.trim().toLowerCase());
 }
 
+/**
+ * Guard for interactive demo role switcher:
+ * Returns true ONLY when:
+ * 1. NODE_ENV !== "production"
+ * 2. ALLOW_DEMO_ROLE_SWITCHING === "true"
+ * 3. email is present in DEMO_SWITCHER_EMAILS (strictly fail-closed if empty or not matching)
+ */
+export function canSwitchRoles(email?: string | null): boolean {
+  if (!email) return false;
+  if (process.env.NODE_ENV === "production") return false;
+  if (process.env.ALLOW_DEMO_ROLE_SWITCHING !== "true") return false;
+
+  const raw = (process.env.DEMO_SWITCHER_EMAILS ?? "").trim();
+  if (!raw) return false;
+
+  const allowedSet = new Set(
+    raw
+      .split(",")
+      .map((e) => e.trim().toLowerCase())
+      .filter(Boolean)
+  );
+  return allowedSet.has(email.trim().toLowerCase());
+}
+
 export async function getOrProvisionCurrentUser() {
   const { userId: clerkId } = await auth();
   if (!clerkId) {

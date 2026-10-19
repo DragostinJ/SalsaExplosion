@@ -1,5 +1,15 @@
 import type { NextConfig } from "next";
 
+const isProductionDeploy =
+  process.env.VERCEL_ENV === "production" ||
+  (process.env.NODE_ENV === "production" && process.env.VERCEL === "1");
+
+if (isProductionDeploy && process.env.ALLOW_DEMO_ROLE_SWITCHING === "true") {
+  throw new Error(
+    "FATAL SECURITY VIOLATION: ALLOW_DEMO_ROLE_SWITCHING cannot be enabled in production."
+  );
+}
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,

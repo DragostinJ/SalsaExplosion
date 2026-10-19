@@ -14,7 +14,7 @@ import {
   TransactionType,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser, isBootstrapAdmin } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, canSwitchRoles } from "@/lib/auth-user";
 import { CUBAN_SALSA_SYLLABUS } from "@/lib/constants/submission";
 import {
   AiRubricEvaluation,
@@ -130,19 +130,14 @@ export async function switchMyAccountRoleAction(rawInput: {
       };
     }
 
-    // Security: Guard against unauthorized privilege escalation
-    // 1. In production, role switching is forbidden unless ALLOW_DEMO_ROLE_SWITCHING is explicitly enabled or user is whitelisted in ADMIN_EMAILS.
-    // 2. In non-production/development, allow switching so the developer and studio owner can freely test all 3 personas (Dancer, Teacher, Owner).
-    const isProd = process.env.NODE_ENV === "production";
-    const allowDemo = process.env.ALLOW_DEMO_ROLE_SWITCHING === "true";
-    const isWhitelisted = isBootstrapAdmin(user.email);
-
-    if (isProd && !allowDemo && !isWhitelisted) {
+    // Security: Strict fail-closed guard against unauthorized privilege escalation.
+    // Must satisfy: NODE_ENV !== 'production' && ALLOW_DEMO_ROLE_SWITCHING === 'true' && email in DEMO_SWITCHER_EMAILS
+    if (!canSwitchRoles(user.email)) {
       return {
         success: false,
         error: {
           code: "FORBIDDEN",
-          message: "Role switching is strictly disabled in production.",
+          message: "Role switching is strictly disabled or unauthorized.",
         },
       };
     }

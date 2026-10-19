@@ -28,9 +28,10 @@ import { AdminNotificationBell } from "@/components/navigation/admin-notificatio
 
 interface SiteHeaderProps {
   role: Role | null;
+  canSwitchRoles?: boolean;
 }
 
-export function SiteHeader({ role }: SiteHeaderProps) {
+export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
   const isStaff = role === "INSTRUCTOR" || role === "ADMIN";
   const isAdmin = role === "ADMIN";
   const pathname = usePathname();
@@ -326,8 +327,9 @@ export function SiteHeader({ role }: SiteHeaderProps) {
 
           {isSignedIn ? (
             <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-              {/* Interactive Studio Demo Role Switcher */}
-              <div
+              {/* Interactive Studio Demo Role Switcher (Shown only if authorized in non-prod) */}
+              {canSwitchRoles && (
+                <div
                 role="group"
                 aria-label="Portal Role Switcher"
                 className="inline-flex items-center rounded-lg border border-border bg-muted/60 p-0.5 text-[11px] shrink-0 shadow-xs"
@@ -360,6 +362,7 @@ export function SiteHeader({ role }: SiteHeaderProps) {
                   );
                 })}
               </div>
+              )}
 
               <UserButton
                 appearance={{

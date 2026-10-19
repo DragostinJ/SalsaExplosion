@@ -276,7 +276,7 @@ export function ShopClient() {
           onClick={() => setActiveReservation(null)}
         >
           <div
-            className="relative w-full max-w-md rounded-2xl border bg-card p-6 shadow-2xl space-y-5"
+            className="relative w-full max-w-md rounded-2xl border bg-card p-6 shadow-2xl space-y-5 max-h-[90dvh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between pb-3 border-b">

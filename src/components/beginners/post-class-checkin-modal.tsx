@@ -51,7 +51,7 @@ export function PostClassCheckinModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-lg rounded-2xl border border-amber-500/40 bg-card p-6 shadow-2xl space-y-5">
+      <div className="relative w-full max-w-lg rounded-2xl border border-amber-500/40 bg-card p-6 shadow-2xl space-y-5 max-h-[90dvh] overflow-y-auto">
         <button
           type="button"
           onClick={onClose}

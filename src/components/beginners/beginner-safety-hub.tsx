@@ -22,6 +22,7 @@ import { FloorAmbassadorsCard } from "@/components/beginners/floor-ambassadors-c
 import { AnonymousQuestionBox } from "@/components/beginners/anonymous-question-box";
 
 export function BeginnerSafetyHub() {
+  const [isHubExpanded, setIsHubExpanded] = useState(false);
   const [isEtiquetteOpen, setIsEtiquetteOpen] = useState(false);
   const [isDressCodeOpen, setIsDressCodeOpen] = useState(false);
   const [isPrepVideoOpen, setIsPrepVideoOpen] = useState(false);
@@ -46,11 +47,25 @@ export function BeginnerSafetyHub() {
               New to Cuban Salsa or BOH Studios? You Are Safe Here!
             </h3>
             <p className="text-xs text-text-muted leading-relaxed max-w-2xl">
-              No partner required, no special shoes needed, and mistakes are celebrated. Explore our beginner comfort guides below:
+              No partner required, no special shoes needed, and mistakes are celebrated.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setIsHubExpanded((prev) => !prev)}
+            className="h-8 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40 shrink-0"
+          >
+            {isHubExpanded ? "Hide Comfort Hub ▲" : "Beginner Comfort Guides & FAQ ▼"}
+          </Button>
+        </div>
+
+        {/* Collapsible Content */}
+        {isHubExpanded && (
+          <div className="pt-4 border-t border-border/60 mt-3 space-y-3 animate-in fade-in duration-200">
+            <div className="flex flex-wrap items-center gap-2">
             <Button
               type="button"
               variant="outline"
@@ -82,7 +97,6 @@ export function BeginnerSafetyHub() {
               Studio Etiquette
             </Button>
           </div>
-        </div>
 
         {/* 3 Quick-Toggle Tabs */}
         <div className="mt-4 pt-3 border-t border-border/60 flex flex-wrap gap-2 text-xs">
@@ -145,6 +159,8 @@ export function BeginnerSafetyHub() {
         {activeTab === "QUESTIONS" && (
           <div className="mt-4 pt-1 animate-in fade-in duration-200">
             <AnonymousQuestionBox />
+          </div>
+        )}
           </div>
         )}
       </div>

@@ -73,8 +73,8 @@ export default async function AdminEventsPage() {
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Guest Artist Events & Door Pass Command
             </h1>
-            <Badge className="bg-amber-500 text-white font-semibold">
-              <Sparkles className="mr-1 h-3.5 w-3.5" />
+            <Badge className="bg-amber-500 text-zinc-950 font-extrabold">
+              <Sparkles className="mr-1 h-3.5 w-3.5 text-zinc-950" />
               Eventbrite Killer
             </Badge>
           </div>

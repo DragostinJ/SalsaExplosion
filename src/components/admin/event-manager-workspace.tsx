@@ -383,10 +383,10 @@ export function EventManagerWorkspace({
             <CardContent>
               <form onSubmit={handleCreateEvent} className="space-y-3.5 text-xs">
                 <div className="space-y-1">
-                  <label className="font-semibold">Event Title</label>
+                  <label htmlFor="event-title-input" className="font-semibold">Event Title</label>
                   <input
+                    id="event-title-input"
                     type="text"
-                    aria-label="Event Title"
                     required
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -395,10 +395,10 @@ export function EventManagerWorkspace({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold">URL Slug</label>
+                  <label htmlFor="event-slug-input" className="font-semibold">URL Slug</label>
                   <input
+                    id="event-slug-input"
                     type="text"
-                    aria-label="URL Slug"
                     required
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
@@ -407,12 +407,12 @@ export function EventManagerWorkspace({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold">
+                  <label htmlFor="event-guest-artists-input" className="font-semibold">
                     Guest Artists (comma-separated)
                   </label>
                   <input
+                    id="event-guest-artists-input"
                     type="text"
-                    aria-label="Guest Artists"
                     required
                     value={guestArtistsCsv}
                     onChange={(e) => setGuestArtistsCsv(e.target.value)}
@@ -422,10 +422,10 @@ export function EventManagerWorkspace({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label className="font-semibold">Venue Name</label>
+                    <label htmlFor="event-venue-name-input" className="font-semibold">Venue Name</label>
                     <input
+                      id="event-venue-name-input"
                       type="text"
-                      aria-label="Venue Name"
                       required
                       value={venueName}
                       onChange={(e) => setVenueName(e.target.value)}
@@ -433,10 +433,10 @@ export function EventManagerWorkspace({
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-semibold">Venue Address</label>
+                    <label htmlFor="event-venue-address-input" className="font-semibold">Venue Address</label>
                     <input
+                      id="event-venue-address-input"
                       type="text"
-                      aria-label="Venue Address"
                       required
                       value={venueAddress}
                       onChange={(e) => setVenueAddress(e.target.value)}
@@ -447,10 +447,10 @@ export function EventManagerWorkspace({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label className="font-semibold">Start Date</label>
+                    <label htmlFor="event-start-date-input" className="font-semibold">Start Date</label>
                     <input
+                      id="event-start-date-input"
                       type="date"
-                      aria-label="Start Date"
                       required
                       value={startDateIso}
                       onChange={(e) => setStartDateIso(e.target.value)}
@@ -458,10 +458,10 @@ export function EventManagerWorkspace({
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-semibold">End Date</label>
+                    <label htmlFor="event-end-date-input" className="font-semibold">End Date</label>
                     <input
+                      id="event-end-date-input"
                       type="date"
-                      aria-label="End Date"
                       required
                       value={endDateIso}
                       onChange={(e) => setEndDateIso(e.target.value)}
@@ -472,10 +472,10 @@ export function EventManagerWorkspace({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label className="font-semibold">Full Pass Price (£)</label>
+                    <label htmlFor="event-full-pass-price-input" className="font-semibold">Full Pass Price (£)</label>
                     <input
+                      id="event-full-pass-price-input"
                       type="number"
-                      aria-label="Full Pass Price"
                       min={10}
                       value={fullPassPricePounds}
                       onChange={(e) =>
@@ -485,12 +485,12 @@ export function EventManagerWorkspace({
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-semibold">
+                    <label htmlFor="event-full-pass-cap-input" className="font-semibold">
                       Full Pass Cap (50/50 L/F)
                     </label>
                     <input
+                      id="event-full-pass-cap-input"
                       type="number"
-                      aria-label="Full Pass Capacity"
                       min={10}
                       value={fullPassCapacity}
                       onChange={(e) =>
@@ -503,10 +503,10 @@ export function EventManagerWorkspace({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label className="font-semibold">Party Pass Price (£)</label>
+                    <label htmlFor="event-party-pass-price-input" className="font-semibold">Party Pass Price (£)</label>
                     <input
+                      id="event-party-pass-price-input"
                       type="number"
-                      aria-label="Party Pass Price"
                       min={5}
                       value={partyPassPricePounds}
                       onChange={(e) =>
@@ -516,10 +516,10 @@ export function EventManagerWorkspace({
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-semibold">Party Pass Capacity</label>
+                    <label htmlFor="event-party-pass-cap-input" className="font-semibold">Party Pass Capacity</label>
                     <input
+                      id="event-party-pass-cap-input"
                       type="number"
-                      aria-label="Party Pass Capacity"
                       min={10}
                       value={partyPassCapacity}
                       onChange={(e) =>
@@ -531,10 +531,10 @@ export function EventManagerWorkspace({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-semibold">Description</label>
+                  <label htmlFor="event-description-input" className="font-semibold">Description</label>
                   <textarea
+                    id="event-description-input"
                     rows={3}
-                    aria-label="Event Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     className="w-full rounded-xl border bg-background px-3 py-2"
@@ -544,9 +544,9 @@ export function EventManagerWorkspace({
                 <Button
                   type="submit"
                   disabled={isPending}
-                  className="w-full bg-gradient-to-r from-amber-600 to-orange-500 text-white font-bold"
+                  className="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-extrabold shadow-sm transition-colors"
                 >
-                  <Sparkles className="mr-1.5 h-4 w-4" />
+                  <Sparkles className="mr-1.5 h-4 w-4 text-zinc-950" />
                   {isPending ? "Publishing Event..." : "Publish Guest Artist Event"}
                 </Button>
               </form>

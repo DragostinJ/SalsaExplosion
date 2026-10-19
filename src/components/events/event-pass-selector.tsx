@@ -164,16 +164,16 @@ export function EventPassSelector({
               }`}
             >
               <CardHeader>
-                <div className="flex items-center justify-between gap-2">
-                  <CardTitle className="text-lg font-bold">{tier.name}</CardTitle>
+                <div className="flex items-start justify-between gap-2">
+                  <CardTitle className="text-lg font-bold leading-tight">{tier.name}</CardTitle>
                   {tier.userRegistration ? (
-                    <Badge className="bg-emerald-600 text-white">
+                    <Badge className="bg-emerald-600 text-white shrink-0 whitespace-nowrap">
                       Pass Active
                     </Badge>
                   ) : isSoldOut ? (
-                    <Badge variant="destructive">Sold Out</Badge>
+                    <Badge variant="destructive" className="shrink-0 whitespace-nowrap">Sold Out</Badge>
                   ) : (
-                    <Badge variant="secondary" className="font-semibold text-xs">
+                    <Badge variant="secondary" className="font-semibold text-xs shrink-0 whitespace-nowrap">
                       {remainingSpots} spots left
                     </Badge>
                   )}
@@ -274,14 +274,14 @@ export function EventPassSelector({
                           ? "default"
                           : "outline"
                       }
-                      className="text-xs font-bold"
+                      className="text-xs font-bold min-h-11 h-auto py-2.5 px-2 whitespace-normal text-center flex items-center justify-center leading-tight"
                     >
                       {isPending ? (
                         <Loader2 className="h-3.5 w-3.5 animate-spin" />
                       ) : (
                         <>
-                          <Ticket className="mr-1.5 h-3.5 w-3.5" />
-                          Book as Lead
+                          <Ticket className="mr-1 h-3.5 w-3.5 shrink-0" />
+                          <span>Book as Lead</span>
                         </>
                       )}
                     </Button>
@@ -300,14 +300,14 @@ export function EventPassSelector({
                           ? "default"
                           : "outline"
                       }
-                      className="text-xs font-bold"
+                      className="text-xs font-bold min-h-11 h-auto py-2.5 px-2 whitespace-normal text-center flex items-center justify-center leading-tight"
                     >
                       {isPending ? (
                         <Loader2 className="h-3.5 w-3.5 animate-spin" />
                       ) : (
                         <>
-                          <Ticket className="mr-1.5 h-3.5 w-3.5" />
-                          Book as Follow
+                          <Ticket className="mr-1 h-3.5 w-3.5 shrink-0" />
+                          <span>Book as Follow</span>
                         </>
                       )}
                     </Button>
@@ -319,10 +319,10 @@ export function EventPassSelector({
                     onClick={() =>
                       onInitiateBooking(tier, DanceRole.SOLO)
                     }
-                    className="w-full bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-semibold shadow-sm text-xs"
+                    className="w-full bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-bold shadow-xs text-xs min-h-11 h-auto py-2.5 px-3 whitespace-normal text-center leading-snug"
                   >
-                    <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-                    {isSoldOut ? "Tier Sold Out" : `Get ${tier.name}`}
+                    <Sparkles className="mr-1.5 h-3.5 w-3.5 shrink-0" />
+                    <span>{isSoldOut ? "Tier Sold Out" : `Get ${tier.name}`}</span>
                   </Button>
                 )}
               </CardFooter>

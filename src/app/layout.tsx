@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 import { SiteHeader } from "@/components/navigation/site-header";
 import { SiteFooter } from "@/components/navigation/site-footer";
+import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -88,8 +89,9 @@ export default async function RootLayout({
       >
         <body className="min-h-full flex flex-col bg-background text-foreground">
           <SiteHeader role={viewer?.role ?? null} canSwitchRoles={userCanSwitchRoles} />
-          <div className="flex-1">{children}</div>
+          <div className="flex-1 pb-20 md:pb-0">{children}</div>
           <SiteFooter />
+          <MobileBottomNav />
           <Toaster richColors position="top-right" />
         </body>
       </html>

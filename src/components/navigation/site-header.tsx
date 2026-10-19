@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useEffect, useTransition } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
@@ -42,6 +42,15 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
   const { isSignedIn } = useUser();
   const [isPending, startTransition] = useTransition();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  // Allow bottom nav bar to trigger the mobile drawer
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleOpen = () => setIsMobileNavOpen(true);
+      window.addEventListener("open-mobile-nav-drawer", handleOpen);
+      return () => window.removeEventListener("open-mobile-nav-drawer", handleOpen);
+    }
+  }, []);
 
   const handleRoleSwitch = (targetRole: Role) => {
     startTransition(async () => {

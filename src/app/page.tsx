@@ -22,46 +22,13 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { SocialProofGrid } from "@/components/marketing/social-proof-grid";
-import { prisma } from "@/lib/prisma";
+import { getCachedUpcomingEvents, getCachedNextClasses } from "@/lib/cached-queries";
 
 export default async function Home() {
-  const upcomingEvents = await prisma.event.findMany({
-    where: { status: "PUBLISHED" },
-    orderBy: { startDate: "asc" },
-    take: 3,
-    include: {
-      ticketTiers: {
-        orderBy: { priceInCents: "asc" },
-      },
-    },
-  });
-
-  const now = new Date();
-  const nextClasses = await prisma.classSession.findMany({
-    where: {
-      startTime: { gt: now },
-      isCancelled: false,
-    },
-    orderBy: { startTime: "asc" },
-    take: 3,
-    include: {
-      instructor: {
-        select: {
-          firstName: true,
-          lastName: true,
-        },
-      },
-      bookings: {
-        where: {
-          status: { in: ["CONFIRMED", "ATTENDED"] },
-        },
-        select: {
-          id: true,
-          danceRole: true,
-        },
-      },
-    },
-  });
+  const [upcomingEvents, nextClasses] = await Promise.all([
+    getCachedUpcomingEvents(3),
+    getCachedNextClasses(3),
+  ]);
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <main className="flex-1">

@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { EventStatus } from "@prisma/client";
 import { Calendar, MapPin, Sparkles, Users, ArrowRight } from "lucide-react";
-import { prisma } from "@/lib/prisma";
+import { getCachedUpcomingEvents } from "@/lib/cached-queries";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,15 +18,7 @@ export const metadata = {
 };
 
 export default async function EventsDirectoryPage() {
-  const events = await prisma.event.findMany({
-    where: { status: EventStatus.PUBLISHED },
-    orderBy: { startDate: "asc" },
-    include: {
-      ticketTiers: {
-        orderBy: { priceInCents: "asc" },
-      },
-    },
-  });
+  const events = await getCachedUpcomingEvents(20);
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">

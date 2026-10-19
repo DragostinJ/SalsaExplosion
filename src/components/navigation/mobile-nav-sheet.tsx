@@ -160,6 +160,7 @@ export function MobileNavSheet({
       {/* Slide-in Drawer */}
       <div
         ref={sheetRef}
+        data-testid="mobile-nav-panel"
         className="relative z-10 flex h-dvh w-[88vw] max-w-sm flex-col bg-card shadow-2xl transition-transform duration-300 ease-in-out border-l border-border"
       >
         {/* Drawer Header */}

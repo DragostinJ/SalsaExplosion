@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import { bookPrivateLessonAction } from "@/actions/lessons.actions";
+import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 
 interface InstructorProfile {
   id: string;
@@ -394,6 +395,10 @@ export function PrivateLessonsClient() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
+          </div>
+
+          <div className="pt-2">
+            <PaymentSecurityTrustBar showRefundPolicy={false} />
           </div>
         </form>
       )}

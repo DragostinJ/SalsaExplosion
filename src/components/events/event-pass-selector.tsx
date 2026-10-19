@@ -25,6 +25,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 
 export interface SerializedEventTier {
   id: string;
@@ -362,6 +363,11 @@ export function EventPassSelector({
             </Card>
           );
         })}
+      </div>
+
+      {/* Payment Security & Direct Registration Trust Bar */}
+      <div className="pt-2">
+        <PaymentSecurityTrustBar showRefundPolicy={false} />
       </div>
 
       {/* Congress VIP Upsell Modal / Drawer */}

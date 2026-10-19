@@ -31,6 +31,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 
 interface PricingCardsProps {
   hasActiveSubscription: boolean;
@@ -245,6 +246,10 @@ export function PricingCards({
             </Card>
           );
         })}
+      </div>
+
+      <div className="mt-8 max-w-3xl mx-auto">
+        <PaymentSecurityTrustBar />
       </div>
     </div>
   );

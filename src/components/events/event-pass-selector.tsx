@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { DanceRole } from "@prisma/client";
 import {
   QrCode,
@@ -13,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { registerForEventTierAction } from "@/actions/management.actions";
+import { createEventCheckoutSessionAction } from "@/actions/checkout.actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -66,6 +68,8 @@ export function EventPassSelector({
   const [addMasterclass, setAddMasterclass] = useState(false);
   const [isPending, startTransition] = useTransition();
 
+  const router = useRouter();
+
   const onInitiateBooking = (tier: SerializedEventTier, role: DanceRole) => {
     const isCongressPass =
       tier.name.toLowerCase().includes("full") ||
@@ -77,17 +81,46 @@ export function EventPassSelector({
       setAddShirt(false);
       setAddMasterclass(false);
     } else {
-      handleRegister(tier.eventId, tier.id, role);
+      handleRegister(tier.eventId, tier.id, role, false, false);
     }
   };
 
   const handleRegister = (
     eventId: string,
     ticketTierId: string,
-    role: DanceRole
+    role: DanceRole,
+    withShirt = false,
+    withMasterclass = false
   ) => {
     setBanner(null);
     startTransition(async () => {
+      const tier = tiers.find((t) => t.id === ticketTierId);
+
+      // Paid passes route through hardened server-validated Stripe checkout
+      if (tier && tier.priceInCents > 0) {
+        const checkoutRes = await createEventCheckoutSessionAction({
+          eventId,
+          ticketTierId,
+          role,
+          addShirt: withShirt,
+          addMasterclass: withMasterclass,
+        });
+
+        if (!checkoutRes.success) {
+          setBanner({ type: "error", text: checkoutRes.error.message });
+          return;
+        }
+
+        if (checkoutRes.data.url.startsWith("/")) {
+          router.push(checkoutRes.data.url);
+          router.refresh();
+        } else {
+          window.location.assign(checkoutRes.data.url);
+        }
+        return;
+      }
+
+      // Free / RSVP tier direct registration
       const res = await registerForEventTierAction({
         eventId,
         ticketTierId,
@@ -486,7 +519,9 @@ export function EventPassSelector({
                   handleRegister(
                     upsellTarget.tier.eventId,
                     upsellTarget.tier.id,
-                    upsellTarget.role
+                    upsellTarget.role,
+                    false,
+                    false
                   );
                   setUpsellTarget(null);
                 }}
@@ -501,7 +536,9 @@ export function EventPassSelector({
                   handleRegister(
                     upsellTarget.tier.eventId,
                     upsellTarget.tier.id,
-                    upsellTarget.role
+                    upsellTarget.role,
+                    addShirt,
+                    addMasterclass
                   );
                   setUpsellTarget(null);
                 }}

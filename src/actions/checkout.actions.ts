@@ -15,6 +15,7 @@ import {
   type CheckoutActionResponse,
 } from "@/lib/constants/pricing";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
+import { recordAuditLog } from "@/lib/audit-log";
 
 // ==========================================
 // ZOD VALIDATION SCHEMA
@@ -330,9 +331,11 @@ export async function createBillingPortalSessionAction(): Promise<CheckoutAction
 const CreateEventCheckoutSchema = z.object({
   eventId: z.string().min(1, "Event ID is required"),
   ticketTierId: z.string().min(1, "Ticket tier ID is required"),
-  role: z.enum(["LEAD", "FOLLOW"] as const, {
-    message: "Dance role must be LEAD or FOLLOW",
+  role: z.enum(["LEAD", "FOLLOW", "SOLO"] as const, {
+    message: "Dance role must be LEAD, FOLLOW, or SOLO",
   }),
+  addShirt: z.boolean().optional(),
+  addMasterclass: z.boolean().optional(),
 });
 
 export type CreateEventCheckoutInput = z.infer<typeof CreateEventCheckoutSchema>;
@@ -360,7 +363,7 @@ export async function createEventCheckoutSessionAction(
       );
     }
 
-    const { eventId, ticketTierId, role } = parsed.data;
+    const { eventId, ticketTierId, role, addShirt = false, addMasterclass = false } = parsed.data;
 
     const tier = await prisma.eventTicketTier.findUnique({
       where: { id: ticketTierId },
@@ -414,12 +417,67 @@ export async function createEventCheckoutSessionAction(
 
     const baseUrl = getAppBaseUrl();
 
+    // Server-enforced Add-on Prices (never trust client amounts)
+    const SHIRT_PRICE_IN_CENTS = 2000; // £20
+    const MASTERCLASS_PRICE_IN_CENTS = 3500; // £35
+
+    let totalAmountInCents = tier.priceInCents;
+    if (addShirt) totalAmountInCents += SHIRT_PRICE_IN_CENTS;
+    if (addMasterclass) totalAmountInCents += MASTERCLASS_PRICE_IN_CENTS;
+
     // Check if live Stripe is configured
     if (!isLiveStripeConfigured("live")) {
+      if (
+        process.env.NODE_ENV === "production" &&
+        process.env.ALLOW_DEMO_PAYMENTS !== "true"
+      ) {
+        throw new CheckoutDomainError(
+          "MISSING_STRIPE_CONFIG",
+          "Live payment processing is not configured for this pass. Contact the studio administrator."
+        );
+      }
+
+      // Demo/Pitch mode transactional registration and audit log
+      const shortCode = randomUUID().slice(0, 8).toUpperCase();
+      const qrCodeHash = `RF-PASS-${shortCode}`;
+
+      await prisma.$transaction(async (tx) => {
+        await tx.eventRegistration.create({
+          data: {
+            userId: user.id,
+            eventId: tier.event.id,
+            ticketTierId: tier.id,
+            role,
+            qrCodeHash,
+            paymentStatus: "PAID",
+            amountPaidInCents: totalAmountInCents,
+          },
+        });
+      });
+
+      await recordAuditLog({
+        actorId: user.id,
+        action: "EVENT_MUTATION",
+        targetType: "EventRegistration",
+        targetId: tier.id,
+        metadata: {
+          mode: "demo_checkout",
+          tierName: tier.name,
+          role,
+          amountPaidInCents: totalAmountInCents,
+          addShirt,
+          addMasterclass,
+        },
+      });
+
+      revalidatePath(`/events/${tier.event.slug}`);
+      revalidatePath("/events");
+      revalidatePath("/admin/events");
+
       return {
         success: true,
         data: {
-          url: `${baseUrl}/events/${tier.event.slug}?checkout=demo_registered&tier=${tier.id}`,
+          url: `${baseUrl}/events/${tier.event.slug}?checkout=demo_registered&tier=${tier.id}&role=${role}`,
         },
       };
     }
@@ -439,29 +497,61 @@ export async function createEventCheckoutSessionAction(
       });
     }
 
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
+      {
+        price_data: {
+          currency: "gbp",
+          unit_amount: tier.priceInCents,
+          product_data: {
+            name: `${tier.event.title} — ${tier.name}`,
+            description: `${tier.description ?? "Congress Pass"} [Dance Role: ${role}]`,
+          },
+        },
+        quantity: 1,
+      },
+    ];
+
+    if (addShirt) {
+      lineItems.push({
+        price_data: {
+          currency: "gbp",
+          unit_amount: SHIRT_PRICE_IN_CENTS,
+          product_data: {
+            name: "Official 2026 Congress Commemorative T-Shirt",
+            description: "Limited Edition Salsa Explosion Festival Tee (Unisex Fit)",
+          },
+        },
+        quantity: 1,
+      });
+    }
+
+    if (addMasterclass) {
+      lineItems.push({
+        price_data: {
+          currency: "gbp",
+          unit_amount: MASTERCLASS_PRICE_IN_CENTS,
+          product_data: {
+            name: "Pre-Congress Masterclass VIP Intensive",
+            description: "Exclusive 90-minute styling & musicality workshop with Maestro Enrique",
+          },
+        },
+        quantity: 1,
+      });
+    }
+
     const checkoutSession = await stripe.checkout.sessions.create({
       customer: stripeCustomerId,
       client_reference_id: user.id,
       mode: "payment",
-      line_items: [
-        {
-          price_data: {
-            currency: "gbp",
-            unit_amount: tier.priceInCents,
-            product_data: {
-              name: `${tier.event.title} — ${tier.name}`,
-              description: `${tier.description ?? "Congress Pass"} [Dance Role: ${role}]`,
-            },
-          },
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       metadata: {
         mode: "event_registration",
         eventId: tier.event.id,
         ticketTierId: tier.id,
         role,
         userId: user.id,
+        addShirt: String(addShirt),
+        addMasterclass: String(addMasterclass),
       },
       payment_intent_data: {
         metadata: {
@@ -470,6 +560,8 @@ export async function createEventCheckoutSessionAction(
           ticketTierId: tier.id,
           role,
           userId: user.id,
+          addShirt: String(addShirt),
+          addMasterclass: String(addMasterclass),
         },
       },
       success_url: `${baseUrl}/events/${tier.event.slug}?checkout=success&tier=${tier.id}`,

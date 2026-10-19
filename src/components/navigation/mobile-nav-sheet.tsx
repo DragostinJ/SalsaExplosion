@@ -198,7 +198,7 @@ export function MobileNavSheet({
         </div>
 
         {/* Drawer Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-6 overscroll-contain">
+        <div className="flex-1 overflow-y-auto p-5 pb-20 space-y-6 overscroll-contain">
           {/* Quick Action: Interactive Studio Tutorial */}
           <div>
             <button

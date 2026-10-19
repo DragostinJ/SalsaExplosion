@@ -26,6 +26,7 @@ import {
 } from "@/components/schedule/class-schedule-card";
 import { NewDancerOnboarding } from "@/components/schedule/new-dancer-onboarding";
 import { PartnerMatchWaitlist } from "@/components/schedule/partner-match-waitlist";
+import { BeginnerSafetyHub } from "@/components/beginners/beginner-safety-hub";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -284,6 +285,9 @@ export default async function StudentSchedulePage({
         classCredits={user.classCredits}
         hasActiveBooking={scheduleItems.some((s) => s.userBooking !== null)}
       />
+
+      {/* Beginner Psychological Safety & Comfort Hub */}
+      <BeginnerSafetyHub />
 
       {/* Partner-Match Priority Waitlist & Bypass Protocol */}
       <PartnerMatchWaitlist

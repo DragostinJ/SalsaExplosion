@@ -16,6 +16,7 @@ import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { StudentVideoUploadDropzone } from "@/components/progression/video-upload-dropzone";
 import { PromotionCertificateCard } from "@/components/progression/promotion-certificate-card";
 import { AttendanceMilestonesCard } from "@/components/progression/attendance-milestones-card";
+import { BeginnerSyllabusRoadmap } from "@/components/beginners/beginner-syllabus-roadmap";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -141,6 +142,9 @@ export default async function ProgressionPage() {
         currentLevel={user.currentLevel}
         hasCongressPass={hasCongressPass}
       />
+
+      {/* Progressive Syllabus: Foundational 8 Cuban Figures */}
+      <BeginnerSyllabusRoadmap />
 
       {/* State 1: Max Level Reached */}
       {isMaxLevel ? (

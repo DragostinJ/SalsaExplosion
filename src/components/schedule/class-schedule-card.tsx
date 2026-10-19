@@ -38,6 +38,11 @@ import {
 
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import { AddToCalendarButton } from "@/components/calendar/add-to-calendar-button";
+import {
+  DigitalEtiquetteModal,
+  ETIQUETTE_STORAGE_KEY,
+} from "@/components/beginners/digital-etiquette-modal";
+import { PostClassCheckinModal } from "@/components/beginners/post-class-checkin-modal";
 
 // ==========================================
 // TYPES & INTERFACES
@@ -134,6 +139,8 @@ export function ClassScheduleCard({
   } | null>(null);
 
   const [isPending, startTransition] = React.useTransition();
+  const [showEtiquetteModal, setShowEtiquetteModal] = React.useState(false);
+  const [showCheckinModal, setShowCheckinModal] = React.useState(false);
 
   // Optimistic State for instant spot counter & badge feedback
   const [optimisticState, addOptimisticUpdate] = React.useOptimistic<
@@ -240,6 +247,19 @@ export function ClassScheduleCard({
     });
   };
 
+  const attemptBook = () => {
+    try {
+      const agreed = window.localStorage.getItem(ETIQUETTE_STORAGE_KEY);
+      if (agreed !== "true") {
+        setShowEtiquetteModal(true);
+        return;
+      }
+    } catch {
+      // ignore
+    }
+    handleBook();
+  };
+
   const handleCancel = () => {
     if (!session.userBooking?.id) return;
     setFeedback(null);
@@ -284,9 +304,23 @@ export function ClassScheduleCard({
             <Badge variant="outline" className={styleConfig.className}>
               {styleConfig.label}
             </Badge>
-            <Badge variant="secondary" className="font-semibold">
-              {session.minLevel}
+            <Badge
+              variant="secondary"
+              className={
+                session.minLevel === DanceLevel.BEGINNER
+                  ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 font-bold"
+                  : "font-semibold"
+              }
+            >
+              {session.minLevel === DanceLevel.BEGINNER
+                ? "Level 0: Absolute Beginner"
+                : session.minLevel}
             </Badge>
+            {session.minLevel === DanceLevel.BEGINNER && (
+              <Badge variant="outline" className="border-emerald-500/40 text-emerald-700 dark:text-emerald-400 font-bold text-[10px]">
+                Zero Experience Needed
+              </Badge>
+            )}
           </div>
 
           {optimisticState.isBooked ? (
@@ -325,6 +359,12 @@ export function ClassScheduleCard({
             <CardDescription className="text-xs mt-1 font-medium text-muted-foreground flex items-center gap-1">
               <span>Maestro {session.instructor.firstName} {session.instructor.lastName}</span>
             </CardDescription>
+            <div className="flex flex-wrap items-center gap-1.5 pt-1.5">
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-blue-700 dark:text-blue-300 bg-blue-500/10 px-2.5 py-0.5 rounded-md">
+                <Users className="h-3 w-3" />
+                No Partner Needed • Circular Rotation
+              </span>
+            </div>
           </div>
         </div>
       </CardHeader>
@@ -485,16 +525,27 @@ export function ClassScheduleCard({
           </Button>
         ) : optimisticState.isBooked ? (
           session.userBooking?.status === BookingStatus.ATTENDED ? (
-            <Button
-              asChild
-              variant="secondary"
-              className="w-full border border-emerald-500/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-bold"
-            >
-              <Link href={`/checkin/${session.id}`}>
-                <CheckCircle2 className="mr-2 h-4 w-4" />
-                Checked In at Door ✓ (View QR Pass)
-              </Link>
-            </Button>
+            <div className="w-full space-y-2">
+              <Button
+                asChild
+                variant="secondary"
+                className="w-full border border-emerald-500/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-bold"
+              >
+                <Link href={`/checkin/${session.id}`}>
+                  <CheckCircle2 className="mr-2 h-4 w-4" />
+                  Checked In at Door ✓ (View QR Pass)
+                </Link>
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => setShowCheckinModal(true)}
+                className="w-full border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300 font-bold text-xs hover:bg-amber-500/20"
+              >
+                💬 How was your class? (Share Comfort Check-In)
+              </Button>
+            </div>
           ) : (
             <div className="w-full space-y-2">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -548,7 +599,7 @@ export function ClassScheduleCard({
           <Button
             type="button"
             disabled={isPending || isSelectedRoleFull || session.isCancelled}
-            onClick={handleBook}
+            onClick={attemptBook}
             className="w-full"
           >
             {isPending ? (
@@ -564,6 +615,19 @@ export function ClassScheduleCard({
           </Button>
         )}
       </CardFooter>
+
+      {/* Beginner Safety Modals */}
+      <DigitalEtiquetteModal
+        isOpen={showEtiquetteModal}
+        onClose={() => setShowEtiquetteModal(false)}
+        onAgree={handleBook}
+      />
+      <PostClassCheckinModal
+        classSessionId={session.id}
+        classTitle={session.title}
+        isOpen={showCheckinModal}
+        onClose={() => setShowCheckinModal(false)}
+      />
     </Card>
   );
 }

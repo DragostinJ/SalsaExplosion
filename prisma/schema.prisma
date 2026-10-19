@@ -101,6 +101,7 @@ model User {
   waitlistEntries    PartnerWaitlistEntry[]
   privateLessons     PrivateLessonBooking[]
   merchReservations  MerchReservation[]
+  postClassFeedbacks PostClassFeedback[]
 
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
@@ -142,6 +143,7 @@ model ClassSession {
   instructorId   String
   instructor     User       @relation("InstructorClasses", fields: [instructorId], references: [id], onDelete: Restrict)
   bookings       Booking[]
+  feedbacks      PostClassFeedback[]
 
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
@@ -388,5 +390,36 @@ model MerchReservation {
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, status])
+}
+
+// ==========================================
+// BEGINNER PSYCHOLOGICAL SAFETY & SUPPORT
+// ==========================================
+
+model AnonymousQuestion {
+  id        String   @id @default(cuid())
+  category  String   // "FOOTWEAR", "RHYTHM", "PARTNER_ANXIETY", "VENUE_ARRIVING", "GENERAL"
+  question  String   @db.Text
+  email     String?  // Optional for direct follow-up
+  status    String   @default("ANSWERED")
+  response  String?  @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([category, status])
+}
+
+model PostClassFeedback {
+  id             String   @id @default(cuid())
+  userId         String
+  classSessionId String
+  sentiment      String   // "LOVED_IT" | "CHALLENGING_FUN" | "A_BIT_OVERWHELMED"
+  notes          String?  @db.Text
+  createdAt      DateTime @default(now())
+
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classSession   ClassSession @relation(fields: [classSessionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, classSessionId])
+  @@index([classSessionId, sentiment])
 }
 

@@ -283,20 +283,59 @@ export default async function Home() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 flex flex-col items-center justify-center text-center p-6 rounded-2xl border border-border bg-muted/30">
-                  <div className="relative mb-4">
-                    <div className="h-28 w-28 sm:h-32 sm:w-32 rounded-full ring-4 ring-amber-500/30 overflow-hidden bg-gradient-to-tr from-amber-600 to-rose-600 flex items-center justify-center text-white shadow-lg">
-                      <Flame className="h-14 w-14 fill-white" />
+                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-amber-500/30 bg-card shadow-sm space-y-4">
+                  <div className="flex items-center gap-4 border-b pb-4">
+                    <div className="relative shrink-0">
+                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-amber-500 overflow-hidden bg-gradient-to-tr from-amber-600 via-rose-600 to-amber-500 flex items-center justify-center text-white shadow-md">
+                        <Flame className="h-8 w-8 sm:h-10 sm:w-10 fill-white" />
+                      </div>
+                      <div className="absolute -bottom-1 -right-1 rounded-full bg-amber-500 text-zinc-950 px-1.5 py-0.2 text-[9px] font-black uppercase tracking-wider shadow-xs">
+                        🇨🇺 Cuba
+                      </div>
                     </div>
-                    <div className="absolute -bottom-2 -right-2 rounded-full bg-amber-500 text-zinc-950 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider shadow-sm">
-                      Cuba 🇨🇺
+                    <div className="min-w-0">
+                      <h3 className="text-base sm:text-lg font-black text-foreground truncate">
+                        Enrique Perez Valdes
+                      </h3>
+                      <p className="text-xs font-bold text-rose-800 dark:text-rose-300">
+                        Havana Master Instructor • UK Pioneer
+                      </p>
+                      <span className="text-[11px] font-semibold text-muted-foreground block mt-0.5">
+                        Director, Salsa Explosion UK
+                      </span>
                     </div>
                   </div>
-                  <h3 className="text-lg font-black text-foreground">Enrique Perez Valdes</h3>
-                  <p className="text-xs font-semibold text-rose-700 dark:text-rose-400">Master Cuban Instructor • Havana Native</p>
-                  <blockquote className="mt-3 text-xs italic text-muted-foreground leading-relaxed border-t pt-3">
+
+                  <div className="space-y-2 text-xs">
+                    <div className="flex items-center justify-between py-1 border-b border-border/60">
+                      <span className="font-semibold text-muted-foreground">Specialties</span>
+                      <span className="font-bold text-foreground">Casino • Rueda • Timba • Son</span>
+                    </div>
+                    <div className="flex items-center justify-between py-1 border-b border-border/60">
+                      <span className="font-semibold text-muted-foreground">Experience</span>
+                      <span className="font-bold text-foreground">30+ Years Social Dancing</span>
+                    </div>
+                    <div className="flex items-center justify-between py-1">
+                      <span className="font-semibold text-muted-foreground">Recognition</span>
+                      <span className="font-extrabold text-amber-800 dark:text-amber-300">Salsa UK Lifetime Award</span>
+                    </div>
+                  </div>
+
+                  <blockquote className="rounded-xl bg-muted/40 p-3 text-xs italic text-foreground/90 leading-relaxed font-medium">
                     &ldquo;Cuban salsa is not just steps—it is community, clave, musicality, and pure joy. No partner required, just bring your energy.&rdquo;
                   </blockquote>
+
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="w-full text-xs font-bold border-amber-500/40 text-amber-950 dark:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20"
+                  >
+                    <Link href="/private-lessons">
+                      <span>Book 1-on-1 Private Coaching with Enrique</span>
+                      <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </div>

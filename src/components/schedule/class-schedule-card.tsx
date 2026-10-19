@@ -437,20 +437,47 @@ export function ClassScheduleCard({
             </span>
           </div>
 
-          <div className="h-2 w-full overflow-hidden rounded-full bg-secondary">
-            <div
-              className={`h-full transition-all duration-300 ${
-                spotsRemaining === 0 ? "bg-destructive" : "bg-primary"
-              }`}
-              style={{
-                width: `${Math.min(
-                  100,
-                  Math.round(
-                    (optimisticState.bookedCount / session.maxCapacity) * 100
-                  )
-                )}%`,
-              }}
-            />
+          {/* Dual-Color Automated Lead vs Follow Ratio Meter */}
+          <div className="space-y-1.5">
+            <div className="h-2 w-full overflow-hidden rounded-full bg-muted flex">
+              <div
+                title={`Leads booked: ${optimisticState.leadsCount}`}
+                className="h-full bg-blue-600 dark:bg-blue-500 transition-all duration-300"
+                style={{
+                  width: `${Math.min(
+                    100,
+                    session.maxCapacity > 0
+                      ? Math.round((optimisticState.leadsCount / session.maxCapacity) * 100)
+                      : 0
+                  )}%`,
+                }}
+              />
+              <div
+                title={`Follows booked: ${optimisticState.followsCount}`}
+                className="h-full bg-rose-600 dark:bg-rose-500 transition-all duration-300"
+                style={{
+                  width: `${Math.min(
+                    100,
+                    session.maxCapacity > 0
+                      ? Math.round((optimisticState.followsCount / session.maxCapacity) * 100)
+                      : 0
+                  )}%`,
+                }}
+              />
+            </div>
+            <div className="flex items-center justify-between text-[11px] text-muted-foreground px-0.5">
+              <span className="flex items-center gap-1 font-semibold text-blue-800 dark:text-blue-300">
+                <span className="h-2 w-2 rounded-full bg-blue-600" />
+                {optimisticState.leadsCount} Leads
+              </span>
+              <span className="text-[10px] uppercase tracking-wider font-extrabold text-foreground">
+                50/50 Balance Algorithm
+              </span>
+              <span className="flex items-center gap-1 font-semibold text-rose-800 dark:text-rose-300">
+                <span className="h-2 w-2 rounded-full bg-rose-600" />
+                {optimisticState.followsCount} Follows
+              </span>
+            </div>
           </div>
 
           {/* Partner Role Selector */}

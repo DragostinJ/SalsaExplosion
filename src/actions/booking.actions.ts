@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import {
+  AuditAction,
   BookingStatus,
   DanceRole,
   Prisma,
@@ -18,6 +19,7 @@ import {
   LEVEL_WEIGHT,
 } from "@/lib/constants/booking";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
+import { recordAuditLog } from "@/lib/audit-log";
 
 // ==========================================
 // ZOD VALIDATION SCHEMAS
@@ -445,6 +447,20 @@ export async function cancelBookingAction(
         isLateCancellation: Boolean(latestDeduction && !isEligibleForRefund),
       };
     });
+
+    if (result.refundedCredits > 0) {
+      await recordAuditLog({
+        actorId: provisionedUser.id,
+        action: AuditAction.REFUND,
+        targetType: "BOOKING",
+        targetId: parsed.data.bookingId,
+        metadata: {
+          classSessionId: result.classSessionId,
+          refundedCredits: result.refundedCredits,
+          isLateCancellation: result.isLateCancellation,
+        },
+      });
+    }
 
     // 4. Revalidate Cache Paths
     revalidatePath("/dashboard/schedule");

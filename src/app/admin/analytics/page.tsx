@@ -14,6 +14,7 @@ import { AdminNav } from "@/components/navigation/admin-nav";
 import { Badge } from "@/components/ui/badge";
 import { AnalyticsCharts } from "@/components/admin/analytics-charts";
 import { CsvExportToolbar } from "@/components/admin/csv-export-toolbar";
+import { AuditTrailTable } from "@/components/admin/audit-trail-table";
 
 export const metadata = {
   title: "Studio Analytics & Executive Intelligence | Salsa Explosion",
@@ -24,7 +25,7 @@ export const metadata = {
 export default async function AdminAnalyticsPage() {
   await requireRole(ADMIN_ONLY);
 
-  // Aggregate Key Business Metrics from PostgreSQL
+  // Aggregate Key Business Metrics & Audit Log from PostgreSQL
   const [
     totalStudents,
     activeBookingsCount,
@@ -34,6 +35,7 @@ export default async function AdminAnalyticsPage() {
     eventRegistrations,
     creditPurchases,
     activeSubscriptionsCount,
+    auditLogs,
   ] = await Promise.all([
     prisma.user.count({ where: { role: Role.STUDENT } }),
     prisma.booking.count({
@@ -70,6 +72,21 @@ export default async function AdminAnalyticsPage() {
     }),
     prisma.subscription.count({
       where: { status: SubscriptionStatus.ACTIVE },
+    }),
+    prisma.auditLog.findMany({
+      take: 50,
+      orderBy: { createdAt: "desc" },
+      include: {
+        actor: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+            role: true,
+          },
+        },
+      },
     }),
   ]);
 
@@ -160,7 +177,7 @@ export default async function AdminAnalyticsPage() {
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Studio Executive Dashboard
             </h1>
-            <Badge className="bg-amber-500 text-white font-semibold flex items-center gap-1">
+            <Badge className="bg-primary-base text-white font-semibold flex items-center gap-1">
               <ShieldCheck className="h-3.5 w-3.5" />
               Admin Intelligence
             </Badge>
@@ -192,6 +209,9 @@ export default async function AdminAnalyticsPage() {
           pendingReviewsCount,
         }}
       />
+
+      {/* Immutable Forensic Audit Trail */}
+      <AuditTrailTable logs={auditLogs} />
     </main>
   );
 }

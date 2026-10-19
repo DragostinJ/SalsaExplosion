@@ -1,0 +1,187 @@
+import React from "react";
+import { AuditAction, Role } from "@prisma/client";
+import {
+  ShieldAlert,
+  UserCheck,
+  CreditCard,
+  Award,
+  FileSpreadsheet,
+  Calendar,
+  RotateCcw,
+  Clock,
+  Terminal,
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+
+export interface AuditLogEntry {
+  id: string;
+  action: AuditAction;
+  targetType: string;
+  targetId: string | null;
+  metadata: unknown;
+  ip: string | null;
+  createdAt: Date;
+  actor: {
+    id: string;
+    firstName: string | null;
+    lastName: string | null;
+    email: string;
+    role: Role;
+  };
+}
+
+interface AuditTrailTableProps {
+  logs: AuditLogEntry[];
+}
+
+function getActionBadge(action: AuditAction) {
+  switch (action) {
+    case AuditAction.ROLE_CHANGE:
+      return (
+        <Badge className="bg-primary-base text-white hover:bg-primary-hover flex items-center gap-1">
+          <UserCheck className="h-3 w-3" />
+          Role Switch
+        </Badge>
+      );
+    case AuditAction.CREDIT_ADJUSTMENT:
+      return (
+        <Badge className="bg-accent-tangerine text-white hover:bg-accent-tangerine/90 flex items-center gap-1">
+          <CreditCard className="h-3 w-3" />
+          Credit Delta
+        </Badge>
+      );
+    case AuditAction.LEVEL_PROMOTION:
+      return (
+        <Badge className="bg-secondary-base text-white hover:bg-secondary-hover flex items-center gap-1">
+          <Award className="h-3 w-3" />
+          Progression
+        </Badge>
+      );
+    case AuditAction.CSV_EXPORT:
+      return (
+        <Badge className="bg-slate-700 text-white hover:bg-slate-800 flex items-center gap-1">
+          <FileSpreadsheet className="h-3 w-3" />
+          CSV Export
+        </Badge>
+      );
+    case AuditAction.EVENT_MUTATION:
+      return (
+        <Badge className="bg-purple-600 text-white hover:bg-purple-700 flex items-center gap-1">
+          <Calendar className="h-3 w-3" />
+          Event Mutation
+        </Badge>
+      );
+    case AuditAction.REFUND:
+      return (
+        <Badge className="bg-rose-700 text-white hover:bg-rose-800 flex items-center gap-1">
+          <RotateCcw className="h-3 w-3" />
+          Refund
+        </Badge>
+      );
+    default:
+      return <Badge variant="outline">{action}</Badge>;
+  }
+}
+
+export function AuditTrailTable({ logs }: AuditTrailTableProps) {
+  return (
+    <div className="rounded-2xl border bg-card p-6 shadow-sm space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-4">
+        <div className="flex items-center gap-2">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-light text-primary-base">
+            <ShieldAlert className="h-5 w-5" />
+          </div>
+          <div>
+            <h2 className="text-lg font-bold tracking-tight">
+              Administrative Audit Trail
+            </h2>
+            <p className="text-xs text-text-muted">
+              Immutable forensic log of privilege changes, credit grants, student evaluations, and sensitive exports (Latest 50 events).
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1.5 text-xs text-text-muted">
+          <Clock className="h-3.5 w-3.5" />
+          <span>Real-time UTC sequence</span>
+        </div>
+      </div>
+
+      {logs.length === 0 ? (
+        <div className="py-12 text-center">
+          <Terminal className="mx-auto h-8 w-8 text-text-muted opacity-40 mb-2" />
+          <p className="text-sm font-medium text-text-muted">
+            No administrative events recorded in the audit trail yet.
+          </p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr className="border-b bg-main/50 text-xs font-semibold text-text-muted uppercase tracking-wider">
+                <th className="py-3 px-4">Timestamp (UTC)</th>
+                <th className="py-3 px-4">Action</th>
+                <th className="py-3 px-4">Actor</th>
+                <th className="py-3 px-4">Target Type & ID</th>
+                <th className="py-3 px-4">Metadata Context</th>
+                <th className="py-3 px-4">Client IP</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/60">
+              {logs.map((log) => {
+                const dateStr = new Date(log.createdAt).toISOString().replace("T", " ").slice(0, 19);
+                const metadataStr = log.metadata
+                  ? JSON.stringify(log.metadata)
+                  : "—";
+
+                return (
+                  <tr
+                    key={log.id}
+                    className="hover:bg-main/40 transition-colors font-mono text-xs"
+                  >
+                    <td className="py-3 px-4 whitespace-nowrap text-text-muted">
+                      {dateStr}
+                    </td>
+                    <td className="py-3 px-4 whitespace-nowrap">
+                      {getActionBadge(log.action)}
+                    </td>
+                    <td className="py-3 px-4 whitespace-nowrap font-sans">
+                      <div className="font-semibold text-text-main">
+                        {log.actor.firstName
+                          ? `${log.actor.firstName} ${log.actor.lastName || ""}`.trim()
+                          : log.actor.email}
+                      </div>
+                      <div className="text-[11px] text-text-muted font-mono">
+                        {log.actor.email}
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 whitespace-nowrap">
+                      <span className="font-semibold text-text-main">
+                        {log.targetType}
+                      </span>
+                      {log.targetId && (
+                        <span className="text-text-muted text-[11px] block truncate max-w-[140px]">
+                          {log.targetId}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-3 px-4 max-w-xs truncate text-text-muted">
+                      <span
+                        title={metadataStr}
+                        className="cursor-help underline decoration-dotted decoration-text-muted/50"
+                      >
+                        {metadataStr}
+                      </span>
+                    </td>
+                    <td className="py-3 px-4 whitespace-nowrap text-text-muted font-mono text-[11px]">
+                      {log.ip || "internal"}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}

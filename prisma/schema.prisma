@@ -66,6 +66,15 @@ enum TransactionType {
   ADMIN_ADJUSTMENT
 }
 
+enum AuditAction {
+  ROLE_CHANGE
+  CREDIT_ADJUSTMENT
+  LEVEL_PROMOTION
+  CSV_EXPORT
+  EVENT_MUTATION
+  REFUND
+}
+
 // ==========================================
 // MODELS
 // ==========================================
@@ -102,6 +111,7 @@ model User {
   privateLessons     PrivateLessonBooking[]
   merchReservations  MerchReservation[]
   postClassFeedbacks PostClassFeedback[]
+  auditLogs          AuditLog[]
 
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
@@ -421,5 +431,25 @@ model PostClassFeedback {
 
   @@unique([userId, classSessionId])
   @@index([classSessionId, sentiment])
+}
+
+// ==========================================
+// AUDIT LOG
+// ==========================================
+
+model AuditLog {
+  id         String      @id @default(cuid())
+  actorId    String
+  action     AuditAction
+  targetType String
+  targetId   String?
+  metadata   Json?
+  ip         String?
+  createdAt  DateTime    @default(now())
+
+  actor      User        @relation(fields: [actorId], references: [id], onDelete: Cascade)
+
+  @@index([actorId, createdAt])
+  @@index([action, createdAt])
 }
 

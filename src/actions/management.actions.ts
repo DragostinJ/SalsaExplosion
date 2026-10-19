@@ -4,6 +4,7 @@ import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import {
+  AuditAction,
   BookingStatus,
   DanceLevel,
   DanceRole,
@@ -21,6 +22,7 @@ import {
   ManagementActionResponse,
 } from "@/lib/constants/management";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
+import { recordAuditLog } from "@/lib/audit-log";
 
 // ==========================================
 // ZOD 4 VALIDATION SCHEMAS (INTERNAL)
@@ -149,6 +151,14 @@ export async function switchMyAccountRoleAction(rawInput: {
       select: { role: true },
     });
 
+    await recordAuditLog({
+      actorId: user.id,
+      action: AuditAction.ROLE_CHANGE,
+      targetType: "USER",
+      targetId: user.id,
+      metadata: { previousRole: user.role, newRole: updated.role },
+    });
+
     revalidatePath("/", "layout");
     revalidatePath("/dashboard/schedule");
     revalidatePath("/instructor/submissions");
@@ -220,6 +230,18 @@ export async function updateStudentProgressionAction(rawInput: {
         lastName: true,
         currentLevel: true,
         preferredRole: true,
+      },
+    });
+
+    await recordAuditLog({
+      actorId: actor.id,
+      action: AuditAction.LEVEL_PROMOTION,
+      targetType: "USER",
+      targetId: updated.id,
+      metadata: {
+        newLevel: updated.currentLevel,
+        preferredRole: updated.preferredRole,
+        studentName: `${updated.firstName} ${updated.lastName}`.trim(),
       },
     });
 
@@ -315,6 +337,19 @@ export async function adjustStudentCreditsAction(rawInput: {
       }
 
       return updatedUser;
+    });
+
+    await recordAuditLog({
+      actorId: actor.id,
+      action: AuditAction.CREDIT_ADJUSTMENT,
+      targetType: "USER",
+      targetId: result.id,
+      metadata: {
+        delta: rawInput.delta,
+        reason: rawInput.reason,
+        newBalance: result.classCredits,
+        studentName: `${result.firstName} ${result.lastName}`.trim(),
+      },
     });
 
     revalidatePath("/instructor/students");
@@ -795,6 +830,19 @@ export async function createClassSessionAction(rawInput: {
       },
     });
 
+    await recordAuditLog({
+      actorId: actor.id,
+      action: AuditAction.EVENT_MUTATION,
+      targetType: "CLASS_SESSION",
+      targetId: created.id,
+      metadata: {
+        mutation: "CREATE",
+        title: created.title,
+        startTime: created.startTime.toISOString(),
+        capacity: created.maxCapacity,
+      },
+    });
+
     revalidatePath("/dashboard/schedule");
     revalidatePath("/instructor/roster");
     revalidatePath("/admin/classes");
@@ -895,6 +943,20 @@ export async function createGuestArtistEventAction(rawInput: {
             },
           ],
         },
+      },
+    });
+
+    await recordAuditLog({
+      actorId: actor.id,
+      action: AuditAction.EVENT_MUTATION,
+      targetType: "EVENT",
+      targetId: created.id,
+      metadata: {
+        mutation: "CREATE_CONGRESS_EVENT",
+        title: created.title,
+        slug: created.slug,
+        fullPassCapacity: parsed.data.fullPassCapacity,
+        partyPassCapacity: parsed.data.partyPassCapacity,
       },
     });
 

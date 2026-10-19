@@ -1,8 +1,10 @@
 "use server";
 
+import { AuditAction } from "@prisma/client";
 import { requireRole, ADMIN_ONLY } from "@/lib/auth-user";
 import { prisma } from "@/lib/prisma";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
+import { recordAuditLog } from "@/lib/audit-log";
 
 function formatCsvCell(value: string | number | boolean | null | undefined): string {
   if (value === null || value === undefined) return '""';
@@ -78,10 +80,19 @@ export async function exportRevenueLedgerCsvAction(): Promise<CsvExportResult> {
 
       const csvContent = buildCsv(headers, rows);
       const dateStamp = new Date().toISOString().split("T")[0];
+      const filename = `salsa-explosion-revenue-ledger-${dateStamp}.csv`;
+
+      await recordAuditLog({
+        actorId: admin.id,
+        action: AuditAction.CSV_EXPORT,
+        targetType: "CSV_EXPORT",
+        targetId: "revenue-ledger",
+        metadata: { filename, rowCount: rows.length },
+      });
 
       return {
         success: true,
-        filename: `salsa-explosion-revenue-ledger-${dateStamp}.csv`,
+        filename,
         csvContent,
       };
     } catch (err: unknown) {
@@ -139,10 +150,19 @@ export async function exportStudentRosterCsvAction(): Promise<CsvExportResult> {
 
       const csvContent = buildCsv(headers, rows);
       const dateStamp = new Date().toISOString().split("T")[0];
+      const filename = `salsa-explosion-student-roster-${dateStamp}.csv`;
+
+      await recordAuditLog({
+        actorId: admin.id,
+        action: AuditAction.CSV_EXPORT,
+        targetType: "CSV_EXPORT",
+        targetId: "student-roster",
+        metadata: { filename, rowCount: rows.length },
+      });
 
       return {
         success: true,
-        filename: `salsa-explosion-student-roster-${dateStamp}.csv`,
+        filename,
         csvContent,
       };
     } catch (err: unknown) {
@@ -221,10 +241,19 @@ export async function exportCongressTicketHoldersCsvAction(): Promise<CsvExportR
 
       const csvContent = buildCsv(headers, rows);
       const dateStamp = new Date().toISOString().split("T")[0];
+      const filename = `bournemouth-congress-attendees-${dateStamp}.csv`;
+
+      await recordAuditLog({
+        actorId: admin.id,
+        action: AuditAction.CSV_EXPORT,
+        targetType: "CSV_EXPORT",
+        targetId: "congress-attendees",
+        metadata: { filename, rowCount: rows.length },
+      });
 
       return {
         success: true,
-        filename: `bournemouth-congress-attendees-${dateStamp}.csv`,
+        filename,
         csvContent,
       };
     } catch (err: unknown) {

@@ -324,7 +324,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
           {/* Social Links (Instagram & Facebook) */}
           <div className="hidden sm:flex items-center gap-1 border-r border-border pr-2 shrink-0">
             <a
-              href="https://www.instagram.com/salsaexplosion/?hl=en"
+              href="https://www.instagram.com/salsaexplosion/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Salsa Explosion Instagram"
@@ -336,12 +336,12 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               </svg>
             </a>
             <a
-              href="https://www.facebook.com/groups/salsaexplosionuk"
+              href="https://www.facebook.com/salsaexplosion"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Salsa Explosion Facebook Group"
+              aria-label="Salsa Explosion Facebook Page"
               className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-blue-600 hover:bg-blue-500/10 transition-colors shrink-0"
-              title="Salsa Explosion Facebook Community"
+              title="Salsa Explosion Facebook Page"
             >
               <svg className="h-4 w-4 fill-current shrink-0" viewBox="0 0 24 24">
                 <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>

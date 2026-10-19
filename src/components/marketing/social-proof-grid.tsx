@@ -77,7 +77,7 @@ const SOCIAL_ITEMS: SocialItem[] = [
     gradient: "from-amber-600 via-orange-600 to-rose-700",
     duration: "0:48",
     badgeText: "Viral Friday Social",
-    instagramUrl: "https://www.instagram.com/salsaexplosion/?hl=en",
+    instagramUrl: "https://www.instagram.com/salsaexplosion/",
   },
   {
     id: "test-1",
@@ -107,7 +107,7 @@ const SOCIAL_ITEMS: SocialItem[] = [
     gradient: "from-orange-600 via-amber-700 to-yellow-600",
     duration: "1:12",
     badgeText: "Technique Breakdown",
-    instagramUrl: "https://www.instagram.com/salsaexplosion/?hl=en",
+    instagramUrl: "https://www.instagram.com/salsaexplosion/",
   },
   {
     id: "test-2",
@@ -137,7 +137,7 @@ const SOCIAL_ITEMS: SocialItem[] = [
     gradient: "from-rose-600 via-purple-700 to-amber-700",
     duration: "0:56",
     badgeText: "Congress Gala",
-    instagramUrl: "https://www.instagram.com/salsaexplosion/?hl=en",
+    instagramUrl: "https://www.instagram.com/salsaexplosion/",
   },
   {
     id: "test-3",
@@ -403,7 +403,7 @@ export function SocialProofGrid() {
               className="w-full sm:w-auto bg-gradient-to-r from-pink-600 via-rose-600 to-amber-600 hover:from-pink-700 hover:to-amber-700 text-white font-bold text-xs sm:text-sm shadow-md"
             >
               <a
-                href="https://www.instagram.com/salsaexplosion/?hl=en"
+                href="https://www.instagram.com/salsaexplosion/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -419,12 +419,12 @@ export function SocialProofGrid() {
               className="w-full sm:w-auto text-xs sm:text-sm font-semibold border-blue-500/30 text-blue-700 dark:text-blue-300 hover:bg-blue-500/10"
             >
               <a
-                href="https://www.facebook.com/groups/salsaexplosionuk"
+                href="https://www.facebook.com/salsaexplosion"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Users className="mr-2 h-4 w-4 text-blue-600" />
-                Facebook Group (4.2K Members)
+                Facebook Community Page
                 <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
               </a>
             </Button>

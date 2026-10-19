@@ -10,7 +10,7 @@ import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 // SCHEMAS
 // ==========================================
 
-export const AnonymousQuestionSchema = z.object({
+const AnonymousQuestionSchema = z.object({
   category: z.enum([
     "FOOTWEAR",
     "RHYTHM",
@@ -31,7 +31,7 @@ export const AnonymousQuestionSchema = z.object({
 
 export type AnonymousQuestionInput = z.infer<typeof AnonymousQuestionSchema>;
 
-export const PostClassFeedbackSchema = z.object({
+const PostClassFeedbackSchema = z.object({
   classSessionId: z.string().min(1, "Class session ID is required."),
   sentiment: z.enum(["LOVED_IT", "CHALLENGING_FUN", "A_BIT_OVERWHELMED"]),
   notes: z.string().max(500, "Notes cannot exceed 500 characters.").optional(),

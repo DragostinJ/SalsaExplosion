@@ -32,7 +32,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(instagramLinks.first()).toBeVisible();
 
     const facebookLinks = page.locator(
-      'a[href*="facebook.com/groups/salsaexplosionuk"]'
+      'a[href*="facebook.com/salsaexplosion"]'
     );
     await expect(facebookLinks.first()).toBeVisible();
 

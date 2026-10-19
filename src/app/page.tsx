@@ -43,6 +43,15 @@ const SocialProofGrid = dynamic(
   }
 );
 
+const LevelMatcherQuiz = dynamic(
+  () => import("@/components/marketing/level-matcher-quiz").then((m) => m.LevelMatcherQuiz),
+  {
+    loading: () => (
+      <div className="rounded-3xl border border-primary-base/20 bg-muted/20 p-8 h-48 animate-pulse" />
+    ),
+  }
+);
+
 export default async function Home() {
   const [upcomingEvents, nextClasses] = await Promise.all([
     getCachedUpcomingEvents(3),
@@ -291,6 +300,13 @@ export default async function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Interactive Level Matcher Section */}
+        <section className="cv-auto py-10 bg-muted/20 border-b border-border/60">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <LevelMatcherQuiz />
           </div>
         </section>
 

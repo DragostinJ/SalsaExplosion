@@ -154,12 +154,12 @@ export function PrivateLessonsClient({
                     <Badge
                       className={
                         isConfirmed
-                          ? "bg-emerald-600 text-white"
+                          ? "bg-emerald-800 text-white font-bold"
                           : isPending
-                          ? "bg-amber-600 text-white"
+                          ? "bg-amber-500 text-zinc-950 font-bold"
                           : isCancelled
-                          ? "bg-zinc-500 text-white"
-                          : "bg-blue-600 text-white"
+                          ? "bg-zinc-600 text-white font-bold"
+                          : "bg-blue-700 text-white font-bold"
                       }
                     >
                       {booking.status}
@@ -239,7 +239,7 @@ export function PrivateLessonsClient({
           {/* Step 1: Choose Instructor */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Badge className="bg-amber-600 text-white font-bold text-xs">Step 1</Badge>
+              <Badge className="bg-amber-500 text-zinc-950 font-extrabold text-xs">Step 1</Badge>
               <h3 className="font-bold text-lg">Select Your Private Coach</h3>
             </div>
 
@@ -291,7 +291,7 @@ export function PrivateLessonsClient({
                         </span>
                         <span className="text-[10px] text-muted-foreground">/hr</span>
                       </div>
-                      <span className={`text-[11px] font-bold ${isSelected ? "text-amber-600" : "text-muted-foreground"}`}>
+                      <span className={`text-[11px] font-bold ${isSelected ? "text-amber-900 dark:text-amber-300" : "text-muted-foreground"}`}>
                         {isSelected ? "Selected" : "Select Coach"}
                       </span>
                     </div>
@@ -304,7 +304,7 @@ export function PrivateLessonsClient({
           {/* Step 2: Choose Package & Dancer Setup */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Badge className="bg-amber-600 text-white font-bold text-xs">Step 2</Badge>
+              <Badge className="bg-amber-500 text-zinc-950 font-extrabold text-xs">Step 2</Badge>
               <h3 className="font-bold text-lg">Package & Dancer Format</h3>
             </div>
 
@@ -342,7 +342,7 @@ export function PrivateLessonsClient({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <h4 className="font-bold text-sm">5-Hour Mastery Block</h4>
-                    <Badge className="bg-emerald-600 text-white text-[10px] px-1.5 py-0">
+                    <Badge className="bg-emerald-800 text-white font-extrabold text-[10px] px-1.5 py-0">
                       Save £50
                     </Badge>
                   </div>
@@ -365,7 +365,7 @@ export function PrivateLessonsClient({
                 onClick={() => setDancerType("SOLO")}
                 className={`rounded-xl p-3 text-xs font-bold transition-all ${
                   dancerType === "SOLO"
-                    ? "bg-amber-600 text-white"
+                    ? "bg-amber-500 text-zinc-950 font-extrabold"
                     : "border bg-card text-muted-foreground"
                 }`}
               >
@@ -376,7 +376,7 @@ export function PrivateLessonsClient({
                 onClick={() => setDancerType("COUPLE")}
                 className={`rounded-xl p-3 text-xs font-bold transition-all ${
                   dancerType === "COUPLE"
-                    ? "bg-amber-600 text-white"
+                    ? "bg-amber-500 text-zinc-950 font-extrabold"
                     : "border bg-card text-muted-foreground"
                 }`}
               >
@@ -388,7 +388,7 @@ export function PrivateLessonsClient({
           {/* Step 3: Focus Topic & Timing */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Badge className="bg-amber-600 text-white font-bold text-xs">Step 3</Badge>
+              <Badge className="bg-amber-500 text-zinc-950 font-extrabold text-xs">Step 3</Badge>
               <h3 className="font-bold text-lg">Focus Topic & Preferred Slot</h3>
             </div>
 

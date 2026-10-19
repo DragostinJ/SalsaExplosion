@@ -149,10 +149,10 @@ export function VenueArrivalPlanner() {
                 }`}
               >
                 <div className="flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <Clock className="h-3.5 w-3.5 text-emerald-800 dark:text-emerald-300" />
                   <span>Evening Class (After 6 PM)</span>
                 </div>
-                <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5">
+                <p className="text-[10px] text-emerald-800 dark:text-emerald-300 font-extrabold mt-0.5">
                   Best for Free Parking
                 </p>
               </button>
@@ -167,7 +167,7 @@ export function VenueArrivalPlanner() {
                 }`}
               >
                 <div className="flex items-center gap-1.5">
-                  <Car className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                  <Car className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400" />
                   <span>Daytime (Before 6 PM)</span>
                 </div>
                 <p className="text-[10px] text-muted-foreground font-normal mt-0.5">
@@ -190,7 +190,7 @@ export function VenueArrivalPlanner() {
             <Badge
               className={`text-[10px] font-black ${
                 activeParking.isFree
-                  ? "bg-emerald-600 text-white"
+                  ? "bg-emerald-800 dark:bg-emerald-700 text-white"
                   : "bg-muted text-muted-foreground"
               }`}
             >
@@ -249,7 +249,7 @@ export function VenueArrivalPlanner() {
         {/* Late Night Safety & Reception Desk Support Card */}
         <div className="grid gap-3 sm:grid-cols-2 pt-2 border-t">
           <div className="rounded-2xl border bg-muted/20 p-4 space-y-1.5 text-xs">
-            <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-bold">
+            <div className="flex items-center gap-1.5 text-emerald-800 dark:text-emerald-300 font-bold">
               <ShieldCheck className="h-4 w-4" />
               Late-Night Studio Safety
             </div>
@@ -267,7 +267,7 @@ export function VenueArrivalPlanner() {
               Need directions or running 5 minutes late for door check-in? Message Maestro Enrique Perez Valdes directly:
             </p>
             <div className="flex items-center gap-2 pt-1">
-              <Button asChild size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold h-7 flex-1">
+              <Button asChild size="sm" className="bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold h-7 flex-1">
                 <a
                   href="https://wa.me/447970153254?text=Hi%20Enrique,%20I'm%20on%20my%20way%20to%20Salsa%20Explosion%20and%20need%20assistance!"
                   target="_blank"

@@ -44,6 +44,11 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByText("Friday Night Rueda de Casino at BOH Studios")
     ).toBeVisible();
     await expect(page.getByText("Mark Townsend")).toBeVisible();
+
+    // 6. Verify Interactive Level Finder Quiz
+    await expect(page.getByText("Interactive Level Finder • 15 Seconds")).toBeVisible();
+    await expect(page.getByText("Not Sure Which Cuban Salsa Level to Book?")).toBeVisible();
+    await expect(page.getByText("I've never danced Cuban Salsa before")).toBeVisible();
   });
 
   test("2. Navigating to schedule checks auth protection or Lead/Follow slots", async ({

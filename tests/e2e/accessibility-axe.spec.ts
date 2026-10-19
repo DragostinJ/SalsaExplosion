@@ -8,6 +8,10 @@ test.describe("B5: Accessibility (WCAG 2.1 AA) Axe Audits", () => {
     { name: "Congress & Events", path: "/events" },
     { name: "Pricing & Passes", path: "/pricing" },
     { name: "Shop", path: "/shop" },
+    { name: "About Academy", path: "/about" },
+    { name: "Venues & Parking", path: "/venues" },
+    { name: "Private Lessons", path: "/private-lessons" },
+    { name: "How It Works", path: "/how-it-works" },
   ];
 
   for (const route of routes) {

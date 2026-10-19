@@ -244,14 +244,14 @@ export function RuedaDictionaryClient() {
         </div>
 
         {/* Quick Filter Buttons & Partner Switch Toggle */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t">
-          <div className="flex flex-wrap items-center gap-1.5">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2 border-t">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
             {["ALL", "Beginner", "Improver", "Intermediate", "Advanced"].map((lvl) => (
               <button
                 key={lvl}
                 type="button"
                 onClick={() => setLevelFilter(lvl)}
-                className={`rounded-lg px-2.5 py-1 text-xs font-bold transition-all ${
+                className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
                   levelFilter === lvl
                     ? "bg-amber-600 text-white shadow-xs"
                     : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -265,7 +265,7 @@ export function RuedaDictionaryClient() {
           <button
             type="button"
             onClick={() => setPartnerSwitchOnly((prev) => !prev)}
-            className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1 text-xs font-bold transition-all ${
+            className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap ${
               partnerSwitchOnly
                 ? "bg-purple-600 text-white shadow-xs"
                 : "border bg-card text-muted-foreground hover:text-foreground"

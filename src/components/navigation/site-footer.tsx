@@ -71,29 +71,29 @@ export function SiteFooter() {
             <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">
               Dancers & Classes
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               <li>
-                <Link href="/dashboard/schedule" className="hover:text-foreground transition-colors">
+                <Link href="/dashboard/schedule" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors">
                   Weekly Class Timetable
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/recaps" className="hover:text-foreground transition-colors">
+                <Link href="/dashboard/recaps" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors">
                   End-of-Class Video Vault
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/progression" className="hover:text-foreground transition-colors">
+                <Link href="/dashboard/progression" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors">
                   Cuban Syllabus & Level-Up
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="hover:text-foreground transition-colors">
+                <Link href="/pricing" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors">
                   Drop-ins & Monthly Passes
                 </Link>
               </li>
               <li>
-                <Link href="/private-lessons" className="hover:text-foreground transition-colors text-rose-800 dark:text-rose-400 font-semibold">
+                <Link href="/private-lessons" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors text-rose-800 dark:text-rose-400 font-semibold">
                   1-on-1 Private Coaching
                 </Link>
               </li>
@@ -105,34 +105,34 @@ export function SiteFooter() {
             <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">
               Congresses & Socials
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               <li>
-                <Link href="/events" className="hover:text-foreground transition-colors">
+                <Link href="/events" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors">
                   Bournemouth Cuban Congress 2026
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="hover:text-foreground transition-colors">
+                <Link href="/events" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors">
                   Havana Nights Social Party
                 </Link>
               </li>
               <li>
-                <Link href="/how-it-works" className="hover:text-foreground transition-colors">
+                <Link href="/how-it-works" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors">
                   How QR Passes Work
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-foreground transition-colors">
+                <Link href="/about" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors">
                   About Enrique & Academy
                 </Link>
               </li>
               <li>
-                <Link href="/music" className="hover:text-foreground transition-colors text-rose-800 dark:text-rose-400 font-semibold">
+                <Link href="/music" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors text-rose-800 dark:text-rose-400 font-semibold">
                   Cuban Music & Playlists
                 </Link>
               </li>
               <li>
-                <Link href="/shop" className="hover:text-foreground transition-colors text-rose-800 dark:text-rose-400 font-semibold">
+                <Link href="/shop" className="inline-flex items-center py-1.5 text-xs hover:text-foreground transition-colors text-rose-800 dark:text-rose-400 font-semibold">
                   Merch & Dance Shoes
                 </Link>
               </li>
@@ -179,10 +179,10 @@ export function SiteFooter() {
               <Flame className="h-3 w-3 fill-current" />
               Salsa Explosion Dance Academy
             </span>
-            <Link href="/how-it-works" className="hover:underline text-slate-800 dark:text-slate-200 font-semibold">
+            <Link href="/how-it-works" className="inline-flex items-center py-1.5 px-1 hover:underline text-slate-800 dark:text-slate-200 font-semibold">
               Guide
             </Link>
-            <Link href="/about" className="hover:underline text-slate-800 dark:text-slate-200 font-semibold">
+            <Link href="/about" className="inline-flex items-center py-1.5 px-1 hover:underline text-slate-800 dark:text-slate-200 font-semibold">
               About
             </Link>
           </div>

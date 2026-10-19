@@ -151,11 +151,11 @@ export function ShopClient() {
       </div>
 
       {/* Category Filter Pills */}
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
         <button
           type="button"
           onClick={() => setSelectedCategory("ALL")}
-          className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+          className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
             selectedCategory === "ALL"
               ? "bg-primary-base text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:text-foreground"
@@ -166,7 +166,7 @@ export function ShopClient() {
         <button
           type="button"
           onClick={() => setSelectedCategory("APPAREL")}
-          className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+          className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
             selectedCategory === "APPAREL"
               ? "bg-primary-base text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:text-foreground"
@@ -177,7 +177,7 @@ export function ShopClient() {
         <button
           type="button"
           onClick={() => setSelectedCategory("ACCESSORY")}
-          className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+          className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
             selectedCategory === "ACCESSORY"
               ? "bg-primary-base text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:text-foreground"
@@ -188,7 +188,7 @@ export function ShopClient() {
         <button
           type="button"
           onClick={() => setSelectedCategory("FOOTWEAR")}
-          className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+          className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
             selectedCategory === "FOOTWEAR"
               ? "bg-primary-base text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:text-foreground"

@@ -186,13 +186,13 @@ export function SocialProofGrid() {
           </p>
 
           {/* Social Filter Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+          <div className="flex items-center justify-start sm:justify-center gap-2 pt-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar w-full">
             <Button
               type="button"
               size="sm"
               variant={activeTab === "all" ? "default" : "outline"}
               onClick={() => setActiveTab("all")}
-              className={`rounded-full text-xs font-semibold ${
+              className={`rounded-full text-xs font-semibold min-h-10 px-4 shrink-0 whitespace-nowrap ${
                 activeTab === "all"
                   ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
                   : "border-muted hover:bg-muted"
@@ -206,7 +206,7 @@ export function SocialProofGrid() {
               size="sm"
               variant={activeTab === "reels" ? "default" : "outline"}
               onClick={() => setActiveTab("reels")}
-              className={`rounded-full text-xs font-semibold ${
+              className={`rounded-full text-xs font-semibold min-h-10 px-4 shrink-0 whitespace-nowrap ${
                 activeTab === "reels"
                   ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
                   : "border-muted hover:bg-muted"
@@ -220,7 +220,7 @@ export function SocialProofGrid() {
               size="sm"
               variant={activeTab === "testimonials" ? "default" : "outline"}
               onClick={() => setActiveTab("testimonials")}
-              className={`rounded-full text-xs font-semibold ${
+              className={`rounded-full text-xs font-semibold min-h-10 px-4 shrink-0 whitespace-nowrap ${
                 activeTab === "testimonials"
                   ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
                   : "border-muted hover:bg-muted"
@@ -234,7 +234,7 @@ export function SocialProofGrid() {
               size="sm"
               variant={activeTab === "congress" ? "default" : "outline"}
               onClick={() => setActiveTab("congress")}
-              className={`rounded-full text-xs font-semibold ${
+              className={`rounded-full text-xs font-semibold min-h-10 px-4 shrink-0 whitespace-nowrap ${
                 activeTab === "congress"
                   ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
                   : "border-muted hover:bg-muted"

@@ -200,12 +200,12 @@ export function CubanMusicHubClient() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-4">
-        <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b pb-4">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
           <button
             type="button"
             onClick={() => setSelectedCategory("ALL")}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+            className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
               selectedCategory === "ALL"
                 ? "bg-amber-600 text-white shadow-xs"
                 : "border bg-card text-muted-foreground hover:text-foreground"
@@ -216,7 +216,7 @@ export function CubanMusicHubClient() {
           <button
             type="button"
             onClick={() => setSelectedCategory("SON")}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+            className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
               selectedCategory === "SON"
                 ? "bg-amber-600 text-white shadow-xs"
                 : "border bg-card text-muted-foreground hover:text-foreground"
@@ -227,7 +227,7 @@ export function CubanMusicHubClient() {
           <button
             type="button"
             onClick={() => setSelectedCategory("CASINO")}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+            className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
               selectedCategory === "CASINO"
                 ? "bg-amber-600 text-white shadow-xs"
                 : "border bg-card text-muted-foreground hover:text-foreground"
@@ -238,7 +238,7 @@ export function CubanMusicHubClient() {
           <button
             type="button"
             onClick={() => setSelectedCategory("TIMBA")}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+            className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
               selectedCategory === "TIMBA"
                 ? "bg-amber-600 text-white shadow-xs"
                 : "border bg-card text-muted-foreground hover:text-foreground"

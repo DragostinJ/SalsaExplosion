@@ -91,13 +91,13 @@ export function StudioGallery() {
   return (
     <div className="space-y-6">
       {/* Category Filter Pills */}
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
         {CATEGORIES.map((cat) => (
           <button
             key={cat.key}
             type="button"
             onClick={() => setSelectedCategory(cat.key)}
-            className={`rounded-xl px-3.5 py-1.5 text-xs font-bold transition-all ${
+            className={`rounded-xl px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
               selectedCategory === cat.key
                 ? "bg-amber-500 text-zinc-950 shadow-xs"
                 : "border bg-card text-muted-foreground hover:border-amber-500/50 hover:text-foreground"

@@ -25,8 +25,28 @@ import {
   StudentContext,
 } from "@/components/schedule/class-schedule-card";
 import { NewDancerOnboarding } from "@/components/schedule/new-dancer-onboarding";
-import { PartnerMatchWaitlist } from "@/components/schedule/partner-match-waitlist";
-import { BeginnerSafetyHub } from "@/components/beginners/beginner-safety-hub";
+import dynamic from "next/dynamic";
+
+const BeginnerSafetyHub = dynamic(
+  () =>
+    import("@/components/beginners/beginner-safety-hub").then(
+      (m) => m.BeginnerSafetyHub
+    ),
+  {
+    loading: () => <div className="h-64 rounded-3xl bg-muted/40 animate-pulse my-6" />,
+  }
+);
+
+const PartnerMatchWaitlist = dynamic(
+  () =>
+    import("@/components/schedule/partner-match-waitlist").then(
+      (m) => m.PartnerMatchWaitlist
+    ),
+  {
+    loading: () => <div className="h-48 rounded-3xl bg-muted/40 animate-pulse my-6" />,
+  }
+);
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 

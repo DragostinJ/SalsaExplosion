@@ -21,8 +21,27 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { SocialProofGrid } from "@/components/marketing/social-proof-grid";
+import dynamic from "next/dynamic";
 import { getCachedUpcomingEvents, getCachedNextClasses } from "@/lib/cached-queries";
+
+const SocialProofGrid = dynamic(
+  () => import("@/components/marketing/social-proof-grid").then((m) => m.SocialProofGrid),
+  {
+    loading: () => (
+      <div className="py-20 flex justify-center items-center min-h-[400px]">
+        <div className="animate-pulse space-y-4 w-full max-w-7xl px-4">
+          <div className="h-8 bg-muted rounded-xl w-64 mx-auto" />
+          <div className="h-4 bg-muted/60 rounded-lg w-96 mx-auto" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+            <div className="h-64 bg-muted/40 rounded-2xl" />
+            <div className="h-64 bg-muted/40 rounded-2xl" />
+            <div className="h-64 bg-muted/40 rounded-2xl" />
+          </div>
+        </div>
+      </div>
+    ),
+  }
+);
 
 export default async function Home() {
   const [upcomingEvents, nextClasses] = await Promise.all([

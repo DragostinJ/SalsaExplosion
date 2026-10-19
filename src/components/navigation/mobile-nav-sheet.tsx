@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Role } from "@prisma/client";
@@ -21,7 +22,12 @@ import {
   ShieldCheck,
   Flame,
   UserCheck,
+  Music,
+  ShoppingBag,
+  HelpCircle,
+  Share2,
 } from "lucide-react";
+import { triggerStudioTutorial } from "@/components/onboarding/interactive-tutorial-modal";
 
 interface MobileNavSheetProps {
   isOpen: boolean;
@@ -44,6 +50,12 @@ export function MobileNavSheet({
   const sheetRef = useRef<HTMLDivElement>(null);
   const isStaff = role === "INSTRUCTOR" || role === "ADMIN";
   const isAdmin = role === "ADMIN";
+
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   const prevPathname = useRef(pathname);
   // Auto-close when pathname changes
@@ -98,16 +110,25 @@ export function MobileNavSheet({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted || typeof document === "undefined") return null;
 
-  const studentLinks = [
+  const coreLinks = [
     { href: "/dashboard/schedule", label: "Schedule & Booking", icon: CalendarDays },
     { href: "/events", label: "Guest Festivals & Congress", icon: Sparkles },
     { href: "/pricing", label: "Class Passes & Memberships", icon: CreditCard },
     { href: "/dashboard/progression", label: "Syllabus Progression", icon: Award },
     { href: "/dashboard/recaps", label: "Class Video Recaps", icon: Video },
+    { href: "/dashboard/rueda", label: "Rueda Call Dictionary", icon: Users },
+    { href: "/private-lessons", label: "1-on-1 Private Lessons", icon: Flame },
     { href: "/venues", label: "Bournemouth Venues", icon: MapPin },
-    { href: "/about", label: "About Salsa Explosion", icon: Compass },
+  ];
+
+  const exploreLinks = [
+    { href: "/music", label: "Cuban Music & Playlists", icon: Music },
+    { href: "/shop", label: "Merch & Dance Shoes", icon: ShoppingBag },
+    { href: "/how-it-works", label: "How QR Passes Work", icon: HelpCircle },
+    { href: "/dashboard/referrals", label: "Dancer Referral Rewards", icon: Share2 },
+    { href: "/about", label: "About Maestro Enrique", icon: Compass },
   ];
 
   const teacherLinks = [
@@ -122,12 +143,12 @@ export function MobileNavSheet({
     { href: "/admin/events", label: "Congress & Party Admin", icon: ShieldCheck },
   ];
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Mobile Navigation Menu"
-      className="fixed inset-0 z-50 flex justify-end xl:hidden"
+      className="fixed inset-0 z-[100] flex justify-end h-dvh w-screen"
     >
       {/* Backdrop */}
       <div
@@ -139,10 +160,10 @@ export function MobileNavSheet({
       {/* Slide-in Drawer */}
       <div
         ref={sheetRef}
-        className="relative z-10 flex h-full w-full max-w-sm flex-col bg-card shadow-2xl transition-transform duration-300 ease-in-out border-l border-border"
+        className="relative z-10 flex h-dvh w-[88vw] max-w-sm flex-col bg-card shadow-2xl transition-transform duration-300 ease-in-out border-l border-border"
       >
         {/* Drawer Header */}
-        <div className="flex h-16 items-center justify-between border-b px-5">
+        <div className="flex h-16 items-center justify-between border-b px-5 shrink-0">
           <Link
             href="/dashboard/schedule"
             onClick={onClose}
@@ -153,7 +174,7 @@ export function MobileNavSheet({
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-extrabold leading-none tracking-tight">
-                Salsa <span className="text-primary-base">Explosion</span>
+                Salsa <span className="text-rose-700 dark:text-rose-400">Explosion</span>
               </span>
               <span className="text-[9px] font-semibold text-text-muted uppercase tracking-widest mt-0.5">
                 Bournemouth • Cuba
@@ -165,22 +186,42 @@ export function MobileNavSheet({
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="rounded-lg p-2 text-text-muted hover:bg-muted/80 hover:text-foreground transition-colors"
+            className="rounded-lg p-2 text-text-muted hover:bg-muted/80 hover:text-foreground transition-colors min-h-10 min-w-10 flex items-center justify-center"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Drawer Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-6">
+        <div className="flex-1 overflow-y-auto p-5 space-y-6 overscroll-contain">
+          {/* Quick Action: Interactive Studio Tutorial */}
+          <div>
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                triggerStudioTutorial();
+              }}
+              className="w-full flex items-center justify-between gap-3 rounded-xl border border-secondary-base/40 bg-secondary-light/40 px-3.5 py-2.5 text-xs font-bold text-secondary-hover hover:bg-secondary-light transition-colors shadow-xs"
+            >
+              <div className="flex items-center gap-2">
+                <HelpCircle className="h-4 w-4 text-secondary-base" />
+                <span>Interactive Studio Guide</span>
+              </div>
+              <span className="text-[10px] uppercase tracking-wider bg-secondary-base text-white px-2 py-0.5 rounded-full">
+                Learn
+              </span>
+            </button>
+          </div>
+
           {/* Persona 1: Dancer Workspace */}
           <div>
-            <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-primary-base">
+            <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-rose-800 dark:text-rose-400">
               <Flame className="h-3.5 w-3.5" />
               <span>Dancer Workspace</span>
             </div>
             <nav className="space-y-1">
-              {studentLinks.map((item) => {
+              {coreLinks.map((item) => {
                 const Icon = item.icon;
                 const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
                 return (
@@ -190,11 +231,40 @@ export function MobileNavSheet({
                     onClick={onClose}
                     className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-primary-base/15 text-primary-base font-bold shadow-xs"
+                        ? "bg-primary-base text-white font-bold shadow-xs"
                         : "text-text-main hover:bg-muted/70 hover:text-foreground"
                     }`}
                   >
-                    <Icon className={`h-4 w-4 ${isActive ? "text-primary-base" : "text-text-muted"}`} />
+                    <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-text-muted"}`} />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+
+          {/* Explore Hub (Music, Merch, FAQs, Community) */}
+          <div className="pt-2 border-t">
+            <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-text-muted">
+              <Compass className="h-3.5 w-3.5" />
+              <span>Explore & Community</span>
+            </div>
+            <nav className="space-y-1">
+              {exploreLinks.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={onClose}
+                    className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
+                      isActive
+                        ? "bg-primary-base text-white font-bold shadow-xs"
+                        : "text-text-main hover:bg-muted/70 hover:text-foreground"
+                    }`}
+                  >
+                    <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-text-muted"}`} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -304,7 +374,7 @@ export function MobileNavSheet({
         </div>
 
         {/* Drawer Footer: Social Community Links */}
-        <div className="border-t bg-muted/30 p-4">
+        <div className="border-t bg-muted/30 p-4 shrink-0">
           <div className="flex items-center justify-between text-xs text-text-muted">
             <span className="font-semibold">Join the Bournemouth Scene:</span>
             <div className="flex items-center gap-2">
@@ -313,7 +383,7 @@ export function MobileNavSheet({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="flex h-8 w-8 items-center justify-center rounded-lg bg-card border text-text-muted hover:text-pink-600 hover:border-pink-500/30 transition-colors"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-card border text-text-muted hover:text-pink-600 hover:border-pink-500/30 transition-colors"
                 title="@salsaexplosion on Instagram"
               >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -325,7 +395,7 @@ export function MobileNavSheet({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook Group"
-                className="flex h-8 w-8 items-center justify-center rounded-lg bg-card border text-text-muted hover:text-blue-600 hover:border-blue-500/30 transition-colors"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-card border text-text-muted hover:text-blue-600 hover:border-blue-500/30 transition-colors"
                 title="Salsa Explosion Facebook Community"
               >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -336,6 +406,7 @@ export function MobileNavSheet({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

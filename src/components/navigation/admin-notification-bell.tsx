@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useTransition } from "react";
 import Link from "next/link";
 import {
   Bell,
@@ -9,59 +9,45 @@ import {
   Video,
   Check,
   ChevronRight,
+  ShoppingBag,
+  CalendarPlus,
+  HeartHandshake,
+  HelpCircle,
+  RefreshCw,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-
-interface NotificationItem {
-  id: string;
-  type: "congress" | "ratio" | "grading";
-  title: string;
-  detail: string;
-  timestamp: string;
-  href: string;
-  isRead: boolean;
-  priority: "high" | "medium" | "low";
-}
-
-const INITIAL_NOTIFICATIONS: NotificationItem[] = [
-  {
-    id: "notif-1",
-    type: "congress",
-    title: "New Congress Pass Purchase",
-    detail: "David Jenkins reserved a Full Congress Pass (£95.00) as Lead via Stripe.",
-    timestamp: "12m ago",
-    href: "/admin/events",
-    isRead: false,
-    priority: "high",
-  },
-  {
-    id: "notif-2",
-    type: "ratio",
-    title: "Class Ratio Alert: Thursday Improver",
-    detail: "14 Leads vs 8 Follows booked. Lead capacity nearing cap (88% filled).",
-    timestamp: "45m ago",
-    href: "/instructor/roster",
-    isRead: false,
-    priority: "medium",
-  },
-  {
-    id: "notif-3",
-    type: "grading",
-    title: "Student Video Awaiting Review",
-    detail: "Elena M. submitted 45s 'Guapea to Vacilala' for Level 2 (Improver) promotion.",
-    timestamp: "2h ago",
-    href: "/instructor/submissions",
-    isRead: false,
-    priority: "high",
-  },
-];
+import {
+  getAdminNotificationsAction,
+  StudioNotificationItem,
+} from "@/actions/notifications.actions";
 
 export function AdminNotificationBell() {
   const [isOpen, setIsOpen] = useState(false);
-  const [notifications, setNotifications] = useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
+  const [notifications, setNotifications] = useState<StudioNotificationItem[]>([]);
+  const [isPending, startTransition] = useTransition();
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // Fetch live notifications on mount
+  useEffect(() => {
+    startTransition(async () => {
+      const res = await getAdminNotificationsAction();
+      if (res.success && res.notifications) {
+        setNotifications(res.notifications);
+      }
+    });
+  }, []);
+
   const unreadCount = notifications.filter((n) => !n.isRead).length;
+
+  // Refresh helper
+  const handleRefresh = () => {
+    startTransition(async () => {
+      const res = await getAdminNotificationsAction();
+      if (res.success && res.notifications) {
+        setNotifications(res.notifications);
+      }
+    });
+  };
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -86,6 +72,26 @@ export function AdminNotificationBell() {
     setNotifications((prev) =>
       prev.map((n) => (n.id === id ? { ...n, isRead: true } : n))
     );
+  };
+
+  const getNotificationIcon = (type: StudioNotificationItem["type"]) => {
+    switch (type) {
+      case "congress":
+        return <Ticket className="h-4 w-4 text-purple-600 dark:text-purple-400" />;
+      case "coaching":
+        return <CalendarPlus className="h-4 w-4 text-sky-600 dark:text-sky-400" />;
+      case "merch":
+        return <ShoppingBag className="h-4 w-4 text-rose-600 dark:text-rose-400" />;
+      case "grading":
+        return <Video className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />;
+      case "sentiment":
+        return <HeartHandshake className="h-4 w-4 text-amber-600 dark:text-amber-400" />;
+      case "question":
+        return <HelpCircle className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />;
+      case "ratio":
+      default:
+        return <Users className="h-4 w-4 text-amber-600 dark:text-amber-400" />;
+    }
   };
 
   return (
@@ -119,16 +125,27 @@ export function AdminNotificationBell() {
                 </Badge>
               )}
             </div>
-            {unreadCount > 0 && (
+            <div className="flex items-center gap-2">
               <button
                 type="button"
-                onClick={markAllAsRead}
-                className="text-[11px] text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+                onClick={handleRefresh}
+                disabled={isPending}
+                className="text-[11px] text-muted-foreground hover:text-foreground transition-colors p-1"
+                title="Refresh alerts"
               >
-                <Check className="h-3 w-3" />
-                Mark all read
+                <RefreshCw className={`h-3 w-3 ${isPending ? "animate-spin" : ""}`} />
               </button>
-            )}
+              {unreadCount > 0 && (
+                <button
+                  type="button"
+                  onClick={markAllAsRead}
+                  className="text-[11px] text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+                >
+                  <Check className="h-3 w-3" />
+                  Mark all read
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Notifications List */}
@@ -139,12 +156,6 @@ export function AdminNotificationBell() {
               </p>
             ) : (
               notifications.map((n) => {
-                const iconMap = {
-                  congress: <Ticket className="h-4 w-4 text-purple-600 dark:text-purple-400" />,
-                  ratio: <Users className="h-4 w-4 text-amber-600 dark:text-amber-400" />,
-                  grading: <Video className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />,
-                };
-
                 return (
                   <Link
                     key={n.id}
@@ -161,7 +172,7 @@ export function AdminNotificationBell() {
                   >
                     <div className="flex items-start gap-3">
                       <div className="mt-0.5 rounded-lg bg-muted p-2 shrink-0">
-                        {iconMap[n.type]}
+                        {getNotificationIcon(n.type)}
                       </div>
                       <div className="flex-1 space-y-1">
                         <div className="flex items-center justify-between">
@@ -184,14 +195,21 @@ export function AdminNotificationBell() {
           </div>
 
           {/* Footer Link */}
-          <div className="pt-2 border-t text-center">
+          <div className="pt-2 border-t flex items-center justify-between">
             <Link
-              href="/admin/analytics"
+              href="/admin/operations"
               onClick={() => setIsOpen(false)}
               className="text-[11px] font-bold text-amber-700 dark:text-amber-400 hover:underline inline-flex items-center gap-1"
             >
-              Open Studio Analytics Dashboard
+              Desk Operations Hub
               <ChevronRight className="h-3 w-3" />
+            </Link>
+            <Link
+              href="/admin/analytics"
+              onClick={() => setIsOpen(false)}
+              className="text-[11px] text-muted-foreground hover:text-foreground inline-flex items-center gap-1"
+            >
+              Analytics
             </Link>
           </div>
         </div>

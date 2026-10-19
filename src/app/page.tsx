@@ -222,7 +222,78 @@ export default async function Home() {
           </section>
         )}
 
-        {/* Featured Congress Callout Banner */}
+        {/* Founder & 25+ Year Cuban Heritage Spotlight */}
+        <section className="cv-auto py-10 sm:py-14 bg-gradient-to-br from-amber-500/[0.06] via-background to-orange-500/[0.04] border-b border-border/70">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="rounded-3xl border border-amber-500/30 bg-card p-6 sm:p-10 shadow-sm">
+              <div className="grid gap-8 lg:grid-cols-12 items-center">
+                <div className="lg:col-span-7 space-y-4 text-left">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge className="bg-amber-500 text-zinc-950 font-extrabold text-xs uppercase tracking-wider">
+                      Academy Founder & Artistic Director
+                    </Badge>
+                    <Badge variant="outline" className="border-amber-500/40 text-amber-700 dark:text-amber-300 font-bold text-xs">
+                      🏆 UK Lifetime Achievement Award
+                    </Badge>
+                  </div>
+
+                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+                    Learn Cuban Casino from <br className="hidden sm:inline" />
+                    <span className="text-rose-700 dark:text-rose-400">Maestro Enrique Perez Valdes</span>
+                  </h2>
+
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    Born and raised in Havana, Cuba, Enrique Perez Valdes brought authentic Cuban Casino and Rueda de Casino to the UK over 25 years ago. Honored with the prestigious <strong>Salsa UK Lifetime Achievement Award</strong>, Enrique has trained over 4,200 dancers and organized Bournemouth&apos;s most celebrated Cuban congresses.
+                  </p>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                    <div className="rounded-xl border border-border/80 bg-background/60 p-3">
+                      <span className="block text-xl sm:text-2xl font-black text-rose-700 dark:text-rose-400">25+</span>
+                      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Years Teaching</span>
+                    </div>
+                    <div className="rounded-xl border border-border/80 bg-background/60 p-3">
+                      <span className="block text-xl sm:text-2xl font-black text-amber-600 dark:text-amber-400">4,200+</span>
+                      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Dancers Mentored</span>
+                    </div>
+                    <div className="col-span-2 sm:col-span-1 rounded-xl border border-border/80 bg-background/60 p-3">
+                      <span className="block text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">Havana</span>
+                      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Roots & Heritage</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-2">
+                    <Button asChild size="default" className="bg-primary-base hover:bg-primary-hover text-white font-bold">
+                      <Link href="/about">
+                        Read Enrique&apos;s Full Story
+                        <ArrowRight className="ml-1.5 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button asChild variant="outline" size="default">
+                      <Link href="/dashboard/schedule">Book a Class with Enrique</Link>
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5 flex flex-col items-center justify-center text-center p-6 rounded-2xl border border-border bg-muted/30">
+                  <div className="relative mb-4">
+                    <div className="h-28 w-28 sm:h-32 sm:w-32 rounded-full ring-4 ring-amber-500/30 overflow-hidden bg-gradient-to-tr from-amber-600 to-rose-600 flex items-center justify-center text-white shadow-lg">
+                      <Flame className="h-14 w-14 fill-white" />
+                    </div>
+                    <div className="absolute -bottom-2 -right-2 rounded-full bg-amber-500 text-zinc-950 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider shadow-sm">
+                      Cuba 🇨🇺
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-black text-foreground">Enrique Perez Valdes</h3>
+                  <p className="text-xs font-semibold text-rose-700 dark:text-rose-400">Master Cuban Instructor • Havana Native</p>
+                  <blockquote className="mt-3 text-xs italic text-muted-foreground leading-relaxed border-t pt-3">
+                    &ldquo;Cuban salsa is not just steps—it is community, clave, musicality, and pure joy. No partner required, just bring your energy.&rdquo;
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="cv-auto py-8 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="rounded-2xl border border-amber-500/30 bg-card/60 backdrop-blur-sm p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">

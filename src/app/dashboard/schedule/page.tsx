@@ -45,11 +45,12 @@ const VALID_LEVELS = new Set<string>(Object.values(DanceLevel));
 export default async function StudentSchedulePage({
   searchParams,
 }: SchedulePageProps) {
-  // 1. Authenticate & Provision User (or allow guest preview)
-  const user = await getOrProvisionCurrentUser();
+  // 1 & 2. Concurrently Authenticate/Provision User and Await searchParams
+  const [user, resolvedParams] = await Promise.all([
+    getOrProvisionCurrentUser(),
+    searchParams,
+  ]);
 
-  // 2. Await Next.js 15 Async searchParams
-  const resolvedParams = await searchParams;
   const styleFilter =
     resolvedParams.style && VALID_STYLES.has(resolvedParams.style)
       ? (resolvedParams.style as DanceStyle)
@@ -84,7 +85,7 @@ export default async function StudentSchedulePage({
         isGuest: true,
       };
 
-  // 4. Query Upcoming Classes with Active Bookings for Role Tallies
+  // 4. Query Upcoming Classes with Active Bookings for Role Tallies (Optimized column projection)
   const upcomingClasses = await prisma.classSession.findMany({
     where: {
       startTime: { gt: now },
@@ -94,7 +95,21 @@ export default async function StudentSchedulePage({
     },
     orderBy: { startTime: "asc" },
     take: 36,
-    include: {
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      style: true,
+      minLevel: true,
+      startTime: true,
+      endTime: true,
+      room: true,
+      maxCapacity: true,
+      maxLeads: true,
+      maxFollows: true,
+      bookedCount: true,
+      creditCost: true,
+      isCancelled: true,
       instructor: {
         select: {
           firstName: true,

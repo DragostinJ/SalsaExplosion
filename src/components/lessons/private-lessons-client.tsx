@@ -254,18 +254,22 @@ export function PrivateLessonsClient() {
 
               <div
                 onClick={() => setSelectedPackage("BLOCK")}
-                className={`cursor-pointer rounded-2xl border p-5 transition-all space-y-2 relative overflow-hidden ${
+                className={`cursor-pointer rounded-2xl border p-5 transition-all space-y-2 ${
                   selectedPackage === "BLOCK"
                     ? "border-amber-500 bg-amber-500/[0.08] ring-2 ring-amber-500/30"
                     : "bg-card hover:bg-muted/30"
                 }`}
               >
-                <Badge className="absolute right-3 top-3 bg-emerald-600 text-white text-[10px] font-bold">
-                  Save £{activeInstructor.hourlyRatePounds * 5 - activeInstructor.blockRatePounds}
-                </Badge>
-                <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-sm">5-Hour Transformation Block</h4>
-                  <span className="text-lg font-black text-amber-600 dark:text-amber-400">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h4 className="font-bold text-sm">5-Hour Transformation Block</h4>
+                      <Badge className="bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5">
+                        Save £{activeInstructor.hourlyRatePounds * 5 - activeInstructor.blockRatePounds}
+                      </Badge>
+                    </div>
+                  </div>
+                  <span className="text-lg font-black text-amber-700 dark:text-amber-300 shrink-0">
                     £{activeInstructor.blockRatePounds}
                   </span>
                 </div>
@@ -370,13 +374,13 @@ export function PrivateLessonsClient() {
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 w-full sm:w-auto">
               {errorMessage && (
                 <span className="text-xs font-semibold text-destructive">
                   {errorMessage}
                 </span>
               )}
-              <div className="text-right">
+              <div className="text-left sm:text-right">
                 <span className="text-2xl font-black text-foreground block">£{price}.00</span>
                 <span className="text-[10px] text-muted-foreground">No upfront payment required</span>
               </div>
@@ -384,7 +388,7 @@ export function PrivateLessonsClient() {
                 type="submit"
                 size="lg"
                 disabled={isSubmitting}
-                className="flex-1 sm:flex-none bg-primary-base hover:bg-primary-hover text-white font-bold text-xs sm:text-sm px-6"
+                className="w-full sm:w-auto bg-primary-base hover:bg-primary-hover text-white font-bold text-sm px-7 min-h-12 flex items-center justify-center shadow-md shadow-primary-base/20"
               >
                 {isSubmitting ? "Submitting..." : "Request Coaching Slot"}
                 <ArrowRight className="ml-2 h-4 w-4" />

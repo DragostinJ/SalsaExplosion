@@ -605,9 +605,12 @@ export function ClassScheduleCard({
             </div>
           )
         ) : isGuest ? (
-          <Button asChild className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold shadow-md transition-colors">
+          <Button asChild className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold shadow-md transition-colors min-h-11 h-auto py-2.5 px-3 whitespace-normal text-center leading-tight">
             <Link href={`/sign-in?redirect_url=${encodeURIComponent("/dashboard/schedule")}`}>
-              Sign In to Book {session.title} (1 Free Welcome Credit)
+              <span>Sign In to Book Spot</span>
+              <span className="ml-1.5 inline-block rounded-md bg-white/20 px-1.5 py-0.5 text-[11px] font-semibold">
+                Free Welcome Pass
+              </span>
             </Link>
           </Button>
         ) : !canAfford ? (

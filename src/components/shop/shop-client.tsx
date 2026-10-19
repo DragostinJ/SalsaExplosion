@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import {
   ShoppingBag,
   CheckCircle2,
@@ -9,99 +9,51 @@ import {
   Wind,
   Footprints,
   X,
+  XCircle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { reserveMerchItemAction } from "@/actions/shop.actions";
+import {
+  reserveMerchItemAction,
+  cancelMerchReservationAction,
+} from "@/actions/shop.actions";
+import { SHOP_CATALOG, CatalogShopItem } from "@/lib/constants/shop";
 
-interface ShopItem {
+export interface SerializedMerchReservation {
   id: string;
-  name: string;
-  category: "APPAREL" | "ACCESSORY" | "FOOTWEAR";
+  itemId: string;
+  itemName: string;
+  size: string | null;
   pricePounds: number;
-  description: string;
-  features: string[];
-  sizes?: string[];
-  gradient: string;
-  badge: string;
+  status: string;
+  createdAtIso: string;
 }
 
-const SHOP_ITEMS: ShopItem[] = [
-  {
-    id: "hoodie",
-    name: "Salsa Explosion Official Zip Hoodie",
-    category: "APPAREL",
-    pricePounds: 40,
-    description: "Premium heavy-weight fleece hoodie featuring embroidered Salsa Explosion UK Cuban crest on chest and Havana Clave print on back.",
-    features: [
-      "80% organic cotton, 20% recycled poly",
-      "Reinforced zipper & fleece-lined hood",
-      "Perfect warm-up gear before BOH Studios classes",
-    ],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    gradient: "from-amber-600 via-orange-600 to-rose-700",
-    badge: "Bestseller",
-  },
-  {
-    id: "tshirt",
-    name: "Bournemouth Summer Congress 2026 Festival Tee",
-    category: "APPAREL",
-    pricePounds: 20,
-    description: "Commemorative 2026 Bournemouth Cuban Congress festival t-shirt featuring guest artist lineup and vibrant Havana artwork.",
-    features: [
-      "100% breathable ringspun cotton",
-      "Screen-printed in Dorset, UK",
-      "Pre-shrunk for durability through social washes",
-    ],
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-    gradient: "from-orange-600 via-amber-700 to-yellow-600",
-    badge: "Official Congress Merch",
-  },
-  {
-    id: "abanico",
-    name: "Hand-Crafted Cuban Flag Abanico (Dance Fan)",
-    category: "ACCESSORY",
-    pricePounds: 12,
-    description: "Essential for surviving high-energy Friday social nights and hot congress workshops. Heavy-duty wooden ribs with authentic Cuban flag silk.",
-    features: [
-      "Durable bamboo frame with silk fabric",
-      "Snap-open sound for dramatic dance accents",
-      "Fits perfectly in clutch or back pocket",
-    ],
-    gradient: "from-rose-600 via-blue-700 to-amber-700",
-    badge: "Social Floor Essential",
-  },
-  {
-    id: "shoes",
-    name: "Cuban Casino Suede-Sole Practice Dance Shoes",
-    category: "FOOTWEAR",
-    pricePounds: 55,
-    description: "Specially calibrated suede-soled practice sneakers for Canadian maple sprung floors. Provides effortless pivot spinning without slipping.",
-    features: [
-      "Genuine split suede chrome sole",
-      "Shock-absorbing cushioned heel padding",
-      "Protects knees & ankles during fast Rueda turns",
-    ],
-    sizes: ["UK 4", "UK 5", "UK 6", "UK 7", "UK 8", "UK 9", "UK 10", "UK 11"],
-    gradient: "from-slate-800 via-zinc-700 to-amber-900",
-    badge: "Pro Dancer Choice",
-  },
-];
+interface ShopClientProps {
+  initialReservations?: SerializedMerchReservation[];
+}
 
-export function ShopClient() {
+export function ShopClient({
+  initialReservations = [],
+}: ShopClientProps) {
+  const shopItems = Object.values(SHOP_CATALOG);
+  const [reservations, setReservations] =
+    useState<SerializedMerchReservation[]>(initialReservations);
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
-  const [activeReservation, setActiveReservation] = useState<ShopItem | null>(null);
+  const [activeReservation, setActiveReservation] = useState<CatalogShopItem | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [isReserved, setIsReserved] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [cancellingId, setCancellingId] = useState<string | null>(null);
+  const [, startTransition] = useTransition();
 
-  const filteredItems = SHOP_ITEMS.filter((item) =>
+  const filteredItems = shopItems.filter((item) =>
     selectedCategory === "ALL" ? true : item.category === selectedCategory
   );
 
-  const handleOpenReservation = (item: ShopItem) => {
+  const handleOpenReservation = (item: CatalogShopItem) => {
     setActiveReservation(item);
     setSelectedSize(item.sizes ? item.sizes[0] : "");
     setIsReserved(false);
@@ -115,12 +67,22 @@ export function ShopClient() {
     try {
       const res = await reserveMerchItemAction({
         itemId: activeReservation.id,
-        itemName: activeReservation.name,
         size: selectedSize || null,
-        pricePounds: activeReservation.pricePounds,
       });
-      if (res.success) {
+      if (res.success && res.data) {
         setIsReserved(true);
+        setReservations((prev) => [
+          {
+            id: res.data!.reservationId,
+            itemId: activeReservation.id,
+            itemName: activeReservation.name,
+            size: selectedSize || null,
+            pricePounds: res.data!.pricePounds,
+            status: "RESERVED",
+            createdAtIso: new Date().toISOString(),
+          },
+          ...prev,
+        ]);
       } else {
         const errText =
           typeof res.error === "string"
@@ -135,8 +97,94 @@ export function ShopClient() {
     }
   };
 
+  const handleCancelReservation = (reservationId: string) => {
+    setCancellingId(reservationId);
+    startTransition(async () => {
+      const res = await cancelMerchReservationAction({ reservationId });
+      if (res.success) {
+        setReservations((prev) =>
+          prev.map((r) =>
+            r.id === reservationId ? { ...r, status: "CANCELLED" } : r
+          )
+        );
+      }
+      setCancellingId(null);
+    });
+  };
+
   return (
     <div className="space-y-8">
+      {/* Existing Student Reservations Drawer */}
+      {reservations.length > 0 && (
+        <div className="rounded-2xl border border-amber-500/30 bg-muted/20 p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="font-bold text-sm flex items-center gap-2">
+              <ShoppingBag className="h-4 w-4 text-amber-600" />
+              Your BOH Studios Desk Pickup Queue ({reservations.length})
+            </h3>
+            <span className="text-[11px] text-muted-foreground">
+              Collect & Pay at BOH Studios Reception
+            </span>
+          </div>
+
+          <div className="grid gap-2.5 sm:grid-cols-2">
+            {reservations.map((res) => {
+              const isReservedStatus = res.status === "RESERVED";
+              const isCollected = res.status === "COLLECTED";
+              const isCancelled = res.status === "CANCELLED";
+
+              return (
+                <div
+                  key={res.id}
+                  className="rounded-xl border bg-card p-3.5 flex flex-col justify-between space-y-2 text-xs"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <div className="font-bold text-foreground">
+                        {res.itemName}
+                      </div>
+                      <div className="text-[11px] text-muted-foreground">
+                        {res.size ? `Size: ${res.size} • ` : ""}£{res.pricePounds}.00
+                      </div>
+                    </div>
+                    <Badge
+                      className={
+                        isCollected
+                          ? "bg-emerald-600 text-white"
+                          : isReservedStatus
+                          ? "bg-amber-600 text-white"
+                          : isCancelled
+                          ? "bg-zinc-500 text-white"
+                          : "bg-blue-600 text-white"
+                      }
+                    >
+                      {res.status}
+                    </Badge>
+                  </div>
+
+                  <div className="text-[11px] text-muted-foreground flex items-center justify-between">
+                    <span>Pickup: BOH Studios Reception Desk</span>
+                    {isReservedStatus && (
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        disabled={cancellingId === res.id}
+                        onClick={() => handleCancelReservation(res.id)}
+                        className="h-7 text-[11px] text-destructive hover:bg-destructive/10"
+                      >
+                        <XCircle className="mr-1 h-3.5 w-3.5" />
+                        {cancellingId === res.id ? "Cancelling..." : "Cancel"}
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Click and Collect Info Strip */}
       <div className="rounded-2xl border border-amber-500/30 bg-amber-500/[0.04] p-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
         <div className="flex items-center gap-2">
@@ -161,7 +209,7 @@ export function ShopClient() {
               : "border bg-card text-muted-foreground hover:text-foreground"
           }`}
         >
-          All Merch ({SHOP_ITEMS.length})
+          All Merch ({shopItems.length})
         </button>
         <button
           type="button"
@@ -253,43 +301,41 @@ export function ShopClient() {
               </CardContent>
             </div>
 
-            <div className="p-5 pt-0 border-t mt-2">
+            <div className="p-5 pt-0">
               <Button
                 type="button"
                 onClick={() => handleOpenReservation(item)}
-                className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold text-xs"
+                className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold text-xs min-h-10 shadow-xs"
               >
                 <ShoppingBag className="mr-1.5 h-3.5 w-3.5" />
-                Reserve for Collection
+                Reserve for Desk Pickup
               </Button>
             </div>
           </Card>
         ))}
       </div>
 
-      {/* Reservation Dialog Modal */}
+      {/* Reservation Modal / Drawer */}
       {activeReservation && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-4 animate-in fade-in duration-200"
           onClick={() => setActiveReservation(null)}
         >
           <div
-            className="relative w-full max-w-md rounded-2xl border bg-card p-6 shadow-2xl space-y-5 max-h-[90dvh] overflow-y-auto"
+            className="relative w-full max-w-md rounded-3xl border bg-card p-6 shadow-2xl space-y-5"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Modal Header */}
             <div className="flex items-start justify-between pb-3 border-b">
               <div>
-                <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px] mb-1">
-                  Click & Collect Desk
+                <Badge className="bg-amber-600 text-white text-[10px] font-bold mb-1">
+                  Click & Collect Reservation
                 </Badge>
-                <h3 className="text-base font-extrabold text-foreground">
+                <h3 className="text-base font-bold text-foreground">
                   {activeReservation.name}
                 </h3>
-                <span className="text-xs text-amber-700 dark:text-amber-400 font-extrabold">
-                  £{activeReservation.pricePounds}.00
-                </span>
               </div>
               <button
                 type="button"
@@ -301,77 +347,110 @@ export function ShopClient() {
             </div>
 
             {isReserved ? (
-              <div className="text-center py-6 space-y-3">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600 text-white shadow-md">
-                  <CheckCircle2 className="h-6 w-6" />
+              <div className="py-4 text-center space-y-4">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-600 text-white shadow-lg animate-bounce">
+                  <CheckCircle2 className="h-7 w-7" />
                 </div>
-                <h4 className="font-bold text-sm text-foreground">
-                  Item Reserved for Collection!
+                <h4 className="text-lg font-bold text-foreground">
+                  Item Reserved for Desk Collection!
                 </h4>
-                <p className="text-xs text-muted-foreground">
-                  Your {activeReservation.name} {selectedSize ? `(Size: ${selectedSize})` : ""} is held at the BOH Studios welcome desk. Simply give your name to Maestro Enrique or desk staff at your next class session.
+                <p className="text-xs text-muted-foreground max-w-xs mx-auto leading-relaxed">
+                  Your reservation for <strong>{activeReservation.name}</strong>{" "}
+                  {selectedSize ? `(Size: ${selectedSize})` : ""} has been registered.
                 </p>
+                <div className="rounded-xl border bg-muted/40 p-3 text-xs space-y-1 text-left">
+                  <div>
+                    <strong className="text-foreground">Price:</strong> £
+                    {activeReservation.pricePounds}.00 (Pay on pickup)
+                  </div>
+                  <div>
+                    <strong className="text-foreground">Collection Desk:</strong> BOH Studios, Haviland Road West, Bournemouth
+                  </div>
+                  <div>
+                    <strong className="text-foreground">Hours:</strong> Tuesdays & Thursdays 6:30 PM – 10:30 PM
+                  </div>
+                </div>
                 <Button
-                  size="sm"
+                  type="button"
                   onClick={() => setActiveReservation(null)}
-                  className="bg-amber-600 text-white font-bold text-xs"
+                  className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold text-xs"
                 >
                   Close & Continue Browsing
                 </Button>
               </div>
             ) : (
-              <div className="space-y-4 text-xs">
-                {activeReservation.sizes && (
-                  <div className="space-y-2">
-                    <label className="font-bold text-foreground">Select Size / Fit:</label>
-                    <div className="flex flex-wrap gap-2">
-                      {activeReservation.sizes.map((s) => (
+              <div className="space-y-4">
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {activeReservation.description}
+                </p>
+
+                {activeReservation.sizes && activeReservation.sizes.length > 0 && (
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-foreground block">
+                      Select Size:
+                    </label>
+                    <div className="grid grid-cols-4 gap-1.5">
+                      {activeReservation.sizes.map((size) => (
                         <button
-                          key={s}
+                          key={size}
                           type="button"
-                          onClick={() => setSelectedSize(s)}
-                          className={`rounded-lg px-3 py-1.5 font-bold transition-all ${
-                            selectedSize === s
-                              ? "bg-amber-600 text-white shadow-xs"
-                              : "border bg-background text-muted-foreground hover:text-foreground"
+                          onClick={() => setSelectedSize(size)}
+                          className={`rounded-lg border py-2 text-xs font-bold transition-all ${
+                            selectedSize === size
+                              ? "border-amber-600 bg-amber-600 text-white shadow-xs"
+                              : "border-border bg-background hover:bg-muted text-foreground"
                           }`}
                         >
-                          {s}
+                          {size}
                         </button>
                       ))}
                     </div>
                   </div>
                 )}
 
-                <div className="rounded-xl border bg-muted/40 p-3 space-y-1.5">
-                  <span className="font-bold text-foreground">Collection Details:</span>
-                  <p className="text-muted-foreground text-[11px] leading-relaxed">
-                    Location: BOH Studios, 11-15 Haviland Road West, Boscombe BH5 1DD. Pay on collection via contactless card or cash. Sizing can be exchanged at the desk if needed.
-                  </p>
+                <div className="rounded-2xl border bg-muted/30 p-3.5 space-y-1 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Price on Collection:</span>
+                    <span className="font-extrabold text-foreground">
+                      £{activeReservation.pricePounds}.00
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Pickup Location:</span>
+                    <span className="font-semibold text-foreground">
+                      BOH Studios Reception
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Payment:</span>
+                    <span className="font-semibold text-foreground">
+                      Card / Contactless / Cash at Desk
+                    </span>
+                  </div>
                 </div>
 
                 {errorMessage && (
-                  <p className="text-right text-[11px] font-semibold text-destructive">
+                  <div className="text-xs font-semibold text-destructive">
                     {errorMessage}
-                  </p>
+                  </div>
                 )}
 
-                <div className="flex items-center justify-end gap-2 pt-2 border-t">
+                <div className="flex items-center gap-2 pt-2 border-t">
                   <Button
+                    type="button"
                     variant="outline"
-                    size="sm"
-                    disabled={isSubmitting}
                     onClick={() => setActiveReservation(null)}
+                    className="flex-1 text-xs"
                   >
                     Cancel
                   </Button>
                   <Button
-                    size="sm"
+                    type="button"
                     disabled={isSubmitting}
                     onClick={handleConfirmReservation}
-                    className="bg-primary-base hover:bg-primary-hover text-white font-bold"
+                    className="flex-1 bg-primary-base hover:bg-primary-hover text-white font-bold text-xs"
                   >
-                    {isSubmitting ? "Holding Item..." : "Confirm Desk Reservation"}
+                    {isSubmitting ? "Reserving..." : "Confirm Reservation"}
                   </Button>
                 </div>
               </div>

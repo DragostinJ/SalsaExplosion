@@ -86,6 +86,7 @@ export function InteractiveTutorialDialog({
       role="dialog"
       aria-modal="true"
       aria-labelledby="studio-tutorial-title"
+      data-testid="interactive-tutorial-dialog"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

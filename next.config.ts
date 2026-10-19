@@ -41,8 +41,9 @@ const nextConfig: NextConfig = {
   async headers() {
     const enforcedCspDirectives = `
       default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://js.stripe.com;
-      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://*.clerk.com https://cdn.protect.clerk.com https://js.stripe.com;
+      worker-src 'self' blob:;
+      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://clerk.salsaexplosion.co.uk;
       img-src 'self' data: blob: https://images.unsplash.com https://img.clerk.com https://commondatastorage.googleapis.com https://*.stripe.com;
       style-src 'self' 'unsafe-inline';
       font-src 'self' data:;
@@ -58,8 +59,9 @@ const nextConfig: NextConfig = {
 
     const reportOnlyStricterCspDirectives = `
       default-src 'self';
-      script-src 'self' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://js.stripe.com;
-      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev;
+      script-src 'self' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://*.clerk.com https://cdn.protect.clerk.com https://js.stripe.com;
+      worker-src 'self' blob:;
+      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com;
       img-src 'self' data: blob: https://images.unsplash.com https://img.clerk.com https://commondatastorage.googleapis.com;
       style-src 'self';
       font-src 'self';
@@ -95,7 +97,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(self), microphone=(), geolocation=(), payment=(self 'https://js.stripe.com')",
+            value: 'camera=(self), microphone=(), geolocation=(), payment=(self "https://js.stripe.com")',
           },
           {
             key: "Content-Security-Policy",

@@ -151,6 +151,7 @@ export function MobileNavSheet({
       role="dialog"
       aria-modal="true"
       aria-label="Mobile Navigation Menu"
+      data-testid="mobile-nav-sheet-content"
       className="fixed inset-0 z-[100] flex justify-end h-dvh w-screen"
     >
       {/* Backdrop */}

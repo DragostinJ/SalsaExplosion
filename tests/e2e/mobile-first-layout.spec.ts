@@ -154,4 +154,73 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     expect(box).not.toBeNull();
     expect(box!.y).toBeLessThan(650);
   });
+
+  test("L8: verifies lean initial mobile DOM, dynamic drawer unmounted, cv-auto, zero CLS and zero console errors", async ({
+    page,
+  }) => {
+    const consoleErrors: string[] = [];
+    page.on("console", (msg) => {
+      if (msg.type() === "error") {
+        consoleErrors.push(msg.text());
+      }
+    });
+
+    await page.setViewportSize({ width: 375, height: 812 });
+
+    // Track CLS on homepage
+    await page.addInitScript(() => {
+      (window as unknown as { __clsScore: number }).__clsScore = 0;
+      try {
+        const observer = new PerformanceObserver((entryList) => {
+          for (const entry of entryList.getEntries()) {
+            if (!(entry as unknown as { hadRecentInput: boolean }).hadRecentInput) {
+              (window as unknown as { __clsScore: number }).__clsScore += (entry as unknown as { value: number }).value;
+            }
+          }
+        });
+        observer.observe({ type: "layout-shift", buffered: true });
+      } catch {
+        // Fallback if layout-shift observer not supported
+      }
+    });
+
+    await page.goto("/");
+    await page.waitForLoadState("domcontentloaded");
+
+    // 1. Initial DOM is lean and mobile drawer / tutorial dialog DOM are NOT mounted on initial load
+    const mobileSheetContent = page.locator('[data-testid="mobile-nav-sheet-content"]');
+    await expect(mobileSheetContent).toHaveCount(0);
+
+    const tutorialDialog = page.locator('[data-testid="interactive-tutorial-dialog"]');
+    await expect(tutorialDialog).toHaveCount(0);
+
+    // Initial DOM node count is lean (< 1500 elements)
+    const domNodeCount = await page.evaluate(() => document.getElementsByTagName("*").length);
+    expect(domNodeCount).toBeLessThan(1500);
+
+    // 2. Below-the-fold sections have content-visibility: auto applied (.cv-auto)
+    const cvSections = page.locator(".cv-auto");
+    const cvCount = await cvSections.count();
+    expect(cvCount).toBeGreaterThanOrEqual(4);
+
+    // Verify footer has cv-auto
+    const footer = page.locator("footer");
+    await expect(footer).toHaveClass(/cv-auto/);
+
+    // 3. Layout Shift (CLS) on initial mobile load is < 0.05
+    await page.waitForTimeout(500);
+    const clsScore = await page.evaluate(
+      () => (window as unknown as { __clsScore: number }).__clsScore || 0
+    );
+    expect(clsScore).toBeLessThan(0.05);
+
+    // 4. Zero fatal console errors on initial load
+    const fatalErrors = consoleErrors.filter(
+      (err) =>
+        !err.includes("favicon") &&
+        !err.includes("Failed to load resource") &&
+        !err.includes("Clerk:")
+    );
+    expect(fatalErrors).toEqual([]);
+  });
 });

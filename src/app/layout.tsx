@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -98,6 +99,10 @@ export default async function RootLayout({
         lang="en"
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
+        <head>
+          <link rel="preconnect" href="https://images.unsplash.com" />
+          <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        </head>
         <body className="min-h-full flex flex-col bg-background text-foreground">
           <SiteHeader role={viewer?.role ?? null} canSwitchRoles={userCanSwitchRoles} />
           <div className="flex-1 pb-20 md:pb-0">{children}</div>

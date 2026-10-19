@@ -140,7 +140,7 @@ export default async function Home() {
                 size="lg"
                 className="h-12 px-7 text-sm font-semibold"
               >
-                <Link href="/instructor/students">Instructor Desk</Link>
+                <Link href="/pricing">Class Passes & Free Trial</Link>
               </Button>
             </div>
           </div>
@@ -386,9 +386,14 @@ export default async function Home() {
               {/* Portal 1: Student Experience */}
               <div className="rounded-2xl border bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-amber-500/40 transition-colors">
                 <div className="space-y-2">
-                  <Badge variant="secondary" className="text-xs font-bold">
-                    1. Dancer Experience
-                  </Badge>
+                  <div className="flex items-center justify-between">
+                    <Badge variant="secondary" className="text-xs font-bold">
+                      1. Dancer Experience
+                    </Badge>
+                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                      Open to All
+                    </span>
+                  </div>
                   <h3 className="text-lg font-extrabold">
                     Bookings, Syllabus & Recaps
                   </h3>
@@ -401,10 +406,10 @@ export default async function Home() {
                     <Link href="/dashboard/schedule">Schedule</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/dashboard/recaps">Recaps</Link>
+                    <Link href="/pricing">Passes</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/dashboard/progression">Progression</Link>
+                    <Link href="/events">Congress Passes</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/about">About Studio</Link>
@@ -412,18 +417,20 @@ export default async function Home() {
                   <Button size="sm" variant="outline" asChild className="text-xs border-primary-base/40 text-rose-800 dark:text-rose-200 font-bold bg-primary-light/50 hover:bg-primary-base hover:text-white transition-colors">
                     <Link href="/how-it-works">How It Works</Link>
                   </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/events">Congress Passes</Link>
-                  </Button>
                 </div>
               </div>
 
               {/* Portal 2: Instructor Desk */}
               <div className="rounded-2xl border border-secondary-base/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-secondary-base/60 transition-colors">
                 <div className="space-y-2">
-                  <Badge className="bg-secondary-base text-white text-xs font-bold">
-                    2. Instructor Teaching Desk
-                  </Badge>
+                  <div className="flex items-center justify-between">
+                    <Badge className="bg-secondary-base text-white text-xs font-bold">
+                      2. Instructor Teaching Desk
+                    </Badge>
+                    <span className="text-[10px] font-bold text-secondary-hover bg-secondary-light/60 px-2 py-0.5 rounded-full">
+                      Staff Portal
+                    </span>
+                  </div>
                   <h3 className="text-lg font-extrabold">
                     Progression, AI Co-Pilot & QR Roster
                   </h3>
@@ -435,7 +442,7 @@ export default async function Home() {
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/instructor/students">
                       <Users className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
-                      Students
+                      Students (Staff)
                     </Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
@@ -456,9 +463,14 @@ export default async function Home() {
               {/* Portal 3: Studio Owner Admin */}
               <div className="rounded-2xl border border-accent-tangerine/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-accent-tangerine/60 transition-colors">
                 <div className="space-y-2">
-                  <Badge className="bg-accent-tangerine text-zinc-950 text-xs font-bold">
-                    3. Studio Owner Command
-                  </Badge>
+                  <div className="flex items-center justify-between">
+                    <Badge className="bg-accent-tangerine text-zinc-950 text-xs font-bold">
+                      3. Studio Owner Command
+                    </Badge>
+                    <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-full">
+                      Owner Only
+                    </span>
+                  </div>
                   <h3 className="text-lg font-extrabold">
                     Revenue Charts, Classes & Festivals
                   </h3>
@@ -470,7 +482,7 @@ export default async function Home() {
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/admin/analytics">
                       <BarChart3 className="mr-1.5 h-3.5 w-3.5 text-accent-tangerine" />
-                      Analytics
+                      Analytics (Admin)
                     </Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">

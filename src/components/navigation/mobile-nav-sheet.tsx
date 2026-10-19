@@ -113,25 +113,46 @@ export function MobileNavSheet({
 
   if (!isOpen || !mounted || typeof document === "undefined") return null;
 
-  const coreLinks = [
-    { href: "/dashboard/schedule", label: "Schedule & Booking", icon: CalendarDays },
-    { href: "/dashboard/wallet", label: "My Wallet & QR Passes", icon: QrCode },
-    { href: "/events", label: "Guest Festivals & Congress", icon: Sparkles },
-    { href: "/pricing", label: "Class Passes & Memberships", icon: CreditCard },
-    { href: "/dashboard/progression", label: "Syllabus Progression", icon: Award },
-    { href: "/dashboard/recaps", label: "Class Video Recaps", icon: Video },
-    { href: "/dashboard/rueda", label: "Rueda Call Dictionary", icon: Users },
-    { href: "/private-lessons", label: "1-on-1 Private Lessons", icon: Flame },
-    { href: "/venues", label: "Bournemouth Venues", icon: MapPin },
-  ];
-
+  // Public explore and community links
   const exploreLinks = [
     { href: "/music", label: "Cuban Music & Playlists", icon: Music },
     { href: "/shop", label: "Merch & Dance Shoes", icon: ShoppingBag },
     { href: "/how-it-works", label: "How QR Passes Work", icon: HelpCircle },
-    { href: "/dashboard/referrals", label: "Dancer Referral Rewards", icon: Share2 },
     { href: "/about", label: "About Maestro Enrique", icon: Compass },
   ];
+
+  // Base public links available to everyone
+  const publicLinks = [
+    { href: "/dashboard/schedule", label: "Schedule & Booking", icon: CalendarDays },
+    { href: "/events", label: "Guest Festivals & Congress", icon: Sparkles },
+    { href: "/pricing", label: "Class Passes & Memberships", icon: CreditCard },
+    { href: "/private-lessons", label: "1-on-1 Private Lessons", icon: Flame },
+    { href: "/venues", label: "Bournemouth Venues", icon: MapPin },
+  ];
+
+  // Member-only links shown only when authenticated
+  const memberOnlyLinks = [
+    { href: "/dashboard/wallet", label: "My Wallet & QR Passes", icon: QrCode },
+    { href: "/dashboard/progression", label: "Syllabus Progression", icon: Award },
+    { href: "/dashboard/recaps", label: "Class Video Recaps", icon: Video },
+    { href: "/dashboard/rueda", label: "Rueda Call Dictionary", icon: Users },
+    { href: "/dashboard/referrals", label: "Dancer Referral Rewards", icon: Share2 },
+  ];
+
+  // If role is present (user is signed in), include full member tools
+  const coreLinks = role
+    ? [
+        publicLinks[0], // Schedule & Booking
+        memberOnlyLinks[0], // Wallet & QR Passes
+        publicLinks[1], // Events
+        publicLinks[2], // Passes
+        memberOnlyLinks[1], // Progression
+        memberOnlyLinks[2], // Recaps
+        memberOnlyLinks[3], // Rueda
+        publicLinks[3], // Private Lessons
+        publicLinks[4], // Venues
+      ]
+    : publicLinks;
 
   const teacherLinks = [
     { href: "/instructor/students", label: "Student Roster & Notes", icon: Users },

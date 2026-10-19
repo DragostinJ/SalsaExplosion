@@ -92,7 +92,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
     });
   };
 
-  const studentLinks = [
+  // Define base public links accessible to all visitors
+  const publicLinks = [
     {
       href: "/dashboard/schedule",
       label: "Schedule",
@@ -112,6 +113,22 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
       active: pathname === "/pricing",
     },
     {
+      href: "/venues",
+      label: "Venues",
+      icon: MapPin,
+      active: pathname.startsWith("/venues"),
+    },
+    {
+      href: "/about",
+      label: "About",
+      icon: Compass,
+      active: pathname.startsWith("/about"),
+    },
+  ];
+
+  // Additional member-only links injected only when authenticated
+  const memberOnlyLinks = [
+    {
       href: "/dashboard/progression",
       label: "Progression",
       icon: Award,
@@ -129,19 +146,19 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
       icon: Video,
       active: pathname.startsWith("/dashboard/recaps"),
     },
-    {
-      href: "/venues",
-      label: "Venues",
-      icon: MapPin,
-      active: pathname.startsWith("/venues"),
-    },
-    {
-      href: "/about",
-      label: "About",
-      icon: Compass,
-      active: pathname.startsWith("/about"),
-    },
   ];
+
+  // In authenticated mode, insert member tools right after Passes
+  const studentLinks = isSignedIn
+    ? [
+        publicLinks[0], // Schedule
+        publicLinks[1], // Events
+        publicLinks[2], // Passes
+        ...memberOnlyLinks, // Progression, Wallet, Recaps
+        publicLinks[3], // Venues
+        publicLinks[4], // About
+      ]
+    : publicLinks;
 
   const instructorLinks = [
     {

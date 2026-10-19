@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
@@ -19,12 +19,14 @@ import {
   Video,
   Compass,
   MapPin,
+  Menu,
 } from "lucide-react";
 
 import type { Role } from "@prisma/client";
 import { switchMyAccountRoleAction } from "@/actions/management.actions";
 import { InteractiveTutorialModal } from "@/components/onboarding/interactive-tutorial-modal";
 import { AdminNotificationBell } from "@/components/navigation/admin-notification-bell";
+import { MobileNavSheet } from "@/components/navigation/mobile-nav-sheet";
 
 import { toast } from "sonner";
 
@@ -34,12 +36,12 @@ interface SiteHeaderProps {
 }
 
 export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
-  const isStaff = role === "INSTRUCTOR" || role === "ADMIN";
   const isAdmin = role === "ADMIN";
   const pathname = usePathname();
   const router = useRouter();
   const { isSignedIn } = useUser();
   const [isPending, startTransition] = useTransition();
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const handleRoleSwitch = (targetRole: Role) => {
     startTransition(async () => {
@@ -331,41 +333,41 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
 
           {isSignedIn ? (
             <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-              {/* Interactive Studio Demo Role Switcher (Shown only if authorized in non-prod) */}
+              {/* Interactive Studio Demo Role Switcher (Shown on sm+; mobile accesses via slide-in drawer) */}
               {canSwitchRoles && (
                 <div
-                role="group"
-                aria-label="Portal Role Switcher"
-                className="inline-flex items-center rounded-lg border border-border bg-muted/60 p-0.5 text-[11px] shrink-0 shadow-xs"
-                title="Switch active portal role for testing"
-              >
-                {(["STUDENT", "INSTRUCTOR", "ADMIN"] as Role[]).map((r) => {
-                  const isActive = (role ?? "STUDENT") === r;
-                  return (
-                    <button
-                      key={r}
-                      type="button"
-                      disabled={isPending}
-                      onClick={() => handleRoleSwitch(r)}
-                      className={`rounded-md px-2 py-1 font-bold transition-all whitespace-nowrap ${
-                        isActive
-                          ? r === "ADMIN"
-                            ? "bg-accent-tangerine text-zinc-950 shadow-xs"
-                            : r === "INSTRUCTOR"
-                              ? "bg-secondary-base text-white shadow-xs"
-                              : "bg-primary-base text-white shadow-xs"
-                          : "text-text-muted hover:text-foreground hover:bg-muted/80"
-                      } ${isPending ? "opacity-60 cursor-wait" : ""}`}
-                    >
-                      {r === "ADMIN"
-                        ? "Owner"
-                        : r === "INSTRUCTOR"
-                          ? "Teacher"
-                          : "Dancer"}
-                    </button>
-                  );
-                })}
-              </div>
+                  role="group"
+                  aria-label="Portal Role Switcher"
+                  className="hidden sm:inline-flex items-center rounded-lg border border-border bg-muted/60 p-0.5 text-[11px] shrink-0 shadow-xs"
+                  title="Switch active portal role for testing"
+                >
+                  {(["STUDENT", "INSTRUCTOR", "ADMIN"] as Role[]).map((r) => {
+                    const isActive = (role ?? "STUDENT") === r;
+                    return (
+                      <button
+                        key={r}
+                        type="button"
+                        disabled={isPending}
+                        onClick={() => handleRoleSwitch(r)}
+                        className={`rounded-md px-2 py-1 font-bold transition-all whitespace-nowrap ${
+                          isActive
+                            ? r === "ADMIN"
+                              ? "bg-accent-tangerine text-zinc-950 shadow-xs"
+                              : r === "INSTRUCTOR"
+                                ? "bg-secondary-base text-white shadow-xs"
+                                : "bg-primary-base text-white shadow-xs"
+                            : "text-text-muted hover:text-foreground hover:bg-muted/80"
+                        } ${isPending ? "opacity-60 cursor-wait" : ""}`}
+                      >
+                        {r === "ADMIN"
+                          ? "Owner"
+                          : r === "INSTRUCTOR"
+                            ? "Teacher"
+                            : "Dancer"}
+                      </button>
+                    );
+                  })}
+                </div>
               )}
 
               <UserButton
@@ -392,36 +394,29 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               </Link>
             </div>
           )}
+
+          {/* Hamburger Menu Toggle (Mobile & Tablet < xl) */}
+          <button
+            type="button"
+            onClick={() => setIsMobileNavOpen(true)}
+            aria-label="Open mobile navigation menu"
+            aria-expanded={isMobileNavOpen}
+            className="flex xl:hidden h-8 w-8 items-center justify-center rounded-lg border border-border bg-card text-text-muted hover:text-foreground hover:bg-muted/70 transition-colors shrink-0"
+          >
+            <Menu className="h-4 w-4" />
+          </button>
         </div>
       </div>
 
-      {/* Tablet & Mobile Horizontal Bar */}
-      <nav
-        aria-label="Mobile Navigation"
-        className="flex xl:hidden overflow-x-auto border-t px-4 py-2 gap-1.5 bg-muted/20 scrollbar-none items-center"
-      >
-        {[
-          ...studentLinks,
-          ...(isStaff ? instructorLinks : []),
-          ...(isAdmin ? adminLinks : []),
-        ].map((item) => {
-          const Icon = item.icon;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`inline-flex items-center gap-1 shrink-0 rounded-md px-2.5 py-1 text-xs font-medium ${
-                item.active
-                  ? "bg-primary-base text-white font-bold"
-                  : "bg-background text-text-muted border"
-              }`}
-            >
-              <Icon className="h-3 w-3" />
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
-      </nav>
+      {/* Slide-In Accessible Mobile Navigation Sheet */}
+      <MobileNavSheet
+        isOpen={isMobileNavOpen}
+        onClose={() => setIsMobileNavOpen(false)}
+        role={role}
+        canSwitchRoles={canSwitchRoles}
+        handleRoleSwitch={handleRoleSwitch}
+        isPending={isPending}
+      />
     </header>
   );
 }

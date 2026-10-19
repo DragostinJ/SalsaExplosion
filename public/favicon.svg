@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="salsaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E11D48" />
+      <stop offset="100%" stop-color="#F97316" />
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="url(#salsaGrad)" />
+  <path d="M16 6c-1.5 3-4 5.5-4 8.5 0 2.5 1.8 4.5 4 4.5s4-2 4-4.5c0-3-2.5-5.5-4-8.5z" fill="#FFFFFF" opacity="0.95" />
+  <circle cx="16" cy="18" r="2.5" fill="#FFE4E6" />
+</svg>

@@ -20,9 +20,44 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL || "https://salsaexplosion.co.uk"
+  ),
   title: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
   description:
     "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth, Rueda de Casino, end-of-class recaps, and congress passes.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+  },
+  openGraph: {
+    title: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
+    description:
+      "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth, Rueda de Casino, end-of-class recaps, and congress passes.",
+    url: "https://salsaexplosion.co.uk",
+    siteName: "Salsa Explosion",
+    locale: "en_GB",
+    type: "website",
+    images: [
+      {
+        url: "/images/opengraph.png",
+        width: 1200,
+        height: 630,
+        alt: "Salsa Explosion Bournemouth Cuban Salsa Academy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
+    description:
+      "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth.",
+    images: ["/images/opengraph.png"],
+  },
 };
 
 import { canSwitchRoles } from "@/lib/auth-user";

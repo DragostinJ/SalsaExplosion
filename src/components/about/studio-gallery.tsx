@@ -19,61 +19,55 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     id: "photo-1",
     title: "Friday Night Rueda de Casino Circle",
     caption:
-      "24 dancers rotating in synchronized harmony to Alexander Abreu & Havana D'Primera. Every lead and follow in flow.",
+      "Dancers rotating in synchronized harmony to Alexander Abreu & Havana D'Primera. Every lead and follow in flow.",
     category: "RUEDA",
-    imageUrl:
-      "https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80",
-    location: "Main Havana Studio",
+    imageUrl: "/images/rueda-social.jpg",
+    location: "BOH Studios Bournemouth",
   },
   {
     id: "photo-2",
-    title: "Sensual Afro-Cuban Rumba Styling",
+    title: "Authentic Afro-Cuban Bodymovement & Styling",
     caption:
-      "Maestra Elena breaking down the circular shoulder isolations and Vacilala styling in our Saturday styling masterclass.",
+      "Maestro Enrique Perez Valdes breaking down circular shoulder isolations and Vacilala styling in our Bournemouth studio.",
     category: "BOOTCAMPS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1200&q=80",
-    location: "Studio B (Mirrors)",
+    imageUrl: "/images/enrique.jpg",
+    location: "BOH Studios Studio A",
   },
   {
     id: "photo-3",
-    title: "Havana Social Fiesta & Timba Jam",
+    title: "Bournemouth Salsa Social Fiesta & Timba Jam",
     caption:
-      "Dancers from beginner to advanced sharing the floor with live conga percussion and authentic Santiago de Cuba energy.",
+      "Dancers from beginner to advanced sharing the floor with authentic Santiago de Cuba rhythm and Cuban Salsa energy.",
     category: "SOCIALS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80",
-    location: "Havana Social Hall",
+    imageUrl: "/images/boh-studios.jpg",
+    location: "BOH Studios Main Hall",
   },
   {
     id: "photo-4",
-    title: "Dynamic Contratiempo Turn Patterns",
+    title: "Bournemouth Summer Cuban Salsa Congress",
     caption:
-      "Maestro Marcos coaching the Setenta Complicado frame tension and foot placement with intermediate salsa students.",
-    category: "RUEDA",
-    imageUrl:
-      "https://images.unsplash.com/photo-1518834107812-67b0b7c58434?auto=format&fit=crop&w=1200&q=80",
-    location: "Main Havana Studio",
+      "Full house for our international guest maestros weekend festival with 3 days of workshops and Havana nights social parties.",
+    category: "BOOTCAMPS",
+    imageUrl: "/images/congress-2025.jpg",
+    location: "The Roundhouse Hotel & BOH Studios",
   },
   {
     id: "photo-5",
-    title: "International Guest Maestro Weekender",
+    title: "Dynamic Contratiempo Rueda Turn Patterns",
     caption:
-      "Full house for our visiting guest maestra masterclass focusing on authentic Son timing and Cuban body isolations.",
-    category: "BOOTCAMPS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
-    location: "Gran Teatro Havana Hall",
+      "Coaching the Setenta Complicado frame tension and foot placement with intermediate salsa dancers.",
+    category: "RUEDA",
+    imageUrl: "/images/rueda-social.jpg",
+    location: "BOH Studios Main Floor",
   },
   {
     id: "photo-6",
-    title: "Community Smiles & Post-Class Recaps",
+    title: "Community Smiles & Studio Culture",
     caption:
-      "The best part of Salsa Explosion: community, laughter, and dancers filming the end-of-class recap to practice with friends.",
+      "The true heart of Salsa Explosion: warmth, authentic Cuban culture, and friends practicing their recaps together.",
     category: "STUDIO_LIFE",
-    imageUrl:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80",
-    location: "Studio Lounge",
+    imageUrl: "/images/boh-studios.jpg",
+    location: "Studio Lounge & Social Bar",
   },
 ];
 

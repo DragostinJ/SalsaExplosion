@@ -83,11 +83,12 @@ export interface StudentContext {
   preferredRole: DanceRole;
   classCredits: number;
   hasActiveSubscription: boolean;
+  isGuest?: boolean;
 }
 
 interface ClassScheduleCardProps {
   session: ClassScheduleItem;
-  student: StudentContext;
+  student: StudentContext | null;
 }
 
 interface OptimisticBookingState {
@@ -129,9 +130,10 @@ export function ClassScheduleCard({
   const isSoloClass =
     session.maxLeads === null && session.maxFollows === null;
 
+  const isGuest = !student || student.isGuest;
   const [selectedRole, setSelectedRole] = React.useState<DanceRole>(
     session.userBooking?.danceRole ??
-      (isSoloClass ? DanceRole.SOLO : student.preferredRole)
+      (isSoloClass ? DanceRole.SOLO : student?.preferredRole ?? DanceRole.LEAD)
   );
 
   const [feedback, setFeedback] = React.useState<{
@@ -197,8 +199,9 @@ export function ClassScheduleCard({
     return hours < CANCELLATION_WINDOW_HOURS;
   });
 
-  const isLevelUnlocked =
-    LEVEL_WEIGHT[student.currentLevel] >= LEVEL_WEIGHT[session.minLevel];
+  const isLevelUnlocked = isGuest
+    ? true // Allow guests to view and evaluate all levels
+    : LEVEL_WEIGHT[student.currentLevel] >= LEVEL_WEIGHT[session.minLevel];
 
   const isTotalFull = optimisticState.bookedCount >= session.maxCapacity;
   const isLeadFull =
@@ -212,9 +215,10 @@ export function ClassScheduleCard({
     (selectedRole === DanceRole.LEAD && isLeadFull) ||
     (selectedRole === DanceRole.FOLLOW && isFollowFull);
 
-  const canAfford =
-    student.hasActiveSubscription ||
-    student.classCredits >= session.creditCost;
+  const canAfford = isGuest
+    ? true
+    : student.hasActiveSubscription ||
+      student.classCredits >= session.creditCost;
 
   const spotsRemaining = Math.max(
     0,
@@ -346,7 +350,7 @@ export function ClassScheduleCard({
             </Badge>
           ) : (
             <Badge variant="outline" className="text-xs">
-              {student.hasActiveSubscription
+              {student?.hasActiveSubscription
                 ? "Included in Membership"
                 : `${session.creditCost} ${
                     session.creditCost === 1 ? "Credit" : "Credits"
@@ -583,7 +587,7 @@ export function ClassScheduleCard({
                     <XCircle className="mr-1.5 h-3.5 w-3.5" />
                   )}
                   {isWithinCancellationWindow &&
-                  !student.hasActiveSubscription
+                  !student?.hasActiveSubscription
                     ? "Cancel (No Refund)"
                     : "Cancel Spot"}
                 </Button>
@@ -600,6 +604,12 @@ export function ClassScheduleCard({
               />
             </div>
           )
+        ) : isGuest ? (
+          <Button asChild className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold shadow-md transition-colors">
+            <Link href={`/sign-in?redirect_url=${encodeURIComponent("/dashboard/schedule")}`}>
+              Sign In to Book {session.title} (1 Free Welcome Credit)
+            </Link>
+          </Button>
         ) : !canAfford ? (
           <Button asChild variant="secondary" className="w-full">
             <Link href="/pricing">

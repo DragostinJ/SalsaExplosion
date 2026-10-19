@@ -108,9 +108,11 @@ export function PartnerMatchWaitlist({
     }
   }
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <Card className="overflow-hidden border border-amber-500/30 bg-gradient-to-br from-card via-card to-amber-500/[0.03] shadow-md">
-      <CardHeader className="border-b border-border/60 pb-4">
+      <CardHeader className="border-b border-border/60 pb-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
@@ -126,12 +128,24 @@ export function PartnerMatchWaitlist({
                 </Badge>
               </div>
               <CardDescription className="text-xs text-muted-foreground mt-0.5">
-                At Salsa Explosion, we maintain strict Lead/Follow balance (+/-3 cap) so no dancer sits out during Rueda partner changes.
+                Maintain strict Lead/Follow balance (+/-3 cap) so no dancer sits out.
               </CardDescription>
             </div>
           </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setIsExpanded((prev) => !prev)}
+            className="h-8 text-xs font-semibold shrink-0"
+          >
+            {isExpanded ? "Hide Waitlist Options ▲" : "Need a Partner or Waitlist? Tap Here ▼"}
+          </Button>
         </div>
       </CardHeader>
+
+      {isExpanded && (
+        <div className="animate-in fade-in duration-200">
 
       <CardContent className="space-y-6 pt-5">
         {/* Role Ratio Explanation Callout */}
@@ -304,6 +318,8 @@ export function PartnerMatchWaitlist({
           <span>BOH Studios Bournemouth • Salsa Explosion UK</span>
         </div>
       </CardFooter>
+      </div>
+      )}
     </Card>
   );
 }

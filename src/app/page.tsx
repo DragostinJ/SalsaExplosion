@@ -35,6 +35,33 @@ export default async function Home() {
       },
     },
   });
+
+  const now = new Date();
+  const nextClasses = await prisma.classSession.findMany({
+    where: {
+      startTime: { gt: now },
+      isCancelled: false,
+    },
+    orderBy: { startTime: "asc" },
+    take: 3,
+    include: {
+      instructor: {
+        select: {
+          firstName: true,
+          lastName: true,
+        },
+      },
+      bookings: {
+        where: {
+          status: { in: ["CONFIRMED", "ATTENDED"] },
+        },
+        select: {
+          id: true,
+          danceRole: true,
+        },
+      },
+    },
+  });
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <main className="flex-1">
@@ -132,6 +159,82 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* Live "Next Up This Week" Class Strip (Instant Speed-to-Value on Mobile) */}
+        {nextClasses.length > 0 && (
+          <section className="border-b bg-card py-6 shadow-xs">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                    Live Studio Floor
+                  </span>
+                  <span className="text-muted-foreground">•</span>
+                  <h2 className="text-sm sm:text-base font-extrabold text-foreground">
+                    Next Classes This Week at BOH Studios
+                  </h2>
+                </div>
+                <Button asChild variant="ghost" size="sm" className="h-8 text-xs font-bold text-primary-base hover:text-primary-hover p-0 sm:px-2">
+                  <Link href="/dashboard/schedule">
+                    Full Weekly Timetable →
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {nextClasses.map((cls) => {
+                  const dateFormatted = new Intl.DateTimeFormat("en-GB", {
+                    weekday: "short",
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                  }).format(new Date(cls.startTime));
+
+                  const spotsLeft = Math.max(0, cls.maxCapacity - cls.bookings.length);
+                  const isAlmostFull = spotsLeft <= 4;
+
+                  return (
+                    <div
+                      key={cls.id}
+                      className="flex items-center justify-between gap-3 rounded-xl border bg-muted/30 p-3.5 hover:border-primary-base/40 hover:bg-muted/50 transition-all"
+                    >
+                      <div className="space-y-1 min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="rounded-md bg-amber-500/15 text-amber-800 dark:text-amber-300 px-1.5 py-0.5 text-[10px] font-bold">
+                            {cls.minLevel}
+                          </span>
+                          <span className="text-[11px] font-semibold text-text-muted">
+                            {dateFormatted}
+                          </span>
+                        </div>
+                        <h3 className="text-xs sm:text-sm font-bold text-foreground truncate">
+                          {cls.title}
+                        </h3>
+                        <p className="text-[11px] text-muted-foreground">
+                          with {cls.instructor.firstName} •{" "}
+                          <span className={isAlmostFull ? "text-accent-tangerine font-bold" : "text-emerald-600 font-medium"}>
+                            {spotsLeft} spots left
+                          </span>
+                        </p>
+                      </div>
+
+                      <Button
+                        asChild
+                        size="sm"
+                        className="shrink-0 h-9 px-3.5 text-xs font-bold bg-primary-base hover:bg-primary-hover text-white shadow-xs"
+                      >
+                        <Link href="/dashboard/schedule">
+                          Book Spot
+                        </Link>
+                      </Button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Featured Congress Callout Banner */}
         <section className="py-8 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">

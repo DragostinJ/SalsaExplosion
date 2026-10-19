@@ -11,6 +11,7 @@ const isPublicRoute = createRouteMatcher([
   "/private-lessons(.*)",
   "/music(.*)",
   "/shop(.*)",
+  "/dashboard/schedule(.*)",
   "/dashboard/rueda(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",

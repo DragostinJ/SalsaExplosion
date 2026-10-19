@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { toast } from "sonner";
 import {
   Heart,
   CheckCircle2,
@@ -39,6 +40,9 @@ export function PostClassCheckinModal({
       });
 
       if (res.success && res.data) {
+        toast.success("Comfort check-in recorded!", {
+          description: "Thank you for helping us make Salsa Explosion welcoming for everyone.",
+        });
         setEncouragement(res.data.encouragement);
         setSubmitted(true);
       }

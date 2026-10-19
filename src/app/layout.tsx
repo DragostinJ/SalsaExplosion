@@ -27,6 +27,8 @@ export const metadata: Metadata = {
 
 import { canSwitchRoles } from "@/lib/auth-user";
 
+import { Toaster } from "sonner";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -53,6 +55,7 @@ export default async function RootLayout({
           <SiteHeader role={viewer?.role ?? null} canSwitchRoles={userCanSwitchRoles} />
           <div className="flex-1">{children}</div>
           <SiteFooter />
+          <Toaster richColors position="top-right" />
         </body>
       </html>
     </ClerkProvider>

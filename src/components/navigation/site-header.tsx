@@ -26,6 +26,8 @@ import { switchMyAccountRoleAction } from "@/actions/management.actions";
 import { InteractiveTutorialModal } from "@/components/onboarding/interactive-tutorial-modal";
 import { AdminNotificationBell } from "@/components/navigation/admin-notification-bell";
 
+import { toast } from "sonner";
+
 interface SiteHeaderProps {
   role: Role | null;
   canSwitchRoles?: boolean;
@@ -44,15 +46,17 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
       try {
         const res = await switchMyAccountRoleAction({ targetRole });
         if (res.success) {
+          toast.success(`Active workspace switched to ${targetRole === "ADMIN" ? "Owner" : targetRole === "INSTRUCTOR" ? "Teacher" : "Dancer"}`);
           router.refresh();
           // Force a clean reload so layout, Prisma viewer, and active links rehydrate immediately
           window.location.reload();
         } else {
           console.error("[handleRoleSwitch] Error:", res.error);
-          alert(res.error?.message || "Could not switch role.");
+          toast.error(res.error?.message || "Could not switch role.");
         }
       } catch (err) {
         console.error("[handleRoleSwitch] Failed:", err);
+        toast.error("An unexpected error occurred while switching roles.");
       }
     });
   };

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { toast } from "sonner";
 import {
   Send,
   CheckCircle2,
@@ -65,10 +66,14 @@ export function AnonymousQuestionBox() {
       });
 
       if (res.success && res.data) {
+        toast.success("Question received safely!", {
+          description: "Our instructors and ambassadors are here to support your dance journey.",
+        });
         setReassurance(res.data.reassurance);
         setQuestionText("");
         setEmailText("");
       } else {
+        toast.error(res.error || "Unable to submit question.");
         setErrorMessage(res.error || "Unable to submit question.");
       }
     });

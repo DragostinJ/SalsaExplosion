@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/card";
 
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
+import { toast } from "sonner";
 import { AddToCalendarButton } from "@/components/calendar/add-to-calendar-button";
 import {
   DigitalEtiquetteModal,
@@ -232,6 +233,7 @@ export function ClassScheduleCard({
       });
 
       if (!result.success) {
+        toast.error(result.error.message);
         setFeedback({
           type: "error",
           message: result.error.message,
@@ -239,6 +241,9 @@ export function ClassScheduleCard({
         return;
       }
 
+      toast.success("You're in! See you on the floor 💃", {
+        description: `${session.title} secured as ${selectedRole}.`,
+      });
       setFeedback({
         type: "success",
         message: result.message,
@@ -272,6 +277,7 @@ export function ClassScheduleCard({
       });
 
       if (!result.success) {
+        toast.error(result.error.message);
         setFeedback({
           type: "error",
           message: result.error.message,
@@ -279,6 +285,11 @@ export function ClassScheduleCard({
         return;
       }
 
+      if (result.data.isLateCancellation) {
+        toast.warning(result.message);
+      } else {
+        toast.success(result.message);
+      }
       setFeedback({
         type: result.data.isLateCancellation ? "warning" : "success",
         message: result.message,

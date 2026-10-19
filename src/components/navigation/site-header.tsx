@@ -98,6 +98,12 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
       active: pathname.startsWith("/dashboard/progression"),
     },
     {
+      href: "/dashboard/wallet",
+      label: "Wallet",
+      icon: QrCode,
+      active: pathname.startsWith("/dashboard/wallet"),
+    },
+    {
       href: "/dashboard/recaps",
       label: "Recaps",
       icon: Video,

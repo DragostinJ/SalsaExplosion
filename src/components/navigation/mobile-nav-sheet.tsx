@@ -114,6 +114,7 @@ export function MobileNavSheet({
 
   const coreLinks = [
     { href: "/dashboard/schedule", label: "Schedule & Booking", icon: CalendarDays },
+    { href: "/dashboard/wallet", label: "My Wallet & QR Passes", icon: QrCode },
     { href: "/events", label: "Guest Festivals & Congress", icon: Sparkles },
     { href: "/pricing", label: "Class Passes & Memberships", icon: CreditCard },
     { href: "/dashboard/progression", label: "Syllabus Progression", icon: Award },

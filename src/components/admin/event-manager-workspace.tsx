@@ -92,6 +92,8 @@ export function EventManagerWorkspace({
   } | null>(null);
   const [isPending, startTransition] = useTransition();
 
+  const [showAllRegistrations, setShowAllRegistrations] = useState(false);
+
   const filteredRegistrations = useMemo(() => {
     const q = searchQrOrName.trim().toLowerCase();
     if (!q) return registrations;
@@ -102,6 +104,13 @@ export function EventManagerWorkspace({
         r.studentEmail.toLowerCase().includes(q)
     );
   }, [registrations, searchQrOrName]);
+
+  const displayedRegistrations = useMemo(() => {
+    if (showAllRegistrations || searchQrOrName.trim()) {
+      return filteredRegistrations;
+    }
+    return filteredRegistrations.slice(0, 15);
+  }, [filteredRegistrations, showAllRegistrations, searchQrOrName]);
 
   const handleTogglePassCheckIn = (
     registrationId: string,
@@ -274,7 +283,7 @@ export function EventManagerWorkspace({
               </div>
 
               <div className="space-y-2.5">
-                {filteredRegistrations.map((reg) => (
+                {displayedRegistrations.map((reg) => (
                   <div
                     key={reg.id}
                     className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border p-3.5 transition-all ${
@@ -335,12 +344,28 @@ export function EventManagerWorkspace({
                     </Button>
                   </div>
                 ))}
+
+                {filteredRegistrations.length > 15 && !searchQrOrName.trim() && (
+                  <div className="pt-2 text-center">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowAllRegistrations(!showAllRegistrations)}
+                      className="text-xs font-semibold"
+                    >
+                      {showAllRegistrations
+                        ? "Show Top 15 Only"
+                        : `Show All ${filteredRegistrations.length} Passes`}
+                    </Button>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
 
           {/* Published Events List */}
-          <div className="space-y-2.5">
+          <div className="cv-auto space-y-2.5">
             <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground px-1">
               Published Guest Artist Events ({initialEvents.length})
             </h2>

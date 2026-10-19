@@ -420,7 +420,7 @@ export function EventManagerWorkspace({
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="font-semibold">Venue Name</label>
                     <input
@@ -445,7 +445,7 @@ export function EventManagerWorkspace({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="font-semibold">Start Date</label>
                     <input
@@ -470,7 +470,7 @@ export function EventManagerWorkspace({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="font-semibold">Full Pass Price (£)</label>
                     <input
@@ -501,7 +501,7 @@ export function EventManagerWorkspace({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="space-y-1">
                     <label className="font-semibold">Party Pass Price (£)</label>
                     <input

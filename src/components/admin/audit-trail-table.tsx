@@ -114,73 +114,121 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
           </p>
         </div>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm border-collapse">
-            <thead>
-              <tr className="border-b bg-main/50 text-xs font-semibold text-text-muted uppercase tracking-wider">
-                <th className="py-3 px-4">Timestamp (UTC)</th>
-                <th className="py-3 px-4">Action</th>
-                <th className="py-3 px-4">Actor</th>
-                <th className="py-3 px-4">Target Type & ID</th>
-                <th className="py-3 px-4">Metadata Context</th>
-                <th className="py-3 px-4">Client IP</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border/60">
-              {logs.map((log) => {
-                const dateStr = new Date(log.createdAt).toISOString().replace("T", " ").slice(0, 19);
-                const metadataStr = log.metadata
-                  ? JSON.stringify(log.metadata)
-                  : "—";
-
-                return (
-                  <tr
-                    key={log.id}
-                    className="hover:bg-main/40 transition-colors font-mono text-xs"
-                  >
-                    <td className="py-3 px-4 whitespace-nowrap text-text-muted">
-                      {dateStr}
-                    </td>
-                    <td className="py-3 px-4 whitespace-nowrap">
-                      {getActionBadge(log.action)}
-                    </td>
-                    <td className="py-3 px-4 whitespace-nowrap font-sans">
-                      <div className="font-semibold text-text-main">
+        <>
+          {/* Mobile Card List View (< md) */}
+          <div className="md:hidden divide-y divide-border/60">
+            {logs.map((log) => {
+              const dateStr = new Date(log.createdAt).toISOString().replace("T", " ").slice(0, 19);
+              const metadataStr = log.metadata ? JSON.stringify(log.metadata) : "—";
+              return (
+                <div key={log.id} className="p-4 space-y-2.5 text-xs font-mono">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-text-muted text-[11px]">{dateStr}</span>
+                    {getActionBadge(log.action)}
+                  </div>
+                  <div className="flex items-start justify-between gap-2 font-sans">
+                    <div>
+                      <div className="font-semibold text-text-main text-xs">
                         {log.actor.firstName
                           ? `${log.actor.firstName} ${log.actor.lastName || ""}`.trim()
                           : log.actor.email}
                       </div>
-                      <div className="text-[11px] text-text-muted font-mono">
-                        {log.actor.email}
-                      </div>
-                    </td>
-                    <td className="py-3 px-4 whitespace-nowrap">
-                      <span className="font-semibold text-text-main">
-                        {log.targetType}
-                      </span>
+                      <div className="text-[11px] text-text-muted font-mono">{log.actor.email}</div>
+                    </div>
+                    <span className="text-text-muted font-mono text-[10px] shrink-0 bg-muted px-1.5 py-0.5 rounded">
+                      {log.ip || "internal"}
+                    </span>
+                  </div>
+                  <div className="bg-main/60 rounded-lg p-2 space-y-1">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-text-muted text-[10px] uppercase">Target:</span>
+                      <span className="font-semibold text-text-main text-[11px]">{log.targetType}</span>
                       {log.targetId && (
-                        <span className="text-text-muted text-[11px] block truncate max-w-[140px]">
-                          {log.targetId}
+                        <span className="text-text-muted text-[10px] truncate max-w-[120px]">
+                          ({log.targetId})
                         </span>
                       )}
-                    </td>
-                    <td className="py-3 px-4 max-w-xs truncate text-text-muted">
-                      <span
-                        title={metadataStr}
-                        className="cursor-help underline decoration-dotted decoration-text-muted/50"
-                      >
+                    </div>
+                    {Boolean(log.metadata) && (
+                      <div className="text-[10px] text-text-muted truncate pt-0.5 border-t border-border/40">
                         {metadataStr}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 whitespace-nowrap text-text-muted font-mono text-[11px]">
-                      {log.ip || "internal"}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop Table View (>= md) */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full text-left text-sm border-collapse">
+              <thead>
+                <tr className="border-b bg-main/50 text-xs font-semibold text-text-muted uppercase tracking-wider">
+                  <th className="py-3 px-4">Timestamp (UTC)</th>
+                  <th className="py-3 px-4">Action</th>
+                  <th className="py-3 px-4">Actor</th>
+                  <th className="py-3 px-4">Target Type & ID</th>
+                  <th className="py-3 px-4">Metadata Context</th>
+                  <th className="py-3 px-4">Client IP</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/60">
+                {logs.map((log) => {
+                  const dateStr = new Date(log.createdAt).toISOString().replace("T", " ").slice(0, 19);
+                  const metadataStr = log.metadata
+                    ? JSON.stringify(log.metadata)
+                    : "—";
+
+                  return (
+                    <tr
+                      key={log.id}
+                      className="hover:bg-main/40 transition-colors font-mono text-xs"
+                    >
+                      <td className="py-3 px-4 whitespace-nowrap text-text-muted">
+                        {dateStr}
+                      </td>
+                      <td className="py-3 px-4 whitespace-nowrap">
+                        {getActionBadge(log.action)}
+                      </td>
+                      <td className="py-3 px-4 whitespace-nowrap font-sans">
+                        <div className="font-semibold text-text-main">
+                          {log.actor.firstName
+                            ? `${log.actor.firstName} ${log.actor.lastName || ""}`.trim()
+                            : log.actor.email}
+                        </div>
+                        <div className="text-[11px] text-text-muted font-mono">
+                          {log.actor.email}
+                        </div>
+                      </td>
+                      <td className="py-3 px-4 whitespace-nowrap">
+                        <span className="font-semibold text-text-main">
+                          {log.targetType}
+                        </span>
+                        {log.targetId && (
+                          <span className="text-text-muted text-[11px] block truncate max-w-[140px]">
+                            {log.targetId}
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-3 px-4 max-w-xs truncate text-text-muted">
+                        <span
+                          title={metadataStr}
+                          className="cursor-help underline decoration-dotted decoration-text-muted/50"
+                        >
+                          {metadataStr}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 whitespace-nowrap text-text-muted font-mono text-[11px]">
+                        {log.ip || "internal"}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   );

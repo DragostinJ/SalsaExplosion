@@ -23,51 +23,91 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  /* Bournemouth Cuban Salsa Designer Tokens */
+  /* Primary (Salsa Core) */
+  --color-primary-base: #E11D48;
+  --color-primary-hover: #BE123C;
+  --color-primary-light: #FFE4E6;
+
+  /* Secondary (Coastal Trust & Safety) */
+  --color-secondary-base: #0D9488;
+  --color-secondary-hover: #0F766E;
+  --color-secondary-light: #CCFBF1;
+
+  /* Accent (Highlighter/Warnings) */
+  --color-accent-tangerine: #F97316;
+
+  /* Backgrounds & Surfaces (The Studio Space) */
+  --color-bg-main: #F8FAFC;
+  --color-bg-card: #FFFFFF;
+  --color-surface-warm: #E7E5E4;
+  --color-bg-dark: #0F172A;
+
+  /* Text & Typography */
+  --color-text-main: #1E293B;
+  --color-text-muted: #64748B;
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    /* Backgrounds & Surfaces */
+    --background: 210 40% 98%; /* #F8FAFC - Crisp Off-White */
+    --foreground: 217 33% 17%; /* #1E293B - Slate 800 */
+    --card: 0 0% 100%; /* #FFFFFF - Pure White */
+    --card-foreground: 217 33% 17%; /* #1E293B */
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 346 77% 43%;
-    --primary-foreground: 355 100% 99%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 5% 34%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --popover-foreground: 217 33% 17%;
+
+    /* Salsa Energy (Primary) */
+    --primary: 347 77% 50%; /* #E11D48 - Fiery Rose */
+    --primary-foreground: 0 0% 100%;
+
+    /* Coastal Trust & Safety (Secondary) */
+    --secondary: 174 84% 32%; /* #0D9488 - Ocean Teal */
+    --secondary-foreground: 0 0% 100%;
+
+    /* Surfaces & Muted */
+    --muted: 24 6% 90%; /* #E7E5E4 - Warm Sand */
+    --muted-foreground: 215 16% 47%; /* #64748B - Slate 500 */
+
+    /* Accent & Warnings */
+    --accent: 25 95% 53%; /* #F97316 - Accent Tangerine */
+    --accent-foreground: 0 0% 100%;
+
     --destructive: 0 75% 42%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 88%;
-    --input: 240 5.9% 88%;
-    --ring: 346 77% 43%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 347 77% 50%;
     --radius: 0.75rem;
   }
+
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 346 77% 49%;
-    --primary-foreground: 355 100% 97%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 72%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 222 47% 11%; /* #0F172A - Deep Slate */
+    --foreground: 210 40% 98%; /* #F8FAFC */
+    --card: 217 33% 17%; /* #1E293B */
+    --card-foreground: 210 40% 98%;
+    --popover: 217 33% 17%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 347 77% 50%; /* #E11D48 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 174 84% 32%; /* #0D9488 */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 217 33% 22%;
+    --muted-foreground: 215 16% 70%;
+
+    --accent: 25 95% 53%; /* #F97316 */
+    --accent-foreground: 0 0% 100%;
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 346 77% 49%;
+    --border: 217 33% 25%;
+    --input: 217 33% 25%;
+    --ring: 347 77% 50%;
   }
 }
 

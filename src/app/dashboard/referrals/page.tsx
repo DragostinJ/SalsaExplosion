@@ -1,13 +1,18 @@
 import { redirect } from "next/navigation";
 import { Gift } from "lucide-react";
+import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
-import { ReferralDashboardClient } from "@/components/referrals/referral-dashboard-client";
+import {
+  ReferralDashboardClient,
+  ReferralStats,
+} from "@/components/referrals/referral-dashboard-client";
 
 export const metadata = {
-  title: "Refer a Dancer | Give £5, Get £5 | Salsa Explosion",
-  description: "Invite your friends to dance Cuban Salsa at BOH Studios Bournemouth. They get £5 off their first class, and you earn £5 credit.",
+  title: "Refer a Dancer | Give 1 Class, Get 1 Class | Salsa Explosion",
+  description:
+    "Invite your friends to dance Cuban Salsa at BOH Studios Bournemouth. They get 1 free welcome credit, and you earn 1 credit.",
 };
 
 export default async function ReferralsPage() {
@@ -17,9 +22,33 @@ export default async function ReferralsPage() {
   }
 
   // Deterministic, readable student referral code
-  const cleanName = (user.firstName || "SALSA").toUpperCase().replace(/[^A-Z]/g, "").slice(0, 4);
+  const cleanName = (user.firstName || "SALSA")
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "")
+    .slice(0, 4);
   const cleanSuffix = user.id.replace(/[^a-zA-Z0-9]/g, "").slice(-4).toUpperCase();
   const referralCode = `SALSA-${cleanName}-${cleanSuffix}`;
+
+  // Fetch real referral stats from CreditLedger
+  const referralEarnings = await prisma.creditLedger.findMany({
+    where: {
+      userId: user.id,
+      description: { startsWith: "REFERRAL_REWARD_EARNED_FROM:" },
+    },
+  });
+
+  const redeemedRecord = await prisma.creditLedger.findFirst({
+    where: {
+      userId: user.id,
+      description: { startsWith: "REFERRAL_BONUS_REDEEMED:" },
+    },
+  });
+
+  const stats: ReferralStats = {
+    friendsInvited: referralEarnings.length,
+    creditsEarned: referralEarnings.reduce((acc, curr) => acc + curr.amount, 0),
+    hasRedeemedWelcomeBonus: Boolean(redeemedRecord),
+  };
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
@@ -42,7 +71,7 @@ export default async function ReferralsPage() {
               Refer-a-Dancer Program
             </h1>
             <Badge className="bg-amber-500 text-zinc-950 font-bold">
-              Give £5, Get £5
+              Give 1 Class, Get 1 Class
             </Badge>
           </div>
           <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-3xl">
@@ -55,6 +84,7 @@ export default async function ReferralsPage() {
       <ReferralDashboardClient
         referralCode={referralCode}
         studentName={`${user.firstName} ${user.lastName}`}
+        stats={stats}
       />
     </main>
   );

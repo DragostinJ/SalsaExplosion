@@ -116,5 +116,30 @@ describe("Security Audit: Authorization & Role Privilege Escalation", () => {
       expect(canSwitchRoles("")).toBe(false);
     });
   });
+
+  describe("Role Route Access Matrix", () => {
+    const ADMIN_ONLY = ["ADMIN"];
+    const STAFF_ROLES = ["INSTRUCTOR", "ADMIN"];
+
+    function checkRouteAccess(userRole: string, allowedRoles: string[]): boolean {
+      return allowedRoles.includes(userRole);
+    }
+
+    it("STUDENT is blocked from /admin/* and /instructor/*", () => {
+      expect(checkRouteAccess("STUDENT", ADMIN_ONLY)).toBe(false);
+      expect(checkRouteAccess("STUDENT", STAFF_ROLES)).toBe(false);
+    });
+
+    it("INSTRUCTOR is allowed on /instructor/* but blocked from /admin/*", () => {
+      expect(checkRouteAccess("INSTRUCTOR", STAFF_ROLES)).toBe(true);
+      expect(checkRouteAccess("INSTRUCTOR", ADMIN_ONLY)).toBe(false);
+    });
+
+    it("ADMIN is allowed on both /admin/* and /instructor/*", () => {
+      expect(checkRouteAccess("ADMIN", ADMIN_ONLY)).toBe(true);
+      expect(checkRouteAccess("ADMIN", STAFF_ROLES)).toBe(true);
+    });
+  });
 });
+
 

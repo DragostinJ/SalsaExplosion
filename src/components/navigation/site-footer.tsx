@@ -23,21 +23,21 @@ export function SiteFooter() {
               </div>
               <div className="flex flex-col">
                 <span className="text-base font-black leading-none tracking-tight">
-                  Salsa <span className="text-rose-600 dark:text-rose-400">Explosion</span>
+                  Salsa <span className="text-rose-700 dark:text-rose-400">Explosion</span>
                 </span>
-                <span className="text-[10px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest mt-0.5">
+                <span className="text-[10px] font-black text-foreground uppercase tracking-widest mt-0.5">
                   Bournemouth • Cuban Salsa
                 </span>
               </div>
             </Link>
 
-            <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-3.5 space-y-1.5 max-w-sm">
-              <div className="flex items-center gap-1.5 text-amber-800 dark:text-amber-300 font-extrabold text-xs">
-                <Award className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
+            <div className="rounded-xl border border-amber-500/50 bg-amber-500/15 p-3.5 space-y-1.5 max-w-sm shadow-xs">
+              <div className="flex items-center gap-1.5 text-amber-950 dark:text-amber-200 font-black text-xs">
+                <Award className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-400" />
                 <span>UK Lifetime Achievement Award</span>
               </div>
-              <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">
-                Founded & directed by Cuban dance maestro <strong className="text-foreground font-black">Enrique Perez Valdes</strong>. Voted <strong className="text-foreground">UK&apos;s Most Popular Salsa Promoter</strong> with 30+ years authentic heritage.
+              <p className="text-xs text-foreground leading-relaxed font-semibold">
+                Founded & directed by Cuban dance maestro <strong className="text-foreground font-black">Enrique Perez Valdes</strong>. Voted <strong className="text-foreground font-black">UK&apos;s Most Popular Salsa Promoter</strong> with 30+ years authentic heritage.
               </p>
             </div>
 
@@ -47,7 +47,7 @@ export function SiteFooter() {
                 href="https://www.instagram.com/salsaexplosion/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-pink-500/50 bg-pink-500/15 px-3 py-1.5 font-bold text-pink-700 dark:text-pink-300 hover:bg-pink-500/25 transition-colors shadow-xs"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-pink-500/50 bg-pink-500/15 px-3 py-1.5 font-black text-pink-800 dark:text-pink-200 hover:bg-pink-500/25 transition-colors shadow-xs"
               >
                 <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -60,7 +60,7 @@ export function SiteFooter() {
                 href="https://www.facebook.com/salsaexplosion"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-blue-500/50 bg-blue-500/15 px-3 py-1.5 font-bold text-blue-700 dark:text-blue-300 hover:bg-blue-500/25 transition-colors shadow-xs"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-blue-500/50 bg-blue-500/15 px-3 py-1.5 font-black text-blue-800 dark:text-blue-200 hover:bg-blue-500/25 transition-colors shadow-xs"
               >
                 <svg className="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
@@ -76,29 +76,29 @@ export function SiteFooter() {
             <h4 className="font-black text-foreground uppercase tracking-wider text-xs">
               Dancers & Classes
             </h4>
-            <ul className="space-y-1">
+            <ul className="space-y-1.5">
               <li>
-                <Link href="/dashboard/schedule" className="inline-flex items-center py-1 text-xs text-slate-800 dark:text-slate-200 font-semibold hover:text-primary-base transition-colors">
+                <Link href="/dashboard/schedule" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
                   Weekly Class Timetable
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/recaps" className="inline-flex items-center py-1 text-xs text-slate-800 dark:text-slate-200 font-semibold hover:text-primary-base transition-colors">
+                <Link href="/dashboard/recaps" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
                   End-of-Class Video Vault
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/progression" className="inline-flex items-center py-1 text-xs text-slate-800 dark:text-slate-200 font-semibold hover:text-primary-base transition-colors">
+                <Link href="/dashboard/progression" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
                   Cuban Syllabus & Level-Up
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="inline-flex items-center py-1 text-xs text-slate-800 dark:text-slate-200 font-semibold hover:text-primary-base transition-colors">
+                <Link href="/pricing" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
                   Drop-ins & Monthly Passes
                 </Link>
               </li>
               <li>
-                <Link href="/private-lessons" className="inline-flex items-center py-1 text-xs text-rose-600 dark:text-rose-400 font-bold hover:underline">
+                <Link href="/private-lessons" className="inline-flex items-center py-1 text-xs text-rose-700 dark:text-rose-400 font-black hover:underline">
                   1-on-1 Private Coaching
                 </Link>
               </li>
@@ -110,34 +110,34 @@ export function SiteFooter() {
             <h4 className="font-black text-foreground uppercase tracking-wider text-xs">
               Congresses & Socials
             </h4>
-            <ul className="space-y-1">
+            <ul className="space-y-1.5">
               <li>
-                <Link href="/events" className="inline-flex items-center py-1 text-xs text-slate-800 dark:text-slate-200 font-semibold hover:text-primary-base transition-colors">
+                <Link href="/events" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
                   Bournemouth Cuban Congress 2026
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="inline-flex items-center py-1 text-xs text-slate-800 dark:text-slate-200 font-semibold hover:text-primary-base transition-colors">
+                <Link href="/events" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
                   Havana Nights Social Party
                 </Link>
               </li>
               <li>
-                <Link href="/how-it-works" className="inline-flex items-center py-1 text-xs text-slate-800 dark:text-slate-200 font-semibold hover:text-primary-base transition-colors">
+                <Link href="/how-it-works" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
                   How QR Passes Work
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="inline-flex items-center py-1 text-xs text-slate-800 dark:text-slate-200 font-semibold hover:text-primary-base transition-colors">
+                <Link href="/about" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
                   About Enrique & Academy
                 </Link>
               </li>
               <li>
-                <Link href="/music" className="inline-flex items-center py-1 text-xs text-rose-700 dark:text-rose-400 font-bold hover:underline">
+                <Link href="/music" className="inline-flex items-center py-1 text-xs text-rose-700 dark:text-rose-400 font-black hover:underline">
                   Cuban Music & Playlists
                 </Link>
               </li>
               <li>
-                <Link href="/shop" className="inline-flex items-center py-1 text-xs text-rose-700 dark:text-rose-400 font-bold hover:underline">
+                <Link href="/shop" className="inline-flex items-center py-1 text-xs text-rose-700 dark:text-rose-400 font-black hover:underline">
                   Merch & Dance Shoes
                 </Link>
               </li>
@@ -149,18 +149,18 @@ export function SiteFooter() {
             <h4 className="font-black text-foreground uppercase tracking-wider text-xs">
               Bournemouth Studio Hub
             </h4>
-            <div className="space-y-2.5 text-slate-800 dark:text-slate-200">
+            <div className="space-y-2.5 text-foreground font-semibold">
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-primary-base shrink-0 mt-0.5" />
                 <span className="text-xs">
                   <strong className="text-foreground font-black">BOH Studios</strong>
                   <br />
-                  Bournemouth, Dorset, UK
+                  <span className="text-foreground">Bournemouth, Dorset, UK</span>
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <Calendar className="h-4 w-4 text-primary-base shrink-0 mt-0.5" />
-                <span className="text-xs leading-relaxed">
+                <span className="text-xs leading-relaxed text-foreground font-medium">
                   Weekly Cuban Salsa & Rueda de Casino every Tuesday & Thursday night.
                 </span>
               </div>

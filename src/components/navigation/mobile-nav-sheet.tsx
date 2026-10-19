@@ -26,6 +26,7 @@ import {
   ShoppingBag,
   HelpCircle,
   Share2,
+  ClipboardList,
 } from "lucide-react";
 import { triggerStudioTutorial } from "@/components/onboarding/interactive-tutorial-modal";
 
@@ -139,6 +140,7 @@ export function MobileNavSheet({
   ];
 
   const ownerLinks = [
+    { href: "/admin/operations", label: "Studio Desk Operations", icon: ClipboardList },
     { href: "/admin/analytics", label: "Executive Analytics", icon: BarChart3 },
     { href: "/admin/classes", label: "Schedule Class Sessions", icon: CalendarPlus },
     { href: "/admin/events", label: "Congress & Party Admin", icon: ShieldCheck },

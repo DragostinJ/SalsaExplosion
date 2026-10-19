@@ -20,6 +20,7 @@ import {
   Compass,
   MapPin,
   Menu,
+  ClipboardList,
 } from "lucide-react";
 
 import type { Role } from "@prisma/client";
@@ -145,6 +146,12 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
   ];
 
   const adminLinks = [
+    {
+      href: "/admin/operations",
+      label: "Operations",
+      icon: ClipboardList,
+      active: pathname.startsWith("/admin/operations"),
+    },
     {
       href: "/admin/analytics",
       label: "Analytics",

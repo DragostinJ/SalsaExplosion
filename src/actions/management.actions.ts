@@ -1118,3 +1118,271 @@ export async function updateMyDanceRolePreferenceAction(rawInput: {
   }
 }
 
+// ==========================================
+// DESK OPERATIONS: STATUS UPDATES & AUDIT
+// ==========================================
+
+const UpdatePrivateLessonStatusSchema = z.object({
+  bookingId: z.string().min(1),
+  status: z.enum(["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"]),
+});
+
+export async function updatePrivateLessonBookingStatusAction(
+  rawInput: z.infer<typeof UpdatePrivateLessonStatusSchema>
+): Promise<ManagementActionResponse<{ id: string; status: string }>> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
+      return {
+        success: false,
+        error: { code: "FORBIDDEN", message: "Only studio staff can update private bookings." },
+      };
+    }
+
+    const parsed = UpdatePrivateLessonStatusSchema.safeParse(rawInput);
+    if (!parsed.success) {
+      return {
+        success: false,
+        error: { code: "VALIDATION_ERROR", message: "Invalid booking status data." },
+      };
+    }
+
+    const existing = await prisma.privateLessonBooking.findUnique({
+      where: { id: parsed.data.bookingId },
+    });
+    if (!existing) {
+      return {
+        success: false,
+        error: { code: "NOT_FOUND", message: "Booking record not found." },
+      };
+    }
+
+    const updated = await prisma.privateLessonBooking.update({
+      where: { id: parsed.data.bookingId },
+      data: { status: parsed.data.status },
+    });
+
+    await recordAuditLog({
+      actorId: user.id,
+      action: AuditAction.EVENT_MUTATION,
+      targetType: "PrivateLessonBooking",
+      targetId: updated.id,
+      metadata: { previousStatus: existing.status, newStatus: updated.status },
+    });
+
+    revalidatePath("/admin/operations");
+    revalidatePath("/dashboard/wallet");
+    revalidatePath("/private-lessons");
+
+    return {
+      success: true,
+      data: { id: updated.id, status: updated.status },
+      message: `Booking marked as ${updated.status}.`,
+    };
+  } catch (error) {
+    console.error("[updatePrivateLessonBookingStatusAction]", error);
+    return {
+      success: false,
+      error: { code: "INTERNAL_ERROR", message: "Could not update booking status." },
+    };
+  }
+}
+
+const UpdateMerchReservationStatusSchema = z.object({
+  reservationId: z.string().min(1),
+  status: z.enum(["RESERVED", "COLLECTED", "CANCELLED"]),
+});
+
+export async function updateMerchReservationStatusAction(
+  rawInput: z.infer<typeof UpdateMerchReservationStatusSchema>
+): Promise<ManagementActionResponse<{ id: string; status: string }>> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
+      return {
+        success: false,
+        error: { code: "FORBIDDEN", message: "Only studio staff can update merch reservations." },
+      };
+    }
+
+    const parsed = UpdateMerchReservationStatusSchema.safeParse(rawInput);
+    if (!parsed.success) {
+      return {
+        success: false,
+        error: { code: "VALIDATION_ERROR", message: "Invalid merch reservation data." },
+      };
+    }
+
+    const existing = await prisma.merchReservation.findUnique({
+      where: { id: parsed.data.reservationId },
+    });
+    if (!existing) {
+      return {
+        success: false,
+        error: { code: "NOT_FOUND", message: "Reservation record not found." },
+      };
+    }
+
+    const updated = await prisma.merchReservation.update({
+      where: { id: parsed.data.reservationId },
+      data: { status: parsed.data.status },
+    });
+
+    await recordAuditLog({
+      actorId: user.id,
+      action: AuditAction.EVENT_MUTATION,
+      targetType: "MerchReservation",
+      targetId: updated.id,
+      metadata: { previousStatus: existing.status, newStatus: updated.status },
+    });
+
+    revalidatePath("/admin/operations");
+    revalidatePath("/dashboard/wallet");
+    revalidatePath("/shop");
+
+    return {
+      success: true,
+      data: { id: updated.id, status: updated.status },
+      message: `Merch reservation marked as ${updated.status}.`,
+    };
+  } catch (error) {
+    console.error("[updateMerchReservationStatusAction]", error);
+    return {
+      success: false,
+      error: { code: "INTERNAL_ERROR", message: "Could not update reservation status." },
+    };
+  }
+}
+
+const UpdatePartnerWaitlistStatusSchema = z.object({
+  waitlistId: z.string().min(1),
+  status: z.enum(["WAITING", "PAIRED", "CANCELLED"]),
+});
+
+export async function updatePartnerWaitlistStatusAction(
+  rawInput: z.infer<typeof UpdatePartnerWaitlistStatusSchema>
+): Promise<ManagementActionResponse<{ id: string; status: string }>> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
+      return {
+        success: false,
+        error: { code: "FORBIDDEN", message: "Only studio staff can update partner waitlist." },
+      };
+    }
+
+    const parsed = UpdatePartnerWaitlistStatusSchema.safeParse(rawInput);
+    if (!parsed.success) {
+      return {
+        success: false,
+        error: { code: "VALIDATION_ERROR", message: "Invalid waitlist status data." },
+      };
+    }
+
+    const existing = await prisma.partnerWaitlistEntry.findUnique({
+      where: { id: parsed.data.waitlistId },
+    });
+    if (!existing) {
+      return {
+        success: false,
+        error: { code: "NOT_FOUND", message: "Waitlist record not found." },
+      };
+    }
+
+    const updated = await prisma.partnerWaitlistEntry.update({
+      where: { id: parsed.data.waitlistId },
+      data: { status: parsed.data.status },
+    });
+
+    await recordAuditLog({
+      actorId: user.id,
+      action: AuditAction.EVENT_MUTATION,
+      targetType: "PartnerWaitlistEntry",
+      targetId: updated.id,
+      metadata: { previousStatus: existing.status, newStatus: updated.status },
+    });
+
+    revalidatePath("/admin/operations");
+
+    return {
+      success: true,
+      data: { id: updated.id, status: updated.status },
+      message: `Waitlist entry updated to ${updated.status}.`,
+    };
+  } catch (error) {
+    console.error("[updatePartnerWaitlistStatusAction]", error);
+    return {
+      success: false,
+      error: { code: "INTERNAL_ERROR", message: "Could not update waitlist status." },
+    };
+  }
+}
+
+const ReplyAnonymousQuestionSchema = z.object({
+  questionId: z.string().min(1),
+  response: z.string().min(1).max(2000),
+});
+
+export async function replyAnonymousQuestionAction(
+  rawInput: z.infer<typeof ReplyAnonymousQuestionSchema>
+): Promise<ManagementActionResponse<{ id: string }>> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
+      return {
+        success: false,
+        error: { code: "FORBIDDEN", message: "Only studio staff can answer beginner questions." },
+      };
+    }
+
+    const parsed = ReplyAnonymousQuestionSchema.safeParse(rawInput);
+    if (!parsed.success) {
+      return {
+        success: false,
+        error: { code: "VALIDATION_ERROR", message: "Answer must be between 1 and 2000 characters." },
+      };
+    }
+
+    const existing = await prisma.anonymousQuestion.findUnique({
+      where: { id: parsed.data.questionId },
+    });
+    if (!existing) {
+      return {
+        success: false,
+        error: { code: "NOT_FOUND", message: "Question not found." },
+      };
+    }
+
+    const updated = await prisma.anonymousQuestion.update({
+      where: { id: parsed.data.questionId },
+      data: {
+        response: parsed.data.response,
+        status: "ANSWERED",
+      },
+    });
+
+    await recordAuditLog({
+      actorId: user.id,
+      action: AuditAction.EVENT_MUTATION,
+      targetType: "AnonymousQuestion",
+      targetId: updated.id,
+      metadata: { category: existing.category },
+    });
+
+    revalidatePath("/admin/operations");
+    revalidatePath("/how-it-works");
+
+    return {
+      success: true,
+      data: { id: updated.id },
+      message: "Answer published to beginner FAQ.",
+    };
+  } catch (error) {
+    console.error("[replyAnonymousQuestionAction]", error);
+    return {
+      success: false,
+      error: { code: "INTERNAL_ERROR", message: "Could not save question response." },
+    };
+  }
+}
+

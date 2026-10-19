@@ -9,6 +9,7 @@ import {
   Users,
   ShieldCheck,
   QrCode,
+  ClipboardList,
 } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +18,12 @@ export function AdminNav() {
   const pathname = usePathname();
 
   const tabs = [
+    {
+      href: "/admin/operations",
+      label: "Studio Desk Operations",
+      icon: ClipboardList,
+      active: pathname.startsWith("/admin/operations"),
+    },
     {
       href: "/admin/analytics",
       label: "Executive Analytics & Charts",

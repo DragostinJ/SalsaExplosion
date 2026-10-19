@@ -148,7 +148,7 @@ export default async function Home() {
 
         {/* Live "Next Up This Week" Class Strip (Instant Speed-to-Value on Mobile) */}
         {nextClasses.length > 0 && (
-          <section className="border-b bg-card py-6 shadow-xs">
+          <section className="cv-auto border-b bg-card py-6 shadow-xs">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div className="flex items-center gap-2">
@@ -223,7 +223,7 @@ export default async function Home() {
         )}
 
         {/* Featured Congress Callout Banner */}
-        <section className="py-8 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
+        <section className="cv-auto py-8 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="rounded-2xl border border-amber-500/30 bg-card/60 backdrop-blur-sm p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
               <div className="space-y-2 text-center lg:text-left">
@@ -264,11 +264,13 @@ export default async function Home() {
         </section>
 
         {/* Interactive Social Proof & Media Grid */}
-        <SocialProofGrid />
+        <div className="cv-auto">
+          <SocialProofGrid />
+        </div>
 
         {/* Incoming Events & Social Parties Showcase */}
         {upcomingEvents.length > 0 && (
-          <section className="py-14 border-t bg-gradient-to-b from-background via-primary-base/[0.02] to-background">
+          <section className="cv-auto py-14 border-t bg-gradient-to-b from-background via-primary-base/[0.02] to-background">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                 <div>
@@ -366,7 +368,7 @@ export default async function Home() {
         )}
 
         {/* 3-Portal Interactive Showcase */}
-        <section className="py-14 border-t bg-muted/20">
+        <section className="cv-auto py-14 border-t bg-muted/20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <Badge variant="outline" className="text-xs font-semibold mb-2">
@@ -487,7 +489,7 @@ export default async function Home() {
         </section>
 
         {/* Core Capabilities Grid */}
-        <section className="py-16 border-t">
+        <section className="cv-auto py-16 border-t">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="rounded-2xl border bg-card p-6 shadow-xs">

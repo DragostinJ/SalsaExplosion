@@ -8,7 +8,7 @@ import {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t bg-surface-warm/50 text-xs text-slate-700 dark:text-slate-300 mt-auto">
+    <footer className="cv-auto border-t bg-surface-warm/50 text-xs text-slate-700 dark:text-slate-300 mt-auto">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-10">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Col 1 & 2: Brand & Director */}

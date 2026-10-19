@@ -224,4 +224,62 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByText("Suede-Sole Practice Dance Shoes").first()
     ).toBeVisible();
   });
+
+  test("11. Venues & Parking guide renders interactive arrival planner and navigation links", async ({
+    page,
+  }) => {
+    await page.goto("/venues", { waitUntil: "domcontentloaded" });
+
+    await expect(
+      page.getByText(/Door-to-Door Arrival Planner/i).first()
+    ).toBeVisible();
+    await expect(page.getByText(/BOH Studios/i).first()).toBeVisible();
+    await expect(page.getByText(/The Roundhouse Hotel/i).first()).toBeVisible();
+    await expect(page.getByText(/Late-Night Studio Safety/i).first()).toBeVisible();
+    await expect(page.getByText(/Studio Desk Hotline/i).first()).toBeVisible();
+  });
+
+  test("12. PWA manifest, robots.txt, and sitemap.xml routes return HTTP 200", async ({
+    request,
+  }) => {
+    const manifestRes = await request.get("/manifest.webmanifest");
+    expect(manifestRes.status()).toBe(200);
+    const manifestJson = await manifestRes.json();
+    expect(manifestJson.name).toBe("Salsa Explosion Bournemouth");
+
+    const robotsRes = await request.get("/robots.txt");
+    expect(robotsRes.status()).toBe(200);
+    const robotsText = await robotsRes.text();
+    expect(robotsText).toContain("sitemap.xml");
+
+    const sitemapRes = await request.get("/sitemap.xml");
+    expect(sitemapRes.status()).toBe(200);
+  });
+
+  test("13. Student Digital Wallet and Passes hub (/dashboard/wallet) route integrity", async ({
+    page,
+  }) => {
+    await page.goto("/dashboard/wallet", { waitUntil: "domcontentloaded" });
+    const url = page.url();
+    if (url.includes("sign-in")) {
+      await expect(page).toHaveURL(/.*sign-in/);
+    } else {
+      await expect(page).toHaveURL(/.*dashboard\/wallet/);
+      await expect(page.getByText(/Digital Passes/i)).toBeVisible();
+    }
+  });
+
+  test("14. Studio Desk Operations hub (/admin/operations) route integrity", async ({
+    page,
+  }) => {
+    await page.goto("/admin/operations", { waitUntil: "domcontentloaded" });
+    const url = page.url();
+    if (url.includes("sign-in") || url.includes("schedule")) {
+      expect(url).toMatch(/sign-in|schedule/);
+    } else {
+      await expect(page).toHaveURL(/.*admin\/operations/);
+      await expect(page.getByText(/Studio Desk Operations/i)).toBeVisible();
+    }
+  });
 });
+

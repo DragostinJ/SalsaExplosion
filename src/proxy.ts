@@ -17,6 +17,9 @@ const isPublicRoute = createRouteMatcher([
   "/sign-up(.*)",
   "/api/webhooks/clerk",
   "/api/webhooks/stripe",
+  "/robots.txt",
+  "/sitemap.xml",
+  "/manifest.webmanifest",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {

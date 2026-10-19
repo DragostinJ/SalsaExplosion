@@ -10,7 +10,7 @@ export default function RootLoading() {
         <p className="text-sm font-extrabold text-foreground tracking-tight">
           Salsa Explosion
         </p>
-        <p className="text-xs text-text-muted animate-pulse">
+        <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
           Setting the tempo...
         </p>
       </div>

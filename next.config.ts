@@ -34,18 +34,36 @@ const nextConfig: NextConfig = {
     },
   },
   async headers() {
-    const cspDirectives = `
+    const enforcedCspDirectives = `
       default-src 'self';
       script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://js.stripe.com;
-      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev;
-      img-src 'self' data: blob: https://images.unsplash.com https://img.clerk.com https://commondatastorage.googleapis.com;
+      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk;
+      img-src 'self' data: blob: https://images.unsplash.com https://img.clerk.com https://commondatastorage.googleapis.com https://*.stripe.com;
       style-src 'self' 'unsafe-inline';
       font-src 'self' data:;
       frame-src 'self' https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev;
-      media-src 'self' blob: https://*.supabase.co;
+      media-src 'self' blob: https://*.supabase.co https://commondatastorage.googleapis.com;
       object-src 'none';
       base-uri 'self';
-      form-action 'self';
+      form-action 'self' https://checkout.stripe.com;
+      frame-ancestors 'self';
+    `
+      .replace(/\s{2,}/g, " ")
+      .trim();
+
+    const reportOnlyStricterCspDirectives = `
+      default-src 'self';
+      script-src 'self' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://js.stripe.com;
+      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev;
+      img-src 'self' data: blob: https://images.unsplash.com https://img.clerk.com https://commondatastorage.googleapis.com;
+      style-src 'self';
+      font-src 'self';
+      frame-src 'self' https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev;
+      media-src 'self' https://*.supabase.co;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://checkout.stripe.com;
+      frame-ancestors 'none';
     `
       .replace(/\s{2,}/g, " ")
       .trim();
@@ -75,8 +93,12 @@ const nextConfig: NextConfig = {
             value: "camera=(self), microphone=(), geolocation=(), payment=(self 'https://js.stripe.com')",
           },
           {
+            key: "Content-Security-Policy",
+            value: enforcedCspDirectives,
+          },
+          {
             key: "Content-Security-Policy-Report-Only",
-            value: cspDirectives,
+            value: reportOnlyStricterCspDirectives,
           },
         ],
       },

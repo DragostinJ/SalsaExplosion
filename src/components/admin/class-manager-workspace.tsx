@@ -5,14 +5,22 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { DanceLevel } from "@prisma/client";
 import {
-  CalendarPlus,
   Calendar,
   MapPin,
   QrCode,
   Sparkles,
   CheckCircle2,
+  Settings2,
+  Ban,
+  X,
+  Save,
+  Loader2,
 } from "lucide-react";
-import { createClassSessionAction } from "@/actions/management.actions";
+import {
+  createClassSessionAction,
+  cancelClassSessionWithRefundsAction,
+  updateClassSessionCapacityAction,
+} from "@/actions/management.actions";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,6 +31,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { toast } from "sonner";
 
 interface ManagedClassItem {
   id: string;
@@ -71,6 +80,17 @@ export function ClassManagerWorkspace({
   } | null>(null);
   const [isPending, startTransition] = useTransition();
 
+  // Edit capacity state
+  const [editingClassId, setEditingClassId] = useState<string | null>(null);
+  const [editRoom, setEditRoom] = useState("");
+  const [editMaxCapacity, setEditMaxCapacity] = useState(24);
+  const [editMaxLeads, setEditMaxLeads] = useState(12);
+  const [editMaxFollows, setEditMaxFollows] = useState(12);
+
+  // Cancellation state
+  const [cancellingClassId, setCancellingClassId] = useState<string | null>(null);
+  const [cancelReason, setCancelReason] = useState("Instructor unwell / emergency coverage");
+
   const handleCreateClass = (e: React.FormEvent) => {
     e.preventDefault();
     setBanner(null);
@@ -98,42 +118,88 @@ export function ClassManagerWorkspace({
     });
   };
 
+  const handleStartEdit = (cls: ManagedClassItem) => {
+    setEditingClassId(cls.id);
+    setEditRoom(cls.room);
+    setEditMaxCapacity(cls.maxCapacity);
+    setEditMaxLeads(cls.maxLeads ?? Math.floor(cls.maxCapacity / 2));
+    setEditMaxFollows(cls.maxFollows ?? Math.floor(cls.maxCapacity / 2));
+    setCancellingClassId(null);
+  };
+
+  const handleSaveEdit = (classSessionId: string) => {
+    startTransition(async () => {
+      const res = await updateClassSessionCapacityAction({
+        classSessionId,
+        room: editRoom,
+        maxCapacity: Number(editMaxCapacity),
+        maxLeads: Number(editMaxLeads),
+        maxFollows: Number(editMaxFollows),
+      });
+
+      if (res.success) {
+        toast.success(res.message);
+        setEditingClassId(null);
+        router.refresh();
+      } else {
+        toast.error(res.error?.message ?? "Failed to update room & capacity.");
+      }
+    });
+  };
+
+  const handleCancelClass = (classSessionId: string) => {
+    if (!cancelReason.trim()) {
+      toast.error("Please specify a cancellation reason.");
+      return;
+    }
+
+    startTransition(async () => {
+      const res = await cancelClassSessionWithRefundsAction({
+        classSessionId,
+        reason: cancelReason.trim(),
+      });
+
+      if (res.success) {
+        toast.success(res.message);
+        setCancellingClassId(null);
+        router.refresh();
+      } else {
+        toast.error(res.error?.message ?? "Failed to cancel class session.");
+      }
+    });
+  };
+
   return (
     <div className="grid gap-8 lg:grid-cols-12">
-      {/* Left Col (5 Cols): Create New Class Session Form */}
-      <div className="lg:col-span-5">
-        <Card className="border shadow-sm">
+      {/* Left Col (5 Cols): Class Session Creator Form */}
+      <div className="lg:col-span-5 space-y-6">
+        <Card className="border shadow-xs">
           <CardHeader>
-            <div className="flex items-center gap-2">
-              <CalendarPlus className="h-5 w-5 text-amber-500" />
-              <CardTitle className="text-lg font-bold">
-                Schedule New Class Session
-              </CardTitle>
-            </div>
+            <CardTitle className="text-lg">Publish New Class</CardTitle>
             <CardDescription className="text-xs">
-              Publish a new role-balanced Cuban Salsa class to the student schedule.
+              Add a single session or set up the weekly schedule block.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleCreateClass} className="space-y-4 text-xs">
-              {banner && (
-                <div
-                  className={`rounded-xl border p-3 font-semibold ${
-                    banner.type === "success"
-                      ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
-                      : "border-destructive/40 bg-destructive/10 text-destructive"
-                  }`}
-                >
-                  {banner.text}
-                </div>
-              )}
+            {banner && (
+              <div
+                className={`mb-4 rounded-xl p-3 text-xs font-semibold ${
+                  banner.type === "success"
+                    ? "bg-emerald-500/10 text-emerald-800 dark:text-emerald-300"
+                    : "bg-rose-500/10 text-rose-800 dark:text-rose-300"
+                }`}
+              >
+                {banner.text}
+              </div>
+            )}
 
+            <form onSubmit={handleCreateClass} className="space-y-4 text-xs">
               <div className="space-y-1.5">
                 <label className="font-semibold">Class Title</label>
                 <input
                   type="text"
-                  aria-label="Class Title"
                   required
+                  aria-label="Class Title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   className="w-full rounded-xl border bg-background px-3 py-2"
@@ -142,26 +208,26 @@ export function ClassManagerWorkspace({
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="font-semibold">Syllabus Tier</label>
+                  <label className="font-semibold">Minimum Level</label>
                   <select
-                    aria-label="Syllabus Tier"
                     value={minLevel}
+                    aria-label="Minimum Level"
                     onChange={(e) => setMinLevel(e.target.value as DanceLevel)}
-                    className="w-full rounded-xl border bg-background px-3 py-2 font-semibold"
+                    className="w-full rounded-xl border bg-background px-3 py-2"
                   >
-                    <option value="BEGINNER">BEGINNER</option>
-                    <option value="IMPROVER">IMPROVER</option>
-                    <option value="INTERMEDIATE">INTERMEDIATE</option>
-                    <option value="ADVANCED">ADVANCED</option>
+                    <option value={DanceLevel.BEGINNER}>Beginner (L1)</option>
+                    <option value={DanceLevel.IMPROVER}>Improver (L2)</option>
+                    <option value={DanceLevel.INTERMEDIATE}>Intermediate (L3)</option>
+                    <option value={DanceLevel.ADVANCED}>Advanced (L4)</option>
                   </select>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="font-semibold">Studio Room</label>
+                  <label className="font-semibold">Studio Room / Venue</label>
                   <input
                     type="text"
-                    aria-label="Studio Room"
                     required
+                    aria-label="Studio Room / Venue"
                     value={room}
                     onChange={(e) => setRoom(e.target.value)}
                     className="w-full rounded-xl border bg-background px-3 py-2"
@@ -169,13 +235,13 @@ export function ClassManagerWorkspace({
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="space-y-1.5 sm:col-span-1">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5">
                   <label className="font-semibold">Start Date & Time</label>
                   <input
                     type="datetime-local"
-                    aria-label="Start Date and Time"
                     required
+                    aria-label="Start Date & Time"
                     value={startTimeIso}
                     onChange={(e) => setStartTimeIso(e.target.value)}
                     className="w-full rounded-xl border bg-background px-3 py-2"
@@ -186,67 +252,76 @@ export function ClassManagerWorkspace({
                   <label className="font-semibold">Duration (Mins)</label>
                   <input
                     type="number"
-                    aria-label="Duration in minutes"
                     min={30}
-                    max={240}
+                    max={180}
+                    step={15}
+                    required
+                    aria-label="Duration (Mins)"
                     value={durationMinutes}
                     onChange={(e) => setDurationMinutes(Number(e.target.value))}
                     className="w-full rounded-xl border bg-background px-3 py-2"
                   />
                 </div>
+              </div>
 
-                <div className="space-y-1.5">
-                  <label className="font-semibold text-amber-700 dark:text-amber-400">Credits</label>
-                  <input
-                    type="number"
-                    aria-label="Credit cost"
-                    min={1}
-                    max={10}
-                    value={creditCost}
-                    onChange={(e) => setCreditCost(Number(e.target.value))}
-                    className="w-full rounded-xl border bg-background px-3 py-2"
-                  />
+              <div className="rounded-xl border bg-muted/30 p-3 space-y-3">
+                <span className="font-bold text-foreground block">
+                  Capacity & Lead/Follow Role Caps
+                </span>
+
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="space-y-1">
+                    <label className="text-[11px] text-muted-foreground">Hard Cap</label>
+                    <input
+                      type="number"
+                      min={4}
+                      max={100}
+                      aria-label="Hard Cap"
+                      value={maxCapacity}
+                      onChange={(e) => setMaxCapacity(Number(e.target.value))}
+                      className="w-full rounded-lg border bg-background px-2 py-1.5"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] text-muted-foreground">Max Leads</label>
+                    <input
+                      type="number"
+                      min={2}
+                      max={50}
+                      aria-label="Max Leads"
+                      value={maxLeads}
+                      onChange={(e) => setMaxLeads(Number(e.target.value))}
+                      className="w-full rounded-lg border bg-background px-2 py-1.5"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] text-muted-foreground">Max Follows</label>
+                    <input
+                      type="number"
+                      min={2}
+                      max={50}
+                      aria-label="Max Follows"
+                      value={maxFollows}
+                      onChange={(e) => setMaxFollows(Number(e.target.value))}
+                      className="w-full rounded-lg border bg-background px-2 py-1.5"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="font-semibold">Total Cap</label>
+                  <label className="font-semibold">Credit Cost</label>
                   <input
                     type="number"
-                    aria-label="Total Capacity"
-                    min={4}
-                    max={200}
-                    value={maxCapacity}
-                    onChange={(e) => setMaxCapacity(Number(e.target.value))}
-                    className="w-full rounded-xl border bg-background px-3 py-2"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="font-semibold text-blue-700 dark:text-blue-300">
-                    Max Leads
-                  </label>
-                  <input
-                    type="number"
-                    aria-label="Max Leads"
-                    min={2}
-                    max={100}
-                    value={maxLeads}
-                    onChange={(e) => setMaxLeads(Number(e.target.value))}
-                    className="w-full rounded-xl border bg-background px-3 py-2"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="font-semibold text-rose-700 dark:text-rose-300">
-                    Max Follows
-                  </label>
-                  <input
-                    type="number"
-                    aria-label="Max Follows"
-                    min={2}
-                    max={100}
-                    value={maxFollows}
-                    onChange={(e) => setMaxFollows(Number(e.target.value))}
+                    min={1}
+                    max={5}
+                    required
+                    aria-label="Credit Cost"
+                    value={creditCost}
+                    onChange={(e) => setCreditCost(Number(e.target.value))}
                     className="w-full rounded-xl border bg-background px-3 py-2"
                   />
                 </div>
@@ -297,58 +372,237 @@ export function ClassManagerWorkspace({
               minute: "2-digit",
             }).format(new Date(cls.startTimeIso));
 
+            const isEditing = editingClassId === cls.id;
+            const isCancelling = cancellingClassId === cls.id;
+
             return (
-              <Card key={cls.id} className="border shadow-xs">
-                <CardContent className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px]">
-                        {cls.minLevel}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {formattedDate}
-                      </span>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <MapPin className="h-3 w-3" />
-                        {cls.room}
-                      </span>
+              <Card key={cls.id} className="border shadow-xs overflow-hidden">
+                <CardContent className="p-4 flex flex-col gap-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px]">
+                          {cls.minLevel}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {formattedDate}
+                        </span>
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <MapPin className="h-3 w-3" />
+                          {cls.room}
+                        </span>
+                      </div>
+                      <h3 className="text-sm font-bold">{cls.title}</h3>
+                      <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground pt-1">
+                        <span className="font-semibold text-blue-700 dark:text-blue-300">
+                          Leads: {cls.leadsBooked}/{cls.maxLeads ?? cls.maxCapacity}
+                        </span>
+                        <span className="font-semibold text-rose-700 dark:text-rose-300">
+                          Follows: {cls.followsBooked}/
+                          {cls.maxFollows ?? cls.maxCapacity}
+                        </span>
+                        <span className="flex items-center gap-1.5 font-medium text-foreground">
+                          <TeacherAvatar
+                            name={cls.instructorName}
+                            avatarUrl={cls.instructorAvatarUrl}
+                            size="xs"
+                            showBadge={false}
+                          />
+                          <span>Maestro {cls.instructorName}</span>
+                        </span>
+                      </div>
                     </div>
-                    <h3 className="text-sm font-bold">{cls.title}</h3>
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground pt-1">
-                      <span className="font-semibold text-blue-700 dark:text-blue-300">
-                        Leads: {cls.leadsBooked}/{cls.maxLeads ?? cls.maxCapacity}
-                      </span>
-                      <span className="font-semibold text-rose-700 dark:text-rose-300">
-                        Follows: {cls.followsBooked}/
-                        {cls.maxFollows ?? cls.maxCapacity}
-                      </span>
-                      <span className="flex items-center gap-1.5 font-medium text-foreground">
-                        <TeacherAvatar
-                          name={cls.instructorName}
-                          avatarUrl={cls.instructorAvatarUrl}
-                          size="xs"
-                          showBadge={false}
-                        />
-                        <span>Maestro {cls.instructorName}</span>
-                      </span>
+
+                    <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+                      <Button variant="outline" size="sm" asChild className="text-xs h-8">
+                        <Link href={`/checkin/${cls.id}`}>
+                          <QrCode className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                          Door QR
+                        </Link>
+                      </Button>
+                      <Button variant="secondary" size="sm" asChild className="text-xs h-8">
+                        <Link href="/instructor/roster">
+                          <CheckCircle2 className="mr-1.5 h-3.5 w-3.5 text-emerald-500" />
+                          Roster
+                        </Link>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => (isEditing ? setEditingClassId(null) : handleStartEdit(cls))}
+                        className="text-xs h-8 px-2 text-muted-foreground hover:text-foreground"
+                        title="Edit Room & Capacity"
+                      >
+                        <Settings2 className="h-3.5 w-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => {
+                          setCancellingClassId(isCancelling ? null : cls.id);
+                          setEditingClassId(null);
+                        }}
+                        className="text-xs h-8 px-2 text-rose-600 hover:text-rose-700 hover:bg-rose-500/10"
+                        title="Cancel Class & Refund Students"
+                      >
+                        <Ban className="h-3.5 w-3.5" />
+                      </Button>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0">
-                    <Button variant="outline" size="sm" asChild className="text-xs">
-                      <Link href={`/checkin/${cls.id}`}>
-                        <QrCode className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
-                        QR Check-In
-                      </Link>
-                    </Button>
-                    <Button variant="secondary" size="sm" asChild className="text-xs">
-                      <Link href="/instructor/roster">
-                        <CheckCircle2 className="mr-1.5 h-3.5 w-3.5 text-emerald-500" />
-                        Roster
-                      </Link>
-                    </Button>
-                  </div>
+                  {/* Inline Room & Capacity Editor */}
+                  {isEditing && (
+                    <div className="rounded-xl border bg-muted/40 p-3 space-y-3 mt-1 text-xs animate-in fade-in duration-150">
+                      <div className="flex items-center justify-between pb-1 border-b">
+                        <span className="font-bold text-foreground flex items-center gap-1.5">
+                          <Settings2 className="h-3.5 w-3.5 text-accent-tangerine" />
+                          Adjust Studio Room & Capacity Limits
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setEditingClassId(null)}
+                          className="text-muted-foreground hover:text-foreground"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <div className="space-y-1">
+                          <label className="text-[11px] text-muted-foreground font-semibold">
+                            Studio Room
+                          </label>
+                          <input
+                            type="text"
+                            value={editRoom}
+                            onChange={(e) => setEditRoom(e.target.value)}
+                            className="w-full rounded-lg border bg-background px-2.5 py-1.5 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[11px] text-muted-foreground font-semibold">
+                            Total Capacity
+                          </label>
+                          <input
+                            type="number"
+                            min={4}
+                            max={100}
+                            value={editMaxCapacity}
+                            onChange={(e) => setEditMaxCapacity(Number(e.target.value))}
+                            className="w-full rounded-lg border bg-background px-2.5 py-1.5 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[11px] text-muted-foreground font-semibold">
+                            Max Leads
+                          </label>
+                          <input
+                            type="number"
+                            min={2}
+                            max={50}
+                            value={editMaxLeads}
+                            onChange={(e) => setEditMaxLeads(Number(e.target.value))}
+                            className="w-full rounded-lg border bg-background px-2.5 py-1.5 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[11px] text-muted-foreground font-semibold">
+                            Max Follows
+                          </label>
+                          <input
+                            type="number"
+                            min={2}
+                            max={50}
+                            value={editMaxFollows}
+                            onChange={(e) => setEditMaxFollows(Number(e.target.value))}
+                            className="w-full rounded-lg border bg-background px-2.5 py-1.5 text-xs"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex justify-end gap-2 pt-1">
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => setEditingClassId(null)}
+                          className="text-xs h-7"
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          size="sm"
+                          disabled={isPending}
+                          onClick={() => handleSaveEdit(cls.id)}
+                          className="bg-accent-tangerine hover:bg-accent-tangerine/90 text-zinc-950 font-bold text-xs h-7"
+                        >
+                          {isPending ? (
+                            <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                          ) : (
+                            <Save className="mr-1 h-3 w-3" />
+                          )}
+                          Save Adjustments
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Inline Class Cancellation & Refund Prompt */}
+                  {isCancelling && (
+                    <div className="rounded-xl border border-rose-500/30 bg-rose-500/[0.06] p-3.5 space-y-2 mt-1 text-xs animate-in fade-in duration-150">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-rose-800 dark:text-rose-400 flex items-center gap-1.5">
+                          <Ban className="h-4 w-4" />
+                          Cancel Class & Automatically Refund {cls.leadsBooked + cls.followsBooked} Student(s)
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setCancellingClassId(null)}
+                          className="text-muted-foreground hover:text-foreground"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
+                      <p className="text-[11px] text-muted-foreground">
+                        This will transition all confirmed bookings to CANCELLED, credit back each student&apos;s class credits via a credit ledger refund, and record an audit trail event.
+                      </p>
+                      <div className="space-y-1 pt-1">
+                        <label className="text-[11px] font-semibold text-foreground">
+                          Reason for Cancellation (sent in student notification):
+                        </label>
+                        <input
+                          type="text"
+                          value={cancelReason}
+                          onChange={(e) => setCancelReason(e.target.value)}
+                          placeholder="e.g. Instructor emergency, venue unavailable..."
+                          className="w-full rounded-lg border bg-background px-3 py-1.5 text-xs"
+                        />
+                      </div>
+                      <div className="flex justify-end gap-2 pt-1">
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => setCancellingClassId(null)}
+                          className="text-xs h-7"
+                        >
+                          Abort
+                        </Button>
+                        <Button
+                          size="sm"
+                          disabled={isPending}
+                          onClick={() => handleCancelClass(cls.id)}
+                          className="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs h-7"
+                        >
+                          {isPending ? (
+                            <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                          ) : (
+                            <Ban className="mr-1 h-3 w-3" />
+                          )}
+                          Confirm Cancellation & Refund Credits
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             );

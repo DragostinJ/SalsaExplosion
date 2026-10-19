@@ -13,6 +13,7 @@ import {
   Role,
   TicketPaymentStatus,
   TransactionType,
+  SubscriptionStatus,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, canSwitchRoles } from "@/lib/auth-user";
@@ -1382,6 +1383,209 @@ export async function replyAnonymousQuestionAction(
     return {
       success: false,
       error: { code: "INTERNAL_ERROR", message: "Could not save question response." },
+    };
+  }
+}
+
+// ==========================================
+// CLASS SESSION MUTATIONS: EDIT & CANCEL REFUNDS
+// ==========================================
+
+const CancelClassSessionSchema = z.object({
+  classSessionId: z.string().min(1),
+  reason: z.string().min(1).max(500),
+});
+
+export async function cancelClassSessionWithRefundsAction(
+  rawInput: z.infer<typeof CancelClassSessionSchema>
+): Promise<ManagementActionResponse<{ id: string; refundedCount: number }>> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
+      return {
+        success: false,
+        error: { code: "FORBIDDEN", message: "Only studio staff can cancel classes." },
+      };
+    }
+
+    const parsed = CancelClassSessionSchema.safeParse(rawInput);
+    if (!parsed.success) {
+      return {
+        success: false,
+        error: { code: "VALIDATION_ERROR", message: "Please provide a valid cancellation reason." },
+      };
+    }
+
+    const result = await prisma.$transaction(async (tx) => {
+      const classSession = await tx.classSession.findUnique({
+        where: { id: parsed.data.classSessionId },
+        include: {
+          bookings: {
+            where: { status: BookingStatus.CONFIRMED },
+            include: {
+              user: {
+                include: {
+                  subscription: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      if (!classSession) {
+        throw new Error("Class session not found.");
+      }
+
+      if (classSession.isCancelled) {
+        throw new Error("Class session is already cancelled.");
+      }
+
+      // 1. Mark session as cancelled
+      await tx.classSession.update({
+        where: { id: classSession.id },
+        data: { isCancelled: true },
+      });
+
+      let refundedCount = 0;
+
+      // 2. Cancel bookings & refund non-unlimited students
+      for (const booking of classSession.bookings) {
+        await tx.booking.update({
+          where: { id: booking.id },
+          data: {
+            status: BookingStatus.CANCELLED,
+            cancelledAt: new Date(),
+          },
+        });
+
+        const hasActiveSubscription =
+          booking.user.subscription?.status === SubscriptionStatus.ACTIVE;
+
+        // If dancer booked with credits (no active unlimited pass), refund their creditCost
+        if (!hasActiveSubscription && classSession.creditCost > 0) {
+          const updatedUser = await tx.user.update({
+            where: { id: booking.userId },
+            data: {
+              classCredits: { increment: classSession.creditCost },
+            },
+            select: { classCredits: true },
+          });
+
+          await tx.creditLedger.create({
+            data: {
+              userId: booking.userId,
+              amount: classSession.creditCost,
+              balanceAfter: updatedUser.classCredits,
+              type: TransactionType.CLASS_CANCELLATION_REFUND,
+              description: `Refund: Class cancellation for "${classSession.title}" (${parsed.data.reason})`,
+              bookingId: booking.id,
+            },
+          });
+
+          refundedCount++;
+        }
+      }
+
+      return { classSession, refundedCount, totalBookings: classSession.bookings.length };
+    });
+
+    await recordAuditLog({
+      actorId: user.id,
+      action: AuditAction.REFUND,
+      targetType: "ClassSession",
+      targetId: parsed.data.classSessionId,
+      metadata: {
+        reason: parsed.data.reason,
+        refundedCreditsCount: result.refundedCount,
+        totalBookingsCancelled: result.totalBookings,
+      },
+    });
+
+    revalidatePath("/admin/classes");
+    revalidatePath("/dashboard/schedule");
+    revalidatePath("/dashboard/wallet");
+    revalidatePath("/instructor/roster");
+
+    return {
+      success: true,
+      data: { id: parsed.data.classSessionId, refundedCount: result.refundedCount },
+      message: `Class cancelled successfully. Refunded ${result.refundedCount} student credit(s).`,
+    };
+  } catch (error) {
+    console.error("[cancelClassSessionWithRefundsAction]", error);
+    const message = error instanceof Error ? error.message : "Failed to cancel class session.";
+    return {
+      success: false,
+      error: { code: "INTERNAL_ERROR", message },
+    };
+  }
+}
+
+const UpdateClassSessionCapacitySchema = z.object({
+  classSessionId: z.string().min(1),
+  maxCapacity: z.number().int().min(1).max(200),
+  maxLeads: z.number().int().min(0).max(100).nullable().optional(),
+  maxFollows: z.number().int().min(0).max(100).nullable().optional(),
+  room: z.string().min(1).max(100),
+});
+
+export async function updateClassSessionCapacityAction(
+  rawInput: z.infer<typeof UpdateClassSessionCapacitySchema>
+): Promise<ManagementActionResponse<{ id: string }>> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
+      return {
+        success: false,
+        error: { code: "FORBIDDEN", message: "Only studio staff can update class capacity." },
+      };
+    }
+
+    const parsed = UpdateClassSessionCapacitySchema.safeParse(rawInput);
+    if (!parsed.success) {
+      return {
+        success: false,
+        error: { code: "VALIDATION_ERROR", message: "Invalid class room or capacity values." },
+      };
+    }
+
+    const updated = await prisma.classSession.update({
+      where: { id: parsed.data.classSessionId },
+      data: {
+        room: parsed.data.room,
+        maxCapacity: parsed.data.maxCapacity,
+        maxLeads: parsed.data.maxLeads,
+        maxFollows: parsed.data.maxFollows,
+      },
+    });
+
+    await recordAuditLog({
+      actorId: user.id,
+      action: AuditAction.EVENT_MUTATION,
+      targetType: "ClassSession",
+      targetId: updated.id,
+      metadata: {
+        room: parsed.data.room,
+        maxCapacity: parsed.data.maxCapacity,
+        maxLeads: parsed.data.maxLeads,
+        maxFollows: parsed.data.maxFollows,
+      },
+    });
+
+    revalidatePath("/admin/classes");
+    revalidatePath("/dashboard/schedule");
+
+    return {
+      success: true,
+      data: { id: updated.id },
+      message: `Class session capacity and room updated successfully.`,
+    };
+  } catch (error) {
+    console.error("[updateClassSessionCapacityAction]", error);
+    return {
+      success: false,
+      error: { code: "INTERNAL_ERROR", message: "Failed to update class session capacity." },
     };
   }
 }

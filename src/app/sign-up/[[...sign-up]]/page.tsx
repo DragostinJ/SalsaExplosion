@@ -1,4 +1,15 @@
+import { Metadata } from "next";
 import { SignUp } from "@clerk/nextjs";
+
+export const metadata: Metadata = {
+  title: "Create Free Student Account | Salsa Explosion UK",
+  description:
+    "Join Salsa Explosion UK to claim your Free Welcome Pass, book Cuban Casino classes at BOH Studios Bournemouth, and track your syllabus progression.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function SignUpPage() {
   return (
@@ -7,3 +18,4 @@ export default function SignUpPage() {
     </div>
   );
 }
+

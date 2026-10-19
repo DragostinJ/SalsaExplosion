@@ -35,6 +35,17 @@ export const metadata: Metadata = {
       { url: "/favicon.svg", type: "image/svg+xml" },
     ],
   },
+  manifest: "/manifest.webmanifest",
+  creator: "Enrique Perez Valdes",
+  keywords: [
+    "Cuban Salsa Bournemouth",
+    "Salsa Explosion",
+    "Enrique Perez Valdes",
+    "Rueda de Casino Bournemouth",
+    "BOH Studios",
+    "Bournemouth Cuban Salsa Congress",
+    "Dance Classes Dorset",
+  ],
   openGraph: {
     title: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
     description:

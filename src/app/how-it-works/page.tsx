@@ -24,9 +24,9 @@ import { BackButton } from "@/components/navigation/back-button";
 import { LaunchTourButton } from "@/components/onboarding/launch-tour-button";
 
 export const metadata = {
-  title: "How It Works | Cuban Salsa Academy Operating System | RitmoFlow",
+  title: "How It Works | Cuban Salsa Academy • Salsa Explosion",
   description:
-    "Learn how RitmoFlow balances Lead/Follow ratios with zero partners needed, advances students through a 4-tier Cuban syllabus, provides AI video feedback, and offers 1-second QR door check-in.",
+    "Learn how Salsa Explosion balances Lead/Follow ratios with zero partners needed, advances students through a 4-tier Cuban syllabus, provides AI video feedback, and offers 1-second QR door check-in.",
 };
 
 export default function HowItWorksPage() {
@@ -51,11 +51,11 @@ export default function HowItWorksPage() {
           </div>
 
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl leading-tight drop-shadow-sm">
-            How RitmoFlow Powers Your Dance Journey
+            How Salsa Explosion Powers Your Dance Journey
           </h1>
 
           <p className="text-base sm:text-lg text-amber-50/95 leading-relaxed font-normal">
-            Traditional dance studios struggle with unbalanced classes, lost cash, long door queues, and forgotten moves. RitmoFlow is an all-in-one operating system built specifically for Cuban Salsa academies, social dancers, and visiting masterclasses.
+            Traditional dance studios struggle with unbalanced classes, lost cash, long door queues, and forgotten moves. Salsa Explosion provides an all-in-one platform built specifically for Cuban Salsa academies, social dancers, and visiting masterclasses.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-3">
@@ -83,7 +83,7 @@ export default function HowItWorksPage() {
       <section className="space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <Badge variant="outline" className="text-xs font-bold border-amber-500/40 text-amber-700 dark:text-amber-400">
-            The RitmoFlow Difference
+            The Salsa Explosion Difference
           </Badge>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             5 Principles That Make Every Class Electric
@@ -107,7 +107,7 @@ export default function HowItWorksPage() {
                 No Partner Required — Ever!
               </CardTitle>
               <CardDescription className="text-xs leading-relaxed">
-                In Cuban Salsa (Casino & Rueda de Casino), we dance in a rotating circle. RitmoFlow dynamically monitors <strong>Lead</strong> vs <strong>Follow</strong> reservations in real time. If one role reaches capacity, reservations pause until the opposite role books. You will spend your class dancing, never sitting out!
+                In Cuban Salsa (Casino & Rueda de Casino), we dance in a rotating circle. Salsa Explosion dynamically monitors <strong>Lead</strong> vs <strong>Follow</strong> reservations in real time. If one role reaches capacity, reservations pause until the opposite role books. You will spend your class dancing, never sitting out!
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-0">
@@ -279,7 +279,7 @@ export default function HowItWorksPage() {
             </div>
             <h3 className="font-bold text-sm">Select Your Role</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Choose <strong>Lead</strong> or <strong>Follow</strong> on the class card. RitmoFlow validates real-time role ratios to keep the class balanced.
+              Choose <strong>Lead</strong> or <strong>Follow</strong> on the class card. Salsa Explosion validates real-time role ratios to keep the class balanced.
             </p>
           </div>
 
@@ -342,7 +342,7 @@ export default function HowItWorksPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="text-xs text-muted-foreground leading-relaxed">
-              Yes, 100%! Cuban Salsa (Casino) is social and conversational. In Rueda de Casino, dancers rotate constantly. RitmoFlow caps bookings so that the number of Leads and Follows matches, ensuring everyone gets equal partner time.
+              Yes, 100%! Cuban Salsa (Casino) is social and conversational. In Rueda de Casino, dancers rotate constantly. Salsa Explosion caps bookings so that the number of Leads and Follows matches, ensuring everyone gets equal partner time.
             </CardContent>
           </Card>
 

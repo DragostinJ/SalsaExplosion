@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { updateMyDanceRolePreferenceAction } from "@/actions/management.actions";
 import { triggerStudioTutorial } from "@/components/onboarding/interactive-tutorial-modal";
 
-const ONBOARDING_DISMISS_KEY = "ritmoflow_onboarding_guide_dismissed_v1";
+const ONBOARDING_DISMISS_KEY = "salsa_explosion_onboarding_guide_dismissed_v1";
 
 interface NewDancerOnboardingProps {
   studentName: string;

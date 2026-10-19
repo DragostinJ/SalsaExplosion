@@ -49,7 +49,7 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Welcome to Salsa Explosion UK. Experience 25+ years of authentic Cuban Casino, Rueda de Casino, and Son. Powered by the RitmoFlow operating system with role-balanced partner rotations, 4-tier syllabus tracking, student recap videos, and official congress passes.
+              Welcome to Salsa Explosion UK. Experience 25+ years of authentic Cuban Casino, Rueda de Casino, and Son with role-balanced partner rotations, 4-tier syllabus tracking, student recap videos, and official congress passes.
             </p>
 
             {/* Quick Stats Pill Bar */}

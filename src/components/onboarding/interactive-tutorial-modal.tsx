@@ -20,8 +20,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-const TUTORIAL_STORAGE_KEY = "ritmoflow_studio_tutorial_seen_v1";
-export const OPEN_TUTORIAL_EVENT = "ritmoflow:open-tutorial";
+const TUTORIAL_STORAGE_KEY = "salsa_explosion_studio_tutorial_seen_v1";
+export const OPEN_TUTORIAL_EVENT = "salsa_explosion:open-tutorial";
 
 export function triggerStudioTutorial() {
   if (typeof window !== "undefined") {
@@ -230,7 +230,7 @@ export function InteractiveTutorialModal({
               {step === 0 && (
                 <div className="space-y-4">
                   <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    In Cuban Salsa (<strong>Casino & Rueda de Casino</strong>), we dance in a rotating circle. You <strong>never need to bring a partner</strong> because RitmoFlow automatically balances <strong>Leads</strong> and <strong>Follows</strong> before class starts!
+                    In Cuban Salsa (<strong>Casino & Rueda de Casino</strong>), we dance in a rotating circle. You <strong>never need to bring a partner</strong> because Salsa Explosion automatically balances <strong>Leads</strong> and <strong>Follows</strong> before class starts!
                   </p>
 
                   {/* Interactive Role Simulator */}

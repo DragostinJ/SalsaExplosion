@@ -12,7 +12,7 @@ import { StudentProgressionDirectory } from "@/components/instructor/student-pro
 import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
-  title: "Student Progression & Credit Directory | RitmoFlow Instructor",
+  title: "Student Progression & Credit Directory | Salsa Explosion Instructor",
   description:
     "View student Cuban Salsa levels, promote dancers in real time, balance Lead/Follow roles, and manage class credits.",
 };

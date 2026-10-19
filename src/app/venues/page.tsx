@@ -271,7 +271,7 @@ export default function VenuesGuidePage() {
             </div>
             <h3 className="font-bold text-sm">1-Second QR Check-In</h3>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Arrive 10 minutes before class. Simply pull up your class pass QR code from your RitmoFlow dashboard on your phone for immediate check-in at the BOH Studios door.
+              Arrive 10 minutes before class. Simply pull up your class pass QR code from your Salsa Explosion dashboard on your phone for immediate check-in at the BOH Studios door.
             </p>
           </div>
         </div>

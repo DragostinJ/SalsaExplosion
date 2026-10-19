@@ -14,7 +14,7 @@ import {
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("🌱 Seeding RitmoFlow database...");
+  console.log("🌱 Seeding Salsa Explosion database...");
 
   // 1. Clean existing seeded records while preserving real Clerk users
   await prisma.eventRegistration.deleteMany();
@@ -554,7 +554,7 @@ async function main() {
     });
   }
 
-  console.log("✅ RitmoFlow database seeded successfully!");
+  console.log("✅ Salsa Explosion database seeded successfully!");
 }
 
 main()

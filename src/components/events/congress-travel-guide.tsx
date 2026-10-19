@@ -45,7 +45,7 @@ const FAQS: FaqItem[] = [
   {
     question: "Can I upgrade my pass at the door if tier spaces are still available?",
     answer:
-      "Yes, subject to Lead/Follow balance availability. However, Congress passes usually sell out in advance to ensure dance floor comfort, so booking early via your RitmoFlow account is strongly advised.",
+      "Yes, subject to Lead/Follow balance availability. However, Congress passes usually sell out in advance to ensure dance floor comfort, so booking early via your Salsa Explosion account is strongly advised.",
   },
 ];
 

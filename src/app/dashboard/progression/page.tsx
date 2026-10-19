@@ -153,7 +153,7 @@ export default async function ProgressionPage() {
               </CardTitle>
             </div>
             <CardDescription className="text-sm">
-              Congratulations! You have unlocked all Cuban Salsa levels at RitmoFlow. You are eligible to book every class on the schedule.
+              Congratulations! You have unlocked all Cuban Salsa levels at Salsa Explosion. You are eligible to book every class on the schedule.
             </CardDescription>
           </CardHeader>
           <CardContent>

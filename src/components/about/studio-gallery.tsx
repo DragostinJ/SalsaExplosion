@@ -69,7 +69,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     id: "photo-6",
     title: "Community Smiles & Post-Class Recaps",
     caption:
-      "The best part of RitmoFlow: community, laughter, and dancers filming the end-of-class recap to practice with friends.",
+      "The best part of Salsa Explosion: community, laughter, and dancers filming the end-of-class recap to practice with friends.",
     category: "STUDIO_LIFE",
     imageUrl:
       "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80",

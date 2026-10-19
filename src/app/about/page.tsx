@@ -84,7 +84,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* 2. The 3 Core Pillars of RitmoFlow */}
+      {/* 2. The 3 Core Pillars of Salsa Explosion */}
       <section className="space-y-6">
         <div className="text-center space-y-1">
           <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">

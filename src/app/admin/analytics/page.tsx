@@ -16,7 +16,7 @@ import { AnalyticsCharts } from "@/components/admin/analytics-charts";
 import { CsvExportToolbar } from "@/components/admin/csv-export-toolbar";
 
 export const metadata = {
-  title: "Studio Analytics & Executive Intelligence | RitmoFlow",
+  title: "Studio Analytics & Executive Intelligence | Salsa Explosion",
   description:
     "Real-time metrics on studio revenue, student retention, role balance, and syllabus level progression.",
 };

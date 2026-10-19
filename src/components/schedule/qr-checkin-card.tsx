@@ -116,7 +116,7 @@ export function QrCheckInCard({
           <QrCode className="h-6 w-6 text-white" />
         </div>
         <Badge className="bg-black/30 text-white border-none">
-          RitmoFlow Studio Door Check-In
+          Salsa Explosion Studio Door Check-In
         </Badge>
         <h1 className="text-xl font-extrabold leading-snug">{session.title}</h1>
       </div>

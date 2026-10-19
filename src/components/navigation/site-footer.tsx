@@ -177,7 +177,7 @@ export function SiteFooter() {
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-amber-700 dark:text-amber-400 font-semibold">
               <Flame className="h-3 w-3 fill-current" />
-              Powered by RitmoFlow Dance OS
+              Salsa Explosion Dance Academy
             </span>
             <Link href="/how-it-works" className="hover:underline">
               Guide

@@ -38,7 +38,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", "ritmoflow-studio-analytics.csv");
+    link.setAttribute("download", "salsa-explosion-studio-analytics.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

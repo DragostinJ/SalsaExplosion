@@ -45,7 +45,7 @@ export async function getOrProvisionCurrentUser() {
   const primaryEmail =
     clerkUser?.primaryEmailAddress?.emailAddress ??
     clerkUser?.emailAddresses[0]?.emailAddress ??
-    `${clerkId}@ritmoflow.local`;
+    `${clerkId}@salsaexplosion.local`;
 
   const isAdmin = isBootstrapAdmin(primaryEmail);
 

@@ -10,7 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
-  title: "Guest Artist Events & Door Pass Scanner | RitmoFlow Admin",
+  title: "Guest Artist Events & Door Pass Scanner | Salsa Explosion Admin",
   description:
     "Launch international guest artist bootcamps, track direct Stripe ticket sales, and verify QR passes at the door.",
 };

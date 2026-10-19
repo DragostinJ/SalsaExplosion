@@ -20,7 +20,6 @@ import {
   Compass,
   HelpCircle,
   MapPin,
-  Music,
 } from "lucide-react";
 
 import type { Role } from "@prisma/client";
@@ -67,12 +66,6 @@ export function SiteHeader({ role }: SiteHeaderProps) {
       label: "Recaps",
       icon: Video,
       active: pathname.startsWith("/dashboard/recaps"),
-    },
-    {
-      href: "/dashboard/rhythm",
-      label: "Rhythm",
-      icon: Music,
-      active: pathname.startsWith("/dashboard/rhythm"),
     },
     {
       href: "/dashboard/progression",

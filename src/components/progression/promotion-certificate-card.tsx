@@ -31,7 +31,7 @@ export function PromotionCertificateCard({
   const [copied, setCopied] = useState(false);
   const [showStoryModal, setShowStoryModal] = useState(false);
 
-  const shareText = `🔥 Officially verified ${currentLevel} Cuban Salsa (${preferredRole}) dancer at RitmoFlow Casino & Rueda Academy! #CubanSalsa #RuedaDeCasino #RitmoFlow`;
+  const shareText = `🔥 Officially verified ${currentLevel} Cuban Salsa (${preferredRole}) dancer at Salsa Explosion Cuban Salsa & Rueda Academy! #CubanSalsa #RuedaDeCasino #SalsaExplosion`;
 
   const handleShareBadge = async () => {
     try {
@@ -52,7 +52,7 @@ export function PromotionCertificateCard({
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-1 text-xs font-bold text-amber-300">
               <Flame className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-              <span>RitmoFlow Verified Dancer Credential</span>
+              <span>Salsa Explosion Verified Dancer Credential</span>
             </div>
 
             <div>
@@ -195,7 +195,7 @@ export function PromotionCertificateCard({
                   Come dance with us this week! 💃🕺
                 </p>
                 <p className="text-[9px] text-amber-400/90 font-mono">
-                  ritmoflow.studio • #LaRuedaNoPara
+                  salsaexplosion.co.uk • #LaRuedaNoPara
                 </p>
               </div>
             </div>

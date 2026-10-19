@@ -11,7 +11,7 @@ import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
-  title: "Class Recaps & Attended Figures | RitmoFlow",
+  title: "Class Recaps & Attended Figures | Salsa Explosion",
   description:
     "Review end-of-class recap videos, Cuban salsa combinations, and instructor notes from every class you attended.",
 };

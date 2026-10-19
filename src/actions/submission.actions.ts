@@ -126,7 +126,7 @@ export async function generateSignedUploadUrlAction(rawInput: {
     if (user.currentLevel === DanceLevel.ADVANCED) {
       throw new SubmissionDomainError(
         "MAX_LEVEL_REACHED",
-        "You have already unlocked ADVANCED (the highest Cuban Salsa tier at RitmoFlow)!"
+        "You have already unlocked ADVANCED (the highest Cuban Salsa tier at Salsa Explosion)!"
       );
     }
 

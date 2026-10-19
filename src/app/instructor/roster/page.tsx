@@ -8,7 +8,7 @@ import { ClassRosterWorkspace } from "@/components/instructor/class-roster-works
 import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
-  title: "Live Class Roster & QR Check-In | RitmoFlow Instructor",
+  title: "Live Class Roster & QR Check-In | Salsa Explosion Instructor",
   description:
     "Mobile-first studio desk roster showing real-time Lead/Follow floor balance and QR code door check-ins.",
 };

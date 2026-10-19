@@ -78,7 +78,7 @@ export async function exportRevenueLedgerCsvAction(): Promise<CsvExportResult> {
 
     return {
       success: true,
-      filename: `ritmoflow-revenue-ledger-${dateStamp}.csv`,
+      filename: `salsa-explosion-revenue-ledger-${dateStamp}.csv`,
       csvContent,
     };
   } catch (err: unknown) {
@@ -136,7 +136,7 @@ export async function exportStudentRosterCsvAction(): Promise<CsvExportResult> {
 
     return {
       success: true,
-      filename: `ritmoflow-student-roster-${dateStamp}.csv`,
+      filename: `salsa-explosion-student-roster-${dateStamp}.csv`,
       csvContent,
     };
   } catch (err: unknown) {

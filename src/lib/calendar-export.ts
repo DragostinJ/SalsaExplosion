@@ -21,7 +21,7 @@ export function downloadIcsFile(event: CalendarEventDetails) {
   const icsContent = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Salsa Explosion UK//RitmoFlow//EN",
+    "PRODID:-//Salsa Explosion UK//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",

@@ -149,17 +149,17 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     }
   });
 
-  test("6. Cuban Clave & Rhythm Trainer renders tempo controls and Web Audio drills", async ({
+  test("6. About page renders Maestro Enrique Perez Valdes heritage and faculty", async ({
     page,
   }) => {
-    await page.goto("/dashboard/rhythm", { waitUntil: "domcontentloaded" });
+    await page.goto("/about", { waitUntil: "domcontentloaded" });
 
     await expect(
-      page.getByText("Cuban Clave & Rhythm Trainer")
+      page.getByText("Bournemouth's Cuban Rhythm.")
     ).toBeVisible();
-    await expect(page.getByText("2-3 Son Clave").first()).toBeVisible();
-    await expect(page.getByText("3-2 Son Clave").first()).toBeVisible();
-    await expect(page.getByText(/Campana/i).first()).toBeVisible();
+    await expect(
+      page.getByText(/Enrique Perez Valdes/i).first()
+    ).toBeVisible();
   });
 
   test("7. Rueda de Casino Call Dictionary renders authentic calls, hand signals, and level filter", async ({

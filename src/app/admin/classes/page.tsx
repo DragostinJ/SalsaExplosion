@@ -7,7 +7,7 @@ import { ClassManagerWorkspace } from "@/components/admin/class-manager-workspac
 import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
-  title: "Weekly Class Manager | RitmoFlow Admin",
+  title: "Weekly Class Manager | Salsa Explosion Admin",
   description:
     "Create and manage Cuban Salsa weekly class sessions, Lead/Follow capacity limits, and QR attendance rosters.",
 };

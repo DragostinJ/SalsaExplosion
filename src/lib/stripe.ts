@@ -5,7 +5,7 @@ const stripeSecretKey = process.env.STRIPE_SECRET_KEY || "sk_test_placeholder_fo
 export const stripe = new Stripe(stripeSecretKey, {
   typescript: true,
   appInfo: {
-    name: "RitmoFlow Dance Studio",
+    name: "Salsa Explosion Dance Studio",
     version: "1.0.0",
   },
 });

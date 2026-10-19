@@ -14,9 +14,27 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { SocialProofGrid } from "@/components/marketing/social-proof-grid";
+import { prisma } from "@/lib/prisma";
 
-export default function Home() {
+export default async function Home() {
+  const upcomingEvents = await prisma.event.findMany({
+    where: { status: "PUBLISHED" },
+    orderBy: { startDate: "asc" },
+    take: 3,
+    include: {
+      ticketTiers: {
+        orderBy: { priceInCents: "asc" },
+      },
+    },
+  });
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <main className="flex-1">
@@ -158,6 +176,105 @@ export default function Home() {
 
         {/* Interactive Social Proof & Media Grid */}
         <SocialProofGrid />
+
+        {/* Incoming Events & Social Parties Showcase */}
+        {upcomingEvents.length > 0 && (
+          <section className="py-14 border-t bg-gradient-to-b from-background via-amber-500/[0.02] to-background">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                <div>
+                  <Badge variant="outline" className="text-xs font-semibold mb-2 border-amber-500/40 text-amber-700 dark:text-amber-300 bg-amber-500/10">
+                    Live Event Calendar
+                  </Badge>
+                  <h2 className="text-2xl font-extrabold sm:text-3xl tracking-tight">
+                    Upcoming Salsa Explosion Nights & Festivals
+                  </h2>
+                  <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
+                    From weekly Thursday parties at BOH Studios to flagship weekend Congresses in Bournemouth.
+                  </p>
+                </div>
+                <Button asChild variant="outline" size="sm" className="shrink-0 text-xs font-bold border-amber-500/30">
+                  <Link href="/events">
+                    Browse All Passes & Events
+                    <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-3">
+                {upcomingEvents.map((evt) => {
+                  const minPrice = evt.ticketTiers[0]?.priceInCents
+                    ? `£${(evt.ticketTiers[0].priceInCents / 100).toFixed(0)}`
+                    : "TBA";
+
+                  const startFormatted = new Intl.DateTimeFormat("en-GB", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  }).format(new Date(evt.startDate));
+
+                  return (
+                    <Card
+                      key={evt.id}
+                      className="flex flex-col overflow-hidden border shadow-xs hover:shadow-md transition-all group hover:border-amber-500/50"
+                    >
+                      <div className="relative h-36 w-full bg-gradient-to-tr from-amber-700 via-orange-600 to-amber-500 p-5 text-white flex flex-col justify-between">
+                        <div className="flex items-center justify-between">
+                          <Badge className="bg-black/40 text-white border-none text-[10px] backdrop-blur-sm">
+                            {evt.slug.includes("congress") ? "Flagship Congress" : "Social Night & Class"}
+                          </Badge>
+                          <span className="text-[11px] font-bold bg-white/20 px-2 py-0.5 rounded-full backdrop-blur-sm">
+                            From {minPrice}
+                          </span>
+                        </div>
+                        <h3 className="text-base font-extrabold leading-snug drop-shadow-sm line-clamp-2">
+                          {evt.title}
+                        </h3>
+                      </div>
+
+                      <CardHeader className="p-4 pb-2">
+                        <div className="flex flex-wrap gap-1 mb-2">
+                          {evt.guestArtists.slice(0, 3).map((artist) => (
+                            <Badge
+                              key={artist}
+                              variant="secondary"
+                              className="text-[10px] bg-amber-500/10 text-amber-700 dark:text-amber-300 font-semibold"
+                            >
+                              ★ {artist}
+                            </Badge>
+                          ))}
+                        </div>
+                        <CardDescription className="line-clamp-2 text-xs">
+                          {evt.description}
+                        </CardDescription>
+                      </CardHeader>
+
+                      <CardContent className="p-4 pt-1 space-y-1.5 text-xs text-muted-foreground flex-1">
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+                          <span>{startFormatted}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <MapPin className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+                          <span className="truncate">{evt.venueName}</span>
+                        </div>
+                      </CardContent>
+
+                      <CardFooter className="p-4 pt-2 border-t">
+                        <Button asChild size="sm" className="w-full text-xs font-bold bg-primary hover:bg-primary/90">
+                          <Link href={`/events/${evt.slug}`}>
+                            Reserve Pass
+                            <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                          </Link>
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* 3-Portal Interactive Showcase */}
         <section className="py-14 border-t bg-muted/20">

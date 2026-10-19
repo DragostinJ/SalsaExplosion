@@ -465,7 +465,8 @@ async function main() {
     },
   });
 
-  // 7. Create Premiere Guest Artist Event (Bournemouth Summer Cuban Salsa Congress)
+  // 7. Create Premiere Events Lineup (Salsa Explosion UK)
+  // Flagship Congress
   const guestEvent = await prisma.event.create({
     data: {
       slug: "bournemouth-summer-cuban-salsa-congress-2026",
@@ -473,7 +474,7 @@ async function main() {
       description:
         "The UK's flagship Cuban dance festival! 3 days of intensive Cuban Salsa, Rueda de Casino, and Afro-Cuban masterclasses with world-class maestros from Cuba, culminating in our legendary Havana Fiesta Gala Party nights overlooking Bournemouth beach.",
       venueName: "The Roundhouse Hotel & BOH Studios",
-      venueAddress: "Meyrick Road, Bournemouth, BH1 2PR",
+      venueAddress: "Meyrick Road & 104 Commercial Rd, Bournemouth, BH1 2PR",
       startDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
       endDate: new Date(Date.now() + 16 * 24 * 60 * 60 * 1000),
       guestArtists: ["Enrique Perez Valdes", "Yaniel Castillo", "Fredy Clan", "DJ Enrique"],
@@ -514,6 +515,123 @@ async function main() {
     include: { ticketTiers: true },
   });
 
+  // Event 2: Made in Cuba! Thursday Salsa & Rueda Fiesta
+  const madeInCubaEvent = await prisma.event.create({
+    data: {
+      slug: "made-in-cuba-thursday-fiesta",
+      title: "Made in Cuba! Thursday Salsa & Rueda Fiesta",
+      description:
+        "Bournemouth's legendary weekly Thursday Cuban night at BOH Studios! 2 hours of high-energy classes (Beginners, Improvers, and Advanced Rueda de Casino) followed by pure Timba, Cuban Salsa, and Bachata social dancing until midnight with DJ Enrique & special guest instructors.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Rd, Bournemouth, BH2 5LR",
+      startDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      endDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000),
+      guestArtists: ["Enrique Perez Valdes", "Moe Flex", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "2-Hour Classes + Party Pass",
+            description:
+              "7:30 PM & 8:30 PM Cuban Salsa & Rueda classes (all levels) plus full entry to the social dance fiesta until midnight.",
+            priceInCents: 1200,
+            totalCapacity: 60,
+            maxLeads: 30,
+            maxFollows: 30,
+            salesEndAt: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+          },
+          {
+            name: "Social Dancing Fiesta Only (From 9:30 PM)",
+            description:
+              "Club social dance entry with DJ Enrique spinning 100% authentic Cuban Timba, Son, and Bachata.",
+            priceInCents: 600,
+            totalCapacity: 100,
+            salesEndAt: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+          },
+        ],
+      },
+    },
+    include: { ticketTiers: true },
+  });
+
+  // Event 3: BOH-Xplosion Monthly Saturday Gala & Masterclasses
+  const bohXplosionEvent = await prisma.event.create({
+    data: {
+      slug: "boh-xplosion-saturday-cuban-gala",
+      title: "BOH-Xplosion: Saturday Cuban Gala Night & Masterclasses",
+      description:
+        "Our monthly flagship 2-room Saturday dance party! Room 1: 100% Authentic Cuban Salsa, Timba & Son; Room 2: Sensual Bachata & Kizomba. Features an 8:00 PM Cuban Styling Masterclass, student showcase animations, and social dancing until 2:00 AM.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Rd, Bournemouth, BH2 5LR",
+      startDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+      endDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000),
+      guestArtists: ["Enrique Perez Valdes", "Yaniel Castillo", "Elena Reyes"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Full Masterclass & 2-Room Party Pass",
+            description:
+              "8:00 PM Son Cubano & Timba Partnerwork Masterclass + 2-Room Fiesta entry with showcases until 2:00 AM.",
+            priceInCents: 2000,
+            totalCapacity: 80,
+            maxLeads: 40,
+            maxFollows: 40,
+            salesEndAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+          },
+          {
+            name: "Party Only Pass (9:30 PM - 2:00 AM)",
+            description:
+              "Entry to the 2-room Saturday night social dance fiesta and live Cuban dance shows.",
+            priceInCents: 1200,
+            totalCapacity: 150,
+            salesEndAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+          },
+        ],
+      },
+    },
+    include: { ticketTiers: true },
+  });
+
+  // Event 4: Cuban Sundays Sunset Social & Workshop
+  const cubanSundaysEvent = await prisma.event.create({
+    data: {
+      slug: "cuban-sundays-sunset-social",
+      title: "Cuban Sundays: Sunset Social & Styling Workshop",
+      description:
+        "End your weekend with the ultimate Cuban dance fix! Afro-Cuban body movement and Cuban Son styling workshops from 6:00 PM, followed by relaxed social dancing with DJ Enrique spinning classic Casino, Changüí, and Son.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Rd, Bournemouth, BH2 5LR",
+      startDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000),
+      guestArtists: ["Enrique Perez Valdes", "Elena Reyes"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Workshop Intensive & Social Pass",
+            description:
+              "6:00 PM & 7:00 PM styling & Rueda workshops + Sunday evening social dance.",
+            priceInCents: 1000,
+            totalCapacity: 50,
+            maxLeads: 25,
+            maxFollows: 25,
+            salesEndAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+          },
+          {
+            name: "Sunday Social Only Entry (From 8:00 PM)",
+            description:
+              "Social dance admission with resident Cuban DJs.",
+            priceInCents: 500,
+            totalCapacity: 80,
+            salesEndAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+          },
+        ],
+      },
+    },
+    include: { ticketTiers: true },
+  });
+
   // Seed sample Event Registrations
   const fullPassTier = guestEvent.ticketTiers[0];
   if (fullPassTier) {
@@ -524,7 +642,7 @@ async function main() {
           eventId: guestEvent.id,
           ticketTierId: fullPassTier.id,
           role: DanceRole.FOLLOW,
-          qrCodeHash: "RF-PASS-SOFIA-001",
+          qrCodeHash: "SE-PASS-SOFIA-001",
           paymentStatus: TicketPaymentStatus.PAID,
           amountPaidInCents: 9500,
           checkedIn: false,
@@ -534,7 +652,7 @@ async function main() {
           eventId: guestEvent.id,
           ticketTierId: fullPassTier.id,
           role: DanceRole.LEAD,
-          qrCodeHash: "RF-PASS-MATEO-002",
+          qrCodeHash: "SE-PASS-MATEO-002",
           paymentStatus: TicketPaymentStatus.PAID,
           amountPaidInCents: 9500,
           checkedIn: true,
@@ -545,9 +663,87 @@ async function main() {
           eventId: guestEvent.id,
           ticketTierId: fullPassTier.id,
           role: DanceRole.FOLLOW,
-          qrCodeHash: "RF-PASS-LUCIA-003",
+          qrCodeHash: "SE-PASS-LUCIA-003",
           paymentStatus: TicketPaymentStatus.PAID,
           amountPaidInCents: 9500,
+          checkedIn: false,
+        },
+      ],
+    });
+  }
+
+  // Seed sample registrations for Made in Cuba Thursday
+  const madeInCubaTier = madeInCubaEvent.ticketTiers[0];
+  if (madeInCubaTier) {
+    await prisma.eventRegistration.createMany({
+      data: [
+        {
+          userId: student2.id,
+          eventId: madeInCubaEvent.id,
+          ticketTierId: madeInCubaTier.id,
+          role: DanceRole.LEAD,
+          qrCodeHash: "SE-THU-DAVID-001",
+          paymentStatus: TicketPaymentStatus.PAID,
+          amountPaidInCents: 1200,
+          checkedIn: false,
+        },
+        {
+          userId: student3.id,
+          eventId: madeInCubaEvent.id,
+          ticketTierId: madeInCubaTier.id,
+          role: DanceRole.FOLLOW,
+          qrCodeHash: "SE-THU-CAMILA-002",
+          paymentStatus: TicketPaymentStatus.PAID,
+          amountPaidInCents: 1200,
+          checkedIn: true,
+          checkedInAt: new Date(),
+        },
+      ],
+    });
+  }
+
+  // Seed sample registrations for BOH-Xplosion Saturday Gala
+  const bohTier = bohXplosionEvent.ticketTiers[0];
+  if (bohTier) {
+    await prisma.eventRegistration.createMany({
+      data: [
+        {
+          userId: student1.id,
+          eventId: bohXplosionEvent.id,
+          ticketTierId: bohTier.id,
+          role: DanceRole.FOLLOW,
+          qrCodeHash: "SE-SAT-SOFIA-001",
+          paymentStatus: TicketPaymentStatus.PAID,
+          amountPaidInCents: 2000,
+          checkedIn: false,
+        },
+        {
+          userId: student4.id,
+          eventId: bohXplosionEvent.id,
+          ticketTierId: bohTier.id,
+          role: DanceRole.LEAD,
+          qrCodeHash: "SE-SAT-MATEO-002",
+          paymentStatus: TicketPaymentStatus.PAID,
+          amountPaidInCents: 2000,
+          checkedIn: false,
+        },
+      ],
+    });
+  }
+
+  // Seed sample registrations for Cuban Sundays Sunset Social
+  const sundayTier = cubanSundaysEvent.ticketTiers[0];
+  if (sundayTier) {
+    await prisma.eventRegistration.createMany({
+      data: [
+        {
+          userId: student6.id,
+          eventId: cubanSundaysEvent.id,
+          ticketTierId: sundayTier.id,
+          role: DanceRole.LEAD,
+          qrCodeHash: "SE-SUN-JAMES-001",
+          paymentStatus: TicketPaymentStatus.PAID,
+          amountPaidInCents: 1000,
           checkedIn: false,
         },
       ],

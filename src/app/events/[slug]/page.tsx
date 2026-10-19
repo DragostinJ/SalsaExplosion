@@ -24,6 +24,7 @@ import {
 } from "@/components/events/event-pass-selector";
 import { AddToCalendarButton } from "@/components/calendar/add-to-calendar-button";
 import { CongressTravelGuide } from "@/components/events/congress-travel-guide";
+import { StudioEventGuide } from "@/components/events/studio-event-guide";
 
 interface EventDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -234,8 +235,12 @@ export default async function EventDetailPage({
         />
       </div>
 
-      {/* Bournemouth Congress Hotel, Travel & Festival Guide */}
-      <CongressTravelGuide />
+      {/* Venue & Event Guide */}
+      {event.slug.includes("congress") ? (
+        <CongressTravelGuide />
+      ) : (
+        <StudioEventGuide eventTitle={event.title} venueName={event.venueName} />
+      )}
     </main>
   );
 }

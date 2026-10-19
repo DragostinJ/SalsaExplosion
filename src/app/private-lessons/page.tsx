@@ -1,7 +1,12 @@
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Award } from "lucide-react";
-import { PrivateLessonsClient } from "@/components/lessons/private-lessons-client";
+import { prisma } from "@/lib/prisma";
+import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import {
+  PrivateLessonsClient,
+  SerializedPrivateLessonBooking,
+} from "@/components/lessons/private-lessons-client";
 
 export const metadata = {
   title: "1-on-1 Private Lessons & Coaching | Salsa Explosion Bournemouth",
@@ -9,7 +14,28 @@ export const metadata = {
     "Book bespoke private dance coaching with Cuban Maestro Enrique Perez Valdes, Yaniel Castillo, or Elena Reyes at BOH Studios Bournemouth.",
 };
 
-export default function PrivateLessonsPage() {
+export default async function PrivateLessonsPage() {
+  const user = await getOrProvisionCurrentUser();
+
+  let initialBookings: SerializedPrivateLessonBooking[] = [];
+  if (user) {
+    const rawBookings = await prisma.privateLessonBooking.findMany({
+      where: { studentId: user.id },
+      orderBy: { createdAt: "desc" },
+    });
+
+    initialBookings = rawBookings.map((b) => ({
+      id: b.id,
+      instructorName: b.instructorName,
+      focusTopic: b.focusTopic,
+      packageType: b.packageType,
+      preferredSlot: b.preferredSlot,
+      totalPricePounds: b.totalPricePounds,
+      status: b.status,
+      createdAtIso: b.createdAt.toISOString(),
+    }));
+  }
+
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
       <div>
@@ -39,8 +65,8 @@ export default function PrivateLessonsPage() {
         </div>
       </div>
 
-      {/* Private Lessons Booking Wizard */}
-      <PrivateLessonsClient />
+      {/* Private Lessons Booking Wizard with Initial Bookings */}
+      <PrivateLessonsClient initialBookings={initialBookings} />
     </main>
   );
 }

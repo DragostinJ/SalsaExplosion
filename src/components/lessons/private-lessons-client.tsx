@@ -1,90 +1,56 @@
 "use client";
 
-import { useState } from "react";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { useState, useTransition } from "react";
+import { CheckCircle2, ArrowRight, XCircle, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
-import { bookPrivateLessonAction } from "@/actions/lessons.actions";
+import {
+  bookPrivateLessonAction,
+  cancelPrivateLessonBookingAction,
+} from "@/actions/lessons.actions";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
+import {
+  COACHING_INSTRUCTORS_CATALOG,
+  COACHING_FOCUS_TOPICS,
+  CoachingInstructor,
+} from "@/lib/constants/coaching";
 
-interface InstructorProfile {
+export interface SerializedPrivateLessonBooking {
   id: string;
-  name: string;
-  title: string;
-  hourlyRatePounds: number;
-  blockRatePounds: number; // 5-hour package
-  specialties: string[];
-  avatarUrl?: string;
-  bio: string;
+  instructorName: string;
+  focusTopic: string;
+  packageType: string;
+  preferredSlot: string;
+  totalPricePounds: number;
+  status: string;
+  createdAtIso: string;
 }
 
-const INSTRUCTORS: InstructorProfile[] = [
-  {
-    id: "enrique",
-    name: "Enrique Perez Valdes",
-    title: "Founder & Director • Lifetime Achievement Recipient",
-    hourlyRatePounds: 65,
-    blockRatePounds: 275,
-    specialties: [
-      "Cuban Body Isolation & Despelote",
-      "Cantante Master Training",
-      "Authentic Cuban Son & Chachacha",
-      "Lead/Follow Tension Mechanics",
-    ],
-    bio: "Pioneered Cuban Salsa & Rueda in the UK for over 25 years. Tailored coaching for competitive dancers, social perfectionists, and wedding routines at BOH Studios.",
-  },
-  {
-    id: "yaniel",
-    name: "Yaniel Castillo",
-    title: "Guest Artist & Afro-Cuban Master",
-    hourlyRatePounds: 60,
-    blockRatePounds: 250,
-    specialties: [
-      "Afro-Cuban Rumba (Yambu & Guaguanco)",
-      "Orisha Body Isolations",
-      "Footwork Speed & Musicality",
-    ],
-    bio: "Internationally renowned Cuban artist bringing sacred Afro-Cuban movement and high-energy Timba body isolation to your dancing.",
-  },
-  {
-    id: "elena",
-    name: "Elena Reyes",
-    title: "Senior Academy Instructor",
-    hourlyRatePounds: 50,
-    blockRatePounds: 220,
-    specialties: [
-      "Follower Arm Styling & Spin Technique",
-      "Guapea Frame Sensitivity",
-      "Beginner-to-Social Confidence",
-    ],
-    bio: "Specializes in developing graceful styling, fluid armwork, and rapid confidence for beginners stepping onto the Bournemouth social floor.",
-  },
-];
+interface PrivateLessonsClientProps {
+  initialBookings?: SerializedPrivateLessonBooking[];
+}
 
-const FOCUS_TOPICS = [
-  "Cuban Motion, Ribcage & Afro-Isolation",
-  "Lead/Follow Elastic Tension & Frame Connection",
-  "Rueda de Casino Cantante (Calling) Mastery",
-  "Footwork Timing on the 1 vs Son on the 2",
-  "Wedding First Dance (Cuban Romance Routine)",
-  "Bournemouth Congress Intensive Preparation",
-];
-
-export function PrivateLessonsClient() {
-  const [selectedInstructor, setSelectedInstructor] = useState<string>("enrique");
+export function PrivateLessonsClient({
+  initialBookings = [],
+}: PrivateLessonsClientProps) {
+  const instructors = Object.values(COACHING_INSTRUCTORS_CATALOG);
+  const [bookings, setBookings] = useState<SerializedPrivateLessonBooking[]>(initialBookings);
+  const [selectedInstructor, setSelectedInstructor] = useState<"enrique" | "yaniel" | "elena">("enrique");
   const [selectedPackage, setSelectedPackage] = useState<"SINGLE" | "BLOCK">("SINGLE");
   const [dancerType, setDancerType] = useState<"SOLO" | "COUPLE">("SOLO");
-  const [selectedTopic, setSelectedTopic] = useState<string>(FOCUS_TOPICS[0]);
-  const [selectedDay, setSelectedDay] = useState<string>("Thursday Evening");
+  const [selectedTopic, setSelectedTopic] = useState<string>(COACHING_FOCUS_TOPICS[0]);
+  const [selectedDay, setSelectedDay] = useState<string>("Thursday Afternoon (BOH Studios)");
   const [notes, setNotes] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [cancellingId, setCancellingId] = useState<string | null>(null);
+  const [, startTransition] = useTransition();
 
-  const activeInstructor =
-    INSTRUCTORS.find((i) => i.id === selectedInstructor) ?? INSTRUCTORS[0];
+  const activeInstructor: CoachingInstructor =
+    COACHING_INSTRUCTORS_CATALOG[selectedInstructor] ?? COACHING_INSTRUCTORS_CATALOG.enrique;
 
   const price =
     selectedPackage === "SINGLE"
@@ -97,15 +63,29 @@ export function PrivateLessonsClient() {
     setErrorMessage(null);
     try {
       const res = await bookPrivateLessonAction({
-        instructorName: activeInstructor.name,
+        instructorId: selectedInstructor,
         focusTopic: selectedTopic,
         packageType: selectedPackage === "SINGLE" ? "SINGLE_1HR" : "BLOCK_5HR",
         preferredSlot: selectedDay,
-        totalPricePounds: price,
+        dancerType,
+        notes: notes || undefined,
       });
 
-      if (res.success) {
+      if (res.success && res.data) {
         setIsSubmitted(true);
+        setBookings((prev) => [
+          {
+            id: res.data!.bookingId,
+            instructorName: activeInstructor.name,
+            focusTopic: selectedTopic,
+            packageType: selectedPackage === "SINGLE" ? "SINGLE_1HR" : "BLOCK_5HR",
+            preferredSlot: `${selectedDay} (${dancerType === "COUPLE" ? "Couple" : "Solo"})`,
+            totalPricePounds: res.data!.totalPricePounds,
+            status: "PENDING",
+            createdAtIso: new Date().toISOString(),
+          },
+          ...prev,
+        ]);
       } else {
         const errText =
           typeof res.error === "string"
@@ -120,8 +100,103 @@ export function PrivateLessonsClient() {
     }
   };
 
+  const handleCancelBooking = (bookingId: string) => {
+    setCancellingId(bookingId);
+    startTransition(async () => {
+      const res = await cancelPrivateLessonBookingAction({ bookingId });
+      if (res.success) {
+        setBookings((prev) =>
+          prev.map((b) => (b.id === bookingId ? { ...b, status: "CANCELLED" } : b))
+        );
+      }
+      setCancellingId(null);
+    });
+  };
+
   return (
     <div className="space-y-8">
+      {/* Existing Student Requests Drawer / Queue */}
+      {bookings.length > 0 && (
+        <div className="rounded-2xl border border-amber-500/30 bg-muted/20 p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="font-bold text-sm flex items-center gap-2">
+              <Clock className="h-4 w-4 text-amber-600" />
+              Your Private Coaching Requests ({bookings.length})
+            </h3>
+            <span className="text-[11px] text-muted-foreground">
+              Direct with BOH Studios Reception
+            </span>
+          </div>
+
+          <div className="grid gap-2.5 sm:grid-cols-2">
+            {bookings.map((booking) => {
+              const isPending = booking.status === "PENDING";
+              const isConfirmed = booking.status === "CONFIRMED";
+              const isCancelled = booking.status === "CANCELLED";
+
+              return (
+                <div
+                  key={booking.id}
+                  className="rounded-xl border bg-card p-3.5 flex flex-col justify-between space-y-2 text-xs"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <div className="font-bold text-foreground">
+                        {booking.instructorName}
+                      </div>
+                      <div className="text-[11px] text-muted-foreground">
+                        {booking.packageType === "SINGLE_1HR"
+                          ? "1-Hour Session"
+                          : "5-Hour Intensive Package"}{" "}
+                        • £{booking.totalPricePounds}
+                      </div>
+                    </div>
+                    <Badge
+                      className={
+                        isConfirmed
+                          ? "bg-emerald-600 text-white"
+                          : isPending
+                          ? "bg-amber-600 text-white"
+                          : isCancelled
+                          ? "bg-zinc-500 text-white"
+                          : "bg-blue-600 text-white"
+                      }
+                    >
+                      {booking.status}
+                    </Badge>
+                  </div>
+
+                  <div className="text-[11px] text-muted-foreground">
+                    <div>
+                      <strong className="text-foreground">Focus:</strong> {booking.focusTopic}
+                    </div>
+                    <div>
+                      <strong className="text-foreground">Slot:</strong> {booking.preferredSlot}
+                    </div>
+                  </div>
+
+                  {isPending && (
+                    <div className="pt-2 border-t flex justify-end">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        disabled={cancellingId === booking.id}
+                        onClick={() => handleCancelBooking(booking.id)}
+                        className="h-7 text-[11px] text-destructive hover:bg-destructive/10"
+                      >
+                        <XCircle className="mr-1 h-3.5 w-3.5" />
+                        {cancellingId === booking.id ? "Cancelling..." : "Cancel Request"}
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {isSubmitted ? (
         <Card className="border-2 border-emerald-500/40 bg-emerald-500/[0.04] p-8 text-center space-y-4 rounded-3xl">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-600 text-white shadow-lg animate-bounce">
@@ -169,7 +244,7 @@ export function PrivateLessonsClient() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-3">
-              {INSTRUCTORS.map((inst) => {
+              {instructors.map((inst) => {
                 const isSelected = selectedInstructor === inst.id;
                 return (
                   <div
@@ -249,8 +324,11 @@ export function PrivateLessonsClient() {
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Targeted 60-minute deep dive on a specific figure, footwork issue, or musicality timing hurdle.
+                  Fast diagnosis and targeted corrections for specific figures, styling habits, or musical timing.
                 </p>
+                <div className="text-[11px] font-semibold text-amber-700 dark:text-amber-400">
+                  Ideal for quick tune-ups before a social party.
+                </div>
               </div>
 
               <div
@@ -261,42 +339,42 @@ export function PrivateLessonsClient() {
                     : "bg-card hover:bg-muted/30"
                 }`}
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h4 className="font-bold text-sm">5-Hour Transformation Block</h4>
-                      <Badge className="bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5">
-                        Save £{activeInstructor.hourlyRatePounds * 5 - activeInstructor.blockRatePounds}
-                      </Badge>
-                    </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <h4 className="font-bold text-sm">5-Hour Mastery Block</h4>
+                    <Badge className="bg-emerald-600 text-white text-[10px] px-1.5 py-0">
+                      Save £50
+                    </Badge>
                   </div>
-                  <span className="text-lg font-black text-amber-700 dark:text-amber-300 shrink-0">
+                  <span className="text-lg font-black text-foreground">
                     £{activeInstructor.blockRatePounds}
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Five 1-hour sessions to master an entire syllabus level, wedding dance choreography, or prepare for the Bournemouth Congress.
+                  Comprehensive syllabus transformation: body isolations, dynamic leading tension, and musical interpretation.
                 </p>
+                <div className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400">
+                  Recommended for rapid level advancement or wedding routines.
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3 pt-2">
-              <span className="text-xs font-bold text-muted-foreground">Booking For:</span>
+            <div className="grid grid-cols-2 gap-3 pt-2">
               <button
                 type="button"
                 onClick={() => setDancerType("SOLO")}
-                className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+                className={`rounded-xl p-3 text-xs font-bold transition-all ${
                   dancerType === "SOLO"
                     ? "bg-amber-600 text-white"
                     : "border bg-card text-muted-foreground"
                 }`}
               >
-                Solo Dancer (1 Dancer)
+                Solo Dancer (1-on-1 with Maestro)
               </button>
               <button
                 type="button"
                 onClick={() => setDancerType("COUPLE")}
-                className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+                className={`rounded-xl p-3 text-xs font-bold transition-all ${
                   dancerType === "COUPLE"
                     ? "bg-amber-600 text-white"
                     : "border bg-card text-muted-foreground"
@@ -323,7 +401,7 @@ export function PrivateLessonsClient() {
                   onChange={(e) => setSelectedTopic(e.target.value)}
                   className="w-full rounded-xl border bg-background px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500"
                 >
-                  {FOCUS_TOPICS.map((topic) => (
+                  {COACHING_FOCUS_TOPICS.map((topic) => (
                     <option key={topic} value={topic}>
                       {topic}
                     </option>

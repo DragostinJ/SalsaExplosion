@@ -90,7 +90,8 @@ export type CheckoutErrorCode =
   | "ALREADY_SUBSCRIBED"
   | "PLAN_UNAVAILABLE"
   | "MISSING_STRIPE_CONFIG"
-  | "STRIPE_API_ERROR";
+  | "STRIPE_API_ERROR"
+  | "RATE_LIMITED";
 
 export class CheckoutDomainError extends Error {
   public readonly code: CheckoutErrorCode;

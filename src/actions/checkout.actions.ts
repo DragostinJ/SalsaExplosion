@@ -14,6 +14,7 @@ import {
   CheckoutDomainError,
   type CheckoutActionResponse,
 } from "@/lib/constants/pricing";
+import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 // ==========================================
 // ZOD VALIDATION SCHEMA
@@ -62,15 +63,18 @@ function isLiveStripeConfigured(priceId: string): boolean {
 export async function createCheckoutSessionAction(
   rawInput: CreateCheckoutInput
 ): Promise<CheckoutActionResponse> {
-  try {
-    // 1. Verify Authentication & Provision User
-    const user = await getOrProvisionCurrentUser();
-    if (!user) {
-      throw new CheckoutDomainError(
-        "UNAUTHORIZED",
-        "Please sign in to purchase a class pass or membership."
-      );
-    }
+  const user = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(user?.id);
+
+  return withRateLimit(identifier, "CHECKOUT", async (): Promise<CheckoutActionResponse> => {
+    try {
+      // 1. Verify Authentication & Provision User
+      if (!user) {
+        throw new CheckoutDomainError(
+          "UNAUTHORIZED",
+          "Please sign in to purchase a class pass or membership."
+        );
+      }
 
     // 2. Validate Package Selection
     const parsed = CreateCheckoutSchema.safeParse(rawInput);
@@ -262,6 +266,7 @@ export async function createCheckoutSessionAction(
       },
     };
   }
+  });
 }
 
 // ==========================================
@@ -269,49 +274,53 @@ export async function createCheckoutSessionAction(
 // ==========================================
 
 export async function createBillingPortalSessionAction(): Promise<CheckoutActionResponse> {
-  try {
-    const user = await getOrProvisionCurrentUser();
-    if (!user) {
-      throw new CheckoutDomainError(
-        "UNAUTHORIZED",
-        "You must be signed in to manage your billing."
-      );
-    }
+  const user = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(user?.id);
 
-    if (!user.stripeCustomerId) {
-      throw new CheckoutDomainError(
-        "USER_NOT_FOUND",
-        "Your Unlimited Studio Membership is currently managed in local demo mode."
-      );
-    }
+  return withRateLimit(identifier, "CHECKOUT", async (): Promise<CheckoutActionResponse> => {
+    try {
+      if (!user) {
+        throw new CheckoutDomainError(
+          "UNAUTHORIZED",
+          "You must be signed in to manage your billing."
+        );
+      }
 
-    const baseUrl = getAppBaseUrl();
-    const portalSession = await stripe.billingPortal.sessions.create({
-      customer: user.stripeCustomerId,
-      return_url: `${baseUrl}/pricing`,
-    });
+      if (!user.stripeCustomerId) {
+        throw new CheckoutDomainError(
+          "USER_NOT_FOUND",
+          "Your Unlimited Studio Membership is currently managed in local demo mode."
+        );
+      }
 
-    return {
-      success: true,
-      data: { url: portalSession.url },
-    };
-  } catch (error) {
-    if (error instanceof CheckoutDomainError) {
+      const baseUrl = getAppBaseUrl();
+      const portalSession = await stripe.billingPortal.sessions.create({
+        customer: user.stripeCustomerId,
+        return_url: `${baseUrl}/pricing`,
+      });
+
+      return {
+        success: true,
+        data: { url: portalSession.url },
+      };
+    } catch (error) {
+      if (error instanceof CheckoutDomainError) {
+        return {
+          success: false,
+          error: { code: error.code, message: error.message },
+        };
+      }
+
+      console.error("[createBillingPortalSessionAction Error]:", error);
       return {
         success: false,
-        error: { code: error.code, message: error.message },
+        error: {
+          code: "STRIPE_API_ERROR",
+          message: "Could not open the billing portal. Please try again.",
+        },
       };
     }
-
-    console.error("[createBillingPortalSessionAction Error]:", error);
-    return {
-      success: false,
-      error: {
-        code: "STRIPE_API_ERROR",
-        message: "Could not open the billing portal. Please try again.",
-      },
-    };
-  }
+  });
 }
 
 // ==========================================
@@ -331,14 +340,17 @@ export type CreateEventCheckoutInput = z.infer<typeof CreateEventCheckoutSchema>
 export async function createEventCheckoutSessionAction(
   rawInput: CreateEventCheckoutInput
 ): Promise<CheckoutActionResponse> {
-  try {
-    const user = await getOrProvisionCurrentUser();
-    if (!user) {
-      throw new CheckoutDomainError(
-        "UNAUTHORIZED",
-        "Please sign in to purchase an event pass."
-      );
-    }
+  const user = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(user?.id);
+
+  return withRateLimit(identifier, "CHECKOUT", async (): Promise<CheckoutActionResponse> => {
+    try {
+      if (!user) {
+        throw new CheckoutDomainError(
+          "UNAUTHORIZED",
+          "Please sign in to purchase an event pass."
+        );
+      }
 
     const parsed = CreateEventCheckoutSchema.safeParse(rawInput);
     if (!parsed.success) {
@@ -492,4 +504,5 @@ export async function createEventCheckoutSessionAction(
       },
     };
   }
+  });
 }

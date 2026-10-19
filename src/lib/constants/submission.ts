@@ -86,7 +86,8 @@ export type SubmissionErrorCode =
   | "INVALID_TARGET_LEVEL"
   | "PENDING_SUBMISSION_EXISTS"
   | "STORAGE_SIGNING_FAILED"
-  | "INTERNAL_ERROR";
+  | "INTERNAL_ERROR"
+  | "RATE_LIMITED";
 
 export class SubmissionDomainError extends Error {
   public readonly code: SubmissionErrorCode;

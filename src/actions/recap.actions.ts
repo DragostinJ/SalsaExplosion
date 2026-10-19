@@ -14,6 +14,7 @@ import {
   ALLOWED_VIDEO_MIME_TYPES,
 } from "@/lib/constants/submission";
 import { createSignedUploadUrlHelper } from "@/lib/storage";
+import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 // ==========================================
 // SCHEMAS
@@ -81,78 +82,82 @@ export interface AttendedRecapItem {
  * an end-of-class recap video directly from their phone / browser.
  */
 export async function generateRecapUploadUrlAction(rawInput: GenerateRecapUploadUrlInput) {
-  try {
-    const user = await requireRole(STAFF_ROLES);
-    const parsed = GenerateRecapUploadUrlSchema.safeParse(rawInput);
-    if (!parsed.success) {
-      return {
-        success: false as const,
-        error: {
-          code: "VALIDATION_ERROR",
-          message: parsed.error.issues[0]?.message ?? "Invalid upload parameters",
-        },
-      };
-    }
+  const user = await requireRole(STAFF_ROLES);
+  const identifier = await getRateLimitIdentifier(user.id);
 
-    const { classSessionId, contentType } = parsed.data;
+  return withRateLimit(identifier, "RECAP", async () => {
+    try {
+      const parsed = GenerateRecapUploadUrlSchema.safeParse(rawInput);
+      if (!parsed.success) {
+        return {
+          success: false as const,
+          error: {
+            code: "VALIDATION_ERROR",
+            message: parsed.error.issues[0]?.message ?? "Invalid upload parameters",
+          },
+        };
+      }
 
-    const session = await prisma.classSession.findUnique({
-      where: { id: classSessionId },
-      select: { id: true, instructorId: true, title: true },
-    });
+      const { classSessionId, contentType } = parsed.data;
 
-    if (!session) {
-      return {
-        success: false as const,
-        error: { code: "NOT_FOUND", message: "Class session not found." },
-      };
-    }
+      const session = await prisma.classSession.findUnique({
+        where: { id: classSessionId },
+        select: { id: true, instructorId: true, title: true },
+      });
 
-    if (user.role === Role.INSTRUCTOR && session.instructorId !== user.id) {
-      return {
-        success: false as const,
-        error: {
-          code: "FORBIDDEN",
-          message: "You can only upload recaps to classes you instructed.",
-        },
-      };
-    }
+      if (!session) {
+        return {
+          success: false as const,
+          error: { code: "NOT_FOUND", message: "Class session not found." },
+        };
+      }
 
-    const ext = ALLOWED_VIDEO_MIME_TYPES[contentType] ?? "mp4";
-    const storagePath = `${session.id}/${Date.now()}-${randomUUID()}.${ext}`;
+      if (user.role === Role.INSTRUCTOR && session.instructorId !== user.id) {
+        return {
+          success: false as const,
+          error: {
+            code: "FORBIDDEN",
+            message: "You can only upload recaps to classes you instructed.",
+          },
+        };
+      }
 
-    const helperResult = await createSignedUploadUrlHelper("recaps", storagePath);
+      const ext = ALLOWED_VIDEO_MIME_TYPES[contentType] ?? "mp4";
+      const storagePath = `${session.id}/${Date.now()}-${randomUUID()}.${ext}`;
 
-    if (!helperResult) {
+      const helperResult = await createSignedUploadUrlHelper("recaps", storagePath);
+
+      if (!helperResult) {
+        return {
+          success: true as const,
+          data: {
+            signedUrl: "DEMO_DIRECT_BYPASS",
+            token: "demo-token",
+            storagePath: `recaps/${storagePath}`,
+            publicUrl: `https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80`,
+          },
+          message: "Studio direct upload channel ready.",
+        };
+      }
+
       return {
         success: true as const,
         data: {
-          signedUrl: "DEMO_DIRECT_BYPASS",
-          token: "demo-token",
+          signedUrl: helperResult.signedUrl,
+          token: helperResult.token,
           storagePath: `recaps/${storagePath}`,
-          publicUrl: `https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80`,
+          publicUrl: helperResult.publicUrl,
         },
-        message: "Studio direct upload channel ready.",
+        message: "Secure upload channel initialized.",
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Failed to prepare video upload";
+      return {
+        success: false as const,
+        error: { code: "INTERNAL_ERROR", message },
       };
     }
-
-    return {
-      success: true as const,
-      data: {
-        signedUrl: helperResult.signedUrl,
-        token: helperResult.token,
-        storagePath: `recaps/${storagePath}`,
-        publicUrl: helperResult.publicUrl,
-      },
-      message: "Secure upload channel initialized.",
-    };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "Failed to prepare video upload";
-    return {
-      success: false as const,
-      error: { code: "INTERNAL_ERROR", message },
-    };
-  }
+  });
 }
 
 /**
@@ -160,88 +165,92 @@ export async function generateRecapUploadUrlAction(rawInput: GenerateRecapUpload
  * Accessible to Instructors and Admins.
  */
 export async function attachClassRecapAction(rawInput: AttachRecapInput) {
-  try {
-    const user = await requireRole(STAFF_ROLES);
-    const parsed = AttachRecapSchema.safeParse(rawInput);
+  const user = await requireRole(STAFF_ROLES);
+  const identifier = await getRateLimitIdentifier(user.id);
 
-    if (!parsed.success) {
+  return withRateLimit(identifier, "RECAP", async () => {
+    try {
+      const parsed = AttachRecapSchema.safeParse(rawInput);
+
+      if (!parsed.success) {
+        return {
+          success: false as const,
+          error: {
+            code: "VALIDATION_ERROR",
+            message: parsed.error.issues[0]?.message ?? "Invalid recap data",
+          },
+        };
+      }
+
+      const { classSessionId, recapVideoUrl, recapNotes, recapFigures, recapPublished } =
+        parsed.data;
+
+      // Verify class session exists
+      const session = await prisma.classSession.findUnique({
+        where: { id: classSessionId },
+        select: { id: true, instructorId: true, title: true },
+      });
+
+      if (!session) {
+        return {
+          success: false as const,
+          error: {
+            code: "NOT_FOUND",
+            message: "Class session not found.",
+          },
+        };
+      }
+
+      // Instructors can only edit their own classes unless they are ADMIN
+      if (user.role === Role.INSTRUCTOR && session.instructorId !== user.id) {
+        return {
+          success: false as const,
+          error: {
+            code: "FORBIDDEN",
+            message: "You can only attach recap videos to classes you instructed.",
+          },
+        };
+      }
+
+      const updated = await prisma.classSession.update({
+        where: { id: classSessionId },
+        data: {
+          recapVideoUrl,
+          recapNotes,
+          recapFigures,
+          recapRecordedAt: new Date(),
+          recapPublished,
+        },
+      });
+
+      revalidatePath("/dashboard/recaps");
+      revalidatePath("/instructor/roster");
+      revalidatePath("/admin/classes");
+      revalidatePath("/dashboard/schedule");
+
+      return {
+        success: true as const,
+        data: {
+          id: updated.id,
+          recapVideoUrl: updated.recapVideoUrl,
+          recapFigures: updated.recapFigures,
+          recapPublished: updated.recapPublished,
+        },
+        message: recapPublished
+          ? `Recap video for "${session.title}" published! Attended students can now review the figures in their Recaps library.`
+          : `Recap draft saved for "${session.title}".`,
+      };
+    } catch (error) {
+      console.error("[attachClassRecapAction]", error);
       return {
         success: false as const,
         error: {
-          code: "VALIDATION_ERROR",
-          message: parsed.error.issues[0]?.message ?? "Invalid recap data",
+          code: "INTERNAL_ERROR",
+          message: "Failed to publish class recap video. Please try again.",
         },
       };
     }
-
-    const { classSessionId, recapVideoUrl, recapNotes, recapFigures, recapPublished } =
-      parsed.data;
-
-    // Verify class session exists
-    const session = await prisma.classSession.findUnique({
-      where: { id: classSessionId },
-      select: { id: true, instructorId: true, title: true },
-    });
-
-    if (!session) {
-      return {
-        success: false as const,
-        error: {
-          code: "NOT_FOUND",
-          message: "Class session not found.",
-        },
-      };
-    }
-
-    // Instructors can only edit their own classes unless they are ADMIN
-    if (user.role === Role.INSTRUCTOR && session.instructorId !== user.id) {
-      return {
-        success: false as const,
-        error: {
-          code: "FORBIDDEN",
-          message: "You can only attach recap videos to classes you instructed.",
-        },
-      };
-    }
-
-    const updated = await prisma.classSession.update({
-      where: { id: classSessionId },
-      data: {
-        recapVideoUrl,
-        recapNotes,
-        recapFigures,
-        recapRecordedAt: new Date(),
-        recapPublished,
-      },
-    });
-
-    revalidatePath("/dashboard/recaps");
-    revalidatePath("/instructor/roster");
-    revalidatePath("/admin/classes");
-    revalidatePath("/dashboard/schedule");
-
-    return {
-      success: true as const,
-      data: {
-        id: updated.id,
-        recapVideoUrl: updated.recapVideoUrl,
-        recapFigures: updated.recapFigures,
-        recapPublished: updated.recapPublished,
-      },
-      message: recapPublished
-        ? `Recap video for "${session.title}" published! Attended students can now review the figures in their Recaps library.`
-        : `Recap draft saved for "${session.title}".`,
-    };
-  } catch (error) {
-    console.error("[attachClassRecapAction]", error);
-    return {
-      success: false as const,
-      error: {
-        code: "INTERNAL_ERROR",
-        message: "Failed to publish class recap video. Please try again.",
-      },
-    };
-  }
+  });
 }
 
 /**

@@ -69,7 +69,11 @@ export function PartnerMatchWaitlist({
       if (res.success) {
         setWaitlistJoined(true);
       } else {
-        setErrorMessage(res.error ?? "Could not join priority waitlist.");
+        const errText =
+          typeof res.error === "string"
+            ? res.error
+            : res.error?.message ?? "Could not join priority waitlist.";
+        setErrorMessage(errText);
       }
     } catch {
       setErrorMessage("Network error connecting to waitlist.");
@@ -91,7 +95,11 @@ export function PartnerMatchWaitlist({
       if (res.success) {
         setBypassSent(true);
       } else {
-        setErrorMessage(res.error ?? "Could not dispatch bypass invite.");
+        const errText =
+          typeof res.error === "string"
+            ? res.error
+            : res.error?.message ?? "Could not dispatch bypass invite.";
+        setErrorMessage(errText);
       }
     } catch {
       setErrorMessage("Network error sending partner invite.");

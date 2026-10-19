@@ -32,11 +32,15 @@ export function CsvExportToolbar() {
     setStatusMessage(null);
     try {
       const res = await exportRevenueLedgerCsvAction();
-      if (res.success && res.csvContent) {
+      if (res.success && res.csvContent && res.filename) {
         triggerBrowserDownload(res.filename, res.csvContent);
         setStatusMessage(`Successfully downloaded ${res.filename}`);
       } else {
-        setStatusMessage(`Export failed: ${res.error ?? "Unknown error"}`);
+        const errText =
+          typeof res.error === "string"
+            ? res.error
+            : res.error?.message ?? "Unknown error";
+        setStatusMessage(`Export failed: ${errText}`);
       }
     } catch {
       setStatusMessage("Export failed due to network or server error.");
@@ -50,11 +54,15 @@ export function CsvExportToolbar() {
     setStatusMessage(null);
     try {
       const res = await exportStudentRosterCsvAction();
-      if (res.success && res.csvContent) {
+      if (res.success && res.csvContent && res.filename) {
         triggerBrowserDownload(res.filename, res.csvContent);
         setStatusMessage(`Successfully downloaded ${res.filename}`);
       } else {
-        setStatusMessage(`Export failed: ${res.error ?? "Unknown error"}`);
+        const errText =
+          typeof res.error === "string"
+            ? res.error
+            : res.error?.message ?? "Unknown error";
+        setStatusMessage(`Export failed: ${errText}`);
       }
     } catch {
       setStatusMessage("Export failed due to network or server error.");
@@ -68,11 +76,15 @@ export function CsvExportToolbar() {
     setStatusMessage(null);
     try {
       const res = await exportCongressTicketHoldersCsvAction();
-      if (res.success && res.csvContent) {
+      if (res.success && res.csvContent && res.filename) {
         triggerBrowserDownload(res.filename, res.csvContent);
         setStatusMessage(`Successfully downloaded ${res.filename}`);
       } else {
-        setStatusMessage(`Export failed: ${res.error ?? "Unknown error"}`);
+        const errText =
+          typeof res.error === "string"
+            ? res.error
+            : res.error?.message ?? "Unknown error";
+        setStatusMessage(`Export failed: ${errText}`);
       }
     } catch {
       setStatusMessage("Export failed due to network or server error.");

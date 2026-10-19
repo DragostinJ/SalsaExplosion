@@ -106,7 +106,11 @@ export function PrivateLessonsClient() {
       if (res.success) {
         setIsSubmitted(true);
       } else {
-        setErrorMessage(res.error ?? "Failed to book lesson.");
+        const errText =
+          typeof res.error === "string"
+            ? res.error
+            : res.error?.message ?? "Failed to book lesson.";
+        setErrorMessage(errText);
       }
     } catch {
       setErrorMessage("Network error booking private lesson.");

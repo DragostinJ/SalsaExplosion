@@ -4,6 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 const BookPrivateLessonSchema = z.object({
   instructorName: z.string().min(2).max(100),
@@ -18,7 +19,7 @@ export type BookPrivateLessonInput = z.infer<typeof BookPrivateLessonSchema>;
 export interface LessonActionResponse<T = unknown> {
   success: boolean;
   data?: T;
-  error?: string;
+  error?: string | { code: string; message: string };
   message?: string;
 }
 
@@ -28,14 +29,17 @@ export interface LessonActionResponse<T = unknown> {
 export async function bookPrivateLessonAction(
   rawInput: BookPrivateLessonInput
 ): Promise<LessonActionResponse<{ bookingId: string }>> {
-  try {
-    const user = await getOrProvisionCurrentUser();
-    if (!user) {
-      return {
-        success: false,
-        error: "Please sign in to book your private coaching session.",
-      };
-    }
+  const user = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(user?.id);
+
+  return withRateLimit(identifier, "LESSON_RESERVATION", async (): Promise<LessonActionResponse<{ bookingId: string }>> => {
+    try {
+      if (!user) {
+        return {
+          success: false,
+          error: "Please sign in to book your private coaching session.",
+        };
+      }
 
     const parsed = BookPrivateLessonSchema.safeParse(rawInput);
     if (!parsed.success) {
@@ -66,8 +70,9 @@ export async function bookPrivateLessonAction(
       data: { bookingId: booking.id },
       message: `Coaching request with ${instructorName} registered! Our studio desk will confirm your slot.`,
     };
-  } catch (err: unknown) {
-    console.error("[bookPrivateLessonAction]", err);
-    return { success: false, error: "Failed to book private coaching session." };
-  }
+    } catch (err: unknown) {
+      console.error("[bookPrivateLessonAction]", err);
+      return { success: false, error: "Failed to book private coaching session." };
+    }
+  });
 }

@@ -6,18 +6,26 @@
  * sliding-window fallback for local development, CI, and test execution.
  */
 
+import { headers } from "next/headers";
+
 export interface RateLimitConfig {
   maxRequests: number;
   windowSeconds: number;
 }
 
 export const RATE_LIMIT_RULES: Record<string, RateLimitConfig> = {
-  BOOKING: { maxRequests: 10, windowSeconds: 60 },
   CHECKOUT: { maxRequests: 5, windowSeconds: 60 },
-  CHECKIN: { maxRequests: 30, windowSeconds: 60 },
+  BOOKING: { maxRequests: 20, windowSeconds: 60 },
+  CHECKIN: { maxRequests: 10, windowSeconds: 60 },
+  ANONYMOUS_QUESTION: { maxRequests: 3, windowSeconds: 600 },
+  SHOP_RESERVATION: { maxRequests: 5, windowSeconds: 600 },
+  LESSON_RESERVATION: { maxRequests: 5, windowSeconds: 600 },
+  EXPORT: { maxRequests: 10, windowSeconds: 3600 },
   ROLE_SWITCH: { maxRequests: 3, windowSeconds: 60 },
-  EXPORT: { maxRequests: 5, windowSeconds: 60 },
-  AI_GRADING: { maxRequests: 3, windowSeconds: 60 },
+  AI_GRADING: { maxRequests: 10, windowSeconds: 60 },
+  SUBMISSION: { maxRequests: 10, windowSeconds: 60 },
+  RECAP: { maxRequests: 20, windowSeconds: 60 },
+  MANAGEMENT: { maxRequests: 30, windowSeconds: 60 },
 } as const;
 
 export interface RateLimitResult {
@@ -133,6 +141,48 @@ export async function checkRateLimit(
 }
 
 /**
+ * Resolves client IP address from request headers with graceful fallback.
+ */
+export async function getClientIp(): Promise<string> {
+  try {
+    const headerList = await headers();
+    const forwarded = headerList.get("x-forwarded-for");
+    if (forwarded) {
+      return forwarded.split(",")[0].trim();
+    }
+    const realIp = headerList.get("x-real-ip");
+    if (realIp) return realIp.trim();
+  } catch {
+    // Graceful fallback outside Next.js request context (e.g. tests)
+  }
+  return "127.0.0.1";
+}
+
+/**
+ * Returns a rate limit identifier key, prioritizing authenticated userId
+ * and falling back to client IP address.
+ */
+export async function getRateLimitIdentifier(userId?: string | null): Promise<string> {
+  if (userId && userId.trim().length > 0) {
+    return `user:${userId.trim()}`;
+  }
+  const ip = await getClientIp();
+  return `ip:${ip}`;
+}
+
+/**
+ * Clears in-memory sliding window cache (useful for test isolation).
+ */
+export function clearRateLimitCache(): void {
+  inMemoryCache.clear();
+}
+
+export interface RateLimitErrorPayload {
+  code: "RATE_LIMITED";
+  message: string;
+}
+
+/**
  * Wrapper for Server Actions with rate limiting.
  */
 export async function withRateLimit<T>(
@@ -140,14 +190,14 @@ export async function withRateLimit<T>(
   action: keyof typeof RATE_LIMIT_RULES | string,
   fn: () => Promise<T>,
   customConfig?: RateLimitConfig
-): Promise<T | { success: false; error: { code: string; message: string } }> {
+): Promise<T | { success: false; error: RateLimitErrorPayload }> {
   const result = await checkRateLimit(identifier, action, customConfig);
 
   if (!result.success) {
     return {
       success: false,
       error: {
-        code: "RATE_LIMIT_EXCEEDED",
+        code: "RATE_LIMITED",
         message: `Too many requests. Please wait ${result.resetSeconds}s before trying again.`,
       },
     };

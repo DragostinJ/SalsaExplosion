@@ -4,6 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 // ==========================================
 // SCHEMAS
@@ -41,7 +42,7 @@ export type PostClassFeedbackInput = z.infer<typeof PostClassFeedbackSchema>;
 export interface BeginnerActionResponse<T = unknown> {
   success: boolean;
   data?: T;
-  error?: string;
+  error?: string | { code: string; message: string };
   message?: string;
 }
 
@@ -72,43 +73,51 @@ const CATEGORY_REASSURANCES: Record<string, string> = {
 export async function submitAnonymousQuestionAction(
   rawInput: AnonymousQuestionInput
 ): Promise<BeginnerActionResponse<{ id: string; reassurance: string }>> {
-  try {
-    const parsed = AnonymousQuestionSchema.safeParse(rawInput);
-    if (!parsed.success) {
-      return {
-        success: false,
-        error: parsed.error.issues[0]?.message ?? "Invalid question submission.",
-      };
+  const identifier = await getRateLimitIdentifier(null);
+
+  return withRateLimit(
+    identifier,
+    "ANONYMOUS_QUESTION",
+    async (): Promise<BeginnerActionResponse<{ id: string; reassurance: string }>> => {
+      try {
+        const parsed = AnonymousQuestionSchema.safeParse(rawInput);
+        if (!parsed.success) {
+          return {
+            success: false,
+            error: parsed.error.issues[0]?.message ?? "Invalid question submission.",
+          };
+        }
+
+        const { category, question, email } = parsed.data;
+        const reassurance = CATEGORY_REASSURANCES[category] ?? CATEGORY_REASSURANCES.GENERAL;
+
+        const record = await prisma.anonymousQuestion.create({
+          data: {
+            category,
+            question,
+            email: email && email.length > 0 ? email : null,
+            status: "ANSWERED",
+            response: reassurance,
+          },
+        });
+
+        return {
+          success: true,
+          data: {
+            id: record.id,
+            reassurance,
+          },
+          message: "Thank you! Your question was received with 100% anonymity.",
+        };
+      } catch (error) {
+        console.error("submitAnonymousQuestionAction error:", error);
+        return {
+          success: false,
+          error: "Unable to submit your question. Please try again.",
+        };
+      }
     }
-
-    const { category, question, email } = parsed.data;
-    const reassurance = CATEGORY_REASSURANCES[category] ?? CATEGORY_REASSURANCES.GENERAL;
-
-    const record = await prisma.anonymousQuestion.create({
-      data: {
-        category,
-        question,
-        email: email && email.length > 0 ? email : null,
-        status: "ANSWERED",
-        response: reassurance,
-      },
-    });
-
-    return {
-      success: true,
-      data: {
-        id: record.id,
-        reassurance,
-      },
-      message: "Thank you! Your question was received with 100% anonymity.",
-    };
-  } catch (error) {
-    console.error("submitAnonymousQuestionAction error:", error);
-    return {
-      success: false,
-      error: "Unable to submit your question. Please try again.",
-    };
-  }
+  );
 }
 
 /**
@@ -117,72 +126,80 @@ export async function submitAnonymousQuestionAction(
 export async function submitPostClassFeedbackAction(
   rawInput: PostClassFeedbackInput
 ): Promise<BeginnerActionResponse<{ sentiment: string; encouragement: string }>> {
-  try {
-    const user = await getOrProvisionCurrentUser();
-    if (!user) {
-      return {
-        success: false,
-        error: "Please sign in to submit your class check-in.",
-      };
+  const user = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(user?.id);
+
+  return withRateLimit(
+    identifier,
+    "BOOKING",
+    async (): Promise<BeginnerActionResponse<{ sentiment: string; encouragement: string }>> => {
+      try {
+        if (!user) {
+          return {
+            success: false,
+            error: "Please sign in to submit your class check-in.",
+          };
+        }
+
+        const parsed = PostClassFeedbackSchema.safeParse(rawInput);
+        if (!parsed.success) {
+          return {
+            success: false,
+            error: parsed.error.issues[0]?.message ?? "Invalid feedback submission.",
+          };
+        }
+
+        const { classSessionId, sentiment, notes } = parsed.data;
+
+        let encouragement = "¡Excelente! Keep dancing and we will see you at the next class!";
+        if (sentiment === "A_BIT_OVERWHELMED") {
+          encouragement =
+            "Completely normal! Every dancer's brain fries a bit on class 1. Maestro Enrique promises your muscle memory begins taking over by class 3. You did amazingly just by stepping onto the floor!";
+        } else if (sentiment === "CHALLENGING_FUN") {
+          encouragement =
+            "That sweet spot where growth happens! Check out your class video recap on the dashboard to review today's turn patterns.";
+        } else if (sentiment === "LOVED_IT") {
+          encouragement =
+            "¡Fabuloso! Your Cuban rhythm is shining. We can't wait to see your energy in the Rueda circle next week!";
+        }
+
+        await prisma.postClassFeedback.upsert({
+          where: {
+            userId_classSessionId: {
+              userId: user.id,
+              classSessionId,
+            },
+          },
+          update: {
+            sentiment,
+            notes: notes ?? null,
+          },
+          create: {
+            userId: user.id,
+            classSessionId,
+            sentiment,
+            notes: notes ?? null,
+          },
+        });
+
+        revalidatePath("/dashboard/schedule");
+        revalidatePath("/dashboard/recaps");
+
+        return {
+          success: true,
+          data: {
+            sentiment,
+            encouragement,
+          },
+          message: "Thank you for letting us know how your class felt!",
+        };
+      } catch (error) {
+        console.error("submitPostClassFeedbackAction error:", error);
+        return {
+          success: false,
+          error: "Unable to record feedback. Please try again.",
+        };
+      }
     }
-
-    const parsed = PostClassFeedbackSchema.safeParse(rawInput);
-    if (!parsed.success) {
-      return {
-        success: false,
-        error: parsed.error.issues[0]?.message ?? "Invalid feedback submission.",
-      };
-    }
-
-    const { classSessionId, sentiment, notes } = parsed.data;
-
-    let encouragement = "¡Excelente! Keep dancing and we will see you at the next class!";
-    if (sentiment === "A_BIT_OVERWHELMED") {
-      encouragement =
-        "Completely normal! Every dancer's brain fries a bit on class 1. Maestro Enrique promises your muscle memory begins taking over by class 3. You did amazingly just by stepping onto the floor!";
-    } else if (sentiment === "CHALLENGING_FUN") {
-      encouragement =
-        "That sweet spot where growth happens! Check out your class video recap on the dashboard to review today's turn patterns.";
-    } else if (sentiment === "LOVED_IT") {
-      encouragement =
-        "¡Fabuloso! Your Cuban rhythm is shining. We can't wait to see your energy in the Rueda circle next week!";
-    }
-
-    await prisma.postClassFeedback.upsert({
-      where: {
-        userId_classSessionId: {
-          userId: user.id,
-          classSessionId,
-        },
-      },
-      update: {
-        sentiment,
-        notes: notes ?? null,
-      },
-      create: {
-        userId: user.id,
-        classSessionId,
-        sentiment,
-        notes: notes ?? null,
-      },
-    });
-
-    revalidatePath("/dashboard/schedule");
-    revalidatePath("/dashboard/recaps");
-
-    return {
-      success: true,
-      data: {
-        sentiment,
-        encouragement,
-      },
-      message: "Thank you for letting us know how your class felt!",
-    };
-  } catch (error) {
-    console.error("submitPostClassFeedbackAction error:", error);
-    return {
-      success: false,
-      error: "Unable to record feedback. Please try again.",
-    };
-  }
+  );
 }

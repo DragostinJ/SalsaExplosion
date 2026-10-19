@@ -16,6 +16,7 @@ import {
   SubmissionActionResponse,
   SubmissionDomainError,
 } from "@/lib/constants/submission";
+import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 function isSupabaseStorageConfigured(): boolean {
   const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
@@ -102,15 +103,25 @@ export async function generateSignedUploadUrlAction(rawInput: {
     targetLevel: DanceLevel;
   }>
 > {
-  try {
-    // 1. Verify User Authentication & Provision Profile
-    const user = await getOrProvisionCurrentUser();
-    if (!user) {
-      throw new SubmissionDomainError(
-        "UNAUTHORIZED",
-        "You must be signed in to upload a Cuban Salsa assessment video."
-      );
-    }
+  const user = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(user?.id);
+
+  return withRateLimit(identifier, "SUBMISSION", async (): Promise<
+    SubmissionActionResponse<{
+      signedUrl: string;
+      token: string;
+      videoPath: string;
+      targetLevel: DanceLevel;
+    }>
+  > => {
+    try {
+      // 1. Verify User Authentication & Provision Profile
+      if (!user) {
+        throw new SubmissionDomainError(
+          "UNAUTHORIZED",
+          "You must be signed in to upload a Cuban Salsa assessment video."
+        );
+      }
 
     // 2. Validate Payload (File Type <= 100MB, MP4/MOV/WebM)
     const parsed = GenerateUploadUrlSchema.safeParse(rawInput);
@@ -221,6 +232,7 @@ export async function generateSignedUploadUrlAction(rawInput: {
       },
     };
   }
+  });
 }
 
 // ==========================================
@@ -232,15 +244,18 @@ export async function createVideoSubmissionAction(rawInput: {
   videoPath: string;
   studentNotes?: string;
 }): Promise<SubmissionActionResponse<{ submissionId: string }>> {
-  try {
-    // 1. Verify User Authentication & Provision Profile
-    const provisionedUser = await getOrProvisionCurrentUser();
-    if (!provisionedUser) {
-      throw new SubmissionDomainError(
-        "UNAUTHORIZED",
-        "You must be signed in to submit an assessment video."
-      );
-    }
+  const provisionedUser = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(provisionedUser?.id);
+
+  return withRateLimit(identifier, "SUBMISSION", async (): Promise<SubmissionActionResponse<{ submissionId: string }>> => {
+    try {
+      // 1. Verify User Authentication & Provision Profile
+      if (!provisionedUser) {
+        throw new SubmissionDomainError(
+          "UNAUTHORIZED",
+          "You must be signed in to submit an assessment video."
+        );
+      }
 
     // 2. Validate Submission Payload
     const parsed = CreateVideoSubmissionSchema.safeParse(rawInput);
@@ -342,4 +357,5 @@ export async function createVideoSubmissionAction(rawInput: {
       },
     };
   }
+  });
 }

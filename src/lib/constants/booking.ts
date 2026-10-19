@@ -23,7 +23,8 @@ export type BookingErrorCode =
   | "INSUFFICIENT_CREDITS"
   | "BOOKING_NOT_FOUND"
   | "ALREADY_CANCELLED"
-  | "INTERNAL_ERROR";
+  | "INTERNAL_ERROR"
+  | "RATE_LIMITED";
 
 export class BookingDomainError extends Error {
   public readonly code: BookingErrorCode;

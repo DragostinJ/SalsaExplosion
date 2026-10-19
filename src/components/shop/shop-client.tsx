@@ -122,7 +122,11 @@ export function ShopClient() {
       if (res.success) {
         setIsReserved(true);
       } else {
-        setErrorMessage(res.error ?? "Failed to reserve item.");
+        const errText =
+          typeof res.error === "string"
+            ? res.error
+            : res.error?.message ?? "Failed to reserve item.";
+        setErrorMessage(errText);
       }
     } catch {
       setErrorMessage("Network error processing reservation.");

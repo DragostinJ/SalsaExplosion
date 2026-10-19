@@ -17,6 +17,7 @@ import {
   CANCELLATION_WINDOW_HOURS,
   LEVEL_WEIGHT,
 } from "@/lib/constants/booking";
+import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 // ==========================================
 // ZOD VALIDATION SCHEMAS
@@ -43,12 +44,15 @@ export type CancelBookingInput = z.infer<typeof CancelBookingSchema>;
 export async function bookClassAction(
   rawInput: BookClassInput
 ): Promise<ActionResponse<{ bookingId: string; usedSubscription: boolean; remainingCredits: number }>> {
-  try {
-    // 1. Authenticate & Ensure Provisioned User
-    const provisionedUser = await getOrProvisionCurrentUser();
-    if (!provisionedUser) {
-      throw new BookingDomainError("UNAUTHORIZED", "You must be signed in to book a class.");
-    }
+  const provisionedUser = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(provisionedUser?.id);
+
+  return withRateLimit(identifier, "BOOKING", async (): Promise<ActionResponse<{ bookingId: string; usedSubscription: boolean; remainingCredits: number }>> => {
+    try {
+      // 1. Authenticate & Ensure Provisioned User
+      if (!provisionedUser) {
+        throw new BookingDomainError("UNAUTHORIZED", "You must be signed in to book a class.");
+      }
 
     // 2. Validate Payload
     const parsed = BookClassSchema.safeParse(rawInput);
@@ -294,6 +298,7 @@ export async function bookClassAction(
       },
     };
   }
+  });
 }
 
 // ==========================================
@@ -303,12 +308,15 @@ export async function bookClassAction(
 export async function cancelBookingAction(
   rawInput: CancelBookingInput
 ): Promise<ActionResponse<{ refundedCredits: number; remainingCredits: number; isLateCancellation: boolean }>> {
-  try {
-    // 1. Authenticate & Ensure Provisioned User
-    const provisionedUser = await getOrProvisionCurrentUser();
-    if (!provisionedUser) {
-      throw new BookingDomainError("UNAUTHORIZED", "You must be signed in to cancel a booking.");
-    }
+  const provisionedUser = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(provisionedUser?.id);
+
+  return withRateLimit(identifier, "BOOKING", async (): Promise<ActionResponse<{ refundedCredits: number; remainingCredits: number; isLateCancellation: boolean }>> => {
+    try {
+      // 1. Authenticate & Ensure Provisioned User
+      if (!provisionedUser) {
+        throw new BookingDomainError("UNAUTHORIZED", "You must be signed in to cancel a booking.");
+      }
 
     // 2. Validate Payload
     const parsed = CancelBookingSchema.safeParse(rawInput);
@@ -476,4 +484,5 @@ export async function cancelBookingAction(
       },
     };
   }
+  });
 }

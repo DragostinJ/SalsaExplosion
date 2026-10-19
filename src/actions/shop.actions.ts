@@ -4,6 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 const ReserveMerchSchema = z.object({
   itemId: z.string().min(1).max(50),
@@ -17,7 +18,7 @@ export type ReserveMerchInput = z.infer<typeof ReserveMerchSchema>;
 export interface ShopActionResponse<T = unknown> {
   success: boolean;
   data?: T;
-  error?: string;
+  error?: string | { code: string; message: string };
   message?: string;
 }
 
@@ -27,14 +28,17 @@ export interface ShopActionResponse<T = unknown> {
 export async function reserveMerchItemAction(
   rawInput: ReserveMerchInput
 ): Promise<ShopActionResponse<{ reservationId: string }>> {
-  try {
-    const user = await getOrProvisionCurrentUser();
-    if (!user) {
-      return {
-        success: false,
-        error: "Please sign in to reserve items for studio desk pickup.",
-      };
-    }
+  const user = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(user?.id);
+
+  return withRateLimit(identifier, "SHOP_RESERVATION", async (): Promise<ShopActionResponse<{ reservationId: string }>> => {
+    try {
+      if (!user) {
+        return {
+          success: false,
+          error: "Please sign in to reserve items for studio desk pickup.",
+        };
+      }
 
     const parsed = ReserveMerchSchema.safeParse(rawInput);
     if (!parsed.success) {
@@ -64,8 +68,9 @@ export async function reserveMerchItemAction(
       data: { reservationId: reservation.id },
       message: `${itemName} reserved! Pay and collect at the BOH Studios reception desk.`,
     };
-  } catch (err: unknown) {
-    console.error("[reserveMerchItemAction]", err);
-    return { success: false, error: "Failed to reserve merchandise item." };
-  }
+    } catch (err: unknown) {
+      console.error("[reserveMerchItemAction]", err);
+      return { success: false, error: "Failed to reserve merchandise item." };
+    }
+  });
 }

@@ -20,6 +20,7 @@ import {
   AiRubricEvaluation,
   ManagementActionResponse,
 } from "@/lib/constants/management";
+import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 // ==========================================
 // ZOD 4 VALIDATION SCHEMAS (INTERNAL)
@@ -407,14 +408,17 @@ export async function toggleBookingCheckInAction(rawInput: {
 export async function selfCheckInClassQrAction(rawInput: {
   classSessionId: string;
 }): Promise<ManagementActionResponse<{ bookingId: string; classTitle: string }>> {
-  try {
-    const user = await getOrProvisionCurrentUser();
-    if (!user) {
-      return {
-        success: false,
-        error: { code: "UNAUTHORIZED", message: "Please sign in to check in." },
-      };
-    }
+  const user = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(user?.id);
+
+  return withRateLimit(identifier, "CHECKIN", async (): Promise<ManagementActionResponse<{ bookingId: string; classTitle: string }>> => {
+    try {
+      if (!user) {
+        return {
+          success: false,
+          error: { code: "UNAUTHORIZED", message: "Please sign in to check in." },
+        };
+      }
 
     const parsed = SelfCheckInClassQrSchema.safeParse(rawInput);
     if (!parsed.success) {
@@ -519,6 +523,7 @@ export async function selfCheckInClassQrAction(rawInput: {
       error: { code: "INTERNAL_ERROR", message: "Failed to complete QR check-in." },
     };
   }
+  });
 }
 
 // ==========================================

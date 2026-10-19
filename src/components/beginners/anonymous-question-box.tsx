@@ -73,8 +73,12 @@ export function AnonymousQuestionBox() {
         setQuestionText("");
         setEmailText("");
       } else {
-        toast.error(res.error || "Unable to submit question.");
-        setErrorMessage(res.error || "Unable to submit question.");
+        const errorText =
+          typeof res.error === "string"
+            ? res.error
+            : res.error?.message ?? "Unable to submit question.";
+        toast.error(errorText);
+        setErrorMessage(errorText);
       }
     });
   };

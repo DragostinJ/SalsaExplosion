@@ -11,6 +11,7 @@ import {
   GradingDomainError,
   type GradingActionResponse,
 } from "@/lib/constants/grading";
+import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 // ==========================================
 // ZOD VALIDATION SCHEMA
@@ -59,15 +60,25 @@ export async function gradeSubmissionAction(
     wasPromoted: boolean;
   }>
 > {
-  try {
-    // 1. Authenticate & Ensure Provisioned Reviewer
-    const provisionedReviewer = await getOrProvisionCurrentUser();
-    if (!provisionedReviewer) {
-      throw new GradingDomainError(
-        "UNAUTHORIZED",
-        "You must be signed in to review submissions."
-      );
-    }
+  const provisionedReviewer = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(provisionedReviewer?.id);
+
+  return withRateLimit(identifier, "AI_GRADING", async (): Promise<
+    GradingActionResponse<{
+      submissionId: string;
+      newStatus: SubmissionStatus;
+      studentNewLevel: DanceLevel;
+      wasPromoted: boolean;
+    }>
+  > => {
+    try {
+      // 1. Authenticate & Ensure Provisioned Reviewer
+      if (!provisionedReviewer) {
+        throw new GradingDomainError(
+          "UNAUTHORIZED",
+          "You must be signed in to review submissions."
+        );
+      }
 
     // 2. Validate Payload
     const parsed = GradeSubmissionSchema.safeParse(rawInput);
@@ -223,4 +234,5 @@ export async function gradeSubmissionAction(
       },
     };
   }
+  });
 }

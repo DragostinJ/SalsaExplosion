@@ -25,6 +25,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
+import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
 
 export const metadata = {
   title: "My Passes & Digital Wallet | Salsa Explosion Bournemouth",
@@ -259,8 +260,12 @@ export default async function StudentWalletPage() {
                 </div>
 
                 <div className="rounded-xl border bg-card p-3 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <QrCode className="h-6 w-6 text-primary-base shrink-0" />
+                  <div className="flex items-center gap-3">
+                    <ScannableQrCode
+                      value={reg.qrCodeHash}
+                      size={54}
+                      className="p-1 rounded-lg border-none shadow-none"
+                    />
                     <div>
                       <span className="text-[10px] uppercase font-bold text-muted-foreground block">
                         Verified Door Pass Hash
@@ -270,8 +275,8 @@ export default async function StudentWalletPage() {
                       </span>
                     </div>
                   </div>
-                  <Badge variant="outline" className="text-[10px] font-semibold">
-                    1-Tap Scan
+                  <Badge variant="outline" className="text-[10px] font-semibold shrink-0">
+                    Door Scanner
                   </Badge>
                 </div>
               </Card>

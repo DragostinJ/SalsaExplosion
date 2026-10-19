@@ -4,7 +4,6 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { DanceRole } from "@prisma/client";
 import {
-  QrCode,
   CheckCircle2,
   Sparkles,
   Loader2,
@@ -26,6 +25,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
+import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
 
 export interface SerializedEventTier {
   id: string;
@@ -229,13 +229,16 @@ export function EventPassSelector({
 
               <CardContent className="space-y-3">
                 {tier.userRegistration ? (
-                  <div className="rounded-2xl border-2 border-dashed border-emerald-500/40 bg-emerald-500/10 p-4 text-center space-y-2">
-                    <QrCode className="mx-auto h-10 w-10 text-emerald-600 dark:text-emerald-400" />
+                  <div className="rounded-2xl border-2 border-dashed border-emerald-500/40 bg-emerald-500/10 p-4 text-center space-y-3">
+                    <div className="flex justify-center">
+                      <ScannableQrCode
+                        value={tier.userRegistration.qrCodeHash}
+                        size={120}
+                        label={tier.userRegistration.qrCodeHash}
+                      />
+                    </div>
                     <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300">
                       Verified Door QR Pass ({tier.userRegistration.role})
-                    </div>
-                    <div className="font-mono text-sm font-extrabold bg-background rounded-lg py-1.5 px-3 border inline-block">
-                      {tier.userRegistration.qrCodeHash}
                     </div>
                     <p className="text-[11px] text-muted-foreground">
                       Show this code at the festival entrance for 1-second check-in.

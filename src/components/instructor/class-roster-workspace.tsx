@@ -27,6 +27,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
 
 interface ClassRosterWorkspaceProps {
   initialClasses: ClassRosterSummary[];
@@ -365,35 +366,12 @@ export function ClassRosterWorkspace({
             {/* Expandable Studio Door QR Code Display */}
             {showQrModal && (
               <div className="rounded-2xl border-2 border-dashed border-amber-500/40 bg-amber-500/[0.03] p-6 text-center space-y-4">
-                <div className="mx-auto flex h-44 w-44 items-center justify-center rounded-2xl bg-white p-4 shadow-md ring-1 ring-black/10">
-                  {/* Stylized deterministic QR Matrix SVG */}
-                  <svg
-                    viewBox="0 0 100 100"
-                    className="h-full w-full text-black"
-                    fill="currentColor"
-                  >
-                    {/* Corner Finder Patterns */}
-                    <path d="M5,5 h28 v28 h-28 z M11,11 v16 h16 v-16 z M15,15 h8 v8 h-8 z" />
-                    <path d="M67,5 h28 v28 h-28 z M73,11 v16 h16 v-16 z M77,15 h8 v8 h-8 z" />
-                    <path d="M5,67 h28 v28 h-28 z M11,73 v16 h16 v-16 z M15,77 h8 v8 h-8 z" />
-                    {/* Data Matrix Modules */}
-                    <rect x="39" y="7" width="6" height="6" />
-                    <rect x="51" y="7" width="6" height="6" />
-                    <rect x="45" y="15" width="6" height="12" />
-                    <rect x="39" y="33" width="12" height="6" />
-                    <rect x="57" y="33" width="6" height="12" />
-                    <rect x="9" y="41" width="12" height="6" />
-                    <rect x="27" y="45" width="6" height="12" />
-                    <rect x="43" y="45" width="12" height="12" />
-                    <rect x="65" y="43" width="6" height="6" />
-                    <rect x="79" y="41" width="14" height="6" />
-                    <rect x="71" y="53" width="12" height="6" />
-                    <rect x="39" y="65" width="6" height="14" />
-                    <rect x="53" y="69" width="12" height="6" />
-                    <rect x="73" y="67" width="6" height="18" />
-                    <rect x="85" y="75" width="8" height="16" />
-                    <rect x="45" y="85" width="18" height="6" />
-                  </svg>
+                <div className="flex justify-center">
+                  <ScannableQrCode
+                    value={`https://salsaexplosion.co.uk${checkInPath}`}
+                    size={160}
+                    label={activeClass.title}
+                  />
                 </div>
 
                 <div>

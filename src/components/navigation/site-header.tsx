@@ -379,16 +379,16 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               />
             </div>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <Link
                 href="/sign-in"
-                className="text-xs font-semibold text-muted-foreground hover:text-foreground"
+                className="hidden sm:inline-flex text-xs font-semibold text-muted-foreground hover:text-foreground py-2 px-1"
               >
                 Sign In
               </Link>
               <Link
                 href="/sign-up"
-                className="rounded-lg bg-primary-base px-3 py-1.5 text-xs font-semibold text-white shadow hover:bg-primary-hover transition-colors"
+                className="rounded-lg bg-primary-base px-3 py-2 text-xs font-bold text-white shadow-xs hover:bg-primary-hover transition-colors min-h-9 flex items-center justify-center whitespace-nowrap"
               >
                 Join Studio
               </Link>
@@ -401,9 +401,9 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
             onClick={() => setIsMobileNavOpen(true)}
             aria-label="Open mobile navigation menu"
             aria-expanded={isMobileNavOpen}
-            className="flex xl:hidden h-8 w-8 items-center justify-center rounded-lg border border-border bg-card text-text-muted hover:text-foreground hover:bg-muted/70 transition-colors shrink-0"
+            className="flex xl:hidden h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-text-muted hover:text-foreground hover:bg-muted/70 transition-colors shrink-0 shadow-xs"
           >
-            <Menu className="h-4 w-4" />
+            <Menu className="h-5 w-5" />
           </button>
         </div>
       </div>

@@ -114,7 +114,7 @@ const STYLE_BADGE_CONFIG: Record<
 > = {
   CUBAN_SALSA: {
     label: "Cuban Salsa",
-    className: "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30",
+    className: "bg-amber-500/15 text-amber-900 dark:text-amber-300 border-amber-500/30",
   },
 };
 
@@ -464,13 +464,13 @@ export function ClassScheduleCard({
                   type="button"
                   disabled={isPending || isLeadFull}
                   onClick={() => setSelectedRole(DanceRole.LEAD)}
-                  className={`flex items-center justify-between rounded-md border px-3 py-2 text-xs font-medium transition-all ${
+                  className={`flex items-center justify-between rounded-md border px-3 py-2 text-xs font-semibold transition-all ${
                     selectedRole === DanceRole.LEAD
-                      ? "border-primary bg-primary/10 text-primary ring-1 ring-primary"
+                      ? "border-primary bg-primary/10 text-primary-hover dark:text-primary-light ring-1 ring-primary"
                       : "border-border bg-background hover:bg-accent"
                   } ${isLeadFull ? "cursor-not-allowed opacity-50" : ""}`}
                 >
-                  <span>Lead</span>
+                  <span className="font-bold">Lead</span>
                   {session.maxLeads !== null && (
                     <span className="text-[11px] text-muted-foreground">
                       {isLeadFull
@@ -484,13 +484,13 @@ export function ClassScheduleCard({
                   type="button"
                   disabled={isPending || isFollowFull}
                   onClick={() => setSelectedRole(DanceRole.FOLLOW)}
-                  className={`flex items-center justify-between rounded-md border px-3 py-2 text-xs font-medium transition-all ${
+                  className={`flex items-center justify-between rounded-md border px-3 py-2 text-xs font-semibold transition-all ${
                     selectedRole === DanceRole.FOLLOW
-                      ? "border-primary bg-primary/10 text-primary ring-1 ring-primary"
+                      ? "border-primary bg-primary/10 text-primary-hover dark:text-primary-light ring-1 ring-primary"
                       : "border-border bg-background hover:bg-accent"
                   } ${isFollowFull ? "cursor-not-allowed opacity-50" : ""}`}
                 >
-                  <span>Follow</span>
+                  <span className="font-bold">Follow</span>
                   {session.maxFollows !== null && (
                     <span className="text-[11px] text-muted-foreground">
                       {isFollowFull

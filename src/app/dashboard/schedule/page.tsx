@@ -163,7 +163,7 @@ export default async function StudentSchedulePage({
   const userCanManage = user?.role === Role.INSTRUCTOR || user?.role === Role.ADMIN || canSwitchRoles(user?.email);
 
   return (
-    <main className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-7xl space-y-6 px-4 py-6 sm:px-6 lg:px-8 overflow-x-hidden w-full">
       {(checkoutStatus === "success" || checkoutStatus === "demo_success") && (
         <div className="flex items-center justify-between rounded-2xl border border-emerald-500/40 bg-emerald-500/10 px-5 py-3.5 text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-300">
           <span>
@@ -261,14 +261,14 @@ export default async function StudentSchedulePage({
       </div>
 
       {/* URL Search Param Filter Bar (Right at the Top!) */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3 max-w-full">
         <div className="flex items-center gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Filter Classes:
           </span>
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
+        <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
           <Button
             asChild
             variant={!levelFilter ? "secondary" : "ghost"}

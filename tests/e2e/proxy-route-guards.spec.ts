@@ -21,12 +21,17 @@ test.describe("Proxy & Role Route Guards (A4)", () => {
     expect(url).toMatch(/sign-in/);
   });
 
-  test("3. Anonymous user attempting to access /dashboard/schedule redirects to sign-in", async ({
+  test("3. Guest user can access /dashboard/schedule without redirect, but /dashboard/progression redirects to sign-in", async ({
     page,
   }) => {
+    // Guest browsing schedule
     await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
-    const url = page.url();
-    expect(url).toMatch(/sign-in/);
+    expect(page.url()).not.toMatch(/sign-in/);
+    await expect(page.getByRole("link", { name: /Claim Free Pass/i })).toBeVisible();
+
+    // Protected progression route
+    await page.goto("/dashboard/progression", { waitUntil: "domcontentloaded" });
+    expect(page.url()).toMatch(/sign-in/);
   });
 
   test("4. Public routes remain freely accessible without authentication", async ({

@@ -213,7 +213,7 @@ export default async function Home() {
                         </h3>
                         <p className="text-[11px] text-muted-foreground">
                           with {cls.instructor.firstName} •{" "}
-                          <span className={isAlmostFull ? "text-accent-tangerine font-bold" : "text-emerald-600 font-medium"}>
+                          <span className={isAlmostFull ? "text-accent-tangerine font-bold" : "text-emerald-700 dark:text-emerald-400 font-semibold"}>
                             {spotsLeft} spots left
                           </span>
                         </p>

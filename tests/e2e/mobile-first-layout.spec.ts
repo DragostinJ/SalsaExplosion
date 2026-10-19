@@ -6,7 +6,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     { name: "Homepage", path: "/" },
     { name: "Class Timetable", path: "/dashboard/schedule" },
     { name: "Events & Festivals Hub", path: "/events" },
-    { name: "Congress Event Details", path: "/events/bournemouth-summer-cuban-congress-2026" },
+    { name: "Congress Event Details", path: "/events/bournemouth-summer-cuban-salsa-congress-2026" },
     { name: "Pricing & Passes", path: "/pricing" },
     { name: "1-on-1 Coaching", path: "/private-lessons" },
     { name: "Cuban Music Hub", path: "/music" },
@@ -72,7 +72,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     }
 
     // 2. Event pass selector CTAs on congress page
-    await page.goto("/events/bournemouth-summer-cuban-congress-2026");
+    await page.goto("/events/bournemouth-summer-cuban-salsa-congress-2026");
     await page.waitForLoadState("domcontentloaded");
     const bookButtons = page.locator("button:has-text('Book as'), button:has-text('Get ')");
     const count = await bookButtons.count();
@@ -116,5 +116,40 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     );
 
     expect(criticalViolations).toEqual([]);
+  });
+
+  test("P6: verifies mobile bottom nav visibility, payment trust badges, and schedule grid hierarchy", async ({
+    page,
+  }) => {
+    // 1. Mobile bottom nav is visible on mobile (375x812) and hidden on desktop (1280x800)
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("/");
+    await page.waitForLoadState("domcontentloaded");
+    const mobileBottomNav = page.locator('[data-testid="mobile-bottom-nav"]');
+    await expect(mobileBottomNav).toBeVisible();
+
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await expect(mobileBottomNav).toBeHidden();
+
+    // 2. Payment Security Trust Bar is visible on pricing and event pages
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto("/pricing");
+    await page.waitForLoadState("domcontentloaded");
+    const pricingTrustBar = page.locator('[data-testid="payment-security-trust-bar"]');
+    await expect(pricingTrustBar).toBeVisible();
+
+    await page.goto("/events/bournemouth-summer-cuban-salsa-congress-2026");
+    await page.waitForLoadState("domcontentloaded");
+    const eventTrustBar = page.locator('[data-testid="payment-security-trust-bar"]');
+    await expect(eventTrustBar).toBeVisible();
+
+    // 3. Class timetable grid renders near top of mobile viewport (y < 650px)
+    await page.goto("/dashboard/schedule");
+    await page.waitForLoadState("domcontentloaded");
+    const scheduleGrid = page.locator('[data-testid="schedule-classes-grid"]');
+    await expect(scheduleGrid).toBeVisible();
+    const box = await scheduleGrid.boundingBox();
+    expect(box).not.toBeNull();
+    expect(box!.y).toBeLessThan(650);
   });
 });

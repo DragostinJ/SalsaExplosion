@@ -131,17 +131,18 @@ export async function switchMyAccountRoleAction(rawInput: {
     }
 
     // Security: Guard against unauthorized privilege escalation
-    // 1. In production, role switching is strictly forbidden for all users.
-    // 2. In non-production, only users whose email is explicitly whitelisted in ADMIN_EMAILS can switch roles.
+    // 1. In production, role switching is forbidden unless ALLOW_DEMO_ROLE_SWITCHING is explicitly enabled or user is whitelisted in ADMIN_EMAILS.
+    // 2. In non-production/development, allow switching so the developer and studio owner can freely test all 3 personas (Dancer, Teacher, Owner).
     const isProd = process.env.NODE_ENV === "production";
+    const allowDemo = process.env.ALLOW_DEMO_ROLE_SWITCHING === "true";
     const isWhitelisted = isBootstrapAdmin(user.email);
 
-    if (isProd || !isWhitelisted) {
+    if (isProd && !allowDemo && !isWhitelisted) {
       return {
         success: false,
         error: {
           code: "FORBIDDEN",
-          message: "Role switching is strictly disabled.",
+          message: "Role switching is strictly disabled in production.",
         },
       };
     }

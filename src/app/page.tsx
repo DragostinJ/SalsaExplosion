@@ -461,7 +461,7 @@ export default async function Home() {
                     <Badge variant="secondary" className="text-xs font-bold">
                       1. Dancer Experience
                     </Badge>
-                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded-full">
                       Open to All
                     </span>
                   </div>

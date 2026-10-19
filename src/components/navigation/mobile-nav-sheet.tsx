@@ -124,10 +124,11 @@ export function MobileNavSheet({
   // Base public links available to everyone
   const publicLinks = [
     { href: "/dashboard/schedule", label: "Schedule & Booking", icon: CalendarDays },
+    { href: "/venues", label: "Bournemouth Venues", icon: MapPin },
+    { href: "/dashboard/rueda", label: "Rueda Call Dictionary", icon: Users },
+    { href: "/private-lessons", label: "1-on-1 Private Lessons", icon: Flame },
     { href: "/events", label: "Guest Festivals & Congress", icon: Sparkles },
     { href: "/pricing", label: "Class Passes & Memberships", icon: CreditCard },
-    { href: "/private-lessons", label: "1-on-1 Private Lessons", icon: Flame },
-    { href: "/venues", label: "Bournemouth Venues", icon: MapPin },
   ];
 
   // Member-only links shown only when authenticated
@@ -135,7 +136,6 @@ export function MobileNavSheet({
     { href: "/dashboard/wallet", label: "My Wallet & QR Passes", icon: QrCode },
     { href: "/dashboard/progression", label: "Syllabus Progression", icon: Award },
     { href: "/dashboard/recaps", label: "Class Video Recaps", icon: Video },
-    { href: "/dashboard/rueda", label: "Rueda Call Dictionary", icon: Users },
     { href: "/dashboard/referrals", label: "Dancer Referral Rewards", icon: Share2 },
   ];
 
@@ -144,13 +144,13 @@ export function MobileNavSheet({
     ? [
         publicLinks[0], // Schedule & Booking
         memberOnlyLinks[0], // Wallet & QR Passes
-        publicLinks[1], // Events
-        publicLinks[2], // Passes
+        publicLinks[1], // Venues
+        publicLinks[2], // Rueda Call Dictionary
         memberOnlyLinks[1], // Progression
         memberOnlyLinks[2], // Recaps
-        memberOnlyLinks[3], // Rueda
         publicLinks[3], // Private Lessons
-        publicLinks[4], // Venues
+        publicLinks[4], // Events
+        publicLinks[5], // Passes
       ]
     : publicLinks;
 

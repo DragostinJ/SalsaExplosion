@@ -78,6 +78,8 @@ export function TeacherAvatar({
           alt={name}
           width={sizeConfig.image}
           height={sizeConfig.image}
+          sizes={`${sizeConfig.image}px`}
+          loading="lazy"
           className="h-full w-full rounded-full object-cover"
           onError={() => setImageError(true)}
           unoptimized={avatarUrl?.startsWith("http")}

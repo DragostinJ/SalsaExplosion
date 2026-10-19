@@ -153,14 +153,14 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
             href="/dashboard/schedule"
             className="flex items-center gap-2 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85 shrink-0"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-600 to-orange-500 text-white shadow-sm shadow-amber-500/20">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-primary-base to-accent-tangerine text-white shadow-sm shadow-primary-base/20">
               <Flame className="h-5 w-5 fill-white" />
             </div>
             <div className="flex flex-col">
               <span className="text-base font-extrabold leading-none tracking-tight">
-                Salsa <span className="text-amber-700 dark:text-amber-400">Explosion</span>
+                Salsa <span className="text-primary-base">Explosion</span>
               </span>
-              <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
+              <span className="text-[10px] font-semibold text-text-muted uppercase tracking-widest mt-0.5">
                 Bournemouth • Cuba
               </span>
             </div>
@@ -174,8 +174,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/dashboard/schedule"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname === "/dashboard/schedule"
-                      ? "bg-primary/10 text-primary font-bold"
-                      : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                      ? "bg-primary-base/15 text-primary-base font-bold"
+                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                   }`}
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
@@ -185,8 +185,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/events"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname.startsWith("/events")
-                      ? "bg-primary/10 text-primary font-bold"
-                      : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                      ? "bg-primary-base/15 text-primary-base font-bold"
+                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                   }`}
                 >
                   <Sparkles className="h-3.5 w-3.5" />
@@ -195,8 +195,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
 
                 <div className="h-4 w-px bg-border mx-1" />
 
-                <div className="flex items-center gap-1 rounded-xl border border-amber-500/30 bg-amber-500/[0.08] px-2 py-1 shrink-0">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300 px-1">
+                <div className="flex items-center gap-1 rounded-xl border border-accent-tangerine/30 bg-accent-tangerine/[0.08] px-2 py-1 shrink-0">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent-tangerine px-1">
                     Admin:
                   </span>
                   {adminLinks.map((item) => {
@@ -207,8 +207,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                         href={item.href}
                         className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors whitespace-nowrap ${
                           item.active
-                            ? "bg-amber-500 text-zinc-950 font-bold shadow-xs"
-                            : "text-muted-foreground hover:bg-amber-500/10 hover:text-foreground"
+                            ? "bg-accent-tangerine text-zinc-950 font-bold shadow-xs"
+                            : "text-text-muted hover:bg-accent-tangerine/10 hover:text-foreground"
                         }`}
                       >
                         <Icon className="h-3 w-3" />
@@ -224,8 +224,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/dashboard/schedule"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname === "/dashboard/schedule"
-                      ? "bg-primary/10 text-primary font-bold"
-                      : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                      ? "bg-primary-base/15 text-primary-base font-bold"
+                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                   }`}
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
@@ -235,8 +235,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/events"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname.startsWith("/events")
-                      ? "bg-primary/10 text-primary font-bold"
-                      : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                      ? "bg-primary-base/15 text-primary-base font-bold"
+                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                   }`}
                 >
                   <Sparkles className="h-3.5 w-3.5" />
@@ -245,8 +245,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
 
                 <div className="h-4 w-px bg-border mx-1" />
 
-                <div className="flex items-center gap-1 rounded-xl border border-emerald-500/25 bg-emerald-500/[0.06] px-2 py-1 shrink-0">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 px-1">
+                <div className="flex items-center gap-1 rounded-xl border border-secondary-base/30 bg-secondary-base/[0.08] px-2 py-1 shrink-0">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-secondary-base px-1">
                     Teacher:
                   </span>
                   {instructorLinks.map((item) => {
@@ -257,8 +257,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                         href={item.href}
                         className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors whitespace-nowrap ${
                           item.active
-                            ? "bg-emerald-700 text-white shadow-xs"
-                            : "text-muted-foreground hover:bg-emerald-500/10 hover:text-foreground"
+                            ? "bg-secondary-base text-white shadow-xs font-bold"
+                            : "text-text-muted hover:bg-secondary-base/10 hover:text-foreground"
                         }`}
                       >
                         <Icon className="h-3 w-3" />
@@ -278,8 +278,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                     href={item.href}
                     className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                       item.active
-                        ? "bg-primary/10 text-primary font-bold"
-                        : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                        ? "bg-primary-base/15 text-primary-base font-bold"
+                        : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                     }`}
                   >
                     <Icon className="h-3.5 w-3.5" />
@@ -346,11 +346,11 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                       className={`rounded-md px-2 py-1 font-bold transition-all whitespace-nowrap ${
                         isActive
                           ? r === "ADMIN"
-                            ? "bg-amber-500 text-zinc-950 shadow-xs"
+                            ? "bg-accent-tangerine text-zinc-950 shadow-xs"
                             : r === "INSTRUCTOR"
-                              ? "bg-emerald-700 text-white shadow-xs"
-                              : "bg-primary text-primary-foreground shadow-xs"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/80"
+                              ? "bg-secondary-base text-white shadow-xs"
+                              : "bg-primary-base text-white shadow-xs"
+                          : "text-text-muted hover:text-foreground hover:bg-muted/80"
                       } ${isPending ? "opacity-60 cursor-wait" : ""}`}
                     >
                       {r === "ADMIN"
@@ -382,7 +382,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               </Link>
               <Link
                 href="/sign-up"
-                className="rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow hover:bg-primary/90"
+                className="rounded-lg bg-primary-base px-3 py-1.5 text-xs font-semibold text-white shadow hover:bg-primary-hover transition-colors"
               >
                 Join Studio
               </Link>
@@ -408,8 +408,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               href={item.href}
               className={`inline-flex items-center gap-1 shrink-0 rounded-md px-2.5 py-1 text-xs font-medium ${
                 item.active
-                  ? "bg-amber-500 text-zinc-950 font-bold"
-                  : "bg-background text-muted-foreground border"
+                  ? "bg-primary-base text-white font-bold"
+                  : "bg-background text-text-muted border"
               }`}
             >
               <Icon className="h-3 w-3" />

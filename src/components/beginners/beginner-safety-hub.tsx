@@ -30,22 +30,22 @@ export function BeginnerSafetyHub() {
   return (
     <div className="space-y-4">
       {/* Beginner Psychological Safety Banner */}
-      <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-r from-amber-500/[0.08] via-background to-orange-500/[0.05] p-4 sm:p-5 shadow-xs">
+      <div className="rounded-2xl border border-secondary-base/30 bg-gradient-to-r from-secondary-light/30 via-background to-secondary-light/10 p-4 sm:p-5 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px]">
-                <Heart className="mr-1 h-3 w-3 fill-zinc-950" />
+              <Badge className="bg-secondary-base text-white font-bold text-[10px]">
+                <Heart className="mr-1 h-3 w-3 fill-white" />
                 First-Timer & Beginner Zone
               </Badge>
-              <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">
+              <span className="text-xs font-semibold text-secondary-base">
                 100% Judgment-Free Studio
               </span>
             </div>
             <h3 className="text-sm sm:text-base font-extrabold tracking-tight text-foreground">
               New to Cuban Salsa or BOH Studios? You Are Safe Here!
             </h3>
-            <p className="text-xs text-muted-foreground leading-relaxed max-w-2xl">
+            <p className="text-xs text-text-muted leading-relaxed max-w-2xl">
               No partner required, no special shoes needed, and mistakes are celebrated. Explore our beginner comfort guides below:
             </p>
           </div>
@@ -56,9 +56,9 @@ export function BeginnerSafetyHub() {
               variant="outline"
               size="sm"
               onClick={() => setIsPrepVideoOpen(true)}
-              className="h-8 text-xs font-bold border-amber-500/40 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
+              className="h-8 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
             >
-              <Video className="mr-1.5 h-3.5 w-3.5 text-amber-600" />
+              <Video className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
               1-Min Video Prep
             </Button>
             <Button
@@ -66,9 +66,9 @@ export function BeginnerSafetyHub() {
               variant="outline"
               size="sm"
               onClick={() => setIsDressCodeOpen(true)}
-              className="h-8 text-xs font-bold border-amber-500/40 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
+              className="h-8 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
             >
-              <Footprints className="mr-1.5 h-3.5 w-3.5 text-amber-600" />
+              <Footprints className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
               What to Wear
             </Button>
             <Button
@@ -76,9 +76,9 @@ export function BeginnerSafetyHub() {
               variant="outline"
               size="sm"
               onClick={() => setIsEtiquetteOpen(true)}
-              className="h-8 text-xs font-bold border-amber-500/40 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
+              className="h-8 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
             >
-              <ShieldCheck className="mr-1.5 h-3.5 w-3.5 text-amber-600" />
+              <ShieldCheck className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
               Studio Etiquette
             </Button>
           </div>
@@ -91,8 +91,8 @@ export function BeginnerSafetyHub() {
             onClick={() => setActiveTab(activeTab === "ROTATION" ? "NONE" : "ROTATION")}
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "ROTATION"
-                ? "bg-blue-600 text-white shadow-xs"
-                : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                ? "bg-secondary-base text-white shadow-xs"
+                : "bg-muted/50 text-text-muted hover:bg-muted hover:text-foreground"
             }`}
           >
             <RotateCw className="h-3.5 w-3.5" />
@@ -105,8 +105,8 @@ export function BeginnerSafetyHub() {
             onClick={() => setActiveTab(activeTab === "AMBASSADORS" ? "NONE" : "AMBASSADORS")}
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "AMBASSADORS"
-                ? "bg-amber-600 text-white shadow-xs"
-                : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                ? "bg-secondary-base text-white shadow-xs"
+                : "bg-muted/50 text-text-muted hover:bg-muted hover:text-foreground"
             }`}
           >
             <Users className="h-3.5 w-3.5" />
@@ -119,8 +119,8 @@ export function BeginnerSafetyHub() {
             onClick={() => setActiveTab(activeTab === "QUESTIONS" ? "NONE" : "QUESTIONS")}
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "QUESTIONS"
-                ? "bg-purple-600 text-white shadow-xs"
-                : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                ? "bg-secondary-base text-white shadow-xs"
+                : "bg-muted/50 text-text-muted hover:bg-muted hover:text-foreground"
             }`}
           >
             <HelpCircle className="h-3.5 w-3.5" />

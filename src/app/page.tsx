@@ -39,53 +39,53 @@ export default async function Home() {
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-b from-amber-500/[0.08] via-orange-500/[0.03] to-background">
+        <section className="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-b from-primary-light/40 via-background to-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
             {/* Social Proof & Award Badges */}
             <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
               <Badge
                 variant="outline"
-                className="border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300 px-3.5 py-1 text-xs font-semibold"
+                className="border-primary-base/30 bg-primary-light text-primary-hover px-3.5 py-1 text-xs font-semibold"
               >
-                <Award className="mr-1.5 h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                <Award className="mr-1.5 h-3.5 w-3.5 text-primary-base" />
                 Salsa UK Lifetime Achievement Award Winner
               </Badge>
               <Badge
                 variant="outline"
-                className="border-orange-500/40 bg-orange-500/10 text-orange-700 dark:text-orange-300 px-3.5 py-1 text-xs font-semibold"
+                className="border-secondary-base/30 bg-secondary-light/40 text-secondary-hover px-3.5 py-1 text-xs font-semibold"
               >
-                <MapPin className="mr-1.5 h-3.5 w-3.5 text-orange-600 dark:text-orange-400" />
+                <MapPin className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
                 Home Hub: BOH Studios Bournemouth
               </Badge>
             </div>
 
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl max-w-4xl mx-auto leading-tight">
               Bournemouth&apos;s Authentic Cuban Salsa Academy.{" "}
-              <span className="block mt-1 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-500 bg-clip-text text-transparent">
+              <span className="block mt-1 bg-gradient-to-r from-primary-base via-accent-tangerine to-primary-base bg-clip-text text-transparent">
                 Directed by Enrique Perez Valdes.
               </span>
             </h1>
 
-            <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-6 text-base sm:text-lg text-text-muted max-w-2xl mx-auto leading-relaxed">
               Welcome to Salsa Explosion UK. Experience 25+ years of authentic Cuban Casino, Rueda de Casino, and Son with role-balanced partner rotations, 4-tier syllabus tracking, student recap videos, and official congress passes.
             </p>
 
             {/* Quick Stats Pill Bar */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-muted-foreground font-medium">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-text-muted font-medium">
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <CheckCircle2 className="h-4 w-4 text-secondary-base" />
                 <span>4,200+ Dancers in Community</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <CheckCircle2 className="h-4 w-4 text-secondary-base" />
                 <span>25+ Years Cuban Salsa Heritage</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <CheckCircle2 className="h-4 w-4 text-secondary-base" />
                 <span>Zero Partner Required</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <CheckCircle2 className="h-4 w-4 text-secondary-base" />
                 <span>Strict Lead/Follow Balance</span>
               </div>
             </div>
@@ -95,7 +95,7 @@ export default async function Home() {
               <Button
                 asChild
                 size="lg"
-                className="h-12 px-7 text-sm font-bold bg-gradient-to-r from-amber-600 to-orange-500 text-white shadow-md hover:from-amber-700 hover:to-orange-600"
+                className="h-12 px-7 text-sm font-bold bg-primary-base text-white shadow-md shadow-primary-base/20 hover:bg-primary-hover"
               >
                 <Link href="/dashboard/schedule">
                   View Weekly Classes
@@ -106,10 +106,10 @@ export default async function Home() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="h-12 px-7 text-sm font-semibold border-amber-500/40 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10"
+                className="h-12 px-7 text-sm font-semibold border-secondary-base/40 text-secondary-hover hover:bg-secondary-light/40"
               >
                 <Link href="/events">
-                  <Flame className="mr-2 h-4 w-4 text-orange-500" />
+                  <Flame className="mr-2 h-4 w-4 text-accent-tangerine" />
                   Bournemouth Congress 2026
                 </Link>
               </Button>

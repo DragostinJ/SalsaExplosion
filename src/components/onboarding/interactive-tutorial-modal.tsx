@@ -142,9 +142,9 @@ export function InteractiveTutorialModal({
           setIsOpen(true);
         }}
         aria-label="Open interactive studio tutorial"
-        className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/35 bg-amber-500/10 px-2 sm:px-2.5 py-1.5 text-xs font-bold text-amber-800 dark:text-amber-300 transition-colors hover:bg-amber-500/20"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-secondary-base/40 bg-secondary-light/40 px-2 sm:px-2.5 py-1.5 text-xs font-bold text-secondary-hover transition-colors hover:bg-secondary-light/70"
       >
-        <HelpCircle className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+        <HelpCircle className="h-3.5 w-3.5 text-secondary-base shrink-0" />
         <span className="inline">How It Works</span>
       </button>
 

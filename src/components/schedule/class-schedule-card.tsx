@@ -308,7 +308,7 @@ export function ClassScheduleCard({
               variant="secondary"
               className={
                 session.minLevel === DanceLevel.BEGINNER
-                  ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 font-bold"
+                  ? "bg-secondary-light/60 text-secondary-hover border-secondary-base/40 font-bold"
                   : "font-semibold"
               }
             >
@@ -317,19 +317,19 @@ export function ClassScheduleCard({
                 : session.minLevel}
             </Badge>
             {session.minLevel === DanceLevel.BEGINNER && (
-              <Badge variant="outline" className="border-emerald-500/40 text-emerald-700 dark:text-emerald-400 font-bold text-[10px]">
+              <Badge variant="outline" className="border-secondary-base/40 text-secondary-base font-bold text-[10px] bg-secondary-light/30">
                 Zero Experience Needed
               </Badge>
             )}
           </div>
 
           {optimisticState.isBooked ? (
-            <Badge className="bg-emerald-600 text-white hover:bg-emerald-600">
+            <Badge className="bg-secondary-base text-white hover:bg-secondary-hover">
               <CheckCircle2 className="mr-1 h-3.5 w-3.5" />
               Booked ({optimisticState.bookedRole})
             </Badge>
           ) : !isLevelUnlocked ? (
-            <Badge variant="outline" className="border-amber-500/40 text-amber-600 dark:text-amber-400">
+            <Badge variant="outline" className="border-accent-tangerine/40 text-accent-tangerine">
               <Lock className="mr-1 h-3 w-3" />
               Level Locked
             </Badge>
@@ -497,9 +497,9 @@ export function ClassScheduleCard({
             role="status"
             className={`flex items-start gap-2 rounded-md border p-2.5 text-xs font-medium ${
               feedback.type === "success"
-                ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                ? "border-secondary-base/30 bg-secondary-light/30 text-secondary-hover"
                 : feedback.type === "warning"
-                  ? "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300"
+                  ? "border-accent-tangerine/30 bg-accent-tangerine/10 text-accent-tangerine"
                   : "border-destructive/40 bg-destructive/10 text-destructive"
             }`}
           >
@@ -519,7 +519,7 @@ export function ClassScheduleCard({
         {!isLevelUnlocked ? (
           <Button asChild variant="outline" className="w-full">
             <Link href="/dashboard/progression">
-              <Sparkles className="mr-2 h-4 w-4 text-amber-500" />
+              <Sparkles className="mr-2 h-4 w-4 text-accent-tangerine" />
               Submit {session.minLevel} Video to Unlock
             </Link>
           </Button>
@@ -529,7 +529,7 @@ export function ClassScheduleCard({
               <Button
                 asChild
                 variant="secondary"
-                className="w-full border border-emerald-500/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-bold"
+                className="w-full border border-secondary-base/40 bg-secondary-light/40 text-secondary-hover font-bold"
               >
                 <Link href={`/checkin/${session.id}`}>
                   <CheckCircle2 className="mr-2 h-4 w-4" />
@@ -541,7 +541,7 @@ export function ClassScheduleCard({
                 variant="outline"
                 size="sm"
                 onClick={() => setShowCheckinModal(true)}
-                className="w-full border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300 font-bold text-xs hover:bg-amber-500/20"
+                className="w-full border-accent-tangerine/40 bg-accent-tangerine/10 text-accent-tangerine font-bold text-xs hover:bg-accent-tangerine/20"
               >
                 💬 How was your class? (Share Comfort Check-In)
               </Button>
@@ -555,7 +555,7 @@ export function ClassScheduleCard({
                   className="w-full font-semibold text-xs"
                 >
                   <Link href={`/checkin/${session.id}`}>
-                    <QrCode className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                    <QrCode className="mr-1.5 h-3.5 w-3.5 text-accent-tangerine" />
                     Door QR Pass
                   </Link>
                 </Button>
@@ -600,7 +600,7 @@ export function ClassScheduleCard({
             type="button"
             disabled={isPending || isSelectedRoleFull || session.isCancelled}
             onClick={attemptBook}
-            className="w-full"
+            className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold shadow-md transition-colors"
           >
             {isPending ? (
               <>

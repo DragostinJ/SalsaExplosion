@@ -83,15 +83,15 @@ export function BeginnerSyllabusRoadmap() {
   const progressPercent = Math.round((masteredCount / BEGINNER_STEPS.length) * 100);
 
   return (
-    <Card className="border border-emerald-500/30 bg-gradient-to-br from-emerald-500/[0.04] via-background to-amber-500/[0.03] shadow-xs">
+    <Card className="border border-secondary-base/30 bg-gradient-to-br from-secondary-light/30 via-background to-secondary-light/10 shadow-xs">
       <CardHeader className="pb-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-emerald-600 text-white font-bold text-[10px]">
+              <Badge className="bg-secondary-base text-white font-bold text-[10px]">
                 Level 0 → Level 1 Roadmap
               </Badge>
-              <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+              <span className="text-xs font-semibold text-secondary-base">
                 Foundational Cuban Figures
               </span>
             </div>
@@ -101,13 +101,13 @@ export function BeginnerSyllabusRoadmap() {
           </div>
 
           <div className="flex items-center gap-2 text-xs bg-muted/40 px-3 py-1.5 rounded-xl border border-border/60">
-            <Award className="h-4 w-4 text-emerald-600" />
+            <Award className="h-4 w-4 text-secondary-base" />
             <span className="font-bold text-foreground">{masteredCount} of 8 Mastered</span>
-            <span className="text-[10px] text-muted-foreground">({progressPercent}%)</span>
+            <span className="text-[10px] text-text-muted">({progressPercent}%)</span>
           </div>
         </div>
 
-        <CardDescription className="text-xs text-muted-foreground leading-relaxed pt-1">
+        <CardDescription className="text-xs text-text-muted leading-relaxed pt-1">
           No guessing what is being taught. This visual syllabus breaks down every move taught in your first month at Salsa Explosion so you always know what&apos;s coming next.
         </CardDescription>
 
@@ -115,7 +115,7 @@ export function BeginnerSyllabusRoadmap() {
         <div className="pt-2">
           <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
             <div
-              className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+              className="h-full bg-secondary-base rounded-full transition-all duration-500"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -133,27 +133,27 @@ export function BeginnerSyllabusRoadmap() {
                 key={step.number}
                 className={`rounded-xl border p-3 flex flex-col justify-between transition-all ${
                   isMastered
-                    ? "border-emerald-500/40 bg-emerald-500/[0.04]"
+                    ? "border-secondary-base/40 bg-secondary-light/30"
                     : isCurrent
-                      ? "border-amber-500/50 bg-amber-500/[0.05] ring-1 ring-amber-500/30"
+                      ? "border-accent-tangerine/50 bg-accent-tangerine/[0.08] ring-1 ring-accent-tangerine/30"
                       : "border-border/60 bg-card/60 opacity-80"
                 }`}
               >
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted">
                       Figure {step.number} • {step.category}
                     </span>
                     {isMastered ? (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-secondary-base">
                         <CheckCircle2 className="h-3 w-3" /> Mastered
                       </span>
                     ) : isCurrent ? (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-600 dark:text-amber-400 animate-pulse">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-accent-tangerine animate-pulse">
                         <Flame className="h-3 w-3" /> Practicing Now
                       </span>
                     ) : (
-                      <span className="text-[10px] text-muted-foreground font-medium">
+                      <span className="text-[10px] text-text-muted font-medium">
                         Coming Up
                       </span>
                     )}

@@ -8,7 +8,7 @@ import {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t bg-muted/30 text-xs text-muted-foreground mt-auto">
+    <footer className="border-t bg-surface-warm/40 text-xs text-text-muted mt-auto">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-10">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Col 1 & 2: Brand & Director */}
@@ -17,22 +17,22 @@ export function SiteFooter() {
               href="/"
               className="inline-flex items-center gap-2.5 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85"
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-600 to-orange-500 text-white shadow-sm shadow-amber-500/20">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-primary-base to-accent-tangerine text-white shadow-sm shadow-primary-base/20">
                 <Flame className="h-5 w-5 fill-white" />
               </div>
               <div className="flex flex-col">
                 <span className="text-base font-extrabold leading-none tracking-tight">
-                  Salsa <span className="text-amber-700 dark:text-amber-400">Explosion</span>
+                  Salsa <span className="text-primary-base">Explosion</span>
                 </span>
-                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
+                <span className="text-[10px] font-semibold text-text-muted uppercase tracking-widest mt-0.5">
                   Bournemouth • Cuban Salsa
                 </span>
               </div>
             </Link>
 
-            <p className="text-xs text-muted-foreground leading-relaxed max-w-sm">
+            <p className="text-xs text-text-muted leading-relaxed max-w-sm">
               Founded & directed by Cuban dance maestro <strong className="text-foreground">Enrique Perez Valdes</strong>. 
-              Winner of the <span className="text-amber-700 dark:text-amber-400 font-semibold">Salsa UK Lifetime Achievement Award</span> and 
+              Winner of the <span className="text-primary-base font-semibold">Salsa UK Lifetime Achievement Award</span> and 
               voted <span className="text-foreground font-semibold">UK&apos;s Most Popular Salsa Promoter</span>.
             </p>
 

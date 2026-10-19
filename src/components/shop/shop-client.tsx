@@ -157,7 +157,7 @@ export function ShopClient() {
           onClick={() => setSelectedCategory("ALL")}
           className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
             selectedCategory === "ALL"
-              ? "bg-amber-600 text-white shadow-xs"
+              ? "bg-primary-base text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -168,7 +168,7 @@ export function ShopClient() {
           onClick={() => setSelectedCategory("APPAREL")}
           className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
             selectedCategory === "APPAREL"
-              ? "bg-amber-600 text-white shadow-xs"
+              ? "bg-primary-base text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -179,7 +179,7 @@ export function ShopClient() {
           onClick={() => setSelectedCategory("ACCESSORY")}
           className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
             selectedCategory === "ACCESSORY"
-              ? "bg-amber-600 text-white shadow-xs"
+              ? "bg-primary-base text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -190,7 +190,7 @@ export function ShopClient() {
           onClick={() => setSelectedCategory("FOOTWEAR")}
           className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
             selectedCategory === "FOOTWEAR"
-              ? "bg-amber-600 text-white shadow-xs"
+              ? "bg-primary-base text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -257,7 +257,7 @@ export function ShopClient() {
               <Button
                 type="button"
                 onClick={() => handleOpenReservation(item)}
-                className="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs"
+                className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold text-xs"
               >
                 <ShoppingBag className="mr-1.5 h-3.5 w-3.5" />
                 Reserve for Collection
@@ -369,7 +369,7 @@ export function ShopClient() {
                     size="sm"
                     disabled={isSubmitting}
                     onClick={handleConfirmReservation}
-                    className="bg-amber-600 hover:bg-amber-700 text-white font-bold"
+                    className="bg-primary-base hover:bg-primary-hover text-white font-bold"
                   >
                     {isSubmitting ? "Holding Item..." : "Confirm Desk Reservation"}
                   </Button>

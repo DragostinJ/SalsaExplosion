@@ -163,8 +163,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               <Flame className="h-5 w-5 fill-white" />
             </div>
             <div className="flex flex-col">
-              <span className="text-base font-extrabold leading-none tracking-tight">
-                Salsa <span className="text-primary-base">Explosion</span>
+              <span className="text-lg font-black leading-none tracking-tight">
+                Salsa <span className="text-rose-700 dark:text-rose-400">Explosion</span>
               </span>
               <span className="text-[10px] font-semibold text-text-muted uppercase tracking-widest mt-0.5">
                 Bournemouth • Cuba
@@ -180,7 +180,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/dashboard/schedule"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname === "/dashboard/schedule"
-                      ? "bg-primary-base/15 text-primary-base font-bold"
+                      ? "bg-primary-base text-white shadow-xs font-bold"
                       : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                   }`}
                 >
@@ -191,7 +191,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/events"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname.startsWith("/events")
-                      ? "bg-primary-base/15 text-primary-base font-bold"
+                      ? "bg-primary-base text-white shadow-xs font-bold"
                       : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                   }`}
                 >
@@ -230,7 +230,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/dashboard/schedule"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname === "/dashboard/schedule"
-                      ? "bg-primary-base/15 text-primary-base font-bold"
+                      ? "bg-primary-base text-white shadow-xs font-bold"
                       : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                   }`}
                 >
@@ -241,7 +241,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/events"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname.startsWith("/events")
-                      ? "bg-primary-base/15 text-primary-base font-bold"
+                      ? "bg-primary-base text-white shadow-xs font-bold"
                       : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                   }`}
                 >
@@ -284,7 +284,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                     href={item.href}
                     className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                       item.active
-                        ? "bg-primary-base/15 text-primary-base font-bold"
+                        ? "bg-primary-base text-white shadow-xs font-bold"
                         : "text-text-muted hover:bg-muted/70 hover:text-foreground"
                     }`}
                   >

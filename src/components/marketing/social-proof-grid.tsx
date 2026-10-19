@@ -194,7 +194,7 @@ export function SocialProofGrid() {
               onClick={() => setActiveTab("all")}
               className={`rounded-full text-xs font-semibold ${
                 activeTab === "all"
-                  ? "bg-amber-600 text-white hover:bg-amber-700"
+                  ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
                   : "border-muted hover:bg-muted"
               }`}
             >
@@ -208,7 +208,7 @@ export function SocialProofGrid() {
               onClick={() => setActiveTab("reels")}
               className={`rounded-full text-xs font-semibold ${
                 activeTab === "reels"
-                  ? "bg-amber-600 text-white hover:bg-amber-700"
+                  ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
                   : "border-muted hover:bg-muted"
               }`}
             >
@@ -222,7 +222,7 @@ export function SocialProofGrid() {
               onClick={() => setActiveTab("testimonials")}
               className={`rounded-full text-xs font-semibold ${
                 activeTab === "testimonials"
-                  ? "bg-amber-600 text-white hover:bg-amber-700"
+                  ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
                   : "border-muted hover:bg-muted"
               }`}
             >
@@ -236,7 +236,7 @@ export function SocialProofGrid() {
               onClick={() => setActiveTab("congress")}
               className={`rounded-full text-xs font-semibold ${
                 activeTab === "congress"
-                  ? "bg-amber-600 text-white hover:bg-amber-700"
+                  ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
                   : "border-muted hover:bg-muted"
               }`}
             >

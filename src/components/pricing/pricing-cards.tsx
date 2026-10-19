@@ -172,7 +172,7 @@ export function PricingCards({
                   <Badge
                     variant={isSubCard ? "default" : "secondary"}
                     className={
-                      isSubCard ? "bg-emerald-600 hover:bg-emerald-600" : ""
+                      isSubCard ? "bg-emerald-800 hover:bg-emerald-800 text-white" : ""
                     }
                   >
                     {isSubCard ? "Monthly Membership" : "Class Pack"}
@@ -180,7 +180,7 @@ export function PricingCards({
                   {pkg.popular && (
                     <Badge
                       variant="outline"
-                      className="border-amber-500/40 text-amber-600 dark:text-amber-400"
+                      className="border-amber-600/40 text-amber-800 dark:text-amber-300 font-bold"
                     >
                       <Sparkles className="mr-1 h-3 w-3" />
                       Most Popular

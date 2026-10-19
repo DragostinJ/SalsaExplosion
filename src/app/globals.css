@@ -31,8 +31,8 @@
   --color-primary-light: #FFE4E6;
 
   /* Secondary (Coastal Trust & Safety) */
-  --color-secondary-base: #0D9488;
-  --color-secondary-hover: #0F766E;
+  --color-secondary-base: #0F766E;
+  --color-secondary-hover: #115E59;
   --color-secondary-light: #CCFBF1;
 
   /* Accent (Highlighter/Warnings) */
@@ -46,7 +46,7 @@
 
   /* Text & Typography */
   --color-text-main: #1E293B;
-  --color-text-muted: #64748B;
+  --color-text-muted: #475569;
 }
 
 @layer base {
@@ -64,12 +64,12 @@
     --primary-foreground: 0 0% 100%;
 
     /* Coastal Trust & Safety (Secondary) */
-    --secondary: 174 84% 32%; /* #0D9488 - Ocean Teal */
+    --secondary: 175 77% 26%; /* #0F766E - Deep Ocean Teal, 4.84:1 contrast with white */
     --secondary-foreground: 0 0% 100%;
 
     /* Surfaces & Muted */
     --muted: 24 6% 90%; /* #E7E5E4 - Warm Sand */
-    --muted-foreground: 215 16% 47%; /* #64748B - Slate 500 */
+    --muted-foreground: 215 19% 38%; /* #475569 - Slate 600, WCAG AA compliant */
 
     /* Accent & Warnings */
     --accent: 25 95% 53%; /* #F97316 - Accent Tangerine */

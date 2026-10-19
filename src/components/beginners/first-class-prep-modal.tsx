@@ -119,7 +119,7 @@ export function FirstClassPrepModal({
             type="button"
             size="sm"
             onClick={onClose}
-            className="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-6"
+            className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs px-6"
           >
             I&apos;m Ready! Close Preview
           </Button>

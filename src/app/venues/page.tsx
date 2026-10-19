@@ -138,7 +138,7 @@ export default function VenuesGuidePage() {
 
           <div className="p-6 pt-0 border-t mt-4 flex items-center justify-between">
             <span className="text-xs text-muted-foreground">Postcode: BH5 1DD</span>
-            <Button asChild size="sm" className="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs">
+            <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs">
               <a
                 href="https://maps.google.com/?q=BOH+Studios+Bournemouth+11-15+Haviland+Road+West+BH5+1DD"
                 target="_blank"

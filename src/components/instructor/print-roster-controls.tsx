@@ -39,7 +39,7 @@ export function PrintRosterControls({
         <Button
           type="button"
           onClick={() => window.print()}
-          className="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs"
+          className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs shadow-xs"
         >
           <Printer className="mr-1.5 h-4 w-4" />
           Print Paper Roster

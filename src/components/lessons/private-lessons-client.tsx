@@ -153,7 +153,7 @@ export function PrivateLessonsClient() {
           <Button
             type="button"
             onClick={() => setIsSubmitted(false)}
-            className="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs"
+            className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs"
           >
             Submit Another Request
           </Button>
@@ -384,7 +384,7 @@ export function PrivateLessonsClient() {
                 type="submit"
                 size="lg"
                 disabled={isSubmitting}
-                className="flex-1 sm:flex-none bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs sm:text-sm px-6"
+                className="flex-1 sm:flex-none bg-primary-base hover:bg-primary-hover text-white font-bold text-xs sm:text-sm px-6"
               >
                 {isSubmitting ? "Submitting..." : "Request Coaching Slot"}
                 <ArrowRight className="ml-2 h-4 w-4" />

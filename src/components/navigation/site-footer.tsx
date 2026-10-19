@@ -8,7 +8,7 @@ import {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t bg-surface-warm/40 text-xs text-text-muted mt-auto">
+    <footer className="border-t bg-surface-warm/50 text-xs text-slate-700 dark:text-slate-300 mt-auto">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 space-y-10">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Col 1 & 2: Brand & Director */}
@@ -22,17 +22,17 @@ export function SiteFooter() {
               </div>
               <div className="flex flex-col">
                 <span className="text-base font-extrabold leading-none tracking-tight">
-                  Salsa <span className="text-primary-base">Explosion</span>
+                  Salsa <span className="text-rose-800 dark:text-rose-400">Explosion</span>
                 </span>
-                <span className="text-[10px] font-semibold text-text-muted uppercase tracking-widest mt-0.5">
+                <span className="text-[10px] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-widest mt-0.5">
                   Bournemouth • Cuban Salsa
                 </span>
               </div>
             </Link>
 
-            <p className="text-xs text-text-muted leading-relaxed max-w-sm">
+            <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed max-w-sm">
               Founded & directed by Cuban dance maestro <strong className="text-foreground">Enrique Perez Valdes</strong>. 
-              Winner of the <span className="text-primary-base font-semibold">Salsa UK Lifetime Achievement Award</span> and 
+              Winner of the <span className="text-rose-800 dark:text-rose-400 font-semibold">Salsa UK Lifetime Achievement Award</span> and 
               voted <span className="text-foreground font-semibold">UK&apos;s Most Popular Salsa Promoter</span>.
             </p>
 
@@ -93,7 +93,7 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/private-lessons" className="hover:text-foreground transition-colors text-amber-700 dark:text-amber-400 font-semibold">
+                <Link href="/private-lessons" className="hover:text-foreground transition-colors text-rose-800 dark:text-rose-400 font-semibold">
                   1-on-1 Private Coaching
                 </Link>
               </li>
@@ -127,12 +127,12 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/music" className="hover:text-foreground transition-colors text-amber-700 dark:text-amber-400 font-semibold">
+                <Link href="/music" className="hover:text-foreground transition-colors text-rose-800 dark:text-rose-400 font-semibold">
                   Cuban Music & Playlists
                 </Link>
               </li>
               <li>
-                <Link href="/shop" className="hover:text-foreground transition-colors text-amber-700 dark:text-amber-400 font-semibold">
+                <Link href="/shop" className="hover:text-foreground transition-colors text-rose-800 dark:text-rose-400 font-semibold">
                   Merch & Dance Shoes
                 </Link>
               </li>
@@ -144,9 +144,9 @@ export function SiteFooter() {
             <h4 className="font-bold text-foreground uppercase tracking-wider text-[11px]">
               Bournemouth Studio Hub
             </h4>
-            <div className="space-y-2.5 text-muted-foreground">
+            <div className="space-y-2.5 text-slate-700 dark:text-slate-300">
               <div className="flex items-start gap-2">
-                <MapPin className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                <MapPin className="h-3.5 w-3.5 text-primary-base shrink-0 mt-0.5" />
                 <span>
                   <strong className="text-foreground">BOH Studios</strong>
                   <br />
@@ -154,7 +154,7 @@ export function SiteFooter() {
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Calendar className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                <Calendar className="h-3.5 w-3.5 text-primary-base shrink-0 mt-0.5" />
                 <span>
                   Weekly Cuban Salsa & Rueda de Casino every Tuesday & Thursday night.
                 </span>
@@ -162,7 +162,7 @@ export function SiteFooter() {
               <div className="pt-1">
                 <Link
                   href="/venues"
-                  className="font-bold text-amber-700 dark:text-amber-400 hover:underline inline-flex items-center gap-1"
+                  className="font-bold text-rose-800 dark:text-rose-400 hover:underline inline-flex items-center gap-1"
                 >
                   Venues & Parking Guide →
                 </Link>
@@ -172,17 +172,17 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px]">
+        <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-700 dark:text-slate-300">
           <p>© {new Date().getFullYear()} Salsa Explosion UK. Directed by Enrique Perez Valdes. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5 text-amber-700 dark:text-amber-400 font-semibold">
+            <span className="flex items-center gap-1.5 text-rose-800 dark:text-rose-400 font-semibold">
               <Flame className="h-3 w-3 fill-current" />
               Salsa Explosion Dance Academy
             </span>
-            <Link href="/how-it-works" className="hover:underline">
+            <Link href="/how-it-works" className="hover:underline text-slate-800 dark:text-slate-200 font-semibold">
               Guide
             </Link>
-            <Link href="/about" className="hover:underline">
+            <Link href="/about" className="hover:underline text-slate-800 dark:text-slate-200 font-semibold">
               About
             </Link>
           </div>

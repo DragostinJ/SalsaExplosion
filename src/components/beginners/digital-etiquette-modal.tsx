@@ -149,7 +149,7 @@ export function DigitalEtiquetteModal({
             size="sm"
             disabled={!agreed}
             onClick={handleConfirm}
-            className="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-5 shadow-xs"
+            className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs px-5 shadow-xs"
           >
             <CheckCircle2 className="mr-1.5 h-4 w-4" />
             Accept & Continue Booking

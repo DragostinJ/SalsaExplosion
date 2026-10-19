@@ -45,9 +45,13 @@ export function MobileNavSheet({
   const isStaff = role === "INSTRUCTOR" || role === "ADMIN";
   const isAdmin = role === "ADMIN";
 
+  const prevPathname = useRef(pathname);
   // Auto-close when pathname changes
   useEffect(() => {
-    onClose();
+    if (prevPathname.current !== pathname) {
+      prevPathname.current = pathname;
+      onClose();
+    }
   }, [pathname, onClose]);
 
   // Handle ESC key and focus trapping

@@ -183,7 +183,7 @@ export default async function Home() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                 <div>
-                  <Badge variant="outline" className="text-xs font-bold mb-2 border-primary-base/30 text-primary-base bg-primary-light/60">
+                  <Badge variant="outline" className="text-xs font-bold mb-2 border-primary-base/30 text-rose-800 dark:text-rose-300 bg-primary-light/60">
                     Live Event Calendar
                   </Badge>
                   <h2 className="text-2xl font-extrabold sm:text-3xl tracking-tight">
@@ -193,7 +193,7 @@ export default async function Home() {
                     From weekly Thursday parties at BOH Studios to flagship weekend Congresses in Bournemouth.
                   </p>
                 </div>
-                <Button asChild variant="outline" size="sm" className="shrink-0 text-xs font-bold border-primary-base/30 text-primary-base hover:bg-primary-base hover:text-white transition-colors">
+                <Button asChild variant="outline" size="sm" className="shrink-0 text-xs font-bold border-primary-base/30 text-rose-700 dark:text-rose-300 hover:bg-primary-base hover:text-white transition-colors">
                   <Link href="/events">
                     Browse All Passes & Events
                     <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
@@ -318,7 +318,7 @@ export default async function Home() {
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/about">About Studio</Link>
                   </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs border-primary-base/40 text-primary-base font-bold bg-primary-light/50 hover:bg-primary-base hover:text-white transition-colors">
+                  <Button size="sm" variant="outline" asChild className="text-xs border-primary-base/40 text-rose-800 dark:text-rose-200 font-bold bg-primary-light/50 hover:bg-primary-base hover:text-white transition-colors">
                     <Link href="/how-it-works">How It Works</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">

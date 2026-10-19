@@ -496,7 +496,7 @@ export function EventPassSelector({
               <Button
                 type="button"
                 size="sm"
-                className="w-full sm:flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs"
+                className="w-full sm:flex-1 bg-primary-base hover:bg-primary-hover text-white font-bold text-xs shadow-xs"
                 onClick={() => {
                   handleRegister(
                     upsellTarget.tier.eventId,

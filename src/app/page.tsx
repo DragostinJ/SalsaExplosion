@@ -139,7 +139,7 @@ export default async function Home() {
             <div className="rounded-2xl border border-amber-500/30 bg-card/60 backdrop-blur-sm p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
               <div className="space-y-2 text-center lg:text-left">
                 <div className="inline-flex items-center gap-2">
-                  <Badge className="bg-amber-600 text-white font-bold text-xs uppercase tracking-wider">
+                  <Badge className="bg-primary-base text-white font-bold text-xs uppercase tracking-wider">
                     Official Flagship Event
                   </Badge>
                   <span className="text-xs text-muted-foreground font-medium">July 17–19, 2026</span>
@@ -155,7 +155,7 @@ export default async function Home() {
               <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
                 <Button
                   asChild
-                  className="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-white font-bold px-6"
+                  className="w-full sm:w-auto bg-primary-base hover:bg-primary-hover text-white font-bold px-6"
                 >
                   <Link href="/events">
                     Reserve Passes (From £20)
@@ -179,11 +179,11 @@ export default async function Home() {
 
         {/* Incoming Events & Social Parties Showcase */}
         {upcomingEvents.length > 0 && (
-          <section className="py-14 border-t bg-gradient-to-b from-background via-amber-500/[0.02] to-background">
+          <section className="py-14 border-t bg-gradient-to-b from-background via-primary-base/[0.02] to-background">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                 <div>
-                  <Badge variant="outline" className="text-xs font-semibold mb-2 border-amber-500/40 text-amber-700 dark:text-amber-300 bg-amber-500/10">
+                  <Badge variant="outline" className="text-xs font-bold mb-2 border-primary-base/30 text-primary-base bg-primary-light/60">
                     Live Event Calendar
                   </Badge>
                   <h2 className="text-2xl font-extrabold sm:text-3xl tracking-tight">
@@ -193,7 +193,7 @@ export default async function Home() {
                     From weekly Thursday parties at BOH Studios to flagship weekend Congresses in Bournemouth.
                   </p>
                 </div>
-                <Button asChild variant="outline" size="sm" className="shrink-0 text-xs font-bold border-amber-500/30">
+                <Button asChild variant="outline" size="sm" className="shrink-0 text-xs font-bold border-primary-base/30 text-primary-base hover:bg-primary-base hover:text-white transition-colors">
                   <Link href="/events">
                     Browse All Passes & Events
                     <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
@@ -216,9 +216,9 @@ export default async function Home() {
                   return (
                     <Card
                       key={evt.id}
-                      className="flex flex-col overflow-hidden border shadow-xs hover:shadow-md transition-all group hover:border-amber-500/50"
+                      className="flex flex-col overflow-hidden border shadow-xs hover:shadow-md transition-all group hover:border-primary-base/50"
                     >
-                      <div className="relative h-36 w-full bg-gradient-to-tr from-amber-700 via-orange-600 to-amber-500 p-5 text-white flex flex-col justify-between">
+                      <div className="relative h-36 w-full bg-gradient-to-tr from-primary-base via-rose-600 to-accent-tangerine p-5 text-white flex flex-col justify-between">
                         <div className="flex items-center justify-between">
                           <Badge className="bg-black/40 text-white border-none text-[10px] backdrop-blur-sm">
                             {evt.slug.includes("congress") ? "Flagship Congress" : "Social Night & Class"}
@@ -238,7 +238,7 @@ export default async function Home() {
                             <Badge
                               key={artist}
                               variant="secondary"
-                              className="text-[10px] bg-amber-500/10 text-amber-700 dark:text-amber-300 font-semibold"
+                              className="text-[10px] bg-secondary-light text-secondary-hover font-bold border border-secondary-base/30"
                             >
                               ★ {artist}
                             </Badge>
@@ -318,7 +318,7 @@ export default async function Home() {
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/about">About Studio</Link>
                   </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs border-amber-500/30 text-amber-700 dark:text-amber-300">
+                  <Button size="sm" variant="outline" asChild className="text-xs border-primary-base/40 text-primary-base font-bold bg-primary-light/50 hover:bg-primary-base hover:text-white transition-colors">
                     <Link href="/how-it-works">How It Works</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
@@ -328,9 +328,9 @@ export default async function Home() {
               </div>
 
               {/* Portal 2: Instructor Desk */}
-              <div className="rounded-2xl border border-emerald-500/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-emerald-500/60 transition-colors">
+              <div className="rounded-2xl border border-secondary-base/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-secondary-base/60 transition-colors">
                 <div className="space-y-2">
-                  <Badge className="bg-emerald-600 text-white text-xs font-bold">
+                  <Badge className="bg-secondary-base text-white text-xs font-bold">
                     2. Instructor Teaching Desk
                   </Badge>
                   <h3 className="text-lg font-extrabold">
@@ -343,19 +343,19 @@ export default async function Home() {
                 <div className="flex flex-wrap gap-2 pt-2">
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/instructor/students">
-                      <Users className="mr-1.5 h-3.5 w-3.5 text-emerald-600" />
+                      <Users className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
                       Students
                     </Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/instructor/submissions">
-                      <Video className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                      <Video className="mr-1.5 h-3.5 w-3.5 text-primary-base" />
                       AI Video Grader
                     </Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/instructor/roster">
-                      <QrCode className="mr-1.5 h-3.5 w-3.5 text-blue-500" />
+                      <QrCode className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
                       QR Roster
                     </Link>
                   </Button>
@@ -363,9 +363,9 @@ export default async function Home() {
               </div>
 
               {/* Portal 3: Studio Owner Admin */}
-              <div className="rounded-2xl border border-amber-500/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-amber-500/60 transition-colors">
+              <div className="rounded-2xl border border-accent-tangerine/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-accent-tangerine/60 transition-colors">
                 <div className="space-y-2">
-                  <Badge className="bg-amber-500 text-white text-xs font-bold">
+                  <Badge className="bg-accent-tangerine text-zinc-950 text-xs font-bold">
                     3. Studio Owner Command
                   </Badge>
                   <h3 className="text-lg font-extrabold">
@@ -378,7 +378,7 @@ export default async function Home() {
                 <div className="flex flex-wrap gap-2 pt-2">
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/admin/analytics">
-                      <BarChart3 className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                      <BarChart3 className="mr-1.5 h-3.5 w-3.5 text-accent-tangerine" />
                       Analytics
                     </Link>
                   </Button>
@@ -387,7 +387,7 @@ export default async function Home() {
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
                     <Link href="/admin/events">
-                      <ShieldCheck className="mr-1.5 h-3.5 w-3.5 text-orange-500" />
+                      <ShieldCheck className="mr-1.5 h-3.5 w-3.5 text-accent-tangerine" />
                       Events Admin
                     </Link>
                   </Button>
@@ -414,7 +414,7 @@ export default async function Home() {
               </div>
 
               <div className="rounded-2xl border bg-card p-6 shadow-xs">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 mb-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-light text-primary-base mb-4">
                   <Award className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold">

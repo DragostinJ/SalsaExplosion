@@ -110,11 +110,11 @@ export function AdminNotificationBell() {
           {/* Header */}
           <div className="flex items-center justify-between pb-2 border-b">
             <div className="flex items-center gap-1.5">
-              <span className="text-xs font-black uppercase tracking-wider text-amber-700 dark:text-amber-400">
+              <span className="text-xs font-black uppercase tracking-wider text-accent-tangerine">
                 Studio Alerts
               </span>
               {unreadCount > 0 && (
-                <Badge className="bg-amber-500 text-zinc-950 text-[10px] font-bold h-4 px-1.5">
+                <Badge className="bg-accent-tangerine text-zinc-950 text-[10px] font-bold h-4 px-1.5">
                   {unreadCount} New
                 </Badge>
               )}

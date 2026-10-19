@@ -118,4 +118,22 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Accessible visible focus indicators using Salsa Fiery Rose */
+  :focus-visible {
+    outline: 2px solid var(--color-primary-base, #E11D48);
+    outline-offset: 2px;
+  }
+
+  /* Accessibility: Respect user prefers-reduced-motion setting */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }

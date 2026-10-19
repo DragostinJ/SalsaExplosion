@@ -142,9 +142,9 @@ export function InteractiveTutorialModal({
           setIsOpen(true);
         }}
         aria-label="Open interactive studio tutorial"
-        className="inline-flex items-center gap-1.5 rounded-lg border border-secondary-base/40 bg-secondary-light/40 px-2 sm:px-2.5 py-1.5 text-xs font-bold text-secondary-hover transition-colors hover:bg-secondary-light/70"
+        className="inline-flex items-center gap-1.5 rounded-lg border border-secondary-base/50 bg-secondary-light text-secondary-hover px-2 sm:px-2.5 py-1.5 text-xs font-bold transition-colors hover:bg-secondary-base hover:text-white shadow-xs"
       >
-        <HelpCircle className="h-3.5 w-3.5 text-secondary-base shrink-0" />
+        <HelpCircle className="h-3.5 w-3.5 text-secondary-base shrink-0 group-hover:text-white" />
         <span className="inline">How It Works</span>
       </button>
 
@@ -160,7 +160,7 @@ export function InteractiveTutorialModal({
           className="fixed inset-0 z-[9999] flex flex-col justify-end sm:justify-center sm:items-center bg-black/80 p-0 sm:p-4 backdrop-blur-sm transition-opacity"
         >
           {/* Card: Bottom Sheet on Mobile, Centered Dialog on Desktop */}
-          <div className="relative flex flex-col w-full max-w-2xl max-h-[92dvh] sm:max-h-[85vh] rounded-t-3xl sm:rounded-3xl border border-amber-500/30 bg-card text-card-foreground shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
+          <div className="relative flex flex-col w-full max-w-2xl max-h-[92dvh] sm:max-h-[85vh] rounded-t-3xl sm:rounded-3xl border border-primary-base/30 bg-card text-card-foreground shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
             {/* Top Step Indicators */}
             <div className="grid grid-cols-4 gap-1.5 bg-muted/60 px-4 py-2 shrink-0">
               {[0, 1, 2, 3].map((idx) => (
@@ -171,7 +171,7 @@ export function InteractiveTutorialModal({
                   onClick={() => setStep(idx)}
                   className={`h-1.5 sm:h-2 rounded-full transition-all ${
                     idx <= step
-                      ? "bg-gradient-to-r from-amber-500 to-orange-500"
+                      ? "bg-gradient-to-r from-primary-base to-accent-tangerine"
                       : "bg-muted-foreground/25"
                   }`}
                 />

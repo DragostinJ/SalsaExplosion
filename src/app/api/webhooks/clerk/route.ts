@@ -17,6 +17,20 @@ export async function POST(req: Request) {
     );
   }
 
+  // Security: Reject dummy/placeholder secrets in production builds
+  if (
+    process.env.NODE_ENV === "production" &&
+    (WEBHOOK_SECRET === "whsec_placeholder" ||
+      WEBHOOK_SECRET.startsWith("whsec_placeholder") ||
+      WEBHOOK_SECRET === "placeholder")
+  ) {
+    console.error("[Clerk Webhook]: Production cannot use placeholder CLERK_WEBHOOK_SECRET.");
+    return NextResponse.json(
+      { error: "Invalid webhook secret configuration in production" },
+      { status: 500 }
+    );
+  }
+
   const headerPayload = await headers();
   const svix_id = headerPayload.get("svix-id");
   const svix_timestamp = headerPayload.get("svix-timestamp");

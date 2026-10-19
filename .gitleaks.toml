@@ -1,0 +1,20 @@
+# .gitleaks.toml - Secret scanning configuration for Salsa Explosion
+
+title = "Salsa Explosion Secret Scanning Configuration"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Global allowlist for documentation, examples, and mock test fixtures"
+paths = [
+  '''^\.env\.example$''',
+  '''^tests/.*$''',
+  '''^node_modules/.*$''',
+  '''^\.next/.*$''',
+]
+regexes = [
+  '''whsec_placeholder''',
+  '''sk_test_placeholder''',
+  '''pk_test_placeholder''',
+]

@@ -124,6 +124,20 @@ export async function POST(req: Request): Promise<NextResponse> {
     );
   }
 
+  // Security: Reject dummy/placeholder secrets in production builds
+  if (
+    process.env.NODE_ENV === "production" &&
+    (STRIPE_WEBHOOK_SECRET === "whsec_placeholder" ||
+      STRIPE_WEBHOOK_SECRET.startsWith("whsec_placeholder") ||
+      STRIPE_WEBHOOK_SECRET === "placeholder")
+  ) {
+    console.error("[Stripe Webhook]: Production cannot use placeholder STRIPE_WEBHOOK_SECRET.");
+    return NextResponse.json(
+      { error: "Invalid webhook secret configuration in production" },
+      { status: 500 }
+    );
+  }
+
   // 1. Read Raw Body & Signature Header
   const rawBody = await req.text();
   const headerPayload = await headers();

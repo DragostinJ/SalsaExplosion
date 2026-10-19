@@ -48,6 +48,11 @@ jobs:
           grep -q "ALLOW_DEMO_ROLE_SWITCHING" .env.example || (echo "Missing ALLOW_DEMO_ROLE_SWITCHING in .env.example" && exit 1)
           echo "Environment variable documentation: PASSED."
 
+      - name: Gitleaks Secret Scanning
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   lint-and-typecheck:
     name: ESLint & TypeScript Compilation
     runs-on: ubuntu-latest

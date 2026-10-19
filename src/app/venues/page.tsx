@@ -9,11 +9,13 @@ import {
   Footprints,
   Compass,
   ArrowRight,
+  Navigation,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BackButton } from "@/components/navigation/back-button";
+import { VenueArrivalPlanner } from "@/components/venues/venue-arrival-planner";
 
 export const metadata = {
   title: "Venues & Parking Guide | BOH Studios Bournemouth | Salsa Explosion",
@@ -69,6 +71,9 @@ export default function VenuesGuidePage() {
           </div>
         </div>
       </div>
+
+      {/* Interactive Door-to-Door Arrival Planner & Parking Calculator */}
+      <VenueArrivalPlanner />
 
       {/* Venues Grid */}
       <div className="grid gap-8 lg:grid-cols-2">
@@ -136,19 +141,31 @@ export default function VenuesGuidePage() {
             </CardContent>
           </div>
 
-          <div className="p-6 pt-0 border-t mt-4 flex items-center justify-between">
+          <div className="p-6 pt-0 border-t mt-4 flex flex-wrap items-center justify-between gap-3">
             <span className="text-xs text-muted-foreground">Postcode: BH5 1DD</span>
-            <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs">
-              <a
-                href="https://maps.google.com/?q=BOH+Studios+Bournemouth+11-15+Haviland+Road+West+BH5+1DD"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MapPin className="mr-1.5 h-3.5 w-3.5" />
-                Open in Google Maps
-                <ExternalLink className="ml-1 h-3 w-3" />
-              </a>
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button asChild size="sm" variant="outline" className="text-xs h-8 font-semibold">
+                <a
+                  href="https://maps.apple.com/?address=11-15+Haviland+Road+West,Bournemouth,BH5+1DD"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-purple-600" />
+                  Apple Maps
+                </a>
+              </Button>
+              <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs h-8">
+                <a
+                  href="https://maps.google.com/?q=BOH+Studios+Bournemouth+11-15+Haviland+Road+West+BH5+1DD"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MapPin className="mr-1.5 h-3.5 w-3.5" />
+                  Google Maps
+                  <ExternalLink className="ml-1 h-3 w-3" />
+                </a>
+              </Button>
+            </div>
           </div>
         </Card>
 
@@ -216,19 +233,31 @@ export default function VenuesGuidePage() {
             </CardContent>
           </div>
 
-          <div className="p-6 pt-0 border-t mt-4 flex items-center justify-between">
+          <div className="p-6 pt-0 border-t mt-4 flex flex-wrap items-center justify-between gap-3">
             <span className="text-xs text-muted-foreground">Postcode: BH1 2PR</span>
-            <Button asChild size="sm" className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs">
-              <a
-                href="https://maps.google.com/?q=The+Roundhouse+Hotel+Meyrick+Road+Bournemouth+BH1+2PR"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MapPin className="mr-1.5 h-3.5 w-3.5" />
-                Open in Google Maps
-                <ExternalLink className="ml-1 h-3 w-3" />
-              </a>
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button asChild size="sm" variant="outline" className="text-xs h-8 font-semibold">
+                <a
+                  href="https://maps.apple.com/?address=Meyrick+Road,Bournemouth,BH1+2PR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-purple-600" />
+                  Apple Maps
+                </a>
+              </Button>
+              <Button asChild size="sm" className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs h-8">
+                <a
+                  href="https://maps.google.com/?q=The+Roundhouse+Hotel+Meyrick+Road+Bournemouth+BH1+2PR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MapPin className="mr-1.5 h-3.5 w-3.5" />
+                  Google Maps
+                  <ExternalLink className="ml-1 h-3 w-3" />
+                </a>
+              </Button>
+            </div>
           </div>
         </Card>
       </div>

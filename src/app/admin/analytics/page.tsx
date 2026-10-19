@@ -36,6 +36,8 @@ export default async function AdminAnalyticsPage() {
     creditPurchases,
     activeSubscriptionsCount,
     auditLogs,
+    coachingBookings,
+    merchReservations,
   ] = await Promise.all([
     prisma.user.count({ where: { role: Role.STUDENT } }),
     prisma.booking.count({
@@ -87,6 +89,12 @@ export default async function AdminAnalyticsPage() {
           },
         },
       },
+    }),
+    prisma.privateLessonBooking.findMany({
+      select: { totalPricePounds: true, status: true },
+    }),
+    prisma.merchReservation.findMany({
+      select: { pricePounds: true, status: true },
     }),
   ]);
 
@@ -152,8 +160,20 @@ export default async function AdminAnalyticsPage() {
   const creditPackRevenuePounds = totalCreditsPurchased * 10;
   const subscriptionRevenuePounds = activeSubscriptionsCount * 89;
 
+  const coachingRevenuePounds = coachingBookings
+    .filter((b) => b.status === "COMPLETED" || b.status === "CONFIRMED")
+    .reduce((acc, curr) => acc + curr.totalPricePounds, 0);
+
+  const merchRevenuePounds = merchReservations
+    .filter((m) => m.status === "COLLECTED" || m.status === "RESERVED")
+    .reduce((acc, curr) => acc + curr.pricePounds, 0);
+
   const currentMonthDynamicPounds =
-    eventRevenuePounds + creditPackRevenuePounds + subscriptionRevenuePounds;
+    eventRevenuePounds +
+    creditPackRevenuePounds +
+    subscriptionRevenuePounds +
+    coachingRevenuePounds +
+    merchRevenuePounds;
 
   const totalRevenueInPounds = 4500 + currentMonthDynamicPounds;
 
@@ -207,6 +227,8 @@ export default async function AdminAnalyticsPage() {
           totalStudents,
           activeBookingsCount,
           pendingReviewsCount,
+          coachingRevenuePounds,
+          merchRevenuePounds,
         }}
       />
 

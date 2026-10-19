@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Download, FileSpreadsheet, Users, Ticket, Loader2 } from "lucide-react";
+import { Download, FileSpreadsheet, Users, Ticket, ShoppingBag, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   exportRevenueLedgerCsvAction,
   exportStudentRosterCsvAction,
   exportCongressTicketHoldersCsvAction,
+  exportPrivateCoachingAndMerchCsvAction,
 } from "@/actions/export.actions";
 
 function triggerBrowserDownload(filename: string, content: string) {
@@ -93,6 +94,28 @@ export function CsvExportToolbar() {
     }
   }
 
+  async function handleExportCoachingMerch() {
+    setDownloadingType("coaching-merch");
+    setStatusMessage(null);
+    try {
+      const res = await exportPrivateCoachingAndMerchCsvAction();
+      if (res.success && res.csvContent && res.filename) {
+        triggerBrowserDownload(res.filename, res.csvContent);
+        setStatusMessage(`Successfully downloaded ${res.filename}`);
+      } else {
+        const errText =
+          typeof res.error === "string"
+            ? res.error
+            : res.error?.message ?? "Unknown error";
+        setStatusMessage(`Export failed: ${errText}`);
+      }
+    } catch {
+      setStatusMessage("Export failed due to network or server error.");
+    } finally {
+      setDownloadingType(null);
+    }
+  }
+
   return (
     <Card className="border border-border/80 bg-card shadow-sm">
       <CardHeader className="pb-3">
@@ -116,7 +139,7 @@ export function CsvExportToolbar() {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {/* Revenue Ledger Export */}
           <Button
             variant="outline"
@@ -180,6 +203,28 @@ export function CsvExportToolbar() {
             </div>
             <span className="text-[11px] text-muted-foreground leading-snug">
               Bournemouth Congress passes, door check-in status & QR hashes.
+            </span>
+          </Button>
+
+          {/* Private Coaching & Merch Export */}
+          <Button
+            variant="outline"
+            className="flex h-auto flex-col items-start gap-1 p-3.5 text-left border-border hover:border-sky-500/50 hover:bg-sky-500/[0.04]"
+            onClick={handleExportCoachingMerch}
+            disabled={downloadingType !== null}
+          >
+            <div className="flex w-full items-center justify-between">
+              <span className="text-xs font-bold text-foreground">
+                Coaching & Merch
+              </span>
+              {downloadingType === "coaching-merch" ? (
+                <Loader2 className="h-4 w-4 animate-spin text-sky-500" />
+              ) : (
+                <ShoppingBag className="h-4 w-4 text-muted-foreground" />
+              )}
+            </div>
+            <span className="text-[11px] text-muted-foreground leading-snug">
+              Private coaching packages, click & collect merch orders & status.
             </span>
           </Button>
         </div>

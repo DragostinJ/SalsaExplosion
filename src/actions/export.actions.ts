@@ -262,3 +262,104 @@ export async function exportCongressTicketHoldersCsvAction(): Promise<CsvExportR
     }
   });
 }
+
+/**
+ * 4. Export Private Coaching & Merch Click & Collect Orders
+ */
+export async function exportPrivateCoachingAndMerchCsvAction(): Promise<CsvExportResult> {
+  const admin = await requireRole(ADMIN_ONLY);
+  const identifier = await getRateLimitIdentifier(admin.id);
+
+  return withRateLimit(identifier, "EXPORT", async (): Promise<CsvExportResult> => {
+    try {
+      const [privateBookings, merchReservations] = await Promise.all([
+        prisma.privateLessonBooking.findMany({
+          include: {
+            student: {
+              select: {
+                firstName: true,
+                lastName: true,
+                email: true,
+              },
+            },
+          },
+          orderBy: { createdAt: "desc" },
+        }),
+        prisma.merchReservation.findMany({
+          include: {
+            user: {
+              select: {
+                firstName: true,
+                lastName: true,
+                email: true,
+              },
+            },
+          },
+          orderBy: { createdAt: "desc" },
+        }),
+      ]);
+
+      const headers = [
+        "Order Type",
+        "Order ID",
+        "Date Created (UTC)",
+        "Customer Name",
+        "Customer Email",
+        "Item / Description",
+        "Package / Size",
+        "Preferred Slot / Notes",
+        "Amount (£)",
+        "Status",
+      ];
+
+      const coachingRows = privateBookings.map((b) => [
+        "PRIVATE_COACHING",
+        b.id,
+        b.createdAt.toISOString(),
+        `${b.student.firstName} ${b.student.lastName}`.trim(),
+        b.student.email,
+        `${b.instructorName} - ${b.focusTopic}`,
+        b.packageType,
+        b.preferredSlot,
+        b.totalPricePounds.toFixed(2),
+        b.status,
+      ]);
+
+      const merchRows = merchReservations.map((m) => [
+        "MERCH_CLICK_AND_COLLECT",
+        m.id,
+        m.createdAt.toISOString(),
+        `${m.user.firstName} ${m.user.lastName}`.trim(),
+        m.user.email,
+        m.itemName,
+        m.size ?? "N/A",
+        "Studio Desk Collection",
+        m.pricePounds.toFixed(2),
+        m.status,
+      ]);
+
+      const allRows = [...coachingRows, ...merchRows];
+      const csvContent = buildCsv(headers, allRows);
+      const dateStamp = new Date().toISOString().split("T")[0];
+      const filename = `salsa-explosion-coaching-merch-${dateStamp}.csv`;
+
+      await recordAuditLog({
+        actorId: admin.id,
+        action: AuditAction.CSV_EXPORT,
+        targetType: "CSV_EXPORT",
+        targetId: "coaching-merch-orders",
+        metadata: { filename, rowCount: allRows.length },
+      });
+
+      return {
+        success: true,
+        filename,
+        csvContent,
+      };
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to export coaching and merch orders";
+      return { success: false, filename: "", error: message };
+    }
+  });
+}
+

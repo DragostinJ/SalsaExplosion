@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Users, TrendingUp, Award, DollarSign, Download } from "lucide-react";
+import { Users, TrendingUp, Award, DollarSign, Download, CalendarPlus, ShoppingBag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -14,6 +14,8 @@ interface AnalyticsData {
   totalStudents: number;
   activeBookingsCount: number;
   pendingReviewsCount: number;
+  coachingRevenuePounds?: number;
+  merchRevenuePounds?: number;
 }
 
 export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
@@ -60,8 +62,8 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
         </Button>
       </div>
 
-      {/* 4 Top KPI Cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* 6 Top KPI Cards */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Card className="border shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
@@ -128,6 +130,44 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             <div className="text-2xl font-bold tracking-tight">{data.pendingReviewsCount}</div>
             <p className="mt-1 text-xs text-muted-foreground">
               Technique videos in review queue
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Coaching Pipeline
+            </CardTitle>
+            <div className="rounded-lg bg-sky-500/10 p-2 text-sky-600 dark:text-sky-400">
+              <CalendarPlus className="h-4 w-4" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold tracking-tight">
+              £{(data.coachingRevenuePounds ?? 0).toLocaleString("en-GB", { minimumFractionDigits: 2 })}
+            </div>
+            <p className="mt-1 text-xs text-muted-foreground">
+              1-on-1 private lessons & intensives
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="border shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Merch Desk Sales
+            </CardTitle>
+            <div className="rounded-lg bg-rose-500/10 p-2 text-rose-600 dark:text-rose-400">
+              <ShoppingBag className="h-4 w-4" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold tracking-tight">
+              £{(data.merchRevenuePounds ?? 0).toLocaleString("en-GB", { minimumFractionDigits: 2 })}
+            </div>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Click & collect hoodies, tees & shoes
             </p>
           </CardContent>
         </Card>

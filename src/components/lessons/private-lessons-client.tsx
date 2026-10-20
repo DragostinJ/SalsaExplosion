@@ -223,7 +223,7 @@ export function PrivateLessonsClient({
             </div>
             <div>
               <span className="font-bold text-muted-foreground">Studio Location:</span>{" "}
-              <span className="font-semibold text-foreground">BOH Studios, Haviland Road West, Bournemouth</span>
+              <span className="font-semibold text-foreground">BOH Studios, 104 Commercial Road, Bournemouth (BH2 5LR)</span>
             </div>
           </div>
           <Button

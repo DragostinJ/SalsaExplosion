@@ -133,7 +133,7 @@ export default async function PrintRosterPage({ searchParams }: PrintRosterPageP
               </span>
             </div>
             <p className="text-xs text-zinc-600 mt-0.5">
-              Hub: BOH Studios Bournemouth • 11-15 Haviland Road West, Boscombe BH5 1DD
+              Hub: BOH Studios Bournemouth • 104 Commercial Road, Bournemouth BH2 5LR
             </p>
             <h1 className="text-2xl font-black mt-2 tracking-tight">
               {classSession.title}

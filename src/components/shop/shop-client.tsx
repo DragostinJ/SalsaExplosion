@@ -378,7 +378,7 @@ export function ShopClient({
                     {activeReservation.pricePounds}.00 (Pay on pickup)
                   </div>
                   <div>
-                    <strong className="text-foreground">Collection Desk:</strong> BOH Studios, Haviland Road West, Bournemouth
+                    <strong className="text-foreground">Collection Desk:</strong> BOH Studios, 104 Commercial Road, Bournemouth (BH2 5LR)
                   </div>
                   <div>
                     <strong className="text-foreground">Hours:</strong> Tuesdays & Thursdays 6:30 PM – 10:30 PM

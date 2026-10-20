@@ -125,7 +125,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     }
   });
 
-  test("4. Venues directory renders BOH Studios Bournemouth and Roundhouse Hotel", async ({
+  test("4. Venues directory renders BOH Studios Bournemouth, Woodlands Ballroom, Neptune Hall, and Roundhouse Hotel", async ({
     page,
   }) => {
     await page.goto("/venues", { waitUntil: "domcontentloaded" });
@@ -134,9 +134,16 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByText("BOH Studios Bournemouth").first()
     ).toBeVisible();
     await expect(
+      page.getByText("The Woodlands Ballroom").first()
+    ).toBeVisible();
+    await expect(
+      page.getByText("Neptune Hall").first()
+    ).toBeVisible();
+    await expect(
       page.getByText("The Roundhouse Hotel").first()
     ).toBeVisible();
-    await expect(page.getByText(/Haviland Road/i).first()).toBeVisible();
+    await expect(page.getByText(/Commercial Road/i).first()).toBeVisible();
+    await expect(page.getByText(/Ashley Road/i).first()).toBeVisible();
   });
 
   test("5. Referrals page enforces authentication for dancer rewards", async ({
@@ -154,7 +161,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     }
   });
 
-  test("6. About page renders Maestro Enrique Perez Valdes heritage and faculty", async ({
+  test("6. About page renders Maestro Enrique Perez Valdes heritage, Moe Flex, and authentic faculty", async ({
     page,
   }) => {
     await page.goto("/about", { waitUntil: "domcontentloaded" });
@@ -164,6 +171,12 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     ).toBeVisible();
     await expect(
       page.getByText(/Enrique Perez Valdes/i).first()
+    ).toBeVisible();
+    await expect(
+      page.getByText(/Moe Flex/i).first()
+    ).toBeVisible();
+    await expect(
+      page.getByText(/General of MCs/i).first()
     ).toBeVisible();
   });
 
@@ -285,6 +298,83 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       await expect(page).toHaveURL(/.*admin\/operations/);
       await expect(page.getByText(/Studio Desk Operations/i)).toBeVisible();
     }
+  });
+
+  test("15. Halloween Fancy Dress Latin Party renders costume prizes, timetable, and poster", async ({
+    page,
+  }) => {
+    await page.goto("/events/halloween-fancy-dress-latin-party-2026", {
+      waitUntil: "domcontentloaded",
+    });
+
+    await expect(
+      page.getByText("HALLOWEEN FANCY DRESS PARTY").first()
+    ).toBeVisible();
+    await expect(page.getByText(/Best Costume Prizes/i).first()).toBeVisible();
+    await expect(page.getByText("1 Made in Cuba Weekend Pass")).toBeVisible();
+    await expect(page.getByText("2 Free Dance Classes", { exact: true })).toBeVisible();
+    await expect(page.getByText("Alex Spindlove").first()).toBeVisible();
+    await expect(
+      page.locator('img[alt="Halloween Latin Party Poster"]')
+    ).toBeVisible();
+  });
+
+  test("16. Weekly recurring schedule calendar overview renders Tuesdays, Wednesdays, Thursdays, and Sundays", async ({
+    page,
+  }) => {
+    await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
+
+    const url = page.url();
+    if (!url.includes("sign-in")) {
+      await expect(
+        page.getByText("Weekly Class Calendar").first()
+      ).toBeVisible();
+      await expect(page.getByText(/Bournemouth, Boscombe & Poole Weekly Schedule/i).first()).toBeVisible();
+      await expect(page.getByText("Every Tuesday Evening")).toBeVisible();
+      await expect(page.getByText("Every Wednesday Evening")).toBeVisible();
+      await expect(page.getByText("Flagship Thursday Night")).toBeVisible();
+      await expect(page.getByText("Every Sunday Evening")).toBeVisible();
+      await expect(page.getByText("The Woodlands Ballroom").first()).toBeVisible();
+      await expect(page.getByText("Moe Flex").first()).toBeVisible();
+    }
+  });
+
+  test("17. Dance Vouchers showcase renders authentic gift benefits and phone order CTA", async ({
+    page,
+  }) => {
+    // 1. Check Homepage
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await expect(
+      page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
+    ).toBeVisible();
+    await expect(page.getByText("ORDER NOW: 07969 633701").first()).toBeVisible();
+    await expect(page.getByText("🎂 Birthday presents").first()).toBeVisible();
+
+    // 2. Check Pricing page
+    await page.goto("/pricing", { waitUntil: "domcontentloaded" });
+    await expect(
+      page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
+    ).toBeVisible();
+
+    // 3. Check Shop page
+    await page.goto("/shop", { waitUntil: "domcontentloaded" });
+    await expect(
+      page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
+    ).toBeVisible();
+    await expect(page.getByText("Cuban Salsa Dance Gift Voucher")).toBeVisible();
+  });
+
+  test("18. Private Lessons page renders authentic teachers Moe Flex, Justyna, Arturas, Jim, and Enrique", async ({
+    page,
+  }) => {
+    await page.goto("/private-lessons", { waitUntil: "domcontentloaded" });
+
+    await expect(page.getByText("Moe Flex").first()).toBeVisible();
+    await expect(page.getByText("General of MCs").first()).toBeVisible();
+    await expect(page.getByText("Justyna").first()).toBeVisible();
+    await expect(page.getByText("Arturas").first()).toBeVisible();
+    await expect(page.getByText("Jim").first()).toBeVisible();
+    await expect(page.getByText("Enrique Perez Valdes").first()).toBeVisible();
   });
 });
 

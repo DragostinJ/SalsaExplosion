@@ -296,9 +296,6 @@ export default async function StudentSchedulePage({
         )}
       </div>
 
-      {/* Weekly Calendar Overview: Days of the Week Only */}
-      <WeeklyCalendarOverview />
-
       {/* URL Search Param Filter Bar (Right at the Top!) */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3 max-w-full">
         <div className="flex items-center gap-2">
@@ -375,6 +372,11 @@ export default async function StudentSchedulePage({
           ))}
         </div>
       )}
+
+      {/* Weekly Calendar Overview: Days of the Week Only */}
+      <div className="pt-6 border-t">
+        <WeeklyCalendarOverview />
+      </div>
 
       {/* Instructor & Studio Admin Quick-Access Command Bar (Shown only to Staff/Admin) */}
       {userCanManage && (

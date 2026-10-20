@@ -23,7 +23,6 @@ import {
   Flame,
   UserCheck,
   Music,
-  ShoppingBag,
   HelpCircle,
   Share2,
   ClipboardList,
@@ -116,7 +115,6 @@ export function MobileNavSheet({
   // Public explore and community links
   const exploreLinks = [
     { href: "/music", label: "Cuban Music & Playlists", icon: Music },
-    { href: "/shop", label: "Merch & Dance Shoes", icon: ShoppingBag },
     { href: "/how-it-works", label: "How QR Passes Work", icon: HelpCircle },
     { href: "/about", label: "About Maestro Enrique", icon: Compass },
   ];

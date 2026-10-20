@@ -371,10 +371,10 @@ export default async function StudentWalletPage() {
                 </CardTitle>
               </div>
               <Link
-                href="/shop"
+                href="/pricing"
                 className="text-xs font-semibold text-primary-base hover:underline"
               >
-                Shop Merch
+                Gift Vouchers
               </Link>
             </div>
             <CardDescription className="text-xs">

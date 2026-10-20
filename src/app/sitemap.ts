@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/private-lessons",
     "/venues",
     "/music",
-    "/shop",
     "/about",
     "/how-it-works",
     "/dashboard/rueda",

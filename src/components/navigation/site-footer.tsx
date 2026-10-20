@@ -137,8 +137,8 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/shop" className="inline-flex items-center py-1 text-xs text-rose-700 dark:text-rose-400 font-black hover:underline">
-                  Merch & Dance Shoes
+                <Link href="/pricing" className="inline-flex items-center py-1 text-xs text-rose-700 dark:text-rose-400 font-black hover:underline">
+                  Dance Gift Vouchers
                 </Link>
               </li>
             </ul>

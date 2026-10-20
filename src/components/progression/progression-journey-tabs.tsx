@@ -48,7 +48,7 @@ export function ProgressionJourneyTabs({
           onClick={() => setActiveTab("syllabus")}
           className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all min-h-10 shrink-0 ${
             activeTab === "syllabus"
-              ? "bg-amber-600 text-white shadow-xs"
+              ? "bg-amber-800 text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
           }`}
         >
@@ -68,7 +68,7 @@ export function ProgressionJourneyTabs({
           onClick={() => setActiveTab("milestones")}
           className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all min-h-10 shrink-0 ${
             activeTab === "milestones"
-              ? "bg-amber-600 text-white shadow-xs"
+              ? "bg-amber-800 text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
           }`}
         >
@@ -85,7 +85,7 @@ export function ProgressionJourneyTabs({
           onClick={() => setActiveTab("video")}
           className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all min-h-10 shrink-0 ${
             activeTab === "video"
-              ? "bg-amber-600 text-white shadow-xs"
+              ? "bg-amber-800 text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
           }`}
         >

@@ -67,7 +67,7 @@ export function CubanDanceGearsMatrix({
             type="button"
             data-testid="toggle-dance-gears-guide"
             onClick={() => setIsCollapsed(false)}
-            className="shrink-0 bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs shadow-sm"
+            className="shrink-0 bg-amber-800 hover:bg-amber-900 text-white font-extrabold text-xs shadow-sm"
           >
             Open Interactive Musicality &amp; Gears Guide
           </Button>

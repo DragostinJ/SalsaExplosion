@@ -242,7 +242,7 @@ export function CubanCurriculumSkillTree({
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div className="space-y-1.5 max-w-2xl">
               <div className="flex flex-wrap items-center gap-2">
-                <Badge className="bg-amber-600 text-white font-black text-[11px] tracking-wide uppercase px-2.5 py-0.5">
+                <Badge className="bg-amber-800 text-white font-black text-[11px] tracking-wide uppercase px-2.5 py-0.5">
                   Maestro Enrique&apos;s Guidance
                 </Badge>
                 <span className="text-xs font-bold text-amber-800 dark:text-amber-300">
@@ -272,7 +272,7 @@ export function CubanCurriculumSkillTree({
               }}
               className={`shrink-0 font-extrabold text-xs transition-all ${
                 focusFirstNight
-                  ? "bg-amber-600 text-white hover:bg-amber-700 shadow-sm"
+                  ? "bg-amber-800 text-white hover:bg-amber-900 shadow-sm"
                   : "border-amber-500/50 bg-background text-foreground hover:bg-amber-500/10"
               }`}
             >

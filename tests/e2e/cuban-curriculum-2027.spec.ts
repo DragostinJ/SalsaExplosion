@@ -1,12 +1,12 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-test.describe("M6: 2027 Cuban Salsa Curriculum Skill Tree & Gears Matrix E2E", () => {
+test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2E", () => {
   test.beforeEach(async ({ page }) => {
     page.setDefaultNavigationTimeout(45000);
   });
 
-  test("1. Renders skill tree, gears matrix, level tabs, and un-confuser diagnostics", async ({
+  test("1. Renders reassurance banner, first-night focus mode, collapsible diagnostics, and dance gears drawer", async ({
     page,
   }) => {
     await page.goto("/how-it-works");
@@ -19,21 +19,42 @@ test.describe("M6: 2027 Cuban Salsa Curriculum Skill Tree & Gears Matrix E2E", (
     await expect(skillTree).toBeVisible();
     await expect(gearsMatrix).toBeVisible();
 
-    // 2. Beginner skills are shown by default
+    // 2. Reassurance banner from Maestro Enrique is rendered
+    const reassuranceBanner = page.locator('[data-testid="curriculum-reassurance-banner"]');
+    await expect(reassuranceBanner).toBeVisible();
+    await expect(reassuranceBanner.getByText(/don't feel overwhelmed/i)).toBeVisible();
+    await expect(reassuranceBanner.getByText(/your first night at boh studios/i)).toBeVisible();
+
+    // 3. Test "Focus Mode: First-Night Essentials (3 Moves)"
+    const focusModeBtn = reassuranceBanner.getByRole("button", {
+      name: /focus mode/i,
+    });
+    await expect(focusModeBtn).toBeVisible();
+    await focusModeBtn.click();
+
+    // In focus mode, verify the 3 starter moves are shown
+    await expect(skillTree.getByRole("heading", { name: "Paso Básico, Lateral y Atrás", exact: true })).toBeVisible();
     await expect(skillTree.getByRole("heading", { name: "Guapea", exact: true })).toBeVisible();
     await expect(skillTree.getByRole("heading", { name: "Dile Que No", exact: true })).toBeVisible();
 
-    // 3. Switch level tab to Improver
+    // Toggle back to full mode
+    await focusModeBtn.click();
+
+    // 4. Switch level tab to Improver
     const improverTab = skillTree.getByRole("tab", { name: /improver/i });
     await improverTab.click();
     await expect(skillTree.getByRole("heading", { name: "Setenta (70)", exact: true })).toBeVisible();
     await expect(skillTree.getByRole("heading", { name: /vac[ií]lala/i })).toBeVisible();
 
-    // 4. Test Un-Confuser Diagnostics and interactive practice status toggle
-    await expect(
-      skillTree.getByText(/un-confuser diagnostic:/i).first()
-    ).toBeVisible();
+    // 5. Test Progressive Disclosure on skill cards: Un-confuser is initially collapsed
+    const detailToggle = skillTree.locator('[data-testid="toggle-skill-details"]').first();
+    await expect(detailToggle).toBeVisible();
+    await detailToggle.click();
 
+    // Now Un-Confuser Diagnostic should be visible
+    await expect(skillTree.getByText(/un-confuser diagnostic:/i).first()).toBeVisible();
+
+    // Test interactive practice status toggle on Setenta
     const statusToggleBtn = skillTree
       .getByRole("button", { name: /not started|practicing now|mastered/i })
       .first();
@@ -43,34 +64,30 @@ test.describe("M6: 2027 Cuban Salsa Curriculum Skill Tree & Gears Matrix E2E", (
       skillTree.getByRole("button", { name: /practicing now/i }).first()
     ).toBeVisible();
 
-    // 5. Test Pillar Filter: click "Solo Footwork & Shines"
-    const soloPillar = skillTree.getByRole("button", {
-      name: /solo footwork & shines/i,
-    });
-    if (await soloPillar.isVisible()) {
-      await soloPillar.click();
-      // Should show solo shines/body movement
-      await expect(skillTree.getByText(/rumba guaguancó basics/i)).toBeVisible();
-    }
+    // 6. Test "Expand All Maestro Tips" toolbar button
+    const expandAllBtn = skillTree.locator('[data-testid="toggle-all-maestro-tips"]');
+    await expect(expandAllBtn).toBeVisible();
+    await expandAllBtn.click();
+    await expect(skillTree.getByText(/collapse all maestro tips/i)).toBeVisible();
 
-    // 6. Test Timba 4-Phase Song Anatomy in gearsMatrix
-    await expect(
-      gearsMatrix.getByText(/timba song anatomy timeline/i)
-    ).toBeVisible();
+    // 7. Test On-Demand Collapsible Gears Matrix
+    // On /how-it-works, gears matrix starts collapsed as a teaser card
+    const openGearsBtn = gearsMatrix.locator('[data-testid="toggle-dance-gears-guide"]');
+    await expect(openGearsBtn).toBeVisible();
+    await expect(gearsMatrix.getByText(/curious why advanced dancers change styles/i)).toBeVisible();
 
-    // Click "Montuno" phase button
+    // Click to open the full interactive guide
+    await openGearsBtn.click();
+    await expect(gearsMatrix.getByText(/timba song anatomy timeline/i)).toBeVisible();
+
+    // Test Phase Switching in expanded guide
     const montunoBtn = gearsMatrix.getByRole("button", { name: /montuno/i }).first();
     await montunoBtn.click();
-    await expect(
-      gearsMatrix.getByText("2. The Call & Response (El Montuno)")
-    ).toBeVisible();
+    await expect(gearsMatrix.getByText("2. The Call & Response (El Montuno)")).toBeVisible();
 
-    // Click "Bomba/Presión" phase button
     const bombaBtn = gearsMatrix.getByRole("button", { name: /bomba/i }).first();
     await bombaBtn.click();
-    await expect(
-      gearsMatrix.getByText("4. The Bass Drop & Street Explosion (La Bomba / Presión)")
-    ).toBeVisible();
+    await expect(gearsMatrix.getByText("4. The Bass Drop & Street Explosion (La Bomba / Presión)")).toBeVisible();
   });
 
   test("2. Zero horizontal overflow on 390px mobile viewport (iPhone 14)", async ({

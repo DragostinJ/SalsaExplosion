@@ -479,7 +479,7 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-amber-600 text-white text-[10px] font-bold">
+                <Badge className="bg-amber-900 text-white text-[10px] font-bold">
                   4-Star Premium
                 </Badge>
                 <span className="text-[11px] font-bold text-primary-hover">3–5 min walk</span>
@@ -499,7 +499,7 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-emerald-600 text-white text-[10px] font-bold">
+                <Badge className="bg-emerald-900 text-white text-[10px] font-bold">
                   Free Hot Breakfast
                 </Badge>
                 <span className="text-[11px] font-bold text-primary-hover">5 min walk</span>

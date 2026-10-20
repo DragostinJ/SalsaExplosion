@@ -369,7 +369,7 @@ export default async function AboutPage() {
           <Button
             asChild
             size="sm"
-            className="bg-[#1877F2] hover:bg-[#166FE5] text-white font-extrabold text-xs shadow-md"
+            className="bg-[#0866ff] hover:bg-[#0756d6] text-white font-extrabold text-xs shadow-md"
           >
             <a
               href="https://www.facebook.com/salsaexplosion"

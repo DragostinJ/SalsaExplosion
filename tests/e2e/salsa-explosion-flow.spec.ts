@@ -224,23 +224,15 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     ).toBeVisible();
   });
 
-  test("10. Merch & Dance Essentials storefront renders items and Click-and-Collect details", async ({
+  test("10. Shop route redirects cleanly to pricing and gift vouchers showcase", async ({
     page,
   }) => {
     await page.goto("/shop", { waitUntil: "domcontentloaded" });
-
+    await expect(page).toHaveURL(/\/pricing/);
     await expect(
-      page.getByText(/Merch & Dance Essentials/i).first()
+      page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
     ).toBeVisible();
-    await expect(
-      page.getByText(/Salsa Explosion .* Hoodie/i).first()
-    ).toBeVisible();
-    await expect(
-      page.getByText("Hand-Crafted Cuban Flag Abanico").first()
-    ).toBeVisible();
-    await expect(
-      page.getByText("Suede-Sole Practice Dance Shoes").first()
-    ).toBeVisible();
+    await expect(page.getByText("Official Gift Certificate").first()).toBeVisible();
   });
 
   test("11. Venues & Parking guide renders interactive arrival planner and navigation links", async ({
@@ -252,7 +244,11 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByText(/Door-to-Door Arrival Planner/i).first()
     ).toBeVisible();
     await expect(page.getByText(/BOH Studios/i).first()).toBeVisible();
+    await expect(page.getByText(/The Woodlands Ballroom/i).first()).toBeVisible();
+    await expect(page.getByText(/Neptune Hall/i).first()).toBeVisible();
+    await expect(page.getByText(/59200/i).first()).toBeVisible();
     await expect(page.getByText(/The Roundhouse Hotel/i).first()).toBeVisible();
+    await expect(page.getByText(/Nearby Hotels for Dance Weekends/i).first()).toBeVisible();
     await expect(page.getByText(/Late-Night Studio Safety/i).first()).toBeVisible();
     await expect(page.getByText(/Studio Desk Hotline/i).first()).toBeVisible();
   });
@@ -361,7 +357,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(
       page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
     ).toBeVisible();
-    await expect(page.getByText("Cuban Salsa Dance Gift Voucher")).toBeVisible();
+    await expect(page.getByText("Official Gift Certificate").first()).toBeVisible();
   });
 
   test("18. Private Lessons page renders authentic teachers Moe Flex, Justyna, Arturas, Jim, and Enrique", async ({
@@ -375,6 +371,16 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(page.getByText("Arturas").first()).toBeVisible();
     await expect(page.getByText("Jim").first()).toBeVisible();
     await expect(page.getByText("Enrique Perez Valdes").first()).toBeVisible();
+  });
+
+  test("19. High-contrast Instagram and Facebook community buttons render with correct brand gradients and links", async ({
+    page,
+  }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    const igButton = page.locator('a[href="https://www.instagram.com/salsaexplosion/"]').first();
+    const fbButton = page.locator('a[href="https://www.facebook.com/salsaexplosion"]').first();
+    await expect(igButton).toBeVisible();
+    await expect(fbButton).toBeVisible();
   });
 });
 

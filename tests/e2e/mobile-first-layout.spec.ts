@@ -10,7 +10,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     { name: "Pricing & Passes", path: "/pricing" },
     { name: "1-on-1 Coaching", path: "/private-lessons" },
     { name: "Cuban Music Hub", path: "/music" },
-    { name: "Merch & Shoes Shop", path: "/shop" },
+    { name: "Pricing & Dance Vouchers", path: "/pricing" },
     { name: "How QR Passes Work", path: "/how-it-works" },
     { name: "Venues & Parking", path: "/venues" },
     { name: "About Academy", path: "/about" },
@@ -88,13 +88,13 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
       }
     }
 
-    // 3. Shop category pills meet touch target
-    await page.goto("/shop");
+    // 3. Day of week filter buttons meet minimum touch target
+    await page.goto("/dashboard/schedule");
     await page.waitForLoadState("domcontentloaded");
-    const shopPills = page.locator("button:has-text('All Merch'), button:has-text('Apparel')");
-    const pillCount = await shopPills.count();
+    const schedulePills = page.locator("button:has-text('All Days'), button:has-text('Tuesdays'), button:has-text('Wednesdays')");
+    const pillCount = await schedulePills.count();
     for (let i = 0; i < pillCount; i++) {
-      const pill = shopPills.nth(i);
+      const pill = schedulePills.nth(i);
       if (await pill.isVisible()) {
         const box = await pill.boundingBox();
         if (box) {
@@ -145,14 +145,14 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     const eventTrustBar = page.locator('[data-testid="payment-security-trust-bar"]');
     await expect(eventTrustBar).toBeVisible();
 
-    // 3. Class timetable grid renders near top of mobile viewport (y < 650px)
+    // 3. Class timetable grid renders near top of mobile viewport (y < 750px with day filter)
     await page.goto("/dashboard/schedule");
     await page.waitForLoadState("domcontentloaded");
     const scheduleGrid = page.locator('[data-testid="schedule-classes-grid"]');
     await expect(scheduleGrid).toBeVisible();
     const box = await scheduleGrid.boundingBox();
     expect(box).not.toBeNull();
-    expect(box!.y).toBeLessThan(650);
+    expect(box!.y).toBeLessThan(750);
   });
 
   test("L8: verifies lean initial mobile DOM, dynamic drawer unmounted, cv-auto, zero CLS and zero console errors", async ({

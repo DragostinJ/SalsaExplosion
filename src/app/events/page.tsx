@@ -119,7 +119,7 @@ export default async function EventsDirectoryPage() {
             <section className="space-y-6">
               <div className="flex items-center justify-between border-b pb-3">
                 <div className="flex items-center gap-3">
-                  <Badge className="bg-amber-600 text-white font-extrabold text-xs">
+                  <Badge className="bg-amber-900 text-white font-extrabold text-xs">
                     2026 Season
                   </Badge>
                   <h2 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">

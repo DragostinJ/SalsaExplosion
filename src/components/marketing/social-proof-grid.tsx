@@ -415,7 +415,7 @@ export function SocialProofGrid() {
             <Button
               asChild
               size="lg"
-              className="w-full sm:w-auto bg-[#1877F2] hover:bg-[#166FE5] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all"
+              className="w-full sm:w-auto bg-[#0866ff] hover:bg-[#0756d6] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all"
             >
               <a
                 href="https://www.facebook.com/salsaexplosion"

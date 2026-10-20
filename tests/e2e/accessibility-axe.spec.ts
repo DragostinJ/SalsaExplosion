@@ -7,7 +7,7 @@ test.describe("B5: Accessibility (WCAG 2.1 AA) Axe Audits", () => {
     { name: "Class Schedule", path: "/dashboard/schedule" },
     { name: "Congress & Events", path: "/events" },
     { name: "Pricing & Passes", path: "/pricing" },
-    { name: "Shop", path: "/shop" },
+    { name: "Shop Redirect", path: "/shop" },
     { name: "About Academy", path: "/about" },
     { name: "Venues & Parking", path: "/venues" },
     { name: "Private Lessons", path: "/private-lessons" },

@@ -60,7 +60,7 @@ export function SiteFooter() {
                 href="https://www.facebook.com/salsaexplosion"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl bg-[#1877F2] hover:bg-[#166FE5] text-white px-3.5 py-1.5 font-extrabold shadow-md hover:shadow-lg transition-all text-xs"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#0866ff] hover:bg-[#0756d6] text-white px-3.5 py-1.5 font-extrabold shadow-md hover:shadow-lg transition-all text-xs"
               >
                 <svg className="h-3.5 w-3.5 fill-white shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>

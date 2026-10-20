@@ -495,7 +495,7 @@ export function ClassScheduleCard({
                 >
                   <span className="font-extrabold tracking-wide">Lead</span>
                   {session.maxLeads !== null && (
-                    <span className={`text-[11px] font-bold ${selectedRole === DanceRole.LEAD ? "text-white/90" : "text-muted-foreground"}`}>
+                    <span className={`text-[11px] font-bold ${selectedRole === DanceRole.LEAD ? "text-white" : "text-muted-foreground"}`}>
                       {isLeadFull
                         ? "Full"
                         : `${session.maxLeads - optimisticState.leadsCount} left`}
@@ -515,7 +515,7 @@ export function ClassScheduleCard({
                 >
                   <span className="font-extrabold tracking-wide">Follow</span>
                   {session.maxFollows !== null && (
-                    <span className={`text-[11px] font-bold ${selectedRole === DanceRole.FOLLOW ? "text-white/90" : "text-muted-foreground"}`}>
+                    <span className={`text-[11px] font-bold ${selectedRole === DanceRole.FOLLOW ? "text-white" : "text-muted-foreground"}`}>
                       {isFollowFull
                         ? "Full"
                         : `${session.maxFollows - optimisticState.followsCount} left`}

@@ -180,8 +180,7 @@ export function PricingCards({
                   </Badge>
                   {pkg.popular && (
                     <Badge
-                      variant="outline"
-                      className="border-amber-600/40 text-amber-800 dark:text-amber-300 font-bold"
+                      className="bg-primary-base text-white font-bold text-[11px]"
                     >
                       <Sparkles className="mr-1 h-3 w-3" />
                       Most Popular
@@ -216,17 +215,22 @@ export function PricingCards({
                     variant="outline"
                     disabled={isPending}
                     onClick={handleOpenBillingPortal}
-                    className="w-full"
+                    className="w-full h-10 rounded-xl font-bold"
                   >
                     Manage Membership
                   </Button>
                 ) : (
                   <Button
                     type="button"
-                    variant={pkg.popular || isSubCard ? "default" : "secondary"}
                     disabled={isPending}
                     onClick={() => handleCheckout(pkg.id)}
-                    className="w-full"
+                    className={`w-full h-10 rounded-xl font-bold shadow-xs transition-colors ${
+                      isSubCard
+                        ? "bg-emerald-700 hover:bg-emerald-800 text-white"
+                        : pkg.popular
+                          ? "bg-primary-base hover:bg-primary-hover text-white shadow-sm"
+                          : "border-2 border-primary-base/30 bg-primary-base/5 text-primary-hover hover:bg-primary-base hover:text-white"
+                    }`}
                   >
                     {isCurrentLoading ? (
                       <>

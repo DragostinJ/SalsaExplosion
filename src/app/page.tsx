@@ -199,7 +199,7 @@ export default async function Home() {
                     >
                       <div className="space-y-1 min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="rounded-md bg-amber-500/15 text-amber-800 dark:text-amber-300 px-1.5 py-0.5 text-[10px] font-bold">
+                          <span className="rounded-md bg-muted text-foreground/80 border border-border/60 px-1.5 py-0.5 text-[10px] font-bold">
                             {cls.minLevel}
                           </span>
                           <span className="text-[11px] font-semibold text-text-muted">
@@ -235,16 +235,16 @@ export default async function Home() {
         )}
 
         {/* Founder & 25+ Year Cuban Heritage Spotlight */}
-        <section className="cv-auto py-10 sm:py-14 bg-gradient-to-br from-amber-500/[0.06] via-background to-orange-500/[0.04] border-b border-border/70">
+        <section className="cv-auto py-10 sm:py-14 bg-card/40 border-b border-border/70">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-amber-500/30 bg-card p-6 sm:p-10 shadow-sm">
+            <div className="rounded-3xl border border-border/80 bg-card p-6 sm:p-10 shadow-sm">
               <div className="grid gap-8 lg:grid-cols-12 items-center">
                 <div className="lg:col-span-7 space-y-4 text-left">
                   <div className="flex flex-wrap items-center gap-2">
-                    <Badge className="bg-amber-500 text-zinc-950 font-extrabold text-xs uppercase tracking-wider">
+                    <Badge className="bg-primary-base text-white font-extrabold text-xs uppercase tracking-wider">
                       Academy Founder & Artistic Director
                     </Badge>
-                    <Badge variant="outline" className="border-amber-500/40 text-amber-700 dark:text-amber-300 font-bold text-xs">
+                    <Badge variant="outline" className="border-border bg-muted/40 text-muted-foreground font-semibold text-xs">
                       🏆 UK Lifetime Achievement Award
                     </Badge>
                   </div>
@@ -264,7 +264,7 @@ export default async function Home() {
                       <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Years Teaching</span>
                     </div>
                     <div className="rounded-xl border border-border/80 bg-background/60 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-amber-600 dark:text-amber-400">4,200+</span>
+                      <span className="block text-xl sm:text-2xl font-black text-foreground">4,200+</span>
                       <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Dancers Mentored</span>
                     </div>
                     <div className="col-span-2 sm:col-span-1 rounded-xl border border-border/80 bg-background/60 p-3">
@@ -274,25 +274,25 @@ export default async function Home() {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3 pt-2">
-                    <Button asChild size="default" className="bg-primary-base hover:bg-primary-hover text-white font-bold">
+                    <Button asChild size="default" className="bg-primary-base hover:bg-primary-hover text-white font-bold h-10 rounded-xl">
                       <Link href="/about">
                         Read Enrique&apos;s Full Story
                         <ArrowRight className="ml-1.5 h-4 w-4" />
                       </Link>
                     </Button>
-                    <Button asChild variant="outline" size="default">
+                    <Button asChild variant="outline" size="default" className="h-10 rounded-xl font-semibold">
                       <Link href="/dashboard/schedule">Book a Class with Enrique</Link>
                     </Button>
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-amber-500/30 bg-card shadow-sm space-y-4">
+                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-border/80 bg-card shadow-sm space-y-4">
                   <div className="flex items-center gap-4 border-b pb-4">
                     <div className="relative shrink-0">
-                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-amber-500 overflow-hidden bg-gradient-to-tr from-amber-600 via-rose-600 to-amber-500 flex items-center justify-center text-white shadow-md">
+                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-primary-base/30 overflow-hidden bg-gradient-to-tr from-zinc-800 via-rose-700 to-zinc-900 flex items-center justify-center text-white shadow-md">
                         <Flame className="h-8 w-8 sm:h-10 sm:w-10 fill-white" />
                       </div>
-                      <div className="absolute -bottom-1 -right-1 rounded-full bg-amber-500 text-zinc-950 px-1.5 py-0.2 text-[9px] font-black uppercase tracking-wider shadow-xs">
+                      <div className="absolute -bottom-1 -right-1 rounded-full bg-primary-base text-white px-1.5 py-0.2 text-[9px] font-black uppercase tracking-wider shadow-xs">
                         🇨🇺 Cuba
                       </div>
                     </div>

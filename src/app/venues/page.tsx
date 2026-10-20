@@ -31,11 +31,11 @@ export default function VenuesGuidePage() {
       </div>
 
       {/* Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 p-8 sm:p-12 text-white shadow-xl">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-rose-950 p-8 sm:p-12 text-white shadow-xl border border-border/40">
         <div className="relative z-10 max-w-3xl space-y-4">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge className="bg-black/30 text-white border-white/20 backdrop-blur-sm text-xs font-bold">
-              <Compass className="mr-1.5 h-3.5 w-3.5 text-amber-300" />
+            <Badge className="bg-primary-base text-white border-none text-xs font-bold">
+              <Compass className="mr-1.5 h-3.5 w-3.5 text-white" />
               Bournemouth Studio Hub & Congress Hotel
             </Badge>
             <Badge className="bg-white/20 text-white border-none backdrop-blur-sm text-xs font-semibold">
@@ -47,14 +47,14 @@ export default function VenuesGuidePage() {
             Venues & Parking Guide
           </h1>
 
-          <p className="text-base sm:text-lg text-amber-50/95 leading-relaxed font-normal">
+          <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal">
             Everything you need for a smooth arrival at Maestro Enrique Perez Valdes&apos; weekly classes at BOH Studios and the annual Bournemouth Cuban Salsa Congress.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <Button
               asChild
-              className="bg-white text-zinc-950 hover:bg-amber-100 font-extrabold shadow-md text-xs sm:text-sm"
+              className="bg-primary-base text-white hover:bg-primary-hover font-extrabold shadow-md text-xs sm:text-sm h-10 rounded-xl"
             >
               <Link href="/dashboard/schedule">
                 View Weekly Class Schedule
@@ -64,7 +64,7 @@ export default function VenuesGuidePage() {
             <Button
               asChild
               variant="outline"
-              className="bg-white/10 text-white hover:bg-white/20 border-white/30 text-xs sm:text-sm font-semibold"
+              className="bg-white/10 text-white hover:bg-white/20 border-white/30 text-xs sm:text-sm font-semibold h-10 rounded-xl"
             >
               <Link href="/events">Congress Passes & Info</Link>
             </Button>
@@ -80,7 +80,7 @@ export default function VenuesGuidePage() {
         {/* Venue 1: BOH Studios Bournemouth */}
         <Card className="border shadow-sm flex flex-col justify-between overflow-hidden">
           <div>
-            <div className="relative h-48 w-full bg-gradient-to-tr from-amber-700 via-orange-600 to-amber-500 p-6 text-white flex flex-col justify-between">
+            <div className="relative h-48 w-full bg-gradient-to-tr from-zinc-900 via-zinc-900 to-rose-950 p-6 text-white flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
                   Thursdays & Sundays Hub

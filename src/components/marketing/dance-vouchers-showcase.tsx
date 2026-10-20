@@ -28,10 +28,10 @@ export function DanceVouchersShowcase({
   return (
     <section
       aria-label="Dance Gift Vouchers"
-      className={`relative overflow-hidden rounded-3xl border-2 border-amber-500/30 bg-gradient-to-br from-rose-950/30 via-background to-amber-950/20 p-6 sm:p-10 shadow-lg ${className}`}
+      className={`relative overflow-hidden rounded-3xl border border-border/80 bg-gradient-to-br from-card via-background to-muted/30 p-6 sm:p-10 shadow-lg ${className}`}
     >
       {/* Decorative background glow */}
-      <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
+      <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary-base/5 blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-rose-600/10 blur-3xl pointer-events-none" />
 
       <div className="relative z-10 grid gap-8 lg:grid-cols-12 items-center">
@@ -43,7 +43,7 @@ export function DanceVouchersShowcase({
                 <Gift className="h-3.5 w-3.5" />
                 The Perfect Gift
               </Badge>
-              <Badge variant="outline" className="border-amber-500/40 text-amber-800 dark:text-amber-300 font-bold text-xs">
+              <Badge variant="outline" className="border-border bg-muted/40 text-muted-foreground font-semibold text-xs">
                 Available Now
               </Badge>
             </div>
@@ -62,7 +62,7 @@ export function DanceVouchersShowcase({
             {occasions.map((occ) => (
               <span
                 key={occ}
-                className="inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-bold text-foreground"
+                className="inline-flex items-center rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-bold text-foreground"
               >
                 {occ}
               </span>
@@ -80,7 +80,7 @@ export function DanceVouchersShowcase({
                   key={idx}
                   className="flex items-center gap-2 font-semibold text-foreground/90"
                 >
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-primary-base" />
                   <span>{benefit}</span>
                 </li>
               ))}
@@ -117,7 +117,7 @@ export function DanceVouchersShowcase({
 
         {/* Right Column: Physical / Digital Voucher Preview Certificate */}
         <div className="lg:col-span-5 flex justify-center">
-          <Card className="w-full max-w-md overflow-hidden rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-amber-600 via-orange-600 to-rose-700 text-white shadow-2xl relative">
+          <Card className="w-full max-w-md overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-zinc-900 via-zinc-900 to-rose-950 text-white shadow-2xl relative">
             <div className="absolute top-0 right-0 -mr-12 -mt-12 w-36 h-36 bg-white/10 rounded-full blur-xl pointer-events-none" />
             
             <CardContent className="p-6 sm:p-8 space-y-6 flex flex-col justify-between min-h-[360px]">

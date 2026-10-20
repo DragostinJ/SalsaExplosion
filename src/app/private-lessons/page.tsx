@@ -43,11 +43,11 @@ export default async function PrivateLessonsPage() {
       </div>
 
       {/* Hero Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 p-8 sm:p-12 text-white shadow-xl">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-rose-950 p-8 sm:p-12 text-white shadow-xl border border-border/40">
         <div className="relative z-10 max-w-3xl space-y-4">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge className="bg-black/30 text-white border-white/20 backdrop-blur-sm text-xs font-bold">
-              <Award className="mr-1.5 h-3.5 w-3.5 text-amber-300" />
+            <Badge className="bg-primary-base text-white border-none text-xs font-bold">
+              <Award className="mr-1.5 h-3.5 w-3.5 text-white" />
               Maestro-Level Mentorship
             </Badge>
             <Badge className="bg-white/20 text-white border-none backdrop-blur-sm text-xs font-semibold">
@@ -59,7 +59,7 @@ export default async function PrivateLessonsPage() {
             1-on-1 Private Lessons & Coaching
           </h1>
 
-          <p className="text-base sm:text-lg text-amber-50/95 leading-relaxed font-normal">
+          <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal">
             Accelerate your social dancing, master complex Rueda calls, or prepare an unforgettable wedding first dance under the personal direction of Maestro Enrique Perez Valdes.
           </p>
         </div>

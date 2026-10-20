@@ -196,10 +196,10 @@ function EventCard({ evt }: EventCardProps) {
       <div
         className={`relative h-44 w-full p-6 text-white flex flex-col justify-between ${
           isWeekendFlagship
-            ? "bg-gradient-to-tr from-amber-700 via-orange-600 to-amber-500"
+            ? "bg-gradient-to-tr from-zinc-900 via-zinc-900 to-rose-950"
             : evt.slug.includes("halloween")
-            ? "bg-gradient-to-tr from-rose-900 via-rose-700 to-amber-600"
-            : "bg-gradient-to-tr from-primary-base via-accent-tangerine to-primary-base"
+            ? "bg-gradient-to-tr from-rose-950 via-rose-900 to-zinc-900"
+            : "bg-gradient-to-tr from-zinc-900 via-primary-base to-rose-900"
         }`}
       >
         <div className="flex items-center justify-between">
@@ -251,10 +251,10 @@ function EventCard({ evt }: EventCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter className="pt-2 border-t">
+      <CardFooter className="pt-3 border-t">
         <Button
           asChild
-          className="w-full bg-primary-base hover:bg-primary-hover text-white text-xs font-bold transition-colors"
+          className="w-full bg-primary-base hover:bg-primary-hover text-white text-xs font-bold transition-colors h-10 rounded-xl shadow-xs"
         >
           <Link href={`/events/${evt.slug}`}>
             View Passes &amp; Details

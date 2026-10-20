@@ -323,6 +323,72 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
+      {/* Staff & Faculty Operations Guide */}
+      <section
+        data-testid="staff-operations-guide"
+        aria-label="Teacher and Door Staff Operations Guide"
+        className="rounded-3xl border-2 border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-card to-rose-500/5 p-6 sm:p-10 space-y-6 shadow-sm"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border pb-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <Badge className="bg-primary-base text-white text-[11px] font-black uppercase tracking-wider">
+                Staff Operations
+              </Badge>
+              <Badge variant="outline" className="border-amber-500/40 text-amber-800 dark:text-amber-300 font-bold text-xs">
+                Enrique & Teachers Guide
+              </Badge>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-black tracking-tight text-foreground mt-2">
+              How Teachers & Door Staff Run Class Check-In
+            </h2>
+            <p className="text-xs sm:text-sm text-muted-foreground font-medium mt-0.5">
+              Designed for Maestro Enrique, Moe Flex, Justyna, Arturas, and Jim. Run seamless door entry right from your phone.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button asChild size="sm" className="bg-primary-base text-white hover:bg-primary-hover font-bold text-xs">
+              <Link href="/instructor/roster">Open Studio Roster</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm" className="text-xs font-semibold">
+              <Link href="/admin/operations">Desk Ops</Link>
+            </Button>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-3 text-xs">
+          <div className="rounded-2xl border bg-card/80 p-4 space-y-2">
+            <div className="flex items-center gap-2 text-amber-700 dark:text-amber-400 font-black text-sm">
+              <QrCode className="h-4 w-4" />
+              <span>1. Self-Serve Door QR</span>
+            </div>
+            <p className="text-muted-foreground leading-relaxed">
+              Open your class on <Link href="/instructor/roster" className="font-bold underline text-foreground">/instructor/roster</Link> and tap <strong>&ldquo;Door QR&rdquo;</strong> on your phone. Students scan the screen or table placard on arrival and check in within 1 second.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border bg-card/80 p-4 space-y-2">
+            <div className="flex items-center gap-2 text-rose-700 dark:text-rose-400 font-black text-sm">
+              <Flame className="h-4 w-4" />
+              <span>2. Live Camera Scanner</span>
+            </div>
+            <p className="text-muted-foreground leading-relaxed">
+              Tap <strong>&ldquo;Open Camera Door Scanner&rdquo;</strong> to activate your phone&apos;s rear camera. Point at any student pass (<code className="bg-muted px-1 rounded font-mono">RF-PASS-...</code>) for instant automatic admission.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border bg-card/80 p-4 space-y-2">
+            <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-black text-sm">
+              <Users className="h-4 w-4" />
+              <span>3. 1-Tap Manual & A4 Backup</span>
+            </div>
+            <p className="text-muted-foreground leading-relaxed">
+              For seniors or walk-ins without smartphones, simply tap the green checkmark next to their name. If venue Wi-Fi drops, print the A4 register beforehand with 1 click.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Frequently Asked Questions */}
       <section className="space-y-6">
         <div className="space-y-1">

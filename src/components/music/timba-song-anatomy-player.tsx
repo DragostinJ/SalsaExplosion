@@ -48,40 +48,40 @@ const THEME_STYLES: Record<
     bgActive: "bg-sky-500/25 dark:bg-sky-500/30",
     bgInactive: "bg-sky-500/10 dark:bg-sky-500/15 hover:bg-sky-500/20",
     border: "border-sky-500/40",
-    text: "text-sky-950 dark:text-sky-200",
-    badge: "border-sky-500/40 bg-sky-500/15 text-sky-950 dark:text-sky-200",
+    text: "text-sky-950 font-bold dark:text-sky-100",
+    badge: "border-sky-500/40 bg-sky-500/15 text-sky-950 font-bold dark:text-sky-100",
     pillBg: "bg-sky-500",
   },
   emerald: {
     bgActive: "bg-emerald-500/25 dark:bg-emerald-500/30",
     bgInactive: "bg-emerald-500/10 dark:bg-emerald-500/15 hover:bg-emerald-500/20",
     border: "border-emerald-500/40",
-    text: "text-emerald-950 dark:text-emerald-200",
-    badge: "border-emerald-500/40 bg-emerald-500/15 text-emerald-950 dark:text-emerald-200",
+    text: "text-emerald-950 font-bold dark:text-emerald-100",
+    badge: "border-emerald-500/40 bg-emerald-500/15 text-emerald-950 font-bold dark:text-emerald-100",
     pillBg: "bg-emerald-500",
   },
   amber: {
     bgActive: "bg-amber-500/25 dark:bg-amber-500/30",
     bgInactive: "bg-amber-500/10 dark:bg-amber-500/15 hover:bg-amber-500/20",
     border: "border-amber-500/40",
-    text: "text-amber-950 dark:text-amber-200",
-    badge: "border-amber-500/40 bg-amber-500/15 text-amber-950 dark:text-amber-200",
+    text: "text-amber-950 font-bold dark:text-amber-100",
+    badge: "border-amber-500/40 bg-amber-500/15 text-amber-950 font-bold dark:text-amber-100",
     pillBg: "bg-amber-500",
   },
   purple: {
     bgActive: "bg-purple-500/25 dark:bg-purple-500/30",
     bgInactive: "bg-purple-500/10 dark:bg-purple-500/15 hover:bg-purple-500/20",
     border: "border-purple-500/40",
-    text: "text-purple-950 dark:text-purple-200",
-    badge: "border-purple-500/40 bg-purple-500/15 text-purple-950 dark:text-purple-200",
+    text: "text-purple-950 font-bold dark:text-purple-100",
+    badge: "border-purple-500/40 bg-purple-500/15 text-purple-950 font-bold dark:text-purple-100",
     pillBg: "bg-purple-500",
   },
   red: {
     bgActive: "bg-rose-500/25 dark:bg-rose-500/30",
     bgInactive: "bg-rose-500/10 dark:bg-rose-500/15 hover:bg-rose-500/20",
     border: "border-rose-500/40",
-    text: "text-rose-950 dark:text-rose-200",
-    badge: "border-rose-500/40 bg-rose-500/15 text-rose-950 dark:text-rose-200",
+    text: "text-rose-950 font-bold dark:text-rose-100",
+    badge: "border-rose-500/40 bg-rose-500/15 text-rose-950 font-bold dark:text-rose-100",
     pillBg: "bg-rose-500",
   },
 };
@@ -470,37 +470,37 @@ export function TimbaSongAnatomyPlayer({
           {/* Card 1: What to Listen For */}
           <Card className="border border-border/80 bg-card shadow-xs">
             <CardContent className="p-4 space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground flex items-center gap-1.5">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-700 dark:text-muted-foreground flex items-center gap-1.5">
                 <Headphones className="h-3.5 w-3.5 text-sky-600" />
                 What to Listen For (Trigger)
               </span>
-              <p className="text-xs text-foreground font-medium leading-relaxed">
+              <p className="text-xs text-slate-900 dark:text-foreground font-semibold leading-relaxed">
                 {activeSegment.musicalTrigger}
               </p>
             </CardContent>
           </Card>
 
           {/* Card 2: Leader Cue */}
-          <Card className="border border-sky-500/30 bg-sky-500/[0.03] shadow-xs">
+          <Card className="border border-sky-500/30 bg-sky-500/[0.04] shadow-xs">
             <CardContent className="p-4 space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-sky-900 dark:text-sky-300 flex items-center gap-1.5">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-sky-500" />
                 Leader Action
               </span>
-              <p className="text-xs text-foreground font-medium leading-relaxed">
+              <p className="text-xs text-slate-900 dark:text-foreground font-semibold leading-relaxed">
                 {activeSegment.leaderCue}
               </p>
             </CardContent>
           </Card>
 
           {/* Card 3: Follower Cue */}
-          <Card className="border border-rose-500/30 bg-rose-500/[0.03] shadow-xs">
+          <Card className="border border-rose-500/30 bg-rose-500/[0.04] shadow-xs">
             <CardContent className="p-4 space-y-2">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-rose-900 dark:text-rose-300 flex items-center gap-1.5">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-rose-950 dark:text-rose-300 flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-rose-500" />
                 Follower Action
               </span>
-              <p className="text-xs text-foreground font-medium leading-relaxed">
+              <p className="text-xs text-slate-900 dark:text-foreground font-semibold leading-relaxed">
                 {activeSegment.followerCue}
               </p>
             </CardContent>
@@ -510,14 +510,14 @@ export function TimbaSongAnatomyPlayer({
         {/* Un-Confuser Alert Banner */}
         <div
           data-testid="un-confuser-alert"
-          className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 flex items-start gap-3 text-xs"
+          className="rounded-2xl border border-amber-300 bg-amber-50 dark:border-amber-500/40 dark:bg-amber-950/20 p-4 flex items-start gap-3 text-xs shadow-xs"
         >
-          <AlertTriangle className="h-4 w-4 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
+          <AlertTriangle className="h-4 w-4 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
           <div className="space-y-0.5">
-            <span className="font-bold text-amber-950 dark:text-amber-200 uppercase text-[10px] tracking-wider block">
+            <span className="font-extrabold text-amber-950 dark:text-amber-200 uppercase text-[10px] tracking-wider block">
               Dancer Un-Confuser Warning
             </span>
-            <p className="text-amber-950/90 dark:text-amber-100 font-medium leading-relaxed">
+            <p className="text-slate-900 dark:text-amber-100 font-semibold leading-relaxed">
               {activeSegment.commonMistakeWarning}
             </p>
           </div>
@@ -622,13 +622,13 @@ export function TimbaSongAnatomyPlayer({
                 )}
               </div>
 
-              <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-xs flex items-start gap-2">
-                <Sparkles className="h-3.5 w-3.5 text-amber-600 shrink-0 mt-0.5" />
+              <div className="rounded-xl border border-amber-300 bg-amber-50 dark:border-amber-500/40 dark:bg-amber-950/20 p-3 text-xs flex items-start gap-2.5 shadow-xs">
+                <Sparkles className="h-3.5 w-3.5 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
                 <div className="space-y-0.5">
-                  <span className="font-bold text-amber-950 dark:text-amber-200 text-[10px] uppercase block">
+                  <span className="font-extrabold text-amber-950 dark:text-amber-200 text-[10px] uppercase tracking-wider block">
                     Un-Confuser Tip
                   </span>
-                  <p className="text-amber-950/90 dark:text-amber-100 font-medium">
+                  <p className="text-slate-900 dark:text-amber-100 font-semibold leading-relaxed">
                     {inspectingMove.unConfuserTip}
                   </p>
                 </div>

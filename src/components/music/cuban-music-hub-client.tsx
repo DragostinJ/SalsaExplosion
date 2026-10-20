@@ -230,12 +230,12 @@ export function CubanMusicHubClient() {
                   </div>
 
                   {/* Why This Song? Callout */}
-                  <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.04] p-3 space-y-1">
-                    <span className="text-[11px] font-bold text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
-                      <Sparkles className="h-3.5 w-3.5 text-amber-500" />
-                      Pedagogical Focus & Why This Song:
+                  <div className="rounded-xl border border-amber-300/60 bg-amber-500/[0.05] dark:border-amber-500/20 dark:bg-amber-500/[0.04] p-3 space-y-1">
+                    <span className="text-[11px] font-bold text-amber-950 dark:text-amber-200 flex items-center gap-1.5">
+                      <Sparkles className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                      Pedagogical Focus &amp; Why This Song:
                     </span>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
+                    <p className="text-xs text-slate-800 dark:text-muted-foreground leading-relaxed">
                       {track.whyThisSong}
                     </p>
                   </div>

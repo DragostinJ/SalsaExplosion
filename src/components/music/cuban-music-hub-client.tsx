@@ -1,153 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Music,
   Headphones,
   ExternalLink,
   Flame,
   Volume2,
+  Search,
+  Radio,
+  Sparkles,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-
-interface TrackItem {
-  id: string;
-  title: string;
-  artist: string;
-  bpm: number;
-  category: "SON" | "CASINO" | "TIMBA";
-  categoryLabel: string;
-  keyFeature: string;
-  recommendedFor: string;
-  spotifySearchUrl: string;
-}
-
-const PLAYLIST_TRACKS: TrackItem[] = [
-  // 1. Slow Cuban Son
-  {
-    id: "son-1",
-    title: "Chan Chan",
-    artist: "Buena Vista Social Club",
-    bpm: 84,
-    category: "SON",
-    categoryLabel: "Classic Cuban Son",
-    keyFeature: "Clean acoustic guitar syncopation, slow tempo to clearly hear count 1 and the 2-3 clave.",
-    recommendedFor: "Beginners learning foundational Guapea and weight transfers.",
-    spotifySearchUrl: "https://open.spotify.com/search/Buena%20Vista%20Social%20Club%20Chan%20Chan",
-  },
-  {
-    id: "son-2",
-    title: "El Cuarto de Tula",
-    artist: "Buena Vista Social Club",
-    bpm: 88,
-    category: "SON",
-    categoryLabel: "Mid-Tempo Son Tradicional",
-    keyFeature: "Accelerating montuno, prominent bongo martillo pattern on counts 1, 3, 5, 7.",
-    recommendedFor: "Practicing continuous partner turns with calm upper body posture.",
-    spotifySearchUrl: "https://open.spotify.com/search/El%20Cuarto%20de%20Tula",
-  },
-  {
-    id: "son-3",
-    title: "Son al Son",
-    artist: "Septeto Santiaguero",
-    bpm: 86,
-    category: "SON",
-    categoryLabel: "Traditional Son Cubano",
-    keyFeature: "Tres guitar arpeggio and clear maracas driving counts 1-2-3.",
-    recommendedFor: "Finding beat 1 without rushing during introductory classes.",
-    spotifySearchUrl: "https://open.spotify.com/search/Septeto%20Santiaguero%20Son%20al%20Son",
-  },
-
-  // 2. Classic Casino
-  {
-    id: "cas-1",
-    title: "Este Amor Que Se Muere",
-    artist: "Los Van Van",
-    bpm: 96,
-    category: "CASINO",
-    categoryLabel: "Songo & Classic Casino",
-    keyFeature: "Signature songo drum beat created by Changuito; prominent cowbell accents.",
-    recommendedFor: "Improvers mastering Dile Que No and Setenta combinations.",
-    spotifySearchUrl: "https://open.spotify.com/search/Los%20Van%20Van%20Este%20Amor%20Que%20Se%20Muere",
-  },
-  {
-    id: "cas-2",
-    title: "Que Sorpresa",
-    artist: "Los Van Van",
-    bpm: 98,
-    category: "CASINO",
-    categoryLabel: "Classic Casino",
-    keyFeature: "Melodic trombone horn lines followed by an irresistible piano montuno groove.",
-    recommendedFor: "Rueda de Casino circles with fast Cantante commands.",
-    spotifySearchUrl: "https://open.spotify.com/search/Los%20Van%20Van%20Que%20Sorpresa",
-  },
-  {
-    id: "cas-3",
-    title: "Brujería",
-    artist: "Elito Revé y Su Charangón",
-    bpm: 99,
-    category: "CASINO",
-    categoryLabel: "Changüí-Casino",
-    keyFeature: "Deep rustic Changüí bassline; powerful lead vocal improvisations.",
-    recommendedFor: "Practicing Cuban arm wraps and Sombrero styling.",
-    spotifySearchUrl: "https://open.spotify.com/search/Elito%20Reve%20Brujeria",
-  },
-
-  // 3. High-Energy Timba & Reparto
-  {
-    id: "tim-1",
-    title: "Me Dicen Cuba",
-    artist: "Alexander Abreu y Havana D'Primera",
-    bpm: 106,
-    category: "TIMBA",
-    categoryLabel: "Modern Timba Anthem",
-    keyFeature: "Virtuoso trumpet fanfares and explosive brass breaks on count 1. The official anthem of Bournemouth Friday socials.",
-    recommendedFor: "Social dancers ready for high-energy partner rotations.",
-    spotifySearchUrl: "https://open.spotify.com/search/Alexander%20Abreu%20Me%20Dicen%20Cuba",
-  },
-  {
-    id: "tim-2",
-    title: "Chaca Chaca",
-    artist: "Maykel Blanco y Su Salsa Mayor",
-    bpm: 108,
-    category: "TIMBA",
-    categoryLabel: "Timba Brava",
-    keyFeature: "Rapid piano tumbaos, syncopated floor breaks, and intense Afro-Cuban despelote mambos.",
-    recommendedFor: "Advanced Casineros and Bournemouth Summer Congress socials.",
-    spotifySearchUrl: "https://open.spotify.com/search/Maykel%20Blanco%20Chaca%20Chaca",
-  },
-  {
-    id: "tim-3",
-    title: "Pasaporte",
-    artist: "Alexander Abreu y Havana D'Primera",
-    bpm: 104,
-    category: "TIMBA",
-    categoryLabel: "Modern Timba",
-    keyFeature: "Deep rhythmic swing, vocal call-and-response, and dynamic energy shifts.",
-    recommendedFor: "Practicing musicality stops, footwork accents, and afro ribcage isolations.",
-    spotifySearchUrl: "https://open.spotify.com/search/Havana%20D%27Primera%20Pasaporte",
-  },
-  {
-    id: "tim-4",
-    title: "Ya Te Olvidé",
-    artist: "Maykel Blanco y Su Salsa Mayor",
-    bpm: 105,
-    category: "TIMBA",
-    categoryLabel: "Timba Romántica",
-    keyFeature: "Catchy romantic chorus followed by an aggressive bass drop and timbal roll.",
-    recommendedFor: "Friday Havana Fiesta midnight social sets at BOH Studios.",
-    spotifySearchUrl: "https://open.spotify.com/search/Maykel%20Blanco%20Ya%20Te%20Olvide",
-  },
-];
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  CURRICULUM_REFERENCE_SONGS,
+  CurriculumReferenceSong,
+  CurriculumLevel,
+} from "@/lib/constants/cuban-curriculum-2027";
 
 export function CubanMusicHubClient() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+  const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel | "ALL">("ALL");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredTracks = PLAYLIST_TRACKS.filter((t) =>
-    selectedCategory === "ALL" ? true : t.category === selectedCategory
-  );
+  const filteredTracks = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return CURRICULUM_REFERENCE_SONGS.filter((track: CurriculumReferenceSong) => {
+      const matchesLevel = selectedLevel === "ALL" || track.level === selectedLevel;
+      const matchesSearch =
+        !q ||
+        track.title.toLowerCase().includes(q) ||
+        track.artist.toLowerCase().includes(q) ||
+        track.subGenre.toLowerCase().includes(q) ||
+        track.whyThisSong.toLowerCase().includes(q) ||
+        track.gearShiftsObserved.some((g) => g.toLowerCase().includes(q)) ||
+        track.instrumentsToListenFor.some((inst) => inst.toLowerCase().includes(q));
+
+      return matchesLevel && matchesSearch;
+    });
+  }, [selectedLevel, searchQuery]);
 
   return (
     <div className="space-y-8">
@@ -199,129 +91,196 @@ export function CubanMusicHubClient() {
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b pb-4">
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
-          <button
-            type="button"
-            onClick={() => setSelectedCategory("ALL")}
-            className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
-              selectedCategory === "ALL"
-                ? "bg-amber-600 text-white shadow-xs"
-                : "border bg-card text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            All Tracks ({PLAYLIST_TRACKS.length})
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory("SON")}
-            className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
-              selectedCategory === "SON"
-                ? "bg-amber-600 text-white shadow-xs"
-                : "border bg-card text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Slow Son (80–90 BPM)
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory("CASINO")}
-            className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
-              selectedCategory === "CASINO"
-                ? "bg-amber-600 text-white shadow-xs"
-                : "border bg-card text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Classic Casino (95–102 BPM)
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory("TIMBA")}
-            className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
-              selectedCategory === "TIMBA"
-                ? "bg-amber-600 text-white shadow-xs"
-                : "border bg-card text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Timba & Congress (105+ BPM)
-          </button>
+      {/* Filter Toolbar & Search */}
+      <div className="rounded-2xl border bg-card p-4 sm:p-6 shadow-xs space-y-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <input
+              type="text"
+              aria-label="Search reference songs"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by track, artist, instrument (e.g. Batá, Campana), or subgenre..."
+              className="w-full rounded-xl border bg-background pl-9 pr-4 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+            />
+          </div>
+
+          <span className="text-xs text-muted-foreground font-semibold shrink-0">
+            Showing {filteredTracks.length} of {CURRICULUM_REFERENCE_SONGS.length} benchmark tracks
+          </span>
         </div>
 
-        <span className="text-xs text-muted-foreground font-semibold">
-          Showing {filteredTracks.length} curated tracks
-        </span>
+        {/* Level Filters */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar border-t pt-3">
+          <button
+            type="button"
+            onClick={() => setSelectedLevel("ALL")}
+            className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
+              selectedLevel === "ALL"
+                ? "bg-amber-600 text-white shadow-xs"
+                : "border bg-card text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            All Tracks ({CURRICULUM_REFERENCE_SONGS.length})
+          </button>
+          {(["Beginner", "Improver", "Intermediate", "Advanced"] as CurriculumLevel[]).map((lvl) => (
+            <button
+              key={lvl}
+              type="button"
+              onClick={() => setSelectedLevel(lvl)}
+              className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
+                selectedLevel === lvl
+                  ? "bg-amber-600 text-white shadow-xs"
+                  : "border bg-card text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Level: {lvl}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Tracks Grid */}
-      <div className="grid gap-4 sm:grid-cols-2">
-        {filteredTracks.map((track) => (
-          <Card
-            key={track.id}
-            className="rounded-2xl border bg-card p-5 shadow-xs flex flex-col justify-between hover:border-amber-500/40 transition-all space-y-4"
-          >
-            <div className="space-y-3">
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <h3 className="font-extrabold text-base text-foreground">
-                    {track.title}
-                  </h3>
-                  <span className="text-xs text-muted-foreground font-semibold">
-                    {track.artist}
-                  </span>
+      <div className="grid gap-6 sm:grid-cols-2">
+        {filteredTracks.length === 0 ? (
+          <div className="col-span-2 text-center py-12 rounded-2xl border bg-muted/20">
+            <Radio className="mx-auto h-12 w-12 text-muted-foreground/40" />
+            <h3 className="mt-3 font-bold text-base">No Matching Tracks Found</h3>
+            <p className="text-xs text-muted-foreground mt-1">
+              Try searching by artist (e.g., Alexander Abreu, Maykel Blanco) or clearing filters.
+            </p>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => {
+                setSearchQuery("");
+                setSelectedLevel("ALL");
+              }}
+              className="mt-4 text-xs font-bold"
+            >
+              Reset Search
+            </Button>
+          </div>
+        ) : (
+          filteredTracks.map((track) => (
+            <Card
+              key={track.id}
+              className="rounded-2xl border bg-card shadow-xs flex flex-col justify-between hover:border-amber-500/40 transition-all overflow-hidden"
+            >
+              <CardContent className="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                <div className="space-y-3">
+                  {/* Top Bar: Title, Artist, Badges */}
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h3 className="font-extrabold text-base text-foreground flex items-center gap-1.5">
+                        <Music className="h-4 w-4 text-amber-500 shrink-0" />
+                        <span>{track.title}</span>
+                      </h3>
+                      <span className="text-xs text-muted-foreground font-semibold">
+                        {track.artist}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col items-end gap-1 shrink-0">
+                      <div className="flex items-center gap-1">
+                        <Badge
+                          className={`text-[10px] font-bold ${
+                            track.level === "Beginner"
+                              ? "bg-blue-600 text-white"
+                              : track.level === "Improver"
+                              ? "bg-emerald-600 text-white"
+                              : track.level === "Intermediate"
+                              ? "bg-amber-600 text-white"
+                              : "bg-purple-600 text-white"
+                          }`}
+                        >
+                          {track.level}
+                        </Badge>
+                        <Badge variant="secondary" className="text-[10px] font-mono font-bold">
+                          {track.bpm} BPM
+                        </Badge>
+                      </div>
+                      <span className="text-[10px] text-muted-foreground font-medium">
+                        {track.subGenre}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Why This Song? Callout */}
+                  <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.04] p-3 space-y-1">
+                    <span className="text-[11px] font-bold text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
+                      <Sparkles className="h-3.5 w-3.5 text-amber-500" />
+                      Pedagogical Focus & Why This Song:
+                    </span>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      {track.whyThisSong}
+                    </p>
+                  </div>
+
+                  {/* Gear Shifts Observed */}
+                  <div className="space-y-1.5">
+                    <span className="text-[11px] font-bold text-foreground block">
+                      Musical Gear Shifts in this Track:
+                    </span>
+                    <div className="flex flex-wrap gap-1">
+                      {track.gearShiftsObserved.map((gear) => (
+                        <Badge
+                          key={gear}
+                          variant="outline"
+                          className="text-[10px] font-semibold border-amber-500/30 bg-amber-500/5 text-amber-800 dark:text-amber-300"
+                        >
+                          {gear}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Instruments to Listen For */}
+                  <div className="space-y-1.5">
+                    <span className="text-[11px] font-bold text-foreground block">
+                      Instruments to Listen For:
+                    </span>
+                    <div className="flex flex-wrap gap-1">
+                      {track.instrumentsToListenFor.map((inst) => (
+                        <Badge
+                          key={inst}
+                          variant="secondary"
+                          className="text-[10px] font-medium"
+                        >
+                          {inst}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex flex-col items-end gap-1">
-                  <Badge
-                    className={`text-[10px] font-bold ${
-                      track.category === "SON"
-                        ? "bg-blue-600 text-white"
-                        : track.category === "CASINO"
-                        ? "bg-emerald-600 text-white"
-                        : "bg-orange-600 text-white"
-                    }`}
+                {/* Footer Action */}
+                <div className="pt-3 border-t flex items-center justify-between mt-3">
+                  <span className="text-[11px] text-muted-foreground font-medium flex items-center gap-1">
+                    <Radio className="h-3.5 w-3.5 text-emerald-600" />
+                    BOH Studios Social Playlist
+                  </span>
+
+                  <Button
+                    asChild
+                    size="sm"
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
                   >
-                    {track.bpm} BPM
-                  </Badge>
-                  <span className="text-[10px] text-muted-foreground font-medium">
-                    {track.categoryLabel}
-                  </span>
+                    <a
+                      href={track.spotifySearchUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Listen on Spotify
+                      <ExternalLink className="ml-1.5 h-3 w-3" />
+                    </a>
+                  </Button>
                 </div>
-              </div>
-
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                {track.keyFeature}
-              </p>
-
-              <div className="rounded-xl border bg-muted/30 p-2.5 text-[11px] space-y-0.5">
-                <span className="font-bold text-foreground">Best Practice Use:</span>
-                <p className="text-muted-foreground">{track.recommendedFor}</p>
-              </div>
-            </div>
-
-            <div className="pt-3 border-t flex items-center justify-between">
-              <span className="text-[11px] text-muted-foreground font-medium flex items-center gap-1">
-                <Music className="h-3.5 w-3.5 text-amber-600" />
-                Featured at BOH Studios Socials
-              </span>
-
-              <Button
-                asChild
-                size="sm"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
-              >
-                <a
-                  href={track.spotifySearchUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Listen on Spotify
-                  <ExternalLink className="ml-1.5 h-3 w-3" />
-                </a>
-              </Button>
-            </div>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))
+        )}
       </div>
     </div>
   );

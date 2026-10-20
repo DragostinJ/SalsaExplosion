@@ -8,6 +8,7 @@ import {
   Shirt,
   Wind,
   Footprints,
+  Gift,
   X,
   XCircle,
 } from "lucide-react";
@@ -244,6 +245,17 @@ export function ShopClient({
         >
           Dance Shoes
         </button>
+        <button
+          type="button"
+          onClick={() => setSelectedCategory("VOUCHER")}
+          className={`rounded-full px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
+            selectedCategory === "VOUCHER"
+              ? "bg-primary-base text-white shadow-xs"
+              : "border bg-card text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Gift Vouchers
+        </button>
       </div>
 
       {/* Products Grid */}
@@ -272,6 +284,8 @@ export function ShopClient({
                     <Shirt className="h-14 w-14 text-white/80" />
                   ) : item.category === "FOOTWEAR" ? (
                     <Footprints className="h-14 w-14 text-white/80" />
+                  ) : item.category === "VOUCHER" ? (
+                    <Gift className="h-14 w-14 text-white/80" />
                   ) : (
                     <Wind className="h-14 w-14 text-white/80" />
                   )}

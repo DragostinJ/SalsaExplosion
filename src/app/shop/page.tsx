@@ -7,6 +7,7 @@ import {
   ShopClient,
   SerializedMerchReservation,
 } from "@/components/shop/shop-client";
+import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
 
 export const metadata = {
   title: "Official Merch & Dance Shoes | Salsa Explosion Bournemouth",
@@ -68,6 +69,11 @@ export default async function ShopPage() {
 
       {/* Shop Storefront */}
       <ShopClient initialReservations={initialReservations} />
+
+      {/* Dance Vouchers Callout */}
+      <div className="pt-6">
+        <DanceVouchersShowcase />
+      </div>
     </main>
   );
 }

@@ -1,7 +1,7 @@
 export interface CatalogShopItem {
   id: string;
   name: string;
-  category: "APPAREL" | "ACCESSORY" | "FOOTWEAR";
+  category: "APPAREL" | "ACCESSORY" | "FOOTWEAR" | "VOUCHER";
   pricePounds: number;
   description: string;
   features: string[];
@@ -11,6 +11,22 @@ export interface CatalogShopItem {
 }
 
 export const SHOP_CATALOG: Record<string, CatalogShopItem> = {
+  voucher: {
+    id: "voucher",
+    name: "Cuban Salsa Dance Gift Voucher",
+    category: "VOUCHER",
+    pricePounds: 35,
+    description:
+      "Looking for a gift that’s a little different? Why not give your friends or family the gift of Cuban Salsa! Perfect for Birthday, Christmas, or any special occasion across Bournemouth, Boscombe & Poole.",
+    features: [
+      "Valid for weekly Cuban Salsa group classes in Bournemouth & Poole",
+      "Redeemable for 12 months with Maestro Enrique & teaching team",
+      "Physical presentation certificate or direct digital voucher",
+      "Direct telephone ordering available on 07969 633701",
+    ],
+    gradient: "from-rose-600 via-amber-600 to-yellow-500",
+    badge: "The Perfect Gift",
+  },
   hoodie: {
     id: "hoodie",
     name: "Salsa Explosion Official Zip Hoodie",

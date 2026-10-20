@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/card";
 import dynamic from "next/dynamic";
 import { getCachedUpcomingEvents, getCachedNextClasses } from "@/lib/cached-queries";
+import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
 
 const SocialProofGrid = dynamic(
   () => import("@/components/marketing/social-proof-grid").then((m) => m.SocialProofGrid),
@@ -494,6 +495,13 @@ export default async function Home() {
             </div>
           </section>
         )}
+
+        {/* Dance Vouchers Gift Showcase */}
+        <section className="cv-auto py-14 border-t bg-gradient-to-b from-background to-muted/20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <DanceVouchersShowcase />
+          </div>
+        </section>
 
         {/* 3-Portal Interactive Showcase */}
         <section className="cv-auto py-14 border-t bg-muted/20">

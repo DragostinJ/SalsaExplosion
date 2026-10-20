@@ -105,20 +105,6 @@ type OptimisticAction =
   | { type: "CANCEL" };
 
 // ==========================================
-// UI DISPLAY MAPS
-// ==========================================
-
-const STYLE_BADGE_CONFIG: Record<
-  DanceStyle,
-  { label: string; className: string }
-> = {
-  CUBAN_SALSA: {
-    label: "Cuban Salsa",
-    className: "border-border/80 bg-muted/60 text-foreground/80 font-medium text-[11px]",
-  },
-};
-
-// ==========================================
 // COMPONENT
 // ==========================================
 
@@ -302,8 +288,6 @@ export function ClassScheduleCard({
     });
   };
 
-  const styleConfig = STYLE_BADGE_CONFIG[session.style];
-
   return (
     <Card
       className={`flex flex-col justify-between transition-all ${
@@ -313,21 +297,16 @@ export function ClassScheduleCard({
       } ${!isLevelUnlocked ? "opacity-90" : ""}`}
     >
       <CardHeader className="space-y-3 pb-4">
-        {/* Top Badges: Style, Level, Status */}
+        {/* Top Badges: Level & Status */}
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className={styleConfig.className}>
-              {styleConfig.label}
-            </Badge>
-            <Badge
-              variant="outline"
-              className="border-border bg-muted/50 text-muted-foreground font-medium text-[11px]"
-            >
-              {session.minLevel === DanceLevel.BEGINNER
-                ? "Level 0: Absolute Beginner"
-                : session.minLevel}
-            </Badge>
-          </div>
+          <Badge
+            variant="outline"
+            className="border-border bg-muted/50 text-muted-foreground font-medium text-[11px]"
+          >
+            {session.minLevel === DanceLevel.BEGINNER
+              ? "Level 0: Absolute Beginner"
+              : session.minLevel}
+          </Badge>
 
           {optimisticState.isBooked ? (
             <Badge className="bg-secondary-base text-white hover:bg-secondary-hover">
@@ -431,7 +410,7 @@ export function ClassScheduleCard({
             <div className="h-2 w-full overflow-hidden rounded-full bg-muted flex">
               <div
                 title={`Leads booked: ${optimisticState.leadsCount}`}
-                className="h-full bg-blue-600 dark:bg-blue-500 transition-all duration-300"
+                className="h-full bg-sky-500/60 dark:bg-sky-400/50 transition-all duration-300"
                 style={{
                   width: `${Math.min(
                     100,
@@ -443,7 +422,7 @@ export function ClassScheduleCard({
               />
               <div
                 title={`Follows booked: ${optimisticState.followsCount}`}
-                className="h-full bg-rose-600 dark:bg-rose-500 transition-all duration-300"
+                className="h-full bg-rose-400/60 dark:bg-rose-400/50 transition-all duration-300"
                 style={{
                   width: `${Math.min(
                     100,
@@ -455,12 +434,12 @@ export function ClassScheduleCard({
               />
             </div>
             <div className="flex items-center justify-between text-[11px] text-muted-foreground px-0.5">
-              <span className="flex items-center gap-1.5 font-semibold text-blue-700 dark:text-blue-300">
-                <span className="h-2 w-2 rounded-full bg-blue-600" />
+              <span className="flex items-center gap-1.5 font-medium text-slate-700 dark:text-slate-300">
+                <span className="h-2 w-2 rounded-full bg-sky-500/75" />
                 {optimisticState.leadsCount} Leads
               </span>
-              <span className="flex items-center gap-1.5 font-semibold text-rose-700 dark:text-rose-300">
-                <span className="h-2 w-2 rounded-full bg-rose-600" />
+              <span className="flex items-center gap-1.5 font-medium text-slate-700 dark:text-slate-300">
+                <span className="h-2 w-2 rounded-full bg-rose-400/75" />
                 {optimisticState.followsCount} Follows
               </span>
             </div>
@@ -475,14 +454,16 @@ export function ClassScheduleCard({
                 onClick={() => setSelectedRole(DanceRole.LEAD)}
                 className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
                   selectedRole === DanceRole.LEAD
-                    ? "border-blue-600 bg-blue-600 text-white shadow-xs ring-2 ring-blue-600/20"
-                    : "border-blue-500/25 bg-blue-500/[0.04] text-foreground hover:bg-blue-500/10 hover:border-blue-500/40"
+                    ? "border-sky-500/45 bg-sky-500/12 text-sky-950 dark:text-sky-100 shadow-xs ring-1 ring-sky-500/20"
+                    : "border-border/80 bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground"
                 } ${isLeadFull ? "cursor-not-allowed opacity-50" : ""}`}
               >
                 <span className="flex items-center gap-1.5 font-extrabold tracking-wide">
                   <span
                     className={`h-2 w-2 rounded-full ${
-                      selectedRole === DanceRole.LEAD ? "bg-white" : "bg-blue-600"
+                      selectedRole === DanceRole.LEAD
+                        ? "bg-sky-600 dark:bg-sky-400"
+                        : "bg-muted-foreground/40"
                     }`}
                   />
                   Lead
@@ -491,7 +472,7 @@ export function ClassScheduleCard({
                   <span
                     className={`text-[11px] font-bold ${
                       selectedRole === DanceRole.LEAD
-                        ? "text-white/90"
+                        ? "text-sky-900/80 dark:text-sky-200/80"
                         : "text-muted-foreground"
                     }`}
                   >
@@ -508,14 +489,16 @@ export function ClassScheduleCard({
                 onClick={() => setSelectedRole(DanceRole.FOLLOW)}
                 className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
                   selectedRole === DanceRole.FOLLOW
-                    ? "border-rose-600 bg-rose-600 text-white shadow-xs ring-2 ring-rose-600/20"
-                    : "border-rose-500/25 bg-rose-500/[0.04] text-foreground hover:bg-rose-500/10 hover:border-rose-500/40"
+                    ? "border-rose-400/45 bg-rose-500/12 text-rose-950 dark:text-rose-100 shadow-xs ring-1 ring-rose-400/20"
+                    : "border-border/80 bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground"
                 } ${isFollowFull ? "cursor-not-allowed opacity-50" : ""}`}
               >
                 <span className="flex items-center gap-1.5 font-extrabold tracking-wide">
                   <span
                     className={`h-2 w-2 rounded-full ${
-                      selectedRole === DanceRole.FOLLOW ? "bg-white" : "bg-rose-600"
+                      selectedRole === DanceRole.FOLLOW
+                        ? "bg-rose-500 dark:bg-rose-400"
+                        : "bg-muted-foreground/40"
                     }`}
                   />
                   Follow
@@ -524,7 +507,7 @@ export function ClassScheduleCard({
                   <span
                     className={`text-[11px] font-bold ${
                       selectedRole === DanceRole.FOLLOW
-                        ? "text-white/90"
+                        ? "text-rose-900/80 dark:text-rose-200/80"
                         : "text-muted-foreground"
                     }`}
                   >
@@ -653,13 +636,7 @@ export function ClassScheduleCard({
             type="button"
             disabled={isPending || isSelectedRoleFull || session.isCancelled}
             onClick={attemptBook}
-            className={`w-full font-bold shadow-md transition-colors h-10 rounded-xl text-white ${
-              selectedRole === DanceRole.LEAD
-                ? "bg-blue-600 hover:bg-blue-700"
-                : selectedRole === DanceRole.FOLLOW
-                  ? "bg-rose-600 hover:bg-rose-700"
-                  : "bg-primary-base hover:bg-primary-hover"
-            }`}
+            className="w-full font-bold shadow-xs transition-colors h-10 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-zinc-200 dark:text-zinc-900"
           >
             {isPending ? (
               <>

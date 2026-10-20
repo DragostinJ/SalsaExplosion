@@ -127,4 +127,69 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
 
     expect(seriousOrCriticalViolations).toEqual([]);
   });
+
+  test("4. Interactive Timba Song Anatomy Player on /music: switches tracks, scrubs timeline, and inspects moves", async ({
+    page,
+  }) => {
+    await page.goto("/music");
+    await page.waitForLoadState("domcontentloaded");
+
+    const player = page.locator('[data-testid="timba-song-anatomy-player"]');
+    await expect(player).toBeVisible();
+
+    // Verify initial song is Me Dicen Cuba
+    await expect(player.getByRole("heading", { name: "Me Dicen Cuba" })).toBeVisible();
+    await expect(player.getByText("2-3 Son Clave")).toBeVisible();
+
+    // Verify timeline segments exist (5 segments for Me Dicen Cuba)
+    const seg0 = player.locator('[data-testid="timeline-segment-0"]');
+    const seg2 = player.locator('[data-testid="timeline-segment-2"]');
+    await expect(seg0).toBeVisible();
+    await expect(seg2).toBeVisible();
+
+    // Click segment 2 (Montuno)
+    await seg2.click();
+
+    // Verify HUD updates to Montuno
+    const hud = player.locator('[data-testid="active-segment-hud"]');
+    await expect(hud).toBeVisible();
+    await expect(hud.getByText("Montuno")).toBeVisible();
+    await expect(hud.getByText("Casino (Flow)")).toBeVisible();
+
+    // Verify Un-Confuser alert is rendered
+    const alert = player.locator('[data-testid="un-confuser-alert"]');
+    await expect(alert).toBeVisible();
+
+    // Verify clickable move pills are present and click one
+    const movePill = player.locator('[data-testid^="move-pill-"]').first();
+    await expect(movePill).toBeVisible();
+    await movePill.click();
+
+    // Verify inline move preview card opens
+    const moveCard = player.locator('[data-testid="move-inspector-card"]');
+    await expect(moveCard).toBeVisible();
+    await expect(moveCard.getByText(/un-confuser tip/i)).toBeVisible();
+
+    // Switch to "La Cosa Mala"
+    const laCosaMalaTab = player.locator('[data-testid="select-song-la-cosa-mala"]');
+    await expect(laCosaMalaTab).toBeVisible();
+    await laCosaMalaTab.click();
+
+    // Verify La Cosa Mala metadata and 8 segments
+    await expect(player.getByRole("heading", { name: "La Cosa Mala" })).toBeVisible();
+    await expect(player.getByText("2-3 Rumba Clave")).toBeVisible();
+    const seg7 = player.locator('[data-testid="timeline-segment-7"]');
+    await expect(seg7).toBeVisible();
+
+    // Verify zero serious or critical accessibility violations on /music
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    const seriousOrCriticalViolations = accessibilityScanResults.violations.filter(
+      (v) => v.impact === "serious" || v.impact === "critical"
+    );
+
+    expect(seriousOrCriticalViolations).toEqual([]);
+  });
 });

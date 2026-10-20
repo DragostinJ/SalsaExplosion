@@ -209,12 +209,12 @@ export function CubanMusicHubClient() {
                         <Badge
                           className={`text-[10px] font-bold ${
                             track.level === "Beginner"
-                              ? "bg-blue-600 text-white"
+                              ? "bg-blue-700 text-white"
                               : track.level === "Improver"
-                              ? "bg-emerald-600 text-white"
+                              ? "bg-emerald-800 text-white"
                               : track.level === "Intermediate"
-                              ? "bg-amber-600 text-white"
-                              : "bg-purple-600 text-white"
+                              ? "bg-amber-800 text-white"
+                              : "bg-purple-700 text-white"
                           }`}
                         >
                           {track.level}
@@ -300,7 +300,7 @@ export function CubanMusicHubClient() {
                             .getElementById("timba-song-anatomy-section")
                             ?.scrollIntoView({ behavior: "smooth" });
                         }}
-                        className="h-8 text-xs font-bold border-primary-base/40 text-primary-base hover:bg-primary-base/10"
+                        className="h-8 text-xs font-bold border-rose-700/30 text-rose-800 dark:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-950/30"
                       >
                         <Compass className="mr-1.5 h-3.5 w-3.5" />
                         Song Map ↑
@@ -310,7 +310,7 @@ export function CubanMusicHubClient() {
                     <Button
                       asChild
                       size="sm"
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-8"
+                      className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs h-8 shadow-xs"
                     >
                       <a
                         href={track.spotifySearchUrl}

@@ -16,7 +16,7 @@ import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { StudentVideoUploadDropzone } from "@/components/progression/video-upload-dropzone";
 import { PromotionCertificateCard } from "@/components/progression/promotion-certificate-card";
 import { AttendanceMilestonesCard } from "@/components/progression/attendance-milestones-card";
-import { BeginnerSyllabusRoadmap } from "@/components/beginners/beginner-syllabus-roadmap";
+import { ProgressionJourneyTabs } from "@/components/progression/progression-journey-tabs";
 import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curriculum-skill-tree";
 import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
 import { PRISMA_TO_CURRICULUM_LEVEL_MAP } from "@/lib/constants/cuban-curriculum-2027";
@@ -130,207 +130,217 @@ export default async function ProgressionPage() {
         </div>
       </div>
 
-      {/* Verified Dancer Milestone Certificate / Social Badge */}
-      <PromotionCertificateCard
-        studentName={`${user.firstName} ${user.lastName}`}
+      {/* 3-Tab Student Journey: Syllabus Checklist, Milestones, and Optional Video Feedback */}
+      <ProgressionJourneyTabs
         currentLevel={user.currentLevel}
-        preferredRole={user.preferredRole}
-        approvedCount={approvedCount}
-      />
+        submissionCount={submissions.length}
+        syllabusTabContent={
+          <div className="space-y-6">
+            <CubanCurriculumSkillTree
+              defaultLevel={PRISMA_TO_CURRICULUM_LEVEL_MAP[user.currentLevel] ?? "Beginner"}
+              studentName={user.firstName}
+            />
 
-      {/* Dancer Attendance Milestones & Streaks Card */}
-      <AttendanceMilestonesCard
-        attendedCount={attendedBookings.length}
-        streakWeeks={streakWeeks}
-        currentLevel={user.currentLevel}
-        hasCongressPass={hasCongressPass}
-      />
-
-      {/* Progressive Syllabus: Foundational 8 Cuban Figures */}
-      <BeginnerSyllabusRoadmap />
-
-      {/* 2027 Modern Cuban Salsa Curriculum: 4-Level & 5-Pillar Skill Tree */}
-      <CubanCurriculumSkillTree
-        defaultLevel={PRISMA_TO_CURRICULUM_LEVEL_MAP[user.currentLevel] ?? "Beginner"}
-        studentName={user.firstName}
-      />
-
-      {/* Cuban Dance Gears Matrix & Timba Song Anatomy */}
-      <CubanDanceGearsMatrix />
-
-      {/* State 1: Max Level Reached */}
-      {isMaxLevel ? (
-        <Card className="border-amber-500/40 bg-amber-500/[0.03]">
-          <CardHeader className="text-center sm:text-left">
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-amber-500" />
-              <CardTitle className="text-xl">
-                Master Casino Dancer (Advanced)
-              </CardTitle>
-            </div>
-            <CardDescription className="text-sm">
-              Congratulations! You have unlocked all Cuban Salsa levels at Salsa Explosion. You are eligible to book every class on the schedule.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button asChild>
-              <Link href="/dashboard/schedule">
-                Browse Full Schedule
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
-      ) : pendingSubmission ? (
-        /* State 2: Active Pending Submission */
-        <Card className="border-primary/40 bg-primary/[0.02]">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-primary" />
-                <CardTitle className="text-lg">
-                  Assessment Awaiting Review
-                </CardTitle>
-              </div>
-              <Badge variant="secondary">In Review Queue</Badge>
-            </div>
-            <CardDescription>
-              Your technique video for <strong>{pendingSubmission.targetLevel}</strong> was submitted on{" "}
-              {new Date(pendingSubmission.createdAt).toLocaleDateString("en-GB", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              })}
-              . A studio instructor is currently reviewing your rhythm and frame.
-            </CardDescription>
-          </CardHeader>
-          {pendingSubmission.studentNotes && (
-            <CardContent>
-              <div className="rounded-lg border bg-muted/30 p-3 text-xs">
-                <span className="font-semibold text-muted-foreground uppercase tracking-wider">
-                  Your Notes:
-                </span>
-                <p className="mt-1 text-sm">{pendingSubmission.studentNotes}</p>
-              </div>
-            </CardContent>
-          )}
-        </Card>
-      ) : (
-        /* State 3: Ready for Video Submission */
-        <StudentVideoUploadDropzone currentLevel={user.currentLevel} />
-      )}
-
-      {/* Historical Submissions Section */}
-      <div className="space-y-4">
-        <h2 className="text-lg font-bold tracking-tight">
-          Assessment History ({submissions.length})
-        </h2>
-
-        {submissions.length === 0 ? (
-          <Card className="border-dashed py-12 text-center">
-            <CardContent>
-              <p className="text-sm font-medium">No past submissions yet.</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                When you submit level-up videos, instructor feedback and grading history will appear here.
-              </p>
-            </CardContent>
-          </Card>
-        ) : (
-          <div className="space-y-3">
-            {submissions.map((sub) => {
-              const isApproved = sub.status === SubmissionStatus.APPROVED;
-              const isRejected = sub.status === SubmissionStatus.REJECTED;
-
-              return (
-                <Card key={sub.id} className="transition-all">
-                  <CardHeader className="pb-3">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
-                        {isApproved ? (
-                          <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-                        ) : isRejected ? (
-                          <XCircle className="h-5 w-5 text-destructive" />
-                        ) : (
-                          <Clock className="h-5 w-5 text-primary" />
-                        )}
-                        <CardTitle className="text-base">
-                          {sub.currentLevel} → {sub.targetLevel}
-                        </CardTitle>
-                        <Badge
-                          variant={
-                            isApproved
-                              ? "default"
-                              : isRejected
-                                ? "destructive"
-                                : "secondary"
-                          }
-                          className={
-                            isApproved
-                              ? "bg-emerald-600 hover:bg-emerald-600 text-white"
-                              : ""
-                          }
-                        >
-                          {sub.status}
-                        </Badge>
-                      </div>
-
-                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                        <Calendar className="h-3.5 w-3.5" />
-                        <span>
-                          {new Date(sub.createdAt).toLocaleDateString("en-GB", {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                          })}
-                        </span>
-                      </div>
-                    </div>
-                  </CardHeader>
-
-                  {(sub.feedback || sub.studentNotes) && (
-                    <CardContent className="space-y-3 pt-0 text-xs">
-                      {sub.studentNotes && (
-                        <div className="rounded-md border bg-muted/20 p-2.5">
-                          <span className="font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">
-                            Student Note:
-                          </span>
-                          <p className="mt-0.5 text-xs text-foreground">
-                            {sub.studentNotes}
-                          </p>
-                        </div>
-                      )}
-
-                      {sub.feedback && (
-                        <div
-                          className={`rounded-md border p-3 ${
-                            isApproved
-                              ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-800 dark:text-emerald-300"
-                              : "border-destructive/30 bg-destructive/5 text-destructive dark:text-destructive"
-                          }`}
-                        >
-                          <div className="flex items-center gap-1.5 font-semibold text-[11px]">
-                            <MessageSquare className="h-3.5 w-3.5" />
-                            <span>
-                              Instructor Feedback
-                              {sub.instructor
-                                ? ` from ${sub.instructor.firstName} ${sub.instructor.lastName}`
-                                : ""}
-                              :
-                            </span>
-                          </div>
-                          <p className="mt-1 whitespace-pre-line text-xs leading-relaxed">
-                            {sub.feedback}
-                          </p>
-                        </div>
-                      )}
-                    </CardContent>
-                  )}
-                </Card>
-              );
-            })}
+            <CubanDanceGearsMatrix initiallyCollapsed={true} />
           </div>
-        )}
-      </div>
+        }
+        milestonesTabContent={
+          <div className="space-y-6">
+            {/* Verified Dancer Milestone Certificate / Social Badge */}
+            <PromotionCertificateCard
+              studentName={`${user.firstName} ${user.lastName}`}
+              currentLevel={user.currentLevel}
+              preferredRole={user.preferredRole}
+              approvedCount={approvedCount}
+            />
+
+            {/* Dancer Attendance Milestones & Streaks Card */}
+            <AttendanceMilestonesCard
+              attendedCount={attendedBookings.length}
+              streakWeeks={streakWeeks}
+              currentLevel={user.currentLevel}
+              hasCongressPass={hasCongressPass}
+            />
+          </div>
+        }
+        videoFeedbackTabContent={
+          <div className="space-y-6">
+            {/* State 1: Max Level Reached */}
+            {isMaxLevel ? (
+              <Card className="border-amber-500/40 bg-amber-500/[0.03]">
+                <CardHeader className="text-center sm:text-left">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-amber-500" />
+                    <CardTitle className="text-xl">
+                      Master Casino Dancer (Advanced)
+                    </CardTitle>
+                  </div>
+                  <CardDescription className="text-sm">
+                    Congratulations! You have unlocked all Cuban Salsa levels at Salsa Explosion. You are eligible to book every class on the schedule.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button asChild>
+                    <Link href="/dashboard/schedule">
+                      Browse Full Schedule
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ) : pendingSubmission ? (
+              /* State 2: Active Pending Submission */
+              <Card className="border-primary/40 bg-primary/[0.02]">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-5 w-5 text-primary" />
+                      <CardTitle className="text-lg">
+                        Assessment Awaiting Review
+                      </CardTitle>
+                    </div>
+                    <Badge variant="secondary">In Review Queue</Badge>
+                  </div>
+                  <CardDescription>
+                    Your technique video for <strong>{pendingSubmission.targetLevel}</strong> was submitted on{" "}
+                    {new Date(pendingSubmission.createdAt).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                    . A studio instructor is currently reviewing your rhythm and frame.
+                  </CardDescription>
+                </CardHeader>
+                {pendingSubmission.studentNotes && (
+                  <CardContent>
+                    <div className="rounded-lg border bg-muted/30 p-3 text-xs">
+                      <span className="font-semibold text-muted-foreground uppercase tracking-wider">
+                        Your Notes:
+                      </span>
+                      <p className="mt-1 text-sm">{pendingSubmission.studentNotes}</p>
+                    </div>
+                  </CardContent>
+                )}
+              </Card>
+            ) : (
+              /* State 3: Ready for Video Submission */
+              <StudentVideoUploadDropzone currentLevel={user.currentLevel} />
+            )}
+
+            {/* Historical Submissions Section */}
+            <div className="space-y-4">
+              <h2 className="text-lg font-bold tracking-tight">
+                Assessment History ({submissions.length})
+              </h2>
+
+              {submissions.length === 0 ? (
+                <Card className="border-dashed py-12 text-center">
+                  <CardContent>
+                    <p className="text-sm font-medium">No past submissions yet.</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      When you submit level-up videos, instructor feedback and grading history will appear here.
+                    </p>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="space-y-3">
+                  {submissions.map((sub) => {
+                    const isApproved = sub.status === SubmissionStatus.APPROVED;
+                    const isRejected = sub.status === SubmissionStatus.REJECTED;
+
+                    return (
+                      <Card key={sub.id} className="transition-all">
+                        <CardHeader className="pb-3">
+                          <div className="flex flex-wrap items-center justify-between gap-2">
+                            <div className="flex items-center gap-2">
+                              {isApproved ? (
+                                <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                              ) : isRejected ? (
+                                <XCircle className="h-5 w-5 text-destructive" />
+                              ) : (
+                                <Clock className="h-5 w-5 text-primary" />
+                              )}
+                              <CardTitle className="text-base">
+                                {sub.currentLevel} → {sub.targetLevel}
+                              </CardTitle>
+                              <Badge
+                                variant={
+                                  isApproved
+                                    ? "default"
+                                    : isRejected
+                                      ? "destructive"
+                                      : "secondary"
+                                }
+                                className={
+                                  isApproved
+                                    ? "bg-emerald-600 hover:bg-emerald-600 text-white"
+                                    : ""
+                                }
+                              >
+                                {sub.status}
+                              </Badge>
+                            </div>
+
+                            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                              <Calendar className="h-3.5 w-3.5" />
+                              <span>
+                                {new Date(sub.createdAt).toLocaleDateString("en-GB", {
+                                  day: "numeric",
+                                  month: "short",
+                                  year: "numeric",
+                                })}
+                              </span>
+                            </div>
+                          </div>
+                        </CardHeader>
+
+                        {(sub.feedback || sub.studentNotes) && (
+                          <CardContent className="space-y-3 pt-0 text-xs">
+                            {sub.studentNotes && (
+                              <div className="rounded-md border bg-muted/20 p-2.5">
+                                <span className="font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">
+                                  Student Note:
+                                </span>
+                                <p className="mt-0.5 text-xs text-foreground">
+                                  {sub.studentNotes}
+                                </p>
+                              </div>
+                            )}
+
+                            {sub.feedback && (
+                              <div
+                                className={`rounded-md border p-3 ${
+                                  isApproved
+                                    ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-800 dark:text-emerald-300"
+                                    : "border-destructive/30 bg-destructive/5 text-destructive dark:text-destructive"
+                                }`}
+                              >
+                                <div className="flex items-center gap-1.5 font-semibold text-[11px]">
+                                  <MessageSquare className="h-3.5 w-3.5" />
+                                  <span>
+                                    Instructor Feedback
+                                    {sub.instructor
+                                      ? ` from ${sub.instructor.firstName} ${sub.instructor.lastName}`
+                                      : ""}
+                                    :
+                                  </span>
+                                </div>
+                                <p className="mt-1 whitespace-pre-line text-xs leading-relaxed">
+                                  {sub.feedback}
+                                </p>
+                              </div>
+                            )}
+                          </CardContent>
+                        )}
+                      </Card>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+        }
+      />
     </main>
   );
 }

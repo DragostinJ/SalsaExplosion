@@ -173,7 +173,7 @@ export function CubanCurriculumSkillTree({
 
           {/* Progress Overview Pill */}
           <div className="flex items-center gap-3 bg-muted/40 border p-2.5 rounded-2xl shrink-0">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary-base/10 text-primary-base font-black">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/10 text-rose-800 dark:text-rose-300 font-black">
               <Award className="h-5 w-5" />
             </div>
             <div className="text-xs">
@@ -215,13 +215,15 @@ export function CubanCurriculumSkillTree({
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground block">
             Select Syllabus Level:
           </span>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div role="tablist" aria-label="Curriculum Levels" className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {LEVELS.map((lvl) => {
               const isSelected = selectedLevel === lvl;
               return (
                 <button
                   key={lvl}
                   type="button"
+                  role="tab"
+                  aria-selected={isSelected}
                   onClick={() => setSelectedLevel(lvl)}
                   className={`rounded-2xl border p-3 text-left transition-all min-h-[58px] flex flex-col justify-between ${
                     isSelected
@@ -488,7 +490,7 @@ export function CubanCurriculumSkillTree({
                       href={song.spotifySearchUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-extrabold text-primary-base hover:underline text-[11px]"
+                      className="inline-flex items-center gap-1 font-extrabold text-rose-700 dark:text-rose-300 hover:underline text-[11px]"
                     >
                       Spotify <ExternalLink className="h-3 w-3" />
                     </a>

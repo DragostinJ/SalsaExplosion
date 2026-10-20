@@ -139,6 +139,20 @@ export function CubanMusicHubClient() {
             </button>
           ))}
         </div>
+
+        {/* Tempo Breakdown Guide */}
+        <div className="flex flex-wrap items-center gap-2 pt-2 border-t text-xs text-muted-foreground">
+          <span className="font-bold text-foreground">Tempo & Genre Categories:</span>
+          <span className="rounded-full bg-blue-500/10 text-blue-800 dark:text-blue-300 px-2.5 py-0.5 font-semibold text-[11px]">
+            Slow Son (80–90 BPM)
+          </span>
+          <span className="rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 px-2.5 py-0.5 font-semibold text-[11px]">
+            Classic Casino (95–102 BPM)
+          </span>
+          <span className="rounded-full bg-orange-500/10 text-orange-800 dark:text-orange-300 px-2.5 py-0.5 font-semibold text-[11px]">
+            High-Energy Timba (105+ BPM)
+          </span>
+        </div>
       </div>
 
       {/* Tracks Grid */}

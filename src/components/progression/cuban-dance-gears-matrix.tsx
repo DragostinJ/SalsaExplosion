@@ -114,7 +114,7 @@ export function CubanDanceGearsMatrix({
           <div className="rounded-2xl border-2 border-primary-base/30 bg-card p-5 space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-primary-base">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-rose-900 dark:text-rose-200">
                   Active Song Phase
                 </span>
                 <h3 className="text-base sm:text-lg font-black text-foreground">
@@ -146,7 +146,7 @@ export function CubanDanceGearsMatrix({
               </div>
 
               <div className="rounded-xl border border-primary-base/30 bg-primary-base/5 p-3 space-y-1">
-                <span className="font-bold text-primary-base uppercase text-[10px] block">
+                <span className="font-bold text-rose-900 dark:text-rose-200 uppercase text-[10px] block">
                   Recommended Dance Gear
                 </span>
                 <p className="text-foreground font-extrabold leading-relaxed">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { DanceRole } from "@prisma/client";
 import {
@@ -122,10 +123,10 @@ export default async function EventDetailPage({
         <div className="relative z-10 max-w-3xl space-y-4">
           <div className="flex flex-wrap items-center gap-2">
             <Badge className="bg-black/40 text-white border-none backdrop-blur-sm">
-              Exclusive Masterclass
+              {event.slug.includes("halloween") ? "★ Halloween Special ★" : "Exclusive Masterclass"}
             </Badge>
             <Badge className="bg-white/20 text-white border-none backdrop-blur-sm">
-              Cuban Salsa & Afro-Cuban
+              {event.slug.includes("halloween") ? "SB&K Social & Costume Party" : "Cuban Salsa & Afro-Cuban"}
             </Badge>
           </div>
 
@@ -166,6 +167,85 @@ export default async function EventDetailPage({
           </div>
         </div>
       </div>
+
+      {/* Special Halloween Prizes & Party Schedule Banner */}
+      {event.slug.includes("halloween") && (
+        <div className="rounded-3xl border border-rose-500/40 bg-gradient-to-br from-rose-950/40 via-background to-amber-950/40 p-6 sm:p-8 space-y-6">
+          <div className="grid gap-6 lg:grid-cols-12 items-center">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                  <Badge className="bg-rose-600 text-white font-extrabold text-xs mb-1 uppercase tracking-wider">
+                    🏆 Best Costume Prizes
+                  </Badge>
+                  <h3 className="text-xl sm:text-2xl font-black text-foreground">
+                    Halloween Fancy Dress Party & Costume Contest
+                  </h3>
+                </div>
+                <span className="text-xs text-muted-foreground font-semibold">
+                  Judging & Awards at Midnight
+                </span>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 space-y-1 text-center">
+                  <span className="text-2xl font-black">🥇</span>
+                  <h4 className="text-sm font-black text-amber-800 dark:text-amber-300">1ST PRIZE</h4>
+                  <p className="text-xs font-bold text-foreground">1 Made in Cuba Weekend Pass</p>
+                </div>
+                <div className="rounded-2xl border border-border bg-card p-4 space-y-1 text-center">
+                  <span className="text-2xl font-black">🥈</span>
+                  <h4 className="text-sm font-black text-foreground">2ND PRIZE</h4>
+                  <p className="text-xs font-bold text-foreground">2 Free Dance Classes</p>
+                </div>
+                <div className="rounded-2xl border border-border bg-card p-4 space-y-1 text-center">
+                  <span className="text-2xl font-black">🥉</span>
+                  <h4 className="text-sm font-black text-foreground">3RD PRIZE</h4>
+                  <p className="text-xs font-bold text-foreground">1 Free Entry to Our Next Party</p>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border bg-card/60 p-5 space-y-3">
+                <h4 className="font-bold text-sm text-foreground flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-amber-500" />
+                  Evening Timetable (8:00 PM – 2:00 AM):
+                </h4>
+                <div className="grid gap-2 sm:grid-cols-3 text-xs">
+                  <div className="p-2.5 rounded-xl border bg-muted/40">
+                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">8:00 PM • Doors Open</span>
+                    <span className="text-foreground">8:15 PM • Bachata Improvers onwards with Alex Spindlove</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl border bg-muted/40">
+                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">9:15 PM • Workshop Rooms</span>
+                    <span className="text-foreground">Rueda De Casino Intermediates + Salsa/Timba Improvers & Int</span>
+                  </div>
+                  <div className="p-2.5 rounded-xl border bg-muted/40">
+                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">10:00 PM – 2:00 AM • Fiesta</span>
+                    <span className="text-foreground">SB&K Social Dance Party with DJ Enrique</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground pt-1">
+                <span>Direct bookings & WhatsApp: <strong className="text-foreground">07969 633701</strong></span>
+                <span>Parking: <strong className="text-foreground">Avenue Rd (BH2 5SL) / West Hill (BH2 5PG)</strong></span>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 flex justify-center">
+              <div className="relative w-full max-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden border-2 border-rose-500/30 shadow-xl group">
+                <Image
+                  src="/images/halloween-latin-party-poster.png"
+                  alt="Halloween Latin Party Poster"
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 300px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Guest Maestros & Highlights */}
       <div className="grid gap-6 md:grid-cols-3">

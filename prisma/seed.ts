@@ -586,38 +586,38 @@ async function main() {
     include: { ticketTiers: true },
   });
 
-  // Event 3: BOH-Xplosion Monthly Saturday Gala & Masterclasses
-  const bohXplosionEvent = await prisma.event.create({
+  // Event 3: Halloween Fancy Dress Latin Party (Saturday 31st October 2026)
+  const halloweenEvent = await prisma.event.create({
     data: {
-      slug: "boh-xplosion-saturday-cuban-gala",
-      title: "BOH-Xplosion: Saturday Cuban Gala Night & Masterclasses",
+      slug: "halloween-fancy-dress-latin-party-2026",
+      title: "★ HALLOWEEN FANCY DRESS PARTY ★ — South Coast Cuban & Latin Night",
       description:
-        "Our monthly flagship 2-room Saturday dance party! Room 1: 100% Authentic Cuban Salsa, Timba & Son; Room 2: Sensual Bachata & Kizomba. Features an 8:00 PM Cuban Styling Masterclass, student showcase animations, and social dancing until 2:00 AM.",
+        "The South Coast’s premier Cuban Dance event, Halloween Fancy Dress Edition! Alex Spindlove is bringing The Bachata flavour to our Halloween party. A night dedicated to Cuban, Latin, Kizomba music & dance featuring top South Coast teachers Anna, Alex (BOH Studios) PLUS The Salsa Explosion team (Enrique, Moe Flex, Justyna, Arturas & Jim) with DJ Enrique SB&K Night. Best costume prizes: 1st Prize - 1 Made in Cuba Weekend, 2nd Prize - 2 Free Dance Classes, 3rd Prize - 1 Free Entry to Our Party!",
       venueName: "BOH Studios Bournemouth",
-      venueAddress: "104 Commercial Rd, Bournemouth, BH2 5LR",
-      startDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
-      endDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000),
-      guestArtists: ["Enrique Perez Valdes", "Moe Flex", "Justyna", "DJ Enrique"],
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2026-10-31T20:00:00Z"),
+      endDate: new Date("2026-11-01T02:00:00Z"),
+      guestArtists: ["Alex Spindlove", "Anna", "Enrique Perez Valdes", "Moe Flex", "DJ Enrique"],
       status: EventStatus.PUBLISHED,
       ticketTiers: {
         create: [
           {
-            name: "Full Masterclass & 2-Room Party Pass",
+            name: "Evening Party & All Classes Pass (8PM - 2AM)",
             description:
-              "8:00 PM Son Cubano & Timba Partnerwork Masterclass + 2-Room Fiesta entry with showcases until 2:00 AM.",
-            priceInCents: 2000,
-            totalCapacity: 80,
-            maxLeads: 40,
-            maxFollows: 40,
-            salesEndAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+              "8:15 PM Bachata Improvers onwards + 9:15 PM Rueda & Salsa classes + 10:00 PM SB&K Social Party until 2:00 AM + Costume competition entry.",
+            priceInCents: 1500,
+            totalCapacity: 120,
+            maxLeads: 60,
+            maxFollows: 60,
+            salesEndAt: new Date("2026-10-31T19:30:00Z"),
           },
           {
-            name: "Party Only Pass (9:30 PM - 2:00 AM)",
+            name: "SB&K Social Dance Party Only (10PM - 2AM)",
             description:
-              "Entry to the 2-room Saturday night social dance fiesta and live Cuban dance shows.",
-            priceInCents: 1200,
+              "Admission from 10:00 PM for Salsa, Bachata & Kizomba social dancing with DJ Enrique & costume prizes.",
+            priceInCents: 1000,
             totalCapacity: 150,
-            salesEndAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+            salesEndAt: new Date("2026-10-31T23:00:00Z"),
           },
         ],
       },
@@ -734,29 +734,29 @@ async function main() {
     });
   }
 
-  // Seed sample registrations for BOH-Xplosion Saturday Gala
-  const bohTier = bohXplosionEvent.ticketTiers[0];
-  if (bohTier) {
+  // Seed sample registrations for Halloween Latin Party
+  const halloweenTier = halloweenEvent.ticketTiers[0];
+  if (halloweenTier) {
     await prisma.eventRegistration.createMany({
       data: [
         {
           userId: student1.id,
-          eventId: bohXplosionEvent.id,
-          ticketTierId: bohTier.id,
+          eventId: halloweenEvent.id,
+          ticketTierId: halloweenTier.id,
           role: DanceRole.FOLLOW,
-          qrCodeHash: "SE-SAT-SOFIA-001",
+          qrCodeHash: "SE-HALLOWEEN-SOFIA-001",
           paymentStatus: TicketPaymentStatus.PAID,
-          amountPaidInCents: 2000,
+          amountPaidInCents: 1500,
           checkedIn: false,
         },
         {
           userId: student4.id,
-          eventId: bohXplosionEvent.id,
-          ticketTierId: bohTier.id,
+          eventId: halloweenEvent.id,
+          ticketTierId: halloweenTier.id,
           role: DanceRole.LEAD,
-          qrCodeHash: "SE-SAT-MATEO-002",
+          qrCodeHash: "SE-HALLOWEEN-MATEO-002",
           paymentStatus: TicketPaymentStatus.PAID,
-          amountPaidInCents: 2000,
+          amountPaidInCents: 1500,
           checkedIn: false,
         },
       ],

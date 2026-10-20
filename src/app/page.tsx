@@ -363,7 +363,7 @@ export default async function Home() {
                   Bournemouth Summer Cuban Salsa Congress 2026
                 </h2>
                 <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl">
-                  3 days of authentic Cuban masterclasses, Rueda de Casino, Havana nights social dancing, and world-class guest artists featuring Enrique Perez Valdes, Yaniel Castillo, and Elena Reyes at The Roundhouse Hotel & BOH Studios Bournemouth.
+                  3 days of authentic Cuban masterclasses, Rueda de Casino, Havana nights social dancing, and world-class guest artists featuring Enrique Perez Valdes, Moe Flex, and the Salsa Explosion team at The Roundhouse Hotel & BOH Studios Bournemouth.
                 </p>
               </div>
 

@@ -11,7 +11,7 @@ import {
 export const metadata = {
   title: "1-on-1 Private Lessons & Coaching | Salsa Explosion Bournemouth",
   description:
-    "Book bespoke private dance coaching with Cuban Maestro Enrique Perez Valdes, Yaniel Castillo, or Elena Reyes at BOH Studios Bournemouth.",
+    "Book bespoke private dance coaching with Cuban Maestro Enrique Perez Valdes, Moe Flex, Justyna, Arturas, or Jim at BOH Studios Bournemouth.",
 };
 
 export default async function PrivateLessonsPage() {

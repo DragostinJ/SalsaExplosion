@@ -65,17 +65,17 @@ async function main() {
     },
   });
 
-  // 3. Create Instructors (Yaniel Castillo & Elena Reyes)
+  // 3. Create Instructors (Moe Flex, Justyna, Arturas, Jim)
   const instructor1 = await prisma.user.create({
     data: {
       clerkId: "user_seed_instructor_001",
-      email: "yaniel@salsaexplosion.co.uk",
-      firstName: "Yaniel",
-      lastName: "Castillo",
-      avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-      bio: "Guest Cuban Maestro from Havana. Renowned international artist specializing in high-tempo Timba footwork, Afro-Cuban body isolation, and dynamic Casino turn patterns.",
-      specialty: "Cuban Timba Mastery & Afro-Cuban Body Isolation",
-      yearsDancing: 16,
+      email: "moe@salsaexplosion.co.uk",
+      firstName: "Moe",
+      lastName: "Flex",
+      avatarUrl: "/images/thursdays-moe-flex-poster.png",
+      bio: "London-based, world-renowned salsa instructor, choreographer, DJ, and Master of Ceremonies (MC). Active on the international Latin dance scene since 1998, he is widely celebrated as the 'General of MCs' and is famous for his infectious positive energy, humour, and 'Flex-fun' teaching style.",
+      specialty: "Flex-Fun Cuban Salsa, Musicality & Pasitos",
+      yearsDancing: 26,
       role: Role.INSTRUCTOR,
       currentLevel: DanceLevel.ADVANCED,
       preferredRole: DanceRole.LEAD,
@@ -85,16 +85,48 @@ async function main() {
   const instructor2 = await prisma.user.create({
     data: {
       clerkId: "user_seed_instructor_002",
-      email: "elena@salsaexplosion.co.uk",
-      firstName: "Elena",
-      lastName: "Reyes",
+      email: "justyna@salsaexplosion.co.uk",
+      firstName: "Justyna",
+      lastName: "Salsa",
       avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-      bio: "Resident Salsa Explosion instructor. Elena specializes in circular Follow frame tension, sensual Son Cubano styling, and authentic Havana social connection.",
-      specialty: "Casino Follow Styling & Son Cubano",
+      bio: "Resident Salsa Explosion instructor. Justyna specializes in Cuban follower body movement, frame elasticity, and sensual styling at BOH Studios.",
+      specialty: "Casino Follow Styling & Body Movement",
       yearsDancing: 12,
       role: Role.INSTRUCTOR,
       currentLevel: DanceLevel.ADVANCED,
       preferredRole: DanceRole.FOLLOW,
+    },
+  });
+
+  const instructor3 = await prisma.user.create({
+    data: {
+      clerkId: "user_seed_instructor_003",
+      email: "arturas@salsaexplosion.co.uk",
+      firstName: "Arturas",
+      lastName: "Casino",
+      avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+      bio: "Resident Salsa Explosion instructor specializing in crisp Cuban Casino turn patterns, dynamic Rueda de Casino calls, and clear leading fundamentals.",
+      specialty: "Cuban Casino Partnerwork & Rueda de Casino",
+      yearsDancing: 14,
+      role: Role.INSTRUCTOR,
+      currentLevel: DanceLevel.ADVANCED,
+      preferredRole: DanceRole.LEAD,
+    },
+  });
+
+  const instructor4 = await prisma.user.create({
+    data: {
+      clerkId: "user_seed_instructor_004",
+      email: "jim@salsaexplosion.co.uk",
+      firstName: "Jim",
+      lastName: "Salsa",
+      avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      bio: "Resident Salsa Explosion instructor teaching Tuesdays at Neptune Hall Boscombe and Thursdays at BOH Studios with Maestro Enrique.",
+      specialty: "Beginner Foundations & Cuban Clave Timing",
+      yearsDancing: 10,
+      role: Role.INSTRUCTOR,
+      currentLevel: DanceLevel.ADVANCED,
+      preferredRole: DanceRole.LEAD,
     },
   });
 
@@ -279,7 +311,7 @@ async function main() {
       maxFollows: 12,
       bookedCount: 4,
       creditCost: 1,
-      instructorId: instructor1.id,
+      instructorId: instructor2.id,
     },
   });
 
@@ -305,7 +337,7 @@ async function main() {
       maxFollows: 10,
       bookedCount: 3,
       creditCost: 1,
-      instructorId: instructor2.id,
+      instructorId: instructor3.id,
     },
   });
 
@@ -318,20 +350,20 @@ async function main() {
 
   const class3 = await prisma.classSession.create({
     data: {
-      title: "Timba Musicality & Advanced Contratiempo Knot Figures",
+      title: "Beginner Foundations & Cuban Clave Timing",
       description:
-        "High-tempo Cuban Timba phrasing, Rumba Guaguanco accents, Setenta con Alarde, and complex multi-turn combinations.",
+        "Beginners Cuban Salsa and rhythm foundation with Jim at Neptune Hall Boscombe.",
       style: DanceStyle.CUBAN_SALSA,
-      minLevel: DanceLevel.INTERMEDIATE,
+      minLevel: DanceLevel.BEGINNER,
       startTime: dayThree,
       endTime: dayThreeEnd,
-      room: "BOH Studios (Main Ballroom), Bournemouth",
-      maxCapacity: 16,
-      maxLeads: 8,
-      maxFollows: 8,
+      room: "Neptune Hall, Boscombe",
+      maxCapacity: 24,
+      maxLeads: 12,
+      maxFollows: 12,
       bookedCount: 2,
       creditCost: 1,
-      instructorId: instructor1.id,
+      instructorId: instructor4.id,
     },
   });
 
@@ -565,7 +597,7 @@ async function main() {
       venueAddress: "104 Commercial Rd, Bournemouth, BH2 5LR",
       startDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
       endDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000),
-      guestArtists: ["Enrique Perez Valdes", "Yaniel Castillo", "Elena Reyes"],
+      guestArtists: ["Enrique Perez Valdes", "Moe Flex", "Justyna", "DJ Enrique"],
       status: EventStatus.PUBLISHED,
       ticketTiers: {
         create: [
@@ -604,7 +636,7 @@ async function main() {
       venueAddress: "104 Commercial Rd, Bournemouth, BH2 5LR",
       startDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000),
-      guestArtists: ["Enrique Perez Valdes", "Elena Reyes"],
+      guestArtists: ["Enrique Perez Valdes", "Justyna", "Arturas", "DJ Enrique"],
       status: EventStatus.PUBLISHED,
       ticketTiers: {
         create: [

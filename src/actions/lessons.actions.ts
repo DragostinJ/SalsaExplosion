@@ -10,7 +10,7 @@ import { recordAuditLog } from "@/lib/audit-log";
 import { COACHING_INSTRUCTORS_CATALOG } from "@/lib/constants/coaching";
 
 const BookPrivateLessonSchema = z.object({
-  instructorId: z.enum(["enrique", "yaniel", "elena"]),
+  instructorId: z.enum(["enrique", "moe", "justyna", "arturas", "jim"]),
   focusTopic: z.string().min(2).max(100),
   packageType: z.enum(["SINGLE_1HR", "BLOCK_5HR"]),
   preferredSlot: z.string().min(2).max(100),

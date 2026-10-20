@@ -37,7 +37,7 @@ export function PrivateLessonsClient({
 }: PrivateLessonsClientProps) {
   const instructors = Object.values(COACHING_INSTRUCTORS_CATALOG);
   const [bookings, setBookings] = useState<SerializedPrivateLessonBooking[]>(initialBookings);
-  const [selectedInstructor, setSelectedInstructor] = useState<"enrique" | "yaniel" | "elena">("enrique");
+  const [selectedInstructor, setSelectedInstructor] = useState<"enrique" | "moe" | "justyna" | "arturas" | "jim">("enrique");
   const [selectedPackage, setSelectedPackage] = useState<"SINGLE" | "BLOCK">("SINGLE");
   const [dancerType, setDancerType] = useState<"SOLO" | "COUPLE">("SOLO");
   const [selectedTopic, setSelectedTopic] = useState<string>(COACHING_FOCUS_TOPICS[0]);

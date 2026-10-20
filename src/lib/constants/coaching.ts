@@ -1,5 +1,5 @@
 export interface CoachingInstructor {
-  id: "enrique" | "yaniel" | "elena";
+  id: "enrique" | "moe" | "justyna" | "arturas" | "jim";
   name: string;
   title: string;
   hourlyRatePounds: number;
@@ -10,7 +10,7 @@ export interface CoachingInstructor {
 }
 
 export const COACHING_INSTRUCTORS_CATALOG: Record<
-  "enrique" | "yaniel" | "elena",
+  "enrique" | "moe" | "justyna" | "arturas" | "jim",
   CoachingInstructor
 > = {
   enrique: {
@@ -27,23 +27,25 @@ export const COACHING_INSTRUCTORS_CATALOG: Record<
     ],
     bio: "Pioneered Cuban Salsa & Rueda in the UK for over 25 years. Tailored coaching for competitive dancers, social perfectionists, and wedding routines at BOH Studios.",
   },
-  yaniel: {
-    id: "yaniel",
-    name: "Yaniel Castillo",
-    title: "Guest Artist & Afro-Cuban Master",
-    hourlyRatePounds: 60,
-    blockRatePounds: 250,
+  moe: {
+    id: "moe",
+    name: "Moe Flex",
+    title: "International Master Instructor & Choreographer",
+    hourlyRatePounds: 65,
+    blockRatePounds: 275,
     specialties: [
-      "Afro-Cuban Rumba (Yambu & Guaguanco)",
-      "Orisha Body Isolations",
-      "Footwork Speed & Musicality",
+      "Flex-Fun Technique & Musicality",
+      "Pasitos & Body Isolation",
+      "Rueda de Casino Dynamic Styling",
+      "Stage Presence & Master of Ceremonies",
     ],
-    bio: "Internationally renowned Cuban artist bringing sacred Afro-Cuban movement and high-energy Timba body isolation to your dancing.",
+    bio: "London-based, world-renowned salsa instructor, choreographer, DJ, and Master of Ceremonies (MC). Active on the international Latin dance scene since 1998, he is widely celebrated as the 'General of MCs' and is famous for his infectious positive energy, humour, and 'Flex-fun' teaching style.",
+    avatarUrl: "/images/thursdays-moe-flex-poster.png",
   },
-  elena: {
-    id: "elena",
-    name: "Elena Reyes",
-    title: "Senior Academy Instructor",
+  justyna: {
+    id: "justyna",
+    name: "Justyna",
+    title: "Resident Academy Instructor",
     hourlyRatePounds: 50,
     blockRatePounds: 220,
     specialties: [
@@ -51,7 +53,33 @@ export const COACHING_INSTRUCTORS_CATALOG: Record<
       "Guapea Frame Sensitivity",
       "Beginner-to-Social Confidence",
     ],
-    bio: "Specializes in developing graceful styling, fluid armwork, and rapid confidence for beginners stepping onto the Bournemouth social floor.",
+    bio: "Resident Salsa Explosion instructor specializing in fluid Cuban Salsa partnerwork, follower body movement, and social styling at BOH Studios.",
+  },
+  arturas: {
+    id: "arturas",
+    name: "Arturas",
+    title: "Resident Academy Instructor",
+    hourlyRatePounds: 50,
+    blockRatePounds: 220,
+    specialties: [
+      "Cuban Casino Partnerwork",
+      "Rueda de Casino Precision",
+      "Leading Clarity & Turn Mechanics",
+    ],
+    bio: "Resident Salsa Explosion instructor focused on Cuban Casino structure, dynamic leading tension, and clear footwork fundamentals.",
+  },
+  jim: {
+    id: "jim",
+    name: "Jim",
+    title: "Resident Academy Instructor",
+    hourlyRatePounds: 50,
+    blockRatePounds: 220,
+    specialties: [
+      "Beginner Foundations & Clave Timing",
+      "Tuesday Cuban Partnerwork (Neptune Hall)",
+      "Social Floor Confidence",
+    ],
+    bio: "Resident Salsa Explosion instructor teaching Tuesdays at Neptune Hall Boscombe and Thursdays at BOH Studios with Maestro Enrique.",
   },
 };
 

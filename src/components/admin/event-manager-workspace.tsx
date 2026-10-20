@@ -25,6 +25,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { LiveQrCameraScanner } from "@/components/admin/live-qr-camera-scanner";
 
 export interface AdminEventRegistrationItem {
   id: string;
@@ -270,6 +271,13 @@ export function EventManagerWorkspace({
             </CardHeader>
 
             <CardContent className="space-y-4">
+              <LiveQrCameraScanner
+                onDetected={(code) => {
+                  setSearchQrOrName(code);
+                }}
+                buttonLabel="Open Camera Pass Scanner"
+              />
+
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <input

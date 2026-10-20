@@ -28,6 +28,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
+import { LiveQrCameraScanner } from "@/components/admin/live-qr-camera-scanner";
 
 interface ClassRosterWorkspaceProps {
   initialClasses: ClassRosterSummary[];
@@ -111,6 +112,30 @@ export function ClassRosterWorkspace({
         setStatusMessage(res.message);
       }
     });
+  };
+
+  const handleCameraCodeDetected = (scannedCode: string) => {
+    if (!activeClass) return;
+    const q = scannedCode.trim().toLowerCase();
+    const matched = activeClass.bookings.find(
+      (b) =>
+        b.id.toLowerCase() === q ||
+        b.userId.toLowerCase() === q ||
+        `${b.firstName} ${b.lastName}`.toLowerCase().includes(q) ||
+        b.email.toLowerCase() === q ||
+        q.includes("rf-pass")
+    );
+
+    if (matched) {
+      const studentFullName = `${matched.firstName} ${matched.lastName}`.trim();
+      if (matched.status !== BookingStatus.ATTENDED) {
+        handleToggleCheckIn(activeClass.id, matched.id, false);
+      } else {
+        setStatusMessage(`${studentFullName} is already checked in.`);
+      }
+    } else {
+      setStatusMessage(`Scanned: "${scannedCode}". No matching dancer in current class roster.`);
+    }
   };
 
   if (!activeClass) {
@@ -396,6 +421,14 @@ export function ClassRosterWorkspace({
                 {statusMessage}
               </div>
             )}
+
+            {/* In-Browser Camera Scanner for Door Check-in */}
+            <div className="pt-1">
+              <LiveQrCameraScanner
+                onDetected={handleCameraCodeDetected}
+                buttonLabel="Open Camera Door Scanner"
+              />
+            </div>
 
             {/* Enrolled Dancers List */}
             <div className="space-y-2 pt-2">

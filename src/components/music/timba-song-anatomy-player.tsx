@@ -506,6 +506,7 @@ export function TimbaSongAnatomyPlayer({
           </div>
           <div className="relative aspect-video w-full max-w-xl mx-auto rounded-xl overflow-hidden shadow-lg bg-black">
             <iframe
+              key={selectedSongId}
               id={`youtube-iframe-${selectedSongId}`}
               data-testid="youtube-iframe"
               title={`Official recording for ${activeSong.title}`}

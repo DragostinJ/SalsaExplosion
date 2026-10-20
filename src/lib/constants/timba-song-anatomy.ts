@@ -212,7 +212,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     claveType: "2-3 Rumba",
     difficultyLevel: "Intermediate",
     durationSeconds: 292,
-    youtubeVideoId: "f5L848r_jW0",
+    youtubeVideoId: "8GXd6UuNJ7A",
     spotifyOrYoutubeEmbedUrl:
       "https://open.spotify.com/search/El%20Nino%20y%20La%20Verdad%20La%20Cosa%20Mala",
     segments: [

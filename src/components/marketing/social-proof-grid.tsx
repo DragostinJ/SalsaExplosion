@@ -400,7 +400,7 @@ export function SocialProofGrid() {
             <Button
               asChild
               size="lg"
-              className="w-full sm:w-auto bg-gradient-to-r from-pink-600 via-rose-600 to-amber-600 hover:from-pink-700 hover:to-amber-700 text-white font-bold text-xs sm:text-sm shadow-md"
+              className="w-full sm:w-auto bg-gradient-to-r from-[#833ab4] via-[#e1306c] to-[#f77737] hover:brightness-110 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all"
             >
               <a
                 href="https://www.instagram.com/salsaexplosion/"
@@ -414,16 +414,15 @@ export function SocialProofGrid() {
             </Button>
             <Button
               asChild
-              variant="outline"
               size="lg"
-              className="w-full sm:w-auto text-xs sm:text-sm font-semibold border-blue-500/30 text-blue-700 dark:text-blue-300 hover:bg-blue-500/10"
+              className="w-full sm:w-auto bg-[#1877F2] hover:bg-[#166FE5] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all"
             >
               <a
                 href="https://www.facebook.com/salsaexplosion"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Users className="mr-2 h-4 w-4 text-blue-600" />
+                <Users className="mr-2 h-4 w-4 text-white" />
                 Facebook Community Page
                 <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
               </a>

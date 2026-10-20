@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   ArrowRight,
   Video,
+  ExternalLink,
 } from "lucide-react";
 import { Role } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -346,6 +347,38 @@ export default async function AboutPage() {
             className="text-zinc-950 font-bold text-sm bg-white hover:bg-zinc-100"
           >
             <Link href="/pricing">View Class Passes</Link>
+          </Button>
+        </div>
+
+        {/* Social channels */}
+        <div className="pt-4 border-t border-white/20 flex flex-wrap items-center justify-center gap-3">
+          <Button
+            asChild
+            size="sm"
+            className="bg-gradient-to-r from-[#833ab4] via-[#e1306c] to-[#f77737] hover:brightness-110 text-white font-extrabold text-xs shadow-md"
+          >
+            <a
+              href="https://www.instagram.com/salsaexplosion/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Follow @salsaexplosion
+              <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+            </a>
+          </Button>
+          <Button
+            asChild
+            size="sm"
+            className="bg-[#1877F2] hover:bg-[#166FE5] text-white font-extrabold text-xs shadow-md"
+          >
+            <a
+              href="https://www.facebook.com/salsaexplosion"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Facebook Community Page
+              <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
+            </a>
           </Button>
         </div>
       </section>

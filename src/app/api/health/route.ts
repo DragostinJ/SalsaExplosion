@@ -3,6 +3,13 @@ import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
+let lastPruneTimestamp = 0;
+const PRUNE_INTERVAL_MS = 60 * 60 * 1000; // 1 hour throttle
+
+export function resetHealthCheckPruneThrottleForTests(): void {
+  lastPruneTimestamp = 0;
+}
+
 export async function GET() {
   const start = performance.now();
   try {
@@ -11,20 +18,24 @@ export async function GET() {
     const latencyMs = Math.round(performance.now() - start);
 
     // 2. Storage pruning guard: clean up ProcessedWebhookEvent records older than 60 days
-    // to preserve free-tier 500MB storage limit over time.
-    const sixtyDaysAgo = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000);
+    // Throttled to at most once per hour to prevent table-locking on frequent monitoring pings
     let prunedWebhookEventsCount = 0;
-    try {
-      const deleteResult = await prisma.processedWebhookEvent.deleteMany({
-        where: {
-          createdAt: {
-            lt: sixtyDaysAgo,
+    const now = Date.now();
+    if (now - lastPruneTimestamp >= PRUNE_INTERVAL_MS) {
+      lastPruneTimestamp = now;
+      const sixtyDaysAgo = new Date(now - 60 * 24 * 60 * 60 * 1000);
+      try {
+        const deleteResult = await prisma.processedWebhookEvent.deleteMany({
+          where: {
+            createdAt: {
+              lt: sixtyDaysAgo,
+            },
           },
-        },
-      });
-      prunedWebhookEventsCount = deleteResult.count;
-    } catch (pruneErr) {
-      console.warn("[HealthCheck] Webhook event cleanup non-critical error:", pruneErr);
+        });
+        prunedWebhookEventsCount = deleteResult.count;
+      } catch (pruneErr) {
+        console.warn("[HealthCheck] Webhook event cleanup non-critical error:", pruneErr);
+      }
     }
 
     return NextResponse.json(
@@ -46,6 +57,15 @@ export async function GET() {
   } catch (error) {
     const latencyMs = Math.round(performance.now() - start);
     console.error("[HealthCheck Failed]:", error);
+
+    // In production, NEVER expose internal database connection strings, credentials, or hostnames
+    const errorMessage =
+      process.env.NODE_ENV === "production"
+        ? "Database connection unavailable"
+        : error instanceof Error
+        ? error.message
+        : "Database connection failed";
+
     return NextResponse.json(
       {
         status: "degraded",
@@ -53,7 +73,7 @@ export async function GET() {
         latencyMs,
         tier: "bootstrap-zero-cost",
         timestamp: new Date().toISOString(),
-        error: error instanceof Error ? error.message : "Database connection failed",
+        error: errorMessage,
       },
       {
         status: 503,

@@ -12,7 +12,7 @@ const JoinWaitlistSchema = z.object({
 });
 
 const InviteBypassSchema = z.object({
-  partnerEmail: z.string().email("Please provide a valid email address."),
+  partnerEmail: z.string().trim().toLowerCase().email("Please provide a valid email address."),
   role: z.nativeEnum(DanceRole),
 });
 
@@ -107,12 +107,38 @@ export async function invitePartnerBypassAction(rawInput: {
       }
 
       const { partnerEmail, role } = parsed.data;
+      const normalizedPartnerEmail = partnerEmail.trim().toLowerCase();
+
+      // Guard: prevent self-invitation bypass
+      if (user.email && user.email.trim().toLowerCase() === normalizedPartnerEmail) {
+        return {
+          success: false,
+          error: "You cannot invite your own email address as a dance partner.",
+        };
+      }
+
+      // Guard: prevent duplicate paired entries / race conditions
+      const existingPaired = await prisma.partnerWaitlistEntry.findFirst({
+        where: {
+          userId: user.id,
+          partnerEmail: normalizedPartnerEmail,
+          status: "PAIRED",
+        },
+      });
+
+      if (existingPaired) {
+        return {
+          success: true,
+          data: { entryId: existingPaired.id, partnerEmail: normalizedPartnerEmail },
+          message: `You already have an active paired reservation with ${partnerEmail}.`,
+        };
+      }
 
       const entry = await prisma.partnerWaitlistEntry.create({
         data: {
           userId: user.id,
           role,
-          partnerEmail,
+          partnerEmail: normalizedPartnerEmail,
           status: "PAIRED",
         },
       });

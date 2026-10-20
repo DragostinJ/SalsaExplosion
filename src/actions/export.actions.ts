@@ -96,8 +96,8 @@ export async function exportRevenueLedgerCsvAction(): Promise<CsvExportResult> {
         csvContent,
       };
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to export revenue ledger";
-      return { success: false, filename: "", error: message };
+      console.error("[exportRevenueLedgerCsvAction]", err);
+      return { success: false, filename: "", error: "Failed to generate CSV export. Please try again." };
     }
   });
 }
@@ -166,8 +166,8 @@ export async function exportStudentRosterCsvAction(): Promise<CsvExportResult> {
         csvContent,
       };
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to export student roster";
-      return { success: false, filename: "", error: message };
+      console.error("[exportStudentRosterCsvAction]", err);
+      return { success: false, filename: "", error: "Failed to generate CSV export. Please try again." };
     }
   });
 }
@@ -257,8 +257,8 @@ export async function exportCongressTicketHoldersCsvAction(): Promise<CsvExportR
         csvContent,
       };
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to export congress ticket holders";
-      return { success: false, filename: "", error: message };
+      console.error("[exportCongressTicketHoldersCsvAction]", err);
+      return { success: false, filename: "", error: "Failed to generate CSV export. Please try again." };
     }
   });
 }
@@ -357,8 +357,8 @@ export async function exportPrivateCoachingAndMerchCsvAction(): Promise<CsvExpor
         csvContent,
       };
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to export coaching and merch orders";
-      return { success: false, filename: "", error: message };
+      console.error("[exportPrivateCoachingAndMerchCsvAction]", err);
+      return { success: false, filename: "", error: "Failed to generate CSV export. Please try again." };
     }
   });
 }

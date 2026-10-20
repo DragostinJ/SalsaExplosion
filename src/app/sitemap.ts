@@ -7,7 +7,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/dashboard/schedule",
+    "/dashboard/progression",
     "/events",
+    "/events/made-in-cuba-dance-weekend-2026",
     "/pricing",
     "/private-lessons",
     "/venues",

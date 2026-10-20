@@ -37,6 +37,8 @@ const STORAGE_KEY = "salsa_explosion_curriculum_progress_v1";
 
 const LEVELS: CurriculumLevel[] = ["Beginner", "Improver", "Intermediate", "Advanced"];
 
+const FIRST_NIGHT_IDS = new Set(["beg-solo-1", "beg-pw-1", "beg-pw-2"]);
+
 function subscribeProgress(callback: () => void) {
   if (typeof window === "undefined") return () => {};
   window.addEventListener("storage", callback);
@@ -68,6 +70,7 @@ export function CubanCurriculumSkillTree({
   const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel>(defaultLevel);
   const [selectedPillar, setSelectedPillar] = useState<CurriculumPillar | "ALL">("ALL");
   const [searchQuery, setSearchQuery] = useState("");
+  const [focusFirstNight, setFocusFirstNight] = useState(false);
 
   const rawProgress = useSyncExternalStore(
     subscribeProgress,
@@ -99,8 +102,11 @@ export function CubanCurriculumSkillTree({
     }
   };
 
-  // Filter skills by level, pillar, and search query
+  // Filter skills by level, pillar, search query, or first night focus mode
   const filteredSkills = useMemo(() => {
+    if (focusFirstNight) {
+      return CUBAN_CURRICULUM_DATA.filter((skill) => FIRST_NIGHT_IDS.has(skill.id));
+    }
     const q = searchQuery.trim().toLowerCase();
     return CUBAN_CURRICULUM_DATA.filter((skill) => {
       const matchesLevel = skill.level === selectedLevel;
@@ -114,7 +120,7 @@ export function CubanCurriculumSkillTree({
 
       return matchesLevel && matchesPillar && matchesSearch;
     });
-  }, [selectedLevel, selectedPillar, searchQuery]);
+  }, [selectedLevel, selectedPillar, searchQuery, focusFirstNight]);
 
   // Reference songs for the selected level
   const levelSongs = useMemo(() => {
@@ -210,6 +216,97 @@ export function CubanCurriculumSkillTree({
       </CardHeader>
 
       <CardContent className="space-y-6">
+        {/* Reassurance Banner from Maestro Enrique */}
+        <div
+          data-testid="curriculum-reassurance-banner"
+          className="rounded-2xl border-2 border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-background to-orange-500/10 p-5 sm:p-6 space-y-4"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+            <div className="space-y-1.5 max-w-2xl">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge className="bg-amber-600 text-white font-black text-[11px] tracking-wide uppercase px-2.5 py-0.5">
+                  Maestro Enrique&apos;s Guidance
+                </Badge>
+                <span className="text-xs font-bold text-amber-800 dark:text-amber-300">
+                  Relax &amp; Breathe • Zero Exam Pressure
+                </span>
+              </div>
+              <h3 className="text-base sm:text-lg font-black text-foreground">
+                Don&apos;t feel overwhelmed! Cuban Salsa is a social conversation, not a school exam.
+              </h3>
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                You do <strong>not</strong> need to learn everything on this page from day one. In your first classes at BOH Studios, our teachers only focus on 3 natural movements. The rest of this syllabus is a long-term curiosity library that unfolds over months and years of social dancing!
+              </p>
+            </div>
+
+            {/* Quick Toggle Button */}
+            <Button
+              type="button"
+              variant={focusFirstNight ? "default" : "outline"}
+              size="sm"
+              onClick={() => {
+                const next = !focusFirstNight;
+                setFocusFirstNight(next);
+                if (next) {
+                  setSelectedLevel("Beginner");
+                  setSelectedPillar("ALL");
+                }
+              }}
+              className={`shrink-0 font-extrabold text-xs transition-all ${
+                focusFirstNight
+                  ? "bg-amber-600 text-white hover:bg-amber-700 shadow-sm"
+                  : "border-amber-500/50 bg-background text-foreground hover:bg-amber-500/10"
+              }`}
+            >
+              {focusFirstNight ? "✓ Focus Mode Active (3 Moves)" : "Focus Mode: Show Only My First-Night Essentials (3 Moves)"}
+            </Button>
+          </div>
+
+          {/* First-Night 3 Essentials Spotlight Cards */}
+          <div className="pt-2 border-t border-amber-500/20">
+            <span className="text-[11px] font-black uppercase tracking-wider text-amber-900 dark:text-amber-200 block mb-2">
+              Your First Night at BOH Studios (The Only 3 Things You Need):
+            </span>
+            <div className="grid gap-2 sm:grid-cols-3 text-xs">
+              <div className="rounded-xl border border-amber-500/20 bg-card/80 p-3 space-y-1">
+                <div className="flex items-center gap-1.5 font-bold text-foreground">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-900 dark:text-amber-200">
+                    1
+                  </span>
+                  <span>Paso Básico</span>
+                </div>
+                <p className="text-[11px] text-muted-foreground leading-snug">
+                  Stepping relaxed on beats 1-2-3, 5-6-7. Just feeling the rhythm in your feet.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-amber-500/20 bg-card/80 p-3 space-y-1">
+                <div className="flex items-center gap-1.5 font-bold text-foreground">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-900 dark:text-amber-200">
+                    2
+                  </span>
+                  <span>Guapea</span>
+                </div>
+                <p className="text-[11px] text-muted-foreground leading-snug">
+                  The friendly open-position push &amp; pull. Connecting palm-to-palm with your partner.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-amber-500/20 bg-card/80 p-3 space-y-1">
+                <div className="flex items-center gap-1.5 font-bold text-foreground">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-900 dark:text-amber-200">
+                    3
+                  </span>
+                  <span>Dile Que No</span>
+                </div>
+                <p className="text-[11px] text-muted-foreground leading-snug">
+                  Rotating smoothly as a couple to reset the circle. That is literally all you need to start!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* 1. Level Navigation Tabs */}
         <div className="space-y-2">
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground block">
@@ -224,7 +321,10 @@ export function CubanCurriculumSkillTree({
                   type="button"
                   role="tab"
                   aria-selected={isSelected}
-                  onClick={() => setSelectedLevel(lvl)}
+                  onClick={() => {
+                    setSelectedLevel(lvl);
+                    setFocusFirstNight(false);
+                  }}
                   className={`rounded-2xl border p-3 text-left transition-all min-h-[58px] flex flex-col justify-between ${
                     isSelected
                       ? "border-primary-base bg-primary-base/10 shadow-xs ring-2 ring-primary-base/30 text-foreground"

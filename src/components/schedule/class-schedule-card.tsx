@@ -455,14 +455,11 @@ export function ClassScheduleCard({
               />
             </div>
             <div className="flex items-center justify-between text-[11px] text-muted-foreground px-0.5">
-              <span className="flex items-center gap-1 font-semibold text-blue-800 dark:text-blue-300">
+              <span className="flex items-center gap-1.5 font-semibold text-blue-700 dark:text-blue-300">
                 <span className="h-2 w-2 rounded-full bg-blue-600" />
                 {optimisticState.leadsCount} Leads
               </span>
-              <span className="text-[10px] uppercase tracking-wider font-extrabold text-foreground">
-                50/50 Balance Algorithm
-              </span>
-              <span className="flex items-center gap-1 font-semibold text-rose-800 dark:text-rose-300">
+              <span className="flex items-center gap-1.5 font-semibold text-rose-700 dark:text-rose-300">
                 <span className="h-2 w-2 rounded-full bg-rose-600" />
                 {optimisticState.followsCount} Follows
               </span>
@@ -471,51 +468,72 @@ export function ClassScheduleCard({
 
           {/* Partner Role Selector */}
           {!isSoloClass && !optimisticState.isBooked && isLevelUnlocked && (
-            <div className="pt-2">
-              <p className="mb-1.5 text-xs font-medium text-muted-foreground">
-                Select Dance Role:
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  disabled={isPending || isLeadFull}
-                  onClick={() => setSelectedRole(DanceRole.LEAD)}
-                  className={`flex items-center justify-between rounded-lg border-2 px-3 py-2 text-xs font-bold transition-all min-h-[38px] ${
-                    selectedRole === DanceRole.LEAD
-                      ? "border-primary-base bg-primary-base text-white shadow-xs ring-2 ring-primary-base/20"
-                      : "border-border bg-card text-foreground hover:bg-muted"
-                  } ${isLeadFull ? "cursor-not-allowed opacity-50" : ""}`}
-                >
-                  <span className="font-extrabold tracking-wide">Lead</span>
-                  {session.maxLeads !== null && (
-                    <span className={`text-[11px] font-bold ${selectedRole === DanceRole.LEAD ? "text-white" : "text-muted-foreground"}`}>
-                      {isLeadFull
-                        ? "Full"
-                        : `${session.maxLeads - optimisticState.leadsCount} left`}
-                    </span>
-                  )}
-                </button>
+            <div className="grid grid-cols-2 gap-2 pt-1.5">
+              <button
+                type="button"
+                disabled={isPending || isLeadFull}
+                onClick={() => setSelectedRole(DanceRole.LEAD)}
+                className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
+                  selectedRole === DanceRole.LEAD
+                    ? "border-blue-600 bg-blue-600 text-white shadow-xs ring-2 ring-blue-600/20"
+                    : "border-blue-500/25 bg-blue-500/[0.04] text-foreground hover:bg-blue-500/10 hover:border-blue-500/40"
+                } ${isLeadFull ? "cursor-not-allowed opacity-50" : ""}`}
+              >
+                <span className="flex items-center gap-1.5 font-extrabold tracking-wide">
+                  <span
+                    className={`h-2 w-2 rounded-full ${
+                      selectedRole === DanceRole.LEAD ? "bg-white" : "bg-blue-600"
+                    }`}
+                  />
+                  Lead
+                </span>
+                {session.maxLeads !== null && (
+                  <span
+                    className={`text-[11px] font-bold ${
+                      selectedRole === DanceRole.LEAD
+                        ? "text-white/90"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {isLeadFull
+                      ? "Full"
+                      : `${session.maxLeads - optimisticState.leadsCount} left`}
+                  </span>
+                )}
+              </button>
 
-                <button
-                  type="button"
-                  disabled={isPending || isFollowFull}
-                  onClick={() => setSelectedRole(DanceRole.FOLLOW)}
-                  className={`flex items-center justify-between rounded-lg border-2 px-3 py-2 text-xs font-bold transition-all min-h-[38px] ${
-                    selectedRole === DanceRole.FOLLOW
-                      ? "border-secondary-base bg-secondary-base text-white shadow-xs ring-2 ring-secondary-base/20"
-                      : "border-border bg-card text-foreground hover:bg-muted"
-                  } ${isFollowFull ? "cursor-not-allowed opacity-50" : ""}`}
-                >
-                  <span className="font-extrabold tracking-wide">Follow</span>
-                  {session.maxFollows !== null && (
-                    <span className={`text-[11px] font-bold ${selectedRole === DanceRole.FOLLOW ? "text-white" : "text-muted-foreground"}`}>
-                      {isFollowFull
-                        ? "Full"
-                        : `${session.maxFollows - optimisticState.followsCount} left`}
-                    </span>
-                  )}
-                </button>
-              </div>
+              <button
+                type="button"
+                disabled={isPending || isFollowFull}
+                onClick={() => setSelectedRole(DanceRole.FOLLOW)}
+                className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
+                  selectedRole === DanceRole.FOLLOW
+                    ? "border-rose-600 bg-rose-600 text-white shadow-xs ring-2 ring-rose-600/20"
+                    : "border-rose-500/25 bg-rose-500/[0.04] text-foreground hover:bg-rose-500/10 hover:border-rose-500/40"
+                } ${isFollowFull ? "cursor-not-allowed opacity-50" : ""}`}
+              >
+                <span className="flex items-center gap-1.5 font-extrabold tracking-wide">
+                  <span
+                    className={`h-2 w-2 rounded-full ${
+                      selectedRole === DanceRole.FOLLOW ? "bg-white" : "bg-rose-600"
+                    }`}
+                  />
+                  Follow
+                </span>
+                {session.maxFollows !== null && (
+                  <span
+                    className={`text-[11px] font-bold ${
+                      selectedRole === DanceRole.FOLLOW
+                        ? "text-white/90"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {isFollowFull
+                      ? "Full"
+                      : `${session.maxFollows - optimisticState.followsCount} left`}
+                  </span>
+                )}
+              </button>
             </div>
           )}
         </div>
@@ -619,13 +637,13 @@ export function ClassScheduleCard({
             </div>
           )
         ) : isGuest ? (
-          <Button asChild className="w-full bg-primary-base hover:bg-primary-hover text-white font-extrabold shadow-md transition-colors min-h-11 h-auto py-2.5 px-3 whitespace-normal text-center leading-tight">
+          <Button asChild className="w-full bg-primary-base hover:bg-primary-hover text-white font-extrabold shadow-md transition-colors h-10 rounded-xl text-center leading-tight">
             <Link href={`/sign-in?redirect_url=${encodeURIComponent("/dashboard/schedule")}`}>
               <span>Sign In to Book • Free Welcome Pass</span>
             </Link>
           </Button>
         ) : !canAfford ? (
-          <Button asChild variant="secondary" className="w-full">
+          <Button asChild variant="secondary" className="w-full h-10 rounded-xl font-bold">
             <Link href="/pricing">
               Top Up Credits ({session.creditCost} Required)
             </Link>
@@ -635,7 +653,13 @@ export function ClassScheduleCard({
             type="button"
             disabled={isPending || isSelectedRoleFull || session.isCancelled}
             onClick={attemptBook}
-            className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold shadow-md transition-colors"
+            className={`w-full font-bold shadow-md transition-colors h-10 rounded-xl text-white ${
+              selectedRole === DanceRole.LEAD
+                ? "bg-blue-600 hover:bg-blue-700"
+                : selectedRole === DanceRole.FOLLOW
+                  ? "bg-rose-600 hover:bg-rose-700"
+                  : "bg-primary-base hover:bg-primary-hover"
+            }`}
           >
             {isPending ? (
               <>

@@ -16,9 +16,9 @@ export default function CubanMusicPage() {
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
         <Badge
           variant="outline"
-          className="border-amber-500/30 bg-amber-500/10 text-amber-800 dark:text-amber-300 font-semibold px-3 py-1 flex items-center gap-1.5"
+          className="border-border bg-muted/40 text-muted-foreground font-semibold px-3 py-1 flex items-center gap-1.5"
         >
-          <Headphones className="h-3.5 w-3.5 text-amber-600" />
+          <Headphones className="h-3.5 w-3.5 text-primary-base" />
           Havana Social Floor Playlists
         </Badge>
       </div>
@@ -30,7 +30,7 @@ export default function CubanMusicPage() {
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Cuban Music & Social Playlist Hub
             </h1>
-            <Badge className="bg-amber-500 text-zinc-950 font-bold">
+            <Badge className="bg-primary-base text-white font-bold">
               <Music className="mr-1 h-3.5 w-3.5" />
               BPM & Clave Guide
             </Badge>

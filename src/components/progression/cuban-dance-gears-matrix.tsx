@@ -15,6 +15,7 @@ import {
   TimbaSongPhase,
   DanceGearShift,
 } from "@/lib/constants/cuban-curriculum-2027";
+import { TimbaSongAnatomyPlayer } from "@/components/music/timba-song-anatomy-player";
 
 interface CubanDanceGearsMatrixProps {
   className?: string;
@@ -308,6 +309,11 @@ export function CubanDanceGearsMatrix({
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* 3. Interactive Song Anatomy Player */}
+        <div className="pt-4 border-t">
+          <TimbaSongAnatomyPlayer initialSongId="la-cosa-mala" />
         </div>
       </div>
     </section>

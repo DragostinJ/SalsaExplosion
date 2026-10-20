@@ -10,6 +10,7 @@ import {
   Search,
   Radio,
   Sparkles,
+  Compass,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,10 +20,12 @@ import {
   CurriculumReferenceSong,
   CurriculumLevel,
 } from "@/lib/constants/cuban-curriculum-2027";
+import { TimbaSongAnatomyPlayer } from "@/components/music/timba-song-anatomy-player";
 
 export function CubanMusicHubClient() {
   const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel | "ALL">("ALL");
   const [searchQuery, setSearchQuery] = useState("");
+  const [featuredSongId, setFeaturedSongId] = useState<string>("me-dicen-cuba");
 
   const filteredTracks = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
@@ -43,10 +46,15 @@ export function CubanMusicHubClient() {
 
   return (
     <div className="space-y-8">
+      {/* Interactive Timba Song Anatomy Trainer (Featured at Top of /music) */}
+      <div id="timba-song-anatomy-section">
+        <TimbaSongAnatomyPlayer key={featuredSongId} initialSongId={featuredSongId} />
+      </div>
+
       {/* Musicality Guide from Maestro Enrique */}
-      <div className="rounded-3xl border border-amber-500/30 bg-gradient-to-r from-amber-500/[0.08] via-orange-500/[0.04] to-background p-6 sm:p-8 space-y-4">
+      <div className="rounded-3xl border border-border/80 bg-muted/20 p-6 sm:p-8 space-y-4">
         <div className="flex items-center gap-2">
-          <Badge className="bg-amber-600 text-white font-bold text-xs">
+          <Badge className="bg-primary-base text-white font-bold text-xs">
             Maestro Enrique&apos;s Musicality Masterclass
           </Badge>
           <span className="text-xs text-muted-foreground font-semibold">
@@ -59,9 +67,9 @@ export function CubanMusicHubClient() {
         </h2>
 
         <div className="grid gap-4 md:grid-cols-3 pt-2 text-xs text-muted-foreground leading-relaxed">
-          <div className="rounded-2xl border bg-background/80 p-4 space-y-2">
+          <div className="rounded-2xl border bg-card p-4 space-y-2">
             <span className="font-bold text-foreground flex items-center gap-1.5">
-              <Headphones className="h-4 w-4 text-amber-600" />
+              <Headphones className="h-4 w-4 text-primary-base" />
               1. Listen for the Piano Montuno
             </span>
             <p>
@@ -69,7 +77,7 @@ export function CubanMusicHubClient() {
             </p>
           </div>
 
-          <div className="rounded-2xl border bg-background/80 p-4 space-y-2">
+          <div className="rounded-2xl border bg-card p-4 space-y-2">
             <span className="font-bold text-foreground flex items-center gap-1.5">
               <Volume2 className="h-4 w-4 text-rose-600" />
               2. Feel the Conga Slap
@@ -79,7 +87,7 @@ export function CubanMusicHubClient() {
             </p>
           </div>
 
-          <div className="rounded-2xl border bg-background/80 p-4 space-y-2">
+          <div className="rounded-2xl border bg-card p-4 space-y-2">
             <span className="font-bold text-foreground flex items-center gap-1.5">
               <Flame className="h-4 w-4 text-orange-600" />
               3. The Singer&apos;s Breath
@@ -102,7 +110,7 @@ export function CubanMusicHubClient() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by track, artist, instrument (e.g. Batá, Campana), or subgenre..."
-              className="w-full rounded-xl border bg-background pl-9 pr-4 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full rounded-xl border bg-background pl-9 pr-4 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary-base"
             />
           </div>
 
@@ -118,7 +126,7 @@ export function CubanMusicHubClient() {
             onClick={() => setSelectedLevel("ALL")}
             className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
               selectedLevel === "ALL"
-                ? "bg-amber-600 text-white shadow-xs"
+                ? "bg-foreground text-background shadow-xs"
                 : "border bg-card text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -131,7 +139,7 @@ export function CubanMusicHubClient() {
               onClick={() => setSelectedLevel(lvl)}
               className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
                 selectedLevel === lvl
-                  ? "bg-amber-600 text-white shadow-xs"
+                  ? "bg-foreground text-background shadow-xs"
                   : "border bg-card text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -242,7 +250,7 @@ export function CubanMusicHubClient() {
                         <Badge
                           key={gear}
                           variant="outline"
-                          className="text-[10px] font-semibold border-amber-500/30 bg-amber-500/5 text-amber-800 dark:text-amber-300"
+                          className="text-[10px] font-semibold border-border bg-muted/40 text-foreground/80"
                         >
                           {gear}
                         </Badge>
@@ -270,26 +278,50 @@ export function CubanMusicHubClient() {
                 </div>
 
                 {/* Footer Action */}
-                <div className="pt-3 border-t flex items-center justify-between mt-3">
+                <div className="pt-3 border-t flex flex-wrap items-center justify-between gap-2 mt-3">
                   <span className="text-[11px] text-muted-foreground font-medium flex items-center gap-1">
                     <Radio className="h-3.5 w-3.5 text-emerald-600" />
-                    BOH Studios Social Playlist
+                    BOH Studios Playlist
                   </span>
 
-                  <Button
-                    asChild
-                    size="sm"
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
-                  >
-                    <a
-                      href={track.spotifySearchUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  <div className="flex items-center gap-2">
+                    {(track.id === "ref-beg-1" || track.id === "ref-int-1") && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          const targetId =
+                            track.id === "ref-beg-1"
+                              ? "me-dicen-cuba"
+                              : "la-cosa-mala";
+                          setFeaturedSongId(targetId);
+                          document
+                            .getElementById("timba-song-anatomy-section")
+                            ?.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className="h-8 text-xs font-bold border-primary-base/40 text-primary-base hover:bg-primary-base/10"
+                      >
+                        <Compass className="mr-1.5 h-3.5 w-3.5" />
+                        Song Map ↑
+                      </Button>
+                    )}
+
+                    <Button
+                      asChild
+                      size="sm"
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs h-8"
                     >
-                      Listen on Spotify
-                      <ExternalLink className="ml-1.5 h-3 w-3" />
-                    </a>
-                  </Button>
+                      <a
+                        href={track.spotifySearchUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Spotify
+                        <ExternalLink className="ml-1.5 h-3 w-3" />
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>

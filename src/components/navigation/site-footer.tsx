@@ -153,16 +153,21 @@ export function SiteFooter() {
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-primary-base shrink-0 mt-0.5" />
                 <span className="text-xs">
-                  <strong className="text-foreground font-black">BOH Studios</strong>
+                  <strong className="text-foreground font-black">BOH Studios Bournemouth</strong>
                   <br />
-                  <span className="text-foreground">Bournemouth, Dorset, UK</span>
+                  <span className="text-foreground">104 Commercial Rd, BH2 5LR</span>
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <Calendar className="h-4 w-4 text-primary-base shrink-0 mt-0.5" />
                 <span className="text-xs leading-relaxed text-foreground font-medium">
-                  Weekly Cuban Salsa & Rueda de Casino every Tuesday & Thursday night.
+                  Tuesdays at Neptune Hall • Wednesdays at Woodlands Ballroom Poole • Thursdays & Sundays at BOH Studios.
                 </span>
+              </div>
+              <div className="pt-0.5 text-xs text-muted-foreground">
+                <a href="tel:07969633701" className="font-bold text-amber-800 dark:text-amber-300 hover:underline">
+                  📞 07969 633701
+                </a>
               </div>
               <div className="pt-1">
                 <Link

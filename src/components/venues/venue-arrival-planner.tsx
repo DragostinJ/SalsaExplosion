@@ -40,22 +40,64 @@ interface DestinationInfo {
 const DESTINATIONS: DestinationInfo[] = [
   {
     id: "boh",
-    name: "BOH Studios (Weekly Classes)",
-    address: "11-15 Haviland Road West, Boscombe",
-    postcode: "BH5 1DD",
-    googleMapsUrl: "https://maps.google.com/?q=BOH+Studios+Bournemouth+11-15+Haviland+Road+West+BH5+1DD",
-    appleMapsUrl: "https://maps.apple.com/?address=11-15+Haviland+Road+West,Bournemouth,BH5+1DD",
-    wazeUrl: "https://waze.com/ul?q=11-15+Haviland+Road+West+Bournemouth",
+    name: "BOH Studios (Thursdays & Sundays)",
+    address: "104 Commercial Road, The Triangle, Bournemouth",
+    postcode: "BH2 5LR",
+    googleMapsUrl: "https://maps.google.com/?q=BOH+Studios+Bournemouth+104+Commercial+Rd+BH2+5LR",
+    appleMapsUrl: "https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR",
+    wazeUrl: "https://waze.com/ul?q=104+Commercial+Road+Bournemouth",
     eveningParking: {
-      title: "Hawkwood Road Car Park (BH5 1BY) & On-Street",
-      description: "Free council parking after 6:00 PM every evening. Over 180 spaces just a 2-minute walk from the studio doors.",
-      estimatedCost: "£0.00 (FREE after 6 PM)",
+      title: "Bournemouth Library (Avenue Rd, BH2 5SL) & West Hill (BH2 5PG)",
+      description: "Convenient parking 2-3 mins walk away. Free on-street parking along Commercial Road and surrounding streets after 6:00 PM.",
+      estimatedCost: "£0.00 (FREE after 6 PM on-street)",
       isFree: true,
     },
     daytimeParking: {
-      title: "Sovereign Centre Multi-Storey (BH5 1NT)",
-      description: "Secure barrier car park with 500+ spaces. Direct covered pedestrian exit onto Christchurch Road.",
+      title: "West Hill Car Park (BH2 5PG)",
+      description: "Large council car park minutes from The Triangle.",
       estimatedCost: "£1.60 / hour",
+      isFree: false,
+    },
+  },
+  {
+    id: "woodlands",
+    name: "The Woodlands Ballroom (Wednesdays)",
+    address: "Parkstone Trade & Labour Club, 485 Ashley Rd, Upper Parkstone, Poole",
+    postcode: "BH14 0BB",
+    googleMapsUrl: "https://maps.google.com/?q=Parkstone+Trade+and+Labour+Club+485+Ashley+Rd+Poole+BH14+0BB",
+    appleMapsUrl: "https://maps.apple.com/?address=485+Ashley+Road,Poole,BH14+0BB",
+    wazeUrl: "https://waze.com/ul?q=485+Ashley+Road+Poole",
+    eveningParking: {
+      title: "On-Site Club Car Park & Street Parking",
+      description: "Free on-site parking at the club plus abundant street parking along Ashley Road. Ballroom space for 100+ dancers.",
+      estimatedCost: "£0.00 (FREE Parking on-site & street)",
+      isFree: true,
+    },
+    daytimeParking: {
+      title: "Ashley Road Shoppers Car Park",
+      description: "Short stay shopper parking available along Ashley Road.",
+      estimatedCost: "£1.20 / hour",
+      isFree: false,
+    },
+  },
+  {
+    id: "neptune",
+    name: "Neptune Hall (Tuesdays)",
+    address: "Harvester, Undercliff Drive, Boscombe",
+    postcode: "BH5 1BN",
+    googleMapsUrl: "https://maps.google.com/?q=Harvester+Neptune+Undercliff+Drive+Boscombe+BH5+1BN",
+    appleMapsUrl: "https://maps.apple.com/?address=Undercliff+Drive,Boscombe,BH5+1BN",
+    wazeUrl: "https://waze.com/ul?q=Undercliff+Drive+Boscombe",
+    eveningParking: {
+      title: "Boscombe Promenade & Overstrand Car Parks",
+      description: "Ample parking right on the seafront above Harvester with coastal views.",
+      estimatedCost: "£0.00 (FREE in evening bays / pay and display)",
+      isFree: true,
+    },
+    daytimeParking: {
+      title: "Undercliff Drive Seafront Pay & Display",
+      description: "Beachfront pay and display bays.",
+      estimatedCost: "£2.00 / hour",
       isFree: false,
     },
   },
@@ -269,7 +311,7 @@ export function VenueArrivalPlanner() {
             <div className="flex items-center gap-2 pt-1">
               <Button asChild size="sm" className="bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold h-7 flex-1">
                 <a
-                  href="https://wa.me/447970153254?text=Hi%20Enrique,%20I'm%20on%20my%20way%20to%20Salsa%20Explosion%20and%20need%20assistance!"
+                  href="https://wa.me/447969633701?text=Hi%20Enrique,%20I'm%20on%20my%20way%20to%20Salsa%20Explosion%20and%20need%20assistance!"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -278,9 +320,9 @@ export function VenueArrivalPlanner() {
                 </a>
               </Button>
               <Button asChild size="sm" variant="outline" className="text-xs font-bold h-7 flex-1 border-border">
-                <a href="tel:+447970153254">
+                <a href="tel:07969633701">
                   <Phone className="mr-1 h-3 w-3" />
-                  Call Desk
+                  07969 633701
                 </a>
               </Button>
             </div>

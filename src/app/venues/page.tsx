@@ -83,10 +83,10 @@ export default function VenuesGuidePage() {
             <div className="relative h-48 w-full bg-gradient-to-tr from-amber-700 via-orange-600 to-amber-500 p-6 text-white flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
-                  Primary Weekly Hub
+                  Thursdays & Sundays Hub
                 </Badge>
                 <span className="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
-                  Boscombe, Bournemouth
+                  The Triangle, Bournemouth
                 </span>
               </div>
 
@@ -95,7 +95,7 @@ export default function VenuesGuidePage() {
                   BOH Studios Bournemouth
                 </h2>
                 <p className="text-xs text-white/90 font-medium mt-0.5">
-                  11-15 Haviland Road West, Boscombe, Bournemouth BH5 1DD
+                  104 Commercial Road, The Triangle, Bournemouth BH2 5LR
                 </p>
               </div>
             </div>
@@ -103,7 +103,7 @@ export default function VenuesGuidePage() {
             <CardContent className="p-6 space-y-5">
               <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
                 <p>
-                  BOH Studios is the permanent home of Salsa Explosion UK. Featuring a state-of-the-art sprung Canadian maple dance floor, full-length mirror wall, professional acoustic sound, changing facilities, and a social refreshment lounge.
+                  BOH Studios is the permanent flagship home of Salsa Explosion UK in Bournemouth town centre. Featuring a state-of-the-art sprung Canadian maple dance floor, full-length mirror wall, professional acoustic sound, licensed bar, and vibrant social dance floor.
                 </p>
               </div>
 
@@ -115,15 +115,18 @@ export default function VenuesGuidePage() {
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>Hawkwood Road Car Park (BH5 1BY):</strong> 2-minute walk from the studio. Over 180 spaces. Free parking after 6:00 PM every evening.
+                    <strong>Bournemouth Library (Avenue Rd, BH2 5SL):</strong> 2-minute walk from the studio doors.
                   </li>
                   <li>
-                    <strong>Haviland Road West & Ashley Road:</strong> Free on-street parking available on a first-come basis right outside the studio.
+                    <strong>West Hill Car Park (BH2 5PG):</strong> Multi-storey and surface parking adjacent to The Triangle.
+                  </li>
+                  <li>
+                    <strong>Commercial Road & Surrounding Streets:</strong> Free on-street parking after 6:00 PM.
                   </li>
                 </ul>
               </div>
 
-              {/* Bus & Train Info */}
+              {/* Transit Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
                   <Bus className="h-4 w-4 text-blue-600 dark:text-blue-400" />
@@ -131,10 +134,10 @@ export default function VenuesGuidePage() {
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>MoreBus M1 & M2:</strong> Runs every 5–7 minutes connecting Bournemouth Central Station, Poole, and Southbourne directly to Boscombe Bus Station (3-minute walk).
+                    <strong>The Triangle Bus Hub:</strong> Virtually all MoreBus lines (M1, M2, 1, 3, 5, 6) stop at The Triangle (30 seconds walk).
                   </li>
                   <li>
-                    <strong>Bournemouth Central Train Station:</strong> 10-minute taxi ride or 8-minute direct bus on the M1/M2 lines.
+                    <strong>Bournemouth Central Train Station:</strong> 5-minute taxi or 7-minute direct bus.
                   </li>
                 </ul>
               </div>
@@ -142,11 +145,11 @@ export default function VenuesGuidePage() {
           </div>
 
           <div className="p-6 pt-0 border-t mt-4 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-xs text-muted-foreground">Postcode: BH5 1DD</span>
+            <span className="text-xs text-muted-foreground">Postcode: BH2 5LR</span>
             <div className="flex items-center gap-2">
               <Button asChild size="sm" variant="outline" className="text-xs h-8 font-semibold">
                 <a
-                  href="https://maps.apple.com/?address=11-15+Haviland+Road+West,Bournemouth,BH5+1DD"
+                  href="https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -156,7 +159,7 @@ export default function VenuesGuidePage() {
               </Button>
               <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs h-8">
                 <a
-                  href="https://maps.google.com/?q=BOH+Studios+Bournemouth+11-15+Haviland+Road+West+BH5+1DD"
+                  href="https://maps.google.com/?q=BOH+Studios+Bournemouth+104+Commercial+Rd+BH2+5LR"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -169,7 +172,175 @@ export default function VenuesGuidePage() {
           </div>
         </Card>
 
-        {/* Venue 2: The Roundhouse Hotel */}
+        {/* Venue 2: The Woodlands Ballroom Poole */}
+        <Card className="border shadow-sm flex flex-col justify-between overflow-hidden">
+          <div>
+            <div className="relative h-48 w-full bg-gradient-to-tr from-emerald-800 via-teal-700 to-amber-600 p-6 text-white flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
+                  Wednesdays Cuban Hub
+                </Badge>
+                <span className="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
+                  Upper Parkstone, Poole
+                </span>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-black drop-shadow-sm">
+                  The Woodlands Ballroom
+                </h2>
+                <p className="text-xs text-white/90 font-medium mt-0.5">
+                  @ Parkstone Trade & Labour Club, 485 Ashley Rd, Poole BH14 0BB
+                </p>
+              </div>
+            </div>
+
+            <CardContent className="p-6 space-y-5">
+              <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
+                <p>
+                  Home of our Wednesday Cuban Salsa courses with Enrique Perez Valdes. A stunning, spacious ballroom with a traditional sprung wooden dance floor accommodating 100+ dancers comfortably.
+                </p>
+              </div>
+
+              {/* Parking Info */}
+              <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
+                <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
+                  <Car className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                  Parking Advice:
+                </h3>
+                <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
+                  <li>
+                    <strong>On-Site Club Car Park:</strong> Free parking directly on-site at Parkstone Trade & Labour Club.
+                  </li>
+                  <li>
+                    <strong>Ashley Road On-Street Parking:</strong> Plentiful free on-street parking bays right outside the venue.
+                  </li>
+                </ul>
+              </div>
+
+              {/* Class Schedule Info */}
+              <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
+                <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
+                  <Clock className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                  Wednesday Schedule:
+                </h3>
+                <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
+                  <li>
+                    <strong>7:00 PM – 8:00 PM:</strong> 6-Week Absolute Beginners Cuban Salsa Course with Enrique from Cuba.
+                  </li>
+                  <li>
+                    <strong>7:00 PM:</strong> Salsa Beginner 2 & Salsa Improvers 2 / Intermediates.
+                  </li>
+                </ul>
+              </div>
+            </CardContent>
+          </div>
+
+          <div className="p-6 pt-0 border-t mt-4 flex flex-wrap items-center justify-between gap-3">
+            <span className="text-xs text-muted-foreground">Postcode: BH14 0BB</span>
+            <div className="flex items-center gap-2">
+              <Button asChild size="sm" variant="outline" className="text-xs h-8 font-semibold">
+                <a
+                  href="https://maps.apple.com/?address=485+Ashley+Road,Poole,BH14+0BB"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-purple-600" />
+                  Apple Maps
+                </a>
+              </Button>
+              <Button asChild size="sm" className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs h-8">
+                <a
+                  href="https://maps.google.com/?q=Parkstone+Trade+and+Labour+Club+485+Ashley+Rd+Poole+BH14+0BB"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MapPin className="mr-1.5 h-3.5 w-3.5" />
+                  Google Maps
+                  <ExternalLink className="ml-1 h-3 w-3" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </Card>
+
+        {/* Venue 3: Neptune Hall Boscombe */}
+        <Card className="border shadow-sm flex flex-col justify-between overflow-hidden">
+          <div>
+            <div className="relative h-48 w-full bg-gradient-to-tr from-blue-700 via-sky-600 to-amber-500 p-6 text-white flex flex-col justify-between">
+              <div className="flex items-center justify-between">
+                <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
+                  Tuesdays Cuban Hub
+                </Badge>
+                <span className="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
+                  Boscombe Seafront
+                </span>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-black drop-shadow-sm">
+                  Neptune Hall
+                </h2>
+                <p className="text-xs text-white/90 font-medium mt-0.5">
+                  Harvester, Undercliff Drive, Boscombe BH5 1BN (Above Harvester)
+                </p>
+              </div>
+            </div>
+
+            <CardContent className="p-6 space-y-5">
+              <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
+                <p>
+                  Tuesday nights overlooking the waves! Join Jim & Enrique for Beginner 2 & Improver Cuban Salsa partnerwork with fresh sea air and a friendly, relaxed community spirit.
+                </p>
+              </div>
+
+              {/* Parking Info */}
+              <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
+                <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
+                  <Car className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  Parking & Seafront Access:
+                </h3>
+                <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
+                  <li>
+                    <strong>Boscombe Seafront & Overstrand Car Parks:</strong> Ample parking along Undercliff Drive right next to the beach.
+                  </li>
+                  <li>
+                    <strong>Entrance:</strong> Located above Harvester restaurant with beachfront staircase access.
+                  </li>
+                </ul>
+              </div>
+            </CardContent>
+          </div>
+
+          <div className="p-6 pt-0 border-t mt-4 flex flex-wrap items-center justify-between gap-3">
+            <span className="text-xs text-muted-foreground">Postcode: BH5 1BN</span>
+            <div className="flex items-center gap-2">
+              <Button asChild size="sm" variant="outline" className="text-xs h-8 font-semibold">
+                <a
+                  href="https://maps.apple.com/?address=Undercliff+Drive,Boscombe,BH5+1BN"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-purple-600" />
+                  Apple Maps
+                </a>
+              </Button>
+              <Button asChild size="sm" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs h-8">
+                <a
+                  href="https://maps.google.com/?q=Harvester+Undercliff+Drive+Boscombe+BH5+1BN"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <MapPin className="mr-1.5 h-3.5 w-3.5" />
+                  Google Maps
+                  <ExternalLink className="ml-1 h-3 w-3" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </Card>
+
+        {/* Venue 4: The Roundhouse Hotel */}
         <Card className="border shadow-sm flex flex-col justify-between overflow-hidden">
           <div>
             <div className="relative h-48 w-full bg-gradient-to-tr from-purple-800 via-indigo-700 to-amber-600 p-6 text-white flex flex-col justify-between">

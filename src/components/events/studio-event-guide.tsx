@@ -33,7 +33,7 @@ const STUDIO_FAQS: FaqItem[] = [
   {
     question: "Where can I park near BOH Studios Bournemouth?",
     answer:
-      "Convenient parking is located just a 2-minute walk away at The Triangle Car Park (BH2 5RH) and Avenue Road Multi-Storey (BH2 5SL). Free on-street parking along Commercial Road and surrounding streets is usually available after 6:00 PM (check local council signs).",
+      "Convenient parking is located 2 minutes walk away at Bournemouth Library (Avenue Rd, BH2 5SL) and West Hill Car Park (BH2 5PG). Free on-street parking along Commercial Road and surrounding streets is usually available after 6:00 PM.",
   },
   {
     question: "Is there a licensed bar inside the venue?",

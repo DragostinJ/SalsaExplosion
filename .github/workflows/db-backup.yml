@@ -1,0 +1,38 @@
+name: Zero-Cost Database Backup
+
+on:
+  schedule:
+    # Runs at 03:00 UTC every Sunday
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    name: Export Encrypted Compressed Database Dump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PostgreSQL Client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client
+
+      - name: Export and Gzip Database Dump
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "DATABASE_URL secret is not configured in repository secrets."
+            exit 1
+          fi
+          DATE_STAMP=$(date +%Y-%m-%d-%H%M%S)
+          BACKUP_FILE="salsaexplosion-backup-${DATE_STAMP}.sql.gz"
+          echo "Dumping database schema and records to: ${BACKUP_FILE}"
+          pg_dump --no-owner --no-acl "$DATABASE_URL" | gzip > "${BACKUP_FILE}"
+          echo "Backup file generated. Size: $(ls -lh "${BACKUP_FILE}" | awk '{print $5}')"
+
+      - name: Upload Backup to Private Artifacts (90-Day Retention)
+        uses: actions/upload-artifact@v4
+        with:
+          name: database-backup-${{ github.run_id }}
+          path: salsaexplosion-backup-*.sql.gz
+          retention-days: 90

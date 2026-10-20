@@ -1,0 +1,28 @@
+name: Supabase Zero-Cost Keep-Alive Ping
+
+on:
+  schedule:
+    # Runs at 08:00 UTC every 2 days to prevent Supabase Free 7-day auto-pause
+    - cron: '0 8 */2 * *'
+  workflow_dispatch:
+
+jobs:
+  ping-health:
+    name: Ping Health Endpoint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Health Endpoint
+        env:
+          APP_URL: ${{ secrets.APP_URL || 'https://salsaexplosion.co.uk' }}
+        run: |
+          echo "Pinging health endpoint at: ${APP_URL}/api/health"
+          RESPONSE=$(curl -s -w "\n%{http_code}" "${APP_URL}/api/health" || true)
+          HTTP_BODY=$(echo "$RESPONSE" | sed '$d')
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n 1)
+          echo "Response Body: $HTTP_BODY"
+          echo "HTTP Status Code: $HTTP_CODE"
+          if [ "$HTTP_CODE" -eq 200 ]; then
+            echo "Keep-alive ping successful. Supabase database is active."
+          else
+            echo "Warning: Health endpoint returned non-200 code ($HTTP_CODE)."
+          fi

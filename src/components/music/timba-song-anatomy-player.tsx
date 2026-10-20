@@ -418,8 +418,8 @@ export function TimbaSongAnatomyPlayer({
           <Badge
             className={`text-[11px] font-bold ${
               activeSong.difficultyLevel === "Beginner"
-                ? "bg-sky-600 text-white"
-                : "bg-rose-600 text-white"
+                ? "bg-sky-700 text-white"
+                : "bg-rose-700 text-white"
             }`}
           >
             {activeSong.difficultyLevel} Level
@@ -429,16 +429,16 @@ export function TimbaSongAnatomyPlayer({
           <Button
             type="button"
             size="sm"
-            variant={showVideoDrawer ? "default" : "outline"}
+            variant="outline"
             data-testid="toggle-song-stream"
             onClick={() => setShowVideoDrawer((prev) => !prev)}
             className={`h-8 text-xs font-bold transition-all ${
               showVideoDrawer
-                ? "bg-red-600 hover:bg-red-700 text-white shadow-xs"
-                : "border-border text-foreground hover:bg-muted"
+                ? "border-rose-700 bg-rose-700 hover:bg-rose-800 text-white shadow-xs"
+                : "border-border bg-card text-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
-            <YouTubeIcon className="mr-1.5 h-3.5 w-3.5 text-red-500" />
+            <YouTubeIcon className="mr-1.5 h-3.5 w-3.5 text-red-600" />
             {showVideoDrawer ? "Close Song Player" : "Original Song Player"}
           </Button>
 
@@ -446,13 +446,13 @@ export function TimbaSongAnatomyPlayer({
           <Button
             type="button"
             size="sm"
-            variant={isClaveHelperActive ? "default" : "outline"}
+            variant="outline"
             data-testid="toggle-rhythm-audio"
             onClick={() => setIsClaveHelperActive((prev) => !prev)}
             className={`h-8 text-xs font-bold transition-all ${
               isClaveHelperActive
-                ? "bg-amber-600 hover:bg-amber-700 text-white shadow-xs"
-                : "border-border text-foreground hover:bg-muted"
+                ? "border-amber-800 bg-amber-800 hover:bg-amber-900 text-white shadow-xs"
+                : "border-border bg-card text-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
             {isClaveHelperActive ? (

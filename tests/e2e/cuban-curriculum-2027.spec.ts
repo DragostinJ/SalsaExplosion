@@ -181,6 +181,32 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     const seg7 = player.locator('[data-testid="timeline-segment-7"]');
     await expect(seg7).toBeVisible();
 
+    // Verify 8-Count Dancer Beat Bar exists
+    const beatBar = player.locator('[data-testid="dancer-beat-bar"]');
+    await expect(beatBar).toBeVisible();
+    await expect(beatBar.getByText(/dancer rhythm bar/i)).toBeVisible();
+
+    // Verify Clave Audio Helper Toggle works
+    const claveBtn = player.locator('[data-testid="toggle-rhythm-audio"]');
+    await expect(claveBtn).toBeVisible();
+    await expect(claveBtn).toContainText("Clave Click: OFF");
+    await claveBtn.click();
+    await expect(claveBtn).toContainText("Clave Click: ON");
+    await claveBtn.click();
+    await expect(claveBtn).toContainText("Clave Click: OFF");
+
+    // Verify In-Page Original Song Player Drawer Toggle works
+    const streamToggle = player.locator('[data-testid="toggle-song-stream"]');
+    await expect(streamToggle).toBeVisible();
+    await streamToggle.click();
+
+    const videoContainer = player.locator('[data-testid="embedded-youtube-player-container"]');
+    await expect(videoContainer).toBeVisible();
+    await expect(videoContainer.locator('[data-testid="youtube-iframe"]')).toBeVisible();
+
+    await streamToggle.click();
+    await expect(videoContainer).not.toBeVisible();
+
     // Verify zero serious or critical accessibility violations on /music
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
@@ -191,5 +217,38 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     );
 
     expect(seriousOrCriticalViolations).toEqual([]);
+  });
+
+  test("5. Zero serious or critical WCAG 2.1 AA violations under OS dark mode (prefers-color-scheme: dark)", async ({
+    page,
+  }) => {
+    // Emulate OS Dark Mode to ensure Tailwind v4 dark variant does not cause contrast bugs
+    await page.emulateMedia({ colorScheme: "dark" });
+
+    // 1. Audit /music under OS Dark Mode
+    await page.goto("/music");
+    await page.waitForLoadState("domcontentloaded");
+
+    const musicAxeResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    const musicViolations = musicAxeResults.violations.filter(
+      (v) => v.impact === "serious" || v.impact === "critical"
+    );
+    expect(musicViolations).toEqual([]);
+
+    // 2. Audit /dashboard/progression under OS Dark Mode
+    await page.goto("/dashboard/progression");
+    await page.waitForLoadState("domcontentloaded");
+
+    const progressionAxeResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    const progressionViolations = progressionAxeResults.violations.filter(
+      (v) => v.impact === "serious" || v.impact === "critical"
+    );
+    expect(progressionViolations).toEqual([]);
   });
 });

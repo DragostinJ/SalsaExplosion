@@ -27,6 +27,7 @@ import {
   SongSegment,
   resolveCurriculumMove,
   SegmentColorTheme,
+  scaleSongSegmentsToDuration,
 } from "@/lib/constants/timba-song-anatomy";
 import { CurriculumSkillItem } from "@/lib/constants/cuban-curriculum-2027";
 import { CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
@@ -37,6 +38,7 @@ interface YTPlayerInstance {
   seekTo: (seconds: number, allowSeekAhead: boolean) => void;
   getCurrentTime: () => number;
   getPlayerState: () => number;
+  getDuration?: () => number;
   destroy?: () => void;
 }
 
@@ -139,13 +141,15 @@ export function TimbaSongAnatomyPlayer({
   className = "",
 }: TimbaSongAnatomyPlayerProps) {
   const [selectedSongId, setSelectedSongId] = useState(initialSongId);
+  const [selectedVideoIdOverride, setSelectedVideoIdOverride] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<1 | 2 | 4>(1);
   const [inspectingMove, setInspectingMove] = useState<CurriculumSkillItem | null>(null);
-  const [showVideoDrawer, setShowVideoDrawer] = useState(false);
+  const [showVideoDrawer, setShowVideoDrawer] = useState(true);
   const [isClaveHelperActive, setIsClaveHelperActive] = useState(false);
   const [currentDancerBeat, setCurrentDancerBeat] = useState<number>(1);
+  const [liveDurationSeconds, setLiveDurationSeconds] = useState<number | null>(null);
 
   const activeSong = useMemo<SongAnatomy>(() => {
     return (
@@ -153,6 +157,13 @@ export function TimbaSongAnatomyPlayer({
       TIMBA_SONG_ANATOMY_DATA[0]
     );
   }, [selectedSongId]);
+
+  const currentVideoId = selectedVideoIdOverride ?? activeSong.youtubeVideoId;
+  const effectiveDuration = liveDurationSeconds ?? activeSong.durationSeconds;
+  const effectiveSegments = useMemo(
+    () => scaleSongSegmentsToDuration(activeSong, effectiveDuration),
+    [activeSong, effectiveDuration]
+  );
 
   const rhythmSynthRef = useRef<CubanRhythmSynth | null>(null);
   const ytPlayerRef = useRef<YTPlayerInstance | null>(null);
@@ -189,6 +200,17 @@ export function TimbaSongAnatomyPlayer({
       firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
     }
 
+    const updateDuration = (player: YTPlayerInstance) => {
+      try {
+        if (typeof player.getDuration === "function") {
+          const dur = player.getDuration();
+          if (typeof dur === "number" && !isNaN(dur) && dur > 10) {
+            setLiveDurationSeconds(Math.round(dur));
+          }
+        }
+      } catch {}
+    };
+
     const initPlayer = () => {
       if (!window.YT?.Player) return;
       const iframeId = `youtube-iframe-${selectedSongId}`;
@@ -198,7 +220,13 @@ export function TimbaSongAnatomyPlayer({
       try {
         ytPlayerRef.current = new window.YT.Player(iframeId, {
           events: {
+            onReady: (event) => {
+              updateDuration(event.target);
+            },
             onStateChange: (event) => {
+              if (ytPlayerRef.current) {
+                updateDuration(ytPlayerRef.current);
+              }
               if (window.YT?.PlayerState) {
                 if (event.data === window.YT.PlayerState.PLAYING) {
                   setIsPlaying(true);
@@ -224,11 +252,13 @@ export function TimbaSongAnatomyPlayer({
         initPlayer();
       };
     }
-  }, [selectedSongId, showVideoDrawer]);
+  }, [selectedSongId, currentVideoId]);
 
   // Handle switching songs: reset playback timer, active move preview, and players
   const handleSelectSong = (songId: string) => {
     setSelectedSongId(songId);
+    setSelectedVideoIdOverride(null);
+    setLiveDurationSeconds(null);
     setCurrentTime(0);
     setIsPlaying(false);
     setInspectingMove(null);
@@ -238,21 +268,34 @@ export function TimbaSongAnatomyPlayer({
     } catch {}
   };
 
+  const handleSwitchVideoVersion = (videoId: string) => {
+    if (videoId === currentVideoId) return;
+    setSelectedVideoIdOverride(videoId);
+    setLiveDurationSeconds(null);
+    setCurrentTime(0);
+    setIsPlaying(false);
+    rhythmSynthRef.current?.stop();
+    try {
+      ytPlayerRef.current?.pauseVideo();
+    } catch {}
+  };
+
   // Active segment determined by currentTime
   const activeSegmentIndex = useMemo(() => {
-    const idx = activeSong.segments.findIndex(
+    const idx = effectiveSegments.findIndex(
       (seg) =>
         currentTime >= seg.startTimeSeconds &&
         (currentTime < seg.endTimeSeconds ||
-          (seg.endTimeSeconds === activeSong.durationSeconds &&
+          (seg.endTimeSeconds === effectiveDuration &&
             currentTime <= seg.endTimeSeconds))
     );
     return idx !== -1 ? idx : 0;
-  }, [activeSong, currentTime]);
+  }, [effectiveSegments, effectiveDuration, currentTime]);
 
-  const activeSegment: SongSegment = activeSong.segments[activeSegmentIndex];
+  const activeSegment: SongSegment =
+    effectiveSegments[activeSegmentIndex] ?? effectiveSegments[0];
   const nextSegment: SongSegment | undefined =
-    activeSong.segments[activeSegmentIndex + 1];
+    effectiveSegments[activeSegmentIndex + 1];
 
   const secondsUntilNextShift = nextSegment
     ? Math.max(0, activeSegment.endTimeSeconds - Math.floor(currentTime))
@@ -268,6 +311,17 @@ export function TimbaSongAnatomyPlayer({
       try {
         if (
           ytPlayerRef.current &&
+          typeof ytPlayerRef.current.getDuration === "function"
+        ) {
+          const dur = ytPlayerRef.current.getDuration();
+          if (typeof dur === "number" && !isNaN(dur) && dur > 10) {
+            setLiveDurationSeconds((prev) =>
+              prev !== Math.round(dur) ? Math.round(dur) : prev
+            );
+          }
+        }
+        if (
+          ytPlayerRef.current &&
           typeof ytPlayerRef.current.getCurrentTime === "function"
         ) {
           const ytTime = ytPlayerRef.current.getCurrentTime();
@@ -278,18 +332,18 @@ export function TimbaSongAnatomyPlayer({
       } catch {}
 
       if (updatedTime !== null) {
-        if (updatedTime >= activeSong.durationSeconds) {
+        if (updatedTime >= effectiveDuration) {
           setIsPlaying(false);
-          setCurrentTime(activeSong.durationSeconds);
+          setCurrentTime(effectiveDuration);
         } else {
           setCurrentTime(updatedTime);
         }
       } else {
         setCurrentTime((prev) => {
           const next = prev + (intervalMs / 1000) * playbackSpeed;
-          if (next >= activeSong.durationSeconds) {
+          if (next >= effectiveDuration) {
             setIsPlaying(false);
-            return activeSong.durationSeconds;
+            return effectiveDuration;
           }
           return next;
         });
@@ -297,10 +351,10 @@ export function TimbaSongAnatomyPlayer({
     }, intervalMs);
 
     return () => clearInterval(interval);
-  }, [isPlaying, playbackSpeed, activeSong.durationSeconds]);
+  }, [isPlaying, playbackSpeed, effectiveDuration]);
 
   const handleSeek = (seconds: number) => {
-    const clamped = Math.max(0, Math.min(seconds, activeSong.durationSeconds));
+    const clamped = Math.max(0, Math.min(seconds, effectiveDuration));
     setCurrentTime(clamped);
     try {
       ytPlayerRef.current?.seekTo(clamped, true);
@@ -318,7 +372,7 @@ export function TimbaSongAnatomyPlayer({
   };
 
   const togglePlay = () => {
-    if (currentTime >= activeSong.durationSeconds) {
+    if (currentTime >= effectiveDuration) {
       setCurrentTime(0);
       try {
         ytPlayerRef.current?.seekTo(0, true);
@@ -489,36 +543,71 @@ export function TimbaSongAnatomyPlayer({
         </div>
       </div>
 
-      {/* Embedded Real Song Player Drawer */}
-      {showVideoDrawer && (
-        <div
-          data-testid="embedded-youtube-player-container"
-          className="rounded-2xl border border-border/80 bg-slate-950 p-3 sm:p-4 space-y-2 text-white shadow-md animate-in fade-in-50 duration-200"
-        >
-          <div className="flex items-center justify-between text-xs pb-2 border-b border-white/10">
-            <span className="font-bold flex items-center gap-1.5 text-white/90">
-              <YouTubeIcon className="h-4 w-4 text-red-500" />
+      {/* Embedded Real Song Player Drawer (Persistent Mount for instant timeline seek) */}
+      <div
+        data-testid="embedded-youtube-player-container"
+        className={`rounded-2xl border border-border/80 bg-slate-950 p-3 sm:p-4 space-y-2 text-white shadow-md transition-all ${
+          showVideoDrawer ? "" : "hidden"
+        }`}
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs pb-2 border-b border-white/10">
+          <div className="flex items-center gap-1.5 font-bold text-white/90">
+            <YouTubeIcon className="h-4 w-4 text-red-500 shrink-0" />
+            <span>
               Official Recording Stream • {activeSong.title} ({activeSong.artist})
             </span>
-            <span className="text-[11px] text-white/60">
+          </div>
+
+          <div className="flex items-center gap-2">
+            {activeSong.alternateYoutubeVideoId && (
+              <div className="flex items-center rounded-lg border border-white/20 bg-white/10 p-0.5 text-[11px]">
+                <button
+                  type="button"
+                  data-testid="switch-version-studio"
+                  onClick={() => handleSwitchVideoVersion(activeSong.youtubeVideoId)}
+                  className={`px-2 py-0.5 rounded font-semibold transition-all ${
+                    currentVideoId === activeSong.youtubeVideoId
+                      ? "bg-white text-slate-950 shadow-xs"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  Studio Audio (5:46)
+                </button>
+                <button
+                  type="button"
+                  data-testid="switch-version-video"
+                  onClick={() =>
+                    handleSwitchVideoVersion(activeSong.alternateYoutubeVideoId!)
+                  }
+                  className={`px-2 py-0.5 rounded font-semibold transition-all ${
+                    currentVideoId === activeSong.alternateYoutubeVideoId
+                      ? "bg-white text-slate-950 shadow-xs"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  Music Video (6:11)
+                </button>
+              </div>
+            )}
+            <span className="text-[11px] text-white/60 hidden md:inline">
               Two-way timeline synchronized
             </span>
           </div>
-          <div className="relative aspect-video w-full max-w-xl mx-auto rounded-xl overflow-hidden shadow-lg bg-black">
-            <iframe
-              key={selectedSongId}
-              id={`youtube-iframe-${selectedSongId}`}
-              data-testid="youtube-iframe"
-              title={`Official recording for ${activeSong.title}`}
-              src={`https://www.youtube-nocookie.com/embed/${activeSong.youtubeVideoId}?enablejsapi=1&playsinline=1&rel=0`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className="w-full h-full border-0"
-            />
-          </div>
         </div>
-      )}
+        <div className="relative aspect-video w-full max-w-xl mx-auto rounded-xl overflow-hidden shadow-lg bg-black">
+          <iframe
+            key={`${selectedSongId}-${currentVideoId}`}
+            id={`youtube-iframe-${selectedSongId}`}
+            data-testid="youtube-iframe"
+            title={`Official recording for ${activeSong.title}`}
+            src={`https://www.youtube-nocookie.com/embed/${currentVideoId}?enablejsapi=1&playsinline=1&rel=0`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            className="w-full h-full border-0"
+          />
+        </div>
+      </div>
 
       {/* 8-Count Dancer Beat Bar */}
       <div
@@ -575,7 +664,7 @@ export function TimbaSongAnatomyPlayer({
             Song Progression Timeline (Click Any Segment to Jump)
           </span>
           <span className="font-mono font-extrabold text-foreground">
-            {formatSeconds(currentTime)} / {formatSeconds(activeSong.durationSeconds)}
+            {formatSeconds(currentTime)} / {formatSeconds(effectiveDuration)}
           </span>
         </div>
 
@@ -585,9 +674,9 @@ export function TimbaSongAnatomyPlayer({
           aria-label="Song Segments Bar"
           className="relative h-12 w-full rounded-2xl border border-border/80 overflow-hidden bg-muted/40 flex"
         >
-          {activeSong.segments.map((segment, idx) => {
+          {effectiveSegments.map((segment, idx) => {
             const segmentDuration = segment.endTimeSeconds - segment.startTimeSeconds;
-            const widthPct = (segmentDuration / activeSong.durationSeconds) * 100;
+            const widthPct = (segmentDuration / effectiveDuration) * 100;
             const isSegmentActive = idx === activeSegmentIndex;
             const theme = THEME_STYLES[segment.colorTheme];
 
@@ -619,7 +708,7 @@ export function TimbaSongAnatomyPlayer({
             style={{
               left: `${Math.min(
                 100,
-                (currentTime / activeSong.durationSeconds) * 100
+                (currentTime / effectiveDuration) * 100
               )}%`,
             }}
           />
@@ -642,7 +731,7 @@ export function TimbaSongAnatomyPlayer({
               ) : (
                 <>
                   <Play className="mr-1.5 h-3.5 w-3.5 fill-white" />
-                  {currentTime >= activeSong.durationSeconds ? "Replay" : "Play Along"}
+                  {currentTime >= effectiveDuration ? "Replay" : "Play Along"}
                 </>
               )}
             </Button>
@@ -684,7 +773,7 @@ export function TimbaSongAnatomyPlayer({
               type="range"
               aria-label="Timeline position scrubber"
               min={0}
-              max={activeSong.durationSeconds}
+              max={effectiveDuration}
               step={1}
               value={Math.floor(currentTime)}
               onChange={(e) => handleSeek(Number(e.target.value))}
@@ -705,7 +794,7 @@ export function TimbaSongAnatomyPlayer({
             <div className="space-y-0.5">
               <div className="flex items-center gap-2">
                 <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
-                  Current Segment ({activeSegmentIndex + 1} of {activeSong.segments.length})
+                  Current Segment ({activeSegmentIndex + 1} of {effectiveSegments.length})
                 </span>
                 <span className="font-mono text-xs font-bold text-foreground">
                   {activeSegment.formattedRange}

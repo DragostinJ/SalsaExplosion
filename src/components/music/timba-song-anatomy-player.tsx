@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import {
   Play,
   Pause,
@@ -15,6 +15,8 @@ import {
   X,
   Clock,
   Radio,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,10 +29,50 @@ import {
   SegmentColorTheme,
 } from "@/lib/constants/timba-song-anatomy";
 import { CurriculumSkillItem } from "@/lib/constants/cuban-curriculum-2027";
+import { CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
+
+interface YTPlayerInstance {
+  playVideo: () => void;
+  pauseVideo: () => void;
+  seekTo: (seconds: number, allowSeekAhead: boolean) => void;
+  getCurrentTime: () => number;
+  getPlayerState: () => number;
+  destroy?: () => void;
+}
+
+declare global {
+  interface Window {
+    YT?: {
+      Player: new (
+        elementId: string | HTMLElement,
+        options: {
+          events?: {
+            onReady?: (event: { target: YTPlayerInstance }) => void;
+            onStateChange?: (event: { data: number }) => void;
+          };
+        }
+      ) => YTPlayerInstance;
+      PlayerState: {
+        PLAYING: number;
+        PAUSED: number;
+        ENDED: number;
+      };
+    };
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
 
 interface TimbaSongAnatomyPlayerProps {
   initialSongId?: string;
   className?: string;
+}
+
+function YouTubeIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+    </svg>
+  );
 }
 
 const THEME_STYLES: Record<
@@ -101,6 +143,9 @@ export function TimbaSongAnatomyPlayer({
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<1 | 2 | 4>(1);
   const [inspectingMove, setInspectingMove] = useState<CurriculumSkillItem | null>(null);
+  const [showVideoDrawer, setShowVideoDrawer] = useState(false);
+  const [isClaveHelperActive, setIsClaveHelperActive] = useState(false);
+  const [currentDancerBeat, setCurrentDancerBeat] = useState<number>(1);
 
   const activeSong = useMemo<SongAnatomy>(() => {
     return (
@@ -109,12 +154,88 @@ export function TimbaSongAnatomyPlayer({
     );
   }, [selectedSongId]);
 
-  // Handle switching songs: reset playback timer and active move preview
+  const rhythmSynthRef = useRef<CubanRhythmSynth | null>(null);
+  const ytPlayerRef = useRef<YTPlayerInstance | null>(null);
+
+  // Initialize Rhythm Synth
+  useEffect(() => {
+    rhythmSynthRef.current = new CubanRhythmSynth({
+      bpm: activeSong.bpm,
+      claveType: activeSong.claveType,
+      onBeat: (beat) => setCurrentDancerBeat(beat),
+    });
+    return () => {
+      rhythmSynthRef.current?.stop();
+    };
+  }, [activeSong.bpm, activeSong.claveType]);
+
+  // Sync Rhythm Synth with play state and helper toggle
+  useEffect(() => {
+    if (isPlaying && isClaveHelperActive) {
+      rhythmSynthRef.current?.setMuted(false);
+      rhythmSynthRef.current?.start();
+    } else {
+      rhythmSynthRef.current?.stop();
+    }
+  }, [isPlaying, isClaveHelperActive]);
+
+  // YouTube Iframe API Initialization
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!window.YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName("script")[0];
+      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+    }
+
+    const initPlayer = () => {
+      if (!window.YT?.Player) return;
+      const iframeId = `youtube-iframe-${selectedSongId}`;
+      const elem = document.getElementById(iframeId);
+      if (!elem) return;
+
+      try {
+        ytPlayerRef.current = new window.YT.Player(iframeId, {
+          events: {
+            onStateChange: (event) => {
+              if (window.YT?.PlayerState) {
+                if (event.data === window.YT.PlayerState.PLAYING) {
+                  setIsPlaying(true);
+                } else if (
+                  event.data === window.YT.PlayerState.PAUSED ||
+                  event.data === window.YT.PlayerState.ENDED
+                ) {
+                  setIsPlaying(false);
+                }
+              }
+            },
+          },
+        });
+      } catch {
+        // safe fallback if already bound
+      }
+    };
+
+    if (window.YT?.Player) {
+      initPlayer();
+    } else {
+      window.onYouTubeIframeAPIReady = () => {
+        initPlayer();
+      };
+    }
+  }, [selectedSongId, showVideoDrawer]);
+
+  // Handle switching songs: reset playback timer, active move preview, and players
   const handleSelectSong = (songId: string) => {
     setSelectedSongId(songId);
     setCurrentTime(0);
     setIsPlaying(false);
     setInspectingMove(null);
+    rhythmSynthRef.current?.stop();
+    try {
+      ytPlayerRef.current?.pauseVideo();
+    } catch {}
   };
 
   // Active segment determined by currentTime
@@ -137,20 +258,42 @@ export function TimbaSongAnatomyPlayer({
     ? Math.max(0, activeSegment.endTimeSeconds - Math.floor(currentTime))
     : 0;
 
-  // Timer simulation loop
+  // Real-time synchronization loop (polls YouTube if playing, or runs simulation timer)
   useEffect(() => {
     if (!isPlaying) return;
 
     const intervalMs = 250;
     const interval = setInterval(() => {
-      setCurrentTime((prev) => {
-        const next = prev + (intervalMs / 1000) * playbackSpeed;
-        if (next >= activeSong.durationSeconds) {
-          setIsPlaying(false);
-          return activeSong.durationSeconds;
+      let updatedTime: number | null = null;
+      try {
+        if (
+          ytPlayerRef.current &&
+          typeof ytPlayerRef.current.getCurrentTime === "function"
+        ) {
+          const ytTime = ytPlayerRef.current.getCurrentTime();
+          if (typeof ytTime === "number" && !isNaN(ytTime) && ytTime > 0) {
+            updatedTime = ytTime;
+          }
         }
-        return next;
-      });
+      } catch {}
+
+      if (updatedTime !== null) {
+        if (updatedTime >= activeSong.durationSeconds) {
+          setIsPlaying(false);
+          setCurrentTime(activeSong.durationSeconds);
+        } else {
+          setCurrentTime(updatedTime);
+        }
+      } else {
+        setCurrentTime((prev) => {
+          const next = prev + (intervalMs / 1000) * playbackSpeed;
+          if (next >= activeSong.durationSeconds) {
+            setIsPlaying(false);
+            return activeSong.durationSeconds;
+          }
+          return next;
+        });
+      }
     }, intervalMs);
 
     return () => clearInterval(interval);
@@ -159,18 +302,37 @@ export function TimbaSongAnatomyPlayer({
   const handleSeek = (seconds: number) => {
     const clamped = Math.max(0, Math.min(seconds, activeSong.durationSeconds));
     setCurrentTime(clamped);
+    try {
+      ytPlayerRef.current?.seekTo(clamped, true);
+    } catch {}
   };
 
   const handleReset = () => {
     setCurrentTime(0);
     setIsPlaying(false);
+    rhythmSynthRef.current?.stop();
+    try {
+      ytPlayerRef.current?.pauseVideo();
+      ytPlayerRef.current?.seekTo(0, true);
+    } catch {}
   };
 
   const togglePlay = () => {
     if (currentTime >= activeSong.durationSeconds) {
       setCurrentTime(0);
+      try {
+        ytPlayerRef.current?.seekTo(0, true);
+      } catch {}
     }
-    setIsPlaying((prev) => !prev);
+    const willPlay = !isPlaying;
+    setIsPlaying(willPlay);
+    try {
+      if (willPlay) {
+        ytPlayerRef.current?.playVideo();
+      } else {
+        ytPlayerRef.current?.pauseVideo();
+      }
+    } catch {}
   };
 
   const activeTheme = THEME_STYLES[activeSegment.colorTheme];
@@ -262,6 +424,50 @@ export function TimbaSongAnatomyPlayer({
           >
             {activeSong.difficultyLevel} Level
           </Badge>
+
+          {/* Toggle Real Song Embedded Player */}
+          <Button
+            type="button"
+            size="sm"
+            variant={showVideoDrawer ? "default" : "outline"}
+            data-testid="toggle-song-stream"
+            onClick={() => setShowVideoDrawer((prev) => !prev)}
+            className={`h-8 text-xs font-bold transition-all ${
+              showVideoDrawer
+                ? "bg-red-600 hover:bg-red-700 text-white shadow-xs"
+                : "border-border text-foreground hover:bg-muted"
+            }`}
+          >
+            <YouTubeIcon className="mr-1.5 h-3.5 w-3.5 text-red-500" />
+            {showVideoDrawer ? "Close Song Player" : "Original Song Player"}
+          </Button>
+
+          {/* Toggle Web Audio Clave Helper */}
+          <Button
+            type="button"
+            size="sm"
+            variant={isClaveHelperActive ? "default" : "outline"}
+            data-testid="toggle-rhythm-audio"
+            onClick={() => setIsClaveHelperActive((prev) => !prev)}
+            className={`h-8 text-xs font-bold transition-all ${
+              isClaveHelperActive
+                ? "bg-amber-600 hover:bg-amber-700 text-white shadow-xs"
+                : "border-border text-foreground hover:bg-muted"
+            }`}
+          >
+            {isClaveHelperActive ? (
+              <>
+                <Volume2 className="mr-1.5 h-3.5 w-3.5" />
+                Clave Click: ON
+              </>
+            ) : (
+              <>
+                <VolumeX className="mr-1.5 h-3.5 w-3.5 text-muted-foreground" />
+                Clave Click: OFF
+              </>
+            )}
+          </Button>
+
           {activeSong.spotifyOrYoutubeEmbedUrl && (
             <Button
               asChild
@@ -275,12 +481,88 @@ export function TimbaSongAnatomyPlayer({
                 rel="noopener noreferrer"
               >
                 <Headphones className="mr-1.5 h-3.5 w-3.5 text-emerald-600" />
-                Listen on Spotify
+                Spotify
                 <ExternalLink className="ml-1 h-3 w-3" />
               </a>
             </Button>
           )}
         </div>
+      </div>
+
+      {/* Embedded Real Song Player Drawer */}
+      {showVideoDrawer && (
+        <div
+          data-testid="embedded-youtube-player-container"
+          className="rounded-2xl border border-border/80 bg-slate-950 p-3 sm:p-4 space-y-2 text-white shadow-md animate-in fade-in-50 duration-200"
+        >
+          <div className="flex items-center justify-between text-xs pb-2 border-b border-white/10">
+            <span className="font-bold flex items-center gap-1.5 text-white/90">
+              <YouTubeIcon className="h-4 w-4 text-red-500" />
+              Official Recording Stream • {activeSong.title} ({activeSong.artist})
+            </span>
+            <span className="text-[11px] text-white/60">
+              Two-way timeline synchronized
+            </span>
+          </div>
+          <div className="relative aspect-video w-full max-w-xl mx-auto rounded-xl overflow-hidden shadow-lg bg-black">
+            <iframe
+              id={`youtube-iframe-${selectedSongId}`}
+              data-testid="youtube-iframe"
+              title={`Official recording for ${activeSong.title}`}
+              src={`https://www.youtube-nocookie.com/embed/${activeSong.youtubeVideoId}?enablejsapi=1&playsinline=1&rel=0`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full border-0"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 8-Count Dancer Beat Bar */}
+      <div
+        data-testid="dancer-beat-bar"
+        className="rounded-2xl border border-border/70 bg-muted/20 p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs shadow-xs"
+      >
+        <div className="flex items-center gap-1.5 font-bold text-foreground">
+          <Headphones className="h-3.5 w-3.5 text-primary-base" />
+          <span>8-Count Dancer Rhythm Bar:</span>
+        </div>
+
+        <div className="flex items-center gap-1 sm:gap-1.5">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((beatNum) => {
+            const isCurrent = isPlaying && currentDancerBeat === beatNum;
+            const isBreakOn1 = beatNum === 1;
+            const isSonOn2 = beatNum === 2;
+
+            return (
+              <div
+                key={beatNum}
+                className={`h-7 px-2 sm:px-2.5 rounded-lg flex items-center justify-center font-mono font-black text-xs transition-all ${
+                  isCurrent
+                    ? "bg-primary-base text-white shadow-sm scale-105 ring-2 ring-primary-base/50"
+                    : isBreakOn1
+                    ? "border border-primary-base/40 bg-primary-base/10 text-primary-base"
+                    : isSonOn2
+                    ? "border border-sky-500/40 bg-sky-500/10 text-sky-700 dark:text-sky-300"
+                    : "border border-border/60 bg-card text-muted-foreground"
+                }`}
+                title={
+                  isBreakOn1
+                    ? "Beat 1: Casino On1 Break Step"
+                    : isSonOn2
+                    ? "Beat 2: Son Contratiempo Step"
+                    : `Beat ${beatNum}`
+                }
+              >
+                {beatNum}
+              </div>
+            );
+          })}
+        </div>
+
+        <span className="text-[10px] text-muted-foreground font-medium hidden md:inline">
+          Red = Beat 1 (On1) • Blue = Beat 2 (Son)
+        </span>
       </div>
 
       {/* 3. Proportional Interactive Timeline Scrubber */}

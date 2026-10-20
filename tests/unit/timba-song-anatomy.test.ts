@@ -7,15 +7,38 @@ import {
   resolveCurriculumMove,
 } from "@/lib/constants/timba-song-anatomy";
 import { CUBAN_CURRICULUM_DATA } from "@/lib/constants/cuban-curriculum-2027";
+import { getClaveStrokeBeats, CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
 
 describe("T2: Timba Song Anatomy Schema & Production Dataset", () => {
-  it("validates all production song maps against SongAnatomySchema", () => {
+  it("validates all production song maps against SongAnatomySchema and checks valid youtubeVideoId", () => {
     expect(TIMBA_SONG_ANATOMY_DATA.length).toBeGreaterThanOrEqual(2);
 
     for (const song of TIMBA_SONG_ANATOMY_DATA) {
       const parsed = SongAnatomySchema.safeParse(song);
       expect(parsed.success).toBe(true);
+      expect(song.youtubeVideoId).toBeDefined();
+      expect(song.youtubeVideoId.length).toBeGreaterThanOrEqual(5);
     }
+  });
+
+  it("proves getClaveStrokeBeats accurately maps authentic 2-3 and 3-2 Son and Rumba Claves", () => {
+    expect(getClaveStrokeBeats("2-3 Son")).toEqual([2, 3, 5, 6.5, 8]);
+    expect(getClaveStrokeBeats("3-2 Son")).toEqual([1, 2.5, 4, 6, 7]);
+    expect(getClaveStrokeBeats("2-3 Rumba")).toEqual([2, 3, 5, 6.5, 8.5]);
+    expect(getClaveStrokeBeats("3-2 Rumba")).toEqual([1, 2.5, 4.5, 6, 7]);
+  });
+
+  it("proves CubanRhythmSynth can instantiate, set BPM and mute safely in node environments", () => {
+    const synth = new CubanRhythmSynth({ bpm: 96, claveType: "2-3 Son" });
+    expect(synth.getIsRunning()).toBe(false);
+    expect(synth.getIsMuted()).toBe(false);
+
+    synth.setMuted(true);
+    expect(synth.getIsMuted()).toBe(true);
+
+    synth.setBpm(105);
+    synth.start();
+    synth.stop();
   });
 
   it("verifies 'Me Dicen Cuba' has 5 continuous, non-overlapping segments covering the entire song", () => {

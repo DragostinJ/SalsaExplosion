@@ -80,6 +80,7 @@ export const SongAnatomySchema = z.object({
   claveType: ClaveTypeSchema,
   difficultyLevel: SongDifficultySchema,
   durationSeconds: z.number().positive(),
+  youtubeVideoId: z.string().min(5),
   spotifyOrYoutubeEmbedUrl: z.string().optional(),
   segments: z.array(SongSegmentSchema).min(1),
 });
@@ -102,6 +103,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     claveType: "2-3 Son",
     difficultyLevel: "Beginner",
     durationSeconds: 275,
+    youtubeVideoId: "jBNgDYJjZP8",
     spotifyOrYoutubeEmbedUrl:
       "https://open.spotify.com/search/Alexander%20Abreu%20Me%20Dicen%20Cuba",
     segments: [
@@ -210,6 +212,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     claveType: "2-3 Rumba",
     difficultyLevel: "Intermediate",
     durationSeconds: 292,
+    youtubeVideoId: "f5L848r_jW0",
     spotifyOrYoutubeEmbedUrl:
       "https://open.spotify.com/search/El%20Nino%20y%20La%20Verdad%20La%20Cosa%20Mala",
     segments: [

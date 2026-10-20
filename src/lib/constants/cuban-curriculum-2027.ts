@@ -685,6 +685,18 @@ export const CURRICULUM_REFERENCE_SONGS: CurriculumReferenceSong[] = [
     instrumentsToListenFor: ["Timbales", "Guiro", "Heavy Bass Stabs"],
     spotifySearchUrl: "https://open.spotify.com/search/Elito%20Reve%20El%20Cuento%20de%20la%20Buena%20Pipa",
   },
+  {
+    id: "ref-adv-4",
+    title: "Chaca Chaca",
+    artist: "Maykel Blanco y Su Salsa Mayor",
+    bpm: 108,
+    level: "Advanced",
+    subGenre: "Timba Brava y Reparto",
+    whyThisSong: "Rapid piano tumbaos, syncopated floor breaks, and intense Afro-Cuban despelote mambos. Demands instant switching between Casino turns and Reparto/Tembleque.",
+    gearShiftsObserved: ["Gear 2 (Casino)", "Gear 3 (Guaguancó)", "Gear 5 (Reparto / Tembleque)"],
+    instrumentsToListenFor: ["High-speed Timbales", "Synthesizer Stabs", "Driving Cowbell"],
+    spotifySearchUrl: "https://open.spotify.com/search/Maykel%20Blanco%20Chaca%20Chaca",
+  },
 ];
 
 // ==========================================

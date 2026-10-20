@@ -55,6 +55,7 @@ interface SchedulePageProps {
   searchParams: Promise<{
     style?: string;
     level?: string;
+    day?: string;
     checkout?: string;
     pkg?: string;
   }>;
@@ -62,6 +63,14 @@ interface SchedulePageProps {
 
 const VALID_STYLES = new Set<string>(Object.values(DanceStyle));
 const VALID_LEVELS = new Set<string>(Object.values(DanceLevel));
+
+const DAY_TABS = [
+  { id: "all", label: "All Days" },
+  { id: "tuesday", label: "Tuesdays • Boscombe" },
+  { id: "wednesday", label: "Wednesdays • Poole" },
+  { id: "thursday", label: "Thursdays • BOH Studios" },
+  { id: "sunday", label: "Sundays • BOH Studios" },
+];
 
 export default async function StudentSchedulePage({
   searchParams,
@@ -81,6 +90,16 @@ export default async function StudentSchedulePage({
     resolvedParams.level && VALID_LEVELS.has(resolvedParams.level)
       ? (resolvedParams.level as DanceLevel)
       : undefined;
+
+  const dayParam = resolvedParams.day?.toLowerCase();
+  const validDays: Record<string, number> = {
+    tuesday: 2,
+    wednesday: 3,
+    thursday: 4,
+    sunday: 0,
+  };
+  const targetDayOfWeek =
+    dayParam && validDays[dayParam] !== undefined ? validDays[dayParam] : undefined;
 
   const checkoutStatus = resolvedParams.checkout;
 
@@ -153,7 +172,12 @@ export default async function StudentSchedulePage({
   });
 
   // 5. Transform Database Records into Serializable Client Props
-  const scheduleItems: ClassScheduleItem[] = upcomingClasses.map((session) => {
+  const filteredClasses =
+    targetDayOfWeek !== undefined
+      ? upcomingClasses.filter((s) => s.startTime.getDay() === targetDayOfWeek)
+      : upcomingClasses;
+
+  const scheduleItems: ClassScheduleItem[] = filteredClasses.map((session) => {
     let currentLeadsCount = 0;
     let currentFollowsCount = 0;
     let userBooking: {
@@ -296,51 +320,98 @@ export default async function StudentSchedulePage({
         )}
       </div>
 
-      {/* URL Search Param Filter Bar (Right at the Top!) */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3 max-w-full">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-            Filter Classes:
-          </span>
+      {/* Day & Level Filter Bars */}
+      <div className="space-y-3 border-b pb-4">
+        {/* Day of Week Filter Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Select Day:
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
+            {DAY_TABS.map((tab) => {
+              const isActive = (!dayParam && tab.id === "all") || dayParam === tab.id;
+              return (
+                <Button
+                  key={tab.id}
+                  asChild
+                  variant={isActive ? "default" : "outline"}
+                  size="sm"
+                  className={`h-8 text-xs font-bold min-h-8 shrink-0 whitespace-nowrap ${
+                    isActive
+                      ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
+                      : "border bg-card text-foreground hover:bg-muted"
+                  }`}
+                >
+                  <Link
+                    href={{
+                      pathname: "/dashboard/schedule",
+                      query: {
+                        ...(styleFilter ? { style: styleFilter } : {}),
+                        ...(levelFilter ? { level: levelFilter } : {}),
+                        ...(tab.id !== "all" ? { day: tab.id } : {}),
+                      },
+                    }}
+                  >
+                    {tab.label}
+                  </Link>
+                </Button>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
-          <Button
-            asChild
-            variant={!levelFilter ? "secondary" : "ghost"}
-            size="sm"
-            className="h-8 text-xs font-bold min-h-8 shrink-0 whitespace-nowrap"
-          >
-            <Link
-              href={{
-                pathname: "/dashboard/schedule",
-                query: { ...(styleFilter ? { style: styleFilter } : {}) },
-              }}
-            >
-              All Levels ({upcomingClasses.length})
-            </Link>
-          </Button>
-          {Object.values(DanceLevel).map((level) => (
+        {/* Syllabus Level Filter Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-border/50">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Syllabus Level:
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
             <Button
-              key={level}
               asChild
-              variant={levelFilter === level ? "secondary" : "ghost"}
+              variant={!levelFilter ? "secondary" : "ghost"}
               size="sm"
-              className="h-8 text-xs font-semibold min-h-8 shrink-0 whitespace-nowrap"
+              className="h-8 text-xs font-bold min-h-8 shrink-0 whitespace-nowrap"
             >
               <Link
                 href={{
                   pathname: "/dashboard/schedule",
                   query: {
                     ...(styleFilter ? { style: styleFilter } : {}),
-                    level,
+                    ...(dayParam ? { day: dayParam } : {}),
                   },
                 }}
               >
-                {level}
+                All Levels ({filteredClasses.length})
               </Link>
             </Button>
-          ))}
+            {Object.values(DanceLevel).map((level) => (
+              <Button
+                key={level}
+                asChild
+                variant={levelFilter === level ? "secondary" : "ghost"}
+                size="sm"
+                className="h-8 text-xs font-semibold min-h-8 shrink-0 whitespace-nowrap"
+              >
+                <Link
+                  href={{
+                    pathname: "/dashboard/schedule",
+                    query: {
+                      ...(styleFilter ? { style: styleFilter } : {}),
+                      ...(dayParam ? { day: dayParam } : {}),
+                      level,
+                    },
+                  }}
+                >
+                  {level}
+                </Link>
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
 

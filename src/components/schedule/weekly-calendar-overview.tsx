@@ -51,8 +51,8 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
       },
     ],
     freeParkingInfo: "Seafront parking & street bays nearby",
-    actionHref: "/venues",
-    actionLabel: "View Venue & Parking",
+    actionHref: "/dashboard/schedule?day=tuesday",
+    actionLabel: "View Tuesday Classes",
   },
   {
     day: "Wednesdays",
@@ -81,8 +81,8 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
       },
     ],
     freeParkingInfo: "Free parking on site and on the street",
-    actionHref: "tel:07969633701",
-    actionLabel: "Book Course: 07969 633701",
+    actionHref: "/dashboard/schedule?day=wednesday",
+    actionLabel: "View Wednesday Classes",
   },
   {
     day: "Thursdays",
@@ -121,8 +121,8 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
       },
     ],
     freeParkingInfo: "Free on-street parking after 6 PM & nearby Library Car Park",
-    actionHref: "/dashboard/schedule",
-    actionLabel: "Explore Thursday Classes",
+    actionHref: "/dashboard/schedule?day=thursday",
+    actionLabel: "View Thursday Classes",
   },
   {
     day: "Sundays",
@@ -159,8 +159,8 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
       },
     ],
     freeParkingInfo: "Free on-street parking after 6 PM",
-    actionHref: "/dashboard/schedule",
-    actionLabel: "View Sunday Schedule",
+    actionHref: "/dashboard/schedule?day=sunday",
+    actionLabel: "View Sunday Classes",
   },
 ];
 

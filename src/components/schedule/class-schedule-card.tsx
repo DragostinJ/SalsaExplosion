@@ -487,15 +487,15 @@ export function ClassScheduleCard({
                   type="button"
                   disabled={isPending || isLeadFull}
                   onClick={() => setSelectedRole(DanceRole.LEAD)}
-                  className={`flex items-center justify-between rounded-md border px-3 py-2 text-xs font-semibold transition-all ${
+                  className={`flex items-center justify-between rounded-lg border-2 px-3 py-2 text-xs font-bold transition-all min-h-[38px] ${
                     selectedRole === DanceRole.LEAD
-                      ? "border-primary bg-primary/10 text-primary-hover dark:text-primary-light ring-1 ring-primary"
-                      : "border-border bg-background hover:bg-accent"
+                      ? "border-primary-base bg-primary-base text-white shadow-xs ring-2 ring-primary-base/20"
+                      : "border-border bg-card text-foreground hover:bg-muted"
                   } ${isLeadFull ? "cursor-not-allowed opacity-50" : ""}`}
                 >
-                  <span className="font-bold">Lead</span>
+                  <span className="font-extrabold tracking-wide">Lead</span>
                   {session.maxLeads !== null && (
-                    <span className="text-[11px] text-muted-foreground">
+                    <span className={`text-[11px] font-bold ${selectedRole === DanceRole.LEAD ? "text-white/90" : "text-muted-foreground"}`}>
                       {isLeadFull
                         ? "Full"
                         : `${session.maxLeads - optimisticState.leadsCount} left`}
@@ -507,20 +507,18 @@ export function ClassScheduleCard({
                   type="button"
                   disabled={isPending || isFollowFull}
                   onClick={() => setSelectedRole(DanceRole.FOLLOW)}
-                  className={`flex items-center justify-between rounded-md border px-3 py-2 text-xs font-semibold transition-all ${
+                  className={`flex items-center justify-between rounded-lg border-2 px-3 py-2 text-xs font-bold transition-all min-h-[38px] ${
                     selectedRole === DanceRole.FOLLOW
-                      ? "border-primary bg-primary/10 text-primary-hover dark:text-primary-light ring-1 ring-primary"
-                      : "border-border bg-background hover:bg-accent"
+                      ? "border-secondary-base bg-secondary-base text-white shadow-xs ring-2 ring-secondary-base/20"
+                      : "border-border bg-card text-foreground hover:bg-muted"
                   } ${isFollowFull ? "cursor-not-allowed opacity-50" : ""}`}
                 >
-                  <span className="font-bold">Follow</span>
+                  <span className="font-extrabold tracking-wide">Follow</span>
                   {session.maxFollows !== null && (
-                    <span className="text-[11px] text-muted-foreground">
+                    <span className={`text-[11px] font-bold ${selectedRole === DanceRole.FOLLOW ? "text-white/90" : "text-muted-foreground"}`}>
                       {isFollowFull
                         ? "Full"
-                        : `${
-                            session.maxFollows - optimisticState.followsCount
-                          } left`}
+                        : `${session.maxFollows - optimisticState.followsCount} left`}
                     </span>
                   )}
                 </button>

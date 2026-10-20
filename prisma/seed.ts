@@ -48,7 +48,7 @@ async function main() {
   }
 
   // 2. Create Admin / Studio Owner (Enrique Perez Valdes)
-  await prisma.user.create({
+  const enriqueAdmin = await prisma.user.create({
     data: {
       clerkId: "user_seed_admin_001",
       email: "enrique@salsaexplosion.co.uk",
@@ -250,6 +250,23 @@ async function main() {
     ],
   });
 
+  // Helper for recurring weekly class dates
+  function getNextWeekdayDate(targetDay: 0 | 1 | 2 | 3 | 4 | 5 | 6, hour: number, minute: number): Date {
+    const date = new Date();
+    const currentDay = date.getDay();
+    let daysUntil = (targetDay - currentDay + 7) % 7;
+    if (daysUntil === 0) {
+      const currentHour = date.getHours();
+      const currentMinute = date.getMinutes();
+      if (currentHour > hour || (currentHour === hour && currentMinute >= minute)) {
+        daysUntil = 7;
+      }
+    }
+    date.setDate(date.getDate() + daysUntil);
+    date.setHours(hour, minute, 0, 0);
+    return date;
+  }
+
   // 5. Create Dance Class Sessions
   const twoDaysAgo = new Date();
   twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
@@ -289,81 +306,260 @@ async function main() {
     },
   });
 
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  tomorrow.setHours(18, 30, 0, 0);
+  // TUESDAYS @ Neptune Hall, Boscombe
+  const tue1Start = getNextWeekdayDate(2, 19, 15);
+  const tue1End = new Date(tue1Start);
+  tue1End.setHours(20, 15, 0, 0);
 
-  const tomorrowEnd = new Date(tomorrow);
-  tomorrowEnd.setHours(19, 45, 0, 0);
-
-  const class1 = await prisma.classSession.create({
+  const tueClass1 = await prisma.classSession.create({
     data: {
-      title: "Cuban Salsa Casino: Rueda Foundations",
+      title: "Cuban Salsa Level 1: Beginner 2 & Foundations",
       description:
-        "Master fundamental Rueda de Casino calls: Dame, Enchufla, Dile Que No, and Guapea timing with crisp circular group flow.",
+        "Step up from the basics with Jim & Enrique! Circular footwork, Dile Que No, and partner connection overlooking the waves at Boscombe Pier.",
       style: DanceStyle.CUBAN_SALSA,
       minLevel: DanceLevel.BEGINNER,
-      startTime: tomorrow,
-      endTime: tomorrowEnd,
-      room: "BOH Studios (Ballroom), Bournemouth",
+      startTime: tue1Start,
+      endTime: tue1End,
+      room: "Neptune Hall (Beachfront), Boscombe",
       maxCapacity: 24,
       maxLeads: 12,
       maxFollows: 12,
       bookedCount: 4,
       creditCost: 1,
+      instructorId: instructor4.id,
+    },
+  });
+
+  const tue2Start = getNextWeekdayDate(2, 20, 30);
+  const tue2End = new Date(tue2Start);
+  tue2End.setHours(21, 30, 0, 0);
+
+  const tueClass2 = await prisma.classSession.create({
+    data: {
+      title: "Cuban Salsa Level 2: Improvers Partnerwork & Rueda",
+      description:
+        "Dynamic partner turn patterns, Setenta variations, Enchufla flow, and synchronized circle calls on the seafront with Jim & Enrique.",
+      style: DanceStyle.CUBAN_SALSA,
+      minLevel: DanceLevel.IMPROVER,
+      startTime: tue2Start,
+      endTime: tue2End,
+      room: "Neptune Hall (Beachfront), Boscombe",
+      maxCapacity: 24,
+      maxLeads: 12,
+      maxFollows: 12,
+      bookedCount: 3,
+      creditCost: 1,
+      instructorId: enriqueAdmin.id,
+    },
+  });
+
+  // WEDNESDAYS @ The Woodlands Ballroom, Poole
+  const wed1Start = getNextWeekdayDate(3, 19, 0);
+  const wed1End = new Date(wed1Start);
+  wed1End.setHours(20, 0, 0, 0);
+
+  const wedClass1 = await prisma.classSession.create({
+    data: {
+      title: "6-Week Absolute Beginners Cuban Salsa Course (Level 0)",
+      description:
+        "Complete beginner course with Maestro Enrique Perez Valdes from Cuba! Zero experience or partner required. Sprung wooden ballroom floor.",
+      style: DanceStyle.CUBAN_SALSA,
+      minLevel: DanceLevel.BEGINNER,
+      startTime: wed1Start,
+      endTime: wed1End,
+      room: "The Woodlands Ballroom (Wood Sprung Floor), Poole",
+      maxCapacity: 30,
+      maxLeads: 15,
+      maxFollows: 15,
+      bookedCount: 6,
+      creditCost: 1,
+      instructorId: enriqueAdmin.id,
+    },
+  });
+
+  const wed2Start = getNextWeekdayDate(3, 19, 0);
+  const wed2End = new Date(wed2Start);
+  wed2End.setHours(20, 0, 0, 0);
+
+  const wedClass2 = await prisma.classSession.create({
+    data: {
+      title: "Cuban Salsa Beginner 2: Technique & Turn Timing (Level 1)",
+      description:
+        "Sharpen your Guapea, Vacilala, and body movement with Justyna & Arturas in room 2 of The Woodlands Ballroom.",
+      style: DanceStyle.CUBAN_SALSA,
+      minLevel: DanceLevel.BEGINNER,
+      startTime: wed2Start,
+      endTime: wed2End,
+      room: "The Woodlands Ballroom (Studio 2), Poole",
+      maxCapacity: 24,
+      maxLeads: 12,
+      maxFollows: 12,
+      bookedCount: 2,
+      creditCost: 1,
       instructorId: instructor2.id,
     },
   });
 
-  const nextDay = new Date();
-  nextDay.setDate(nextDay.getDate() + 2);
-  nextDay.setHours(20, 0, 0, 0);
+  const wed3Start = getNextWeekdayDate(3, 20, 0);
+  const wed3End = new Date(wed3Start);
+  wed3End.setHours(21, 0, 0, 0);
 
-  const nextDayEnd = new Date(nextDay);
-  nextDayEnd.setHours(21, 30, 0, 0);
-
-  const class2 = await prisma.classSession.create({
+  const wedClass3 = await prisma.classSession.create({
     data: {
-      title: "Cuban Salsa Casino: Setenta & Sombrero Turn Patterns",
+      title: "Cuban Salsa Improvers 2 & Intermediates Partnerwork",
       description:
-        "Intermediate partnerwork focusing on Setenta (70), Setenta Complicado, Vacilala, and Sombrero with Afro-Cuban Rumba body movement.",
+        "Complex Cuban Casino turns, Sombrero variations, and authentic musicality on Canadian maple and sprung wood with Maestro Enrique.",
+      style: DanceStyle.CUBAN_SALSA,
+      minLevel: DanceLevel.INTERMEDIATE,
+      startTime: wed3Start,
+      endTime: wed3End,
+      room: "The Woodlands Ballroom (Main Hall), Poole",
+      maxCapacity: 30,
+      maxLeads: 15,
+      maxFollows: 15,
+      bookedCount: 3,
+      creditCost: 1,
+      instructorId: enriqueAdmin.id,
+    },
+  });
+
+  // THURSDAYS @ BOH Studios, Bournemouth
+  const thu1Start = getNextWeekdayDate(4, 19, 0);
+  const thu1End = new Date(thu1Start);
+  thu1End.setHours(20, 0, 0, 0);
+
+  const thuClass1 = await prisma.classSession.create({
+    data: {
+      title: "Solo Salsa: Pasitos, Technique & Musicality (with Moe Flex)",
+      description:
+        "World-renowned salsa instructor & MC Moe Flex brings his infectious energy, body isolations, and footwork styling! Improvers onwards.",
       style: DanceStyle.CUBAN_SALSA,
       minLevel: DanceLevel.IMPROVER,
-      startTime: nextDay,
-      endTime: nextDayEnd,
-      room: "Pavilion Dance Studio, Bournemouth",
-      maxCapacity: 20,
-      maxLeads: 10,
-      maxFollows: 10,
-      bookedCount: 3,
+      startTime: thu1Start,
+      endTime: thu1End,
+      room: "BOH Studios (Ballroom), Bournemouth",
+      maxCapacity: 28,
+      maxLeads: 14,
+      maxFollows: 14,
+      bookedCount: 5,
+      creditCost: 1,
+      instructorId: instructor1.id,
+    },
+  });
+
+  const thu2Start = getNextWeekdayDate(4, 19, 0);
+  const thu2End = new Date(thu2Start);
+  thu2End.setHours(20, 0, 0, 0);
+
+  const thuClass2 = await prisma.classSession.create({
+    data: {
+      title: "Cuban Salsa Absolute Beginners: Two Separate Rooms (Level 0 & 1)",
+      description:
+        "Two dedicated beginner rooms running simultaneously with Justyna & Arturas. First-timers welcome, no partner required!",
+      style: DanceStyle.CUBAN_SALSA,
+      minLevel: DanceLevel.BEGINNER,
+      startTime: thu2Start,
+      endTime: thu2End,
+      room: "BOH Studios (Ground Floor Studio), Bournemouth",
+      maxCapacity: 30,
+      maxLeads: 15,
+      maxFollows: 15,
+      bookedCount: 4,
       creditCost: 1,
       instructorId: instructor3.id,
     },
   });
 
-  const dayThree = new Date();
-  dayThree.setDate(dayThree.getDate() + 3);
-  dayThree.setHours(19, 30, 0, 0);
+  const thu3Start = getNextWeekdayDate(4, 19, 0);
+  const thu3End = new Date(thu3Start);
+  thu3End.setHours(20, 0, 0, 0);
 
-  const dayThreeEnd = new Date(dayThree);
-  dayThreeEnd.setHours(21, 0, 0, 0);
-
-  const class3 = await prisma.classSession.create({
+  const thuClass3 = await prisma.classSession.create({
     data: {
-      title: "Beginner Foundations & Cuban Clave Timing",
+      title: "Rueda de Casino Intermediates",
       description:
-        "Beginners Cuban Salsa and rhythm foundation with Jim at Neptune Hall Boscombe.",
+        "High-octane circular group dancing! Rapid-fire Cuban calls, dame variations, and synchronized partner swaps with Jim & Enrique.",
       style: DanceStyle.CUBAN_SALSA,
-      minLevel: DanceLevel.BEGINNER,
-      startTime: dayThree,
-      endTime: dayThreeEnd,
-      room: "Neptune Hall, Boscombe",
+      minLevel: DanceLevel.INTERMEDIATE,
+      startTime: thu3Start,
+      endTime: thu3End,
+      room: "BOH Studios (The Triangle Room), Bournemouth",
       maxCapacity: 24,
       maxLeads: 12,
       maxFollows: 12,
       bookedCount: 2,
       creditCost: 1,
       instructorId: instructor4.id,
+    },
+  });
+
+  const thu4Start = getNextWeekdayDate(4, 20, 0);
+  const thu4End = new Date(thu4Start);
+  thu4End.setHours(21, 15, 0, 0);
+
+  const thuClass4 = await prisma.classSession.create({
+    data: {
+      title: "Cuban Salsa Partnerwork All Levels + Free Social till 11:30 PM",
+      description:
+        "Flagship Thursday session! Dedicated Improvers, Intermediates, and Advanced rooms with Moe Flex, Enrique & team, followed by FREE social dancing until 11:30 PM.",
+      style: DanceStyle.CUBAN_SALSA,
+      minLevel: DanceLevel.IMPROVER,
+      startTime: thu4Start,
+      endTime: thu4End,
+      room: "BOH Studios (Main Ballroom), Bournemouth",
+      maxCapacity: 40,
+      maxLeads: 20,
+      maxFollows: 20,
+      bookedCount: 7,
+      creditCost: 1,
+      instructorId: instructor1.id,
+    },
+  });
+
+  // SUNDAYS @ BOH Studios, Bournemouth
+  const sun1Start = getNextWeekdayDate(0, 18, 0);
+  const sun1End = new Date(sun1Start);
+  sun1End.setHours(19, 0, 0, 0);
+
+  const sunClass1 = await prisma.classSession.create({
+    data: {
+      title: "Sunday Cuban Salsa Beginners",
+      description:
+        "Relaxed Sunday evening session covering essential rhythm, partner frame, and basic Casino steps with Justyna & Arturas.",
+      style: DanceStyle.CUBAN_SALSA,
+      minLevel: DanceLevel.BEGINNER,
+      startTime: sun1Start,
+      endTime: sun1End,
+      room: "BOH Studios (Main Ballroom), Bournemouth",
+      maxCapacity: 24,
+      maxLeads: 12,
+      maxFollows: 12,
+      bookedCount: 3,
+      creditCost: 1,
+      instructorId: instructor2.id,
+    },
+  });
+
+  const sun2Start = getNextWeekdayDate(0, 19, 0);
+  const sun2End = new Date(sun2Start);
+  sun2End.setHours(20, 30, 0, 0);
+
+  const sunClass2 = await prisma.classSession.create({
+    data: {
+      title: "Sunday Salsa Improvers, Rueda Intermediates & 8PM Social Practice",
+      description:
+        "Intermediate combinations and fast-paced Rueda calls from 7:00 PM, followed by an open social dancing practice session from 8:00 PM with Enrique.",
+      style: DanceStyle.CUBAN_SALSA,
+      minLevel: DanceLevel.INTERMEDIATE,
+      startTime: sun2Start,
+      endTime: sun2End,
+      room: "BOH Studios (Main Ballroom), Bournemouth",
+      maxCapacity: 30,
+      maxLeads: 15,
+      maxFollows: 15,
+      bookedCount: 5,
+      creditCost: 1,
+      instructorId: enriqueAdmin.id,
     },
   });
 
@@ -392,60 +588,135 @@ async function main() {
         status: BookingStatus.ATTENDED,
         checkedInAt: twoDaysAgo,
       },
-      // Upcoming class1 bookings
+      // Tuesday class bookings
       {
         userId: student1.id,
-        classSessionId: class1.id,
+        classSessionId: tueClass1.id,
         danceRole: DanceRole.FOLLOW,
         status: BookingStatus.CONFIRMED,
       },
       {
         userId: student2.id,
-        classSessionId: class1.id,
+        classSessionId: tueClass1.id,
         danceRole: DanceRole.LEAD,
         status: BookingStatus.ATTENDED,
         checkedInAt: new Date(),
       },
       {
         userId: student4.id,
-        classSessionId: class1.id,
+        classSessionId: tueClass1.id,
         danceRole: DanceRole.LEAD,
         status: BookingStatus.CONFIRMED,
       },
       {
         userId: student6.id,
-        classSessionId: class1.id,
-        danceRole: DanceRole.LEAD,
-        status: BookingStatus.CONFIRMED,
-      },
-      {
-        userId: student1.id,
-        classSessionId: class2.id,
-        danceRole: DanceRole.FOLLOW,
-        status: BookingStatus.CONFIRMED,
-      },
-      {
-        userId: student3.id,
-        classSessionId: class2.id,
-        danceRole: DanceRole.FOLLOW,
-        status: BookingStatus.CONFIRMED,
-      },
-      {
-        userId: student4.id,
-        classSessionId: class2.id,
+        classSessionId: tueClass1.id,
         danceRole: DanceRole.LEAD,
         status: BookingStatus.CONFIRMED,
       },
       {
         userId: student3.id,
-        classSessionId: class3.id,
+        classSessionId: tueClass2.id,
         danceRole: DanceRole.FOLLOW,
         status: BookingStatus.CONFIRMED,
       },
       {
         userId: student5.id,
-        classSessionId: class3.id,
+        classSessionId: tueClass2.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.CONFIRMED,
+      },
+      // Wednesday class bookings
+      {
+        userId: student1.id,
+        classSessionId: wedClass1.id,
         danceRole: DanceRole.FOLLOW,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student3.id,
+        classSessionId: wedClass1.id,
+        danceRole: DanceRole.FOLLOW,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student4.id,
+        classSessionId: wedClass1.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student2.id,
+        classSessionId: wedClass2.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student5.id,
+        classSessionId: wedClass3.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.CONFIRMED,
+      },
+      // Thursday class bookings
+      {
+        userId: student1.id,
+        classSessionId: thuClass1.id,
+        danceRole: DanceRole.FOLLOW,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student2.id,
+        classSessionId: thuClass1.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student6.id,
+        classSessionId: thuClass2.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student4.id,
+        classSessionId: thuClass3.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student3.id,
+        classSessionId: thuClass4.id,
+        danceRole: DanceRole.FOLLOW,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student5.id,
+        classSessionId: thuClass4.id,
+        danceRole: DanceRole.FOLLOW,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student4.id,
+        classSessionId: thuClass4.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.CONFIRMED,
+      },
+      // Sunday class bookings
+      {
+        userId: student6.id,
+        classSessionId: sunClass1.id,
+        danceRole: DanceRole.LEAD,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student1.id,
+        classSessionId: sunClass2.id,
+        danceRole: DanceRole.FOLLOW,
+        status: BookingStatus.CONFIRMED,
+      },
+      {
+        userId: student2.id,
+        classSessionId: sunClass2.id,
+        danceRole: DanceRole.LEAD,
         status: BookingStatus.CONFIRMED,
       },
     ],

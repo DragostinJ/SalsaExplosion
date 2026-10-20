@@ -341,7 +341,7 @@ export default function HowItWorksPage() {
 
         <CubanCurriculumSkillTree defaultLevel="Beginner" />
 
-        <CubanDanceGearsMatrix />
+        <CubanDanceGearsMatrix initiallyCollapsed={true} />
       </section>
 
       {/* Staff & Faculty Operations Guide */}

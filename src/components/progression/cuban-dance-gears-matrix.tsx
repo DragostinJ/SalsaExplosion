@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   Compass,
-  Sparkles,
   Music,
   ShieldAlert,
 } from "lucide-react";
@@ -19,11 +18,14 @@ import {
 
 interface CubanDanceGearsMatrixProps {
   className?: string;
+  initiallyCollapsed?: boolean;
 }
 
 export function CubanDanceGearsMatrix({
   className = "",
+  initiallyCollapsed = false,
 }: CubanDanceGearsMatrixProps) {
+  const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed);
   const [selectedPhase, setSelectedPhase] = useState<TimbaSongPhase["phase"]>("Tema");
   const [activeGearFilter, setActiveGearFilter] = useState<number | "ALL">("ALL");
 
@@ -34,6 +36,45 @@ export function CubanDanceGearsMatrix({
     activeGearFilter === "ALL"
       ? CUBAN_DANCE_GEARS
       : CUBAN_DANCE_GEARS.filter((g) => g.gearNumber === activeGearFilter);
+
+  if (isCollapsed) {
+    return (
+      <section
+        data-testid="cuban-dance-gears-matrix"
+        aria-label="The Cuban Dance Gears & Timba Song Anatomy Guide"
+        className={`rounded-3xl border-2 border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-card to-rose-500/5 p-6 sm:p-8 space-y-4 shadow-sm ${className}`}
+      >
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1.5 max-w-2xl">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge className="bg-gradient-to-r from-amber-600 to-rose-600 text-white font-black text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-0.5">
+                <Compass className="h-3.5 w-3.5" />
+                Optional Deep-Dive • Best for Improvers &amp; Social Dancers
+              </Badge>
+              <span className="text-xs font-bold text-amber-800 dark:text-amber-300">
+                Timba Musicality
+              </span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-black text-foreground">
+              Curious Why Advanced Dancers Change Styles Mid-Song?
+            </h3>
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              Explore the 4 Phases of a Timba Song (Tema, Montuno, Mambo, Bomba) and the 5 Cuban Dance Gears whenever you&apos;re ready.
+            </p>
+          </div>
+
+          <Button
+            type="button"
+            data-testid="toggle-dance-gears-guide"
+            onClick={() => setIsCollapsed(false)}
+            className="shrink-0 bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-xs shadow-sm"
+          >
+            Open Interactive Musicality &amp; Gears Guide
+          </Button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -55,12 +96,20 @@ export function CubanDanceGearsMatrix({
               </Badge>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
-              The 5 Cuban Dance Gears & Song Anatomy
+              The 5 Cuban Dance Gears &amp; Song Anatomy
             </h2>
           </div>
-          <div className="flex items-center gap-1 text-xs text-muted-foreground font-semibold">
-            <Sparkles className="h-4 w-4 text-amber-500 shrink-0" />
-            <span>Interactive Timba Gear Shift Matrix</span>
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              data-testid="toggle-dance-gears-guide"
+              onClick={() => setIsCollapsed(true)}
+              className="font-bold text-xs"
+            >
+              Hide Musicality Guide
+            </Button>
           </div>
         </div>
 

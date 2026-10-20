@@ -6,7 +6,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     { name: "Homepage", path: "/" },
     { name: "Class Timetable", path: "/dashboard/schedule" },
     { name: "Events & Festivals Hub", path: "/events" },
-    { name: "Congress Event Details", path: "/events/bournemouth-summer-cuban-salsa-congress-2026" },
+    { name: "Congress Event Details", path: "/events/made-in-cuba-dance-weekend-2026" },
     { name: "Pricing & Passes", path: "/pricing" },
     { name: "1-on-1 Coaching", path: "/private-lessons" },
     { name: "Cuban Music Hub", path: "/music" },
@@ -74,7 +74,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     }
 
     // 2. Event pass selector CTAs on congress page
-    await page.goto("/events/bournemouth-summer-cuban-salsa-congress-2026");
+    await page.goto("/events/made-in-cuba-dance-weekend-2026");
     await page.waitForLoadState("domcontentloaded");
     const bookButtons = page.locator("button:has-text('Book as'), button:has-text('Get ')");
     const count = await bookButtons.count();
@@ -140,7 +140,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     const pricingTrustBar = page.locator('[data-testid="payment-security-trust-bar"]');
     await expect(pricingTrustBar).toBeVisible();
 
-    await page.goto("/events/bournemouth-summer-cuban-salsa-congress-2026");
+    await page.goto("/events/made-in-cuba-dance-weekend-2026");
     await page.waitForLoadState("domcontentloaded");
     const eventTrustBar = page.locator('[data-testid="payment-security-trust-bar"]');
     await expect(eventTrustBar).toBeVisible();

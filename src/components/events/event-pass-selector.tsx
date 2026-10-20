@@ -75,6 +75,7 @@ export function EventPassSelector({
     const isCongressPass =
       tier.name.toLowerCase().includes("full") ||
       tier.name.toLowerCase().includes("congress") ||
+      tier.name.toLowerCase().includes("weekend") ||
       tier.name.toLowerCase().includes("bootcamp");
 
     if (isCongressPass) {

@@ -210,8 +210,8 @@ export default async function StudentWalletPage() {
           <Card className="border border-dashed p-6 text-center text-xs text-muted-foreground space-y-2">
             <p>No festival passes registered yet.</p>
             <Button asChild size="sm" variant="outline" className="text-xs">
-              <Link href="/events/bournemouth-summer-cuban-salsa-congress-2026">
-                Get 2026 Congress Pass
+              <Link href="/events/made-in-cuba-dance-weekend-2026">
+                Get Made in Cuba Pass
               </Link>
             </Button>
           </Card>

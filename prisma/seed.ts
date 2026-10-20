@@ -768,107 +768,19 @@ async function main() {
     },
   });
 
-  // 7. Create Premiere Events Lineup (Salsa Explosion UK)
-  // Flagship Congress
-  const guestEvent = await prisma.event.create({
-    data: {
-      slug: "bournemouth-summer-cuban-salsa-congress-2026",
-      title: "Bournemouth Summer Cuban Salsa Congress 2026",
-      description:
-        "The UK's flagship Cuban dance festival! 3 days of intensive Cuban Salsa, Rueda de Casino, and Afro-Cuban masterclasses with world-class maestros from Cuba, culminating in our legendary Havana Fiesta Gala Party nights overlooking Bournemouth beach.",
-      venueName: "The Roundhouse Hotel & BOH Studios",
-      venueAddress: "Meyrick Road & 104 Commercial Rd, Bournemouth, BH1 2PR",
-      startDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-      endDate: new Date(Date.now() + 16 * 24 * 60 * 60 * 1000),
-      guestArtists: ["Enrique Perez Valdes", "Yaniel Castillo", "Fredy Clan", "DJ Enrique"],
-      status: EventStatus.PUBLISHED,
-      ticketTiers: {
-        create: [
-          {
-            name: "Full 3-Day Congress Pass (Early Bird)",
-            description:
-              "All workshops (Friday, Saturday & Sunday) + All Night Parties + Masterclass Certificate",
-            priceInCents: 9500,
-            totalCapacity: 80,
-            maxLeads: 40,
-            maxFollows: 40,
-            salesEndAt: new Date(Date.now() + 13 * 24 * 60 * 60 * 1000),
-          },
-          {
-            name: "Saturday Masterclass Bootcamp",
-            description:
-              "Saturday 5-hour Cuban Masterclass intensive (Casino turns, Afro-Cuban isolation & dynamic partnerwork)",
-            priceInCents: 6000,
-            totalCapacity: 50,
-            maxLeads: 25,
-            maxFollows: 25,
-            salesEndAt: new Date(Date.now() + 13 * 24 * 60 * 60 * 1000),
-          },
-          {
-            name: "Saturday Night Havana Fiesta Pass",
-            description:
-              "Entry to the Saturday Night Gala Fiesta with live Timba DJ sets, Cuban dance shows & social dancing",
-            priceInCents: 2000,
-            totalCapacity: 150,
-            salesEndAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-          },
-        ],
-      },
-    },
-    include: { ticketTiers: true },
-  });
-
-  // Event 2: Made in Cuba! Thursday Salsa & Rueda Fiesta
-  const madeInCubaEvent = await prisma.event.create({
-    data: {
-      slug: "made-in-cuba-thursday-fiesta",
-      title: "Made in Cuba! Thursday Salsa & Rueda Fiesta",
-      description:
-        "Bournemouth's legendary weekly Thursday Cuban night at BOH Studios! 2 hours of high-energy classes (Beginners, Improvers, and Advanced Rueda de Casino) followed by pure Timba, Cuban Salsa, and Bachata social dancing until midnight with DJ Enrique & special guest instructors.",
-      venueName: "BOH Studios Bournemouth",
-      venueAddress: "104 Commercial Rd, Bournemouth, BH2 5LR",
-      startDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-      endDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000),
-      guestArtists: ["Enrique Perez Valdes", "Moe Flex", "DJ Enrique"],
-      status: EventStatus.PUBLISHED,
-      ticketTiers: {
-        create: [
-          {
-            name: "2-Hour Classes + Party Pass",
-            description:
-              "7:30 PM & 8:30 PM Cuban Salsa & Rueda classes (all levels) plus full entry to the social dance fiesta until midnight.",
-            priceInCents: 1200,
-            totalCapacity: 60,
-            maxLeads: 30,
-            maxFollows: 30,
-            salesEndAt: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-          },
-          {
-            name: "Social Dancing Fiesta Only (From 9:30 PM)",
-            description:
-              "Club social dance entry with DJ Enrique spinning 100% authentic Cuban Timba, Son, and Bachata.",
-            priceInCents: 600,
-            totalCapacity: 100,
-            salesEndAt: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-          },
-        ],
-      },
-    },
-    include: { ticketTiers: true },
-  });
-
-  // Event 3: Halloween Fancy Dress Latin Party (Saturday 31st October 2026)
+  // 7. Create Premiere Events Lineup — Official DANZA! 2026 | 2027 Calendar (BOH Studios Bournemouth)
+  // Event 1: Halloween Fancy Dress Latin Party (Saturday 31st October 2026)
   const halloweenEvent = await prisma.event.create({
     data: {
       slug: "halloween-fancy-dress-latin-party-2026",
       title: "★ HALLOWEEN FANCY DRESS PARTY ★ — South Coast Cuban & Latin Night",
       description:
-        "The South Coast’s premier Cuban Dance event, Halloween Fancy Dress Edition! Alex Spindlove is bringing The Bachata flavour to our Halloween party. A night dedicated to Cuban, Latin, Kizomba music & dance featuring top South Coast teachers Anna, Alex (BOH Studios) PLUS The Salsa Explosion team (Enrique, Moe Flex, Justyna, Arturas & Jim) with DJ Enrique SB&K Night. Best costume prizes: 1st Prize - 1 Made in Cuba Weekend, 2nd Prize - 2 Free Dance Classes, 3rd Prize - 1 Free Entry to Our Party!",
+        "The South Coast’s premier Cuban Dance event, Halloween Fancy Dress Edition! Alex Spindlove is bringing The Bachata flavour to our Halloween party. A night dedicated to Cuban, Latin, Kizomba music & dance featuring top South Coast teachers Anna, Xaris, Alex (BOH Studios) PLUS The Salsa Explosion team (Enrique, Moe Flex, Justyna, Arturas & Jim) with DJ Enrique SB&K Night. Best costume prizes: 1st Prize - 1 Made in Cuba Weekend, 2nd Prize - 2 Free Dance Classes, 3rd Prize - 1 Free Entry to Our Party!",
       venueName: "BOH Studios Bournemouth",
       venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
       startDate: new Date("2026-10-31T20:00:00Z"),
       endDate: new Date("2026-11-01T02:00:00Z"),
-      guestArtists: ["Alex Spindlove", "Anna", "Enrique Perez Valdes", "Moe Flex", "DJ Enrique"],
+      guestArtists: ["Alex Spindlove", "Anna", "Xaris", "Alex (BOH)", "Enrique Perez Valdes", "Moe Flex", "DJ Enrique"],
       status: EventStatus.PUBLISHED,
       ticketTiers: {
         create: [
@@ -896,38 +808,84 @@ async function main() {
     include: { ticketTiers: true },
   });
 
-  // Event 4: Cuban Sundays Sunset Social & Workshop
-  const cubanSundaysEvent = await prisma.event.create({
+  // Event 2: SB&K Night Extravaganza (Saturday 14th November 2026)
+  await prisma.event.create({
     data: {
-      slug: "cuban-sundays-sunset-social",
-      title: "Cuban Sundays: Sunset Social & Styling Workshop",
+      slug: "sbk-night-extravaganza-nov-2026",
+      title: "SB&K NIGHT! EXTRAVAGANZA — Salsa, Bachata, Timba & Kizomba",
       description:
-        "End your weekend with the ultimate Cuban dance fix! Afro-Cuban body movement and Cuban Son styling workshops from 6:00 PM, followed by relaxed social dancing with DJ Enrique spinning classic Casino, Changüí, and Son.",
+        "Salsa Explosion presents SB&K Night at BOH Studios Bournemouth! 2 workshop rooms from 8:00 PM followed by our high-energy 4-genre Latin social fiesta until 1:00 AM with DJ Enrique & guest maestros.",
       venueName: "BOH Studios Bournemouth",
-      venueAddress: "104 Commercial Rd, Bournemouth, BH2 5LR",
-      startDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000),
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2026-11-14T20:00:00Z"),
+      endDate: new Date("2026-11-15T01:00:00Z"),
       guestArtists: ["Enrique Perez Valdes", "Justyna", "Arturas", "DJ Enrique"],
       status: EventStatus.PUBLISHED,
       ticketTiers: {
         create: [
           {
-            name: "Workshop Intensive & Social Pass",
+            name: "Workshops + Party Pass (8PM - 1AM)",
+            description: "Admission to 8PM Bachata & Cuban Salsa classes plus full social party.",
+            priceInCents: 1200,
+            totalCapacity: 100,
+            maxLeads: 50,
+            maxFollows: 50,
+            salesEndAt: new Date("2026-11-14T19:30:00Z"),
+          },
+          {
+            name: "Fiesta Social Pass Only (From 9:30 PM)",
+            description: "Late entry for Salsa, Bachata & Kizomba dancing until 1:00 AM.",
+            priceInCents: 800,
+            totalCapacity: 120,
+            salesEndAt: new Date("2026-11-14T22:30:00Z"),
+          },
+        ],
+      },
+    },
+  });
+
+  // Event 3: MADE IN CUBA Dance Weekend 2026 (4–6 December 2026) — Flagship Weekend Festival
+  const madeInCubaWeekendEvent = await prisma.event.create({
+    data: {
+      slug: "made-in-cuba-dance-weekend-2026",
+      title: "MADE IN CUBA — Dance Weekend 2026",
+      description:
+        "The South Coast's flagship Cuban dance festival! 3 days of intensive Cuban Salsa, Rueda de Casino, Son Cubano, Afro-Cuban & Timba masterclasses with world-class maestros from Cuba, culminating in our legendary Gala Party nights at BOH Studios Bournemouth overlooking the coastal lights.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2026-12-04T18:00:00Z"),
+      endDate: new Date("2026-12-06T23:00:00Z"),
+      guestArtists: ["Enrique Perez Valdes", "Moe Flex", "Yaniel Castillo", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Full 3-Day Congress Pass (Early Bird)",
             description:
-              "6:00 PM & 7:00 PM styling & Rueda workshops + Sunday evening social dance.",
-            priceInCents: 1000,
+              "All workshops (Friday, Saturday & Sunday) + All Night Parties + Masterclass Certificate",
+            priceInCents: 9500,
+            totalCapacity: 80,
+            maxLeads: 40,
+            maxFollows: 40,
+            salesEndAt: new Date("2026-12-04T17:00:00Z"),
+          },
+          {
+            name: "Saturday Masterclass Bootcamp",
+            description:
+              "Saturday 5-hour Cuban Masterclass intensive (Casino turns, Afro-Cuban isolation & dynamic partnerwork)",
+            priceInCents: 6000,
             totalCapacity: 50,
             maxLeads: 25,
             maxFollows: 25,
-            salesEndAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            salesEndAt: new Date("2026-12-04T17:00:00Z"),
           },
           {
-            name: "Sunday Social Only Entry (From 8:00 PM)",
+            name: "Saturday Night Havana Fiesta Pass",
             description:
-              "Social dance admission with resident Cuban DJs.",
-            priceInCents: 500,
-            totalCapacity: 80,
-            salesEndAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+              "Entry to the Saturday Night Gala Fiesta with live Timba DJ sets, Cuban dance shows & social dancing",
+            priceInCents: 2000,
+            totalCapacity: 150,
+            salesEndAt: new Date("2026-12-05T21:00:00Z"),
           },
         ],
       },
@@ -935,14 +893,349 @@ async function main() {
     include: { ticketTiers: true },
   });
 
-  // Seed sample Event Registrations
-  const fullPassTier = guestEvent.ticketTiers[0];
+  // Event 4: Salsa Explosion Xmas Party (Saturday 19th December 2026)
+  await prisma.event.create({
+    data: {
+      slug: "salsa-explosion-xmas-party-2026",
+      title: "SALSA EXPLOSION XMAS PARTY! 🎄",
+      description:
+        "Annual Christmas Cuban & Latin celebration at BOH Studios Bournemouth! Festive animations, special student showcases, holiday rum punch, and non-stop Cuban Salsa and Bachata dancing with Enrique & Moe Flex.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2026-12-19T20:00:00Z"),
+      endDate: new Date("2026-12-20T01:00:00Z"),
+      guestArtists: ["Enrique Perez Valdes", "Moe Flex", "Justyna", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Xmas Party & Workshop Pass",
+            description: "8PM festive Cuban Salsa class + Christmas party until 1:00 AM.",
+            priceInCents: 1500,
+            totalCapacity: 120,
+            maxLeads: 60,
+            maxFollows: 60,
+            salesEndAt: new Date("2026-12-19T19:30:00Z"),
+          },
+          {
+            name: "Xmas Social Party Pass",
+            description: "Admission to Christmas Latin party from 9:30 PM.",
+            priceInCents: 1000,
+            totalCapacity: 150,
+            salesEndAt: new Date("2026-12-19T22:30:00Z"),
+          },
+        ],
+      },
+    },
+  });
+
+  // Event 5: Xmas Season Latin Party (Sunday 27th December 2026)
+  await prisma.event.create({
+    data: {
+      slug: "xmas-season-latin-party-2026",
+      title: "XMAS SEASON LATIN PARTY",
+      description:
+        "Festive Sunday Latin social gathering at BOH Studios Bournemouth! Burn off the Christmas treats with relaxed Cuban Salsa, Son, and Bachata social dancing with resident maestros.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2026-12-27T18:00:00Z"),
+      endDate: new Date("2026-12-27T23:00:00Z"),
+      guestArtists: ["Enrique Perez Valdes", "Jim", "Arturas", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Workshop & Festive Social",
+            description: "6PM Cuban styling workshop + Sunday festive social dancing.",
+            priceInCents: 1000,
+            totalCapacity: 80,
+            maxLeads: 40,
+            maxFollows: 40,
+            salesEndAt: new Date("2026-12-27T17:30:00Z"),
+          },
+          {
+            name: "Social Dance Only Entry",
+            description: "Social entry from 7:30 PM to 11:00 PM.",
+            priceInCents: 600,
+            totalCapacity: 100,
+            salesEndAt: new Date("2026-12-27T20:30:00Z"),
+          },
+        ],
+      },
+    },
+  });
+
+  // Event 6: NYE Latin Fiesta (Thursday 31st December 2026)
+  await prisma.event.create({
+    data: {
+      slug: "nye-latin-fiesta-the-big-one-2026",
+      title: "NYE LATIN FIESTA (THE BIG ONE) — Welcome 2027!",
+      description:
+        "The premier New Year's Eve Latin countdown fiesta on the South Coast! Midnight champagne toast, 12 grapes Cuban tradition, two dance rooms, and authentic Salsa, Timba & Bachata partying until 3:00 AM.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2026-12-31T20:00:00Z"),
+      endDate: new Date("2027-01-01T03:00:00Z"),
+      guestArtists: ["Enrique Perez Valdes", "Moe Flex", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "NYE All-Inclusive Party Pass",
+            description: "Full entry 8PM-3AM, midnight bubbles toast, and Cuban celebration grapes.",
+            priceInCents: 2500,
+            totalCapacity: 150,
+            maxLeads: 75,
+            maxFollows: 75,
+            salesEndAt: new Date("2026-12-31T19:30:00Z"),
+          },
+          {
+            name: "Midnight Social Entry (From 11PM)",
+            description: "Countdown party admission from 11:00 PM to 3:00 AM.",
+            priceInCents: 1800,
+            totalCapacity: 100,
+            salesEndAt: new Date("2026-12-31T23:30:00Z"),
+          },
+        ],
+      },
+    },
+  });
+
+  // Event 7: First Party of the Year 2027 (Saturday 9th January 2027)
+  await prisma.event.create({
+    data: {
+      slug: "first-party-of-the-year-jan-2027",
+      title: "FIRST PARTY OF THE YEAR 2027",
+      description:
+        "Start 2027 on the dance floor! First major Saturday Latin fiesta of the new year at BOH Studios Bournemouth with high-energy Cuban Salsa workshops and open social dancing.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2027-01-09T20:00:00Z"),
+      endDate: new Date("2027-01-10T01:00:00Z"),
+      guestArtists: ["Enrique Perez Valdes", "Justyna", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Workshops & Party Pass",
+            description: "8PM Cuban Salsa classes + fiesta until 1:00 AM.",
+            priceInCents: 1200,
+            totalCapacity: 100,
+            maxLeads: 50,
+            maxFollows: 50,
+            salesEndAt: new Date("2027-01-09T19:30:00Z"),
+          },
+          {
+            name: "Party Pass Only",
+            description: "Social entry from 9:30 PM.",
+            priceInCents: 800,
+            totalCapacity: 120,
+            salesEndAt: new Date("2027-01-09T22:30:00Z"),
+          },
+        ],
+      },
+    },
+  });
+
+  // Event 8: Moe Flex Bootcamp & Party (Saturday 30th January 2027)
+  const moeFlexBootcampEvent = await prisma.event.create({
+    data: {
+      slug: "moe-flex-bootcamp-and-party-jan-2027",
+      title: "MOE FLEX BOOTCAMP & PARTY — Pure Energy & Musicality",
+      description:
+        "The General of MCs Moe Flex is back at BOH Studios Bournemouth! 4 hours of intensive daytime Pasitos, body isolations, and musicality bootcamp, followed by an explosive evening Latin party with Moe & Enrique.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2027-01-30T14:00:00Z"),
+      endDate: new Date("2027-01-31T01:00:00Z"),
+      guestArtists: ["Moe Flex", "Enrique Perez Valdes", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Full Bootcamp + Evening Party Pass",
+            description: "14:00-18:00 masterclass intensive + entry to 8PM-1AM evening party.",
+            priceInCents: 4500,
+            totalCapacity: 60,
+            maxLeads: 30,
+            maxFollows: 30,
+            salesEndAt: new Date("2027-01-30T13:30:00Z"),
+          },
+          {
+            name: "Evening Party Only (From 8PM)",
+            description: "Admission to evening workshops and social dance party.",
+            priceInCents: 1200,
+            totalCapacity: 120,
+            salesEndAt: new Date("2027-01-30T22:30:00Z"),
+          },
+        ],
+      },
+    },
+    include: { ticketTiers: true },
+  });
+
+  // Event 9: Valentine Love Dance Weekend (13–14 February 2027)
+  await prisma.event.create({
+    data: {
+      slug: "valentine-love-dance-weekend-2027",
+      title: "VALENTINE LOVE DANCE WEEKEND 2027",
+      description:
+        "Romantic 2-day Cuban Salsa, Son Cubano & Sensual Bachata dance weekender at BOH Studios Bournemouth! Daytime connection masterclasses and Saturday night Red & White Valentine Ball.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2027-02-13T12:00:00Z"),
+      endDate: new Date("2027-02-14T23:00:00Z"),
+      guestArtists: ["Enrique Perez Valdes", "Justyna", "Arturas", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Full Weekend Pass (Both Days + Ball)",
+            description: "All workshops across both days plus Saturday night Valentine Ball.",
+            priceInCents: 5500,
+            totalCapacity: 80,
+            maxLeads: 40,
+            maxFollows: 40,
+            salesEndAt: new Date("2027-02-13T11:30:00Z"),
+          },
+          {
+            name: "Saturday Ball & Social Only",
+            description: "Entry to Saturday Night Red & White Valentine Fiesta.",
+            priceInCents: 1500,
+            totalCapacity: 120,
+            salesEndAt: new Date("2027-02-13T22:30:00Z"),
+          },
+        ],
+      },
+    },
+  });
+
+  // Event 10: Spring Latin White Party (Saturday 6th March 2027)
+  await prisma.event.create({
+    data: {
+      slug: "spring-latin-white-party-mar-2027",
+      title: "SPRING LATIN WHITE PARTY",
+      description:
+        "Welcome spring dressed in pure white! Salsa Explosion's signature White Fiesta at BOH Studios Bournemouth with guest artists, fun animations, and vibrant Cuban music.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2027-03-06T20:00:00Z"),
+      endDate: new Date("2027-03-07T01:00:00Z"),
+      guestArtists: ["Enrique Perez Valdes", "Anna", "Jim", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "White Party & Workshop Pass",
+            description: "8PM Cuban Salsa classes + white dress code fiesta until 1:00 AM.",
+            priceInCents: 1400,
+            totalCapacity: 100,
+            maxLeads: 50,
+            maxFollows: 50,
+            salesEndAt: new Date("2027-03-06T19:30:00Z"),
+          },
+          {
+            name: "Social Dance Entry Only",
+            description: "Social entry from 9:30 PM.",
+            priceInCents: 900,
+            totalCapacity: 120,
+            salesEndAt: new Date("2027-03-06T22:30:00Z"),
+          },
+        ],
+      },
+    },
+  });
+
+  // Event 11: The Unmatched Dance Star: Barbara Jiménez Weekend (3–4 April 2027)
+  const barbaraJimenezEvent = await prisma.event.create({
+    data: {
+      slug: "barbara-jimenez-cuban-weekend-2027",
+      title: "THE UNMATCHED DANCE STAR: BARBARA JIMÉNEZ WEEKEND",
+      description:
+        "World-renowned Cuban dance superstar Barbara Jiménez comes to BOH Studios Bournemouth! 2 days of world-class Afro-Cuban movement, Cuban styling, Casino partnerwork masterclasses, and Saturday night Gala Fiesta.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2027-04-03T12:00:00Z"),
+      endDate: new Date("2027-04-04T23:00:00Z"),
+      guestArtists: ["Barbara Jiménez", "Enrique Perez Valdes", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Full 2-Day Barbara Jiménez Pass",
+            description: "All masterclasses across Saturday & Sunday + Saturday Night Gala Fiesta.",
+            priceInCents: 7500,
+            totalCapacity: 60,
+            maxLeads: 30,
+            maxFollows: 30,
+            salesEndAt: new Date("2027-04-03T11:30:00Z"),
+          },
+          {
+            name: "Saturday Masterclasses + Gala Party",
+            description: "Saturday Afro-Cuban & styling intensives + Gala Party entry.",
+            priceInCents: 5000,
+            totalCapacity: 50,
+            maxLeads: 25,
+            maxFollows: 25,
+            salesEndAt: new Date("2027-04-03T11:30:00Z"),
+          },
+          {
+            name: "Saturday Gala Party Only",
+            description: "Saturday Night Gala Fiesta entry with Barbara Jiménez showcase.",
+            priceInCents: 1800,
+            totalCapacity: 150,
+            salesEndAt: new Date("2027-04-03T21:30:00Z"),
+          },
+        ],
+      },
+    },
+    include: { ticketTiers: true },
+  });
+
+  // Event 12: Love Cuban Dance Fiesta (Saturday 1st May 2027)
+  await prisma.event.create({
+    data: {
+      slug: "love-cuban-dance-may-2027",
+      title: "LOVE CUBAN DANCE FIESTA — May Bank Holiday Edition",
+      description:
+        "Celebrate the May Bank Holiday weekend with Salsa Explosion! An evening dedicated to Cuban dance, music & culture with Rueda de Casino, Son, and Timba at BOH Studios Bournemouth.",
+      venueName: "BOH Studios Bournemouth",
+      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
+      startDate: new Date("2027-05-01T20:00:00Z"),
+      endDate: new Date("2027-05-02T02:00:00Z"),
+      guestArtists: ["Enrique Perez Valdes", "Moe Flex", "Arturas", "DJ Enrique"],
+      status: EventStatus.PUBLISHED,
+      ticketTiers: {
+        create: [
+          {
+            name: "Bank Holiday Workshop & Fiesta Pass",
+            description: "8PM workshops in 2 rooms + party until 2:00 AM.",
+            priceInCents: 1400,
+            totalCapacity: 100,
+            maxLeads: 50,
+            maxFollows: 50,
+            salesEndAt: new Date("2027-05-01T19:30:00Z"),
+          },
+          {
+            name: "Evening Social Entry Only",
+            description: "Social dancing admission from 9:30 PM.",
+            priceInCents: 900,
+            totalCapacity: 120,
+            salesEndAt: new Date("2027-05-01T22:30:00Z"),
+          },
+        ],
+      },
+    },
+  });
+
+  // Seed sample Event Registrations for Made in Cuba Weekend
+  const fullPassTier = madeInCubaWeekendEvent.ticketTiers[0];
   if (fullPassTier) {
     await prisma.eventRegistration.createMany({
       data: [
         {
           userId: student1.id,
-          eventId: guestEvent.id,
+          eventId: madeInCubaWeekendEvent.id,
           ticketTierId: fullPassTier.id,
           role: DanceRole.FOLLOW,
           qrCodeHash: "SE-PASS-SOFIA-001",
@@ -952,7 +1245,7 @@ async function main() {
         },
         {
           userId: student4.id,
-          eventId: guestEvent.id,
+          eventId: madeInCubaWeekendEvent.id,
           ticketTierId: fullPassTier.id,
           role: DanceRole.LEAD,
           qrCodeHash: "SE-PASS-MATEO-002",
@@ -963,43 +1256,13 @@ async function main() {
         },
         {
           userId: student5.id,
-          eventId: guestEvent.id,
+          eventId: madeInCubaWeekendEvent.id,
           ticketTierId: fullPassTier.id,
           role: DanceRole.FOLLOW,
           qrCodeHash: "SE-PASS-LUCIA-003",
           paymentStatus: TicketPaymentStatus.PAID,
           amountPaidInCents: 9500,
           checkedIn: false,
-        },
-      ],
-    });
-  }
-
-  // Seed sample registrations for Made in Cuba Thursday
-  const madeInCubaTier = madeInCubaEvent.ticketTiers[0];
-  if (madeInCubaTier) {
-    await prisma.eventRegistration.createMany({
-      data: [
-        {
-          userId: student2.id,
-          eventId: madeInCubaEvent.id,
-          ticketTierId: madeInCubaTier.id,
-          role: DanceRole.LEAD,
-          qrCodeHash: "SE-THU-DAVID-001",
-          paymentStatus: TicketPaymentStatus.PAID,
-          amountPaidInCents: 1200,
-          checkedIn: false,
-        },
-        {
-          userId: student3.id,
-          eventId: madeInCubaEvent.id,
-          ticketTierId: madeInCubaTier.id,
-          role: DanceRole.FOLLOW,
-          qrCodeHash: "SE-THU-CAMILA-002",
-          paymentStatus: TicketPaymentStatus.PAID,
-          amountPaidInCents: 1200,
-          checkedIn: true,
-          checkedInAt: new Date(),
         },
       ],
     });
@@ -1034,19 +1297,49 @@ async function main() {
     });
   }
 
-  // Seed sample registrations for Cuban Sundays Sunset Social
-  const sundayTier = cubanSundaysEvent.ticketTiers[0];
-  if (sundayTier) {
+  // Seed sample registrations for Moe Flex Bootcamp
+  const moeFlexTier = moeFlexBootcampEvent.ticketTiers[0];
+  if (moeFlexTier) {
+    await prisma.eventRegistration.createMany({
+      data: [
+        {
+          userId: student2.id,
+          eventId: moeFlexBootcampEvent.id,
+          ticketTierId: moeFlexTier.id,
+          role: DanceRole.LEAD,
+          qrCodeHash: "SE-MOE-DAVID-001",
+          paymentStatus: TicketPaymentStatus.PAID,
+          amountPaidInCents: 4500,
+          checkedIn: false,
+        },
+        {
+          userId: student3.id,
+          eventId: moeFlexBootcampEvent.id,
+          ticketTierId: moeFlexTier.id,
+          role: DanceRole.FOLLOW,
+          qrCodeHash: "SE-MOE-CAMILA-002",
+          paymentStatus: TicketPaymentStatus.PAID,
+          amountPaidInCents: 4500,
+          checkedIn: true,
+          checkedInAt: new Date(),
+        },
+      ],
+    });
+  }
+
+  // Seed sample registrations for Barbara Jiménez Masterclass
+  const barbaraTier = barbaraJimenezEvent.ticketTiers[0];
+  if (barbaraTier) {
     await prisma.eventRegistration.createMany({
       data: [
         {
           userId: student6.id,
-          eventId: cubanSundaysEvent.id,
-          ticketTierId: sundayTier.id,
+          eventId: barbaraJimenezEvent.id,
+          ticketTierId: barbaraTier.id,
           role: DanceRole.LEAD,
-          qrCodeHash: "SE-SUN-JAMES-001",
+          qrCodeHash: "SE-BARBARA-JAMES-001",
           paymentStatus: TicketPaymentStatus.PAID,
-          amountPaidInCents: 1000,
+          amountPaidInCents: 7500,
           checkedIn: false,
         },
       ],

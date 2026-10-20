@@ -62,12 +62,12 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "photo-4",
-    title: "Bournemouth Summer Cuban Salsa Congress",
+    title: "Made in Cuba Dance Weekend",
     caption:
       "Full house for our international guest maestros weekend festival with 3 days of workshops and Havana nights social parties.",
     category: "BOOTCAMPS",
-    imageUrl: "/images/congress-2025.jpg",
-    location: "The Roundhouse Hotel & BOH Studios",
+    imageUrl: "/images/danza-2026-2027-calendar.png",
+    location: "BOH Studios Bournemouth",
   },
 ];
 

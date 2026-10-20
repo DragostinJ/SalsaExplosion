@@ -131,9 +131,9 @@ export default async function Home() {
                 size="lg"
                 className="h-12 px-7 text-sm font-semibold border-secondary-base/40 text-secondary-hover hover:bg-secondary-light/40"
               >
-                <Link href="/events">
+                <Link href="/events/made-in-cuba-dance-weekend-2026">
                   <Flame className="mr-2 h-4 w-4 text-accent-tangerine" />
-                  Bournemouth Congress 2026
+                  Made in Cuba Weekend 2026
                 </Link>
               </Button>
               <Button
@@ -360,13 +360,13 @@ export default async function Home() {
                   <Badge className="bg-primary-base text-white font-bold text-xs uppercase tracking-wider">
                     Official Flagship Event
                   </Badge>
-                  <span className="text-xs text-muted-foreground font-medium">July 17–19, 2026</span>
+                  <span className="text-xs text-muted-foreground font-medium">December 4–6, 2026</span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
-                  Bournemouth Summer Cuban Salsa Congress 2026
+                  MADE IN CUBA — Dance Weekend 2026
                 </h2>
                 <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl">
-                  3 days of authentic Cuban masterclasses, Rueda de Casino, Havana nights social dancing, and world-class guest artists featuring Enrique Perez Valdes, Moe Flex, and the Salsa Explosion team at The Roundhouse Hotel & BOH Studios Bournemouth.
+                  3 days of authentic Cuban masterclasses, Rueda de Casino, Son Cubano, Afro-Cuban &amp; Timba weekend festival with international maestros and legendary social fiesta nights at BOH Studios Bournemouth.
                 </p>
               </div>
 
@@ -375,7 +375,7 @@ export default async function Home() {
                   asChild
                   className="w-full sm:w-auto bg-primary-base hover:bg-primary-hover text-white font-bold px-6"
                 >
-                  <Link href="/events">
+                  <Link href="/events/made-in-cuba-dance-weekend-2026">
                     Reserve Passes (From £20)
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>

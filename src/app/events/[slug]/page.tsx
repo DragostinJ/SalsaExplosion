@@ -316,7 +316,7 @@ export default async function EventDetailPage({
       </div>
 
       {/* Venue & Event Guide */}
-      {event.slug.includes("congress") ? (
+      {event.slug.includes("congress") || event.slug.includes("weekend") ? (
         <CongressTravelGuide />
       ) : (
         <StudioEventGuide eventTitle={event.title} venueName={event.venueName} />

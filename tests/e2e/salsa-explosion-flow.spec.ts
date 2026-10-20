@@ -70,7 +70,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     }
   });
 
-  test("3. Opening the 2026 Bournemouth Summer Congress page, ticket tiers, and VIP upsell drawer", async ({
+  test("3. Opening the Made in Cuba Weekend page, ticket tiers, and VIP upsell drawer", async ({
     page,
   }) => {
     // 1. Open Events Directory
@@ -79,17 +79,17 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByText("Salsa Explosion Congresses & Masterclasses")
     ).toBeVisible();
 
-    // 2. Open Congress Detail Page
-    await page.goto("/events/bournemouth-summer-cuban-salsa-congress-2026", {
+    // 2. Open Congress/Weekend Festival Detail Page
+    await page.goto("/events/made-in-cuba-dance-weekend-2026", {
       waitUntil: "domcontentloaded",
     });
 
     // Verify Title and Venue
     await expect(
-      page.getByText("Bournemouth Summer Cuban Salsa Congress 2026").first()
+      page.getByText("MADE IN CUBA — Dance Weekend 2026").first()
     ).toBeVisible();
     await expect(
-      page.getByText(/The Roundhouse Hotel/i).first()
+      page.getByText(/BOH Studios Bournemouth/i).first()
     ).toBeVisible();
 
     // Verify Ticket Tiers

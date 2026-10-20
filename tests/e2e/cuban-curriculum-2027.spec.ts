@@ -137,9 +137,23 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     const player = page.locator('[data-testid="timba-song-anatomy-player"]');
     await expect(player).toBeVisible();
 
-    // Verify initial song is Me Dicen Cuba
+    // Verify initial song is Me Dicen Cuba with calibrated 5:27 duration
     await expect(player.getByRole("heading", { name: "Me Dicen Cuba" })).toBeVisible();
     await expect(player.getByText("2-3 Son Clave")).toBeVisible();
+    await expect(player.getByText(/0:00 \/ 5:27/)).toBeVisible();
+
+    // Verify YouTube player container is mounted and visible by default
+    const videoContainer = player.locator('[data-testid="embedded-youtube-player-container"]');
+    await expect(videoContainer).toBeVisible();
+    await expect(videoContainer.locator('[data-testid="youtube-iframe"]')).toBeVisible();
+
+    // Verify drawer toggle hides and restores video container
+    const streamToggle = player.locator('[data-testid="toggle-song-stream"]');
+    await expect(streamToggle).toBeVisible();
+    await streamToggle.click();
+    await expect(videoContainer).not.toBeVisible();
+    await streamToggle.click();
+    await expect(videoContainer).toBeVisible();
 
     // Verify timeline segments exist (5 segments for Me Dicen Cuba)
     const seg0 = player.locator('[data-testid="timeline-segment-0"]');
@@ -175,11 +189,18 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     await expect(laCosaMalaTab).toBeVisible();
     await laCosaMalaTab.click();
 
-    // Verify La Cosa Mala metadata and 8 segments
+    // Verify La Cosa Mala metadata, calibrated 5:46 duration, and 8 segments
     await expect(player.getByRole("heading", { name: "La Cosa Mala" })).toBeVisible();
     await expect(player.getByText("2-3 Rumba Clave")).toBeVisible();
+    await expect(player.getByText(/0:00 \/ 5:46/)).toBeVisible();
     const seg7 = player.locator('[data-testid="timeline-segment-7"]');
     await expect(seg7).toBeVisible();
+
+    // Verify version switch buttons exist (Studio Audio 5:46 vs Music Video 6:11)
+    const studioBtn = player.locator('[data-testid="switch-version-studio"]');
+    const videoBtn = player.locator('[data-testid="switch-version-video"]');
+    await expect(studioBtn).toBeVisible();
+    await expect(videoBtn).toBeVisible();
 
     // Verify 8-Count Dancer Beat Bar exists
     const beatBar = player.locator('[data-testid="dancer-beat-bar"]');
@@ -195,21 +216,10 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     await claveBtn.click();
     await expect(claveBtn).toContainText("Clave Click: OFF");
 
-    // Verify In-Page Original Song Player Drawer Toggle works
-    const streamToggle = player.locator('[data-testid="toggle-song-stream"]');
-    await expect(streamToggle).toBeVisible();
-    await streamToggle.click();
-
-    const videoContainer = player.locator('[data-testid="embedded-youtube-player-container"]');
-    await expect(videoContainer).toBeVisible();
-    await expect(videoContainer.locator('[data-testid="youtube-iframe"]')).toBeVisible();
-
-    await streamToggle.click();
-    await expect(videoContainer).not.toBeVisible();
-
-    // Verify zero serious or critical accessibility violations on /music
+    // Verify zero serious or critical accessibility violations on /music (excluding third-party YouTube embed iframe)
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .exclude("iframe")
       .analyze();
 
     const seriousOrCriticalViolations = accessibilityScanResults.violations.filter(
@@ -225,12 +235,13 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     // Emulate OS Dark Mode to ensure Tailwind v4 dark variant does not cause contrast bugs
     await page.emulateMedia({ colorScheme: "dark" });
 
-    // 1. Audit /music under OS Dark Mode
+    // 1. Audit /music under OS Dark Mode (excluding third-party YouTube embed iframe)
     await page.goto("/music");
     await page.waitForLoadState("domcontentloaded");
 
     const musicAxeResults = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .exclude("iframe")
       .analyze();
 
     const musicViolations = musicAxeResults.violations.filter(

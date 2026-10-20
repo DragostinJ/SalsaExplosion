@@ -170,7 +170,7 @@ export function WeeklyCalendarOverview() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div className="space-y-1">
           <div className="inline-flex items-center gap-2">
-            <Badge className="bg-amber-500 text-zinc-950 font-extrabold text-xs">
+            <Badge className="bg-primary-base text-white font-extrabold text-xs">
               <CalendarDays className="mr-1.5 h-3.5 w-3.5" />
               Weekly Class Calendar
             </Badge>
@@ -189,7 +189,7 @@ export function WeeklyCalendarOverview() {
         <div className="flex items-center gap-2">
           <Button asChild size="sm" variant="outline" className="text-xs font-semibold">
             <a href="tel:07969633701">
-              <Phone className="mr-1.5 h-3.5 w-3.5 text-amber-600" />
+              <Phone className="mr-1.5 h-3.5 w-3.5 text-muted-foreground" />
               Call / WhatsApp: 07969 633701
             </a>
           </Button>
@@ -200,16 +200,16 @@ export function WeeklyCalendarOverview() {
         {WEEKLY_SCHEDULE.map((item) => (
           <Card
             key={item.day}
-            className="flex flex-col justify-between overflow-hidden border border-border/80 shadow-xs hover:border-amber-500/50 hover:shadow-md transition-all"
+            className="flex flex-col justify-between overflow-hidden border border-border/80 shadow-xs hover:border-primary-base/40 hover:shadow-md transition-all"
           >
             <div>
               {/* Day Header Banner */}
-              <div className="bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-transparent p-5 border-b space-y-2">
+              <div className="bg-muted/30 p-5 border-b space-y-2">
                 <div className="flex items-center justify-between">
-                  <Badge className="bg-amber-500 text-zinc-950 font-black text-xs uppercase tracking-wider">
+                  <Badge className="bg-foreground text-background font-black text-xs uppercase tracking-wider">
                     {item.day}
                   </Badge>
-                  <span className="text-xs font-bold text-amber-800 dark:text-amber-300">
+                  <span className="text-xs font-semibold text-muted-foreground">
                     {item.dayBadge}
                   </span>
                 </div>
@@ -220,15 +220,15 @@ export function WeeklyCalendarOverview() {
                       {item.venueName}
                     </h3>
                     <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
-                      <MapPin className="h-3.5 w-3.5 text-amber-600 shrink-0" />
+                      <MapPin className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
                       <span>{item.venueAddress}</span>
                     </p>
                   </div>
                 </div>
 
                 {item.specialGuestNotice && (
-                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 flex items-center gap-2 text-xs font-bold text-amber-900 dark:text-amber-200">
-                    <Flame className="h-4 w-4 text-amber-600 shrink-0" />
+                  <div className="rounded-xl border border-primary-base/30 bg-primary-base/5 p-2.5 flex items-center gap-2 text-xs font-bold text-foreground">
+                    <Flame className="h-4 w-4 text-primary-base shrink-0" />
                     <span>{item.specialGuestNotice}</span>
                   </div>
                 )}
@@ -256,7 +256,7 @@ export function WeeklyCalendarOverview() {
               <CardContent className="p-5 space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b text-xs">
                   <span className="font-bold text-foreground">Teaching Team:</span>
-                  <span className="font-extrabold text-amber-800 dark:text-amber-300">
+                  <span className="font-extrabold text-foreground">
                     {item.teachers}
                   </span>
                 </div>
@@ -267,8 +267,8 @@ export function WeeklyCalendarOverview() {
                       key={idx}
                       className="rounded-xl border bg-muted/30 p-2.5 flex items-start gap-3 text-xs"
                     >
-                      <div className="flex items-center gap-1 font-black text-amber-700 dark:text-amber-300 shrink-0 pt-0.5">
-                        <Clock className="h-3.5 w-3.5" />
+                      <div className="flex items-center gap-1 font-bold text-xs bg-muted px-2 py-0.5 rounded-md text-foreground shrink-0 pt-0.5">
+                        <Clock className="h-3.5 w-3.5 text-muted-foreground" />
                         <span>{cls.time}</span>
                       </div>
                       <div className="min-w-0">
@@ -291,14 +291,14 @@ export function WeeklyCalendarOverview() {
 
             <div className="p-5 pt-0">
               {item.actionHref?.startsWith("tel:") ? (
-                <Button asChild className="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs h-9">
+                <Button asChild className="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs h-10 rounded-xl shadow-xs">
                   <a href={item.actionHref}>
                     <Phone className="mr-1.5 h-3.5 w-3.5" />
                     {item.actionLabel}
                   </a>
                 </Button>
               ) : (
-                <Button asChild variant="outline" className="w-full border-amber-500/40 text-foreground hover:bg-amber-500/10 font-bold text-xs h-9">
+                <Button asChild className="w-full bg-primary-base hover:bg-primary-hover text-white font-bold text-xs h-10 rounded-xl shadow-xs">
                   <Link href={item.actionHref ?? "/dashboard/schedule"}>
                     <span>{item.actionLabel ?? "View Classes"}</span>
                     <ArrowRight className="ml-1.5 h-3.5 w-3.5" />

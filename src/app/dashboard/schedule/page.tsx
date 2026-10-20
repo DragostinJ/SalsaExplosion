@@ -238,25 +238,25 @@ export default async function StudentSchedulePage({
 
       {/* Guest Welcome Banner */}
       {!user && (
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-amber-500/40 bg-gradient-to-r from-amber-500/15 via-background to-rose-500/10 p-4 sm:p-5 shadow-xs">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-border bg-card p-4 sm:p-5 shadow-xs">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <Badge className="bg-primary-base text-white font-bold text-xs">
                 🎁 First-Time Visitor Offer
               </Badge>
-              <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">
+              <span className="text-xs font-semibold text-muted-foreground">
                 1 Complimentary Welcome Class Credit
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-foreground font-bold">
+            <p className="text-xs sm:text-sm text-foreground font-semibold">
               Browse live Bournemouth classes below. No partner required — partner rotations are 100% ratio balanced!
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs">
+            <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs h-9 rounded-lg">
               <Link href="/sign-up">Claim Free Pass</Link>
             </Button>
-            <Button asChild variant="outline" size="sm" className="text-xs font-semibold">
+            <Button asChild variant="outline" size="sm" className="text-xs font-semibold h-9 rounded-lg">
               <Link href="/sign-in">Sign In</Link>
             </Button>
           </div>
@@ -270,7 +270,7 @@ export default async function StudentSchedulePage({
             <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Class Schedule
             </h1>
-            <Badge variant="outline" className="border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs">
+            <Badge variant="outline" className="border-border bg-muted/40 text-muted-foreground text-xs">
               BOH Studios Bournemouth
             </Badge>
           </div>
@@ -489,9 +489,9 @@ export default async function StudentSchedulePage({
             </div>
           </div>
 
-          <div className="flex flex-col justify-between gap-3 rounded-2xl border border-amber-500/30 bg-amber-500/[0.04] p-4 sm:flex-row sm:items-center">
+          <div className="flex flex-col justify-between gap-3 rounded-2xl border border-border bg-card p-4 sm:flex-row sm:items-center">
             <div>
-              <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+              <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground">
                 Studio Owner Admin
               </span>
               <h2 className="text-sm font-bold">

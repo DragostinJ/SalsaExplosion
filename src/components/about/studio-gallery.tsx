@@ -16,6 +16,42 @@ export interface GalleryPhoto {
 
 const GALLERY_PHOTOS: GalleryPhoto[] = [
   {
+    id: "photo-thursdays-moe-flex",
+    title: "Thursdays with Special Guest Moe Flex & Salsa Explosion Team",
+    caption:
+      "High-energy Cuban Salsa, Pasitos, Musicality, and Rueda de Casino at BOH Studios Bournemouth with Moe Flex, Justyna, Arturas, Jim & Enrique.",
+    category: "BOOTCAMPS",
+    imageUrl: "/images/thursdays-moe-flex-poster.png",
+    location: "BOH Studios Bournemouth (104 Commercial Rd)",
+  },
+  {
+    id: "photo-woodlands-ballroom",
+    title: "The Woodlands Ballroom @ Parkstone Trade & Labour Club",
+    caption:
+      "Wednesday Cuban Salsa Classes with Enrique Perez Valdes. Gorgeous sprung hardwood ballroom for 100+ dancers with free on-site parking.",
+    category: "STUDIO_LIFE",
+    imageUrl: "/images/woodlands-ballroom.png",
+    location: "Upper Parkstone, Poole (485 Ashley Rd)",
+  },
+  {
+    id: "photo-halloween-latin-party",
+    title: "Halloween Fancy Dress Latin Party (Saturday 31st October)",
+    caption:
+      "Premier South Coast Cuban & Latin Halloween event featuring Bachata masterclasses with Alex Spindlove, SB&K social dancing, and best costume prizes.",
+    category: "SOCIALS",
+    imageUrl: "/images/halloween-latin-party-poster.png",
+    location: "BOH Studios Bournemouth",
+  },
+  {
+    id: "photo-weekly-calendar",
+    title: "Official Salsa Explosion Weekly Timetable",
+    caption:
+      "Full weekly rhythm: Tuesdays at Neptune Hall Boscombe, Wednesdays at The Woodlands Ballroom Poole, Thursdays & Sundays at BOH Studios Bournemouth.",
+    category: "RUEDA",
+    imageUrl: "/images/weekly-calendar-poster.png",
+    location: "Bournemouth, Boscombe & Poole Hubs",
+  },
+  {
     id: "photo-1",
     title: "Friday Night Rueda de Casino Circle",
     caption:
@@ -25,24 +61,6 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     location: "BOH Studios Bournemouth",
   },
   {
-    id: "photo-2",
-    title: "Authentic Afro-Cuban Bodymovement & Styling",
-    caption:
-      "Maestro Enrique Perez Valdes breaking down circular shoulder isolations and Vacilala styling in our Bournemouth studio.",
-    category: "BOOTCAMPS",
-    imageUrl: "/images/enrique.jpg",
-    location: "BOH Studios Studio A",
-  },
-  {
-    id: "photo-3",
-    title: "Bournemouth Salsa Social Fiesta & Timba Jam",
-    caption:
-      "Dancers from beginner to advanced sharing the floor with authentic Santiago de Cuba rhythm and Cuban Salsa energy.",
-    category: "SOCIALS",
-    imageUrl: "/images/boh-studios.jpg",
-    location: "BOH Studios Main Hall",
-  },
-  {
     id: "photo-4",
     title: "Bournemouth Summer Cuban Salsa Congress",
     caption:
@@ -50,24 +68,6 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     category: "BOOTCAMPS",
     imageUrl: "/images/congress-2025.jpg",
     location: "The Roundhouse Hotel & BOH Studios",
-  },
-  {
-    id: "photo-5",
-    title: "Dynamic Contratiempo Rueda Turn Patterns",
-    caption:
-      "Coaching the Setenta Complicado frame tension and foot placement with intermediate salsa dancers.",
-    category: "RUEDA",
-    imageUrl: "/images/rueda-social.jpg",
-    location: "BOH Studios Main Floor",
-  },
-  {
-    id: "photo-6",
-    title: "Community Smiles & Studio Culture",
-    caption:
-      "The true heart of Salsa Explosion: warmth, authentic Cuban culture, and friends practicing their recaps together.",
-    category: "STUDIO_LIFE",
-    imageUrl: "/images/boh-studios.jpg",
-    location: "Studio Lounge & Social Bar",
   },
 ];
 

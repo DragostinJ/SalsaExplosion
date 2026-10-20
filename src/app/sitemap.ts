@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/how-it-works",
     "/dashboard/rueda",
+    "/terms",
   ];
 
   return routes.map((route) => ({

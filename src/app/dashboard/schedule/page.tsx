@@ -49,6 +49,7 @@ const PartnerMatchWaitlist = dynamic(
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
 
 interface SchedulePageProps {
   searchParams: Promise<{
@@ -294,6 +295,9 @@ export default async function StudentSchedulePage({
           </Button>
         )}
       </div>
+
+      {/* Weekly Calendar Overview: Days of the Week Only */}
+      <WeeklyCalendarOverview />
 
       {/* URL Search Param Filter Bar (Right at the Top!) */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b pb-3 max-w-full">

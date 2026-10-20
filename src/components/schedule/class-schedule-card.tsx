@@ -389,12 +389,8 @@ export function ClassScheduleCard({
         <div className="grid grid-cols-2 gap-2 rounded-lg border bg-muted/30 p-3 text-xs">
           <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4 text-muted-foreground" />
-            <span className="font-medium">
-              {startDate.toLocaleDateString("en-GB", {
-                weekday: "short",
-                day: "numeric",
-                month: "short",
-              })}
+            <span className="font-semibold text-amber-800 dark:text-amber-300">
+              Every {startDate.toLocaleDateString("en-GB", { weekday: "long" })}
             </span>
           </div>
           <div className="flex items-center gap-2">

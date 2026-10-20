@@ -69,7 +69,7 @@ export function TeacherAvatar({
 
   return (
     <div
-      className={`relative inline-flex shrink-0 items-center justify-center rounded-full ring-2 ring-amber-500/30 shadow-xs ${sizeConfig.container} ${className}`}
+      className={`relative inline-flex shrink-0 items-center justify-center rounded-full ring-2 ring-border/80 shadow-xs ${sizeConfig.container} ${className}`}
       title={specialty ? `${name} • ${specialty}` : name}
     >
       {hasValidPhoto ? (
@@ -85,14 +85,14 @@ export function TeacherAvatar({
           unoptimized={avatarUrl?.startsWith("http")}
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-tr from-amber-600 via-orange-600 to-amber-500 font-extrabold text-white shadow-inner">
+        <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-tr from-zinc-700 via-zinc-800 to-zinc-900 font-extrabold text-white shadow-inner">
           <span>{initials || "M"}</span>
         </div>
       )}
 
       {showBadge && (
         <span
-          className={`absolute flex items-center justify-center rounded-full bg-amber-500 text-zinc-950 font-bold ring-2 ring-background ${sizeConfig.badge}`}
+          className={`absolute flex items-center justify-center rounded-full bg-primary-base text-white font-bold ring-2 ring-background ${sizeConfig.badge}`}
           title="Cuban Maestro"
         >
           <Sparkles className="h-2 w-2" />

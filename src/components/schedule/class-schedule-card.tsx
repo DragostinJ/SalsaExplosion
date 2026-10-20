@@ -114,7 +114,7 @@ const STYLE_BADGE_CONFIG: Record<
 > = {
   CUBAN_SALSA: {
     label: "Cuban Salsa",
-    className: "bg-amber-500/15 text-amber-900 dark:text-amber-300 border-amber-500/30",
+    className: "border-border/80 bg-muted/60 text-foreground/80 font-medium text-[11px]",
   },
 };
 
@@ -320,22 +320,13 @@ export function ClassScheduleCard({
               {styleConfig.label}
             </Badge>
             <Badge
-              variant="secondary"
-              className={
-                session.minLevel === DanceLevel.BEGINNER
-                  ? "bg-secondary-light/60 text-secondary-hover border-secondary-base/40 font-bold"
-                  : "font-semibold"
-              }
+              variant="outline"
+              className="border-border bg-muted/50 text-muted-foreground font-medium text-[11px]"
             >
               {session.minLevel === DanceLevel.BEGINNER
                 ? "Level 0: Absolute Beginner"
                 : session.minLevel}
             </Badge>
-            {session.minLevel === DanceLevel.BEGINNER && (
-              <Badge variant="outline" className="border-secondary-base/40 text-secondary-base font-bold text-[10px] bg-secondary-light/30">
-                Zero Experience Needed
-              </Badge>
-            )}
           </div>
 
           {optimisticState.isBooked ? (
@@ -360,12 +351,12 @@ export function ClassScheduleCard({
         </div>
 
         {/* Title & Instructor with Avatar */}
-        <div className="flex items-start gap-3">
+        <div className="flex items-start gap-3.5 pt-0.5">
           <TeacherAvatar
             name={`${session.instructor.firstName} ${session.instructor.lastName}`}
             avatarUrl={session.instructor.avatarUrl}
-            size="md"
-            className="mt-0.5"
+            size="lg"
+            className="mt-0.5 shrink-0"
           />
           <div className="min-w-0">
             <CardTitle className="text-base sm:text-lg leading-snug font-bold">
@@ -374,42 +365,44 @@ export function ClassScheduleCard({
             <CardDescription className="text-xs mt-1 font-medium text-muted-foreground flex items-center gap-1">
               <span>Maestro {session.instructor.firstName} {session.instructor.lastName}</span>
             </CardDescription>
-            <div className="flex flex-wrap items-center gap-1.5 pt-1.5">
-              <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-blue-700 dark:text-blue-300 bg-blue-500/10 px-2.5 py-0.5 rounded-md">
-                <Users className="h-3 w-3" />
-                No Partner Needed • Circular Rotation
-              </span>
-            </div>
           </div>
         </div>
       </CardHeader>
 
       <CardContent className="space-y-4 pb-4 text-sm">
-        {/* Time & Studio Room Metadata */}
-        <div className="grid grid-cols-2 gap-2 rounded-lg border bg-muted/30 p-3 text-xs">
-          <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4 text-muted-foreground" />
-            <span className="font-semibold text-amber-800 dark:text-amber-300">
-              Every {startDate.toLocaleDateString("en-GB", { weekday: "long" })}
-            </span>
+        {/* Time, Studio Room & Partner Reassurance Metadata */}
+        <div className="rounded-xl border border-border/70 bg-muted/25 p-3.5 text-xs space-y-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4 text-muted-foreground shrink-0" />
+              <span className="font-semibold text-foreground">
+                Every {startDate.toLocaleDateString("en-GB", { weekday: "long" })}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4 text-muted-foreground shrink-0" />
+              <span className="text-foreground/90 font-medium">
+                {startDate.toLocaleTimeString("en-GB", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}{" "}
+                –{" "}
+                {new Date(session.endTime).toLocaleTimeString("en-GB", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4 text-muted-foreground" />
-            <span>
-              {startDate.toLocaleTimeString("en-GB", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}{" "}
-              –{" "}
-              {new Date(session.endTime).toLocaleTimeString("en-GB", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </span>
-          </div>
-          <div className="col-span-2 flex items-center gap-2 pt-1 text-muted-foreground">
-            <MapPin className="h-4 w-4 shrink-0" />
-            <span>{session.room}</span>
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-1.5 border-t border-border/50 text-muted-foreground">
+            <div className="flex items-center gap-1.5">
+              <MapPin className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+              <span className="truncate">{session.room}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-[11px] font-medium text-foreground/85">
+              <Users className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+              <span>No Partner Needed • Rotations</span>
+            </div>
           </div>
         </div>
 

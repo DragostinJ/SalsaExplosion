@@ -81,6 +81,7 @@ export const SongAnatomySchema = z.object({
   difficultyLevel: SongDifficultySchema,
   durationSeconds: z.number().positive(),
   youtubeVideoId: z.string().min(5),
+  alternateYoutubeVideoId: z.string().optional(),
   spotifyOrYoutubeEmbedUrl: z.string().optional(),
   segments: z.array(SongSegmentSchema).min(1),
 });
@@ -93,7 +94,8 @@ export type SongAnatomy = z.infer<typeof SongAnatomySchema>;
 export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
   // -----------------------------------------------------------------
   // 1. "Me Dicen Cuba" - Alexander Abreu y Havana D'Primera
-  // Level: Beginner / Improver • 90 BPM • 2-3 Son Clave • 275 seconds
+  // Level: Beginner / Improver • 90 BPM • 2-3 Son Clave • 327 seconds (5:27)
+  // Official Video ID: jBNgDYJjZP8 (Exact length: 327 seconds)
   // -----------------------------------------------------------------
   {
     id: "me-dicen-cuba",
@@ -102,7 +104,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     bpm: 90,
     claveType: "2-3 Son",
     difficultyLevel: "Beginner",
-    durationSeconds: 275,
+    durationSeconds: 327,
     youtubeVideoId: "jBNgDYJjZP8",
     spotifyOrYoutubeEmbedUrl:
       "https://open.spotify.com/search/Alexander%20Abreu%20Me%20Dicen%20Cuba",
@@ -110,8 +112,8 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       {
         id: "mdc-seg-1",
         startTimeSeconds: 0,
-        endTimeSeconds: 32,
-        formattedRange: "0:00 - 0:32",
+        endTimeSeconds: 38,
+        formattedRange: "0:00 - 0:38",
         sectionName: "Intro",
         danceGear: "Son Cubano",
         colorTheme: "blue",
@@ -127,9 +129,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "mdc-seg-2",
-        startTimeSeconds: 32,
-        endTimeSeconds: 85,
-        formattedRange: "0:32 - 1:25",
+        startTimeSeconds: 38,
+        endTimeSeconds: 108,
+        formattedRange: "0:38 - 1:48",
         sectionName: "Tema (Verse)",
         danceGear: "Casino (Smooth)",
         colorTheme: "emerald",
@@ -145,9 +147,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "mdc-seg-3",
-        startTimeSeconds: 85,
-        endTimeSeconds: 160,
-        formattedRange: "1:25 - 2:40",
+        startTimeSeconds: 108,
+        endTimeSeconds: 185,
+        formattedRange: "1:48 - 3:05",
         sectionName: "Montuno",
         danceGear: "Casino (Flow)",
         colorTheme: "emerald",
@@ -163,9 +165,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "mdc-seg-4",
-        startTimeSeconds: 160,
-        endTimeSeconds: 205,
-        formattedRange: "2:40 - 3:25",
+        startTimeSeconds: 185,
+        endTimeSeconds: 258,
+        formattedRange: "3:05 - 4:18",
         sectionName: "Mambo",
         danceGear: "Suelta / Shines",
         colorTheme: "purple",
@@ -181,9 +183,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "mdc-seg-5",
-        startTimeSeconds: 205,
-        endTimeSeconds: 275,
-        formattedRange: "3:25 - 4:35",
+        startTimeSeconds: 258,
+        endTimeSeconds: 327,
+        formattedRange: "4:18 - 5:27",
         sectionName: "Finale",
         danceGear: "Casino (Flow)",
         colorTheme: "emerald",
@@ -202,7 +204,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
 
   // -----------------------------------------------------------------
   // 2. "La Cosa Mala" - El Niño y La Verdad
-  // Level: Intermediate / Advanced • 96 BPM • 2-3 Rumba Clave • 292 seconds
+  // Level: Intermediate / Advanced • 96 BPM • 2-3 Rumba Clave • 346 seconds (5:46)
+  // Official Studio Audio: et8gHrBf_6s (Exact studio length: 346 seconds)
+  // Alternate Official Music Video: 8GXd6UuNJ7A (371s / 6:11)
   // -----------------------------------------------------------------
   {
     id: "la-cosa-mala",
@@ -211,16 +215,17 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     bpm: 96,
     claveType: "2-3 Rumba",
     difficultyLevel: "Intermediate",
-    durationSeconds: 292,
-    youtubeVideoId: "8GXd6UuNJ7A",
+    durationSeconds: 346,
+    youtubeVideoId: "et8gHrBf_6s",
+    alternateYoutubeVideoId: "8GXd6UuNJ7A",
     spotifyOrYoutubeEmbedUrl:
       "https://open.spotify.com/search/El%20Nino%20y%20La%20Verdad%20La%20Cosa%20Mala",
     segments: [
       {
         id: "lcm-seg-1",
         startTimeSeconds: 0,
-        endTimeSeconds: 23,
-        formattedRange: "0:00 - 0:23",
+        endTimeSeconds: 28,
+        formattedRange: "0:00 - 0:28",
         sectionName: "Intro",
         danceGear: "Suelta / Shines",
         colorTheme: "amber",
@@ -236,9 +241,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "lcm-seg-2",
-        startTimeSeconds: 23,
-        endTimeSeconds: 72,
-        formattedRange: "0:23 - 1:12",
+        startTimeSeconds: 28,
+        endTimeSeconds: 85,
+        formattedRange: "0:28 - 1:25",
         sectionName: "Tema (Verse)",
         danceGear: "Son Cubano",
         colorTheme: "blue",
@@ -254,9 +259,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "lcm-seg-3",
-        startTimeSeconds: 72,
-        endTimeSeconds: 102,
-        formattedRange: "1:12 - 1:42",
+        startTimeSeconds: 85,
+        endTimeSeconds: 108,
+        formattedRange: "1:25 - 1:48",
         sectionName: "Puente",
         danceGear: "Casino (Smooth)",
         colorTheme: "emerald",
@@ -272,9 +277,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "lcm-seg-4",
-        startTimeSeconds: 102,
-        endTimeSeconds: 150,
-        formattedRange: "1:42 - 2:30",
+        startTimeSeconds: 108,
+        endTimeSeconds: 165,
+        formattedRange: "1:48 - 2:45",
         sectionName: "Montuno",
         danceGear: "Casino (Flow)",
         colorTheme: "emerald",
@@ -290,9 +295,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "lcm-seg-5",
-        startTimeSeconds: 150,
-        endTimeSeconds: 188,
-        formattedRange: "2:30 - 3:08",
+        startTimeSeconds: 165,
+        endTimeSeconds: 215,
+        formattedRange: "2:45 - 3:35",
         sectionName: "Rumba / Afro Break",
         danceGear: "Rumba Guaguancó",
         colorTheme: "amber",
@@ -308,11 +313,11 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "lcm-seg-6",
-        startTimeSeconds: 188,
-        endTimeSeconds: 218,
-        formattedRange: "3:08 - 3:38",
+        startTimeSeconds: 215,
+        endTimeSeconds: 255,
+        formattedRange: "3:35 - 4:15",
         sectionName: "Mambo",
-        danceGear: "Suelta / Shines",
+        danceGear: "Afro-Cuban Orishas",
         colorTheme: "purple",
         musicalTrigger:
           "Explosive trombone riffs punch through the percussion; timbales crash and piano drives aggressive tumbaos.",
@@ -326,9 +331,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "lcm-seg-7",
-        startTimeSeconds: 218,
-        endTimeSeconds: 258,
-        formattedRange: "3:38 - 4:18",
+        startTimeSeconds: 255,
+        endTimeSeconds: 305,
+        formattedRange: "4:15 - 5:05",
         sectionName: "Bomba / Presión",
         danceGear: "Despelote / Reparto",
         colorTheme: "red",
@@ -344,9 +349,9 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       },
       {
         id: "lcm-seg-8",
-        startTimeSeconds: 258,
-        endTimeSeconds: 292,
-        formattedRange: "4:18 - 4:52",
+        startTimeSeconds: 305,
+        endTimeSeconds: 346,
+        formattedRange: "5:05 - 5:46",
         sectionName: "Finale",
         danceGear: "Casino (Flow)",
         colorTheme: "emerald",
@@ -380,4 +385,47 @@ export function resolveCurriculumMove(slugOrId: string): CurriculumSkillItem | u
   return CUBAN_CURRICULUM_DATA.find(
     (skill) => skill.id === slugOrId || skill.name.toLowerCase() === slugOrId.toLowerCase()
   );
+}
+
+export function formatSecondsToTime(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s < 10 ? "0" : ""}${s}`;
+}
+
+/**
+ * Pure helper function to dynamically scale song segments if YouTube's live stream reports
+ * a duration variance (e.g. 371s music video vs 346s official studio audio).
+ */
+export function scaleSongSegmentsToDuration(
+  song: SongAnatomy,
+  actualDurationSeconds: number
+): SongSegment[] {
+  if (
+    !actualDurationSeconds ||
+    actualDurationSeconds <= 0 ||
+    Math.abs(actualDurationSeconds - song.durationSeconds) < 2
+  ) {
+    return song.segments;
+  }
+
+  const ratio = actualDurationSeconds / song.durationSeconds;
+  let runningStart = 0;
+
+  return song.segments.map((seg, idx) => {
+    const isLast = idx === song.segments.length - 1;
+    const scaledEnd = isLast
+      ? actualDurationSeconds
+      : Math.round(seg.endTimeSeconds * ratio);
+
+    const segment: SongSegment = {
+      ...seg,
+      startTimeSeconds: runningStart,
+      endTimeSeconds: scaledEnd,
+      formattedRange: `${formatSecondsToTime(runningStart)} - ${formatSecondsToTime(scaledEnd)}`,
+    };
+
+    runningStart = scaledEnd;
+    return segment;
+  });
 }

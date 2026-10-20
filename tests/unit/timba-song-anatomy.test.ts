@@ -5,6 +5,7 @@ import {
   getSongAnatomyById,
   getAllSongAnatomies,
   resolveCurriculumMove,
+  scaleSongSegmentsToDuration,
 } from "@/lib/constants/timba-song-anatomy";
 import { CUBAN_CURRICULUM_DATA } from "@/lib/constants/cuban-curriculum-2027";
 import { getClaveStrokeBeats, CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
@@ -41,9 +42,10 @@ describe("T2: Timba Song Anatomy Schema & Production Dataset", () => {
     synth.stop();
   });
 
-  it("verifies 'Me Dicen Cuba' has 5 continuous, non-overlapping segments covering the entire song", () => {
+  it("verifies 'Me Dicen Cuba' has 5 continuous, non-overlapping segments covering the calibrated 327s (5:27) duration", () => {
     const song = getSongAnatomyById("me-dicen-cuba");
     expect(song).toBeDefined();
+    expect(song?.durationSeconds).toBe(327);
     expect(song?.segments.length).toBe(5);
 
     let currentExpectedStart = 0;
@@ -52,12 +54,14 @@ describe("T2: Timba Song Anatomy Schema & Production Dataset", () => {
       expect(segment.endTimeSeconds).toBeGreaterThan(segment.startTimeSeconds);
       currentExpectedStart = segment.endTimeSeconds;
     }
-    expect(currentExpectedStart).toBe(song!.durationSeconds);
+    expect(currentExpectedStart).toBe(327);
+    expect(song!.segments[4].formattedRange).toBe("4:18 - 5:27");
   });
 
-  it("verifies 'La Cosa Mala' has 8 continuous, non-overlapping segments covering the entire song", () => {
+  it("verifies 'La Cosa Mala' has 8 continuous, non-overlapping segments covering the calibrated 346s (5:46) duration", () => {
     const song = getSongAnatomyById("la-cosa-mala");
     expect(song).toBeDefined();
+    expect(song?.durationSeconds).toBe(346);
     expect(song?.segments.length).toBe(8);
 
     let currentExpectedStart = 0;
@@ -66,7 +70,22 @@ describe("T2: Timba Song Anatomy Schema & Production Dataset", () => {
       expect(segment.endTimeSeconds).toBeGreaterThan(segment.startTimeSeconds);
       currentExpectedStart = segment.endTimeSeconds;
     }
-    expect(currentExpectedStart).toBe(song!.durationSeconds);
+    expect(currentExpectedStart).toBe(346);
+    expect(song!.segments[7].formattedRange).toBe("5:05 - 5:46");
+  });
+
+  it("proves scaleSongSegmentsToDuration proportionally rescales segments when actual live stream duration differs", () => {
+    const song = getSongAnatomyById("la-cosa-mala")!;
+    // When duration matches, returns original segments
+    const unchanged = scaleSongSegmentsToDuration(song, 346);
+    expect(unchanged).toBe(song.segments);
+
+    // When duration is 371s (Official Music Video with intro street skit)
+    const scaled = scaleSongSegmentsToDuration(song, 371);
+    expect(scaled.length).toBe(8);
+    expect(scaled[0].startTimeSeconds).toBe(0);
+    expect(scaled[7].endTimeSeconds).toBe(371);
+    expect(scaled[7].formattedRange.endsWith("6:11")).toBe(true);
   });
 
   it("ensures every recommendedMoveSlug in every segment resolves to a valid curriculum move", () => {

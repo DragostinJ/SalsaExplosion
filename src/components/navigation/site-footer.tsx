@@ -112,13 +112,13 @@ export function SiteFooter() {
             </h4>
             <ul className="space-y-1.5">
               <li>
-                <Link href="/events" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
-                  Bournemouth Cuban Congress 2026
+                <Link href="/events/made-in-cuba-dance-weekend-2026" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
+                  MADE IN CUBA — Dance Weekend
                 </Link>
               </li>
               <li>
                 <Link href="/events" className="inline-flex items-center py-1 text-xs text-foreground font-bold hover:text-primary-base transition-colors">
-                  Havana Nights Social Party
+                  DANZA! 2026 | 2027 Calendar
                 </Link>
               </li>
               <li>
@@ -182,18 +182,24 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-700 dark:text-slate-300">
+        <div className="border-t border-border pt-6 flex flex-col lg:flex-row items-center justify-between gap-4 text-xs text-slate-700 dark:text-slate-300">
           <p>© {new Date().getFullYear()} Salsa Explosion UK. Directed by Enrique Perez Valdes. All rights reserved.</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <span className="flex items-center gap-1.5 text-rose-700 dark:text-rose-400 font-bold">
               <Flame className="h-3.5 w-3.5 fill-current" />
               Salsa Explosion Dance Academy
             </span>
+            <Link href="/terms" className="inline-flex items-center py-1 px-1 hover:underline text-foreground font-bold">
+              Terms & UK Consumer Rights
+            </Link>
+            <Link href="/terms#refunds" className="inline-flex items-center py-1 px-1 hover:underline text-foreground font-bold">
+              Refund Policy
+            </Link>
+            <Link href="/terms#privacy" className="inline-flex items-center py-1 px-1 hover:underline text-foreground font-bold">
+              Privacy & GDPR
+            </Link>
             <Link href="/how-it-works" className="inline-flex items-center py-1 px-1 hover:underline text-foreground font-bold">
               Guide
-            </Link>
-            <Link href="/about" className="inline-flex items-center py-1 px-1 hover:underline text-foreground font-bold">
-              About
             </Link>
           </div>
         </div>

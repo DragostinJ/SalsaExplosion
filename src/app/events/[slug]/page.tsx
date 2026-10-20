@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DanceRole } from "@prisma/client";
 import {
@@ -313,6 +314,22 @@ export default async function EventDetailPage({
           tiers={serializedTiers}
           defaultPreferredRole={currentUser?.preferredRole ?? DanceRole.LEAD}
         />
+
+        {/* UK Consumer Rights Notice (Dated Leisure Events) */}
+        <div className="rounded-2xl border border-amber-500/30 bg-amber-500/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2 text-foreground font-medium">
+            <ShieldCheck className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
+            <span>
+              <strong className="font-extrabold">UK Consumer Notice:</strong> Under Regulation 28(1)(h) of the Consumer Contracts Regulations 2013, dated event tickets are exempt from cooling-off refunds; however, Salsa Explosion offers <strong>100% free dancer name transfers</strong> up to 48 hours before the event.
+            </span>
+          </div>
+          <Link
+            href="/terms#refunds"
+            className="font-bold text-amber-800 dark:text-amber-300 hover:underline shrink-0"
+          >
+            Read Transfer Policy →
+          </Link>
+        </div>
       </div>
 
       {/* Venue & Event Guide */}

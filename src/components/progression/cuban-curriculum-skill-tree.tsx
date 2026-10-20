@@ -11,6 +11,9 @@ import {
   ExternalLink,
   BookOpen,
   Music,
+  ChevronDown,
+  ChevronUp,
+  HelpCircle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -71,6 +74,21 @@ export function CubanCurriculumSkillTree({
   const [selectedPillar, setSelectedPillar] = useState<CurriculumPillar | "ALL">("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [focusFirstNight, setFocusFirstNight] = useState(false);
+  const [expandedSkillIds, setExpandedSkillIds] = useState<Set<string>>(new Set());
+  const [expandAllTips, setExpandAllTips] = useState(false);
+  const [songsExpanded, setSongsExpanded] = useState(false);
+
+  const toggleSkillExpanded = (skillId: string) => {
+    setExpandedSkillIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(skillId)) {
+        next.delete(skillId);
+      } else {
+        next.add(skillId);
+      }
+      return next;
+    });
+  };
 
   const rawProgress = useSyncExternalStore(
     subscribeProgress,
@@ -394,13 +412,21 @@ export function CubanCurriculumSkillTree({
 
         {/* 3. Skill Cards Grid */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between text-xs font-bold text-muted-foreground">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-bold text-muted-foreground border-b pb-2">
             <span>
               Showing {filteredSkills.length} Curriculum Skills in {selectedLevel}
             </span>
-            <span className="text-[11px] text-amber-800 dark:text-amber-300 font-semibold">
-              Tap Status to Toggle: Learning ⇄ Mastered
-            </span>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                data-testid="toggle-all-maestro-tips"
+                onClick={() => setExpandAllTips(!expandAllTips)}
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-800 dark:text-amber-300 hover:underline"
+              >
+                <HelpCircle className="h-3.5 w-3.5" />
+                <span>{expandAllTips ? "Collapse All Maestro Tips" : "Expand All Maestro Tips"}</span>
+              </button>
+            </div>
           </div>
 
           {filteredSkills.length === 0 ? (
@@ -425,6 +451,7 @@ export function CubanCurriculumSkillTree({
                 const status = progressMap[skill.id] ?? "NOT_STARTED";
                 const isMastered = status === "MASTERED";
                 const isLearning = status === "LEARNING";
+                const isExpanded = expandAllTips || expandedSkillIds.has(skill.id);
 
                 return (
                   <div
@@ -497,33 +524,67 @@ export function CubanCurriculumSkillTree({
                       <p className="text-xs text-foreground/90 font-medium leading-relaxed">
                         {skill.summary}
                       </p>
-
-                      {/* Geometry & Handhold (for partnerwork) */}
-                      {(skill.entryExitGeometry || skill.handholdType) && (
-                        <div className="rounded-xl border bg-muted/30 p-2.5 text-[11px] space-y-1 text-muted-foreground">
-                          {skill.entryExitGeometry && (
-                            <div>
-                              <strong className="text-foreground">Geometry:</strong> {skill.entryExitGeometry}
-                            </div>
-                          )}
-                          {skill.handholdType && (
-                            <div>
-                              <strong className="text-foreground">Handhold:</strong> {skill.handholdType}
-                            </div>
-                          )}
-                        </div>
-                      )}
                     </div>
 
-                    {/* Un-Confuser Diagnostic Badge */}
-                    <div className="rounded-xl border-2 border-rose-500/40 bg-rose-500/5 p-3 space-y-1">
-                      <div className="flex items-center gap-1.5 text-rose-800 dark:text-rose-300 font-black text-[11px] uppercase tracking-wider">
-                        <ShieldAlert className="h-3.5 w-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
-                        <span>Un-Confuser Diagnostic:</span>
-                      </div>
-                      <p className="text-xs text-foreground font-semibold leading-snug">
-                        {skill.unConfuserTip}
-                      </p>
+                    {/* Collapsible Details & Maestro Un-Confuser Diagnostic */}
+                    <div className="pt-2 border-t space-y-2">
+                      <button
+                        type="button"
+                        data-testid="toggle-skill-details"
+                        aria-expanded={isExpanded}
+                        onClick={() => toggleSkillExpanded(skill.id)}
+                        className="w-full flex items-center justify-between text-left text-xs font-bold text-amber-800 dark:text-amber-300 hover:text-foreground transition-all rounded-lg p-1.5 hover:bg-muted/40"
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <HelpCircle className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                          <span>
+                            {isExpanded
+                              ? "Hide Maestro Tip & Mechanics"
+                              : "Feeling stuck? View Maestro Tip & Handhold Mechanics"}
+                          </span>
+                        </span>
+                        {isExpanded ? (
+                          <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                        )}
+                      </button>
+
+                      {isExpanded && (
+                        <div className="space-y-2.5 pt-1">
+                          {/* Geometry & Handhold (for partnerwork) */}
+                          {(skill.entryExitGeometry || skill.handholdType) && (
+                            <div className="rounded-xl border bg-muted/30 p-2.5 text-[11px] space-y-1 text-muted-foreground">
+                              {skill.entryExitGeometry && (
+                                <div>
+                                  <strong className="text-foreground">Geometry:</strong> {skill.entryExitGeometry}
+                                </div>
+                              )}
+                              {skill.handholdType && (
+                                <div>
+                                  <strong className="text-foreground">Handhold:</strong> {skill.handholdType}
+                                </div>
+                              )}
+                              {skill.claveSync && (
+                                <div>
+                                  <strong className="text-foreground">Clave Timing:</strong> {skill.claveSync}
+                                </div>
+                              )}
+                            </div>
+                          )}
+
+                          {/* Un-Confuser Diagnostic Badge */}
+                          <div className="rounded-xl border-2 border-rose-500/40 bg-rose-500/5 p-3 space-y-1">
+                            <div className="flex items-center gap-1.5 text-rose-800 dark:text-rose-300 font-black text-[11px] uppercase tracking-wider">
+                              <ShieldAlert className="h-3.5 w-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
+                              <span>Un-Confuser Diagnostic:</span>
+                            </div>
+                            <p className="text-xs text-foreground font-semibold leading-snug">
+                              {skill.unConfuserTip}
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -532,72 +593,89 @@ export function CubanCurriculumSkillTree({
           )}
         </div>
 
-        {/* 4. Curriculum Reference Songs (Shown when Reference Songs or All is selected) */}
+        {/* 4. Curriculum Reference Songs (Collapsible Tray) */}
         {levelSongs.length > 0 && (
-          <div className="space-y-4 pt-4 border-t">
-            <div className="flex items-center justify-between">
+          <div className="space-y-3 pt-4 border-t">
+            <button
+              type="button"
+              data-testid="toggle-reference-songs"
+              onClick={() => setSongsExpanded(!songsExpanded)}
+              className="w-full flex items-center justify-between p-3 rounded-2xl border bg-muted/30 hover:bg-muted/50 transition-all text-left"
+            >
               <div className="flex items-center gap-2">
                 <Music className="h-4 w-4 text-amber-500" />
-                <h3 className="text-base font-black text-foreground">
-                  {selectedLevel} Benchmark Reference Songs ({levelSongs.length})
-                </h3>
+                <span className="text-sm font-black text-foreground">
+                  Listen to Level Reference Songs ({levelSongs.length} Tracks)
+                </span>
+                <Badge variant="outline" className="text-[10px] font-bold border-amber-500/40 text-amber-800 dark:text-amber-300">
+                  Optional Listening
+                </Badge>
               </div>
-              <span className="text-xs text-muted-foreground font-semibold">
-                Musical Gear Shift Breakdown
-              </span>
-            </div>
+              <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground">
+                <span className="hidden sm:inline">
+                  {songsExpanded ? "Hide Reference Tracks" : "Show Benchmark Tracks"}
+                </span>
+                {songsExpanded ? (
+                  <ChevronUp className="h-4 w-4" />
+                ) : (
+                  <ChevronDown className="h-4 w-4" />
+                )}
+              </div>
+            </button>
 
-            <div className="grid gap-3 sm:grid-cols-2">
-              {levelSongs.map((song: CurriculumReferenceSong) => (
-                <div
-                  key={song.id}
-                  className="rounded-2xl border bg-card p-4 space-y-2.5 text-xs shadow-xs"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <h4 className="font-black text-sm text-foreground">
-                        {song.title}
-                      </h4>
-                      <p className="text-muted-foreground font-semibold">
-                        {song.artist} • <span className="font-mono">{song.bpm} BPM</span>
-                      </p>
+            {songsExpanded && (
+              <div className="grid gap-3 sm:grid-cols-2 pt-1">
+                {levelSongs.map((song: CurriculumReferenceSong) => (
+                  <div
+                    key={song.id}
+                    className="rounded-2xl border bg-card p-4 space-y-2.5 text-xs shadow-xs"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <h4 className="font-black text-sm text-foreground">
+                          {song.title}
+                        </h4>
+                        <p className="text-muted-foreground font-semibold">
+                          {song.artist} • <span className="font-mono">{song.bpm} BPM</span>
+                        </p>
+                      </div>
+                      <Badge variant="outline" className="text-[10px] font-bold border-amber-500/40 text-amber-900 dark:text-amber-300">
+                        {song.subGenre}
+                      </Badge>
                     </div>
-                    <Badge variant="outline" className="text-[10px] font-bold border-amber-500/40 text-amber-900 dark:text-amber-300">
-                      {song.subGenre}
-                    </Badge>
-                  </div>
 
-                  <p className="text-foreground/90 font-medium leading-relaxed">
-                    <strong className="text-foreground">Why this song?</strong> {song.whyThisSong}
-                  </p>
+                    <p className="text-foreground/90 font-medium leading-relaxed">
+                      <strong className="text-foreground">Why this song?</strong> {song.whyThisSong}
+                    </p>
 
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {song.gearShiftsObserved.map((gear) => (
-                      <span
-                        key={gear}
-                        className="inline-flex items-center rounded-md border bg-muted px-2 py-0.5 text-[10px] font-bold text-foreground"
-                      >
-                        {gear}
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {song.gearShiftsObserved.map((gear) => (
+                        <span
+                          key={gear}
+                          className="inline-flex items-center rounded-md border bg-muted px-2 py-0.5 text-[10px] font-bold text-foreground"
+                        >
+                          {gear}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="pt-1 border-t flex items-center justify-between">
+                      <span className="text-[10px] text-muted-foreground">
+                        Listen: {song.instrumentsToListenFor.join(", ")}
                       </span>
-                    ))}
+                      <a
+                        href={song.spotifySearchUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 font-extrabold text-rose-700 dark:text-rose-300 hover:underline text-[11px]"
+                      >
+                        Spotify <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </div>
                   </div>
-
-                  <div className="pt-1 border-t flex items-center justify-between">
-                    <span className="text-[10px] text-muted-foreground">
-                      Listen: {song.instrumentsToListenFor.join(", ")}
-                    </span>
-                    <a
-                      href={song.spotifySearchUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-extrabold text-rose-700 dark:text-rose-300 hover:underline text-[11px]"
-                    >
-                      Spotify <ExternalLink className="h-3 w-3" />
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </CardContent>

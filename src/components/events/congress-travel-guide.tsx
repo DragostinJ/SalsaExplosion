@@ -148,48 +148,58 @@ export function CongressTravelGuide() {
           </CardContent>
         </Card>
 
-        {/* Nearby Lansdowne / Boscombe B&Bs */}
+        {/* Nearby Walkable BOH Studios & Seafront Hotels */}
         <Card className="border border-border">
           <CardHeader className="pb-3">
             <Badge variant="outline" className="w-fit text-[10px]">
-              Alternative Accommodation
+              Walkable Hotels for Dance Weekends
             </Badge>
             <CardTitle className="text-lg font-bold flex items-center gap-2 mt-2">
               <Bed className="h-5 w-5 text-primary" />
-              Nearby Lansdowne & Seafront B&Bs
+              Nearby Hotels for BOH Studios Dance Weekends
             </CardTitle>
             <CardDescription className="text-xs">
-              All within 3 to 8 minutes walking distance of the venue
+              All within 3 to 10 minutes walking distance of BOH Studios (104 Commercial Rd, BH2 5LR)
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3.5 text-xs">
             <div className="rounded-lg border border-border/70 p-3 space-y-1">
               <div className="flex items-center justify-between font-semibold">
-                <span>The Orchid Hotel (Boutique 4-Star)</span>
-                <span className="text-muted-foreground text-[11px]">3 min walk</span>
+                <span>Hilton Bournemouth (4-Star Premium)</span>
+                <span className="text-muted-foreground text-[11px]">3–5 min walk</span>
               </div>
               <p className="text-[11px] text-muted-foreground">
-                34 Gervis Rd, Lansdowne. Stylish boutique hotel with serene courtyard and cocktail lounge.
+                Terrace Rd, BH2 5EL. Heated pool, Schpoons &amp; Forx restaurant, and secure on-site parking.
               </p>
             </div>
 
             <div className="rounded-lg border border-border/70 p-3 space-y-1">
               <div className="flex items-center justify-between font-semibold">
-                <span>Suncliff Hotel & Ocean Beach</span>
-                <span className="text-muted-foreground text-[11px]">7 min walk</span>
+                <span>Hampton by Hilton Bournemouth</span>
+                <span className="text-muted-foreground text-[11px]">5 min walk</span>
               </div>
               <p className="text-[11px] text-muted-foreground">
-                East Cliff coastal clifftop views overlooking Bournemouth Pier and bay.
+                Upper Terrace Rd, BH2 5NW. Modern rooms with free hot breakfast included and on-site parking.
               </p>
             </div>
 
             <div className="rounded-lg border border-border/70 p-3 space-y-1">
               <div className="flex items-center justify-between font-semibold">
-                <span>Travelodge Bournemouth Seafront</span>
-                <span className="text-muted-foreground text-[11px]">6 min walk</span>
+                <span>Premier Inn Bournemouth Central</span>
+                <span className="text-muted-foreground text-[11px]">8 min walk</span>
               </div>
               <p className="text-[11px] text-muted-foreground">
-                West Hill / Lansdowne budget-friendly option with twin and family room configurations.
+                Westover Rd, BH1 2BZ. Budget-friendly, overlooking Lower Gardens and 2 minutes from the pier.
+              </p>
+            </div>
+
+            <div className="rounded-lg border border-border/70 p-3 space-y-1">
+              <div className="flex items-center justify-between font-semibold">
+                <span>Holiday Inn Bournemouth</span>
+                <span className="text-muted-foreground text-[11px]">10 min walk</span>
+              </div>
+              <p className="text-[11px] text-muted-foreground">
+                Bath Rd, BH1 2NT. Direct road access from Wessex Way with large on-site car park and open-lobby bar.
               </p>
             </div>
           </CardContent>

@@ -190,7 +190,7 @@ export default function VenuesGuidePage() {
                   The Woodlands Ballroom
                 </h2>
                 <p className="text-xs text-white/90 font-medium mt-0.5">
-                  @ Parkstone Trade & Labour Club, 485 Ashley Rd, Poole BH14 0BB
+                  @ Parkstone Trades &amp; Labour Club, 485 Ashley Rd, Poole BH14 0BB • Tel: 01202 746491
                 </p>
               </div>
             </div>
@@ -198,7 +198,7 @@ export default function VenuesGuidePage() {
             <CardContent className="p-6 space-y-5">
               <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
                 <p>
-                  Home of our Wednesday Cuban Salsa courses with Enrique Perez Valdes. A stunning, spacious ballroom with a traditional sprung wooden dance floor accommodating 100+ dancers comfortably.
+                  Home of our Wednesday Cuban Salsa courses with Maestro Enrique Perez Valdes, Justyna &amp; Arturas. A stunning, spacious ballroom with a famous <strong>original vintage sprung wooden dance floor</strong>, private licensed bar, stage area, and 100+ dancer capacity.
                 </p>
               </div>
 
@@ -206,14 +206,17 @@ export default function VenuesGuidePage() {
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
                   <Car className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                  Parking Advice:
+                  Parking &amp; Venue Features:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>On-Site Club Car Park:</strong> Free parking directly on-site at Parkstone Trade & Labour Club.
+                    <strong>Free On-Site Club Car Park:</strong> Generous free parking directly in the Parkstone Trades &amp; Labour Club rear car park.
                   </li>
                   <li>
-                    <strong>Ashley Road On-Street Parking:</strong> Plentiful free on-street parking bays right outside the venue.
+                    <strong>Ashley Road On-Street Parking:</strong> Plentiful free on-street parking bays right outside the venue doors.
+                  </li>
+                  <li>
+                    <strong>Amenities:</strong> Traditional sprung timber floor, private member club bar, and high-ceiling acoustics.
                   </li>
                 </ul>
               </div>
@@ -226,10 +229,10 @@ export default function VenuesGuidePage() {
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>7:00 PM – 8:00 PM:</strong> 6-Week Absolute Beginners Cuban Salsa Course with Enrique from Cuba.
+                    <strong>7:00 PM – 8:00 PM:</strong> 6-Week Absolute Beginners Cuban Salsa Course (Enrique) + Salsa Beginner 2 (Justyna &amp; Arturas).
                   </li>
                   <li>
-                    <strong>7:00 PM:</strong> Salsa Beginner 2 & Salsa Improvers 2 / Intermediates.
+                    <strong>8:00 PM – 9:00 PM:</strong> Cuban Salsa Improvers 2 &amp; Intermediates Partnerwork with Enrique.
                   </li>
                 </ul>
               </div>
@@ -237,7 +240,7 @@ export default function VenuesGuidePage() {
           </div>
 
           <div className="p-6 pt-0 border-t mt-4 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-xs text-muted-foreground">Postcode: BH14 0BB</span>
+            <span className="text-xs text-muted-foreground">Postcode: BH14 0BB • Tel: 01202 746491</span>
             <div className="flex items-center gap-2">
               <Button asChild size="sm" variant="outline" className="text-xs h-8 font-semibold">
                 <a
@@ -282,7 +285,7 @@ export default function VenuesGuidePage() {
                   Neptune Hall
                 </h2>
                 <p className="text-xs text-white/90 font-medium mt-0.5">
-                  Harvester, Undercliff Drive, Boscombe BH5 1BN (Above Harvester)
+                  The Neptune Harvester, Undercliff Drive, Boscombe Pier, Bournemouth BH5 1BN
                 </p>
               </div>
             </div>
@@ -290,7 +293,7 @@ export default function VenuesGuidePage() {
             <CardContent className="p-6 space-y-5">
               <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
                 <p>
-                  Tuesday nights overlooking the waves! Join Jim & Enrique for Beginner 2 & Improver Cuban Salsa partnerwork with fresh sea air and a friendly, relaxed community spirit.
+                  Tuesday nights overlooking the waves! Private beachfront function room setting directly opposite <strong>Boscombe Pier</strong> with panoramic sea views over Poole Bay. Join Jim &amp; Enrique for Cuban Salsa Level 1 and Level 2 (Improvers Partnerwork &amp; Rueda).
                 </p>
               </div>
 
@@ -298,14 +301,33 @@ export default function VenuesGuidePage() {
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
                   <Car className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                  Parking & Seafront Access:
+                  Verified Parking &amp; Seafront Access:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>Boscombe Seafront & Overstrand Car Parks:</strong> Ample parking along Undercliff Drive right next to the beach.
+                    <strong>Boscombe Undercliff Car Park (Right Next Door, BH5 1BN):</strong> BCP Council PayByPhone Code <strong>59200</strong>. Hundreds of bays with direct beach level access. Note: 2.1m height barrier, car park gates close at midnight until 8:00 AM, so exit before 12:00 AM.
                   </li>
                   <li>
-                    <strong>Entrance:</strong> Located above Harvester restaurant with beachfront staircase access.
+                    <strong>Free Evening Street Parking:</strong> Plentiful free evening bays up along <strong>Boscombe Overcliff Drive</strong> (a brisk 2-minute stroll down the illuminated Zig-Zag cliff path).
+                  </li>
+                  <li>
+                    <strong>Entrance:</strong> Located on the first floor above The Neptune Harvester with private beach-facing entrance and panoramic ocean balcony.
+                  </li>
+                </ul>
+              </div>
+
+              {/* Class Schedule Info */}
+              <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
+                <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
+                  <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  Tuesday Schedule:
+                </h3>
+                <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
+                  <li>
+                    <strong>7:15 PM – 8:15 PM:</strong> Cuban Salsa Level 1 (Beginner 2) with Jim &amp; Enrique.
+                  </li>
+                  <li>
+                    <strong>8:30 PM – 9:30 PM:</strong> Cuban Salsa Level 2 (Improvers Partnerwork &amp; Rueda de Casino).
                   </li>
                 </ul>
               </div>
@@ -313,7 +335,7 @@ export default function VenuesGuidePage() {
           </div>
 
           <div className="p-6 pt-0 border-t mt-4 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-xs text-muted-foreground">Postcode: BH5 1BN</span>
+            <span className="text-xs text-muted-foreground">Postcode: BH5 1BN • PayByPhone Code: 59200</span>
             <div className="flex items-center gap-2">
               <Button asChild size="sm" variant="outline" className="text-xs h-8 font-semibold">
                 <a
@@ -431,6 +453,108 @@ export default function VenuesGuidePage() {
             </div>
           </div>
         </Card>
+      </div>
+
+      {/* Dedicated Nearby Hotels for Dance Weekends Section */}
+      <div className="rounded-3xl border border-primary-base/20 bg-gradient-to-br from-card via-card to-primary-light/20 p-6 sm:p-10 space-y-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <Badge className="bg-primary-base text-white text-xs font-bold uppercase tracking-wider mb-2">
+              Visiting Dancer Guide
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
+              Nearby Hotels for Dance Weekends &amp; DANZA! Festivals
+            </h2>
+            <p className="text-xs sm:text-sm text-text-muted mt-1 max-w-2xl">
+              Travelling from London, Bristol, Southampton, or abroad for our weekend festivals? These verified walkable hotels are all within 3 to 10 minutes of BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR).
+            </p>
+          </div>
+          <Badge variant="outline" className="border-secondary-base/40 text-secondary-hover bg-secondary-light/30 text-xs font-semibold shrink-0">
+            Walking Distance to BOH Studios
+          </Badge>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Hotel 1: Hilton Bournemouth */}
+          <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Badge className="bg-amber-600 text-white text-[10px] font-bold">
+                  4-Star Premium
+                </Badge>
+                <span className="text-[11px] font-bold text-primary-hover">3–5 min walk</span>
+              </div>
+              <h3 className="font-extrabold text-base text-foreground">Hilton Bournemouth</h3>
+              <p className="text-xs text-text-muted">Terrace Rd, Bournemouth BH2 5EL</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Closest upscale hotel to BOH Studios with secure on-site parking, Schpoons &amp; Forx restaurant, heated indoor pool, and luxury rooms.
+              </p>
+            </div>
+            <div className="pt-2 border-t text-[11px] font-semibold text-text-muted">
+              Secure underground parking
+            </div>
+          </div>
+
+          {/* Hotel 2: Hampton by Hilton */}
+          <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Badge className="bg-emerald-600 text-white text-[10px] font-bold">
+                  Free Hot Breakfast
+                </Badge>
+                <span className="text-[11px] font-bold text-primary-hover">5 min walk</span>
+              </div>
+              <h3 className="font-extrabold text-base text-foreground">Hampton by Hilton</h3>
+              <p className="text-xs text-text-muted">Upper Terrace Rd, Bournemouth BH2 5NW</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Modern dancer favorite! Includes complimentary hot breakfast, 24/7 fitness center, on-site parking, and spacious rooms just around the corner from The Triangle.
+              </p>
+            </div>
+            <div className="pt-2 border-t text-[11px] font-semibold text-text-muted">
+              Breakfast included with every stay
+            </div>
+          </div>
+
+          {/* Hotel 3: Premier Inn Bournemouth Central */}
+          <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Badge className="bg-purple-600 text-white text-[10px] font-bold">
+                  Top Value
+                </Badge>
+                <span className="text-[11px] font-bold text-primary-hover">8 min walk</span>
+              </div>
+              <h3 className="font-extrabold text-base text-foreground">Premier Inn Central</h3>
+              <p className="text-xs text-text-muted">Westover Rd, Bournemouth BH1 2BZ</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Superb central location overlooking Lower Gardens and 2 minutes from the pier. King-size Hypnos beds, quiet rooms, and very budget-friendly rates.
+              </p>
+            </div>
+            <div className="pt-2 border-t text-[11px] font-semibold text-text-muted">
+              Close to beach &amp; gardens
+            </div>
+          </div>
+
+          {/* Hotel 4: Holiday Inn Bournemouth */}
+          <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Badge className="bg-blue-600 text-white text-[10px] font-bold">
+                  Full Service
+                </Badge>
+                <span className="text-[11px] font-bold text-primary-hover">10 min walk</span>
+              </div>
+              <h3 className="font-extrabold text-base text-foreground">Holiday Inn Bournemouth</h3>
+              <p className="text-xs text-text-muted">Bath Rd, Lansdowne, Bournemouth BH1 2NT</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Convenient direct road access via Wessex Way with large on-site car park, open-lobby lounge bar, and full hot buffet breakfast.
+              </p>
+            </div>
+            <div className="pt-2 border-t text-[11px] font-semibold text-text-muted">
+              Easy road access &amp; ample parking
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Newcomer Arrival & Etiquette Guide */}

@@ -41,13 +41,13 @@ const nextConfig: NextConfig = {
   async headers() {
     const enforcedCspDirectives = `
       default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://*.clerk.com https://cdn.protect.clerk.com https://js.stripe.com;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://*.clerk.com https://cdn.protect.clerk.com https://js.stripe.com https://www.youtube.com https://s.ytimg.com;
       worker-src 'self' blob:;
-      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://clerk.salsaexplosion.co.uk;
-      img-src 'self' data: blob: https://images.unsplash.com https://img.clerk.com https://commondatastorage.googleapis.com https://*.stripe.com;
+      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://clerk.salsaexplosion.co.uk https://www.youtube.com https://*.googlevideo.com;
+      img-src 'self' data: blob: https://images.unsplash.com https://img.clerk.com https://commondatastorage.googleapis.com https://*.stripe.com https://i.ytimg.com https://*.youtube.com;
       style-src 'self' 'unsafe-inline';
       font-src 'self' data:;
-      frame-src 'self' https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev;
+      frame-src 'self' https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev https://www.youtube.com https://www.youtube-nocookie.com;
       media-src 'self' blob: https://*.supabase.co https://commondatastorage.googleapis.com;
       object-src 'none';
       base-uri 'self';
@@ -59,13 +59,13 @@ const nextConfig: NextConfig = {
 
     const reportOnlyStricterCspDirectives = `
       default-src 'self';
-      script-src 'self' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://*.clerk.com https://cdn.protect.clerk.com https://js.stripe.com;
+      script-src 'self' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://*.clerk.com https://cdn.protect.clerk.com https://js.stripe.com https://www.youtube.com https://s.ytimg.com;
       worker-src 'self' blob:;
-      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com;
-      img-src 'self' data: blob: https://images.unsplash.com https://img.clerk.com https://commondatastorage.googleapis.com;
+      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://www.youtube.com https://*.googlevideo.com;
+      img-src 'self' data: blob: https://images.unsplash.com https://img.clerk.com https://commondatastorage.googleapis.com https://i.ytimg.com https://*.youtube.com;
       style-src 'self';
       font-src 'self';
-      frame-src 'self' https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev;
+      frame-src 'self' https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev https://www.youtube.com https://www.youtube-nocookie.com;
       media-src 'self' https://*.supabase.co;
       object-src 'none';
       base-uri 'self';

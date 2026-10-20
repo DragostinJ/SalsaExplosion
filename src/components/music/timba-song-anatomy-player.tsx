@@ -511,6 +511,7 @@ export function TimbaSongAnatomyPlayer({
               title={`Official recording for ${activeSong.title}`}
               src={`https://www.youtube-nocookie.com/embed/${activeSong.youtubeVideoId}?enablejsapi=1&playsinline=1&rel=0`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
               className="w-full h-full border-0"
             />

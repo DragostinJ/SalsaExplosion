@@ -382,5 +382,48 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(igButton).toBeVisible();
     await expect(fbButton).toBeVisible();
   });
+
+  test("20. Zero-cost health check endpoint /api/health returns HTTP 200 and healthy status", async ({
+    request,
+  }) => {
+    const response = await request.get("/api/health");
+    expect(response.status()).toBe(200);
+    const data = await response.json();
+    expect(data.status).toBe("healthy");
+    expect(data.database).toBe("connected");
+    expect(data.tier).toBe("bootstrap-zero-cost");
+  });
+
+  test("21. Terms & UK Legal Hub (/terms) renders statutory consumer rights, 14-day cooling-off, and GDPR notice", async ({
+    page,
+  }) => {
+    await page.goto("/terms", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText(/Terms of Service, Consumer Rights/i).first()).toBeVisible();
+    await expect(page.getByText(/14-Day Statutory Cooling-Off Period/i).first()).toBeVisible();
+    await expect(page.getByText(/UK GDPR & Data Protection Act 2018/i).first()).toBeVisible();
+    await expect(page.getByText(/104 Commercial Road/i).first()).toBeVisible();
+  });
+
+  test("22. Class schedule renders Multi-Age Fast-Track and 60+ Senior reassurance banners", async ({
+    page,
+  }) => {
+    await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
+    const banner = page.locator('[data-testid="multi-age-ux-banner"]');
+    await expect(banner).toBeVisible();
+    await expect(page.getByText("15-Second Quick Guide").first()).toBeVisible();
+    await expect(page.getByText("Prefer Not to Use Apps or QR Codes?").first()).toBeVisible();
+  });
+
+  test("23. How It Works renders Teacher and Door Staff Operations guide for Enrique and faculty", async ({
+    page,
+  }) => {
+    await page.goto("/how-it-works", { waitUntil: "domcontentloaded" });
+    const staffGuide = page.locator('[data-testid="staff-operations-guide"]');
+    await expect(staffGuide).toBeVisible();
+    await expect(page.getByText("How Teachers & Door Staff Run Class Check-In").first()).toBeVisible();
+    await expect(page.getByText("Self-Serve Door QR").first()).toBeVisible();
+    await expect(page.getByText("Live Camera Scanner").first()).toBeVisible();
+  });
 });
+
 

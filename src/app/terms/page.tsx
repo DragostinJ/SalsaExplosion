@@ -99,13 +99,13 @@ export default function TermsAndLegalPage() {
               </div>
               <div>
                 <span className="block font-bold text-muted-foreground uppercase text-[10px]">Email Enquiries</span>
-                <a href="mailto:info@salsaexplosion.co.uk" className="font-extrabold text-primary-base hover:underline">
+                <a href="mailto:info@salsaexplosion.co.uk" className="font-extrabold text-rose-800 dark:text-rose-400 hover:underline">
                   info@salsaexplosion.co.uk
                 </a>
               </div>
               <div>
                 <span className="block font-bold text-muted-foreground uppercase text-[10px]">Studio Desk Phone & WhatsApp</span>
-                <a href="tel:07969633701" className="font-extrabold text-primary-base hover:underline">
+                <a href="tel:07969633701" className="font-extrabold text-rose-800 dark:text-rose-400 hover:underline">
                   07969 633701
                 </a>
               </div>
@@ -265,7 +265,7 @@ export default function TermsAndLegalPage() {
             </ul>
 
             <p className="font-semibold text-foreground pt-1">
-              <strong>Your Rights:</strong> Under UK GDPR, you have the right to access your personal data, request correction of errors, or request total account deletion (&ldquo;Right to be Forgotten&rdquo;). To make a Subject Access Request (SAR) or delete your account, email our Data Privacy Officer at <a href="mailto:info@salsaexplosion.co.uk" className="text-primary-base font-bold underline">info@salsaexplosion.co.uk</a>. We respond within 30 days free of charge.
+              <strong>Your Rights:</strong> Under UK GDPR, you have the right to access your personal data, request correction of errors, or request total account deletion (&ldquo;Right to be Forgotten&rdquo;). To make a Subject Access Request (SAR) or delete your account, email our Data Privacy Officer at <a href="mailto:info@salsaexplosion.co.uk" className="text-rose-800 dark:text-rose-400 font-extrabold underline">info@salsaexplosion.co.uk</a>. We respond within 30 days free of charge.
             </p>
           </CardContent>
         </Card>

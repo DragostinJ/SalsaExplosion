@@ -32,7 +32,7 @@ test.describe("B4 & M8: Responsive Mobile Navigation Sheet & Full Viewport asser
     await expect(sheetDialog.getByRole("link", { name: /rueda call dictionary/i })).toBeVisible();
     await expect(sheetDialog.getByRole("link", { name: /1-on-1 private lessons/i })).toBeVisible();
     await expect(sheetDialog.getByRole("link", { name: /cuban music/i })).toBeVisible();
-    await expect(sheetDialog.getByRole("link", { name: /merch & dance shoes/i })).toBeVisible();
+    await expect(sheetDialog.getByRole("link", { name: /class passes & memberships/i })).toBeVisible();
     await expect(sheetDialog.getByRole("link", { name: /how qr passes work/i })).toBeVisible();
 
     // Take screenshot of mobile drawer open

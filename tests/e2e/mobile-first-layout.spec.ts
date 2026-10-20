@@ -17,6 +17,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     { name: "Rueda Dictionary", path: "/dashboard/rueda" },
     { name: "Student Wallet & Passes", path: "/dashboard/wallet" },
     { name: "Desk Operations", path: "/admin/operations" },
+    { name: "Terms & UK Legal", path: "/terms" },
   ];
 
   for (const route of publicRoutes) {

@@ -17,6 +17,9 @@ import { StudentVideoUploadDropzone } from "@/components/progression/video-uploa
 import { PromotionCertificateCard } from "@/components/progression/promotion-certificate-card";
 import { AttendanceMilestonesCard } from "@/components/progression/attendance-milestones-card";
 import { BeginnerSyllabusRoadmap } from "@/components/beginners/beginner-syllabus-roadmap";
+import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curriculum-skill-tree";
+import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
+import { PRISMA_TO_CURRICULUM_LEVEL_MAP } from "@/lib/constants/cuban-curriculum-2027";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -145,6 +148,15 @@ export default async function ProgressionPage() {
 
       {/* Progressive Syllabus: Foundational 8 Cuban Figures */}
       <BeginnerSyllabusRoadmap />
+
+      {/* 2027 Modern Cuban Salsa Curriculum: 4-Level & 5-Pillar Skill Tree */}
+      <CubanCurriculumSkillTree
+        defaultLevel={PRISMA_TO_CURRICULUM_LEVEL_MAP[user.currentLevel] ?? "Beginner"}
+        studentName={user.firstName}
+      />
+
+      {/* Cuban Dance Gears Matrix & Timba Song Anatomy */}
+      <CubanDanceGearsMatrix />
 
       {/* State 1: Max Level Reached */}
       {isMaxLevel ? (

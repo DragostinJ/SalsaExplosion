@@ -80,6 +80,13 @@ export const CURRICULUM_TO_PRISMA_LEVEL_MAP: Record<CurriculumLevel, DanceLevel>
   Advanced: DanceLevel.ADVANCED,
 };
 
+export const PRISMA_TO_CURRICULUM_LEVEL_MAP: Record<DanceLevel, CurriculumLevel> = {
+  [DanceLevel.BEGINNER]: "Beginner",
+  [DanceLevel.IMPROVER]: "Improver",
+  [DanceLevel.INTERMEDIATE]: "Intermediate",
+  [DanceLevel.ADVANCED]: "Advanced",
+};
+
 export const PILLAR_LABELS: Record<CurriculumPillar, string> = {
   partnerwork_casino: "Partnerwork (Casino)",
   solo_suelta: "Solo Footwork & Shines",

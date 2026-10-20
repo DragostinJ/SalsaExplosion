@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/card";
 import { BackButton } from "@/components/navigation/back-button";
 import { LaunchTourButton } from "@/components/onboarding/launch-tour-button";
+import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curriculum-skill-tree";
+import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
 
 export const metadata = {
   title: "How It Works | Cuban Salsa Academy • Salsa Explosion",
@@ -321,6 +323,25 @@ export default function HowItWorksPage() {
           </div>
           <LaunchTourButton />
         </div>
+      </section>
+
+      {/* 2027 Modern Cuban Salsa Curriculum: 4-Level Skill Tree & Gears Matrix */}
+      <section className="space-y-8" aria-label="Cuban Salsa Syllabus and Musicality Roadmap">
+        <div className="space-y-2 text-center max-w-2xl mx-auto">
+          <Badge variant="outline" className="text-xs font-bold border-amber-500/40 text-amber-700 dark:text-amber-400">
+            Official 2027 Modern Curriculum
+          </Badge>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            Clear Progression from Day 1 to Timba Mastery
+          </h2>
+          <p className="text-xs sm:text-sm text-muted-foreground">
+            Explore our structured 4-level taxonomy, track figures across 5 dance pillars, and learn how to shift musical gears with authentic Cuban songs.
+          </p>
+        </div>
+
+        <CubanCurriculumSkillTree defaultLevel="Beginner" />
+
+        <CubanDanceGearsMatrix />
       </section>
 
       {/* Staff & Faculty Operations Guide */}

@@ -50,6 +50,7 @@ const PartnerMatchWaitlist = dynamic(
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
+import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 
 interface SchedulePageProps {
   searchParams: Promise<{
@@ -447,6 +448,11 @@ export default async function StudentSchedulePage({
       {/* Weekly Calendar Overview: Days of the Week Only */}
       <div className="pt-6 border-t">
         <WeeklyCalendarOverview />
+      </div>
+
+      {/* Multi-Generational UX: Fast-Track Arrival Essentials & 60+ Senior Reassurance */}
+      <div className="pt-6 border-t">
+        <MultiAgeReassuranceBanner />
       </div>
 
       {/* Instructor & Studio Admin Quick-Access Command Bar (Shown only to Staff/Admin) */}

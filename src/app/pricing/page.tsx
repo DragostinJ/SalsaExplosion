@@ -3,6 +3,7 @@ import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { PricingCards } from "@/components/pricing/pricing-cards";
 import { BackButton } from "@/components/navigation/back-button";
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
+import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 
 export default async function PricingPage() {
   const user = await getOrProvisionCurrentUser();
@@ -39,6 +40,10 @@ export default async function PricingPage() {
         hasActiveSubscription={hasActiveSubscription}
         currentCredits={currentCredits}
       />
+
+      <div className="mt-12">
+        <MultiAgeReassuranceBanner />
+      </div>
 
       <div className="mt-14">
         <DanceVouchersShowcase />

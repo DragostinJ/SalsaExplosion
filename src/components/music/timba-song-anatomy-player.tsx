@@ -455,7 +455,13 @@ export function TimbaSongAnatomyPlayer({
                     {song.segments.length} Segs
                   </span>
                 )}
-                <span className="text-[10px] font-mono opacity-80">
+                <span
+                  className={`text-[10px] font-mono font-bold ${
+                    isSelected
+                      ? "text-inherit"
+                      : "text-slate-800 dark:text-slate-200"
+                  }`}
+                >
                   {song.bpm} BPM
                 </span>
               </button>

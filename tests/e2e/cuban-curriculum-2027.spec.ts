@@ -137,10 +137,20 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     const player = page.locator('[data-testid="timba-song-anatomy-player"]');
     await expect(player).toBeVisible();
 
-    // Verify initial song is Me Dicen Cuba with calibrated 5:27 duration
+    // Verify initial song is Me Dicen Cuba with calibrated 4:35 duration
     await expect(player.getByRole("heading", { name: "Me Dicen Cuba" })).toBeVisible();
     await expect(player.getByText("2-3 Son Clave")).toBeVisible();
-    await expect(player.getByText(/0:00 \/ 5:27/)).toBeVisible();
+    await expect(player.getByText(/0:00 \/ 4:35/)).toBeVisible();
+
+    // Verify all 3 song tabs are rendered
+    const meDicenCubaTab = player.locator('[data-testid="select-song-me-dicen-cuba"]');
+    const laCosaMalaTab = player.locator('[data-testid="select-song-la-cosa-mala"]');
+    const aguaPaYemayaTab = player.locator('[data-testid="select-song-agua-pa-yemaya"]');
+
+    await expect(meDicenCubaTab).toBeVisible();
+    await expect(laCosaMalaTab).toBeVisible();
+    await expect(aguaPaYemayaTab).toBeVisible();
+    await expect(aguaPaYemayaTab.getByText(/boss track/i)).toBeVisible();
 
     // Verify YouTube player container is mounted and visible by default
     const videoContainer = player.locator('[data-testid="embedded-youtube-player-container"]');
@@ -185,14 +195,12 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     await expect(moveCard.getByText(/un-confuser tip/i)).toBeVisible();
 
     // Switch to "La Cosa Mala"
-    const laCosaMalaTab = player.locator('[data-testid="select-song-la-cosa-mala"]');
-    await expect(laCosaMalaTab).toBeVisible();
     await laCosaMalaTab.click();
 
-    // Verify La Cosa Mala metadata, calibrated 5:46 duration, and 8 segments
+    // Verify La Cosa Mala metadata, calibrated 4:52 duration, and 8 segments
     await expect(player.getByRole("heading", { name: "La Cosa Mala" })).toBeVisible();
     await expect(player.getByText("2-3 Rumba Clave")).toBeVisible();
-    await expect(player.getByText(/0:00 \/ 5:46/)).toBeVisible();
+    await expect(player.getByText(/0:00 \/ 4:52/)).toBeVisible();
     const seg7 = player.locator('[data-testid="timeline-segment-7"]');
     await expect(seg7).toBeVisible();
 
@@ -201,6 +209,51 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     const videoBtn = player.locator('[data-testid="switch-version-video"]');
     await expect(studioBtn).toBeVisible();
     await expect(videoBtn).toBeVisible();
+
+    // Switch to Level 4 Boss Track "Agua Pa' Yemayá"
+    await aguaPaYemayaTab.click();
+
+    // Verify Agua Pa' Yemayá metadata, 5:42 duration, and 7 segments
+    await expect(player.getByRole("heading", { name: "Agua Pa' Yemayá" })).toBeVisible();
+    await expect(player.getByText("108 BPM").first()).toBeVisible();
+    await expect(player.getByText(/0:00 \/ 5:42/)).toBeVisible();
+    await expect(player.getByText("Advanced Level")).toBeVisible();
+
+    // Verify Active Timing Mode Pill & 3-Zone Body Telemetry Widget
+    const timingModeBadge = player.locator('[data-testid="active-timing-mode-badge"]');
+    await expect(timingModeBadge).toBeVisible();
+    await expect(timingModeBadge).toContainText("Free / Polyrhythmic (6/8)");
+
+    const telemetryWidget = player.locator('[data-testid="body-telemetry-widget"]');
+    await expect(telemetryWidget).toBeVisible();
+    await expect(telemetryWidget.getByText(/chest & shoulders/i)).toBeVisible();
+    await expect(telemetryWidget.getByText(/bata drum call accents/i)).toBeVisible();
+    await expect(telemetryWidget.getByText(/hips & knees/i)).toBeVisible();
+    await expect(telemetryWidget.getByText(/ocean swell wave motion/i)).toBeVisible();
+    await expect(telemetryWidget.getByText(/feet/i)).toBeVisible();
+    await expect(telemetryWidget.getByText(/grounded slow weight shifts/i)).toBeVisible();
+
+    // Test Play, Jump to Finale, and Replay run-through
+    const playToggleBtn = player.locator('[data-testid="playback-toggle"]');
+    await playToggleBtn.click();
+    await expect(playToggleBtn).toContainText("Pause");
+
+    // Click last segment (Finale 4:48 - 5:42)
+    const aguaSeg6 = player.locator('[data-testid="timeline-segment-6"]');
+    await aguaSeg6.click();
+
+    // Verify HUD updates to Finale & new timingMode
+    await expect(hud.getByText("Finale").first()).toBeVisible();
+
+    // Reset and replay
+    const resetBtn = player.getByRole("button", { name: "Reset" });
+    await resetBtn.click();
+    await expect(player.getByText(/0:00 \/ 5:42/)).toBeVisible();
+
+    // Click Play Along
+    await playToggleBtn.click();
+    await expect(playToggleBtn).toContainText("Pause");
+    await playToggleBtn.click(); // Pause
 
     // Verify 8-Count Dancer Beat Bar exists
     const beatBar = player.locator('[data-testid="dancer-beat-bar"]');

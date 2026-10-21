@@ -55,14 +55,14 @@ export function InstructorNav() {
         </Badge>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 rounded-2xl border bg-muted/40 p-2 shadow-xs">
+      <div className="flex items-center gap-2 rounded-2xl border bg-muted/40 p-2 shadow-xs overflow-x-auto no-scrollbar sm:flex-wrap">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           return (
             <Link
               key={tab.href}
               href={tab.href}
-              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all ${
+              className={`shrink-0 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all ${
                 tab.active
                   ? "bg-background text-foreground shadow-sm ring-1 ring-border font-bold"
                   : "text-muted-foreground hover:bg-background/60 hover:text-foreground"

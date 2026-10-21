@@ -174,9 +174,9 @@ export default async function RootLayout({
             }}
           />
         </head>
-        <body className="min-h-full flex flex-col bg-background text-foreground">
+        <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden">
           <SiteHeader role={effectiveRole} canSwitchRoles={userCanSwitchRoles} />
-          <div className="flex-1 pb-20 md:pb-0">{children}</div>
+          <div className="flex-1 pb-20 md:pb-0 overflow-x-hidden">{children}</div>
           <SiteFooter />
           <MobileBottomNav />
           <Toaster richColors position="top-right" />

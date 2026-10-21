@@ -323,7 +323,7 @@ export function ClassScheduleCard({
               {student?.hasActiveSubscription
                 ? "Included in Membership"
                 : `${session.creditCost} ${
-                    session.creditCost === 1 ? "Credit" : "Credits"
+                    session.creditCost === 1 ? "Credit (or \u00A310 Drop-In)" : "Credits (or \u00A310 Drop-In)"
                   }`}
             </Badge>
           )}

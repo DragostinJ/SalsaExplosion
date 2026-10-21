@@ -178,11 +178,11 @@ export function CubanCurriculumSkillTree({
       data-testid="curriculum-skill-tree"
       className={`border-2 border-primary-base/30 bg-gradient-to-br from-card via-background to-card shadow-sm ${className}`}
     >
-      <CardHeader className="pb-4 space-y-3">
+      <CardHeader className="p-3.5 sm:p-6 pb-3 sm:pb-4 space-y-2.5 sm:space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-primary-base text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
+              <Badge className="bg-primary-base text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1">
                 <Sparkles className="h-3 w-3" />
                 2027 Modern Cuban Syllabus
               </Badge>
@@ -190,7 +190,7 @@ export function CubanCurriculumSkillTree({
                 4 Levels • 5 Pillars
               </Badge>
             </div>
-            <CardTitle className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
+            <CardTitle className="text-lg sm:text-2xl font-black tracking-tight text-foreground">
               Interactive Cuban Salsa Skill Tree & Checklist
             </CardTitle>
           </div>
@@ -233,11 +233,11 @@ export function CubanCurriculumSkillTree({
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      <CardContent className="p-3.5 sm:p-6 pt-0 sm:pt-0 space-y-4 sm:space-y-6">
         {/* Reassurance Banner from Maestro Enrique */}
         <div
           data-testid="curriculum-reassurance-banner"
-          className="rounded-2xl border-2 border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-background to-orange-500/10 p-5 sm:p-6 space-y-4"
+          className="rounded-2xl border-2 border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-background to-orange-500/10 p-3.5 sm:p-6 space-y-3 sm:space-y-4"
         >
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div className="space-y-1.5 max-w-2xl">
@@ -285,8 +285,8 @@ export function CubanCurriculumSkillTree({
             <span className="text-[11px] font-black uppercase tracking-wider text-amber-900 dark:text-amber-200 block mb-2">
               Your First Night at BOH Studios (The Only 3 Things You Need):
             </span>
-            <div className="grid gap-2 sm:grid-cols-3 text-xs">
-              <div className="rounded-xl border border-amber-500/20 bg-card/80 p-3 space-y-1">
+            <div className="flex overflow-x-auto no-scrollbar gap-2 sm:grid sm:grid-cols-3 text-xs pb-1 sm:pb-0">
+              <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-900 dark:text-amber-200">
                     1
@@ -298,7 +298,7 @@ export function CubanCurriculumSkillTree({
                 </p>
               </div>
 
-              <div className="rounded-xl border border-amber-500/20 bg-card/80 p-3 space-y-1">
+              <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-900 dark:text-amber-200">
                     2
@@ -310,7 +310,7 @@ export function CubanCurriculumSkillTree({
                 </p>
               </div>
 
-              <div className="rounded-xl border border-amber-500/20 bg-card/80 p-3 space-y-1">
+              <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-900 dark:text-amber-200">
                     3
@@ -330,7 +330,7 @@ export function CubanCurriculumSkillTree({
           <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground block">
             Select Syllabus Level:
           </span>
-          <div role="tablist" aria-label="Curriculum Levels" className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div role="tablist" aria-label="Curriculum Levels" className="grid grid-cols-4 gap-1.5 sm:gap-2">
             {LEVELS.map((lvl) => {
               const isSelected = selectedLevel === lvl;
               return (
@@ -343,20 +343,20 @@ export function CubanCurriculumSkillTree({
                     setSelectedLevel(lvl);
                     setFocusFirstNight(false);
                   }}
-                  className={`rounded-2xl border p-3 text-left transition-all min-h-[58px] flex flex-col justify-between ${
+                  className={`rounded-xl sm:rounded-2xl border p-2 sm:p-3 text-left transition-all min-h-[50px] sm:min-h-[58px] flex flex-col justify-between ${
                     isSelected
                       ? "border-primary-base bg-primary-base/10 shadow-xs ring-2 ring-primary-base/30 text-foreground"
                       : "border-border bg-card/70 hover:bg-muted/50 text-muted-foreground"
                   }`}
                 >
-                  <span className="text-[10px] font-mono font-extrabold uppercase tracking-wider">
-                    {lvl === "Beginner" ? "Level 1" : lvl === "Improver" ? "Level 2" : lvl === "Intermediate" ? "Level 3" : "Level 4"}
+                  <span className="text-[9px] sm:text-[10px] font-mono font-extrabold uppercase tracking-wider">
+                    {lvl === "Beginner" ? "Lvl 1" : lvl === "Improver" ? "Lvl 2" : lvl === "Intermediate" ? "Lvl 3" : "Lvl 4"}
                   </span>
-                  <div className="font-black text-sm text-foreground flex items-center justify-between">
-                    <span>{lvl}</span>
+                  <div className="font-black text-xs sm:text-sm text-foreground flex items-center justify-between">
+                    <span className="truncate">{lvl}</span>
                     {lvl === "Beginner" && (
-                      <span className="text-[9px] bg-amber-500/20 text-amber-900 dark:text-amber-200 px-1.5 py-0.5 rounded font-bold uppercase">
-                        Start Here
+                      <span className="text-[8px] sm:text-[9px] bg-amber-500/20 text-amber-900 dark:text-amber-200 px-1 py-0.2 sm:px-1.5 sm:py-0.5 rounded font-bold uppercase hidden sm:inline">
+                        Start
                       </span>
                     )}
                   </div>
@@ -456,7 +456,7 @@ export function CubanCurriculumSkillTree({
                 return (
                   <div
                     key={skill.id}
-                    className={`rounded-2xl border-2 p-4 transition-all flex flex-col justify-between space-y-3.5 ${
+                    className={`rounded-2xl border-2 p-3 sm:p-4 transition-all flex flex-col justify-between space-y-2.5 sm:space-y-3.5 ${
                       isMastered
                         ? "border-emerald-500/40 bg-emerald-500/[0.04]"
                         : isLearning

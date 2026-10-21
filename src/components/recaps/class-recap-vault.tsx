@@ -310,7 +310,7 @@ export function ClassRecapVault({
       {/* Top Controls: Tabs & Staff Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         {/* Toggle between My Attended Classes & Full Studio Archive */}
-        <div className="inline-flex rounded-xl border bg-muted/40 p-1 text-xs">
+        <div className="grid grid-cols-2 sm:inline-flex rounded-xl border bg-muted/40 p-1 text-xs w-full sm:w-auto">
           <button
             type="button"
             onClick={() => {

@@ -123,7 +123,7 @@ export default async function StudentWalletPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
         <Badge
           variant="outline"
@@ -199,7 +199,7 @@ export default async function StudentWalletPage() {
 
       {/* Active Congress Passes Section */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-amber-600" />
             <h2 className="text-lg font-bold">Your Congress & Festival Passes</h2>

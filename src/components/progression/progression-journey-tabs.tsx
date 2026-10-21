@@ -33,11 +33,11 @@ export function ProgressionJourneyTabs({
       data-testid="progression-journey-tabs"
       className="space-y-6"
     >
-      {/* 3-Tab Journey Switcher */}
+      {/* 3-Tab Journey Switcher (3-col full width grid on mobile, flex on desktop) */}
       <div
         role="tablist"
         aria-label="Student Journey Navigation"
-        className="flex items-center gap-2 border-b pb-3 overflow-x-auto no-scrollbar"
+        className="grid grid-cols-3 gap-1.5 sm:flex sm:items-center sm:gap-2 border-b pb-3"
       >
         <button
           type="button"
@@ -46,15 +46,16 @@ export function ProgressionJourneyTabs({
           aria-selected={activeTab === "syllabus"}
           aria-controls="panel-syllabus"
           onClick={() => setActiveTab("syllabus")}
-          className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all min-h-10 shrink-0 ${
+          className={`inline-flex items-center justify-center gap-1 sm:gap-2 px-1.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all min-h-10 text-center ${
             activeTab === "syllabus"
               ? "bg-amber-800 text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
           }`}
         >
-          <BookOpen className="h-4 w-4" />
-          <span>My Syllabus &amp; Checklist</span>
-          <Badge className="bg-white/20 text-white font-mono text-[10px] px-1.5 py-0">
+          <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+          <span className="hidden sm:inline">My Syllabus &amp; Checklist</span>
+          <span className="sm:hidden">Syllabus</span>
+          <Badge className="bg-white/20 text-white font-mono text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0 hidden xs:inline-flex">
             {currentLevel}
           </Badge>
         </button>
@@ -66,14 +67,15 @@ export function ProgressionJourneyTabs({
           aria-selected={activeTab === "milestones"}
           aria-controls="panel-milestones"
           onClick={() => setActiveTab("milestones")}
-          className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all min-h-10 shrink-0 ${
+          className={`inline-flex items-center justify-center gap-1 sm:gap-2 px-1.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all min-h-10 text-center ${
             activeTab === "milestones"
               ? "bg-amber-800 text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
           }`}
         >
-          <Award className="h-4 w-4" />
-          <span>Badges &amp; Class Streaks</span>
+          <Award className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+          <span className="hidden sm:inline">Badges &amp; Class Streaks</span>
+          <span className="sm:hidden">Badges</span>
         </button>
 
         <button
@@ -83,16 +85,17 @@ export function ProgressionJourneyTabs({
           aria-selected={activeTab === "video"}
           aria-controls="panel-video"
           onClick={() => setActiveTab("video")}
-          className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all min-h-10 shrink-0 ${
+          className={`inline-flex items-center justify-center gap-1 sm:gap-2 px-1.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all min-h-10 text-center ${
             activeTab === "video"
               ? "bg-amber-800 text-white shadow-xs"
               : "border bg-card text-muted-foreground hover:bg-muted hover:text-foreground"
           }`}
         >
-          <Video className="h-4 w-4" />
-          <span>Video Feedback (Optional)</span>
+          <Video className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+          <span className="hidden sm:inline">Video Feedback (Optional)</span>
+          <span className="sm:hidden">Video</span>
           {submissionCount > 0 && (
-            <Badge variant="secondary" className="font-mono text-[10px] px-1.5 py-0">
+            <Badge variant="secondary" className="font-mono text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0">
               {submissionCount}
             </Badge>
           )}

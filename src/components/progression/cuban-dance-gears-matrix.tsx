@@ -43,7 +43,7 @@ export function CubanDanceGearsMatrix({
       <section
         data-testid="cuban-dance-gears-matrix"
         aria-label="The Cuban Dance Gears & Timba Song Anatomy Guide"
-        className={`rounded-3xl border-2 border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-card to-rose-500/5 p-6 sm:p-8 space-y-4 shadow-sm ${className}`}
+        className={`rounded-3xl border-2 border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-card to-rose-500/5 p-4 sm:p-8 space-y-3 sm:space-y-4 shadow-sm ${className}`}
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5 max-w-2xl">
@@ -130,7 +130,7 @@ export function CubanDanceGearsMatrix({
             </span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
             {TIMBA_SONG_PHASES.map((phaseItem, index) => {
               const isSelected = selectedPhase === phaseItem.phase;
               return (
@@ -138,7 +138,7 @@ export function CubanDanceGearsMatrix({
                   key={phaseItem.phase}
                   type="button"
                   onClick={() => setSelectedPhase(phaseItem.phase)}
-                  className={`rounded-2xl border p-3 text-left transition-all min-h-[72px] flex flex-col justify-between ${
+                  className={`rounded-xl sm:rounded-2xl border p-2 sm:p-3 text-left transition-all min-h-[56px] sm:min-h-[72px] flex flex-col justify-between ${
                     isSelected
                       ? "border-primary-base bg-primary-base/10 shadow-sm ring-2 ring-primary-base/30 text-foreground"
                       : "border-border bg-card/60 hover:bg-muted/60 text-muted-foreground"
@@ -161,7 +161,7 @@ export function CubanDanceGearsMatrix({
           </div>
 
           {/* Active Phase Explainer Box */}
-          <div className="rounded-2xl border-2 border-primary-base/30 bg-card p-5 space-y-3">
+          <div className="rounded-2xl border-2 border-primary-base/30 bg-card p-3.5 sm:p-5 space-y-2.5 sm:space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-rose-900 dark:text-rose-200">
@@ -253,11 +253,11 @@ export function CubanDanceGearsMatrix({
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0 no-scrollbar">
           {displayedGears.map((gear: DanceGearShift) => (
             <Card
               key={gear.gearNumber}
-              className="border-2 border-border/80 shadow-xs hover:border-amber-500/50 transition-all flex flex-col justify-between"
+              className="border-2 border-border/80 shadow-xs hover:border-amber-500/50 transition-all flex flex-col justify-between min-w-[85vw] sm:min-w-[320px] md:min-w-0 snap-center shrink-0 md:shrink"
             >
               <CardHeader className="pb-3 space-y-2">
                 <div className="flex items-center justify-between">

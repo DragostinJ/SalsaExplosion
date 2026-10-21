@@ -114,14 +114,14 @@ export default async function Home() {
             </div>
 
             {/* Main Action Buttons */}
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
               <Button
                 asChild
                 size="lg"
-                className="h-12 px-7 text-sm font-bold bg-primary-base text-white shadow-md shadow-primary-base/20 hover:bg-primary-hover"
+                className="w-full sm:w-auto h-12 px-8 text-sm font-bold bg-primary-base text-white shadow-md shadow-primary-base/20 hover:bg-primary-hover"
               >
                 <Link href="/dashboard/schedule">
-                  View Weekly Classes
+                  Claim Free Trial ? View Classes
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -129,28 +129,12 @@ export default async function Home() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="h-12 px-7 text-sm font-semibold border-secondary-base/40 text-secondary-hover hover:bg-secondary-light/40"
+                className="w-full sm:w-auto h-12 px-7 text-sm font-semibold border-secondary-base/40 text-secondary-hover hover:bg-secondary-light/40"
               >
                 <Link href="/events/made-in-cuba-dance-weekend-2026">
                   <Flame className="mr-2 h-4 w-4 text-accent-tangerine" />
                   Made in Cuba Weekend 2026
                 </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="h-12 px-7 text-sm font-semibold"
-              >
-                <Link href="/about">Maestro Enrique Story</Link>
-              </Button>
-              <Button
-                asChild
-                variant="secondary"
-                size="lg"
-                className="h-12 px-7 text-sm font-semibold"
-              >
-                <Link href="/pricing">Class Passes & Free Trial</Link>
               </Button>
             </div>
           </div>
@@ -233,6 +217,13 @@ export default async function Home() {
             </div>
           </section>
         )}
+
+        {/* Interactive Level Matcher Section ? Promoted above the fold */}
+        <section className="cv-auto py-10 bg-muted/20 border-b border-border/60">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <LevelMatcherQuiz />
+          </div>
+        </section>
 
         {/* Founder & 25+ Year Cuban Heritage Spotlight */}
         <section className="cv-auto py-10 sm:py-14 bg-card/40 border-b border-border/70">
@@ -345,12 +336,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Interactive Level Matcher Section */}
-        <section className="cv-auto py-10 bg-muted/20 border-b border-border/60">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <LevelMatcherQuiz />
-          </div>
-        </section>
+
 
         <section className="cv-auto py-8 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -514,124 +500,114 @@ export default async function Home() {
                 One Platform for Dancers, Instructors & Academy Owners
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
-                Built specifically for Cuban Salsa academies with distinct role permissions and live multi-tenant isolation.
+                Purpose-built for Bournemouth dancers: structured 4-tier Cuban syllabus, Maestro Enrique video recaps, and lightning-fast digital passes.
               </p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-3">
-              {/* Portal 1: Student Experience */}
-              <div className="rounded-2xl border bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-amber-500/40 transition-colors">
+              {/* Feature 1: Structured Cuban Learning */}
+              <div className="rounded-2xl border bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-primary-base/40 transition-colors">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Badge variant="secondary" className="text-xs font-bold">
-                      1. Dancer Experience
+                      1. Weekly Classes & Timetable
                     </Badge>
                     <span className="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded-full">
-                      Open to All
+                      Beginner Friendly
                     </span>
                   </div>
                   <h3 className="text-lg font-extrabold">
-                    Bookings, Syllabus & Recaps
+                    Bournemouth, Boscombe & Poole
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Reserve Lead or Follow spots with automatic ratio protection, watch post-class video recaps from Maestro Enrique, track your 4-tier Cuban syllabus, and store your Congress QR pass.
+                    Every Tuesday, Wednesday, Thursday & Sunday at BOH Studios and partner halls. No partner required, fun social rotations, and strict lead/follow balance so you always have a partner.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2">
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/dashboard/schedule">Schedule</Link>
+                    <Link href="/dashboard/schedule">View Timetable</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/pricing">Passes</Link>
+                    <Link href="/pricing">Class Passes</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/events">Congress Passes</Link>
-                  </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/about">About Studio</Link>
-                  </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs border-primary-base/40 text-rose-800 dark:text-rose-200 font-bold bg-primary-light/50 hover:bg-primary-base hover:text-white transition-colors">
-                    <Link href="/how-it-works">How It Works</Link>
+                    <Link href="/venues">Studio Venues</Link>
                   </Button>
                 </div>
               </div>
 
-              {/* Portal 2: Instructor Desk */}
+              {/* Feature 2: Authentic Cuban Heritage */}
               <div className="rounded-2xl border border-secondary-base/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-secondary-base/60 transition-colors">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Badge className="bg-secondary-base text-white text-xs font-bold">
-                      2. Instructor Teaching Desk
+                      2. Authentic Cuban Syllabus
                     </Badge>
                     <span className="text-[10px] font-bold text-secondary-hover bg-secondary-light/60 px-2 py-0.5 rounded-full">
-                      Staff Portal
+                      Direct from Havana
                     </span>
                   </div>
                   <h3 className="text-lg font-extrabold">
-                    Progression, AI Co-Pilot & QR Roster
+                    Casino, Rueda & Musicality
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    View every student&apos;s level, promote dancers in 1 click across Beginner to Advanced, grade video assessments with AI rubric feedback, and run lightning-fast QR door check-ins.
+                    Progress smoothly from fundamental Guapea & Dile Que No to advanced Vacilala, Sombrero, and lightning-fast Rueda de Casino calls under Maestro Enrique Perez Valdes.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2">
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/instructor/students">
-                      <Users className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
-                      Students (Staff)
-                    </Link>
+                    <Link href="/dashboard/rueda">Rueda Dictionary</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/instructor/submissions">
-                      <Video className="mr-1.5 h-3.5 w-3.5 text-primary-base" />
-                      AI Video Grader
-                    </Link>
+                    <Link href="/music">Cuban Song Hub</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/instructor/roster">
-                      <QrCode className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
-                      QR Roster
-                    </Link>
+                    <Link href="/about">Enrique&apos;s Story</Link>
                   </Button>
                 </div>
               </div>
 
-              {/* Portal 3: Studio Owner Admin */}
+              {/* Feature 3: Festivals & Private Coaching */}
               <div className="rounded-2xl border border-accent-tangerine/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-accent-tangerine/60 transition-colors">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Badge className="bg-accent-tangerine text-zinc-950 text-xs font-bold">
-                      3. Studio Owner Command
+                      3. Congresses & Bespoke Coaching
                     </Badge>
                     <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-full">
-                      Owner Only
+                      VIP Experiences
                     </span>
                   </div>
                   <h3 className="text-lg font-extrabold">
-                    Revenue Charts, Classes & Festivals
+                    Weekend Festivals & 1-on-1 Lessons
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Monitor monthly recurring revenue, track Lead/Follow retention curves, schedule weekly Cuban classes at BOH Studios, and publish ticket tiers for visiting maestros.
+                    Join the international Made in Cuba Dance Weekend or book private 1-on-1 coaching with Maestro Enrique, Moe Flex, Justyna, Arturas, or Jim for fast-track progression.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2">
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/admin/analytics">
-                      <BarChart3 className="mr-1.5 h-3.5 w-3.5 text-accent-tangerine" />
-                      Analytics (Admin)
-                    </Link>
+                    <Link href="/events">Explore Festivals</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/admin/classes">Classes</Link>
+                    <Link href="/private-lessons">Private Lessons</Link>
                   </Button>
                   <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/admin/events">
-                      <ShieldCheck className="mr-1.5 h-3.5 w-3.5 text-accent-tangerine" />
-                      Events Admin
-                    </Link>
+                    <Link href="/how-it-works">Dancer Guide</Link>
                   </Button>
                 </div>
               </div>
+            </div>
+
+            {/* Discrete Studio Operations link for teachers and staff */}
+            <div className="mt-8 pt-6 border-t border-border/50 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground">
+              <span>Teaching desk or studio administration staff?</span>
+              <Link
+                href="/admin/operations"
+                className="font-bold text-primary-base hover:underline inline-flex items-center gap-1"
+              >
+                Access Academy Teaching & Operations Portal ?
+              </Link>
             </div>
           </div>
         </section>
@@ -648,7 +624,7 @@ export default async function Home() {
                   Balanced Lead & Follow Ratios
                 </h3>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Row-locked PostgreSQL transactions enforce strict Lead and Follow caps on both weekly classes at BOH Studios and weekend congress bootcamps.
+                  Our smart real-time booking system automatically caps Lead and Follow tickets so you never spend a class waiting on the sidelines.
                 </p>
               </div>
 
@@ -672,7 +648,7 @@ export default async function Home() {
                   Zero-Commission Congress Passes
                 </h3>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Sell Full Passes and Havana Fiesta social passes directly with Stripe integration and instant 1-second camera QR door verification.
+                  Instant Apple Pay, Google Pay, and card checkout with direct-to-phone QR digital passes for quick door check-in.
                 </p>
               </div>
             </div>

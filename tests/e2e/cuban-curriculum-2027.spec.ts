@@ -137,10 +137,11 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     const player = page.locator('[data-testid="timba-song-anatomy-player"]');
     await expect(player).toBeVisible();
 
-    // Verify initial song is Me Dicen Cuba with calibrated 4:35 duration
-    await expect(player.getByRole("heading", { name: "Me Dicen Cuba" })).toBeVisible();
-    await expect(player.getByText("2-3 Son Clave")).toBeVisible();
-    await expect(player.getByText(/0:00 \/ 4:35/)).toBeVisible();
+    // Verify initial song is Me Dicen Cuba with calibrated 5:28 duration
+    await expect(player.getByRole("heading", { name: "Me Dicen Cuba (Official Video)" })).toBeVisible();
+    await expect(player.getByText("91 BPM").first()).toBeVisible();
+    await expect(player.getByText("2-3 Son Clave").first()).toBeVisible();
+    await expect(player.getByText(/0:00 \/ 5:28/)).toBeVisible();
 
     // Verify all 3 song tabs are rendered
     const meDicenCubaTab = player.locator('[data-testid="select-song-me-dicen-cuba"]');
@@ -165,19 +166,23 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     await streamToggle.click();
     await expect(videoContainer).toBeVisible();
 
-    // Verify timeline segments exist (5 segments for Me Dicen Cuba)
+    // Verify timeline segments exist (9 segments for Me Dicen Cuba)
     const seg0 = player.locator('[data-testid="timeline-segment-0"]');
-    const seg2 = player.locator('[data-testid="timeline-segment-2"]');
+    const seg5 = player.locator('[data-testid="timeline-segment-5"]');
     await expect(seg0).toBeVisible();
-    await expect(seg2).toBeVisible();
+    await expect(seg5).toBeVisible();
 
-    // Click segment 2 (Montuno)
-    await seg2.click();
-
-    // Verify HUD updates to Montuno
+    // Initial HUD check: Intro Cinematográfico (No Music) (Wait / Breathe)
     const hud = player.locator('[data-testid="active-segment-hud"]');
     await expect(hud).toBeVisible();
-    await expect(hud.getByText("Montuno")).toBeVisible();
+    await expect(hud.getByText(/Intro Cinematográfico/i)).toBeVisible();
+    await expect(hud.getByText(/Wait \/ Breathe/i)).toBeVisible();
+
+    // Click segment 5: Montuno 1 ('Para saber de verdad') (2:35 - 3:20)
+    await seg5.click();
+
+    // Verify HUD updates to Montuno 1
+    await expect(hud.getByText(/Montuno 1/i)).toBeVisible();
     await expect(hud.getByText("Casino (Flow)")).toBeVisible();
 
     // Verify Un-Confuser alert is rendered
@@ -197,10 +202,11 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     // Switch to "La Cosa Mala"
     await laCosaMalaTab.click();
 
-    // Verify La Cosa Mala metadata, calibrated 4:52 duration, and 8 segments
-    await expect(player.getByRole("heading", { name: "La Cosa Mala" })).toBeVisible();
-    await expect(player.getByText("2-3 Rumba Clave")).toBeVisible();
-    await expect(player.getByText(/0:00 \/ 4:52/)).toBeVisible();
+    // Verify La Cosa Mala metadata, calibrated 5:47 duration, 95 BPM, and 8 segments
+    await expect(player.getByRole("heading", { name: "La Cosa Mala (Official Audio)" })).toBeVisible();
+    await expect(player.getByText("95 BPM").first()).toBeVisible();
+    await expect(player.getByText("2-3 Son Clave").first()).toBeVisible();
+    await expect(player.getByText(/0:00 \/ 5:47/)).toBeVisible();
     const seg7 = player.locator('[data-testid="timeline-segment-7"]');
     await expect(seg7).toBeVisible();
 
@@ -210,14 +216,23 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     await expect(studioBtn).toBeVisible();
     await expect(videoBtn).toBeVisible();
 
+    // Click segment 5: El Conteo Regresivo ('4, 3, 2, 1... ¡Se le quitó!')
+    const lcmSeg5 = player.locator('[data-testid="timeline-segment-5"]');
+    await lcmSeg5.click();
+    await expect(hud.getByText(/El Conteo Regresivo/i)).toBeVisible();
+    await expect(hud.getByText(/Despelote \/ Reparto/i)).toBeVisible();
+
     // Switch to Level 4 Boss Track "Agua Pa' Yemayá"
     await aguaPaYemayaTab.click();
 
-    // Verify Agua Pa' Yemayá metadata, 5:42 duration, and 7 segments
-    await expect(player.getByRole("heading", { name: "Agua Pa' Yemayá" })).toBeVisible();
-    await expect(player.getByText("108 BPM").first()).toBeVisible();
-    await expect(player.getByText(/0:00 \/ 5:42/)).toBeVisible();
+    // Verify Agua Pa' Yemayá metadata, 6:57 duration, 99 BPM, and 10 segments
+    await expect(player.getByRole("heading", { name: "Agua Pa' Yemayá (2026 Official Video)" })).toBeVisible();
+    await expect(player.getByText("99 BPM").first()).toBeVisible();
+    await expect(player.getByText("2-3 Son / 6/8 Afro-Bembé Hybrid").first()).toBeVisible();
+    await expect(player.getByText(/0:00 \/ 6:57/)).toBeVisible();
     await expect(player.getByText("Advanced Level")).toBeVisible();
+    const apySeg9 = player.locator('[data-testid="timeline-segment-9"]');
+    await expect(apySeg9).toBeVisible();
 
     // Verify Active Timing Mode Pill & 3-Zone Body Telemetry Widget
     const timingModeBadge = player.locator('[data-testid="active-timing-mode-badge"]');
@@ -227,28 +242,27 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     const telemetryWidget = player.locator('[data-testid="body-telemetry-widget"]');
     await expect(telemetryWidget).toBeVisible();
     await expect(telemetryWidget.getByText(/chest & shoulders/i)).toBeVisible();
-    await expect(telemetryWidget.getByText(/bata drum call accents/i)).toBeVisible();
+    await expect(telemetryWidget.getByText(/Iyá Batá drum accents/i)).toBeVisible();
     await expect(telemetryWidget.getByText(/hips & knees/i)).toBeVisible();
-    await expect(telemetryWidget.getByText(/ocean swell wave motion/i)).toBeVisible();
+    await expect(telemetryWidget.getByText(/rolling ocean swell/i)).toBeVisible();
     await expect(telemetryWidget.getByText(/feet/i)).toBeVisible();
-    await expect(telemetryWidget.getByText(/grounded slow weight shifts/i)).toBeVisible();
+    await expect(telemetryWidget.getByText(/grounded 6\/8 earth connection/i)).toBeVisible();
 
     // Test Play, Jump to Finale, and Replay run-through
     const playToggleBtn = player.locator('[data-testid="playback-toggle"]');
     await playToggleBtn.click();
     await expect(playToggleBtn).toContainText("Pause");
 
-    // Click last segment (Finale 4:48 - 5:42)
-    const aguaSeg6 = player.locator('[data-testid="timeline-segment-6"]');
-    await aguaSeg6.click();
+    // Click last segment (Coda Final 6:36 - 6:57)
+    await apySeg9.click();
 
-    // Verify HUD updates to Finale & new timingMode
-    await expect(hud.getByText("Finale").first()).toBeVisible();
+    // Verify HUD updates to Coda Final
+    await expect(hud.getByText(/Coda Final/i)).toBeVisible();
 
     // Reset and replay
     const resetBtn = player.getByRole("button", { name: "Reset" });
     await resetBtn.click();
-    await expect(player.getByText(/0:00 \/ 5:42/)).toBeVisible();
+    await expect(player.getByText(/0:00 \/ 6:57/)).toBeVisible();
 
     // Click Play Along
     await playToggleBtn.click();

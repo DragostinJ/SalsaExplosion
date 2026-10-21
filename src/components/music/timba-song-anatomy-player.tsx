@@ -158,6 +158,7 @@ export function TimbaSongAnatomyPlayer({
   const [showVideoDrawer, setShowVideoDrawer] = useState(true);
   const [isClaveHelperActive, setIsClaveHelperActive] = useState(false);
   const [currentDancerBeat, setCurrentDancerBeat] = useState<number>(1);
+  const [mobileCueFocus, setMobileCueFocus] = useState<"ALL" | "LEAD" | "FOLLOW" | "TRIGGER">("ALL");
 
   const activeSong = useMemo<SongAnatomy>(() => {
     return (
@@ -403,13 +404,13 @@ export function TimbaSongAnatomyPlayer({
   return (
     <div
       data-testid="timba-song-anatomy-player"
-      className={`rounded-3xl border border-border/80 bg-card p-5 sm:p-7 space-y-6 shadow-sm overflow-hidden ${className}`}
+      className={`rounded-3xl border border-border/80 bg-card p-3.5 sm:p-7 space-y-3.5 sm:space-y-6 shadow-sm overflow-hidden ${className}`}
     >
       {/* 1. Top Bar: Header & Song Selector Tabs */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 border-b pb-3.5 sm:pb-5">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <Badge className="bg-primary-base text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
+            <Badge className="bg-primary-base text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1">
               <Compass className="h-3.5 w-3.5" />
               Interactive Song Map
             </Badge>
@@ -417,7 +418,7 @@ export function TimbaSongAnatomyPlayer({
               Live Dancer HUD
             </Badge>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
+          <h2 className="text-lg sm:text-2xl font-black tracking-tight text-foreground">
             Timba Song Anatomy &amp; Gear-Shift Trainer
           </h2>
           <p className="text-xs text-muted-foreground">
@@ -425,8 +426,8 @@ export function TimbaSongAnatomyPlayer({
           </p>
         </div>
 
-        {/* Song Switcher Tabs */}
-        <div className="flex flex-wrap items-center gap-2 self-start md:self-auto">
+        {/* Song Switcher Tabs (Swipeable on mobile, flex-wrap on desktop) */}
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 md:flex-wrap md:pb-0 self-start md:self-auto w-full md:w-auto">
           {TIMBA_SONG_ANATOMY_DATA.map((song) => {
             const isSelected = song.id === activeSong.id;
             const isBoss = song.id === "agua-pa-yemaya";
@@ -436,7 +437,7 @@ export function TimbaSongAnatomyPlayer({
                 type="button"
                 data-testid={`select-song-${song.id}`}
                 onClick={() => handleSelectSong(song.id)}
-                className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] flex items-center gap-2 ${
+                className={`rounded-xl px-2.5 py-1.5 sm:px-3.5 sm:py-2 text-xs font-bold transition-all min-h-[38px] sm:min-h-[40px] flex items-center gap-1.5 sm:gap-2 shrink-0 ${
                   isSelected
                     ? isBoss
                       ? "bg-gradient-to-r from-red-600 to-amber-600 text-white shadow-sm ring-1 ring-amber-400"
@@ -479,7 +480,7 @@ export function TimbaSongAnatomyPlayer({
       </div>
 
       {/* 2. Active Song Meta Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border bg-muted/20 p-4 text-xs">
+      <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 rounded-2xl border bg-muted/20 p-3 sm:p-4 text-xs">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-base/10 text-primary-base font-bold">
             <Radio className="h-5 w-5" />
@@ -748,6 +749,30 @@ export function TimbaSongAnatomyPlayer({
           />
         </div>
 
+        {/* Mobile Quick-Jump Thumb-Friendly Segment Strip */}
+        <div className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+          {effectiveSegments.map((segment, idx) => {
+            const isSegmentActive = idx === activeSegmentIndex;
+            const theme = THEME_STYLES[segment.colorTheme];
+            return (
+              <button
+                key={`mobile-seg-${segment.id}`}
+                type="button"
+                data-testid={`mobile-segment-chip-${idx}`}
+                onClick={() => handleSeek(segment.startTimeSeconds)}
+                className={`rounded-lg px-2.5 py-1 text-[11px] font-bold shrink-0 transition-all border ${
+                  isSegmentActive
+                    ? `${theme.bgActive} ${theme.border} text-foreground ring-1 ring-foreground/40 shadow-xs`
+                    : "border-border/60 bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground"
+                }`}
+              >
+                <span>{idx + 1}. {segment.sectionName}</span>
+                <span className="ml-1 opacity-75 font-mono text-[9px]">{segment.formattedRange.split(" - ")[0]}</span>
+              </button>
+            );
+          })}
+        </div>
+
         {/* Playback Controls & Range Scrubber */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
           <div className="flex items-center gap-2">
@@ -903,7 +928,7 @@ export function TimbaSongAnatomyPlayer({
               </span>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3">
               {/* Zone 1: Chest & Shoulders */}
               <div className="rounded-xl border border-sky-500/30 bg-sky-500/[0.06] p-3 space-y-1">
                 <span className="text-[10px] uppercase font-black tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1.5">
@@ -940,11 +965,39 @@ export function TimbaSongAnatomyPlayer({
           </div>
         )}
 
+        {/* Mobile Cue Role Filter (Visible only on < md) */}
+        <div className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs">
+          <span className="text-[10px] font-extrabold uppercase text-muted-foreground shrink-0 mr-1">Focus:</span>
+          {(
+            [
+              { id: "ALL", label: "All Cues" },
+              { id: "LEAD", label: "Leader" },
+              { id: "FOLLOW", label: "Follower" },
+              { id: "TRIGGER", label: "Listen Trigger" },
+            ] as const
+          ).map((filter) => (
+            <button
+              key={filter.id}
+              type="button"
+              onClick={() => setMobileCueFocus(filter.id)}
+              className={`rounded-lg px-2.5 py-1 text-[11px] font-extrabold transition-all shrink-0 ${
+                mobileCueFocus === filter.id
+                  ? "bg-foreground text-background shadow-xs"
+                  : "border border-border/80 bg-muted/30 text-muted-foreground hover:bg-muted"
+              }`}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+
         {/* 3 Action Cards (What to Listen For, Leader Cue, Follower Cue) */}
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-2.5 sm:gap-4 md:grid-cols-3">
           {/* Card 1: What to Listen For */}
-          <Card className="border border-border/80 bg-card shadow-xs">
-            <CardContent className="p-4 space-y-2">
+          <Card className={`border border-border/80 bg-card shadow-xs ${
+            mobileCueFocus === "ALL" || mobileCueFocus === "TRIGGER" ? "block" : "hidden md:block"
+          }`}>
+            <CardContent className="p-3 sm:p-4 space-y-1.5 sm:space-y-2">
               <span className="text-[10px] uppercase font-bold tracking-wider text-slate-700 dark:text-muted-foreground flex items-center gap-1.5">
                 <Headphones className="h-3.5 w-3.5 text-sky-600" />
                 What to Listen For (Trigger)
@@ -956,8 +1009,10 @@ export function TimbaSongAnatomyPlayer({
           </Card>
 
           {/* Card 2: Leader Cue */}
-          <Card className="border border-sky-500/30 bg-sky-500/[0.04] shadow-xs">
-            <CardContent className="p-4 space-y-2">
+          <Card className={`border border-sky-500/30 bg-sky-500/[0.04] shadow-xs ${
+            mobileCueFocus === "ALL" || mobileCueFocus === "LEAD" ? "block" : "hidden md:block"
+          }`}>
+            <CardContent className="p-3 sm:p-4 space-y-1.5 sm:space-y-2">
               <span className="text-[10px] uppercase font-bold tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-sky-500" />
                 Leader Action
@@ -969,8 +1024,10 @@ export function TimbaSongAnatomyPlayer({
           </Card>
 
           {/* Card 3: Follower Cue */}
-          <Card className="border border-rose-500/30 bg-rose-500/[0.04] shadow-xs">
-            <CardContent className="p-4 space-y-2">
+          <Card className={`border border-rose-500/30 bg-rose-500/[0.04] shadow-xs ${
+            mobileCueFocus === "ALL" || mobileCueFocus === "FOLLOW" ? "block" : "hidden md:block"
+          }`}>
+            <CardContent className="p-3 sm:p-4 space-y-1.5 sm:space-y-2">
               <span className="text-[10px] uppercase font-bold tracking-wider text-rose-950 dark:text-rose-300 flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-rose-500" />
                 Follower Action

@@ -325,7 +325,7 @@ export default async function AboutPage() {
       </section>
 
       {/* 6. Call to Action Banner */}
-      <section className="rounded-3xl border border-amber-500/40 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 p-8 sm:p-12 text-white text-center shadow-lg space-y-4">
+      <section className="rounded-3xl border border-amber-500/40 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 p-5 sm:p-12 text-white text-center shadow-lg space-y-4">
         <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
           Ready to Step Into the Circle?
         </h2>

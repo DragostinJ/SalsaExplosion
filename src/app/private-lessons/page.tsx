@@ -43,7 +43,7 @@ export default async function PrivateLessonsPage() {
       </div>
 
       {/* Hero Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-rose-950 p-8 sm:p-12 text-white shadow-xl border border-border/40">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-rose-950 p-5 sm:p-12 text-white shadow-xl border border-border/40">
         <div className="relative z-10 max-w-3xl space-y-4">
           <div className="flex flex-wrap items-center gap-2">
             <Badge className="bg-primary-base text-white border-none text-xs font-bold">

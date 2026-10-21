@@ -202,7 +202,7 @@ function EventCard({ evt }: EventCardProps) {
             : "bg-gradient-to-tr from-zinc-900 via-primary-base to-rose-900"
         }`}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-[10px] font-bold">
             {isWeekendFlagship ? "Weekend Festival" : "Special Event"}
           </Badge>

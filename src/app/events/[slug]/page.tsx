@@ -120,7 +120,7 @@ export default async function EventDetailPage({
       </div>
 
       {/* Hero Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-700 via-orange-600 to-amber-500 p-8 sm:p-12 text-white shadow-lg">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-700 via-orange-600 to-amber-500 p-5 sm:p-12 text-white shadow-lg">
         <div className="relative z-10 max-w-3xl space-y-4">
           <div className="flex flex-wrap items-center gap-2">
             <Badge className="bg-black/40 text-white border-none backdrop-blur-sm">

@@ -222,7 +222,7 @@ export function VenueArrivalPlanner() {
 
         {/* Calculated Parking Result Banner */}
         <div className="rounded-2xl border bg-muted/30 p-4 space-y-2">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <Car className="h-4 w-4 text-accent-tangerine" />
               <span className="text-xs font-bold text-foreground">

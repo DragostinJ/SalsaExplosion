@@ -118,7 +118,7 @@ export function PrivateLessonsClient({
       {/* Existing Student Requests Drawer / Queue */}
       {bookings.length > 0 && (
         <div className="rounded-2xl border border-amber-500/30 bg-muted/20 p-5 space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="font-bold text-sm flex items-center gap-2">
               <Clock className="h-4 w-4 text-amber-600" />
               Your Private Coaching Requests ({bookings.length})
@@ -359,7 +359,7 @@ export function PrivateLessonsClient({
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <button
                 type="button"
                 onClick={() => setDancerType("SOLO")}

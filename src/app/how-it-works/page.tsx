@@ -40,7 +40,7 @@ export default function HowItWorksPage() {
       </div>
 
       {/* Hero Header */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 p-8 sm:p-14 text-white shadow-xl">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 p-5 sm:p-14 text-white shadow-xl">
         <div className="relative z-10 max-w-3xl space-y-5">
           <div className="flex flex-wrap items-center gap-2">
             <Badge className="bg-black/30 text-white border-white/20 backdrop-blur-sm text-xs font-bold">

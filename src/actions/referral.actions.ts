@@ -12,7 +12,7 @@ const ReferralCodeSchema = z.object({
   code: z
     .string()
     .trim()
-    .regex(/^SALSA-[A-Z]{1,4}-[A-Z0-9]{4}$/i, "Invalid referral code format."),
+    .regex(/^SALSA-[A-Z0-9]{1,4}-[A-Z0-9]{4}$/i, "Invalid referral code format."),
 });
 
 export interface ReferralActionResponse<T = unknown> {
@@ -52,35 +52,34 @@ export async function redeemReferralCodeAction(rawInput: {
         }
 
         const normalizedCode = parsed.data.code.toUpperCase();
+        const isOfficialStudioPromo = normalizedCode === "SALSA-BOH1-2026";
 
-        // 1. Check if student already redeemed ANY referral code
-        const alreadyRedeemed = await prisma.creditLedger.findFirst({
+        // 1. Fast preliminary check (authoritative check enforced inside row-locked transaction below)
+        const priorRedemption = await prisma.creditLedger.findFirst({
           where: {
             userId: user.id,
             description: { startsWith: "REFERRAL_BONUS_REDEEMED:" },
           },
         });
 
-        if (alreadyRedeemed) {
+        if (priorRedemption) {
           return {
             success: false,
             error: "You have already redeemed a welcome referral bonus on your account.",
           };
         }
 
-        // 2. Identify referrer by suffix match against existing user IDs
+        // 2. Identify referrer by suffix match against existing user IDs (case-insensitive)
         const parts = normalizedCode.split("-");
         const suffix = parts[2]; // 4-char suffix
         const referrerCandidates = await prisma.user.findMany({
           where: {
-            id: { endsWith: suffix },
+            id: { endsWith: suffix.toLowerCase(), mode: "insensitive" },
           },
           select: { id: true, firstName: true, classCredits: true },
         });
 
         // Exclude self-referral
-        const validReferrer = referrerCandidates.find((c) => c.id !== user.id);
-
         if (referrerCandidates.some((c) => c.id === user.id)) {
           return {
             success: false,
@@ -88,8 +87,32 @@ export async function redeemReferralCodeAction(rawInput: {
           };
         }
 
+        const validReferrer = referrerCandidates.find((c) => c.id !== user.id);
+
+        // Reject fabricated/unknown codes unless it is the official studio welcome promo
+        if (!validReferrer && !isOfficialStudioPromo) {
+          return {
+            success: false,
+            error: "This referral code was not found or is invalid.",
+          };
+        }
+
         // 3. Atomically grant 1 bonus credit to student (and 1 to referrer if found)
         await prisma.$transaction(async (tx) => {
+          // Acquire PostgreSQL row lock to eliminate TOCTOU double-claiming races
+          await tx.$queryRaw`SELECT id FROM "User" WHERE id = ${user.id} FOR UPDATE`;
+
+          const alreadyRedeemed = await tx.creditLedger.findFirst({
+            where: {
+              userId: user.id,
+              description: { startsWith: "REFERRAL_BONUS_REDEEMED:" },
+            },
+          });
+
+          if (alreadyRedeemed) {
+            throw new Error("ALREADY_REDEEMED");
+          }
+
           // Grant to current user
           const updatedUser = await tx.user.update({
             where: { id: user.id },
@@ -159,6 +182,12 @@ export async function redeemReferralCodeAction(rawInput: {
           message: "🎉 Success! 1 Complimentary Class Credit has been added to your studio wallet!",
         };
       } catch (err: unknown) {
+        if (err instanceof Error && err.message === "ALREADY_REDEEMED") {
+          return {
+            success: false,
+            error: "You have already redeemed a welcome referral bonus on your account.",
+          };
+        }
         console.error("[redeemReferralCodeAction]", err);
         return {
           success: false,

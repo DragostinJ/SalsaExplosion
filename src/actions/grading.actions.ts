@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { DanceLevel, Role, SubmissionStatus } from "@prisma/client";
+import { AuditAction, DanceLevel, Role, SubmissionStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { LEVEL_WEIGHT } from "@/lib/constants/booking";
@@ -12,6 +12,7 @@ import {
   type GradingActionResponse,
 } from "@/lib/constants/grading";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
+import { recordAuditLog } from "@/lib/audit-log";
 
 // ==========================================
 // ZOD VALIDATION SCHEMA
@@ -188,12 +189,29 @@ export async function gradeSubmissionAction(
 
       return {
         submissionId: submission.id,
+        studentId: submission.student.id,
         studentName: `${submission.student.firstName} ${submission.student.lastName}`,
+        oldLevel: submission.student.currentLevel,
         newStatus: decision,
         studentNewLevel,
         wasPromoted,
       };
     });
+
+    if (result.wasPromoted) {
+      await recordAuditLog({
+        actorId: provisionedReviewer.id,
+        action: AuditAction.LEVEL_PROMOTION,
+        targetType: "User",
+        targetId: result.studentId,
+        metadata: {
+          submissionId: result.submissionId,
+          oldLevel: result.oldLevel,
+          newLevel: result.studentNewLevel,
+          promotedByInstructorId: provisionedReviewer.id,
+        },
+      });
+    }
 
     // 4. Revalidate Relevant Cache Routes
     revalidatePath("/instructor/submissions");

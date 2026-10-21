@@ -151,6 +151,19 @@ export async function submitPostClassFeedbackAction(
 
         const { classSessionId, sentiment, notes } = parsed.data;
 
+        // Verify class session exists to prevent foreign key errors or orphaned feedback
+        const targetSession = await prisma.classSession.findUnique({
+          where: { id: classSessionId },
+          select: { id: true },
+        });
+
+        if (!targetSession) {
+          return {
+            success: false,
+            error: "Class session not found.",
+          };
+        }
+
         let encouragement = "¡Excelente! Keep dancing and we will see you at the next class!";
         if (sentiment === "A_BIT_OVERWHELMED") {
           encouragement =

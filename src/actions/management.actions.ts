@@ -577,134 +577,164 @@ export async function registerForEventTierAction(rawInput: {
     tierName: string;
   }>
 > {
-  try {
-    const user = await getOrProvisionCurrentUser();
-    if (!user) {
-      return {
-        success: false,
-        error: {
-          code: "UNAUTHORIZED",
-          message: "Please sign in to register for this event.",
-        },
-      };
-    }
+  const user = await getOrProvisionCurrentUser();
+  const identifier = await getRateLimitIdentifier(user?.id);
 
-    const parsed = RegisterEventTierSchema.safeParse(rawInput);
-    if (!parsed.success) {
-      return {
-        success: false,
-        error: { code: "VALIDATION_ERROR", message: "Invalid pass selection." },
-      };
-    }
+  return withRateLimit(
+    identifier,
+    "BOOKING",
+    async (): Promise<
+      ManagementActionResponse<{
+        registrationId: string;
+        qrCodeHash: string;
+        tierName: string;
+      }>
+    > => {
+      try {
+        if (!user) {
+          return {
+            success: false,
+            error: {
+              code: "UNAUTHORIZED",
+              message: "Please sign in to register for this event.",
+            },
+          };
+        }
 
-    const { eventId, ticketTierId, role } = parsed.data;
+        const parsed = RegisterEventTierSchema.safeParse(rawInput);
+        if (!parsed.success) {
+          return {
+            success: false,
+            error: { code: "VALIDATION_ERROR", message: "Invalid pass selection." },
+          };
+        }
 
-    const result = await prisma.$transaction(async (tx) => {
-      // Acquire PostgreSQL row-level lock on EventTicketTier to prevent concurrent capacity/role race conditions
-      await tx.$queryRaw`SELECT id FROM "EventTicketTier" WHERE id = ${ticketTierId} FOR UPDATE`;
+        const { eventId, ticketTierId, role } = parsed.data;
 
-      const tier = await tx.eventTicketTier.findUnique({
-        where: { id: ticketTierId },
-        include: {
-          event: { select: { id: true, slug: true, title: true } },
-          registrations: {
-            where: { paymentStatus: TicketPaymentStatus.PAID },
-            select: { id: true, userId: true, role: true },
+        const result = await prisma.$transaction(async (tx) => {
+          // Acquire PostgreSQL row-level lock on EventTicketTier to prevent concurrent capacity/role race conditions
+          await tx.$queryRaw`SELECT id FROM "EventTicketTier" WHERE id = ${ticketTierId} FOR UPDATE`;
+
+          const tier = await tx.eventTicketTier.findUnique({
+            where: { id: ticketTierId },
+            include: {
+              event: { select: { id: true, slug: true, title: true } },
+              registrations: {
+                where: { paymentStatus: TicketPaymentStatus.PAID },
+                select: { id: true, userId: true, role: true },
+              },
+            },
+          });
+
+          if (!tier || tier.eventId !== eventId) {
+            throw new Error("Ticket tier not found.");
+          }
+
+          const existingUserPass = tier.registrations.find((r) => r.userId === user.id);
+          if (existingUserPass) {
+            throw new Error("You already hold an active pass for this tier!");
+          }
+
+          if (tier.registrations.length >= tier.totalCapacity) {
+            throw new Error("This ticket tier is completely sold out.");
+          }
+
+          if (role === DanceRole.LEAD && tier.maxLeads !== null) {
+            const leadsCount = tier.registrations.filter(
+              (r) => r.role === DanceRole.LEAD
+            ).length;
+            if (leadsCount >= tier.maxLeads) {
+              throw new Error(
+                "Lead spots for this tier are currently full to maintain partner balance."
+              );
+            }
+          }
+
+          if (role === DanceRole.FOLLOW && tier.maxFollows !== null) {
+            const followsCount = tier.registrations.filter(
+              (r) => r.role === DanceRole.FOLLOW
+            ).length;
+            if (followsCount >= tier.maxFollows) {
+              throw new Error(
+                "Follow spots for this tier are currently full to maintain partner balance."
+              );
+            }
+          }
+
+          // Security: Paid tiers must be processed through Stripe Checkout in production
+          const isDemoRegistrationAllowed =
+            process.env.NODE_ENV !== "production" ||
+            process.env.ALLOW_DEMO_EVENT_REGISTRATION === "true";
+
+          if (tier.priceInCents > 0 && !isDemoRegistrationAllowed) {
+            throw new Error(
+              "Direct registration is only available for free tiers or RSVPs. Paid passes must be purchased via Stripe checkout."
+            );
+          }
+
+          const shortCode = randomUUID().slice(0, 8).toUpperCase();
+          const qrCodeHash = `RF-PASS-${shortCode}`;
+
+          const registration = await tx.eventRegistration.create({
+            data: {
+              userId: user.id,
+              eventId,
+              ticketTierId,
+              role,
+              qrCodeHash,
+              paymentStatus: TicketPaymentStatus.PAID,
+              amountPaidInCents: tier.priceInCents,
+            },
+          });
+
+          return {
+            registrationId: registration.id,
+            qrCodeHash: registration.qrCodeHash,
+            tierName: tier.name,
+            eventSlug: tier.event.slug,
+          };
+        });
+
+        revalidatePath(`/events/${result.eventSlug}`);
+        revalidatePath("/events");
+        revalidatePath("/admin/events");
+        revalidatePath("/admin/analytics");
+
+        return {
+          success: true,
+          data: {
+            registrationId: result.registrationId,
+            qrCodeHash: result.qrCodeHash,
+            tierName: result.tierName,
           },
-        },
-      });
-
-      if (!tier || tier.eventId !== eventId) {
-        throw new Error("Ticket tier not found.");
-      }
-
-      const existingUserPass = tier.registrations.find((r) => r.userId === user.id);
-      if (existingUserPass) {
-        throw new Error("You already hold an active pass for this tier!");
-      }
-
-      if (tier.registrations.length >= tier.totalCapacity) {
-        throw new Error("This ticket tier is completely sold out.");
-      }
-
-      if (role === DanceRole.LEAD && tier.maxLeads !== null) {
-        const leadsCount = tier.registrations.filter(
-          (r) => r.role === DanceRole.LEAD
-        ).length;
-        if (leadsCount >= tier.maxLeads) {
-          throw new Error(
-            "Lead spots for this tier are currently full to maintain partner balance."
-          );
+          message: `Pass confirmed! Your QR Door Code is ${result.qrCodeHash}.`,
+        };
+      } catch (error) {
+        const SAFE_ERRORS = [
+          "Ticket tier not found.",
+          "You already hold an active pass for this tier!",
+          "This ticket tier is completely sold out.",
+          "Lead spots for this tier are currently full to maintain partner balance.",
+          "Follow spots for this tier are currently full to maintain partner balance.",
+          "Direct registration is only available for free tiers or RSVPs. Paid passes must be purchased via Stripe checkout.",
+        ];
+        const rawMsg = error instanceof Error ? error.message : "";
+        const isSafe = SAFE_ERRORS.includes(rawMsg);
+        if (!isSafe) {
+          console.error("[registerForEventTierAction]", error);
         }
+        return {
+          success: false,
+          error: {
+            code: "REGISTRATION_ERROR",
+            message: isSafe
+              ? rawMsg
+              : "Could not complete registration. Please try again or contact studio reception.",
+          },
+        };
       }
-
-      if (role === DanceRole.FOLLOW && tier.maxFollows !== null) {
-        const followsCount = tier.registrations.filter(
-          (r) => r.role === DanceRole.FOLLOW
-        ).length;
-        if (followsCount >= tier.maxFollows) {
-          throw new Error(
-            "Follow spots for this tier are currently full to maintain partner balance."
-          );
-        }
-      }
-
-      // Security: Paid tiers must be processed through Stripe Checkout in production
-      const isDemoRegistrationAllowed =
-        process.env.NODE_ENV !== "production" ||
-        process.env.ALLOW_DEMO_EVENT_REGISTRATION === "true";
-
-      if (tier.priceInCents > 0 && !isDemoRegistrationAllowed) {
-        throw new Error(
-          "Direct registration is only available for free tiers or RSVPs. Paid passes must be purchased via Stripe checkout."
-        );
-      }
-
-      const shortCode = randomUUID().slice(0, 8).toUpperCase();
-      const qrCodeHash = `RF-PASS-${shortCode}`;
-
-      const registration = await tx.eventRegistration.create({
-        data: {
-          userId: user.id,
-          eventId,
-          ticketTierId,
-          role,
-          qrCodeHash,
-          paymentStatus: TicketPaymentStatus.PAID,
-          amountPaidInCents: tier.priceInCents,
-        },
-      });
-
-      return {
-        registrationId: registration.id,
-        qrCodeHash: registration.qrCodeHash,
-        tierName: tier.name,
-        eventSlug: tier.event.slug,
-      };
-    });
-
-    revalidatePath(`/events/${result.eventSlug}`);
-    revalidatePath("/events");
-    revalidatePath("/admin/events");
-    revalidatePath("/admin/analytics");
-
-    return {
-      success: true,
-      data: {
-        registrationId: result.registrationId,
-        qrCodeHash: result.qrCodeHash,
-        tierName: result.tierName,
-      },
-      message: `Pass confirmed! Your QR Door Code is ${result.qrCodeHash}.`,
-    };
-  } catch (error) {
-    const msg =
-      error instanceof Error ? error.message : "Could not complete registration.";
-    return {
-      success: false,
-      error: { code: "REGISTRATION_ERROR", message: msg },
-    };
-  }
+    }
+  );
 }
 
 // ==========================================
@@ -796,6 +826,16 @@ export async function createClassSessionAction(rawInput: {
         error: {
           code: "VALIDATION_ERROR",
           message: parsed.error.issues[0]?.message ?? "Invalid class fields.",
+        },
+      };
+    }
+
+    if (parsed.data.maxLeads + parsed.data.maxFollows > parsed.data.maxCapacity) {
+      return {
+        success: false,
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "Sum of max leads and max follows cannot exceed total studio capacity.",
         },
       };
     }
@@ -905,6 +945,15 @@ export async function createGuestArtistEventAction(rawInput: {
 
     const startDate = new Date(parsed.data.startDateIso);
     const endDate = new Date(parsed.data.endDateIso);
+    if (endDate < startDate) {
+      return {
+        success: false,
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "Event end date cannot be earlier than start date.",
+        },
+      };
+    }
     const guestArtists = parsed.data.guestArtistsCsv
       .split(",")
       .map((s) => s.trim())
@@ -1514,10 +1563,20 @@ export async function cancelClassSessionWithRefundsAction(
     };
   } catch (error) {
     console.error("[cancelClassSessionWithRefundsAction]", error);
-    const message = error instanceof Error ? error.message : "Failed to cancel class session.";
+    const SAFE_CANCELLATION_ERRORS = [
+      "Class session not found.",
+      "This class session has already been cancelled.",
+    ];
+    const rawMsg = error instanceof Error ? error.message : "";
+    const isSafe = SAFE_CANCELLATION_ERRORS.includes(rawMsg);
     return {
       success: false,
-      error: { code: "INTERNAL_ERROR", message },
+      error: {
+        code: "INTERNAL_ERROR",
+        message: isSafe
+          ? rawMsg
+          : "Failed to cancel class session. Please try again or contact support.",
+      },
     };
   }
 }

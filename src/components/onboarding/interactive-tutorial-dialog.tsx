@@ -33,26 +33,34 @@ export function InteractiveTutorialDialog({
   const [demoTierIndex, setDemoTierIndex] = useState(0);
   const [demoQrCheckedIn, setDemoQrCheckedIn] = useState(false);
 
+  // Body scroll locking: lock strictly on isOpen mount, restore on unmount
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isOpen]);
+
   // Keyboard navigation inside modal
   useEffect(() => {
     if (!isOpen) return;
 
-    const originalStyle = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight" && step < 3) setStep((s) => s + 1);
-      if (e.key === "ArrowLeft" && step > 0) setStep((s) => s - 1);
+      if (e.key === "ArrowRight") setStep((s) => Math.min(3, s + 1));
+      if (e.key === "ArrowLeft") setStep((s) => Math.max(0, s - 1));
     };
 
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = originalStyle;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [isOpen, step, onClose]);
+  }, [isOpen, onClose]);
 
   if (!isOpen || typeof document === "undefined") return null;
 
@@ -95,7 +103,10 @@ export function InteractiveTutorialDialog({
       className="fixed inset-0 z-[9999] flex flex-col justify-end sm:justify-center sm:items-center bg-black/80 p-0 sm:p-4 backdrop-blur-sm transition-opacity"
     >
       {/* Card: Bottom Sheet on Mobile, Centered Dialog on Desktop */}
-      <div className="relative flex flex-col w-full max-w-2xl max-h-[92dvh] sm:max-h-[85vh] rounded-t-3xl sm:rounded-3xl border border-primary-base/30 bg-card text-card-foreground shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative flex flex-col w-full max-w-2xl max-h-[92dvh] sm:max-h-[85vh] rounded-t-3xl sm:rounded-3xl border border-primary-base/30 bg-card text-card-foreground shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-200"
+      >
         {/* Top Step Indicators */}
         <div className="grid grid-cols-4 gap-1.5 bg-muted/60 px-4 py-2 shrink-0">
           {[0, 1, 2, 3].map((idx) => (
@@ -134,14 +145,25 @@ export function InteractiveTutorialDialog({
               </h2>
             </div>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close tutorial"
-            className="rounded-lg p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors shrink-0 ml-2"
-          >
-            <X className="h-5 w-5" />
-          </button>
+          <div className="flex items-center gap-1.5 shrink-0 ml-2">
+            <Link
+              href="/how-it-works"
+              onClick={onClose}
+              className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-semibold text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+              title="Open full syllabus and student handbook"
+            >
+              <span>Full Guide</span>
+              <ExternalLink className="h-3 w-3" />
+            </Link>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close tutorial"
+              className="rounded-lg p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
         </div>
 
         {/* Scrollable Step Body */}

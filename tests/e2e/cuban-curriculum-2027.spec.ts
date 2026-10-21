@@ -329,4 +329,55 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     );
     expect(progressionViolations).toEqual([]);
   });
+  test("6. Interactive Tutorial Modal: triggers reliably from header pill on laptop viewports, steps through all 4 cards, and restores body scroll", async ({
+    page,
+  }) => {
+    // 1366x768 laptop resolution (common breakpoint where flex overflow was reported)
+    await page.setViewportSize({ width: 1366, height: 768 });
+    await page.goto("/dashboard/schedule");
+    await page.waitForLoadState("domcontentloaded");
+
+    const tutorialBtn = page.locator('[data-testid="how-it-works-tutorial-button"]');
+    await expect(tutorialBtn).toBeVisible();
+
+    // Verify modal is not mounted yet
+    const tutorialDialog = page.locator('[data-testid="interactive-tutorial-dialog"]');
+    await expect(tutorialDialog).toHaveCount(0);
+
+    // Click trigger pill in header
+    await tutorialBtn.click();
+    await expect(tutorialDialog).toBeVisible();
+
+    // Verify Step 1
+    await expect(page.getByText(/1\. Partner Balance: No Partner Required!/i)).toBeVisible();
+    await expect(page.getByText(/equal Lead & Follow slot caps/i)).toBeVisible();
+
+    // Verify body overflow is locked
+    const overflowLocked = await page.evaluate(() => document.body.style.overflow);
+    expect(overflowLocked).toBe("hidden");
+
+    // Click Next -> Step 2
+    await page.getByRole("button", { name: /^Next/i }).click();
+    await expect(page.getByText(/2\. Studio Wallet, Credits & Free Refunds/i)).toBeVisible();
+
+    // Click Next -> Step 3
+    await page.getByRole("button", { name: /^Next/i }).click();
+    await expect(page.getByText(/3\. Cuban Salsa Levels & AI Video Co-Pilot/i)).toBeVisible();
+
+    // Click Next -> Step 4
+    await page.getByRole("button", { name: /^Next/i }).click();
+    await expect(page.getByText(/4\. 1-Second Door QR Check-In & Badges/i)).toBeVisible();
+
+    // Click Got It, Let's Dance! button
+    const finishBtn = page.getByRole("button", { name: /Got It, Let's Dance!/i });
+    await expect(finishBtn).toBeVisible();
+    await finishBtn.click();
+
+    // Modal dialog should unmount cleanly
+    await expect(tutorialDialog).toHaveCount(0);
+
+    // Body scroll must be unlocked (not permanently stuck on "hidden")
+    const overflowUnlocked = await page.evaluate(() => document.body.style.overflow);
+    expect(overflowUnlocked).not.toBe("hidden");
+  });
 });

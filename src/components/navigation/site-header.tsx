@@ -183,7 +183,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
     },
     {
       href: "/instructor/submissions",
-      label: "Video Grading",
+      label: "Grading",
       icon: ClipboardCheck,
       active: pathname.startsWith("/instructor/submissions"),
     },
@@ -198,25 +198,29 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
   const adminLinks = [
     {
       href: "/admin/operations",
-      label: "Operations",
+      shortLabel: "Ops",
+      fullLabel: "Operations",
       icon: ClipboardList,
       active: pathname.startsWith("/admin/operations"),
     },
     {
       href: "/admin/analytics",
-      label: "Analytics",
+      shortLabel: "Analytics",
+      fullLabel: "Analytics",
       icon: BarChart3,
       active: pathname.startsWith("/admin/analytics"),
     },
     {
       href: "/admin/classes",
-      label: "Classes",
+      shortLabel: "Classes",
+      fullLabel: "Classes",
       icon: CalendarPlus,
       active: pathname.startsWith("/admin/classes"),
     },
     {
       href: "/admin/events",
-      label: "Events Admin",
+      shortLabel: "Events",
+      fullLabel: "Events",
       icon: ShieldCheck,
       active: pathname.startsWith("/admin/events"),
     },
@@ -226,15 +230,15 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-3 sm:gap-4">
         {/* Brand Logo & Context-Aware Left Nav */}
-        <div className="flex items-center gap-3 lg:gap-6 min-w-0">
+        <div className="flex items-center gap-2.5 lg:gap-5 min-w-0 flex-1 overflow-x-clip">
           <Link
             href="/dashboard/schedule"
             className="flex items-center gap-2 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85 shrink-0"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-primary-base to-accent-tangerine text-white shadow-sm shadow-primary-base/20">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-primary-base to-accent-tangerine text-white shadow-sm shadow-primary-base/20 shrink-0">
               <Flame className="h-5 w-5 fill-white" />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col shrink-0">
               <span className="text-lg font-black leading-none tracking-tight">
                 Salsa <span className="text-rose-700 dark:text-rose-400">Explosion</span>
               </span>
@@ -245,12 +249,12 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
           </Link>
 
           {/* Desktop Navigation (Filtered by active role persona) */}
-          <nav aria-label="Primary Navigation" className="hidden xl:flex items-center gap-1.5 whitespace-nowrap min-w-0">
+          <nav aria-label="Primary Navigation" className="hidden xl:flex items-center gap-1.5 whitespace-nowrap min-w-0 overflow-x-clip">
             {isAdmin ? (
               <>
                 <Link
                   href="/dashboard/schedule"
-                  className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+                  className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold transition-colors shrink-0 ${
                     pathname === "/dashboard/schedule"
                       ? "bg-primary-base text-white shadow-xs font-bold"
                       : "text-text-muted hover:bg-muted/70 hover:text-foreground"
@@ -261,7 +265,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                 </Link>
                 <Link
                   href="/music"
-                  className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+                  className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold transition-colors shrink-0 ${
                     pathname.startsWith("/music")
                       ? "bg-primary-base text-white shadow-xs font-bold"
                       : "text-text-muted hover:bg-muted/70 hover:text-foreground"
@@ -270,22 +274,11 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   <Music className="h-3.5 w-3.5" />
                   <span>Song Trainer</span>
                 </Link>
-                <Link
-                  href="/events"
-                  className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
-                    pathname.startsWith("/events")
-                      ? "bg-primary-base text-white shadow-xs font-bold"
-                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
-                  }`}
-                >
-                  <Sparkles className="h-3.5 w-3.5" />
-                  <span>Events</span>
-                </Link>
 
-                <div className="h-4 w-px bg-border mx-1" />
+                <div className="h-4 w-px bg-border mx-0.5 shrink-0" />
 
-                <div className="flex items-center gap-1 rounded-xl border border-accent-tangerine/30 bg-accent-tangerine/[0.08] px-2 py-1 shrink-0">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent-tangerine px-1">
+                <div className="flex items-center gap-1 rounded-xl border border-accent-tangerine/30 bg-accent-tangerine/[0.08] p-1 shrink-0">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent-tangerine px-1 hidden 2xl:inline">
                     Admin:
                   </span>
                   {adminLinks.map((item) => {
@@ -301,7 +294,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                         }`}
                       >
                         <Icon className="h-3 w-3" />
-                        <span>{item.label}</span>
+                        <span className="hidden 2xl:inline">{item.fullLabel}</span>
+                        <span className="2xl:hidden">{item.shortLabel}</span>
                       </Link>
                     );
                   })}
@@ -392,7 +386,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
         </div>
 
         {/* Right side Actions & User Profile */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 ml-auto">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 ml-auto z-10">
           <InteractiveTutorialModal />
 
           {isAdmin && <AdminNotificationBell />}

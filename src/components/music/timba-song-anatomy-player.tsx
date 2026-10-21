@@ -27,7 +27,6 @@ import {
   SongSegment,
   resolveCurriculumMove,
   SegmentColorTheme,
-  scaleSongSegmentsToDuration,
 } from "@/lib/constants/timba-song-anatomy";
 import { CurriculumSkillItem } from "@/lib/constants/cuban-curriculum-2027";
 import { CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
@@ -136,6 +135,8 @@ function formatSeconds(secs: number): string {
   return `${m}:${s < 10 ? "0" : ""}${s}`;
 }
 
+const getNow = () => (typeof Date !== "undefined" ? Date.now() : 0);
+
 export function TimbaSongAnatomyPlayer({
   initialSongId = "me-dicen-cuba",
   className = "",
@@ -149,7 +150,6 @@ export function TimbaSongAnatomyPlayer({
   const [showVideoDrawer, setShowVideoDrawer] = useState(true);
   const [isClaveHelperActive, setIsClaveHelperActive] = useState(false);
   const [currentDancerBeat, setCurrentDancerBeat] = useState<number>(1);
-  const [liveDurationSeconds, setLiveDurationSeconds] = useState<number | null>(null);
 
   const activeSong = useMemo<SongAnatomy>(() => {
     return (
@@ -159,14 +159,13 @@ export function TimbaSongAnatomyPlayer({
   }, [selectedSongId]);
 
   const currentVideoId = selectedVideoIdOverride ?? activeSong.youtubeVideoId;
-  const effectiveDuration = liveDurationSeconds ?? activeSong.durationSeconds;
-  const effectiveSegments = useMemo(
-    () => scaleSongSegmentsToDuration(activeSong, effectiveDuration),
-    [activeSong, effectiveDuration]
-  );
+  const effectiveDuration = activeSong.durationSeconds;
+  const effectiveSegments = activeSong.segments;
 
   const rhythmSynthRef = useRef<CubanRhythmSynth | null>(null);
   const ytPlayerRef = useRef<YTPlayerInstance | null>(null);
+  const lastSeekTimestampRef = useRef<number>(0);
+  const ytPlayerStateRef = useRef<number>(-1);
 
   // Initialize Rhythm Synth
   useEffect(() => {
@@ -200,17 +199,6 @@ export function TimbaSongAnatomyPlayer({
       firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
     }
 
-    const updateDuration = (player: YTPlayerInstance) => {
-      try {
-        if (typeof player.getDuration === "function") {
-          const dur = player.getDuration();
-          if (typeof dur === "number" && !isNaN(dur) && dur > 10) {
-            setLiveDurationSeconds(Math.round(dur));
-          }
-        }
-      } catch {}
-    };
-
     const initPlayer = () => {
       if (!window.YT?.Player) return;
       const iframeId = `youtube-iframe-${selectedSongId}`;
@@ -220,13 +208,8 @@ export function TimbaSongAnatomyPlayer({
       try {
         ytPlayerRef.current = new window.YT.Player(iframeId, {
           events: {
-            onReady: (event) => {
-              updateDuration(event.target);
-            },
             onStateChange: (event) => {
-              if (ytPlayerRef.current) {
-                updateDuration(ytPlayerRef.current);
-              }
+              ytPlayerStateRef.current = event.data;
               if (window.YT?.PlayerState) {
                 if (event.data === window.YT.PlayerState.PLAYING) {
                   setIsPlaying(true);
@@ -258,25 +241,29 @@ export function TimbaSongAnatomyPlayer({
   const handleSelectSong = (songId: string) => {
     setSelectedSongId(songId);
     setSelectedVideoIdOverride(null);
-    setLiveDurationSeconds(null);
+    lastSeekTimestampRef.current = getNow();
+    ytPlayerStateRef.current = -1;
     setCurrentTime(0);
     setIsPlaying(false);
     setInspectingMove(null);
     rhythmSynthRef.current?.stop();
     try {
       ytPlayerRef.current?.pauseVideo();
+      ytPlayerRef.current?.seekTo(0, true);
     } catch {}
   };
 
   const handleSwitchVideoVersion = (videoId: string) => {
     if (videoId === currentVideoId) return;
     setSelectedVideoIdOverride(videoId);
-    setLiveDurationSeconds(null);
+    lastSeekTimestampRef.current = getNow();
+    ytPlayerStateRef.current = -1;
     setCurrentTime(0);
     setIsPlaying(false);
     rhythmSynthRef.current?.stop();
     try {
       ytPlayerRef.current?.pauseVideo();
+      ytPlayerRef.current?.seekTo(0, true);
     } catch {}
   };
 
@@ -308,33 +295,30 @@ export function TimbaSongAnatomyPlayer({
     const intervalMs = 250;
     const interval = setInterval(() => {
       let updatedTime: number | null = null;
-      try {
-        if (
-          ytPlayerRef.current &&
-          typeof ytPlayerRef.current.getDuration === "function"
-        ) {
-          const dur = ytPlayerRef.current.getDuration();
-          if (typeof dur === "number" && !isNaN(dur) && dur > 10) {
-            setLiveDurationSeconds((prev) =>
-              prev !== Math.round(dur) ? Math.round(dur) : prev
-            );
-          }
-        }
-        if (
-          ytPlayerRef.current &&
-          typeof ytPlayerRef.current.getCurrentTime === "function"
-        ) {
-          const ytTime = ytPlayerRef.current.getCurrentTime();
-          if (typeof ytTime === "number" && !isNaN(ytTime) && ytTime > 0) {
+      const canSyncFromYT =
+        ytPlayerRef.current &&
+        typeof ytPlayerRef.current.getCurrentTime === "function" &&
+        ytPlayerStateRef.current === 1 &&
+        playbackSpeed === 1 &&
+        getNow() - lastSeekTimestampRef.current > 1000;
+
+      if (canSyncFromYT) {
+        try {
+          const ytTime = ytPlayerRef.current!.getCurrentTime();
+          if (typeof ytTime === "number" && !isNaN(ytTime) && ytTime >= 0) {
             updatedTime = ytTime;
           }
-        }
-      } catch {}
+        } catch {}
+      }
 
       if (updatedTime !== null) {
         if (updatedTime >= effectiveDuration) {
           setIsPlaying(false);
           setCurrentTime(effectiveDuration);
+          ytPlayerStateRef.current = 0;
+          try {
+            ytPlayerRef.current?.pauseVideo();
+          } catch {}
         } else {
           setCurrentTime(updatedTime);
         }
@@ -343,6 +327,10 @@ export function TimbaSongAnatomyPlayer({
           const next = prev + (intervalMs / 1000) * playbackSpeed;
           if (next >= effectiveDuration) {
             setIsPlaying(false);
+            ytPlayerStateRef.current = 0;
+            try {
+              ytPlayerRef.current?.pauseVideo();
+            } catch {}
             return effectiveDuration;
           }
           return next;
@@ -355,6 +343,7 @@ export function TimbaSongAnatomyPlayer({
 
   const handleSeek = (seconds: number) => {
     const clamped = Math.max(0, Math.min(seconds, effectiveDuration));
+    lastSeekTimestampRef.current = getNow();
     setCurrentTime(clamped);
     try {
       ytPlayerRef.current?.seekTo(clamped, true);
@@ -362,6 +351,8 @@ export function TimbaSongAnatomyPlayer({
   };
 
   const handleReset = () => {
+    lastSeekTimestampRef.current = getNow();
+    ytPlayerStateRef.current = -1;
     setCurrentTime(0);
     setIsPlaying(false);
     rhythmSynthRef.current?.stop();
@@ -372,16 +363,26 @@ export function TimbaSongAnatomyPlayer({
   };
 
   const togglePlay = () => {
-    if (currentTime >= effectiveDuration) {
+    const isAtEnd =
+      currentTime >= effectiveDuration - 0.5 ||
+      ytPlayerStateRef.current === 0;
+
+    if (isAtEnd) {
+      lastSeekTimestampRef.current = getNow();
       setCurrentTime(0);
       try {
         ytPlayerRef.current?.seekTo(0, true);
       } catch {}
     }
+
     const willPlay = !isPlaying;
     setIsPlaying(willPlay);
     try {
       if (willPlay) {
+        if (isAtEnd) {
+          lastSeekTimestampRef.current = getNow();
+          ytPlayerRef.current?.seekTo(0, true);
+        }
         ytPlayerRef.current?.playVideo();
       } else {
         ytPlayerRef.current?.pauseVideo();
@@ -420,6 +421,7 @@ export function TimbaSongAnatomyPlayer({
         <div className="flex flex-wrap items-center gap-2 self-start md:self-auto">
           {TIMBA_SONG_ANATOMY_DATA.map((song) => {
             const isSelected = song.id === activeSong.id;
+            const isBoss = song.id === "agua-pa-yemaya";
             return (
               <button
                 key={song.id}
@@ -428,20 +430,33 @@ export function TimbaSongAnatomyPlayer({
                 onClick={() => handleSelectSong(song.id)}
                 className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] flex items-center gap-2 ${
                   isSelected
-                    ? "bg-foreground text-background shadow-sm"
+                    ? isBoss
+                      ? "bg-gradient-to-r from-red-600 to-amber-600 text-white shadow-sm ring-1 ring-amber-400"
+                      : "bg-foreground text-background shadow-sm"
+                    : isBoss
+                    ? "border border-amber-500/40 bg-amber-500/10 text-amber-950 dark:text-amber-200 hover:bg-amber-500/20"
                     : "border border-border bg-muted/30 text-muted-foreground hover:bg-muted/60 hover:text-foreground"
                 }`}
               >
                 <Music className="h-3.5 w-3.5 shrink-0" />
                 <span className="truncate">{song.title}</span>
-                <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                    isSelected
-                      ? "bg-background/20 text-background"
-                      : "bg-muted text-muted-foreground"
-                  }`}
-                >
-                  {song.segments.length} Segs
+                {isBoss ? (
+                  <Badge className="bg-amber-500 text-slate-950 font-black text-[9px] uppercase px-1.5 py-0 tracking-wider">
+                    Boss Track
+                  </Badge>
+                ) : (
+                  <span
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                      isSelected
+                        ? "bg-background/20 text-background"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    {song.segments.length} Segs
+                  </span>
+                )}
+                <span className="text-[10px] font-mono opacity-80">
+                  {song.bpm} BPM
                 </span>
               </button>
             );
@@ -473,6 +488,8 @@ export function TimbaSongAnatomyPlayer({
             className={`text-[11px] font-bold ${
               activeSong.difficultyLevel === "Beginner"
                 ? "bg-sky-700 text-white"
+                : activeSong.difficultyLevel === "Advanced"
+                ? "bg-gradient-to-r from-red-600 to-amber-600 text-white"
                 : "bg-rose-700 text-white"
             }`}
           >
@@ -829,14 +846,82 @@ export function TimbaSongAnatomyPlayer({
             </div>
           </div>
 
-          {/* Active Dance Gear Pill */}
-          <div className="flex items-center gap-2 pt-1">
+          {/* Active Dance Gear Pill & Timing Mode Badges */}
+          <div className="flex flex-wrap items-center gap-2 pt-1">
             <span className="text-xs font-bold text-foreground">Recommended Gear:</span>
             <Badge className={`${activeTheme.badge} text-xs font-black`}>
               {activeSegment.danceGear}
             </Badge>
+
+            {activeSegment.timingMode && (
+              <Badge
+                variant="outline"
+                data-testid="active-timing-mode-badge"
+                className="border-amber-500/60 bg-amber-500/15 text-amber-950 dark:text-amber-200 text-xs font-black flex items-center gap-1 px-2.5 py-0.5"
+              >
+                <Sparkles className="h-3 w-3 text-amber-600 dark:text-amber-400" />
+                <span>Timing: {activeSegment.timingMode}</span>
+              </Badge>
+            )}
           </div>
         </div>
+
+        {/* 3-Zone Body Telemetry (Polyrhythm Zone Separation) */}
+        {activeSegment.instrumentMapping && (
+          <div
+            data-testid="body-telemetry-widget"
+            className="rounded-2xl border-2 border-primary-base/40 bg-gradient-to-r from-amber-500/10 via-primary-base/10 to-sky-500/10 p-4 sm:p-5 space-y-3 shadow-xs"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/60 pb-2">
+              <div className="flex items-center gap-2">
+                <Badge className="bg-primary-base text-white text-[10px] font-black uppercase tracking-wider">
+                  Level 4 Body Separation
+                </Badge>
+                <h4 className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wide">
+                  3-Zone Body Telemetry (Polyrhythm Split)
+                </h4>
+              </div>
+              <span className="text-[11px] text-muted-foreground font-medium">
+                Advanced Timba Body Isolation Map
+              </span>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {/* Zone 1: Chest & Shoulders */}
+              <div className="rounded-xl border border-sky-500/30 bg-sky-500/[0.06] p-3 space-y-1">
+                <span className="text-[10px] uppercase font-black tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-sky-500 shrink-0" />
+                  Chest &amp; Shoulders
+                </span>
+                <p className="text-xs text-slate-900 dark:text-slate-100 font-bold leading-snug">
+                  {activeSegment.instrumentMapping.chestAndShoulders}
+                </p>
+              </div>
+
+              {/* Zone 2: Hips & Knees */}
+              <div className="rounded-xl border border-amber-500/30 bg-amber-500/[0.06] p-3 space-y-1">
+                <span className="text-[10px] uppercase font-black tracking-wider text-amber-950 dark:text-amber-300 flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-amber-500 shrink-0" />
+                  Hips &amp; Knees
+                </span>
+                <p className="text-xs text-slate-900 dark:text-slate-100 font-bold leading-snug">
+                  {activeSegment.instrumentMapping.hipsAndKnees}
+                </p>
+              </div>
+
+              {/* Zone 3: Feet */}
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.06] p-3 space-y-1">
+                <span className="text-[10px] uppercase font-black tracking-wider text-emerald-950 dark:text-emerald-300 flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+                  Feet
+                </span>
+                <p className="text-xs text-slate-900 dark:text-slate-100 font-bold leading-snug">
+                  {activeSegment.instrumentMapping.feet}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* 3 Action Cards (What to Listen For, Leader Cue, Follower Cue) */}
         <div className="grid gap-4 md:grid-cols-3">

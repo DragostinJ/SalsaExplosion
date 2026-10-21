@@ -20,6 +20,29 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     { name: "Terms & UK Legal", path: "/terms" },
   ];
 
+  
+  for (const route of publicRoutes) {
+    test(`[360x740 Compact Phone] verifies zero horizontal overflow on ${route.name} (${route.path})`, async ({ page }) => {
+      await page.setViewportSize({ width: 360, height: 740 });
+      await page.goto(route.path);
+      await page.waitForLoadState("domcontentloaded");
+
+      const overflow = await page.evaluate(() => {
+        const doc = document.documentElement;
+        return {
+          scrollWidth: doc.scrollWidth,
+          clientWidth: doc.clientWidth,
+          innerWidth: window.innerWidth,
+        };
+      });
+
+      expect(
+        overflow.scrollWidth,
+        `Page ${route.path} has horizontal overflow at 360px (scrollWidth: ${overflow.scrollWidth} > innerWidth: ${overflow.innerWidth})`
+      ).toBeLessThanOrEqual(overflow.innerWidth);
+    });
+  }
+
   for (const route of publicRoutes) {
     test(`[375x812] verifies zero horizontal overflow and header layout integrity on ${route.name} (${route.path})`, async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 812 });

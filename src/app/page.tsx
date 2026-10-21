@@ -2,12 +2,8 @@ import Link from "next/link";
 import {
   Calendar,
   Award,
-  Video,
   ArrowRight,
   QrCode,
-  BarChart3,
-  Users,
-  ShieldCheck,
   MapPin,
   Flame,
   CheckCircle2,

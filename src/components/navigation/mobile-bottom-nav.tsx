@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { CalendarDays, Sparkles, CreditCard, Award, Info, Menu } from "lucide-react";
+import { CalendarDays, Sparkles, CreditCard, Award, Info, Menu, Music } from "lucide-react";
 
 interface MobileBottomNavProps {
   onOpenMenu?: () => void;

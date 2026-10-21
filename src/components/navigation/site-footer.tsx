@@ -165,7 +165,7 @@ export function SiteFooter() {
                 </span>
               </div>
               <div className="pt-0.5 text-xs text-muted-foreground">
-                <a href="tel:07969633701" className="font-bold text-amber-800 dark:text-amber-300 hover:underline">
+                <a href="tel:+447969633701" className="font-bold text-amber-800 dark:text-amber-300 hover:underline">
                   📞 07969 633701
                 </a>
               </div>

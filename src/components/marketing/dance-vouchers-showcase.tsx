@@ -97,7 +97,7 @@ export function DanceVouchersShowcase({
           {/* Call to Actions */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
             <a
-              href="tel:07969633701"
+              href="tel:+447969633701"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-base px-6 py-3.5 text-sm font-black text-white shadow-md hover:bg-primary-hover transition-all min-h-11"
             >
               <Phone className="h-4 w-4" />

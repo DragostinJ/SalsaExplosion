@@ -75,7 +75,8 @@ export const metadata: Metadata = {
   },
 };
 
-import { canSwitchRoles } from "@/lib/auth-user";
+import { canSwitchRoles, isBootstrapAdmin } from "@/lib/auth-user";
+import type { Role } from "@prisma/client";
 
 import { Toaster } from "sonner";
 
@@ -84,15 +85,37 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Role lookup only (no provisioning) — cheap indexed read on clerkId
-  const { userId } = await auth();
-  const viewer = userId
-    ? await prisma.user.findUnique({
+  // Defensive role lookup only (no provisioning) — cheap indexed read on clerkId with cold-start resilience
+  let viewer: { role: Role; email: string } | null = null;
+  try {
+    const { userId } = await auth();
+    if (userId) {
+      viewer = await prisma.user.findUnique({
         where: { clerkId: userId },
         select: { role: true, email: true },
-      })
-    : null;
+      });
+    }
+  } catch (err: unknown) {
+    const isDynamicUsageError =
+      typeof err === "object" &&
+      err !== null &&
+      "digest" in err &&
+      (err as { digest?: string }).digest === "DYNAMIC_SERVER_USAGE";
 
+    if (!isDynamicUsageError) {
+      console.warn("[RootLayout] Non-critical auth/database lookup failed:", err);
+    }
+    // Re-throw Next.js dynamic bail-out so Next.js handles route dynamic bail-out cleanly
+    if (isDynamicUsageError) {
+      throw err;
+    }
+  }
+
+  const effectiveRole = viewer
+    ? isBootstrapAdmin(viewer.email)
+      ? ("ADMIN" as Role)
+      : viewer.role
+    : null;
   const userCanSwitchRoles = viewer ? canSwitchRoles(viewer.email) : false;
 
   return (
@@ -152,7 +175,7 @@ export default async function RootLayout({
           />
         </head>
         <body className="min-h-full flex flex-col bg-background text-foreground">
-          <SiteHeader role={viewer?.role ?? null} canSwitchRoles={userCanSwitchRoles} />
+          <SiteHeader role={effectiveRole} canSwitchRoles={userCanSwitchRoles} />
           <div className="flex-1 pb-20 md:pb-0">{children}</div>
           <SiteFooter />
           <MobileBottomNav />

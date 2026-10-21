@@ -729,7 +729,7 @@ export function TimbaSongAnatomyPlayer({
                 <div className="truncate text-[10px] font-bold text-foreground">
                   {segment.sectionName}
                 </div>
-                <div className="truncate text-[9px] text-muted-foreground font-medium">
+                <div className="truncate text-[9px] text-slate-900 dark:text-slate-100 font-semibold">
                   {segment.danceGear}
                 </div>
               </button>

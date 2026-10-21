@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useUser } from "@clerk/nextjs";
-import { CalendarDays, Sparkles, CreditCard, Award, Info, Menu, Music } from "lucide-react";
+import { CalendarDays, Sparkles, CreditCard, Music, Menu } from "lucide-react";
 
 interface MobileBottomNavProps {
   onOpenMenu?: () => void;
@@ -11,7 +10,7 @@ interface MobileBottomNavProps {
 
 export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
   const pathname = usePathname();
-  const { isSignedIn } = useUser();
+  
 
   function triggerDrawer() {
     if (onOpenMenu) {
@@ -25,12 +24,18 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
   }
 
   // If signed in, show Syllabus (progression). If guest, show About to avoid kicking to login
-  const navItems = [
+    const navItems = [
     {
       label: "Classes",
       href: "/dashboard/schedule",
       icon: CalendarDays,
       isActive: pathname.startsWith("/dashboard/schedule"),
+    },
+    {
+      label: "Music",
+      href: "/music",
+      icon: Music,
+      isActive: pathname.startsWith("/music"),
     },
     {
       label: "Congress",
@@ -44,19 +49,6 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
       icon: CreditCard,
       isActive: pathname.startsWith("/pricing"),
     },
-    isSignedIn
-      ? {
-          label: "Syllabus",
-          href: "/dashboard/progression",
-          icon: Award,
-          isActive: pathname.startsWith("/dashboard/progression"),
-        }
-      : {
-          label: "About",
-          href: "/about",
-          icon: Info,
-          isActive: pathname.startsWith("/about"),
-        },
   ];
 
   return (

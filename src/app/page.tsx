@@ -600,7 +600,7 @@ export default async function Home() {
               <span>Teaching desk or studio administration staff?</span>
               <Link
                 href="/admin/operations"
-                className="font-bold text-primary-base hover:underline inline-flex items-center gap-1"
+                className="font-black text-rose-700 dark:text-rose-300 hover:underline inline-flex items-center gap-1"
               >
                 Access Academy Teaching & Operations Portal ?
               </Link>

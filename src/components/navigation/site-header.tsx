@@ -21,6 +21,8 @@ import {
   MapPin,
   Menu,
   ClipboardList,
+  Music,
+  BookOpen,
 } from "lucide-react";
 
 import dynamic from "next/dynamic";
@@ -99,6 +101,18 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
       label: "Schedule",
       icon: CalendarDays,
       active: pathname === "/dashboard/schedule",
+    },
+    {
+      href: "/music",
+      label: "Song Trainer",
+      icon: Music,
+      active: pathname.startsWith("/music"),
+    },
+    {
+      href: "/how-it-works",
+      label: "Syllabus",
+      icon: BookOpen,
+      active: pathname.startsWith("/how-it-works"),
     },
     {
       href: "/events",
@@ -246,6 +260,17 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   <span>Schedule</span>
                 </Link>
                 <Link
+                  href="/music"
+                  className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+                    pathname.startsWith("/music")
+                      ? "bg-primary-base text-white shadow-xs font-bold"
+                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
+                  }`}
+                >
+                  <Music className="h-3.5 w-3.5" />
+                  <span>Song Trainer</span>
+                </Link>
+                <Link
                   href="/events"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname.startsWith("/events")
@@ -294,6 +319,17 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
                   <span>Schedule</span>
+                </Link>
+                <Link
+                  href="/music"
+                  className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+                    pathname.startsWith("/music")
+                      ? "bg-primary-base text-white shadow-xs font-bold"
+                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
+                  }`}
+                >
+                  <Music className="h-3.5 w-3.5" />
+                  <span>Song Trainer</span>
                 </Link>
                 <Link
                   href="/events"

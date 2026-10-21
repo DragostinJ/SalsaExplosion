@@ -11,7 +11,9 @@ import {
   X,
   Share2,
   ShieldCheck,
+  ExternalLink,
 } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -202,6 +204,21 @@ export function InteractiveTutorialDialog({
                   </p>
                 </div>
               </div>
+
+              {/* Quick-Jump Pitch Link */}
+              <div className="flex items-center justify-between p-2.5 rounded-xl border bg-muted/30">
+                <span className="text-[11px] font-semibold text-muted-foreground">
+                  View Live Lead/Follow Ratio Timetable:
+                </span>
+                <Link
+                  href="/dashboard/schedule"
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline"
+                >
+                  <span>Open Live Schedule</span>
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
+              </div>
             </div>
           )}
 
@@ -241,6 +258,21 @@ export function InteractiveTutorialDialog({
                     Share your unique referral link. When a friend attends their first class, you both receive 1 bonus credit.
                   </p>
                 </div>
+              </div>
+
+              {/* Quick-Jump Pitch Link */}
+              <div className="flex items-center justify-between p-2.5 rounded-xl border bg-muted/30">
+                <span className="text-[11px] font-semibold text-muted-foreground">
+                  View Pass Packages &amp; Pricing:
+                </span>
+                <Link
+                  href="/pricing"
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline"
+                >
+                  <span>Open Passes &amp; Pricing</span>
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
               </div>
             </div>
           )}
@@ -300,6 +332,21 @@ export function InteractiveTutorialDialog({
                     💡 {tiers[demoTierIndex].tip}
                   </p>
                 </div>
+
+                {/* Quick-Jump Pitch Link */}
+                <div className="flex items-center justify-between p-2.5 rounded-xl border bg-muted/30">
+                  <span className="text-[11px] font-semibold text-muted-foreground">
+                    Explore Syllabus &amp; Un-Confusers:
+                  </span>
+                  <Link
+                    href="/how-it-works"
+                    onClick={onClose}
+                    className="inline-flex items-center gap-1 text-xs font-bold text-purple-700 dark:text-purple-400 hover:underline"
+                  >
+                    <span>Open 2027 Syllabus</span>
+                    <ExternalLink className="h-3 w-3" />
+                  </Link>
+                </div>
               </div>
             </div>
           )}
@@ -350,6 +397,21 @@ export function InteractiveTutorialDialog({
                     </Button>
                   )}
                 </div>
+              </div>
+
+              {/* Quick-Jump Pitch Link */}
+              <div className="flex items-center justify-between p-2.5 rounded-xl border bg-muted/30">
+                <span className="text-[11px] font-semibold text-muted-foreground">
+                  Interactive Timba Song Anatomy:
+                </span>
+                <Link
+                  href="/music"
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1 text-xs font-bold text-rose-700 dark:text-rose-400 hover:underline"
+                >
+                  <span>Open Song Anatomy Player</span>
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
               </div>
             </div>
           )}

@@ -253,7 +253,7 @@ export function CubanDanceGearsMatrix({
           </div>
         </div>
 
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0 no-scrollbar">
+        <div tabIndex={0} role="region" aria-label="The 5 Cuban dance gears breakdown" className="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:pb-0 no-scrollbar focus:outline-none">
           {displayedGears.map((gear: DanceGearShift) => (
             <Card
               key={gear.gearNumber}

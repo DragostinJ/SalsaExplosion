@@ -750,7 +750,7 @@ export function TimbaSongAnatomyPlayer({
         </div>
 
         {/* Mobile Quick-Jump Thumb-Friendly Segment Strip */}
-        <div className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+        <div tabIndex={0} role="region" aria-label="Mobile quick-jump timeline segments" className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar py-1 focus:outline-none">
           {effectiveSegments.map((segment, idx) => {
             const isSegmentActive = idx === activeSegmentIndex;
             const theme = THEME_STYLES[segment.colorTheme];

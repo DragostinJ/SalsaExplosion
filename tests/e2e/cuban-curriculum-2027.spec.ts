@@ -380,4 +380,89 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     const overflowUnlocked = await page.evaluate(() => document.body.style.overflow);
     expect(overflowUnlocked).not.toBe("hidden");
   });
+  test("7. Mobile-First UX: verifies zero horizontal overflow, quick-jump segment chip bar, mobile cue focus, and single-row level tabs on 390px mobile viewport", async ({
+    page,
+  }) => {
+    // 390x844 (iPhone 14 standard mobile viewport)
+    await page.setViewportSize({ width: 390, height: 844 });
+
+    // 1. Audit /music on mobile
+    await page.goto("/music");
+    await page.waitForLoadState("domcontentloaded");
+
+    const player = page.locator('[data-testid="timba-song-anatomy-player"]');
+    await expect(player).toBeVisible();
+
+    // Verify zero horizontal page overflow on mobile
+    const musicOverflow = await page.evaluate(() => {
+      return document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1;
+    });
+    expect(musicOverflow).toBe(true);
+
+    // Verify mobile quick-jump segment strip is mounted and visible
+    const mobileChip0 = page.locator('[data-testid="mobile-segment-chip-0"]');
+    const mobileChip1 = page.locator('[data-testid="mobile-segment-chip-1"]');
+    await expect(mobileChip0).toBeVisible();
+    await expect(mobileChip1).toBeVisible();
+
+    // Tap mobile chip 1 to jump timeline
+    await mobileChip1.click();
+    const hud = page.locator('[data-testid="active-segment-hud"]');
+    await expect(hud).toBeVisible();
+
+    // Test mobile cue role focus toggles
+    const leaderFocusBtn = page.getByRole("button", { name: "Leader", exact: true });
+    if (await leaderFocusBtn.isVisible()) {
+      await leaderFocusBtn.click();
+      await expect(page.getByText(/Leader Action/i)).toBeVisible();
+    }
+
+    const allCuesBtn = page.getByRole("button", { name: "All Cues", exact: true });
+    if (await allCuesBtn.isVisible()) {
+      await allCuesBtn.click();
+      await expect(page.getByText(/Leader Action/i)).toBeVisible();
+      await expect(page.getByText(/Follower Action/i)).toBeVisible();
+    }
+
+    // 2. Audit /how-it-works on mobile
+    await page.goto("/how-it-works");
+    await page.waitForLoadState("domcontentloaded");
+
+    const skillTree = page.locator('[data-testid="curriculum-skill-tree"]');
+    await expect(skillTree).toBeVisible();
+
+    // Verify zero horizontal overflow on /how-it-works
+    const syllabusOverflow = await page.evaluate(() => {
+      return document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1;
+    });
+    expect(syllabusOverflow).toBe(true);
+
+    // Verify all 4 levels are accessible on mobile tablist
+    const tabList = skillTree.getByRole("tablist", { name: "Curriculum Levels" });
+    await expect(tabList).toBeVisible();
+    const beginnerTab = tabList.getByRole("tab", { name: /Beginner/i });
+    const improverTab = tabList.getByRole("tab", { name: /Improver/i });
+    const intermTab = tabList.getByRole("tab", { name: /Intermediate/i });
+    const advTab = tabList.getByRole("tab", { name: /Advanced/i });
+
+    await expect(beginnerTab).toBeVisible();
+    await expect(improverTab).toBeVisible();
+    await expect(intermTab).toBeVisible();
+    await expect(advTab).toBeVisible();
+
+    // Tap Improver tab
+    await improverTab.click();
+    await expect(skillTree.getByRole("heading", { name: "Setenta (70)", exact: true })).toBeVisible();
+
+    // 3. Verify zero serious or critical WCAG 2.1 AA violations on mobile (excluding third-party iframe)
+    const mobileAxeResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .exclude("iframe")
+      .analyze();
+
+    const seriousOrCriticalViolations = mobileAxeResults.violations.filter(
+      (v) => v.impact === "serious" || v.impact === "critical"
+    );
+    expect(seriousOrCriticalViolations).toEqual([]);
+  });
 });

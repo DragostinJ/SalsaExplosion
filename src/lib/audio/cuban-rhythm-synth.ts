@@ -7,6 +7,8 @@ import { ClaveType } from "../constants/timba-song-anatomy";
 export function getClaveStrokeBeats(claveType: ClaveType): number[] {
   switch (claveType) {
     case "2-3 Son":
+    case "2-3 Son Clave":
+    case "2-3 Son / 6/8 Afro-Bembé Hybrid":
       // Bar 1 (2-side): Beat 2, Beat 3
       // Bar 2 (3-side): Beat 5, Beat 6.5, Beat 8
       return [2, 3, 5, 6.5, 8];
@@ -17,6 +19,7 @@ export function getClaveStrokeBeats(claveType: ClaveType): number[] {
       return [1, 2.5, 4, 6, 7];
 
     case "2-3 Rumba":
+    case "2-3 Rumba Clave":
       // Bar 1 (2-side): Beat 2, Beat 3
       // Bar 2 (3-side): Beat 5, Beat 6.5, Beat 8.5 (delayed 3rd stroke)
       return [2, 3, 5, 6.5, 8.5];

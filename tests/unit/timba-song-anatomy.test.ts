@@ -10,8 +10,8 @@ import {
 import { CUBAN_CURRICULUM_DATA } from "@/lib/constants/cuban-curriculum-2027";
 import { getClaveStrokeBeats, CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
 
-describe("T2 & B1: Timba Song Anatomy Schema & Production Dataset", () => {
-  it("validates all 3 production song maps against SongAnatomySchema and checks valid youtubeVideoId", () => {
+describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dataset", () => {
+  it("validates all 3 production song maps against SongAnatomySchema and checks valid youtubeVideoId & youtubeUrl", () => {
     expect(TIMBA_SONG_ANATOMY_DATA.length).toBe(3);
 
     for (const song of TIMBA_SONG_ANATOMY_DATA) {
@@ -19,18 +19,22 @@ describe("T2 & B1: Timba Song Anatomy Schema & Production Dataset", () => {
       expect(parsed.success).toBe(true);
       expect(song.youtubeVideoId).toBeDefined();
       expect(song.youtubeVideoId.length).toBeGreaterThanOrEqual(5);
+      expect(song.youtubeUrl).toBeDefined();
     }
   });
 
-  it("proves getClaveStrokeBeats accurately maps authentic 2-3 and 3-2 Son and Rumba Claves", () => {
+  it("proves getClaveStrokeBeats accurately maps authentic 2-3 and 3-2 Son and Rumba Claves and hybrids", () => {
     expect(getClaveStrokeBeats("2-3 Son")).toEqual([2, 3, 5, 6.5, 8]);
+    expect(getClaveStrokeBeats("2-3 Son Clave")).toEqual([2, 3, 5, 6.5, 8]);
     expect(getClaveStrokeBeats("3-2 Son")).toEqual([1, 2.5, 4, 6, 7]);
     expect(getClaveStrokeBeats("2-3 Rumba")).toEqual([2, 3, 5, 6.5, 8.5]);
+    expect(getClaveStrokeBeats("2-3 Rumba Clave")).toEqual([2, 3, 5, 6.5, 8.5]);
     expect(getClaveStrokeBeats("3-2 Rumba")).toEqual([1, 2.5, 4.5, 6, 7]);
+    expect(getClaveStrokeBeats("2-3 Son / 6/8 Afro-Bembé Hybrid")).toEqual([2, 3, 5, 6.5, 8]);
   });
 
   it("proves CubanRhythmSynth can instantiate, set BPM and mute safely in node environments", () => {
-    const synth = new CubanRhythmSynth({ bpm: 96, claveType: "2-3 Son" });
+    const synth = new CubanRhythmSynth({ bpm: 91, claveType: "2-3 Son Clave" });
     expect(synth.getIsRunning()).toBe(false);
     expect(synth.getIsMuted()).toBe(false);
 
@@ -42,49 +46,62 @@ describe("T2 & B1: Timba Song Anatomy Schema & Production Dataset", () => {
     synth.stop();
   });
 
-  it("verifies 'Me Dicen Cuba' has 5 continuous, non-overlapping segments covering the calibrated 275s (4:35) duration", () => {
+  it("verifies 'Me Dicen Cuba' has 9 continuous, non-overlapping segments covering the calibrated 328s (5:28) duration", () => {
     const song = getSongAnatomyById("me-dicen-cuba");
     expect(song).toBeDefined();
-    expect(song?.durationSeconds).toBe(275);
-    expect(song?.segments.length).toBe(5);
+    expect(song?.bpm).toBe(91);
+    expect(song?.claveType).toBe("2-3 Son Clave");
+    expect(song?.difficultyLevel).toBe("Beginner");
+    expect(song?.durationSeconds).toBe(328);
+    expect(song?.segments.length).toBe(9);
 
     let currentExpectedStart = 0;
     for (const segment of song!.segments) {
       expect(segment.startTimeSeconds).toBe(currentExpectedStart);
       expect(segment.endTimeSeconds).toBeGreaterThan(segment.startTimeSeconds);
+      expect(segment.timingMode).toBeDefined();
+      expect(segment.instrumentMapping).toBeDefined();
       currentExpectedStart = segment.endTimeSeconds;
     }
-    expect(currentExpectedStart).toBe(275);
-    expect(song!.segments[0].formattedRange).toBe("0:00 - 0:46");
-    expect(song!.segments[4].formattedRange).toBe("3:15 - 4:35");
+    expect(currentExpectedStart).toBe(328);
+    expect(song!.segments[0].formattedRange).toBe("0:00 - 0:18");
+    expect(song!.segments[0].danceGear).toBe("Wait / Breathe");
+    expect(song!.segments[0].colorTheme).toBe("slate");
+    expect(song!.segments[8].formattedRange).toBe("4:16 - 5:28");
   });
 
-  it("verifies 'La Cosa Mala' has 8 continuous, non-overlapping segments covering the exact 292s (4:52) spreadsheet duration", () => {
+  it("verifies 'La Cosa Mala' has 8 continuous, non-overlapping segments covering the exact 347s (5:47) duration", () => {
     const song = getSongAnatomyById("la-cosa-mala");
     expect(song).toBeDefined();
-    expect(song?.durationSeconds).toBe(292);
+    expect(song?.bpm).toBe(95);
+    expect(song?.claveType).toBe("2-3 Son Clave");
+    expect(song?.difficultyLevel).toBe("Intermediate");
+    expect(song?.durationSeconds).toBe(347);
     expect(song?.segments.length).toBe(8);
 
     let currentExpectedStart = 0;
     for (const segment of song!.segments) {
       expect(segment.startTimeSeconds).toBe(currentExpectedStart);
       expect(segment.endTimeSeconds).toBeGreaterThan(segment.startTimeSeconds);
+      expect(segment.timingMode).toBeDefined();
+      expect(segment.instrumentMapping).toBeDefined();
       currentExpectedStart = segment.endTimeSeconds;
     }
-    expect(currentExpectedStart).toBe(292);
-    expect(song!.segments[0].formattedRange).toBe("0:00 - 0:23");
-    expect(song!.segments[1].formattedRange).toBe("0:23 - 1:12");
-    expect(song!.segments[6].formattedRange).toBe("3:38 - 4:18");
-    expect(song!.segments[7].formattedRange).toBe("4:18 - 4:52");
+    expect(currentExpectedStart).toBe(347);
+    expect(song!.segments[0].formattedRange).toBe("0:00 - 0:15");
+    expect(song!.segments[5].sectionName).toBe("El Conteo Regresivo ('4, 3, 2, 1... ¡Se le quitó!')");
+    expect(song!.segments[5].formattedRange).toBe("3:52 - 4:12");
+    expect(song!.segments[7].formattedRange).toBe("5:10 - 5:47");
   });
 
-  it("verifies 'Agua Pa' Yemayá' has 7 continuous segments with timingMode and 3-zone instrumentMapping", () => {
+  it("verifies 'Agua Pa' Yemayá' has 10 continuous segments covering 417s (6:57) with timingMode and 3-zone instrumentMapping", () => {
     const song = getSongAnatomyById("agua-pa-yemaya");
     expect(song).toBeDefined();
-    expect(song?.bpm).toBe(108);
+    expect(song?.bpm).toBe(99);
+    expect(song?.claveType).toBe("2-3 Son / 6/8 Afro-Bembé Hybrid");
     expect(song?.difficultyLevel).toBe("Advanced");
-    expect(song?.durationSeconds).toBe(342);
-    expect(song?.segments.length).toBe(7);
+    expect(song?.durationSeconds).toBe(417);
+    expect(song?.segments.length).toBe(10);
 
     let currentExpectedStart = 0;
     for (const segment of song!.segments) {
@@ -97,26 +114,26 @@ describe("T2 & B1: Timba Song Anatomy Schema & Production Dataset", () => {
       expect(segment.instrumentMapping?.chestAndShoulders).toBeDefined();
       currentExpectedStart = segment.endTimeSeconds;
     }
-    expect(currentExpectedStart).toBe(342);
-    expect(song!.segments[0].formattedRange).toBe("0:00 - 0:42");
-    expect(song!.segments[6].formattedRange).toBe("4:48 - 5:42");
+    expect(currentExpectedStart).toBe(417);
+    expect(song!.segments[0].formattedRange).toBe("0:00 - 0:29");
+    expect(song!.segments[9].formattedRange).toBe("6:36 - 6:57");
   });
 
   it("proves scaleSongSegmentsToDuration preserves all intermediate transition timestamps and extends final segment if longer", () => {
     const song = getSongAnatomyById("la-cosa-mala")!;
     // When duration matches, returns original segments
-    const unchanged = scaleSongSegmentsToDuration(song, 292);
+    const unchanged = scaleSongSegmentsToDuration(song, 347);
     expect(unchanged).toBe(song.segments);
 
-    // When duration is 346s
-    const scaled = scaleSongSegmentsToDuration(song, 346);
+    // When duration is 360s
+    const scaled = scaleSongSegmentsToDuration(song, 360);
     expect(scaled.length).toBe(8);
     expect(scaled[0].startTimeSeconds).toBe(0);
-    expect(scaled[0].endTimeSeconds).toBe(23); // Unchanged intermediate!
-    expect(scaled[1].startTimeSeconds).toBe(23);
-    expect(scaled[1].endTimeSeconds).toBe(72); // Unchanged intermediate!
-    expect(scaled[7].startTimeSeconds).toBe(258);
-    expect(scaled[7].endTimeSeconds).toBe(346); // Only the final segment extends!
+    expect(scaled[0].endTimeSeconds).toBe(15); // Unchanged intermediate!
+    expect(scaled[1].startTimeSeconds).toBe(15);
+    expect(scaled[1].endTimeSeconds).toBe(102); // Unchanged intermediate!
+    expect(scaled[7].startTimeSeconds).toBe(310);
+    expect(scaled[7].endTimeSeconds).toBe(360); // Only the final segment extends!
   });
 
   it("ensures every recommendedMoveSlug in every segment resolves to a valid curriculum move", () => {

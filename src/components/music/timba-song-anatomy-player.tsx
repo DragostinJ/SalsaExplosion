@@ -87,6 +87,14 @@ const THEME_STYLES: Record<
     pillBg: string;
   }
 > = {
+  slate: {
+    bgActive: "bg-slate-500/25 dark:bg-slate-500/30",
+    bgInactive: "bg-slate-500/10 dark:bg-slate-500/15 hover:bg-slate-500/20",
+    border: "border-slate-500/40",
+    text: "text-slate-950 font-bold dark:text-slate-100",
+    badge: "border-slate-500/40 bg-slate-500/15 text-slate-950 font-bold dark:text-slate-100",
+    pillBg: "bg-slate-500",
+  },
   blue: {
     bgActive: "bg-sky-500/25 dark:bg-sky-500/30",
     bgInactive: "bg-sky-500/10 dark:bg-sky-500/15 hover:bg-sky-500/20",
@@ -439,7 +447,7 @@ export function TimbaSongAnatomyPlayer({
                 }`}
               >
                 <Music className="h-3.5 w-3.5 shrink-0" />
-                <span className="truncate">{song.title}</span>
+                <span className="truncate max-w-[130px] sm:max-w-none">{song.title}</span>
                 {isBoss ? (
                   <Badge className="bg-amber-500 text-slate-950 font-black text-[9px] uppercase px-1.5 py-0 tracking-wider">
                     Boss Track
@@ -488,7 +496,10 @@ export function TimbaSongAnatomyPlayer({
 
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="outline" className="text-[11px] font-bold border-border/80">
-            {activeSong.claveType} Clave
+            {activeSong.claveType.toLowerCase().includes("clave") ||
+            activeSong.claveType.toLowerCase().includes("hybrid")
+              ? activeSong.claveType
+              : `${activeSong.claveType} Clave`}
           </Badge>
           <Badge
             className={`text-[11px] font-bold ${

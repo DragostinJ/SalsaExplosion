@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useMemo } from "react";
 import Link from "next/link";
 import { BookingStatus, DanceRole } from "@prisma/client";
 import {
@@ -13,6 +13,9 @@ import {
   Video,
   X,
   Printer,
+  Search,
+  AlertTriangle,
+  Zap,
 } from "lucide-react";
 import { toggleBookingCheckInAction } from "@/actions/management.actions";
 import { attachClassRecapAction } from "@/actions/recap.actions";
@@ -44,6 +47,8 @@ export function ClassRosterWorkspace({
   const [showQrModal, setShowQrModal] = useState<boolean>(false);
   const [showRecapModal, setShowRecapModal] = useState<boolean>(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filterRole, setFilterRole] = useState<"ALL" | "AWAITING" | "CHECKED_IN" | "LEAD" | "FOLLOW">("ALL");
   const [isPending, startTransition] = useTransition();
 
   // Recap Form State
@@ -121,9 +126,9 @@ export function ClassRosterWorkspace({
       (b) =>
         b.id.toLowerCase() === q ||
         b.userId.toLowerCase() === q ||
-        `${b.firstName} ${b.lastName}`.toLowerCase().includes(q) ||
         b.email.toLowerCase() === q ||
-        q.includes("rf-pass")
+        `${b.firstName} ${b.lastName}`.toLowerCase() === q ||
+        (q.length >= 3 && `${b.firstName} ${b.lastName}`.toLowerCase().includes(q))
     );
 
     if (matched) {
@@ -137,6 +142,67 @@ export function ClassRosterWorkspace({
       setStatusMessage(`Scanned: "${scannedCode}". No matching dancer in current class roster.`);
     }
   };
+
+  const awaitingBookings = useMemo(() => {
+    if (!activeClass) return [];
+    return activeClass.bookings.filter((b) => b.status !== BookingStatus.ATTENDED);
+  }, [activeClass]);
+
+  const handleCheckInAllRemaining = () => {
+    if (!activeClass || awaitingBookings.length === 0) return;
+    startTransition(async () => {
+      let count = 0;
+      for (const booking of awaitingBookings) {
+        const res = await toggleBookingCheckInAction({
+          bookingId: booking.id,
+          markAttended: true,
+        });
+        if (res.success) count++;
+      }
+      setClasses((prev) =>
+        prev.map((cls) => {
+          if (cls.id !== activeClass.id) return cls;
+          const updatedBookings = cls.bookings.map((b) => ({
+            ...b,
+            status: BookingStatus.ATTENDED,
+            checkedInAt: b.checkedInAt ?? new Date().toISOString(),
+          }));
+          const checkedInLeads = updatedBookings.filter(
+            (b) => b.danceRole === DanceRole.LEAD
+          ).length;
+          const checkedInFollows = updatedBookings.filter(
+            (b) => b.danceRole === DanceRole.FOLLOW
+          ).length;
+          return {
+            ...cls,
+            checkedInLeads,
+            checkedInFollows,
+            bookings: updatedBookings,
+          };
+        })
+      );
+      setStatusMessage(`⚡ Checked in ${count} remaining dancer(s) in bulk.`);
+    });
+  };
+
+  const filteredBookings = useMemo(() => {
+    if (!activeClass) return [];
+    return activeClass.bookings.filter((b) => {
+      if (filterRole === "AWAITING" && b.status === BookingStatus.ATTENDED) return false;
+      if (filterRole === "CHECKED_IN" && b.status !== BookingStatus.ATTENDED) return false;
+      if (filterRole === "LEAD" && b.danceRole !== DanceRole.LEAD) return false;
+      if (filterRole === "FOLLOW" && b.danceRole !== DanceRole.FOLLOW) return false;
+
+      if (!searchQuery.trim()) return true;
+      const q = searchQuery.toLowerCase().trim();
+      const fullName = `${b.firstName} ${b.lastName}`.toLowerCase();
+      return (
+        fullName.includes(q) ||
+        b.email.toLowerCase().includes(q) ||
+        b.id.toLowerCase().includes(q)
+      );
+    });
+  }, [activeClass, filterRole, searchQuery]);
 
   if (!activeClass) {
     return (
@@ -388,6 +454,29 @@ export function ClassRosterWorkspace({
               </div>
             </div>
 
+            {/* Live Floor-Ratio Imbalance Callout */}
+            {Math.abs(activeClass.checkedInLeads - activeClass.checkedInFollows) >= 3 && (
+              <div
+                data-testid="floor-imbalance-callout"
+                className="rounded-2xl border border-amber-400 bg-amber-500/10 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-amber-950 dark:text-amber-200 font-bold"
+              >
+                <div className="flex items-center gap-2">
+                  <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                  <span>
+                    ⚠️ Partner Imbalance:{" "}
+                    {Math.abs(activeClass.checkedInLeads - activeClass.checkedInFollows)} more{" "}
+                    {activeClass.checkedInLeads > activeClass.checkedInFollows ? "Lead" : "Follow"}s
+                    checked in than{" "}
+                    {activeClass.checkedInLeads > activeClass.checkedInFollows ? "Follow" : "Lead"}s
+                    on the floor
+                  </span>
+                </div>
+                <span className="text-[11px] font-mono opacity-80">
+                  Tip: Rotate partners frequently or invite assistant instructors
+                </span>
+              </div>
+            )}
+
             {/* Expandable Studio Door QR Code Display */}
             {showQrModal && (
               <div className="rounded-2xl border-2 border-dashed border-amber-500/40 bg-amber-500/[0.03] p-6 text-center space-y-4">
@@ -431,18 +520,117 @@ export function ClassRosterWorkspace({
             </div>
 
             {/* Enrolled Dancers List */}
-            <div className="space-y-2 pt-2">
-              <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-muted-foreground pb-1">
+            <div className="space-y-3 pt-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-bold uppercase tracking-wider text-muted-foreground pb-1">
                 <span>Enrolled Dancers ({activeClass.bookings.length})</span>
-                <span>Door Attendance Status</span>
+                {awaitingBookings.length > 0 && (
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    data-testid="check-in-all-remaining-btn"
+                    disabled={isPending}
+                    onClick={handleCheckInAllRemaining}
+                    className="text-xs font-bold border-amber-500/50 text-amber-700 dark:text-amber-300 hover:bg-amber-500/10 h-8 self-start sm:self-auto"
+                  >
+                    <Zap className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                    ⚡ Check In All Remaining ({awaitingBookings.length})
+                  </Button>
+                )}
+              </div>
+
+              {/* Instant Search Bar & Filter Pills */}
+              <div className="space-y-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+                  <input
+                    type="text"
+                    data-testid="roster-search-input"
+                    placeholder="Search by dancer first name, last name, or email..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full rounded-xl border border-border/80 bg-background pl-9 pr-4 py-2 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                  <button
+                    type="button"
+                    onClick={() => setFilterRole("ALL")}
+                    className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
+                      filterRole === "ALL"
+                        ? "bg-foreground text-background shadow-xs"
+                        : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                    }`}
+                  >
+                    All ({activeClass.bookings.length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFilterRole("AWAITING")}
+                    className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
+                      filterRole === "AWAITING"
+                        ? "bg-amber-500 text-zinc-950 shadow-xs"
+                        : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                    }`}
+                  >
+                    Awaiting Arrival ({awaitingBookings.length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFilterRole("CHECKED_IN")}
+                    className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
+                      filterRole === "CHECKED_IN"
+                        ? "bg-emerald-600 text-white shadow-xs"
+                        : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                    }`}
+                  >
+                    Checked In ({activeClass.checkedInLeads + activeClass.checkedInFollows})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFilterRole("LEAD")}
+                    className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
+                      filterRole === "LEAD"
+                        ? "bg-blue-600 text-white shadow-xs"
+                        : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                    }`}
+                  >
+                    Leads ({activeClass.bookings.filter((b) => b.danceRole === DanceRole.LEAD).length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFilterRole("FOLLOW")}
+                    className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
+                      filterRole === "FOLLOW"
+                        ? "bg-rose-600 text-white shadow-xs"
+                        : "bg-muted/50 text-muted-foreground hover:bg-muted"
+                    }`}
+                  >
+                    Follows ({activeClass.bookings.filter((b) => b.danceRole === DanceRole.FOLLOW).length})
+                  </button>
+                </div>
               </div>
 
               {activeClass.bookings.length === 0 ? (
                 <div className="rounded-xl border p-8 text-center text-xs text-muted-foreground">
                   No bookings for this session yet.
                 </div>
+              ) : filteredBookings.length === 0 ? (
+                <div className="rounded-xl border border-dashed p-6 text-center text-xs text-muted-foreground">
+                  No dancers match your current search or filter query.
+                </div>
               ) : (
-                activeClass.bookings.map((booking) => {
+                filteredBookings.map((booking) => {
                   const isAttended = booking.status === BookingStatus.ATTENDED;
 
                   return (

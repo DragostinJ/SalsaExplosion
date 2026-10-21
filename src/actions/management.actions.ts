@@ -1306,7 +1306,7 @@ export async function updateMerchReservationStatusAction(
 
 const UpdatePartnerWaitlistStatusSchema = z.object({
   waitlistId: z.string().min(1),
-  status: z.enum(["WAITING", "PAIRED", "CANCELLED"]),
+  status: z.enum(["WAITING", "PAIRED", "NOTIFIED", "CANCELLED"]),
 });
 
 export async function updatePartnerWaitlistStatusAction(
@@ -1364,6 +1364,110 @@ export async function updatePartnerWaitlistStatusAction(
     return {
       success: false,
       error: { code: "INTERNAL_ERROR", message: "Could not update waitlist status." },
+    };
+  }
+}
+
+export async function autoPairWaitlistDancersAction(): Promise<
+  ManagementActionResponse<{
+    leadEntryId: string;
+    followEntryId: string;
+    leadName: string;
+    followName: string;
+  }>
+> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
+      return {
+        success: false,
+        error: { code: "FORBIDDEN", message: "Only studio staff can auto-pair waitlist dancers." },
+      };
+    }
+
+    // Find the oldest WAITING Lead and oldest WAITING Follow
+    const [oldestLead, oldestFollow] = await Promise.all([
+      prisma.partnerWaitlistEntry.findFirst({
+        where: { role: DanceRole.LEAD, status: "WAITING" },
+        orderBy: { createdAt: "asc" },
+        include: { user: { select: { firstName: true, lastName: true } } },
+      }),
+      prisma.partnerWaitlistEntry.findFirst({
+        where: { role: DanceRole.FOLLOW, status: "WAITING" },
+        orderBy: { createdAt: "asc" },
+        include: { user: { select: { firstName: true, lastName: true } } },
+      }),
+    ]);
+
+    if (!oldestLead || !oldestFollow) {
+      return {
+        success: false,
+        error: {
+          code: "CANNOT_PAIR",
+          message: !oldestLead
+            ? "No waiting leads in the waitlist queue to pair."
+            : "No waiting follows in the waitlist queue to pair.",
+        },
+      };
+    }
+
+    // Atomically mark both as NOTIFIED
+    await prisma.$transaction([
+      prisma.partnerWaitlistEntry.update({
+        where: { id: oldestLead.id },
+        data: { status: "NOTIFIED" },
+      }),
+      prisma.partnerWaitlistEntry.update({
+        where: { id: oldestFollow.id },
+        data: { status: "NOTIFIED" },
+      }),
+    ]);
+
+    await Promise.all([
+      recordAuditLog({
+        actorId: user.id,
+        action: AuditAction.EVENT_MUTATION,
+        targetType: "PartnerWaitlistEntry",
+        targetId: oldestLead.id,
+        metadata: {
+          action: "AUTO_PAIRED_NOTIFIED",
+          pairedWithId: oldestFollow.id,
+          role: DanceRole.LEAD,
+        },
+      }),
+      recordAuditLog({
+        actorId: user.id,
+        action: AuditAction.EVENT_MUTATION,
+        targetType: "PartnerWaitlistEntry",
+        targetId: oldestFollow.id,
+        metadata: {
+          action: "AUTO_PAIRED_NOTIFIED",
+          pairedWithId: oldestLead.id,
+          role: DanceRole.FOLLOW,
+        },
+      }),
+    ]);
+
+    revalidatePath("/admin/operations");
+
+    const leadName = `${oldestLead.user.firstName} ${oldestLead.user.lastName}`.trim();
+    const followName = `${oldestFollow.user.firstName} ${oldestFollow.user.lastName}`.trim();
+
+    return {
+      success: true,
+      data: {
+        leadEntryId: oldestLead.id,
+        followEntryId: oldestFollow.id,
+        leadName,
+        followName,
+      },
+      message: `⚡ Successfully paired & notified Lead ${leadName} with Follow ${followName}!`,
+    };
+  } catch (error) {
+    console.error("[autoPairWaitlistDancersAction]", error);
+    return {
+      success: false,
+      error: { code: "INTERNAL_ERROR", message: "Failed to auto-pair waitlist dancers." },
     };
   }
 }

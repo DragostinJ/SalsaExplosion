@@ -12,6 +12,7 @@ import {
   XCircle,
   Send,
   Loader2,
+  Zap,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ import {
   updateMerchReservationStatusAction,
   updatePartnerWaitlistStatusAction,
   replyAnonymousQuestionAction,
+  autoPairWaitlistDancersAction,
 } from "@/actions/management.actions";
 import { toast } from "sonner";
 
@@ -172,14 +174,104 @@ export function StudioOperationsWorkspace({
     });
   };
 
-  // Counts for tabs
+  const handleAutoPairWaitlist = () => {
+    startTransition(async () => {
+      const res = await autoPairWaitlistDancersAction();
+      if (res.success) {
+        toast.success(res.message);
+        router.refresh();
+      } else {
+        toast.error(res.error?.message ?? "Failed to auto-pair dancers.");
+      }
+    });
+  };
+
+  // Counts & Revenue for tabs & summary strip
   const pendingCoachingCount = privateBookings.filter((b) => b.status === "PENDING").length;
+  const pendingCoachingRevenue = privateBookings
+    .filter((b) => b.status === "PENDING" || b.status === "CONFIRMED")
+    .reduce((sum, b) => sum + (b.totalPricePounds || 0), 0);
+
   const pendingMerchCount = merchReservations.filter((m) => m.status === "RESERVED").length;
+  const pendingMerchRevenue = merchReservations
+    .filter((m) => m.status === "RESERVED")
+    .reduce((sum, m) => sum + (m.pricePounds || 0), 0);
+
   const waitingWaitlistCount = waitlistEntries.filter((w) => w.status === "WAITING").length;
+  const waitingLeadsCount = waitlistEntries.filter(
+    (w) => w.status === "WAITING" && w.role === "LEAD"
+  ).length;
+  const waitingFollowsCount = waitlistEntries.filter(
+    (w) => w.status === "WAITING" && w.role === "FOLLOW"
+  ).length;
+
   const unansweredQCount = anonymousQuestions.filter((q) => q.status !== "ANSWERED").length;
 
   return (
     <div className="space-y-6">
+      {/* Tonight's Desk & Revenue Summary Strip */}
+      <div
+        data-testid="tonights-desk-summary-strip"
+        className="grid gap-3 sm:grid-cols-3"
+      >
+        <Card className="rounded-2xl border border-border/80 bg-card p-4 shadow-xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
+              Pending Coaching Revenue
+            </span>
+            <Badge variant="outline" className="text-[10px] font-mono">
+              {pendingCoachingCount} Pending
+            </Badge>
+          </div>
+          <div className="mt-2 flex items-baseline justify-between">
+            <h4 className="text-2xl font-black text-foreground">
+              £{pendingCoachingRevenue}.00
+            </h4>
+            <span className="text-xs text-muted-foreground font-medium">
+              Due Cash/Card
+            </span>
+          </div>
+        </Card>
+
+        <Card className="rounded-2xl border border-border/80 bg-card p-4 shadow-xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
+              Merch Collection Due
+            </span>
+            <Badge variant="outline" className="text-[10px] font-mono">
+              {pendingMerchCount} Reserved
+            </Badge>
+          </div>
+          <div className="mt-2 flex items-baseline justify-between">
+            <h4 className="text-2xl font-black text-foreground">
+              £{pendingMerchRevenue}.00
+            </h4>
+            <span className="text-xs text-muted-foreground font-medium">
+              Awaiting Desk Pickup
+            </span>
+          </div>
+        </Card>
+
+        <Card className="rounded-2xl border border-border/80 bg-card p-4 shadow-xs">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
+              Partner Waitlist Queue
+            </span>
+            <Badge className="bg-amber-500 text-zinc-950 text-[10px] font-bold">
+              {waitingWaitlistCount} Waiting
+            </Badge>
+          </div>
+          <div className="mt-2 flex items-baseline justify-between">
+            <h4 className="text-lg font-black text-foreground">
+              {waitingLeadsCount} Leads / {waitingFollowsCount} Follows
+            </h4>
+            <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+              {Math.min(waitingLeadsCount, waitingFollowsCount)} Couple(s) Pairable
+            </span>
+          </div>
+        </Card>
+      </div>
+
       {/* Tab Navigation Pill Bar */}
       <div className="flex flex-wrap items-center gap-2 border-b border-border/80 pb-3">
         <button
@@ -472,13 +564,27 @@ export function StudioOperationsWorkspace({
       {/* Tab 3: Partner Waitlist */}
       {activeTab === "waitlist" && (
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-base font-bold text-foreground">
-              Partner Waitlist Queue ({waitlistEntries.length})
-            </h3>
-            <span className="text-xs text-muted-foreground">
-              {waitingWaitlistCount} dancers waiting for role balance pairing
-            </span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h3 className="text-base font-bold text-foreground">
+                Partner Waitlist Queue ({waitlistEntries.length})
+              </h3>
+              <span className="text-xs text-muted-foreground">
+                {waitingWaitlistCount} dancers waiting for role balance pairing
+              </span>
+            </div>
+
+            <Button
+              type="button"
+              size="sm"
+              disabled={isPending || waitingLeadsCount === 0 || waitingFollowsCount === 0}
+              onClick={handleAutoPairWaitlist}
+              data-testid="auto-pair-waitlist-btn"
+              className="bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-bold text-xs shadow-xs h-8 self-start sm:self-auto"
+            >
+              <Zap className="mr-1.5 h-3.5 w-3.5" />
+              ⚡ Auto-Pair Waiting Lead + Follow
+            </Button>
           </div>
 
           {waitlistEntries.length === 0 ? (
@@ -502,7 +608,7 @@ export function StudioOperationsWorkspace({
                         </div>
                         <Badge
                           className={`text-[10px] font-bold ${
-                            w.status === "PAIRED"
+                            w.status === "PAIRED" || w.status === "NOTIFIED"
                               ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30"
                               : w.status === "CANCELLED"
                               ? "bg-rose-500/10 text-rose-700 dark:text-rose-400"

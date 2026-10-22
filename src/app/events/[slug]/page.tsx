@@ -9,7 +9,18 @@ import {
   Flame,
   CheckCircle2,
   Clock,
+  Sparkles,
+  Phone,
+  Mail,
 } from "lucide-react";
+
+function InstagramIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg className={`fill-current shrink-0 ${className}`} viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+    </svg>
+  );
+}
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { Badge } from "@/components/ui/badge";
@@ -168,6 +179,200 @@ export default async function EventDetailPage({
           </div>
         </div>
       </div>
+
+      {/* Special Flagship MADE IN CUBA Dance Festival 2026 Showcase */}
+      {event.slug.includes("made-in-cuba") && (
+        <div
+          data-testid="made-in-cuba-festival-showcase"
+          className="rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-amber-950/40 via-background to-orange-950/30 p-6 sm:p-8 space-y-6 shadow-xl"
+        >
+          <div className="grid gap-8 lg:grid-cols-12 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 space-y-5">
+              <div className="space-y-2">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge className="bg-amber-500 text-zinc-950 font-black text-xs uppercase tracking-wider shadow-sm">
+                    🎉 Celebrating 33 Years of Salsa Explosion!
+                  </Badge>
+                  <Badge variant="outline" className="border-amber-400/40 text-amber-300 bg-amber-500/10 text-xs font-bold">
+                    South Coast’s Premier Cuban Dance Event
+                  </Badge>
+                </div>
+
+                <h3 className="text-2xl sm:text-4xl font-black text-foreground tracking-tight">
+                  MADE IN CUBA DANCE FESTIVAL 2026
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold text-amber-800 dark:text-amber-300">
+                  Bournemouth • Friday 4, Saturday 5 &amp; Sunday 6 December 2026
+                </p>
+                <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed font-medium">
+                  Welcome to <strong>MADE IN CUBA DANCE WEEKEND</strong> — get ready for an unforgettable weekend celebrating authentic Cuban dance, music, culture and community. Three days. Three nights. Incredible dancers. Authentic Cuban flavour. One amazing community!
+                </p>
+              </div>
+
+              {/* What to Expect Grid (7 Key Features) */}
+              <div className="space-y-2.5">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                  <Sparkles className="h-3.5 w-3.5 text-amber-500" />
+                  What to Expect
+                </h4>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-center font-bold text-foreground">
+                    <span className="block text-lg">🌙</span>
+                    3 Nights of Parties
+                  </div>
+                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-center font-bold text-foreground">
+                    <span className="block text-lg">🎓</span>
+                    2 Days of Workshops
+                  </div>
+                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-center font-bold text-foreground">
+                    <span className="block text-lg">🎭</span>
+                    2 Spectacular Shows
+                  </div>
+                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-center font-bold text-foreground">
+                    <span className="block text-lg">⭐</span>
+                    Dancing with the Stars
+                  </div>
+                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-center font-bold text-foreground col-span-2 sm:col-span-2">
+                    <span className="block text-lg">💃</span>
+                    Social Dancing Until 2:00 AM
+                  </div>
+                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-center font-bold text-foreground">
+                    <span className="block text-lg">🇨🇺</span>
+                    Room 1: Salsa &amp; Timba
+                  </div>
+                  <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-center font-bold text-foreground">
+                    <span className="block text-lg">🇩🇴</span>
+                    Room 2: Bachata Room
+                  </div>
+                </div>
+              </div>
+
+              {/* 3-Day Weekend Programme */}
+              <div className="rounded-2xl border bg-card/80 p-4 sm:p-5 space-y-3">
+                <h4 className="font-extrabold text-sm text-foreground flex items-center gap-2">
+                  <Clock className="h-4 w-4 text-amber-500" />
+                  The Weekend Programme (By Venue &amp; Hours):
+                </h4>
+                <div className="grid gap-2.5 sm:grid-cols-3 text-xs">
+                  <div className="p-3 rounded-xl border border-border/80 bg-muted/40 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-black text-amber-700 dark:text-amber-400 uppercase tracking-wider text-[11px]">
+                        Friday 4 Dec
+                      </span>
+                    </div>
+                    <p className="font-extrabold text-foreground">7:00 PM – 12:00 AM</p>
+                    <p className="text-muted-foreground text-[11px] leading-snug">
+                      Classes &amp; Welcome Party
+                    </p>
+                    <div className="pt-1">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-rose-700 dark:text-rose-400 bg-rose-500/10 px-1.5 py-0.5 rounded">
+                        <MapPin className="h-2.5 w-2.5" /> The Woodlands Ballroom
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-3 rounded-xl border border-border/80 bg-muted/40 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-black text-amber-700 dark:text-amber-400 uppercase tracking-wider text-[11px]">
+                        Saturday 5 Dec
+                      </span>
+                    </div>
+                    <p className="font-extrabold text-foreground">12:00 PM – 5:00 PM Workshops</p>
+                    <p className="font-extrabold text-foreground">8:00 PM – 2:00 AM Fiesta</p>
+                    <p className="text-muted-foreground text-[11px] leading-snug">
+                      Classes, 2 Shows &amp; 2-Room Party
+                    </p>
+                    <div className="pt-1">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                        <MapPin className="h-2.5 w-2.5" /> BOH Studios
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-3 rounded-xl border border-border/80 bg-muted/40 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="font-black text-amber-700 dark:text-amber-400 uppercase tracking-wider text-[11px]">
+                        Sunday 6 Dec
+                      </span>
+                    </div>
+                    <p className="font-extrabold text-foreground">6:00 PM – 12:00 AM</p>
+                    <p className="text-muted-foreground text-[11px] leading-snug">
+                      Classes &amp; Social Dancing Finale
+                    </p>
+                    <div className="pt-1">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                        <MapPin className="h-2.5 w-2.5" /> BOH Studios
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Artists Announcement Callout */}
+              <div className="rounded-xl border border-amber-500/30 bg-amber-500/15 p-3 flex items-center gap-2.5 text-xs">
+                <span className="text-lg">🔥</span>
+                <div>
+                  <span className="font-extrabold text-amber-900 dark:text-amber-200">
+                    ARTISTS ANNOUNCEMENT COMING SOON!
+                  </span>
+                  <p className="text-[11px] text-foreground/80">
+                    Featuring top UK and international Cuban dance maestros, performers and guest DJs.
+                  </p>
+                </div>
+              </div>
+
+              {/* Contact & Enquiries Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1 border-t border-border/60">
+                <div className="flex items-center gap-2">
+                  <a
+                    href="https://wa.me/447969633701?text=Hi%20Enrique,%20I'd%20like%20more%20info%20about%20the%20Made%20in%20Cuba%20Dance%20Festival%202026%20please!"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 font-bold shadow-xs"
+                  >
+                    <Phone className="h-3.5 w-3.5" />
+                    <span>WhatsApp Enrique: 07969 633701</span>
+                  </a>
+                  <a
+                    href="mailto:info@salsaexplosion.co.uk"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 font-bold hover:bg-muted"
+                  >
+                    <Mail className="h-3.5 w-3.5 text-muted-foreground" />
+                    <span>info@salsaexplosion.co.uk</span>
+                  </a>
+                </div>
+                <a
+                  href="https://www.instagram.com/salsaexplosion/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-rose-700 dark:text-rose-400 hover:underline inline-flex items-center gap-1"
+                >
+                  <InstagramIcon className="h-3.5 w-3.5" />
+                  <span>@salsaexplosion</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Poster Display Column */}
+            <div className="lg:col-span-5 flex flex-col items-center justify-center">
+              <div className="relative w-full max-w-[340px] aspect-square rounded-2xl overflow-hidden border-2 border-amber-500/60 shadow-2xl group ring-4 ring-amber-500/20 bg-zinc-950">
+                <Image
+                  src="/images/made-in-cuba-2026-poster.jpg"
+                  alt="MADE IN CUBA Dance Festival 2026 Bournemouth Official Poster — Celebrating 33 Years of Salsa Explosion"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 360px"
+                  priority
+                />
+              </div>
+              <span className="text-[11px] font-semibold text-muted-foreground mt-2 text-center">
+                Official Festival Artwork • 4, 5 &amp; 6 December 2026
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Special Halloween Prizes & Party Schedule Banner */}
       {event.slug.includes("halloween") && (

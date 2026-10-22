@@ -117,7 +117,7 @@ export default async function Home() {
                 className="w-full sm:w-auto h-12 px-8 text-sm font-bold bg-primary-base text-white shadow-md shadow-primary-base/20 hover:bg-primary-hover"
               >
                 <Link href="/dashboard/schedule">
-                  Claim Free Trial ? View Classes
+                  View Weekly Classes & Claim Trial
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -214,7 +214,7 @@ export default async function Home() {
           </section>
         )}
 
-        {/* Interactive Level Matcher Section ? Promoted above the fold */}
+        {/* Interactive Level Matcher Section — Promoted above the fold */}
         <section className="cv-auto py-10 bg-muted/20 border-b border-border/60">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <LevelMatcherQuiz />
@@ -602,7 +602,7 @@ export default async function Home() {
                 href="/admin/operations"
                 className="font-black text-rose-700 dark:text-rose-300 hover:underline inline-flex items-center gap-1"
               >
-                Access Academy Teaching & Operations Portal ?
+                Access Academy Teaching & Operations Portal →
               </Link>
             </div>
           </div>

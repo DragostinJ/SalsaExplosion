@@ -437,9 +437,9 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
 
     // 2. Verify all filter pills exist
     await expect(page.getByRole("button", { name: /All Artists/i })).toBeVisible();
-    await expect(page.getByRole("button", { name: /Cuban Salsa & Rueda/i })).toBeVisible();
-    await expect(page.getByRole("button", { name: /Solo & Pasitos/i })).toBeVisible();
-    await expect(page.getByRole("button", { name: /Bachata & Kizomba/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Weekly Cuban Team/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Afro-Rumba & Timba/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /BOH Venue Partner/i })).toBeVisible();
 
     // 3. Verify instructor cards (e.g. Moe Flex, Enrique, Arturas)
     await expect(page.locator('[data-testid="instructor-card-enrique"]')).toBeVisible();

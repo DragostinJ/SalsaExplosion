@@ -33,10 +33,10 @@ interface InstructorRosterSectionProps {
 }
 
 const CATEGORIES: { key: InstructorCategory | "all"; label: string }[] = [
-  { key: "all", label: "All Artists (8)" },
-  { key: "cuban", label: "Cuban Salsa & Rueda" },
-  { key: "solo", label: "Solo & Pasitos" },
-  { key: "sbk", label: "Bachata & Kizomba (SB&K)" },
+  { key: "all", label: "All Artists" },
+  { key: "cuban_weekly", label: "Weekly Cuban Team" },
+  { key: "afro_timba", label: "Afro-Rumba & Timba Guest Artists" },
+  { key: "boh_special", label: "BOH Venue Partner & Special Events" },
 ];
 
 export function InstructorRosterSection({ id = "instructors" }: InstructorRosterSectionProps) {
@@ -125,7 +125,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                       : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground border border-border/60"
                   }`}
                 >
-                  {cat.key === "all" ? cat.label : `${cat.label} (${count})`}
+                  {`${cat.label} (${count})`}
                 </button>
               );
             })}

@@ -65,17 +65,17 @@ describe("Security Audit: Authorization & Role Privilege Escalation", () => {
     it("strictly returns false in production, even if email is allowlisted and flag is true", () => {
       vi.stubEnv("NODE_ENV", "production");
       vi.stubEnv("ALLOW_DEMO_ROLE_SWITCHING", "true");
-      vi.stubEnv("DEMO_SWITCHER_EMAILS", "dragostinj@gmail.com");
+      vi.stubEnv("DEMO_SWITCHER_EMAILS", "owner@salsaexplosion.co.uk");
 
-      expect(canSwitchRoles("dragostinj@gmail.com")).toBe(false);
+      expect(canSwitchRoles("owner@salsaexplosion.co.uk")).toBe(false);
     });
 
     it("strictly returns false if ALLOW_DEMO_ROLE_SWITCHING is not true", () => {
       vi.stubEnv("NODE_ENV", "development");
       vi.stubEnv("ALLOW_DEMO_ROLE_SWITCHING", "false");
-      vi.stubEnv("DEMO_SWITCHER_EMAILS", "dragostinj@gmail.com");
+      vi.stubEnv("DEMO_SWITCHER_EMAILS", "owner@salsaexplosion.co.uk");
 
-      expect(canSwitchRoles("dragostinj@gmail.com")).toBe(false);
+      expect(canSwitchRoles("owner@salsaexplosion.co.uk")).toBe(false);
     });
 
     it("strictly returns false when DEMO_SWITCHER_EMAILS is empty or unset", () => {
@@ -83,14 +83,14 @@ describe("Security Audit: Authorization & Role Privilege Escalation", () => {
       vi.stubEnv("ALLOW_DEMO_ROLE_SWITCHING", "true");
       vi.stubEnv("DEMO_SWITCHER_EMAILS", "");
 
-      expect(canSwitchRoles("dragostinj@gmail.com")).toBe(false);
+      expect(canSwitchRoles("owner@salsaexplosion.co.uk")).toBe(false);
       expect(canSwitchRoles("anyone@test.com")).toBe(false);
     });
 
     it("rejects STUDENT or user not on the allow-list", () => {
       vi.stubEnv("NODE_ENV", "development");
       vi.stubEnv("ALLOW_DEMO_ROLE_SWITCHING", "true");
-      vi.stubEnv("DEMO_SWITCHER_EMAILS", "dragostinj@gmail.com");
+      vi.stubEnv("DEMO_SWITCHER_EMAILS", "owner@salsaexplosion.co.uk");
 
       expect(canSwitchRoles("student@salsaexplosion.co.uk")).toBe(false);
       expect(canSwitchRoles("attacker@hacker.io")).toBe(false);
@@ -99,17 +99,17 @@ describe("Security Audit: Authorization & Role Privilege Escalation", () => {
     it("returns true only in non-production when flag is true and email matches allow-list", () => {
       vi.stubEnv("NODE_ENV", "development");
       vi.stubEnv("ALLOW_DEMO_ROLE_SWITCHING", "true");
-      vi.stubEnv("DEMO_SWITCHER_EMAILS", "dragostinj@gmail.com, enrique@salsaexplosion.co.uk");
+      vi.stubEnv("DEMO_SWITCHER_EMAILS", "owner@salsaexplosion.co.uk, enrique@salsaexplosion.co.uk");
 
-      expect(canSwitchRoles("dragostinj@gmail.com")).toBe(true);
-      expect(canSwitchRoles("DRAGOSTINJ@GMAIL.COM")).toBe(true);
+      expect(canSwitchRoles("owner@salsaexplosion.co.uk")).toBe(true);
+      expect(canSwitchRoles("OWNER@SALSAEXPLOSION.CO.UK")).toBe(true);
       expect(canSwitchRoles("  enrique@salsaexplosion.co.uk ")).toBe(true);
     });
 
     it("rejects null or empty email inputs", () => {
       vi.stubEnv("NODE_ENV", "development");
       vi.stubEnv("ALLOW_DEMO_ROLE_SWITCHING", "true");
-      vi.stubEnv("DEMO_SWITCHER_EMAILS", "dragostinj@gmail.com");
+      vi.stubEnv("DEMO_SWITCHER_EMAILS", "owner@salsaexplosion.co.uk");
 
       expect(canSwitchRoles(null)).toBe(false);
       expect(canSwitchRoles(undefined)).toBe(false);

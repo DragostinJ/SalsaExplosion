@@ -178,6 +178,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(
       page.getByText(/General of MCs/i).first()
     ).toBeVisible();
+    await expect(page.getByText(/Dragostin/i)).toHaveCount(0);
   });
 
   test("7. Rueda de Casino Call Dictionary renders authentic calls, hand signals, and level filter", async ({

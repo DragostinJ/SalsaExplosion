@@ -31,14 +31,21 @@ export const metadata = {
 };
 
 export default async function AboutPage() {
-  // Query Instructors and Studio Owner
+  // Query Instructors and Studio Owner (strictly authentic faculty)
   const teachers = await prisma.user.findMany({
     where: {
-      role: { in: [Role.INSTRUCTOR, Role.ADMIN] },
+      OR: [
+        { role: Role.INSTRUCTOR },
+        { email: "enrique@salsaexplosion.co.uk" },
+      ],
+      NOT: {
+        email: { in: ["dragostinj@gmail.com"] },
+      },
     },
     orderBy: [{ role: "asc" }, { firstName: "asc" }],
     select: {
       id: true,
+      email: true,
       firstName: true,
       lastName: true,
       avatarUrl: true,
@@ -179,7 +186,9 @@ export default async function AboutPage() {
                       </h3>
                     </div>
                     <p className="text-xs font-bold text-amber-700 dark:text-amber-400 mt-0.5">
-                      {teacher.role === Role.ADMIN ? "Studio Founder & Maestro" : "Senior Maestra"}
+                      {teacher.email === "enrique@salsaexplosion.co.uk" || teacher.firstName === "Enrique"
+                        ? "Founder & Artistic Director"
+                        : "Resident Faculty Instructor"}
                     </p>
                     {teacher.yearsDancing && (
                       <span className="text-[11px] text-muted-foreground">

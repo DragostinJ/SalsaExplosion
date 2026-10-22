@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Calendar,
   Award,
@@ -435,28 +436,42 @@ export default async function Home() {
 
 
 
-        <section className="cv-auto py-8 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
+        <section className="cv-auto py-10 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="rounded-2xl border border-amber-500/30 bg-card/60 backdrop-blur-sm p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
-              <div className="space-y-2 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2">
-                  <Badge className="bg-primary-base text-white font-bold text-xs uppercase tracking-wider">
-                    Official Flagship Event
-                  </Badge>
-                  <span className="text-xs text-muted-foreground font-medium">December 4–6, 2026</span>
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
+                <div className="relative w-28 h-36 sm:w-32 sm:h-44 shrink-0 overflow-hidden rounded-xl border-2 border-amber-500/50 shadow-md">
+                  <Image
+                    src="/images/made-in-cuba-2026-poster.jpg"
+                    alt="MADE IN CUBA Dance Festival 2026 Official Poster"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 112px, 128px"
+                  />
                 </div>
-                <h2 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
-                  MADE IN CUBA — Dance Weekend 2026
-                </h2>
-                <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl">
-                  3 days of authentic Cuban masterclasses, Rueda de Casino, Son Cubano, Afro-Cuban &amp; Timba weekend festival with international maestros and legendary social fiesta nights at BOH Studios Bournemouth.
-                </p>
+                <div className="space-y-2">
+                  <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    <Badge className="bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs uppercase tracking-wider">
+                      🎉 33 Years of Salsa Explosion
+                    </Badge>
+                    <span className="text-xs text-amber-500/90 font-semibold">4, 5 &amp; 6 Dec 2026</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-foreground">
+                    MADE IN CUBA — Dance Weekend 2026
+                  </h2>
+                  <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
+                    South Coast&apos;s premier Cuban dance event celebrating 33 years! 3 nights of parties, 2 days of workshops, 2 spectacular shows, and dancing until 2:00 AM across 2 dedicated rooms (Salsa &amp; Timba Room + Bachata Room).
+                  </p>
+                  <p className="text-xs text-muted-foreground font-medium">
+                    📍 <span className="text-foreground font-semibold">The Woodlands Ballroom</span> (Friday Welcome Party) &amp; <span className="text-foreground font-semibold">BOH Studios</span> (Saturday &amp; Sunday Workshops + Shows + Fiesta).
+                  </p>
+                </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+              <div className="flex flex-col sm:flex-row lg:flex-col items-center gap-3 shrink-0 w-full sm:w-auto">
                 <Button
                   asChild
-                  className="w-full sm:w-auto bg-primary-base hover:bg-primary-hover text-white font-bold px-6"
+                  className="w-full sm:w-auto bg-primary-base hover:bg-primary-hover text-white font-bold px-6 shadow-sm"
                 >
                   <Link href="/events/made-in-cuba-dance-weekend-2026">
                     Reserve Passes (From £20)
@@ -468,7 +483,9 @@ export default async function Home() {
                   variant="outline"
                   className="w-full sm:w-auto"
                 >
-                  <Link href="/events">View Artist Lineup</Link>
+                  <Link href="/events/made-in-cuba-dance-weekend-2026#timetable">
+                    Full Festival Programme
+                  </Link>
                 </Button>
               </div>
             </div>

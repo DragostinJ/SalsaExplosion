@@ -847,51 +847,49 @@ export function TimbaSongAnatomyPlayer({
         {/* Active Segment Announcement Banner */}
         <div
           data-testid="active-segment-hud"
-          className={`rounded-2xl border ${activeTheme.border} ${activeTheme.bgActive} p-4 sm:p-5 space-y-3 transition-colors`}
+          className={`rounded-2xl border ${activeTheme.border} ${activeTheme.bgActive} p-3 sm:p-5 space-y-2 sm:space-y-3 transition-colors`}
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
+            <div className="space-y-0.5 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
                   Current Segment ({activeSegmentIndex + 1} of {effectiveSegments.length})
                 </span>
-                <span className="font-mono text-xs font-bold text-foreground">
+                <span className="font-mono text-[11px] sm:text-xs font-bold text-foreground">
                   {activeSegment.formattedRange}
                 </span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-black text-foreground">
+              <h3 className="text-sm sm:text-2xl font-black text-foreground truncate sm:whitespace-normal">
                 {activeSegment.sectionName}
               </h3>
             </div>
 
             {/* Next Shift Countdown */}
-            <div className="rounded-xl border border-border/80 bg-background/80 px-3.5 py-2 text-xs text-right self-start sm:self-auto shadow-xs">
-              {nextSegment ? (
-                <div>
-                  <span className="text-[10px] text-muted-foreground font-semibold block">
-                    Next Shift in: <strong className="text-foreground font-mono text-xs">{secondsUntilNextShift}s</strong>
-                  </span>
-                  <span className="font-bold text-foreground text-[11px]">
-                    {nextSegment.sectionName} ({nextSegment.danceGear})
-                  </span>
-                </div>
-              ) : (
-                <div>
-                  <span className="text-[10px] text-muted-foreground font-semibold block">
-                    Song Climax
-                  </span>
-                  <span className="font-bold text-foreground text-[11px]">
-                    Final Section • Strike Pose
-                  </span>
-                </div>
-              )}
-            </div>
+            {nextSegment ? (
+              <div className="inline-flex sm:block items-center gap-1.5 rounded-lg sm:rounded-xl border border-border/80 bg-background/80 px-2.5 sm:px-3.5 py-1 sm:py-2 text-[11px] sm:text-xs sm:text-right self-start sm:self-auto shadow-xs shrink-0">
+                <span className="text-[10px] text-muted-foreground font-semibold inline sm:block">
+                  Next in <strong className="text-foreground font-mono text-xs">{secondsUntilNextShift}s</strong>:
+                </span>
+                <span className="font-bold text-foreground text-[11px] truncate max-w-[220px] sm:max-w-none">
+                  {nextSegment.sectionName} ({nextSegment.danceGear})
+                </span>
+              </div>
+            ) : (
+              <div className="inline-flex sm:block items-center gap-1.5 rounded-lg sm:rounded-xl border border-border/80 bg-background/80 px-2.5 sm:px-3.5 py-1 sm:py-2 text-[11px] sm:text-xs sm:text-right self-start sm:self-auto shadow-xs shrink-0">
+                <span className="text-[10px] text-muted-foreground font-semibold inline sm:block">
+                  Song Climax
+                </span>
+                <span className="font-bold text-foreground text-[11px]">
+                  Final Section • Strike Pose
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Active Dance Gear Pill & Timing Mode Badges */}
-          <div className="flex flex-wrap items-center gap-2 pt-1">
-            <span className="text-xs font-bold text-foreground">Recommended Gear:</span>
-            <Badge className={`${activeTheme.badge} text-xs font-black`}>
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5 sm:pt-1 text-[11px] sm:text-xs">
+            <span className="text-[11px] sm:text-xs font-bold text-foreground">Recommended Gear:</span>
+            <Badge className={`${activeTheme.badge} text-[10px] sm:text-xs font-black px-2 py-0.5`}>
               {activeSegment.danceGear}
             </Badge>
 
@@ -899,10 +897,10 @@ export function TimbaSongAnatomyPlayer({
               <Badge
                 variant="outline"
                 data-testid="active-timing-mode-badge"
-                className="border-amber-500/60 bg-amber-500/15 text-amber-950 dark:text-amber-200 text-xs font-black flex items-center gap-1 px-2.5 py-0.5"
+                className="border-amber-500/60 bg-amber-500/15 text-amber-950 dark:text-amber-200 text-[10px] sm:text-xs font-black flex items-center gap-1 px-2 sm:px-2.5 py-0.5"
               >
-                <Sparkles className="h-3 w-3 text-amber-600 dark:text-amber-400" />
-                <span>Timing: {activeSegment.timingMode}</span>
+                <Sparkles className="h-3 w-3 text-amber-600 dark:text-amber-400 shrink-0" />
+                <span className="truncate">Timing: {activeSegment.timingMode}</span>
               </Badge>
             )}
           </div>

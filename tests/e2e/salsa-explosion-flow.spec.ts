@@ -424,6 +424,57 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(page.getByText("Self-Serve Door QR").first()).toBeVisible();
     await expect(page.getByText("Live Camera Scanner").first()).toBeVisible();
   });
+
+  test("24. Instructor Trading Cards and BOH Studios Venue Spotlight render and interact", async ({
+    page,
+  }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    // 1. Verify Instructor Roster Section presence
+    const rosterSection = page.locator('[data-testid="instructor-roster-section"]');
+    await expect(rosterSection).toBeVisible();
+    await expect(page.getByText("Meet the Salsa Explosion Faculty")).toBeVisible();
+
+    // 2. Verify all filter pills exist
+    await expect(page.getByRole("button", { name: /All Artists/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Cuban Salsa & Rueda/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Solo & Pasitos/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Bachata & Kizomba/i })).toBeVisible();
+
+    // 3. Verify instructor cards (e.g. Moe Flex, Enrique, Arturas)
+    await expect(page.locator('[data-testid="instructor-card-enrique"]')).toBeVisible();
+    await expect(page.locator('[data-testid="instructor-card-moe-flex"]')).toBeVisible();
+    await expect(page.locator('[data-testid="instructor-card-arturas"]')).toBeVisible();
+
+    // 4. Open instructor profile modal for Moe Flex
+    const moeCard = page.locator('[data-testid="instructor-card-moe-flex"]');
+    await moeCard.getByRole("button", { name: /View Profile & Bookings/i }).click();
+
+    const modal = page.locator('[data-testid="instructor-spotlight-modal"]');
+    await expect(modal).toBeVisible();
+    await expect(modal.getByText("Moe Flex")).toBeVisible();
+    await expect(modal.getByText(/Book 1-on-1 Private via WhatsApp/i)).toBeVisible();
+
+    // Close modal via Close button
+    await modal.getByRole("button", { name: /Close spotlight modal/i }).click();
+    await expect(modal).not.toBeVisible();
+
+    // 5. Verify BOH Studios Venue Spotlight
+    const venueSection = page.locator('[data-testid="boh-venue-spotlight"]');
+    await expect(venueSection).toBeVisible();
+    await expect(page.getByText("Hosted at BOH Studios Bournemouth")).toBeVisible();
+
+    // Verify arrival planner tabs switch
+    await page.getByRole("button", { name: /Bus & Train/i }).click();
+    await expect(page.getByText("Bournemouth Square & Poole Hill Bus Stops")).toBeVisible();
+
+    await page.getByRole("button", { name: /First-Timer Door Guide/i }).click();
+    await expect(page.getByText(/104 Commercial Road \(The Triangle\)/i)).toBeVisible();
+
+    // Verify Google Maps external link
+    const mapsLink = venueSection.locator('a[href*="google.com/maps"]');
+    await expect(mapsLink).toBeVisible();
+  });
 });
 
 

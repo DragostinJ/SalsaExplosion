@@ -142,7 +142,7 @@ export default async function Home() {
             </h1>
 
             <p className="mt-6 text-base sm:text-lg text-text-muted max-w-2xl mx-auto leading-relaxed">
-              Welcome to Salsa Explosion UK. Experience 25+ years of authentic Cuban Casino, Rueda de Casino, and Son with role-balanced partner rotations, 4-tier syllabus tracking, student recap videos, and official congress passes.
+              Welcome to Salsa Explosion UK. Experience 25+ years of authentic Cuban Casino, high-energy Rueda de Casino, and multi-room Cuban, Bachata &amp; Kizomba (SB&amp;K) socials with resident maestros and guest artists at BOH Studios Bournemouth.
             </p>
 
             {/* Quick Stats Pill Bar */}
@@ -162,6 +162,10 @@ export default async function Home() {
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="h-4 w-4 text-secondary-base" />
                 <span>Strict Lead/Follow Balance</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Flame className="h-4 w-4 text-accent-tangerine" />
+                <span>Multi-Room Cuban, Bachata &amp; Kizomba (SB&amp;K) Socials</span>
               </div>
             </div>
 

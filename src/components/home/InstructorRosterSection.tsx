@@ -42,6 +42,7 @@ const CATEGORIES: { key: InstructorCategory | "all"; label: string }[] = [
 export function InstructorRosterSection({ id = "instructors" }: InstructorRosterSectionProps) {
   const [activeCategory, setActiveCategory] = useState<InstructorCategory | "all">("all");
   const [selectedInstructor, setSelectedInstructor] = useState<InstructorProfile | null>(null);
+  const [isMobileExpanded, setIsMobileExpanded] = useState(false);
   const titleId = useId();
 
   // Escape key listener & body scroll lock
@@ -133,11 +134,13 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
         {/* 8-Card Responsive Trading Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {filteredInstructors.map((instructor) => (
+          {filteredInstructors.map((instructor, idx) => (
             <div
               key={instructor.id}
               id={`artist-${instructor.id}`}
-              className="group relative flex flex-col justify-between rounded-2xl border border-border/80 bg-card p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary-base/50 hover:shadow-xl hover:shadow-primary-base/5"
+              className={`group relative flex-col justify-between rounded-2xl border border-border/80 bg-card p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary-base/50 hover:shadow-xl hover:shadow-primary-base/5 ${
+                idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden md:flex" : "flex"
+              }`}
               data-testid={`instructor-card-${instructor.id}`}
             >
               <div className="space-y-3.5">
@@ -210,6 +213,23 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
             </div>
           ))}
         </div>
+
+        {/* Mobile Expand / Collapse Toggle for "All" Category */}
+        {activeCategory === "all" && (
+          <div className="mt-6 flex justify-center md:hidden">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setIsMobileExpanded(!isMobileExpanded)}
+              className="text-xs font-bold border-primary-base/40 text-primary-base hover:bg-primary-light/40 h-10 px-5 rounded-full shadow-xs"
+            >
+              {isMobileExpanded
+                ? "Show Fewer Artists ↑"
+                : "Show All 8 Maestros & Guest Artists (+4) ↓"}
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Expanded Artist Spotlight Modal */}

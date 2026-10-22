@@ -83,7 +83,7 @@ export function LiveTonightBanner() {
               size="sm"
               className={`h-7 px-3 text-[11px] font-extrabold shadow-xs ${
                 isLiveTonight
-                  ? "bg-emerald-600 hover:bg-emerald-500 text-white border border-emerald-400/30"
+                  ? "bg-emerald-400 hover:bg-emerald-300 text-emerald-950 font-black border border-emerald-300"
                   : "bg-primary-base hover:bg-primary-hover text-white"
               }`}
             >

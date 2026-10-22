@@ -475,6 +475,56 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     const mapsLink = venueSection.locator('a[href*="google.com/maps"]');
     await expect(mapsLink).toBeVisible();
   });
+
+  test("25. Pre-pitch competitor kill-shot features (live banner, why cuban comparison, crossover quiz, and mobile roster toggle)", async ({
+    page,
+  }) => {
+    // 1. Visit landing page
+    await page.goto("/");
+    await page.waitForLoadState("domcontentloaded");
+
+    // 2. Verify Live Tonight Banner
+    const liveBanner = page.locator('[data-testid="live-tonight-banner"]');
+    await expect(liveBanner).toBeVisible();
+    await expect(
+      liveBanner.getByText(/Live Tonight at BOH Studios|This Week at BOH Studios/i)
+    ).toBeVisible();
+
+    // 3. Verify Why Cuban Casino Section
+    const whyCuban = page.locator('[data-testid="why-cuban-section"]');
+    await expect(whyCuban).toBeVisible();
+    await expect(
+      whyCuban.getByRole("heading", { name: /Why Dancers Fall in Love with Authentic Cuban Salsa/i })
+    ).toBeVisible();
+    await expect(whyCuban.getByText(/360° Dynamic Circular Flow/i)).toBeVisible();
+    await expect(whyCuban.getByText(/Strict Lead\/Follow Ratio Capping/i)).toBeVisible();
+
+    // 4. Verify Cross-Over Dancer Option in Level Matcher Quiz
+    const crossoverBtn = page.getByRole("button", {
+      name: /I Dance Cross-Body Salsa or Bachata/i,
+    });
+    await expect(crossoverBtn).toBeVisible();
+    await crossoverBtn.click();
+
+    // Verify Crossover recommendation card appears
+    await expect(
+      page.getByRole("heading", { name: /Crossover Fast-Track/i })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /Book Your Cuban Transition Class/i })
+    ).toBeVisible();
+
+    // 5. Verify Mobile Expand Toggle on mobile viewport
+    await page.setViewportSize({ width: 375, height: 667 });
+    const mobileToggle = page.getByRole("button", {
+      name: /Show All 8 Maestros & Guest Artists/i,
+    });
+    await expect(mobileToggle).toBeVisible();
+    await mobileToggle.click();
+    await expect(
+      page.getByRole("button", { name: /Show Fewer Artists/i })
+    ).toBeVisible();
+  });
 });
 
 

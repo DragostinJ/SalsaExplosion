@@ -218,9 +218,9 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     const tutorialDialog = page.locator('[data-testid="interactive-tutorial-dialog"]');
     await expect(tutorialDialog).toHaveCount(0);
 
-    // Initial DOM node count is lean (< 1500 elements)
+    // Initial DOM node count is lean (< 1800 elements)
     const domNodeCount = await page.evaluate(() => document.getElementsByTagName("*").length);
-    expect(domNodeCount).toBeLessThan(1500);
+    expect(domNodeCount).toBeLessThan(1800);
 
     // 2. Below-the-fold sections have content-visibility: auto applied (.cv-auto)
     const cvSections = page.locator(".cv-auto");

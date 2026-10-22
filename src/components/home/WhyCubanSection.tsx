@@ -49,7 +49,7 @@ export function WhyCubanSection() {
             <div className="space-y-4">
               <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-4">
                 <div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-full inline-block mb-1">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-zinc-800 dark:text-zinc-200 bg-zinc-200/90 dark:bg-zinc-800 px-2 py-0.5 rounded-full inline-block mb-1 border border-zinc-300 dark:border-zinc-700">
                     Rigid Slot Stepping
                   </span>
                   <h3 className="text-lg sm:text-xl font-bold text-foreground">

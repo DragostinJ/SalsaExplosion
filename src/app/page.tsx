@@ -24,6 +24,7 @@ import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-sho
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { BohVenueSpotlight } from "@/components/home/BohVenueSpotlight";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
+import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 
 const SocialProofGrid = dynamic(
   () => import("@/components/marketing/social-proof-grid").then((m) => m.SocialProofGrid),
@@ -298,6 +299,9 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* Why Authentic Cuban Casino & Rueda vs Linear Styles */}
+        <WhyCubanSection />
 
         {/* Founder & 25+ Year Cuban Heritage Spotlight */}
         <section className="cv-auto py-10 sm:py-14 bg-card/40 border-b border-border/70">

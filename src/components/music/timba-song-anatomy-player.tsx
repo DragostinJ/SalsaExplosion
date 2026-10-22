@@ -723,14 +723,21 @@ export function TimbaSongAnatomyPlayer({
                 onClick={() => handleSeek(segment.startTimeSeconds)}
                 title={`${segment.formattedRange} • ${segment.sectionName} (${segment.danceGear})`}
                 style={{ width: `${widthPct}%` }}
-                className={`relative h-full text-left transition-all px-2 flex flex-col justify-center border-r border-background/60 last:border-r-0 ${
+                className={`relative h-full text-left transition-all px-1 sm:px-2 flex flex-col justify-center border-r border-background/60 last:border-r-0 ${
                   isSegmentActive ? `${theme.bgActive} ring-2 ring-inset ring-foreground/40` : theme.bgInactive
                 }`}
               >
                 <div className="truncate text-[10px] font-bold text-foreground">
-                  {segment.sectionName}
+                  {widthPct < 12 ? (
+                    <>
+                      <span className="md:hidden text-[9px] font-bold">{idx + 1}</span>
+                      <span className="hidden md:inline">{segment.sectionName}</span>
+                    </>
+                  ) : (
+                    <span>{segment.sectionName}</span>
+                  )}
                 </div>
-                <div className="truncate text-[9px] text-slate-900 dark:text-slate-100 font-semibold">
+                <div className="hidden md:block truncate text-[9px] text-slate-900 dark:text-slate-100 font-semibold">
                   {segment.danceGear}
                 </div>
               </button>
@@ -750,7 +757,7 @@ export function TimbaSongAnatomyPlayer({
         </div>
 
         {/* Mobile Quick-Jump Thumb-Friendly Segment Strip */}
-        <div tabIndex={0} role="region" aria-label="Mobile quick-jump timeline segments" className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar py-1 focus:outline-none">
+        <div tabIndex={0} role="region" aria-label="Mobile quick-jump timeline segments" className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar py-1 snap-x snap-mandatory focus:outline-none">
           {effectiveSegments.map((segment, idx) => {
             const isSegmentActive = idx === activeSegmentIndex;
             const theme = THEME_STYLES[segment.colorTheme];
@@ -760,7 +767,7 @@ export function TimbaSongAnatomyPlayer({
                 type="button"
                 data-testid={`mobile-segment-chip-${idx}`}
                 onClick={() => handleSeek(segment.startTimeSeconds)}
-                className={`rounded-lg px-2.5 py-1 text-[11px] font-bold shrink-0 transition-all border ${
+                className={`rounded-lg px-2.5 py-1 text-[11px] font-bold shrink-0 transition-all border snap-start ${
                   isSegmentActive
                     ? `${theme.bgActive} ${theme.border} text-foreground ring-1 ring-foreground/40 shadow-xs`
                     : "border-border/60 bg-muted/40 text-muted-foreground hover:bg-muted hover:text-foreground"

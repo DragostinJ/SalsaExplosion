@@ -381,7 +381,7 @@ export function ClassRosterWorkspace({
                   {showQrModal ? "Hide QR" : "Door QR"}
                 </Button>
                 <Button variant="outline" size="sm" asChild className="text-xs">
-                  <Link href={`/instructor/roster/print?sessionId=${activeClass.id}`} target="_blank">
+                  <Link href={`/instructor/roster/print?sessionId=${activeClass.id}`} target="_blank" rel="noopener noreferrer">
                     <Printer className="mr-1.5 h-3.5 w-3.5 text-blue-600" />
                     Print A4 Sheet
                   </Link>

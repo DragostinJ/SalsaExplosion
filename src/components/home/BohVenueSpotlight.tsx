@@ -156,7 +156,7 @@ export function BohVenueSpotlight() {
                     </span>
                     <span className="inline-flex items-center gap-1 rounded-md bg-white/10 backdrop-blur-xs px-1.5 py-0.5 text-[9px] font-semibold text-white/80">
                       <Camera className="h-2.5 w-2.5" />
-                      Studio Photo Slot
+                      📸 BOH Studios
                     </span>
                   </div>
 

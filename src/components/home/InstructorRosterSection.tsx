@@ -137,7 +137,8 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
           {filteredInstructors.map((instructor, idx) => (
             <div
               key={instructor.id}
-              id={`artist-${instructor.id}`}
+              id={`instructors-${instructor.id}`}
+              data-artist-id={instructor.id}
               className={`group relative flex-col justify-between rounded-2xl border border-border/80 bg-card p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary-base/50 hover:shadow-xl hover:shadow-primary-base/5 ${
                 idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden md:flex" : "flex"
               }`}
@@ -152,7 +153,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     </span>
                     <span className="inline-flex items-center gap-1 rounded-md bg-white/10 backdrop-blur-xs px-1.5 py-0.5 text-[9px] font-semibold text-white/80">
                       <Camera className="h-2.5 w-2.5" />
-                      Studio Photo Slot
+                      ✨ Official Faculty
                     </span>
                   </div>
 

@@ -850,7 +850,7 @@ async function main() {
       slug: "made-in-cuba-dance-weekend-2026",
       title: "MADE IN CUBA — Dance Weekend 2026",
       description:
-        "The South Coast's flagship Cuban dance festival! 3 days of intensive Cuban Salsa, Rueda de Casino, Son Cubano, Afro-Cuban & Timba masterclasses with world-class maestros from Cuba, culminating in our legendary Gala Party nights at BOH Studios Bournemouth overlooking the coastal lights.",
+        "Celebrating 33 Years of Salsa Explosion! 3 nights of parties, 2 days of workshops, 2 spectacular shows, and social dancing until 2:00 AM across two dedicated rooms (Salsa Room & Bachata Room). Friday at The Woodlands Ballroom; Saturday and Sunday at BOH Studios Bournemouth.",
       venueName: "BOH Studios Bournemouth",
       venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
       startDate: new Date("2026-12-04T18:00:00Z"),

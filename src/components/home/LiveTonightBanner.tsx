@@ -1,14 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-function getInitialUkDay(): number {
-  if (typeof window === "undefined") {
-    return 4; // Default to Thursday for clean SSR
-  }
+function getClientUkDay(): number {
   try {
     const params = new URLSearchParams(window.location.search);
     const demo = params.get("liveDemo")?.toLowerCase();
@@ -23,9 +20,16 @@ function getInitialUkDay(): number {
   }
 }
 
+const emptySubscribe = () => () => {};
+
 export function LiveTonightBanner() {
   const [isDismissed, setIsDismissed] = useState(false);
-  const [dayOfWeek] = useState<number>(() => getInitialUkDay());
+  // useSyncExternalStore guarantees deterministic SSR (snapshot 4) with 0 hydration warnings
+  const dayOfWeek = useSyncExternalStore(
+    emptySubscribe,
+    getClientUkDay,
+    () => 4
+  );
 
   if (isDismissed) return null;
 

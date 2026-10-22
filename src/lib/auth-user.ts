@@ -30,13 +30,11 @@ export function isBootstrapAdmin(email?: string | null): boolean {
 /**
  * Guard for interactive demo role switcher:
  * Returns true ONLY when:
- * 1. NODE_ENV !== "production"
- * 2. ALLOW_DEMO_ROLE_SWITCHING === "true"
- * 3. email is present in DEMO_SWITCHER_EMAILS (strictly fail-closed if empty or not matching)
+ * 1. ALLOW_DEMO_ROLE_SWITCHING === "true"
+ * 2. email is present in DEMO_SWITCHER_EMAILS (strictly fail-closed if empty or not matching)
  */
 export function canSwitchRoles(email?: string | null): boolean {
   if (!email) return false;
-  if (process.env.NODE_ENV === "production") return false;
   if (process.env.ALLOW_DEMO_ROLE_SWITCHING !== "true") return false;
 
   const raw = (process.env.DEMO_SWITCHER_EMAILS ?? "").trim();

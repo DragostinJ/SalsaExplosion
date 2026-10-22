@@ -62,12 +62,12 @@ describe("Security Audit: Authorization & Role Privilege Escalation", () => {
   });
 
   describe("canSwitchRoles (Fail-Closed Demo Role Switcher Guard)", () => {
-    it("strictly returns false in production, even if email is allowlisted and flag is true", () => {
+    it("allows role switching when flag is true and email matches allowlist in production demo", () => {
       vi.stubEnv("NODE_ENV", "production");
       vi.stubEnv("ALLOW_DEMO_ROLE_SWITCHING", "true");
       vi.stubEnv("DEMO_SWITCHER_EMAILS", "owner@salsaexplosion.co.uk");
 
-      expect(canSwitchRoles("owner@salsaexplosion.co.uk")).toBe(false);
+      expect(canSwitchRoles("owner@salsaexplosion.co.uk")).toBe(true);
     });
 
     it("strictly returns false if ALLOW_DEMO_ROLE_SWITCHING is not true", () => {

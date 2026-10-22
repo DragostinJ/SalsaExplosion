@@ -112,12 +112,14 @@ export default async function RootLayout({
     }
   }
 
-  const effectiveRole = viewer
-    ? isBootstrapAdmin(viewer.email)
-      ? ("ADMIN" as Role)
-      : viewer.role
-    : null;
   const userCanSwitchRoles = viewer ? canSwitchRoles(viewer.email) : false;
+  const effectiveRole = viewer
+    ? userCanSwitchRoles
+      ? viewer.role
+      : isBootstrapAdmin(viewer.email)
+        ? ("ADMIN" as Role)
+        : viewer.role
+    : null;
 
   return (
     <ClerkProvider>

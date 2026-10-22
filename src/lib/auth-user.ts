@@ -60,7 +60,11 @@ export async function getOrProvisionCurrentUser() {
     include: { subscription: true },
   });
   if (existing) {
-    if (existing.role !== Role.ADMIN && isBootstrapAdmin(existing.email)) {
+    if (
+      existing.role !== Role.ADMIN &&
+      isBootstrapAdmin(existing.email) &&
+      !canSwitchRoles(existing.email)
+    ) {
       return prisma.user.update({
         where: { id: existing.id },
         data: { role: Role.ADMIN },

@@ -1,20 +1,51 @@
 import Link from "next/link";
-import { ArrowRight, Compass, Users, Sparkles, Check, X } from "lucide-react";
+import { ArrowRight, Sparkles, Users, Music, HeartHandshake, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-const LINEAR_POINTS = [
-  "Danced back-and-forth in a narrow, rigid straight line with strict slot boundaries",
-  "Heavy focus on solo spinning drills and staring into rehearsal studio mirrors",
-  "Unbalanced lines where followers wait on the sidelines for a partner",
-  "Intimidating if you attend alone without a regular dance partner",
-];
-
-const CUBAN_POINTS = [
-  "360° Dynamic Circular Flow — natural, relaxed walking rhythm and fluid body movement",
-  "High-Energy Rueda Circles — 40+ dancers switching partners, laughing, and learning as one team",
-  "Strict Lead/Follow Ratio Capping — continuous partner rotation so you never wait out",
-  "2-Room SB&K Socials — Dedicated Cuban Timba Ballroom + Separate Bachata & Kizomba Room!",
+const CELEBRATION_CARDS = [
+  {
+    icon: Users,
+    badge: "Instant Community",
+    title: "🔄 The Magic of the Rueda Circle",
+    subheading: "Danced in one big circle with partner swaps on every call",
+    description:
+      "In Rueda de Casino, couples form one big circle and swap partners on the caller's command. Within five minutes, everyone is laughing, high-fiving, and dancing together as one big family.",
+    highlights: [
+      "Continuous partner rotation so everyone dances",
+      "Zero partner required — join solo anytime",
+      "Instant social connection & high-fives on the floor",
+    ],
+    borderAccent: "border-primary-base/40 hover:border-primary-base",
+  },
+  {
+    icon: Music,
+    badge: "Authentic Musicality",
+    title: "🎶 Pure Havana Rhythm, Timba & Afro-Rumba",
+    subheading: "Grounded body movement and 360° fluid circular flow",
+    description:
+      "Grounded, natural walking movement that flows in a 360-degree circle. From smooth Son Cubano to high-energy Timba and Afro-Rumba expression, you learn to truly feel the music.",
+    highlights: [
+      "Authentic Afro-Cuban roots & cultural richness",
+      "Musicality on Clave and dynamic body isolations",
+      "Relaxed walking rhythm with zero rigid stress",
+    ],
+    borderAccent: "border-secondary-base/40 hover:border-secondary-base",
+  },
+  {
+    icon: HeartHandshake,
+    badge: "All Styles Welcome",
+    title: "🤝 Danced Other Styles Before? Come Play!",
+    subheading: "A warm, zero-ego transition for Latin & social dancers",
+    description:
+      "Already dance another style of Salsa, Bachata, or Latin dance? You'll love how playful and liberating circular Cuban movement feels. Our team will warmly guide you into Guapea and Dile Que No with zero ego and 100% fun.",
+    highlights: [
+      "Easily transfer your existing rhythm and frame",
+      "Expand your repertoire with circular partnerwork",
+      "Zero ego, 100% friendly South Coast community",
+    ],
+    borderAccent: "border-accent-tangerine/40 hover:border-accent-tangerine",
+  },
 ];
 
 export function WhyCubanSection() {
@@ -31,98 +62,81 @@ export function WhyCubanSection() {
             variant="outline"
             className="border-primary-base/30 bg-primary-light/50 text-primary-hover px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5"
           >
-            <Compass className="h-3.5 w-3.5 text-primary-base" />
-            🇨🇺 The Havana Difference • Circle vs. Slot
+            <Sparkles className="h-3.5 w-3.5 text-primary-base" />
+            🇨🇺 The Heartbeat of Havana in Bournemouth
           </Badge>
           <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-            Why Dancers Fall in Love with Authentic Cuban Salsa
+            What Makes Cuban Casino &amp; Rueda So Addictive?
           </h2>
           <p className="mt-3 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            New to Latin dance—or switching over from linear ballroom/LA style or Bachata? Discover why Cuban Casino &amp; Rueda de Casino is the most social, musical, and welcoming dance floor on the South Coast.
+            Whether you are taking your very first dance step tonight or you already dance other styles and want to add authentic Cuban flavour to your repertoire—everyone is welcome in our circle.
           </p>
         </div>
 
-        {/* 2-Card Visual Contrast */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {/* Card A: Standard Linear */}
-          <div className="flex flex-col justify-between rounded-3xl border border-border/70 bg-card/60 p-6 sm:p-8 opacity-90 shadow-xs">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-4">
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-zinc-800 dark:text-zinc-200 bg-zinc-200/90 dark:bg-zinc-800 px-2 py-0.5 rounded-full inline-block mb-1 border border-zinc-300 dark:border-zinc-700">
-                    Rigid Slot Stepping
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-foreground">
-                    Standard Linear / Cross-Body Classes Elsewhere
-                  </h3>
-                </div>
-              </div>
-
-              <ul className="space-y-3.5 pt-2 text-xs sm:text-sm text-muted-foreground">
-                {LINEAR_POINTS.map((point) => (
-                  <li key={point} className="flex items-start gap-2.5">
-                    <span className="h-5 w-5 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
-                      <X className="h-3.5 w-3.5" />
-                    </span>
-                    <span className="leading-relaxed">{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="pt-6 mt-6 border-t border-border/50 text-xs text-muted-foreground italic">
-              Often leaves beginners feeling self-conscious or isolated on the social dance floor.
-            </div>
-          </div>
-
-          {/* Card B: Enrique's Cuban Casino */}
-          <div className="relative flex flex-col justify-between rounded-3xl border-2 border-primary-base/50 bg-gradient-to-b from-card via-card to-primary-light/10 p-6 sm:p-8 shadow-lg shadow-primary-base/5">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between gap-2 border-b border-primary-base/20 pb-4">
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-primary-hover bg-primary-light/80 px-2 py-0.5 rounded-full inline-block mb-1">
-                    🏆 25+ Years Cuban Heritage
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-extrabold text-foreground">
-                    Authentic Cuban Casino &amp; Rueda at BOH Studios
-                  </h3>
-                </div>
-                <div className="h-10 w-10 rounded-2xl bg-primary-base/15 flex items-center justify-center text-primary-base shrink-0">
-                  <Users className="h-5 w-5" />
-                </div>
-              </div>
-
-              <ul className="space-y-3.5 pt-2 text-xs sm:text-sm text-foreground/90 font-medium">
-                {CUBAN_POINTS.map((point) => (
-                  <li key={point} className="flex items-start gap-2.5">
-                    <span className="h-5 w-5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="h-3.5 w-3.5 stroke-[3]" />
-                    </span>
-                    <span className="leading-relaxed">{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="pt-6 mt-6 border-t border-primary-base/20 space-y-3">
-              <Button
-                asChild
-                className="w-full h-11 text-xs font-extrabold bg-primary-base hover:bg-primary-hover text-white shadow-sm"
+        {/* 3-Card Joyful Celebration Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {CELEBRATION_CARDS.map((card) => {
+            const Icon = card.icon;
+            return (
+              <div
+                key={card.title}
+                className={`flex flex-col justify-between rounded-3xl border bg-card/80 p-6 sm:p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${card.borderAccent}`}
               >
-                <Link href="/dashboard/schedule">
-                  Experience the Cuban Circle • Claim Free Trial
-                  <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-                </Link>
-              </Button>
-            </div>
-          </div>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-3.5">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-primary-hover bg-primary-light/80 px-2.5 py-0.5 rounded-full inline-block">
+                      {card.badge}
+                    </span>
+                    <div className="h-9 w-9 rounded-xl bg-primary-base/15 flex items-center justify-center text-primary-base shrink-0">
+                      <Icon className="h-4.5 w-4.5" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-base sm:text-lg font-extrabold text-foreground tracking-tight">
+                      {card.title}
+                    </h3>
+                    <p className="text-xs font-semibold text-secondary-hover mt-1">
+                      {card.subheading}
+                    </p>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    {card.description}
+                  </p>
+
+                  <ul className="space-y-2 pt-2 text-xs text-foreground/90 font-medium">
+                    {card.highlights.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="h-4 w-4 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                          <Check className="h-3 w-3 stroke-[3]" />
+                        </span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Bottom Reassurance Pill */}
-        <div className="mt-8 max-w-2xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-secondary-base/30 bg-secondary-light/40 px-4 py-2 text-xs font-semibold text-secondary-hover shadow-xs">
+        {/* Bottom CTA & Reassurance Bar */}
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 text-center">
+          <Button
+            asChild
+            size="lg"
+            className="h-11 px-7 text-xs sm:text-sm font-extrabold bg-primary-base hover:bg-primary-hover text-white shadow-md shadow-primary-base/20"
+          >
+            <Link href="/dashboard/schedule">
+              Join the Cuban Circle • Claim Free Welcome Trial
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+
+          <div className="inline-flex items-center gap-2 rounded-full border border-secondary-base/30 bg-secondary-light/40 px-4 py-1.5 text-xs font-semibold text-secondary-hover shadow-xs">
             <Sparkles className="h-3.5 w-3.5 text-secondary-base shrink-0" />
-            <span>Over 35% of our intermediate dancers switched from linear/ballroom salsa or modern bachata — our teachers make the circular transition seamless!</span>
+            <span>Over 35% of our community started in other dance styles — our instructors make your circular Cuban transition effortless and fun!</span>
           </div>
         </div>
       </div>

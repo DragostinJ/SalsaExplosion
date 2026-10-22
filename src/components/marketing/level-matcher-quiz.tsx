@@ -17,15 +17,15 @@ interface LevelResult {
 
 const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
   crossover_dancer: {
-    levelTitle: "Crossover Fast-Track • Circular Cuban Transition",
-    badge: "Crossover Fast-Track: Switch to Cuban",
+    levelTitle: "Expand Your Dance Horizons • Circular Cuban Transition",
+    badge: "Crossover Welcome: Explore Cuban Flavour",
     description:
-      "Welcome to the Cuban circle! Because you already understand rhythm, timing, and partner connection from Bachata or linear Salsa, we fast-track your transition from linear slot stepping into circular Guapea, Dile Que No, and high-energy Rueda calls with Maestro Enrique and team at BOH Studios.",
-    classTiming: "Thursday 7:00 PM (Solo Pasitos / Room 2) & 8:15 PM Partnerwork • BOH Studios",
+      "Welcome to our circle! Because you already have natural rhythm and partner frame from other styles, you'll pick up Cuban Casino with ease. We warmly guide your transition into circular Guapea, Dile Que No, and high-energy Rueda de Casino calls with zero ego and pure fun.",
+    classTiming: "Every Thursday 7:00 PM (Solo Musicality / Beginners) & 8:15 PM Partnerwork • BOH Studios",
     recommendedTrack:
-      "Thursday Improver 1 Cuban Foundation + Solo Pasitos with Moe Flex (or Level 1 Transition Room)",
+      "Start with Moe Flex's All-Levels Musicality & Pasitos at 7:00 PM, followed by Justyna's Improvers or Enrique's Foundation to master fluid circular transitions.",
     href: "/dashboard/schedule",
-    ctaLabel: "Book Your Cuban Transition Class",
+    ctaLabel: "Explore the Timetable & Book Your Session →",
   },
   absolute_beginner: {
     levelTitle: "Beginner 1 • Fundamentos & Guapea",
@@ -71,8 +71,8 @@ export function LevelMatcherQuiz() {
   const questions = [
     {
       key: "crossover_dancer",
-      title: "🔄 I Dance Cross-Body Salsa or Bachata (New to Cuban)",
-      detail: "I already have rhythm and partner frame, and want to learn circular Cuban Casino & Rueda.",
+      title: "✨ I Dance Other Styles — Curious About Cuban Salsa!",
+      detail: "I already have rhythm from other dance styles and want to explore Cuban Casino & Rueda.",
     },
     {
       key: "absolute_beginner",

@@ -494,24 +494,24 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     const whyCuban = page.locator('[data-testid="why-cuban-section"]');
     await expect(whyCuban).toBeVisible();
     await expect(
-      whyCuban.getByRole("heading", { name: /Why Dancers Fall in Love with Authentic Cuban Salsa/i })
+      whyCuban.getByRole("heading", { name: /What Makes Cuban Casino & Rueda So Addictive/i })
     ).toBeVisible();
-    await expect(whyCuban.getByText(/360° Dynamic Circular Flow/i)).toBeVisible();
-    await expect(whyCuban.getByText(/Strict Lead\/Follow Ratio Capping/i)).toBeVisible();
+    await expect(whyCuban.getByText(/The Magic of the Rueda Circle/i)).toBeVisible();
+    await expect(whyCuban.getByText(/Pure Havana Rhythm, Timba & Afro-Rumba/i)).toBeVisible();
 
     // 4. Verify Cross-Over Dancer Option in Level Matcher Quiz
     const crossoverBtn = page.getByRole("button", {
-      name: /I Dance Cross-Body Salsa or Bachata/i,
+      name: /I Dance Other Styles/i,
     });
     await expect(crossoverBtn).toBeVisible();
     await crossoverBtn.click();
 
     // Verify Crossover recommendation card appears
     await expect(
-      page.getByRole("heading", { name: /Crossover Fast-Track/i })
+      page.getByRole("heading", { name: /Expand Your Dance Horizons/i })
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /Book Your Cuban Transition Class/i })
+      page.getByRole("link", { name: /Explore the Timetable & Book Your Session/i })
     ).toBeVisible();
 
     // 5. Verify Mobile Expand Toggle on mobile viewport

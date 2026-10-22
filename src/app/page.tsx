@@ -49,11 +49,66 @@ const LevelMatcherQuiz = dynamic(
   }
 );
 
+const THURSDAY_EVENING_SLOTS = [
+  {
+    id: "slot-beginner",
+    minLevel: "BEGINNER",
+    timing: "Every Thursday • 7:00 PM",
+    title: "Cuban Salsa Absolute Beginners: Two Separate Rooms (Level 0 & 1)",
+    instructor: "Arturas & Team",
+    fallbackSpots: 14,
+  },
+  {
+    id: "slot-solo",
+    minLevel: "ALL LEVELS",
+    timing: "Every Thursday • 7:30 PM",
+    title: "Solo Salsa: Pasitos, Technique & Musicality",
+    instructor: "Moe Flex",
+    fallbackSpots: 6,
+  },
+  {
+    id: "slot-partnerwork",
+    minLevel: "IMPROVER / INTERMEDIATE",
+    timing: "Every Thursday • 8:15 PM",
+    title: "Cuban Salsa Partnerwork & Rueda de Casino",
+    instructor: "Maestro Enrique Perez Valdes & Jim",
+    fallbackSpots: 4,
+  },
+];
+
 export default async function Home() {
   const [upcomingEvents, nextClasses] = await Promise.all([
     getCachedUpcomingEvents(3),
     getCachedNextClasses(3),
   ]);
+
+  const eveningProgression = THURSDAY_EVENING_SLOTS.map((slot, index) => {
+    const liveClass = nextClasses[index];
+    const spotsLeft = liveClass
+      ? Math.max(0, liveClass.maxCapacity - liveClass.bookings.length)
+      : slot.fallbackSpots;
+
+    let spotBadgeText: string;
+    let spotBadgeClass: string;
+
+    if (spotsLeft <= 0) {
+      spotBadgeText = "🔴 Class Full • Waitlist Open";
+      spotBadgeClass = "text-rose-700 dark:text-rose-400 font-bold";
+    } else if (spotsLeft <= 8) {
+      spotBadgeText = `🔥 Only ${spotsLeft} spots left`;
+      spotBadgeClass = "text-accent-tangerine font-bold";
+    } else {
+      spotBadgeText = "✅ Lead & Follow Spots Open";
+      spotBadgeClass = "text-emerald-700 dark:text-emerald-400 font-semibold";
+    }
+
+    return {
+      ...slot,
+      spotsLeft,
+      spotBadgeText,
+      spotBadgeClass,
+    };
+  });
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <main className="flex-1">
@@ -137,11 +192,11 @@ export default async function Home() {
         </section>
 
         {/* Live "Next Up This Week" Class Strip (Instant Speed-to-Value on Mobile) */}
-        {nextClasses.length > 0 && (
-          <section className="cv-auto border-b bg-card py-6 shadow-xs">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                <div className="flex items-center gap-2">
+        <section className="cv-auto border-b bg-card py-6 shadow-xs">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2 flex-wrap">
                   <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                     Live Studio Floor
@@ -151,73 +206,89 @@ export default async function Home() {
                     Next Classes This Week at BOH Studios
                   </h2>
                 </div>
-                <Button asChild variant="ghost" size="sm" className="h-8 text-xs font-bold text-primary-base hover:text-primary-hover p-0 sm:px-2">
-                  <Link href="/dashboard/schedule">
-                    Full Weekly Timetable →
-                  </Link>
-                </Button>
+                <div>
+                  <span className="inline-flex items-center rounded-full border border-secondary-base/30 bg-secondary-light/40 px-3 py-1 text-xs font-semibold text-secondary-hover">
+                    🎟️ Drop-ins from £10 • Free Trial Available • Class Passes Accepted
+                  </span>
+                </div>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {nextClasses.map((cls) => {
-                  const dayOfWeek = new Intl.DateTimeFormat("en-GB", {
-                    weekday: "long",
-                  }).format(new Date(cls.startTime));
-                  const timeFormatted = new Intl.DateTimeFormat("en-GB", {
-                    hour: "numeric",
-                    minute: "numeric",
-                    hour12: true,
-                  }).format(new Date(cls.startTime));
-
-                  const spotsLeft = Math.max(0, cls.maxCapacity - cls.bookings.length);
-                  const isAlmostFull = spotsLeft <= 4;
-
-                  return (
-                    <div
-                      key={cls.id}
-                      className="flex items-center justify-between gap-3 rounded-xl border bg-muted/30 p-3.5 hover:border-primary-base/40 hover:bg-muted/50 transition-all"
-                    >
-                      <div className="space-y-1 min-w-0">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="rounded-md bg-muted text-foreground/80 border border-border/60 px-1.5 py-0.5 text-[10px] font-bold">
-                            {cls.minLevel}
-                          </span>
-                          <span className="text-[11px] font-semibold text-text-muted">
-                            Every {dayOfWeek} • {timeFormatted}
-                          </span>
-                        </div>
-                        <h3 className="text-xs sm:text-sm font-bold text-foreground truncate">
-                          {cls.title}
-                        </h3>
-                        <p className="text-[11px] text-muted-foreground">
-                          with {cls.instructor.firstName} •{" "}
-                          <span className={isAlmostFull ? "text-accent-tangerine font-bold" : "text-emerald-700 dark:text-emerald-400 font-semibold"}>
-                            {spotsLeft} spots left
-                          </span>
-                        </p>
-                      </div>
-
-                      <Button
-                        asChild
-                        size="sm"
-                        className="shrink-0 h-9 px-3.5 text-xs font-bold bg-primary-base hover:bg-primary-hover text-white shadow-xs"
-                      >
-                        <Link href="/dashboard/schedule">
-                          Book Spot
-                        </Link>
-                      </Button>
-                    </div>
-                  );
-                })}
-              </div>
+              <Button asChild variant="ghost" size="sm" className="h-8 text-xs font-bold text-primary-base hover:text-primary-hover p-0 sm:px-2 self-start sm:self-auto">
+                <Link href="/dashboard/schedule">
+                  Full Weekly Timetable →
+                </Link>
+              </Button>
             </div>
-          </section>
-        )}
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {eveningProgression.map((slot) => (
+                <div
+                  key={slot.id}
+                  className="flex items-center justify-between gap-3 rounded-xl border bg-muted/30 p-3.5 hover:border-primary-base/40 hover:bg-muted/50 transition-all"
+                >
+                  <div className="space-y-1 min-w-0">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="rounded-md bg-muted text-foreground/80 border border-border/60 px-1.5 py-0.5 text-[10px] font-bold">
+                        {slot.minLevel}
+                      </span>
+                      <span className="text-[11px] font-semibold text-text-muted">
+                        {slot.timing}
+                      </span>
+                    </div>
+                    <h3 className="text-xs sm:text-sm font-bold text-foreground truncate">
+                      {slot.title}
+                    </h3>
+                    <p className="text-[11px] text-muted-foreground">
+                      with {slot.instructor} •{" "}
+                      <span className={slot.spotBadgeClass}>
+                        {slot.spotBadgeText}
+                      </span>
+                    </p>
+                  </div>
+
+                  <Button
+                    asChild
+                    size="sm"
+                    className="shrink-0 h-9 px-3.5 text-xs font-bold bg-primary-base hover:bg-primary-hover text-white shadow-xs"
+                  >
+                    <Link href="/dashboard/schedule">
+                      Book Spot
+                    </Link>
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Interactive Level Matcher Section — Promoted above the fold */}
         <section className="cv-auto py-10 bg-muted/20 border-b border-border/60">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <LevelMatcherQuiz />
+
+            {/* First-Timer Quick Guide Reassurance Bar */}
+            <div className="mt-6 rounded-2xl border border-border/70 bg-card/80 p-4 shadow-xs">
+              <div className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground mb-3 text-center sm:text-left">
+                First-Timer Quick Guide
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+                <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/80 px-3 py-2 text-xs font-semibold text-foreground">
+                  <span>👟</span>
+                  <span>Comfortable flat shoes or trainers</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/80 px-3 py-2 text-xs font-semibold text-foreground">
+                  <span>🤝</span>
+                  <span>Zero partner required (we rotate)</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/80 px-3 py-2 text-xs font-semibold text-foreground">
+                  <span>💧</span>
+                  <span>Bar & water station at BOH Studios</span>
+                </div>
+                <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/80 px-3 py-2 text-xs font-semibold text-foreground">
+                  <span>🚗</span>
+                  <span>Easy town-centre parking nearby (BH2 5LR)</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

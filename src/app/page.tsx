@@ -451,10 +451,10 @@ export default async function Home() {
                 </div>
                 <div className="space-y-2">
                   <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                    <Badge className="bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs uppercase tracking-wider">
+                    <Badge className="bg-primary-base text-white font-bold text-xs uppercase tracking-wider">
                       🎉 33 Years of Salsa Explosion
                     </Badge>
-                    <span className="text-xs text-amber-500/90 font-semibold">4, 5 &amp; 6 Dec 2026</span>
+                    <span className="text-xs text-muted-foreground font-semibold">4, 5 &amp; 6 Dec 2026</span>
                   </div>
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-foreground">
                     MADE IN CUBA — Dance Weekend 2026

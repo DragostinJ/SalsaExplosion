@@ -117,7 +117,7 @@ export default async function Home() {
                 className="w-full sm:w-auto h-12 px-8 text-sm font-bold bg-primary-base text-white shadow-md shadow-primary-base/20 hover:bg-primary-hover"
               >
                 <Link href="/dashboard/schedule">
-                  View Weekly Classes & Claim Trial
+                  View Weekly Classes & Claim Trial →
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>

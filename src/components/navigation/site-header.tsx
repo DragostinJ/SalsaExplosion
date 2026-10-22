@@ -232,7 +232,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
         {/* Brand Logo & Context-Aware Left Nav */}
         <div className="flex items-center gap-2.5 lg:gap-5 min-w-0 flex-1 overflow-x-clip">
           <Link
-            href="/dashboard/schedule"
+            href="/"
             className="flex items-center gap-2 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85 shrink-0"
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-primary-base to-accent-tangerine text-white shadow-sm shadow-primary-base/20 shrink-0">

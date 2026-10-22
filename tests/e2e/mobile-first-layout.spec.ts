@@ -68,7 +68,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
       const header = page.locator("header");
       if (await header.count() > 0) {
         const hamburger = header.getByRole("button", { name: /open mobile navigation menu/i });
-        const logo = header.locator("a[href='/dashboard/schedule']").first();
+        const logo = header.locator("a[href='/']").first();
 
         if (await hamburger.isVisible() && await logo.isVisible()) {
           const hamburgerBox = await hamburger.boundingBox();

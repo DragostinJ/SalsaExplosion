@@ -105,7 +105,7 @@ export default function TermsAndLegalPage() {
               </div>
               <div>
                 <span className="block font-bold text-muted-foreground uppercase text-[10px]">Studio Desk Phone & WhatsApp</span>
-                <a href="tel:07969633701" className="font-extrabold text-rose-800 dark:text-rose-400 hover:underline">
+                <a href="tel:+447969633701" className="font-extrabold text-rose-800 dark:text-rose-400 hover:underline">
                   07969 633701
                 </a>
               </div>
@@ -283,7 +283,7 @@ export default function TermsAndLegalPage() {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-2 shrink-0">
           <a
-            href="tel:07969633701"
+            href="tel:+447969633701"
             className="inline-flex items-center gap-1.5 rounded-xl bg-primary-base px-4 py-2.5 text-xs font-black text-white hover:bg-primary-hover transition-all shadow-xs"
           >
             <Phone className="h-3.5 w-3.5" />

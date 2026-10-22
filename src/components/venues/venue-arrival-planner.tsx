@@ -320,7 +320,7 @@ export function VenueArrivalPlanner() {
                 </a>
               </Button>
               <Button asChild size="sm" variant="outline" className="text-xs font-bold h-7 flex-1 border-border">
-                <a href="tel:07969633701">
+                <a href="tel:+447969633701">
                   <Phone className="mr-1 h-3 w-3" />
                   07969 633701
                 </a>

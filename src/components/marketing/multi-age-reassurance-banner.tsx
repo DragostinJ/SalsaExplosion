@@ -91,7 +91,7 @@ export function MultiAgeReassuranceBanner({
               <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-border">
                 <span className="text-muted-foreground font-semibold">Need advice or have questions?</span>
                 <a
-                  href="tel:07969633701"
+                  href="tel:+447969633701"
                   className="inline-flex items-center gap-1 font-black text-amber-900 dark:text-amber-300 hover:underline"
                 >
                   <Phone className="h-3.5 w-3.5" />

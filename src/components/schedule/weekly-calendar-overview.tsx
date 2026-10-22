@@ -188,7 +188,7 @@ export function WeeklyCalendarOverview() {
 
         <div className="flex items-center gap-2">
           <Button asChild size="sm" variant="outline" className="text-xs font-semibold">
-            <a href="tel:07969633701">
+            <a href="tel:+447969633701">
               <Phone className="mr-1.5 h-3.5 w-3.5 text-muted-foreground" />
               Call / WhatsApp: 07969 633701
             </a>

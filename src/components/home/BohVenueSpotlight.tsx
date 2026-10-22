@@ -37,7 +37,7 @@ const AMENITIES: Amenity[] = [
     icon: Volume2,
     title: "Multi-Room Sound Isolation",
     description:
-      "Dedicated Cuban Casino & Timba main ballroom + separate Bachata & Kizomba room on featured party and SB&K nights.",
+      "Dedicated Cuban Casino & Timba main ballroom + separate Bachata & Kizomba room opened specifically during our special monthly events and SB&K parties.",
   },
   {
     icon: Coffee,
@@ -100,7 +100,7 @@ export function BohVenueSpotlight() {
             Hosted at BOH Studios Bournemouth
           </h2>
           <p className="mt-3 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            104 Commercial Road, Bournemouth, BH2 5LR — Purpose-built dance studios in The Triangle for our Thursday & Sunday Cuban nights, monthly SB&K parties, and the Made in Cuba Congress.
+            104 Commercial Road, Bournemouth, BH2 5LR — Salsa Explosion proudly hires BOH Studios (co-owned by Alex Spindlove) as our flagship home base in The Triangle for our Thursday &amp; Sunday Cuban nights, special event multi-room SB&amp;K parties, and the Made in Cuba Congress.
           </p>
         </div>
 

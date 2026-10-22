@@ -103,7 +103,7 @@ export default function VenuesGuidePage() {
             <CardContent className="p-6 space-y-5">
               <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
                 <p>
-                  BOH Studios is the permanent flagship home of Salsa Explosion UK in Bournemouth town centre. Featuring a state-of-the-art sprung Canadian maple dance floor, full-length mirror wall, professional acoustic sound, licensed bar, and vibrant social dance floor.
+                  Salsa Explosion UK proudly hires BOH Studios (co-owned by Alex Spindlove) as our flagship home base in Bournemouth town centre. Featuring a state-of-the-art sprung Canadian maple dance floor, full-length mirror wall, professional acoustic sound, licensed bar, and vibrant social dance floor.
                 </p>
               </div>
 

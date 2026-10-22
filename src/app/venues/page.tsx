@@ -229,10 +229,10 @@ export default function VenuesGuidePage() {
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>7:00 PM – 8:00 PM:</strong> 6-Week Absolute Beginners Cuban Salsa Course (Enrique) + Salsa Beginner 2 (Justyna &amp; Arturas).
+                    <strong>7:00 PM – 8:00 PM:</strong> 6-Week Absolute Beginners Cuban Salsa Course (Maestro Enrique) + Salsa Improvers (Justyna).
                   </li>
                   <li>
-                    <strong>8:00 PM – 9:00 PM:</strong> Cuban Salsa Improvers 2 &amp; Intermediates Partnerwork with Enrique.
+                    <strong>8:00 PM – 9:00 PM:</strong> Cuban Salsa Intermediates Partnerwork (Arturas &amp; Maestro Enrique).
                   </li>
                 </ul>
               </div>

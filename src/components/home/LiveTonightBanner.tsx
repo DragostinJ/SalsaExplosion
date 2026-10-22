@@ -62,7 +62,7 @@ export function LiveTonightBanner() {
             <div className="font-medium text-xs leading-snug">
               {isThursday ? (
                 <span>
-                  <strong className="text-white font-extrabold">Thursday Cuban Night:</strong> 7:00 PM Beginners (Arturas) & Solo Pasitos (Moe Flex) • 8:15 PM Partnerwork & Rueda (Maestro Enrique & Jim) • Social till late!
+                  <strong className="text-white font-extrabold">Thursday Cuban Night:</strong> 7:00 PM Beginners Foundation (Maestro Enrique) & All-Levels Musicality/Pasitos (Moe Flex) • 8:15 PM Improvers (Justyna), Intermediates (Arturas) & Rueda (Jim) • Social till late!
                 </span>
               ) : isSunday ? (
                 <span>

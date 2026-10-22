@@ -176,7 +176,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   <h3 className="text-base font-extrabold text-foreground tracking-tight group-hover:text-primary-base transition-colors">
                     {instructor.name}
                   </h3>
-                  <p className="text-xs font-semibold text-text-muted line-clamp-1">
+                  <p className="text-xs font-semibold text-muted-foreground dark:text-zinc-300 line-clamp-1">
                     {instructor.role}
                   </p>
 
@@ -193,7 +193,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   </div>
 
                   {/* Teaching Days */}
-                  <div className="flex items-start gap-1.5 text-[11px] text-muted-foreground pt-1.5">
+                  <div className="flex items-start gap-1.5 text-[11px] text-muted-foreground dark:text-zinc-300 pt-1.5">
                     <Calendar className="h-3.5 w-3.5 text-secondary-base shrink-0 mt-0.5" />
                     <span className="line-clamp-1">{instructor.teachingDays}</span>
                   </div>
@@ -274,7 +274,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                 <h3 id={titleId} className="text-xl sm:text-2xl font-extrabold text-foreground">
                   {selectedInstructor.name}
                 </h3>
-                <p className="text-xs sm:text-sm font-semibold text-text-muted">
+                <p className="text-xs sm:text-sm font-semibold text-muted-foreground dark:text-zinc-300">
                   {selectedInstructor.role}
                 </p>
               </div>
@@ -310,7 +310,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   <Calendar className="h-4 w-4 text-primary-base" />
                   <span>Teaching Schedule at BOH Studios</span>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed pl-6">
+                <p className="text-xs text-muted-foreground dark:text-zinc-300 leading-relaxed pl-6">
                   {selectedInstructor.teachingDays}
                 </p>
               </div>

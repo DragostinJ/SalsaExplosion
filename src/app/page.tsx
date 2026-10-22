@@ -23,6 +23,7 @@ import { getCachedUpcomingEvents, getCachedNextClasses } from "@/lib/cached-quer
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { BohVenueSpotlight } from "@/components/home/BohVenueSpotlight";
+import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 
 const SocialProofGrid = dynamic(
   () => import("@/components/marketing/social-proof-grid").then((m) => m.SocialProofGrid),
@@ -109,6 +110,8 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <main className="flex-1">
+        <LiveTonightBanner />
+
         {/* Hero Section */}
         <section className="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-b from-primary-light/40 via-background to-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">

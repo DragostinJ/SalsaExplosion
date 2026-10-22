@@ -21,6 +21,8 @@ import dynamic from "next/dynamic";
 import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
 import { getCachedUpcomingEvents, getCachedNextClasses } from "@/lib/cached-queries";
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
+import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
+import { BohVenueSpotlight } from "@/components/home/BohVenueSpotlight";
 
 const SocialProofGrid = dynamic(
   () => import("@/components/marketing/social-proof-grid").then((m) => m.SocialProofGrid),
@@ -44,6 +46,7 @@ const SocialProofGrid = dynamic(
 const THURSDAY_EVENING_SLOTS = [
   {
     id: "slot-beginner",
+    artistId: "arturas",
     minLevel: "BEGINNER",
     timing: "Every Thursday • 7:00 PM",
     title: "Cuban Salsa Absolute Beginners: Two Separate Rooms (Level 0 & 1)",
@@ -52,6 +55,7 @@ const THURSDAY_EVENING_SLOTS = [
   },
   {
     id: "slot-solo",
+    artistId: "moe-flex",
     minLevel: "ALL LEVELS",
     timing: "Every Thursday • 7:30 PM",
     title: "Solo Salsa: Pasitos, Technique & Musicality",
@@ -60,6 +64,7 @@ const THURSDAY_EVENING_SLOTS = [
   },
   {
     id: "slot-partnerwork",
+    artistId: "enrique",
     minLevel: "IMPROVER / INTERMEDIATE",
     timing: "Every Thursday • 8:15 PM",
     title: "Cuban Salsa Partnerwork & Rueda de Casino",
@@ -230,7 +235,14 @@ export default async function Home() {
                       {slot.title}
                     </h3>
                     <p className="text-[11px] text-muted-foreground">
-                      with {slot.instructor} •{" "}
+                      with{" "}
+                      <Link
+                        href={`#instructors-${slot.artistId}`}
+                        className="font-semibold text-foreground hover:text-primary-base hover:underline transition-colors"
+                      >
+                        {slot.instructor}
+                      </Link>{" "}
+                      •{" "}
                       <span className={slot.spotBadgeClass}>
                         {slot.spotBadgeText}
                       </span>
@@ -395,6 +407,9 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* Interactive Instructor Roster Section */}
+        <InstructorRosterSection id="instructors" />
+
 
 
         <section className="cv-auto py-8 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
@@ -499,15 +514,26 @@ export default async function Home() {
 
                       <CardHeader className="p-4 pb-2">
                         <div className="flex flex-wrap gap-1 mb-2">
-                          {evt.guestArtists.slice(0, 3).map((artist) => (
-                            <Badge
-                              key={artist}
-                              variant="secondary"
-                              className="text-[10px] bg-secondary-light text-secondary-hover font-bold border border-secondary-base/30"
-                            >
-                              ★ {artist}
-                            </Badge>
-                          ))}
+                          {evt.guestArtists.slice(0, 3).map((artist) => {
+                            const artistSlug = artist
+                              .toLowerCase()
+                              .replace(/[^a-z0-9]+/g, "-")
+                              .replace(/(^-|-$)/g, "");
+                            return (
+                              <Link
+                                key={artist}
+                                href={`#instructors-${artistSlug}`}
+                                className="inline-flex"
+                              >
+                                <Badge
+                                  variant="secondary"
+                                  className="text-[10px] bg-secondary-light text-secondary-hover font-bold border border-secondary-base/30 hover:bg-secondary-base hover:text-white transition-colors cursor-pointer"
+                                >
+                                  ★ {artist}
+                                </Badge>
+                              </Link>
+                            );
+                          })}
                         </div>
                         <CardDescription className="line-clamp-2 text-xs">
                           {evt.description}
@@ -547,6 +573,9 @@ export default async function Home() {
             <DanceVouchersShowcase />
           </div>
         </section>
+
+        {/* Flagship BOH Studios Venue & Arrival Guide */}
+        <BohVenueSpotlight />
 
         {/* 3-Portal Interactive Showcase */}
         <section className="cv-auto py-14 border-t bg-muted/20">

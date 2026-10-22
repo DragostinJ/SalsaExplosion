@@ -17,6 +17,8 @@ import {
   Radio,
   Volume2,
   VolumeX,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -159,6 +161,7 @@ export function TimbaSongAnatomyPlayer({
   const [isClaveHelperActive, setIsClaveHelperActive] = useState(false);
   const [currentDancerBeat, setCurrentDancerBeat] = useState<number>(1);
   const [mobileCueFocus, setMobileCueFocus] = useState<"ALL" | "LEAD" | "FOLLOW" | "TRIGGER">("ALL");
+  const [isTelemetryExpandedMobile, setIsTelemetryExpandedMobile] = useState(false);
 
   const activeSong = useMemo<SongAnatomy>(() => {
     return (
@@ -917,23 +920,39 @@ export function TimbaSongAnatomyPlayer({
         {activeSegment.instrumentMapping && (
           <div
             data-testid="body-telemetry-widget"
-            className="rounded-2xl border-2 border-primary-base/40 bg-gradient-to-r from-amber-500/10 via-primary-base/10 to-sky-500/10 p-4 sm:p-5 space-y-3 shadow-xs"
+            className="rounded-2xl border-2 border-primary-base/40 bg-gradient-to-r from-amber-500/10 via-primary-base/10 to-sky-500/10 p-3 sm:p-5 space-y-3 shadow-xs"
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border/60 pb-2">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <Badge className="bg-primary-base text-white text-[10px] font-black uppercase tracking-wider">
                   Level 4 Body Separation
                 </Badge>
                 <h4 className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wide">
-                  3-Zone Body Telemetry (Polyrhythm Split)
+                  3-Zone Body Telemetry
                 </h4>
               </div>
-              <span className="text-[11px] text-muted-foreground font-medium">
-                Advanced Timba Body Isolation Map
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="hidden sm:inline text-[11px] text-muted-foreground font-medium">
+                  Advanced Timba Body Isolation Map
+                </span>
+                <button
+                  type="button"
+                  data-testid="toggle-telemetry-mobile"
+                  onClick={() => setIsTelemetryExpandedMobile((prev) => !prev)}
+                  className="md:hidden flex items-center gap-1 text-[11px] font-bold text-primary-base hover:underline py-0.5 px-1.5 rounded bg-primary-base/10"
+                  aria-expanded={isTelemetryExpandedMobile}
+                >
+                  <span>{isTelemetryExpandedMobile ? "Hide" : "Show 3 Zones"}</span>
+                  {isTelemetryExpandedMobile ? (
+                    <ChevronUp className="h-3 w-3" />
+                  ) : (
+                    <ChevronDown className="h-3 w-3" />
+                  )}
+                </button>
+              </div>
             </div>
 
-            <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3">
+            <div className={`${isTelemetryExpandedMobile ? "grid" : "hidden md:grid"} gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3`}>
               {/* Zone 1: Chest & Shoulders */}
               <div className="rounded-xl border border-sky-500/30 bg-sky-500/[0.06] p-3 space-y-1">
                 <span className="text-[10px] uppercase font-black tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1.5">

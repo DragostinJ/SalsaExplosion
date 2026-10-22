@@ -23,29 +23,34 @@ interface FaqItem {
 
 const FAQS: FaqItem[] = [
   {
-    question: "Do I need to bring a partner to the Congress?",
+    question: "Do I need to bring a partner to the Made in Cuba Festival?",
     answer:
-      "No partner required! All daytime masterclasses rotate partners continuously so everyone dances with equal practice time. Evening socials are notoriously welcoming, with dancers inviting each other regardless of level.",
+      "No partner required! All daytime workshops rotate partners continuously so everyone dances with equal practice time. Evening socials are exceptionally welcoming, with dancers inviting each other regardless of level.",
   },
   {
-    question: "How do I get to the venue from Bournemouth Train & Coach Station?",
+    question: "Where do the festival events take place across the weekend?",
     answer:
-      "The Roundhouse Hotel and BOH Studios are located in Lansdowne, just a 6-minute walk (0.3 miles) from Bournemouth Central Train & Coach Station. Direct South Western Railway trains run from London Waterloo in 1h 45m.",
+      "Friday 4 Dec (7pm–12am) takes place at The Woodlands Ballroom (Parkstone, Poole) for our Welcome Party. Saturday 5 Dec (12pm–5pm workshops, 8pm–2am shows & party) and Sunday 6 Dec (6pm–12am classes & dancing) take place at BOH Studios Bournemouth in The Triangle. A direct 10-minute taxi or M1/M2 bus connects both venues.",
   },
   {
-    question: "Is dancer parking available on-site?",
+    question: "What are the two dedicated rooms during the parties?",
     answer:
-      "Yes. The Roundhouse Hotel has secure underground parking with a discounted rate for Salsa Explosion pass holders (validate your registration QR pass at hotel reception). Additional 24/7 parking is located at Lansdowne Road Car Park (BH1 1SN, 2 min walk).",
+      "Both Friday and Saturday nights feature two separate rooms with dedicated sound systems: Room 1 is the Cuban Salsa & Timba Room with authentic Havana rhythms, and Room 2 is the Bachata Room playing modern, sensual, and traditional Dominican Bachata.",
   },
   {
-    question: "What is the dress code for the Saturday Havana Gala Night?",
+    question: "Is dancer parking available on-site at both venues?",
     answer:
-      "Saturday Havana Gala is 'Havana Glamour / Tropical Elegance' — think crisp guayaberas, vibrant dresses, fedoras, and elegant dance attire. Remember your suede-sole or smooth leather dance shoes for the sprung ballroom floor!",
+      "Yes. The Woodlands Ballroom has an on-site private car park. For BOH Studios, the Bournemouth Library Car Park (Avenue Rd, BH2 5SL) is just a 2-minute walk away. The Roundhouse Hotel also has secure underground parking with discounted dancer permits.",
   },
   {
-    question: "Can I upgrade my pass at the door if tier spaces are still available?",
+    question: "What is the dress code for Saturday Gala & Shows Night?",
     answer:
-      "Yes, subject to Lead/Follow balance availability. However, Congress passes usually sell out in advance to ensure dance floor comfort, so booking early via your Salsa Explosion account is strongly advised.",
+      "Saturday Gala is 'Havana Glamour / Tropical Elegance' — think crisp guayaberas, vibrant dresses, fedoras, and elegant dance attire. Remember your suede-sole or smooth leather dance shoes for the sprung Canadian maple floor at BOH Studios!",
+  },
+  {
+    question: "How do I book passes or get direct enquiries?",
+    answer:
+      "You can book passes directly online with instant confirmation or contact Maestro Enrique Perez Valdes and the festival team on 07969 633701, email info@salsaexplosion.co.uk, or DM on Instagram @salsaexplosion.",
   },
 ];
 
@@ -62,18 +67,34 @@ export function CongressTravelGuide() {
     <section className="space-y-8 rounded-2xl border border-border bg-card/60 p-6 sm:p-8">
       {/* Section Header */}
       <div>
-        <div className="flex items-center gap-2">
-          <Badge className="bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/20 text-xs font-semibold">
-            Bournemouth Summer Congress 2026
+        <div className="flex flex-wrap items-center gap-2">
+          <Badge className="bg-primary-base text-white border-none text-xs font-bold uppercase tracking-wider">
+            🎉 MADE IN CUBA Dance Festival 2026
           </Badge>
-          <span className="text-xs text-muted-foreground">• Lansdowne Coastal Hub</span>
+          <span className="text-xs text-muted-foreground font-medium">• 4, 5 &amp; 6 December 2026 • Bournemouth</span>
         </div>
         <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
-          Hotel, Travel & Weekend Festival Guide
+          Hotel, Travel &amp; Weekend Festival Guide
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Everything you need for an unforgettable coastal dance weekend: official room block rates, nearby B&Bs, full 3-day timetable, and transit directions.
+          Everything you need for an unforgettable coastal Cuban dance weekend celebrating 33 years of Salsa Explosion: partner hotel rates, nearby Bournemouth accommodations, full 3-day dual-venue timetable, and transit directions.
         </p>
+      </div>
+
+      {/* Dual-Venue Transit Quick Tip */}
+      <div className="rounded-xl border border-amber-500/30 bg-amber-500/[0.04] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+        <div className="space-y-0.5">
+          <span className="font-bold text-foreground flex items-center gap-1.5">
+            <MapPin className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
+            Dual-Venue Weekend Programme (Poole &amp; Bournemouth)
+          </span>
+          <p className="text-muted-foreground text-[11px] leading-relaxed">
+            Friday Welcome Party at <strong className="text-foreground">The Woodlands Ballroom</strong> (BH14 0BB) • Saturday &amp; Sunday Workshops, Shows &amp; Socials at <strong className="text-foreground">BOH Studios Bournemouth</strong> (BH2 5LR).
+          </p>
+        </div>
+        <span className="text-[11px] font-bold text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2 py-1 rounded shrink-0">
+          10 min taxi or M1/M2 bus
+        </span>
       </div>
 
       {/* Grid: Official Hotel & B&B Options */}
@@ -82,8 +103,8 @@ export function CongressTravelGuide() {
         <Card className="border border-amber-500/30 bg-gradient-to-br from-card via-card to-amber-500/[0.04]">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <Badge className="bg-amber-500 text-white font-bold text-[10px]">
-                Official Festival Hotel
+              <Badge className="bg-primary-base text-white font-bold text-[10px]">
+                Recommended Hotel Partner
               </Badge>
               <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                 Special Dancer Rate
@@ -100,13 +121,13 @@ export function CongressTravelGuide() {
           </CardHeader>
           <CardContent className="space-y-4 text-xs text-muted-foreground">
             <p className="leading-relaxed">
-              Stay in the heart of the action! All daytime masterclasses, evening socials, and late-night social dancing take place inside The Roundhouse Hotel and adjacent BOH Studios ballrooms.
+              Stay in comfort during the festival weekend! Located just 5-8 minutes from BOH Studios with discounted room rates for Salsa Explosion dancers and late bar access.
             </p>
 
             <div className="rounded-lg border border-border/80 bg-background/80 p-3 space-y-2">
               <div className="flex items-center justify-between font-semibold text-foreground">
                 <span>Dancer Block Rates (Code: <code className="text-primary font-mono">SALSA2026</code>)</span>
-                <span className="text-amber-500 font-bold">From £69/night</span>
+                <span className="text-amber-600 dark:text-amber-400 font-bold">From £69/night</span>
               </div>
               <ul className="space-y-1 text-[11px]">
                 <li className="flex items-center gap-1.5">
@@ -119,13 +140,13 @@ export function CongressTravelGuide() {
                 </li>
                 <li className="flex items-center gap-1.5">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                  <span>Late 2:30 AM bar access & complimentary dancer parking permit</span>
+                  <span>Late 2:30 AM bar access &amp; complimentary dancer parking permit</span>
                 </li>
               </ul>
             </div>
 
             <div className="flex items-center gap-2 pt-1">
-              <Button size="sm" variant="default" asChild className="h-8 text-xs font-semibold">
+              <Button size="sm" variant="default" asChild className="h-8 text-xs font-semibold bg-primary-base hover:bg-primary-hover text-white">
                 <a
                   href="tel:+441202554444"
                   className="inline-flex items-center gap-1.5"
@@ -219,7 +240,10 @@ export function CongressTravelGuide() {
           {/* Friday */}
           <div className="rounded-xl border border-border bg-background/80 p-4 space-y-3">
             <div className="flex items-center justify-between border-b pb-2">
-              <span className="text-sm font-bold text-foreground">Friday, 17 July</span>
+              <div>
+                <span className="text-sm font-bold text-foreground">Friday, 4 December</span>
+                <span className="block text-[11px] text-muted-foreground">The Woodlands Ballroom</span>
+              </div>
               <Badge variant="secondary" className="text-[10px]">
                 Day 1
               </Badge>
@@ -228,19 +252,19 @@ export function CongressTravelGuide() {
               <li className="flex items-start gap-2">
                 <Clock className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">18:00 - 20:00:</span> Registration & Badge Pick-Up (Roundhouse Foyer)
+                  <span className="font-semibold text-foreground">19:00 - 20:00:</span> Registration &amp; Cuban Warm-Up Masterclasses
                 </div>
               </li>
               <li className="flex items-start gap-2">
                 <Clock className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">20:00 - 21:00:</span> Welcome Warm-up Rueda Masterclass
+                  <span className="font-semibold text-foreground">20:00 - 00:00:</span> Welcome Party &amp; Social Dancing Fiesta
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <Clock className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">21:00 - 02:00:</span> Welcome Social & DJ Sets (White & Red Fiesta)
+                  <span className="font-semibold text-foreground">2 Dedicated Rooms:</span> Room 1 (Salsa &amp; Timba) + Room 2 (Bachata)
                 </div>
               </li>
             </ul>
@@ -249,8 +273,11 @@ export function CongressTravelGuide() {
           {/* Saturday */}
           <div className="rounded-xl border border-amber-500/40 bg-amber-500/[0.03] p-4 space-y-3">
             <div className="flex items-center justify-between border-b border-amber-500/20 pb-2">
-              <span className="text-sm font-bold text-foreground">Saturday, 18 July</span>
-              <Badge className="bg-amber-500 text-white text-[10px] font-bold">
+              <div>
+                <span className="text-sm font-bold text-foreground">Saturday, 5 December</span>
+                <span className="block text-[11px] text-amber-600 dark:text-amber-400 font-semibold">BOH Studios Bournemouth</span>
+              </div>
+              <Badge className="bg-primary-base text-white text-[10px] font-bold">
                 Gala Day
               </Badge>
             </div>
@@ -258,19 +285,19 @@ export function CongressTravelGuide() {
               <li className="flex items-start gap-2">
                 <Clock className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">10:30 - 13:00:</span> Daytime Masterclasses: Afro-Cuban & Casino Footwork
+                  <span className="font-semibold text-foreground">12:00 - 17:00:</span> 2 Days of Workshops: Cuban Casino, Timba &amp; Afro-Cuban
                 </div>
               </li>
               <li className="flex items-start gap-2">
                 <Clock className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">14:00 - 17:30:</span> Advanced Rueda Callers & Son Styling Intensives
+                  <span className="font-semibold text-foreground">20:00 - 21:00:</span> Evening Masterclasses &amp; Show Previews
                 </div>
               </li>
               <li className="flex items-start gap-2">
                 <Clock className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">20:30 - 03:00:</span> The Havana Gala Show & Live Band Cuban Social
+                  <span className="font-semibold text-foreground">21:00 - 02:00:</span> 2 Spectacular Shows &amp; Social Fiesta Until 2:00 AM (2 Rooms)
                 </div>
               </li>
             </ul>
@@ -279,7 +306,10 @@ export function CongressTravelGuide() {
           {/* Sunday */}
           <div className="rounded-xl border border-border bg-background/80 p-4 space-y-3">
             <div className="flex items-center justify-between border-b pb-2">
-              <span className="text-sm font-bold text-foreground">Sunday, 19 July</span>
+              <div>
+                <span className="text-sm font-bold text-foreground">Sunday, 6 December</span>
+                <span className="block text-[11px] text-muted-foreground">BOH Studios Bournemouth</span>
+              </div>
               <Badge variant="secondary" className="text-[10px]">
                 Day 3
               </Badge>
@@ -288,19 +318,19 @@ export function CongressTravelGuide() {
               <li className="flex items-start gap-2">
                 <Clock className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">11:30 - 14:00:</span> Musicality, Tumbao Drills & Reparto Masterclass
+                  <span className="font-semibold text-foreground">18:00 - 19:30:</span> Musicality, Tumbao Drills &amp; Reparto Masterclass
                 </div>
               </li>
               <li className="flex items-start gap-2">
                 <Clock className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">15:00 - 19:00:</span> Sunday Beach Farewell Open-Air Social (Bournemouth Pier)
+                  <span className="font-semibold text-foreground">19:30 - 00:00:</span> Dancing with the Stars &amp; Farewell Social Fiesta
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <Clock className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">19:30:</span> Farewell Tapas & Paella Dinner (Optional)
+                  <span className="font-semibold text-foreground">Closing Social:</span> Celebrating 33 Years of Salsa Explosion
                 </div>
               </li>
             </ul>

@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { SiteHeader } from "@/components/navigation/site-header";
 import { SiteFooter } from "@/components/navigation/site-footer";
 import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
+import { JsonLdSchema } from "@/components/seo/JsonLdSchema";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -127,52 +128,7 @@ export default async function RootLayout({
         <head>
           <link rel="preconnect" href="https://images.unsplash.com" />
           <link rel="dns-prefetch" href="https://images.unsplash.com" />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "DanceSchool",
-                name: "Salsa Explosion UK",
-                founder: {
-                  "@type": "Person",
-                  name: "Enrique Perez Valdes",
-                  jobTitle: "Maestro & Founder",
-                  award: "Salsa UK Lifetime Achievement Award",
-                },
-                address: {
-                  "@type": "PostalAddress",
-                  streetAddress: "104 Commercial Road, The Triangle",
-                  addressLocality: "Bournemouth",
-                  postalCode: "BH2 5LR",
-                  addressCountry: "GB",
-                },
-                telephone: "+447969633701",
-                url: "https://salsaexplosion.co.uk",
-                sameAs: [
-                  "https://www.instagram.com/salsaexplosion/",
-                  "https://www.facebook.com/salsaexplosion",
-                ],
-                event: {
-                  "@type": "Festival",
-                  name: "MADE IN CUBA — Dance Weekend 2026",
-                  startDate: "2026-12-04T18:00:00Z",
-                  endDate: "2026-12-06T23:00:00Z",
-                  location: {
-                    "@type": "Place",
-                    name: "BOH Studios Bournemouth",
-                    address: {
-                      "@type": "PostalAddress",
-                      streetAddress: "104 Commercial Road",
-                      addressLocality: "Bournemouth",
-                      postalCode: "BH2 5LR",
-                      addressCountry: "GB",
-                    },
-                  },
-                },
-              }),
-            }}
-          />
+          <JsonLdSchema />
         </head>
         <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden">
           <SiteHeader role={effectiveRole} canSwitchRoles={userCanSwitchRoles} />

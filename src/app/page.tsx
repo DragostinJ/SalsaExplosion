@@ -18,6 +18,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import dynamic from "next/dynamic";
+import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
 import { getCachedUpcomingEvents, getCachedNextClasses } from "@/lib/cached-queries";
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
 
@@ -36,15 +37,6 @@ const SocialProofGrid = dynamic(
           </div>
         </div>
       </div>
-    ),
-  }
-);
-
-const LevelMatcherQuiz = dynamic(
-  () => import("@/components/marketing/level-matcher-quiz").then((m) => m.LevelMatcherQuiz),
-  {
-    loading: () => (
-      <div className="rounded-3xl border border-primary-base/20 bg-muted/20 p-8 h-48 animate-pulse" />
     ),
   }
 );
@@ -561,10 +553,10 @@ export default async function Home() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <Badge variant="outline" className="text-xs font-semibold mb-2">
-                Unified Ecosystem
+                The Complete Dancer Experience
               </Badge>
               <h2 className="text-2xl font-extrabold sm:text-3xl">
-                One Platform for Dancers, Instructors & Academy Owners
+                Everything You Need From Your First Basic Step to the Social Floor
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
                 Purpose-built for Bournemouth dancers: structured 4-tier Cuban syllabus, Maestro Enrique video recaps, and lightning-fast digital passes.
@@ -712,10 +704,10 @@ export default async function Home() {
                   <QrCode className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-bold">
-                  Zero-Commission Congress Passes
+                  Instant Digital Passes — Zero Booking Fees
                 </h3>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Instant Apple Pay, Google Pay, and card checkout with direct-to-phone QR digital passes for quick door check-in.
+                  One-tap Apple Pay, Google Pay, and card checkout with instant QR passes saved straight to your phone for 1-second door check-in at BOH Studios.
                 </p>
               </div>
             </div>

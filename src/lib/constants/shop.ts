@@ -65,7 +65,7 @@ export const SHOP_CATALOG: Record<string, CatalogShopItem> = {
     category: "ACCESSORY",
     pricePounds: 12,
     description:
-      "Essential for surviving high-energy Friday social nights and hot congress workshops. Heavy-duty wooden ribs with authentic Cuban flag silk.",
+      "Essential for surviving high-energy Thursday & Sunday social nights and hot congress workshops. Heavy-duty wooden ribs with authentic Cuban flag silk.",
     features: [
       "Durable bamboo frame with silk fabric",
       "Snap-open sound for dramatic dance accents",

@@ -41,7 +41,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByText("Feel the Energy of Bournemouth's Cuban Community")
     ).toBeVisible();
     await expect(
-      page.getByText("Friday Night Rueda de Casino at BOH Studios")
+      page.getByText("Thursday Night Rueda de Casino at BOH Studios")
     ).toBeVisible();
     await expect(page.getByText("Mark Townsend")).toBeVisible();
 

@@ -53,7 +53,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "photo-1",
-    title: "Friday Night Rueda de Casino Circle",
+    title: "Thursday Night Rueda de Casino Circle",
     caption:
       "Dancers rotating in synchronized harmony to Alexander Abreu & Havana D'Primera. Every lead and follow in flow.",
     category: "RUEDA",

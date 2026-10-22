@@ -67,7 +67,7 @@ const SOCIAL_ITEMS: SocialItem[] = [
     id: "reel-1",
     type: "reel",
     category: "reels",
-    title: "Friday Night Rueda de Casino at BOH Studios",
+    title: "Thursday Night Rueda de Casino at BOH Studios",
     views: "34.8K",
     likes: "2,840",
     track: "Alexander Abreu y Havana D'Primera - Me Dicen Cuba",
@@ -76,7 +76,7 @@ const SOCIAL_ITEMS: SocialItem[] = [
     tags: ["#SalsaExplosion", "#RuedaDeCasino", "#Bournemouth", "#CubanSalsa"],
     gradient: "from-amber-600 via-orange-600 to-rose-700",
     duration: "0:48",
-    badgeText: "Viral Friday Social",
+    badgeText: "Viral Thursday Social",
     instagramUrl: "https://www.instagram.com/salsaexplosion/",
   },
   {
@@ -182,7 +182,7 @@ export function SocialProofGrid() {
           </h2>
 
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-            From packed Friday Rueda circles at BOH Studios to the international Bournemouth Cuban Congress — see why over 4,200 dancers call Salsa Explosion their home.
+            From packed Thursday & Sunday Rueda circles at BOH Studios to the international Bournemouth Cuban Congress — see why over 4,200 dancers call Salsa Explosion their home.
           </p>
 
           {/* Social Filter Tabs */}
@@ -392,7 +392,7 @@ export function SocialProofGrid() {
               Follow Salsa Explosion on Instagram & Facebook
             </h3>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              Stay connected with weekly class routines, visiting Cuban maestro announcements, and Friday Havana Fiesta photo galleries.
+              Stay connected with weekly class routines, visiting Cuban maestro announcements, and Thursday & Sunday Havana Fiesta photo galleries.
             </p>
           </div>
 

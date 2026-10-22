@@ -36,7 +36,7 @@ export default function CubanMusicPage() {
             </Badge>
           </div>
           <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-3xl">
-            Learn the songs played every Friday at BOH Studios and the Bournemouth Summer Cuban Congress. Categorized by tempo with direct Spotify search links.
+            Learn the songs played every Thursday & Sunday at BOH Studios and the Bournemouth Summer Cuban Congress. Categorized by tempo with direct Spotify search links.
           </p>
         </div>
       </div>

@@ -12,9 +12,21 @@ interface LevelResult {
   classTiming: string;
   recommendedTrack: string;
   href: string;
+  ctaLabel?: string;
 }
 
 const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
+  crossover_dancer: {
+    levelTitle: "Crossover Fast-Track • Circular Cuban Transition",
+    badge: "Crossover Fast-Track: Switch to Cuban",
+    description:
+      "Welcome to the Cuban circle! Because you already understand rhythm, timing, and partner connection from Bachata or linear Salsa, we fast-track your transition from linear slot stepping into circular Guapea, Dile Que No, and high-energy Rueda calls with Maestro Enrique and team at BOH Studios.",
+    classTiming: "Thursday 7:00 PM (Solo Pasitos / Room 2) & 8:15 PM Partnerwork • BOH Studios",
+    recommendedTrack:
+      "Thursday Improver 1 Cuban Foundation + Solo Pasitos with Moe Flex (or Level 1 Transition Room)",
+    href: "/dashboard/schedule",
+    ctaLabel: "Book Your Cuban Transition Class",
+  },
   absolute_beginner: {
     levelTitle: "Beginner 1 • Fundamentos & Guapea",
     badge: "Level 1: No Experience Needed",
@@ -57,6 +69,11 @@ export function LevelMatcherQuiz() {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
 
   const questions = [
+    {
+      key: "crossover_dancer",
+      title: "🔄 I Dance Cross-Body Salsa or Bachata (New to Cuban)",
+      detail: "I already have rhythm and partner frame, and want to learn circular Cuban Casino & Rueda.",
+    },
     {
       key: "absolute_beginner",
       title: "I've never danced Cuban Salsa before",
@@ -107,7 +124,11 @@ export function LevelMatcherQuiz() {
                 key={q.key}
                 type="button"
                 onClick={() => setSelectedKey(q.key)}
-                className="text-left rounded-2xl border bg-card p-4 hover:border-primary-base hover:shadow-sm transition-all group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-base"
+                className={`text-left rounded-2xl border bg-card p-4 hover:border-primary-base hover:shadow-sm transition-all group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-base ${
+                  q.key === "crossover_dancer"
+                    ? "sm:col-span-2 border-primary-base/40 bg-gradient-to-r from-card via-card to-primary-light/10 shadow-xs"
+                    : ""
+                }`}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="space-y-1">
@@ -162,7 +183,7 @@ export function LevelMatcherQuiz() {
                 className="bg-primary-base hover:bg-primary-hover text-white font-extrabold shadow-sm text-xs min-h-10"
               >
                 <Link href={result.href}>
-                  <span>Book This Level • Free Welcome Pass</span>
+                  <span>{result.ctaLabel || "Book This Level • Free Welcome Pass"}</span>
                   <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                 </Link>
               </Button>

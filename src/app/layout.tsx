@@ -126,8 +126,6 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       >
         <head>
-          <link rel="preconnect" href="https://images.unsplash.com" />
-          <link rel="dns-prefetch" href="https://images.unsplash.com" />
           <JsonLdSchema />
         </head>
         <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden">

@@ -20,11 +20,23 @@ import {
 import dynamic from "next/dynamic";
 import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
 import { getCachedUpcomingEvents, getCachedNextClasses } from "@/lib/cached-queries";
-import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
-import { BohVenueSpotlight } from "@/components/home/BohVenueSpotlight";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
+
+const DanceVouchersShowcase = dynamic(
+  () => import("@/components/marketing/dance-vouchers-showcase").then((m) => m.DanceVouchersShowcase),
+  {
+    loading: () => <div className="py-12 min-h-[300px] animate-pulse bg-muted/10 rounded-3xl" />,
+  }
+);
+
+const BohVenueSpotlight = dynamic(
+  () => import("@/components/home/BohVenueSpotlight").then((m) => m.BohVenueSpotlight),
+  {
+    loading: () => <div className="py-20 min-h-[400px] animate-pulse bg-muted/20" />,
+  }
+);
 
 const SocialProofGrid = dynamic(
   () => import("@/components/marketing/social-proof-grid").then((m) => m.SocialProofGrid),

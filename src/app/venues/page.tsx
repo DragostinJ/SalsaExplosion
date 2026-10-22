@@ -20,7 +20,7 @@ import { VenueArrivalPlanner } from "@/components/venues/venue-arrival-planner";
 export const metadata = {
   title: "Venues & Parking Guide | BOH Studios Bournemouth | Salsa Explosion",
   description:
-    "Official venue, parking, bus routes, and arrival guide for Salsa Explosion classes at BOH Studios and Bournemouth Summer Congress at The Roundhouse Hotel.",
+    "Official venue, parking, bus routes, and arrival guide for Salsa Explosion classes at BOH Studios, The Woodlands Ballroom, and Salsa Explosion dance weekend festivals.",
 };
 
 export default function VenuesGuidePage() {
@@ -36,19 +36,19 @@ export default function VenuesGuidePage() {
           <div className="flex flex-wrap items-center gap-2">
             <Badge className="bg-primary-base text-white border-none text-xs font-bold">
               <Compass className="mr-1.5 h-3.5 w-3.5 text-white" />
-              Bournemouth Studio Hub & Congress Hotel
+              Bournemouth Studio Hub &amp; Festival Partner Venues
             </Badge>
             <Badge className="bg-white/20 text-white border-none backdrop-blur-sm text-xs font-semibold">
-              Travel, Parking & Arrival Guide
+              Travel, Parking &amp; Arrival Guide
             </Badge>
           </div>
 
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl leading-tight drop-shadow-sm">
-            Venues & Parking Guide
+            Venues &amp; Parking Guide
           </h1>
 
           <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal">
-            Everything you need for a smooth arrival at Maestro Enrique Perez Valdes&apos; weekly classes at BOH Studios and the annual Bournemouth Cuban Salsa Congress.
+            Everything you need for a smooth arrival at Maestro Enrique Perez Valdes&apos; weekly classes at BOH Studios and Salsa Explosion dance weekend festivals.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -66,7 +66,7 @@ export default function VenuesGuidePage() {
               variant="outline"
               className="bg-white/10 text-white hover:bg-white/20 border-white/30 text-xs sm:text-sm font-semibold h-10 rounded-xl"
             >
-              <Link href="/events">Congress Passes & Info</Link>
+              <Link href="/events">Festival Passes &amp; Info</Link>
             </Button>
           </div>
         </div>
@@ -368,7 +368,7 @@ export default function VenuesGuidePage() {
             <div className="relative h-48 w-full bg-gradient-to-tr from-purple-800 via-indigo-700 to-amber-600 p-6 text-white flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
-                  Annual Congress Festival Hotel
+                  Festival Accommodation Partner
                 </Badge>
                 <span className="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
                   Lansdowne, Bournemouth
@@ -388,7 +388,7 @@ export default function VenuesGuidePage() {
             <CardContent className="p-6 space-y-5">
               <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
                 <p>
-                  Official flagship venue for the Bournemouth Summer Cuban Salsa Congress. Featuring 3 simultaneous workshop ballrooms, international maestro staging, full hotel bar, and late-night social dancing until 4:00 AM.
+                  Recommended accommodation partner for Salsa Explosion dance weekend festivals and visiting dancers. Featuring ballroom facilities, discounted dancer rates (Code: SALSA2026), full hotel bar, and easy transit to BOH Studios.
                 </p>
               </div>
 

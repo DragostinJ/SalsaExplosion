@@ -45,11 +45,11 @@ export const SHOP_CATALOG: Record<string, CatalogShopItem> = {
   },
   tshirt: {
     id: "tshirt",
-    name: "Bournemouth Summer Congress 2026 Festival Tee",
+    name: "MADE IN CUBA 2026 — 33rd Anniversary Festival Tee",
     category: "APPAREL",
     pricePounds: 20,
     description:
-      "Commemorative 2026 Bournemouth Cuban Congress festival t-shirt featuring guest artist lineup and vibrant Havana artwork.",
+      "Commemorative 2026 MADE IN CUBA Dance Festival t-shirt celebrating 33 years of Salsa Explosion with authentic Havana artwork.",
     features: [
       "100% breathable ringspun cotton",
       "Screen-printed in Dorset, UK",
@@ -57,7 +57,7 @@ export const SHOP_CATALOG: Record<string, CatalogShopItem> = {
     ],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     gradient: "from-orange-600 via-amber-700 to-yellow-600",
-    badge: "Official Congress Merch",
+    badge: "Official Festival Merch",
   },
   abanico: {
     id: "abanico",

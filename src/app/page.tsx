@@ -129,8 +129,8 @@ export default async function Home() {
       <main className="flex-1">
         <LiveTonightBanner />
 
-        {/* Theatrical Cinema Stage Hero */}
-        <section className="relative overflow-hidden min-h-[82vh] lg:min-h-[86vh] flex items-center justify-center py-16 sm:py-24 bg-[#080605] border-b border-amber-500/10 text-white">
+        {/* Monumental "The Place" Editorial Hero */}
+        <section className="relative overflow-hidden min-h-[88vh] lg:min-h-[92vh] flex flex-col justify-between py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-[#070605] border-b border-amber-500/10 text-white">
           {/* Atmospheric Havana Stage Light Rays & Watermark Layer */}
           <div
             className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen"
@@ -150,88 +150,106 @@ export default async function Home() {
             <div className="absolute inset-20 rounded-full border border-amber-500/10" />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-            {/* Top Interactive Ambience Bar */}
-            <div className="mb-6 flex flex-wrap items-center justify-center gap-3">
+          {/* Top Cultural Tag Bar */}
+          <div className="relative z-10 mx-auto w-full max-w-7xl flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 mb-6 sm:mb-8">
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-amber-300">
+                SALSA EXPLOSION • BOH STUDIOS BOURNEMOUTH
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
               <HavanaGrooveToggle />
               <Badge
                 variant="outline"
-                className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3.5 py-1 text-xs font-semibold backdrop-blur-md"
+                className="hidden sm:inline-flex border-amber-500/30 bg-amber-500/10 text-amber-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
               >
                 <Award className="mr-1.5 h-3.5 w-3.5 text-amber-400" />
                 Salsa UK Lifetime Achievement Award Winner
               </Badge>
               <Badge
                 variant="outline"
-                className="border-white/15 bg-white/[0.04] text-zinc-300 px-3.5 py-1 text-xs font-semibold backdrop-blur-md"
+                className="hidden sm:inline-flex border-white/15 bg-white/[0.04] text-zinc-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
               >
                 <MapPin className="mr-1.5 h-3.5 w-3.5 text-rose-400" />
                 Home Hub: BOH Studios Bournemouth
               </Badge>
             </div>
+          </div>
 
-            {/* Editorial Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.1] text-white">
-              Bournemouth&apos;s Home of{" "}
-              <span className="font-display italic font-normal text-amber-300 drop-shadow-[0_2px_15px_rgba(245,158,11,0.3)]">
-                Authentic Havana Rhythm.
+          {/* Center Stage: Monumental Typography */}
+          <div className="relative z-10 mx-auto w-full max-w-6xl text-center my-auto flex flex-col items-center">
+            {/* Mobile-visible award and location badges */}
+            <div className="sm:hidden flex flex-wrap items-center justify-center gap-2 mb-4">
+              <Badge
+                variant="outline"
+                className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-2.5 py-0.5 text-[11px] font-semibold backdrop-blur-md"
+              >
+                <Award className="mr-1 h-3 w-3 text-amber-400" />
+                Salsa UK Lifetime Achievement Award Winner
+              </Badge>
+              <Badge
+                variant="outline"
+                className="border-white/15 bg-white/[0.04] text-zinc-300 px-2.5 py-0.5 text-[11px] font-semibold backdrop-blur-md"
+              >
+                <MapPin className="mr-1 h-3 w-3 text-rose-400" />
+                Home Hub: BOH Studios Bournemouth
+              </Badge>
+            </div>
+
+            <h1 className="text-[2.65rem] sm:text-6xl lg:text-[5.5rem] font-black tracking-tighter leading-[0.92] uppercase text-white max-w-6xl">
+              CUBAN SALSA{" "}
+              <span className="font-display italic font-normal text-amber-400 drop-shadow-[0_2px_20px_rgba(245,158,11,0.35)] block sm:inline">
+                Rueda &amp; Rhythm
               </span>{" "}
-              <span className="block mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white via-zinc-100 to-amber-200 bg-clip-text text-transparent">
-                Directed by Enrique Perez Valdes.
+              <span className="block text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mt-2 text-zinc-100 normal-case">
+                Every Thu &amp; Sun in Bournemouth with Enrique Perez Valdes.
               </span>
             </h1>
 
-            <p className="mt-6 text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed font-normal">
-              Welcome to Salsa Explosion UK. Experience 25+ years of authentic Cuban Casino, high-energy Rueda de Casino, and weekly classes at BOH Studios Bournemouth, plus special event multi-room Cuban, Bachata &amp; Kizomba (SB&amp;K) party extravaganzas.
+            <p className="mt-4 sm:mt-6 text-sm sm:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed font-normal">
+              Directed by UK Lifetime Achievement Award winner <strong className="text-white font-bold">Maestro Enrique Perez Valdes</strong> at BOH Studios Bournemouth.
             </p>
 
-            {/* Quick Stats Pill Bar */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm text-zinc-300 font-medium">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+            {/* Heritage & Community Trust Stat Pills */}
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 text-xs text-zinc-300 font-medium">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                 <span>4,200+ Dancers in Community</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                 <span>25+ Years Cuban Salsa Heritage</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                 <span>Zero Partner Required</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-sm">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
                 <span>Strict Lead/Follow Balance</span>
-              </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/[0.07] border border-amber-500/20 backdrop-blur-sm text-amber-200">
-                <Flame className="h-4 w-4 text-amber-400" />
-                <span>Weekly Cuban Salsa + Special Multi-Room SB&amp;K Socials</span>
               </div>
             </div>
 
-            {/* Main Action Buttons */}
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+            {/* Thumb-Zone Dual Action Bar at Bottom of Hero */}
+            <div className="mt-8 sm:mt-10 flex flex-col items-center gap-3 w-full max-w-md mx-auto">
               <Button
                 asChild
-                size="lg"
-                className="w-full sm:w-auto h-12 px-8 text-sm font-bold bg-primary-base text-white shadow-[0_0_30px_-5px_rgba(225,29,72,0.45)] hover:bg-primary-hover hover:shadow-[0_0_35px_-5px_rgba(245,158,11,0.5)] transition-all duration-300"
+                className="w-full h-14 text-sm sm:text-base font-black uppercase tracking-wider bg-amber-500 hover:bg-amber-400 text-black rounded-xl sm:rounded-full flex items-center justify-between px-6 shadow-[0_10px_30px_rgba(245,158,11,0.35)] transition-transform active:scale-[0.99]"
               >
                 <Link href="/dashboard/schedule">
-                  View Weekly Classes &amp; Claim Trial →
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <span>THU &amp; SUN TIMETABLE</span>
+                  <span className="flex items-center gap-1 font-black">
+                    BOOK <ArrowRight className="h-4 w-4" />
+                  </span>
                 </Link>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto h-12 px-7 text-sm font-semibold border-amber-500/40 bg-black/70 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400/50 backdrop-blur-sm transition-all duration-300"
+              <Link
+                href="/events/made-in-cuba-dance-weekend-2026"
+                className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-amber-300/90 hover:text-amber-200 transition-colors py-1.5"
               >
-                <Link href="/events/made-in-cuba-dance-weekend-2026">
-                  <Flame className="mr-2 h-4 w-4 text-amber-400" />
-                  Made in Cuba Weekend 2026
-                </Link>
-              </Button>
+                <span>DEC 4–6: MADE IN CUBA FESTIVAL</span>
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
           </div>
         </section>

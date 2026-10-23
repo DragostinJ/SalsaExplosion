@@ -46,40 +46,32 @@ export function KineticMarqueeRibbon({
         {/* First track */}
         <div className="flex items-center gap-6 sm:gap-10 shrink-0 pr-6 sm:pr-10">
           {normalizedPhrases.map((phrase, idx) => (
-            <React.Fragment key={`p1-${idx}`}>
-              <span
-                className={
-                  phrase.isSerif
-                    ? "font-display italic font-normal text-amber-300 drop-shadow-sm text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
-                    : "font-black tracking-widest uppercase text-stroke-amber text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
-                }
-              >
-                {phrase.text}
-              </span>
-              <span className="text-amber-500/40 text-lg sm:text-2xl select-none">
-                ✦
-              </span>
-            </React.Fragment>
+            <span
+              key={`p1-${idx}`}
+              className={
+                phrase.isSerif
+                  ? "font-display italic font-normal text-amber-300 drop-shadow-sm text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
+                  : "font-black tracking-widest uppercase text-stroke-amber text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
+              }
+            >
+              {phrase.text} <span className="text-amber-500/40 text-lg sm:text-2xl select-none ml-3 sm:ml-5">✦</span>
+            </span>
           ))}
         </div>
 
         {/* Second track (seamless loop mirror) */}
         <div className="flex items-center gap-6 sm:gap-10 shrink-0 pr-6 sm:pr-10">
           {normalizedPhrases.map((phrase, idx) => (
-            <React.Fragment key={`p2-${idx}`}>
-              <span
-                className={
-                  phrase.isSerif
-                    ? "font-display italic font-normal text-amber-300 drop-shadow-sm text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
-                    : "font-black tracking-widest uppercase text-stroke-amber text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
-                }
-              >
-                {phrase.text}
-              </span>
-              <span className="text-amber-500/40 text-lg sm:text-2xl select-none">
-                ✦
-              </span>
-            </React.Fragment>
+            <span
+              key={`p2-${idx}`}
+              className={
+                phrase.isSerif
+                  ? "font-display italic font-normal text-amber-300 drop-shadow-sm text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
+                  : "font-black tracking-widest uppercase text-stroke-amber text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
+              }
+            >
+              {phrase.text} <span className="text-amber-500/40 text-lg sm:text-2xl select-none ml-3 sm:ml-5">✦</span>
+            </span>
           ))}
         </div>
       </div>

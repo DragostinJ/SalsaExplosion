@@ -99,39 +99,25 @@ export default async function Home() {
             </div>
             <div className="flex items-center gap-2">
               <HavanaGrooveToggle />
+            </div>
+          </div>
+
+          {/* Center Stage: Monumental Typography */}
+          <div className="relative z-10 mx-auto w-full max-w-6xl text-center my-auto flex flex-col items-center">
+            {/* Award and location badges */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
               <Badge
                 variant="outline"
-                className="hidden sm:inline-flex border-amber-500/30 bg-amber-500/10 text-amber-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
+                className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
               >
                 <Award className="mr-1.5 h-3.5 w-3.5 text-amber-400" />
                 Salsa UK Lifetime Achievement Award Winner
               </Badge>
               <Badge
                 variant="outline"
-                className="hidden sm:inline-flex border-white/15 bg-white/[0.04] text-zinc-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
+                className="border-white/15 bg-white/[0.04] text-zinc-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
               >
                 <MapPin className="mr-1.5 h-3.5 w-3.5 text-rose-400" />
-                Home Hub: BOH Studios Bournemouth
-              </Badge>
-            </div>
-          </div>
-
-          {/* Center Stage: Monumental Typography */}
-          <div className="relative z-10 mx-auto w-full max-w-6xl text-center my-auto flex flex-col items-center">
-            {/* Mobile-visible award and location badges */}
-            <div className="sm:hidden flex flex-wrap items-center justify-center gap-2 mb-4">
-              <Badge
-                variant="outline"
-                className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-2.5 py-0.5 text-[11px] font-semibold backdrop-blur-md"
-              >
-                <Award className="mr-1 h-3 w-3 text-amber-400" />
-                Salsa UK Lifetime Achievement Award Winner
-              </Badge>
-              <Badge
-                variant="outline"
-                className="border-white/15 bg-white/[0.04] text-zinc-300 px-2.5 py-0.5 text-[11px] font-semibold backdrop-blur-md"
-              >
-                <MapPin className="mr-1 h-3 w-3 text-rose-400" />
                 Home Hub: BOH Studios Bournemouth
               </Badge>
             </div>
@@ -201,9 +187,7 @@ export default async function Home() {
           phrases={[
             { text: "CASINO CUBANO", isSerif: false },
             { text: "Rueda de Casino", isSerif: true },
-            { text: "SON CUBANO", isSerif: false },
             { text: "Havana Timba", isSerif: true },
-            { text: "AFRO-RUMBA", isSerif: false },
             { text: "BOH Studios Bournemouth", isSerif: true },
             { text: "LA HABANA", isSerif: false },
           ]}
@@ -373,9 +357,7 @@ export default async function Home() {
             { text: "MAESTRO ENRIQUE PEREZ VALDES", isSerif: false },
             { text: "25+ Years Cuban Heritage", isSerif: true },
             { text: "MADE IN CUBA 2026", isSerif: false },
-            { text: "Strict Lead & Follow Ratio Balance", isSerif: true },
-            { text: "BOURNEMOUTH UK", isSerif: false },
-            { text: "Authentic Havana Flavour", isSerif: true },
+            { text: "Strict Lead & Follow Balance", isSerif: true },
           ]}
         />
 
@@ -611,15 +593,9 @@ export default async function Home() {
                     Every Thursday &amp; Sunday at BOH Studios Bournemouth. No partner required, fun social rotations, and strict lead/follow balance so you always have a partner.
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-2 pt-2">
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/dashboard/schedule">View Timetable</Link>
-                  </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/pricing">Class Passes</Link>
-                  </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/venues">Studio Venues</Link>
+                <div className="pt-2">
+                  <Button size="sm" variant="outline" asChild className="w-full text-xs font-bold">
+                    <Link href="/dashboard/schedule">Explore Thursday &amp; Sunday Timetable →</Link>
                   </Button>
                 </div>
               </div>
@@ -636,21 +612,15 @@ export default async function Home() {
                     </span>
                   </div>
                   <h3 className="text-lg font-extrabold">
-                    Casino, Rueda & Musicality
+                    Casino, Rueda &amp; Musicality
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Progress smoothly from fundamental Guapea & Dile Que No to advanced Vacilala, Sombrero, and lightning-fast Rueda de Casino calls under Maestro Enrique Perez Valdes.
+                    Progress smoothly from fundamental Guapea &amp; Dile Que No to advanced Vacilala, Sombrero, and lightning-fast Rueda de Casino calls under Maestro Enrique Perez Valdes.
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-2 pt-2">
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/dashboard/rueda">Rueda Dictionary</Link>
-                  </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/music">Cuban Song Hub</Link>
-                  </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/about">Enrique&apos;s Story</Link>
+                <div className="pt-2">
+                  <Button size="sm" variant="outline" asChild className="w-full text-xs font-bold">
+                    <Link href="/dashboard/rueda">Explore Rueda Dictionary &amp; Song Hub →</Link>
                   </Button>
                 </div>
               </div>
@@ -660,28 +630,22 @@ export default async function Home() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Badge className="bg-accent-tangerine text-zinc-950 text-xs font-bold">
-                      3. Congresses & Bespoke Coaching
+                      3. Congresses &amp; Bespoke Coaching
                     </Badge>
                     <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-full">
                       VIP Experiences
                     </span>
                   </div>
                   <h3 className="text-lg font-extrabold">
-                    Weekend Festivals & 1-on-1 Lessons
+                    Weekend Festivals &amp; 1-on-1 Lessons
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     Join the international Made in Cuba Dance Weekend or book private 1-on-1 coaching with Maestro Enrique, Moe Flex, Justyna, Arturas, or Jim for fast-track progression.
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-2 pt-2">
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/events">Explore Festivals</Link>
-                  </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/private-lessons">Private Lessons</Link>
-                  </Button>
-                  <Button size="sm" variant="outline" asChild className="text-xs">
-                    <Link href="/how-it-works">Dancer Guide</Link>
+                <div className="pt-2">
+                  <Button size="sm" variant="outline" asChild className="w-full text-xs font-bold">
+                    <Link href="/events">Explore Congress Passes &amp; Private Lessons →</Link>
                   </Button>
                 </div>
               </div>

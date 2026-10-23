@@ -94,36 +94,6 @@ const SOCIAL_ITEMS: SocialItem[] = [
     monthsActive: "Student for 2 years",
   },
   {
-    id: "reel-2",
-    type: "reel",
-    category: "reels",
-    title: "Maestro Enrique Breaks Down Dile Que No & Setenta",
-    views: "19.4K",
-    likes: "1,560",
-    track: "Los Van Van - Este Amor Que Se Muere",
-    caption:
-      "Cuban tension and footwork preparation on beat 1. Look at the connection and arm prep. Weekly syllabus masterclass at BOH Studios Bournemouth.",
-    tags: ["#EnriquePerez", "#CubanTechnique", "#CasinoSalsa", "#BOHStudios"],
-    gradient: "from-orange-600 via-amber-700 to-yellow-600",
-    duration: "1:12",
-    badgeText: "Technique Breakdown",
-    instagramUrl: "https://www.instagram.com/salsaexplosion/",
-  },
-  {
-    id: "test-2",
-    type: "testimonial",
-    category: "testimonials",
-    name: "Sophie Laurent",
-    location: "Poole",
-    role: "Follow",
-    level: "Level 2 • Improver",
-    avatarInitials: "SL",
-    quote:
-      "I came alone with zero dance background and two left feet. Within 8 weeks, I knew Guapea, Vacilala, and Setenta with real confidence. Everyone rotates, the vibe is warm and inclusive, and Enrique's musicality makes it impossible not to smile.",
-    rating: 5,
-    monthsActive: "Student for 7 months",
-  },
-  {
     id: "reel-3",
     type: "reel",
     category: "congress",
@@ -138,20 +108,6 @@ const SOCIAL_ITEMS: SocialItem[] = [
     duration: "0:56",
     badgeText: "Festival Gala",
     instagramUrl: "https://www.instagram.com/salsaexplosion/",
-  },
-  {
-    id: "test-3",
-    type: "testimonial",
-    category: "testimonials",
-    name: "David & Elena Jenkins",
-    location: "Christchurch",
-    role: "Lead & Follow",
-    level: "Level 4 • Casinero Advanced",
-    avatarInitials: "DJ",
-    quote:
-      "Enrique Perez Valdes is an absolute titan in UK Cuban Salsa. Having a Lifetime Achievement Award winner teaching Casino and Son right here in Dorset is extraordinary. The student recaps after each class also make practicing at home effortless.",
-    rating: 5,
-    monthsActive: "Dancers for 3 years",
   },
 ];
 

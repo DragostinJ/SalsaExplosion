@@ -7,7 +7,6 @@ import {
   Sparkles,
   ExternalLink,
   MessageCircle,
-  Camera,
   X,
   CheckCircle2,
   GraduationCap,
@@ -38,6 +37,37 @@ const CATEGORIES: { key: InstructorCategory | "all"; label: string }[] = [
   { key: "afro_timba", label: "Afro-Rumba & Timba Guest Artists" },
   { key: "boh_special", label: "BOH Venue Partner & Special Events" },
 ];
+
+const ARTIST_GLOWS: Record<string, { bg: string; text: string }> = {
+  enrique: {
+    bg: "from-amber-500/25 via-rose-950/40 to-transparent",
+    text: "ENRIQUE",
+  },
+  "moe-flex": {
+    bg: "from-amber-400/25 via-emerald-950/40 to-transparent",
+    text: "MOE FLEX",
+  },
+  justyna: {
+    bg: "from-rose-500/25 via-amber-950/40 to-transparent",
+    text: "JUSTYNA",
+  },
+  arturas: {
+    bg: "from-orange-500/25 via-zinc-950/50 to-transparent",
+    text: "ARTURAS",
+  },
+  jim: {
+    bg: "from-amber-600/25 via-teal-950/40 to-transparent",
+    text: "JIM",
+  },
+  "xaris-anna": {
+    bg: "from-red-600/25 via-amber-950/30 to-transparent",
+    text: "XARIS & ANNA",
+  },
+  "alex-spindlove": {
+    bg: "from-purple-500/25 via-amber-950/30 to-transparent",
+    text: "ALEX SPINDLOVE",
+  },
+};
 
 export function InstructorRosterSection({ id = "instructors" }: InstructorRosterSectionProps) {
   const [activeCategory, setActiveCategory] = useState<InstructorCategory | "all">("all");
@@ -99,8 +129,11 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
             <Sparkles className="h-3.5 w-3.5 text-primary-base" />
             Resident Maestros & Guest Specialists
           </Badge>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-            Meet the Salsa Explosion Faculty
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+            Meet the Salsa Explosion Faculty{" "}
+            <span className="block sm:inline font-display italic font-normal text-amber-300 sm:ml-2">
+              Maestros &amp; Artists
+            </span>
           </h2>
           <p className="mt-3 text-xs sm:text-sm text-muted-foreground leading-relaxed">
             From Cuban-born lifetime achievers to international festival headliners, our passionate teaching team brings authentic Casino technique, high-energy Rueda circles, and warm South Coast community spirit to BOH Studios every week.
@@ -132,87 +165,110 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
           </div>
         </div>
 
-        {/* 8-Card Responsive Trading Cards Grid */}
+        {/* 8-Card Responsive Character Posters Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {filteredInstructors.map((instructor, idx) => (
-            <div
-              key={instructor.id}
-              id={`instructors-${instructor.id}`}
-              data-artist-id={instructor.id}
-              className={`group relative flex-col justify-between rounded-2xl border border-border/80 bg-card p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-primary-base/50 hover:shadow-xl hover:shadow-primary-base/5 ${
-                idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden md:flex" : "flex"
-              }`}
-              data-testid={`instructor-card-${instructor.id}`}
-            >
-              <div className="space-y-3.5">
-                {/* Photo Container / Graphic Fallback */}
-                <div className="relative aspect-[16/11] w-full overflow-hidden rounded-xl border border-border/60 bg-gradient-to-tr from-zinc-950 via-zinc-900 to-rose-950/40 p-3.5 flex flex-col justify-between">
-                  <div className="flex items-center justify-between gap-1.5 z-10">
-                    <span className="rounded-md bg-black/60 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10">
-                      {instructor.origin}
-                    </span>
-                    <span className="inline-flex items-center gap-1 rounded-md bg-white/10 backdrop-blur-xs px-1.5 py-0.5 text-[9px] font-semibold text-white/80">
-                      <Camera className="h-2.5 w-2.5" />
-                      ✨ Official Faculty
-                    </span>
-                  </div>
+          {filteredInstructors.map((instructor, idx) => {
+            const glow = ARTIST_GLOWS[instructor.id] || {
+              bg: "from-amber-500/20 via-zinc-900/40 to-transparent",
+              text: instructor.name.toUpperCase(),
+            };
+            return (
+              <div
+                key={instructor.id}
+                id={`instructors-${instructor.id}`}
+                data-artist-id={instructor.id}
+                className={`group relative flex flex-col justify-between rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-amber-400/50 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.25)] ${
+                  idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden md:flex" : "flex"
+                }`}
+                data-testid={`instructor-card-${instructor.id}`}
+              >
+                <div>
+                  {/* Theatrical Poster Frame */}
+                  <div
+                    className={`relative h-[250px] sm:h-[270px] w-full overflow-hidden p-3.5 flex flex-col justify-between bg-gradient-to-b ${glow.bg}`}
+                  >
+                    {/* Giant Oversized Background Typography */}
+                    <div
+                      className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden"
+                      aria-hidden="true"
+                    >
+                      <span className="font-display italic font-black text-6xl sm:text-7xl uppercase tracking-tighter text-white/[0.05] whitespace-nowrap scale-110">
+                        {glow.text}
+                      </span>
+                    </div>
 
-                  {/* Stylized Monogram Centerpiece */}
-                  <div className="my-auto flex flex-col items-center justify-center py-2">
-                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-primary-base via-rose-600 to-accent-tangerine flex items-center justify-center text-white font-black text-xl shadow-md border-2 border-white/20 group-hover:scale-105 transition-transform duration-300">
-                      {instructor.avatarFallback}
+                    {/* Top Badges */}
+                    <div className="flex items-center justify-between gap-1.5 z-10">
+                      <span className="rounded-md bg-black/60 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10">
+                        {instructor.origin}
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-md bg-black/40 backdrop-blur-xs px-2 py-0.5 text-[10px] font-semibold text-amber-200 border border-amber-400/20">
+                        <Sparkles className="h-2.5 w-2.5 text-amber-400" />
+                        ✨ Official Faculty
+                      </span>
+                    </div>
+
+                    {/* Stylized Monogram Crest Centerpiece */}
+                    <div className="relative z-10 my-auto flex flex-col items-center justify-center py-2">
+                      <div className="relative">
+                        <div className="absolute -inset-2 rounded-full bg-amber-500/20 blur-md group-hover:bg-amber-400/35 transition-all duration-500" />
+                        <div className="relative h-16 w-16 rounded-2xl bg-gradient-to-tr from-[#1f1510] via-[#2c1d15] to-[#452b1e] border-2 border-amber-500/40 flex flex-col items-center justify-center text-amber-200 font-display italic font-bold text-2xl shadow-xl group-hover:scale-105 transition-transform duration-500">
+                          <span>{instructor.avatarFallback}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Role / Accolade Badge */}
+                    <div className="z-10 truncate">
+                      <span className="rounded-md bg-black/60 backdrop-blur-xs px-2.5 py-1 text-[10px] font-bold text-amber-300 border border-amber-500/30 truncate block">
+                        {instructor.badge}
+                      </span>
                     </div>
                   </div>
 
-                  <div className="z-10 truncate">
-                    <span className="rounded-md bg-rose-950/80 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-rose-200 border border-rose-800/40 truncate block">
-                      {instructor.badge}
-                    </span>
+                  {/* Card Info */}
+                  <div className="p-4 space-y-2.5">
+                    <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight group-hover:text-amber-300 transition-colors">
+                      {instructor.name}
+                    </h3>
+                    <p className="text-xs font-semibold text-amber-200/90 line-clamp-1">
+                      {instructor.role}
+                    </p>
+
+                    {/* Style Pills */}
+                    <div className="flex flex-wrap gap-1 pt-0.5">
+                      {instructor.styles.slice(0, 3).map((st) => (
+                        <span
+                          key={st}
+                          className="rounded-md bg-white/[0.04] text-zinc-300 border border-white/10 px-2 py-0.5 text-[10px] font-semibold"
+                        >
+                          {st}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Teaching Days */}
+                    <div className="flex items-start gap-1.5 text-[11px] text-zinc-400 pt-1">
+                      <Calendar className="h-3.5 w-3.5 text-amber-400 shrink-0 mt-0.5" />
+                      <span className="line-clamp-1">{instructor.teachingDays}</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Card Info */}
-                <div className="space-y-1.5">
-                  <h3 className="text-base font-extrabold text-foreground tracking-tight group-hover:text-primary-base transition-colors">
-                    {instructor.name}
-                  </h3>
-                  <p className="text-xs font-semibold text-muted-foreground dark:text-zinc-300 line-clamp-1">
-                    {instructor.role}
-                  </p>
-
-                  {/* Style Pills */}
-                  <div className="flex flex-wrap gap-1 pt-1">
-                    {instructor.styles.slice(0, 3).map((st) => (
-                      <span
-                        key={st}
-                        className="rounded-md bg-muted text-foreground/80 border border-border/60 px-1.5 py-0.5 text-[10px] font-semibold"
-                      >
-                        {st}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Teaching Days */}
-                  <div className="flex items-start gap-1.5 text-[11px] text-muted-foreground dark:text-zinc-300 pt-1.5">
-                    <Calendar className="h-3.5 w-3.5 text-secondary-base shrink-0 mt-0.5" />
-                    <span className="line-clamp-1">{instructor.teachingDays}</span>
-                  </div>
+                {/* Action Buttons */}
+                <div className="p-4 pt-0">
+                  <Button
+                    type="button"
+                    onClick={() => setSelectedInstructor(instructor)}
+                    size="sm"
+                    className="w-full text-xs font-bold bg-primary-base hover:bg-primary-hover text-white shadow-xs"
+                  >
+                    View Profile &amp; Bookings →
+                  </Button>
                 </div>
               </div>
-
-              {/* Action Buttons */}
-              <div className="pt-4 border-t border-border/60 mt-4 flex items-center gap-2">
-                <Button
-                  type="button"
-                  onClick={() => setSelectedInstructor(instructor)}
-                  size="sm"
-                  className="w-full text-xs font-bold bg-primary-base hover:bg-primary-hover text-white shadow-xs"
-                >
-                  View Profile & Bookings →
-                </Button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Mobile Expand / Collapse Toggle for "All" Category */}
@@ -243,7 +299,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
           onClick={() => setSelectedInstructor(null)}
         >
           <div
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-border/80 bg-card p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 duration-200 text-left"
+            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-amber-500/30 bg-gradient-to-b from-[#18110d] via-[#120d0a] to-[#080605] p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 duration-200 text-left"
             onClick={(e) => e.stopPropagation()}
             data-testid="instructor-spotlight-modal"
           >
@@ -258,8 +314,8 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
             </button>
 
             {/* Modal Header */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-b border-border/60 pb-5">
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-primary-base via-rose-600 to-accent-tangerine flex items-center justify-center text-white font-black text-2xl shadow-md border-2 border-white/20 shrink-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-b border-white/10 pb-5">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-[#251812] via-[#3a2217] to-[#5a3622] flex items-center justify-center text-amber-200 font-display italic font-bold text-2xl shadow-md border-2 border-amber-500/40 shrink-0">
                 {selectedInstructor.avatarFallback}
               </div>
               <div className="space-y-1">
@@ -267,14 +323,14 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   <Badge className="bg-primary-base text-white text-[10px] font-bold">
                     {selectedInstructor.origin}
                   </Badge>
-                  <span className="text-[11px] font-bold text-rose-700 dark:text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-full">
+                  <span className="text-[11px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
                     {selectedInstructor.badge}
                   </span>
                 </div>
-                <h3 id={titleId} className="text-xl sm:text-2xl font-extrabold text-foreground">
+                <h3 id={titleId} className="text-xl sm:text-2xl font-extrabold text-foreground font-display">
                   {selectedInstructor.name}
                 </h3>
-                <p className="text-xs sm:text-sm font-semibold text-muted-foreground dark:text-zinc-300">
+                <p className="text-xs sm:text-sm font-semibold text-amber-200/90">
                   {selectedInstructor.role}
                 </p>
               </div>

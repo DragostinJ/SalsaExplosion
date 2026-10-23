@@ -235,13 +235,13 @@ export default async function Home() {
         </section>
 
         {/* Live "Next Up This Week" Class Strip (Instant Speed-to-Value on Mobile) */}
-        <section className="cv-auto border-b bg-card py-6 shadow-xs">
+        <section className="cv-auto border-b border-amber-500/15 bg-gradient-to-b from-[#0c0806]/95 to-[#080605] py-7 shadow-xs">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                  <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400">
                     Live Studio Floor
                   </span>
                   <span className="text-muted-foreground">•</span>
@@ -250,41 +250,41 @@ export default async function Home() {
                   </h2>
                 </div>
                 <div>
-                  <span className="inline-flex items-center rounded-full border border-secondary-base/30 bg-secondary-light/40 px-3 py-1 text-xs font-semibold text-secondary-hover">
+                  <span className="inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300">
                     🎟️ Drop-ins from £10 • Free Trial Available • Class Passes Accepted
                   </span>
                 </div>
               </div>
-              <Button asChild variant="ghost" size="sm" className="h-8 text-xs font-bold text-primary-base hover:text-primary-hover p-0 sm:px-2 self-start sm:self-auto">
+              <Button asChild variant="ghost" size="sm" className="h-8 text-xs font-bold text-amber-300 hover:text-amber-200 hover:bg-amber-500/10 p-0 sm:px-2 self-start sm:self-auto">
                 <Link href="/dashboard/schedule">
                   Full Weekly Timetable →
                 </Link>
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
               {eveningProgression.map((slot) => (
                 <div
                   key={slot.id}
-                  className="flex items-center justify-between gap-3 rounded-xl border bg-muted/30 p-3.5 hover:border-primary-base/40 hover:bg-muted/50 transition-all"
+                  className="flex items-center justify-between gap-3 rounded-xl border border-amber-500/15 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-3.5 hover:border-amber-400/40 hover:bg-white/[0.06] backdrop-blur-md transition-all duration-300"
                 >
                   <div className="space-y-1 min-w-0">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="rounded-md bg-muted text-foreground/80 border border-border/60 px-1.5 py-0.5 text-[10px] font-bold">
+                      <span className="rounded-md bg-white/[0.06] text-amber-200 border border-amber-500/20 px-1.5 py-0.5 text-[10px] font-bold">
                         {slot.minLevel}
                       </span>
-                      <span className="text-[11px] font-semibold text-text-muted">
+                      <span className="text-[11px] font-semibold text-zinc-400">
                         {slot.timing}
                       </span>
                     </div>
                     <h3 className="text-xs sm:text-sm font-bold text-foreground truncate">
                       {slot.title}
                     </h3>
-                    <p className="text-[11px] text-muted-foreground">
+                    <p className="text-[11px] text-zinc-400">
                       with{" "}
                       <Link
                         href={`#instructors-${slot.artistId}`}
-                        className="font-semibold text-foreground hover:text-primary-base hover:underline transition-colors"
+                        className="font-semibold text-amber-300 hover:text-amber-200 hover:underline transition-colors"
                       >
                         {slot.instructor}
                       </Link>{" "}
@@ -461,42 +461,46 @@ export default async function Home() {
 
 
 
-        <section className="cv-auto py-10 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
+        <section className="cv-auto py-12 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-2xl border border-amber-500/30 bg-card/60 backdrop-blur-sm p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
-              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
-                <div className="relative w-28 h-36 sm:w-32 sm:h-44 shrink-0 overflow-hidden rounded-xl border-2 border-amber-500/50 shadow-md">
+            <div className="rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-[#1c130b] via-[#120c08] to-[#080504] p-6 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_45px_-8px_rgba(245,158,11,0.25)] relative overflow-hidden group">
+              <div
+                className="absolute -inset-full bg-gradient-to-r from-transparent via-amber-400/[0.05] to-transparent rotate-45 pointer-events-none group-hover:translate-x-full transition-transform duration-1000"
+                aria-hidden="true"
+              />
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left relative z-10">
+                <div className="relative w-28 h-36 sm:w-36 sm:h-48 shrink-0 overflow-hidden rounded-2xl border-2 border-amber-400/60 shadow-[0_0_25px_-4px_rgba(245,158,11,0.35)]">
                   <Image
                     src="/images/made-in-cuba-2026-poster.jpg"
                     alt="MADE IN CUBA Dance Festival 2026 Official Poster"
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 112px, 128px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 640px) 112px, 144px"
                   />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                    <Badge className="bg-primary-base text-white font-bold text-xs uppercase tracking-wider">
+                    <Badge className="bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold text-xs uppercase tracking-wider border border-amber-400/30">
                       🎉 33 Years of Salsa Explosion
                     </Badge>
-                    <span className="text-xs text-muted-foreground font-semibold">4, 5 &amp; 6 Dec 2026</span>
+                    <span className="text-xs text-amber-300 font-semibold">4, 5 &amp; 6 Dec 2026</span>
                   </div>
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-foreground">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground">
                     MADE IN CUBA — Dance Weekend 2026
                   </h2>
-                  <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
+                  <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl leading-relaxed">
                     South Coast&apos;s premier Cuban dance event celebrating 33 years! 3 nights of parties, 2 days of workshops, 2 spectacular shows, and dancing until 2:00 AM across 2 dedicated rooms (Salsa &amp; Timba Room + Bachata Room).
                   </p>
-                  <p className="text-xs text-muted-foreground font-medium">
-                    📍 <span className="text-foreground font-semibold">The Woodlands Ballroom</span> (Friday Welcome Party) &amp; <span className="text-foreground font-semibold">BOH Studios</span> (Saturday &amp; Sunday Workshops + Shows + Fiesta).
+                  <p className="text-xs text-zinc-400 font-medium">
+                    📍 <span className="text-amber-200 font-semibold">The Woodlands Ballroom</span> (Friday Welcome Party) &amp; <span className="text-amber-200 font-semibold">BOH Studios</span> (Saturday &amp; Sunday Workshops + Shows + Fiesta).
                   </p>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row lg:flex-col items-center gap-3 shrink-0 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row lg:flex-col items-center gap-3 shrink-0 w-full sm:w-auto relative z-10">
                 <Button
                   asChild
-                  className="w-full sm:w-auto bg-primary-base hover:bg-primary-hover text-white font-bold px-6 shadow-sm"
+                  className="w-full sm:w-auto bg-gradient-to-r from-amber-600 via-primary-base to-rose-600 hover:from-amber-500 hover:via-primary-hover hover:to-rose-500 text-white font-bold px-7 h-12 shadow-[0_0_25px_-5px_rgba(245,158,11,0.4)]"
                 >
                   <Link href="/events/made-in-cuba-dance-weekend-2026">
                     Reserve Passes (From £20)
@@ -506,7 +510,7 @@ export default async function Home() {
                 <Button
                   asChild
                   variant="outline"
-                  className="w-full sm:w-auto"
+                  className="w-full sm:w-auto border-amber-500/40 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400/60 backdrop-blur-sm h-11"
                 >
                   <Link href="/events/made-in-cuba-dance-weekend-2026#timetable">
                     Full Festival Programme

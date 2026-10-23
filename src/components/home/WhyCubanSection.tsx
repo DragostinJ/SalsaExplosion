@@ -60,15 +60,18 @@ export function WhyCubanSection() {
         <div className="text-center max-w-3xl mx-auto mb-12">
           <Badge
             variant="outline"
-            className="border-primary-base/30 bg-primary-light/50 text-primary-hover px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5"
+            className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5 backdrop-blur-sm"
           >
-            <Sparkles className="h-3.5 w-3.5 text-primary-base" />
+            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
             🇨🇺 The Heartbeat of Havana in Bournemouth
           </Badge>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-            What Makes Cuban Casino &amp; Rueda So Addictive?
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+            What Makes Cuban Casino &amp; Rueda{" "}
+            <span className="font-display italic font-normal text-amber-300 drop-shadow-sm">
+              So Addictive?
+            </span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+          <p className="mt-3 text-xs sm:text-sm text-zinc-300 leading-relaxed">
             Whether you are taking your very first dance step tonight or you already dance other styles and want to add authentic Cuban flavour to your repertoire—everyone is welcome in our circle.
           </p>
         </div>
@@ -80,14 +83,14 @@ export function WhyCubanSection() {
             return (
               <div
                 key={card.title}
-                className={`flex flex-col justify-between rounded-3xl border bg-card/80 p-6 sm:p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${card.borderAccent}`}
+                className="flex flex-col justify-between rounded-3xl border border-amber-500/15 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] p-6 sm:p-7 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-amber-400/40 hover:shadow-[0_10px_30px_-10px_rgba(245,158,11,0.2)]"
               >
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-3.5">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-primary-hover bg-primary-light/80 px-2.5 py-0.5 rounded-full inline-block">
+                  <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-3.5">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full inline-block">
                       {card.badge}
                     </span>
-                    <div className="h-9 w-9 rounded-xl bg-primary-base/15 flex items-center justify-center text-primary-base shrink-0">
+                    <div className="h-9 w-9 rounded-xl bg-amber-500/15 border border-amber-500/20 flex items-center justify-center text-amber-300 shrink-0">
                       <Icon className="h-4.5 w-4.5" />
                     </div>
                   </div>
@@ -96,7 +99,7 @@ export function WhyCubanSection() {
                     <h3 className="text-base sm:text-lg font-extrabold text-foreground tracking-tight">
                       {card.title}
                     </h3>
-                    <p className="text-xs font-semibold text-secondary-hover mt-1">
+                    <p className="text-xs font-semibold text-amber-200/90 mt-1">
                       {card.subheading}
                     </p>
                   </div>

@@ -472,7 +472,16 @@ export default async function Home() {
                 </Button>
               </div>
 
-              <div className="grid gap-6 md:grid-cols-3">
+              {/* Mobile Swipe Hint */}
+              <div className="md:hidden flex items-center justify-between text-xs text-amber-300 font-bold px-1 mb-2">
+                <span className="flex items-center gap-1.5">
+                  <Flame className="h-3.5 w-3.5 text-amber-400" />
+                  Swipe Upcoming Dates (1/{upcomingEvents.length})
+                </span>
+                <span className="text-[11px] text-zinc-400">Swipe →</span>
+              </div>
+
+              <div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-5 pb-4 -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar">
                 {upcomingEvents.map((evt) => {
                   const minPrice = evt.ticketTiers[0]?.priceInCents
                     ? `£${(evt.ticketTiers[0].priceInCents / 100).toFixed(0)}`
@@ -487,7 +496,7 @@ export default async function Home() {
                   return (
                     <Card
                       key={evt.id}
-                      className="flex flex-col overflow-hidden border shadow-xs hover:shadow-md transition-all group hover:border-primary-base/50"
+                      className="flex flex-col overflow-hidden border shadow-xs hover:shadow-md transition-all group hover:border-primary-base/50 w-[82vw] shrink-0 snap-center md:w-auto"
                     >
                       <div className="relative h-36 w-full bg-gradient-to-tr from-primary-base via-rose-600 to-accent-tangerine p-5 text-white flex flex-col justify-between">
                         <div className="flex items-center justify-between">

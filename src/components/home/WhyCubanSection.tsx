@@ -76,8 +76,17 @@ export function WhyCubanSection() {
           </p>
         </div>
 
-        {/* 3-Card Joyful Celebration Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
+        {/* Mobile Swipe Hint */}
+        <div className="md:hidden flex items-center justify-between text-xs text-amber-300 font-bold px-1 mb-2">
+          <span className="flex items-center gap-1.5">
+            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+            Swipe Casino Highlights (1/3)
+          </span>
+          <span className="text-[11px] text-zinc-400">Swipe →</span>
+        </div>
+
+        {/* 3-Card Joyful Celebration Grid with Mobile Touch-Snap */}
+        <div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-5 max-w-6xl mx-auto items-start pb-4 -mx-4 px-4 md:mx-auto md:px-0 no-scrollbar">
           {CELEBRATION_CARDS.map((card, idx) => {
             const Icon = card.icon;
             const staggerClass =
@@ -87,7 +96,7 @@ export function WhyCubanSection() {
             return (
               <div
                 key={card.title}
-                className={`art-card relative flex flex-col justify-between rounded-3xl border border-amber-500/20 p-6 sm:p-7 shadow-sm ${staggerClass}`}
+                className={`art-card relative flex flex-col justify-between rounded-3xl border border-amber-500/20 p-6 sm:p-7 shadow-sm w-[82vw] shrink-0 snap-center md:w-auto ${staggerClass}`}
               >
                 {/* Giant Editorial Index Number */}
                 <span

@@ -165,8 +165,16 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
           </div>
         </div>
 
-        {/* 8-Card Responsive Character Posters Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* 8-Card Responsive Character Posters Grid with Mobile Touch-Snap */}
+        <div className="md:hidden flex items-center justify-between text-xs text-amber-300 font-bold px-1 mb-2">
+          <span className="flex items-center gap-1.5">
+            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+            Swipe Faculty (1/{filteredInstructors.length})
+          </span>
+          <span className="text-[11px] text-zinc-400">Swipe →</span>
+        </div>
+
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-4 sm:gap-5 pb-4 -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar">
           {filteredInstructors.map((instructor, idx) => {
             const glow = ARTIST_GLOWS[instructor.id] || {
               bg: "from-amber-500/20 via-zinc-900/40 to-transparent",
@@ -177,7 +185,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                 key={instructor.id}
                 id={`instructors-${instructor.id}`}
                 data-artist-id={instructor.id}
-                className={`group relative flex flex-col justify-between rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-amber-400/50 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.25)] ${
+                className={`art-card group relative flex flex-col justify-between rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-amber-400/50 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.25)] w-[82vw] shrink-0 snap-center md:w-auto ${
                   idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden md:flex" : "flex"
                 }`}
                 data-testid={`instructor-card-${instructor.id}`}

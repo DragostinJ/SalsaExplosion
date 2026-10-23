@@ -116,7 +116,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
   return (
     <section
       id={id}
-      className="cv-auto py-14 sm:py-20 border-b border-border/70 bg-gradient-to-b from-card/30 via-background to-muted/20 scroll-mt-20"
+      className="cv-auto py-14 sm:py-20 bg-[#0c0908] border-b border-amber-500/15 scroll-mt-20 text-white"
       data-testid="instructor-roster-section"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -124,18 +124,18 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
         <div className="text-center max-w-3xl mx-auto mb-10">
           <Badge
             variant="outline"
-            className="border-primary-base/30 bg-primary-light/50 text-primary-hover px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5"
+            className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5 backdrop-blur-sm"
           >
-            <Sparkles className="h-3.5 w-3.5 text-primary-base" />
+            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
             Resident Maestros & Guest Specialists
           </Badge>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             Meet the Salsa Explosion Faculty{" "}
             <span className="block sm:inline font-display italic font-normal text-amber-300 sm:ml-2">
               Maestros &amp; Artists
             </span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+          <p className="mt-3 text-xs sm:text-sm text-zinc-300 leading-relaxed">
             From Cuban-born lifetime achievers to international festival headliners, our passionate teaching team brings authentic Casino technique, high-energy Rueda circles, and warm South Coast community spirit to BOH Studios every week.
           </p>
 
@@ -155,7 +155,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all ${
                     isActive
                       ? "bg-primary-base text-white shadow-sm shadow-primary-base/20"
-                      : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground border border-border/60"
+                      : "bg-black/60 text-zinc-300 hover:bg-black/80 hover:text-white border border-amber-500/20"
                   }`}
                 >
                   {`${cat.label} (${count})`}
@@ -228,7 +228,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
                   {/* Card Info */}
                   <div className="p-4 space-y-2.5">
-                    <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight group-hover:text-amber-300 transition-colors">
+                    <h3 className="text-base sm:text-lg font-bold text-white tracking-tight group-hover:text-amber-300 transition-colors">
                       {instructor.name}
                     </h3>
                     <p className="text-xs font-semibold text-amber-200/90 line-clamp-1">
@@ -263,7 +263,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     size="sm"
                     className="w-full text-xs font-bold bg-primary-base hover:bg-primary-hover text-white shadow-xs"
                   >
-                    View Profile &amp; Bookings →
+                    View Profile & Bookings →
                   </Button>
                 </div>
               </div>

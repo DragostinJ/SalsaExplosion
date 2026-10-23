@@ -81,7 +81,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
 
     // 2. Open Congress/Weekend Festival Detail Page
     await page.goto("/events/made-in-cuba-dance-weekend-2026", {
-      waitUntil: "domcontentloaded",
+      waitUntil: "networkidle",
     });
 
     // Verify Title and Venue
@@ -429,7 +429,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   test("24. Instructor Trading Cards and BOH Studios Venue Spotlight render and interact", async ({
     page,
   }) => {
-    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await page.goto("/", { waitUntil: "networkidle" });
 
     // 1. Verify Instructor Roster Section presence
     const rosterSection = page.locator('[data-testid="instructor-roster-section"]');

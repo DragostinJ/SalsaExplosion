@@ -52,7 +52,7 @@ export function WhyCubanSection() {
   return (
     <section
       id="why-cuban"
-      className="cv-auto py-14 sm:py-20 bg-muted/30 border-b border-border/70 scroll-mt-20"
+      className="cv-auto py-14 sm:py-20 bg-[#080605] border-b border-amber-500/15 scroll-mt-20 text-white"
       data-testid="why-cuban-section"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -65,7 +65,7 @@ export function WhyCubanSection() {
             <Sparkles className="h-3.5 w-3.5 text-amber-400" />
             🇨🇺 The Heartbeat of Havana in Bournemouth
           </Badge>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             What Makes Cuban Casino &amp; Rueda{" "}
             <span className="font-display italic font-normal text-amber-300 drop-shadow-sm">
               So Addictive?
@@ -96,7 +96,7 @@ export function WhyCubanSection() {
                   </div>
 
                   <div>
-                    <h3 className="text-base sm:text-lg font-extrabold text-foreground tracking-tight">
+                    <h3 className="text-base sm:text-lg font-extrabold text-white tracking-tight">
                       {card.title}
                     </h3>
                     <p className="text-xs font-semibold text-amber-200/90 mt-1">
@@ -104,11 +104,11 @@ export function WhyCubanSection() {
                     </p>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                     {card.description}
                   </p>
 
-                  <ul className="space-y-2 pt-2 text-xs text-foreground/90 font-medium">
+                  <ul className="space-y-2 pt-2 text-xs text-zinc-200 font-medium">
                     {card.highlights.map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <span className="h-4 w-4 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">

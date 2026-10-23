@@ -128,7 +128,7 @@ export default async function Home() {
         <LiveTonightBanner />
 
         {/* Theatrical Cinema Stage Hero */}
-        <section className="relative overflow-hidden min-h-[82vh] lg:min-h-[86vh] flex items-center justify-center py-16 sm:py-24 bg-gradient-to-b from-[#0e0a08]/90 via-[#080605] to-[#080605] border-b border-amber-500/10">
+        <section className="relative overflow-hidden min-h-[82vh] lg:min-h-[86vh] flex items-center justify-center py-16 sm:py-24 bg-[#080605] border-b border-amber-500/10 text-white">
           {/* Atmospheric Havana Stage Light Rays & Watermark Layer */}
           <div
             className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen"
@@ -169,7 +169,7 @@ export default async function Home() {
             </div>
 
             {/* Editorial Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.1] text-foreground">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.1] text-white">
               Bournemouth&apos;s Home of{" "}
               <span className="font-display italic font-normal text-amber-300 drop-shadow-[0_2px_15px_rgba(245,158,11,0.3)]">
                 Authentic Havana Rhythm.
@@ -223,7 +223,7 @@ export default async function Home() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto h-12 px-7 text-sm font-semibold border-amber-500/30 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400/50 backdrop-blur-sm transition-all duration-300"
+                className="w-full sm:w-auto h-12 px-7 text-sm font-semibold border-amber-500/40 bg-black/70 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400/50 backdrop-blur-sm transition-all duration-300"
               >
                 <Link href="/events/made-in-cuba-dance-weekend-2026">
                   <Flame className="mr-2 h-4 w-4 text-amber-400" />
@@ -461,7 +461,7 @@ export default async function Home() {
 
 
 
-        <section className="cv-auto py-12 bg-gradient-to-r from-amber-950/40 via-background to-orange-950/30 border-y border-amber-500/20">
+        <section className="cv-auto py-12 bg-[#0c0908] border-y border-amber-500/20 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-[#1c130b] via-[#120c08] to-[#080504] p-6 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_45px_-8px_rgba(245,158,11,0.25)] relative overflow-hidden group">
               <div
@@ -485,7 +485,7 @@ export default async function Home() {
                     </Badge>
                     <span className="text-xs text-amber-300 font-semibold">4, 5 &amp; 6 Dec 2026</span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-foreground">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
                     MADE IN CUBA — Dance Weekend 2026
                   </h2>
                   <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl leading-relaxed">
@@ -510,7 +510,7 @@ export default async function Home() {
                 <Button
                   asChild
                   variant="outline"
-                  className="w-full sm:w-auto border-amber-500/40 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400/60 backdrop-blur-sm h-11"
+                  className="w-full sm:w-auto border-amber-500/40 bg-black/70 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400/60 backdrop-blur-sm h-11"
                 >
                   <Link href="/events/made-in-cuba-dance-weekend-2026#timetable">
                     Full Festival Programme
@@ -700,7 +700,7 @@ export default async function Home() {
                     <Badge className="bg-secondary-base text-white text-xs font-bold">
                       2. Authentic Cuban Syllabus
                     </Badge>
-                    <span className="text-[10px] font-bold text-secondary-hover bg-secondary-light/60 px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-bold text-secondary-hover bg-secondary-light px-2 py-0.5 rounded-full">
                       Direct from Havana
                     </span>
                   </div>

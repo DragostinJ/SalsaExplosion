@@ -210,4 +210,31 @@
     animation: marquee-right 34s linear infinite;
     will-change: transform;
   }
+
+  /* 3D Specular Glass Art-House Cards */
+  .art-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.065) 0%, rgba(255, 255, 255, 0.015) 50%, rgba(245, 158, 11, 0.04) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease;
+  }
+
+  .art-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.45) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .art-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 60px -15px rgba(245, 158, 11, 0.22);
+  }
 }

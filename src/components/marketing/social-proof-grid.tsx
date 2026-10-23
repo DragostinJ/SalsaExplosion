@@ -250,14 +250,16 @@ export function SocialProofGrid() {
         </div>
 
         {/* Media & Testimonial Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredItems.map((item) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+          {filteredItems.map((item, idx) => {
+            const staggerClass =
+              idx % 3 === 0 ? "lg:mt-0" : idx % 3 === 1 ? "lg:mt-8" : "lg:mt-4";
             if (item.type === "reel") {
               return (
                 <div
                   key={item.id}
                   onClick={() => setSelectedReel(item)}
-                  className="group relative cursor-pointer overflow-hidden rounded-3xl border border-amber-500/20 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-amber-400/50 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.25)] flex flex-col"
+                  className={`art-card group relative cursor-pointer rounded-3xl border border-amber-500/20 shadow-sm flex flex-col ${staggerClass}`}
                 >
                   {/* Vertical Cinema Reel Thumbnail Banner */}
                   <div
@@ -339,7 +341,7 @@ export function SocialProofGrid() {
             return (
               <Card
                 key={item.id}
-                className="rounded-3xl border border-amber-500/15 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] p-6 shadow-sm flex flex-col justify-between space-y-4 hover:border-amber-400/40 transition-colors"
+                className={`art-card rounded-3xl border border-amber-500/15 p-6 shadow-sm flex flex-col justify-between space-y-4 ${staggerClass}`}
               >
                 <CardContent className="p-0 space-y-4">
                   {/* Star Rating & Quote Icon */}

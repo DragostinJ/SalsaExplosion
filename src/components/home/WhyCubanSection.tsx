@@ -77,15 +77,27 @@ export function WhyCubanSection() {
         </div>
 
         {/* 3-Card Joyful Celebration Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {CELEBRATION_CARDS.map((card) => {
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
+          {CELEBRATION_CARDS.map((card, idx) => {
             const Icon = card.icon;
+            const staggerClass =
+              idx === 0 ? "lg:mt-0" : idx === 1 ? "lg:mt-8" : "lg:mt-4";
+            const indexNumber = `0${idx + 1}`;
+
             return (
               <div
                 key={card.title}
-                className="flex flex-col justify-between rounded-3xl border border-amber-500/15 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] p-6 sm:p-7 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-amber-400/40 hover:shadow-[0_10px_30px_-10px_rgba(245,158,11,0.2)]"
+                className={`art-card relative flex flex-col justify-between rounded-3xl border border-amber-500/20 p-6 sm:p-7 shadow-sm ${staggerClass}`}
               >
-                <div className="space-y-4">
+                {/* Giant Editorial Index Number */}
+                <span
+                  aria-hidden="true"
+                  className="font-display italic text-6xl lg:text-7xl font-black text-amber-500/[0.12] select-none pointer-events-none absolute top-3 right-4 leading-none"
+                >
+                  {indexNumber}
+                </span>
+
+                <div className="space-y-4 relative z-10">
                   <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-3.5">
                     <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full inline-block">
                       {card.badge}

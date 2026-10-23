@@ -172,17 +172,20 @@ export function SocialProofGrid() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-4 py-1 text-xs font-semibold text-pink-700 dark:text-pink-300">
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1 text-xs font-semibold text-amber-300 backdrop-blur-sm">
             <InstagramIcon className="h-3.5 w-3.5" />
             <span>@salsaexplosion Community</span>
           </div>
 
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-foreground">
-            Feel the Energy of Bournemouth&apos;s Cuban Community
+          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-foreground">
+            Feel the Energy of{" "}
+            <span className="font-display italic font-normal text-amber-300 drop-shadow-sm">
+              Bournemouth&apos;s Cuban Community
+            </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-            From packed Thursday & Sunday Rueda circles at BOH Studios to the international Bournemouth Cuban Congress — see why over 4,200 dancers call Salsa Explosion their home.
+          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+            From packed Thursday &amp; Sunday Rueda circles at BOH Studios to the international Bournemouth Cuban Congress — see why over 4,200 dancers call Salsa Explosion their home.
           </p>
 
           {/* Social Filter Tabs */}
@@ -254,32 +257,38 @@ export function SocialProofGrid() {
                 <div
                   key={item.id}
                   onClick={() => setSelectedReel(item)}
-                  className="group relative cursor-pointer overflow-hidden rounded-2xl border bg-card shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-amber-500/50 flex flex-col"
+                  className="group relative cursor-pointer overflow-hidden rounded-3xl border border-amber-500/20 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-amber-400/50 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.25)] flex flex-col"
                 >
-                  {/* Reel Thumbnail Simulation Banner */}
+                  {/* Vertical Cinema Reel Thumbnail Banner */}
                   <div
-                    className={`relative h-64 w-full bg-gradient-to-br ${item.gradient} p-5 flex flex-col justify-between text-white overflow-hidden`}
+                    className={`relative h-72 w-full bg-gradient-to-br ${item.gradient} p-5 flex flex-col justify-between text-white overflow-hidden`}
                   >
+                    {/* Cinematic Vignette Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/40 pointer-events-none" />
+
                     {/* Top Badges */}
                     <div className="flex items-center justify-between z-10">
-                      <Badge className="bg-black/40 text-white backdrop-blur-md text-[11px] font-bold border-none">
+                      <Badge className="bg-black/60 text-amber-300 backdrop-blur-md text-[11px] font-bold border border-amber-500/30">
                         {item.badgeText}
                       </Badge>
-                      <span className="flex items-center gap-1 rounded-full bg-black/40 px-2.5 py-0.5 text-[11px] font-semibold backdrop-blur-md">
+                      <span className="flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-0.5 text-[11px] font-semibold backdrop-blur-md border border-white/10">
                         <InstagramIcon className="h-3 w-3 text-pink-300" />
                         {item.duration}
                       </span>
                     </div>
 
-                    {/* Play Button Overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white transition-transform duration-300 group-hover:scale-110 group-hover:bg-white/30 shadow-lg">
-                        <Play className="h-6 w-6 fill-white ml-0.5" />
+                    {/* Pulsing Play Button Overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="relative flex items-center justify-center">
+                        <span className="absolute h-16 w-16 rounded-full bg-amber-400/20 animate-ping group-hover:scale-125 transition-transform" />
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-black/70 border border-amber-400/40 text-amber-300 backdrop-blur-md shadow-[0_0_20px_-3px_rgba(245,158,11,0.5)] transition-transform duration-300 group-hover:scale-110">
+                          <Play className="h-6 w-6 fill-amber-300 ml-0.5" />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Bottom Stats & Sound */}
-                    <div className="space-y-1.5 z-10">
+                    {/* Bottom Stats & Vinyl Sound Track */}
+                    <div className="space-y-2 z-10">
                       <div className="flex items-center gap-3 text-xs font-semibold drop-shadow-sm">
                         <span className="flex items-center gap-1">
                           <Eye className="h-3.5 w-3.5" />
@@ -290,9 +299,9 @@ export function SocialProofGrid() {
                           {item.likes}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1 text-[11px] text-white/80 line-clamp-1 drop-shadow-xs">
-                        <Music2 className="h-3 w-3 shrink-0" />
-                        <span>{item.track}</span>
+                      <div className="inline-flex items-center gap-1.5 rounded-full bg-black/70 border border-amber-500/30 px-3 py-1 text-[11px] font-semibold text-amber-200 backdrop-blur-md drop-shadow-xs max-w-full truncate">
+                        <span className="text-xs">🎵</span>
+                        <span className="truncate">{item.track}</span>
                       </div>
                     </div>
                   </div>
@@ -300,23 +309,23 @@ export function SocialProofGrid() {
                   {/* Card Content & Caption */}
                   <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                     <div className="space-y-2">
-                      <h3 className="font-bold text-sm text-foreground line-clamp-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                      <h3 className="font-bold text-base text-foreground line-clamp-1 group-hover:text-amber-300 transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
+                      <p className="text-xs text-zinc-300 line-clamp-3 leading-relaxed">
                         {item.caption}
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t flex items-center justify-between text-xs text-muted-foreground">
+                    <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs text-muted-foreground">
                       <div className="flex flex-wrap gap-1">
                         {item.tags.slice(0, 2).map((tag) => (
-                          <span key={tag} className="text-[10px] font-medium text-amber-700 dark:text-amber-400">
+                          <span key={tag} className="text-[10px] font-medium text-amber-400">
                             {tag}
                           </span>
                         ))}
                       </div>
-                      <span className="font-semibold text-foreground inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                      <span className="font-semibold text-foreground inline-flex items-center gap-1 group-hover:translate-x-0.5 group-hover:text-amber-300 transition-transform">
                         Preview Clip
                         <ExternalLink className="h-3 w-3" />
                       </span>
@@ -330,29 +339,29 @@ export function SocialProofGrid() {
             return (
               <Card
                 key={item.id}
-                className="rounded-2xl border bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-emerald-500/40 transition-colors"
+                className="rounded-3xl border border-amber-500/15 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] p-6 shadow-sm flex flex-col justify-between space-y-4 hover:border-amber-400/40 transition-colors"
               >
                 <CardContent className="p-0 space-y-4">
                   {/* Star Rating & Quote Icon */}
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1 text-amber-500">
+                    <div className="flex items-center gap-1 text-amber-400">
                       {[...Array(item.rating)].map((_, i) => (
                         <Star key={i} className="h-3.5 w-3.5 fill-current" />
                       ))}
                     </div>
-                    <Quote className="h-5 w-5 text-muted-foreground/30" />
+                    <Quote className="h-5 w-5 text-amber-500/20" />
                   </div>
 
                   {/* Testimonial Quote */}
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed italic">
                     &ldquo;{item.quote}&rdquo;
                   </p>
                 </CardContent>
 
                 {/* Author Info */}
-                <div className="pt-3 border-t flex items-center justify-between">
+                <div className="pt-3 border-t border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-amber-600 to-orange-500 text-white text-xs font-bold shadow-xs">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[#251812] via-[#3a2217] to-[#5a3622] text-amber-200 border border-amber-500/30 text-xs font-bold shadow-xs">
                       {item.avatarInitials}
                     </div>
                     <div>

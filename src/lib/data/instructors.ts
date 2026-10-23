@@ -42,7 +42,7 @@ export const INSTRUCTORS: InstructorProfile[] = [
     origin: "Salsa Explosion Team",
     categories: ["cuban_weekly"],
     styles: ["Cuban Salsa Improvers", "Partner Connection", "Cuban Styling"],
-    teachingDays: "Thursdays 8:15 PM (Improvers Partnerwork) • Tuesday Partner Sessions",
+    teachingDays: "Thursdays 8:15 PM (Improvers Partnerwork) & Sundays (Masterclass & Social)",
     bio: "Resident Cuban Salsa instructor teaching our weekly Improvers classes, focusing on smooth transitions, follower frame, graceful arm styling, and grounded body movement with authentic partner connection.",
     instagramUrl: "https://www.instagram.com/salsaexplosion/",
     instagramHandle: "@salsaexplosion",

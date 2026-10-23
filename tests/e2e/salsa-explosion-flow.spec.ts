@@ -316,7 +316,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     ).toBeVisible();
   });
 
-  test("16. Weekly recurring schedule calendar overview renders Tuesdays, Wednesdays, Thursdays, and Sundays", async ({
+  test("16. Weekly recurring schedule calendar overview renders Thursdays and Sundays at BOH Studios", async ({
     page,
   }) => {
     await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
@@ -326,12 +326,10 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       await expect(
         page.getByText("Weekly Class Calendar").first()
       ).toBeVisible();
-      await expect(page.getByText(/Bournemouth, Boscombe & Poole Weekly Schedule/i).first()).toBeVisible();
-      await expect(page.getByText("Every Tuesday Evening")).toBeVisible();
-      await expect(page.getByText("Every Wednesday Evening")).toBeVisible();
+      await expect(page.getByText(/BOH Studios Bournemouth Weekly Schedule/i).first()).toBeVisible();
       await expect(page.getByText("Flagship Thursday Night")).toBeVisible();
       await expect(page.getByText("Every Sunday Evening")).toBeVisible();
-      await expect(page.getByText("The Woodlands Ballroom").first()).toBeVisible();
+      await expect(page.getByText("BOH Studios Bournemouth").first()).toBeVisible();
       await expect(page.getByText("Moe Flex").first()).toBeVisible();
     }
   });

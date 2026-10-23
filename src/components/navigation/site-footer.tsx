@@ -161,7 +161,7 @@ export function SiteFooter() {
               <div className="flex items-start gap-2">
                 <Calendar className="h-4 w-4 text-primary-base shrink-0 mt-0.5" />
                 <span className="text-xs leading-relaxed text-foreground font-medium">
-                  Tuesdays at Neptune Hall • Wednesdays at Woodlands Ballroom Poole • Thursdays & Sundays at BOH Studios.
+                  Every Thursday &amp; Sunday at BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR).
                 </span>
               </div>
               <div className="pt-0.5 text-xs text-muted-foreground">

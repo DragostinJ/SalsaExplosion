@@ -417,7 +417,7 @@ export function PrivateLessonsClient({
                   onChange={(e) => setSelectedDay(e.target.value)}
                   className="w-full rounded-xl border bg-background px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500"
                 >
-                  <option value="Tuesday Daytime (BOH Studios)">Tuesday Daytime (11:00 AM – 3:00 PM)</option>
+                  <option value="Sunday Afternoon (BOH Studios)">Sunday Afternoon (2:00 PM – 5:30 PM)</option>
                   <option value="Thursday Afternoon (BOH Studios)">Thursday Afternoon (2:00 PM – 5:30 PM)</option>
                   <option value="Thursday Evening Pre-Social">Thursday Evening Pre-Social (6:00 PM – 7:00 PM)</option>
                   <option value="Saturday Morning Weekend Intensive">Saturday Morning (10:00 AM – 1:00 PM)</option>

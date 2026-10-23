@@ -67,8 +67,6 @@ const VALID_LEVELS = new Set<string>(Object.values(DanceLevel));
 
 const DAY_TABS = [
   { id: "all", label: "All Days" },
-  { id: "tuesday", label: "Tuesdays • Boscombe" },
-  { id: "wednesday", label: "Wednesdays • Poole" },
   { id: "thursday", label: "Thursdays • BOH Studios" },
   { id: "sunday", label: "Sundays • BOH Studios" },
 ];
@@ -94,8 +92,6 @@ export default async function StudentSchedulePage({
 
   const dayParam = resolvedParams.day?.toLowerCase();
   const validDays: Record<string, number> = {
-    tuesday: 2,
-    wednesday: 3,
     thursday: 4,
     sunday: 0,
   };

@@ -191,7 +191,7 @@ export function ShopClient({
         <div className="flex items-center gap-2">
           <Clock className="h-4 w-4 text-amber-600" />
           <span className="font-semibold text-foreground">
-            BOH Studios Desk Collection: Reserved online, collected & fitted at Tuesday or Thursday classes.
+            BOH Studios Desk Collection: Reserved online, collected & fitted at Thursday or Sunday classes.
           </span>
         </div>
         <Badge variant="outline" className="text-amber-800 dark:text-amber-300 font-bold border-amber-500/30">
@@ -381,7 +381,7 @@ export function ShopClient({
                     <strong className="text-foreground">Collection Desk:</strong> BOH Studios, 104 Commercial Road, Bournemouth (BH2 5LR)
                   </div>
                   <div>
-                    <strong className="text-foreground">Hours:</strong> Tuesdays & Thursdays 6:30 PM – 10:30 PM
+                    <strong className="text-foreground">Hours:</strong> Thursdays &amp; Sundays 6:30 PM – 10:30 PM
                   </div>
                 </div>
                 <Button

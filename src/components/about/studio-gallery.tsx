@@ -28,7 +28,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     id: "photo-woodlands-ballroom",
     title: "The Woodlands Ballroom @ Parkstone Trade & Labour Club",
     caption:
-      "Wednesday Cuban Salsa Classes with Enrique Perez Valdes. Gorgeous sprung hardwood ballroom for 100+ dancers with free on-site parking.",
+      "Flagship Made in Cuba Dance Festival venue with Enrique Perez Valdes. Gorgeous sprung hardwood ballroom for 100+ dancers with free on-site parking.",
     category: "STUDIO_LIFE",
     imageUrl: "/images/woodlands-ballroom.png",
     location: "Upper Parkstone, Poole (485 Ashley Rd)",
@@ -46,7 +46,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     id: "photo-weekly-calendar",
     title: "Official Salsa Explosion Weekly Timetable",
     caption:
-      "Full weekly rhythm: Tuesdays at Neptune Hall Boscombe, Wednesdays at The Woodlands Ballroom Poole, Thursdays & Sundays at BOH Studios Bournemouth.",
+      "Full weekly rhythm: Thursdays & Sundays at BOH Studios Bournemouth.",
     category: "RUEDA",
     imageUrl: "/images/weekly-calendar-poster.png",
     location: "Bournemouth, Boscombe & Poole Hubs",

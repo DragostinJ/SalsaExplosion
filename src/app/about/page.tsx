@@ -314,10 +314,10 @@ export default async function AboutPage() {
                   </span>
                   <div className="grid grid-cols-2 gap-2 text-muted-foreground pt-1">
                     <div>
-                      <strong>Tuesday Classes:</strong> 19:30 – 22:30
+                      <strong>Thursday Classes:</strong> 19:00 – 23:00
                     </div>
                     <div>
-                      <strong>Thursday Classes:</strong> 19:30 – 22:30
+                      <strong>Sunday Masterclasses:</strong> 18:30 – 22:00
                     </div>
                     <div>
                       <strong>Monthly Social Fiesta:</strong> 20:00 – 01:00

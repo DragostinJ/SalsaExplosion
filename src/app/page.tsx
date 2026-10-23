@@ -711,10 +711,10 @@ export default async function Home() {
                     </span>
                   </div>
                   <h3 className="text-lg font-extrabold">
-                    Bournemouth, Boscombe & Poole
+                    BOH Studios Bournemouth Hub
                   </h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Every Tuesday, Wednesday, Thursday & Sunday at BOH Studios and partner halls. No partner required, fun social rotations, and strict lead/follow balance so you always have a partner.
+                    Every Thursday &amp; Sunday at BOH Studios Bournemouth. No partner required, fun social rotations, and strict lead/follow balance so you always have a partner.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2">

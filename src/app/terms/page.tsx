@@ -151,7 +151,7 @@ export default function TermsAndLegalPage() {
                   Weekly Class Cancellations & Re-credits
                 </h3>
                 <p className="text-xs">
-                  If you have booked a weekly class (e.g. Tuesday at Neptune Hall, Wednesday at Woodlands Ballroom, Thursday or Sunday at BOH Studios) and are unable to attend, you may cancel your booking online up to <strong>2 hours prior to class start time</strong>. Your class credit will be instantly returned to your digital wallet for future use. If Salsa Explosion cancels a class due to teacher illness or venue emergency, all booked credits are refunded to affected students automatically.
+                  If you have booked a weekly class (Thursday or Sunday at BOH Studios) and are unable to attend, you may cancel your booking online up to <strong>2 hours prior to class start time</strong>. Your class credit will be instantly returned to your digital wallet for future use. If Salsa Explosion cancels a class due to teacher illness or venue emergency, all booked credits are refunded to affected students automatically.
                 </p>
               </div>
 

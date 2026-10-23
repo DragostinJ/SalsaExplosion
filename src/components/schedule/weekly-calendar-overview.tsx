@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 export interface DaySchedule {
-  day: "Tuesdays" | "Wednesdays" | "Thursdays" | "Sundays";
+  day: "Thursdays" | "Sundays";
   dayBadge: string;
   badgeVariant?: "default" | "secondary" | "outline";
   venueName: string;
@@ -37,54 +37,6 @@ export interface DaySchedule {
 
 export const WEEKLY_SCHEDULE: DaySchedule[] = [
   {
-    day: "Tuesdays",
-    dayBadge: "Every Tuesday Evening",
-    venueName: "Neptune Hall",
-    venueAddress: "Harvester, Undercliff Drive, Boscombe BH5 1BN",
-    venueLocationHighlight: "Above Harvester on the Boscombe seafront",
-    teachers: "Jim & Enrique",
-    classes: [
-      {
-        time: "7:30 PM",
-        title: "Beginners 2 & Improvers Cuban Salsa",
-        levelOrNotes: "Fun social partnerwork, body movement & foundational timing",
-      },
-    ],
-    freeParkingInfo: "Seafront parking & street bays nearby",
-    actionHref: "/dashboard/schedule?day=tuesday",
-    actionLabel: "View Tuesday Classes",
-  },
-  {
-    day: "Wednesdays",
-    dayBadge: "Every Wednesday Evening",
-    venueName: "The Woodlands Ballroom",
-    venueAddress: "Parkstone Trade & Labour Club, 485 Ashley Rd, Upper Parkstone, Poole BH14 0BB",
-    venueLocationHighlight: "Beautiful ballroom space for 100+ dancers with sprung wood floor",
-    venueImage: "/images/woodlands-ballroom.png",
-    specialGuestNotice: "6-Week Absolute Beginners Cuban Salsa Course with Enrique from Cuba",
-    teachers: "Maestro Enrique, Justyna & Arturas",
-    classes: [
-      {
-        time: "7:00 PM – 8:00 PM",
-        title: "Absolute Beginners Cuban Salsa Course",
-        levelOrNotes: "with Maestro Enrique • Zero experience needed • No partner required",
-      },
-      {
-        time: "7:00 PM",
-        title: "Salsa Improvers",
-        levelOrNotes: "with Justyna • Transitions & follower frame connection",
-      },
-      {
-        time: "8:00 PM",
-        title: "Salsa Intermediates Partnerwork",
-        levelOrNotes: "with Arturas & Enrique • Complex turn patterns & Casino technique",
-      },
-    ],
-    freeParkingInfo: "Free parking on site and on the street",
-    actionHref: "/dashboard/schedule?day=wednesday",
-    actionLabel: "View Wednesday Classes",
-  },
-  {
     day: "Thursdays",
     dayBadge: "Flagship Thursday Night",
     venueName: "BOH Studios Bournemouth",
@@ -96,7 +48,7 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
     classes: [
       {
         time: "7:00 PM",
-        title: "Solo Salsa: Musicality, Pasitos & Rhythm",
+        title: "All-Levels Musicality, Pasitos & Rhythm",
         levelOrNotes: "Open to All Levels with Moe Flex",
       },
       {
@@ -106,18 +58,18 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
       },
       {
         time: "8:15 PM",
-        title: "Cuban Salsa Improvers & Intermediates",
-        levelOrNotes: "Improvers with Justyna • Intermediates with Arturas & Moe Flex",
+        title: "Cuban Salsa Improvers",
+        levelOrNotes: "Follower frame connection, turns & Cuban styling with Justyna",
       },
       {
         time: "8:15 PM",
-        title: "Rueda de Casino Circles",
-        levelOrNotes: "Dynamic calls & partner rotations with Jim & Maestro Enrique",
+        title: "Cuban Salsa Intermediates & Rueda de Casino",
+        levelOrNotes: "Dynamic Rueda circles & complex Casino turn patterns with Arturas, Moe Flex & Jim",
       },
       {
-        time: "9:15 PM – Late",
-        title: "Havana Social & Practice with DJ Enrique",
-        levelOrNotes: "Authentic Cuban Timba, Son & Social Floorcraft",
+        time: "9:30 PM – Late",
+        title: "Thursday Havana Social Fiesta",
+        levelOrNotes: "Authentic Cuban Timba, Son & Social Floorcraft with DJ Enrique",
       },
     ],
     freeParkingInfo: "Free on-street parking after 6 PM & nearby Library Car Park",
@@ -129,36 +81,22 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
     dayBadge: "Every Sunday Evening",
     venueName: "BOH Studios Bournemouth",
     venueAddress: "104 Commercial Rd, Bournemouth BH2 5LR",
-    venueLocationHighlight: "Relaxed Sunday Cuban session & social wind-down",
-    teachers: "The Salsa Explosion Team",
+    venueLocationHighlight: "Relaxed Sunday Cuban Masterclass & Social Fiesta",
+    specialGuestNotice: "Cuban Salsa Masterclass & Rueda Circle with Maestro Enrique & Faculty",
+    teachers: "Maestro Enrique Perez Valdes & Faculty",
     classes: [
       {
-        time: "6:00 PM",
-        title: "Salsa Beginners",
-        levelOrNotes: "Level 1 foundations",
+        time: "6:30 PM",
+        title: "Sunday Cuban Salsa Masterclass & Rueda Circle",
+        levelOrNotes: "Authentic Cuban Casino styling, technique & Rueda with Maestro Enrique & Team",
       },
       {
-        time: "7:00 PM",
-        title: "Salsa Improvers",
-        levelOrNotes: "Technique & frame elasticity",
-      },
-      {
-        time: "7:00 PM",
-        title: "Salsa Intermediates",
-        levelOrNotes: "Dynamic turn patterns & musical timing",
-      },
-      {
-        time: "7:00 PM",
-        title: "Rueda Intermediates",
-        levelOrNotes: "Fast-paced group rotations",
-      },
-      {
-        time: "8:00 PM",
-        title: "Social / Practice Session",
-        levelOrNotes: "Dance with fellow students & teachers",
+        time: "7:30 PM – Late",
+        title: "Sunday Havana Social Fiesta",
+        levelOrNotes: "Social dancing, practice & connection with the Salsa Explosion community",
       },
     ],
-    freeParkingInfo: "Free on-street parking after 6 PM",
+    freeParkingInfo: "Free on-street parking after 6 PM & nearby Library Car Park",
     actionHref: "/dashboard/schedule?day=sunday",
     actionLabel: "View Sunday Classes",
   },
@@ -175,14 +113,14 @@ export function WeeklyCalendarOverview() {
               Weekly Class Calendar
             </Badge>
             <span className="text-xs font-semibold text-muted-foreground">
-              Tuesdays • Wednesdays • Thursdays • Sundays
+              Every Thursday &amp; Sunday • BOH Studios Bournemouth
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
-            Bournemouth, Boscombe & Poole Weekly Schedule
+            BOH Studios Bournemouth Weekly Schedule
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl">
-            Pure weekly rhythm with no fixed date lock-in. Turn up on your regular evening, rotate partners in the circle, and learn authentic Cuban Salsa with Maestro Enrique Perez Valdes and special guests.
+            Pure weekly rhythm with no fixed date lock-in. Turn up on Thursdays or Sundays, rotate partners in the circle, and learn authentic Cuban Salsa with Maestro Enrique Perez Valdes and guest artists.
           </p>
         </div>
 

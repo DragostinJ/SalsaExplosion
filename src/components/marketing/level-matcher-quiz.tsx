@@ -32,8 +32,8 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
     badge: "Level 1: No Experience Needed",
     description:
       "Start with basic footwork (Paso Básico), Cuban frame connection, Dile Que No, and your very first Dame in the Rueda circle. Zero partner needed!",
-    classTiming: "Every Tuesday 7:00 PM • BOH Studios",
-    recommendedTrack: "Claim your 1 Free Welcome Credit and join our friendly Tuesday cohort.",
+    classTiming: "Every Thursday 7:00 PM • BOH Studios",
+    recommendedTrack: "Claim your 1 Free Welcome Credit and join our friendly Thursday cohort with Maestro Enrique.",
     href: "/dashboard/schedule",
   },
   some_basics: {
@@ -41,8 +41,8 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
     badge: "Level 2: 1-3 Months Dancing",
     description:
       "Master Vacílala, Enchúfla doble, Sombrero, and fluid partner lead/follow technique with Cuban musicality on Clave.",
-    classTiming: "Every Tuesday 8:00 PM & Thursday 7:00 PM",
-    recommendedTrack: "Great fit to build confidence with turn patterns and fast Rueda transitions.",
+    classTiming: "Every Thursday 8:15 PM & Sunday 6:30 PM",
+    recommendedTrack: "Great fit to build confidence with turn patterns and fast Rueda transitions with Justyna.",
     href: "/dashboard/schedule",
   },
   rueda_regular: {

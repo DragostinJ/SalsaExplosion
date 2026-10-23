@@ -61,7 +61,7 @@ const DESTINATIONS: DestinationInfo[] = [
   },
   {
     id: "woodlands",
-    name: "The Woodlands Ballroom (Wednesdays)",
+    name: "The Woodlands Ballroom (Made in Cuba Festival)",
     address: "Parkstone Trades & Labour Club, 485 Ashley Rd, Upper Parkstone, Poole BH14 0BB (Tel: 01202 746491)",
     postcode: "BH14 0BB",
     googleMapsUrl: "https://maps.google.com/?q=Parkstone+Trade+and+Labour+Club+485+Ashley+Rd+Poole+BH14+0BB",
@@ -82,7 +82,7 @@ const DESTINATIONS: DestinationInfo[] = [
   },
   {
     id: "neptune",
-    name: "Neptune Hall (Tuesdays)",
+    name: "Neptune Hall (Boscombe Pier)",
     address: "The Neptune Harvester, Undercliff Drive, Boscombe Pier, Bournemouth",
     postcode: "BH5 1BN",
     googleMapsUrl: "https://maps.google.com/?q=The+Neptune+Harvester+Undercliff+Drive+Boscombe+Pier+BH5+1BN",

@@ -76,10 +76,10 @@ export const COACHING_INSTRUCTORS_CATALOG: Record<
     blockRatePounds: 220,
     specialties: [
       "Beginner Foundations & Clave Timing",
-      "Tuesday Cuban Partnerwork (Neptune Hall)",
+      "Thursday Cuban Partnerwork & Rueda Circles",
       "Social Floor Confidence",
     ],
-    bio: "Resident Salsa Explosion instructor teaching Tuesdays at Neptune Hall Boscombe and Thursdays at BOH Studios with Maestro Enrique.",
+    bio: "Resident Salsa Explosion instructor teaching Thursdays and Sundays at BOH Studios with Maestro Enrique.",
   },
 };
 

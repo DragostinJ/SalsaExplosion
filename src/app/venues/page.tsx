@@ -178,7 +178,7 @@ export default function VenuesGuidePage() {
             <div className="relative h-48 w-full bg-gradient-to-tr from-emerald-800 via-teal-700 to-amber-600 p-6 text-white flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
-                  Wednesdays Cuban Hub
+                  Made in Cuba Festival Venue
                 </Badge>
                 <span className="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
                   Upper Parkstone, Poole
@@ -198,7 +198,7 @@ export default function VenuesGuidePage() {
             <CardContent className="p-6 space-y-5">
               <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
                 <p>
-                  Home of our Wednesday Cuban Salsa courses with Maestro Enrique Perez Valdes, Justyna &amp; Arturas. A stunning, spacious ballroom with a famous <strong>original vintage sprung wooden dance floor</strong>, private licensed bar, stage area, and 100+ dancer capacity.
+                  Official venue for the Friday Welcome Party of our annual MADE IN CUBA Dance Weekend festival celebrating 33 years of Salsa Explosion. A stunning, spacious ballroom with a famous <strong>original vintage sprung wooden dance floor</strong>, private licensed bar, stage area, and 100+ dancer capacity.
                 </p>
               </div>
 
@@ -221,18 +221,15 @@ export default function VenuesGuidePage() {
                 </ul>
               </div>
 
-              {/* Class Schedule Info */}
+              {/* Festival Schedule Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
                   <Clock className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                  Wednesday Schedule:
+                  Festival Programme:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>7:00 PM – 8:00 PM:</strong> 6-Week Absolute Beginners Cuban Salsa Course (Maestro Enrique) + Salsa Improvers (Justyna).
-                  </li>
-                  <li>
-                    <strong>8:00 PM – 9:00 PM:</strong> Cuban Salsa Intermediates Partnerwork (Arturas &amp; Maestro Enrique).
+                    <strong>Friday 4 December:</strong> 7:00 PM – 12:00 AM Made in Cuba Dance Festival Welcome Party &amp; Masterclasses.
                   </li>
                 </ul>
               </div>
@@ -273,7 +270,7 @@ export default function VenuesGuidePage() {
             <div className="relative h-48 w-full bg-gradient-to-tr from-blue-700 via-sky-600 to-amber-500 p-6 text-white flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
-                  Tuesdays Cuban Hub
+                  Special Events Venue
                 </Badge>
                 <span className="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
                   Boscombe Seafront
@@ -293,7 +290,7 @@ export default function VenuesGuidePage() {
             <CardContent className="p-6 space-y-5">
               <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
                 <p>
-                  Tuesday nights overlooking the waves! Private beachfront function room setting directly opposite <strong>Boscombe Pier</strong> with panoramic sea views over Poole Bay. Join Jim &amp; Enrique for Cuban Salsa Level 1 and Level 2 (Improvers Partnerwork &amp; Rueda).
+                  Atmospheric beachfront function room setting directly opposite <strong>Boscombe Pier</strong> with panoramic sea views over Poole Bay. Selected home for special seasonal workshops, outdoor summer socials, and private Latin party bookings.
                 </p>
               </div>
 
@@ -316,18 +313,15 @@ export default function VenuesGuidePage() {
                 </ul>
               </div>
 
-              {/* Class Schedule Info */}
+              {/* Events Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
                   <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                  Tuesday Schedule:
+                  Seasonal Schedule:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>7:15 PM – 8:15 PM:</strong> Cuban Salsa Level 1 (Beginner 2) with Jim &amp; Enrique.
-                  </li>
-                  <li>
-                    <strong>8:30 PM – 9:30 PM:</strong> Cuban Salsa Level 2 (Improvers Partnerwork &amp; Rueda de Casino).
+                    <strong>Special Events:</strong> Special seasonal socials, beachfront workshops, and party dates announced in our live event calendar.
                   </li>
                 </ul>
               </div>

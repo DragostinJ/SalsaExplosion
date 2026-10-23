@@ -338,7 +338,7 @@ export function BohVenueSpotlight() {
                   className="border-border text-foreground hover:bg-muted font-semibold text-xs w-full sm:w-auto"
                 >
                   <Link href="/venues">
-                    View All Partner Venues (Poole & Boscombe) →
+                    View All Studio &amp; Festival Venues →
                   </Link>
                 </Button>
               </div>

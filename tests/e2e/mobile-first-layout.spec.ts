@@ -115,7 +115,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     // 3. Day of week filter buttons meet minimum touch target
     await page.goto("/dashboard/schedule");
     await page.waitForLoadState("domcontentloaded");
-    const schedulePills = page.locator("button:has-text('All Days'), button:has-text('Tuesdays'), button:has-text('Wednesdays')");
+    const schedulePills = page.locator("button:has-text('All Days'), button:has-text('Thursdays'), button:has-text('Sundays')");
     const pillCount = await schedulePills.count();
     for (let i = 0; i < pillCount; i++) {
       const pill = schedulePills.nth(i);

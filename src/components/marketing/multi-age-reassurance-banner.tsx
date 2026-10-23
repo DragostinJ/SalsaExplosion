@@ -49,7 +49,7 @@ export function MultiAgeReassuranceBanner({
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-rose-700 dark:text-rose-400 shrink-0 mt-0.5" />
                 <span className="text-foreground">
-                  <strong className="font-extrabold">Venues & Parking:</strong> BOH Studios (BH2 5LR) • Neptune Hall (BH5 1BN, code 59200) • Woodlands Poole (BH14 9AG).
+                  <strong className="font-extrabold">Home Hub &amp; Parking:</strong> BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR) • Free on-street parking after 6 PM &amp; nearby Library Car Park.
                 </span>
               </div>
               <div className="flex items-start gap-2">

@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/navigation/site-header";
 import { SiteFooter } from "@/components/navigation/site-footer";
 import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
 import { JsonLdSchema } from "@/components/seo/JsonLdSchema";
+import { StageSpotlight } from "@/components/ui/StageSpotlight";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -140,6 +141,7 @@ export default async function RootLayout({
         </head>
         <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden havana-stage-lighting relative">
           <div className="film-grain" aria-hidden="true" />
+          <StageSpotlight />
           <SiteHeader role={effectiveRole} canSwitchRoles={userCanSwitchRoles} />
           <div className="flex-1 pb-20 md:pb-0 overflow-x-hidden relative z-10">{children}</div>
           <SiteFooter />

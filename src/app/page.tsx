@@ -26,6 +26,7 @@ import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { HavanaGrooveToggle } from "@/components/home/HavanaGrooveToggle";
 import { KineticMarqueeRibbon } from "@/components/home/KineticMarqueeRibbon";
+import { ArtReveal } from "@/components/ui/ArtReveal";
 
 const DanceVouchersShowcase = dynamic(
   () => import("@/components/marketing/dance-vouchers-showcase").then((m) => m.DanceVouchersShowcase),
@@ -359,7 +360,9 @@ export default async function Home() {
         </section>
 
         {/* Why Authentic Cuban Casino & Rueda vs Linear Styles */}
-        <WhyCubanSection />
+        <ArtReveal>
+          <WhyCubanSection />
+        </ArtReveal>
 
         {/* Founder & 25+ Year Cuban Heritage Spotlight */}
         <section className="cv-auto py-10 sm:py-14 bg-card/40 border-b border-border/70">
@@ -473,7 +476,9 @@ export default async function Home() {
         </section>
 
         {/* Interactive Instructor Roster Section */}
-        <InstructorRosterSection id="instructors" />
+        <ArtReveal>
+          <InstructorRosterSection id="instructors" />
+        </ArtReveal>
 
         {/* Kinetic Rhythm Ribbon 2 */}
         <KineticMarqueeRibbon
@@ -489,7 +494,8 @@ export default async function Home() {
           ]}
         />
 
-        <section className="cv-auto py-12 bg-[#0c0908] border-y border-amber-500/20 text-white">
+        <ArtReveal>
+          <section className="cv-auto py-12 bg-[#0c0908] border-y border-amber-500/20 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-[#1c130b] via-[#120c08] to-[#080504] p-6 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_45px_-8px_rgba(245,158,11,0.25)] relative overflow-hidden group">
               <div
@@ -548,11 +554,14 @@ export default async function Home() {
             </div>
           </div>
         </section>
+        </ArtReveal>
 
         {/* Interactive Social Proof & Media Grid */}
-        <div className="cv-auto">
-          <SocialProofGrid />
-        </div>
+        <ArtReveal>
+          <div className="cv-auto">
+            <SocialProofGrid />
+          </div>
+        </ArtReveal>
 
         {/* Incoming Events & Social Parties Showcase */}
         {upcomingEvents.length > 0 && (

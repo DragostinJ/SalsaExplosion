@@ -3,6 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --font-display: var(--font-display), "Playfair Display", Georgia, serif;
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));
@@ -86,12 +87,13 @@
   }
 
   .dark {
-    --background: 222 47% 11%; /* #0F172A - Deep Slate */
-    --foreground: 210 40% 98%; /* #F8FAFC */
-    --card: 217 33% 17%; /* #1E293B */
-    --card-foreground: 210 40% 98%;
-    --popover: 217 33% 17%;
-    --popover-foreground: 210 40% 98%;
+    /* Warm Havana Espresso-Obsidian Nocturne Palette */
+    --background: 24 25% 4%; /* #0a0705 */
+    --foreground: 40 20% 97%; /* #fbf8f4 */
+    --card: 24 22% 7%; /* #120e0b */
+    --card-foreground: 40 20% 97%;
+    --popover: 24 22% 7%;
+    --popover-foreground: 40 20% 97%;
 
     --primary: 347 77% 50%; /* #E11D48 */
     --primary-foreground: 0 0% 100%;
@@ -99,16 +101,16 @@
     --secondary: 174 84% 32%; /* #0D9488 */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 217 33% 22%;
-    --muted-foreground: 215 16% 70%;
+    --muted: 24 18% 13%;
+    --muted-foreground: 38 18% 75%;
 
     --accent: 25 95% 53%; /* #F97316 */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 217 33% 25%;
-    --input: 217 33% 25%;
+    --border: 24 20% 16%;
+    --input: 24 20% 16%;
     --ring: 347 77% 50%;
   }
 }
@@ -145,5 +147,24 @@
   .cv-auto {
     content-visibility: auto;
     contain-intrinsic-size: auto 600px;
+  }
+
+  /* Warm Havana Nocturne Stage Lighting and Film Grain */
+  .havana-stage-lighting {
+    background-image:
+      radial-gradient(circle at 15% 15%, rgba(245, 158, 11, 0.12), transparent 55%),
+      radial-gradient(circle at 85% 30%, rgba(225, 29, 72, 0.10), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  .film-grain {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 30;
+    opacity: 0.026;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 }

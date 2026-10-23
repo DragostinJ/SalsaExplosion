@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
@@ -20,6 +20,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
   preload: false,
+});
+
+const playfairDisplay = Playfair_Display({
+  variable: "--font-display",
+  subsets: ["latin"],
+  display: "swap",
+  style: ["normal", "italic"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -125,14 +133,15 @@ export default async function RootLayout({
     <ClerkProvider>
       <html
         lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} h-full antialiased dark`}
       >
         <head>
           <JsonLdSchema />
         </head>
-        <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden">
+        <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden havana-stage-lighting relative">
+          <div className="film-grain" aria-hidden="true" />
           <SiteHeader role={effectiveRole} canSwitchRoles={userCanSwitchRoles} />
-          <div className="flex-1 pb-20 md:pb-0 overflow-x-hidden">{children}</div>
+          <div className="flex-1 pb-20 md:pb-0 overflow-x-hidden relative z-10">{children}</div>
           <SiteFooter />
           <MobileBottomNav />
           <Toaster richColors position="top-right" />

@@ -25,6 +25,7 @@ import { InstructorRosterSection } from "@/components/home/InstructorRosterSecti
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { HavanaGrooveToggle } from "@/components/home/HavanaGrooveToggle";
+import { KineticMarqueeRibbon } from "@/components/home/KineticMarqueeRibbon";
 
 const DanceVouchersShowcase = dynamic(
   () => import("@/components/marketing/dance-vouchers-showcase").then((m) => m.DanceVouchersShowcase),
@@ -233,6 +234,21 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* Kinetic Rhythm Ribbon 1 */}
+        <KineticMarqueeRibbon
+          direction="left"
+          skew="-rotate-1"
+          phrases={[
+            { text: "CASINO CUBANO", isSerif: false },
+            { text: "Rueda de Casino", isSerif: true },
+            { text: "SON CUBANO", isSerif: false },
+            { text: "Havana Timba", isSerif: true },
+            { text: "AFRO-RUMBA", isSerif: false },
+            { text: "BOH Studios Bournemouth", isSerif: true },
+            { text: "LA HABANA", isSerif: false },
+          ]}
+        />
 
         {/* Live "Next Up This Week" Class Strip (Instant Speed-to-Value on Mobile) */}
         <section className="cv-auto border-b border-amber-500/15 bg-gradient-to-b from-[#0c0806]/95 to-[#080605] py-7 shadow-xs">
@@ -459,7 +475,19 @@ export default async function Home() {
         {/* Interactive Instructor Roster Section */}
         <InstructorRosterSection id="instructors" />
 
-
+        {/* Kinetic Rhythm Ribbon 2 */}
+        <KineticMarqueeRibbon
+          direction="right"
+          skew="rotate-1"
+          phrases={[
+            { text: "MAESTRO ENRIQUE PEREZ VALDES", isSerif: false },
+            { text: "25+ Years Cuban Heritage", isSerif: true },
+            { text: "MADE IN CUBA 2026", isSerif: false },
+            { text: "Strict Lead & Follow Ratio Balance", isSerif: true },
+            { text: "BOURNEMOUTH UK", isSerif: false },
+            { text: "Authentic Havana Flavour", isSerif: true },
+          ]}
+        />
 
         <section className="cv-auto py-12 bg-[#0c0908] border-y border-amber-500/20 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

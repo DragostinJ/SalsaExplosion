@@ -20,12 +20,13 @@ import {
 } from "@/components/ui/card";
 import dynamic from "next/dynamic";
 import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
-import { getCachedUpcomingEvents, getCachedNextClasses } from "@/lib/cached-queries";
+import { getCachedUpcomingEvents } from "@/lib/cached-queries";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { HavanaGrooveToggle } from "@/components/home/HavanaGrooveToggle";
 import { KineticMarqueeRibbon } from "@/components/home/KineticMarqueeRibbon";
+import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
 import { ArtReveal } from "@/components/ui/ArtReveal";
 
 const DanceVouchersShowcase = dynamic(
@@ -61,69 +62,8 @@ const SocialProofGrid = dynamic(
   }
 );
 
-const THURSDAY_EVENING_SLOTS = [
-  {
-    id: "slot-solo",
-    artistId: "moe-flex",
-    minLevel: "ALL LEVELS WELCOME",
-    timing: "Every Thursday • 7:00 PM",
-    title: "Solo Salsa: Musicality, Pasitos & Rhythm (Open to All Levels)",
-    instructor: "Moe Flex",
-    fallbackSpots: 8,
-  },
-  {
-    id: "slot-beginner",
-    artistId: "enrique",
-    minLevel: "BEGINNER & IMPROVER",
-    timing: "Every Thursday • 7:00 PM & 8:15 PM",
-    title: "Cuban Salsa Beginners (with Maestro Enrique) & Improvers (with Justyna)",
-    instructor: "Maestro Enrique & Justyna",
-    fallbackSpots: 14,
-  },
-  {
-    id: "slot-partnerwork",
-    artistId: "arturas",
-    minLevel: "INTERMEDIATE",
-    timing: "Every Thursday • 8:15 PM",
-    title: "Cuban Salsa Intermediates & Rueda de Casino",
-    instructor: "Arturas, Moe Flex & Jim",
-    fallbackSpots: 6,
-  },
-];
-
 export default async function Home() {
-  const [upcomingEvents, nextClasses] = await Promise.all([
-    getCachedUpcomingEvents(3),
-    getCachedNextClasses(3),
-  ]);
-
-  const eveningProgression = THURSDAY_EVENING_SLOTS.map((slot, index) => {
-    const liveClass = nextClasses[index];
-    const spotsLeft = liveClass
-      ? Math.max(0, liveClass.maxCapacity - liveClass.bookings.length)
-      : slot.fallbackSpots;
-
-    let spotBadgeText: string;
-    let spotBadgeClass: string;
-
-    if (spotsLeft <= 0) {
-      spotBadgeText = "🔴 Class Full • Waitlist Open";
-      spotBadgeClass = "text-rose-700 dark:text-rose-400 font-bold";
-    } else if (spotsLeft <= 8) {
-      spotBadgeText = `🔥 Only ${spotsLeft} spots left`;
-      spotBadgeClass = "text-accent-tangerine font-bold";
-    } else {
-      spotBadgeText = "✅ Lead & Follow Spots Open";
-      spotBadgeClass = "text-emerald-700 dark:text-emerald-400 font-semibold";
-    }
-
-    return {
-      ...slot,
-      spotsLeft,
-      spotBadgeText,
-      spotBadgeClass,
-    };
-  });
+  const upcomingEvents = await getCachedUpcomingEvents(3);
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <main className="flex-1">
@@ -269,81 +209,8 @@ export default async function Home() {
           ]}
         />
 
-        {/* Live "Next Up This Week" Class Strip (Instant Speed-to-Value on Mobile) */}
-        <section className="cv-auto border-b border-amber-500/15 bg-gradient-to-b from-[#0c0806]/95 to-[#080605] py-7 shadow-xs">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400">
-                    Live Studio Floor
-                  </span>
-                  <span className="text-muted-foreground">•</span>
-                  <h2 className="text-sm sm:text-base font-extrabold text-foreground">
-                    Next Classes This Week at BOH Studios
-                  </h2>
-                </div>
-                <div>
-                  <span className="inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300">
-                    🎟️ Drop-ins from £10 • Free Trial Available • Class Passes Accepted
-                  </span>
-                </div>
-              </div>
-              <Button asChild variant="ghost" size="sm" className="h-8 text-xs font-bold text-amber-300 hover:text-amber-200 hover:bg-amber-500/10 p-0 sm:px-2 self-start sm:self-auto">
-                <Link href="/dashboard/schedule">
-                  Full Weekly Timetable →
-                </Link>
-              </Button>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              {eveningProgression.map((slot) => (
-                <div
-                  key={slot.id}
-                  className="flex items-center justify-between gap-3 rounded-xl border border-amber-500/15 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-3.5 hover:border-amber-400/40 hover:bg-white/[0.06] backdrop-blur-md transition-all duration-300"
-                >
-                  <div className="space-y-1 min-w-0">
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="rounded-md bg-white/[0.06] text-amber-200 border border-amber-500/20 px-1.5 py-0.5 text-[10px] font-bold">
-                        {slot.minLevel}
-                      </span>
-                      <span className="text-[11px] font-semibold text-zinc-400">
-                        {slot.timing}
-                      </span>
-                    </div>
-                    <h3 className="text-xs sm:text-sm font-bold text-foreground truncate">
-                      {slot.title}
-                    </h3>
-                    <p className="text-[11px] text-zinc-400">
-                      with{" "}
-                      <Link
-                        href={`#instructors-${slot.artistId}`}
-                        className="font-semibold text-amber-300 hover:text-amber-200 hover:underline transition-colors"
-                      >
-                        {slot.instructor}
-                      </Link>{" "}
-                      •{" "}
-                      <span className={slot.spotBadgeClass}>
-                        {slot.spotBadgeText}
-                      </span>
-                    </p>
-                  </div>
-
-                  <Button
-                    asChild
-                    size="sm"
-                    className="shrink-0 h-9 px-3.5 text-xs font-bold bg-primary-base hover:bg-primary-hover text-white shadow-xs"
-                  >
-                    <Link href="/dashboard/schedule">
-                      Book Spot
-                    </Link>
-                  </Button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Two-Day Exhibition Timetable Showcase (Inspired by The Place) */}
+        <TwoDayExhibitionTimetable />
 
         {/* Interactive Level Matcher Section — Promoted above the fold */}
         <section className="cv-auto py-10 bg-muted/20 border-b border-border/60">

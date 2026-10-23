@@ -249,42 +249,42 @@ export default async function Home() {
           <WhyCubanSection />
         </ArtReveal>
 
-        {/* Founder & 25+ Year Cuban Heritage Spotlight */}
-        <section className="cv-auto py-10 sm:py-14 bg-card/40 border-b border-border/70">
+        {/* Founder & 25+ Year Cuban Heritage Spotlight — Havana Crimson / Terracotta Wash */}
+        <section className="cv-auto py-12 sm:py-16 bg-gradient-to-br from-[#260808] via-[#120404] to-[#070605] border-y border-rose-950/40 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-border/80 bg-card p-6 sm:p-10 shadow-sm">
+            <div className="rounded-3xl border border-rose-500/25 bg-gradient-to-b from-[#1b0808]/90 via-[#120505]/95 to-[#0a0303] p-6 sm:p-10 shadow-2xl backdrop-blur-md">
               <div className="grid gap-8 lg:grid-cols-12 items-center">
                 <div className="lg:col-span-7 space-y-4 text-left">
                   <div className="flex flex-wrap items-center gap-2">
                     <Badge className="bg-primary-base text-white font-extrabold text-xs uppercase tracking-wider">
-                      Academy Founder & Artistic Director
+                      Academy Founder &amp; Artistic Director
                     </Badge>
-                    <Badge variant="outline" className="border-border bg-muted/40 text-muted-foreground font-semibold text-xs">
+                    <Badge variant="outline" className="border-amber-500/30 bg-amber-500/10 text-amber-300 font-semibold text-xs">
                       🏆 UK Lifetime Achievement Award
                     </Badge>
                   </div>
 
-                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
                     Learn Cuban Casino from <br className="hidden sm:inline" />
-                    <span className="text-rose-700 dark:text-rose-400">Maestro Enrique Perez Valdes</span>
+                    <span className="font-display italic font-normal text-amber-300">Maestro Enrique Perez Valdes</span>
                   </h2>
 
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                     Born and raised in Havana, Cuba, Enrique Perez Valdes brought authentic Cuban Casino and Rueda de Casino to the UK over 25 years ago. Honored with the prestigious <strong>Salsa UK Lifetime Achievement Award</strong>, Enrique has trained over 4,200 dancers and organized Bournemouth&apos;s most celebrated Cuban congresses.
                   </p>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                    <div className="rounded-xl border border-border/80 bg-background/60 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-rose-700 dark:text-rose-400">25+</span>
-                      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Years Teaching</span>
+                    <div className="rounded-xl border border-rose-500/20 bg-black/40 p-3">
+                      <span className="block text-xl sm:text-2xl font-black text-rose-400">25+</span>
+                      <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Years Teaching</span>
                     </div>
-                    <div className="rounded-xl border border-border/80 bg-background/60 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-foreground">4,200+</span>
-                      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Dancers Mentored</span>
+                    <div className="rounded-xl border border-rose-500/20 bg-black/40 p-3">
+                      <span className="block text-xl sm:text-2xl font-black text-white">4,200+</span>
+                      <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Dancers Mentored</span>
                     </div>
-                    <div className="col-span-2 sm:col-span-1 rounded-xl border border-border/80 bg-background/60 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">Havana</span>
-                      <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Roots & Heritage</span>
+                    <div className="col-span-2 sm:col-span-1 rounded-xl border border-rose-500/20 bg-black/40 p-3">
+                      <span className="block text-xl sm:text-2xl font-black text-emerald-400">Havana</span>
+                      <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Roots &amp; Heritage</span>
                     </div>
                   </div>
 
@@ -295,16 +295,16 @@ export default async function Home() {
                         <ArrowRight className="ml-1.5 h-4 w-4" />
                       </Link>
                     </Button>
-                    <Button asChild variant="outline" size="default" className="h-10 rounded-xl font-semibold">
+                    <Button asChild variant="outline" size="default" className="h-10 rounded-xl font-semibold border-white/20 bg-white/5 text-white hover:bg-white/10">
                       <Link href="/dashboard/schedule">Book a Class with Enrique</Link>
                     </Button>
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-border/80 bg-card shadow-sm space-y-4">
-                  <div className="flex items-center gap-4 border-b pb-4">
+                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-rose-500/25 bg-black/50 shadow-md space-y-4">
+                  <div className="flex items-center gap-4 border-b border-white/10 pb-4">
                     <div className="relative shrink-0">
-                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-primary-base/30 overflow-hidden bg-gradient-to-tr from-zinc-800 via-rose-700 to-zinc-900 flex items-center justify-center text-white shadow-md">
+                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-rose-500/40 overflow-hidden bg-gradient-to-tr from-zinc-800 via-rose-700 to-zinc-900 flex items-center justify-center text-white shadow-md">
                         <Flame className="h-8 w-8 sm:h-10 sm:w-10 fill-white" />
                       </div>
                       <div className="absolute -bottom-1 -right-1 rounded-full bg-primary-base text-white px-1.5 py-0.2 text-[9px] font-black uppercase tracking-wider shadow-xs">
@@ -312,34 +312,34 @@ export default async function Home() {
                       </div>
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-base sm:text-lg font-black text-foreground truncate">
+                      <h3 className="text-base sm:text-lg font-black text-white truncate">
                         Enrique Perez Valdes
                       </h3>
-                      <p className="text-xs font-bold text-rose-800 dark:text-rose-300">
+                      <p className="text-xs font-bold text-rose-300">
                         Havana Master Instructor • UK Pioneer
                       </p>
-                      <span className="text-[11px] font-semibold text-muted-foreground block mt-0.5">
+                      <span className="text-[11px] font-semibold text-zinc-400 block mt-0.5">
                         Director, Salsa Explosion UK
                       </span>
                     </div>
                   </div>
 
                   <div className="space-y-2 text-xs">
-                    <div className="flex items-center justify-between py-1 border-b border-border/60">
-                      <span className="font-semibold text-muted-foreground">Specialties</span>
-                      <span className="font-bold text-foreground">Casino • Rueda • Timba • Son</span>
+                    <div className="flex items-center justify-between py-1 border-b border-white/10">
+                      <span className="font-semibold text-zinc-400">Specialties</span>
+                      <span className="font-bold text-white">Casino • Rueda • Timba • Son</span>
                     </div>
-                    <div className="flex items-center justify-between py-1 border-b border-border/60">
-                      <span className="font-semibold text-muted-foreground">Experience</span>
-                      <span className="font-bold text-foreground">30+ Years Social Dancing</span>
+                    <div className="flex items-center justify-between py-1 border-b border-white/10">
+                      <span className="font-semibold text-zinc-400">Experience</span>
+                      <span className="font-bold text-white">30+ Years Social Dancing</span>
                     </div>
                     <div className="flex items-center justify-between py-1">
-                      <span className="font-semibold text-muted-foreground">Recognition</span>
-                      <span className="font-extrabold text-amber-800 dark:text-amber-300">Salsa UK Lifetime Award</span>
+                      <span className="font-semibold text-zinc-400">Recognition</span>
+                      <span className="font-extrabold text-amber-300">Salsa UK Lifetime Award</span>
                     </div>
                   </div>
 
-                  <blockquote className="rounded-xl bg-muted/40 p-3 text-xs italic text-foreground/90 leading-relaxed font-medium">
+                  <blockquote className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-3.5 text-xs italic text-amber-100 leading-relaxed font-medium">
                     &ldquo;Cuban salsa is not just steps—it is community, clave, musicality, and pure joy. No partner required, just bring your energy.&rdquo;
                   </blockquote>
 
@@ -347,7 +347,7 @@ export default async function Home() {
                     asChild
                     variant="outline"
                     size="sm"
-                    className="w-full text-xs font-bold border-amber-500/40 text-amber-950 dark:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20"
+                    className="w-full text-xs font-bold border-amber-500/40 text-amber-200 bg-amber-500/15 hover:bg-amber-500/25"
                   >
                     <Link href="/private-lessons">
                       <span>Book 1-on-1 Private Coaching with Enrique</span>
@@ -382,7 +382,7 @@ export default async function Home() {
         <ArtReveal>
           <section className="cv-auto py-12 bg-[#0c0908] border-y border-amber-500/20 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-[#1c130b] via-[#120c08] to-[#080504] p-6 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_45px_-8px_rgba(245,158,11,0.25)] relative overflow-hidden group">
+            <div className="rounded-3xl border-2 border-amber-400/60 bg-gradient-to-br from-[#1f1508] via-[#140d04] to-[#090602] p-6 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_50px_rgba(245,158,11,0.25)] relative overflow-hidden group">
               <div
                 className="absolute -inset-full bg-gradient-to-r from-transparent via-amber-400/[0.05] to-transparent rotate-45 pointer-events-none group-hover:translate-x-full transition-transform duration-1000"
                 aria-hidden="true"

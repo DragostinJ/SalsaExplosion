@@ -105,16 +105,16 @@ export function BohVenueSpotlight() {
         </div>
 
         {/* 4 Amenity Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div className="flex sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-4 mb-8 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
           {AMENITIES.map((amenity) => {
             const Icon = amenity.icon;
             return (
               <div
                 key={amenity.title}
-                className="rounded-2xl border border-border/80 bg-card p-5 shadow-xs hover:border-secondary-base/50 transition-all space-y-2.5"
+                className="w-[75vw] shrink-0 snap-center sm:w-auto rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs hover:border-secondary-base/50 transition-all space-y-2"
               >
-                <div className="h-10 w-10 rounded-xl bg-secondary-light text-secondary-hover flex items-center justify-center font-bold">
-                  <Icon className="h-5 w-5 text-secondary-base" />
+                <div className="h-9 w-9 rounded-xl bg-secondary-light text-secondary-hover flex items-center justify-center font-bold">
+                  <Icon className="h-4.5 w-4.5 text-secondary-base" />
                 </div>
                 <h3 className="text-sm font-bold text-foreground">
                   {amenity.title}
@@ -141,11 +141,11 @@ export function BohVenueSpotlight() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="flex md:grid grid-cols-1 md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-4 -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar">
             {PHOTO_SLOTS.map((slot) => (
               <div
                 key={slot.id}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-card shadow-sm hover:border-primary-base/50 transition-all"
+                className="w-[78vw] shrink-0 snap-center md:w-auto group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-card shadow-sm hover:border-primary-base/50 transition-all"
               >
                 <div
                   className={`relative aspect-[16/10] w-full bg-gradient-to-br ${slot.gradient} p-4 flex flex-col justify-between border-b border-border/60`}

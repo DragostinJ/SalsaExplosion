@@ -78,7 +78,9 @@ export function DanceVouchersShowcase({
               {benefits.map((benefit, idx) => (
                 <li
                   key={idx}
-                  className="flex items-center gap-2 font-semibold text-foreground/90"
+                  className={`items-center gap-2 font-semibold text-foreground/90 ${
+                    idx >= 4 ? "hidden sm:flex" : "flex"
+                  }`}
                 >
                   <CheckCircle2 className="h-4 w-4 shrink-0 text-primary-base" />
                   <span>{benefit}</span>
@@ -90,8 +92,8 @@ export function DanceVouchersShowcase({
           {/* Location strip */}
           <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground">
             <MapPin className="h-4 w-4 text-rose-500" />
-            <span>Valid across all weekly classes in:</span>
-            <span className="text-foreground">Bournemouth • Boscombe • Poole</span>
+            <span>Valid across all weekly classes at:</span>
+            <span className="text-foreground">BOH Studios Bournemouth (104 Commercial Rd)</span>
           </div>
 
           {/* Call to Actions */}

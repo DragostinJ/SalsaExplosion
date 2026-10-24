@@ -4,6 +4,7 @@
 
 @theme {
   --font-display: var(--font-display), "Playfair Display", Georgia, serif;
+  --font-hand: var(--font-hand), "Caveat", cursive;
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));
@@ -260,4 +261,8 @@
   .animate-eq-2 { animation: eq-pulse-2 0.75s ease-in-out infinite 0.1s; }
   .animate-eq-3 { animation: eq-pulse-3 0.55s ease-in-out infinite 0.2s; }
   .animate-eq-4 { animation: eq-pulse-4 0.7s ease-in-out infinite 0.15s; }
+
+  .font-hand {
+    font-family: var(--font-hand), "Caveat", cursive;
+  }
 }

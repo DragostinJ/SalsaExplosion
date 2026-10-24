@@ -233,10 +233,10 @@ export default async function Home() {
           <WhyCubanSection />
         </ArtReveal>
 
-        {/* Founder & 25+ Year Cuban Heritage Spotlight — Havana Crimson / Terracotta Wash */}
-        <section className="cv-auto py-12 sm:py-16 bg-gradient-to-br from-[#260808] via-[#120404] to-[#070605] border-y border-rose-950/40 text-white">
+        {/* Founder & 25+ Year Cuban Heritage Spotlight — Havana Mahogany & Gold Wash */}
+        <section className="cv-auto py-12 sm:py-16 bg-gradient-to-br from-[#260907] via-[#120605] to-[#080605] border-y border-amber-900/30 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-rose-500/25 bg-gradient-to-b from-[#1b0808]/90 via-[#120505]/95 to-[#0a0303] p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+            <div className="rounded-3xl border border-amber-500/25 bg-gradient-to-b from-[#1b0808]/90 via-[#120605]/95 to-[#080605] p-6 sm:p-10 shadow-2xl backdrop-blur-md">
               <div className="grid gap-8 lg:grid-cols-12 items-center">
                 <div className="lg:col-span-7 space-y-4 text-left">
                   <div className="flex flex-wrap items-center gap-2">
@@ -345,6 +345,11 @@ export default async function Home() {
         </section>
 
         {/* Interactive Instructor Roster Section */}
+        <div className="pt-8 pb-2 text-center">
+          <p className="font-hand text-xl sm:text-2xl text-amber-300 -rotate-1">
+            “Tap any of our posters to message us on WhatsApp for 1-on-1 coaching!” — Enrique
+          </p>
+        </div>
         <ArtReveal>
           <InstructorRosterSection id="instructors" />
         </ArtReveal>
@@ -364,13 +369,13 @@ export default async function Home() {
         <ArtReveal>
           <section className="cv-auto py-12 bg-[#0c0908] border-y border-amber-500/20 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border-2 border-amber-400/60 bg-gradient-to-br from-[#1f1508] via-[#140d04] to-[#090602] p-6 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_50px_rgba(245,158,11,0.25)] relative overflow-hidden group">
+            <div className="rounded-3xl border-2 border-black/30 bg-[#E59819] text-[#0D0907] p-6 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_50px_rgba(229,152,25,0.35)] relative overflow-hidden group">
               <div
-                className="absolute -inset-full bg-gradient-to-r from-transparent via-amber-400/[0.05] to-transparent rotate-45 pointer-events-none group-hover:translate-x-full transition-transform duration-1000"
+                className="absolute -inset-full bg-gradient-to-r from-transparent via-white/10 to-transparent rotate-45 pointer-events-none group-hover:translate-x-full transition-transform duration-1000"
                 aria-hidden="true"
               />
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left relative z-10">
-                <div className="relative w-28 h-36 sm:w-36 sm:h-48 shrink-0 overflow-hidden rounded-2xl border-2 border-amber-400/60 shadow-[0_0_25px_-4px_rgba(245,158,11,0.35)]">
+                <div className="relative w-28 h-36 sm:w-36 sm:h-48 shrink-0 overflow-hidden rounded-2xl border-2 border-black/40 shadow-lg">
                   <Image
                     src="/images/made-in-cuba-2026-poster.jpg"
                     alt="MADE IN CUBA Dance Festival 2026 Official Poster"
@@ -381,19 +386,19 @@ export default async function Home() {
                 </div>
                 <div className="space-y-2.5">
                   <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                    <Badge className="bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold text-xs uppercase tracking-wider border border-amber-400/30">
+                    <Badge className="bg-black text-[#E59819] font-black text-xs uppercase tracking-wider">
                       🎉 33 Years of Salsa Explosion
                     </Badge>
-                    <span className="text-xs text-amber-300 font-semibold">4, 5 &amp; 6 Dec 2026</span>
+                    <span className="text-sm font-black text-black">04 — 06 DEC 2026</span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0D0907]">
                     MADE IN CUBA — Dance Weekend 2026
                   </h2>
-                  <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#1A120B] max-w-2xl leading-relaxed font-medium">
                     South Coast&apos;s premier Cuban dance event celebrating 33 years! 3 nights of parties, 2 days of workshops, 2 spectacular shows, and dancing until 2:00 AM across 2 dedicated rooms (Salsa &amp; Timba Room + Bachata Room).
                   </p>
-                  <p className="text-xs text-zinc-400 font-medium">
-                    📍 <span className="text-amber-200 font-semibold">The Woodlands Ballroom</span> (Friday Welcome Party) &amp; <span className="text-amber-200 font-semibold">BOH Studios</span> (Saturday &amp; Sunday Workshops + Shows + Fiesta).
+                  <p className="text-xs text-[#2A1D11] font-semibold">
+                    📍 <strong>The Woodlands Ballroom</strong> (Friday Welcome Party) &amp; <strong>BOH Studios</strong> (Saturday &amp; Sunday Workshops + Shows + Fiesta).
                   </p>
                 </div>
               </div>
@@ -401,7 +406,7 @@ export default async function Home() {
               <div className="flex flex-col sm:flex-row lg:flex-col items-center gap-3 shrink-0 w-full sm:w-auto relative z-10">
                 <Button
                   asChild
-                  className="w-full sm:w-auto bg-gradient-to-r from-amber-600 via-primary-base to-rose-600 hover:from-amber-500 hover:via-primary-hover hover:to-rose-500 text-white font-bold px-7 h-12 shadow-[0_0_25px_-5px_rgba(245,158,11,0.4)]"
+                  className="w-full sm:w-auto bg-[#0D0907] hover:bg-black text-[#F6EFE6] font-black px-7 h-12 shadow-lg"
                 >
                   <Link href="/events/made-in-cuba-dance-weekend-2026">
                     Reserve Passes (From £20)
@@ -411,7 +416,7 @@ export default async function Home() {
                 <Button
                   asChild
                   variant="outline"
-                  className="w-full sm:w-auto border-amber-500/40 bg-black/70 text-amber-300 hover:bg-amber-500/10 hover:border-amber-400/60 backdrop-blur-sm h-11"
+                  className="w-full sm:w-auto border-black/30 bg-black/5 hover:bg-black/10 text-[#0D0907] font-bold backdrop-blur-sm h-11"
                 >
                   <Link href="/events/made-in-cuba-dance-weekend-2026#timetable">
                     Full Festival Programme

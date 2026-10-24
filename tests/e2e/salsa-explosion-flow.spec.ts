@@ -15,17 +15,17 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(heroHeading).toContainText("Bournemouth");
     await expect(heroHeading).toContainText("Enrique Perez Valdes");
 
-    // 2. Verify Lifetime Achievement Award & BOH Studios badges
+    // 2. Verify Lifetime Achievement Award & BOH Studios residency
     await expect(
-      page.getByText("Salsa UK Lifetime Achievement Award Winner")
+      page.getByText("Directed by Salsa UK Lifetime Achievement Award winner Maestro Enrique Perez Valdes")
     ).toBeVisible();
     await expect(
-      page.getByText("Home Hub: BOH Studios Bournemouth")
+      page.getByText("BOH Studios Bournemouth Residency")
     ).toBeVisible();
 
     // 3. Verify Community Social Proof
-    await expect(page.getByText("4,200+ Dancers in Community")).toBeVisible();
-    await expect(page.getByText("25+ Years Cuban Salsa Heritage")).toBeVisible();
+    await expect(page.getByText("4,200+").first()).toBeVisible();
+    await expect(page.getByText("33+ Years").first()).toBeVisible();
 
     // 4. Verify Social Media Links to @salsaexplosion & Facebook Community
     const instagramLinks = page.locator('a[href*="instagram.com/salsaexplosion"]');

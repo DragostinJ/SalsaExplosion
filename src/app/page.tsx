@@ -7,7 +7,6 @@ import {
   QrCode,
   MapPin,
   Flame,
-  CheckCircle2,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -86,7 +85,7 @@ export default async function Home() {
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 mb-8 sm:mb-12">
               <div className="flex items-center gap-2">
                 <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-amber-300">
-                  BOURNEMOUTH • BOH STUDIOS • THURSDAYS &amp; SUNDAYS
+                  BOH STUDIOS BOURNEMOUTH • THURSDAYS &amp; SUNDAYS
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -98,60 +97,26 @@ export default async function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
               {/* Left Column (7 cols): Editorial Typography & Direct Action */}
               <div className="lg:col-span-7 flex flex-col items-start text-left space-y-5">
-                {/* Award & Residency Badges */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge
-                    variant="outline"
-                    className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
-                  >
-                    <Award className="mr-1.5 h-3.5 w-3.5 text-amber-400" />
-                    Salsa UK Lifetime Achievement Award Winner
-                  </Badge>
-                  <Badge
-                    variant="outline"
-                    className="border-white/15 bg-white/[0.04] text-zinc-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
-                  >
-                    <MapPin className="mr-1.5 h-3.5 w-3.5 text-rose-400" />
-                    Home Hub: BOH Studios Bournemouth
-                  </Badge>
-                </div>
-
-                {/* Monumental Headline — Unified Architectural Typography */}
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[0.98]">
-                  CUBAN SALSA &amp; RUEDA ACADEMY
-                  <span className="block text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-zinc-200 mt-3 normal-case">
-                    Every Thursday &amp; Sunday in Bournemouth with Maestro Enrique Perez Valdes.
+                {/* Monumental Architectural Headline */}
+                <h1 className="text-3xl sm:text-5xl lg:text-[4rem] font-extrabold tracking-tight leading-[1.02] text-white uppercase">
+                  Cuban Salsa &amp; Rueda de Casino
+                  <span className="block text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-zinc-300 mt-3 normal-case">
+                    In the heart of Bournemouth with Maestro Enrique Perez Valdes.
                   </span>
                 </h1>
 
-                <p className="text-sm sm:text-base text-zinc-300 max-w-xl leading-relaxed">
-                  Authentic Cuban Casino partnerwork, high-energy Rueda circles, and genuine Havana social dancing at BOH Studios. Directed by UK Lifetime Achievement Award winner Maestro Enrique Perez Valdes with 33+ years of dance heritage.
+                <p className="text-base sm:text-lg text-stone-300 leading-relaxed max-w-xl mt-6">
+                  Directed by Salsa UK Lifetime Achievement Award winner Maestro Enrique Perez Valdes. Join our weekly Thursday and Sunday classes, Rueda circles, and Havana social fiestas at BOH Studios.
                 </p>
 
-                {/* Trust & Community Stat Pills */}
-                <div className="flex flex-wrap items-center gap-2.5 text-xs text-zinc-300 font-medium pt-1">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                    <span>4,200+ Dancers in Community</span>
-                  </div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                    <span>25+ Years Cuban Salsa Heritage</span>
-                  </div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                    <span>Zero Partner Required</span>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
+                {/* Two Clean Side-by-Side Action Buttons */}
                 <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
                   <Button
                     asChild
                     className="h-12 px-6 text-xs sm:text-sm font-black uppercase tracking-wider bg-amber-500 hover:bg-amber-400 text-black rounded-xl shadow-[0_10px_30px_rgba(245,158,11,0.25)] transition-transform active:scale-[0.99]"
                   >
                     <Link href="#timetable">
-                      <span>View Thursday &amp; Sunday Lineup ↓</span>
+                      <span>Thursday &amp; Sunday Lineup ↓</span>
                     </Link>
                   </Button>
                   <Button
@@ -159,20 +124,26 @@ export default async function Home() {
                     variant="outline"
                     className="h-12 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-xl"
                   >
-                    <Link href="/dashboard/schedule">
-                      <span>Explore Full Schedule →</span>
+                    <Link href="/events/made-in-cuba-dance-weekend-2026">
+                      <span>Made in Cuba — Dec 4–6 →</span>
                     </Link>
                   </Button>
                 </div>
 
-                <div className="pt-1">
-                  <Link
-                    href="/events/made-in-cuba-dance-weekend-2026"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-amber-200 transition-colors"
-                  >
-                    <span>DEC 4–6: MADE IN CUBA FESTIVAL 2026</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
+                {/* Architectural Metrics Bar */}
+                <div className="mt-10 pt-6 border-t border-white/10 grid grid-cols-3 gap-6 w-full">
+                  <div>
+                    <div className="text-xl sm:text-2xl font-black text-amber-300">33+ Years</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">Cuban Heritage</div>
+                  </div>
+                  <div>
+                    <div className="text-xl sm:text-2xl font-black text-white">4,200+</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">Dancers Mentored</div>
+                  </div>
+                  <div>
+                    <div className="text-xl sm:text-2xl font-black text-amber-300">Zero Partner</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">Required to Join</div>
+                  </div>
                 </div>
               </div>
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Clock, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { triggerQuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 
 interface ClassRow {
   time: string;
@@ -255,13 +256,21 @@ export function TwoDayExhibitionTimetable() {
               {/* Right Column: Instant Action Pill */}
               <div className="shrink-0 flex items-center justify-end">
                 <Button
-                  asChild
                   size="sm"
-                  className="w-full sm:w-auto h-10 px-5 text-xs font-black uppercase tracking-wider bg-[#120D0A] hover:bg-black text-[#F4ECE1] rounded-full shadow-sm transition-transform active:scale-95"
+                  type="button"
+                  onClick={() =>
+                    triggerQuickBookDrawer({
+                      title: item.title,
+                      time: item.time,
+                      level: item.level,
+                      instructor: item.instructor,
+                      isSocial: item.isSocial,
+                      day: activeDay,
+                    })
+                  }
+                  className="w-full sm:w-auto h-10 px-5 text-xs font-black uppercase tracking-wider bg-[#120D0A] hover:bg-black text-[#F4ECE1] rounded-full shadow-sm transition-transform active:scale-95 cursor-pointer"
                 >
-                  <Link href="/dashboard/schedule">
-                    <span>{item.isSocial ? "JOIN FIESTA →" : "BOOK SPOT →"}</span>
-                  </Link>
+                  <span>{item.isSocial ? "JOIN FIESTA →" : "BOOK SPOT →"}</span>
                 </Button>
               </div>
             </div>

@@ -28,6 +28,7 @@ import { HavanaGrooveToggle } from "@/components/home/HavanaGrooveToggle";
 import { KineticMarqueeRibbon } from "@/components/home/KineticMarqueeRibbon";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
 import { CubanRotarySeal } from "@/components/ui/CubanRotarySeal";
+import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import { ArtReveal } from "@/components/ui/ArtReveal";
 
 const DanceVouchersShowcase = dynamic(
@@ -717,6 +718,9 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* 2-Tap Interactive QuickBook & Live QR Drawer */}
+        <QuickBookDrawer />
       </main>
     </div>
   );

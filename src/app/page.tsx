@@ -10,13 +10,6 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
 import dynamic from "next/dynamic";
 import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
 import { getCachedUpcomingEvents } from "@/lib/cached-queries";
@@ -332,11 +325,7 @@ export default async function Home() {
         <ArtReveal>
           <section className="cv-auto py-12 bg-[#0c0908] border-y border-amber-500/20 text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border-2 border-black/30 bg-[#E59819] text-[#0D0907] p-6 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-[0_0_50px_rgba(229,152,25,0.35)] relative overflow-hidden group">
-              <div
-                className="absolute -inset-full bg-gradient-to-r from-transparent via-white/10 to-transparent rotate-45 pointer-events-none group-hover:translate-x-full transition-transform duration-1000"
-                aria-hidden="true"
-              />
+            <div className="rounded-3xl border border-amber-500/30 bg-[#E59819] text-[#0D0907] p-6 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden group">
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 text-center sm:text-left relative z-10">
                 <div className="relative w-28 h-36 sm:w-36 sm:h-48 shrink-0 overflow-hidden rounded-2xl border-2 border-black/40 shadow-lg">
                   <Image
@@ -349,9 +338,9 @@ export default async function Home() {
                 </div>
                 <div className="space-y-2.5">
                   <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                    <Badge className="bg-black text-[#E59819] font-black text-xs uppercase tracking-wider">
-                      🎉 33 Years of Salsa Explosion
-                    </Badge>
+                    <span className="bg-black text-[#E59819] font-black text-xs uppercase tracking-wider px-2.5 py-1 rounded-md">
+                      33 Years of Salsa Explosion • 1993–2026
+                    </span>
                     <span className="text-sm font-black text-black">04 — 06 DEC 2026</span>
                   </div>
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-[#0D0907]">
@@ -361,7 +350,7 @@ export default async function Home() {
                     South Coast&apos;s premier Cuban dance event celebrating 33 years! 3 nights of parties, 2 days of workshops, 2 spectacular shows, and dancing until 2:00 AM across 2 dedicated rooms (Salsa &amp; Timba Room + Bachata Room).
                   </p>
                   <p className="text-xs text-[#2A1D11] font-semibold">
-                    📍 <strong>The Woodlands Ballroom</strong> (Friday Welcome Party) &amp; <strong>BOH Studios</strong> (Saturday &amp; Sunday Workshops + Shows + Fiesta).
+                    Venues: <strong>The Woodlands Ballroom</strong> (Friday Welcome Party) &amp; <strong>BOH Studios</strong> (Saturday &amp; Sunday Workshops + Shows + Fiesta).
                   </p>
                 </div>
               </div>
@@ -372,8 +361,7 @@ export default async function Home() {
                   className="w-full sm:w-auto bg-[#0D0907] hover:bg-black text-[#F6EFE6] font-black px-7 h-12 shadow-lg"
                 >
                   <Link href="/events/made-in-cuba-dance-weekend-2026">
-                    Reserve Passes (From £20)
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    Secure Festival Passes →
                   </Link>
                 </Button>
                 <Button
@@ -400,116 +388,83 @@ export default async function Home() {
 
         {/* Incoming Events & Social Parties Showcase */}
         {upcomingEvents.length > 0 && (
-          <section className="cv-auto py-14 border-t bg-gradient-to-b from-background via-primary-base/[0.02] to-background">
+          <section className="cv-auto py-14 sm:py-20 border-t bg-[#0B0807] text-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-4 border-b border-white/10">
                 <div>
-                  <Badge variant="outline" className="text-xs font-bold mb-2 border-primary-base/30 text-rose-800 dark:text-rose-300 bg-primary-light/60">
-                    Live Event Calendar
-                  </Badge>
-                  <h2 className="text-2xl font-extrabold sm:text-3xl tracking-tight">
-                    Upcoming Salsa Explosion Nights & Festivals
+                  <span className="text-xs font-black uppercase tracking-widest text-amber-400 block mb-1">
+                    What&apos;s On: Special Events &amp; Congresses
+                  </span>
+                  <h2 className="text-2xl font-black sm:text-4xl tracking-tight text-white">
+                    Flagship Congresses &amp; Social Fiestas
                   </h2>
-                  <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-                    From weekly Thursday parties at BOH Studios to flagship weekend Congresses in Bournemouth.
+                  <p className="mt-1 text-xs sm:text-sm text-zinc-400">
+                    From weekly Thursday &amp; Sunday parties at BOH Studios to flagship weekend Congresses in Bournemouth.
                   </p>
                 </div>
-                <Button asChild variant="outline" size="sm" className="shrink-0 text-xs font-bold border-primary-base/30 text-rose-700 dark:text-rose-300 hover:bg-primary-base hover:text-white transition-colors">
+                <Button asChild variant="outline" size="sm" className="shrink-0 text-xs font-bold border-white/20 bg-white/5 text-zinc-200 hover:bg-white/10 hover:text-white transition-colors">
                   <Link href="/events">
-                    Browse All Passes & Events
-                    <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                    Browse All Passes &amp; Events →
                   </Link>
                 </Button>
               </div>
 
-              {/* Mobile Swipe Hint */}
-              <div className="md:hidden flex items-center justify-between text-xs text-amber-300 font-bold px-1 mb-2">
-                <span className="flex items-center gap-1.5">
-                  <Flame className="h-3.5 w-3.5 text-amber-400" />
-                  Swipe Upcoming Dates (1/{upcomingEvents.length})
-                </span>
-                <span className="text-[11px] text-zinc-400">Swipe →</span>
-              </div>
-
-              <div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-5 pb-4 -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {upcomingEvents.map((evt) => {
                   const minPrice = evt.ticketTiers[0]?.priceInCents
                     ? `£${(evt.ticketTiers[0].priceInCents / 100).toFixed(0)}`
                     : "TBA";
 
                   const startFormatted = new Intl.DateTimeFormat("en-GB", {
-                    day: "numeric",
+                    day: "2-digit",
                     month: "short",
                     year: "numeric",
                   }).format(new Date(evt.startDate));
 
                   return (
-                    <Card
+                    <div
                       key={evt.id}
-                      className="flex flex-col overflow-hidden border shadow-xs hover:shadow-md transition-all group hover:border-primary-base/50 w-[82vw] shrink-0 snap-center md:w-auto"
+                      className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14100E] p-6 shadow-lg hover:border-amber-400/40 transition-all duration-300"
                     >
-                      <div className="relative h-36 w-full bg-gradient-to-tr from-primary-base via-rose-600 to-accent-tangerine p-5 text-white flex flex-col justify-between">
-                        <div className="flex items-center justify-between">
-                          <Badge className="bg-black/40 text-white border-none text-[10px] backdrop-blur-sm">
-                            {evt.slug.includes("congress") ? "Flagship Congress" : "Social Night & Class"}
-                          </Badge>
-                          <span className="text-[11px] font-bold bg-white/20 px-2 py-0.5 rounded-full backdrop-blur-sm">
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between text-xs font-mono font-bold">
+                          <span className="text-amber-400 uppercase tracking-widest">
+                            {startFormatted.toUpperCase()}
+                          </span>
+                          <span className="text-zinc-400 font-sans text-[11px] font-semibold bg-white/5 px-2 py-0.5 rounded border border-white/10">
                             From {minPrice}
                           </span>
                         </div>
-                        <h3 className="text-base font-extrabold leading-snug drop-shadow-sm line-clamp-2">
+
+                        <h3 className="text-lg font-bold text-white group-hover:text-amber-300 transition-colors leading-snug">
                           {evt.title}
                         </h3>
-                      </div>
 
-                      <CardHeader className="p-4 pb-2">
-                        <div className="flex flex-wrap gap-1 mb-2">
-                          {evt.guestArtists.slice(0, 3).map((artist) => {
-                            const artistSlug = artist
-                              .toLowerCase()
-                              .replace(/[^a-z0-9]+/g, "-")
-                              .replace(/(^-|-$)/g, "");
-                            return (
-                              <Link
-                                key={artist}
-                                href={`#instructors-${artistSlug}`}
-                                className="inline-flex"
-                              >
-                                <Badge
-                                  variant="secondary"
-                                  className="text-[10px] bg-secondary-light text-secondary-hover font-bold border border-secondary-base/30 hover:bg-secondary-base hover:text-white transition-colors cursor-pointer"
-                                >
-                                  ★ {artist}
-                                </Badge>
-                              </Link>
-                            );
-                          })}
-                        </div>
-                        <CardDescription className="line-clamp-2 text-xs">
-                          {evt.description}
-                        </CardDescription>
-                      </CardHeader>
-
-                      <CardContent className="p-4 pt-1 space-y-1.5 text-xs text-muted-foreground flex-1">
-                        <div className="flex items-center gap-1.5">
-                          <Calendar className="h-3.5 w-3.5 text-amber-500 shrink-0" />
-                          <span>{startFormatted}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5 text-xs text-zinc-400">
                           <MapPin className="h-3.5 w-3.5 text-amber-500 shrink-0" />
                           <span className="truncate">{evt.venueName}</span>
                         </div>
-                      </CardContent>
 
-                      <CardFooter className="p-4 pt-2 border-t">
-                        <Button asChild size="sm" className="w-full text-xs font-bold bg-primary hover:bg-primary/90">
-                          <Link href={`/events/${evt.slug}`}>
-                            Reserve Pass
-                            <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-                          </Link>
-                        </Button>
-                      </CardFooter>
-                    </Card>
+                        <p className="text-xs text-zinc-300 line-clamp-2 leading-relaxed">
+                          {evt.description}
+                        </p>
+                      </div>
+
+                      <div className="pt-5 mt-4 border-t border-white/10 flex items-center justify-between">
+                        <Link
+                          href={`/events/${evt.slug}`}
+                          className="inline-flex items-center gap-1 text-xs font-bold text-amber-400 group-hover:text-amber-300 transition-colors"
+                        >
+                          Book Pass <span aria-hidden="true">→</span>
+                        </Link>
+                        <Link
+                          href={`/events/${evt.slug}`}
+                          className="text-[11px] font-medium text-zinc-400 hover:text-white transition-colors"
+                        >
+                          Event Details
+                        </Link>
+                      </div>
+                    </div>
                   );
                 })}
               </div>

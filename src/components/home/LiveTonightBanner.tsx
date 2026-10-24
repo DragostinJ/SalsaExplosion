@@ -2,8 +2,21 @@
 
 import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { Sparkles, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+function getUkDayFromDate(date: Date): number {
+  try {
+    const ukDateString = date.toLocaleString("en-US", { timeZone: "Europe/London" });
+    return new Date(ukDateString).getDay();
+  } catch {
+    return date.getDay();
+  }
+}
+
+function getServerUkDay(): number {
+  return getUkDayFromDate(new Date());
+}
 
 function getClientUkDay(): number {
   try {
@@ -13,11 +26,10 @@ function getClientUkDay(): number {
     if (demo === "sunday") return 0;
     if (demo === "friday") return 5;
     if (demo === "saturday") return 6;
-    if (demo === "weekend") return 5;
+    if (demo === "weekend") return 6;
+    if (demo === "monday") return 1;
 
-    const now = new Date();
-    const ukDateString = now.toLocaleString("en-US", { timeZone: "Europe/London" });
-    return new Date(ukDateString).getDay();
+    return getUkDayFromDate(new Date());
   } catch {
     return new Date().getDay();
   }
@@ -27,11 +39,10 @@ const emptySubscribe = () => () => {};
 
 export function LiveTonightBanner() {
   const [isDismissed, setIsDismissed] = useState(false);
-  // useSyncExternalStore guarantees deterministic SSR (snapshot 4 = Thursday) with 0 hydration warnings
   const dayOfWeek = useSyncExternalStore(
     emptySubscribe,
     getClientUkDay,
-    () => 4
+    getServerUkDay
   );
 
   if (isDismissed) return null;
@@ -60,22 +71,20 @@ export function LiveTonightBanner() {
             {isSunday ? (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-0.5 text-[11px] font-extrabold text-emerald-300 uppercase tracking-wider animate-pulse">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                Live Tonight at BOH Studios
+                LIVE TONIGHT AT BOH STUDIOS
               </span>
             ) : isThursday ? (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-0.5 text-[11px] font-extrabold text-emerald-300 uppercase tracking-wider animate-pulse">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                Live Tonight at BOH Studios
+                LIVE TONIGHT AT BOH STUDIOS
               </span>
             ) : isWeekend ? (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/20 border border-amber-400/40 px-2.5 py-0.5 text-[11px] font-extrabold text-amber-300 uppercase tracking-wider">
-                <Sparkles className="h-3 w-3 text-amber-400" />
-                🔥 THIS SUNDAY AT BOH STUDIOS • This Week at BOH Studios
+                [ THIS SUNDAY AT BOH STUDIOS ]
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-base/15 border border-primary-base/30 px-2.5 py-0.5 text-[11px] font-extrabold text-primary-hover uppercase tracking-wider">
-                <Sparkles className="h-3 w-3 text-primary-base" />
-                This Week at BOH Studios
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 border border-amber-400/30 px-2.5 py-0.5 text-[11px] font-extrabold text-amber-300 uppercase tracking-wider">
+                [ THIS THURSDAY AT BOH STUDIOS ]
               </span>
             )}
 
@@ -86,15 +95,15 @@ export function LiveTonightBanner() {
                 </span>
               ) : isSunday ? (
                 <span>
-                  <strong className="text-white font-extrabold">Sunday Havana Masterclass:</strong> 6:30 PM Sunday Cuban Masterclass &amp; Havana Social Fiesta (7:30 PM – Late) with Maestro Enrique!
+                  <strong className="text-white font-extrabold">LIVE TONIGHT AT BOH STUDIOS:</strong> 18:30 Sunday Cuban Masterclass &amp; 19:30 Havana Social Fiesta with Maestro Enrique!
                 </span>
               ) : isWeekend ? (
                 <span>
-                  <strong className="text-white font-extrabold">This Weekend:</strong> Sunday Cuban Masterclass &amp; Rueda (6:30 PM) + Havana Social Fiesta (7:30 PM) with Maestro Enrique • Every Thursday from 7:00 PM!
+                  <strong className="text-white font-extrabold">NEXT UP TOMORROW (SUNDAY) AT BOH STUDIOS:</strong> 18:30 Cuban Masterclass &amp; 19:30 Havana Social Fiesta with Maestro Enrique • Every Thursday from 19:00
                 </span>
               ) : (
                 <span>
-                  <strong className="text-white font-extrabold">Thursday Cuban Night:</strong> 4 Levels of Cuban Salsa, Solo Pasitos with Moe Flex &amp; Havana Fiesta Social (7:00 PM – Late)! • <span className="text-muted-foreground">🎟️ Free Trial Available</span>
+                  <strong className="text-white font-extrabold">Thursday Cuban Night:</strong> 4 Levels of Cuban Salsa, Solo Pasitos with Moe Flex &amp; Havana Fiesta Social (7:00 PM – Late)! • <span className="text-muted-foreground">Free Trial Available</span>
                 </span>
               )}
             </div>
@@ -119,7 +128,7 @@ export function LiveTonightBanner() {
                   : isThursday
                   ? "Book Tonight's Spot →"
                   : isWeekend
-                  ? "Book Sunday / Thursday →"
+                  ? "Reserve Sunday / Thursday →"
                   : "Reserve Thursday Spot →"}
               </Link>
             </Button>

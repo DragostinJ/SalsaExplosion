@@ -9,7 +9,7 @@ import { sitePhotos } from "@/lib/site-photos";
 const CELEBRATION_CARDS = [
   {
     icon: Users,
-    badge: "[ 01 / RUEDA ] Instant Community",
+    badge: "01 / RUEDA • Instant Community",
     title: "The Magic of the Rueda Circle",
     subheading: "Danced in one big circle with partner swaps on every call",
     photo: sitePhotos.whyCuban.rueda,
@@ -24,7 +24,7 @@ const CELEBRATION_CARDS = [
   },
   {
     icon: Music,
-    badge: "[ 02 / MUSICALITY ] Authentic Rhythm",
+    badge: "02 / MUSICALITY • Authentic Rhythm",
     title: "Pure Havana Rhythm, Timba & Afro-Rumba",
     subheading: "Grounded body movement and 360° fluid circular flow",
     photo: sitePhotos.whyCuban.musicality,
@@ -39,7 +39,7 @@ const CELEBRATION_CARDS = [
   },
   {
     icon: HeartHandshake,
-    badge: "[ 03 / CROSSOVER ] All Styles Welcome",
+    badge: "03 / CROSSOVER • All Styles Welcome",
     title: "Danced Other Styles Before? Come Play!",
     subheading: "A warm, zero-ego transition for Latin & social dancers",
     photo: sitePhotos.whyCuban.community,
@@ -69,7 +69,7 @@ export function WhyCubanSection() {
             className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5 backdrop-blur-sm"
           >
             <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-            [ THE HEARTBEAT OF HAVANA IN BOURNEMOUTH ]
+            THE HEARTBEAT OF HAVANA IN BOURNEMOUTH
           </Badge>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             What Makes Cuban Casino &amp; Rueda{" "}

@@ -25,9 +25,7 @@ import { InstructorRosterSection } from "@/components/home/InstructorRosterSecti
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { HavanaGrooveToggle } from "@/components/home/HavanaGrooveToggle";
-import { KineticMarqueeRibbon } from "@/components/home/KineticMarqueeRibbon";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
-import { CubanRotarySeal } from "@/components/ui/CubanRotarySeal";
 import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import { ArtReveal } from "@/components/ui/ArtReveal";
 
@@ -182,24 +180,6 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Cuban Rotary Seal — Overlapping Transition */}
-        <div className="relative flex justify-center -my-6 z-20">
-          <CubanRotarySeal size={104} />
-        </div>
-
-        {/* Kinetic Rhythm Ribbon 1 */}
-        <KineticMarqueeRibbon
-          direction="left"
-          skew="-rotate-1"
-          phrases={[
-            { text: "CASINO CUBANO", isSerif: false },
-            { text: "Rueda de Casino", isSerif: true },
-            { text: "Havana Timba", isSerif: true },
-            { text: "BOH Studios Bournemouth", isSerif: true },
-            { text: "LA HABANA", isSerif: false },
-          ]}
-        />
-
         {/* Two-Day Exhibition Timetable Showcase (Inspired by The Place) */}
         <TwoDayExhibitionTimetable />
 
@@ -251,7 +231,7 @@ export default async function Home() {
                       Academy Founder &amp; Artistic Director
                     </Badge>
                     <Badge variant="outline" className="border-amber-500/30 bg-amber-500/10 text-amber-300 font-black text-xs uppercase tracking-wider">
-                      [ UK LIFETIME ACHIEVEMENT AWARD ]
+                      UK LIFETIME ACHIEVEMENT AWARD
                     </Badge>
                   </div>
 
@@ -352,26 +332,9 @@ export default async function Home() {
         </section>
 
         {/* Interactive Instructor Roster Section */}
-        <div className="pt-8 pb-2 text-center">
-          <p className="font-hand text-xl sm:text-2xl text-amber-900 dark:text-amber-300 -rotate-1">
-            “Tap any of our posters to message us on WhatsApp for 1-on-1 coaching!” — Enrique
-          </p>
-        </div>
         <ArtReveal>
           <InstructorRosterSection id="instructors" />
         </ArtReveal>
-
-        {/* Kinetic Rhythm Ribbon 2 */}
-        <KineticMarqueeRibbon
-          direction="right"
-          skew="rotate-1"
-          phrases={[
-            { text: "MAESTRO ENRIQUE PEREZ VALDES", isSerif: false },
-            { text: "25+ Years Cuban Heritage", isSerif: true },
-            { text: "MADE IN CUBA 2026", isSerif: false },
-            { text: "Strict Lead & Follow Balance", isSerif: true },
-          ]}
-        />
 
         <ArtReveal>
           <section className="cv-auto py-12 bg-[#0c0908] border-y border-amber-500/20 text-white">

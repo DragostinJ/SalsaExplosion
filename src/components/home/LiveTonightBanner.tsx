@@ -80,11 +80,11 @@ export function LiveTonightBanner() {
               </span>
             ) : isWeekend ? (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/20 border border-amber-400/40 px-2.5 py-0.5 text-[11px] font-extrabold text-amber-300 uppercase tracking-wider">
-                [ THIS SUNDAY AT BOH STUDIOS ]
+                THIS SUNDAY AT BOH STUDIOS
               </span>
             ) : (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 border border-amber-400/30 px-2.5 py-0.5 text-[11px] font-extrabold text-amber-300 uppercase tracking-wider">
-                [ THIS THURSDAY AT BOH STUDIOS ]
+                THIS THURSDAY AT BOH STUDIOS
               </span>
             )}
 

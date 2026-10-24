@@ -224,8 +224,8 @@ export function TwoDayExhibitionTimetable() {
                 Thursday Havana Residency
               </h3>
             </div>
-            <p className="font-hand text-xl sm:text-2xl text-rose-800 -rotate-1">
-              “Brand new? Start right here with me on Thursday at 7pm — zero partner needed, we rotate and laugh all night!” — Enrique
+            <p className="text-xs sm:text-sm font-semibold text-[#524336] max-w-sm sm:text-right">
+              Beginners Foundation to Advanced Partnerwork &bull; Canadian Sprung Maple Floor
             </p>
           </div>
 
@@ -252,8 +252,8 @@ export function TwoDayExhibitionTimetable() {
                 Sunday Havana Sessions — BOH Studios
               </h3>
             </div>
-            <p className="font-hand text-xl sm:text-2xl text-amber-900 -rotate-1">
-              “Our Sunday evening family session — the warmest way to wrap up your weekend in Bournemouth!” — Enrique
+            <p className="text-xs sm:text-sm font-semibold text-[#524336] max-w-sm sm:text-right">
+              Weekly Masterclass &amp; Havana Social Fiesta &bull; Pure Timba &amp; Son Cubano
             </p>
           </div>
 
@@ -268,7 +268,7 @@ export function TwoDayExhibitionTimetable() {
         <div className="p-4 rounded-2xl border border-black/15 bg-black/[0.04] space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span className="text-xs font-black uppercase tracking-wider text-[#120D0A]">
-              [ 01 / RUEDA ] This Week&apos;s Rueda Call at BOH Studios
+              01 / RUEDA • This Week&apos;s Rueda Call at BOH Studios
             </span>
             <Link
               href="/dashboard/rueda"

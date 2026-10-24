@@ -213,7 +213,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                         {instructor.origin}
                       </span>
                       <span className="inline-flex items-center gap-1 rounded-md bg-black/40 backdrop-blur-xs px-2 py-0.5 text-[10px] font-black uppercase text-amber-300 border border-amber-400/20">
-                        [ OFFICIAL FACULTY ]
+                        OFFICIAL FACULTY
                       </span>
                     </div>
 

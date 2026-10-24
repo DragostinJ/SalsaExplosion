@@ -89,7 +89,7 @@ export function QuickBookDrawer() {
           <div className="flex items-center gap-2">
             <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             <h3 className="text-xs font-black uppercase tracking-widest text-amber-300">
-              [ 2-TAP QUICKBOOK ] HAVANA CARTEL PASS
+              2-TAP QUICKBOOK • HAVANA RESIDENCY PASS
             </h3>
           </div>
           <button
@@ -124,7 +124,7 @@ export function QuickBookDrawer() {
             {/* Step 1: Role Selection & Live Balance Meter */}
             <div className="space-y-2">
               <label className="text-xs font-black uppercase tracking-wider text-zinc-300">
-                [ 01 / ROLE SELECTION ]
+                01 / ROLE SELECTION
               </label>
               <div className="grid grid-cols-2 gap-2.5">
                 <button
@@ -136,7 +136,7 @@ export function QuickBookDrawer() {
                       : "border-white/10 bg-white/5 text-zinc-400 hover:text-white"
                   }`}
                 >
-                  <div className="text-sm font-black">[ LEAD ] Lead Role</div>
+                  <div className="text-sm font-black">LEAD • Lead Partner</div>
                   <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">Spot Open</div>
                 </button>
                 <button
@@ -148,7 +148,7 @@ export function QuickBookDrawer() {
                       : "border-white/10 bg-white/5 text-zinc-400 hover:text-white"
                   }`}
                 >
-                  <div className="text-sm font-black">[ FOLLOW ] Follow Role</div>
+                  <div className="text-sm font-black">FOLLOW • Follow Partner</div>
                   <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">Spot Open</div>
                 </button>
               </div>
@@ -169,7 +169,7 @@ export function QuickBookDrawer() {
             {/* Step 2: Entry Tier Selection */}
             <div className="space-y-2">
               <label className="text-xs font-black uppercase tracking-wider text-zinc-300">
-                [ 02 / PASS OPTION ]
+                02 / PASS OPTION
               </label>
               <div className="space-y-2">
                 <button
@@ -241,7 +241,7 @@ export function QuickBookDrawer() {
                   onClick={() => setUserName("Alex Rivera")}
                   className="text-[11px] font-semibold text-amber-400 hover:underline"
                 >
-                  [ Autofill Guest ]
+                  Autofill Guest
                 </button>
               </div>
               <input
@@ -270,7 +270,7 @@ export function QuickBookDrawer() {
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">
-                    [ CONFIRMED RESERVATION ]
+                    CONFIRMED RESERVATION
                   </span>
                   <h4 className="text-lg font-black text-white">{session.title}</h4>
                 </div>

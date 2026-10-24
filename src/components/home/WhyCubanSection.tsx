@@ -1,56 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Sparkles, Users, Music, HeartHandshake, Check } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { sitePhotos } from "@/lib/site-photos";
 
 const CELEBRATION_CARDS = [
   {
-    icon: Users,
-    badge: "01 / RUEDA • Instant Community",
+    kicker: "Rueda de Casino",
     title: "The Magic of the Rueda Circle",
-    subheading: "Danced in one big circle with partner swaps on every call",
     photo: sitePhotos.whyCuban.rueda,
     description:
-      "In Rueda de Casino, couples form one big circle and swap partners on the caller's command. Within five minutes, everyone is laughing, high-fiving, and dancing together as one big family.",
-    highlights: [
-      "Continuous partner rotation so everyone dances",
-      "Zero partner required — join solo anytime",
-      "Instant social connection & high-fives on the floor",
-    ],
-    borderAccent: "border-primary-base/40 hover:border-primary-base",
+      "In Rueda de Casino, couples form one dynamic circle and swap partners on the caller's command. Within minutes, everyone is dancing, communicating, and laughing together as one community.",
   },
   {
-    icon: Music,
-    badge: "02 / MUSICALITY • Authentic Rhythm",
+    kicker: "Havana Musicality",
     title: "Pure Havana Rhythm, Timba & Afro-Rumba",
-    subheading: "Grounded body movement and 360° fluid circular flow",
     photo: sitePhotos.whyCuban.musicality,
     description:
-      "Grounded, natural walking movement that flows in a 360-degree circle. From smooth Son Cubano to high-energy Timba and Afro-Rumba expression, you learn to truly feel the music.",
-    highlights: [
-      "Authentic Afro-Cuban roots & cultural richness",
-      "Musicality on Clave and dynamic body isolations",
-      "Relaxed walking rhythm with zero rigid stress",
-    ],
-    borderAccent: "border-secondary-base/40 hover:border-secondary-base",
+      "Grounded, circular walking body movement that flows naturally in 360 degrees. From smooth Son Cubano to high-energy Timba and Afro-Rumba expression, you learn to truly feel the clave.",
   },
   {
-    icon: HeartHandshake,
-    badge: "03 / CROSSOVER • All Styles Welcome",
-    title: "Danced Other Styles Before? Come Play!",
-    subheading: "A warm, zero-ego transition for Latin & social dancers",
+    kicker: "Open Community",
+    title: "Danced Other Styles Before? Come Play",
     photo: sitePhotos.whyCuban.community,
     description:
-      "Already dance another style of Salsa, Bachata, or Latin dance? You'll love how playful and liberating circular Cuban movement feels. Our team will warmly guide you into Guapea and Dile Que No with zero ego and 100% fun.",
-    highlights: [
-      "Easily transfer your existing rhythm and frame",
-      "Expand your repertoire with circular partnerwork",
-      "Zero ego, 100% friendly South Coast community",
-    ],
-    borderAccent: "border-accent-tangerine/40 hover:border-accent-tangerine",
+      "Already dance another style of Salsa, Bachata, or Latin dance? You will love how liberating and playful circular Cuban movement feels with zero ego and warm South Coast community spirit.",
   },
 ];
 
@@ -82,88 +58,55 @@ export function WhyCubanSection() {
           </p>
         </div>
 
-        {/* Mobile Swipe Hint */}
-        <div className="md:hidden flex items-center justify-between text-xs text-amber-300 font-bold px-1 mb-2">
-          <span className="flex items-center gap-1.5">
-            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-            Swipe Casino Highlights (1/3)
-          </span>
-          <span className="text-[11px] text-zinc-400">Swipe →</span>
-        </div>
-
-        {/* 3-Card Symmetric Architectural Grid with Mobile Touch-Snap */}
-        <div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-6 max-w-6xl mx-auto items-stretch pb-4 -mx-4 px-4 md:mx-auto md:px-0 no-scrollbar">
-          {CELEBRATION_CARDS.map((card, idx) => {
-            const Icon = card.icon;
-            const indexNumber = `0${idx + 1}`;
-
-            return (
-              <div
-                key={card.title}
-                className="art-card group relative flex flex-col justify-between rounded-2xl border border-amber-500/20 p-6 sm:p-7 shadow-sm w-[82vw] shrink-0 snap-center md:w-auto h-full"
-              >
-                {/* Giant Editorial Index Number */}
-                <span
-                  aria-hidden="true"
-                  className="font-display italic text-6xl lg:text-7xl font-black text-amber-500/[0.12] select-none pointer-events-none absolute top-3 right-4 leading-none"
-                >
-                  {indexNumber}
-                </span>
-
-                <div className="space-y-4 relative z-10 flex-1 flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-3.5">
-                      <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full inline-block">
-                        {card.badge}
-                      </span>
-                      <div className="h-9 w-9 rounded-xl bg-amber-500/15 border border-amber-500/20 flex items-center justify-center text-amber-300 shrink-0">
-                        <Icon className="h-4.5 w-4.5" />
-                      </div>
-                    </div>
-
-                    {/* Photo Container with Clean Aspect Ratio */}
-                    {card.photo && (
-                      <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-amber-500/20 bg-black/40">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={card.photo}
-                          alt={card.title}
-                          className="editorial-photo h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          onError={(e) => {
-                            (e.currentTarget.parentElement as HTMLElement).style.display = "none";
-                          }}
-                        />
-                      </div>
-                    )}
-
-                    <div>
-                      <h3 className="text-base sm:text-lg font-extrabold text-white tracking-tight">
-                        {card.title}
-                      </h3>
-                      <p className="text-xs font-semibold text-amber-200/90 mt-1">
-                        {card.subheading}
-                      </p>
-                    </div>
-
-                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-                      {card.description}
-                    </p>
-                  </div>
-
-                  <ul className="space-y-2 pt-4 border-t border-white/10 text-xs text-zinc-200 font-medium">
-                    {card.highlights.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="h-4 w-4 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
-                          <Check className="h-3 w-3 stroke-[3]" />
-                        </span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+        {/* 3-Card Pure Editorial Architecture Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
+          {CELEBRATION_CARDS.map((card) => (
+            <div
+              key={card.title}
+              className="art-card group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#120d0a] p-6 sm:p-7 transition-all duration-500 hover:border-amber-400/40"
+            >
+              <div>
+                {/* 1. Top Photo Frame */}
+                <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-stone-900 mb-5 border border-white/10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={card.photo}
+                    alt={card.title}
+                    className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    onError={(e) => {
+                      (e.currentTarget.parentElement as HTMLElement).style.display = "none";
+                    }}
+                  />
                 </div>
+
+                {/* 2. Clean Kicker */}
+                <div className="text-xs font-bold uppercase tracking-[0.18em] text-amber-400 mb-2">
+                  {card.kicker}
+                </div>
+
+                {/* 3. Bold Editorial Title */}
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-3 leading-snug">
+                  {card.title}
+                </h3>
+
+                {/* 4. Concise 2-Sentence Paragraph */}
+                <p className="text-stone-300 text-sm leading-relaxed mb-6 font-normal">
+                  {card.description}
+                </p>
               </div>
-            );
-          })}
+
+              {/* 5. Clean Bottom Link */}
+              <div className="pt-4 border-t border-white/10">
+                <Link
+                  href="/dashboard/schedule"
+                  className="text-xs font-bold uppercase tracking-wider text-amber-300 hover:text-white inline-flex items-center gap-1.5 transition-colors"
+                >
+                  <span>Explore Classes</span>
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Bottom CTA & Reassurance Bar */}

@@ -21,6 +21,7 @@ function InstagramIcon({ className = "h-4 w-4" }: { className?: string }) {
 }
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { sitePhotos } from "@/lib/site-photos";
 import {
   INSTRUCTORS,
   type InstructorProfile,
@@ -180,6 +181,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
               bg: "from-amber-500/20 via-zinc-900/40 to-transparent",
               text: instructor.name.toUpperCase(),
             };
+            const photoSrc = sitePhotos.instructors[instructor.id as keyof typeof sitePhotos.instructors];
             return (
               <div
                 key={instructor.id}
@@ -207,21 +209,31 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
                     {/* Top Badges */}
                     <div className="flex items-center justify-between gap-1.5 z-10">
-                      <span className="rounded-md bg-black/60 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10">
+                      <span className="rounded-md bg-black/60 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10 uppercase">
                         {instructor.origin}
                       </span>
-                      <span className="inline-flex items-center gap-1 rounded-md bg-black/40 backdrop-blur-xs px-2 py-0.5 text-[10px] font-semibold text-amber-200 border border-amber-400/20">
-                        <Sparkles className="h-2.5 w-2.5 text-amber-400" />
-                        ✨ Official Faculty
+                      <span className="inline-flex items-center gap-1 rounded-md bg-black/40 backdrop-blur-xs px-2 py-0.5 text-[10px] font-black uppercase text-amber-300 border border-amber-400/20">
+                        [ OFFICIAL FACULTY ]
                       </span>
                     </div>
 
-                    {/* Stylized Monogram Crest Centerpiece */}
+                    {/* Stylized Monogram Crest or Editorial Photo Centerpiece */}
                     <div className="relative z-10 my-auto flex flex-col items-center justify-center py-2">
                       <div className="relative">
                         <div className="absolute -inset-2 rounded-full bg-amber-500/20 blur-md group-hover:bg-amber-400/35 transition-all duration-500" />
-                        <div className="relative h-16 w-16 rounded-2xl bg-gradient-to-tr from-[#1f1510] via-[#2c1d15] to-[#452b1e] border-2 border-amber-500/40 flex flex-col items-center justify-center text-amber-200 font-display italic font-bold text-2xl shadow-xl group-hover:scale-105 transition-transform duration-500">
-                          <span>{instructor.avatarFallback}</span>
+                        <div className="relative h-18 w-18 rounded-2xl bg-gradient-to-tr from-[#1f1510] via-[#2c1d15] to-[#452b1e] border-2 border-amber-500/40 overflow-hidden flex flex-col items-center justify-center text-amber-200 font-display italic font-bold text-2xl shadow-xl group-hover:scale-105 transition-transform duration-500">
+                          {photoSrc && (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img
+                              src={photoSrc}
+                              alt={instructor.name}
+                              className="editorial-photo absolute inset-0 h-full w-full object-cover"
+                              onError={(e) => {
+                                (e.currentTarget as HTMLElement).style.display = "none";
+                              }}
+                            />
+                          )}
+                          <span className="select-none">{instructor.avatarFallback}</span>
                         </div>
                       </div>
                     </div>

@@ -2,13 +2,15 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, Users, Music, HeartHandshake, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { sitePhotos } from "@/lib/site-photos";
 
 const CELEBRATION_CARDS = [
   {
     icon: Users,
-    badge: "Instant Community",
-    title: "🔄 The Magic of the Rueda Circle",
+    badge: "[ 01 / RUEDA ] Instant Community",
+    title: "The Magic of the Rueda Circle",
     subheading: "Danced in one big circle with partner swaps on every call",
+    photo: sitePhotos.whyCuban.rueda,
     description:
       "In Rueda de Casino, couples form one big circle and swap partners on the caller's command. Within five minutes, everyone is laughing, high-fiving, and dancing together as one big family.",
     highlights: [
@@ -20,9 +22,10 @@ const CELEBRATION_CARDS = [
   },
   {
     icon: Music,
-    badge: "Authentic Musicality",
-    title: "🎶 Pure Havana Rhythm, Timba & Afro-Rumba",
+    badge: "[ 02 / MUSICALITY ] Authentic Rhythm",
+    title: "Pure Havana Rhythm, Timba & Afro-Rumba",
     subheading: "Grounded body movement and 360° fluid circular flow",
+    photo: sitePhotos.whyCuban.musicality,
     description:
       "Grounded, natural walking movement that flows in a 360-degree circle. From smooth Son Cubano to high-energy Timba and Afro-Rumba expression, you learn to truly feel the music.",
     highlights: [
@@ -34,9 +37,10 @@ const CELEBRATION_CARDS = [
   },
   {
     icon: HeartHandshake,
-    badge: "All Styles Welcome",
-    title: "🤝 Danced Other Styles Before? Come Play!",
+    badge: "[ 03 / CROSSOVER ] All Styles Welcome",
+    title: "Danced Other Styles Before? Come Play!",
     subheading: "A warm, zero-ego transition for Latin & social dancers",
+    photo: sitePhotos.whyCuban.community,
     description:
       "Already dance another style of Salsa, Bachata, or Latin dance? You'll love how playful and liberating circular Cuban movement feels. Our team will warmly guide you into Guapea and Dile Que No with zero ego and 100% fun.",
     highlights: [
@@ -63,7 +67,7 @@ export function WhyCubanSection() {
             className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5 backdrop-blur-sm"
           >
             <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-            🇨🇺 The Heartbeat of Havana in Bournemouth
+            [ THE HEARTBEAT OF HAVANA IN BOURNEMOUTH ]
           </Badge>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             What Makes Cuban Casino &amp; Rueda{" "}
@@ -96,7 +100,7 @@ export function WhyCubanSection() {
             return (
               <div
                 key={card.title}
-                className={`art-card relative flex flex-col justify-between rounded-3xl border border-amber-500/20 p-6 sm:p-7 shadow-sm w-[82vw] shrink-0 snap-center md:w-auto ${staggerClass}`}
+                className={`art-card group relative flex flex-col justify-between rounded-3xl border border-amber-500/20 p-6 sm:p-7 shadow-sm w-[82vw] shrink-0 snap-center md:w-auto ${staggerClass}`}
               >
                 {/* Giant Editorial Index Number */}
                 <span
@@ -115,6 +119,21 @@ export function WhyCubanSection() {
                       <Icon className="h-4.5 w-4.5" />
                     </div>
                   </div>
+
+                  {/* Photo Container with Havana Duotone-to-Colour CSS Filter */}
+                  {card.photo && (
+                    <div className="relative h-28 w-full rounded-2xl overflow-hidden border border-amber-500/20 bg-black/40">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={card.photo}
+                        alt={card.title}
+                        className="editorial-photo h-full w-full object-cover"
+                        onError={(e) => {
+                          (e.currentTarget.parentElement as HTMLElement).style.display = "none";
+                        }}
+                      />
+                    </div>
+                  )}
 
                   <div>
                     <h3 className="text-base sm:text-lg font-extrabold text-white tracking-tight">

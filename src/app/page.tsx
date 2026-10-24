@@ -215,19 +215,19 @@ export default async function Home() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
                 <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/80 px-3 py-2 text-xs font-semibold text-foreground">
-                  <span>👟</span>
+                  <span className="font-mono text-[10px] font-black uppercase text-amber-800 dark:text-amber-400">01 / FOOTWEAR</span>
                   <span>Comfortable flat shoes or trainers</span>
                 </div>
                 <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/80 px-3 py-2 text-xs font-semibold text-foreground">
-                  <span>🤝</span>
+                  <span className="font-mono text-[10px] font-black uppercase text-amber-800 dark:text-amber-400">02 / SOLO ENTRY</span>
                   <span>Zero partner required (we rotate)</span>
                 </div>
                 <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/80 px-3 py-2 text-xs font-semibold text-foreground">
-                  <span>💧</span>
-                  <span>Bar & water station at BOH Studios</span>
+                  <span className="font-mono text-[10px] font-black uppercase text-amber-800 dark:text-amber-400">03 / STUDIO BAR</span>
+                  <span>Bar &amp; water station at BOH Studios</span>
                 </div>
                 <div className="flex items-center gap-2 rounded-xl border border-border/60 bg-background/80 px-3 py-2 text-xs font-semibold text-foreground">
-                  <span>🚗</span>
+                  <span className="font-mono text-[10px] font-black uppercase text-amber-800 dark:text-amber-400">04 / PARKING</span>
                   <span>Easy town-centre parking nearby (BH2 5LR)</span>
                 </div>
               </div>
@@ -250,8 +250,8 @@ export default async function Home() {
                     <Badge className="bg-primary-base text-white font-extrabold text-xs uppercase tracking-wider">
                       Academy Founder &amp; Artistic Director
                     </Badge>
-                    <Badge variant="outline" className="border-amber-500/30 bg-amber-500/10 text-amber-300 font-semibold text-xs">
-                      🏆 UK Lifetime Achievement Award
+                    <Badge variant="outline" className="border-amber-500/30 bg-amber-500/10 text-amber-300 font-black text-xs uppercase tracking-wider">
+                      [ UK LIFETIME ACHIEVEMENT AWARD ]
                     </Badge>
                   </div>
 

@@ -29,7 +29,7 @@ export function QuickBookDrawer() {
   const [role, setRole] = useState<"lead" | "follow">("lead");
   const [tier, setTier] = useState<"trial" | "dropin" | "pack">("trial");
   const [userName, setUserName] = useState("");
-  const [passCode, setPassCode] = useState("#SE-BOH-2026");
+  const [passCode, setPassCode] = useState("#BOH-2026");
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
@@ -38,7 +38,9 @@ export function QuickBookDrawer() {
       if (customEvent.detail) {
         setSession(customEvent.detail);
         setStep("configure");
-        setPassCode(`#SE-BOH-2026-${Math.floor(1000 + Math.random() * 9000)}`);
+        const suffix = Math.floor(1000 + Math.random() * 9000);
+        const dayTag = customEvent.detail.day === "sunday" ? "SUN" : "THU";
+        setPassCode(`#BOH-2026-${dayTag}-${suffix}`);
         setIsOpen(true);
       }
     };
@@ -86,8 +88,8 @@ export function QuickBookDrawer() {
         <div className="flex items-center justify-between pb-3 border-b border-white/10">
           <div className="flex items-center gap-2">
             <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            <h3 className="text-sm font-black uppercase tracking-wider text-amber-300">
-              Havana FastPass • 2-Tap Booking
+            <h3 className="text-xs font-black uppercase tracking-widest text-amber-300">
+              [ 2-TAP QUICKBOOK ] HAVANA CARTEL PASS
             </h3>
           </div>
           <button
@@ -119,10 +121,10 @@ export function QuickBookDrawer() {
               </div>
             </div>
 
-            {/* Step 2: Role Selection & Live Balance Meter */}
+            {/* Step 1: Role Selection & Live Balance Meter */}
             <div className="space-y-2">
               <label className="text-xs font-black uppercase tracking-wider text-zinc-300">
-                1. Select Your Role
+                [ 01 / ROLE SELECTION ]
               </label>
               <div className="grid grid-cols-2 gap-2.5">
                 <button
@@ -134,7 +136,7 @@ export function QuickBookDrawer() {
                       : "border-white/10 bg-white/5 text-zinc-400 hover:text-white"
                   }`}
                 >
-                  <div className="text-sm font-black">🕺 Lead Role</div>
+                  <div className="text-sm font-black">[ LEAD ] Lead Role</div>
                   <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">Spot Open</div>
                 </button>
                 <button
@@ -146,7 +148,7 @@ export function QuickBookDrawer() {
                       : "border-white/10 bg-white/5 text-zinc-400 hover:text-white"
                   }`}
                 >
-                  <div className="text-sm font-black">💃 Follow Role</div>
+                  <div className="text-sm font-black">[ FOLLOW ] Follow Role</div>
                   <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">Spot Open</div>
                 </button>
               </div>
@@ -154,8 +156,8 @@ export function QuickBookDrawer() {
               {/* Live Partner Ratio Balance Meter */}
               <div className="p-2.5 rounded-xl border border-emerald-500/30 bg-emerald-950/30 text-xs space-y-1.5">
                 <div className="flex items-center justify-between text-[11px] font-bold text-emerald-300">
-                  <span>⚖️ 50% Leads / 50% Follows</span>
-                  <span>Rotation Guaranteed</span>
+                  <span>LIVE RATIO LOCK: 50% LEADS / 50% FOLLOWS</span>
+                  <span>BALANCED CIRCLE</span>
                 </div>
                 <div className="w-full h-2 rounded-full bg-zinc-800 overflow-hidden flex">
                   <div className="w-1/2 bg-amber-400 h-full" />
@@ -164,10 +166,10 @@ export function QuickBookDrawer() {
               </div>
             </div>
 
-            {/* Step 3: Entry Tier Selection */}
+            {/* Step 2: Entry Tier Selection */}
             <div className="space-y-2">
               <label className="text-xs font-black uppercase tracking-wider text-zinc-300">
-                2. Choose Entry Option
+                [ 02 / PASS OPTION ]
               </label>
               <div className="space-y-2">
                 <button
@@ -181,7 +183,7 @@ export function QuickBookDrawer() {
                 >
                   <div>
                     <div className="text-xs font-black flex items-center gap-1.5">
-                      <span>✨ 1st-Timer Free Welcome Pass</span>
+                      <span>FIRST-TIMER TRIAL (£0)</span>
                       <span className="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300">
                         FREE
                       </span>
@@ -201,8 +203,8 @@ export function QuickBookDrawer() {
                   }`}
                 >
                   <div>
-                    <div className="text-xs font-black">🎟️ Single Class &amp; Social Fiesta</div>
-                    <div className="text-[10px] text-zinc-400">Includes 7pm/8:15pm classes + party</div>
+                    <div className="text-xs font-black">SINGLE DROP-IN (£10)</div>
+                    <div className="text-[10px] text-zinc-400">Includes evening classes + social fiesta</div>
                   </div>
                   <span className="text-xs font-black text-amber-300">£10 Drop-In</span>
                 </button>
@@ -218,7 +220,7 @@ export function QuickBookDrawer() {
                 >
                   <div>
                     <div className="text-xs font-black flex items-center gap-1.5">
-                      <span>🔥 5-Class Havana Rhythm Pack</span>
+                      <span>5-CLASS PACK (£40)</span>
                       <span className="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-amber-400 text-black">
                         SAVE 20%
                       </span>
@@ -230,7 +232,7 @@ export function QuickBookDrawer() {
               </div>
             </div>
 
-            {/* Fast Name Input */}
+            {/* Attendee Name Input */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between text-xs">
                 <label className="font-bold text-zinc-300">Attendee Name (For Door Check-In)</label>
@@ -239,7 +241,7 @@ export function QuickBookDrawer() {
                   onClick={() => setUserName("Alex Rivera")}
                   className="text-[11px] font-semibold text-amber-400 hover:underline"
                 >
-                  ⚡ Autofill Guest
+                  [ Autofill Guest ]
                 </button>
               </div>
               <input
@@ -257,7 +259,7 @@ export function QuickBookDrawer() {
               onClick={handleGeneratePass}
               className="w-full h-12 text-xs sm:text-sm font-black uppercase tracking-wider bg-amber-500 hover:bg-amber-400 text-black rounded-xl shadow-lg transition-transform active:scale-[0.99]"
             >
-              <span>GENERATE INSTANT QR PASS / APPLE PAY →</span>
+              CONFIRM &amp; GENERATE QR PASS →
             </Button>
           </div>
         ) : (
@@ -268,7 +270,7 @@ export function QuickBookDrawer() {
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">
-                    🟢 CONFIRMED RESERVATION
+                    [ CONFIRMED RESERVATION ]
                   </span>
                   <h4 className="text-lg font-black text-white">{session.title}</h4>
                 </div>
@@ -281,7 +283,6 @@ export function QuickBookDrawer() {
               <div className="flex flex-col sm:flex-row items-center gap-4 py-2">
                 <div className="p-3 rounded-xl bg-white border border-amber-500/30 shrink-0 flex items-center justify-center">
                   <svg className="w-24 h-24 text-black" viewBox="0 0 100 100" fill="currentColor">
-                    {/* Simulated SVG High-Contrast QR Matrix */}
                     <rect x="5" y="5" width="25" height="25" rx="3" />
                     <rect x="10" y="10" width="15" height="15" fill="white" />
                     <rect x="14" y="14" width="7" height="7" />
@@ -334,7 +335,7 @@ export function QuickBookDrawer() {
                 onClick={handleCopyPass}
                 className="w-full h-11 text-xs font-bold bg-amber-500 hover:bg-amber-400 text-black rounded-xl"
               >
-                {isCopied ? "✓ Pass Code Copied to Clipboard!" : "Save Pass to Phone (Copy Code)"}
+                {isCopied ? "Pass Code Copied to Clipboard!" : "Save Pass to Phone (Copy Code)"}
               </Button>
 
               <div className="grid grid-cols-2 gap-2">
@@ -344,7 +345,7 @@ export function QuickBookDrawer() {
                   className="h-10 text-xs font-semibold border-white/20 bg-white/5 text-white hover:bg-white/10"
                 >
                   <Link href="/instructor/roster" onClick={() => setIsOpen(false)}>
-                    <span>Door Scanner →</span>
+                    <span>Test Door Scanner (/instructor/roster) →</span>
                   </Link>
                 </Button>
                 <Button
@@ -353,7 +354,7 @@ export function QuickBookDrawer() {
                   onClick={() => setIsOpen(false)}
                   className="h-10 text-xs font-semibold text-zinc-400 hover:text-white"
                 >
-                  Done / Close
+                  Done
                 </Button>
               </div>
             </div>

@@ -27,6 +27,7 @@ import {
 } from "@/lib/constants/booking";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { triggerQuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import {
   Card,
   CardContent,
@@ -620,11 +621,31 @@ export function ClassScheduleCard({
             </div>
           )
         ) : isGuest ? (
-          <Button asChild className="w-full bg-primary-base hover:bg-primary-hover text-white font-extrabold shadow-md transition-colors h-10 rounded-xl text-center leading-tight">
-            <Link href={`/sign-in?redirect_url=${encodeURIComponent("/dashboard/schedule")}`}>
-              <span>Sign In to Book • Free Welcome Pass</span>
-            </Link>
-          </Button>
+          <div className="w-full space-y-2">
+            <Button
+              type="button"
+              onClick={() =>
+                triggerQuickBookDrawer({
+                  title: session.title,
+                  time: startDate.toLocaleTimeString("en-GB", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }),
+                  level: session.minLevel,
+                  instructor: `${session.instructor.firstName} ${session.instructor.lastName}`.trim(),
+                  day: startDate.getDay() === 0 ? "sunday" : "thursday",
+                })
+              }
+              className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black uppercase text-xs h-10 rounded-xl shadow-md transition-colors"
+            >
+              Instant 2-Tap QuickBook →
+            </Button>
+            <Button asChild variant="outline" size="sm" className="w-full text-xs font-semibold">
+              <Link href={`/sign-in?redirect_url=${encodeURIComponent("/dashboard/schedule")}`}>
+                Sign In with Full Account
+              </Link>
+            </Button>
+          </div>
         ) : !canAfford ? (
           <Button asChild variant="secondary" className="w-full h-10 rounded-xl font-bold">
             <Link href="/pricing">

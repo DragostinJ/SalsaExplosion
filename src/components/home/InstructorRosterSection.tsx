@@ -28,6 +28,17 @@ import {
   type InstructorCategory,
 } from "@/lib/data/instructors";
 
+const SPOTLIGHT_GRADIENTS: Record<string, string> = {
+  enrique: "from-amber-500/25 via-amber-950/40 to-black/60",
+  justyna: "from-amber-400/20 via-rose-950/30 to-black/60",
+  arturas: "from-amber-500/20 via-amber-950/35 to-black/60",
+  "moe-flex": "from-yellow-400/25 via-amber-950/40 to-black/60",
+  jim: "from-orange-500/20 via-amber-950/30 to-black/60",
+  xaris: "from-red-500/25 via-orange-950/35 to-black/60",
+  anna: "from-amber-400/20 via-rose-950/30 to-black/60",
+  "alex-spindlove": "from-amber-600/20 via-zinc-900/40 to-black/60",
+};
+
 interface InstructorRosterSectionProps {
   id?: string;
 }
@@ -135,16 +146,8 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
           </div>
         </div>
 
-        {/* 8-Card Responsive Character Posters Grid with Mobile Touch-Snap */}
-        <div className="md:hidden flex items-center justify-between text-xs text-amber-300 font-bold px-1 mb-2">
-          <span className="flex items-center gap-1.5">
-            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-            Swipe Faculty (1/{filteredInstructors.length})
-          </span>
-          <span className="text-[11px] text-zinc-400">Swipe →</span>
-        </div>
-
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-4 sm:gap-5 pb-4 -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar">
+        {/* 8-Card Responsive Architectural Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredInstructors.map((instructor, idx) => {
             const photoSrc = sitePhotos.instructors[instructor.id as keyof typeof sitePhotos.instructors];
             return (
@@ -152,45 +155,64 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                 key={instructor.id}
                 id={`instructors-${instructor.id}`}
                 data-artist-id={instructor.id}
-                className={`art-card group relative flex flex-col justify-between rounded-2xl border border-stone-800 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:border-amber-400/40 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.2)] w-[82vw] shrink-0 snap-center md:w-auto ${
-                  idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden md:flex" : "flex"
+                className={`art-card group relative flex flex-col justify-between rounded-2xl border border-stone-800 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:border-amber-400/40 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.2)] w-full ${
+                  idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden sm:flex" : "flex"
                 }`}
                 data-testid={`instructor-card-${instructor.id}`}
               >
                 <div>
-                  {/* Clean Aspect-[4/5] Portrait Frame */}
-                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-900">
+                  {/* Bespoke Architectural Typographic Portrait Plate */}
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#14110F] border-b border-white/[0.08]">
+                    {/* Fine 1px Architectural Grid Lines & Stage Crosshairs */}
+                    <div className="absolute inset-0 pointer-events-none border border-white/[0.04]">
+                      <div className="absolute top-2.5 right-2.5 text-white/20 text-xs font-mono select-none">+</div>
+                      <div className="absolute bottom-2.5 right-2.5 text-white/20 text-xs font-mono select-none">+</div>
+                      <div className="absolute inset-x-0 top-1/2 border-t border-white/[0.03]" />
+                    </div>
+
+                    {/* Warm Directional Spotlight Wash Unique to Each Artist */}
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${
+                        SPOTLIGHT_GRADIENTS[instructor.id] || "from-amber-500/15 via-zinc-900/40 to-transparent"
+                      } pointer-events-none`}
+                    />
+
+                    {/* Vertical Micro-Typography Role Badge Along Left Margin */}
+                    <div className="absolute left-2.5 top-3 bottom-3 flex items-center justify-center z-10 pointer-events-none">
+                      <span className="[writing-mode:vertical-rl] text-[9px] font-black uppercase tracking-[0.2em] text-amber-400/80 rotate-180 select-none">
+                        {instructor.role.split("•")[0]?.trim() || "Faculty Artist"}
+                      </span>
+                    </div>
+
+                    {/* Authentic Image if Available / Error-Safe */}
                     {photoSrc && (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         src={photoSrc}
                         alt={instructor.name}
-                        className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="editorial-photo relative z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                         onError={(e) => {
                           (e.currentTarget as HTMLElement).style.display = "none";
                         }}
                       />
                     )}
 
-                    {/* Fallback Monogram Avatar if image fails */}
-                    <div className="absolute inset-0 flex items-center justify-center text-amber-200/40 font-display italic font-bold text-4xl select-none -z-10">
+                    {/* Museum-Grade Typographic Monogram */}
+                    <div className="absolute inset-0 flex items-center justify-center pl-4 font-display italic font-bold text-4xl sm:text-5xl text-amber-200/90 select-none z-0">
                       {instructor.avatarFallback}
                     </div>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-transparent to-black/40 pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-transparent to-black/30 pointer-events-none z-10" />
 
-                    {/* Top Badges */}
-                    <div className="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 z-10">
+                    {/* Top Right Origin Badge */}
+                    <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
                       <span className="rounded-md bg-black/70 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10 uppercase">
                         {instructor.origin}
-                      </span>
-                      <span className="inline-flex items-center gap-1 rounded-md bg-black/70 backdrop-blur-xs px-2 py-0.5 text-[10px] font-black uppercase text-amber-300 border border-amber-400/20">
-                        OFFICIAL FACULTY
                       </span>
                     </div>
 
                     {/* Bottom Accolade Badge */}
-                    <div className="absolute bottom-3 inset-x-3 z-10 truncate">
+                    <div className="absolute bottom-3 inset-x-3 z-20 truncate pl-4">
                       <span className="rounded-md bg-black/80 backdrop-blur-xs px-2.5 py-1 text-[10px] font-bold text-amber-300 border border-amber-500/30 truncate block">
                         {instructor.badge}
                       </span>

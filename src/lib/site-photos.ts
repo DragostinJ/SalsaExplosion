@@ -12,16 +12,7 @@ export interface SitePhotosConfig {
     community: string;
   };
   madeInCuba: string;
-  instructors: {
-    enrique: string;
-    justyna: string;
-    arturas: string;
-    "moe-flex": string;
-    jim: string;
-    xaris: string;
-    anna: string;
-    alex: string;
-  };
+  instructors: Record<string, string>;
 }
 
 export const sitePhotos: SitePhotosConfig = {
@@ -38,21 +29,14 @@ export const sitePhotos: SitePhotosConfig = {
   madeInCuba:
     "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1200&q=80",
   instructors: {
-    enrique:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
-    justyna:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
-    arturas:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
-    "moe-flex":
-      "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80",
-    jim:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80",
-    xaris:
-      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=800&q=80",
-    anna:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
-    alex:
-      "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=800&q=80",
+    enrique: "/images/instructors/enrique.jpg",
+    justyna: "/images/instructors/justyna.jpg",
+    arturas: "/images/instructors/arturas.jpg",
+    "moe-flex": "/images/instructors/moe-flex.jpg",
+    jim: "/images/instructors/jim.jpg",
+    xaris: "/images/instructors/xaris.jpg",
+    anna: "/images/instructors/anna.jpg",
+    alex: "/images/instructors/alex-spindlove.jpg",
+    "alex-spindlove": "/images/instructors/alex-spindlove.jpg",
   },
 };

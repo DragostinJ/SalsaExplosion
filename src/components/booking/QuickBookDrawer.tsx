@@ -124,7 +124,7 @@ export function QuickBookDrawer() {
             {/* Step 1: Role Selection & Live Balance Meter */}
             <div className="space-y-2">
               <label className="text-xs font-black uppercase tracking-wider text-zinc-300">
-                01 / ROLE SELECTION
+                ROLE SELECTION
               </label>
               <div className="grid grid-cols-2 gap-2.5">
                 <button
@@ -169,7 +169,7 @@ export function QuickBookDrawer() {
             {/* Step 2: Entry Tier Selection */}
             <div className="space-y-2">
               <label className="text-xs font-black uppercase tracking-wider text-zinc-300">
-                02 / PASS OPTION
+                PASS OPTION
               </label>
               <div className="space-y-2">
                 <button

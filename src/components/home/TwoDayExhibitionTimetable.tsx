@@ -183,7 +183,7 @@ export function TwoDayExhibitionTimetable() {
   const activeCall = RUEDA_CALLS[activeRuedaIdx];
 
   return (
-    <section className="cv-auto py-12 sm:py-16 bg-[#F4ECE1] border-b border-black/15 text-[#120D0A]">
+    <section id="timetable" className="cv-auto py-12 sm:py-16 bg-[#F4ECE1] border-b border-black/15 text-[#120D0A] scroll-mt-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Main Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-black/15">

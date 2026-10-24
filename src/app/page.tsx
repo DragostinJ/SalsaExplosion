@@ -69,113 +69,135 @@ export default async function Home() {
       <main className="flex-1">
         <LiveTonightBanner />
 
-        {/* Monumental "The Place" Editorial Hero */}
-        <section className="relative overflow-hidden min-h-[88vh] lg:min-h-[92vh] flex flex-col justify-between py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-[#070605] border-b border-amber-500/10 text-white">
-          {/* Atmospheric Havana Stage Light Rays & Watermark Layer */}
+        {/* Monumental "The Place" Editorial Hero — Pure Horizontal Architectural Split */}
+        <section className="relative overflow-hidden py-10 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-[#070605] border-b border-white/10 text-white">
+          {/* Subtle Ambient Studio Light (zero geometric distortion) */}
           <div
-            className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen"
+            className="absolute inset-0 pointer-events-none opacity-30 mix-blend-screen"
             style={{
               backgroundImage:
-                "radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.22), transparent 70%), radial-gradient(circle at 15% 40%, rgba(225, 29, 72, 0.16), transparent 60%)",
+                "radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.18), transparent 70%), radial-gradient(circle at 10% 30%, rgba(225, 29, 72, 0.12), transparent 50%)",
             }}
             aria-hidden="true"
           />
 
-          {/* Rueda Geometric Silhouette Watermark */}
-          <div
-            className="absolute -top-24 -right-24 w-96 h-96 rounded-full border border-amber-500/10 opacity-30 pointer-events-none animate-[spin_120s_linear_infinite]"
-            aria-hidden="true"
-          >
-            <div className="absolute inset-8 rounded-full border border-dashed border-amber-500/15" />
-            <div className="absolute inset-20 rounded-full border border-amber-500/10" />
-          </div>
-
-          {/* Top Cultural Tag Bar */}
-          <div className="relative z-10 mx-auto w-full max-w-7xl flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 mb-6 sm:mb-8">
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-amber-300">
-                SALSA EXPLOSION • BOH STUDIOS BOURNEMOUTH
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <HavanaGrooveToggle />
-            </div>
-          </div>
-
-          {/* Center Stage: Monumental Typography */}
-          <div className="relative z-10 mx-auto w-full max-w-6xl text-center my-auto flex flex-col items-center">
-            {/* Award and location badges */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
-              <Badge
-                variant="outline"
-                className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
-              >
-                <Award className="mr-1.5 h-3.5 w-3.5 text-amber-400" />
-                Salsa UK Lifetime Achievement Award Winner
-              </Badge>
-              <Badge
-                variant="outline"
-                className="border-white/15 bg-white/[0.04] text-zinc-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
-              >
-                <MapPin className="mr-1.5 h-3.5 w-3.5 text-rose-400" />
-                Home Hub: BOH Studios Bournemouth
-              </Badge>
-            </div>
-
-            <h1 className="text-[2.65rem] sm:text-6xl lg:text-[5.5rem] font-black tracking-tighter leading-[0.92] uppercase text-white max-w-6xl">
-              CUBAN SALSA{" "}
-              <span className="font-display italic font-normal text-amber-400 drop-shadow-[0_2px_20px_rgba(245,158,11,0.35)] block sm:inline">
-                Rueda &amp; Rhythm
-              </span>{" "}
-              <span className="block text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mt-2 text-zinc-100 normal-case">
-                Every Thu &amp; Sun in Bournemouth with Enrique Perez Valdes.
-              </span>
-            </h1>
-
-            <p className="mt-4 sm:mt-6 text-sm sm:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed font-normal">
-              Directed by UK Lifetime Achievement Award winner <strong className="text-white font-bold">Maestro Enrique Perez Valdes</strong> at BOH Studios Bournemouth.
-            </p>
-
-            {/* Heritage & Community Trust Stat Pills */}
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 text-xs text-zinc-300 font-medium">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                <span>4,200+ Dancers in Community</span>
+          <div className="relative z-10 mx-auto w-full max-w-7xl">
+            {/* Top Cultural Tag Bar */}
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 mb-8 sm:mb-12">
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-amber-300">
+                  BOURNEMOUTH • BOH STUDIOS • THURSDAYS &amp; SUNDAYS
+                </span>
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                <span>25+ Years Cuban Salsa Heritage</span>
-              </div>
-              <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                <span>Zero Partner Required</span>
-              </div>
-              <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                <span>Strict Lead/Follow Balance</span>
+              <div className="flex items-center gap-2">
+                <HavanaGrooveToggle />
               </div>
             </div>
 
-            {/* Thumb-Zone Dual Action Bar at Bottom of Hero */}
-            <div className="mt-8 sm:mt-10 flex flex-col items-center gap-3 w-full max-w-md mx-auto">
-              <Button
-                asChild
-                className="w-full h-14 text-sm sm:text-base font-black uppercase tracking-wider bg-amber-500 hover:bg-amber-400 text-black rounded-xl sm:rounded-full flex items-center justify-between px-6 shadow-[0_10px_30px_rgba(245,158,11,0.35)] transition-transform active:scale-[0.99]"
-              >
-                <Link href="/dashboard/schedule">
-                  <span>THU &amp; SUN TIMETABLE</span>
-                  <span className="flex items-center gap-1 font-black">
-                    BOOK NOW <ArrowRight className="h-4 w-4" />
+            {/* 12-Column Architectural Split */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+              {/* Left Column (7 cols): Editorial Typography & Direct Action */}
+              <div className="lg:col-span-7 flex flex-col items-start text-left space-y-5">
+                {/* Award & Residency Badges */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <Badge
+                    variant="outline"
+                    className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
+                  >
+                    <Award className="mr-1.5 h-3.5 w-3.5 text-amber-400" />
+                    Salsa UK Lifetime Achievement Award Winner
+                  </Badge>
+                  <Badge
+                    variant="outline"
+                    className="border-white/15 bg-white/[0.04] text-zinc-300 px-3 py-1 text-xs font-semibold backdrop-blur-md"
+                  >
+                    <MapPin className="mr-1.5 h-3.5 w-3.5 text-rose-400" />
+                    Home Hub: BOH Studios Bournemouth
+                  </Badge>
+                </div>
+
+                {/* Monumental Headline — Unified Architectural Typography */}
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[0.98]">
+                  CUBAN SALSA &amp; RUEDA ACADEMY
+                  <span className="block text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-zinc-200 mt-3 normal-case">
+                    Every Thursday &amp; Sunday in Bournemouth with Maestro Enrique Perez Valdes.
                   </span>
-                </Link>
-              </Button>
-              <Link
-                href="/events/made-in-cuba-dance-weekend-2026"
-                className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-amber-300/90 hover:text-amber-200 transition-colors py-1.5"
-              >
-                <span>DEC 4–6: MADE IN CUBA FESTIVAL</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
+                </h1>
+
+                <p className="text-sm sm:text-base text-zinc-300 max-w-xl leading-relaxed">
+                  Authentic Cuban Casino partnerwork, high-energy Rueda circles, and genuine Havana social dancing at BOH Studios. Directed by UK Lifetime Achievement Award winner Maestro Enrique Perez Valdes with 33+ years of dance heritage.
+                </p>
+
+                {/* Trust & Community Stat Pills */}
+                <div className="flex flex-wrap items-center gap-2.5 text-xs text-zinc-300 font-medium pt-1">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                    <span>4,200+ Dancers in Community</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                    <span>25+ Years Cuban Salsa Heritage</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-sm">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                    <span>Zero Partner Required</span>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+                  <Button
+                    asChild
+                    className="h-12 px-6 text-xs sm:text-sm font-black uppercase tracking-wider bg-amber-500 hover:bg-amber-400 text-black rounded-xl shadow-[0_10px_30px_rgba(245,158,11,0.25)] transition-transform active:scale-[0.99]"
+                  >
+                    <Link href="#timetable">
+                      <span>View Thursday &amp; Sunday Lineup ↓</span>
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-12 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-xl"
+                  >
+                    <Link href="/dashboard/schedule">
+                      <span>Explore Full Schedule →</span>
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="pt-1">
+                  <Link
+                    href="/events/made-in-cuba-dance-weekend-2026"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-amber-200 transition-colors"
+                  >
+                    <span>DEC 4–6: MADE IN CUBA FESTIVAL 2026</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Column (5 cols): Aspect-[4/5] Architectural Dance Frame */}
+              <div className="lg:col-span-5 relative w-full">
+                <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-2xl border border-stone-800 bg-[#120d0a] shadow-2xl group">
+                  <Image
+                    src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80"
+                    alt="Maestro Enrique Perez Valdes directing Cuban Salsa & Rueda de Casino at BOH Studios Bournemouth"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover editorial-photo transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 text-left z-10">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-amber-300 block mb-1">
+                      BOH Studios Bournemouth Residency
+                    </span>
+                    <p className="text-xs sm:text-sm font-semibold text-zinc-200 leading-snug">
+                      Maestro Enrique Perez Valdes &amp; BOH Studios Collective
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

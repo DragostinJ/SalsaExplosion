@@ -28,6 +28,15 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async redirects() {
+    return [
+      {
+        source: "/schedule",
+        destination: "/dashboard/schedule",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     const enforcedCspDirectives = `
       default-src 'self';

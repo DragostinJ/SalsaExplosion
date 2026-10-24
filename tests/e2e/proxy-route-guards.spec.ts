@@ -58,4 +58,16 @@ test.describe("Proxy & Role Route Guards (A4)", () => {
     await page.goto("/music", { waitUntil: "domcontentloaded" });
     expect(page.url()).not.toMatch(/sign-in/);
   });
+
+  test("5. Unauthenticated user accessing /dashboard or /schedule resolves to schedule without sign-in", async ({
+    page,
+  }) => {
+    await page.goto("/dashboard", { waitUntil: "domcontentloaded" });
+    expect(page.url()).not.toMatch(/sign-in/);
+    expect(page.url()).toContain("/dashboard/schedule");
+
+    await page.goto("/schedule", { waitUntil: "domcontentloaded" });
+    expect(page.url()).not.toMatch(/sign-in/);
+    expect(page.url()).toContain("/dashboard/schedule");
+  });
 });

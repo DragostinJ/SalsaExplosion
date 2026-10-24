@@ -265,7 +265,7 @@ export default async function StudentSchedulePage({
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight sm:text-3xl uppercase">
-              THU &amp; SUN <span className="font-display italic font-normal text-amber-500">Programme</span>
+              THU &amp; SUN <span className="font-display italic font-normal text-amber-800 dark:text-amber-400">Programme</span>
             </h1>
             <Badge variant="outline" className="border-border bg-muted/40 text-muted-foreground text-xs">
               BOH Studios Bournemouth

@@ -353,7 +353,7 @@ export default async function Home() {
 
         {/* Interactive Instructor Roster Section */}
         <div className="pt-8 pb-2 text-center">
-          <p className="font-hand text-xl sm:text-2xl text-amber-300 -rotate-1">
+          <p className="font-hand text-xl sm:text-2xl text-amber-900 dark:text-amber-300 -rotate-1">
             “Tap any of our posters to message us on WhatsApp for 1-on-1 coaching!” — Enrique
           </p>
         </div>

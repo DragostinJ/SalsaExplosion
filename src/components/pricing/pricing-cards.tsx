@@ -195,7 +195,7 @@ export function PricingCards({
                     <Badge
                       className={
                         isParchment
-                          ? "bg-amber-600 text-white font-black text-[11px]"
+                          ? "bg-amber-400 text-black font-black text-[11px]"
                           : "bg-primary-base text-white font-bold text-[11px]"
                       }
                     >

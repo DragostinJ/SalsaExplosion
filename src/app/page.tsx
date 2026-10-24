@@ -27,6 +27,7 @@ import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { HavanaGrooveToggle } from "@/components/home/HavanaGrooveToggle";
 import { KineticMarqueeRibbon } from "@/components/home/KineticMarqueeRibbon";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
+import { CubanRotarySeal } from "@/components/ui/CubanRotarySeal";
 import { ArtReveal } from "@/components/ui/ArtReveal";
 
 const DanceVouchersShowcase = dynamic(
@@ -180,6 +181,11 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* Cuban Rotary Seal — Overlapping Transition */}
+        <div className="relative flex justify-center -my-6 z-20">
+          <CubanRotarySeal size={104} />
+        </div>
+
         {/* Kinetic Rhythm Ribbon 1 */}
         <KineticMarqueeRibbon
           direction="left"
@@ -285,7 +291,7 @@ export default async function Home() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-rose-500/25 bg-black/50 shadow-md space-y-4">
+                <div className="lg:col-span-5 flex flex-col p-6 rounded-t-[120px] sm:rounded-t-[140px] rounded-b-2xl border border-amber-500/25 bg-black/60 shadow-xl space-y-4">
                   <div className="flex items-center gap-4 border-b border-white/10 pb-4">
                     <div className="relative shrink-0">
                       <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-rose-500/40 overflow-hidden bg-gradient-to-tr from-zinc-800 via-rose-700 to-zinc-900 flex items-center justify-center text-white shadow-md">

@@ -185,7 +185,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                 key={instructor.id}
                 id={`instructors-${instructor.id}`}
                 data-artist-id={instructor.id}
-                className={`art-card group relative flex flex-col justify-between rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-amber-400/50 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.25)] w-[82vw] shrink-0 snap-center md:w-auto ${
+                className={`art-card group relative flex flex-col justify-between rounded-t-[120px] sm:rounded-t-[140px] rounded-b-2xl border border-amber-500/20 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-amber-400/50 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.25)] w-[82vw] shrink-0 snap-center md:w-auto ${
                   idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden md:flex" : "flex"
                 }`}
                 data-testid={`instructor-card-${instructor.id}`}

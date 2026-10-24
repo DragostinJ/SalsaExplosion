@@ -265,4 +265,17 @@
   .font-hand {
     font-family: var(--font-hand), "Caveat", cursive;
   }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 24s linear infinite;
+  }
 }

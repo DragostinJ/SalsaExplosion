@@ -50,11 +50,11 @@ export function KineticMarqueeRibbon({
               key={`p1-${idx}`}
               className={
                 phrase.isSerif
-                  ? "font-display italic font-normal text-amber-300 drop-shadow-sm text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
-                  : "font-black tracking-widest uppercase text-stroke-amber text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
+                  ? "font-display italic font-normal text-amber-300 drop-shadow-sm text-xl sm:text-3xl lg:text-4xl whitespace-nowrap after:content-['✦'] after:ml-4 after:text-amber-500/40 after:font-sans after:not-italic"
+                  : "font-black tracking-widest uppercase text-stroke-amber text-xl sm:text-3xl lg:text-4xl whitespace-nowrap after:content-['✦'] after:ml-4 after:text-amber-500/40"
               }
             >
-              {phrase.text} <span className="text-amber-500/40 text-lg sm:text-2xl select-none ml-3 sm:ml-5">✦</span>
+              {phrase.text}
             </span>
           ))}
         </div>
@@ -66,11 +66,11 @@ export function KineticMarqueeRibbon({
               key={`p2-${idx}`}
               className={
                 phrase.isSerif
-                  ? "font-display italic font-normal text-amber-300 drop-shadow-sm text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
-                  : "font-black tracking-widest uppercase text-stroke-amber text-xl sm:text-3xl lg:text-4xl whitespace-nowrap"
+                  ? "font-display italic font-normal text-amber-300 drop-shadow-sm text-xl sm:text-3xl lg:text-4xl whitespace-nowrap after:content-['✦'] after:ml-4 after:text-amber-500/40 after:font-sans after:not-italic"
+                  : "font-black tracking-widest uppercase text-stroke-amber text-xl sm:text-3xl lg:text-4xl whitespace-nowrap after:content-['✦'] after:ml-4 after:text-amber-500/40"
               }
             >
-              {phrase.text} <span className="text-amber-500/40 text-lg sm:text-2xl select-none ml-3 sm:ml-5">✦</span>
+              {phrase.text}
             </span>
           ))}
         </div>

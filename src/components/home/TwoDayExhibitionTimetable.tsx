@@ -79,10 +79,36 @@ const SUNDAY_CLASSES: ClassRow[] = [
   },
 ];
 
+const RUEDA_CALLS = [
+  {
+    name: "Setenta (70)",
+    level: "Improver / Intermediate",
+    signal: "🤙 7 Fingers Signal",
+    description: "Classic hammerlock turn combination into back-to-back cross break — Improver/Intermediate staple.",
+    callerCue: "“¡SE-TEN-TA!”",
+  },
+  {
+    name: "Dile Que No",
+    level: "Beginner Foundation",
+    signal: "👋 Palm Open Break",
+    description: "The heartbeat cross-body open break of Cuban Casino — leads the transition into every dynamic Rueda figure.",
+    callerCue: "“¡DILE QUE NO!”",
+  },
+  {
+    name: "Dame Dos",
+    level: "All Dancers",
+    signal: "✌️ Two Fingers Raised",
+    description: "Skip one partner and rotate two places down the Rueda circle with high-energy clap & turn!",
+    callerCue: "“¡DAME DOS CON CHÚA!”",
+  },
+];
+
 export function TwoDayExhibitionTimetable() {
   const [activeDay, setActiveDay] = useState<"thursday" | "sunday">("thursday");
+  const [activeRuedaIdx, setActiveRuedaIdx] = useState(0);
 
   const currentClasses = activeDay === "thursday" ? THURSDAY_CLASSES : SUNDAY_CLASSES;
+  const activeCall = RUEDA_CALLS[activeRuedaIdx];
 
   return (
     <section className="cv-auto py-12 sm:py-16 bg-[#F4ECE1] border-b border-black/15 text-[#120D0A]">
@@ -167,17 +193,13 @@ export function TwoDayExhibitionTimetable() {
 
         {/* Personal Maestro Handwritten Note */}
         {activeDay === "thursday" ? (
-          <div className="pt-4 pb-1">
-            <p className="font-hand text-xl sm:text-2xl text-rose-800 -rotate-1">
-              “Brand new? Start right here with me on Thursday at 7pm — zero partner needed, we rotate and laugh all night!” — Enrique 🇨🇺
-            </p>
-          </div>
+          <p className="pt-3 pb-1 font-hand text-xl sm:text-2xl text-rose-800 -rotate-1">
+            “Brand new? Start right here with me on Thursday at 7pm — zero partner needed, we rotate and laugh all night!” — Enrique 🇨🇺
+          </p>
         ) : (
-          <div className="pt-4 pb-1">
-            <p className="font-hand text-xl sm:text-2xl text-amber-900 -rotate-1">
-              “Our Sunday evening family social — the best way to finish your weekend in Bournemouth!” — Enrique
-            </p>
-          </div>
+          <p className="pt-3 pb-1 font-hand text-xl sm:text-2xl text-amber-900 -rotate-1">
+            “Our Sunday evening family social — the best way to finish your weekend in Bournemouth!” — Enrique
+          </p>
         )}
 
         {/* Architectural Horizontal Rows */}
@@ -280,6 +302,61 @@ export function TwoDayExhibitionTimetable() {
             </button>
           </div>
         )}
+
+        {/* Interactive "Rueda Call of the Week" Strip */}
+        <div className="mt-5 p-4 rounded-2xl border border-black/15 bg-black/[0.04] space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="text-base">🔄</span>
+              <span className="text-xs font-black uppercase tracking-wider text-[#120D0A]">
+                This Week&apos;s Rueda Call at BOH Studios
+              </span>
+            </div>
+            <Link
+              href="/dashboard/rueda"
+              className="text-xs font-extrabold text-[#A83800] hover:text-[#D9480F] hover:underline"
+            >
+              Explore Full Rueda Dictionary (40+ Calls) →
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            {RUEDA_CALLS.map((call, idx) => (
+              <button
+                key={call.name}
+                type="button"
+                onClick={() => setActiveRuedaIdx(idx)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 ${
+                  activeRuedaIdx === idx
+                    ? "bg-[#120D0A] text-[#F4ECE1] shadow-xs"
+                    : "bg-black/5 text-[#524336] hover:bg-black/10 hover:text-[#120D0A]"
+                }`}
+              >
+                {call.name}
+              </button>
+            ))}
+          </div>
+
+          <div className="p-3 rounded-xl bg-white/70 border border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="font-mono font-black text-amber-800 text-sm">
+                  {activeCall.callerCue}
+                </span>
+                <span className="font-bold text-[#120D0A]">{activeCall.name}</span>
+                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-black/5 text-[#524336]">
+                  {activeCall.level}
+                </span>
+              </div>
+              <p className="text-[#524336] text-[11px] font-medium leading-relaxed">
+                {activeCall.description}
+              </p>
+            </div>
+            <span className="text-[11px] font-bold text-amber-900 bg-amber-500/15 border border-amber-600/20 px-2.5 py-1 rounded-full shrink-0 self-start sm:self-center">
+              {activeCall.signal}
+            </span>
+          </div>
+        </div>
 
         {/* Bottom Editorial Confidence Strip */}
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-black/10 bg-black/[0.03]">

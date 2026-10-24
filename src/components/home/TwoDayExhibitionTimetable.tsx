@@ -112,68 +112,77 @@ function TimetableRow({
   day: "thursday" | "sunday";
 }) {
   return (
-    <div className="py-4 sm:py-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-black/[0.03] px-2 sm:px-3 rounded-xl transition-colors">
-      {/* Left Column: Timestamp & Level Badge */}
-      <div className="flex items-center gap-3 shrink-0 sm:min-w-[240px]">
-        <span className="font-mono text-xl sm:text-2xl font-black text-[#120D0A] tracking-tight">
-          {item.time}
-        </span>
-        <span
-          className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
-            item.isSocial
-              ? "bg-emerald-800/15 text-emerald-950 border-emerald-800/30"
-              : "bg-amber-500/20 text-[#733500] border-amber-600/30"
-          }`}
-        >
-          {item.level}
-        </span>
-      </div>
+    <div className="py-4 sm:py-5 border-b border-black/10 hover:bg-black/[0.025] px-3 sm:px-4 rounded-xl transition-colors">
+      {/* Desktop 4-Column Architectural Grid / Mobile Responsive Stack */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-start lg:items-center">
+        {/* Column 1: Time (col-span-2) */}
+        <div className="lg:col-span-2 flex items-center gap-2.5">
+          <span className="font-mono text-lg sm:text-xl font-black text-[#120D0A] tracking-tight whitespace-nowrap">
+            {item.time}
+          </span>
+        </div>
 
-      {/* Center Column: Class Title & Instructor Tag */}
-      <div className="flex-1 min-w-0 space-y-1">
-        <div className="flex items-center gap-2 flex-wrap">
-          <h3 className="text-base sm:text-lg font-black text-[#120D0A] tracking-tight">
-            {item.title}
-          </h3>
+        {/* Column 2: Level / Category Badge (col-span-3) */}
+        <div className="lg:col-span-3 flex items-center gap-2 flex-wrap">
+          <span
+            className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+              item.isSocial
+                ? "bg-emerald-800/15 text-emerald-950 border-emerald-800/30"
+                : "bg-amber-500/20 text-[#733500] border-amber-600/30"
+            }`}
+          >
+            {item.level}
+          </span>
           {item.badge && (
             <span className="text-[10px] font-semibold text-[#524336] bg-black/5 border border-black/10 px-2 py-0.5 rounded-md">
               {item.badge}
             </span>
           )}
         </div>
-        <p className="text-xs text-[#524336]">
-          Directed by{" "}
-          {item.instructorHref ? (
-            <Link
-              href={item.instructorHref}
-              className="font-bold text-[#A83800] hover:text-[#D9480F] hover:underline transition-colors"
-            >
-              {item.instructor}
-            </Link>
-          ) : (
-            <span className="font-bold text-[#A83800]">{item.instructor}</span>
-          )}
-        </p>
-      </div>
 
-      {/* Right Column: Instant Action Button */}
-      <Button
-        size="sm"
-        type="button"
-        onClick={() =>
-          triggerQuickBookDrawer({
-            title: item.title,
-            time: item.time,
-            level: item.level,
-            instructor: item.instructor,
-            isSocial: item.isSocial,
-            day,
-          })
-        }
-        className="shrink-0 self-stretch sm:self-auto h-10 px-5 text-xs font-black uppercase tracking-wider bg-[#120D0A] hover:bg-black text-[#F4ECE1] rounded-full shadow-sm transition-transform active:scale-95 cursor-pointer"
-      >
-        {item.isSocial ? "JOIN FIESTA →" : "BOOK SPOT →"}
-      </Button>
+        {/* Column 3: Class Title & Instructor / Hall Details (col-span-5) */}
+        <div className="lg:col-span-5 min-w-0 space-y-0.5">
+          <h4 className="text-base sm:text-lg font-black text-[#120D0A] tracking-tight">
+            {item.title}
+          </h4>
+          <p className="text-xs text-[#524336]">
+            Directed by{" "}
+            {item.instructorHref ? (
+              <Link
+                href={item.instructorHref}
+                className="font-bold text-[#A83800] hover:text-[#D9480F] hover:underline transition-colors"
+              >
+                {item.instructor}
+              </Link>
+            ) : (
+              <span className="font-bold text-[#A83800]">{item.instructor}</span>
+            )}
+            {" • "}
+            <span className="text-[#733500] font-medium">BOH Studios Main Hall</span>
+          </p>
+        </div>
+
+        {/* Column 4: Action (col-span-2) */}
+        <div className="lg:col-span-2 lg:text-right pt-2 lg:pt-0">
+          <Button
+            size="sm"
+            type="button"
+            onClick={() =>
+              triggerQuickBookDrawer({
+                title: item.title,
+                time: item.time,
+                level: item.level,
+                instructor: item.instructor,
+                isSocial: item.isSocial,
+                day,
+              })
+            }
+            className="w-full lg:w-auto h-9 px-5 text-xs font-black uppercase tracking-wider bg-[#120D0A] hover:bg-black text-[#F4ECE1] rounded-full shadow-sm transition-transform active:scale-95 cursor-pointer"
+          >
+            {item.isSocial ? "JOIN FIESTA →" : "BOOK SPOT →"}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -195,7 +204,7 @@ export function TwoDayExhibitionTimetable() {
               </span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#120D0A] leading-none">
-              Thursday &amp; Sunday <span className="font-display italic font-normal text-[#A83800]">Havana Lineup</span>
+              WEEKLY PROGRAMME <span className="font-display italic font-normal text-[#A83800] lowercase">lineup</span>
             </h2>
             <p className="text-xs sm:text-sm text-[#524336] font-medium max-w-xl">
               Strictly Thursdays and Sundays at BOH Studios Bournemouth. High-energy partner rotations, authentic Cuban Casino footwork, and zero partner required.
@@ -208,7 +217,7 @@ export function TwoDayExhibitionTimetable() {
           </div>
         </div>
 
-        {/* ================= THURSDAY ARCHITECTURAL BLOCK ================= */}
+        {/* ================= THURSDAY 4-COLUMN SWISS ARCHITECTURAL TABLE ================= */}
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-black/15">
             <div>
@@ -229,6 +238,14 @@ export function TwoDayExhibitionTimetable() {
             </p>
           </div>
 
+          {/* Table Header (Desktop only) */}
+          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-[#524336]/80 border-b border-black/10">
+            <span className="col-span-2">Time</span>
+            <span className="col-span-3">Level / Track</span>
+            <span className="col-span-5">Class &amp; Faculty</span>
+            <span className="col-span-2 text-right">Reservation</span>
+          </div>
+
           <div className="divide-y divide-black/10 border-b border-black/10">
             {THURSDAY_CLASSES.map((item, idx) => (
               <TimetableRow key={`thursday-${idx}`} item={item} day="thursday" />
@@ -236,7 +253,7 @@ export function TwoDayExhibitionTimetable() {
           </div>
         </div>
 
-        {/* ================= SUNDAY ARCHITECTURAL BLOCK ================= */}
+        {/* ================= SUNDAY 4-COLUMN SWISS ARCHITECTURAL TABLE ================= */}
         <div className="space-y-4 pt-4">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-black/15">
             <div>
@@ -255,6 +272,14 @@ export function TwoDayExhibitionTimetable() {
             <p className="text-xs sm:text-sm font-semibold text-[#524336] max-w-sm sm:text-right">
               Weekly Masterclass &amp; Havana Social Fiesta &bull; Pure Timba &amp; Son Cubano
             </p>
+          </div>
+
+          {/* Table Header (Desktop only) */}
+          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-[#524336]/80 border-b border-black/10">
+            <span className="col-span-2">Time</span>
+            <span className="col-span-3">Level / Track</span>
+            <span className="col-span-5">Class &amp; Faculty</span>
+            <span className="col-span-2 text-right">Reservation</span>
           </div>
 
           <div className="divide-y divide-black/10 border-b border-black/10">
@@ -284,7 +309,7 @@ export function TwoDayExhibitionTimetable() {
                 key={call.name}
                 type="button"
                 onClick={() => setActiveRuedaIdx(idx)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${
                   activeRuedaIdx === idx
                     ? "bg-[#120D0A] text-[#F4ECE1] shadow-xs"
                     : "bg-black/5 text-[#524336] hover:bg-black/10 hover:text-[#120D0A]"
@@ -295,7 +320,7 @@ export function TwoDayExhibitionTimetable() {
             ))}
           </div>
 
-          <div className="p-3 rounded-xl bg-white/70 border border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="p-3.5 rounded-xl bg-white/70 border border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <span className="font-mono font-black text-amber-800 text-sm">

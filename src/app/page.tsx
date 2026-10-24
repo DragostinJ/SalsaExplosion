@@ -294,7 +294,7 @@ export default async function Home() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 flex flex-col p-6 rounded-t-[120px] sm:rounded-t-[140px] rounded-b-2xl border border-amber-500/25 bg-black/60 shadow-xl space-y-4">
+                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-stone-800 bg-[#120d0a]/90 shadow-xl space-y-4">
                   <div className="flex items-center gap-4 border-b border-white/10 pb-4">
                     <div className="relative shrink-0">
                       <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-rose-500/40 overflow-hidden bg-gradient-to-tr from-zinc-800 via-rose-700 to-zinc-900 flex items-center justify-center text-white shadow-md">

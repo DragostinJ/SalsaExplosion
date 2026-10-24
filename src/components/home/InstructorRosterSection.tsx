@@ -39,37 +39,6 @@ const CATEGORIES: { key: InstructorCategory | "all"; label: string }[] = [
   { key: "boh_special", label: "BOH Venue Partner & Special Events" },
 ];
 
-const ARTIST_GLOWS: Record<string, { bg: string; text: string }> = {
-  enrique: {
-    bg: "from-amber-500/25 via-rose-950/40 to-transparent",
-    text: "ENRIQUE",
-  },
-  "moe-flex": {
-    bg: "from-amber-400/25 via-emerald-950/40 to-transparent",
-    text: "MOE FLEX",
-  },
-  justyna: {
-    bg: "from-rose-500/25 via-amber-950/40 to-transparent",
-    text: "JUSTYNA",
-  },
-  arturas: {
-    bg: "from-orange-500/25 via-zinc-950/50 to-transparent",
-    text: "ARTURAS",
-  },
-  jim: {
-    bg: "from-amber-600/25 via-teal-950/40 to-transparent",
-    text: "JIM",
-  },
-  "xaris-anna": {
-    bg: "from-red-600/25 via-amber-950/30 to-transparent",
-    text: "XARIS & ANNA",
-  },
-  "alex-spindlove": {
-    bg: "from-purple-500/25 via-amber-950/30 to-transparent",
-    text: "ALEX SPINDLOVE",
-  },
-};
-
 export function InstructorRosterSection({ id = "instructors" }: InstructorRosterSectionProps) {
   const [activeCategory, setActiveCategory] = useState<InstructorCategory | "all">("all");
   const [selectedInstructor, setSelectedInstructor] = useState<InstructorProfile | null>(null);
@@ -177,70 +146,52 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
         <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-4 sm:gap-5 pb-4 -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar">
           {filteredInstructors.map((instructor, idx) => {
-            const glow = ARTIST_GLOWS[instructor.id] || {
-              bg: "from-amber-500/20 via-zinc-900/40 to-transparent",
-              text: instructor.name.toUpperCase(),
-            };
             const photoSrc = sitePhotos.instructors[instructor.id as keyof typeof sitePhotos.instructors];
             return (
               <div
                 key={instructor.id}
                 id={`instructors-${instructor.id}`}
                 data-artist-id={instructor.id}
-                className={`art-card group relative flex flex-col justify-between rounded-t-[120px] sm:rounded-t-[140px] rounded-b-2xl border border-amber-500/20 bg-gradient-to-b from-[#140f0c] via-[#100b08] to-[#080605] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-amber-400/50 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.25)] w-[82vw] shrink-0 snap-center md:w-auto ${
+                className={`art-card group relative flex flex-col justify-between rounded-2xl border border-stone-800 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:border-amber-400/40 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.2)] w-[82vw] shrink-0 snap-center md:w-auto ${
                   idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden md:flex" : "flex"
                 }`}
                 data-testid={`instructor-card-${instructor.id}`}
               >
                 <div>
-                  {/* Theatrical Poster Frame */}
-                  <div
-                    className={`relative h-[250px] sm:h-[270px] w-full overflow-hidden p-3.5 flex flex-col justify-between bg-gradient-to-b ${glow.bg}`}
-                  >
-                    {/* Giant Oversized Background Typography */}
-                    <div
-                      className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden"
-                      aria-hidden="true"
-                    >
-                      <span className="font-display italic font-black text-6xl sm:text-7xl uppercase tracking-tighter text-white/[0.05] whitespace-nowrap scale-110">
-                        {glow.text}
-                      </span>
+                  {/* Clean Aspect-[4/5] Portrait Frame */}
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-900">
+                    {photoSrc && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={photoSrc}
+                        alt={instructor.name}
+                        className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLElement).style.display = "none";
+                        }}
+                      />
+                    )}
+
+                    {/* Fallback Monogram Avatar if image fails */}
+                    <div className="absolute inset-0 flex items-center justify-center text-amber-200/40 font-display italic font-bold text-4xl select-none -z-10">
+                      {instructor.avatarFallback}
                     </div>
 
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-transparent to-black/40 pointer-events-none" />
+
                     {/* Top Badges */}
-                    <div className="flex items-center justify-between gap-1.5 z-10">
-                      <span className="rounded-md bg-black/60 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10 uppercase">
+                    <div className="absolute top-3 inset-x-3 flex items-center justify-between gap-1.5 z-10">
+                      <span className="rounded-md bg-black/70 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10 uppercase">
                         {instructor.origin}
                       </span>
-                      <span className="inline-flex items-center gap-1 rounded-md bg-black/40 backdrop-blur-xs px-2 py-0.5 text-[10px] font-black uppercase text-amber-300 border border-amber-400/20">
+                      <span className="inline-flex items-center gap-1 rounded-md bg-black/70 backdrop-blur-xs px-2 py-0.5 text-[10px] font-black uppercase text-amber-300 border border-amber-400/20">
                         OFFICIAL FACULTY
                       </span>
                     </div>
 
-                    {/* Stylized Monogram Crest or Editorial Photo Centerpiece */}
-                    <div className="relative z-10 my-auto flex flex-col items-center justify-center py-2">
-                      <div className="relative">
-                        <div className="absolute -inset-2 rounded-full bg-amber-500/20 blur-md group-hover:bg-amber-400/35 transition-all duration-500" />
-                        <div className="relative h-18 w-18 rounded-2xl bg-gradient-to-tr from-[#1f1510] via-[#2c1d15] to-[#452b1e] border-2 border-amber-500/40 overflow-hidden flex flex-col items-center justify-center text-amber-200 font-display italic font-bold text-2xl shadow-xl group-hover:scale-105 transition-transform duration-500">
-                          {photoSrc && (
-                            /* eslint-disable-next-line @next/next/no-img-element */
-                            <img
-                              src={photoSrc}
-                              alt={instructor.name}
-                              className="editorial-photo absolute inset-0 h-full w-full object-cover"
-                              onError={(e) => {
-                                (e.currentTarget as HTMLElement).style.display = "none";
-                              }}
-                            />
-                          )}
-                          <span className="select-none">{instructor.avatarFallback}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom Role / Accolade Badge */}
-                    <div className="z-10 truncate">
-                      <span className="rounded-md bg-black/60 backdrop-blur-xs px-2.5 py-1 text-[10px] font-bold text-amber-300 border border-amber-500/30 truncate block">
+                    {/* Bottom Accolade Badge */}
+                    <div className="absolute bottom-3 inset-x-3 z-10 truncate">
+                      <span className="rounded-md bg-black/80 backdrop-blur-xs px-2.5 py-1 text-[10px] font-bold text-amber-300 border border-amber-500/30 truncate block">
                         {instructor.badge}
                       </span>
                     </div>
@@ -251,7 +202,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     <h3 className="text-base sm:text-lg font-bold text-white tracking-tight group-hover:text-amber-300 transition-colors">
                       {instructor.name}
                     </h3>
-                    <p className="text-xs font-semibold text-amber-200/90 line-clamp-1">
+                    <p className="text-xs font-semibold text-amber-200/90 line-clamp-1 uppercase tracking-wide">
                       {instructor.role}
                     </p>
 

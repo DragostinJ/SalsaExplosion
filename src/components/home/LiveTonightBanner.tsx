@@ -57,7 +57,12 @@ export function LiveTonightBanner() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
           {/* Status Message */}
           <div className="flex items-center gap-2.5 flex-wrap justify-center sm:justify-start text-center sm:text-left">
-            {isLiveTonight ? (
+            {isSunday ? (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-0.5 text-[11px] font-extrabold text-emerald-300 uppercase tracking-wider animate-pulse">
+                <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                Live Tonight at BOH Studios
+              </span>
+            ) : isThursday ? (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-0.5 text-[11px] font-extrabold text-emerald-300 uppercase tracking-wider animate-pulse">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
                 Live Tonight at BOH Studios
@@ -65,7 +70,7 @@ export function LiveTonightBanner() {
             ) : isWeekend ? (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/20 border border-amber-400/40 px-2.5 py-0.5 text-[11px] font-extrabold text-amber-300 uppercase tracking-wider">
                 <Sparkles className="h-3 w-3 text-amber-400" />
-                This Week at BOH Studios
+                🔥 THIS SUNDAY AT BOH STUDIOS • This Week at BOH Studios
               </span>
             ) : (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-base/15 border border-primary-base/30 px-2.5 py-0.5 text-[11px] font-extrabold text-primary-hover uppercase tracking-wider">
@@ -81,15 +86,15 @@ export function LiveTonightBanner() {
                 </span>
               ) : isSunday ? (
                 <span>
-                  <strong className="text-white font-extrabold">🟢 LIVE TONIGHT AT BOH STUDIOS:</strong> 6:30 PM Sunday Havana Masterclass &amp; Cuban Social with Maestro Enrique!
+                  <strong className="text-white font-extrabold">Sunday Havana Masterclass:</strong> 6:30 PM Sunday Cuban Masterclass &amp; Havana Social Fiesta (7:30 PM – Late) with Maestro Enrique!
                 </span>
               ) : isWeekend ? (
                 <span>
-                  <strong className="text-white font-extrabold">🔥 THIS SUNDAY AT BOH STUDIOS:</strong> 6:30 PM Havana Masterclass &amp; Cuban Social with Maestro Enrique • Next Thursday Doors 6:45 PM • <span className="text-amber-300 font-semibold">🎃 Halloween Fancy Dress Party — Sat 31 Oct!</span>
+                  <strong className="text-white font-extrabold">This Weekend:</strong> Sunday Cuban Masterclass &amp; Rueda (6:30 PM) + Havana Social Fiesta (7:30 PM) with Maestro Enrique • Every Thursday from 7:00 PM!
                 </span>
               ) : (
                 <span>
-                  Next classes at BOH Studios: <strong className="font-bold text-foreground">Thursday 7:00 PM</strong> • Beginners &amp; Rueda de Casino • <span className="text-muted-foreground">🎟️ Free Trial Available</span>
+                  <strong className="text-white font-extrabold">Thursday Cuban Night:</strong> 4 Levels of Cuban Salsa, Solo Pasitos with Moe Flex &amp; Havana Fiesta Social (7:00 PM – Late)! • <span className="text-muted-foreground">🎟️ Free Trial Available</span>
                 </span>
               )}
             </div>
@@ -109,7 +114,13 @@ export function LiveTonightBanner() {
               }`}
             >
               <Link href="/dashboard/schedule">
-                {isLiveTonight ? "Book Tonight's Spot →" : "View Timetable →"}
+                {isSunday
+                  ? "Book Tonight's Masterclass →"
+                  : isThursday
+                  ? "Book Tonight's Spot →"
+                  : isWeekend
+                  ? "Book Sunday / Thursday →"
+                  : "Reserve Thursday Spot →"}
               </Link>
             </Button>
 

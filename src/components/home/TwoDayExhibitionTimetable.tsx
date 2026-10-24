@@ -62,17 +62,17 @@ const THURSDAY_CLASSES: ClassRow[] = [
 const SUNDAY_CLASSES: ClassRow[] = [
   {
     time: "18:30",
-    level: "ALL LEVELS / RUEDA",
-    title: "Sunday Cuban Salsa Masterclass & Rueda Circle",
-    instructor: "Maestro Enrique Perez Valdes & Faculty",
+    level: "ALL LEVELS & IMPROVERS",
+    title: "Sunday Cuban Salsa & Rueda Masterclass",
+    instructor: "Maestro Enrique Perez Valdes & Team",
     instructorHref: "#instructors-enrique",
     badge: "Casino & Rueda Masterclass",
   },
   {
     time: "19:30 – Late",
     level: "ALL DANCERS",
-    title: "Sunday Havana Social Fiesta",
-    instructor: "DJ Enrique & Community",
+    title: "Sunday Havana Social Fiesta & Rueda Circles",
+    instructor: "Maestro Enrique",
     instructorHref: "#instructors-enrique",
     badge: "Cuban Timba & Son Social",
     isSocial: true,
@@ -93,11 +93,11 @@ export function TwoDayExhibitionTimetable() {
             <div className="inline-flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-[11px] font-black uppercase tracking-widest text-emerald-400">
-                Weekly Programme • The Place Editorial Format
+                Official BOH Studios Residency • Thursdays &amp; Sundays
               </span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white leading-none">
-              Weekly <span className="font-display italic font-normal text-amber-400">Exhibition</span> Lineup
+              Thursday &amp; Sunday <span className="font-display italic font-normal text-amber-400">Havana Lineup</span>
             </h2>
             <p className="text-xs sm:text-sm text-zinc-400 font-medium max-w-xl">
               Strictly Thursdays and Sundays at BOH Studios Bournemouth. High-energy partner rotations, authentic Cuban Casino footwork, and zero partner required.
@@ -105,30 +105,44 @@ export function TwoDayExhibitionTimetable() {
           </div>
 
           {/* Monumental Day Tabs */}
-          <div className="flex items-center gap-2 self-start md:self-auto bg-black/60 p-1 rounded-2xl border border-white/10">
+          <div className="flex items-center gap-2 self-start md:self-auto bg-black/60 p-1.5 rounded-2xl border border-white/15">
             <button
               type="button"
               onClick={() => setActiveDay("thursday")}
-              className={`px-5 py-3 rounded-xl text-left transition-all ${
+              className={`px-4 sm:px-5 py-3 rounded-xl text-left transition-all ${
                 activeDay === "thursday"
-                  ? "bg-amber-500 text-black shadow-md font-black"
+                  ? "bg-amber-500 text-black shadow-lg font-black"
                   : "text-zinc-400 hover:text-white hover:bg-white/5 font-bold"
               }`}
             >
-              <div className="text-base sm:text-lg uppercase tracking-tight leading-none">THU</div>
-              <div className="text-[10px] opacity-85 mt-0.5 font-semibold">Doors 6:45 PM</div>
+              <div className="flex items-center gap-2">
+                <span className="text-base sm:text-lg uppercase tracking-tight leading-none font-black">THU</span>
+                <span className={`text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.2 rounded ${
+                  activeDay === "thursday" ? "bg-black/20 text-black" : "bg-white/10 text-zinc-300"
+                }`}>
+                  5 Sessions
+                </span>
+              </div>
+              <div className="text-[10px] opacity-90 mt-1 font-semibold">Doors 6:45 PM • 19:00</div>
             </button>
             <button
               type="button"
               onClick={() => setActiveDay("sunday")}
-              className={`px-5 py-3 rounded-xl text-left transition-all ${
+              className={`px-4 sm:px-5 py-3 rounded-xl text-left transition-all ${
                 activeDay === "sunday"
-                  ? "bg-amber-500 text-black shadow-md font-black"
+                  ? "bg-amber-500 text-black shadow-lg font-black"
                   : "text-zinc-400 hover:text-white hover:bg-white/5 font-bold"
               }`}
             >
-              <div className="text-base sm:text-lg uppercase tracking-tight leading-none">SUN</div>
-              <div className="text-[10px] opacity-85 mt-0.5 font-semibold">Doors 6:15 PM</div>
+              <div className="flex items-center gap-2">
+                <span className="text-base sm:text-lg uppercase tracking-tight leading-none font-black">SUN</span>
+                <span className={`text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.2 rounded ${
+                  activeDay === "sunday" ? "bg-black/20 text-black" : "bg-amber-500/20 text-amber-300"
+                }`}>
+                  Fiesta Night
+                </span>
+              </div>
+              <div className="text-[10px] opacity-90 mt-1 font-semibold">Doors 6:15 PM • 18:30</div>
             </button>
           </div>
         </div>
@@ -216,6 +230,41 @@ export function TwoDayExhibitionTimetable() {
             </div>
           ))}
         </div>
+
+        {/* Dual Day Quick Switch Strip */}
+        {activeDay === "thursday" ? (
+          <div className="mt-4 p-4 rounded-xl border border-amber-500/30 bg-amber-500/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="text-amber-400 text-base">🇨🇺</span>
+              <span className="text-zinc-200">
+                <strong>Sunday Havana Sessions:</strong> 18:30 Masterclass &amp; 19:30 Social Fiesta with Maestro Enrique.
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActiveDay("sunday")}
+              className="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-[11px] uppercase tracking-wider transition-colors shrink-0"
+            >
+              View Sunday Schedule (2 Sessions) →
+            </button>
+          </div>
+        ) : (
+          <div className="mt-4 p-4 rounded-xl border border-amber-500/30 bg-amber-500/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="text-amber-400 text-base">🇨🇺</span>
+              <span className="text-zinc-200">
+                <strong>Thursday Cuban Nights:</strong> 4 Levels of Salsa, Moe Flex Pasitos, and Social till late.
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActiveDay("thursday")}
+              className="px-3.5 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-[11px] uppercase tracking-wider transition-colors shrink-0"
+            >
+              View Thursday Schedule (5 Sessions) →
+            </button>
+          </div>
+        )}
 
         {/* Bottom Editorial Confidence Strip */}
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-white/10 bg-white/[0.02]">

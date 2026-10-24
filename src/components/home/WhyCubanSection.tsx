@@ -91,18 +91,16 @@ export function WhyCubanSection() {
           <span className="text-[11px] text-zinc-400">Swipe →</span>
         </div>
 
-        {/* 3-Card Joyful Celebration Grid with Mobile Touch-Snap */}
-        <div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-5 max-w-6xl mx-auto items-start pb-4 -mx-4 px-4 md:mx-auto md:px-0 no-scrollbar">
+        {/* 3-Card Symmetric Architectural Grid with Mobile Touch-Snap */}
+        <div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-6 max-w-6xl mx-auto items-stretch pb-4 -mx-4 px-4 md:mx-auto md:px-0 no-scrollbar">
           {CELEBRATION_CARDS.map((card, idx) => {
             const Icon = card.icon;
-            const staggerClass =
-              idx === 0 ? "lg:mt-0" : idx === 1 ? "lg:mt-8" : "lg:mt-4";
             const indexNumber = `0${idx + 1}`;
 
             return (
               <div
                 key={card.title}
-                className={`art-card group relative flex flex-col justify-between rounded-3xl border border-amber-500/20 p-6 sm:p-7 shadow-sm w-[82vw] shrink-0 snap-center md:w-auto ${staggerClass}`}
+                className="art-card group relative flex flex-col justify-between rounded-2xl border border-amber-500/20 p-6 sm:p-7 shadow-sm w-[82vw] shrink-0 snap-center md:w-auto h-full"
               >
                 {/* Giant Editorial Index Number */}
                 <span
@@ -112,45 +110,47 @@ export function WhyCubanSection() {
                   {indexNumber}
                 </span>
 
-                <div className="space-y-4 relative z-10">
-                  <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-3.5">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full inline-block">
-                      {card.badge}
-                    </span>
-                    <div className="h-9 w-9 rounded-xl bg-amber-500/15 border border-amber-500/20 flex items-center justify-center text-amber-300 shrink-0">
-                      <Icon className="h-4.5 w-4.5" />
+                <div className="space-y-4 relative z-10 flex-1 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-3.5">
+                      <span className="text-[10px] font-black uppercase tracking-wider text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full inline-block">
+                        {card.badge}
+                      </span>
+                      <div className="h-9 w-9 rounded-xl bg-amber-500/15 border border-amber-500/20 flex items-center justify-center text-amber-300 shrink-0">
+                        <Icon className="h-4.5 w-4.5" />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Photo Container with Havana Duotone-to-Colour CSS Filter */}
-                  {card.photo && (
-                    <div className="relative h-28 w-full rounded-2xl overflow-hidden border border-amber-500/20 bg-black/40">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={card.photo}
-                        alt={card.title}
-                        className="editorial-photo h-full w-full object-cover"
-                        onError={(e) => {
-                          (e.currentTarget.parentElement as HTMLElement).style.display = "none";
-                        }}
-                      />
+                    {/* Photo Container with Clean Aspect Ratio */}
+                    {card.photo && (
+                      <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-amber-500/20 bg-black/40">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={card.photo}
+                          alt={card.title}
+                          className="editorial-photo h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          onError={(e) => {
+                            (e.currentTarget.parentElement as HTMLElement).style.display = "none";
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    <div>
+                      <h3 className="text-base sm:text-lg font-extrabold text-white tracking-tight">
+                        {card.title}
+                      </h3>
+                      <p className="text-xs font-semibold text-amber-200/90 mt-1">
+                        {card.subheading}
+                      </p>
                     </div>
-                  )}
 
-                  <div>
-                    <h3 className="text-base sm:text-lg font-extrabold text-white tracking-tight">
-                      {card.title}
-                    </h3>
-                    <p className="text-xs font-semibold text-amber-200/90 mt-1">
-                      {card.subheading}
+                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                      {card.description}
                     </p>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-                    {card.description}
-                  </p>
-
-                  <ul className="space-y-2 pt-2 text-xs text-zinc-200 font-medium">
+                  <ul className="space-y-2 pt-4 border-t border-white/10 text-xs text-zinc-200 font-medium">
                     {card.highlights.map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <span className="h-4 w-4 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">

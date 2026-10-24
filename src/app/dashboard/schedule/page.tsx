@@ -51,6 +51,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
+import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 
 interface SchedulePageProps {
   searchParams: Promise<{
@@ -66,9 +67,9 @@ const VALID_STYLES = new Set<string>(Object.values(DanceStyle));
 const VALID_LEVELS = new Set<string>(Object.values(DanceLevel));
 
 const DAY_TABS = [
-  { id: "all", label: "All Days" },
-  { id: "thursday", label: "Thursdays • BOH Studios" },
-  { id: "sunday", label: "Sundays • BOH Studios" },
+  { id: "all", label: "All BOH Sessions" },
+  { id: "thursday", label: "Thursdays Only" },
+  { id: "sunday", label: "Sundays Only" },
 ];
 
 export default async function StudentSchedulePage({
@@ -172,7 +173,7 @@ export default async function StudentSchedulePage({
   const filteredClasses =
     targetDayOfWeek !== undefined
       ? upcomingClasses.filter((s) => s.startTime.getDay() === targetDayOfWeek)
-      : upcomingClasses;
+      : upcomingClasses.filter((s) => s.startTime.getDay() === 4 || s.startTime.getDay() === 0);
 
   const scheduleItems: ClassScheduleItem[] = filteredClasses.map((session) => {
     let currentLeadsCount = 0;
@@ -263,8 +264,8 @@ export default async function StudentSchedulePage({
       <div className="flex flex-col justify-between gap-4 rounded-2xl border bg-card p-5 shadow-sm sm:flex-row sm:items-center">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Class Schedule
+            <h1 className="text-2xl font-black tracking-tight sm:text-3xl uppercase">
+              THU &amp; SUN <span className="font-display italic font-normal text-amber-500">Programme</span>
             </h1>
             <Badge variant="outline" className="border-border bg-muted/40 text-muted-foreground text-xs">
               BOH Studios Bournemouth
@@ -537,6 +538,9 @@ export default async function StudentSchedulePage({
         userRole={user?.preferredRole ?? DanceRole.LEAD}
         userName={user?.firstName ?? "Dancer"}
       />
+
+      {/* 2-Tap Interactive QuickBook & Live QR Drawer */}
+      <QuickBookDrawer />
     </main>
   );
 }

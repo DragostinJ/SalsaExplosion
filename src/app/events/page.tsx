@@ -185,35 +185,82 @@ function EventCard({ evt }: EventCardProps) {
     year: "numeric",
   }).format(new Date(evt.startDate));
 
+  const isMadeInCuba = evt.slug.includes("made-in-cuba");
+  const isHalloween = evt.slug.includes("halloween");
+  const isSBK = evt.slug.includes("sb-k") || evt.slug.includes("sbk");
   const isWeekendFlagship =
-    evt.slug.includes("made-in-cuba-dance-weekend") ||
+    isMadeInCuba ||
     evt.slug.includes("barbara-jimenez") ||
     evt.slug.includes("valentine");
 
   return (
-    <Card className="flex flex-col overflow-hidden border shadow-sm transition-all hover:shadow-md">
-      {/* Visual Header */}
+    <Card
+      className={`flex flex-col overflow-hidden border transition-all hover:shadow-lg ${
+        isMadeInCuba
+          ? "border-2 border-black/30 shadow-md ring-2 ring-amber-500/20"
+          : isHalloween
+          ? "border-orange-500/30 shadow-sm"
+          : isSBK
+          ? "border-rose-500/30 shadow-sm"
+          : "shadow-sm"
+      }`}
+    >
+      {/* Visual Header / Cuban Cartel Poster */}
       <div
-        className={`relative h-44 w-full p-6 text-white flex flex-col justify-between ${
-          isWeekendFlagship
-            ? "bg-gradient-to-tr from-zinc-900 via-zinc-900 to-rose-950"
-            : evt.slug.includes("halloween")
-            ? "bg-gradient-to-tr from-rose-950 via-rose-900 to-zinc-900"
-            : "bg-gradient-to-tr from-zinc-900 via-primary-base to-rose-900"
+        className={`relative h-44 w-full p-6 flex flex-col justify-between ${
+          isMadeInCuba
+            ? "bg-[#E59819] text-[#0D0907] border-b border-black/15"
+            : isHalloween
+            ? "bg-gradient-to-tr from-[#160600] via-[#2A0E00] to-[#E65100] text-white"
+            : isSBK
+            ? "bg-gradient-to-tr from-[#260907] via-[#120605] to-[#7B1113] text-white"
+            : isWeekendFlagship
+            ? "bg-gradient-to-tr from-zinc-900 via-zinc-900 to-rose-950 text-white"
+            : "bg-gradient-to-tr from-zinc-900 via-primary-base to-rose-900 text-white"
         }`}
       >
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-[10px] font-bold">
-            {isWeekendFlagship ? "Weekend Festival" : "Special Event"}
+          <Badge
+            className={`text-[10px] font-black uppercase tracking-wider border-none ${
+              isMadeInCuba
+                ? "bg-black text-[#E59819]"
+                : "bg-black/50 text-white backdrop-blur-sm"
+            }`}
+          >
+            {isMadeInCuba
+              ? "04–06 DEC 2026"
+              : isHalloween
+              ? "31 OCT 2026"
+              : isSBK
+              ? "14 NOV 2026"
+              : isWeekendFlagship
+              ? "Weekend Festival"
+              : "Special Event"}
           </Badge>
-          <span className="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
+          <span
+            className={`text-xs font-black px-2.5 py-1 rounded-full ${
+              isMadeInCuba
+                ? "bg-black text-white"
+                : "bg-white/20 text-white backdrop-blur-sm"
+            }`}
+          >
             From {minPrice}
           </span>
         </div>
 
         <div>
-          <h3 className="text-lg font-extrabold leading-snug drop-shadow-sm line-clamp-2">
-            {evt.title}
+          <h3
+            className={`text-lg font-black leading-snug drop-shadow-xs line-clamp-2 uppercase ${
+              isMadeInCuba ? "text-[#0D0907]" : "text-white"
+            }`}
+          >
+            {isMadeInCuba
+              ? "★ MADE IN CUBA DANCE FESTIVAL 2026 ★"
+              : isHalloween
+              ? "★ HALLOWEEN FANCY DRESS PARTY ★"
+              : isSBK
+              ? "★ SB&K NIGHT! EXTRAVAGANZA ★"
+              : evt.title}
           </h3>
         </div>
       </div>
@@ -254,7 +301,11 @@ function EventCard({ evt }: EventCardProps) {
       <CardFooter className="pt-3 border-t">
         <Button
           asChild
-          className="w-full bg-primary-base hover:bg-primary-hover text-white text-xs font-bold transition-colors h-10 rounded-xl shadow-xs"
+          className={`w-full text-xs font-bold transition-colors h-10 rounded-xl shadow-xs ${
+            isMadeInCuba
+              ? "bg-[#0D0907] hover:bg-black text-[#F4ECE1] font-black"
+              : "bg-primary-base hover:bg-primary-hover text-white"
+          }`}
         >
           <Link href={`/events/${evt.slug}`}>
             View Passes &amp; Details

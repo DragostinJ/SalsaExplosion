@@ -29,12 +29,11 @@ export default async function PricingPage() {
       </div>
 
       <div className="mb-10 text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Class Passes & Memberships
+        <h1 className="text-3xl font-black tracking-tight sm:text-4xl uppercase">
+          Class Passes &amp; <span className="font-display italic font-normal text-amber-500">Memberships</span>
         </h1>
-        <p className="mx-auto mt-3 max-w-2xl text-base text-muted-foreground">
-          Choose a drop-in pass, multi-class rhythm pack, or unlimited monthly
-          access to our Cuban Salsa (Casino & Rueda) schedule.
+        <p className="mx-auto mt-3 max-w-2xl text-xs sm:text-sm text-muted-foreground font-medium">
+          Strictly Thursdays &amp; Sundays at BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR). Choose a single drop-in, 5-class Havana pack, 10-class Casinero pass, or unlimited monthly access.
         </p>
       </div>
 

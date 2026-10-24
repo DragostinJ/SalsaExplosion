@@ -153,13 +153,16 @@ export function PricingCards({
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {packages.map((pkg) => {
           const isSubCard = pkg.mode === "subscription";
+          const isParchment = pkg.id === "PACK_5";
           const isCurrentLoading = isPending && activePackageId === pkg.id;
 
           return (
             <Card
               key={pkg.id}
               className={`flex flex-col justify-between transition-all ${
-                pkg.popular
+                isParchment
+                  ? "bg-[#F4ECE1] text-[#120D0A] border-2 border-amber-600/40 shadow-lg ring-2 ring-amber-600/25"
+                  : pkg.popular
                   ? "border-primary shadow-md ring-1 ring-primary"
                   : ""
               } ${
@@ -173,26 +176,54 @@ export function PricingCards({
                   <Badge
                     variant={isSubCard ? "default" : "secondary"}
                     className={
-                      isSubCard ? "bg-emerald-800 hover:bg-emerald-800 text-white" : ""
+                      isParchment
+                        ? "bg-[#120D0A] text-[#F4ECE1] font-black"
+                        : isSubCard
+                        ? "bg-emerald-800 hover:bg-emerald-800 text-white"
+                        : ""
                     }
                   >
-                    {isSubCard ? "Monthly Membership" : "Class Pack"}
+                    {isParchment
+                      ? "Havana Rhythm Pack"
+                      : isSubCard
+                      ? "Monthly Membership"
+                      : pkg.id === "PACK_10"
+                      ? "Best Value Casinero"
+                      : "Class Pack"}
                   </Badge>
-                  {pkg.popular && (
+                  {(pkg.popular || isParchment) && (
                     <Badge
-                      className="bg-primary-base text-white font-bold text-[11px]"
+                      className={
+                        isParchment
+                          ? "bg-amber-600 text-white font-black text-[11px]"
+                          : "bg-primary-base text-white font-bold text-[11px]"
+                      }
                     >
                       <Sparkles className="mr-1 h-3 w-3" />
-                      Most Popular
+                      {isParchment ? "Maestro Pick" : "Most Popular"}
                     </Badge>
                   )}
                 </div>
 
-                <CardTitle className="pt-2 text-xl">{pkg.name}</CardTitle>
-                <div className="text-3xl font-extrabold tracking-tight">
+                <CardTitle
+                  className={`pt-2 text-xl ${
+                    isParchment ? "text-[#120D0A] font-black" : ""
+                  }`}
+                >
+                  {pkg.name}
+                </CardTitle>
+                <div
+                  className={`text-3xl font-extrabold tracking-tight ${
+                    isParchment ? "text-[#120D0A]" : ""
+                  }`}
+                >
                   {pkg.priceDisplay}
                 </div>
-                <CardDescription className="text-xs leading-relaxed">
+                <CardDescription
+                  className={`text-xs leading-relaxed ${
+                    isParchment ? "text-[#524336] font-medium" : ""
+                  }`}
+                >
                   {pkg.description}
                 </CardDescription>
               </CardHeader>
@@ -201,14 +232,24 @@ export function PricingCards({
                 <ul className="space-y-2.5 text-xs">
                   {pkg.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-                      <span>{feature}</span>
+                      <Check
+                        className={`mt-0.5 h-4 w-4 shrink-0 ${
+                          isParchment ? "text-amber-800" : "text-emerald-500"
+                        }`}
+                      />
+                      <span className={isParchment ? "text-[#3D2C1E] font-semibold" : ""}>
+                        {feature}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
 
-              <CardFooter className="border-t bg-muted/10 pt-4">
+              <CardFooter
+                className={`border-t pt-4 ${
+                  isParchment ? "border-black/10 bg-black/[0.03]" : "bg-muted/10"
+                }`}
+              >
                 {isSubCard && hasActiveSubscription ? (
                   <Button
                     type="button"
@@ -225,11 +266,13 @@ export function PricingCards({
                     disabled={isPending}
                     onClick={() => handleCheckout(pkg.id)}
                     className={`w-full h-10 rounded-xl font-bold shadow-xs transition-colors ${
-                      isSubCard
+                      isParchment
+                        ? "bg-[#120D0A] hover:bg-black text-[#F4ECE1] font-black"
+                        : isSubCard
                         ? "bg-emerald-700 hover:bg-emerald-800 text-white"
                         : pkg.popular
-                          ? "bg-primary-base hover:bg-primary-hover text-white shadow-sm"
-                          : "border-2 border-primary-base/30 bg-primary-base/5 text-primary-hover hover:bg-primary-base hover:text-white"
+                        ? "bg-primary-base hover:bg-primary-hover text-white shadow-sm"
+                        : "border-2 border-primary-base/30 bg-primary-base/5 text-primary-hover hover:bg-primary-base hover:text-white"
                     }`}
                   >
                     {isCurrentLoading ? (

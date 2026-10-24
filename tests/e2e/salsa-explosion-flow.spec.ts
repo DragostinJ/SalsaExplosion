@@ -486,7 +486,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     const liveBanner = page.locator('[data-testid="live-tonight-banner"]');
     await expect(liveBanner).toBeVisible();
     await expect(
-      liveBanner.getByText(/Live Tonight at BOH Studios|This Week at BOH Studios/i)
+      liveBanner.getByText(/Live Tonight at BOH Studios|This Week at BOH Studios|THIS SUNDAY AT BOH STUDIOS|THIS THURSDAY AT BOH STUDIOS/i)
     ).toBeVisible();
 
     // 3. Verify Why Cuban Casino Section

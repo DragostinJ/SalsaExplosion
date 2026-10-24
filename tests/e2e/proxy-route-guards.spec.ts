@@ -63,10 +63,12 @@ test.describe("Proxy & Role Route Guards (A4)", () => {
     page,
   }) => {
     await page.goto("/dashboard", { waitUntil: "domcontentloaded" });
+    await page.waitForURL("**/dashboard/schedule");
     expect(page.url()).not.toMatch(/sign-in/);
     expect(page.url()).toContain("/dashboard/schedule");
 
     await page.goto("/schedule", { waitUntil: "domcontentloaded" });
+    await page.waitForURL("**/dashboard/schedule");
     expect(page.url()).not.toMatch(/sign-in/);
     expect(page.url()).toContain("/dashboard/schedule");
   });

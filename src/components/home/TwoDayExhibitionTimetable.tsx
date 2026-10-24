@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -80,30 +79,6 @@ const SUNDAY_CLASSES: ClassRow[] = [
   },
 ];
 
-const RUEDA_CALLS = [
-  {
-    name: "Setenta (70)",
-    level: "Improver / Intermediate",
-    signal: "7 Fingers Signal",
-    description: "Classic hammerlock turn combination into back-to-back cross break — Improver/Intermediate staple.",
-    callerCue: "¡SE-TEN-TA!",
-  },
-  {
-    name: "Dile Que No",
-    level: "Beginner Foundation",
-    signal: "Palm Open Break",
-    description: "The heartbeat cross-body open break of Cuban Casino — leads the transition into every dynamic Rueda figure.",
-    callerCue: "¡DILE QUE NO!",
-  },
-  {
-    name: "Dame Dos",
-    level: "All Dancers",
-    signal: "Two Fingers Raised",
-    description: "Skip one partner and rotate two places down the Rueda circle with high-energy clap & turn!",
-    callerCue: "¡DAME DOS CON CHUA!",
-  },
-];
-
 function TimetableRow({
   item,
   day,
@@ -164,8 +139,7 @@ function TimetableRow({
 
         {/* Column 4: Action (col-span-2) */}
         <div className="lg:col-span-2 lg:text-right pt-2 lg:pt-0">
-          <Button
-            size="sm"
+          <button
             type="button"
             onClick={() =>
               triggerQuickBookDrawer({
@@ -177,10 +151,15 @@ function TimetableRow({
                 day,
               })
             }
-            className="w-full lg:w-auto h-9 px-5 text-xs font-black uppercase tracking-wider bg-[#120D0A] hover:bg-black text-[#F4ECE1] rounded-full shadow-sm transition-transform active:scale-95 cursor-pointer"
+            className={
+              item.isSocial
+                ? "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-5 py-2.5 border border-[#11100E] text-[#11100E] hover:bg-[#11100E] hover:text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer"
+                : "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-5 py-2.5 bg-[#11100E] hover:bg-[#C83E2B] text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer shadow-xs"
+            }
           >
-            {item.isSocial ? "JOIN FIESTA →" : "BOOK SPOT →"}
-          </Button>
+            <span>{item.isSocial ? "Join Social" : "Book Spot"}</span>
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
       </div>
     </div>
@@ -188,9 +167,6 @@ function TimetableRow({
 }
 
 export function TwoDayExhibitionTimetable() {
-  const [activeRuedaIdx, setActiveRuedaIdx] = useState(0);
-  const activeCall = RUEDA_CALLS[activeRuedaIdx];
-
   return (
     <section id="timetable" className="cv-auto py-12 sm:py-16 bg-[#F4ECE1] border-b border-black/15 text-[#120D0A] scroll-mt-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
@@ -286,58 +262,6 @@ export function TwoDayExhibitionTimetable() {
             {SUNDAY_CLASSES.map((item, idx) => (
               <TimetableRow key={`sunday-${idx}`} item={item} day="sunday" />
             ))}
-          </div>
-        </div>
-
-        {/* Interactive "Rueda Call of the Week" Strip */}
-        <div className="p-4 rounded-2xl border border-black/15 bg-black/[0.04] space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <span className="text-xs font-black uppercase tracking-wider text-[#120D0A]">
-              01 / RUEDA • This Week&apos;s Rueda Call at BOH Studios
-            </span>
-            <Link
-              href="/dashboard/rueda"
-              className="text-xs font-extrabold text-[#A83800] hover:text-[#D9480F] hover:underline"
-            >
-              Explore Full Rueda Dictionary (40+ Calls) →
-            </Link>
-          </div>
-
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-            {RUEDA_CALLS.map((call, idx) => (
-              <button
-                key={call.name}
-                type="button"
-                onClick={() => setActiveRuedaIdx(idx)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                  activeRuedaIdx === idx
-                    ? "bg-[#120D0A] text-[#F4ECE1] shadow-xs"
-                    : "bg-black/5 text-[#524336] hover:bg-black/10 hover:text-[#120D0A]"
-                }`}
-              >
-                {call.name}
-              </button>
-            ))}
-          </div>
-
-          <div className="p-3.5 rounded-xl bg-white/70 border border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="font-mono font-black text-amber-800 text-sm">
-                  {activeCall.callerCue}
-                </span>
-                <span className="font-bold text-[#120D0A]">{activeCall.name}</span>
-                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-black/5 text-[#524336]">
-                  {activeCall.level}
-                </span>
-              </div>
-              <p className="text-[#524336] text-[11px] font-medium leading-relaxed">
-                {activeCall.description}
-              </p>
-            </div>
-            <span className="text-[11px] font-bold text-amber-900 bg-amber-500/15 border border-amber-600/20 px-2.5 py-1 rounded-full shrink-0 self-start sm:self-center">
-              {activeCall.signal}
-            </span>
           </div>
         </div>
 

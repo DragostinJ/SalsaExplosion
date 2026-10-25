@@ -158,7 +158,7 @@ export function TimbaSongAnatomyPlayer({
   const [showVideoDrawer, setShowVideoDrawer] = useState(true);
   const [isClaveHelperActive, setIsClaveHelperActive] = useState(false);
   const [currentDancerBeat, setCurrentDancerBeat] = useState<number>(1);
-  const [mobileCueFocus, setMobileCueFocus] = useState<"ALL" | "LEAD" | "FOLLOW" | "TRIGGER">("ALL");
+  const [activeRole, setActiveRole] = useState<"leader" | "follower">("leader");
 
   const activeSong = useMemo<SongAnatomy>(() => {
     return (
@@ -517,14 +517,15 @@ export function TimbaSongAnatomyPlayer({
           {/* Segmented Cockpit Role Switcher (Leader ⇄ Follower) */}
           <div
             data-testid="cockpit-role-switcher"
-            className="flex items-center rounded-xl border border-border/80 bg-background/80 p-0.5 text-xs"
+            className="flex items-center rounded-xl border border-border/80 bg-background/90 p-0.5 text-xs shadow-xs"
           >
             <button
               type="button"
               data-testid="role-switch-leader"
-              onClick={() => setMobileCueFocus("LEAD")}
-              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all ${
-                mobileCueFocus === "LEAD"
+              aria-pressed={activeRole === "leader"}
+              onClick={() => setActiveRole("leader")}
+              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer ${
+                activeRole === "leader"
                   ? "bg-sky-600 text-white shadow-xs"
                   : "text-muted-foreground hover:text-foreground"
               }`}
@@ -534,9 +535,10 @@ export function TimbaSongAnatomyPlayer({
             <button
               type="button"
               data-testid="role-switch-follower"
-              onClick={() => setMobileCueFocus("FOLLOW")}
-              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all ${
-                mobileCueFocus === "FOLLOW"
+              aria-pressed={activeRole === "follower"}
+              onClick={() => setActiveRole("follower")}
+              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer ${
+                activeRole === "follower"
                   ? "bg-rose-600 text-white shadow-xs"
                   : "text-muted-foreground hover:text-foreground"
               }`}
@@ -1001,87 +1003,64 @@ export function TimbaSongAnatomyPlayer({
           </div>
         )}
 
-        {/* Mobile Cue Role Filter (Visible only on < md) */}
-        <div className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs">
-          <span className="text-[10px] font-extrabold uppercase text-muted-foreground shrink-0 mr-1">Focus:</span>
-          {(
-            [
-              { id: "ALL", label: "All Cues" },
-              { id: "LEAD", label: "Leader" },
-              { id: "FOLLOW", label: "Follower" },
-              { id: "TRIGGER", label: "Listen Trigger" },
-            ] as const
-          ).map((filter) => (
-            <button
-              key={filter.id}
-              type="button"
-              onClick={() => setMobileCueFocus(filter.id)}
-              className={`rounded-lg px-2.5 py-1 text-[11px] font-extrabold transition-all shrink-0 ${
-                mobileCueFocus === filter.id
-                  ? "bg-foreground text-background shadow-xs"
-                  : "border border-border/80 bg-muted/30 text-muted-foreground hover:bg-muted"
-              }`}
-            >
-              {filter.label}
-            </button>
-          ))}
-        </div>
-
-        {/* 3 Action Cards (What to Listen For, Leader Cue, Follower Cue) */}
-        <div className="grid gap-2 sm:gap-3 md:grid-cols-3">
-          {/* Card 1: What to Listen For (Permanently visible) */}
-          <Card className="border border-border/80 bg-card shadow-xs block">
-            <CardContent className="p-2.5 sm:p-3.5 space-y-1">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-slate-700 dark:text-muted-foreground flex items-center gap-1.5">
-                <Headphones className="h-3.5 w-3.5 text-sky-600" />
-                What to Listen For (Trigger)
+        {/* 2-Card Live Cue Row: Permanent Trigger + Strictly Conditional Active Role (Leader XOR Follower) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {/* Card 1: What to Listen For (100% Permanently Visible) */}
+          <Card data-testid="trigger-cue-card" className="border border-border/80 bg-card shadow-xs">
+            <CardContent className="p-2.5 sm:p-3 space-y-0.5">
+              <span className="text-[10px] uppercase font-black tracking-wider text-slate-700 dark:text-muted-foreground flex items-center gap-1.5">
+                <Headphones className="h-3.5 w-3.5 text-sky-600 shrink-0" />
+                🎧 What to Listen For (Trigger)
               </span>
-              <p className="text-xs text-slate-900 dark:text-foreground font-semibold leading-relaxed">
+              <p className="text-xs text-slate-900 dark:text-foreground font-semibold leading-snug">
                 {activeSegment.musicalTrigger}
               </p>
             </CardContent>
           </Card>
 
-          {/* Card 2: Leader Cue */}
-          <Card className={`border border-sky-500/30 bg-sky-500/[0.04] shadow-xs ${
-            mobileCueFocus === "ALL" || mobileCueFocus === "LEAD" ? "block" : "hidden md:block"
-          }`}>
-            <CardContent className="p-2.5 sm:p-3.5 space-y-1">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-sky-500" />
-                Leader Action
-              </span>
-              <p className="text-xs text-slate-900 dark:text-foreground font-semibold leading-relaxed">
-                {activeSegment.leaderCue}
-              </p>
-            </CardContent>
-          </Card>
-
-          {/* Card 3: Follower Cue */}
-          <Card className={`border border-rose-500/30 bg-rose-500/[0.04] shadow-xs ${
-            mobileCueFocus === "ALL" || mobileCueFocus === "FOLLOW" ? "block" : "hidden md:block"
-          }`}>
-            <CardContent className="p-2.5 sm:p-3.5 space-y-1">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-rose-950 dark:text-rose-300 flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-rose-500" />
-                Follower Action
-              </span>
-              <p className="text-xs text-slate-900 dark:text-foreground font-semibold leading-relaxed">
-                {activeSegment.followerCue}
-              </p>
-            </CardContent>
-          </Card>
+          {/* Card 2: Strictly Conditional Role Action (ONLY Leader OR Follower in DOM!) */}
+          {activeRole === "leader" ? (
+            <Card
+              data-testid="leader-action-card"
+              className="border border-sky-500/35 bg-sky-500/[0.05] shadow-xs"
+            >
+              <CardContent className="p-2.5 sm:p-3 space-y-0.5">
+                <span className="text-[10px] uppercase font-black tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-sky-500 shrink-0" />
+                  🕺 Leader Action
+                </span>
+                <p className="text-xs text-slate-900 dark:text-foreground font-semibold leading-snug">
+                  {activeSegment.leaderCue}
+                </p>
+              </CardContent>
+            </Card>
+          ) : (
+            <Card
+              data-testid="follower-action-card"
+              className="border border-rose-500/35 bg-rose-500/[0.05] shadow-xs"
+            >
+              <CardContent className="p-2.5 sm:p-3 space-y-0.5">
+                <span className="text-[10px] uppercase font-black tracking-wider text-rose-950 dark:text-rose-300 flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-rose-500 shrink-0" />
+                  💃 Follower Action
+                </span>
+                <p className="text-xs text-slate-900 dark:text-foreground font-semibold leading-snug">
+                  {activeSegment.followerCue}
+                </p>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
-        {/* Compact 1-Line Dancer Un-Confuser Alert Strip */}
+        {/* Compact Warning Pill Strip */}
         <div
           data-testid="un-confuser-alert"
-          className="rounded-xl border border-amber-500/35 bg-amber-950/20 px-3 py-2 flex items-center gap-2 text-xs text-amber-950 dark:text-amber-100/95 leading-snug shadow-xs"
+          className="rounded-xl border border-amber-500/35 bg-amber-950/20 py-1.5 px-3 flex items-center gap-2 text-xs text-amber-950 dark:text-amber-100/95 leading-snug shadow-xs"
         >
           <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0" />
-          <p className="truncate sm:whitespace-normal">
+          <p className="line-clamp-2 sm:line-clamp-none">
             <strong className="font-black uppercase tracking-wider text-amber-900 dark:text-amber-300 mr-1.5">
-              ⚠️ Avoid (Dancer Un-Confuser):
+              ⚠️ Avoid:
             </strong>
             {activeSegment.commonMistakeWarning}
           </p>

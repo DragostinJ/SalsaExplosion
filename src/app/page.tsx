@@ -16,10 +16,10 @@ import { getCachedUpcomingEvents } from "@/lib/cached-queries";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
-import { HavanaGrooveToggle } from "@/components/home/HavanaGrooveToggle";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
 import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import { ArtReveal } from "@/components/ui/ArtReveal";
+import { ACADEMY_METRICS, VENUE_INFO } from "@/lib/academy-data";
 
 const DanceVouchersShowcase = dynamic(
   () => import("@/components/marketing/dance-vouchers-showcase").then((m) => m.DanceVouchersShowcase),
@@ -82,7 +82,12 @@ export default async function Home() {
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <HavanaGrooveToggle />
+                <Link
+                  href="/venues"
+                  className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-amber-300 transition-colors"
+                >
+                  {VENUE_INFO.streetAddress.toUpperCase()}, {VENUE_INFO.postcode} →
+                </Link>
               </div>
             </div>
 
@@ -126,16 +131,16 @@ export default async function Home() {
                 {/* Architectural Metrics Bar */}
                 <div className="mt-10 pt-6 border-t border-white/10 grid grid-cols-3 gap-6 w-full">
                   <div>
-                    <div className="text-xl sm:text-2xl font-black text-amber-300">33+ Years</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">Cuban Heritage</div>
+                    <div className="text-xl sm:text-2xl font-black text-amber-300">{ACADEMY_METRICS.yearsInUk}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">{ACADEMY_METRICS.yearsInUkLabel}</div>
                   </div>
                   <div>
-                    <div className="text-xl sm:text-2xl font-black text-white">4,200+</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">Dancers Mentored</div>
+                    <div className="text-xl sm:text-2xl font-black text-white">{ACADEMY_METRICS.dancersMentored}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">{ACADEMY_METRICS.dancersMentoredLabel}</div>
                   </div>
                   <div>
-                    <div className="text-xl sm:text-2xl font-black text-amber-300">Zero Partner</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">Required to Join</div>
+                    <div className="text-xl sm:text-2xl font-black text-amber-300">{ACADEMY_METRICS.partnerPolicy}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">{ACADEMY_METRICS.partnerPolicyLabel}</div>
                   </div>
                 </div>
               </div>
@@ -232,12 +237,12 @@ export default async function Home() {
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
                     <div className="rounded-xl border border-rose-500/20 bg-black/40 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-rose-400">25+</span>
-                      <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Years Teaching</span>
+                      <span className="block text-xl sm:text-2xl font-black text-rose-400">{ACADEMY_METRICS.yearsInUk}</span>
+                      <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">{ACADEMY_METRICS.yearsInUkLabel}</span>
                     </div>
                     <div className="rounded-xl border border-rose-500/20 bg-black/40 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-white">4,200+</span>
-                      <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Dancers Mentored</span>
+                      <span className="block text-xl sm:text-2xl font-black text-white">{ACADEMY_METRICS.dancersMentored}</span>
+                      <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">{ACADEMY_METRICS.dancersMentoredLabel}</span>
                     </div>
                     <div className="col-span-2 sm:col-span-1 rounded-xl border border-rose-500/20 bg-black/40 p-3">
                       <span className="block text-xl sm:text-2xl font-black text-emerald-400">Havana</span>
@@ -288,7 +293,7 @@ export default async function Home() {
                     </div>
                     <div className="flex items-center justify-between py-1 border-b border-white/10">
                       <span className="font-semibold text-zinc-400">Experience</span>
-                      <span className="font-bold text-white">30+ Years Social Dancing</span>
+                      <span className="font-bold text-white">{ACADEMY_METRICS.yearsInUk} {ACADEMY_METRICS.yearsInUkLabel}</span>
                     </div>
                     <div className="flex items-center justify-between py-1">
                       <span className="font-semibold text-zinc-400">Recognition</span>

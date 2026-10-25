@@ -25,7 +25,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
 
     // 3. Verify Community Social Proof
     await expect(page.getByText("4,200+").first()).toBeVisible();
-    await expect(page.getByText("33+ Years").first()).toBeVisible();
+    await expect(page.getByText("25+ Years").first()).toBeVisible();
 
     // 4. Verify Social Media Links to @salsaexplosion & Facebook Community
     const instagramLinks = page.locator('a[href*="instagram.com/salsaexplosion"]');

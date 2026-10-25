@@ -143,7 +143,7 @@ export default async function RootLayout({
           <div className="film-grain" aria-hidden="true" />
           <StageSpotlight />
           <SiteHeader role={effectiveRole} canSwitchRoles={userCanSwitchRoles} />
-          <div className="flex-1 pb-20 md:pb-0 overflow-x-hidden relative z-10">{children}</div>
+          <div className="flex-1 overflow-x-hidden relative z-10">{children}</div>
           <SiteFooter />
           <MobileBottomNav />
           <Toaster richColors position="top-right" />

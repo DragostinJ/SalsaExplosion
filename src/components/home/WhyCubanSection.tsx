@@ -121,11 +121,6 @@ export function WhyCubanSection() {
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-
-          <div className="inline-flex items-center gap-2 rounded-full border border-secondary-base/30 bg-secondary-light/40 px-4 py-1.5 text-xs font-semibold text-secondary-hover shadow-xs">
-            <Sparkles className="h-3.5 w-3.5 text-secondary-base shrink-0" />
-            <span>Over 35% of our community started in other dance styles — our instructors make your circular Cuban transition effortless and fun!</span>
-          </div>
         </div>
       </div>
     </section>

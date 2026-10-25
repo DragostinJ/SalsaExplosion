@@ -45,7 +45,10 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     ).toBeVisible();
     await expect(page.getByText("Mark Townsend")).toBeVisible();
 
-    // 6. Verify Interactive Level Finder Quiz
+    // 6. Verify theplace-inspired Classes Gateway on landing page and Level Finder Quiz on /dashboard/schedule
+    await expect(page.locator('[data-testid="theplace-classes-gateway"]')).toBeVisible();
+    await page.goto("/dashboard/schedule");
+    await page.waitForLoadState("domcontentloaded");
     await expect(page.getByText("Interactive Level Finder • 15 Seconds")).toBeVisible();
     await expect(page.getByText("Not Sure Which Cuban Salsa Level to Book?")).toBeVisible();
     await expect(page.getByText("I've never danced Cuban Salsa before")).toBeVisible();
@@ -498,7 +501,9 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(whyCuban.getByText(/The Magic of the Rueda Circle/i)).toBeVisible();
     await expect(whyCuban.getByText(/Pure Havana Rhythm, Timba & Afro-Rumba/i)).toBeVisible();
 
-    // 4. Verify Cross-Over Dancer Option in Level Matcher Quiz
+    // 4. Verify Cross-Over Dancer Option in Level Matcher Quiz on /dashboard/schedule
+    await page.goto("/dashboard/schedule");
+    await page.waitForLoadState("domcontentloaded");
     const crossoverBtn = page.getByRole("button", {
       name: /I Dance Other Styles/i,
     });
@@ -514,6 +519,8 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     ).toBeVisible();
 
     // 5. Verify Mobile Expand Toggle on mobile viewport
+    await page.goto("/?liveDemo=thursday");
+    await page.waitForLoadState("domcontentloaded");
     await page.setViewportSize({ width: 375, height: 667 });
     const mobileToggle = page.getByRole("button", {
       name: /Show All 8 Maestros & Guest Artists/i,

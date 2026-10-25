@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/navigation/site-header";
 import { SiteFooter } from "@/components/navigation/site-footer";
 import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
 import { JsonLdSchema } from "@/components/seo/JsonLdSchema";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { StageSpotlight } from "@/components/ui/StageSpotlight";
 import "./globals.css";
 
@@ -146,6 +147,7 @@ export default async function RootLayout({
           <div className="flex-1 overflow-x-hidden relative z-10">{children}</div>
           <SiteFooter />
           <MobileBottomNav />
+          <GoogleAnalytics />
           <Toaster richColors position="top-right" />
         </body>
       </html>

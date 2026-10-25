@@ -1,4 +1,18 @@
+import {
+  ACADEMY_METRICS,
+  VENUE_INFO,
+  WEEKLY_SCHEDULE,
+  PASS_PRICING,
+  UPCOMING_EVENTS,
+  ACADEMY_FAQS,
+} from "@/lib/academy-data";
+
 export function JsonLdSchema() {
+  const allSessions = [
+    ...WEEKLY_SCHEDULE.thursday.sessions.map((s) => ({ ...s, dayName: "Thursday" })),
+    ...WEEKLY_SCHEDULE.sunday.sessions.map((s) => ({ ...s, dayName: "Sunday" })),
+  ];
+
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -7,21 +21,22 @@ export function JsonLdSchema() {
         "@id": "https://salsaexplosion.co.uk/#organization",
         name: "Salsa Explosion UK — Bournemouth Cuban Salsa Academy",
         description:
-          "Bournemouth's authentic Cuban Salsa academy directed by Maestro Enrique Perez Valdes. Weekly partnerwork, Rueda de Casino, and congress passes at BOH Studios.",
+          "Bournemouth's authentic Cuban Salsa & Rueda de Casino academy directed by Maestro Enrique Perez Valdes. Strictly Thursdays and Sundays at BOH Studios Bournemouth.",
         url: "https://salsaexplosion.co.uk",
-        telephone: "+447969633701",
+        telephone: VENUE_INFO.phoneE164,
+        priceRange: "£10 - £95",
         founder: {
           "@type": "Person",
-          name: "Enrique Perez Valdes",
-          jobTitle: "Maestro & Founder",
-          award: "Salsa UK Lifetime Achievement Award",
+          name: ACADEMY_METRICS.founderName,
+          jobTitle: "Maestro & Artistic Director",
+          award: ACADEMY_METRICS.founderAward,
         },
         address: {
           "@type": "PostalAddress",
-          streetAddress: "BOH Studios, 104 Commercial Rd",
-          addressLocality: "Bournemouth",
-          postalCode: "BH2 5LR",
-          addressCountry: "GB",
+          streetAddress: `BOH Studios, ${VENUE_INFO.streetAddress}`,
+          addressLocality: VENUE_INFO.city,
+          postalCode: VENUE_INFO.postcode,
+          addressCountry: VENUE_INFO.country,
         },
         areaServed: [
           "Bournemouth",
@@ -40,98 +55,66 @@ export function JsonLdSchema() {
           "Kizomba",
           "Latin Dance Classes",
         ],
-        sameAs: [
-          "https://www.instagram.com/salsaexplosion/",
-          "https://www.facebook.com/salsaexplosion",
-        ],
+        sameAs: [VENUE_INFO.instagramUrl, VENUE_INFO.facebookUrl],
       },
-      {
+      ...allSessions.map((session) => ({
+        "@type": "Course",
+        "@id": `https://salsaexplosion.co.uk/#course-${session.id}`,
+        name: `${session.dayName} ${session.time} — ${session.title}`,
+        description: `${session.level} (${session.badge}) directed by ${session.instructor} at ${VENUE_INFO.name}, ${VENUE_INFO.fullAddress}.`,
+        provider: {
+          "@id": "https://salsaexplosion.co.uk/#organization",
+        },
+        offers: {
+          "@type": "Offer",
+          price: PASS_PRICING.PACK_SINGLE.priceInPounds.toFixed(2),
+          priceCurrency: "GBP",
+          availability: "https://schema.org/InStock",
+          url: "https://salsaexplosion.co.uk/dashboard/schedule",
+        },
+      })),
+      ...UPCOMING_EVENTS.map((evt) => ({
         "@type": "Event",
-        "@id": "https://salsaexplosion.co.uk/events/halloween-fancy-dress-latin-party-2026",
-        name: "Halloween Fancy Dress Party",
-        startDate: "2026-10-31T19:30:00Z",
+        "@id": `https://salsaexplosion.co.uk/events/${evt.slug}`,
+        name: evt.title,
+        startDate: evt.startDateIso,
+        ...(evt.endDateIso ? { endDate: evt.endDateIso } : {}),
+        description: evt.description,
         location: {
           "@type": "Place",
-          name: "BOH Studios Bournemouth",
+          name: evt.venueName,
           address: {
             "@type": "PostalAddress",
-            streetAddress: "104 Commercial Rd",
-            addressLocality: "Bournemouth",
-            postalCode: "BH2 5LR",
-            addressCountry: "GB",
+            streetAddress: VENUE_INFO.streetAddress,
+            addressLocality: VENUE_INFO.city,
+            postalCode: VENUE_INFO.postcode,
+            addressCountry: VENUE_INFO.country,
           },
         },
         offers: {
           "@type": "Offer",
-          price: "12.00",
+          price: evt.minPricePounds.toFixed(2),
           priceCurrency: "GBP",
           availability: "https://schema.org/InStock",
-          url: "https://salsaexplosion.co.uk/events/halloween-fancy-dress-latin-party-2026",
+          url: `https://salsaexplosion.co.uk/events/${evt.slug}`,
         },
         organizer: {
           "@type": "Organization",
           name: "Salsa Explosion UK",
           url: "https://salsaexplosion.co.uk",
         },
-      },
+      })),
       {
-        "@type": "Event",
-        "@id": "https://salsaexplosion.co.uk/events/sbk-night-extravaganza-2026",
-        name: "SB&K Night Extravaganza",
-        startDate: "2026-11-14T19:30:00Z",
-        location: {
-          "@type": "Place",
-          name: "BOH Studios Bournemouth",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "104 Commercial Rd",
-            addressLocality: "Bournemouth",
-            postalCode: "BH2 5LR",
-            addressCountry: "GB",
+        "@type": "FAQPage",
+        "@id": "https://salsaexplosion.co.uk/#faq",
+        mainEntity: ACADEMY_FAQS.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
           },
-        },
-        offers: {
-          "@type": "Offer",
-          price: "15.00",
-          priceCurrency: "GBP",
-          availability: "https://schema.org/InStock",
-          url: "https://salsaexplosion.co.uk/events/sbk-night-extravaganza-2026",
-        },
-        organizer: {
-          "@type": "Organization",
-          name: "Salsa Explosion UK",
-          url: "https://salsaexplosion.co.uk",
-        },
-      },
-      {
-        "@type": "Event",
-        "@id": "https://salsaexplosion.co.uk/events/made-in-cuba-dance-weekend-2026",
-        name: "MADE IN CUBA — Dance Weekend 2026",
-        startDate: "2026-12-04T18:00:00Z",
-        endDate: "2026-12-06T23:00:00Z",
-        location: {
-          "@type": "Place",
-          name: "BOH Studios Bournemouth",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "104 Commercial Rd",
-            addressLocality: "Bournemouth",
-            postalCode: "BH2 5LR",
-            addressCountry: "GB",
-          },
-        },
-        offers: {
-          "@type": "Offer",
-          price: "20.00",
-          priceCurrency: "GBP",
-          availability: "https://schema.org/InStock",
-          url: "https://salsaexplosion.co.uk/events/made-in-cuba-dance-weekend-2026",
-        },
-        organizer: {
-          "@type": "Organization",
-          name: "Salsa Explosion UK",
-          url: "https://salsaexplosion.co.uk",
-        },
+        })),
       },
     ],
   };

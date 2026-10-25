@@ -7,7 +7,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/dashboard/schedule",
-    "/dashboard/progression",
+    "/dashboard/rueda",
+    "/dashboard/wallet",
+    "/dashboard/referrals",
     "/events",
     "/events/made-in-cuba-dance-weekend-2026",
     "/pricing",
@@ -16,8 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/music",
     "/about",
     "/how-it-works",
-    "/dashboard/rueda",
     "/terms",
+    "/llms.txt",
   ];
 
   return routes.map((route) => ({
@@ -28,7 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       route === ""
         ? 1.0
-        : route === "/dashboard/schedule" || route === "/events"
+        : route === "/dashboard/schedule" || route === "/events" || route === "/llms.txt"
         ? 0.9
         : 0.8,
   }));

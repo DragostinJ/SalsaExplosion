@@ -1,4 +1,5 @@
 // src/lib/constants/pricing.ts
+import { PASS_PRICING } from "@/lib/academy-data";
 
 export type PackageId =
   | "PACK_SINGLE"
@@ -21,61 +22,44 @@ export interface PricingPackage {
 export const PRICING_CATALOG: Record<PackageId, PricingPackage> = {
   PACK_SINGLE: {
     id: "PACK_SINGLE",
-    name: "Single Drop-In Pass",
-    description: "Perfect for trying out a Cuban Salsa Casino or Rueda class.",
-    priceDisplay: "£12",
+    name: PASS_PRICING.PACK_SINGLE.name,
+    description: PASS_PRICING.PACK_SINGLE.description,
+    priceDisplay: PASS_PRICING.PACK_SINGLE.priceDisplay,
     mode: "payment",
     stripePriceIdEnvVar: "STRIPE_PRICE_SINGLE_DROPIN",
     creditAmount: 1,
-    features: [
-      "1 Class Credit",
-      "Valid for any unlocked dance level",
-      "12-hour free cancellation refund",
-    ],
+    features: PASS_PRICING.PACK_SINGLE.features,
   },
   PACK_5: {
     id: "PACK_5",
-    name: "5-Class Rhythm Pack",
-    description: "Ideal for weekly dancers building consistent Casino technique.",
-    priceDisplay: "£50",
+    name: PASS_PRICING.PACK_5.name,
+    description: PASS_PRICING.PACK_5.description,
+    priceDisplay: PASS_PRICING.PACK_5.priceDisplay,
     mode: "payment",
     stripePriceIdEnvVar: "STRIPE_PRICE_5_PACK",
     creditAmount: 5,
-    features: [
-      "5 Class Credits (£10 / class)",
-      "Valid across all Cuban Salsa levels",
-      "Credits never expire",
-    ],
+    popular: true,
+    features: PASS_PRICING.PACK_5.features,
   },
   PACK_10: {
     id: "PACK_10",
-    name: "10-Class Salsero Pack",
-    description: "Best value credit bundle for dedicated Cuban Salsa dancers.",
-    priceDisplay: "£90",
+    name: PASS_PRICING.PACK_10.name,
+    description: PASS_PRICING.PACK_10.description,
+    priceDisplay: PASS_PRICING.PACK_10.priceDisplay,
     mode: "payment",
     stripePriceIdEnvVar: "STRIPE_PRICE_10_PACK",
     creditAmount: 10,
-    popular: true,
-    features: [
-      "10 Class Credits (£9 / class)",
-      "Valid for all Cuban Salsa & Rueda classes",
-      "Priority video level-up reviews",
-    ],
+    features: PASS_PRICING.PACK_10.features,
   },
   SUB_UNLIMITED_MONTHLY: {
     id: "SUB_UNLIMITED_MONTHLY",
-    name: "Unlimited Studio Membership",
-    description: "All-access monthly pass for dedicated dancers.",
-    priceDisplay: "£110 / month",
+    name: PASS_PRICING.SUB_UNLIMITED_MONTHLY.name,
+    description: PASS_PRICING.SUB_UNLIMITED_MONTHLY.description,
+    priceDisplay: PASS_PRICING.SUB_UNLIMITED_MONTHLY.priceDisplay,
     mode: "subscription",
     stripePriceIdEnvVar: "STRIPE_PRICE_UNLIMITED_MONTHLY",
     creditAmount: 0,
-    features: [
-      "Unlimited weekly studio classes",
-      "Zero credit deductions when booking",
-      "Free entry to monthly social practice",
-      "Cancel anytime via Billing Portal",
-    ],
+    features: PASS_PRICING.SUB_UNLIMITED_MONTHLY.features,
   },
 } as const;
 

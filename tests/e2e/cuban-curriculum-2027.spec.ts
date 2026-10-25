@@ -410,19 +410,22 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     const hud = page.locator('[data-testid="active-segment-hud"]');
     await expect(hud).toBeVisible();
 
-    // Test mobile cue role focus toggles
-    const leaderFocusBtn = page.getByRole("button", { name: "Leader", exact: true });
-    if (await leaderFocusBtn.isVisible()) {
-      await leaderFocusBtn.click();
-      await expect(page.getByText(/Leader Action/i)).toBeVisible();
-    }
+    // Test mobile cue role focus toggles & strict conditional rendering
+    const leaderCard = page.locator('[data-testid="leader-action-card"]');
+    const followerCard = page.locator('[data-testid="follower-action-card"]');
+    const roleSwitchFollower = page.locator('[data-testid="role-switch-follower"]');
+    const roleSwitchLeader = page.locator('[data-testid="role-switch-leader"]');
 
-    const allCuesBtn = page.getByRole("button", { name: "All Cues", exact: true });
-    if (await allCuesBtn.isVisible()) {
-      await allCuesBtn.click();
-      await expect(page.getByText(/Leader Action/i)).toBeVisible();
-      await expect(page.getByText(/Follower Action/i)).toBeVisible();
-    }
+    await expect(leaderCard).toBeVisible();
+    await expect(followerCard).toHaveCount(0);
+
+    await roleSwitchFollower.click();
+    await expect(followerCard).toBeVisible();
+    await expect(leaderCard).toHaveCount(0);
+
+    await roleSwitchLeader.click();
+    await expect(leaderCard).toBeVisible();
+    await expect(followerCard).toHaveCount(0);
 
     // 2. Audit /how-it-works on mobile
     await page.goto("/how-it-works");

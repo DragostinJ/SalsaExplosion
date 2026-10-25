@@ -429,10 +429,10 @@ export function TimbaSongAnatomyPlayer({
         {/* 1-Line Compact Mobile Header */}
         <div className="flex md:hidden items-center justify-between gap-2 text-xs">
           <span className="font-black text-foreground truncate">
-            🎵 Timba Song Trainer • {activeSong.title.replace(/\s*\(.*?\)\s*/g, "")} ({activeSong.bpm} BPM)
+            🎵 Timba Trainer • {activeSong.title.replace(/\s*\(.*?\)\s*/g, "")} • {activeSong.bpm} Tempo
           </span>
           <span className="font-mono text-[11px] font-extrabold text-muted-foreground shrink-0">
-            {formatSeconds(currentTime)} / {formatSeconds(effectiveDuration)}
+            {formatSeconds(currentTime)} elapsed
           </span>
         </div>
 
@@ -536,7 +536,7 @@ export function TimbaSongAnatomyPlayer({
               onClick={() => setActiveRole("leader")}
               className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer ${
                 activeRole === "leader"
-                  ? "bg-sky-600 text-white shadow-xs"
+                  ? "bg-sky-700 text-white shadow-xs"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -549,7 +549,7 @@ export function TimbaSongAnatomyPlayer({
               onClick={() => setActiveRole("follower")}
               className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer ${
                 activeRole === "follower"
-                  ? "bg-rose-600 text-white shadow-xs"
+                  ? "bg-rose-700 text-white shadow-xs"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >

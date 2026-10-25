@@ -1133,22 +1133,24 @@ export function TimbaSongAnatomyPlayer({
             })}
           </div>
 
-          {/* Inline Move Inspector Card (Opens on tap) */}
+          {/* Slide-Up Move Breakdown Overlay / Inspector Modal */}
           {inspectingMove && (
             <div
               data-testid="move-inspector-card"
-              className="rounded-2xl border-2 border-primary-base/40 bg-card p-5 space-y-3 mt-3 shadow-md relative"
+              className="fixed inset-x-3 bottom-16 sm:static sm:inset-auto sm:bottom-auto z-50 rounded-2xl border-2 border-primary-base/50 bg-card/95 sm:bg-card p-4 sm:p-5 space-y-2.5 mt-3 shadow-2xl sm:shadow-md backdrop-blur-md"
             >
               <button
                 type="button"
+                data-testid="close-move-inspector"
+                aria-label="Close move preview"
                 onClick={() => setInspectingMove(null)}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+                className="absolute top-3.5 right-3.5 rounded-full p-1 text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
                 title="Close move preview"
               >
                 <X className="h-4 w-4" />
               </button>
 
-              <div className="space-y-1">
+              <div className="space-y-1 pr-6">
                 <div className="flex items-center gap-2">
                   <Badge className="bg-primary-base text-white text-[10px] font-bold">
                     {inspectingMove.level} Syllabus
@@ -1159,38 +1161,38 @@ export function TimbaSongAnatomyPlayer({
                     </span>
                   )}
                 </div>
-                <h4 className="text-lg font-black text-foreground">
+                <h4 className="text-base sm:text-lg font-black text-foreground">
                   {inspectingMove.name}
                 </h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-none">
                   {inspectingMove.summary}
                 </p>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-2 text-xs pt-1">
+              <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-2 text-xs pt-1">
                 {inspectingMove.handholdType && (
-                  <div className="rounded-xl border bg-muted/30 p-2.5 space-y-0.5">
+                  <div className="rounded-xl border bg-muted/30 p-2 sm:p-2.5 space-y-0.5">
                     <span className="text-[10px] font-bold uppercase text-muted-foreground block">
                       Handhold &amp; Connection
                     </span>
-                    <p className="font-medium text-foreground">{inspectingMove.handholdType}</p>
+                    <p className="font-semibold text-foreground text-xs">{inspectingMove.handholdType}</p>
                   </div>
                 )}
                 {inspectingMove.entryExitGeometry && (
-                  <div className="rounded-xl border bg-muted/30 p-2.5 space-y-0.5">
+                  <div className="rounded-xl border bg-muted/30 p-2 sm:p-2.5 space-y-0.5">
                     <span className="text-[10px] font-bold uppercase text-muted-foreground block">
                       Circular Geometry
                     </span>
-                    <p className="font-medium text-foreground">{inspectingMove.entryExitGeometry}</p>
+                    <p className="font-semibold text-foreground text-xs">{inspectingMove.entryExitGeometry}</p>
                   </div>
                 )}
               </div>
 
-              <div className="rounded-xl border border-amber-300 bg-amber-50 dark:border-amber-500/40 dark:bg-amber-950/20 p-3 text-xs flex items-start gap-2.5 shadow-xs">
+              <div className="rounded-xl border border-amber-300 bg-amber-50 dark:border-amber-500/40 dark:bg-amber-950/20 p-2.5 sm:p-3 text-xs flex items-start gap-2 shadow-xs">
                 <Sparkles className="h-3.5 w-3.5 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
                 <div className="space-y-0.5">
                   <span className="font-extrabold text-amber-950 dark:text-amber-200 text-[10px] uppercase tracking-wider block">
-                    Un-Confuser Tip
+                    💡 Un-Confuser Tip:
                   </span>
                   <p className="text-slate-900 dark:text-amber-100 font-semibold leading-relaxed">
                     {inspectingMove.unConfuserTip}

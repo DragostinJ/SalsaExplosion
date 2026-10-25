@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function CubanMusicPage() {
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
+    <main className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
         <Badge

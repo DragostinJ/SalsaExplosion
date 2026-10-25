@@ -1,22 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Calendar,
-  Award,
   ArrowRight,
-  QrCode,
   MapPin,
   Flame,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
-import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
 import { getCachedUpcomingEvents } from "@/lib/cached-queries";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
-import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
 import { ArtHouseGallerySection } from "@/components/home/ArtHouseGallerySection";
 import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import { ArtReveal } from "@/components/ui/ArtReveal";
@@ -114,8 +109,8 @@ export default async function Home() {
                     asChild
                     className="h-12 px-6 text-xs sm:text-sm font-black uppercase tracking-wider bg-amber-500 hover:bg-amber-400 text-black rounded-xl shadow-[0_10px_30px_rgba(245,158,11,0.25)] transition-transform active:scale-[0.99]"
                   >
-                    <Link href="#timetable">
-                      <span>Thursday &amp; Sunday Lineup ↓</span>
+                    <Link href="/dashboard/schedule">
+                      <span>Thursday &amp; Sunday Lineup →</span>
                     </Link>
                   </Button>
                   <Button
@@ -172,40 +167,8 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Two-Day Exhibition Timetable Showcase (Inspired by The Place) */}
-        <TwoDayExhibitionTimetable />
-
-        {/* Interactive Level Matcher Section — Promoted above the fold */}
-        <section className="cv-auto py-10 bg-muted/20 border-b border-border/60">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <LevelMatcherQuiz />
-
-            {/* First-Timer Quick Guide Reassurance Bar */}
-            <div className="mt-6 rounded-2xl border border-border/70 bg-card/80 p-4 shadow-xs">
-              <div className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground mb-3 text-center sm:text-left">
-                First-Timer Quick Guide
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
-                <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-background/80 px-3.5 py-2.5 text-xs text-foreground">
-                  <span className="font-bold text-amber-800 dark:text-amber-400">Footwear</span>
-                  <span className="text-muted-foreground">Comfortable flat shoes or trainers</span>
-                </div>
-                <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-background/80 px-3.5 py-2.5 text-xs text-foreground">
-                  <span className="font-bold text-amber-800 dark:text-amber-400">No Partner Needed</span>
-                  <span className="text-muted-foreground">Zero partner required (we rotate continuously)</span>
-                </div>
-                <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-background/80 px-3.5 py-2.5 text-xs text-foreground">
-                  <span className="font-bold text-amber-800 dark:text-amber-400">Studio Bar &amp; Lounge</span>
-                  <span className="text-muted-foreground">Refreshments &amp; social lounge at BOH Studios</span>
-                </div>
-                <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-background/80 px-3.5 py-2.5 text-xs text-foreground">
-                  <span className="font-bold text-amber-800 dark:text-amber-400">Town-Centre Parking</span>
-                  <span className="text-muted-foreground">Easy parking nearby (The Triangle, BH2 5LR)</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Curated Art-House Exhibition Photo Gallery & 2-Card Thursday/Sunday Gateway (Inspired by The Place) */}
+        <ArtHouseGallerySection />
 
         {/* Why Authentic Cuban Casino & Rueda vs Linear Styles */}
         <ArtReveal>
@@ -479,7 +442,7 @@ export default async function Home() {
         )}
 
         {/* Dance Vouchers Gift Showcase */}
-        <section className="cv-auto py-14 border-t bg-gradient-to-b from-background to-muted/20">
+        <section className="cv-auto dark py-14 border-t border-white/10 bg-[#080605] text-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <DanceVouchersShowcase />
           </div>
@@ -487,52 +450,6 @@ export default async function Home() {
 
         {/* Flagship BOH Studios Venue & Arrival Guide */}
         <BohVenueSpotlight />
-
-        {/* Curated Art-House Exhibition Photo Gallery & Essential Visitor FAQ */}
-        <ArtHouseGallerySection />
-
-        {/* Core Capabilities Grid */}
-        <section className="cv-auto py-16 border-t">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="rounded-2xl border bg-card p-6 shadow-xs">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-blue-600 mb-4">
-                  <Calendar className="h-6 w-6" />
-                </div>
-                <h3 className="text-lg font-bold">
-                  Balanced Lead & Follow Ratios
-                </h3>
-                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Our smart real-time booking system automatically caps Lead and Follow tickets so you never spend a class waiting on the sidelines.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border bg-card p-6 shadow-xs">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-light text-primary-base mb-4">
-                  <Award className="h-6 w-6" />
-                </div>
-                <h3 className="text-lg font-bold">
-                  4-Tier Cuban Salsa Syllabus
-                </h3>
-                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  Clear progression from Beginner to Improver, Intermediate, and Advanced covering Guapea, Dile Que No, Setenta, Vacilala, and Rueda command mastery.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border bg-card p-6 shadow-xs">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 mb-4">
-                  <QrCode className="h-6 w-6" />
-                </div>
-                <h3 className="text-lg font-bold">
-                  Instant Digital Passes — Zero Booking Fees
-                </h3>
-                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  One-tap Apple Pay, Google Pay, and card checkout with instant QR passes saved straight to your phone for 1-second door check-in at BOH Studios.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* 2-Tap Interactive QuickBook & Live QR Drawer */}
         <QuickBookDrawer />

@@ -22,6 +22,116 @@ export function ArtHouseGallerySection() {
       className="cv-auto py-14 sm:py-20 bg-[#080605] border-t border-white/10 text-white"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
+        {/* theplace.org.uk-inspired 2-Card Photo-Led Classes Gateway */}
+        <div data-testid="theplace-classes-gateway" className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-white/10">
+            <div>
+              <span className="text-[11px] font-black uppercase tracking-widest text-amber-300 block mb-1">
+                Bournemouth Cuban Residency • Weekly Programmes
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white leading-none">
+                Weekly Classes &amp;{" "}
+                <span className="font-display italic font-normal text-amber-300 lowercase">
+                  social fiestas
+                </span>
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-300 max-w-md">
+              Strictly Thursdays and Sundays at BOH Studios. Photo-led programmes with partner-balanced rotations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Card 1: Thursday */}
+            <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:border-amber-400/50">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80"
+                  alt="Thursday Cuban Salsa, Musicality & Rueda at BOH Studios Bournemouth"
+                  loading="lazy"
+                  decoding="async"
+                  className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute top-3 left-3">
+                  <span className="rounded-md bg-black/80 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
+                    EVERY THURSDAY • DOORS 18:45
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-black text-white group-hover:text-amber-300 transition-colors">
+                    Thursday Cuban Salsa, Musicality &amp; Rueda
+                  </h3>
+                  <p className="text-xs sm:text-sm text-zinc-300 mt-1.5 leading-relaxed">
+                    19:00 Beginners &amp; Solo Musicality • 20:15 Improvers, Intermediate &amp; Rueda • 21:30 Havana Social Fiesta.
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-amber-300">
+                    19:00 – LATE
+                  </span>
+                  <Link
+                    href="/dashboard/schedule#timetable-thursday"
+                    className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-amber-300 hover:text-white transition-colors"
+                  >
+                    <span>Explore Thursday Lineup</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Sunday */}
+            <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:border-amber-400/50">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1000&q=80"
+                  alt="Sunday Masterclass & Havana Social Fiesta at BOH Studios Bournemouth"
+                  loading="lazy"
+                  decoding="async"
+                  className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute top-3 left-3">
+                  <span className="rounded-md bg-black/80 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
+                    EVERY SUNDAY • DOORS 18:15
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg sm:text-xl font-black text-white group-hover:text-amber-300 transition-colors">
+                    Sunday Masterclass &amp; Havana Social Fiesta
+                  </h3>
+                  <p className="text-xs sm:text-sm text-zinc-300 mt-1.5 leading-relaxed">
+                    18:30 All-Levels Cuban Workshop &amp; Rueda Circle followed by our 19:30 Sunday Social Fiesta at BOH Studios.
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-amber-300">
+                    18:30 – LATE
+                  </span>
+                  <Link
+                    href="/dashboard/schedule#timetable-sunday"
+                    className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-amber-300 hover:text-white transition-colors"
+                  >
+                    <span>Explore Sunday Lineup</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Part 1: Curated Exhibition Photo Gallery (Inspired by The Place) */}
         <div className="space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-white/10">
@@ -122,7 +232,7 @@ export function ArtHouseGallerySection() {
                   asChild
                   className="bg-amber-500 hover:bg-amber-400 text-black font-black text-xs h-10 px-5 rounded-xl"
                 >
-                  <Link href="#timetable">
+                  <Link href="/dashboard/schedule#timetable">
                     Book Thursday or Sunday Spot
                     <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                   </Link>
@@ -229,7 +339,7 @@ export function ArtHouseGallerySection() {
                 size="sm"
                 className="bg-amber-500 hover:bg-amber-400 text-black font-black text-xs shrink-0"
               >
-                <Link href="#timetable" onClick={() => setSelectedPhoto(null)}>
+                <Link href="/dashboard/schedule#timetable" onClick={() => setSelectedPhoto(null)}>
                   Book Spot →
                 </Link>
               </Button>

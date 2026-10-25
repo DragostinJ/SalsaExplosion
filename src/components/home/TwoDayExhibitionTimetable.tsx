@@ -71,9 +71,11 @@ function TimetableRow({
 
         {/* Column 4: Action (col-span-2) */}
         <div className="lg:col-span-2 lg:text-right pt-2 lg:pt-0">
-          <button
-            type="button"
-            onClick={() =>
+          <a
+            href={`/dashboard/schedule?book=${item.id}`}
+            data-testid={`timetable-book-${item.id}`}
+            onClick={(e) => {
+              e.preventDefault();
               triggerQuickBookDrawer({
                 title: item.title,
                 time: item.time,
@@ -81,8 +83,8 @@ function TimetableRow({
                 instructor: item.instructor,
                 isSocial: item.isSocial,
                 day,
-              })
-            }
+              });
+            }}
             className={
               item.isSocial
                 ? "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-5 py-2.5 border border-[#11100E] text-[#11100E] hover:bg-[#11100E] hover:text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer"
@@ -91,7 +93,7 @@ function TimetableRow({
           >
             <span>{item.ctaLabel || (item.isSocial ? "Join Social" : "Book Spot")}</span>
             <span aria-hidden="true">→</span>
-          </button>
+          </a>
         </div>
       </div>
     </div>

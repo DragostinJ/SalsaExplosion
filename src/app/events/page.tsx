@@ -12,6 +12,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { BackButton } from "@/components/navigation/back-button";
+import { VENUE_INFO, ACADEMY_METRICS } from "@/lib/academy-data";
 
 export const metadata = {
   title: "DANZA! 2026 | 2027 & Salsa Explosion Congresses | Bournemouth",
@@ -47,7 +48,7 @@ export default async function EventsDirectoryPage() {
                 variant="outline"
                 className="border-secondary-base/40 text-secondary-hover bg-secondary-light/30 text-xs font-semibold"
               >
-                📍 BOH Studios Bournemouth
+                {VENUE_INFO.name}
               </Badge>
             </div>
 
@@ -56,20 +57,20 @@ export default async function EventsDirectoryPage() {
                 DANZA! 2026 | 2027 Special Event Calendar
               </h1>
               <p className="text-xs text-text-muted mt-1">
-                Salsa Explosion Congresses &amp; Masterclasses
+                Salsa Explosion Congresses &amp; Masterclasses • Directed by {ACADEMY_METRICS.founderTitleName}
               </p>
             </div>
 
             <div className="rounded-2xl border border-primary-base/20 bg-primary-base/5 p-4 sm:p-5 space-y-3">
               <p className="text-xs sm:text-sm text-foreground leading-relaxed italic">
-                &ldquo;We’ve got some very exciting special events coming up at BOH Studios, Bournemouth — and we’d love you to be part of them! ❤️ From Cuban Salsa, Rueda, Son Cubano, Afro Cuban, Bachata, Kizomba and Timba to big parties, special guests, dance weekends and plenty of social dancing… there’s lots to look forward to! These are the dates you don’t want to miss, so get your diary out and save them now! 📅&rdquo;
+                &ldquo;We have an extraordinary season of special events coming up at {VENUE_INFO.name} — and we would love you to be part of them. From Cuban Salsa, Rueda, Son Cubano, Afro-Cuban, Bachata, Kizomba, and Timba to flagship parties, guest maestros, dance weekends, and late-night social dancing, save these dates in your diary now.&rdquo;
               </p>
               <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-primary-base/15 text-xs">
                 <span className="font-extrabold text-primary-hover">
-                  Enrique &amp; The Salsa Explosion Team 🇨🇺
+                  Enrique &amp; The Salsa Explosion Team
                 </span>
                 <span className="text-text-muted font-medium">
-                  104 Commercial Rd, Bournemouth BH2 5LR
+                  {VENUE_INFO.streetAddress}, {VENUE_INFO.city} {VENUE_INFO.postcode}
                 </span>
               </div>
             </div>

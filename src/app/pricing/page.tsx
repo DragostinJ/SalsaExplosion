@@ -6,6 +6,7 @@ import { PricingCards } from "@/components/pricing/pricing-cards";
 import { BackButton } from "@/components/navigation/back-button";
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
+import { VENUE_INFO, PASS_PRICING } from "@/lib/academy-data";
 
 export default async function PricingPage() {
   const user = await getOrProvisionCurrentUser();
@@ -33,7 +34,7 @@ export default async function PricingPage() {
           Class Passes &amp; <span className="font-display italic font-normal text-amber-800 dark:text-amber-400">Memberships</span>
         </h1>
         <p className="mx-auto mt-3 max-w-2xl text-xs sm:text-sm text-muted-foreground font-medium">
-          Strictly Thursdays &amp; Sundays at BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR). Choose a single drop-in, 5-class Havana pack, 10-class Casinero pass, or unlimited monthly access.
+          Strictly Thursdays &amp; Sundays at {VENUE_INFO.name} ({VENUE_INFO.streetAddress}, {VENUE_INFO.postcode}). Choose a {PASS_PRICING.PACK_SINGLE.priceDisplay} single drop-in, {PASS_PRICING.PACK_5.priceDisplay} 5-class Havana pack, {PASS_PRICING.PACK_10.priceDisplay} 10-class Casinero pass, or {PASS_PRICING.SUB_UNLIMITED_MONTHLY.priceDisplay} unlimited access.
         </p>
       </div>
 

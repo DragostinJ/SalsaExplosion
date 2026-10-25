@@ -52,6 +52,7 @@ import { Button } from "@/components/ui/button";
 import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
+import { VENUE_INFO } from "@/lib/academy-data";
 
 interface SchedulePageProps {
   searchParams: Promise<{
@@ -225,7 +226,7 @@ export default async function StudentSchedulePage({
       {(checkoutStatus === "success" || checkoutStatus === "demo_success") && (
         <div className="flex items-center justify-between rounded-2xl border border-emerald-500/40 bg-emerald-500/10 px-5 py-3.5 text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-300">
           <span>
-            🎉 Pass activated! Your studio wallet has been updated ({user?.classCredits ?? 0} credits available). Select any class below to book your spot!
+            Pass activated! Your studio wallet has been updated ({user?.classCredits ?? 0} credits available). Select any class below to book your spot!
           </span>
           <Link href="/dashboard/schedule" className="underline ml-4 text-xs">
             Dismiss
@@ -239,14 +240,14 @@ export default async function StudentSchedulePage({
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <Badge className="bg-primary-base text-white font-bold text-xs">
-                🎁 First-Time Visitor Offer
+                First-Time Visitor Offer
               </Badge>
               <span className="text-xs font-semibold text-muted-foreground">
                 1 Complimentary Welcome Class Credit
               </span>
             </div>
             <p className="text-xs sm:text-sm text-foreground font-semibold">
-              Browse live Bournemouth classes below. No partner required — partner rotations are 100% ratio balanced!
+              Browse live {VENUE_INFO.city} classes below. No partner required — partner rotations are 100% ratio balanced!
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">

@@ -14,6 +14,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  WEEKLY_SCHEDULE as CANONICAL_WEEKLY_SCHEDULE,
+  VENUE_INFO,
+} from "@/lib/academy-data";
 
 export interface DaySchedule {
   day: "Thursdays" | "Sundays";
@@ -39,64 +43,35 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
   {
     day: "Thursdays",
     dayBadge: "Flagship Thursday Night",
-    venueName: "BOH Studios Bournemouth",
-    venueAddress: "104 Commercial Rd, Bournemouth BH2 5LR",
-    venueLocationHighlight: "Centrally located next to The Triangle with Canadian maple sprung floor",
+    venueName: VENUE_INFO.name,
+    venueAddress: `${VENUE_INFO.streetAddress}, ${VENUE_INFO.city} ${VENUE_INFO.postcode}`,
+    venueLocationHighlight: `Centrally located next to The Triangle with ${VENUE_INFO.floor}`,
     venueImage: "/images/thursdays-moe-flex-poster.png",
     specialGuestNotice: "Resident Specialist MOE FLEX & The Salsa Explosion Team",
     teachers: "Maestro Enrique, Justyna, Arturas, Moe Flex & Jim",
-    classes: [
-      {
-        time: "7:00 PM",
-        title: "All-Levels Musicality, Pasitos & Rhythm",
-        levelOrNotes: "Open to All Levels with Moe Flex",
-      },
-      {
-        time: "7:00 PM",
-        title: "Cuban Salsa Beginners Foundation",
-        levelOrNotes: "with Maestro Enrique • Zero experience needed • No partner required",
-      },
-      {
-        time: "8:15 PM",
-        title: "Cuban Salsa Improvers",
-        levelOrNotes: "Follower frame connection, turns & Cuban styling with Justyna",
-      },
-      {
-        time: "8:15 PM",
-        title: "Cuban Salsa Intermediates & Rueda de Casino",
-        levelOrNotes: "Dynamic Rueda circles & complex Casino turn patterns with Arturas, Moe Flex & Jim",
-      },
-      {
-        time: "9:30 PM – Late",
-        title: "Thursday Havana Social Fiesta",
-        levelOrNotes: "Authentic Cuban Timba, Son & Social Floorcraft with DJ Enrique",
-      },
-    ],
-    freeParkingInfo: "Free on-street parking after 6 PM & nearby Library Car Park",
+    classes: CANONICAL_WEEKLY_SCHEDULE.thursday.sessions.map((s) => ({
+      time: s.time,
+      title: s.title,
+      levelOrNotes: `${s.level} • Directed by ${s.instructor} (${s.badge})`,
+    })),
+    freeParkingInfo: VENUE_INFO.parkingSummary,
     actionHref: "/dashboard/schedule?day=thursday",
     actionLabel: "View Thursday Classes",
   },
   {
     day: "Sundays",
     dayBadge: "Every Sunday Evening",
-    venueName: "BOH Studios Bournemouth",
-    venueAddress: "104 Commercial Rd, Bournemouth BH2 5LR",
+    venueName: VENUE_INFO.name,
+    venueAddress: `${VENUE_INFO.streetAddress}, ${VENUE_INFO.city} ${VENUE_INFO.postcode}`,
     venueLocationHighlight: "Relaxed Sunday Cuban Masterclass & Social Fiesta",
     specialGuestNotice: "Cuban Salsa Masterclass & Rueda Circle with Maestro Enrique & Faculty",
     teachers: "Maestro Enrique Perez Valdes & Faculty",
-    classes: [
-      {
-        time: "6:30 PM",
-        title: "Sunday Cuban Salsa Masterclass & Rueda Circle",
-        levelOrNotes: "Authentic Cuban Casino styling, technique & Rueda with Maestro Enrique & Team",
-      },
-      {
-        time: "7:30 PM – Late",
-        title: "Sunday Havana Social Fiesta",
-        levelOrNotes: "Social dancing, practice & connection with the Salsa Explosion community",
-      },
-    ],
-    freeParkingInfo: "Free on-street parking after 6 PM & nearby Library Car Park",
+    classes: CANONICAL_WEEKLY_SCHEDULE.sunday.sessions.map((s) => ({
+      time: s.time,
+      title: s.title,
+      levelOrNotes: `${s.level} • Directed by ${s.instructor} (${s.badge})`,
+    })),
+    freeParkingInfo: VENUE_INFO.parkingSummary,
     actionHref: "/dashboard/schedule?day=sunday",
     actionLabel: "View Sunday Classes",
   },

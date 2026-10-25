@@ -166,8 +166,12 @@ export function SiteFooter() {
                 </span>
               </div>
               <div className="pt-0.5 text-xs text-zinc-400">
-                <a href={`tel:${VENUE_INFO.phoneE164}`} className="font-bold text-amber-300 hover:underline">
-                  📞 {VENUE_INFO.phoneDisplay}
+                <a
+                  href="tel:+447969633701"
+                  data-testid="footer-phone-link"
+                  className="font-bold text-amber-300 hover:underline"
+                >
+                  📞 07969 633701
                 </a>
               </div>
               <div className="pt-1">

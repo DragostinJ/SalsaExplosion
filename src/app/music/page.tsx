@@ -11,34 +11,35 @@ export const metadata = {
 
 export default function CubanMusicPage() {
   return (
-    <main className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+    <main className="mx-auto max-w-7xl px-2.5 sm:px-6 lg:px-8 py-2 sm:py-6 space-y-2.5 sm:space-y-6">
+      {/* Compact 1-Line Mobile Top Bar (< md) + Full Desktop Header (md+) */}
+      <div className="flex items-center justify-between gap-2 rounded-xl sm:rounded-2xl border bg-card px-3 py-2 sm:p-5 shadow-xs">
+        <div className="flex items-center gap-2 min-w-0">
+          <BackButton fallbackUrl="/dashboard/schedule" label="Schedule" />
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <h1 className="text-xs sm:text-2xl font-black tracking-tight text-foreground truncate">
+                Cuban Music &amp; Social Playlist Hub
+              </h1>
+              <Badge className="hidden sm:inline-flex bg-primary-base text-white font-bold text-xs">
+                <Music className="mr-1 h-3.5 w-3.5" />
+                BPM &amp; Clave Guide
+              </Badge>
+            </div>
+            <p className="hidden md:block mt-0.5 text-xs text-muted-foreground max-w-3xl">
+              Learn the songs played every Thursday &amp; Sunday at BOH Studios. Follow the live Timba Song Trainer below.
+            </p>
+          </div>
+        </div>
+
         <Badge
           variant="outline"
-          className="border-border bg-muted/40 text-muted-foreground font-semibold px-3 py-1 flex items-center gap-1.5"
+          className="border-border bg-muted/40 text-muted-foreground font-semibold px-2.5 py-0.5 text-[10px] sm:text-xs flex items-center gap-1 shrink-0"
         >
-          <Headphones className="h-3.5 w-3.5 text-primary-base" />
-          Havana Social Floor Playlists
+          <Headphones className="h-3 w-3 text-primary-base" />
+          <span className="hidden sm:inline">Havana Social Floor</span>
+          <span className="sm:hidden">Havana HUD</span>
         </Badge>
-      </div>
-
-      {/* Header */}
-      <div className="flex flex-col justify-between gap-4 rounded-2xl border bg-card p-6 shadow-xs sm:flex-row sm:items-center">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Cuban Music & Social Playlist Hub
-            </h1>
-            <Badge className="bg-primary-base text-white font-bold">
-              <Music className="mr-1 h-3.5 w-3.5" />
-              BPM & Clave Guide
-            </Badge>
-          </div>
-          <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-3xl">
-            Learn the songs played every Thursday & Sunday at BOH Studios and the Bournemouth Summer Cuban Congress. Categorized by tempo with direct Spotify search links.
-          </p>
-        </div>
       </div>
 
       {/* Music Client Component */}

@@ -404,11 +404,11 @@ export function TimbaSongAnatomyPlayer({
   return (
     <div
       data-testid="timba-song-anatomy-player"
-      className={`rounded-3xl border border-border/80 bg-card p-3.5 sm:p-7 space-y-3.5 sm:space-y-6 shadow-sm overflow-hidden ${className}`}
+      className={`rounded-3xl border border-border/80 bg-card p-3 sm:p-7 space-y-3 sm:space-y-6 shadow-sm overflow-hidden relative ${className}`}
     >
       {/* 1. Top Bar: Header & Song Selector Tabs */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 border-b pb-3.5 sm:pb-5">
-        <div className="space-y-1">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2.5 sm:gap-4 border-b pb-2.5 sm:pb-5">
+        <div className="hidden md:block space-y-1">
           <div className="flex items-center gap-2">
             <Badge className="bg-primary-base text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1">
               <Compass className="h-3.5 w-3.5" />
@@ -424,6 +424,16 @@ export function TimbaSongAnatomyPlayer({
           <p className="text-xs text-muted-foreground">
             Follow a real track in real time. Know exactly when the horns hit, when to breakaway, and when to drop into Bomba.
           </p>
+        </div>
+
+        {/* 1-Line Compact Mobile Header */}
+        <div className="flex md:hidden items-center justify-between gap-2 text-xs">
+          <span className="font-black text-foreground truncate">
+            🎵 Timba Song Trainer • {activeSong.title.replace(/\s*\(.*?\)\s*/g, "")} ({activeSong.bpm} BPM)
+          </span>
+          <span className="font-mono text-[11px] font-extrabold text-muted-foreground shrink-0">
+            {formatSeconds(currentTime)} / {formatSeconds(effectiveDuration)}
+          </span>
         </div>
 
         {/* Song Switcher Tabs (Swipeable on mobile, flex-wrap on desktop) */}
@@ -680,14 +690,14 @@ export function TimbaSongAnatomyPlayer({
       {/* 8-Count Dancer Beat Bar */}
       <div
         data-testid="dancer-beat-bar"
-        className="rounded-2xl border border-border/70 bg-muted/20 p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs shadow-xs"
+        className="rounded-xl sm:rounded-2xl border border-border/70 bg-muted/20 p-1.5 sm:p-3 flex items-center justify-between gap-1.5 sm:gap-2.5 text-xs shadow-xs"
       >
-        <div className="flex items-center gap-1.5 font-bold text-foreground">
+        <div className="flex items-center gap-1 sm:gap-1.5 font-bold text-foreground shrink-0">
           <Headphones className="h-3.5 w-3.5 text-primary-base" />
-          <span>8-Count Dancer Rhythm Bar:</span>
+          <span className="text-[11px] sm:text-xs">Dancer Rhythm Bar:</span>
         </div>
 
-        <div className="flex items-center gap-1 sm:gap-1.5">
+        <div className="flex items-center gap-0.5 sm:gap-1.5">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((beatNum) => {
             const isCurrent = isPlaying && currentDancerBeat === beatNum;
             const isBreakOn1 = beatNum === 1;
@@ -696,7 +706,7 @@ export function TimbaSongAnatomyPlayer({
             return (
               <div
                 key={beatNum}
-                className={`h-7 px-2 sm:px-2.5 rounded-lg flex items-center justify-center font-mono font-black text-xs transition-all ${
+                className={`h-6 sm:h-7 px-1.5 sm:px-2.5 rounded-lg flex items-center justify-center font-mono font-black text-[11px] sm:text-xs transition-all ${
                   isCurrent
                     ? "bg-primary-base text-white shadow-sm scale-105 ring-2 ring-primary-base/50"
                     : isBreakOn1
@@ -719,7 +729,7 @@ export function TimbaSongAnatomyPlayer({
           })}
         </div>
 
-        <span className="text-[10px] text-muted-foreground font-medium hidden md:inline">
+        <span className="text-[10px] text-muted-foreground font-medium hidden lg:inline">
           Red = Beat 1 (On1) • Blue = Beat 2 (Son)
         </span>
       </div>
@@ -950,9 +960,9 @@ export function TimbaSongAnatomyPlayer({
         {activeSegment.instrumentMapping && (
           <div
             data-testid="body-telemetry-widget"
-            className="rounded-xl border border-primary-base/40 bg-gradient-to-r from-amber-500/10 via-primary-base/10 to-sky-500/10 p-2 sm:p-3 space-y-1.5 shadow-xs"
+            className="rounded-xl border border-primary-base/40 bg-gradient-to-r from-amber-500/10 via-primary-base/10 to-sky-500/10 p-1.5 sm:p-3 space-y-1 sm:space-y-1.5 shadow-xs"
           >
-            <div className="flex items-center justify-between gap-2 border-b border-border/40 pb-1">
+            <div className="hidden md:flex items-center justify-between gap-2 border-b border-border/40 pb-1">
               <div className="flex items-center gap-2 flex-wrap">
                 <Badge className="bg-primary-base text-white text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2">
                   Level 4 Body Separation
@@ -966,36 +976,36 @@ export function TimbaSongAnatomyPlayer({
               </span>
             </div>
 
-            <div className="grid gap-1.5 grid-cols-1 sm:grid-cols-3">
+            <div className="grid grid-cols-3 gap-1 sm:gap-1.5">
               {/* Zone 1: Chest & Shoulders */}
-              <div className="rounded-lg border border-sky-500/30 bg-sky-500/[0.06] p-2 space-y-0.5">
-                <span className="text-[10px] uppercase font-black tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1">
+              <div className="rounded-lg border border-sky-500/30 bg-sky-500/[0.06] p-1.5 sm:p-2 space-y-0.5">
+                <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-sky-500 shrink-0" />
                   Chest &amp; Shoulders
                 </span>
-                <p className="text-[11px] sm:text-xs text-slate-900 dark:text-slate-100 font-bold leading-tight">
+                <p className="text-[10px] sm:text-xs text-slate-900 dark:text-slate-100 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
                   {activeSegment.instrumentMapping.chestAndShoulders}
                 </p>
               </div>
 
               {/* Zone 2: Hips & Knees */}
-              <div className="rounded-lg border border-amber-500/30 bg-amber-500/[0.06] p-2 space-y-0.5">
-                <span className="text-[10px] uppercase font-black tracking-wider text-amber-950 dark:text-amber-300 flex items-center gap-1">
+              <div className="rounded-lg border border-amber-500/30 bg-amber-500/[0.06] p-1.5 sm:p-2 space-y-0.5">
+                <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-amber-950 dark:text-amber-300 flex items-center gap-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-500 shrink-0" />
                   Hips &amp; Knees
                 </span>
-                <p className="text-[11px] sm:text-xs text-slate-900 dark:text-slate-100 font-bold leading-tight">
+                <p className="text-[10px] sm:text-xs text-slate-900 dark:text-slate-100 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
                   {activeSegment.instrumentMapping.hipsAndKnees}
                 </p>
               </div>
 
               {/* Zone 3: Feet */}
-              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/[0.06] p-2 space-y-0.5">
-                <span className="text-[10px] uppercase font-black tracking-wider text-emerald-950 dark:text-emerald-300 flex items-center gap-1">
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/[0.06] p-1.5 sm:p-2 space-y-0.5">
+                <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-emerald-950 dark:text-emerald-300 flex items-center gap-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
                   Feet
                 </span>
-                <p className="text-[11px] sm:text-xs text-slate-900 dark:text-slate-100 font-bold leading-tight">
+                <p className="text-[10px] sm:text-xs text-slate-900 dark:text-slate-100 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
                   {activeSegment.instrumentMapping.feet}
                 </p>
               </div>
@@ -1078,7 +1088,7 @@ export function TimbaSongAnatomyPlayer({
             </span>
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
             {activeSegment.recommendedMoveSlugs.map((slug) => {
               const move = resolveCurriculumMove(slug);
               if (!move) return null;
@@ -1092,7 +1102,7 @@ export function TimbaSongAnatomyPlayer({
                   onClick={() =>
                     setInspectingMove(isSelected ? null : move)
                   }
-                  className={`rounded-xl border px-3 py-1.5 text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  className={`rounded-xl border px-3 py-1.5 text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
                     isSelected
                       ? "border-primary-base bg-primary-base text-white shadow-xs"
                       : "border-border bg-muted/40 text-foreground hover:bg-muted"

@@ -17,8 +17,6 @@ import {
   Radio,
   Volume2,
   VolumeX,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -161,7 +159,6 @@ export function TimbaSongAnatomyPlayer({
   const [isClaveHelperActive, setIsClaveHelperActive] = useState(false);
   const [currentDancerBeat, setCurrentDancerBeat] = useState<number>(1);
   const [mobileCueFocus, setMobileCueFocus] = useState<"ALL" | "LEAD" | "FOLLOW" | "TRIGGER">("ALL");
-  const [isTelemetryExpandedMobile, setIsTelemetryExpandedMobile] = useState(false);
 
   const activeSong = useMemo<SongAnatomy>(() => {
     return (
@@ -516,6 +513,37 @@ export function TimbaSongAnatomyPlayer({
           >
             {activeSong.difficultyLevel} Level
           </Badge>
+
+          {/* Segmented Cockpit Role Switcher (Leader ⇄ Follower) */}
+          <div
+            data-testid="cockpit-role-switcher"
+            className="flex items-center rounded-xl border border-border/80 bg-background/80 p-0.5 text-xs"
+          >
+            <button
+              type="button"
+              data-testid="role-switch-leader"
+              onClick={() => setMobileCueFocus("LEAD")}
+              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all ${
+                mobileCueFocus === "LEAD"
+                  ? "bg-sky-600 text-white shadow-xs"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              🕺 Leader
+            </button>
+            <button
+              type="button"
+              data-testid="role-switch-follower"
+              onClick={() => setMobileCueFocus("FOLLOW")}
+              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all ${
+                mobileCueFocus === "FOLLOW"
+                  ? "bg-rose-600 text-white shadow-xs"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              💃 Follower
+            </button>
+          </div>
 
           {/* Toggle Real Song Embedded Player */}
           <Button
@@ -920,68 +948,52 @@ export function TimbaSongAnatomyPlayer({
         {activeSegment.instrumentMapping && (
           <div
             data-testid="body-telemetry-widget"
-            className="rounded-2xl border-2 border-primary-base/40 bg-gradient-to-r from-amber-500/10 via-primary-base/10 to-sky-500/10 p-3 sm:p-5 space-y-3 shadow-xs"
+            className="rounded-xl border border-primary-base/40 bg-gradient-to-r from-amber-500/10 via-primary-base/10 to-sky-500/10 p-2 sm:p-3 space-y-1.5 shadow-xs"
           >
-            <div className="flex items-center justify-between gap-2 border-b border-border/60 pb-2">
+            <div className="flex items-center justify-between gap-2 border-b border-border/40 pb-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <Badge className="bg-primary-base text-white text-[10px] font-black uppercase tracking-wider">
+                <Badge className="bg-primary-base text-white text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2">
                   Level 4 Body Separation
                 </Badge>
-                <h4 className="text-xs sm:text-sm font-black text-foreground uppercase tracking-wide">
+                <h4 className="text-[11px] sm:text-xs font-black text-foreground uppercase tracking-wide">
                   3-Zone Body Telemetry
                 </h4>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="hidden sm:inline text-[11px] text-muted-foreground font-medium">
-                  Advanced Timba Body Isolation Map
-                </span>
-                <button
-                  type="button"
-                  data-testid="toggle-telemetry-mobile"
-                  onClick={() => setIsTelemetryExpandedMobile((prev) => !prev)}
-                  className="md:hidden flex items-center gap-1 text-[11px] font-bold text-primary-base hover:underline py-0.5 px-1.5 rounded bg-primary-base/10"
-                  aria-expanded={isTelemetryExpandedMobile}
-                >
-                  <span>{isTelemetryExpandedMobile ? "Hide" : "Show 3 Zones"}</span>
-                  {isTelemetryExpandedMobile ? (
-                    <ChevronUp className="h-3 w-3" />
-                  ) : (
-                    <ChevronDown className="h-3 w-3" />
-                  )}
-                </button>
-              </div>
+              <span className="text-[10px] text-muted-foreground font-medium hidden sm:inline">
+                Polyrhythmic Body Isolation Map
+              </span>
             </div>
 
-            <div className={`${isTelemetryExpandedMobile ? "grid" : "hidden md:grid"} gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3`}>
+            <div className="grid gap-1.5 grid-cols-1 sm:grid-cols-3">
               {/* Zone 1: Chest & Shoulders */}
-              <div className="rounded-xl border border-sky-500/30 bg-sky-500/[0.06] p-3 space-y-1">
-                <span className="text-[10px] uppercase font-black tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-sky-500 shrink-0" />
+              <div className="rounded-lg border border-sky-500/30 bg-sky-500/[0.06] p-2 space-y-0.5">
+                <span className="text-[10px] uppercase font-black tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-sky-500 shrink-0" />
                   Chest &amp; Shoulders
                 </span>
-                <p className="text-xs text-slate-900 dark:text-slate-100 font-bold leading-snug">
+                <p className="text-[11px] sm:text-xs text-slate-900 dark:text-slate-100 font-bold leading-tight">
                   {activeSegment.instrumentMapping.chestAndShoulders}
                 </p>
               </div>
 
               {/* Zone 2: Hips & Knees */}
-              <div className="rounded-xl border border-amber-500/30 bg-amber-500/[0.06] p-3 space-y-1">
-                <span className="text-[10px] uppercase font-black tracking-wider text-amber-950 dark:text-amber-300 flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-amber-500 shrink-0" />
+              <div className="rounded-lg border border-amber-500/30 bg-amber-500/[0.06] p-2 space-y-0.5">
+                <span className="text-[10px] uppercase font-black tracking-wider text-amber-950 dark:text-amber-300 flex items-center gap-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-500 shrink-0" />
                   Hips &amp; Knees
                 </span>
-                <p className="text-xs text-slate-900 dark:text-slate-100 font-bold leading-snug">
+                <p className="text-[11px] sm:text-xs text-slate-900 dark:text-slate-100 font-bold leading-tight">
                   {activeSegment.instrumentMapping.hipsAndKnees}
                 </p>
               </div>
 
               {/* Zone 3: Feet */}
-              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.06] p-3 space-y-1">
-                <span className="text-[10px] uppercase font-black tracking-wider text-emerald-950 dark:text-emerald-300 flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/[0.06] p-2 space-y-0.5">
+                <span className="text-[10px] uppercase font-black tracking-wider text-emerald-950 dark:text-emerald-300 flex items-center gap-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
                   Feet
                 </span>
-                <p className="text-xs text-slate-900 dark:text-slate-100 font-bold leading-snug">
+                <p className="text-[11px] sm:text-xs text-slate-900 dark:text-slate-100 font-bold leading-tight">
                   {activeSegment.instrumentMapping.feet}
                 </p>
               </div>
@@ -1016,12 +1028,10 @@ export function TimbaSongAnatomyPlayer({
         </div>
 
         {/* 3 Action Cards (What to Listen For, Leader Cue, Follower Cue) */}
-        <div className="grid gap-2.5 sm:gap-4 md:grid-cols-3">
-          {/* Card 1: What to Listen For */}
-          <Card className={`border border-border/80 bg-card shadow-xs ${
-            mobileCueFocus === "ALL" || mobileCueFocus === "TRIGGER" ? "block" : "hidden md:block"
-          }`}>
-            <CardContent className="p-3 sm:p-4 space-y-1.5 sm:space-y-2">
+        <div className="grid gap-2 sm:gap-3 md:grid-cols-3">
+          {/* Card 1: What to Listen For (Permanently visible) */}
+          <Card className="border border-border/80 bg-card shadow-xs block">
+            <CardContent className="p-2.5 sm:p-3.5 space-y-1">
               <span className="text-[10px] uppercase font-bold tracking-wider text-slate-700 dark:text-muted-foreground flex items-center gap-1.5">
                 <Headphones className="h-3.5 w-3.5 text-sky-600" />
                 What to Listen For (Trigger)
@@ -1036,7 +1046,7 @@ export function TimbaSongAnatomyPlayer({
           <Card className={`border border-sky-500/30 bg-sky-500/[0.04] shadow-xs ${
             mobileCueFocus === "ALL" || mobileCueFocus === "LEAD" ? "block" : "hidden md:block"
           }`}>
-            <CardContent className="p-3 sm:p-4 space-y-1.5 sm:space-y-2">
+            <CardContent className="p-2.5 sm:p-3.5 space-y-1">
               <span className="text-[10px] uppercase font-bold tracking-wider text-sky-950 dark:text-sky-300 flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-sky-500" />
                 Leader Action
@@ -1051,7 +1061,7 @@ export function TimbaSongAnatomyPlayer({
           <Card className={`border border-rose-500/30 bg-rose-500/[0.04] shadow-xs ${
             mobileCueFocus === "ALL" || mobileCueFocus === "FOLLOW" ? "block" : "hidden md:block"
           }`}>
-            <CardContent className="p-3 sm:p-4 space-y-1.5 sm:space-y-2">
+            <CardContent className="p-2.5 sm:p-3.5 space-y-1">
               <span className="text-[10px] uppercase font-bold tracking-wider text-rose-950 dark:text-rose-300 flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-rose-500" />
                 Follower Action
@@ -1063,20 +1073,18 @@ export function TimbaSongAnatomyPlayer({
           </Card>
         </div>
 
-        {/* Un-Confuser Alert Banner */}
+        {/* Compact 1-Line Dancer Un-Confuser Alert Strip */}
         <div
           data-testid="un-confuser-alert"
-          className="rounded-2xl border border-amber-300 bg-amber-50 dark:border-amber-500/40 dark:bg-amber-950/20 p-4 flex items-start gap-3 text-xs shadow-xs"
+          className="rounded-xl border border-amber-500/35 bg-amber-950/20 px-3 py-2 flex items-center gap-2 text-xs text-amber-950 dark:text-amber-100/95 leading-snug shadow-xs"
         >
-          <AlertTriangle className="h-4 w-4 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
-          <div className="space-y-0.5">
-            <span className="font-extrabold text-amber-950 dark:text-amber-200 uppercase text-[10px] tracking-wider block">
-              Dancer Un-Confuser Warning
-            </span>
-            <p className="text-slate-900 dark:text-amber-100 font-semibold leading-relaxed">
-              {activeSegment.commonMistakeWarning}
-            </p>
-          </div>
+          <AlertTriangle className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+          <p className="truncate sm:whitespace-normal">
+            <strong className="font-black uppercase tracking-wider text-amber-900 dark:text-amber-300 mr-1.5">
+              ⚠️ Avoid (Dancer Un-Confuser):
+            </strong>
+            {activeSegment.commonMistakeWarning}
+          </p>
         </div>
 
         {/* Recommended Curriculum Moves Bar */}

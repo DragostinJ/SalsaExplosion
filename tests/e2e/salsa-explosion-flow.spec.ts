@@ -478,15 +478,15 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   test("25. Pre-pitch competitor kill-shot features (live banner, why cuban comparison, crossover quiz, and mobile roster toggle)", async ({
     page,
   }) => {
-    // 1. Visit landing page
-    await page.goto("/");
+    // 1. Visit landing page with Thursday live demo so banner renders on any day of week
+    await page.goto("/?liveDemo=thursday");
     await page.waitForLoadState("domcontentloaded");
 
     // 2. Verify Live Tonight Banner
     const liveBanner = page.locator('[data-testid="live-tonight-banner"]');
     await expect(liveBanner).toBeVisible();
     await expect(
-      liveBanner.getByText(/Live Tonight at BOH Studios|This Week at BOH Studios|THIS SUNDAY AT BOH STUDIOS|THIS THURSDAY AT BOH STUDIOS/i)
+      liveBanner.getByText(/CLASSES LIVE TONIGHT AT BOH STUDIOS|Live Tonight at BOH Studios/i)
     ).toBeVisible();
 
     // 3. Verify Why Cuban Casino Section

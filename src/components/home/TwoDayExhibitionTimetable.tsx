@@ -4,86 +4,18 @@ import Link from "next/link";
 import { MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { triggerQuickBookDrawer } from "@/components/booking/QuickBookDrawer";
-
-interface ClassRow {
-  time: string;
-  level: string;
-  title: string;
-  instructor: string;
-  instructorHref?: string;
-  badge?: string;
-  isSocial?: boolean;
-}
-
-const THURSDAY_CLASSES: ClassRow[] = [
-  {
-    time: "19:00",
-    level: "ALL LEVELS",
-    title: "Solo Salsa: Musicality, Pasitos & Rhythm",
-    instructor: "Moe Flex",
-    instructorHref: "#instructors-moe-flex",
-    badge: "Open to Everyone",
-  },
-  {
-    time: "19:00",
-    level: "BEGINNERS",
-    title: "Cuban Salsa Beginners Foundation",
-    instructor: "Maestro Enrique Perez Valdes",
-    instructorHref: "#instructors-enrique",
-    badge: "1st Timers Welcome",
-  },
-  {
-    time: "20:15",
-    level: "IMPROVERS",
-    title: "Cuban Salsa Improvers Partnerwork",
-    instructor: "Justyna",
-    instructorHref: "#instructors-justyna",
-    badge: "Guapea & Turns",
-  },
-  {
-    time: "20:15",
-    level: "INTERMEDIATE",
-    title: "Cuban Salsa Intermediates & Rueda de Casino",
-    instructor: "Arturas, Moe Flex & Jim",
-    instructorHref: "#instructors-arturas",
-    badge: "Fast Rueda Circles",
-  },
-  {
-    time: "21:30 – Late",
-    level: "ALL DANCERS",
-    title: "Thursday Havana Social Fiesta",
-    instructor: "DJ Enrique & Resident Team",
-    instructorHref: "#instructors-enrique",
-    badge: "Social Dance Practice",
-    isSocial: true,
-  },
-];
-
-const SUNDAY_CLASSES: ClassRow[] = [
-  {
-    time: "18:30",
-    level: "ALL LEVELS & IMPROVERS",
-    title: "Sunday Cuban Salsa & Rueda Masterclass",
-    instructor: "Maestro Enrique Perez Valdes & Team",
-    instructorHref: "#instructors-enrique",
-    badge: "Open Circle & Partnerwork",
-  },
-  {
-    time: "19:30 – Late",
-    level: "ALL DANCERS",
-    title: "Sunday Havana Social Fiesta",
-    instructor: "Maestro Enrique",
-    instructorHref: "#instructors-enrique",
-    badge: "Pure Timba, Son & Rueda Circles",
-    isSocial: true,
-  },
-];
+import {
+  WEEKLY_SCHEDULE,
+  VENUE_INFO,
+  PASS_PRICING,
+  type CanonicalClassSession,
+} from "@/lib/academy-data";
 
 function TimetableRow({
   item,
   day,
 }: {
-  item: ClassRow;
+  item: CanonicalClassSession;
   day: "thursday" | "sunday";
 }) {
   return (
@@ -133,7 +65,7 @@ function TimetableRow({
               <span className="font-bold text-[#A83800]">{item.instructor}</span>
             )}
             {" • "}
-            <span className="text-[#733500] font-medium">BOH Studios Main Hall</span>
+            <span className="text-[#733500] font-medium">{item.room}</span>
           </p>
         </div>
 
@@ -157,7 +89,7 @@ function TimetableRow({
                 : "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-5 py-2.5 bg-[#11100E] hover:bg-[#C83E2B] text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer shadow-xs"
             }
           >
-            <span>{item.isSocial ? "Join Social" : "Book Spot"}</span>
+            <span>{item.ctaLabel || (item.isSocial ? "Join Social" : "Book Spot")}</span>
             <span aria-hidden="true">→</span>
           </button>
         </div>
@@ -167,8 +99,14 @@ function TimetableRow({
 }
 
 export function TwoDayExhibitionTimetable() {
+  const thursdaySchedule = WEEKLY_SCHEDULE.thursday;
+  const sundaySchedule = WEEKLY_SCHEDULE.sunday;
+
   return (
-    <section id="timetable" className="cv-auto py-12 sm:py-16 bg-[#F4ECE1] border-b border-black/15 text-[#120D0A] scroll-mt-20">
+    <section
+      id="timetable"
+      className="cv-auto py-12 sm:py-16 bg-[#F4ECE1] border-b border-black/15 text-[#120D0A] scroll-mt-20"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Main Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-black/15">
@@ -176,25 +114,30 @@ export function TwoDayExhibitionTimetable() {
             <div className="inline-flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
               <span className="text-[11px] font-black uppercase tracking-widest text-emerald-800">
-                Official BOH Studios Residency • Thursdays &amp; Sundays
+                Official {VENUE_INFO.shortName} Residency • Thursdays &amp; Sundays
               </span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#120D0A] leading-none">
-              WEEKLY PROGRAMME <span className="font-display italic font-normal text-[#A83800] lowercase">lineup</span>
+              WEEKLY PROGRAMME{" "}
+              <span className="font-display italic font-normal text-[#A83800] lowercase">
+                lineup
+              </span>
             </h2>
             <p className="text-xs sm:text-sm text-[#524336] font-medium max-w-xl">
-              Strictly Thursdays and Sundays at BOH Studios Bournemouth. High-energy partner rotations, authentic Cuban Casino footwork, and zero partner required.
+              Strictly Thursdays and Sundays at {VENUE_INFO.name}. High-energy partner rotations, authentic Cuban Casino footwork, and zero partner required.
             </p>
           </div>
 
           <div className="flex items-center gap-2 self-start md:self-auto bg-black/5 px-4 py-2.5 rounded-2xl border border-black/10 text-xs font-bold text-[#524336]">
             <MapPin className="h-4 w-4 text-[#A83800] shrink-0" />
-            <span>BOH Studios Bournemouth • 104 Commercial Rd, The Triangle, BH2 5LR</span>
+            <span>
+              {VENUE_INFO.name} • {VENUE_INFO.address}, {VENUE_INFO.postcode}
+            </span>
           </div>
         </div>
 
         {/* ================= THURSDAY 4-COLUMN SWISS ARCHITECTURAL TABLE ================= */}
-        <div className="space-y-4">
+        <div id="timetable-thursday" className="space-y-4 scroll-mt-24">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-black/15">
             <div>
               <div className="flex items-center gap-2">
@@ -202,7 +145,7 @@ export function TwoDayExhibitionTimetable() {
                   THURSDAY
                 </span>
                 <span className="text-xs font-bold text-[#524336]">
-                  5 Sessions • Doors 18:45 • Canadian Sprung Maple Floor
+                  {thursdaySchedule.sessions.length} Sessions • Doors {thursdaySchedule.doorsTime} • {VENUE_INFO.floor}
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-[#120D0A] mt-1">
@@ -210,7 +153,7 @@ export function TwoDayExhibitionTimetable() {
               </h3>
             </div>
             <p className="text-xs sm:text-sm font-semibold text-[#524336] max-w-sm sm:text-right">
-              Beginners Foundation to Advanced Partnerwork &bull; Canadian Sprung Maple Floor
+              {thursdaySchedule.subtitle}
             </p>
           </div>
 
@@ -223,14 +166,14 @@ export function TwoDayExhibitionTimetable() {
           </div>
 
           <div className="divide-y divide-black/10 border-b border-black/10">
-            {THURSDAY_CLASSES.map((item, idx) => (
-              <TimetableRow key={`thursday-${idx}`} item={item} day="thursday" />
+            {thursdaySchedule.sessions.map((item) => (
+              <TimetableRow key={item.id} item={item} day="thursday" />
             ))}
           </div>
         </div>
 
         {/* ================= SUNDAY 4-COLUMN SWISS ARCHITECTURAL TABLE ================= */}
-        <div className="space-y-4 pt-4">
+        <div id="timetable-sunday" className="space-y-4 pt-4 scroll-mt-24">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-black/15">
             <div>
               <div className="flex items-center gap-2">
@@ -238,15 +181,15 @@ export function TwoDayExhibitionTimetable() {
                   SUNDAY
                 </span>
                 <span className="text-xs font-bold text-[#524336]">
-                  Doors 18:15 • Every Sunday • Masterclass &amp; Social
+                  Doors {sundaySchedule.doorsTime} • Every Sunday • Masterclass &amp; Social
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-[#120D0A] mt-1">
-                Sunday Havana Sessions — BOH Studios
+                Sunday Havana Sessions — {VENUE_INFO.shortName}
               </h3>
             </div>
             <p className="text-xs sm:text-sm font-semibold text-[#524336] max-w-sm sm:text-right">
-              Weekly Masterclass &amp; Havana Social Fiesta &bull; Pure Timba &amp; Son Cubano
+              {sundaySchedule.subtitle}
             </p>
           </div>
 
@@ -259,8 +202,8 @@ export function TwoDayExhibitionTimetable() {
           </div>
 
           <div className="divide-y divide-black/10 border-b border-black/10">
-            {SUNDAY_CLASSES.map((item, idx) => (
-              <TimetableRow key={`sunday-${idx}`} item={item} day="sunday" />
+            {sundaySchedule.sessions.map((item) => (
+              <TimetableRow key={item.id} item={item} day="sunday" />
             ))}
           </div>
         </div>
@@ -270,7 +213,7 @@ export function TwoDayExhibitionTimetable() {
           <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-[#3A2D23] font-semibold">
             <span className="flex items-center gap-1.5 text-[#733500]">
               <Sparkles className="h-3.5 w-3.5" />
-              £10 Drop-In Available
+              {PASS_PRICING.PACK_SINGLE.priceDisplay} Drop-In Available
             </span>
             <span className="flex items-center gap-1.5 text-emerald-800">
               <CheckCircle2 className="h-3.5 w-3.5" />
@@ -286,7 +229,12 @@ export function TwoDayExhibitionTimetable() {
             </span>
           </div>
 
-          <Button asChild variant="ghost" size="sm" className="text-xs font-bold text-[#A83800] hover:text-black p-0 sm:px-2">
+          <Button
+            asChild
+            variant="ghost"
+            size="sm"
+            className="text-xs font-bold text-[#A83800] hover:text-black p-0 sm:px-2"
+          >
             <Link href="/dashboard/schedule">
               Full Schedule &amp; Digital Passes →
             </Link>

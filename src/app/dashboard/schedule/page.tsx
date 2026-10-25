@@ -52,6 +52,8 @@ import { Button } from "@/components/ui/button";
 import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
+import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
+import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
 import { VENUE_INFO } from "@/lib/academy-data";
 
 interface SchedulePageProps {
@@ -414,34 +416,76 @@ export default async function StudentSchedulePage({
         </div>
       </div>
 
-      {/* Responsive Class Schedule Grid — Top of the page! */}
-      {scheduleItems.length === 0 ? (
-        <div className="rounded-xl border border-dashed py-16 text-center">
-          <p className="text-base font-medium">
-            No upcoming classes match your selected filters.
-          </p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Try clearing your style or level filters to view the full timetable.
-          </p>
-          <Button asChild variant="outline" size="sm" className="mt-4">
-            <Link href="/dashboard/schedule">Reset Filters</Link>
-          </Button>
+      {/* Thursday & Sunday Exhibition Timetable (Primary Schedule Grid with id="schedule-classes-grid") */}
+      <div id="schedule-classes-grid" data-testid="schedule-classes-grid" className="space-y-8">
+        <TwoDayExhibitionTimetable />
+
+        {/* Live Interactive Database Sessions (When Scheduled) */}
+        {scheduleItems.length > 0 ? (
+          <div className="space-y-4 pt-6 border-t border-border/60">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h3 className="text-lg font-black uppercase tracking-tight text-foreground">
+                  Live Interactive Sessions &amp; Ratio Capacity
+                </h3>
+                <p className="text-xs text-muted-foreground">
+                  Select your dance role (Lead / Follow) for live ratio-balanced reservation.
+                </p>
+              </div>
+              <span className="text-xs font-bold text-muted-foreground bg-muted/40 px-3 py-1 rounded-full border">
+                {scheduleItems.length} Sessions Available
+              </span>
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {scheduleItems.map((session) => (
+                <ClassScheduleCard
+                  key={session.id}
+                  session={session}
+                  student={studentContext}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (styleFilter || levelFilter || dayParam) ? (
+          <div className="rounded-xl border border-dashed py-8 text-center bg-card">
+            <p className="text-sm font-semibold">
+              No live database sessions match your current filter selection.
+            </p>
+            <Button asChild variant="outline" size="sm" className="mt-3 text-xs font-bold">
+              <Link href="/dashboard/schedule">Reset Filters</Link>
+            </Button>
+          </div>
+        ) : null}
+      </div>
+
+      {/* Interactive Level Matcher & First-Timer Quick Guide (Moved from Landing Page) */}
+      <section className="rounded-3xl border border-border/70 bg-card p-5 sm:p-8 shadow-xs space-y-6">
+        <LevelMatcherQuiz />
+
+        <div className="rounded-2xl border border-border/70 bg-background/80 p-4 shadow-xs">
+          <div className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground mb-3 text-center sm:text-left">
+            First-Timer Quick Guide
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+            <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-card px-3.5 py-2.5 text-xs text-foreground">
+              <span className="font-bold text-amber-800 dark:text-amber-400">Footwear</span>
+              <span className="text-muted-foreground">Comfortable flat shoes or trainers</span>
+            </div>
+            <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-card px-3.5 py-2.5 text-xs text-foreground">
+              <span className="font-bold text-amber-800 dark:text-amber-400">No Partner Needed</span>
+              <span className="text-muted-foreground">Zero partner required (we rotate continuously)</span>
+            </div>
+            <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-card px-3.5 py-2.5 text-xs text-foreground">
+              <span className="font-bold text-amber-800 dark:text-amber-400">Studio Bar &amp; Lounge</span>
+              <span className="text-muted-foreground">Refreshments &amp; social lounge at BOH Studios</span>
+            </div>
+            <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-card px-3.5 py-2.5 text-xs text-foreground">
+              <span className="font-bold text-amber-800 dark:text-amber-400">Town-Centre Parking</span>
+              <span className="text-muted-foreground">Easy parking nearby (The Triangle, BH2 5LR)</span>
+            </div>
+          </div>
         </div>
-      ) : (
-        <div
-          id="schedule-classes-grid"
-          data-testid="schedule-classes-grid"
-          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {scheduleItems.map((session) => (
-            <ClassScheduleCard
-              key={session.id}
-              session={session}
-              student={studentContext}
-            />
-          ))}
-        </div>
-      )}
+      </section>
 
       {/* Weekly Calendar Overview: Days of the Week Only */}
       <div className="pt-6 border-t">

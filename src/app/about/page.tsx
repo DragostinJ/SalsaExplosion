@@ -9,6 +9,8 @@ import {
   ArrowRight,
   Video,
   ExternalLink,
+  Calendar,
+  QrCode,
 } from "lucide-react";
 import { Role } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -92,11 +94,11 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* 2. The 3 Core Pillars of Salsa Explosion */}
+      {/* 2. Core Pillars & Academy Capabilities */}
       <section className="space-y-6">
         <div className="text-center space-y-1">
           <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
-            Our Dance Philosophy
+            Our Dance Philosophy &amp; Capabilities
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             Why Cuban Salsa is Different
@@ -106,14 +108,14 @@ export default async function AboutPage() {
         <div className="grid gap-6 md:grid-cols-3">
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-700 dark:text-amber-300">
-                <Users className="h-5 w-5" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/15 text-blue-700 dark:text-blue-300">
+                <Calendar className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
-                The Rueda Circle • No Partner Needed
+                Balanced Lead &amp; Follow Ratios
               </CardTitle>
               <CardDescription className="text-xs leading-relaxed">
-                In Cuban Salsa, we dance in <em>La Rueda</em>—a dynamic rotating circle where turns are called out by the <em>cantante</em>. Partners switch dynamically, so everyone dances with everyone and no one ever sits out alone.
+                Our smart real-time booking system automatically caps Lead and Follow tickets so you never spend a class waiting on the sidelines.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -124,24 +126,66 @@ export default async function AboutPage() {
                 <Award className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
-                Structured 4-Tier Casino Curriculum
+                4-Tier Cuban Salsa Syllabus
               </CardTitle>
               <CardDescription className="text-xs leading-relaxed">
-                From your first <em>Guapea</em> in Beginner to complex <em>Setenta</em> combinations and Contratiempo musicality in Advanced, our clear syllabus ensures you progress smoothly without feeling overwhelmed.
+                From your first <em>Guapea</em> in Beginner to complex <em>Setenta</em> combinations and Contratiempo musicality in Advanced, our clear syllabus ensures you progress smoothly.
               </CardDescription>
             </CardHeader>
           </Card>
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/15 text-blue-700 dark:text-blue-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-700 dark:text-amber-300">
+                <QrCode className="h-5 w-5" />
+              </div>
+              <CardTitle className="text-lg font-bold">
+                Instant Digital Passes — Zero Booking Fees
+              </CardTitle>
+              <CardDescription className="text-xs leading-relaxed">
+                One-tap Apple Pay, Google Pay, and card checkout with instant QR passes saved straight to your phone for 1-second door check-in at BOH Studios.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="border shadow-xs">
+            <CardHeader className="space-y-2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-700 dark:text-amber-300">
+                <Users className="h-5 w-5" />
+              </div>
+              <CardTitle className="text-lg font-bold">
+                The Rueda Circle • No Partner Needed
+              </CardTitle>
+              <CardDescription className="text-xs leading-relaxed">
+                In Cuban Salsa, we dance in <em>La Rueda</em>—a dynamic rotating circle where turns are called out by the <em>cantante</em>. Partners switch dynamically, so everyone dances with everyone.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="border shadow-xs">
+            <CardHeader className="space-y-2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/15 text-purple-700 dark:text-purple-300">
+                <Flame className="h-5 w-5" />
+              </div>
+              <CardTitle className="text-lg font-bold">
+                Authentic Afro-Cuban &amp; Timba Heritage
+              </CardTitle>
+              <CardDescription className="text-xs leading-relaxed">
+                Rooted directly in Havana folklore—Batá drums, Guaguancó body isolations, Son Cubano contratiempo timing, and contemporary high-energy Timba musicality.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="border shadow-xs">
+            <CardHeader className="space-y-2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-500/15 text-rose-700 dark:text-rose-300">
                 <Video className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
-                End-of-Class Video Recaps & AI Co-Pilot
+                End-of-Class Video Recaps &amp; Vault
               </CardTitle>
               <CardDescription className="text-xs leading-relaxed">
-                Never lose a routine in your camera roll! After every class, teachers publish a 60-second video recap of the combinations taught. Review footwork in 0.75x slow-mo anytime in your personal Recaps Vault.
+                Never lose a routine in your camera roll! After every class, teachers publish a 60-second video recap of the combinations taught. Review footwork in 0.75x slow-mo anytime.
               </CardDescription>
             </CardHeader>
           </Card>

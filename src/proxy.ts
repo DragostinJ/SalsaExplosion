@@ -7,6 +7,8 @@ const isPublicRoute = createRouteMatcher([
   "/dashboard",
   "/dashboard/schedule(.*)",
   "/dashboard/rueda(.*)",
+  "/dashboard/wallet(.*)",
+  "/dashboard/referrals(.*)",
   "/how-it-works(.*)",
   "/about(.*)",
   "/events(.*)",
@@ -23,6 +25,7 @@ const isPublicRoute = createRouteMatcher([
   "/api/webhooks/stripe",
   "/robots.txt",
   "/sitemap.xml",
+  "/llms.txt",
   "/manifest.webmanifest",
 ]);
 

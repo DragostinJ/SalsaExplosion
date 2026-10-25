@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
   CreditCard,
@@ -11,6 +10,7 @@ import {
   ShieldCheck,
   Clock,
   Coins,
+  CheckCircle2,
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/card";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
+import { PASS_PRICING_LIST, VENUE_INFO } from "@/lib/academy-data";
 
 export const metadata = {
   title: "My Passes & Digital Wallet | Salsa Explosion Bournemouth",
@@ -36,7 +37,111 @@ export const metadata = {
 export default async function StudentWalletPage() {
   const user = await getOrProvisionCurrentUser();
   if (!user) {
-    redirect("/sign-in");
+    return (
+      <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+          <Badge
+            variant="outline"
+            className="border-amber-500/40 bg-amber-500/10 text-amber-800 dark:text-amber-300 font-semibold px-3 py-1 flex items-center gap-1.5"
+          >
+            <CreditCard className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+            BOH Studios Digital Wallet
+          </Badge>
+        </div>
+
+        <div className="rounded-3xl border border-amber-500/30 bg-gradient-to-br from-[#120d0a] via-[#0c0908] to-[#070605] p-6 sm:p-10 text-white shadow-xl space-y-6">
+          <div className="max-w-2xl space-y-3">
+            <span className="text-xs font-black uppercase tracking-widest text-amber-300">
+              Instant QR Door Admission • {VENUE_INFO.name}
+            </span>
+            <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
+              Digital Passes &amp; Studio Wallet
+            </h1>
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+              Manage your Thursday &amp; Sunday class credits, Made in Cuba festival passes, and instant 1-tap QR door check-in at {VENUE_INFO.name} ({VENUE_INFO.address}, {VENUE_INFO.postcode}).
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <Button
+              asChild
+              className="bg-amber-500 hover:bg-amber-400 text-black font-black text-xs sm:text-sm h-11 px-6 rounded-xl"
+            >
+              <Link href="/sign-in">
+                Sign In to Access Your Wallet
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-xs sm:text-sm h-11 px-6 rounded-xl"
+            >
+              <Link href="/dashboard/schedule">
+                Browse Thursday &amp; Sunday Timetable
+              </Link>
+            </Button>
+          </div>
+        </div>
+
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg sm:text-xl font-black tracking-tight text-foreground">
+              Available Class Passes &amp; Memberships
+            </h2>
+            <Link
+              href="/pricing"
+              className="text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline inline-flex items-center gap-1"
+            >
+              Compare All Passes <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {PASS_PRICING_LIST.map((tier) => (
+              <Card
+                key={tier.id}
+                className="rounded-2xl border bg-card p-5 flex flex-col justify-between space-y-4 shadow-xs"
+              >
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[11px] font-black uppercase tracking-wider text-amber-800 dark:text-amber-400">
+                      {tier.shortLabel}
+                    </span>
+                    {tier.popular && (
+                      <Badge className="bg-amber-500 text-black text-[10px] font-black">
+                        Best Value
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="text-2xl font-black text-foreground">
+                    {tier.priceDisplay}
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {tier.description}
+                  </p>
+                  <ul className="space-y-1.5 pt-2 text-xs text-foreground">
+                    {tier.features.map((feat) => (
+                      <li key={feat} className="flex items-start gap-1.5">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <Button asChild size="sm" className="w-full font-bold text-xs">
+                  <Link href="/pricing">Select Pass →</Link>
+                </Button>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <PaymentSecurityTrustBar />
+      </main>
+    );
   }
 
   // 1. Fetch user subscription status

@@ -17,6 +17,7 @@ import { InstructorRosterSection } from "@/components/home/InstructorRosterSecti
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
+import { ArtHouseGallerySection } from "@/components/home/ArtHouseGallerySection";
 import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import { ArtReveal } from "@/components/ui/ArtReveal";
 import { ACADEMY_METRICS, VENUE_INFO } from "@/lib/academy-data";
@@ -487,110 +488,8 @@ export default async function Home() {
         {/* Flagship BOH Studios Venue & Arrival Guide */}
         <BohVenueSpotlight />
 
-        {/* 3-Portal Interactive Showcase */}
-        <section className="cv-auto py-14 border-t bg-muted/20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-10">
-              <Badge variant="outline" className="text-xs font-semibold mb-2">
-                The Complete Dancer Experience
-              </Badge>
-              <h2 className="text-2xl font-extrabold sm:text-3xl">
-                Everything You Need From Your First Basic Step to the Social Floor
-              </h2>
-              <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
-                Purpose-built for Bournemouth dancers: structured 4-tier Cuban syllabus, Maestro Enrique video recaps, and lightning-fast digital passes.
-              </p>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              {/* Feature 1: Structured Cuban Learning */}
-              <div className="rounded-2xl border bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-primary-base/40 transition-colors">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary" className="text-xs font-bold">
-                      1. Weekly Classes & Timetable
-                    </Badge>
-                    <span className="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded-full">
-                      Beginner Friendly
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-extrabold">
-                    BOH Studios Bournemouth Hub
-                  </h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    Every Thursday &amp; Sunday at BOH Studios Bournemouth. No partner required, fun social rotations, and strict lead/follow balance so you always have a partner.
-                  </p>
-                </div>
-                <div className="pt-2">
-                  <Button size="sm" variant="outline" asChild className="w-full text-xs font-bold">
-                    <Link href="/dashboard/schedule">Explore Thursday &amp; Sunday Timetable →</Link>
-                  </Button>
-                </div>
-              </div>
-
-              {/* Feature 2: Authentic Cuban Heritage */}
-              <div className="rounded-2xl border border-secondary-base/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-secondary-base/60 transition-colors">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Badge className="bg-secondary-base text-white text-xs font-bold">
-                      2. Authentic Cuban Syllabus
-                    </Badge>
-                    <span className="text-[10px] font-bold text-secondary-hover bg-secondary-light px-2 py-0.5 rounded-full">
-                      Direct from Havana
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-extrabold">
-                    Casino, Rueda &amp; Musicality
-                  </h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    Progress smoothly from fundamental Guapea &amp; Dile Que No to advanced Vacilala, Sombrero, and lightning-fast Rueda de Casino calls under Maestro Enrique Perez Valdes.
-                  </p>
-                </div>
-                <div className="pt-2">
-                  <Button size="sm" variant="outline" asChild className="w-full text-xs font-bold">
-                    <Link href="/dashboard/rueda">Explore Rueda Dictionary &amp; Song Hub →</Link>
-                  </Button>
-                </div>
-              </div>
-
-              {/* Feature 3: Festivals & Private Coaching */}
-              <div className="rounded-2xl border border-accent-tangerine/30 bg-card p-6 shadow-xs flex flex-col justify-between space-y-4 hover:border-accent-tangerine/60 transition-colors">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Badge className="bg-accent-tangerine text-zinc-950 text-xs font-bold">
-                      3. Congresses &amp; Bespoke Coaching
-                    </Badge>
-                    <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-full">
-                      VIP Experiences
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-extrabold">
-                    Weekend Festivals &amp; 1-on-1 Lessons
-                  </h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    Join the international Made in Cuba Dance Weekend or book private 1-on-1 coaching with Maestro Enrique, Moe Flex, Justyna, Arturas, or Jim for fast-track progression.
-                  </p>
-                </div>
-                <div className="pt-2">
-                  <Button size="sm" variant="outline" asChild className="w-full text-xs font-bold">
-                    <Link href="/events">Explore Congress Passes &amp; Private Lessons →</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Discrete Studio Operations link for teachers and staff */}
-            <div className="mt-8 pt-6 border-t border-border/50 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground">
-              <span>Teaching desk or studio administration staff?</span>
-              <Link
-                href="/admin/operations"
-                className="font-black text-rose-700 dark:text-rose-300 hover:underline inline-flex items-center gap-1"
-              >
-                Access Academy Teaching & Operations Portal →
-              </Link>
-            </div>
-          </div>
-        </section>
+        {/* Curated Art-House Exhibition Photo Gallery & Essential Visitor FAQ */}
+        <ArtHouseGallerySection />
 
         {/* Core Capabilities Grid */}
         <section className="cv-auto py-16 border-t">

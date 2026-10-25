@@ -72,6 +72,8 @@ export function WhyCubanSection() {
                   <img
                     src={card.photo}
                     alt={card.title}
+                    loading="lazy"
+                    decoding="async"
                     className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     onError={(e) => {
                       (e.currentTarget.parentElement as HTMLElement).style.display = "none";

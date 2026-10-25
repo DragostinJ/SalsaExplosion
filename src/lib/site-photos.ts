@@ -29,14 +29,14 @@ export const sitePhotos: SitePhotosConfig = {
   madeInCuba:
     "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1200&q=80",
   instructors: {
-    enrique: "/images/instructors/enrique.jpg",
-    justyna: "/images/instructors/justyna.jpg",
-    arturas: "/images/instructors/arturas.jpg",
-    "moe-flex": "/images/instructors/moe-flex.jpg",
-    jim: "/images/instructors/jim.jpg",
-    xaris: "/images/instructors/xaris.jpg",
-    anna: "/images/instructors/anna.jpg",
-    alex: "/images/instructors/alex-spindlove.jpg",
-    "alex-spindlove": "/images/instructors/alex-spindlove.jpg",
+    enrique: "",
+    justyna: "",
+    arturas: "",
+    "moe-flex": "",
+    jim: "",
+    xaris: "",
+    anna: "",
+    alex: "",
+    "alex-spindlove": "",
   },
 };

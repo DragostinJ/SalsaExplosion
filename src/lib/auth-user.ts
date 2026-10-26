@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { DanceLevel, DanceRole, Role } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { isNextControlFlowError } from "@/lib/safe-url";
 
 /** Complimentary credits granted to a brand-new student account. */
 export const WELCOME_CREDITS = 1;
@@ -62,12 +63,7 @@ export async function getOrProvisionCurrentUser() {
     const authState = await auth();
     clerkId = authState.userId;
   } catch (authErr: unknown) {
-    if (
-      authErr &&
-      typeof authErr === "object" &&
-      "digest" in authErr &&
-      (authErr as { digest: string }).digest === "DYNAMIC_SERVER_USAGE"
-    ) {
+    if (isNextControlFlowError(authErr)) {
       throw authErr;
     }
     console.error("[getOrProvisionCurrentUser:auth]", authErr);
@@ -102,12 +98,7 @@ export async function getOrProvisionCurrentUser() {
     try {
       clerkUser = await currentUser();
     } catch (userErr: unknown) {
-      if (
-        userErr &&
-        typeof userErr === "object" &&
-        "digest" in userErr &&
-        (userErr as { digest: string }).digest === "DYNAMIC_SERVER_USAGE"
-      ) {
+      if (isNextControlFlowError(userErr)) {
         throw userErr;
       }
       console.warn("[getOrProvisionCurrentUser:currentUser]", userErr);
@@ -138,12 +129,7 @@ export async function getOrProvisionCurrentUser() {
       include: { subscription: true },
     });
   } catch (dbErr: unknown) {
-    if (
-      dbErr &&
-      typeof dbErr === "object" &&
-      "digest" in dbErr &&
-      (dbErr as { digest: string }).digest === "DYNAMIC_SERVER_USAGE"
-    ) {
+    if (isNextControlFlowError(dbErr)) {
       throw dbErr;
     }
     console.error("[getOrProvisionCurrentUser:db]", dbErr);

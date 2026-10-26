@@ -35,7 +35,10 @@ export function isNextControlFlowError(err: unknown): boolean {
   const digest = String((err as { digest?: unknown }).digest || "");
   return (
     digest === "DYNAMIC_SERVER_USAGE" ||
+    digest === "BAILOUT_TO_CLIENT_SIDE_RENDERING" ||
+    digest === "NEXT_NOT_FOUND" ||
     digest.startsWith("NEXT_REDIRECT") ||
-    digest === "NEXT_NOT_FOUND"
+    digest.startsWith("NEXT_HTTP_ERROR_FALLBACK") ||
+    digest.includes("HANGING_PROMISE_REJECTION")
   );
 }

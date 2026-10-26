@@ -28,37 +28,74 @@ import {
 } from "@/components/ui/card";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 
+import { reportError } from "@/lib/monitoring";
+
 export const metadata = {
   title: "About Salsa Explosion | Cuban Salsa Academy & Community • Bournemouth, UK",
   description:
     "Discover Salsa Explosion UK, founded by Cuban maestro Enrique Perez Valdes. Learn authentic Cuban Salsa (Casino & Rueda de Casino) at BOH Studios Bournemouth.",
 };
 
+const CANONICAL_FACULTY = [
+  {
+    id: "canonical-enrique",
+    email: "enrique@salsaexplosion.co.uk",
+    firstName: "Enrique",
+    lastName: "Perez Valdes",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+    bio: "Founder & Artistic Director of Salsa Explosion. Born in Cuba, Enrique has been promoting authentic Cuban Salsa, Rueda de Casino, and Afro-Cuban culture across the UK for over 25 years. Awarded the Salsa UK Lifetime Achievement Award and voted UK's Most Popular Salsa Promoter.",
+    specialty: "Cuban Salsa, Rueda de Casino, Timba & Afro-Cuban",
+    yearsDancing: 28,
+    role: Role.ADMIN,
+  },
+];
+
 export default async function AboutPage() {
   // Query Instructors and Studio Owner (strictly authentic faculty)
-  const teachers = await prisma.user.findMany({
-    where: {
-      OR: [
-        { role: Role.INSTRUCTOR },
-        { email: "enrique@salsaexplosion.co.uk" },
-      ],
-      NOT: {
-        email: { in: ["dragostinj@gmail.com"] },
+  let teachers: Array<{
+    id: string;
+    email: string;
+    firstName: string | null;
+    lastName: string | null;
+    avatarUrl: string | null;
+    bio: string | null;
+    specialty: string | null;
+    yearsDancing: number | null;
+    role: Role;
+  }> = [];
+
+  try {
+    teachers = await prisma.user.findMany({
+      where: {
+        OR: [
+          { role: Role.INSTRUCTOR },
+          { email: "enrique@salsaexplosion.co.uk" },
+        ],
+        NOT: {
+          email: { in: ["dragostinj@gmail.com"] },
+        },
       },
-    },
-    orderBy: [{ role: "asc" }, { firstName: "asc" }],
-    select: {
-      id: true,
-      email: true,
-      firstName: true,
-      lastName: true,
-      avatarUrl: true,
-      bio: true,
-      specialty: true,
-      yearsDancing: true,
-      role: true,
-    },
-  });
+      orderBy: [{ role: "asc" }, { firstName: "asc" }],
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        avatarUrl: true,
+        bio: true,
+        specialty: true,
+        yearsDancing: true,
+        role: true,
+      },
+    });
+  } catch (err) {
+    reportError("AboutPage:teachersQuery", err);
+  }
+
+  if (!teachers || teachers.length === 0) {
+    teachers = CANONICAL_FACULTY;
+  }
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-16">

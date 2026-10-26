@@ -13,7 +13,8 @@
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:deploy": "prisma migrate deploy && prisma db seed",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "test:e2e:degraded": "node scripts/run-degraded-e2e.mjs"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.16",

@@ -19,7 +19,11 @@ export async function GET() {
 
   const clerkPublishableKeyPresent = clerkPub.length > 0;
   const clerkSecretKeyPresent = clerkSec.length > 0;
-  const clerkKeyMode: "test" | "live" = clerkPub.startsWith("pk_live_") ? "live" : "test";
+  const clerkKeyMode: "live" | "test" | "missing" = clerkPub.startsWith("pk_live_")
+    ? "live"
+    : clerkPub.startsWith("pk_test_")
+    ? "test"
+    : "missing";
 
   let appUrlValid = false;
   try {

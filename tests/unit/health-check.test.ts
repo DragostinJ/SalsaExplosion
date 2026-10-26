@@ -119,4 +119,20 @@ describe("Z1 & Z7: Zero-Cost Keep-Alive & Health Check Safeguards", () => {
     expect(stringified).not.toContain("samplekey123");
     expect(stringified).not.toContain("secretxyz789");
   });
+
+  it("M13: reports clerkKeyMode 'live' when pk_live_ prefix is present, and 'missing' when key is blank", async () => {
+    vi.mocked(prisma.$queryRaw).mockResolvedValue([{ 1: 1 }] as never);
+
+    vi.stubEnv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "pk_live_real_production_credential_abc");
+    const liveRes = await GET();
+    const liveData = await liveRes.json();
+    expect(liveData.clerkKeyMode).toBe("live");
+    expect(JSON.stringify(liveData)).not.toContain("real_production_credential_abc");
+
+    vi.stubEnv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "");
+    const missingRes = await GET();
+    const missingData = await missingRes.json();
+    expect(missingData.clerkKeyMode).toBe("missing");
+    expect(missingData.clerkPublishableKeyPresent).toBe(false);
+  });
 });

@@ -87,7 +87,8 @@ export type SubmissionErrorCode =
   | "PENDING_SUBMISSION_EXISTS"
   | "STORAGE_SIGNING_FAILED"
   | "INTERNAL_ERROR"
-  | "RATE_LIMITED";
+  | "RATE_LIMITED"
+  | "SERVICE_UNAVAILABLE";
 
 export class SubmissionDomainError extends Error {
   public readonly code: SubmissionErrorCode;

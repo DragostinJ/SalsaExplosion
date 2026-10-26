@@ -11,7 +11,7 @@ import {
   TransactionType,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import {
   ActionResponse,
   BookingDomainError,
@@ -46,6 +46,7 @@ export type CancelBookingInput = z.infer<typeof CancelBookingSchema>;
 export async function bookClassAction(
   rawInput: BookClassInput
 ): Promise<ActionResponse<{ bookingId: string; usedSubscription: boolean; remainingCredits: number }>> {
+  // fallback-guard
   const provisionedUser = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(provisionedUser?.id);
 
@@ -54,6 +55,9 @@ export async function bookClassAction(
       // 1. Authenticate & Ensure Provisioned User
       if (!provisionedUser) {
         throw new BookingDomainError("UNAUTHORIZED", "You must be signed in to book a class.");
+      }
+      if (isFallbackUser(provisionedUser)) {
+        throw new BookingDomainError("SERVICE_UNAVAILABLE", SERVICE_UNAVAILABLE_MESSAGE);
       }
 
     // 2. Validate Payload
@@ -310,6 +314,7 @@ export async function bookClassAction(
 export async function cancelBookingAction(
   rawInput: CancelBookingInput
 ): Promise<ActionResponse<{ refundedCredits: number; remainingCredits: number; isLateCancellation: boolean }>> {
+  // fallback-guard
   const provisionedUser = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(provisionedUser?.id);
 
@@ -318,6 +323,9 @@ export async function cancelBookingAction(
       // 1. Authenticate & Ensure Provisioned User
       if (!provisionedUser) {
         throw new BookingDomainError("UNAUTHORIZED", "You must be signed in to cancel a booking.");
+      }
+      if (isFallbackUser(provisionedUser)) {
+        throw new BookingDomainError("SERVICE_UNAVAILABLE", SERVICE_UNAVAILABLE_MESSAGE);
       }
 
     // 2. Validate Payload

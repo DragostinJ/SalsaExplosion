@@ -75,7 +75,8 @@ export type CheckoutErrorCode =
   | "PLAN_UNAVAILABLE"
   | "MISSING_STRIPE_CONFIG"
   | "STRIPE_API_ERROR"
-  | "RATE_LIMITED";
+  | "RATE_LIMITED"
+  | "SERVICE_UNAVAILABLE";
 
 export class CheckoutDomainError extends Error {
   public readonly code: CheckoutErrorCode;

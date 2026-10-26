@@ -13,7 +13,7 @@ import {
   SubscriptionStatus,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser, canSwitchRoles, isBootstrapAdmin } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, canSwitchRoles, isBootstrapAdmin, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { recordAuditLog } from "@/lib/audit-log";
 import { CUBAN_SALSA_SYLLABUS } from "@/lib/constants/submission";
 import type {
@@ -83,6 +83,7 @@ export async function switchMyAccountRoleAction(rawInput: {
   targetRole: Role;
 }): Promise<ManagementActionResponse<{ role: Role }>> {
   try {
+    // fallback-guard-exempt: demo role switcher preserved for owner pitch
     const user = await getOrProvisionCurrentUser();
     if (!user) {
       return {
@@ -149,6 +150,7 @@ export async function getCurrentUserRoleAction(): Promise<{
   canSwitchRoles: boolean;
 }> {
   try {
+    // fallback-guard-exempt: read-only role lookup
     const user = await getOrProvisionCurrentUser();
     if (!user) {
       return { role: null, canSwitchRoles: false };
@@ -177,6 +179,7 @@ export async function updateStudentProgressionAction(rawInput: {
   }>
 > {
   try {
+    // fallback-guard
     const actor = await getOrProvisionCurrentUser();
     if (!actor || (actor.role !== Role.INSTRUCTOR && actor.role !== Role.ADMIN)) {
       return {
@@ -185,6 +188,12 @@ export async function updateStudentProgressionAction(rawInput: {
           code: "FORBIDDEN",
           message: "Only Instructors and Studio Admins can modify student levels.",
         },
+      };
+    }
+    if (isFallbackUser(actor)) {
+      return {
+        success: false,
+        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
       };
     }
 
@@ -258,6 +267,7 @@ export async function adjustStudentCreditsAction(rawInput: {
   reason: string;
 }): Promise<ManagementActionResponse<{ studentId: string; classCredits: number }>> {
   try {
+    // fallback-guard
     const actor = await getOrProvisionCurrentUser();
     if (!actor || (actor.role !== Role.INSTRUCTOR && actor.role !== Role.ADMIN)) {
       return {
@@ -266,6 +276,12 @@ export async function adjustStudentCreditsAction(rawInput: {
           code: "FORBIDDEN",
           message: "Only Instructors and Studio Admins can adjust class credits.",
         },
+      };
+    }
+    if (isFallbackUser(actor)) {
+      return {
+        success: false,
+        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
       };
     }
 
@@ -363,6 +379,7 @@ export async function createClassSessionAction(rawInput: {
   creditCost: number;
 }): Promise<ManagementActionResponse<{ classId: string }>> {
   try {
+    // fallback-guard
     const actor = await getOrProvisionCurrentUser();
     if (!actor || (actor.role !== Role.INSTRUCTOR && actor.role !== Role.ADMIN)) {
       return {
@@ -371,6 +388,12 @@ export async function createClassSessionAction(rawInput: {
           code: "FORBIDDEN",
           message: "Only Instructors and Admins can create classes.",
         },
+      };
+    }
+    if (isFallbackUser(actor)) {
+      return {
+        success: false,
+        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
       };
     }
 
@@ -461,6 +484,7 @@ export async function analyzeSubmissionWithAiAction(rawInput: {
   submissionId: string;
 }): Promise<ManagementActionResponse<AiRubricEvaluation>> {
   try {
+    // fallback-guard
     const actor = await getOrProvisionCurrentUser();
     if (!actor || (actor.role !== Role.INSTRUCTOR && actor.role !== Role.ADMIN)) {
       return {
@@ -469,6 +493,12 @@ export async function analyzeSubmissionWithAiAction(rawInput: {
           code: "FORBIDDEN",
           message: "Only Instructors and Admins can run AI Co-Pilot grading.",
         },
+      };
+    }
+    if (isFallbackUser(actor)) {
+      return {
+        success: false,
+        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
       };
     }
 
@@ -544,11 +574,18 @@ export async function updateMyDanceRolePreferenceAction(rawInput: {
   preferredRole: DanceRole;
 }): Promise<ManagementActionResponse<{ preferredRole: DanceRole }>> {
   try {
+    // fallback-guard
     const user = await getOrProvisionCurrentUser();
     if (!user) {
       return {
         success: false,
         error: { code: "UNAUTHORIZED", message: "Please sign in first." },
+      };
+    }
+    if (isFallbackUser(user)) {
+      return {
+        success: false,
+        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
       };
     }
 
@@ -587,11 +624,18 @@ export async function cancelClassSessionWithRefundsAction(
   rawInput: z.infer<typeof CancelClassSessionSchema>
 ): Promise<ManagementActionResponse<{ id: string; refundedCount: number }>> {
   try {
+    // fallback-guard
     const user = await getOrProvisionCurrentUser();
     if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
       return {
         success: false,
         error: { code: "FORBIDDEN", message: "Only studio staff can cancel classes." },
+      };
+    }
+    if (isFallbackUser(user)) {
+      return {
+        success: false,
+        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
       };
     }
 
@@ -720,11 +764,18 @@ export async function updateClassSessionCapacityAction(
   rawInput: z.infer<typeof UpdateClassSessionCapacitySchema>
 ): Promise<ManagementActionResponse<{ id: string }>> {
   try {
+    // fallback-guard
     const user = await getOrProvisionCurrentUser();
     if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
       return {
         success: false,
         error: { code: "FORBIDDEN", message: "Only studio staff can update class capacity." },
+      };
+    }
+    if (isFallbackUser(user)) {
+      return {
+        success: false,
+        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
       };
     }
 

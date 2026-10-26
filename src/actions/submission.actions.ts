@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { DanceLevel, DanceStyle, SubmissionStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { getSupabaseAdmin, isSupabaseStorageConfigured } from "@/lib/storage";
 import {
   ALLOWED_VIDEO_MIME_TYPES,
@@ -75,6 +75,7 @@ export async function generateSignedUploadUrlAction(rawInput: {
     targetLevel: DanceLevel;
   }>
 > {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -93,6 +94,9 @@ export async function generateSignedUploadUrlAction(rawInput: {
           "UNAUTHORIZED",
           "You must be signed in to upload a Cuban Salsa assessment video."
         );
+      }
+      if (isFallbackUser(user)) {
+        throw new SubmissionDomainError("SERVICE_UNAVAILABLE", SERVICE_UNAVAILABLE_MESSAGE);
       }
 
     // 2. Validate Payload (File Type <= 100MB, MP4/MOV/WebM)
@@ -216,6 +220,7 @@ export async function createVideoSubmissionAction(rawInput: {
   videoPath: string;
   studentNotes?: string;
 }): Promise<SubmissionActionResponse<{ submissionId: string }>> {
+  // fallback-guard
   const provisionedUser = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(provisionedUser?.id);
 
@@ -227,6 +232,9 @@ export async function createVideoSubmissionAction(rawInput: {
           "UNAUTHORIZED",
           "You must be signed in to submit an assessment video."
         );
+      }
+      if (isFallbackUser(provisionedUser)) {
+        throw new SubmissionDomainError("SERVICE_UNAVAILABLE", SERVICE_UNAVAILABLE_MESSAGE);
       }
 
     // 2. Validate Submission Payload

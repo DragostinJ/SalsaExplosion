@@ -24,7 +24,8 @@ export type BookingErrorCode =
   | "BOOKING_NOT_FOUND"
   | "ALREADY_CANCELLED"
   | "INTERNAL_ERROR"
-  | "RATE_LIMITED";
+  | "RATE_LIMITED"
+  | "SERVICE_UNAVAILABLE";
 
 export class BookingDomainError extends Error {
   public readonly code: BookingErrorCode;

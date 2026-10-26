@@ -6,7 +6,7 @@ import { z } from "zod";
 import Stripe from "stripe";
 import { SubscriptionStatus, TransactionType } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { stripe } from "@/lib/stripe";
 import {
   PackageId,
@@ -64,6 +64,7 @@ function isLiveStripeConfigured(priceId: string): boolean {
 export async function createCheckoutSessionAction(
   rawInput: CreateCheckoutInput
 ): Promise<CheckoutActionResponse> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -75,6 +76,9 @@ export async function createCheckoutSessionAction(
           "UNAUTHORIZED",
           "Please sign in to purchase a class pass or membership."
         );
+      }
+      if (isFallbackUser(user)) {
+        throw new CheckoutDomainError("SERVICE_UNAVAILABLE", SERVICE_UNAVAILABLE_MESSAGE);
       }
 
     // 2. Validate Package Selection
@@ -276,6 +280,7 @@ export async function createCheckoutSessionAction(
 // ==========================================
 
 export async function createBillingPortalSessionAction(): Promise<CheckoutActionResponse> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -286,6 +291,9 @@ export async function createBillingPortalSessionAction(): Promise<CheckoutAction
           "UNAUTHORIZED",
           "You must be signed in to manage your billing."
         );
+      }
+      if (isFallbackUser(user)) {
+        throw new CheckoutDomainError("SERVICE_UNAVAILABLE", SERVICE_UNAVAILABLE_MESSAGE);
       }
 
       if (!user.stripeCustomerId) {
@@ -344,6 +352,7 @@ export type CreateEventCheckoutInput = z.infer<typeof CreateEventCheckoutSchema>
 export async function createEventCheckoutSessionAction(
   rawInput: CreateEventCheckoutInput
 ): Promise<CheckoutActionResponse> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -354,6 +363,9 @@ export async function createEventCheckoutSessionAction(
           "UNAUTHORIZED",
           "Please sign in to purchase an event pass."
         );
+      }
+      if (isFallbackUser(user)) {
+        throw new CheckoutDomainError("SERVICE_UNAVAILABLE", SERVICE_UNAVAILABLE_MESSAGE);
       }
 
     const parsed = CreateEventCheckoutSchema.safeParse(rawInput);

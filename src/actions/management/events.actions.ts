@@ -11,7 +11,7 @@ import {
   TicketPaymentStatus,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
 import type { ManagementActionResponse } from "@/lib/constants/management";
@@ -53,6 +53,7 @@ export async function registerForEventTierAction(rawInput: {
     tierName: string;
   }>
 > {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -73,6 +74,15 @@ export async function registerForEventTierAction(rawInput: {
             error: {
               code: "UNAUTHORIZED",
               message: "Please sign in to register for this event.",
+            },
+          };
+        }
+        if (isFallbackUser(user)) {
+          return {
+            success: false,
+            error: {
+              code: "SERVICE_UNAVAILABLE",
+              message: SERVICE_UNAVAILABLE_MESSAGE,
             },
           };
         }
@@ -226,6 +236,7 @@ export async function createGuestArtistEventAction(rawInput: {
   partyPassCapacity: number;
 }): Promise<ManagementActionResponse<{ eventSlug: string }>> {
   try {
+    // fallback-guard
     const actor = await getOrProvisionCurrentUser();
     if (!actor || actor.role !== Role.ADMIN) {
       return {
@@ -233,6 +244,15 @@ export async function createGuestArtistEventAction(rawInput: {
         error: {
           code: "FORBIDDEN",
           message: "Only Studio Admins can publish Guest Artist Events.",
+        },
+      };
+    }
+    if (isFallbackUser(actor)) {
+      return {
+        success: false,
+        error: {
+          code: "SERVICE_UNAVAILABLE",
+          message: SERVICE_UNAVAILABLE_MESSAGE,
         },
       };
     }

@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 // ==========================================
@@ -126,6 +126,7 @@ export async function submitAnonymousQuestionAction(
 export async function submitPostClassFeedbackAction(
   rawInput: PostClassFeedbackInput
 ): Promise<BeginnerActionResponse<{ sentiment: string; encouragement: string }>> {
+// fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -138,6 +139,12 @@ export async function submitPostClassFeedbackAction(
           return {
             success: false,
             error: "Please sign in to submit your class check-in.",
+          };
+        }
+        if (isFallbackUser(user)) {
+          return {
+            success: false,
+            error: SERVICE_UNAVAILABLE_MESSAGE,
           };
         }
 

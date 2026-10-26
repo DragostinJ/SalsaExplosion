@@ -5,7 +5,8 @@ export type GradingErrorCode =
   | "SUBMISSION_NOT_FOUND"
   | "ALREADY_GRADED"
   | "INTERNAL_ERROR"
-  | "RATE_LIMITED";
+  | "RATE_LIMITED"
+  | "SERVICE_UNAVAILABLE";
 
 export class GradingDomainError extends Error {
   public readonly code: GradingErrorCode;

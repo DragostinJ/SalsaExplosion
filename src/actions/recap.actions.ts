@@ -258,6 +258,7 @@ export async function attachClassRecapAction(rawInput: AttachRecapInput) {
  */
 export async function getMyAttendedClassRecapsAction() {
   try {
+    // fallback-guard-exempt: read-only attended recap query
     const user = await getOrProvisionCurrentUser();
     if (!user) {
       return {

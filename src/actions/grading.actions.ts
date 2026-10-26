@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { AuditAction, DanceLevel, Role, SubmissionStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { LEVEL_WEIGHT } from "@/lib/constants/booking";
 
 import {
@@ -61,6 +61,7 @@ export async function gradeSubmissionAction(
     wasPromoted: boolean;
   }>
 > {
+  // fallback-guard
   const provisionedReviewer = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(provisionedReviewer?.id);
 
@@ -79,6 +80,9 @@ export async function gradeSubmissionAction(
           "UNAUTHORIZED",
           "You must be signed in to review submissions."
         );
+      }
+      if (isFallbackUser(provisionedReviewer)) {
+        throw new GradingDomainError("SERVICE_UNAVAILABLE", SERVICE_UNAVAILABLE_MESSAGE);
       }
 
     // 2. Validate Payload

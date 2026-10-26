@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { Role, AuditAction } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { recordAuditLog } from "@/lib/audit-log";
 import type { ManagementActionResponse } from "@/lib/constants/management";
 
@@ -17,11 +17,18 @@ export async function replyAnonymousQuestionAction(
   rawInput: z.infer<typeof ReplyAnonymousQuestionSchema>
 ): Promise<ManagementActionResponse<{ id: string }>> {
   try {
+    // fallback-guard
     const user = await getOrProvisionCurrentUser();
     if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
       return {
         success: false,
         error: { code: "FORBIDDEN", message: "Only studio staff can answer beginner questions." },
+      };
+    }
+    if (isFallbackUser(user)) {
+      return {
+        success: false,
+        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
       };
     }
 

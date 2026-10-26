@@ -4,7 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { DanceRole } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
 const JoinWaitlistSchema = z.object({
@@ -29,6 +29,7 @@ export interface WaitlistActionResponse<T = unknown> {
 export async function joinPartnerWaitlistAction(rawInput: {
   role: DanceRole;
 }): Promise<WaitlistActionResponse<{ entryId: string; role: DanceRole }>> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -36,6 +37,9 @@ export async function joinPartnerWaitlistAction(rawInput: {
     try {
       if (!user) {
         return { success: false, error: "Please sign in to join the priority waitlist." };
+      }
+      if (isFallbackUser(user)) {
+        return { success: false, error: SERVICE_UNAVAILABLE_MESSAGE };
       }
 
       const parsed = JoinWaitlistSchema.safeParse(rawInput);
@@ -89,6 +93,7 @@ export async function invitePartnerBypassAction(rawInput: {
   partnerEmail: string;
   role: DanceRole;
 }): Promise<WaitlistActionResponse<{ entryId: string; partnerEmail: string }>> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -96,6 +101,9 @@ export async function invitePartnerBypassAction(rawInput: {
     try {
       if (!user) {
         return { success: false, error: "Please sign in to invite a dance partner." };
+      }
+      if (isFallbackUser(user)) {
+        return { success: false, error: SERVICE_UNAVAILABLE_MESSAGE };
       }
 
       const parsed = InviteBypassSchema.safeParse(rawInput);

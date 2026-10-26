@@ -4,7 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { AuditAction, Role } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
 import { COACHING_INSTRUCTORS_CATALOG } from "@/lib/constants/coaching";
@@ -33,6 +33,7 @@ export interface LessonActionResponse<T = unknown> {
 export async function bookPrivateLessonAction(
   rawInput: BookPrivateLessonInput
 ): Promise<LessonActionResponse<{ bookingId: string; totalPricePounds: number }>> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -45,6 +46,12 @@ export async function bookPrivateLessonAction(
           return {
             success: false,
             error: "Please sign in to book your private coaching session.",
+          };
+        }
+        if (isFallbackUser(user)) {
+          return {
+            success: false,
+            error: SERVICE_UNAVAILABLE_MESSAGE,
           };
         }
 
@@ -127,6 +134,7 @@ export async function bookPrivateLessonAction(
 export async function cancelPrivateLessonBookingAction(rawInput: {
   bookingId: string;
 }): Promise<LessonActionResponse<{ bookingId: string }>> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -137,6 +145,9 @@ export async function cancelPrivateLessonBookingAction(rawInput: {
       try {
         if (!user) {
           return { success: false, error: "Please sign in to cancel your booking." };
+        }
+        if (isFallbackUser(user)) {
+          return { success: false, error: SERVICE_UNAVAILABLE_MESSAGE };
         }
 
         const booking = await prisma.privateLessonBooking.findUnique({

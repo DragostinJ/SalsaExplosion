@@ -17,6 +17,8 @@ vi.mock("@/lib/auth-user", () => ({
   getOrProvisionCurrentUser: vi.fn(),
   requireRole: vi.fn(),
   canSwitchRoles: vi.fn(),
+  isFallbackUser: vi.fn((user: { id: string }) => user.id.startsWith("fallback-")),
+  SERVICE_UNAVAILABLE_MESSAGE: "We can't reach our booking system right now. Please try again in a minute.",
   STAFF_ROLES: [Role.INSTRUCTOR, Role.ADMIN],
   ADMIN_ONLY: [Role.ADMIN],
 }));

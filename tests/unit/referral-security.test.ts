@@ -12,6 +12,8 @@ vi.mock("next/cache", () => ({
 // Mock auth-user module
 vi.mock("@/lib/auth-user", () => ({
   getOrProvisionCurrentUser: vi.fn(),
+  isFallbackUser: vi.fn((user: { id: string }) => user.id.startsWith("fallback-")),
+  SERVICE_UNAVAILABLE_MESSAGE: "We can't reach our booking system right now. Please try again in a minute.",
 }));
 
 // Mock audit-log

@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { BookingStatus, Role } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import type { ManagementActionResponse } from "@/lib/constants/management";
 
@@ -27,6 +27,7 @@ export async function toggleBookingCheckInAction(rawInput: {
   markAttended: boolean;
 }): Promise<ManagementActionResponse<{ bookingId: string; status: BookingStatus }>> {
   try {
+    // fallback-guard
     const actor = await getOrProvisionCurrentUser();
     if (!actor || (actor.role !== Role.INSTRUCTOR && actor.role !== Role.ADMIN)) {
       return {
@@ -34,6 +35,15 @@ export async function toggleBookingCheckInAction(rawInput: {
         error: {
           code: "FORBIDDEN",
           message: "Only Instructors and Admins can check in students.",
+        },
+      };
+    }
+    if (isFallbackUser(actor)) {
+      return {
+        success: false,
+        error: {
+          code: "SERVICE_UNAVAILABLE",
+          message: SERVICE_UNAVAILABLE_MESSAGE,
         },
       };
     }
@@ -84,6 +94,7 @@ export async function toggleBookingCheckInAction(rawInput: {
 export async function selfCheckInClassQrAction(rawInput: {
   classSessionId: string;
 }): Promise<ManagementActionResponse<{ bookingId: string; classTitle: string }>> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -93,6 +104,12 @@ export async function selfCheckInClassQrAction(rawInput: {
         return {
           success: false,
           error: { code: "UNAUTHORIZED", message: "Please sign in to check in." },
+        };
+      }
+      if (isFallbackUser(user)) {
+        return {
+          success: false,
+          error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
         };
       }
 
@@ -207,11 +224,21 @@ export async function toggleEventRegistrationCheckInAction(rawInput: {
   checkedIn: boolean;
 }): Promise<ManagementActionResponse<{ registrationId: string; checkedIn: boolean }>> {
   try {
+    // fallback-guard
     const actor = await getOrProvisionCurrentUser();
     if (!actor || (actor.role !== Role.INSTRUCTOR && actor.role !== Role.ADMIN)) {
       return {
         success: false,
         error: { code: "FORBIDDEN", message: "Unauthorized door scanner access." },
+      };
+    }
+    if (isFallbackUser(actor)) {
+      return {
+        success: false,
+        error: {
+          code: "SERVICE_UNAVAILABLE",
+          message: SERVICE_UNAVAILABLE_MESSAGE,
+        },
       };
     }
 

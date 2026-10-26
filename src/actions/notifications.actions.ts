@@ -43,6 +43,7 @@ export async function getAdminNotificationsAction(rawInput?: unknown): Promise<{
 }> {
   try {
     notificationsQuerySchema.parse(rawInput);
+    // fallback-guard-exempt: read-only notification query
     const user = await getOrProvisionCurrentUser();
     if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
       return { success: false, notifications: [], unreadCount: 0 };

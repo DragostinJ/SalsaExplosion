@@ -6,6 +6,13 @@ import { prisma } from "@/lib/prisma";
 /** Complimentary credits granted to a brand-new student account. */
 export const WELCOME_CREDITS = 1;
 
+export function isFallbackUser(user: { id: string }): boolean {
+  return user.id.startsWith("fallback-");
+}
+
+export const SERVICE_UNAVAILABLE_MESSAGE =
+  "We can't reach our booking system right now. Please try again in a minute.";
+
 /**
  * Comma-separated list of emails that are bootstrapped as ADMIN on first sign-in
  * (e.g. ADMIN_EMAILS="you@example.com,owner@studio.com").

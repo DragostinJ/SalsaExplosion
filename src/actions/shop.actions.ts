@@ -4,7 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { AuditAction, Role } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
 import { SHOP_CATALOG } from "@/lib/constants/shop";
@@ -29,6 +29,7 @@ export interface ShopActionResponse<T = unknown> {
 export async function reserveMerchItemAction(
   rawInput: ReserveMerchInput
 ): Promise<ShopActionResponse<{ reservationId: string; pricePounds: number }>> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -41,6 +42,12 @@ export async function reserveMerchItemAction(
           return {
             success: false,
             error: "Please sign in to reserve items for studio desk pickup.",
+          };
+        }
+        if (isFallbackUser(user)) {
+          return {
+            success: false,
+            error: SERVICE_UNAVAILABLE_MESSAGE,
           };
         }
 
@@ -124,6 +131,7 @@ export async function reserveMerchItemAction(
 export async function cancelMerchReservationAction(rawInput: {
   reservationId: string;
 }): Promise<ShopActionResponse<{ reservationId: string }>> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -134,6 +142,9 @@ export async function cancelMerchReservationAction(rawInput: {
       try {
         if (!user) {
           return { success: false, error: "Please sign in to cancel your reservation." };
+        }
+        if (isFallbackUser(user)) {
+          return { success: false, error: SERVICE_UNAVAILABLE_MESSAGE };
         }
 
         const reservation = await prisma.merchReservation.findUnique({

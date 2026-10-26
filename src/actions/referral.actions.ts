@@ -4,7 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { TransactionType, AuditAction } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
 
@@ -28,6 +28,7 @@ export interface ReferralActionResponse<T = unknown> {
 export async function redeemReferralCodeAction(rawInput: {
   code: string;
 }): Promise<ReferralActionResponse<{ creditsAwarded: number }>> {
+  // fallback-guard
   const user = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(user?.id);
 
@@ -40,6 +41,12 @@ export async function redeemReferralCodeAction(rawInput: {
           return {
             success: false,
             error: "Please sign in to redeem a referral code.",
+          };
+        }
+        if (isFallbackUser(user)) {
+          return {
+            success: false,
+            error: SERVICE_UNAVAILABLE_MESSAGE,
           };
         }
 

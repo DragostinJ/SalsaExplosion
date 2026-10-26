@@ -14,9 +14,9 @@ export function RosterBalanceMeters({ activeClass }: RosterBalanceMetersProps) {
     <div className="space-y-4">
       {/* Live Lead / Follow Floor Balance Meters */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-xl border bg-blue-500/[0.04] border-blue-500/20 p-3.5">
+        <div className="rounded-xl border bg-role-lead-soft border-role-lead-line p-3.5">
           <div className="flex items-center justify-between text-xs font-semibold">
-            <span className="text-blue-400 uppercase tracking-wider">
+            <span className="text-role-lead uppercase tracking-wider font-bold">
               Leads on Dance Floor
             </span>
             <span className="font-bold">
@@ -36,14 +36,14 @@ export function RosterBalanceMeters({ activeClass }: RosterBalanceMetersProps) {
                   )
                 )}%`,
               }}
-              className="h-full bg-blue-600 rounded-full transition-all"
+              className="h-full bg-role-lead rounded-full transition-all"
             />
           </div>
         </div>
 
-        <div className="rounded-xl border bg-rose-500/[0.04] border-rose-500/20 p-3.5">
+        <div className="rounded-xl border bg-role-follow-soft border-role-follow-line p-3.5">
           <div className="flex items-center justify-between text-xs font-semibold">
-            <span className="text-rose-400 uppercase tracking-wider">
+            <span className="text-role-follow uppercase tracking-wider font-bold">
               Follows on Dance Floor
             </span>
             <span className="font-bold">
@@ -63,7 +63,7 @@ export function RosterBalanceMeters({ activeClass }: RosterBalanceMetersProps) {
                   )
                 )}%`,
               }}
-              className="h-full bg-rose-500 rounded-full transition-all"
+              className="h-full bg-role-follow rounded-full transition-all"
             />
           </div>
         </div>

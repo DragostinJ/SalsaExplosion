@@ -173,26 +173,26 @@ export function TimbaDancerHud({
         {activeRole === "leader" ? (
           <div
             data-testid="leader-action-card"
-            className="rounded-xl border border-teal-500/25 bg-teal-950/35 p-2.5 sm:p-3 space-y-0.5 shadow-xs text-teal-100"
+            className="rounded-xl border border-role-lead-line bg-role-lead-soft p-2.5 sm:p-3 space-y-0.5 shadow-xs text-role-lead"
           >
-            <span className="text-[10px] uppercase font-black tracking-wider text-teal-300 flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-teal-400 shrink-0" />
+            <span className="text-[10px] uppercase font-black tracking-wider text-role-lead flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-role-lead shrink-0" />
               🕺 Leader Action
             </span>
-            <p className="text-xs text-teal-100 font-semibold leading-snug">
+            <p className="text-xs text-ivory font-semibold leading-snug">
               {activeSegment.leaderCue}
             </p>
           </div>
         ) : (
           <div
             data-testid="follower-action-card"
-            className="rounded-xl border border-rose-500/25 bg-rose-950/35 p-2.5 sm:p-3 space-y-0.5 shadow-xs text-rose-100"
+            className="rounded-xl border border-role-follow-line bg-role-follow-soft p-2.5 sm:p-3 space-y-0.5 shadow-xs text-role-follow"
           >
-            <span className="text-[10px] uppercase font-black tracking-wider text-rose-300 flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-rose-400 shrink-0" />
+            <span className="text-[10px] uppercase font-black tracking-wider text-role-follow flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-role-follow shrink-0" />
               💃 Follower Action
             </span>
-            <p className="text-xs text-rose-100 font-semibold leading-snug">
+            <p className="text-xs text-ivory font-semibold leading-snug">
               {activeSegment.followerCue}
             </p>
           </div>

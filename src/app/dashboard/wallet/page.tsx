@@ -14,6 +14,8 @@ import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { coachingStatusTone } from "@/lib/status-tone";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -287,15 +289,12 @@ export default async function StudentWalletPage() {
                         {reg.event.title}
                       </h3>
                     </div>
-                    <Badge
-                      className={
-                        reg.checkedIn
-                          ? "bg-emerald-600 text-white text-[10px]"
-                          : "bg-purple-600 text-white text-[10px]"
-                      }
+                    <StatusBadge
+                      tone={reg.checkedIn ? "success" : "info"}
+                      className="text-[10px]"
                     >
                       {reg.checkedIn ? "Checked In" : `Role: ${reg.role}`}
-                    </Badge>
+                    </StatusBadge>
                   </div>
 
                   <div className="text-[11px] text-muted-foreground space-y-0.5">
@@ -380,7 +379,13 @@ export default async function StudentWalletPage() {
                 >
                   <div className="space-y-1">
                     <div className="flex items-center justify-between">
-                      <Badge className="bg-emerald-600 text-white text-[10px] font-bold">
+                      <Badge
+                        className={
+                          b.danceRole === "LEAD"
+                            ? "bg-role-lead text-stone-950 text-[10px] font-bold"
+                            : "bg-role-follow text-stone-950 text-[10px] font-bold"
+                        }
+                      >
                         Role: {b.danceRole}
                       </Badge>
                       <span className="text-[11px] font-semibold text-muted-foreground">
@@ -505,15 +510,12 @@ export default async function StudentWalletPage() {
                       {l.totalPricePounds}
                     </span>
                   </div>
-                  <Badge
-                    className={
-                      l.status === "CONFIRMED"
-                        ? "bg-emerald-600 text-white text-[10px]"
-                        : "bg-amber-600 text-white text-[10px]"
-                    }
+                  <StatusBadge
+                    tone={coachingStatusTone(l.status)}
+                    className="text-[10px]"
                   >
                     {l.status}
-                  </Badge>
+                  </StatusBadge>
                 </div>
               ))
             )}
@@ -556,7 +558,7 @@ export default async function StudentWalletPage() {
                   <div className="text-right">
                     <span
                       className={`font-black text-xs ${
-                        tx.amount > 0 ? "text-emerald-600" : "text-rose-600"
+                        tx.amount > 0 ? "text-success" : "text-danger"
                       }`}
                     >
                       {tx.amount > 0 ? `+${tx.amount}` : tx.amount} Credits

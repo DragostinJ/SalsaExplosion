@@ -2,6 +2,8 @@
 
 import { Loader2, Send, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { sentimentTone } from "@/lib/status-tone";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import type { QuestionItem, SentimentItem } from "./types";
@@ -47,17 +49,12 @@ export function SentimentFeedbackTab({
                     </h4>
                     <p className="text-[10px] text-muted-foreground">{fb.classSession.title}</p>
                   </div>
-                  <Badge
-                    className={`text-[10px] font-bold ${
-                      fb.sentiment === "LOVED_IT"
-                        ? "bg-emerald-500/10 text-emerald-400"
-                        : fb.sentiment === "A_BIT_OVERWHELMED"
-                        ? "bg-rose-500/10 text-rose-400"
-                        : "bg-sky-500/10 text-sky-400"
-                    }`}
+                  <StatusBadge
+                    tone={sentimentTone(fb.sentiment)}
+                    className="text-[10px]"
                   >
                     {fb.sentiment.replace(/_/g, " ")}
-                  </Badge>
+                  </StatusBadge>
                 </div>
                 {fb.notes && (
                   <p className="text-xs text-muted-foreground italic bg-muted/40 rounded-xl p-2.5">
@@ -108,15 +105,12 @@ export function SentimentFeedbackTab({
                       </div>
                       <p className="text-sm font-semibold text-foreground">{q.question}</p>
                     </div>
-                    <Badge
-                      className={`text-[10px] font-bold shrink-0 ${
-                        isAnswered
-                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                          : "bg-amber-500/10 text-amber-400 border-amber-500/30"
-                      }`}
+                    <StatusBadge
+                      tone={isAnswered ? "success" : "warning"}
+                      className="text-[10px] shrink-0"
                     >
                       {q.status}
-                    </Badge>
+                    </StatusBadge>
                   </div>
 
                   {/* Existing Response */}

@@ -1,7 +1,8 @@
 "use client";
 
 import { CheckCircle2, Users, XCircle, Zap } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { waitlistStatusTone } from "@/lib/status-tone";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { WaitlistItem } from "./types";
@@ -69,17 +70,9 @@ export function PartnerWaitlistTab({
                       </CardTitle>
                       <p className="text-[11px] text-muted-foreground">{w.user.email}</p>
                     </div>
-                    <Badge
-                      className={`text-[10px] font-bold ${
-                        w.status === "PAIRED" || w.status === "NOTIFIED"
-                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                          : w.status === "CANCELLED"
-                          ? "bg-rose-500/10 text-rose-400"
-                          : "bg-amber-500/10 text-amber-400 border-amber-500/30"
-                      }`}
-                    >
+                    <StatusBadge tone={waitlistStatusTone(w.status)} className="text-[10px]">
                       {w.status}
-                    </Badge>
+                    </StatusBadge>
                   </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-3 space-y-3 text-xs">

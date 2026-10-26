@@ -1,7 +1,8 @@
 "use client";
 
 import { CalendarPlus, CheckCircle2, Sparkles, XCircle } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { coachingStatusTone } from "@/lib/status-tone";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { PrivateBookingItem } from "./types";
@@ -50,19 +51,9 @@ export function CoachingRequestsTab({
                       </CardTitle>
                       <p className="text-[11px] text-muted-foreground">{b.student.email}</p>
                     </div>
-                    <Badge
-                      className={`text-[10px] font-bold ${
-                        b.status === "CONFIRMED"
-                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                          : b.status === "COMPLETED"
-                          ? "bg-muted text-muted-foreground"
-                          : b.status === "CANCELLED"
-                          ? "bg-rose-500/10 text-rose-400"
-                          : "bg-amber-500/10 text-amber-400 border-amber-500/30"
-                      }`}
-                    >
+                    <StatusBadge tone={coachingStatusTone(b.status)} className="text-[10px]">
                       {b.status}
-                    </Badge>
+                    </StatusBadge>
                   </div>
                 </CardHeader>
                 <CardContent className="p-4 pt-3 space-y-3 text-xs">

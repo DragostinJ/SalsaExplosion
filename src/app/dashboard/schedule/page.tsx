@@ -229,7 +229,7 @@ export default async function StudentSchedulePage({
   return (
     <main className="mx-auto max-w-7xl space-y-4 sm:space-y-6 px-4 py-3 sm:py-6 overflow-x-hidden w-full">
       {(checkoutStatus === "success" || checkoutStatus === "demo_success") && (
-        <div className="flex items-center justify-between rounded-2xl border border-emerald-500/40 bg-emerald-500/10 px-5 py-3.5 text-xs sm:text-sm font-semibold text-emerald-300">
+        <div className="flex items-center justify-between rounded-2xl border border-success-line bg-success-soft px-5 py-3.5 text-xs sm:text-sm font-semibold text-success">
           <span>
             Pass activated! Your studio wallet has been updated ({user?.classCredits ?? 0} credits available). Select any class below to book your spot!
           </span>
@@ -449,7 +449,7 @@ export default async function StudentSchedulePage({
       {/* Instructor & Studio Admin Quick-Access Command Bar (Shown only to Staff/Admin) */}
       {userCanManage && (
         <div className="grid gap-4 md:grid-cols-2 pt-4">
-          <div className="flex flex-col justify-between gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/[0.04] p-4 sm:flex-row sm:items-center">
+          <div className="flex flex-col justify-between gap-3 rounded-2xl border border-success-line bg-success-soft p-4 sm:flex-row sm:items-center">
             <div>
               <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">
                 Instructor Portal

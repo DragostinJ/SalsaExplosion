@@ -91,7 +91,7 @@ export function RosterDancerList({
             onClick={() => onFilterChange("AWAITING")}
             className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
               filterRole === "AWAITING"
-                ? "bg-amber-500 text-stone-950 shadow-xs"
+                ? "bg-warning text-stone-950 shadow-xs"
                 : "bg-muted/50 text-muted-foreground hover:bg-muted"
             }`}
           >
@@ -102,7 +102,7 @@ export function RosterDancerList({
             onClick={() => onFilterChange("CHECKED_IN")}
             className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
               filterRole === "CHECKED_IN"
-                ? "bg-emerald-600 text-white shadow-xs"
+                ? "bg-success text-stone-950 shadow-xs"
                 : "bg-muted/50 text-muted-foreground hover:bg-muted"
             }`}
           >
@@ -113,7 +113,7 @@ export function RosterDancerList({
             onClick={() => onFilterChange("LEAD")}
             className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
               filterRole === "LEAD"
-                ? "bg-blue-600 text-white shadow-xs"
+                ? "bg-role-lead text-stone-950 shadow-xs"
                 : "bg-muted/50 text-muted-foreground hover:bg-muted"
             }`}
           >
@@ -124,7 +124,7 @@ export function RosterDancerList({
             onClick={() => onFilterChange("FOLLOW")}
             className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
               filterRole === "FOLLOW"
-                ? "bg-rose-600 text-white shadow-xs"
+                ? "bg-role-follow text-stone-950 shadow-xs"
                 : "bg-muted/50 text-muted-foreground hover:bg-muted"
             }`}
           >
@@ -150,7 +150,7 @@ export function RosterDancerList({
               key={booking.id}
               className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border p-3.5 transition-all ${
                 isAttended
-                  ? "border-emerald-500/30 bg-emerald-500/[0.04]"
+                  ? "border-success-line bg-success-soft"
                   : "bg-card"
               }`}
             >
@@ -158,7 +158,7 @@ export function RosterDancerList({
                 <div
                   className={`flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold ${
                     isAttended
-                      ? "bg-emerald-600 text-white"
+                      ? "bg-success text-stone-950 font-black"
                       : "bg-muted text-foreground"
                   }`}
                 >
@@ -173,8 +173,8 @@ export function RosterDancerList({
                     <Badge
                       className={
                         booking.danceRole === DanceRole.LEAD
-                          ? "bg-blue-600 text-white text-[10px]"
-                          : "bg-rose-500 text-white text-[10px]"
+                          ? "bg-role-lead text-stone-950 font-bold text-[10px]"
+                          : "bg-role-follow text-stone-950 font-bold text-[10px]"
                       }
                     >
                       {booking.danceRole}
@@ -204,7 +204,7 @@ export function RosterDancerList({
                   }
                   className={
                     isAttended
-                      ? "border-emerald-500/40 bg-emerald-500/15 text-emerald-300 font-bold text-xs"
+                      ? "border-success-line bg-success-soft text-success font-bold text-xs"
                       : "bg-primary text-primary-foreground text-xs font-semibold"
                   }
                 >

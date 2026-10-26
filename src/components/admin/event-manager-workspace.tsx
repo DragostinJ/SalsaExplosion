@@ -311,8 +311,8 @@ export function EventManagerWorkspace({
                         <Badge
                           className={
                             reg.role === DanceRole.LEAD
-                              ? "bg-blue-700 text-white text-[10px]"
-                              : "bg-rose-700 text-white text-[10px]"
+                              ? "bg-role-lead text-stone-950 font-bold text-[10px]"
+                              : "bg-role-follow text-stone-950 font-bold text-[10px]"
                           }
                         >
                           {reg.role}

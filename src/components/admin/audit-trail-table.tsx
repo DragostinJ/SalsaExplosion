@@ -11,7 +11,7 @@ import {
   Clock,
   Terminal,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/ui/status-badge";
 
 export interface AuditLogEntry {
   id: string;
@@ -38,48 +38,48 @@ function getActionBadge(action: AuditAction) {
   switch (action) {
     case AuditAction.ROLE_CHANGE:
       return (
-        <Badge className="bg-primary-base text-white hover:bg-primary-hover flex items-center gap-1">
+        <StatusBadge tone="info" className="flex items-center gap-1">
           <UserCheck className="h-3 w-3" />
           Role Switch
-        </Badge>
+        </StatusBadge>
       );
     case AuditAction.CREDIT_ADJUSTMENT:
       return (
-        <Badge className="bg-accent-tangerine text-white hover:bg-accent-tangerine/90 flex items-center gap-1">
+        <StatusBadge tone="warning" className="flex items-center gap-1">
           <CreditCard className="h-3 w-3" />
           Credit Delta
-        </Badge>
+        </StatusBadge>
       );
     case AuditAction.LEVEL_PROMOTION:
       return (
-        <Badge className="bg-secondary-base text-white hover:bg-secondary-hover flex items-center gap-1">
+        <StatusBadge tone="success" className="flex items-center gap-1">
           <Award className="h-3 w-3" />
           Progression
-        </Badge>
+        </StatusBadge>
       );
     case AuditAction.CSV_EXPORT:
       return (
-        <Badge className="bg-surface-3 text-stone-200 hover:bg-surface-2 border border-line flex items-center gap-1">
+        <StatusBadge tone="neutral" className="flex items-center gap-1">
           <FileSpreadsheet className="h-3 w-3" />
           CSV Export
-        </Badge>
+        </StatusBadge>
       );
     case AuditAction.EVENT_MUTATION:
       return (
-        <Badge className="bg-purple-600 text-white hover:bg-purple-700 flex items-center gap-1">
+        <StatusBadge tone="info" className="flex items-center gap-1">
           <Calendar className="h-3 w-3" />
           Event Mutation
-        </Badge>
+        </StatusBadge>
       );
     case AuditAction.REFUND:
       return (
-        <Badge className="bg-rose-700 text-white hover:bg-rose-800 flex items-center gap-1">
+        <StatusBadge tone="danger" className="flex items-center gap-1">
           <RotateCcw className="h-3 w-3" />
           Refund
-        </Badge>
+        </StatusBadge>
       );
     default:
-      return <Badge variant="outline">{action}</Badge>;
+      return <StatusBadge tone="neutral">{action}</StatusBadge>;
   }
 }
 

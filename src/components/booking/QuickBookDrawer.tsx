@@ -87,7 +87,7 @@ export function QuickBookDrawer() {
         {/* Header Bar */}
         <div className="flex items-center justify-between pb-3 border-b border-line">
           <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="flex h-2 w-2 rounded-full bg-success animate-pulse" />
             <h3 className="text-xs font-black uppercase tracking-widest text-gold">
               2-TAP QUICKBOOK • HAVANA RESIDENCY PASS
             </h3>
@@ -132,36 +132,36 @@ export function QuickBookDrawer() {
                   onClick={() => setRole("lead")}
                   className={`p-3 rounded-xl border text-left transition-all ${
                     role === "lead"
-                      ? "border-gold bg-gold/15 text-ivory shadow-xs"
+                      ? "border-role-lead bg-role-lead-soft text-ivory shadow-xs"
                       : "border-line bg-surface-3 text-stone-400 hover:text-ivory hover:bg-surface-1"
                   }`}
                 >
                   <div className="text-sm font-black">LEAD • Lead Partner</div>
-                  <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">Spot Open</div>
+                  <div className="text-[10px] text-role-lead font-semibold mt-0.5">Spot Open</div>
                 </button>
                 <button
                   type="button"
                   onClick={() => setRole("follow")}
                   className={`p-3 rounded-xl border text-left transition-all ${
                     role === "follow"
-                      ? "border-gold bg-gold/15 text-ivory shadow-xs"
+                      ? "border-role-follow bg-role-follow-soft text-ivory shadow-xs"
                       : "border-line bg-surface-3 text-stone-400 hover:text-ivory hover:bg-surface-1"
                   }`}
                 >
                   <div className="text-sm font-black">FOLLOW • Follow Partner</div>
-                  <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">Spot Open</div>
+                  <div className="text-[10px] text-role-follow font-semibold mt-0.5">Spot Open</div>
                 </button>
               </div>
 
               {/* Live Partner Ratio Balance Meter */}
-              <div className="p-2.5 rounded-xl border border-emerald-500/30 bg-emerald-950/30 text-xs space-y-1.5">
-                <div className="flex items-center justify-between text-[11px] font-bold text-emerald-300">
+              <div className="p-2.5 rounded-xl border border-success-line bg-success-soft text-xs space-y-1.5">
+                <div className="flex items-center justify-between text-[11px] font-bold text-success">
                   <span>LIVE RATIO LOCK: 50% LEADS / 50% FOLLOWS</span>
                   <span>BALANCED CIRCLE</span>
                 </div>
                 <div className="w-full h-2 rounded-full bg-surface-1 overflow-hidden flex">
-                  <div className="w-1/2 bg-gold h-full" />
-                  <div className="w-1/2 bg-emerald-400 h-full" />
+                  <div className="w-1/2 bg-role-lead h-full" />
+                  <div className="w-1/2 bg-role-follow h-full" />
                 </div>
               </div>
             </div>
@@ -269,7 +269,7 @@ export function QuickBookDrawer() {
               {/* Top Perforation Notches */}
               <div className="flex items-center justify-between border-b border-line pb-3">
                 <div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-success">
                     CONFIRMED RESERVATION
                   </span>
                   <h4 className="text-lg font-black text-ivory">{session.title}</h4>

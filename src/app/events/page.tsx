@@ -42,17 +42,17 @@ export default async function EventsDirectoryPage() {
           <div className="lg:col-span-7 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3 text-[11px] font-black uppercase tracking-widest text-gold">
               <span>OFFICIAL ONLINE BOX OFFICE • FESTIVALS &amp; SPECIAL EVENTS</span>
-              <span className="text-stone-400 font-bold">{VENUE_INFO.shortName} • BOURNEMOUTH</span>
+              <span className="text-ivory-muted font-bold">{VENUE_INFO.shortName} • BOURNEMOUTH</span>
             </div>
 
             <div>
-              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-ivory uppercase leading-none">
+              <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-ivory leading-tight">
                 DANZA! 2026 | 2027{" "}
-                <span className="font-display italic font-normal text-gold normal-case">
+                <span className="italic font-normal text-gold">
                   Special Event Calendar
                 </span>
               </h1>
-              <p className="text-xs sm:text-sm text-stone-300 mt-2 font-medium">
+              <p className="text-xs sm:text-sm text-ivory-muted mt-2 font-medium">
                 Salsa Explosion Congresses &amp; Masterclasses • Directed by {ACADEMY_METRICS.founderTitleName}
               </p>
             </div>
@@ -70,13 +70,13 @@ export default async function EventsDirectoryPage() {
                 <span className="font-bold text-gold">
                   Enrique &amp; The Salsa Explosion Team
                 </span>
-                <span className="text-stone-400 font-medium">
+                <span className="text-ivory-muted font-medium">
                   {VENUE_INFO.streetAddress}, {VENUE_INFO.city} {VENUE_INFO.postcode}
                 </span>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs text-stone-300 pt-1">
+            <div className="flex flex-wrap items-center gap-4 text-xs text-ivory-muted pt-1">
               <div className="flex items-center gap-1.5 font-bold text-gold">
                 <Sparkles className="h-4 w-4 shrink-0" />
                 <span>12 Exclusive Parties &amp; Weekenders</span>
@@ -223,7 +223,7 @@ function EventCard({ evt }: EventCardProps) {
       >
         <div className="flex flex-wrap items-center justify-between gap-2">
           <Badge
-            className={`text-[10px] font-black uppercase tracking-wider border-none ${
+            className={`text-[11px] font-black uppercase tracking-wider border-none ${
               isMadeInCuba
                 ? "bg-black text-gold"
                 : "bg-black/50 text-white backdrop-blur-sm"

@@ -266,7 +266,7 @@ export function StudentProgressionDirectory({
                             </h3>
                             <Badge
                               variant="outline"
-                              className="text-[10px] px-1.5 py-0"
+                              className="text-xs px-1.5 py-0"
                             >
                               {student.role}
                             </Badge>
@@ -329,7 +329,7 @@ export function StudentProgressionDirectory({
                                 }`}
                               />
                               <span
-                                className={`block text-[10px] text-center font-semibold uppercase ${
+                                className={`block text-xs text-center font-semibold uppercase ${
                                   idx === currentStepIndex
                                     ? "text-foreground font-bold"
                                     : "text-muted-foreground"
@@ -358,7 +358,7 @@ export function StudentProgressionDirectory({
                                   student.preferredRole
                                 )
                               }
-                              className={`rounded-md px-2 py-1 text-[10px] font-bold transition-all ${
+                              className={`rounded-md px-2 py-1 text-xs font-bold transition-all ${
                                 isCurrent
                                   ? "bg-amber-500 text-stone-950 shadow-xs cursor-default"
                                   : "border bg-background text-muted-foreground hover:border-amber-500 hover:text-foreground"
@@ -381,7 +381,7 @@ export function StudentProgressionDirectory({
                                 : DanceRole.LEAD
                             )
                           }
-                          className="ml-auto rounded-md border bg-muted/40 px-2 py-1 text-[10px] font-semibold text-muted-foreground hover:text-foreground"
+                          className="ml-auto rounded-md border bg-muted/40 px-2 py-1 text-xs font-semibold text-muted-foreground hover:text-foreground"
                           title="Switch Preferred Dance Role"
                         >
                           Switch to{" "}
@@ -400,7 +400,7 @@ export function StudentProgressionDirectory({
                           <span>Class Credits:</span>
                         </div>
                         {student.hasActiveSubscription ? (
-                          <Badge className="bg-emerald-700 text-white text-[10px]">
+                          <Badge className="bg-emerald-700 text-white text-xs">
                             <ShieldCheck className="mr-1 h-3 w-3" />
                             Unlimited Member
                           </Badge>

@@ -194,7 +194,7 @@ export default async function PrintRosterPage({ searchParams }: PrintRosterPageP
                     }`}
                   >
                     <td className="py-2 px-2 text-center">
-                      <div className="h-4 w-4 mx-auto border-2 border-zinc-600 rounded-xs flex items-center justify-center font-bold text-[10px]">
+                      <div className="h-4 w-4 mx-auto border-2 border-zinc-600 rounded-xs flex items-center justify-center font-bold text-xs">
                         {b.status === BookingStatus.ATTENDED ? "✓" : ""}
                       </div>
                     </td>
@@ -202,11 +202,11 @@ export default async function PrintRosterPage({ searchParams }: PrintRosterPageP
                       {b.user.lastName}, {b.user.firstName}
                     </td>
                     <td className="py-2 px-2 text-zinc-600">{b.user.currentLevel}</td>
-                    <td className="py-2 px-2 text-zinc-500 font-mono text-[10px]">
+                    <td className="py-2 px-2 text-zinc-500 font-mono text-xs">
                       {b.user.email}
                     </td>
                     <td className="py-2 px-2">
-                      <span className="text-[10px] font-semibold uppercase bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">
+                      <span className="text-xs font-semibold uppercase bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">
                         {b.status === BookingStatus.ATTENDED ? "Attended" : "Paid Pass"}
                       </span>
                     </td>
@@ -255,7 +255,7 @@ export default async function PrintRosterPage({ searchParams }: PrintRosterPageP
                     }`}
                   >
                     <td className="py-2 px-2 text-center">
-                      <div className="h-4 w-4 mx-auto border-2 border-zinc-600 rounded-xs flex items-center justify-center font-bold text-[10px]">
+                      <div className="h-4 w-4 mx-auto border-2 border-zinc-600 rounded-xs flex items-center justify-center font-bold text-xs">
                         {b.status === BookingStatus.ATTENDED ? "✓" : ""}
                       </div>
                     </td>
@@ -263,11 +263,11 @@ export default async function PrintRosterPage({ searchParams }: PrintRosterPageP
                       {b.user.lastName}, {b.user.firstName}
                     </td>
                     <td className="py-2 px-2 text-zinc-600">{b.user.currentLevel}</td>
-                    <td className="py-2 px-2 text-zinc-500 font-mono text-[10px]">
+                    <td className="py-2 px-2 text-zinc-500 font-mono text-xs">
                       {b.user.email}
                     </td>
                     <td className="py-2 px-2">
-                      <span className="text-[10px] font-semibold uppercase bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">
+                      <span className="text-xs font-semibold uppercase bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">
                         {b.status === BookingStatus.ATTENDED ? "Attended" : "Paid Pass"}
                       </span>
                     </td>
@@ -300,9 +300,9 @@ export default async function PrintRosterPage({ searchParams }: PrintRosterPageP
                 <tr key={rowNum} className="border-b border-zinc-200 h-8">
                   <td className="py-1.5 px-2 text-center text-zinc-400 font-bold">{rowNum}</td>
                   <td className="py-1.5 px-2" />
-                  <td className="py-1.5 px-2 text-zinc-400 text-[10px]">Lead / Follow</td>
+                  <td className="py-1.5 px-2 text-zinc-400 text-xs">Lead / Follow</td>
                   <td className="py-1.5 px-2" />
-                  <td className="py-1.5 px-2 text-zinc-400 text-[10px]">£__________</td>
+                  <td className="py-1.5 px-2 text-zinc-400 text-xs">£__________</td>
                   <td className="py-1.5 px-2" />
                 </tr>
               ))}

@@ -232,7 +232,7 @@ export function ClassScheduleCard({
         return;
       }
 
-      toast.success("You're in! See you on the floor 💃", {
+      toast.success("You're in! See you on the floor!", {
         description: `${session.title} secured as ${selectedRole}.`,
       });
       setFeedback({
@@ -435,11 +435,11 @@ export function ClassScheduleCard({
               />
             </div>
             <div className="flex items-center justify-between text-[11px] text-muted-foreground px-0.5">
-              <span className="flex items-center gap-1.5 font-medium text-stone-300">
+              <span className="flex items-center gap-1.5 font-medium text-ivory-muted">
                 <span className="h-2 w-2 rounded-full bg-sky-500/75" />
                 {optimisticState.leadsCount} Leads
               </span>
-              <span className="flex items-center gap-1.5 font-medium text-stone-300">
+              <span className="flex items-center gap-1.5 font-medium text-ivory-muted">
                 <span className="h-2 w-2 rounded-full bg-rose-400/75" />
                 {optimisticState.followsCount} Follows
               </span>

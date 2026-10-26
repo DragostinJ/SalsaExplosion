@@ -105,7 +105,7 @@ export function AdminNotificationBell() {
       >
         <Bell className="h-4 w-4" />
         {unreadCount > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-rose-600 px-1 text-[10px] font-black text-white shadow-xs animate-pulse">
+          <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-rose-600 px-1 text-xs font-black text-white shadow-xs animate-pulse">
             {unreadCount}
           </span>
         )}
@@ -120,7 +120,7 @@ export function AdminNotificationBell() {
                 Studio Alerts
               </span>
               {unreadCount > 0 && (
-                <Badge className="bg-accent-tangerine text-stone-950 text-[10px] font-bold h-4 px-1.5">
+                <Badge className="bg-accent-tangerine text-stone-950 text-xs font-bold h-4 px-1.5">
                   {unreadCount} New
                 </Badge>
               )}
@@ -179,7 +179,7 @@ export function AdminNotificationBell() {
                           <h4 className="text-xs font-bold text-foreground line-clamp-1">
                             {n.title}
                           </h4>
-                          <span className="text-[10px] text-muted-foreground">
+                          <span className="text-xs text-muted-foreground">
                             {n.timestamp}
                           </span>
                         </div>

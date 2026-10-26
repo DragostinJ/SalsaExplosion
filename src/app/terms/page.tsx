@@ -73,23 +73,23 @@ export default function TermsAndLegalPage() {
 
             <div className="grid gap-3 sm:grid-cols-2 rounded-xl border bg-muted/30 p-4 text-xs font-medium">
               <div>
-                <span className="block font-bold text-muted-foreground uppercase text-[10px]">Trading Name</span>
+                <span className="block font-bold text-muted-foreground uppercase text-[11px]">Trading Name</span>
                 <span className="font-extrabold text-foreground text-sm">Salsa Explosion UK</span>
                 <span className="block text-muted-foreground">Directed by Maestro Enrique Perez Valdes</span>
               </div>
               <div>
-                <span className="block font-bold text-muted-foreground uppercase text-[10px]">Principal Studio Address</span>
+                <span className="block font-bold text-muted-foreground uppercase text-[11px]">Principal Studio Address</span>
                 <span className="font-bold text-foreground">BOH Studios, 104 Commercial Road</span>
                 <span className="block text-muted-foreground">The Triangle, Bournemouth, BH2 5LR, United Kingdom</span>
               </div>
               <div>
-                <span className="block font-bold text-muted-foreground uppercase text-[10px]">Email Enquiries</span>
+                <span className="block font-bold text-muted-foreground uppercase text-[11px]">Email Enquiries</span>
                 <a href="mailto:info@salsaexplosion.co.uk" className="font-extrabold text-rose-400 hover:underline">
                   info@salsaexplosion.co.uk
                 </a>
               </div>
               <div>
-                <span className="block font-bold text-muted-foreground uppercase text-[10px]">Studio Desk Phone & WhatsApp</span>
+                <span className="block font-bold text-muted-foreground uppercase text-[11px]">Studio Desk Phone & WhatsApp</span>
                 <a href="tel:+447969633701" className="font-extrabold text-rose-400 hover:underline">
                   07969 633701
                 </a>

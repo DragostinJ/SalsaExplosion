@@ -179,7 +179,7 @@ export function ClassRosterWorkspace({
           };
         })
       );
-      setStatusMessage(`⚡ Checked in ${count} remaining dancer(s) in bulk.`);
+      setStatusMessage(`Checked in ${count} remaining dancer(s) in bulk.`);
     });
   };
 

@@ -180,12 +180,12 @@ export function AttendanceMilestonesCard({
                       />
                     </div>
                     {m.isUnlocked ? (
-                      <Badge className={`text-[10px] font-bold ${m.colorScheme.badgeColor}`}>
+                      <Badge className={`text-xs font-bold ${m.colorScheme.badgeColor}`}>
                         <CheckCircle2 className="mr-1 h-3 w-3" />
                         Unlocked
                       </Badge>
                     ) : (
-                      <Badge variant="outline" className="text-[10px] text-muted-foreground">
+                      <Badge variant="outline" className="text-xs text-muted-foreground">
                         <Lock className="mr-1 h-3 w-3" />
                         Locked
                       </Badge>
@@ -204,7 +204,7 @@ export function AttendanceMilestonesCard({
 
                 {/* Micro Progress Bar */}
                 <div className="space-y-1.5 pt-2 border-t border-border/40">
-                  <div className="flex items-center justify-between text-[10px] font-semibold text-muted-foreground">
+                  <div className="flex items-center justify-between text-xs font-semibold text-muted-foreground">
                     <span>{m.progressText}</span>
                     <span>{m.progressPercent}%</span>
                   </div>

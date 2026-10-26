@@ -30,7 +30,7 @@ function TimetableRow({
         {/* Column 2: Level / Category Badge (col-span-3) */}
         <div className="lg:col-span-3 flex items-center gap-2 flex-wrap">
           <span
-            className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+            className={`text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
               item.isSocial
                 ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
                 : "bg-amber-500/20 text-amber-300 border-amber-500/30"
@@ -39,7 +39,7 @@ function TimetableRow({
             {item.level}
           </span>
           {item.badge && (
-            <span className="text-[10px] font-semibold text-stone-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">
+            <span className="text-xs font-semibold text-ivory-muted bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">
               {item.badge}
             </span>
           )}
@@ -50,7 +50,7 @@ function TimetableRow({
           <h4 className="text-base sm:text-lg font-black text-white tracking-tight">
             {item.title}
           </h4>
-          <p className="text-xs text-stone-300">
+          <p className="text-xs text-ivory-muted">
             Directed by{" "}
             {item.instructorHref ? (
               <Link
@@ -63,7 +63,7 @@ function TimetableRow({
               <span className="font-bold text-amber-300">{item.instructor}</span>
             )}
             {" • "}
-            <span className="text-stone-400 font-medium">{item.room}</span>
+            <span className="text-ivory-muted font-medium">{item.room}</span>
           </p>
         </div>
 
@@ -112,12 +112,12 @@ export function TwoDayExhibitionTimetable() {
                 lineup
               </span>
             </h2>
-            <p className="text-xs sm:text-sm text-stone-300 font-medium max-w-xl">
+            <p className="text-xs sm:text-sm text-ivory-muted font-medium max-w-xl">
               Strictly Thursdays and Sundays at {VENUE_INFO.name}. High-energy partner rotations, authentic Cuban Casino footwork, and zero partner required.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 self-start md:self-auto bg-white/5 px-4 py-2.5 rounded-2xl border border-white/10 text-xs font-bold text-stone-300">
+          <div className="flex items-center gap-2 self-start md:self-auto bg-white/5 px-4 py-2.5 rounded-2xl border border-white/10 text-xs font-bold text-ivory-muted">
             <MapPin className="h-4 w-4 text-amber-400 shrink-0" />
             <span>
               {VENUE_INFO.name} • {VENUE_INFO.address}, {VENUE_INFO.postcode}
@@ -133,7 +133,7 @@ export function TwoDayExhibitionTimetable() {
                 <span className="px-2.5 py-0.5 rounded bg-amber-500 text-stone-950 text-xs font-black tracking-wider">
                   THURSDAY
                 </span>
-                <span className="text-xs font-bold text-stone-400">
+                <span className="text-xs font-bold text-ivory-muted">
                   {thursdaySchedule.sessions.length} Sessions • Doors {thursdaySchedule.doorsTime} • {VENUE_INFO.floor}
                 </span>
               </div>
@@ -141,13 +141,13 @@ export function TwoDayExhibitionTimetable() {
                 Thursday Havana Residency
               </h3>
             </div>
-            <p className="text-xs sm:text-sm font-semibold text-stone-400 max-w-sm sm:text-right">
+            <p className="text-xs sm:text-sm font-semibold text-ivory-muted max-w-sm sm:text-right">
               {thursdaySchedule.subtitle}
             </p>
           </div>
 
           {/* Table Header (Desktop only) */}
-          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-stone-400 border-b border-white/10">
+          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-ivory-muted border-b border-white/10">
             <span className="col-span-2">Time</span>
             <span className="col-span-3">Level / Track</span>
             <span className="col-span-5">Class &amp; Faculty</span>
@@ -169,7 +169,7 @@ export function TwoDayExhibitionTimetable() {
                 <span className="px-2.5 py-0.5 rounded bg-amber-400 text-stone-950 text-xs font-black tracking-wider">
                   SUNDAY
                 </span>
-                <span className="text-xs font-bold text-stone-400">
+                <span className="text-xs font-bold text-ivory-muted">
                   Doors {sundaySchedule.doorsTime} • Every Sunday • Masterclass &amp; Social
                 </span>
               </div>
@@ -177,13 +177,13 @@ export function TwoDayExhibitionTimetable() {
                 Sunday Havana Sessions — {VENUE_INFO.shortName}
               </h3>
             </div>
-            <p className="text-xs sm:text-sm font-semibold text-stone-400 max-w-sm sm:text-right">
+            <p className="text-xs sm:text-sm font-semibold text-ivory-muted max-w-sm sm:text-right">
               {sundaySchedule.subtitle}
             </p>
           </div>
 
           {/* Table Header (Desktop only) */}
-          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-stone-400 border-b border-white/10">
+          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-ivory-muted border-b border-white/10">
             <span className="col-span-2">Time</span>
             <span className="col-span-3">Level / Track</span>
             <span className="col-span-5">Class &amp; Faculty</span>
@@ -199,7 +199,7 @@ export function TwoDayExhibitionTimetable() {
 
         {/* Bottom Editorial Confidence Strip */}
         <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-white/10 bg-surface-2">
-          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-stone-300 font-semibold">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-ivory-muted font-semibold">
             <span className="flex items-center gap-1.5 text-amber-300">
               <CreditCard className="h-3.5 w-3.5" />
               {DOOR_PRICING.summaryBadge}
@@ -208,11 +208,11 @@ export function TwoDayExhibitionTimetable() {
               <CheckCircle2 className="h-3.5 w-3.5" />
               Cash or Card at Door
             </span>
-            <span className="flex items-center gap-1.5 text-stone-300">
+            <span className="flex items-center gap-1.5 text-ivory-muted">
               <CheckCircle2 className="h-3.5 w-3.5 text-amber-400" />
               Zero Partner Required
             </span>
-            <span className="hidden md:flex items-center gap-1.5 text-stone-300">
+            <span className="hidden md:flex items-center gap-1.5 text-ivory-muted">
               <CheckCircle2 className="h-3.5 w-3.5 text-amber-400" />
               No Online Pre-Booking Needed
             </span>

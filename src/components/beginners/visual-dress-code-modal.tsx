@@ -57,7 +57,7 @@ export function VisualDressCodeModal({
                   <Footprints className="h-4 w-4 text-amber-500" />
                   <span>Footwear: Smooth Soles vs Grippy Rubber</span>
                 </div>
-                <Badge variant="outline" className="text-[10px] font-bold">Priority #1</Badge>
+                <Badge variant="outline" className="text-xs font-bold">Priority #1</Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-3 text-xs">
@@ -97,7 +97,7 @@ export function VisualDressCodeModal({
                   <Shirt className="h-4 w-4 text-blue-500" />
                   <span>Clothing: Breathable & Layered</span>
                 </div>
-                <Badge variant="outline" className="text-[10px] font-bold">Comfort</Badge>
+                <Badge variant="outline" className="text-xs font-bold">Comfort</Badge>
               </div>
             </CardHeader>
             <CardContent className="space-y-3 text-xs">

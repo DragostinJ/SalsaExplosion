@@ -381,7 +381,7 @@ export function ClassManagerWorkspace({
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <Badge className="bg-amber-500 text-stone-950 font-bold text-[10px]">
+                        <Badge className="bg-amber-500 text-stone-950 font-bold text-xs">
                           {cls.minLevel}
                         </Badge>
                         <span className="text-xs text-muted-foreground flex items-center gap-1">

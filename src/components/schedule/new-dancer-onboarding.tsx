@@ -15,6 +15,7 @@ import {
   HelpCircle,
   ChevronDown,
   ChevronUp,
+  Footprints,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -182,12 +183,12 @@ export function NewDancerOnboarding({
               <div className="flex items-center justify-between">
                 <Badge
                   variant="outline"
-                  className="border-amber-500/40 bg-amber-500/10 text-amber-400 font-bold text-[10px]"
+                  className="border-amber-500/40 bg-amber-500/10 text-amber-400 font-bold text-xs"
                 >
                   Step 1 • Partner Role
                 </Badge>
                 {roleSaved && (
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400">
                     <CheckCircle2 className="h-3 w-3" /> Saved
                   </span>
                 )}
@@ -206,25 +207,27 @@ export function NewDancerOnboarding({
                 type="button"
                 disabled={isPending}
                 onClick={() => handleSelectRole(DanceRole.LEAD)}
-                className={`rounded-lg border px-2 py-1.5 text-xs font-bold transition-all ${
+                className={`rounded-lg border px-2 py-1.5 text-xs font-bold transition-all flex items-center justify-center gap-1 ${
                   roleSelected === DanceRole.LEAD
-                    ? "border-blue-600 bg-blue-500/15 text-blue-300 ring-1 ring-blue-500/40"
+                    ? "border-role-lead-line bg-role-lead-soft text-role-lead ring-1 ring-role-lead"
                     : "bg-muted/30 text-muted-foreground hover:text-foreground"
                 }`}
               >
-                🕺 Lead
+                <Footprints className="h-3.5 w-3.5 text-role-lead" aria-hidden="true" />
+                <span>Lead</span>
               </button>
               <button
                 type="button"
                 disabled={isPending}
                 onClick={() => handleSelectRole(DanceRole.FOLLOW)}
-                className={`rounded-lg border px-2 py-1.5 text-xs font-bold transition-all ${
+                className={`rounded-lg border px-2 py-1.5 text-xs font-bold transition-all flex items-center justify-center gap-1 ${
                   roleSelected === DanceRole.FOLLOW
-                    ? "border-rose-600 bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/40"
+                    ? "border-role-follow-line bg-role-follow-soft text-role-follow ring-1 ring-role-follow"
                     : "bg-muted/30 text-muted-foreground hover:text-foreground"
                 }`}
               >
-                💃 Follow
+                <Footprints className="h-3.5 w-3.5 text-role-follow" aria-hidden="true" />
+                <span>Follow</span>
               </button>
             </div>
           </div>
@@ -235,11 +238,11 @@ export function NewDancerOnboarding({
               <div className="flex items-center justify-between">
                 <Badge
                   variant="outline"
-                  className="border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-bold text-[10px]"
+                  className="border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-bold text-xs"
                 >
                   Step 2 • Your Tier
                 </Badge>
-                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400">
+                <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400">
                   <CheckCircle2 className="h-3 w-3" /> Ready
                 </span>
               </div>
@@ -256,7 +259,7 @@ export function NewDancerOnboarding({
               <span className="font-semibold text-emerald-200 text-[11px]">
                 Wallet: {classCredits} Pass{classCredits === 1 ? "" : "es"}
               </span>
-              <span className="text-[10px] font-bold text-emerald-300">
+              <span className="text-xs font-bold text-emerald-300">
                 Active
               </span>
             </div>
@@ -268,12 +271,12 @@ export function NewDancerOnboarding({
               <div className="flex items-center justify-between">
                 <Badge
                   variant="outline"
-                  className="border-amber-500/40 bg-amber-500/10 text-amber-400 font-bold text-[10px]"
+                  className="border-amber-500/40 bg-amber-500/10 text-amber-400 font-bold text-xs"
                 >
                   Step 3 • Reserve
                 </Badge>
                 {hasActiveBooking && (
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400">
                     <CheckCircle2 className="h-3 w-3" /> Booked!
                   </span>
                 )}

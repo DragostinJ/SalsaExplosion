@@ -309,7 +309,7 @@ export function ClassRecapVault({
 
             {/* Quick Cuban Figure Filter Chips */}
             <div className="space-y-1.5 pt-1.5 border-t">
-              <div className="flex items-center justify-between text-[10px] text-muted-foreground font-semibold">
+              <div className="flex items-center justify-between text-xs text-muted-foreground font-semibold">
                 <span>Popular Cuban Figures:</span>
                 {(searchQuery || levelFilter !== "ALL") && (
                   <button
@@ -332,7 +332,7 @@ export function ClassRecapVault({
                       key={fig}
                       type="button"
                       onClick={() => setSearchQuery(isActive ? "" : fig)}
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-medium transition-all ${
+                      className={`rounded-full px-2 py-0.5 text-xs font-medium transition-all ${
                         isActive
                           ? "bg-amber-500 text-stone-950 font-bold shadow-xs"
                           : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
@@ -389,7 +389,7 @@ export function ClassRecapVault({
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <Badge variant="secondary" className="text-[10px] font-bold">
+                      <Badge variant="secondary" className="text-xs font-bold">
                         {recap.minLevel}
                       </Badge>
                       <span className="text-[11px] font-semibold text-muted-foreground flex items-center gap-1">
@@ -423,13 +423,13 @@ export function ClassRecapVault({
                       {recap.recapFigures.slice(0, 3).map((fig) => (
                         <span
                           key={fig}
-                          className="rounded bg-muted px-1.5 py-0.5 text-[9px] font-medium text-muted-foreground"
+                          className="rounded bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground"
                         >
                           {fig}
                         </span>
                       ))}
                       {recap.recapFigures.length > 3 && (
-                        <span className="text-[9px] text-muted-foreground">
+                        <span className="text-xs text-muted-foreground">
                           +{recap.recapFigures.length - 3} more
                         </span>
                       )}

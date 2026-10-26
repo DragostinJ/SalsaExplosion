@@ -103,7 +103,7 @@ export function CongressTravelGuide() {
         <Card className="border border-line bg-surface-1">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <Badge className="bg-primary-base text-white font-bold text-[10px]">
+              <Badge className="bg-primary-base text-white font-bold text-xs">
                 Recommended Hotel Partner
               </Badge>
               <span className="text-xs font-semibold text-emerald-400">
@@ -172,7 +172,7 @@ export function CongressTravelGuide() {
         {/* Nearby Walkable BOH Studios & Seafront Hotels */}
         <Card className="border border-border">
           <CardHeader className="pb-3">
-            <Badge variant="outline" className="w-fit text-[10px]">
+            <Badge variant="outline" className="w-fit text-xs">
               Walkable Hotels for Dance Weekends
             </Badge>
             <CardTitle className="text-lg font-bold flex items-center gap-2 mt-2">
@@ -244,7 +244,7 @@ export function CongressTravelGuide() {
                 <span className="text-sm font-bold text-foreground">Friday, 4 December</span>
                 <span className="block text-[11px] text-muted-foreground">BOH Studios Bournemouth</span>
               </div>
-              <Badge variant="secondary" className="text-[10px]">
+              <Badge variant="secondary" className="text-xs">
                 Day 1
               </Badge>
             </div>
@@ -277,7 +277,7 @@ export function CongressTravelGuide() {
                 <span className="text-sm font-bold text-foreground">Saturday, 5 December</span>
                 <span className="block text-[11px] text-amber-400 font-semibold">BOH Studios Bournemouth</span>
               </div>
-              <Badge className="bg-primary-base text-white text-[10px] font-bold">
+              <Badge className="bg-primary-base text-white text-xs font-bold">
                 Gala Day
               </Badge>
             </div>
@@ -310,7 +310,7 @@ export function CongressTravelGuide() {
                 <span className="text-sm font-bold text-foreground">Sunday, 6 December</span>
                 <span className="block text-[11px] text-muted-foreground">BOH Studios Bournemouth</span>
               </div>
-              <Badge variant="secondary" className="text-[10px]">
+              <Badge variant="secondary" className="text-xs">
                 Day 3
               </Badge>
             </div>

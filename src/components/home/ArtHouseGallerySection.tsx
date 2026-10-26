@@ -30,7 +30,7 @@ export function ArtHouseGallerySection() {
                 Explore Salsa Explosion
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-stone-300 max-w-md">
+            <p className="text-xs sm:text-sm text-ivory-muted max-w-md">
               Weekly Classes, Flagship Festivals &amp; Authentic Cuban Culture. £12 for 1 class / £14 for 2 classes at the door.
             </p>
           </div>
@@ -55,7 +55,7 @@ export function ArtHouseGallerySection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
-                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-300">
                     PAY AT THE DOOR • £12 / £14
                   </span>
                 </div>
@@ -65,7 +65,7 @@ export function ArtHouseGallerySection() {
                   <h3 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
                     Weekly Classes &amp; Socials
                   </h3>
-                  <p className="text-xs text-stone-300 mt-1 leading-relaxed">
+                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed">
                     Thursdays (19:00 &amp; 20:15) and Sundays (18:30) at BOH Studios. £12 for 1 class or £14 for 2 classes at the door. No partner needed.
                   </p>
                 </div>
@@ -90,7 +90,7 @@ export function ArtHouseGallerySection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
-                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-300">
                     BOOK ONLINE • OFFICIAL PASSES
                   </span>
                 </div>
@@ -100,7 +100,7 @@ export function ArtHouseGallerySection() {
                   <h3 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
                     Festivals &amp; Special Events
                   </h3>
-                  <p className="text-xs text-stone-300 mt-1 leading-relaxed">
+                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed">
                     Reserve your official online passes for Made in Cuba Dance Weekend 2026 (4–6 Dec), Halloween Party, and SB&amp;K Nights.
                   </p>
                 </div>
@@ -125,7 +125,7 @@ export function ArtHouseGallerySection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
-                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-300">
                     40+ CUBAN CIRCLE CALLS
                   </span>
                 </div>
@@ -135,7 +135,7 @@ export function ArtHouseGallerySection() {
                   <h3 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
                     Rueda Call Dictionary
                   </h3>
-                  <p className="text-xs text-stone-300 mt-1 leading-relaxed">
+                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed">
                     Master authentic Havana Rueda de Casino calls, caller hand signals, and our 4-tier Cuban syllabus.
                   </p>
                 </div>
@@ -160,7 +160,7 @@ export function ArtHouseGallerySection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
-                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-300">
                     INTERACTIVE AUDIO COCKPIT
                   </span>
                 </div>
@@ -170,7 +170,7 @@ export function ArtHouseGallerySection() {
                   <h3 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
                     Timba Song Trainer
                   </h3>
-                  <p className="text-xs text-stone-300 mt-1 leading-relaxed">
+                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed">
                     Train your ear with our real-time song progression map, 8-count rhythm bar, and Leader/Follower cues.
                   </p>
                 </div>
@@ -204,7 +204,7 @@ export function InsideCubanCircleGallery() {
                 cuban circle
               </span>
             </h2>
-            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-ivory-muted leading-relaxed">
               Captured on Thursday and Sunday nights at {VENUE_INFO.name}. Real dancers, live Rueda de Casino calls, and authentic Havana musicality in the heart of Bournemouth.
             </p>
           </div>
@@ -246,7 +246,7 @@ export function InsideCubanCircleGallery() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-canvas via-black/20 to-transparent pointer-events-none" />
                 <div className="absolute top-3 left-3">
-                  <span className="rounded-md bg-black/75 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-gold">
+                  <span className="rounded-md bg-black/75 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-gold">
                     {photo.kicker}
                   </span>
                 </div>
@@ -257,7 +257,7 @@ export function InsideCubanCircleGallery() {
                   <h3 className="text-sm sm:text-base font-black text-ivory group-hover:text-gold transition-colors">
                     {photo.title}
                   </h3>
-                  <p className="text-xs text-stone-300 line-clamp-2 mt-1 leading-relaxed">
+                  <p className="text-xs text-ivory-muted line-clamp-2 mt-1 leading-relaxed">
                     {photo.caption}
                   </p>
                 </div>
@@ -302,13 +302,13 @@ export function InsideCubanCircleGallery() {
             </div>
             <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-amber-300">
+                <span className="text-[11px] font-black uppercase tracking-widest text-amber-300">
                   {selectedPhoto.kicker}
                 </span>
                 <h4 className="text-lg font-black text-white mt-0.5">
                   {selectedPhoto.title}
                 </h4>
-                <p className="text-xs text-stone-300 mt-1">
+                <p className="text-xs text-ivory-muted mt-1">
                   {selectedPhoto.caption}
                 </p>
               </div>

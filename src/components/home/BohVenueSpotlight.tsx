@@ -151,10 +151,10 @@ export function BohVenueSpotlight() {
                   className="relative aspect-[16/10] w-full bg-surface-3 p-4 flex flex-col justify-between border-b border-border/60"
                 >
                   <div className="flex items-center justify-between z-10">
-                    <span className="rounded-md bg-black/60 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10">
+                    <span className="rounded-md bg-black/60 backdrop-blur-xs px-2 py-0.5 text-xs font-bold text-white/90 border border-white/10">
                       {slot.tag}
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-md bg-white/10 backdrop-blur-xs px-1.5 py-0.5 text-[9px] font-semibold text-white/80">
+                    <span className="inline-flex items-center gap-1 rounded-md bg-white/10 backdrop-blur-xs px-1.5 py-0.5 text-xs font-semibold text-white/80">
                       <Camera className="h-2.5 w-2.5" />
                       📸 BOH Studios
                     </span>

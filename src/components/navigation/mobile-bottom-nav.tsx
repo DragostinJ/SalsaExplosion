@@ -66,7 +66,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
             <Link
               key={item.href}
               href={item.href}
-              className={`relative flex flex-col items-center justify-center h-11 px-2.5 sm:px-3 rounded-full text-[10px] font-black transition-all ${
+              className={`relative flex flex-col items-center justify-center h-11 px-2.5 sm:px-3 rounded-full text-xs font-black transition-all ${
                 item.isActive
                   ? "bg-brand text-white shadow-xs scale-105"
                   : "bg-brand/90 hover:bg-brand text-white shadow-xs active:scale-95"
@@ -82,10 +82,10 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
           <Link
             key={item.href}
             href={item.href}
-            className={`relative flex flex-col items-center justify-center flex-1 h-full py-1 text-[10px] font-bold transition-all ${
+            className={`relative flex flex-col items-center justify-center flex-1 h-full py-1 text-xs font-bold transition-all ${
               item.isActive
                 ? "text-gold font-black scale-105"
-                : "text-stone-400 hover:text-ivory"
+                : "text-ivory-muted hover:text-ivory"
             }`}
           >
             {item.isActive && (
@@ -93,7 +93,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
             )}
             <Icon
               className={`h-4.5 w-4.5 mb-0.5 transition-colors ${
-                item.isActive ? "text-gold" : "text-stone-400"
+                item.isActive ? "text-gold" : "text-ivory-muted"
               }`}
             />
             <span className="leading-tight tracking-tight whitespace-nowrap">{item.label}</span>
@@ -105,9 +105,9 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
         type="button"
         onClick={triggerDrawer}
         aria-label="Open More Menu"
-        className="flex flex-col items-center justify-center flex-1 h-full py-1 text-[10px] font-bold text-stone-400 hover:text-ivory transition-all active:scale-95"
+        className="flex flex-col items-center justify-center flex-1 h-full py-1 text-xs font-bold text-ivory-muted hover:text-ivory transition-all active:scale-95"
       >
-        <Menu className="h-4.5 w-4.5 mb-0.5 text-stone-400" />
+        <Menu className="h-4.5 w-4.5 mb-0.5 text-ivory-muted" />
         <span className="leading-tight tracking-tight">Menu</span>
       </button>
     </nav>

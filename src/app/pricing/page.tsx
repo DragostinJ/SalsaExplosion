@@ -59,7 +59,7 @@ export default async function PricingPage() {
               <p className="text-xs text-amber-100 font-semibold leading-relaxed">
                 £12 for 1 Class / £14 for 2 Classes (Cash or Card at the Door — Havana Social Fiesta Included • No Prior Booking Required)
               </p>
-              <p className="text-xs text-stone-300 leading-relaxed">
+              <p className="text-xs text-ivory-muted leading-relaxed">
                 Pay Maestro Enrique directly when you arrive at BOH Studios Bournemouth. Both options include entry to the Havana Social Fiesta.
               </p>
             </div>
@@ -83,7 +83,7 @@ export default async function PricingPage() {
               <span className="text-lg sm:text-xl font-extrabold text-ivory">
                 Festivals, Special Nights &amp; Gift Vouchers
               </span>
-              <p className="text-xs text-stone-300 leading-relaxed">
+              <p className="text-xs text-ivory-muted leading-relaxed">
                 Official online passes for Made in Cuba Dance Weekend 2026, Halloween Fancy Dress Party, SB&amp;K Nights, and digital gift vouchers below.
               </p>
             </div>
@@ -99,12 +99,12 @@ export default async function PricingPage() {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-4 text-xs text-stone-300 pt-2 border-t border-line">
+      <div className="flex flex-wrap items-center gap-4 text-xs text-ivory-muted pt-2 border-t border-line">
         <div className="flex items-center gap-1.5 font-bold text-gold">
           <Sparkles className="h-4 w-4 shrink-0" />
           <span>{DOOR_PRICING.summaryBadge}</span>
         </div>
-        <div className="flex items-center gap-1.5 font-medium text-stone-400">
+        <div className="flex items-center gap-1.5 font-medium text-ivory-muted">
           <span>{DOOR_PRICING.paymentMethodNote}</span>
         </div>
       </div>

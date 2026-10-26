@@ -34,7 +34,7 @@ export function TimbaTimelineScrubber({
   return (
     <div className="space-y-2 sm:space-y-3">
       <div className="flex items-center justify-between text-xs">
-        <span className="font-bold text-stone-400 uppercase text-[10px] tracking-wider flex items-center gap-1.5">
+        <span className="font-bold text-ivory-muted uppercase text-[11px] tracking-wider flex items-center gap-1.5">
           <Clock className="h-3.5 w-3.5 text-gold" />
           Song Progression Timeline (Click Any Segment to Jump)
         </span>
@@ -69,17 +69,17 @@ export function TimbaTimelineScrubber({
                   : theme.bgInactive
               }`}
             >
-              <div className="truncate text-[10px] font-bold text-white">
+              <div className="truncate text-xs font-bold text-white">
                 {widthPct < 12 ? (
                   <>
-                    <span className="md:hidden text-[9px] font-bold">{idx + 1}</span>
+                    <span className="md:hidden text-xs font-bold">{idx + 1}</span>
                     <span className="hidden md:inline">{segment.sectionName}</span>
                   </>
                 ) : (
                   <span>{segment.sectionName}</span>
                 )}
               </div>
-              <div className="hidden md:block truncate text-[9px] text-stone-300 font-semibold">
+              <div className="hidden md:block truncate text-xs text-ivory-muted font-semibold">
                 {segment.danceGear}
               </div>
             </button>
@@ -116,11 +116,11 @@ export function TimbaTimelineScrubber({
               className={`rounded-lg px-2.5 py-1 text-[11px] font-bold shrink-0 transition-all border snap-start ${
                 isSegmentActive
                   ? "bg-gold/25 border-gold/50 text-gold ring-1 ring-gold/50 shadow-xs"
-                  : "border-line bg-surface-3 text-stone-400 hover:bg-surface-2 hover:text-stone-200"
+                  : "border-line bg-surface-3 text-ivory-muted hover:bg-surface-2 hover:text-stone-200"
               }`}
             >
               <span>{idx + 1}. {segment.sectionName}</span>
-              <span className="ml-1 opacity-75 font-mono text-[9px]">{segment.formattedRange.split(" - ")[0]}</span>
+              <span className="ml-1 opacity-75 font-mono text-xs">{segment.formattedRange.split(" - ")[0]}</span>
             </button>
           );
         })}
@@ -170,7 +170,7 @@ export function TimbaTimelineScrubber({
                 className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition-all ${
                   playbackSpeed === spd
                     ? "bg-gold text-stone-950 shadow-xs"
-                    : "text-stone-400 hover:text-stone-200"
+                    : "text-ivory-muted hover:text-stone-200"
                 }`}
               >
                 {spd}x

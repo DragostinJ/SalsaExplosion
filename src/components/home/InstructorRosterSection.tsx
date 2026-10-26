@@ -117,7 +117,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
               Maestros &amp; Artists
             </span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-stone-300 leading-relaxed">
+          <p className="mt-3 text-xs sm:text-sm text-ivory-muted leading-relaxed">
             From Cuban-born lifetime achievers to international festival headliners, our passionate teaching team brings authentic Casino technique, high-energy Rueda circles, and warm South Coast community spirit to BOH Studios every week.
           </p>
 
@@ -137,7 +137,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all ${
                     isActive
                       ? "bg-brand text-white shadow-xs"
-                      : "bg-surface-3 text-stone-300 hover:bg-surface-2 hover:text-ivory border border-gold/20"
+                      : "bg-surface-3 text-ivory-muted hover:bg-surface-2 hover:text-ivory border border-gold/20"
                   }`}
                 >
                   {`${cat.label} (${count})`}
@@ -180,7 +180,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
                     {/* Vertical Micro-Typography Role Badge Along Left Margin */}
                     <div className="absolute left-2.5 top-3 bottom-3 flex items-center justify-center z-10 pointer-events-none">
-                      <span className="[writing-mode:vertical-rl] text-[9px] font-black uppercase tracking-[0.2em] text-amber-400/80 rotate-180 select-none">
+                      <span className="[writing-mode:vertical-rl] text-[11px] font-black uppercase tracking-[0.2em] text-amber-400/80 rotate-180 select-none">
                         {instructor.role.split("•")[0]?.trim() || "Faculty Artist"}
                       </span>
                     </div>
@@ -205,14 +205,14 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
                     {/* Top Right Origin Badge */}
                     <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
-                      <span className="rounded-md bg-black/70 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10 uppercase">
+                      <span className="rounded-md bg-black/70 backdrop-blur-xs px-2 py-0.5 text-[11px] font-bold text-white/90 border border-white/10 uppercase">
                         {instructor.origin}
                       </span>
                     </div>
 
                     {/* Bottom Accolade Badge */}
                     <div className="absolute bottom-3 inset-x-3 z-20 truncate pl-4">
-                      <span className="rounded-md bg-black/80 backdrop-blur-xs px-2.5 py-1 text-[10px] font-bold text-amber-300 border border-amber-500/30 truncate block">
+                      <span className="rounded-md bg-black/80 backdrop-blur-xs px-2.5 py-1 text-xs font-bold text-amber-300 border border-amber-500/30 truncate block">
                         {instructor.badge}
                       </span>
                     </div>
@@ -232,7 +232,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                       {instructor.styles.slice(0, 3).map((st) => (
                         <span
                           key={st}
-                          className="rounded-md bg-white/[0.04] text-stone-300 border border-white/10 px-2 py-0.5 text-[10px] font-semibold"
+                          className="rounded-md bg-white/[0.04] text-ivory-muted border border-white/10 px-2 py-0.5 text-xs font-semibold"
                         >
                           {st}
                         </span>
@@ -240,7 +240,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     </div>
 
                     {/* Teaching Days */}
-                    <div className="flex items-start gap-1.5 text-[11px] text-stone-400 pt-1">
+                    <div className="flex items-start gap-1.5 text-[11px] text-ivory-muted pt-1">
                       <Calendar className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
                       <span className="line-clamp-1">{instructor.teachingDays}</span>
                     </div>
@@ -312,7 +312,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
               </div>
               <div className="space-y-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge className="bg-primary-base text-white text-[10px] font-bold">
+                  <Badge className="bg-primary-base text-white text-xs font-bold">
                     {selectedInstructor.origin}
                   </Badge>
                   <span className="text-[11px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
@@ -358,7 +358,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   <Calendar className="h-4 w-4 text-primary-base" />
                   <span>Teaching Schedule at BOH Studios</span>
                 </div>
-                <p className="text-xs text-stone-300 leading-relaxed pl-6">
+                <p className="text-xs text-ivory-muted leading-relaxed pl-6">
                   {selectedInstructor.teachingDays}
                 </p>
               </div>

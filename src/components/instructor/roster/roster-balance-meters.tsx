@@ -76,9 +76,9 @@ export function RosterBalanceMeters({ activeClass }: RosterBalanceMetersProps) {
           className="rounded-2xl border border-amber-400 bg-amber-500/10 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-amber-200 font-bold"
         >
           <div className="flex items-center gap-2">
-            <AlertTriangle className="h-4 w-4 text-amber-400 shrink-0" />
+            <AlertTriangle className="h-4 w-4 text-warning shrink-0" aria-hidden="true" />
             <span>
-              ⚠️ Partner Imbalance: {leadDiff} more{" "}
+              Partner Imbalance: {leadDiff} more{" "}
               {activeClass.checkedInLeads > activeClass.checkedInFollows ? "Lead" : "Follow"}s
               checked in than{" "}
               {activeClass.checkedInLeads > activeClass.checkedInFollows ? "Follow" : "Lead"}s

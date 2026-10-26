@@ -207,7 +207,7 @@ export function CubanMusicHubClient() {
                     <div className="flex flex-col items-end gap-1 shrink-0">
                       <div className="flex items-center gap-1">
                         <Badge
-                          className={`text-[10px] font-bold ${
+                          className={`text-xs font-bold ${
                             track.level === "Beginner"
                               ? "bg-info-soft text-info border border-info-line"
                               : track.level === "Improver"
@@ -219,11 +219,11 @@ export function CubanMusicHubClient() {
                         >
                           {track.level}
                         </Badge>
-                        <Badge variant="secondary" className="text-[10px] font-mono font-bold">
+                        <Badge variant="secondary" className="text-xs font-mono font-bold">
                           {track.bpm} BPM
                         </Badge>
                       </div>
-                      <span className="text-[10px] text-muted-foreground font-medium">
+                      <span className="text-xs text-muted-foreground font-medium">
                         {track.subGenre}
                       </span>
                     </div>
@@ -235,7 +235,7 @@ export function CubanMusicHubClient() {
                       <Sparkles className="h-3.5 w-3.5 text-amber-400" />
                       Pedagogical Focus &amp; Why This Song:
                     </span>
-                    <p className="text-xs text-stone-300 leading-relaxed">
+                    <p className="text-xs text-ivory-muted leading-relaxed">
                       {track.whyThisSong}
                     </p>
                   </div>
@@ -250,7 +250,7 @@ export function CubanMusicHubClient() {
                         <Badge
                           key={gear}
                           variant="outline"
-                          className="text-[10px] font-semibold border-border bg-muted/40 text-foreground/80"
+                          className="text-xs font-semibold border-border bg-muted/40 text-foreground/80"
                         >
                           {gear}
                         </Badge>
@@ -268,7 +268,7 @@ export function CubanMusicHubClient() {
                         <Badge
                           key={inst}
                           variant="secondary"
-                          className="text-[10px] font-medium"
+                          className="text-xs font-medium"
                         >
                           {inst}
                         </Badge>

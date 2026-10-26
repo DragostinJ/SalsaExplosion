@@ -300,7 +300,7 @@ export default async function ProgressionPage() {
                           <CardContent className="space-y-3 pt-0 text-xs">
                             {sub.studentNotes && (
                               <div className="rounded-md border bg-muted/20 p-2.5">
-                                <span className="font-semibold text-muted-foreground uppercase tracking-wider text-[10px]">
+                                <span className="font-semibold text-muted-foreground uppercase tracking-wider text-[11px]">
                                   Student Note:
                                 </span>
                                 <p className="mt-0.5 text-xs text-foreground">

@@ -200,7 +200,7 @@ export function MobileNavSheet({
               <span className="text-sm font-extrabold leading-none tracking-tight">
                 Salsa <span className="text-rose-400">Explosion</span>
               </span>
-              <span className="text-[9px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
+              <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
                 Bournemouth • Cuba
               </span>
             </div>
@@ -232,7 +232,7 @@ export function MobileNavSheet({
                 <HelpCircle className="h-4 w-4 text-gold" />
                 <span>Interactive Studio Guide</span>
               </div>
-              <span className="text-[10px] uppercase tracking-wider bg-gold text-stone-950 font-black px-2 py-0.5 rounded-full">
+              <span className="text-[11px] uppercase tracking-wider bg-gold text-stone-950 font-black px-2 py-0.5 rounded-full">
                 Learn
               </span>
             </button>
@@ -256,7 +256,7 @@ export function MobileNavSheet({
                     className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                       isActive
                         ? "bg-surface-3 text-ivory font-bold border-l-2 border-gold shadow-xs"
-                        : "text-stone-300 hover:bg-surface-3 hover:text-ivory"
+                        : "text-ivory-muted hover:bg-surface-3 hover:text-ivory"
                     }`}
                   >
                     <Icon className={`h-4 w-4 ${isActive ? "text-gold" : "text-muted-foreground"}`} />
@@ -298,7 +298,7 @@ export function MobileNavSheet({
                     className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                       isActive
                         ? "bg-surface-3 text-ivory font-bold border-l-2 border-gold shadow-xs"
-                        : "text-stone-300 hover:bg-surface-3 hover:text-ivory"
+                        : "text-ivory-muted hover:bg-surface-3 hover:text-ivory"
                     }`}
                   >
                     <Icon className={`h-4 w-4 ${isActive ? "text-gold" : "text-muted-foreground"}`} />
@@ -328,7 +328,7 @@ export function MobileNavSheet({
                       className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                         isActive
                           ? "bg-emerald-600 text-white font-bold shadow-xs"
-                          : "text-stone-300 hover:bg-secondary-base/10 hover:text-ivory"
+                          : "text-ivory-muted hover:bg-secondary-base/10 hover:text-ivory"
                       }`}
                     >
                       <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-secondary-base"}`} />
@@ -359,7 +359,7 @@ export function MobileNavSheet({
                       className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                         isActive
                           ? "bg-gold text-stone-950 font-bold shadow-xs"
-                          : "text-stone-300 hover:bg-gold/15 hover:text-ivory"
+                          : "text-ivory-muted hover:bg-gold/15 hover:text-ivory"
                       }`}
                     >
                       <Icon className={`h-4 w-4 ${isActive ? "text-stone-950" : "text-gold"}`} />
@@ -398,7 +398,7 @@ export function MobileNavSheet({
                             : r === "INSTRUCTOR"
                               ? "bg-emerald-600 text-white shadow-xs"
                               : "bg-primary-base text-white shadow-xs"
-                          : "text-stone-400 hover:text-foreground hover:bg-muted/80"
+                          : "text-ivory-muted hover:text-foreground hover:bg-muted/80"
                       } ${isPending ? "opacity-60 cursor-wait" : ""}`}
                     >
                       {r === "ADMIN" ? "Owner" : r === "INSTRUCTOR" ? "Teacher" : "Dancer"}

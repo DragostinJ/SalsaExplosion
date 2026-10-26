@@ -29,7 +29,7 @@ export default function DashboardErrorBoundary({ error, reset }: ErrorProps) {
           <h1 className="text-2xl font-extrabold tracking-tight text-ivory sm:text-3xl">
             Unable to Load Dashboard
           </h1>
-          <p className="text-sm text-stone-400 leading-relaxed">
+          <p className="text-sm text-ivory-muted leading-relaxed">
             We could not connect to your dance records right now. Weekly classes run strictly Thursdays and Sundays at BOH Studios.
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function DashboardErrorBoundary({ error, reset }: ErrorProps) {
           <Button
             asChild
             variant="outline"
-            className="w-full sm:w-auto border-white/10 text-stone-300 hover:bg-white/5"
+            className="w-full sm:w-auto border-white/10 text-ivory-muted hover:bg-white/5"
           >
             <Link href="/dashboard/schedule">
               <Calendar className="mr-2 h-4 w-4" />

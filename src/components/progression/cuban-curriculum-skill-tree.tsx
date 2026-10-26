@@ -182,7 +182,7 @@ export function CubanCurriculumSkillTree({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-primary-base text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1">
+              <Badge className="bg-primary-base text-white text-[11px] font-black uppercase tracking-wider flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1">
                 <Sparkles className="h-3 w-3" />
                 2027 Modern Cuban Syllabus
               </Badge>
@@ -288,7 +288,7 @@ export function CubanCurriculumSkillTree({
             <div tabIndex={0} role="region" aria-label="First night essentials spotlight" className="flex overflow-x-auto no-scrollbar gap-2 sm:grid sm:grid-cols-3 text-xs pb-1 sm:pb-0 focus:outline-none rounded-xl">
               <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-200">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-xs font-black text-amber-200">
                     1
                   </span>
                   <span>Paso Básico</span>
@@ -300,7 +300,7 @@ export function CubanCurriculumSkillTree({
 
               <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-200">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-xs font-black text-amber-200">
                     2
                   </span>
                   <span>Guapea</span>
@@ -312,7 +312,7 @@ export function CubanCurriculumSkillTree({
 
               <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-200">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-xs font-black text-amber-200">
                     3
                   </span>
                   <span>Dile Que No</span>
@@ -327,7 +327,7 @@ export function CubanCurriculumSkillTree({
 
         {/* 1. Level Navigation Tabs */}
         <div className="space-y-2">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground block">
+          <span className="text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground block">
             Select Syllabus Level:
           </span>
           <div role="tablist" aria-label="Curriculum Levels" className="grid grid-cols-4 gap-1.5 sm:gap-2">
@@ -349,13 +349,13 @@ export function CubanCurriculumSkillTree({
                       : "border-border bg-card/70 hover:bg-muted/50 text-muted-foreground"
                   }`}
                 >
-                  <span className="text-[9px] sm:text-[10px] font-mono font-extrabold uppercase tracking-wider">
+                  <span className="text-[11px] sm:text-[11px] font-mono font-extrabold uppercase tracking-wider">
                     {lvl === "Beginner" ? "Lvl 1" : lvl === "Improver" ? "Lvl 2" : lvl === "Intermediate" ? "Lvl 3" : "Lvl 4"}
                   </span>
                   <div className="font-black text-xs sm:text-sm text-foreground flex items-center justify-between">
                     <span className="truncate">{lvl}</span>
                     {lvl === "Beginner" && (
-                      <span className="text-[8px] sm:text-[9px] bg-amber-500/20 text-amber-200 px-1 py-0.2 sm:px-1.5 sm:py-0.5 rounded font-bold uppercase hidden sm:inline">
+                      <span className="text-[8px] sm:text-[11px] bg-amber-500/20 text-amber-200 px-1 py-0.2 sm:px-1.5 sm:py-0.5 rounded font-bold uppercase hidden sm:inline">
                         Start
                       </span>
                     )}
@@ -469,7 +469,7 @@ export function CubanCurriculumSkillTree({
                       <div className="flex items-center justify-between gap-2">
                         <Badge
                           variant="outline"
-                          className="text-[10px] font-bold border-muted-foreground/30 text-muted-foreground uppercase tracking-wider"
+                          className="text-[11px] font-bold border-muted-foreground/30 text-muted-foreground uppercase tracking-wider"
                         >
                           {PILLAR_LABELS[skill.pillar]}
                         </Badge>
@@ -607,7 +607,7 @@ export function CubanCurriculumSkillTree({
                 <span className="text-sm font-black text-foreground">
                   Listen to Level Reference Songs ({levelSongs.length} Tracks)
                 </span>
-                <Badge variant="outline" className="text-[10px] font-bold border-amber-500/40 text-amber-300">
+                <Badge variant="outline" className="text-xs font-bold border-amber-500/40 text-amber-300">
                   Optional Listening
                 </Badge>
               </div>
@@ -639,7 +639,7 @@ export function CubanCurriculumSkillTree({
                           {song.artist} • <span className="font-mono">{song.bpm} BPM</span>
                         </p>
                       </div>
-                      <Badge variant="outline" className="text-[10px] font-bold border-amber-500/40 text-amber-300">
+                      <Badge variant="outline" className="text-xs font-bold border-amber-500/40 text-amber-300">
                         {song.subGenre}
                       </Badge>
                     </div>
@@ -652,7 +652,7 @@ export function CubanCurriculumSkillTree({
                       {song.gearShiftsObserved.map((gear) => (
                         <span
                           key={gear}
-                          className="inline-flex items-center rounded-md border bg-muted px-2 py-0.5 text-[10px] font-bold text-foreground"
+                          className="inline-flex items-center rounded-md border bg-muted px-2 py-0.5 text-xs font-bold text-foreground"
                         >
                           {gear}
                         </span>
@@ -660,7 +660,7 @@ export function CubanCurriculumSkillTree({
                     </div>
 
                     <div className="pt-1 border-t flex items-center justify-between">
-                      <span className="text-[10px] text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         Listen: {song.instrumentsToListenFor.join(", ")}
                       </span>
                       <a

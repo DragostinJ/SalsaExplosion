@@ -588,7 +588,7 @@ export function RuedaDictionaryClient() {
 
                   <div className="flex flex-col items-end gap-1">
                     <Badge
-                      className={`text-[10px] font-bold ${
+                      className={`text-xs font-bold ${
                         call.level === "Beginner"
                           ? "bg-info-soft text-info border border-info-line"
                           : call.level === "Improver"
@@ -602,12 +602,12 @@ export function RuedaDictionaryClient() {
                     </Badge>
 
                     {call.switchesPartner ? (
-                      <span className="text-[10px] font-semibold text-gold flex items-center gap-1">
+                      <span className="text-xs font-semibold text-gold flex items-center gap-1">
                         <Repeat className="h-3 w-3" />
                         Switches Partner
                       </span>
                     ) : (
-                      <span className="text-[10px] font-semibold text-muted-foreground">
+                      <span className="text-xs font-semibold text-muted-foreground">
                         Same Partner
                       </span>
                     )}
@@ -616,11 +616,11 @@ export function RuedaDictionaryClient() {
 
                 {/* Handhold & Entry/Exit Badges */}
                 <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                  <Badge variant="outline" className="text-[10px] font-semibold border-amber-500/30 bg-amber-500/5 text-amber-300">
+                  <Badge variant="outline" className="text-xs font-semibold border-amber-500/30 bg-amber-500/5 text-amber-300">
                     <Hand className="mr-1 h-2.5 w-2.5" />
                     {call.handholdType}
                   </Badge>
-                  <Badge variant="outline" className="text-[10px] font-semibold border-blue-500/30 bg-blue-500/5 text-blue-300">
+                  <Badge variant="outline" className="text-xs font-semibold border-blue-500/30 bg-blue-500/5 text-blue-300">
                     <Compass className="mr-1 h-2.5 w-2.5" />
                     {call.entryExitGeometry}
                   </Badge>

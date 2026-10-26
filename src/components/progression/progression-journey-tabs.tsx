@@ -55,7 +55,7 @@ export function ProgressionJourneyTabs({
           <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
           <span className="hidden sm:inline">My Syllabus &amp; Checklist</span>
           <span className="sm:hidden">Syllabus</span>
-          <Badge className="bg-white/20 text-white font-mono text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0 hidden xs:inline-flex">
+          <Badge className="bg-white/20 text-white font-mono text-xs sm:text-xs px-1 sm:px-1.5 py-0 hidden xs:inline-flex">
             {currentLevel}
           </Badge>
         </button>
@@ -95,7 +95,7 @@ export function ProgressionJourneyTabs({
           <span className="hidden sm:inline">Video Feedback (Optional)</span>
           <span className="sm:hidden">Video</span>
           {submissionCount > 0 && (
-            <Badge variant="secondary" className="font-mono text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0">
+            <Badge variant="secondary" className="font-mono text-xs sm:text-xs px-1 sm:px-1.5 py-0">
               {submissionCount}
             </Badge>
           )}

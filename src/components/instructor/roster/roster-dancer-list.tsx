@@ -45,8 +45,8 @@ export function RosterDancerList({
             onClick={onCheckInAllRemaining}
             className="text-xs font-bold border-amber-500/50 text-amber-300 hover:bg-amber-500/10 h-8 self-start sm:self-auto"
           >
-            <Zap className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
-            ⚡ Check In All Remaining ({awaitingBookings.length})
+            <Zap className="mr-1.5 h-3.5 w-3.5 text-gold" aria-hidden="true" />
+            Check In All Remaining ({awaitingBookings.length})
           </Button>
         )}
       </div>
@@ -173,13 +173,13 @@ export function RosterDancerList({
                     <Badge
                       className={
                         booking.danceRole === DanceRole.LEAD
-                          ? "bg-role-lead text-stone-950 font-bold text-[10px]"
-                          : "bg-role-follow text-stone-950 font-bold text-[10px]"
+                          ? "bg-role-lead text-stone-950 font-bold text-xs"
+                          : "bg-role-follow text-stone-950 font-bold text-xs"
                       }
                     >
                       {booking.danceRole}
                     </Badge>
-                    <Badge variant="outline" className="text-[10px]">
+                    <Badge variant="outline" className="text-xs">
                       {booking.currentLevel}
                     </Badge>
                   </div>

@@ -87,7 +87,7 @@ export function AnonymousQuestionBox() {
     <Card className="border border-line bg-surface-1 shadow-xs">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-2">
-          <Badge className="bg-surface-3 text-ivory border border-line font-bold text-[10px]">
+          <Badge className="bg-surface-3 text-ivory border border-line font-bold text-xs">
             <Lock className="mr-1 h-3 w-3" />
             100% Anonymous
           </Badge>
@@ -118,7 +118,7 @@ export function AnonymousQuestionBox() {
                 <p className="font-bold text-foreground text-[11px] leading-snug">
                   &ldquo;{cq.question}&rdquo;
                 </p>
-                <p className="text-[10px] text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {cq.answer}
                 </p>
               </div>
@@ -156,11 +156,11 @@ export function AnonymousQuestionBox() {
               </label>
               <div className="flex flex-wrap gap-1.5">
                 {[
-                  { id: "RHYTHM", label: "🎵 Rhythm & Steps" },
-                  { id: "FOOTWEAR", label: "👟 Shoes & Clothes" },
-                  { id: "PARTNER_ANXIETY", label: "🤝 Coming Alone" },
-                  { id: "VENUE_ARRIVING", label: "📍 Arriving & Parking" },
-                  { id: "GENERAL", label: "💬 General Question" },
+                  { id: "RHYTHM", label: "Rhythm & Steps" },
+                  { id: "FOOTWEAR", label: "Shoes & Clothes" },
+                  { id: "PARTNER_ANXIETY", label: "Coming Alone" },
+                  { id: "VENUE_ARRIVING", label: "Arriving & Parking" },
+                  { id: "GENERAL", label: "General Question" },
                 ].map((cat) => (
                   <button
                     key={cat.id}

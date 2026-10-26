@@ -46,8 +46,8 @@ export function PartnerWaitlistTab({
           data-testid="auto-pair-waitlist-btn"
           className="bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-xs h-8 self-start sm:self-auto"
         >
-          <Zap className="mr-1.5 h-3.5 w-3.5" />
-          ⚡ Auto-Pair Waiting Lead + Follow
+          <Zap className="mr-1.5 h-3.5 w-3.5" aria-hidden="true" />
+          Auto-Pair Waiting Lead + Follow
         </Button>
       </div>
 
@@ -70,7 +70,7 @@ export function PartnerWaitlistTab({
                       </CardTitle>
                       <p className="text-[11px] text-muted-foreground">{w.user.email}</p>
                     </div>
-                    <StatusBadge tone={waitlistStatusTone(w.status)} className="text-[10px]">
+                    <StatusBadge tone={waitlistStatusTone(w.status)} className="text-xs">
                       {w.status}
                     </StatusBadge>
                   </div>

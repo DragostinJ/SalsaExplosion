@@ -135,22 +135,22 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
                       </div>
                       <div className="text-[11px] text-muted-foreground font-mono">{log.actor.email}</div>
                     </div>
-                    <span className="text-muted-foreground font-mono text-[10px] shrink-0 bg-muted px-1.5 py-0.5 rounded">
+                    <span className="text-muted-foreground font-mono text-xs shrink-0 bg-muted px-1.5 py-0.5 rounded">
                       {log.ip || "internal"}
                     </span>
                   </div>
                   <div className="bg-main/60 rounded-lg p-2 space-y-1">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-muted-foreground text-[10px] uppercase">Target:</span>
+                      <span className="text-muted-foreground text-xs uppercase">Target:</span>
                       <span className="font-semibold text-text-main text-[11px]">{log.targetType}</span>
                       {log.targetId && (
-                        <span className="text-muted-foreground text-[10px] truncate max-w-[120px]">
+                        <span className="text-muted-foreground text-xs truncate max-w-[120px]">
                           ({log.targetId})
                         </span>
                       )}
                     </div>
                     {Boolean(log.metadata) && (
-                      <div className="text-[10px] text-muted-foreground truncate pt-0.5 border-t border-border/40">
+                      <div className="text-xs text-muted-foreground truncate pt-0.5 border-t border-border/40">
                         {metadataStr}
                       </div>
                     )}

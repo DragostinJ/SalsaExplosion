@@ -9,6 +9,7 @@ import {
   Radio,
   Volume2,
   VolumeX,
+  Footprints,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -327,28 +328,29 @@ export function TimbaSongAnatomyPlayer({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-2.5 sm:gap-4 border-b border-line pb-2.5 sm:pb-4">
         <div className="hidden md:block space-y-1">
           <div className="flex items-center gap-2">
-            <Badge className="bg-brand text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1">
+            <Badge className="bg-brand text-white text-[11px] font-black uppercase tracking-wider flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1">
               <Compass className="h-3.5 w-3.5" />
               Interactive Song Map
             </Badge>
-            <Badge variant="outline" className="border-line bg-surface-3 text-xs font-semibold text-stone-300">
+            <Badge variant="outline" className="border-line bg-surface-3 text-xs font-semibold text-ivory-muted">
               Live Dancer HUD
             </Badge>
           </div>
           <h2 className="text-lg sm:text-2xl font-black tracking-tight text-ivory">
             Timba Song Anatomy &amp; Gear-Shift Trainer
           </h2>
-          <p className="text-xs text-stone-400">
+          <p className="text-xs text-ivory-muted">
             Follow a real track in real time. Know exactly when the horns hit, when to breakaway, and when to drop into Bomba.
           </p>
         </div>
 
         {/* 1-Line Compact Mobile Header */}
         <div className="flex md:hidden items-center justify-between gap-2 text-xs">
-          <span className="font-black text-ivory truncate">
-            🎵 Timba Trainer • {activeSong.title.replace(/\s*\(.*?\)\s*/g, "")} • {activeSong.bpm} Tempo
+          <span className="font-black text-ivory truncate flex items-center gap-1">
+            <Music className="h-3.5 w-3.5 text-gold shrink-0" aria-hidden="true" />
+            <span>Timba Trainer • {activeSong.title.replace(/\s*\(.*?\)\s*/g, "")} • {activeSong.bpm} Tempo</span>
           </span>
-          <span className="font-mono text-[11px] font-extrabold text-stone-400 shrink-0">
+          <span className="font-mono text-[11px] font-extrabold text-ivory-muted shrink-0">
             {formatSeconds(currentTime)} elapsed
           </span>
         </div>
@@ -371,31 +373,31 @@ export function TimbaSongAnatomyPlayer({
                       : "bg-gold/20 text-gold border border-gold/60 shadow-xs ring-1 ring-gold/40"
                     : isBoss
                     ? "border border-gold/30 bg-surface-3 text-gold hover:bg-surface-2"
-                    : "border border-line bg-surface-3 text-stone-400 hover:bg-surface-2 hover:text-stone-200"
+                    : "border border-line bg-surface-3 text-ivory-muted hover:bg-surface-2 hover:text-stone-200"
                 }`}
               >
                 <Music className="h-3.5 w-3.5 shrink-0" />
                 <span className="truncate max-w-[130px] sm:max-w-none">{song.title}</span>
                 {isBoss ? (
-                  <Badge className="bg-amber-500 text-stone-950 font-black text-[9px] uppercase px-1.5 py-0 tracking-wider">
+                  <Badge className="bg-amber-500 text-stone-950 font-black text-[11px] uppercase px-1.5 py-0 tracking-wider">
                     Boss Track
                   </Badge>
                 ) : (
                   <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                    className={`text-xs px-1.5 py-0.2 rounded-full font-mono ${
                       isSelected
                         ? "bg-amber-500/30 text-amber-200"
-                        : "bg-white/5 text-stone-400"
+                        : "bg-white/5 text-ivory-muted"
                     }`}
                   >
                     {song.segments.length} Segs
                   </span>
                 )}
                 <span
-                  className={`text-[10px] font-mono font-bold ${
+                  className={`text-xs font-mono font-bold ${
                     isSelected
                       ? "text-inherit"
-                      : "text-stone-300"
+                      : "text-ivory-muted"
                   }`}
                 >
                   {song.bpm} BPM
@@ -416,14 +418,14 @@ export function TimbaSongAnatomyPlayer({
             <h3 className="font-extrabold text-sm text-ivory">
               {activeSong.title}
             </h3>
-            <p className="text-stone-400 text-[11px]">
-              {activeSong.artist} • <span className="font-mono font-semibold text-stone-300">{activeSong.bpm} BPM</span>
+            <p className="text-ivory-muted text-[11px]">
+              {activeSong.artist} • <span className="font-mono font-semibold text-ivory-muted">{activeSong.bpm} BPM</span>
             </p>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="outline" className="text-[11px] font-bold border-line bg-surface-3 text-stone-300">
+          <Badge variant="outline" className="text-[11px] font-bold border-line bg-surface-3 text-ivory-muted">
             {activeSong.claveType.toLowerCase().includes("clave") ||
             activeSong.claveType.toLowerCase().includes("hybrid")
               ? activeSong.claveType
@@ -451,26 +453,28 @@ export function TimbaSongAnatomyPlayer({
               data-testid="role-switch-leader"
               aria-pressed={activeRole === "leader"}
               onClick={() => setActiveRole("leader")}
-              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer ${
+              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer flex items-center gap-1 ${
                 activeRole === "leader"
                   ? "bg-role-lead-soft text-role-lead border border-role-lead-line shadow-xs"
                   : "text-ivory-muted hover:text-ivory"
               }`}
             >
-              🕺 Leader
+              <Footprints className="h-3.5 w-3.5 text-role-lead" aria-hidden="true" />
+              <span>Leader</span>
             </button>
             <button
               type="button"
               data-testid="role-switch-follower"
               aria-pressed={activeRole === "follower"}
               onClick={() => setActiveRole("follower")}
-              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer ${
+              className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer flex items-center gap-1 ${
                 activeRole === "follower"
                   ? "bg-role-follow-soft text-role-follow border border-role-follow-line shadow-xs"
                   : "text-ivory-muted hover:text-ivory"
               }`}
             >
-              💃 Follower
+              <Footprints className="h-3.5 w-3.5 text-role-follow" aria-hidden="true" />
+              <span>Follower</span>
             </button>
           </div>
 
@@ -484,7 +488,7 @@ export function TimbaSongAnatomyPlayer({
             className={`h-8 text-xs font-bold transition-all ${
               showVideoDrawer
                 ? "border-gold/40 bg-gold/20 hover:bg-gold/30 text-gold shadow-xs"
-                : "border-line bg-surface-3 text-stone-300 hover:bg-surface-2 hover:text-white"
+                : "border-line bg-surface-3 text-ivory-muted hover:bg-surface-2 hover:text-white"
             }`}
           >
             <YouTubeIcon className="mr-1.5 h-3.5 w-3.5 text-brand" />
@@ -501,7 +505,7 @@ export function TimbaSongAnatomyPlayer({
             className={`h-8 text-xs font-bold transition-all ${
               isClaveHelperActive
                 ? "border-gold/40 bg-gold/20 hover:bg-gold/30 text-gold shadow-xs"
-                : "border-line bg-surface-3 text-stone-300 hover:bg-surface-2 hover:text-white"
+                : "border-line bg-surface-3 text-ivory-muted hover:bg-surface-2 hover:text-white"
             }`}
           >
             {isClaveHelperActive ? (
@@ -511,7 +515,7 @@ export function TimbaSongAnatomyPlayer({
               </>
             ) : (
               <>
-                <VolumeX className="mr-1.5 h-3.5 w-3.5 text-stone-500" />
+                <VolumeX className="mr-1.5 h-3.5 w-3.5 text-ivory-muted" />
                 Clave Click: OFF
               </>
             )}
@@ -522,7 +526,7 @@ export function TimbaSongAnatomyPlayer({
               asChild
               size="sm"
               variant="outline"
-              className="h-8 text-xs font-semibold border-line bg-surface-3 text-stone-300 hover:bg-surface-2 hover:text-white"
+              className="h-8 text-xs font-semibold border-line bg-surface-3 text-ivory-muted hover:bg-surface-2 hover:text-white"
             >
               <a
                 href={activeSong.spotifyOrYoutubeEmbedUrl}
@@ -563,7 +567,7 @@ export function TimbaSongAnatomyPlayer({
                   className={`px-2 py-0.5 rounded font-semibold transition-all ${
                     currentVideoId === activeSong.youtubeVideoId
                       ? "bg-ivory text-stone-950 shadow-xs"
-                      : "text-stone-400 hover:text-ivory"
+                      : "text-ivory-muted hover:text-ivory"
                   }`}
                 >
                   Studio Audio (5:46)
@@ -577,7 +581,7 @@ export function TimbaSongAnatomyPlayer({
                   className={`px-2 py-0.5 rounded font-semibold transition-all ${
                     currentVideoId === activeSong.alternateYoutubeVideoId
                       ? "bg-ivory text-stone-950 shadow-xs"
-                      : "text-stone-400 hover:text-ivory"
+                      : "text-ivory-muted hover:text-ivory"
                   }`}
                 >
                   Music Video (6:11)

@@ -52,7 +52,7 @@ export function MerchFulfillmentTab({
                         {m.user.firstName} {m.user.lastName} ({m.user.email})
                       </p>
                     </div>
-                    <StatusBadge tone={merchStatusTone(m.status)} className="text-[10px]">
+                    <StatusBadge tone={merchStatusTone(m.status)} className="text-xs">
                       {m.status}
                     </StatusBadge>
                   </div>

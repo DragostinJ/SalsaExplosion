@@ -261,7 +261,7 @@ export function PrivateLessonsClient({
                         <TeacherAvatar name={inst.name} avatarUrl={inst.avatarUrl} size="md" />
                         <div>
                           <h4 className="font-bold text-sm text-foreground">{inst.name}</h4>
-                          <span className="text-[10px] text-muted-foreground block line-clamp-1">
+                          <span className="text-xs text-muted-foreground block line-clamp-1">
                             {inst.title}
                           </span>
                         </div>
@@ -275,7 +275,7 @@ export function PrivateLessonsClient({
                         {inst.specialties.slice(0, 2).map((s) => (
                           <span
                             key={s}
-                            className="rounded bg-muted px-2 py-0.5 text-[9px] font-semibold text-muted-foreground"
+                            className="rounded bg-muted px-2 py-0.5 text-xs font-semibold text-muted-foreground"
                           >
                             {s}
                           </span>
@@ -289,7 +289,7 @@ export function PrivateLessonsClient({
                         <span className="font-extrabold text-sm text-foreground">
                           £{inst.hourlyRatePounds}
                         </span>
-                        <span className="text-[10px] text-muted-foreground">/hr</span>
+                        <span className="text-xs text-muted-foreground">/hr</span>
                       </div>
                       <span className={`text-[11px] font-bold ${isSelected ? "text-amber-300" : "text-muted-foreground"}`}>
                         {isSelected ? "Selected" : "Select Coach"}
@@ -342,7 +342,7 @@ export function PrivateLessonsClient({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <h4 className="font-bold text-sm">5-Hour Mastery Block</h4>
-                    <Badge className="bg-emerald-800 text-white font-extrabold text-[10px] px-1.5 py-0">
+                    <Badge className="bg-emerald-800 text-white font-extrabold text-xs px-1.5 py-0">
                       Save £50
                     </Badge>
                   </div>
@@ -461,7 +461,7 @@ export function PrivateLessonsClient({
               )}
               <div className="text-left sm:text-right">
                 <span className="text-2xl font-black text-foreground block">£{price}.00</span>
-                <span className="text-[10px] text-muted-foreground">No upfront payment required</span>
+                <span className="text-xs text-muted-foreground">No upfront payment required</span>
               </div>
               <Button
                 type="submit"

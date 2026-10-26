@@ -7,6 +7,7 @@ import {
   AlertTriangle,
   BookOpen,
   X,
+  Lightbulb,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { SongSegment } from "@/lib/constants/timba-song-anatomy";
@@ -45,7 +46,7 @@ export function TimbaDancerHud({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
           <div className="space-y-0.5 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-gold/80">
+              <span className="text-[11px] uppercase font-bold tracking-wider text-gold/80">
                 Current Segment ({activeSegmentIndex + 1} of {totalSegments})
               </span>
               <span className="font-mono text-[11px] sm:text-xs font-bold text-gold">
@@ -60,7 +61,7 @@ export function TimbaDancerHud({
           {/* Next Shift Countdown */}
           {nextSegment ? (
             <div className="inline-flex sm:block items-center gap-1.5 rounded-lg sm:rounded-xl border border-line bg-surface-1/90 px-2.5 sm:px-3.5 py-1 sm:py-2 text-[11px] sm:text-xs sm:text-right self-start sm:self-auto shadow-xs shrink-0">
-              <span className="text-[10px] text-stone-400 font-semibold inline sm:block">
+              <span className="text-xs text-ivory-muted font-semibold inline sm:block">
                 Next in <strong className="text-gold font-mono text-xs">{secondsUntilNextShift}s</strong>:
               </span>
               <span className="font-bold text-ivory text-[11px] truncate max-w-[220px] sm:max-w-none">
@@ -69,7 +70,7 @@ export function TimbaDancerHud({
             </div>
           ) : (
             <div className="inline-flex sm:block items-center gap-1.5 rounded-lg sm:rounded-xl border border-line bg-surface-1/90 px-2.5 sm:px-3.5 py-1 sm:py-2 text-[11px] sm:text-xs sm:text-right self-start sm:self-auto shadow-xs shrink-0">
-              <span className="text-[10px] text-stone-400 font-semibold inline sm:block">
+              <span className="text-xs text-ivory-muted font-semibold inline sm:block">
                 Song Climax
               </span>
               <span className="font-bold text-gold text-[11px]">
@@ -82,7 +83,7 @@ export function TimbaDancerHud({
         {/* Active Dance Gear Pill & Timing Mode Badges */}
         <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5 sm:pt-1 text-[11px] sm:text-xs">
           <span className="text-[11px] sm:text-xs font-bold text-stone-200">Recommended Gear:</span>
-          <Badge className="border-gold/40 bg-gold/20 text-gold text-[10px] sm:text-xs font-black px-2 py-0.5">
+          <Badge className="border-gold/40 bg-gold/20 text-gold text-xs sm:text-xs font-black px-2 py-0.5">
             {activeSegment.danceGear}
           </Badge>
 
@@ -90,7 +91,7 @@ export function TimbaDancerHud({
             <Badge
               variant="outline"
               data-testid="active-timing-mode-badge"
-              className="border-gold/40 bg-gold/10 text-gold text-[10px] sm:text-xs font-black flex items-center gap-1 px-2 sm:px-2.5 py-0.5"
+              className="border-gold/40 bg-gold/10 text-gold text-xs sm:text-xs font-black flex items-center gap-1 px-2 sm:px-2.5 py-0.5"
             >
               <Sparkles className="h-3 w-3 text-gold shrink-0" />
               <span className="truncate">Timing: {activeSegment.timingMode}</span>
@@ -107,14 +108,14 @@ export function TimbaDancerHud({
         >
           <div className="hidden md:flex items-center justify-between gap-2 border-b border-line pb-1">
             <div className="flex items-center gap-2 flex-wrap">
-              <Badge className="bg-gold/20 text-gold border border-gold/30 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2">
+              <Badge className="bg-gold/20 text-gold border border-gold/30 text-[11px] font-black uppercase tracking-wider px-1.5 py-0.2">
                 Level 4 Body Separation
               </Badge>
               <h4 className="text-[11px] sm:text-xs font-black text-stone-200 uppercase tracking-wide">
                 3-Zone Body Telemetry
               </h4>
             </div>
-            <span className="text-[10px] text-stone-400 font-medium hidden sm:inline">
+            <span className="text-xs text-ivory-muted font-medium hidden sm:inline">
               Polyrhythmic Body Isolation Map
             </span>
           </div>
@@ -122,33 +123,33 @@ export function TimbaDancerHud({
           <div className="grid grid-cols-3 gap-1 sm:gap-1.5">
             {/* Zone 1: Chest & Shoulders */}
             <div className="rounded-lg border border-line bg-surface-3 p-1.5 sm:p-2 space-y-0.5">
-              <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-sky-300 flex items-center gap-1">
+              <span className="text-[11px] sm:text-[11px] uppercase font-black tracking-wider text-sky-300 flex items-center gap-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-sky-400 shrink-0" />
                 Chest &amp; Shoulders
               </span>
-              <p className="text-[10px] sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
+              <p className="text-xs sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
                 {activeSegment.instrumentMapping.chestAndShoulders}
               </p>
             </div>
 
             {/* Zone 2: Hips & Knees */}
             <div className="rounded-lg border border-line bg-surface-3 p-1.5 sm:p-2 space-y-0.5">
-              <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-gold flex items-center gap-1">
+              <span className="text-[11px] sm:text-[11px] uppercase font-black tracking-wider text-gold flex items-center gap-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
                 Hips &amp; Knees
               </span>
-              <p className="text-[10px] sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
+              <p className="text-xs sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
                 {activeSegment.instrumentMapping.hipsAndKnees}
               </p>
             </div>
 
             {/* Zone 3: Feet */}
             <div className="rounded-lg border border-line bg-surface-3 p-1.5 sm:p-2 space-y-0.5">
-              <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-emerald-300 flex items-center gap-1">
+              <span className="text-[11px] sm:text-[11px] uppercase font-black tracking-wider text-emerald-300 flex items-center gap-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
                 Feet
               </span>
-              <p className="text-[10px] sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
+              <p className="text-xs sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
                 {activeSegment.instrumentMapping.feet}
               </p>
             </div>
@@ -160,9 +161,9 @@ export function TimbaDancerHud({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {/* Card 1: What to Listen For (100% Permanently Visible) */}
         <div data-testid="trigger-cue-card" className="rounded-xl border border-line border-l-2 border-l-gold bg-surface-2 p-2.5 sm:p-3 space-y-0.5 shadow-xs">
-          <span className="text-[10px] uppercase font-black tracking-wider text-gold flex items-center gap-1.5">
-            <Headphones className="h-3.5 w-3.5 text-gold shrink-0" />
-            🎧 What to Listen For (Trigger)
+          <span className="text-[11px] uppercase font-black tracking-wider text-gold flex items-center gap-1.5">
+            <Headphones className="h-3.5 w-3.5 text-gold shrink-0" aria-hidden="true" />
+            What to Listen For (Trigger)
           </span>
           <p className="text-xs text-stone-100 font-semibold leading-snug">
             {activeSegment.musicalTrigger}
@@ -175,9 +176,9 @@ export function TimbaDancerHud({
             data-testid="leader-action-card"
             className="rounded-xl border border-role-lead-line bg-role-lead-soft p-2.5 sm:p-3 space-y-0.5 shadow-xs text-role-lead"
           >
-            <span className="text-[10px] uppercase font-black tracking-wider text-role-lead flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-role-lead shrink-0" />
-              🕺 Leader Action
+            <span className="text-[11px] uppercase font-black tracking-wider text-role-lead flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-role-lead shrink-0" aria-hidden="true" />
+              Leader Action
             </span>
             <p className="text-xs text-ivory font-semibold leading-snug">
               {activeSegment.leaderCue}
@@ -188,9 +189,9 @@ export function TimbaDancerHud({
             data-testid="follower-action-card"
             className="rounded-xl border border-role-follow-line bg-role-follow-soft p-2.5 sm:p-3 space-y-0.5 shadow-xs text-role-follow"
           >
-            <span className="text-[10px] uppercase font-black tracking-wider text-role-follow flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-role-follow shrink-0" />
-              💃 Follower Action
+            <span className="text-[11px] uppercase font-black tracking-wider text-role-follow flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-role-follow shrink-0" aria-hidden="true" />
+              Follower Action
             </span>
             <p className="text-xs text-ivory font-semibold leading-snug">
               {activeSegment.followerCue}
@@ -220,7 +221,7 @@ export function TimbaDancerHud({
             <Sparkles className="h-3.5 w-3.5 text-gold" />
             Recommended Curriculum Moves for this Section:
           </span>
-          <span className="text-[11px] text-stone-400">
+          <span className="text-[11px] text-ivory-muted">
             Tap any move for instant breakdown
           </span>
         </div>
@@ -242,14 +243,14 @@ export function TimbaDancerHud({
                 className={`rounded-xl border px-3 py-1.5 text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
                   isSelected
                     ? "border-gold bg-gold/20 text-gold shadow-xs"
-                    : "border-line bg-surface-3 text-stone-300 hover:bg-surface-2 hover:text-white"
+                    : "border-line bg-surface-3 text-ivory-muted hover:bg-surface-2 hover:text-white"
                 }`}
               >
                 <BookOpen className="h-3 w-3" />
                 <span>{move.name}</span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                    isSelected ? "bg-gold/30 text-gold" : "bg-white/10 text-stone-400"
+                  className={`text-xs px-1.5 py-0.2 rounded-full font-mono ${
+                    isSelected ? "bg-gold/30 text-gold" : "bg-white/10 text-ivory-muted"
                   }`}
                 >
                   {move.level}
@@ -270,7 +271,7 @@ export function TimbaDancerHud({
               data-testid="close-move-inspector"
               aria-label="Close move preview"
               onClick={() => setInspectingMove(null)}
-              className="absolute top-3.5 right-3.5 rounded-full p-1 text-stone-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="absolute top-3.5 right-3.5 rounded-full p-1 text-ivory-muted hover:text-white hover:bg-white/10 transition-colors"
               title="Close move preview"
             >
               <X className="h-4 w-4" />
@@ -278,11 +279,11 @@ export function TimbaDancerHud({
 
             <div className="space-y-1 pr-6">
               <div className="flex items-center gap-2">
-                <Badge className="bg-gold/20 text-gold border border-gold/30 text-[10px] font-bold">
+                <Badge className="bg-gold/20 text-gold border border-gold/30 text-xs font-bold">
                   {inspectingMove.level} Syllabus
                 </Badge>
                 {inspectingMove.phonetic && (
-                  <span className="text-xs text-stone-400 italic">
+                  <span className="text-xs text-ivory-muted italic">
                     Pronounced: &ldquo;{inspectingMove.phonetic}&rdquo;
                   </span>
                 )}
@@ -290,7 +291,7 @@ export function TimbaDancerHud({
               <h4 className="text-base sm:text-lg font-black text-ivory">
                 {inspectingMove.name}
               </h4>
-              <p className="text-xs text-stone-300 leading-relaxed line-clamp-2 sm:line-clamp-none">
+              <p className="text-xs text-ivory-muted leading-relaxed line-clamp-2 sm:line-clamp-none">
                 {inspectingMove.summary}
               </p>
             </div>
@@ -298,7 +299,7 @@ export function TimbaDancerHud({
             <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-2 text-xs pt-1">
               {inspectingMove.handholdType && (
                 <div className="rounded-xl border border-line bg-surface-3 p-2 sm:p-2.5 space-y-0.5">
-                  <span className="text-[10px] font-bold uppercase text-stone-400 block">
+                  <span className="text-[11px] font-bold uppercase text-ivory-muted block">
                     Handhold &amp; Connection
                   </span>
                   <p className="font-semibold text-stone-200 text-xs">{inspectingMove.handholdType}</p>
@@ -306,7 +307,7 @@ export function TimbaDancerHud({
               )}
               {inspectingMove.entryExitGeometry && (
                 <div className="rounded-xl border border-line bg-surface-3 p-2 sm:p-2.5 space-y-0.5">
-                  <span className="text-[10px] font-bold uppercase text-stone-400 block">
+                  <span className="text-[11px] font-bold uppercase text-ivory-muted block">
                     Circular Geometry
                   </span>
                   <p className="font-semibold text-stone-200 text-xs">{inspectingMove.entryExitGeometry}</p>
@@ -317,8 +318,9 @@ export function TimbaDancerHud({
             <div className="rounded-xl border border-amber-500/30 bg-amber-950/25 p-2.5 sm:p-3 text-xs flex items-start gap-2 shadow-xs">
               <Sparkles className="h-3.5 w-3.5 text-amber-400 shrink-0 mt-0.5" />
               <div className="space-y-0.5">
-                <span className="font-extrabold text-amber-300 text-[10px] uppercase tracking-wider block">
-                  💡 Un-Confuser Tip:
+                <span className="font-extrabold text-amber-300 text-[11px] uppercase tracking-wider flex items-center gap-1">
+                  <Lightbulb className="h-3.5 w-3.5 text-gold shrink-0" aria-hidden="true" />
+                  Un-Confuser Tip:
                 </span>
                 <p className="text-stone-200 font-semibold leading-relaxed">
                   {inspectingMove.unConfuserTip}

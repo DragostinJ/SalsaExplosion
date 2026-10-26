@@ -250,9 +250,9 @@ export default async function StudentSchedulePage({
           user ? (
             <div className="inline-flex items-center gap-2 rounded-xl border border-line bg-surface-3 px-3 py-1.5 text-xs">
               <Sparkles className="h-4 w-4 text-gold" />
-              <span className="text-stone-300">Dancer:</span>
+              <span className="text-ivory-muted">Dancer:</span>
               <span className="font-bold text-gold">{user.currentLevel}</span>
-              <span className="text-stone-400 font-mono">({user.classCredits} credits)</span>
+              <span className="text-ivory-muted font-mono">({user.classCredits} credits)</span>
             </div>
           ) : undefined
         }
@@ -451,7 +451,7 @@ export default async function StudentSchedulePage({
         <div className="grid gap-4 md:grid-cols-2 pt-4">
           <div className="flex flex-col justify-between gap-3 rounded-2xl border border-success-line bg-success-soft p-4 sm:flex-row sm:items-center">
             <div>
-              <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400">
                 Instructor Portal
               </span>
               <h2 className="text-sm font-bold">
@@ -482,7 +482,7 @@ export default async function StudentSchedulePage({
 
           <div className="flex flex-col justify-between gap-3 rounded-2xl border border-border bg-card p-4 sm:flex-row sm:items-center">
             <div>
-              <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">
                 Studio Owner Admin
               </span>
               <h2 className="text-sm font-bold">

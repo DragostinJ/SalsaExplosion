@@ -47,11 +47,11 @@ export function SentimentFeedbackTab({
                     <h4 className="text-xs font-bold text-foreground">
                       {fb.user.firstName} {fb.user.lastName}
                     </h4>
-                    <p className="text-[10px] text-muted-foreground">{fb.classSession.title}</p>
+                    <p className="text-xs text-muted-foreground">{fb.classSession.title}</p>
                   </div>
                   <StatusBadge
                     tone={sentimentTone(fb.sentiment)}
-                    className="text-[10px]"
+                    className="text-xs"
                   >
                     {fb.sentiment.replace(/_/g, " ")}
                   </StatusBadge>
@@ -61,7 +61,7 @@ export function SentimentFeedbackTab({
                     &ldquo;{fb.notes}&rdquo;
                   </p>
                 )}
-                <span className="text-[10px] text-muted-foreground block text-right">
+                <span className="text-xs text-muted-foreground block text-right">
                   {new Date(fb.createdAt).toLocaleDateString("en-GB")}
                 </span>
               </Card>
@@ -94,7 +94,7 @@ export function SentimentFeedbackTab({
                   <div className="flex items-start justify-between gap-3">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <Badge variant="outline" className="text-[10px] uppercase font-bold">
+                        <Badge variant="outline" className="text-[11px] uppercase font-bold">
                           {q.category}
                         </Badge>
                         {q.email && (
@@ -107,7 +107,7 @@ export function SentimentFeedbackTab({
                     </div>
                     <StatusBadge
                       tone={isAnswered ? "success" : "warning"}
-                      className="text-[10px] shrink-0"
+                      className="text-xs shrink-0"
                     >
                       {q.status}
                     </StatusBadge>

@@ -434,7 +434,7 @@ export function VideoGradingWorkspace({
                     <div className="space-y-3 border-t border-amber-500/20 pt-3">
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
                         <div className="rounded-xl border bg-background p-2.5">
-                          <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+                          <span className="text-[11px] font-bold uppercase text-muted-foreground block">
                             Overall Score
                           </span>
                           <span className="text-lg font-extrabold text-amber-400">
@@ -442,7 +442,7 @@ export function VideoGradingWorkspace({
                           </span>
                         </div>
                         <div className="rounded-xl border bg-background p-2.5">
-                          <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+                          <span className="text-[11px] font-bold uppercase text-muted-foreground block">
                             Clave Timing
                           </span>
                           <span className="text-lg font-extrabold text-emerald-400">
@@ -450,7 +450,7 @@ export function VideoGradingWorkspace({
                           </span>
                         </div>
                         <div className="rounded-xl border bg-background p-2.5">
-                          <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+                          <span className="text-[11px] font-bold uppercase text-muted-foreground block">
                             Circular Frame
                           </span>
                           <span className="text-lg font-extrabold text-blue-400">
@@ -458,7 +458,7 @@ export function VideoGradingWorkspace({
                           </span>
                         </div>
                         <div className="rounded-xl border bg-background p-2.5">
-                          <span className="text-[10px] font-bold uppercase text-muted-foreground block">
+                          <span className="text-[11px] font-bold uppercase text-muted-foreground block">
                             Cuban Motion
                           </span>
                           <span className="text-lg font-extrabold text-gold">

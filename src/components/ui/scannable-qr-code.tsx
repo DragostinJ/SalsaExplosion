@@ -124,7 +124,7 @@ export function ScannableQrCode({
         )}
       </svg>
       {label && (
-        <span className="mt-1 font-mono text-[10px] font-bold text-stone-600 tracking-wider">
+        <span className="mt-1 font-mono text-xs font-bold text-stone-600 tracking-wider">
           {label}
         </span>
       )}

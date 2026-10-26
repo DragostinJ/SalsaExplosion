@@ -88,7 +88,7 @@ export function BeginnerSyllabusRoadmap() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-[10px]">
+              <Badge className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-xs">
                 Level 0 → Level 1 Roadmap
               </Badge>
               <span className="text-xs font-semibold text-emerald-400">
@@ -103,7 +103,7 @@ export function BeginnerSyllabusRoadmap() {
           <div className="flex items-center gap-2 text-xs bg-muted/40 px-3 py-1.5 rounded-xl border border-border/60">
             <Award className="h-4 w-4 text-emerald-400" />
             <span className="font-bold text-foreground">{masteredCount} of 8 Mastered</span>
-            <span className="text-[10px] text-muted-foreground">({progressPercent}%)</span>
+            <span className="text-xs text-muted-foreground">({progressPercent}%)</span>
           </div>
         </div>
 
@@ -141,19 +141,19 @@ export function BeginnerSyllabusRoadmap() {
               >
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
                       Figure {step.number} • {step.category}
                     </span>
                     {isMastered ? (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-secondary-base">
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-secondary-base">
                         <CheckCircle2 className="h-3 w-3" /> Mastered
                       </span>
                     ) : isCurrent ? (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-accent-tangerine animate-pulse">
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-accent-tangerine animate-pulse">
                         <Flame className="h-3 w-3" /> Practicing Now
                       </span>
                     ) : (
-                      <span className="text-[10px] text-muted-foreground font-medium">
+                      <span className="text-xs text-muted-foreground font-medium">
                         Coming Up
                       </span>
                     )}
@@ -163,7 +163,7 @@ export function BeginnerSyllabusRoadmap() {
                     <h4 className="text-xs font-bold text-foreground">
                       {step.name}
                     </h4>
-                    <span className="text-[10px] text-muted-foreground font-mono italic">
+                    <span className="text-xs text-muted-foreground font-mono italic">
                       [{step.phonetic}]
                     </span>
                   </div>

@@ -10,7 +10,7 @@ import { ACADEMY_METRICS, VENUE_INFO } from "@/lib/academy-data";
 
 export function SiteFooter() {
   return (
-    <footer className="cv-auto border-t border-line bg-surface-1 text-xs text-stone-300 mt-auto pb-28 md:pb-12">
+    <footer className="cv-auto border-t border-line bg-surface-1 text-xs text-ivory-muted mt-auto pb-28 md:pb-12">
       <div className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8 space-y-10">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Col 1 & 2: Brand & Director */}
@@ -26,7 +26,7 @@ export function SiteFooter() {
                 <span className="text-base font-black leading-none tracking-tight text-ivory">
                   Salsa <span className="text-rose-400">Explosion</span>
                 </span>
-                <span className="text-[10px] font-black text-stone-400 uppercase tracking-widest mt-0.5">
+                <span className="text-[11px] font-black text-ivory-muted uppercase tracking-widest mt-0.5">
                   Bournemouth • Cuban Salsa
                 </span>
               </div>
@@ -37,7 +37,7 @@ export function SiteFooter() {
                 <Award className="h-4 w-4 shrink-0 text-gold" />
                 <span>{ACADEMY_METRICS.lifetimeAward}</span>
               </div>
-              <p className="text-xs text-stone-300 leading-relaxed font-medium">
+              <p className="text-xs text-ivory-muted leading-relaxed font-medium">
                 Founded &amp; directed by Cuban dance maestro <strong className="text-ivory font-black">{ACADEMY_METRICS.founderName}</strong>. Voted <strong className="text-ivory font-black">{ACADEMY_METRICS.promoterAward}</strong> with {ACADEMY_METRICS.yearsInUk} authentic UK teaching heritage.
               </p>
             </div>
@@ -79,27 +79,27 @@ export function SiteFooter() {
             </h4>
             <ul className="space-y-1.5">
               <li>
-                <Link href="/dashboard/schedule" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
+                <Link href="/dashboard/schedule" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   Thursday &amp; Sunday Timetable
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/recaps" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
+                <Link href="/dashboard/recaps" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   End-of-Class Recaps
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/progression" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
+                <Link href="/dashboard/progression" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   Cuban Syllabus &amp; Level-Up
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/rueda" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
+                <Link href="/dashboard/rueda" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   Rueda de Casino Dictionary
                 </Link>
               </li>
               <li>
-                <Link href="/music" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
+                <Link href="/music" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   Timba Song Trainer
                 </Link>
               </li>
@@ -118,22 +118,22 @@ export function SiteFooter() {
             </h4>
             <ul className="space-y-1.5">
               <li>
-                <Link href="/events/made-in-cuba-dance-weekend-2026" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
+                <Link href="/events/made-in-cuba-dance-weekend-2026" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   MADE IN CUBA Weekend 2026
                 </Link>
               </li>
               <li>
-                <Link href="/events" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
+                <Link href="/events" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   Halloween &amp; SB&amp;K Parties
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
+                <Link href="/about" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   About Maestro Enrique
                 </Link>
               </li>
               <li>
-                <Link href="/venues" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
+                <Link href="/venues" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   BOH Studios &amp; Parking (BH2 5LR)
                 </Link>
               </li>
@@ -143,7 +143,7 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/sign-in" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-ivory transition-colors">
+                <Link href="/sign-in" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-ivory transition-colors">
                   Student Portal Login
                 </Link>
               </li>
@@ -155,22 +155,22 @@ export function SiteFooter() {
             <h4 className="font-black text-ivory uppercase tracking-wider text-xs">
               Bournemouth Studio Hub
             </h4>
-            <div className="space-y-2.5 text-stone-300 font-semibold">
+            <div className="space-y-2.5 text-ivory-muted font-semibold">
               <div className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-gold shrink-0 mt-0.5" />
                 <span className="text-xs">
                   <strong className="text-ivory font-black">{VENUE_INFO.name}</strong>
                   <br />
-                  <span className="text-stone-300">{VENUE_INFO.streetAddress}, {VENUE_INFO.postcode}</span>
+                  <span className="text-ivory-muted">{VENUE_INFO.streetAddress}, {VENUE_INFO.postcode}</span>
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <Calendar className="h-4 w-4 text-gold shrink-0 mt-0.5" />
-                <span className="text-xs leading-relaxed text-stone-300 font-medium">
+                <span className="text-xs leading-relaxed text-ivory-muted font-medium">
                   Every Thursday &amp; Sunday at {VENUE_INFO.name} ({VENUE_INFO.streetAddress}, {VENUE_INFO.postcode}).
                 </span>
               </div>
-              <div className="pt-0.5 text-xs text-stone-400">
+              <div className="pt-0.5 text-xs text-ivory-muted">
                 <a
                   href="tel:+447969633701"
                   data-testid="footer-phone-link"
@@ -192,23 +192,23 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-line pt-6 flex flex-col lg:flex-row items-center justify-between gap-4 text-xs text-stone-400">
+        <div className="border-t border-line pt-6 flex flex-col lg:flex-row items-center justify-between gap-4 text-xs text-ivory-muted">
           <p>© {new Date().getFullYear()} Salsa Explosion UK. Directed by {ACADEMY_METRICS.founderName}. All rights reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <span className="flex items-center gap-1.5 text-gold font-bold">
               <Flame className="h-3.5 w-3.5 fill-current" />
               Salsa Explosion Dance Academy
             </span>
-            <Link href="/terms" className="inline-flex items-center py-1 px-1 hover:underline text-stone-300 font-bold">
+            <Link href="/terms" className="inline-flex items-center py-1 px-1 hover:underline text-ivory-muted font-bold">
               Terms &amp; UK Consumer Rights
             </Link>
-            <Link href="/terms#refunds" className="inline-flex items-center py-1 px-1 hover:underline text-stone-300 font-bold">
+            <Link href="/terms#refunds" className="inline-flex items-center py-1 px-1 hover:underline text-ivory-muted font-bold">
               Refund Policy
             </Link>
-            <Link href="/terms#privacy" className="inline-flex items-center py-1 px-1 hover:underline text-stone-300 font-bold">
+            <Link href="/terms#privacy" className="inline-flex items-center py-1 px-1 hover:underline text-ivory-muted font-bold">
               Privacy &amp; GDPR
             </Link>
-            <Link href="/how-it-works" className="inline-flex items-center py-1 px-1 hover:underline text-stone-300 font-bold">
+            <Link href="/how-it-works" className="inline-flex items-center py-1 px-1 hover:underline text-ivory-muted font-bold">
               Guide
             </Link>
           </div>

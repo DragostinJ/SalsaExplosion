@@ -36,21 +36,21 @@ export default async function ReferralsPage() {
             <div className="rounded-xl border border-line bg-surface-2 p-4 space-y-1">
               <Users className="h-5 w-5 text-gold mb-1" />
               <div className="text-sm font-black text-ivory">1. Share Your Code</div>
-              <p className="text-xs text-stone-300">
+              <p className="text-xs text-ivory-muted">
                 Send your personal Salsa Explosion invite link via WhatsApp or Instagram.
               </p>
             </div>
             <div className="rounded-xl border border-line bg-surface-2 p-4 space-y-1">
               <Sparkles className="h-5 w-5 text-gold mb-1" />
               <div className="text-sm font-black text-ivory">2. Friend Joins Class</div>
-              <p className="text-xs text-stone-300">
+              <p className="text-xs text-ivory-muted">
                 Your friend claims their free welcome credit for Thursday or Sunday at BOH Studios.
               </p>
             </div>
             <div className="rounded-xl border border-line bg-surface-2 p-4 space-y-1">
               <CheckCircle2 className="h-5 w-5 text-emerald-400 mb-1" />
               <div className="text-sm font-black text-ivory">3. Earn Automatic Credit</div>
-              <p className="text-xs text-stone-300">
+              <p className="text-xs text-ivory-muted">
                 1 free class credit is added directly to your digital studio wallet.
               </p>
             </div>

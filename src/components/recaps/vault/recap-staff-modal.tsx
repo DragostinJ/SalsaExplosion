@@ -170,7 +170,7 @@ export function RecapStaffModal({
                     <span className="font-bold text-xs text-foreground text-center">
                       Tap to choose or record recap video
                     </span>
-                    <span className="text-[10px] text-muted-foreground mt-0.5">
+                    <span className="text-xs text-muted-foreground mt-0.5">
                       Direct from camera roll or files (MP4, MOV up to 100MB)
                     </span>
                     <input
@@ -190,7 +190,7 @@ export function RecapStaffModal({
                       <Film className="h-4 w-4 text-amber-400 shrink-0" />
                       <div className="min-w-0">
                         <p className="text-xs font-bold truncate">{selectedFile.name}</p>
-                        <p className="text-[10px] text-muted-foreground">
+                        <p className="text-xs text-muted-foreground">
                           {(selectedFile.size / (1024 * 1024)).toFixed(1)} MB • Ready to upload
                         </p>
                       </div>
@@ -234,7 +234,7 @@ export function RecapStaffModal({
                   onChange={(e) => setAttachVideoUrl(e.target.value)}
                   className="w-full rounded-xl border bg-background px-3 py-2 font-medium"
                 />
-                <p className="text-[10px] text-muted-foreground">
+                <p className="text-xs text-muted-foreground">
                   Paste a public YouTube watch link, Vimeo link, or HTTPS video URL.
                 </p>
               </div>
@@ -245,7 +245,7 @@ export function RecapStaffModal({
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label className="font-semibold">Cuban Figures Practiced</label>
-              <span className="text-[10px] text-muted-foreground">Tap chips to toggle</span>
+              <span className="text-xs text-muted-foreground">Tap chips to toggle</span>
             </div>
 
             <div className="flex flex-wrap gap-1 mb-1.5">
@@ -259,7 +259,7 @@ export function RecapStaffModal({
                     key={figure}
                     type="button"
                     onClick={() => handleToggleFigureTag(figure)}
-                    className={`rounded-lg px-2 py-0.5 text-[10px] font-semibold transition-all ${
+                    className={`rounded-lg px-2 py-0.5 text-xs font-semibold transition-all ${
                       active
                         ? "bg-amber-500 text-stone-950 shadow-xs"
                         : "bg-muted text-muted-foreground hover:bg-muted/80"

@@ -462,7 +462,7 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold">
+                <Badge className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold">
                   4-Star Premium
                 </Badge>
                 <span className="text-[11px] font-bold text-rose-400">3–5 min walk</span>
@@ -482,7 +482,7 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">
+                <Badge className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold">
                   Free Hot Breakfast
                 </Badge>
                 <span className="text-[11px] font-bold text-rose-400">5 min walk</span>
@@ -502,7 +502,7 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-gold/15 text-gold border border-gold/30 text-[10px] font-bold">
+                <Badge className="bg-gold/15 text-gold border border-gold/30 text-xs font-bold">
                   Top Value
                 </Badge>
                 <span className="text-[11px] font-bold text-rose-400">8 min walk</span>
@@ -522,7 +522,7 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] font-bold">
+                <Badge className="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-xs font-bold">
                   Full Service
                 </Badge>
                 <span className="text-[11px] font-bold text-rose-400">10 min walk</span>

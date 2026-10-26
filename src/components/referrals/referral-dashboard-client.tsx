@@ -206,7 +206,7 @@ export function ReferralDashboardClient({
                 Friends Referred
               </span>
               <div className="text-2xl font-black mt-1">{stats.friendsInvited}</div>
-              <span className="text-[10px] text-muted-foreground">
+              <span className="text-xs text-muted-foreground">
                 Dancers who joined with your code
               </span>
             </div>
@@ -225,7 +225,7 @@ export function ReferralDashboardClient({
               <div className="text-2xl font-black mt-1 text-amber-600">
                 {stats.creditsEarned} {stats.creditsEarned === 1 ? "Credit" : "Credits"}
               </div>
-              <span className="text-[10px] text-emerald-600 font-semibold">
+              <span className="text-xs text-emerald-600 font-semibold">
                 Available in your studio wallet
               </span>
             </div>
@@ -244,7 +244,7 @@ export function ReferralDashboardClient({
               <div className="text-lg font-black mt-1 text-foreground">
                 {stats.hasRedeemedWelcomeBonus ? "Claimed (1 Credit)" : "Available to Claim"}
               </div>
-              <span className="text-[10px] text-muted-foreground">
+              <span className="text-xs text-muted-foreground">
                 1 bonus credit per student account
               </span>
             </div>

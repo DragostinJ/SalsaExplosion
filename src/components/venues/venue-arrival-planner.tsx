@@ -171,7 +171,7 @@ export function VenueArrivalPlanner() {
                   }`}
                 >
                   <p className="line-clamp-1">{dest.name}</p>
-                  <p className="text-[10px] text-muted-foreground font-normal">{dest.postcode}</p>
+                  <p className="text-xs text-muted-foreground font-normal">{dest.postcode}</p>
                 </button>
               ))}
             </div>
@@ -194,7 +194,7 @@ export function VenueArrivalPlanner() {
                   <Clock className="h-3.5 w-3.5 text-emerald-300" />
                   <span>Evening Class (After 18:00)</span>
                 </div>
-                <p className="text-[10px] text-emerald-300 font-extrabold mt-0.5">
+                <p className="text-xs text-emerald-300 font-extrabold mt-0.5">
                   Best for Free Parking
                 </p>
               </button>
@@ -212,7 +212,7 @@ export function VenueArrivalPlanner() {
                   <Car className="h-3.5 w-3.5 text-amber-400" />
                   <span>Daytime (Before 18:00)</span>
                 </div>
-                <p className="text-[10px] text-muted-foreground font-normal mt-0.5">
+                <p className="text-xs text-muted-foreground font-normal mt-0.5">
                   Pay & Display Car Parks
                 </p>
               </button>
@@ -230,7 +230,7 @@ export function VenueArrivalPlanner() {
               </span>
             </div>
             <Badge
-              className={`text-[10px] font-black ${
+              className={`text-xs font-black ${
                 activeParking.isFree
                   ? "bg-emerald-700 text-white"
                   : "bg-muted text-muted-foreground"
@@ -303,7 +303,7 @@ export function VenueArrivalPlanner() {
           <div className="rounded-2xl border bg-accent-tangerine/[0.06] border-accent-tangerine/30 p-4 space-y-2 text-xs">
             <div className="flex items-center justify-between">
               <span className="font-bold text-foreground">Studio Desk Hotline & WhatsApp</span>
-              <span className="text-[10px] text-muted-foreground font-semibold">Director Support</span>
+              <span className="text-xs text-muted-foreground font-semibold">Director Support</span>
             </div>
             <p className="text-muted-foreground text-[11px]">
               Need directions or running 5 minutes late for door check-in? Message Maestro Enrique Perez Valdes directly:

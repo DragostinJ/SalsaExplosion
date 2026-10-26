@@ -85,7 +85,7 @@ export function RosterRecapModal({
               onChange={(e) => onVideoUrlChange(e.target.value)}
               className="w-full rounded-xl border bg-background px-3 py-2"
             />
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               Attended students will be able to review this video in their Recaps vault.
             </p>
           </div>

@@ -15,7 +15,7 @@ interface TeacherAvatarProps {
 
 const SIZE_MAP = {
   xs: {
-    container: "h-6 w-6 text-[10px]",
+    container: "h-6 w-6 text-xs",
     image: 24,
     badge: "h-2 w-2 right-0 bottom-0",
   },

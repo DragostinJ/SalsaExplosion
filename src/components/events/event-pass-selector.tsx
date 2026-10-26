@@ -446,7 +446,7 @@ export function EventPassSelector({
                   </p>
                 </div>
                 <div
-                  className={`h-4 w-4 rounded-xs border-2 flex items-center justify-center text-[10px] font-bold ${
+                  className={`h-4 w-4 rounded-xs border-2 flex items-center justify-center text-xs font-bold ${
                     addShirt ? "border-amber-600 bg-amber-600 text-white" : "border-muted-foreground"
                   }`}
                 >
@@ -480,7 +480,7 @@ export function EventPassSelector({
                   </p>
                 </div>
                 <div
-                  className={`h-4 w-4 rounded-xs border-2 flex items-center justify-center text-[10px] font-bold ${
+                  className={`h-4 w-4 rounded-xs border-2 flex items-center justify-center text-xs font-bold ${
                     addMasterclass ? "border-amber-600 bg-amber-600 text-white" : "border-muted-foreground"
                   }`}
                 >

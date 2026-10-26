@@ -46,7 +46,7 @@ export function FloorAmbassadorsCard() {
     <Card className="border border-line bg-surface-1 shadow-xs">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-2">
-          <Badge className="bg-amber-500 text-stone-950 font-bold text-[10px]">
+          <Badge className="bg-amber-500 text-stone-950 font-bold text-xs">
             <Heart className="mr-1 h-3 w-3 fill-zinc-950" />
             Floor Ambassadors
           </Badge>
@@ -78,7 +78,7 @@ export function FloorAmbassadorsCard() {
                     <h4 className="text-xs font-bold truncate text-foreground">
                       {amb.name}
                     </h4>
-                    <p className="text-[10px] text-amber-400 font-semibold truncate">
+                    <p className="text-xs text-amber-400 font-semibold truncate">
                       {amb.role}
                     </p>
                   </div>
@@ -89,7 +89,7 @@ export function FloorAmbassadorsCard() {
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-border/50 text-[10px] text-muted-foreground flex justify-between">
+              <div className="pt-2 border-t border-border/50 text-xs text-muted-foreground flex justify-between">
                 <span>{amb.yearsAtStudio}</span>
                 <span className="font-medium text-foreground">Fav: {amb.favoriteFigure}</span>
               </div>

@@ -80,7 +80,7 @@ export default function Home() {
               <div className="flex items-center gap-2">
                 <Link
                   href="/venues"
-                  className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-stone-300 hover:text-gold transition-colors"
+                  className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-ivory-muted hover:text-gold transition-colors"
                 >
                   {VENUE_INFO.streetAddress.toUpperCase()}, {VENUE_INFO.postcode} →
                 </Link>
@@ -92,14 +92,14 @@ export default function Home() {
               {/* Left Column (7 cols): Editorial Typography & Direct Action */}
               <div className="lg:col-span-7 flex flex-col items-start text-left space-y-5">
                 {/* Monumental Architectural Headline */}
-                <h1 className="text-3xl sm:text-5xl lg:text-[4rem] font-extrabold tracking-tight leading-[1.02] text-ivory uppercase">
+                <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight leading-[1.08] text-ivory">
                   Cuban Salsa &amp; Rueda de Casino
-                  <span className="block text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-stone-300 mt-3 normal-case">
+                  <span className="block font-sans text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-ivory-muted mt-3">
                     In the heart of Bournemouth with Maestro Enrique Perez Valdes.
                   </span>
                 </h1>
 
-                <p className="text-base sm:text-lg text-stone-300 leading-relaxed max-w-xl mt-6">
+                <p className="text-base sm:text-lg text-ivory-muted leading-relaxed max-w-xl mt-6">
                   Directed by Salsa UK Lifetime Achievement Award winner Maestro Enrique Perez Valdes. Join our weekly Thursday and Sunday classes (£12 / £14 at the door) and major Cuban festivals.
                 </p>
 
@@ -128,15 +128,15 @@ export default function Home() {
                 <div className="mt-10 pt-6 border-t border-line grid grid-cols-3 gap-6 w-full">
                   <div>
                     <div className="text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.yearsInUk}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-stone-400 uppercase tracking-wide">{ACADEMY_METRICS.yearsInUkLabel}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.yearsInUkLabel}</div>
                   </div>
                   <div>
                     <div className="text-xl sm:text-2xl font-black text-ivory">{ACADEMY_METRICS.dancersMentored}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-stone-400 uppercase tracking-wide">{ACADEMY_METRICS.dancersMentoredLabel}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.dancersMentoredLabel}</div>
                   </div>
                   <div>
                     <div className="text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.partnerPolicy}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-stone-400 uppercase tracking-wide">{ACADEMY_METRICS.partnerPolicyLabel}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.partnerPolicyLabel}</div>
                   </div>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 text-left z-10">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gold block mb-1">
+                    <span className="text-[11px] font-black uppercase tracking-widest text-gold block mb-1">
                       BOH Studios Bournemouth Residency
                     </span>
                     <p className="text-xs sm:text-sm font-semibold text-stone-200 leading-snug">
@@ -184,7 +184,7 @@ export default function Home() {
                     festivals &amp; congresses
                   </span>
                 </h2>
-                <p className="mt-2 text-xs sm:text-sm text-stone-300">
+                <p className="mt-2 text-xs sm:text-sm text-ivory-muted">
                   Book official online passes for Salsa Explosion flagship congresses, bank holiday weekenders, and costume parties in Bournemouth.
                 </p>
               </div>
@@ -209,15 +209,15 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
+                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-amber-300">
                       SAT 31 OCT 2026
                     </span>
-                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
                       THIS SATURDAY
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
                       From £12
                     </span>
                   </div>
@@ -228,11 +228,11 @@ export default function Home() {
                     <h3 className="text-lg font-black text-white group-hover:text-amber-300 transition-colors leading-snug">
                       Halloween Fancy Dress Latin Party
                     </h3>
-                    <div className="flex items-center gap-1.5 text-xs text-stone-400 mt-1">
+                    <div className="flex items-center gap-1.5 text-xs text-ivory-muted mt-1">
                       <MapPin className="h-3.5 w-3.5 text-amber-400 shrink-0" />
                       <span>BOH Studios Bournemouth</span>
                     </div>
-                    <p className="text-xs text-stone-300 mt-2 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-ivory-muted mt-2 line-clamp-2 leading-relaxed">
                       Cash prizes for best dressed, Cuban Salsa &amp; Bachata workshops, guest maestros, and dancing until 02:00.
                     </p>
                   </div>
@@ -263,12 +263,12 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-2 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-gold">
+                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-gold">
                       SAT 14 NOV 2026
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
                       From £12
                     </span>
                   </div>
@@ -279,11 +279,11 @@ export default function Home() {
                     <h3 className="text-lg font-black text-white group-hover:text-amber-300 transition-colors leading-snug">
                       SB&amp;K Night! Extravaganza
                     </h3>
-                    <div className="flex items-center gap-1.5 text-xs text-stone-400 mt-1">
+                    <div className="flex items-center gap-1.5 text-xs text-ivory-muted mt-1">
                       <MapPin className="h-3.5 w-3.5 text-amber-400 shrink-0" />
                       <span>BOH Studios Bournemouth</span>
                     </div>
-                    <p className="text-xs text-stone-300 mt-2 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-ivory-muted mt-2 line-clamp-2 leading-relaxed">
                       Salsa, Bachata &amp; Kizomba across 2 vibrant rooms. 20:00 workshops followed by Bournemouth&apos;s premier Saturday social.
                     </p>
                   </div>
@@ -314,12 +314,12 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-2 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-gold">
+                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-gold">
                       04 — 06 DEC 2026
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
                       From £20
                     </span>
                   </div>
@@ -330,11 +330,11 @@ export default function Home() {
                     <h3 className="text-lg font-black text-ivory group-hover:text-gold transition-colors leading-snug">
                       MADE IN CUBA — Dance Weekend 2026
                     </h3>
-                    <div className="flex items-center gap-1.5 text-xs text-stone-400 mt-1">
+                    <div className="flex items-center gap-1.5 text-xs text-ivory-muted mt-1">
                       <MapPin className="h-3.5 w-3.5 text-gold shrink-0" />
                       <span>BOH Studios Bournemouth</span>
                     </div>
-                    <p className="text-xs text-stone-300 mt-2 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-ivory-muted mt-2 line-clamp-2 leading-relaxed">
                       3 nights of parties, 2 days of workshops, and dancing until 02:00 across 2 dedicated rooms celebrating 25+ years of Salsa Explosion heritage.
                     </p>
                   </div>
@@ -377,22 +377,22 @@ export default function Home() {
                     <span className="font-display italic font-normal text-gold normal-case">Maestro Enrique Perez Valdes</span>
                   </h2>
 
-                  <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-ivory-muted leading-relaxed">
                     Born and raised in Havana, Cuba, Enrique Perez Valdes brought authentic Cuban Casino and Rueda de Casino to the UK over 25 years ago. Honored with the prestigious <strong>Salsa UK Lifetime Achievement Award</strong>, Enrique has trained over 4,200 dancers and organized Bournemouth&apos;s most celebrated Cuban congresses.
                   </p>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
                     <div className="rounded-xl border border-line bg-surface-2 p-3">
                       <span className="block text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.yearsInUk}</span>
-                      <span className="text-[11px] font-semibold text-stone-400 uppercase tracking-wider">{ACADEMY_METRICS.yearsInUkLabel}</span>
+                      <span className="text-[11px] font-semibold text-ivory-muted uppercase tracking-wider">{ACADEMY_METRICS.yearsInUkLabel}</span>
                     </div>
                     <div className="rounded-xl border border-line bg-surface-2 p-3">
                       <span className="block text-xl sm:text-2xl font-black text-ivory">{ACADEMY_METRICS.dancersMentored}</span>
-                      <span className="text-[11px] font-semibold text-stone-400 uppercase tracking-wider">{ACADEMY_METRICS.dancersMentoredLabel}</span>
+                      <span className="text-[11px] font-semibold text-ivory-muted uppercase tracking-wider">{ACADEMY_METRICS.dancersMentoredLabel}</span>
                     </div>
                     <div className="col-span-2 sm:col-span-1 rounded-xl border border-line bg-surface-2 p-3">
                       <span className="block text-xl sm:text-2xl font-black text-emerald-400">Havana</span>
-                      <span className="text-[11px] font-semibold text-stone-400 uppercase tracking-wider">Roots &amp; Heritage</span>
+                      <span className="text-[11px] font-semibold text-ivory-muted uppercase tracking-wider">Roots &amp; Heritage</span>
                     </div>
                   </div>
 
@@ -415,7 +415,7 @@ export default function Home() {
                       <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-gold/40 overflow-hidden bg-surface-3 flex items-center justify-center text-white shadow-md">
                         <Flame className="h-8 w-8 sm:h-10 sm:w-10 fill-white" />
                       </div>
-                      <div className="absolute -bottom-1 -right-1 rounded-full bg-brand text-white px-1.5 py-0.2 text-[9px] font-black uppercase tracking-wider shadow-xs">
+                      <div className="absolute -bottom-1 -right-1 rounded-full bg-brand text-white px-1.5 py-0.2 text-[11px] font-black uppercase tracking-wider shadow-xs">
                         🇨🇺 Cuba
                       </div>
                     </div>
@@ -426,7 +426,7 @@ export default function Home() {
                       <p className="text-xs font-bold text-gold">
                         Havana Master Instructor • UK Pioneer
                       </p>
-                      <span className="text-[11px] font-semibold text-stone-400 block mt-0.5">
+                      <span className="text-[11px] font-semibold text-ivory-muted block mt-0.5">
                         Director, Salsa Explosion UK
                       </span>
                     </div>
@@ -434,15 +434,15 @@ export default function Home() {
 
                   <div className="space-y-2 text-xs">
                     <div className="flex items-center justify-between py-1 border-b border-line">
-                      <span className="font-semibold text-stone-400">Specialties</span>
+                      <span className="font-semibold text-ivory-muted">Specialties</span>
                       <span className="font-bold text-ivory">Casino • Rueda • Timba • Son</span>
                     </div>
                     <div className="flex items-center justify-between py-1 border-b border-line">
-                      <span className="font-semibold text-stone-400">Experience</span>
+                      <span className="font-semibold text-ivory-muted">Experience</span>
                       <span className="font-bold text-ivory">{ACADEMY_METRICS.yearsInUk} {ACADEMY_METRICS.yearsInUkLabel}</span>
                     </div>
                     <div className="flex items-center justify-between py-1">
-                      <span className="font-semibold text-stone-400">Recognition</span>
+                      <span className="font-semibold text-ivory-muted">Recognition</span>
                       <span className="font-extrabold text-gold">Salsa UK Lifetime Award</span>
                     </div>
                   </div>

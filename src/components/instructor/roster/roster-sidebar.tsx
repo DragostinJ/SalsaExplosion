@@ -46,7 +46,7 @@ export function RosterSidebar({
               }`}
             >
               <div className="flex items-center justify-between gap-2 mb-1.5">
-                <Badge variant="secondary" className="text-[10px] font-bold">
+                <Badge variant="secondary" className="text-xs font-bold">
                   {cls.minLevel}
                 </Badge>
                 <span className="text-[11px] font-semibold text-emerald-400">

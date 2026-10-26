@@ -227,8 +227,8 @@ export function LiveQrCameraScanner({
                 />
 
                 {!cameraActive && isSupported && (
-                  <div className="text-center p-4 text-xs text-stone-400">
-                    <Camera className="h-8 w-8 mx-auto mb-2 text-stone-500 animate-pulse" />
+                  <div className="text-center p-4 text-xs text-ivory-muted">
+                    <Camera className="h-8 w-8 mx-auto mb-2 text-ivory-muted animate-pulse" />
                     Starting camera stream...
                   </div>
                 )}
@@ -239,7 +239,7 @@ export function LiveQrCameraScanner({
                 </div>
               </div>
 
-              <div className="flex items-center justify-between text-[11px] text-stone-400">
+              <div className="flex items-center justify-between text-[11px] text-ivory-muted">
                 <span>Align student&apos;s phone QR inside box</span>
                 <button
                   type="button"

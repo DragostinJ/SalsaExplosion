@@ -54,7 +54,7 @@ export function WhyCubanSection() {
               So Addictive?
             </span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-stone-300 leading-relaxed">
+          <p className="mt-3 text-xs sm:text-sm text-ivory-muted leading-relaxed">
             Whether you are taking your very first dance step tonight or you already dance other styles and want to add authentic Cuban flavour to your repertoire—everyone is welcome in our circle.
           </p>
         </div>
@@ -89,7 +89,7 @@ export function WhyCubanSection() {
                 </h3>
 
                 {/* 4. Concise 2-Sentence Paragraph */}
-                <p className="text-stone-300 text-sm leading-relaxed mb-6 font-normal">
+                <p className="text-ivory-muted text-sm leading-relaxed mb-6 font-normal">
                   {card.description}
                 </p>
               </div>

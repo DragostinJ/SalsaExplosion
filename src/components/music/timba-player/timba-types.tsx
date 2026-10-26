@@ -22,7 +22,7 @@ export const THEME_STYLES: Record<
 > = {
   slate: {
     bgActive: "bg-stone-800/80 border-stone-500/50 text-stone-100",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
+    bgInactive: "bg-surface-3 text-ivory-muted border-line hover:bg-surface-2 hover:text-stone-200",
     border: "border-stone-500/40",
     text: "text-stone-100 font-bold",
     badge: "border-stone-500/40 bg-stone-800/80 text-stone-200 font-bold",
@@ -30,7 +30,7 @@ export const THEME_STYLES: Record<
   },
   blue: {
     bgActive: "bg-sky-950/60 border-sky-500/40 text-sky-200",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
+    bgInactive: "bg-surface-3 text-ivory-muted border-line hover:bg-surface-2 hover:text-stone-200",
     border: "border-sky-500/40",
     text: "text-sky-200 font-bold",
     badge: "border-sky-500/40 bg-sky-950/60 text-sky-200 font-bold",
@@ -38,7 +38,7 @@ export const THEME_STYLES: Record<
   },
   emerald: {
     bgActive: "bg-emerald-950/60 border-emerald-500/40 text-emerald-200",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
+    bgInactive: "bg-surface-3 text-ivory-muted border-line hover:bg-surface-2 hover:text-stone-200",
     border: "border-emerald-500/40",
     text: "text-emerald-200 font-bold",
     badge: "border-emerald-500/40 bg-emerald-950/60 text-emerald-200 font-bold",
@@ -46,7 +46,7 @@ export const THEME_STYLES: Record<
   },
   amber: {
     bgActive: "bg-amber-950/60 border-amber-500/40 text-amber-200",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
+    bgInactive: "bg-surface-3 text-ivory-muted border-line hover:bg-surface-2 hover:text-stone-200",
     border: "border-amber-500/40",
     text: "text-amber-200 font-bold",
     badge: "border-amber-500/40 bg-amber-950/60 text-amber-200 font-bold",
@@ -54,7 +54,7 @@ export const THEME_STYLES: Record<
   },
   purple: {
     bgActive: "bg-surface-2 border-gold/40 text-gold",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
+    bgInactive: "bg-surface-3 text-ivory-muted border-line hover:bg-surface-2 hover:text-stone-200",
     border: "border-gold/40",
     text: "text-gold font-bold",
     badge: "border-gold/40 bg-surface-2 text-gold font-bold",
@@ -62,7 +62,7 @@ export const THEME_STYLES: Record<
   },
   red: {
     bgActive: "bg-rose-950/60 border-rose-500/40 text-rose-200",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
+    bgInactive: "bg-surface-3 text-ivory-muted border-line hover:bg-surface-2 hover:text-stone-200",
     border: "border-rose-500/40",
     text: "text-rose-200 font-bold",
     badge: "border-rose-500/40 bg-rose-950/60 text-rose-200 font-bold",

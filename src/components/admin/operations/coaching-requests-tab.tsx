@@ -51,7 +51,7 @@ export function CoachingRequestsTab({
                       </CardTitle>
                       <p className="text-[11px] text-muted-foreground">{b.student.email}</p>
                     </div>
-                    <StatusBadge tone={coachingStatusTone(b.status)} className="text-[10px]">
+                    <StatusBadge tone={coachingStatusTone(b.status)} className="text-xs">
                       {b.status}
                     </StatusBadge>
                   </div>

@@ -224,7 +224,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
                       />
                     </div>
 
-                    <span className="mt-2 text-[11px] font-medium text-stone-400">
+                    <span className="mt-2 text-[11px] font-medium text-ivory-muted">
                       {item.month}
                     </span>
                   </div>

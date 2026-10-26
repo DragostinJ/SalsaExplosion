@@ -318,7 +318,7 @@ export function ClaveTrainerClient() {
                   <span className="text-3xl font-black">{beat.count}</span>
 
                   <span
-                    className={`text-[10px] leading-tight font-bold mt-1 ${
+                    className={`text-xs leading-tight font-bold mt-1 ${
                       isActive ? "text-stone-950" : "text-muted-foreground"
                     }`}
                   >
@@ -326,7 +326,7 @@ export function ClaveTrainerClient() {
                   </span>
 
                   <span
-                    className={`text-[9px] uppercase tracking-widest mt-1 px-1.5 py-0.5 rounded ${
+                    className={`text-[11px] uppercase tracking-widest mt-1 px-1.5 py-0.5 rounded ${
                       beat.isDanceStep
                         ? isActive
                           ? "bg-stone-950 text-amber-400 font-extrabold"
@@ -402,7 +402,7 @@ export function ClaveTrainerClient() {
                   onChange={(e) => setTempo(Number(e.target.value))}
                   className="w-full accent-amber-600 cursor-pointer"
                 />
-                <div className="flex justify-between text-[9px] text-muted-foreground">
+                <div className="flex justify-between text-xs text-muted-foreground">
                   <span>75 (Drill)</span>
                   <span>90 (Casino)</span>
                   <span>115 (Timba)</span>

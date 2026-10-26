@@ -35,7 +35,7 @@ export function BeginnerSafetyHub() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-[10px]">
+              <Badge className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-xs">
                 <Heart className="mr-1 h-3 w-3 fill-emerald-300" />
                 First-Timer &amp; Beginner Zone
               </Badge>

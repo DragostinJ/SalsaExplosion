@@ -157,10 +157,10 @@ export function StudioOperationsWorkspace({
       >
         <Card className="rounded-2xl border border-border/80 bg-card p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
+            <span className="text-[11px] uppercase font-bold tracking-wider text-muted-foreground">
               Pending Coaching Revenue
             </span>
-            <Badge variant="outline" className="text-[10px] font-mono">
+            <Badge variant="outline" className="text-xs font-mono">
               {pendingCoachingCount} Pending
             </Badge>
           </div>
@@ -176,10 +176,10 @@ export function StudioOperationsWorkspace({
 
         <Card className="rounded-2xl border border-border/80 bg-card p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
+            <span className="text-[11px] uppercase font-bold tracking-wider text-muted-foreground">
               Merch Collection Due
             </span>
-            <Badge variant="outline" className="text-[10px] font-mono">
+            <Badge variant="outline" className="text-xs font-mono">
               {pendingMerchCount} Reserved
             </Badge>
           </div>
@@ -195,10 +195,10 @@ export function StudioOperationsWorkspace({
 
         <Card className="rounded-2xl border border-border/80 bg-card p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
+            <span className="text-[11px] uppercase font-bold tracking-wider text-muted-foreground">
               Partner Waitlist Queue
             </span>
-            <Badge className="bg-amber-500 text-stone-950 text-[10px] font-bold">
+            <Badge className="bg-amber-500 text-stone-950 text-xs font-bold">
               {waitingWaitlistCount} Waiting
             </Badge>
           </div>
@@ -221,13 +221,13 @@ export function StudioOperationsWorkspace({
           className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             activeTab === "coaching"
               ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-              : "bg-surface-1 text-stone-400 hover:bg-surface-2 hover:text-ivory"
+              : "bg-surface-1 text-ivory-muted hover:bg-surface-2 hover:text-ivory"
           }`}
         >
           <CalendarPlus className="h-4 w-4" />
           <span>Private Coaching</span>
           {pendingCoachingCount > 0 && (
-            <Badge className="bg-rose-600 text-white text-[10px] h-4 px-1.5 font-bold">
+            <Badge className="bg-rose-600 text-white text-xs h-4 px-1.5 font-bold">
               {pendingCoachingCount}
             </Badge>
           )}
@@ -239,13 +239,13 @@ export function StudioOperationsWorkspace({
           className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             activeTab === "merch"
               ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-              : "bg-surface-1 text-stone-400 hover:bg-surface-2 hover:text-ivory"
+              : "bg-surface-1 text-ivory-muted hover:bg-surface-2 hover:text-ivory"
           }`}
         >
           <ShoppingBag className="h-4 w-4" />
           <span>Click & Collect Merch</span>
           {pendingMerchCount > 0 && (
-            <Badge className="bg-rose-600 text-white text-[10px] h-4 px-1.5 font-bold">
+            <Badge className="bg-rose-600 text-white text-xs h-4 px-1.5 font-bold">
               {pendingMerchCount}
             </Badge>
           )}
@@ -257,13 +257,13 @@ export function StudioOperationsWorkspace({
           className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             activeTab === "waitlist"
               ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-              : "bg-surface-1 text-stone-400 hover:bg-surface-2 hover:text-ivory"
+              : "bg-surface-1 text-ivory-muted hover:bg-surface-2 hover:text-ivory"
           }`}
         >
           <Users className="h-4 w-4" />
           <span>Partner Waitlist</span>
           {waitingWaitlistCount > 0 && (
-            <Badge className="bg-amber-600 text-white text-[10px] h-4 px-1.5 font-bold">
+            <Badge className="bg-amber-600 text-white text-xs h-4 px-1.5 font-bold">
               {waitingWaitlistCount}
             </Badge>
           )}
@@ -275,13 +275,13 @@ export function StudioOperationsWorkspace({
           className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             activeTab === "qa"
               ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-              : "bg-surface-1 text-stone-400 hover:bg-surface-2 hover:text-ivory"
+              : "bg-surface-1 text-ivory-muted hover:bg-surface-2 hover:text-ivory"
           }`}
         >
           <MessageSquare className="h-4 w-4" />
           <span>Beginner Sentiment & Q&A</span>
           {unansweredQCount > 0 && (
-            <Badge className="bg-blue-600 text-white text-[10px] h-4 px-1.5 font-bold">
+            <Badge className="bg-blue-600 text-white text-xs h-4 px-1.5 font-bold">
               {unansweredQCount}
             </Badge>
           )}

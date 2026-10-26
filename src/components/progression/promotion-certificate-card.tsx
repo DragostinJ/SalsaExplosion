@@ -57,7 +57,7 @@ export function PromotionCertificateCard({
             </div>
 
             <div>
-              <p className="text-xs uppercase tracking-widest text-stone-400 font-semibold">
+              <p className="text-xs uppercase tracking-widest text-ivory-muted font-semibold">
                 Official Cuban Salsa & Rueda Tier
               </p>
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mt-0.5 flex items-center gap-2.5">
@@ -68,7 +68,7 @@ export function PromotionCertificateCard({
               </h2>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 text-xs text-stone-300">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-ivory-muted">
               <span className="inline-flex items-center gap-1 font-semibold">
                 <Sparkles className="h-3.5 w-3.5 text-gold" />
                 Role: {preferredRole}
@@ -135,7 +135,7 @@ export function PromotionCertificateCard({
               <button
                 type="button"
                 onClick={() => setShowStoryModal(false)}
-                className="rounded-full bg-surface-3 p-1.5 text-stone-300 hover:bg-surface-1 hover:text-white"
+                className="rounded-full bg-surface-3 p-1.5 text-ivory-muted hover:bg-surface-1 hover:text-white"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -152,7 +152,7 @@ export function PromotionCertificateCard({
                     Ritmo<span className="text-gold">Flow</span>
                   </span>
                 </div>
-                <Badge className="bg-gold/20 text-gold border border-gold/40 text-[10px]">
+                <Badge className="bg-gold/20 text-gold border border-gold/40 text-xs">
                   VERIFIED PASSPORT
                 </Badge>
               </div>
@@ -163,7 +163,7 @@ export function PromotionCertificateCard({
                 </div>
 
                 <div className="space-y-1">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-gold">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-gold">
                     Official Level Unlocked
                   </p>
                   <h3 className="text-2xl font-black tracking-tight">
@@ -175,15 +175,15 @@ export function PromotionCertificateCard({
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-3 text-[11px] space-y-1">
-                  <div className="flex justify-between text-stone-400">
+                  <div className="flex justify-between text-ivory-muted">
                     <span>Style</span>
                     <span className="font-bold text-white">Cuban Casino & Rueda</span>
                   </div>
-                  <div className="flex justify-between text-stone-400">
+                  <div className="flex justify-between text-ivory-muted">
                     <span>Partner Role</span>
                     <span className="font-bold text-gold">{preferredRole}</span>
                   </div>
-                  <div className="flex justify-between text-stone-400">
+                  <div className="flex justify-between text-ivory-muted">
                     <span>Mastery Checks</span>
                     <span className="font-bold text-emerald-400">
                       {approvedCount} Verified
@@ -193,10 +193,10 @@ export function PromotionCertificateCard({
               </div>
 
               <div className="text-center space-y-1 border-t border-white/10 pt-3">
-                <p className="text-[10px] font-semibold text-stone-300">
-                  Come dance with us this week! 💃🕺
+                <p className="text-xs font-semibold text-ivory-muted">
+                  Come dance with us this week!
                 </p>
-                <p className="text-[9px] text-gold/90 font-mono">
+                <p className="text-xs text-gold/90 font-mono">
                   salsaexplosion.co.uk • #LaRuedaNoPara
                 </p>
               </div>

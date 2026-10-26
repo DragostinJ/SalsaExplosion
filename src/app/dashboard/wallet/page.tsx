@@ -97,7 +97,7 @@ export default async function StudentWalletPage() {
                       {tier.shortLabel}
                     </span>
                     {tier.popular && (
-                      <Badge className="bg-amber-500 text-black text-[10px] font-black">
+                      <Badge className="bg-amber-500 text-black text-xs font-black">
                         Best Value
                       </Badge>
                     )}
@@ -226,7 +226,7 @@ export default async function StudentWalletPage() {
         actions={
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="rounded-xl border border-line bg-surface-2 p-3 text-center min-w-[120px] shadow-xs">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-ivory-muted block">
                 Available Credits
               </span>
               <div className="text-2xl font-black text-ivory mt-0.5">
@@ -282,7 +282,7 @@ export default async function StudentWalletPage() {
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <Badge className="bg-amber-600 text-white text-[10px] font-bold mb-1">
+                      <Badge className="bg-amber-600 text-white text-xs font-bold mb-1">
                         {reg.ticketTier.name}
                       </Badge>
                       <h3 className="font-bold text-sm text-foreground">
@@ -291,7 +291,7 @@ export default async function StudentWalletPage() {
                     </div>
                     <StatusBadge
                       tone={reg.checkedIn ? "success" : "info"}
-                      className="text-[10px]"
+                      className="text-xs"
                     >
                       {reg.checkedIn ? "Checked In" : `Role: ${reg.role}`}
                     </StatusBadge>
@@ -321,7 +321,7 @@ export default async function StudentWalletPage() {
                       className="p-1 rounded-lg border-none shadow-none"
                     />
                     <div>
-                      <span className="text-[10px] uppercase font-bold text-muted-foreground block">
+                      <span className="text-[11px] uppercase font-bold text-muted-foreground block">
                         Verified Door Pass Hash
                       </span>
                       <span className="font-mono text-xs font-black text-foreground">
@@ -329,7 +329,7 @@ export default async function StudentWalletPage() {
                       </span>
                     </div>
                   </div>
-                  <Badge variant="outline" className="text-[10px] font-semibold shrink-0">
+                  <Badge variant="outline" className="text-xs font-semibold shrink-0">
                     Door Scanner
                   </Badge>
                 </div>
@@ -382,8 +382,8 @@ export default async function StudentWalletPage() {
                       <Badge
                         className={
                           b.danceRole === "LEAD"
-                            ? "bg-role-lead text-stone-950 text-[10px] font-bold"
-                            : "bg-role-follow text-stone-950 text-[10px] font-bold"
+                            ? "bg-role-lead text-stone-950 text-xs font-bold"
+                            : "bg-role-follow text-stone-950 text-xs font-bold"
                         }
                       >
                         Role: {b.danceRole}
@@ -460,7 +460,7 @@ export default async function StudentWalletPage() {
                       {item.size ? `Size ${item.size} • ` : ""}£{item.pricePounds}.00
                     </span>
                   </div>
-                  <Badge variant="secondary" className="text-[10px] font-bold">
+                  <Badge variant="secondary" className="text-xs font-bold">
                     Desk Pickup
                   </Badge>
                 </div>
@@ -512,7 +512,7 @@ export default async function StudentWalletPage() {
                   </div>
                   <StatusBadge
                     tone={coachingStatusTone(l.status)}
-                    className="text-[10px]"
+                    className="text-xs"
                   >
                     {l.status}
                   </StatusBadge>
@@ -546,7 +546,7 @@ export default async function StudentWalletPage() {
                     <span className="font-semibold text-foreground block">
                       {tx.description || tx.type}
                     </span>
-                    <span className="text-[10px] text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                       {new Intl.DateTimeFormat("en-GB", {
                         day: "numeric",
                         month: "short",
@@ -563,7 +563,7 @@ export default async function StudentWalletPage() {
                     >
                       {tx.amount > 0 ? `+${tx.amount}` : tx.amount} Credits
                     </span>
-                    <span className="text-[10px] text-muted-foreground block">
+                    <span className="text-xs text-muted-foreground block">
                       Balance: {tx.balanceAfter}
                     </span>
                   </div>

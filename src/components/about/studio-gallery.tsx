@@ -130,15 +130,15 @@ export function StudioGallery() {
             {/* Bottom Caption Info */}
             <div className="absolute inset-x-0 bottom-0 p-4 text-white space-y-1">
               <div className="flex items-center justify-between">
-                <Badge className="bg-amber-500 text-stone-950 font-bold text-[10px]">
+                <Badge className="bg-amber-500 text-stone-950 font-bold text-xs">
                   {photo.category.replace("_", " ")}
                 </Badge>
-                <span className="text-[11px] text-stone-300 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-[11px] text-ivory-muted flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Eye className="h-3 w-3" /> Click to view
                 </span>
               </div>
               <h3 className="text-sm font-extrabold line-clamp-1">{photo.title}</h3>
-              <p className="text-[11px] text-stone-300 line-clamp-2 leading-relaxed">
+              <p className="text-[11px] text-ivory-muted line-clamp-2 leading-relaxed">
                 {photo.caption}
               </p>
             </div>
@@ -186,12 +186,12 @@ export function StudioGallery() {
                 <Badge className="bg-amber-500 text-stone-950 font-bold text-xs">
                   {activePhoto.category.replace("_", " ")}
                 </Badge>
-                <span className="text-xs text-stone-400">
+                <span className="text-xs text-ivory-muted">
                   📍 {activePhoto.location}
                 </span>
               </div>
               <h4 className="text-lg font-extrabold">{activePhoto.title}</h4>
-              <p className="text-xs text-stone-300 leading-relaxed max-w-3xl">
+              <p className="text-xs text-ivory-muted leading-relaxed max-w-3xl">
                 {activePhoto.caption}
               </p>
             </div>

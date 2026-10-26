@@ -95,7 +95,7 @@ export function QuickBookDrawer() {
           <button
             type="button"
             onClick={() => setIsOpen(false)}
-            className="rounded-full p-1.5 text-stone-400 hover:text-ivory hover:bg-surface-3 transition-colors"
+            className="rounded-full p-1.5 text-ivory-muted hover:text-ivory hover:bg-surface-3 transition-colors"
             aria-label="Close booking drawer"
           >
             <X className="h-5 w-5" />
@@ -109,13 +109,13 @@ export function QuickBookDrawer() {
               <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-wider">
                 <span className="text-gold">{session.time}</span>
                 {session.level && (
-                  <span className="bg-surface-2 text-gold px-2 py-0.5 rounded-full text-[9px] border border-line">
+                  <span className="bg-surface-2 text-gold px-2 py-0.5 rounded-full text-xs border border-line">
                     {session.level}
                   </span>
                 )}
               </div>
               <h4 className="text-base font-black text-ivory">{session.title}</h4>
-              <div className="flex items-center justify-between text-xs text-stone-300 pt-1">
+              <div className="flex items-center justify-between text-xs text-ivory-muted pt-1">
                 <span>{session.instructor ? `Directed by ${session.instructor}` : "Salsa Explosion Team"}</span>
                 <span className="font-bold text-gold">BOH Studios Bournemouth</span>
               </div>
@@ -123,7 +123,7 @@ export function QuickBookDrawer() {
 
             {/* Step 1: Role Selection & Live Balance Meter */}
             <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-wider text-stone-300">
+              <label className="text-xs font-black uppercase tracking-wider text-ivory-muted">
                 ROLE SELECTION
               </label>
               <div className="grid grid-cols-2 gap-2.5">
@@ -133,11 +133,11 @@ export function QuickBookDrawer() {
                   className={`p-3 rounded-xl border text-left transition-all ${
                     role === "lead"
                       ? "border-role-lead bg-role-lead-soft text-ivory shadow-xs"
-                      : "border-line bg-surface-3 text-stone-400 hover:text-ivory hover:bg-surface-1"
+                      : "border-line bg-surface-3 text-ivory-muted hover:text-ivory hover:bg-surface-1"
                   }`}
                 >
                   <div className="text-sm font-black">LEAD • Lead Partner</div>
-                  <div className="text-[10px] text-role-lead font-semibold mt-0.5">Spot Open</div>
+                  <div className="text-xs text-role-lead font-semibold mt-0.5">Spot Open</div>
                 </button>
                 <button
                   type="button"
@@ -145,11 +145,11 @@ export function QuickBookDrawer() {
                   className={`p-3 rounded-xl border text-left transition-all ${
                     role === "follow"
                       ? "border-role-follow bg-role-follow-soft text-ivory shadow-xs"
-                      : "border-line bg-surface-3 text-stone-400 hover:text-ivory hover:bg-surface-1"
+                      : "border-line bg-surface-3 text-ivory-muted hover:text-ivory hover:bg-surface-1"
                   }`}
                 >
                   <div className="text-sm font-black">FOLLOW • Follow Partner</div>
-                  <div className="text-[10px] text-role-follow font-semibold mt-0.5">Spot Open</div>
+                  <div className="text-xs text-role-follow font-semibold mt-0.5">Spot Open</div>
                 </button>
               </div>
 
@@ -168,7 +168,7 @@ export function QuickBookDrawer() {
 
             {/* Step 2: Entry Tier Selection */}
             <div className="space-y-2">
-              <label className="text-xs font-black uppercase tracking-wider text-stone-300">
+              <label className="text-xs font-black uppercase tracking-wider text-ivory-muted">
                 PASS OPTION
               </label>
               <div className="space-y-2">
@@ -178,17 +178,17 @@ export function QuickBookDrawer() {
                   className={`w-full p-3 rounded-xl border text-left flex items-center justify-between transition-all ${
                     tier === "trial"
                       ? "border-gold bg-gold/20 text-ivory"
-                      : "border-line bg-surface-3 text-stone-300 hover:border-gold/30 hover:bg-surface-1"
+                      : "border-line bg-surface-3 text-ivory-muted hover:border-gold/30 hover:bg-surface-1"
                   }`}
                 >
                   <div>
                     <div className="text-xs font-black flex items-center gap-1.5">
                       <span>FIRST-TIMER TRIAL (£0)</span>
-                      <span className="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300">
+                      <span className="text-[11px] font-black uppercase px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300">
                         FREE
                       </span>
                     </div>
-                    <div className="text-[10px] text-stone-400">Valid for new local dancers</div>
+                    <div className="text-xs text-ivory-muted">Valid for new local dancers</div>
                   </div>
                   <span className="text-xs font-black text-gold">Claim Trial</span>
                 </button>
@@ -199,12 +199,12 @@ export function QuickBookDrawer() {
                   className={`w-full p-3 rounded-xl border text-left flex items-center justify-between transition-all ${
                     tier === "dropin"
                       ? "border-gold bg-gold/20 text-ivory"
-                      : "border-line bg-surface-3 text-stone-300 hover:border-gold/30 hover:bg-surface-1"
+                      : "border-line bg-surface-3 text-ivory-muted hover:border-gold/30 hover:bg-surface-1"
                   }`}
                 >
                   <div>
                     <div className="text-xs font-black">SINGLE DROP-IN (£12)</div>
-                    <div className="text-[10px] text-stone-400">Includes evening classes + social fiesta</div>
+                    <div className="text-xs text-ivory-muted">Includes evening classes + social fiesta</div>
                   </div>
                   <span className="text-xs font-black text-gold">£12 Drop-In</span>
                 </button>
@@ -215,17 +215,17 @@ export function QuickBookDrawer() {
                   className={`w-full p-3 rounded-xl border text-left flex items-center justify-between transition-all ${
                     tier === "pack"
                       ? "border-gold bg-gold/20 text-ivory"
-                      : "border-line bg-surface-3 text-stone-300 hover:border-gold/30 hover:bg-surface-1"
+                      : "border-line bg-surface-3 text-ivory-muted hover:border-gold/30 hover:bg-surface-1"
                   }`}
                 >
                   <div>
                     <div className="text-xs font-black flex items-center gap-1.5">
                       <span>5-CLASS PACK (£40)</span>
-                      <span className="text-[9px] font-black uppercase px-1.5 py-0.2 rounded bg-gold text-stone-950 font-bold">
+                      <span className="text-[11px] font-black uppercase px-1.5 py-0.2 rounded bg-gold text-stone-950 font-bold">
                         SAVE 20%
                       </span>
                     </div>
-                    <div className="text-[10px] text-stone-400">£8 per session • Valid 60 days</div>
+                    <div className="text-xs text-ivory-muted">£8 per session • Valid 60 days</div>
                   </div>
                   <span className="text-xs font-black text-gold">£40</span>
                 </button>
@@ -235,7 +235,7 @@ export function QuickBookDrawer() {
             {/* Attendee Name Input */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between text-xs">
-                <label className="font-bold text-stone-300">Attendee Name (For Door Check-In)</label>
+                <label className="font-bold text-ivory-muted">Attendee Name (For Door Check-In)</label>
                 <button
                   type="button"
                   onClick={() => setUserName("Alex Rivera")}
@@ -249,7 +249,7 @@ export function QuickBookDrawer() {
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 placeholder="Enter your name"
-                className="w-full h-11 px-3.5 rounded-xl border border-line bg-surface-3 text-ivory placeholder:text-stone-500 text-sm focus:outline-hidden focus:border-gold"
+                className="w-full h-11 px-3.5 rounded-xl border border-line bg-surface-3 text-ivory placeholder:text-ivory-muted text-sm focus:outline-hidden focus:border-gold"
               />
             </div>
 
@@ -269,7 +269,7 @@ export function QuickBookDrawer() {
               {/* Top Perforation Notches */}
               <div className="flex items-center justify-between border-b border-line pb-3">
                 <div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-success">
+                  <span className="text-[11px] font-black uppercase tracking-widest text-success">
                     CONFIRMED RESERVATION
                   </span>
                   <h4 className="text-lg font-black text-ivory">{session.title}</h4>
@@ -310,11 +310,11 @@ export function QuickBookDrawer() {
                 <div className="space-y-1.5 text-xs text-center sm:text-left">
                   <div className="font-mono text-xs font-bold text-gold">{passCode}</div>
                   <div className="font-bold text-ivory text-sm">{userName || "Guest Dancer"}</div>
-                  <div className="text-stone-400 flex items-center justify-center sm:justify-start gap-1">
+                  <div className="text-ivory-muted flex items-center justify-center sm:justify-start gap-1">
                     <Clock className="h-3 w-3 text-gold" />
                     <span>{session.time} • BOH Studios Doors Open</span>
                   </div>
-                  <div className="text-stone-400 flex items-center justify-center sm:justify-start gap-1">
+                  <div className="text-ivory-muted flex items-center justify-center sm:justify-start gap-1">
                     <MapPin className="h-3 w-3 text-gold" />
                     <span>104 Commercial Rd, Bournemouth</span>
                   </div>
@@ -322,7 +322,7 @@ export function QuickBookDrawer() {
               </div>
 
               {/* Perforated Hairline Divider */}
-              <div className="border-t border-dashed border-line pt-3 flex items-center justify-between text-[11px] text-stone-400 font-medium">
+              <div className="border-t border-dashed border-line pt-3 flex items-center justify-between text-[11px] text-ivory-muted font-medium">
                 <span>Pass tier: <strong>{tier.toUpperCase()}</strong></span>
                 <span>Maestro Enrique Perez Valdes</span>
               </div>
@@ -352,7 +352,7 @@ export function QuickBookDrawer() {
                   type="button"
                   variant="ghost"
                   onClick={() => setIsOpen(false)}
-                  className="h-10 text-xs font-semibold text-stone-400 hover:text-ivory"
+                  className="h-10 text-xs font-semibold text-ivory-muted hover:text-ivory"
                 >
                   Done
                 </Button>

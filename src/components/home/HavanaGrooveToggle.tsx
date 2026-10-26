@@ -383,10 +383,10 @@ export function HavanaGrooveToggle() {
                 type="button"
                 onClick={() => switchMode("son-clave")}
                 aria-pressed={mode === "son-clave"}
-                className={`text-[10px] font-semibold px-2 py-0.5 rounded-md transition-colors ${
+                className={`text-xs font-semibold px-2 py-0.5 rounded-md transition-colors ${
                   mode === "son-clave"
                     ? "bg-amber-500/25 text-amber-200 border border-amber-400/50 shadow-sm"
-                    : "text-stone-400 hover:text-stone-200 hover:bg-white/5"
+                    : "text-ivory-muted hover:text-stone-200 hover:bg-white/5"
                 }`}
               >
                 Son Clave
@@ -395,10 +395,10 @@ export function HavanaGrooveToggle() {
                 type="button"
                 onClick={() => switchMode("guaguanco")}
                 aria-pressed={mode === "guaguanco"}
-                className={`text-[10px] font-semibold px-2 py-0.5 rounded-md transition-colors flex items-center gap-1 ${
+                className={`text-xs font-semibold px-2 py-0.5 rounded-md transition-colors flex items-center gap-1 ${
                   mode === "guaguanco"
                     ? "bg-amber-500/25 text-amber-200 border border-amber-400/50 shadow-sm"
-                    : "text-stone-400 hover:text-stone-200 hover:bg-white/5"
+                    : "text-ivory-muted hover:text-stone-200 hover:bg-white/5"
                 }`}
               >
                 <Sparkles className="h-2.5 w-2.5 text-amber-400" />
@@ -412,7 +412,7 @@ export function HavanaGrooveToggle() {
             type="button"
             onClick={stopGroove}
             aria-label="Pause rhythm"
-            className="p-1.5 rounded-full text-stone-400 hover:text-amber-300 hover:bg-white/10 transition-colors shrink-0 ml-1"
+            className="p-1.5 rounded-full text-ivory-muted hover:text-amber-300 hover:bg-white/10 transition-colors shrink-0 ml-1"
           >
             <Pause className="h-4 w-4" />
           </button>

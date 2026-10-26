@@ -221,7 +221,7 @@ export function PricingCards({
                 </div>
                 <CardDescription
                   className={`text-xs leading-relaxed ${
-                    isParchment ? "text-stone-300 font-medium" : ""
+                    isParchment ? "text-ivory-muted font-medium" : ""
                   }`}
                 >
                   {pkg.description}

@@ -229,7 +229,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               <span className="text-lg font-black leading-none tracking-tight">
                 Salsa <span className="text-rose-400">Explosion</span>
               </span>
-              <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
+              <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
                 Bournemouth • Cuba
               </span>
             </div>
@@ -265,7 +265,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                 <div className="h-4 w-px bg-line mx-0.5 shrink-0" />
 
                 <div className="flex items-center gap-1 rounded-xl border border-gold/30 bg-gold/10 p-1 shrink-0">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-gold px-1 hidden 2xl:inline">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-gold px-1 hidden 2xl:inline">
                     Admin:
                   </span>
                   {adminLinks.map((item) => {
@@ -327,7 +327,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                 <div className="h-4 w-px bg-line mx-1" />
 
                 <div className="flex items-center gap-1 rounded-xl border border-secondary-base/30 bg-secondary-base/[0.08] px-2 py-1 shrink-0">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-secondary-base px-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-secondary-base px-1">
                     Teacher:
                   </span>
                   {instructorLinks.map((item) => {

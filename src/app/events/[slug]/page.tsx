@@ -360,7 +360,7 @@ export default async function EventDetailPage({
                       Classes &amp; Welcome Party
                     </p>
                     <div className="pt-1">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
                         <MapPin className="h-2.5 w-2.5" /> BOH Studios Bournemouth
                       </span>
                     </div>
@@ -378,7 +378,7 @@ export default async function EventDetailPage({
                       Classes, 2 Shows &amp; 2-Room Party
                     </p>
                     <div className="pt-1">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
                         <MapPin className="h-2.5 w-2.5" /> BOH Studios
                       </span>
                     </div>
@@ -395,7 +395,7 @@ export default async function EventDetailPage({
                       Classes &amp; Social Dancing Finale
                     </p>
                     <div className="pt-1">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                      <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
                         <MapPin className="h-2.5 w-2.5" /> BOH Studios
                       </span>
                     </div>

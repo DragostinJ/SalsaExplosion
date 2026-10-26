@@ -35,7 +35,7 @@ export function TimbaBeatBar({ isPlaying, currentDancerBeat }: TimbaBeatBarProps
                   ? "border border-rose-500/40 bg-rose-500/20 text-rose-300"
                   : isSonOn2
                   ? "border border-sky-500/40 bg-sky-500/20 text-sky-300"
-                  : "border border-line bg-surface-1 text-stone-400"
+                  : "border border-line bg-surface-1 text-ivory-muted"
               }`}
               title={
                 isBreakOn1
@@ -51,7 +51,7 @@ export function TimbaBeatBar({ isPlaying, currentDancerBeat }: TimbaBeatBarProps
         })}
       </div>
 
-      <span className="text-[10px] text-stone-400 font-medium hidden lg:inline">
+      <span className="text-xs text-ivory-muted font-medium hidden lg:inline">
         Red = Beat 1 (On1) • Blue = Beat 2 (Son)
       </span>
     </div>

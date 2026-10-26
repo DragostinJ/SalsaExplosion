@@ -43,7 +43,7 @@ export default function HowItWorksPage() {
       <section className="relative overflow-hidden rounded-3xl border border-stone-800 bg-canvas p-6 sm:p-12 text-white shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
           <span>STUDENT HANDBOOK &amp; STUDIO ARCHITECTURE</span>
-          <span className="text-stone-400 font-bold">CUBAN SALSA &amp; RUEDA DE CASINO</span>
+          <span className="text-ivory-muted font-bold">CUBAN SALSA &amp; RUEDA DE CASINO</span>
         </div>
 
         <div className="mt-6 max-w-3xl space-y-4">
@@ -54,7 +54,7 @@ export default function HowItWorksPage() {
             </span>
           </h1>
 
-          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-medium">
+          <p className="text-xs sm:text-sm text-ivory-muted leading-relaxed font-medium">
             Traditional dance studios struggle with unbalanced classes, lost cash, long door queues, and forgotten moves. Salsa Explosion provides a seamless studio system built specifically for Cuban Salsa academies, social dancers, and visiting masterclasses.
           </p>
 

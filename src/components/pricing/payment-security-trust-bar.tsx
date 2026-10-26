@@ -23,13 +23,13 @@ export function PaymentSecurityTrustBar({
             <span className="font-extrabold text-[11px] uppercase tracking-wider text-emerald-300">
               256-Bit SSL Encrypted Checkout
             </span>
-            <p className="text-[10px] text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               Official Stripe PCI-DSS Level 1 payment processing.
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-[10px] font-bold text-muted-foreground">
+        <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground">
           <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 flex items-center gap-1 shadow-2xs">
             <CreditCard className="h-3 w-3 text-rose-400" /> Apple Pay / GPay
           </span>

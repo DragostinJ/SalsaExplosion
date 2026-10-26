@@ -12,6 +12,7 @@ import {
   Share2,
   ShieldCheck,
   ExternalLink,
+  Lightbulb,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -131,7 +132,7 @@ export function InteractiveTutorialDialog({
               <Flame className="h-4 w-4 sm:h-5 sm:w-5 fill-white" />
             </div>
             <div className="min-w-0">
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-400 block truncate">
+              <span className="text-[11px] font-extrabold uppercase tracking-widest text-amber-400 block truncate">
                 Interactive Dancer Guide • Step {step + 1} of 4
               </span>
               <h2
@@ -173,7 +174,7 @@ export function InteractiveTutorialDialog({
             <div className="space-y-4">
               <div className="rounded-2xl bg-surface-2 p-4 border border-line space-y-2">
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-amber-600 text-white font-bold text-[10px]">
+                  <Badge className="bg-amber-600 text-white font-bold text-xs">
                     Strict Ratio Protection
                   </Badge>
                   <span className="text-muted-foreground text-xs font-semibold">
@@ -249,7 +250,7 @@ export function InteractiveTutorialDialog({
             <div className="space-y-4">
               <div className="rounded-2xl bg-surface-2 p-4 border border-line space-y-2">
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-emerald-600 text-white font-bold text-[10px]">
+                  <Badge className="bg-emerald-600 text-white font-bold text-xs">
                     Zero Lock-In
                   </Badge>
                   <span className="text-muted-foreground text-xs font-semibold">
@@ -304,7 +305,7 @@ export function InteractiveTutorialDialog({
             <div className="space-y-4">
               <div className="rounded-2xl bg-surface-2 p-4 border border-line space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-surface-3 text-ivory border border-line font-bold text-[10px]">
+                  <Badge className="bg-surface-3 text-ivory border border-line font-bold text-xs">
                     Audited Syllabus
                   </Badge>
                   <span className="text-muted-foreground text-xs font-semibold">
@@ -343,15 +344,16 @@ export function InteractiveTutorialDialog({
                     <span className="font-extrabold text-xs text-foreground">
                       Level {demoTierIndex}: {tiers[demoTierIndex].subtitle}
                     </span>
-                    <Badge variant="outline" className="text-[10px] font-semibold">
+                    <Badge variant="outline" className="text-xs font-semibold">
                       Official Curriculum
                     </Badge>
                   </div>
                   <p className="text-[11px] text-muted-foreground">
                     <strong>Key Moves:</strong> {tiers[demoTierIndex].moves}
                   </p>
-                  <p className="text-[10px] text-gold font-medium bg-gold/10 border border-gold/20 p-2 rounded-lg mt-1">
-                    💡 {tiers[demoTierIndex].tip}
+                  <p className="text-xs text-gold font-medium bg-gold/10 border border-gold/20 p-2 rounded-lg mt-1 flex items-start gap-1.5">
+                    <Lightbulb className="h-4 w-4 shrink-0 text-gold mt-0.5" aria-hidden="true" />
+                    <span>{tiers[demoTierIndex].tip}</span>
                   </p>
                 </div>
 
@@ -378,7 +380,7 @@ export function InteractiveTutorialDialog({
             <div className="space-y-4">
               <div className="rounded-2xl bg-surface-2 p-4 border border-line space-y-2">
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-rose-600 text-white font-bold text-[10px]">
+                  <Badge className="bg-rose-600 text-white font-bold text-xs">
                     Fast Entry at BOH Studios
                   </Badge>
                   <span className="text-muted-foreground text-xs font-semibold">

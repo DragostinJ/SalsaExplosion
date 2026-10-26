@@ -271,7 +271,7 @@ export function ShopClient({
                 className="relative h-44 w-full bg-surface-3 p-4 flex flex-col justify-between text-white"
               >
                 <div className="flex items-center justify-between">
-                  <Badge className="bg-black/40 text-white text-[10px] font-bold border-none backdrop-blur-md">
+                  <Badge className="bg-black/40 text-white text-xs font-bold border-none backdrop-blur-md">
                     {item.badge}
                   </Badge>
                   <span className="font-extrabold text-lg bg-black/40 px-2 py-0.5 rounded-lg backdrop-blur-md">
@@ -291,7 +291,7 @@ export function ShopClient({
                   )}
                 </div>
 
-                <div className="text-[10px] font-semibold text-white/80 text-right">
+                <div className="text-xs font-semibold text-white/80 text-right">
                   Salsa Explosion UK
                 </div>
               </div>
@@ -344,7 +344,7 @@ export function ShopClient({
             {/* Modal Header */}
             <div className="flex items-start justify-between pb-3 border-b">
               <div>
-                <Badge className="bg-amber-600 text-white text-[10px] font-bold mb-1">
+                <Badge className="bg-amber-600 text-white text-xs font-bold mb-1">
                   Click & Collect Reservation
                 </Badge>
                 <h3 className="text-base font-bold text-foreground">

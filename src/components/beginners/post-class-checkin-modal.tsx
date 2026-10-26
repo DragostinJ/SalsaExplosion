@@ -109,7 +109,7 @@ export function PostClassCheckinModal({
                 </div>
                 <div className="space-y-0.5">
                   <p className="text-xs font-bold text-foreground">Loved It!</p>
-                  <p className="text-[10px] text-muted-foreground">Felt like magic</p>
+                  <p className="text-xs text-muted-foreground">Felt like magic</p>
                 </div>
               </button>
 
@@ -124,7 +124,7 @@ export function PostClassCheckinModal({
                 </div>
                 <div className="space-y-0.5">
                   <p className="text-xs font-bold text-foreground">Challenging</p>
-                  <p className="text-[10px] text-muted-foreground">Good fun & sweat</p>
+                  <p className="text-xs text-muted-foreground">Good fun & sweat</p>
                 </div>
               </button>
 
@@ -139,7 +139,7 @@ export function PostClassCheckinModal({
                 </div>
                 <div className="space-y-0.5">
                   <p className="text-xs font-bold text-foreground">Overwhelmed</p>
-                  <p className="text-[10px] text-muted-foreground">Brain was frying</p>
+                  <p className="text-xs text-muted-foreground">Brain was frying</p>
                 </div>
               </button>
             </div>

@@ -21,7 +21,7 @@ export function RotationMechanicsCard() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-blue-600 text-white font-bold text-[10px]">
+              <Badge className="bg-blue-600 text-white font-bold text-xs">
                 <RotateCw className="mr-1 h-3 w-3 animate-spin duration-1000" />
                 The Rueda Dynamic
               </Badge>
@@ -66,7 +66,7 @@ export function RotationMechanicsCard() {
               <span className="font-extrabold text-blue-400 text-xs">
                 Stage 1: Drill in Place
               </span>
-              <span className="text-[10px] text-muted-foreground font-mono">Counts 1-2-3</span>
+              <span className="text-xs text-muted-foreground font-mono">Counts 1-2-3</span>
             </div>
             <p className="text-muted-foreground text-[11px] leading-snug">
               You practice the basic Guapea step or Dile Que No with your current partner while Maestro Enrique demonstrates.
@@ -78,7 +78,7 @@ export function RotationMechanicsCard() {
               <span className="font-extrabold text-amber-400 text-xs">
                 Stage 2: The Call &ldquo;¡Dame!&rdquo;
               </span>
-              <span className="text-[10px] text-amber-700 font-bold">Switch!</span>
+              <span className="text-xs text-amber-700 font-bold">Switch!</span>
             </div>
             <p className="text-muted-foreground text-[11px] leading-snug">
               The caller shouts <em>&ldquo;¡Dame!&rdquo;</em> (Give me another). Leads step forward around the circle to the next partner on 5-6-7.
@@ -90,7 +90,7 @@ export function RotationMechanicsCard() {
               <span className="font-extrabold text-emerald-400 text-xs">
                 Stage 3: Fresh Reset
               </span>
-              <span className="text-[10px] text-muted-foreground font-mono">New Smile</span>
+              <span className="text-xs text-muted-foreground font-mono">New Smile</span>
             </div>
             <p className="text-muted-foreground text-[11px] leading-snug">
               You greet a new partner with a quick smile and try the combination again. Zero awkwardness—everyone rotates!

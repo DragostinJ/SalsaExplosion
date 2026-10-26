@@ -141,7 +141,7 @@ export function DanceVouchersShowcase({
               </div>
 
               <div className="space-y-3 bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
-                <span className="text-[10px] uppercase font-bold tracking-wider text-amber-200">
+                <span className="text-[11px] uppercase font-bold tracking-wider text-amber-200">
                   Presented To:
                 </span>
                 <p className="text-lg font-black italic tracking-wide">
@@ -154,11 +154,11 @@ export function DanceVouchersShowcase({
 
               <div className="pt-2 border-t border-white/20 flex items-center justify-between text-xs">
                 <div>
-                  <span className="block text-[10px] text-amber-200 font-bold uppercase">Locations</span>
+                  <span className="block text-[11px] text-amber-200 font-bold uppercase">Locations</span>
                   <span className="font-bold">Bournemouth • Poole</span>
                 </div>
                 <div className="text-right">
-                  <span className="block text-[10px] text-amber-200 font-bold uppercase">Order Direct</span>
+                  <span className="block text-[11px] text-amber-200 font-bold uppercase">Order Direct</span>
                   <span className="font-extrabold text-amber-300">07969 633701</span>
                 </div>
               </div>

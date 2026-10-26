@@ -123,7 +123,7 @@ export function PartnerMatchWaitlist({
                 <CardTitle className="text-base font-bold sm:text-lg">
                   Partner-Match Priority Waitlist & Bypass
                 </CardTitle>
-                <Badge variant="outline" className="border-amber-500/40 bg-amber-500/10 text-amber-300 text-[10px] font-bold">
+                <Badge variant="outline" className="border-amber-500/40 bg-amber-500/10 text-amber-300 text-xs font-bold">
                   Role Balance Protocol
                 </Badge>
               </div>
@@ -237,7 +237,7 @@ export function PartnerMatchWaitlist({
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-amber-500" />
                 <h3 className="text-sm font-bold">Option 2: Pair-Up Instant Bypass</h3>
-                <Badge className="bg-emerald-600 text-[10px] text-white">
+                <Badge className="bg-emerald-600 text-xs text-white">
                   Zero Wait
                 </Badge>
               </div>

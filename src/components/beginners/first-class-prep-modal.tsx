@@ -67,7 +67,7 @@ export function FirstClassPrepModal({
                 <p className="text-xs font-bold text-white drop-shadow-sm">
                   Watch 60-Second Studio Walkthrough & Basic Step Preview
                 </p>
-                <p className="text-[11px] text-stone-300 max-w-sm drop-shadow-sm">
+                <p className="text-[11px] text-ivory-muted max-w-sm drop-shadow-sm">
                   See where to hang your coat, how door check-in works, and how the beginner circle begins.
                 </p>
               </div>

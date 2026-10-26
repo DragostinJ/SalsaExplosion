@@ -30,7 +30,7 @@ export default function GlobalError({
           <h1 className="text-3xl font-extrabold uppercase tracking-tight text-ivory">
             Application Error
           </h1>
-          <p className="text-sm text-stone-300 leading-relaxed">
+          <p className="text-sm text-ivory-muted leading-relaxed">
             The studio platform encountered an unexpected hiccup. Please refresh the page or try again.
           </p>
           <button

@@ -2,7 +2,12 @@ import { Award } from "lucide-react";
 
 export default function InstructorLoading() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 animate-pulse space-y-8">
+    <div
+      role="status"
+      aria-busy="true"
+      aria-label="Loading instructor"
+      className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 animate-pulse space-y-8"
+    >
       <div className="h-44 sm:h-56 rounded-3xl bg-surface-1 border border-line flex flex-col items-center justify-center p-6 space-y-3">
         <div className="h-10 w-10 rounded-2xl bg-role-lead/20 flex items-center justify-center text-role-lead">
           <Award className="h-5 w-5" />

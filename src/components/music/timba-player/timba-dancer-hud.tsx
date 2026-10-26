@@ -7,7 +7,6 @@ import {
   AlertTriangle,
   BookOpen,
   X,
-  Compass,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { SongSegment } from "@/lib/constants/timba-song-anatomy";
@@ -69,56 +68,135 @@ export function TimbaDancerHud({
               </span>
             </div>
           ) : (
-            <Badge className="bg-white/10 text-stone-300 text-[10px] font-mono border-line self-start sm:self-auto shrink-0">
-              Song Outro / Final Gear
+            <div className="inline-flex sm:block items-center gap-1.5 rounded-lg sm:rounded-xl border border-line bg-surface-1/90 px-2.5 sm:px-3.5 py-1 sm:py-2 text-[11px] sm:text-xs sm:text-right self-start sm:self-auto shadow-xs shrink-0">
+              <span className="text-[10px] text-stone-400 font-semibold inline sm:block">
+                Song Climax
+              </span>
+              <span className="font-bold text-gold text-[11px]">
+                Final Section • Strike Pose
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Active Dance Gear Pill & Timing Mode Badges */}
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5 sm:pt-1 text-[11px] sm:text-xs">
+          <span className="text-[11px] sm:text-xs font-bold text-stone-200">Recommended Gear:</span>
+          <Badge className="border-gold/40 bg-gold/20 text-gold text-[10px] sm:text-xs font-black px-2 py-0.5">
+            {activeSegment.danceGear}
+          </Badge>
+
+          {activeSegment.timingMode && (
+            <Badge
+              variant="outline"
+              data-testid="active-timing-mode-badge"
+              className="border-gold/40 bg-gold/10 text-gold text-[10px] sm:text-xs font-black flex items-center gap-1 px-2 sm:px-2.5 py-0.5"
+            >
+              <Sparkles className="h-3 w-3 text-gold shrink-0" />
+              <span className="truncate">Timing: {activeSegment.timingMode}</span>
             </Badge>
           )}
         </div>
+      </div>
 
-        {/* Section Trigger & Dancer Cues */}
-        <div className="grid gap-2 sm:gap-3 grid-cols-1 md:grid-cols-2 text-xs pt-1 sm:pt-2 border-t border-white/10">
-          <div
-            data-testid="musical-trigger-box"
-            className="rounded-xl border border-line bg-surface-3/80 p-2.5 sm:p-3 space-y-1"
-          >
-            <div className="flex items-center gap-1.5 text-stone-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider">
-              <Headphones className="h-3 sm:h-3.5 w-3 sm:w-3.5 text-gold shrink-0" />
-              What to Listen For (Trigger):
+      {/* 3-Zone Body Telemetry (Polyrhythm Zone Separation) */}
+      {activeSegment.instrumentMapping && (
+        <div
+          data-testid="body-telemetry-widget"
+          className="rounded-xl border border-line bg-surface-2 p-1.5 sm:p-3 space-y-1 sm:space-y-1.5 shadow-xs"
+        >
+          <div className="hidden md:flex items-center justify-between gap-2 border-b border-line pb-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <Badge className="bg-gold/20 text-gold border border-gold/30 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2">
+                Level 4 Body Separation
+              </Badge>
+              <h4 className="text-[11px] sm:text-xs font-black text-stone-200 uppercase tracking-wide">
+                3-Zone Body Telemetry
+              </h4>
             </div>
-            <p className="text-stone-200 text-xs leading-relaxed font-medium">
-              {activeSegment.musicalTrigger}
-            </p>
+            <span className="text-[10px] text-stone-400 font-medium hidden sm:inline">
+              Polyrhythmic Body Isolation Map
+            </span>
           </div>
 
-          {/* Active Role Card (Leader OR Follower based on Mobile Toggle) */}
-          {activeRole === "leader" ? (
-            <div
-              data-testid="leader-action-box"
-              className="rounded-xl border border-sky-500/30 bg-sky-950/20 p-2.5 sm:p-3 space-y-1"
-            >
-              <div className="flex items-center gap-1.5 text-sky-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider">
-                <Compass className="h-3 sm:h-3.5 w-3 sm:w-3.5 text-sky-400 shrink-0" />
-                Leader Action (What to Dance):
-              </div>
-              <p className="text-stone-200 text-xs leading-relaxed font-medium">
-                {activeSegment.leaderCue}
+          <div className="grid grid-cols-3 gap-1 sm:gap-1.5">
+            {/* Zone 1: Chest & Shoulders */}
+            <div className="rounded-lg border border-line bg-surface-3 p-1.5 sm:p-2 space-y-0.5">
+              <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-sky-300 flex items-center gap-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-sky-400 shrink-0" />
+                Chest &amp; Shoulders
+              </span>
+              <p className="text-[10px] sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
+                {activeSegment.instrumentMapping.chestAndShoulders}
               </p>
             </div>
-          ) : (
-            <div
-              data-testid="follower-action-box"
-              className="rounded-xl border border-rose-500/30 bg-rose-950/20 p-2.5 sm:p-3 space-y-1"
-            >
-              <div className="flex items-center gap-1.5 text-rose-300 font-bold text-[10px] sm:text-xs uppercase tracking-wider">
-                <Compass className="h-3 sm:h-3.5 w-3 sm:w-3.5 text-rose-400 shrink-0" />
-                Follower Response (Styling &amp; Energy):
-              </div>
-              <p className="text-stone-200 text-xs leading-relaxed font-medium">
-                {activeSegment.followerCue}
+
+            {/* Zone 2: Hips & Knees */}
+            <div className="rounded-lg border border-line bg-surface-3 p-1.5 sm:p-2 space-y-0.5">
+              <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-gold flex items-center gap-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
+                Hips &amp; Knees
+              </span>
+              <p className="text-[10px] sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
+                {activeSegment.instrumentMapping.hipsAndKnees}
               </p>
             </div>
-          )}
+
+            {/* Zone 3: Feet */}
+            <div className="rounded-lg border border-line bg-surface-3 p-1.5 sm:p-2 space-y-0.5">
+              <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-emerald-300 flex items-center gap-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
+                Feet
+              </span>
+              <p className="text-[10px] sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
+                {activeSegment.instrumentMapping.feet}
+              </p>
+            </div>
+          </div>
         </div>
+      )}
+
+      {/* 2-Card Live Cue Row: Permanent Trigger + Strictly Conditional Active Role (Leader XOR Follower) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {/* Card 1: What to Listen For (100% Permanently Visible) */}
+        <div data-testid="trigger-cue-card" className="rounded-xl border border-line border-l-2 border-l-gold bg-surface-2 p-2.5 sm:p-3 space-y-0.5 shadow-xs">
+          <span className="text-[10px] uppercase font-black tracking-wider text-gold flex items-center gap-1.5">
+            <Headphones className="h-3.5 w-3.5 text-gold shrink-0" />
+            🎧 What to Listen For (Trigger)
+          </span>
+          <p className="text-xs text-stone-100 font-semibold leading-snug">
+            {activeSegment.musicalTrigger}
+          </p>
+        </div>
+
+        {/* Card 2: Strictly Conditional Role Action (ONLY Leader OR Follower in DOM!) */}
+        {activeRole === "leader" ? (
+          <div
+            data-testid="leader-action-card"
+            className="rounded-xl border border-teal-500/25 bg-teal-950/35 p-2.5 sm:p-3 space-y-0.5 shadow-xs text-teal-100"
+          >
+            <span className="text-[10px] uppercase font-black tracking-wider text-teal-300 flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-teal-400 shrink-0" />
+              🕺 Leader Action
+            </span>
+            <p className="text-xs text-teal-100 font-semibold leading-snug">
+              {activeSegment.leaderCue}
+            </p>
+          </div>
+        ) : (
+          <div
+            data-testid="follower-action-card"
+            className="rounded-xl border border-rose-500/25 bg-rose-950/35 p-2.5 sm:p-3 space-y-0.5 shadow-xs text-rose-100"
+          >
+            <span className="text-[10px] uppercase font-black tracking-wider text-rose-300 flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-rose-400 shrink-0" />
+              💃 Follower Action
+            </span>
+            <p className="text-xs text-rose-100 font-semibold leading-snug">
+              {activeSegment.followerCue}
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Compact Warning Pill Strip */}

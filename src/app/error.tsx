@@ -33,6 +33,11 @@ export default function ErrorBoundary({ error, reset }: ErrorProps) {
           <p className="text-sm text-muted-foreground leading-relaxed">
             Something went off-beat while loading this section. Our dance studio coordinators have been informed. Try recovering the step below:
           </p>
+          {error?.digest && (
+            <p className="text-[11px] font-mono tracking-wider uppercase text-muted-foreground/80 pt-1">
+              Reference: {typeof error.digest === "string" ? error.digest : "SESSION_ERROR"}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">

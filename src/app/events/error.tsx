@@ -32,6 +32,11 @@ export default function EventsErrorBoundary({ error, reset }: ErrorProps) {
           <p className="text-sm text-ivory-muted leading-relaxed">
             The festival and congress passes directory encountered an issue while retrieving ticket tiers.
           </p>
+          {error?.digest && (
+            <p className="text-[11px] font-mono tracking-wider uppercase text-stone-400 pt-1">
+              Reference: {typeof error.digest === "string" ? error.digest : "SESSION_ERROR"}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">

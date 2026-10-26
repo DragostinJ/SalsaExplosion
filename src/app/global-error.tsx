@@ -33,12 +33,12 @@ export default function GlobalError({
           <p className="text-sm text-ivory-muted leading-relaxed">
             The studio platform encountered an unexpected hiccup. Please refresh the page or try again.
           </p>
-          {error.digest && (
+          {error?.digest && (
             <p
               className="text-[11px] font-mono tracking-wider uppercase"
               style={{ color: "#A8A29E" }}
             >
-              Reference: {error.digest}
+              Reference: {typeof error.digest === "string" ? error.digest : "SESSION_ERROR"}
             </p>
           )}
           <button

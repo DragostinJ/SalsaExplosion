@@ -12,6 +12,25 @@ export function resetHealthCheckPruneThrottleForTests(): void {
 
 export async function GET() {
   const start = performance.now();
+
+  const clerkPub = (process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ?? "").trim();
+  const clerkSec = (process.env.CLERK_SECRET_KEY ?? "").trim();
+  const rawAppUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "").trim();
+
+  const clerkPublishableKeyPresent = clerkPub.length > 0;
+  const clerkSecretKeyPresent = clerkSec.length > 0;
+  const clerkKeyMode: "test" | "live" = clerkPub.startsWith("pk_live_") ? "live" : "test";
+
+  let appUrlValid = false;
+  try {
+    if (rawAppUrl) {
+      const u = new URL(rawAppUrl.startsWith("http") ? rawAppUrl : `https://${rawAppUrl}`);
+      appUrlValid = Boolean(u.hostname);
+    }
+  } catch {
+    appUrlValid = false;
+  }
+
   try {
     // 1. Run raw SQL ping against PostgreSQL to verify connectivity and keep Supabase connection active
     await prisma.$queryRaw`SELECT 1`;
@@ -42,6 +61,11 @@ export async function GET() {
       {
         status: "healthy",
         database: "connected",
+        databaseReachable: true,
+        clerkPublishableKeyPresent,
+        clerkSecretKeyPresent,
+        clerkKeyMode,
+        appUrlValid,
         latencyMs,
         tier: "bootstrap-zero-cost",
         prunedWebhookEvents: prunedWebhookEventsCount,
@@ -70,6 +94,11 @@ export async function GET() {
       {
         status: "degraded",
         database: "unreachable",
+        databaseReachable: false,
+        clerkPublishableKeyPresent,
+        clerkSecretKeyPresent,
+        clerkKeyMode,
+        appUrlValid,
         latencyMs,
         tier: "bootstrap-zero-cost",
         timestamp: new Date().toISOString(),

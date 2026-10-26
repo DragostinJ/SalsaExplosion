@@ -97,4 +97,26 @@ describe("Z1 & Z7: Zero-Cost Keep-Alive & Health Check Safeguards", () => {
     expect(data.error).not.toContain("secretpw");
     expect(data.error).not.toContain("supabase.com");
   });
+
+  it("I3: reports sanitized config diagnostics (booleans and mode only) with zero secret leaks", async () => {
+    vi.stubEnv("NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "pk_test_samplekey123");
+    vi.stubEnv("CLERK_SECRET_KEY", "sk_test_secretxyz789");
+    vi.stubEnv("NEXT_PUBLIC_APP_URL", "https://salsaexplosion.co.uk");
+    vi.mocked(prisma.$queryRaw).mockResolvedValue([{ 1: 1 }] as never);
+
+    const response = await GET();
+    const data = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(data.clerkPublishableKeyPresent).toBe(true);
+    expect(data.clerkSecretKeyPresent).toBe(true);
+    expect(data.clerkKeyMode).toBe("test");
+    expect(data.databaseReachable).toBe(true);
+    expect(data.appUrlValid).toBe(true);
+
+    // Verify ZERO secret values or substrings are leaked in response keys or values
+    const stringified = JSON.stringify(data);
+    expect(stringified).not.toContain("samplekey123");
+    expect(stringified).not.toContain("secretxyz789");
+  });
 });

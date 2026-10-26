@@ -396,7 +396,7 @@ export function ClassScheduleCard({
             <span
               className={`font-semibold ${
                 spotsRemaining <= 3
-                  ? "text-amber-600 dark:text-amber-400"
+                  ? "text-amber-400"
                   : "text-foreground"
               }`}
             >
@@ -411,7 +411,7 @@ export function ClassScheduleCard({
             <div className="h-2 w-full overflow-hidden rounded-full bg-muted flex">
               <div
                 title={`Leads booked: ${optimisticState.leadsCount}`}
-                className="h-full bg-sky-500/60 dark:bg-sky-400/50 transition-all duration-300"
+                className="h-full bg-sky-400/50 transition-all duration-300"
                 style={{
                   width: `${Math.min(
                     100,
@@ -423,7 +423,7 @@ export function ClassScheduleCard({
               />
               <div
                 title={`Follows booked: ${optimisticState.followsCount}`}
-                className="h-full bg-rose-400/60 dark:bg-rose-400/50 transition-all duration-300"
+                className="h-full bg-rose-400/50 transition-all duration-300"
                 style={{
                   width: `${Math.min(
                     100,
@@ -455,7 +455,7 @@ export function ClassScheduleCard({
                 onClick={() => setSelectedRole(DanceRole.LEAD)}
                 className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
                   selectedRole === DanceRole.LEAD
-                    ? "border-sky-500/45 bg-sky-500/12 text-sky-950 dark:text-sky-100 shadow-xs ring-1 ring-sky-500/20"
+                    ? "border-sky-500/45 bg-sky-500/12 text-sky-100 shadow-xs ring-1 ring-sky-500/20"
                     : "border-border/80 bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground"
                 } ${isLeadFull ? "cursor-not-allowed opacity-50" : ""}`}
               >
@@ -463,7 +463,7 @@ export function ClassScheduleCard({
                   <span
                     className={`h-2 w-2 rounded-full ${
                       selectedRole === DanceRole.LEAD
-                        ? "bg-sky-600 dark:bg-sky-400"
+                        ? "bg-sky-400"
                         : "bg-muted-foreground/40"
                     }`}
                   />
@@ -473,7 +473,7 @@ export function ClassScheduleCard({
                   <span
                     className={`text-[11px] font-bold ${
                       selectedRole === DanceRole.LEAD
-                        ? "text-sky-900/80 dark:text-sky-200/80"
+                        ? "text-sky-200/80"
                         : "text-muted-foreground"
                     }`}
                   >
@@ -490,7 +490,7 @@ export function ClassScheduleCard({
                 onClick={() => setSelectedRole(DanceRole.FOLLOW)}
                 className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
                   selectedRole === DanceRole.FOLLOW
-                    ? "border-rose-400/45 bg-rose-500/12 text-rose-950 dark:text-rose-100 shadow-xs ring-1 ring-rose-400/20"
+                    ? "border-rose-400/45 bg-rose-500/12 text-rose-100 shadow-xs ring-1 ring-rose-400/20"
                     : "border-border/80 bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground"
                 } ${isFollowFull ? "cursor-not-allowed opacity-50" : ""}`}
               >
@@ -498,7 +498,7 @@ export function ClassScheduleCard({
                   <span
                     className={`h-2 w-2 rounded-full ${
                       selectedRole === DanceRole.FOLLOW
-                        ? "bg-rose-500 dark:bg-rose-400"
+                        ? "bg-rose-400"
                         : "bg-muted-foreground/40"
                     }`}
                   />
@@ -508,7 +508,7 @@ export function ClassScheduleCard({
                   <span
                     className={`text-[11px] font-bold ${
                       selectedRole === DanceRole.FOLLOW
-                        ? "text-rose-900/80 dark:text-rose-200/80"
+                        ? "text-rose-200/80"
                         : "text-muted-foreground"
                     }`}
                   >

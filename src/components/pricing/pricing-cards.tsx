@@ -114,7 +114,7 @@ export function PricingCards({
         <div className="flex flex-wrap items-center gap-2">
           <Button variant="outline" size="sm" asChild className="text-xs font-semibold">
             <Link href="/dashboard/schedule">
-              <CalendarDays className="mr-1.5 h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+              <CalendarDays className="mr-1.5 h-3.5 w-3.5 text-amber-400" />
               Go to Class Schedule
             </Link>
           </Button>

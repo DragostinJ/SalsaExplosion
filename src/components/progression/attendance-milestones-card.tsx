@@ -63,7 +63,7 @@ export function AttendanceMilestonesCard({
       colorScheme: {
         unlockedBg: "bg-amber-500/10",
         unlockedBorder: "border-amber-500/40",
-        iconColor: "text-amber-600 dark:text-amber-400",
+        iconColor: "text-amber-400",
         badgeColor: "bg-amber-500 text-stone-950",
       },
     },
@@ -78,7 +78,7 @@ export function AttendanceMilestonesCard({
       colorScheme: {
         unlockedBg: "bg-orange-500/10",
         unlockedBorder: "border-orange-500/40",
-        iconColor: "text-orange-600 dark:text-orange-400",
+        iconColor: "text-orange-400",
         badgeColor: "bg-orange-600 text-white",
       },
     },
@@ -93,7 +93,7 @@ export function AttendanceMilestonesCard({
       colorScheme: {
         unlockedBg: "bg-emerald-500/10",
         unlockedBorder: "border-emerald-500/40",
-        iconColor: "text-emerald-600 dark:text-emerald-400",
+        iconColor: "text-emerald-400",
         badgeColor: "bg-emerald-600 text-white",
       },
     },
@@ -108,7 +108,7 @@ export function AttendanceMilestonesCard({
       colorScheme: {
         unlockedBg: "bg-purple-500/10",
         unlockedBorder: "border-purple-500/40",
-        iconColor: "text-purple-600 dark:text-purple-400",
+        iconColor: "text-purple-400",
         badgeColor: "bg-purple-600 text-white",
       },
     },

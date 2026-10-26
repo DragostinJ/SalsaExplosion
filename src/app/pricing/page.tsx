@@ -112,14 +112,14 @@ export default async function PricingPage() {
       {/* UK Consumer Rights Pre-Checkout Guarantee */}
       <div className="mb-8 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2 text-foreground font-medium">
-          <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+          <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
           <span>
             <strong className="font-extrabold">UK Consumer Rights Guarantee:</strong> 14-day statutory cooling-off refund right on unused credit packs &amp; vouchers. Cancel weekly classes up to 2 hours before start for instant 100% credit return.
           </span>
         </div>
         <Link
           href="/terms#refunds"
-          className="font-bold text-emerald-800 dark:text-emerald-300 hover:underline shrink-0"
+          className="font-bold text-emerald-300 hover:underline shrink-0"
         >
           Read Refund Policy →
         </Link>

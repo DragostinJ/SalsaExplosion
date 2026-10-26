@@ -144,7 +144,7 @@ export function QrCheckInCard({
           <div
             className={`rounded-xl border p-3.5 text-xs font-semibold ${
               feedback.type === "success"
-                ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
                 : "border-destructive/40 bg-destructive/10 text-destructive"
             }`}
           >
@@ -155,7 +155,7 @@ export function QrCheckInCard({
         {isAttended ? (
           <div className="rounded-2xl border-2 border-emerald-500/40 bg-emerald-500/[0.06] p-6 text-center space-y-2">
             <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-500" />
-            <h2 className="text-lg font-extrabold text-emerald-700 dark:text-emerald-300">
+            <h2 className="text-lg font-extrabold text-emerald-300">
               You Are Checked In!
             </h2>
             <p className="text-xs text-muted-foreground">
@@ -220,7 +220,7 @@ export function QrCheckInCard({
         </Link>
         <Link
           href="/instructor/roster"
-          className="text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1 hover:underline"
+          className="text-amber-400 font-semibold flex items-center gap-1 hover:underline"
         >
           Instructor Roster
           <ArrowRight className="h-3 w-3" />

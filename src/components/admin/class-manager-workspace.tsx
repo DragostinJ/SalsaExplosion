@@ -185,8 +185,8 @@ export function ClassManagerWorkspace({
               <div
                 className={`mb-4 rounded-xl p-3 text-xs font-semibold ${
                   banner.type === "success"
-                    ? "bg-emerald-500/10 text-emerald-800 dark:text-emerald-300"
-                    : "bg-rose-500/10 text-rose-800 dark:text-rose-300"
+                    ? "bg-emerald-500/10 text-emerald-300"
+                    : "bg-rose-500/10 text-rose-300"
                 }`}
               >
                 {banner.text}
@@ -395,10 +395,10 @@ export function ClassManagerWorkspace({
                       </div>
                       <h3 className="text-sm font-bold">{cls.title}</h3>
                       <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground pt-1">
-                        <span className="font-semibold text-blue-700 dark:text-blue-300">
+                        <span className="font-semibold text-blue-300">
                           Leads: {cls.leadsBooked}/{cls.maxLeads ?? cls.maxCapacity}
                         </span>
-                        <span className="font-semibold text-rose-700 dark:text-rose-300">
+                        <span className="font-semibold text-rose-300">
                           Follows: {cls.followsBooked}/
                           {cls.maxFollows ?? cls.maxCapacity}
                         </span>
@@ -551,7 +551,7 @@ export function ClassManagerWorkspace({
                   {isCancelling && (
                     <div className="rounded-xl border border-rose-500/30 bg-rose-500/[0.06] p-3.5 space-y-2 mt-1 text-xs animate-in fade-in duration-150">
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-rose-800 dark:text-rose-400 flex items-center gap-1.5">
+                        <span className="font-bold text-rose-400 flex items-center gap-1.5">
                           <Ban className="h-4 w-4" />
                           Cancel Class & Automatically Refund {cls.leadsBooked + cls.followsBooked} Student(s)
                         </span>

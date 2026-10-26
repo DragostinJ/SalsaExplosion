@@ -132,7 +132,7 @@ export function CsvExportToolbar() {
             </CardDescription>
           </div>
           {statusMessage && (
-            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+            <span className="text-xs font-semibold text-emerald-400">
               {statusMessage}
             </span>
           )}

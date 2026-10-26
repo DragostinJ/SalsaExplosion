@@ -35,7 +35,7 @@ export function VisualDressCodeModal({
 
         {/* Header */}
         <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-bold text-amber-700 dark:text-amber-400">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-bold text-amber-400">
             <Footprints className="h-3.5 w-3.5 text-amber-600" />
             <span>Studio Comfort & Floor Safety</span>
           </div>
@@ -63,7 +63,7 @@ export function VisualDressCodeModal({
             <CardContent className="space-y-3 text-xs">
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.04] p-3 space-y-1.5">
-                  <span className="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 text-xs">
+                  <span className="font-bold text-emerald-400 flex items-center gap-1.5 text-xs">
                     <CheckCircle2 className="h-3.5 w-3.5" /> What to Bring (Recommended)
                   </span>
                   <ul className="text-muted-foreground space-y-1 list-disc list-inside text-[11px] leading-relaxed">
@@ -75,7 +75,7 @@ export function VisualDressCodeModal({
                 </div>
 
                 <div className="rounded-xl border border-rose-500/30 bg-rose-500/[0.04] p-3 space-y-1.5">
-                  <span className="font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1.5 text-xs">
+                  <span className="font-bold text-rose-400 flex items-center gap-1.5 text-xs">
                     <XCircle className="h-3.5 w-3.5" /> What to Avoid
                   </span>
                   <ul className="text-muted-foreground space-y-1 list-disc list-inside text-[11px] leading-relaxed">
@@ -103,7 +103,7 @@ export function VisualDressCodeModal({
             <CardContent className="space-y-3 text-xs">
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.04] p-3 space-y-1.5">
-                  <span className="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 text-xs">
+                  <span className="font-bold text-emerald-400 flex items-center gap-1.5 text-xs">
                     <CheckCircle2 className="h-3.5 w-3.5" /> Ideal Outfits
                   </span>
                   <ul className="text-muted-foreground space-y-1 list-disc list-inside text-[11px] leading-relaxed">
@@ -115,7 +115,7 @@ export function VisualDressCodeModal({
                 </div>
 
                 <div className="rounded-xl border border-rose-500/30 bg-rose-500/[0.04] p-3 space-y-1.5">
-                  <span className="font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1.5 text-xs">
+                  <span className="font-bold text-rose-400 flex items-center gap-1.5 text-xs">
                     <XCircle className="h-3.5 w-3.5" /> Items to Skip
                   </span>
                   <ul className="text-muted-foreground space-y-1 list-disc list-inside text-[11px] leading-relaxed">
@@ -131,7 +131,7 @@ export function VisualDressCodeModal({
 
           {/* Dance Bag Essentials */}
           <div className="rounded-xl border border-amber-500/30 bg-amber-500/[0.05] p-3.5 space-y-2 text-xs">
-            <span className="font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5">
+            <span className="font-bold text-amber-400 flex items-center gap-1.5">
               <Droplets className="h-3.5 w-3.5" /> Beginner Dance Bag Checklist
             </span>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-[11px] text-muted-foreground">

@@ -188,8 +188,8 @@ export function BohVenueSpotlight() {
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border-b border-border/60 pb-5 mb-6">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                <ShieldCheck className="h-4 w-4 text-emerald-400" />
+                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400">
                   Dancer Arrival Planner
                 </span>
               </div>
@@ -311,7 +311,7 @@ export function BohVenueSpotlight() {
             {/* Direct Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 mt-6 border-t border-border/60">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <MapPin className="h-4 w-4 text-rose-600 dark:text-rose-400 shrink-0" />
+                <MapPin className="h-4 w-4 text-rose-400 shrink-0" />
                 <span>104 Commercial Road, The Triangle, Bournemouth, BH2 5LR</span>
               </div>
 

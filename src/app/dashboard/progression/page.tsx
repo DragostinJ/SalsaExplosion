@@ -313,8 +313,8 @@ export default async function ProgressionPage() {
                               <div
                                 className={`rounded-md border p-3 ${
                                   isApproved
-                                    ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-800 dark:text-emerald-300"
-                                    : "border-destructive/30 bg-destructive/5 text-destructive dark:text-destructive"
+                                    ? "border-emerald-500/30 bg-emerald-500/5 text-emerald-300"
+                                    : "border-destructive/30 bg-destructive/5 text-destructive"
                                 }`}
                               >
                                 <div className="flex items-center gap-1.5 font-semibold text-[11px]">

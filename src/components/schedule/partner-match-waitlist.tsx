@@ -115,7 +115,7 @@ export function PartnerMatchWaitlist({
       <CardHeader className="border-b border-border/60 pb-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
               <Users className="h-5 w-5" />
             </div>
             <div>
@@ -123,7 +123,7 @@ export function PartnerMatchWaitlist({
                 <CardTitle className="text-base font-bold sm:text-lg">
                   Partner-Match Priority Waitlist & Bypass
                 </CardTitle>
-                <Badge variant="outline" className="border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-[10px] font-bold">
+                <Badge variant="outline" className="border-amber-500/40 bg-amber-500/10 text-amber-300 text-[10px] font-bold">
                   Role Balance Protocol
                 </Badge>
               </div>
@@ -174,12 +174,12 @@ export function PartnerMatchWaitlist({
               </p>
 
               {waitlistJoined ? (
-                <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-xs text-emerald-800 dark:text-emerald-200">
+                <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-xs text-emerald-200">
                   <div className="flex items-center gap-2 font-bold">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                     Priority Waitlist Activated!
                   </div>
-                  <p className="mt-1 text-[11px] text-emerald-700 dark:text-emerald-300">
+                  <p className="mt-1 text-[11px] text-emerald-300">
                     You are in the queue as a <span className="font-bold">{selectedRole}</span>. You will receive an SMS and email notification the moment a {oppositeRole} books.
                   </p>
                 </div>
@@ -246,12 +246,12 @@ export function PartnerMatchWaitlist({
               </p>
 
               {bypassSent ? (
-                <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-xs text-emerald-800 dark:text-emerald-200">
+                <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-xs text-emerald-200">
                   <div className="flex items-center gap-2 font-bold">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                     Invitation Dispatched!
                   </div>
-                  <p className="mt-1 text-[11px] text-emerald-700 dark:text-emerald-300">
+                  <p className="mt-1 text-[11px] text-emerald-300">
                     We sent a paired bypass link to <span className="font-semibold">{partnerEmail}</span>. As soon as they confirm their {oppositeRole} registration, both your spots are guaranteed!
                   </p>
                 </div>

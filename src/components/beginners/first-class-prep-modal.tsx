@@ -31,7 +31,7 @@ export function FirstClassPrepModal({
 
         {/* Header */}
         <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-bold text-amber-700 dark:text-amber-400">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-bold text-amber-400">
             <Video className="h-3.5 w-3.5 text-amber-600" />
             <span>Pre-Class Orientation</span>
           </div>
@@ -82,7 +82,7 @@ export function FirstClassPrepModal({
           </h3>
           <div className="grid gap-2.5 sm:grid-cols-3 text-xs">
             <div className="rounded-xl border border-border/70 bg-muted/30 p-3 space-y-1">
-              <span className="font-bold text-amber-600 dark:text-amber-400 block text-[11px]">
+              <span className="font-bold text-amber-400 block text-[11px]">
                 1. 15 Mins Before Start
               </span>
               <p className="font-semibold text-foreground">Front Desk Welcome</p>
@@ -92,7 +92,7 @@ export function FirstClassPrepModal({
             </div>
 
             <div className="rounded-xl border border-border/70 bg-muted/30 p-3 space-y-1">
-              <span className="font-bold text-blue-600 dark:text-blue-400 block text-[11px]">
+              <span className="font-bold text-blue-400 block text-[11px]">
                 2. 10 Mins Before Start
               </span>
               <p className="font-semibold text-foreground">Change Shoes & Coat</p>
@@ -102,7 +102,7 @@ export function FirstClassPrepModal({
             </div>
 
             <div className="rounded-xl border border-border/70 bg-muted/30 p-3 space-y-1">
-              <span className="font-bold text-emerald-600 dark:text-emerald-400 block text-[11px]">
+              <span className="font-bold text-emerald-400 block text-[11px]">
                 3. On the Hour
               </span>
               <p className="font-semibold text-foreground">Join the Warm-Up</p>

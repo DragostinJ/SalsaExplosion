@@ -77,7 +77,7 @@ export default async function StudentWalletPage() {
             </h2>
             <Link
               href="/pricing"
-              className="text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline inline-flex items-center gap-1"
+              className="text-xs font-bold text-amber-400 hover:underline inline-flex items-center gap-1"
             >
               Compare All Passes <ArrowRight className="h-3.5 w-3.5" />
             </Link>
@@ -91,7 +91,7 @@ export default async function StudentWalletPage() {
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-black uppercase tracking-wider text-amber-800 dark:text-amber-400">
+                    <span className="text-[11px] font-black uppercase tracking-wider text-amber-400">
                       {tier.shortLabel}
                     </span>
                     {tier.popular && (
@@ -255,7 +255,7 @@ export default async function StudentWalletPage() {
           </div>
           <Link
             href="/events"
-            className="text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-amber-400 hover:underline flex items-center gap-1"
           >
             Explore Festivals <ArrowRight className="h-3 w-3" />
           </Link>
@@ -349,7 +349,7 @@ export default async function StudentWalletPage() {
           </div>
           <Link
             href="/dashboard/schedule"
-            className="text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-amber-400 hover:underline flex items-center gap-1"
           >
             Full Timetable <ArrowRight className="h-3 w-3" />
           </Link>
@@ -476,7 +476,7 @@ export default async function StudentWalletPage() {
               </div>
               <Link
                 href="/private-lessons"
-                className="text-xs font-semibold text-amber-700 dark:text-amber-400 hover:underline"
+                className="text-xs font-semibold text-amber-400 hover:underline"
               >
                 Request Slot
               </Link>

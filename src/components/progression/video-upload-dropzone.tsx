@@ -296,7 +296,7 @@ export function StudentVideoUploadDropzone({
         <div className="flex flex-wrap items-center justify-between gap-2">
           <Badge
             variant="outline"
-            className="border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-300"
+            className="border-amber-500/40 bg-amber-500/10 text-amber-300"
           >
             <Music className="mr-1.5 h-3.5 w-3.5" />
             Cuban Salsa (Casino & Rueda)

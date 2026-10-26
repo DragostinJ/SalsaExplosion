@@ -62,9 +62,9 @@ export function AdminNav() {
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
         <Badge
           variant="outline"
-          className="border-amber-500/40 bg-amber-500/15 text-amber-800 dark:text-amber-300 font-extrabold px-3 py-1 flex items-center gap-1.5"
+          className="border-amber-500/40 bg-amber-500/15 text-amber-300 font-extrabold px-3 py-1 flex items-center gap-1.5"
         >
-          <ShieldCheck className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400" />
+          <ShieldCheck className="h-3.5 w-3.5 text-amber-400" />
           Studio Owner & Admin Command Center
         </Badge>
       </div>

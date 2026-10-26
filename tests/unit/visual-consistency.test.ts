@@ -149,4 +149,56 @@ describe("V5: Visual Consistency & Design Drift Guard", () => {
         .join("\n")}`
     ).toEqual([]);
   });
+
+  it("proves zero dark: variant classes remain across all app and components", () => {
+    const violations: { file: string; line: number; text: string }[] = [];
+
+    for (const file of allFiles) {
+      if (isExcluded(file)) continue;
+      const content = fs.readFileSync(file, "utf-8");
+      const lines = content.split("\n");
+      lines.forEach((line, index) => {
+        if (/\bdark:/.test(line)) {
+          violations.push({
+            file: path.relative(rootSrc, file),
+            line: index + 1,
+            text: line.trim(),
+          });
+        }
+      });
+    }
+
+    expect(
+      violations,
+      `Found dead dark: variant classes. All UI must use canonical dark tokens unconditionally:\n${violations
+        .map((v) => `  ${v.file}:${v.line} -> ${v.text}`)
+        .join("\n")}`
+    ).toEqual([]);
+  });
+
+  it("proves zero references to banned legacy cream/beige color strings (#F4ECE1, #faf7f2)", () => {
+    const violations: { file: string; line: number; text: string }[] = [];
+    const bannedColors = ["#f4ece1", "#faf7f2"];
+
+    for (const file of allFiles) {
+      if (isExcluded(file)) continue;
+      const content = fs.readFileSync(file, "utf-8").toLowerCase();
+      bannedColors.forEach((color) => {
+        if (content.includes(color)) {
+          violations.push({
+            file: path.relative(rootSrc, file),
+            line: 1,
+            text: `Contains banned legacy color ${color}`,
+          });
+        }
+      });
+    }
+
+    expect(
+      violations,
+      `Found legacy cream/beige color strings. All views must use the unified deep obsidian-black palette:\n${violations
+        .map((v) => `  ${v.file}:${v.line} -> ${v.text}`)
+        .join("\n")}`
+    ).toEqual([]);
+  });
 });

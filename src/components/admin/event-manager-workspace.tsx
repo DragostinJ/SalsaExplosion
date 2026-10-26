@@ -190,7 +190,7 @@ export function EventManagerWorkspace({
       <div className="grid gap-4 sm:grid-cols-3">
         <Card className="border-emerald-500/30 bg-emerald-500/[0.04]">
           <CardHeader className="pb-2">
-            <CardTitle className="text-xs font-bold uppercase text-emerald-700 dark:text-emerald-300">
+            <CardTitle className="text-xs font-bold uppercase text-emerald-300">
               Event Pass Revenue
             </CardTitle>
           </CardHeader>
@@ -206,12 +206,12 @@ export function EventManagerWorkspace({
 
         <Card className="border-amber-500/30 bg-amber-500/[0.04]">
           <CardHeader className="pb-2">
-            <CardTitle className="text-xs font-bold uppercase text-amber-700 dark:text-amber-300">
+            <CardTitle className="text-xs font-bold uppercase text-amber-300">
               Saved vs. Eventbrite Fees
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-extrabold text-amber-600 dark:text-amber-400">
+            <div className="text-2xl font-extrabold text-amber-400">
               +£{estimatedEventbriteSavings}
             </div>
             <p className="text-xs text-muted-foreground mt-0.5">
@@ -242,7 +242,7 @@ export function EventManagerWorkspace({
         <div
           className={`rounded-xl border px-4 py-3 text-xs font-semibold ${
             banner.type === "success"
-              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
               : "border-destructive/40 bg-destructive/10 text-destructive"
           }`}
         >
@@ -334,7 +334,7 @@ export function EventManagerWorkspace({
                       }
                       className={
                         reg.checkedIn
-                          ? "border-emerald-500/40 bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 font-bold text-xs"
+                          ? "border-emerald-500/40 bg-emerald-500/15 text-emerald-300 font-bold text-xs"
                           : "bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs"
                       }
                     >

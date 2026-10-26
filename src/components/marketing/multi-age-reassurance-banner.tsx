@@ -41,19 +41,19 @@ export function MultiAgeReassuranceBanner({
 
             <div className="grid gap-2 text-xs font-medium pt-1">
               <div className="flex items-start gap-2">
-                <CreditCard className="h-4 w-4 text-emerald-700 dark:text-emerald-400 shrink-0 mt-0.5" />
+                <CreditCard className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                 <span className="text-foreground">
                   <strong className="font-extrabold">Door Pricing:</strong> £12 for 1 class • £14 for 2 classes &amp; social fiesta (Card or Cash at the Door).
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 text-rose-700 dark:text-rose-400 shrink-0 mt-0.5" />
+                <MapPin className="h-4 w-4 text-rose-400 shrink-0 mt-0.5" />
                 <span className="text-foreground">
                   <strong className="font-extrabold">Home Hub &amp; Parking:</strong> BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR) • Free on-street parking after 18:00 &amp; nearby Library Car Park.
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
                 <span className="text-foreground">
                   <strong className="font-extrabold">What to Wear:</strong> Casual comfortable clothes & smooth-soled shoes or trainers.
                 </span>
@@ -66,11 +66,11 @@ export function MultiAgeReassuranceBanner({
         {(variant === "all" || variant === "senior-only") && (
           <div className="rounded-2xl border-2 border-amber-500/40 bg-gradient-to-br from-amber-500/10 via-card to-amber-500/5 p-5 sm:p-6 shadow-xs space-y-3.5">
             <div className="flex items-center justify-between gap-2">
-              <Badge className="bg-amber-800 dark:bg-amber-700 text-white font-extrabold text-[11px] uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
+              <Badge className="bg-amber-700 text-white font-extrabold text-[11px] uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
                 <HeartHandshake className="h-3.5 w-3.5" />
                 Everyone Welcome
               </Badge>
-              <span className="text-xs font-black text-amber-900 dark:text-amber-300">
+              <span className="text-xs font-black text-amber-300">
                 Ages 18 to 80+
               </span>
             </div>
@@ -92,7 +92,7 @@ export function MultiAgeReassuranceBanner({
                 <span className="text-muted-foreground font-semibold">Need advice or have questions?</span>
                 <a
                   href="tel:+447969633701"
-                  className="inline-flex items-center gap-1 font-black text-amber-900 dark:text-amber-300 hover:underline"
+                  className="inline-flex items-center gap-1 font-black text-amber-300 hover:underline"
                 >
                   <Phone className="h-3.5 w-3.5" />
                   Call or text Enrique: 07969 633701

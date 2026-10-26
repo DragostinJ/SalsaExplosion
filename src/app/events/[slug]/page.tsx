@@ -296,7 +296,7 @@ export default async function EventDetailPage({
                 <h3 className="text-2xl sm:text-4xl font-black text-foreground tracking-tight">
                   MADE IN CUBA DANCE FESTIVAL 2026
                 </h3>
-                <p className="text-xs sm:text-sm font-semibold text-amber-800 dark:text-amber-300">
+                <p className="text-xs sm:text-sm font-semibold text-amber-300">
                   Bournemouth • Friday 4, Saturday 5 &amp; Sunday 6 December 2026
                 </p>
                 <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed font-medium">
@@ -351,7 +351,7 @@ export default async function EventDetailPage({
                 <div className="grid gap-2.5 sm:grid-cols-3 text-xs">
                   <div className="p-3 rounded-xl border border-border/80 bg-muted/40 space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="font-black text-amber-700 dark:text-amber-400 uppercase tracking-wider text-[11px]">
+                      <span className="font-black text-amber-400 uppercase tracking-wider text-[11px]">
                         Friday 4 Dec
                       </span>
                     </div>
@@ -360,7 +360,7 @@ export default async function EventDetailPage({
                       Classes &amp; Welcome Party
                     </p>
                     <div className="pt-1">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
                         <MapPin className="h-2.5 w-2.5" /> BOH Studios Bournemouth
                       </span>
                     </div>
@@ -368,7 +368,7 @@ export default async function EventDetailPage({
 
                   <div className="p-3 rounded-xl border border-border/80 bg-muted/40 space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="font-black text-amber-700 dark:text-amber-400 uppercase tracking-wider text-[11px]">
+                      <span className="font-black text-amber-400 uppercase tracking-wider text-[11px]">
                         Saturday 5 Dec
                       </span>
                     </div>
@@ -378,7 +378,7 @@ export default async function EventDetailPage({
                       Classes, 2 Shows &amp; 2-Room Party
                     </p>
                     <div className="pt-1">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
                         <MapPin className="h-2.5 w-2.5" /> BOH Studios
                       </span>
                     </div>
@@ -386,7 +386,7 @@ export default async function EventDetailPage({
 
                   <div className="p-3 rounded-xl border border-border/80 bg-muted/40 space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="font-black text-amber-700 dark:text-amber-400 uppercase tracking-wider text-[11px]">
+                      <span className="font-black text-amber-400 uppercase tracking-wider text-[11px]">
                         Sunday 6 Dec
                       </span>
                     </div>
@@ -395,7 +395,7 @@ export default async function EventDetailPage({
                       Classes &amp; Social Dancing Finale
                     </p>
                     <div className="pt-1">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
                         <MapPin className="h-2.5 w-2.5" /> BOH Studios
                       </span>
                     </div>
@@ -407,7 +407,7 @@ export default async function EventDetailPage({
               <div className="rounded-xl border border-amber-500/30 bg-amber-500/15 p-3 flex items-center gap-2.5 text-xs">
                 <span className="text-lg">🔥</span>
                 <div>
-                  <span className="font-extrabold text-amber-900 dark:text-amber-200">
+                  <span className="font-extrabold text-amber-200">
                     ARTISTS ANNOUNCEMENT COMING SOON!
                   </span>
                   <p className="text-[11px] text-foreground/80">
@@ -440,7 +440,7 @@ export default async function EventDetailPage({
                   href="https://www.instagram.com/salsaexplosion/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-rose-700 dark:text-rose-400 hover:underline inline-flex items-center gap-1"
+                  className="font-bold text-rose-400 hover:underline inline-flex items-center gap-1"
                 >
                   <InstagramIcon className="h-3.5 w-3.5" />
                   <span>@salsaexplosion</span>
@@ -490,7 +490,7 @@ export default async function EventDetailPage({
               <div className="grid gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 space-y-1 text-center">
                   <span className="text-2xl font-black">🥇</span>
-                  <h4 className="text-sm font-black text-amber-800 dark:text-amber-300">1ST PRIZE</h4>
+                  <h4 className="text-sm font-black text-amber-300">1ST PRIZE</h4>
                   <p className="text-xs font-bold text-foreground">1 Made in Cuba Weekend Pass</p>
                 </div>
                 <div className="rounded-2xl border border-border bg-card p-4 space-y-1 text-center">
@@ -512,15 +512,15 @@ export default async function EventDetailPage({
                 </h4>
                 <div className="grid gap-2 sm:grid-cols-3 text-xs">
                   <div className="p-2.5 rounded-xl border bg-muted/40">
-                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">20:00 • Doors Open</span>
+                    <span className="font-extrabold text-amber-300 block">20:00 • Doors Open</span>
                     <span className="text-foreground">20:15 • Bachata Improvers onwards with Alex Spindlove</span>
                   </div>
                   <div className="p-2.5 rounded-xl border bg-muted/40">
-                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">21:15 • Workshop Rooms</span>
+                    <span className="font-extrabold text-amber-300 block">21:15 • Workshop Rooms</span>
                     <span className="text-foreground">Rueda De Casino Intermediates + Salsa/Timba Improvers &amp; Int</span>
                   </div>
                   <div className="p-2.5 rounded-xl border bg-muted/40">
-                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">22:00 – 02:00 • Fiesta</span>
+                    <span className="font-extrabold text-amber-300 block">22:00 – 02:00 • Fiesta</span>
                     <span className="text-foreground">SB&amp;K Social Dance Party with DJ Enrique</span>
                   </div>
                 </div>
@@ -617,14 +617,14 @@ export default async function EventDetailPage({
         {/* UK Consumer Rights Notice (Dated Leisure Events) */}
         <div className="rounded-2xl border border-amber-500/30 bg-amber-500/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2 text-foreground font-medium">
-            <ShieldCheck className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
+            <ShieldCheck className="h-4 w-4 text-amber-400 shrink-0" />
             <span>
               <strong className="font-extrabold">UK Consumer Notice:</strong> Under Regulation 28(1)(h) of the Consumer Contracts Regulations 2013, dated event tickets are exempt from cooling-off refunds; however, Salsa Explosion offers <strong>100% free dancer name transfers</strong> up to 48 hours before the event.
             </span>
           </div>
           <Link
             href="/terms#refunds"
-            className="font-bold text-amber-800 dark:text-amber-300 hover:underline shrink-0"
+            className="font-bold text-amber-300 hover:underline shrink-0"
           >
             Read Transfer Policy →
           </Link>

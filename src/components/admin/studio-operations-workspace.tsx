@@ -265,7 +265,7 @@ export function StudioOperationsWorkspace({
             <h4 className="text-lg font-black text-foreground">
               {waitingLeadsCount} Leads / {waitingFollowsCount} Follows
             </h4>
-            <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+            <span className="text-xs text-emerald-400 font-semibold">
               {Math.min(waitingLeadsCount, waitingFollowsCount)} Couple(s) Pairable
             </span>
           </div>
@@ -382,12 +382,12 @@ export function StudioOperationsWorkspace({
                         <Badge
                           className={`text-[10px] font-bold ${
                             b.status === "CONFIRMED"
-                              ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30"
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
                               : b.status === "COMPLETED"
                               ? "bg-muted text-muted-foreground"
                               : b.status === "CANCELLED"
-                              ? "bg-rose-500/10 text-rose-700 dark:text-rose-400"
-                              : "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/30"
+                              ? "bg-rose-500/10 text-rose-400"
+                              : "bg-amber-500/10 text-amber-400 border-amber-500/30"
                           }`}
                         >
                           {b.status}
@@ -449,7 +449,7 @@ export function StudioOperationsWorkspace({
                             variant="outline"
                             disabled={isPending}
                             onClick={() => handleUpdateBooking(b.id, "CANCELLED")}
-                            className="text-rose-600 hover:text-rose-700 border-rose-300 dark:border-rose-800 text-[11px] h-8 px-2 font-bold"
+                            className="text-rose-600 hover:text-rose-700 border-rose-800 text-[11px] h-8 px-2 font-bold"
                           >
                             <XCircle className="h-3.5 w-3.5" />
                           </Button>
@@ -500,10 +500,10 @@ export function StudioOperationsWorkspace({
                         <Badge
                           className={`text-[10px] font-bold ${
                             m.status === "COLLECTED"
-                              ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30"
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
                               : m.status === "CANCELLED"
-                              ? "bg-rose-500/10 text-rose-700 dark:text-rose-400"
-                              : "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/30"
+                              ? "bg-rose-500/10 text-rose-400"
+                              : "bg-amber-500/10 text-amber-400 border-amber-500/30"
                           }`}
                         >
                           {m.status}
@@ -546,7 +546,7 @@ export function StudioOperationsWorkspace({
                             variant="outline"
                             disabled={isPending}
                             onClick={() => handleUpdateMerch(m.id, "CANCELLED")}
-                            className="text-rose-600 hover:text-rose-700 border-rose-300 dark:border-rose-800 text-[11px] h-8 px-2 font-bold"
+                            className="text-rose-600 hover:text-rose-700 border-rose-800 text-[11px] h-8 px-2 font-bold"
                           >
                             <XCircle className="h-3.5 w-3.5" />
                           </Button>
@@ -609,10 +609,10 @@ export function StudioOperationsWorkspace({
                         <Badge
                           className={`text-[10px] font-bold ${
                             w.status === "PAIRED" || w.status === "NOTIFIED"
-                              ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30"
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
                               : w.status === "CANCELLED"
-                              ? "bg-rose-500/10 text-rose-700 dark:text-rose-400"
-                              : "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/30"
+                              ? "bg-rose-500/10 text-rose-400"
+                              : "bg-amber-500/10 text-amber-400 border-amber-500/30"
                           }`}
                         >
                           {w.status}
@@ -655,7 +655,7 @@ export function StudioOperationsWorkspace({
                             variant="outline"
                             disabled={isPending}
                             onClick={() => handleUpdateWaitlist(w.id, "CANCELLED")}
-                            className="text-rose-600 hover:text-rose-700 border-rose-300 dark:border-rose-800 text-[11px] h-8 px-2 font-bold"
+                            className="text-rose-600 hover:text-rose-700 border-rose-800 text-[11px] h-8 px-2 font-bold"
                           >
                             <XCircle className="h-3.5 w-3.5" />
                           </Button>
@@ -696,10 +696,10 @@ export function StudioOperationsWorkspace({
                       <Badge
                         className={`text-[10px] font-bold ${
                           fb.sentiment === "LOVED_IT"
-                            ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                            ? "bg-emerald-500/10 text-emerald-400"
                             : fb.sentiment === "A_BIT_OVERWHELMED"
-                            ? "bg-rose-500/10 text-rose-700 dark:text-rose-400"
-                            : "bg-sky-500/10 text-sky-700 dark:text-sky-400"
+                            ? "bg-rose-500/10 text-rose-400"
+                            : "bg-sky-500/10 text-sky-400"
                         }`}
                       >
                         {fb.sentiment.replace(/_/g, " ")}
@@ -757,8 +757,8 @@ export function StudioOperationsWorkspace({
                         <Badge
                           className={`text-[10px] font-bold shrink-0 ${
                             isAnswered
-                              ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30"
-                              : "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/30"
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
+                              : "bg-amber-500/10 text-amber-400 border-amber-500/30"
                           }`}
                         >
                           {q.status}

@@ -102,7 +102,7 @@ export default async function AboutPage() {
       {/* 2. Core Pillars & Academy Capabilities */}
       <section className="space-y-6">
         <div className="text-center space-y-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
             Our Dance Philosophy &amp; Capabilities
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -113,7 +113,7 @@ export default async function AboutPage() {
         <div className="grid gap-6 md:grid-cols-3">
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/15 text-blue-700 dark:text-blue-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/15 text-blue-300">
                 <Calendar className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -127,7 +127,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
                 <Award className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -141,7 +141,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-700 dark:text-amber-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-300">
                 <QrCode className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -155,7 +155,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-700 dark:text-amber-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-300">
                 <Users className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -169,7 +169,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/15 text-purple-700 dark:text-purple-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/15 text-purple-300">
                 <Flame className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -183,7 +183,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-500/15 text-rose-700 dark:text-rose-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-500/15 text-rose-300">
                 <Video className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -201,7 +201,7 @@ export default async function AboutPage() {
       <section className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
               Meet Our Faculty
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -234,7 +234,7 @@ export default async function AboutPage() {
                         {teacher.firstName} {teacher.lastName}
                       </h3>
                     </div>
-                    <p className="text-xs font-bold text-amber-700 dark:text-amber-400 mt-0.5">
+                    <p className="text-xs font-bold text-amber-400 mt-0.5">
                       {teacher.email === "enrique@salsaexplosion.co.uk" || teacher.firstName === "Enrique"
                         ? "Founder & Artistic Director"
                         : "Resident Faculty Instructor"}
@@ -249,7 +249,7 @@ export default async function AboutPage() {
 
                 {teacher.specialty && (
                   <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 text-xs">
-                    <span className="font-semibold text-amber-900 dark:text-amber-200">
+                    <span className="font-semibold text-amber-200">
                       Specialty: {teacher.specialty}
                     </span>
                   </div>
@@ -277,7 +277,7 @@ export default async function AboutPage() {
       {/* 4. Interactive Class Photo & Video Galleries */}
       <section className="space-y-6">
         <div className="space-y-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
             Studio Energy & Community
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -296,7 +296,7 @@ export default async function AboutPage() {
       <section className="rounded-3xl border bg-card p-6 sm:p-10 shadow-sm space-y-6">
         <div className="grid gap-8 lg:grid-cols-12 items-center">
           <div className="lg:col-span-6 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
               Our Havana Sanctuary
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">

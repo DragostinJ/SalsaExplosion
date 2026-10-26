@@ -77,20 +77,20 @@ export function AdminNotificationBell() {
   const getNotificationIcon = (type: StudioNotificationItem["type"]) => {
     switch (type) {
       case "congress":
-        return <Ticket className="h-4 w-4 text-purple-600 dark:text-purple-400" />;
+        return <Ticket className="h-4 w-4 text-purple-400" />;
       case "coaching":
-        return <CalendarPlus className="h-4 w-4 text-sky-600 dark:text-sky-400" />;
+        return <CalendarPlus className="h-4 w-4 text-sky-400" />;
       case "merch":
-        return <ShoppingBag className="h-4 w-4 text-rose-600 dark:text-rose-400" />;
+        return <ShoppingBag className="h-4 w-4 text-rose-400" />;
       case "grading":
-        return <Video className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />;
+        return <Video className="h-4 w-4 text-emerald-400" />;
       case "sentiment":
-        return <HeartHandshake className="h-4 w-4 text-amber-600 dark:text-amber-400" />;
+        return <HeartHandshake className="h-4 w-4 text-amber-400" />;
       case "question":
-        return <HelpCircle className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />;
+        return <HelpCircle className="h-4 w-4 text-indigo-400" />;
       case "ratio":
       default:
-        return <Users className="h-4 w-4 text-amber-600 dark:text-amber-400" />;
+        return <Users className="h-4 w-4 text-amber-400" />;
     }
   };
 
@@ -199,7 +199,7 @@ export function AdminNotificationBell() {
             <Link
               href="/admin/operations"
               onClick={() => setIsOpen(false)}
-              className="text-[11px] font-bold text-amber-700 dark:text-amber-400 hover:underline inline-flex items-center gap-1"
+              className="text-[11px] font-bold text-amber-400 hover:underline inline-flex items-center gap-1"
             >
               Desk Operations Hub
               <ChevronRight className="h-3 w-3" />

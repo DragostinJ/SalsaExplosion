@@ -48,7 +48,7 @@ export function InstructorNav() {
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
         <Badge
           variant="outline"
-          className="border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-semibold px-3 py-1 flex items-center gap-1.5"
+          className="border-emerald-500/30 bg-emerald-500/10 text-emerald-300 font-semibold px-3 py-1 flex items-center gap-1.5"
         >
           <ShieldCheck className="h-3.5 w-3.5" />
           Instructor & Teaching Desk Portal

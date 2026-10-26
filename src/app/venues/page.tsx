@@ -99,7 +99,7 @@ export default function VenuesGuidePage() {
               {/* Parking Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
-                  <Car className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                  <Car className="h-4 w-4 text-amber-400" />
                   Parking Advice:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
@@ -118,7 +118,7 @@ export default function VenuesGuidePage() {
               {/* Transit Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
-                  <Bus className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <Bus className="h-4 w-4 text-blue-400" />
                   Public Transit & Buses:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
@@ -194,7 +194,7 @@ export default function VenuesGuidePage() {
               {/* Parking Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
-                  <Car className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                  <Car className="h-4 w-4 text-emerald-400" />
                   Parking &amp; Venue Features:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
@@ -213,7 +213,7 @@ export default function VenuesGuidePage() {
               {/* Festival Schedule Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
-                  <Clock className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                  <Clock className="h-4 w-4 text-amber-400" />
                   Session Timetable:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
@@ -286,7 +286,7 @@ export default function VenuesGuidePage() {
               {/* Parking Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
-                  <Car className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <Car className="h-4 w-4 text-blue-400" />
                   Verified Parking &amp; Seafront Access:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
@@ -305,7 +305,7 @@ export default function VenuesGuidePage() {
               {/* Events Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
-                  <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <Clock className="h-4 w-4 text-blue-400" />
                   Seasonal Schedule:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
@@ -378,7 +378,7 @@ export default function VenuesGuidePage() {
               {/* Parking Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
-                  <Car className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                  <Car className="h-4 w-4 text-purple-400" />
                   Parking Advice:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
@@ -394,7 +394,7 @@ export default function VenuesGuidePage() {
               {/* Transit Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
-                  <Bus className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <Bus className="h-4 w-4 text-blue-400" />
                   Transit & Walking Distance:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">

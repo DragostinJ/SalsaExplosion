@@ -186,7 +186,7 @@ export function CubanCurriculumSkillTree({
                 <Sparkles className="h-3 w-3" />
                 2027 Modern Cuban Syllabus
               </Badge>
-              <Badge variant="outline" className="border-amber-500/40 text-amber-900 dark:text-amber-300 font-extrabold text-xs">
+              <Badge variant="outline" className="border-amber-500/40 text-amber-300 font-extrabold text-xs">
                 4 Levels • 5 Pillars
               </Badge>
             </div>
@@ -197,7 +197,7 @@ export function CubanCurriculumSkillTree({
 
           {/* Progress Overview Pill */}
           <div className="flex items-center gap-3 bg-muted/40 border p-2.5 rounded-2xl shrink-0">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/10 text-rose-800 dark:text-rose-300 font-black">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/10 text-rose-300 font-black">
               <Award className="h-5 w-5" />
             </div>
             <div className="text-xs">
@@ -207,7 +207,7 @@ export function CubanCurriculumSkillTree({
               <div className="text-[11px] text-muted-foreground font-semibold flex items-center gap-2">
                 <span>{progressPercent}% Complete</span>
                 {learningCount > 0 && (
-                  <span className="text-amber-800 dark:text-amber-400 font-bold">
+                  <span className="text-amber-400 font-bold">
                     • {learningCount} In Practice
                   </span>
                 )}
@@ -245,7 +245,7 @@ export function CubanCurriculumSkillTree({
                 <Badge className="bg-amber-800 text-white font-black text-[11px] tracking-wide uppercase px-2.5 py-0.5">
                   Maestro Enrique&apos;s Guidance
                 </Badge>
-                <span className="text-xs font-bold text-amber-800 dark:text-amber-300">
+                <span className="text-xs font-bold text-amber-300">
                   Relax &amp; Breathe • Zero Exam Pressure
                 </span>
               </div>
@@ -282,13 +282,13 @@ export function CubanCurriculumSkillTree({
 
           {/* First-Night 3 Essentials Spotlight Cards */}
           <div className="pt-2 border-t border-amber-500/20">
-            <span className="text-[11px] font-black uppercase tracking-wider text-amber-900 dark:text-amber-200 block mb-2">
+            <span className="text-[11px] font-black uppercase tracking-wider text-amber-200 block mb-2">
               Your First Night at BOH Studios (The Only 3 Things You Need):
             </span>
             <div tabIndex={0} role="region" aria-label="First night essentials spotlight" className="flex overflow-x-auto no-scrollbar gap-2 sm:grid sm:grid-cols-3 text-xs pb-1 sm:pb-0 focus:outline-none rounded-xl">
               <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-900 dark:text-amber-200">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-200">
                     1
                   </span>
                   <span>Paso Básico</span>
@@ -300,7 +300,7 @@ export function CubanCurriculumSkillTree({
 
               <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-900 dark:text-amber-200">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-200">
                     2
                   </span>
                   <span>Guapea</span>
@@ -312,7 +312,7 @@ export function CubanCurriculumSkillTree({
 
               <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-900 dark:text-amber-200">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-[10px] font-black text-amber-200">
                     3
                   </span>
                   <span>Dile Que No</span>
@@ -355,7 +355,7 @@ export function CubanCurriculumSkillTree({
                   <div className="font-black text-xs sm:text-sm text-foreground flex items-center justify-between">
                     <span className="truncate">{lvl}</span>
                     {lvl === "Beginner" && (
-                      <span className="text-[8px] sm:text-[9px] bg-amber-500/20 text-amber-900 dark:text-amber-200 px-1 py-0.2 sm:px-1.5 sm:py-0.5 rounded font-bold uppercase hidden sm:inline">
+                      <span className="text-[8px] sm:text-[9px] bg-amber-500/20 text-amber-200 px-1 py-0.2 sm:px-1.5 sm:py-0.5 rounded font-bold uppercase hidden sm:inline">
                         Start
                       </span>
                     )}
@@ -421,7 +421,7 @@ export function CubanCurriculumSkillTree({
                 type="button"
                 data-testid="toggle-all-maestro-tips"
                 onClick={() => setExpandAllTips(!expandAllTips)}
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-800 dark:text-amber-300 hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-300 hover:underline"
               >
                 <HelpCircle className="h-3.5 w-3.5" />
                 <span>{expandAllTips ? "Collapse All Maestro Tips" : "Expand All Maestro Tips"}</span>
@@ -481,7 +481,7 @@ export function CubanCurriculumSkillTree({
                             isMastered
                               ? "bg-emerald-600 text-white shadow-xs"
                               : isLearning
-                                ? "bg-amber-800 dark:bg-amber-700 text-white shadow-xs"
+                                ? "bg-amber-700 text-white shadow-xs"
                                 : "bg-muted text-muted-foreground hover:bg-muted/80"
                           }`}
                         >
@@ -533,10 +533,10 @@ export function CubanCurriculumSkillTree({
                         data-testid="toggle-skill-details"
                         aria-expanded={isExpanded}
                         onClick={() => toggleSkillExpanded(skill.id)}
-                        className="w-full flex items-center justify-between text-left text-xs font-bold text-amber-800 dark:text-amber-300 hover:text-foreground transition-all rounded-lg p-1.5 hover:bg-muted/40"
+                        className="w-full flex items-center justify-between text-left text-xs font-bold text-amber-300 hover:text-foreground transition-all rounded-lg p-1.5 hover:bg-muted/40"
                       >
                         <span className="flex items-center gap-1.5">
-                          <HelpCircle className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                          <HelpCircle className="h-3.5 w-3.5 text-amber-400" />
                           <span>
                             {isExpanded
                               ? "Hide Maestro Tip & Mechanics"
@@ -575,8 +575,8 @@ export function CubanCurriculumSkillTree({
 
                           {/* Un-Confuser Diagnostic Badge */}
                           <div className="rounded-xl border-2 border-rose-500/40 bg-rose-500/5 p-3 space-y-1">
-                            <div className="flex items-center gap-1.5 text-rose-800 dark:text-rose-300 font-black text-[11px] uppercase tracking-wider">
-                              <ShieldAlert className="h-3.5 w-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
+                            <div className="flex items-center gap-1.5 text-rose-300 font-black text-[11px] uppercase tracking-wider">
+                              <ShieldAlert className="h-3.5 w-3.5 text-rose-400 shrink-0" />
                               <span>Un-Confuser Diagnostic:</span>
                             </div>
                             <p className="text-xs text-foreground font-semibold leading-snug">
@@ -607,7 +607,7 @@ export function CubanCurriculumSkillTree({
                 <span className="text-sm font-black text-foreground">
                   Listen to Level Reference Songs ({levelSongs.length} Tracks)
                 </span>
-                <Badge variant="outline" className="text-[10px] font-bold border-amber-500/40 text-amber-800 dark:text-amber-300">
+                <Badge variant="outline" className="text-[10px] font-bold border-amber-500/40 text-amber-300">
                   Optional Listening
                 </Badge>
               </div>
@@ -639,7 +639,7 @@ export function CubanCurriculumSkillTree({
                           {song.artist} • <span className="font-mono">{song.bpm} BPM</span>
                         </p>
                       </div>
-                      <Badge variant="outline" className="text-[10px] font-bold border-amber-500/40 text-amber-900 dark:text-amber-300">
+                      <Badge variant="outline" className="text-[10px] font-bold border-amber-500/40 text-amber-300">
                         {song.subGenre}
                       </Badge>
                     </div>
@@ -667,7 +667,7 @@ export function CubanCurriculumSkillTree({
                         href={song.spotifySearchUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-extrabold text-rose-700 dark:text-rose-300 hover:underline text-[11px]"
+                        className="inline-flex items-center gap-1 font-extrabold text-rose-300 hover:underline text-[11px]"
                       >
                         Spotify <ExternalLink className="h-3 w-3" />
                       </a>

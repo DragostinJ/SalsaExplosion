@@ -398,7 +398,7 @@ export function ClassRecapVault({
               {/* Video Playback Speed Toolbar */}
               <div className="flex items-center justify-between border-b bg-muted/30 px-4 py-2 text-xs">
                 <span className="flex items-center gap-1.5 text-muted-foreground font-medium">
-                  <Gauge className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                  <Gauge className="h-3.5 w-3.5 text-amber-400" />
                   <span>Playback Speed:</span>
                 </span>
                 <div className="flex items-center gap-1">
@@ -468,7 +468,7 @@ export function ClassRecapVault({
                         variant="secondary"
                         className="px-2.5 py-1 text-xs font-semibold border"
                       >
-                        <Sparkles className="mr-1 h-3 w-3 text-amber-600 dark:text-amber-400" />
+                        <Sparkles className="mr-1 h-3 w-3 text-amber-400" />
                         {fig}
                       </Badge>
                     ))}
@@ -478,7 +478,7 @@ export function ClassRecapVault({
                 {/* Maestro Notes */}
                 {selectedRecap.recapNotes && (
                   <div className="rounded-xl border bg-muted/20 p-3.5 space-y-1 text-xs">
-                    <span className="font-bold text-amber-800 dark:text-amber-300">
+                    <span className="font-bold text-amber-300">
                       Maestro Coaching Notes:
                     </span>
                     <p className="text-muted-foreground leading-relaxed">
@@ -562,7 +562,7 @@ export function ClassRecapVault({
                       setSearchQuery("");
                       setLevelFilter("ALL");
                     }}
-                    className="text-amber-700 dark:text-amber-400 hover:underline"
+                    className="text-amber-400 hover:underline"
                   >
                     Clear Filters
                   </button>
@@ -656,7 +656,7 @@ export function ClassRecapVault({
                         />
                         <span>{recap.instructorName}</span>
                       </span>
-                      <span className="font-semibold text-amber-700 dark:text-amber-400 flex items-center gap-1">
+                      <span className="font-semibold text-amber-400 flex items-center gap-1">
                         <Play className="h-2.5 w-2.5 fill-current" />
                         Watch Video
                       </span>
@@ -712,7 +712,7 @@ export function ClassRecapVault({
               <div
                 className={`rounded-xl border p-3 text-xs font-semibold ${
                   attachFeedback.type === "success"
-                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-800 dark:text-emerald-300"
+                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
                     : "border-destructive/40 bg-destructive/10 text-destructive"
                 }`}
               >
@@ -749,7 +749,7 @@ export function ClassRecapVault({
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
-                    <Film className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                    <Film className="h-3.5 w-3.5 text-amber-400" />
                     <span>Upload Video File (Phone / PC)</span>
                   </button>
                   <button
@@ -761,7 +761,7 @@ export function ClassRecapVault({
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
-                    <Link2 className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                    <Link2 className="h-3.5 w-3.5 text-amber-400" />
                     <span>Paste Video Link (YouTube / URL)</span>
                   </button>
                 </div>
@@ -787,7 +787,7 @@ export function ClassRecapVault({
                             : "border-muted-foreground/30 hover:border-amber-500/60 hover:bg-muted/30"
                         }`}
                       >
-                        <UploadCloud className="h-7 w-7 text-amber-600 dark:text-amber-400 mb-1.5" />
+                        <UploadCloud className="h-7 w-7 text-amber-400 mb-1.5" />
                         <span className="font-bold text-xs text-foreground text-center">
                           Tap to choose or record recap video
                         </span>
@@ -808,7 +808,7 @@ export function ClassRecapVault({
                     ) : (
                       <div className="flex items-center justify-between rounded-xl border bg-muted/40 p-3">
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <Film className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
+                          <Film className="h-4 w-4 text-amber-400 shrink-0" />
                           <div className="min-w-0">
                             <p className="text-xs font-bold truncate">{selectedFile.name}</p>
                             <p className="text-[10px] text-muted-foreground">

@@ -140,10 +140,10 @@ export function StudentProgressionDirectory({
         {LEVEL_ORDER.map((lvl, idx) => {
           const count = levelCounts[lvl];
           const colors = [
-            "border-emerald-500/30 bg-emerald-500/5 text-emerald-700 dark:text-emerald-300",
-            "border-blue-500/30 bg-blue-500/5 text-blue-700 dark:text-blue-300",
-            "border-amber-500/30 bg-amber-500/5 text-amber-700 dark:text-amber-300",
-            "border-purple-500/30 bg-purple-500/5 text-purple-700 dark:text-purple-300",
+            "border-emerald-500/30 bg-emerald-500/5 text-emerald-300",
+            "border-blue-500/30 bg-blue-500/5 text-blue-300",
+            "border-amber-500/30 bg-amber-500/5 text-amber-300",
+            "border-purple-500/30 bg-purple-500/5 text-purple-300",
           ];
           return (
             <Card key={lvl} className={`border ${colors[idx]}`}>
@@ -171,7 +171,7 @@ export function StudentProgressionDirectory({
         <div
           className={`flex items-center justify-between rounded-xl border px-4 py-3 text-xs font-semibold ${
             feedbackBanner.type === "success"
-              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
               : "border-destructive/40 bg-destructive/10 text-destructive"
           }`}
         >
@@ -294,7 +294,7 @@ export function StudentProgressionDirectory({
                         {student.pendingSubmissionsCount > 0 && (
                           <Badge
                             variant="outline"
-                            className="border-amber-600 text-amber-800 dark:text-amber-300 flex items-center gap-1"
+                            className="border-amber-600 text-amber-300 flex items-center gap-1"
                           >
                             <Clock className="h-3 w-3" />
                             {student.pendingSubmissionsCount} Video Pending
@@ -309,7 +309,7 @@ export function StudentProgressionDirectory({
                         <span className="font-semibold text-muted-foreground">
                           Syllabus Tier:
                         </span>
-                        <span className="font-extrabold text-amber-800 dark:text-amber-300 flex items-center gap-1">
+                        <span className="font-extrabold text-amber-300 flex items-center gap-1">
                           <Sparkles className="h-3.5 w-3.5" />
                           {student.currentLevel}
                         </span>

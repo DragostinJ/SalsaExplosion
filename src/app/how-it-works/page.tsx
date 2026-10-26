@@ -82,7 +82,7 @@ export default function HowItWorksPage() {
       {/* 5 Core Pillars */}
       <section className="space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <Badge variant="outline" className="text-xs font-bold border-amber-500/40 text-amber-700 dark:text-amber-400">
+          <Badge variant="outline" className="text-xs font-bold border-amber-500/40 text-amber-400">
             The Salsa Explosion Difference
           </Badge>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -97,7 +97,7 @@ export default function HowItWorksPage() {
           {/* Pillar 1: No Partner Needed */}
           <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-700 dark:text-blue-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400">
                 <Users className="h-5 w-5" />
               </div>
               <Badge className="w-fit bg-blue-700 text-white text-[11px]">
@@ -113,9 +113,9 @@ export default function HowItWorksPage() {
             <CardContent className="pt-0">
               <div className="rounded-xl border bg-muted/30 p-3 space-y-2 text-xs">
                 <div className="flex justify-between font-semibold">
-                  <span className="text-blue-700 dark:text-blue-400">🕺 Lead Role</span>
-                  <span className="text-emerald-700 dark:text-emerald-300 font-bold">✓ 50/50 Synchronized</span>
-                  <span className="text-rose-700 dark:text-rose-400">💃 Follow Role</span>
+                  <span className="text-blue-400">🕺 Lead Role</span>
+                  <span className="text-emerald-300 font-bold">✓ 50/50 Synchronized</span>
+                  <span className="text-rose-400">💃 Follow Role</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="h-1.5 rounded-full bg-blue-600" />
@@ -128,7 +128,7 @@ export default function HowItWorksPage() {
           {/* Pillar 2: Studio Wallet & Credits */}
           <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-700 dark:text-amber-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
                 <CreditCard className="h-5 w-5" />
               </div>
               <Badge className="w-fit bg-amber-500 text-stone-950 font-bold text-[11px]">
@@ -143,7 +143,7 @@ export default function HowItWorksPage() {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.05] p-3 text-xs flex items-start gap-2">
-                <ShieldCheck className="h-4 w-4 text-emerald-700 dark:text-emerald-400 shrink-0 mt-0.5" />
+                <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                 <span className="text-muted-foreground leading-snug">
                   <strong>12-Hour Cancellation Window:</strong> Cancel at least 12 hours before class and your credit is immediately returned to your wallet automatically.
                 </span>
@@ -154,7 +154,7 @@ export default function HowItWorksPage() {
           {/* Pillar 3: 4-Tier Syllabus & AI Co-Pilot */}
           <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400">
                 <Award className="h-5 w-5" />
               </div>
               <Badge className="w-fit bg-emerald-700 text-white text-[11px]">
@@ -178,7 +178,7 @@ export default function HowItWorksPage() {
           {/* Pillar 4: 1-Second QR Check-In */}
           <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-purple-500/10 text-purple-700 dark:text-purple-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-purple-500/10 text-purple-400">
                 <QrCode className="h-5 w-5" />
               </div>
               <Badge className="w-fit bg-purple-700 text-white text-[11px]">
@@ -193,7 +193,7 @@ export default function HowItWorksPage() {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="rounded-xl border bg-muted/30 p-3 space-y-1 text-xs">
-                <div className="flex items-center gap-1.5 text-amber-700 dark:text-amber-400 font-bold">
+                <div className="flex items-center gap-1.5 text-amber-400 font-bold">
                   <Share2 className="h-3.5 w-3.5" />
                   <span>9:16 Instagram Story Badges</span>
                 </div>
@@ -207,7 +207,7 @@ export default function HowItWorksPage() {
           {/* Pillar 5: End-of-Class Video Recaps */}
           <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-700 dark:text-orange-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-400">
                 <Video className="h-5 w-5" />
               </div>
               <Badge className="w-fit bg-orange-700 text-white text-[11px]">
@@ -233,7 +233,7 @@ export default function HowItWorksPage() {
           {/* Pillar 6: Visiting Maestros & Events */}
           <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-rose-500/10 text-rose-700 dark:text-rose-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-rose-500/10 text-rose-400">
                 <Flame className="h-5 w-5" />
               </div>
               <Badge className="w-fit bg-rose-700 text-white text-[11px]">
@@ -326,7 +326,7 @@ export default function HowItWorksPage() {
       {/* 2027 Modern Cuban Salsa Curriculum: 4-Level Skill Tree & Gears Matrix */}
       <section className="space-y-8" aria-label="Cuban Salsa Syllabus and Musicality Roadmap">
         <div className="space-y-2 text-center max-w-2xl mx-auto">
-          <Badge variant="outline" className="text-xs font-bold border-amber-500/40 text-amber-700 dark:text-amber-400">
+          <Badge variant="outline" className="text-xs font-bold border-amber-500/40 text-amber-400">
             Official 2027 Modern Curriculum
           </Badge>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -354,7 +354,7 @@ export default function HowItWorksPage() {
               <Badge className="bg-primary-base text-white text-[11px] font-black uppercase tracking-wider">
                 Staff Operations
               </Badge>
-              <Badge variant="outline" className="border-amber-500/40 text-amber-800 dark:text-amber-300 font-bold text-xs">
+              <Badge variant="outline" className="border-amber-500/40 text-amber-300 font-bold text-xs">
                 Enrique & Teachers Guide
               </Badge>
             </div>
@@ -377,7 +377,7 @@ export default function HowItWorksPage() {
 
         <div className="grid gap-4 sm:grid-cols-3 text-xs">
           <div className="rounded-2xl border bg-card/80 p-4 space-y-2">
-            <div className="flex items-center gap-2 text-amber-700 dark:text-amber-400 font-black text-sm">
+            <div className="flex items-center gap-2 text-amber-400 font-black text-sm">
               <QrCode className="h-4 w-4" />
               <span>1. Self-Serve Door QR</span>
             </div>
@@ -387,7 +387,7 @@ export default function HowItWorksPage() {
           </div>
 
           <div className="rounded-2xl border bg-card/80 p-4 space-y-2">
-            <div className="flex items-center gap-2 text-rose-700 dark:text-rose-400 font-black text-sm">
+            <div className="flex items-center gap-2 text-rose-400 font-black text-sm">
               <Flame className="h-4 w-4" />
               <span>2. Live Camera Scanner</span>
             </div>
@@ -397,7 +397,7 @@ export default function HowItWorksPage() {
           </div>
 
           <div className="rounded-2xl border bg-card/80 p-4 space-y-2">
-            <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-black text-sm">
+            <div className="flex items-center gap-2 text-emerald-400 font-black text-sm">
               <Users className="h-4 w-4" />
               <span>3. 1-Tap Manual & A4 Backup</span>
             </div>

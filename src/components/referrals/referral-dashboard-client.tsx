@@ -148,7 +148,7 @@ export function ReferralDashboardClient({
 
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <span>Referral Code:</span>
-          <span className="font-mono font-black text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20">
+          <span className="font-mono font-black text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20">
             {referralCode}
           </span>
         </div>
@@ -170,7 +170,7 @@ export function ReferralDashboardClient({
           <div
             className={`rounded-xl border p-3.5 text-xs font-semibold ${
               feedback.type === "success"
-                ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
                 : "border-destructive/40 bg-destructive/10 text-destructive"
             }`}
           >

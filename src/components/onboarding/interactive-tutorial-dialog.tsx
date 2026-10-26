@@ -131,7 +131,7 @@ export function InteractiveTutorialDialog({
               <Flame className="h-4 w-4 sm:h-5 sm:w-5 fill-white" />
             </div>
             <div className="min-w-0">
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-700 dark:text-amber-400 block truncate">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-400 block truncate">
                 Interactive Dancer Guide • Step {step + 1} of 4
               </span>
               <h2
@@ -182,7 +182,7 @@ export function InteractiveTutorialDialog({
                 </div>
                 <p className="text-foreground leading-relaxed">
                   Unlike traditional dance schools where followers outnumber leaders, Salsa Explosion enforces{" "}
-                  <strong className="text-amber-700 dark:text-amber-400">equal Lead &amp; Follow slot caps</strong> on every class session.
+                  <strong className="text-amber-400">equal Lead &amp; Follow slot caps</strong> on every class session.
                 </p>
               </div>
 
@@ -235,7 +235,7 @@ export function InteractiveTutorialDialog({
                 <Link
                   href="/dashboard/schedule"
                   onClick={onClose}
-                  className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-amber-400 hover:underline"
                 >
                   <span>Open Live Schedule</span>
                   <ExternalLink className="h-3 w-3" />
@@ -257,7 +257,7 @@ export function InteractiveTutorialDialog({
                   </span>
                 </div>
                 <p className="text-foreground leading-relaxed">
-                  Every dancer starts with <strong className="text-emerald-700 dark:text-emerald-400">1 complimentary credit</strong>. No credit card required. Punchcards (5-pack, 10-pack) never expire!
+                  Every dancer starts with <strong className="text-emerald-400">1 complimentary credit</strong>. No credit card required. Punchcards (5-pack, 10-pack) never expire!
                 </p>
               </div>
 
@@ -290,7 +290,7 @@ export function InteractiveTutorialDialog({
                 <Link
                   href="/pricing"
                   onClick={onClose}
-                  className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 hover:underline"
                 >
                   <span>Open Passes &amp; Pricing</span>
                   <ExternalLink className="h-3 w-3" />
@@ -350,7 +350,7 @@ export function InteractiveTutorialDialog({
                   <p className="text-[11px] text-muted-foreground">
                     <strong>Key Moves:</strong> {tiers[demoTierIndex].moves}
                   </p>
-                  <p className="text-[10px] text-purple-700 dark:text-purple-300 font-medium bg-purple-50 dark:bg-purple-950/40 p-2 rounded-lg mt-1">
+                  <p className="text-[10px] text-purple-300 font-medium bg-purple-950/40 p-2 rounded-lg mt-1">
                     💡 {tiers[demoTierIndex].tip}
                   </p>
                 </div>
@@ -363,7 +363,7 @@ export function InteractiveTutorialDialog({
                   <Link
                     href="/how-it-works"
                     onClick={onClose}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-purple-700 dark:text-purple-400 hover:underline"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-purple-400 hover:underline"
                   >
                     <span>Open 2027 Syllabus</span>
                     <ExternalLink className="h-3 w-3" />
@@ -429,7 +429,7 @@ export function InteractiveTutorialDialog({
                 <Link
                   href="/music"
                   onClick={onClose}
-                  className="inline-flex items-center gap-1 text-xs font-bold text-rose-700 dark:text-rose-400 hover:underline"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-rose-400 hover:underline"
                 >
                   <span>Open Song Anatomy Player</span>
                   <ExternalLink className="h-3 w-3" />

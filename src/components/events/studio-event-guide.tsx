@@ -88,7 +88,7 @@ export function StudioEventGuide({
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="border-border/60 bg-background/50">
           <CardHeader className="pb-2">
-            <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+            <div className="flex items-center gap-2 text-amber-400">
               <MapPin className="h-4 w-4" />
               <CardTitle className="text-sm font-bold">Location</CardTitle>
             </div>
@@ -97,7 +97,7 @@ export function StudioEventGuide({
             <p className="font-semibold text-foreground">{venueName}</p>
             <p>104 Commercial Road</p>
             <p>Bournemouth, BH2 5LR</p>
-            <p className="text-[11px] text-amber-600 dark:text-amber-400 font-medium pt-1">
+            <p className="text-[11px] text-amber-400 font-medium pt-1">
               Next to The Triangle
             </p>
           </CardContent>
@@ -105,7 +105,7 @@ export function StudioEventGuide({
 
         <Card className="border-border/60 bg-background/50">
           <CardHeader className="pb-2">
-            <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+            <div className="flex items-center gap-2 text-amber-400">
               <Car className="h-4 w-4" />
               <CardTitle className="text-sm font-bold">Parking</CardTitle>
             </div>
@@ -114,7 +114,7 @@ export function StudioEventGuide({
             <p className="font-semibold text-foreground">Triangle Car Park</p>
             <p>2 mins walk (BH2 5RH)</p>
             <p>Avenue Rd Multi-Storey</p>
-            <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium pt-1">
+            <p className="text-[11px] text-emerald-400 font-medium pt-1">
               Free on-street after 18:00
             </p>
           </CardContent>
@@ -122,7 +122,7 @@ export function StudioEventGuide({
 
         <Card className="border-border/60 bg-background/50">
           <CardHeader className="pb-2">
-            <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+            <div className="flex items-center gap-2 text-amber-400">
               <GlassWater className="h-4 w-4" />
               <CardTitle className="text-sm font-bold">Licensed Bar</CardTitle>
             </div>
@@ -131,7 +131,7 @@ export function StudioEventGuide({
             <p className="font-semibold text-foreground">Authentic Cuban Rum</p>
             <p>Havana Club 3 & 7 Años</p>
             <p>Cold Beers, Ciders & Softs</p>
-            <p className="text-[11px] text-amber-600 dark:text-amber-400 font-medium pt-1">
+            <p className="text-[11px] text-amber-400 font-medium pt-1">
               Contactless accepted
             </p>
           </CardContent>
@@ -139,7 +139,7 @@ export function StudioEventGuide({
 
         <Card className="border-border/60 bg-background/50">
           <CardHeader className="pb-2">
-            <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+            <div className="flex items-center gap-2 text-amber-400">
               <Music2 className="h-4 w-4" />
               <CardTitle className="text-sm font-bold">Cuban Music</CardTitle>
             </div>
@@ -148,7 +148,7 @@ export function StudioEventGuide({
             <p className="font-semibold text-foreground">Curated by DJ Enrique</p>
             <p>Timba, Son, Salsa & Reparto</p>
             <p>Sensual Bachata Room (Saturdays)</p>
-            <p className="text-[11px] text-orange-600 dark:text-orange-400 font-medium pt-1">
+            <p className="text-[11px] text-orange-400 font-medium pt-1">
               Top Sound & Sprung Wood
             </p>
           </CardContent>
@@ -165,7 +165,7 @@ export function StudioEventGuide({
         </div>
         <div className="grid gap-3 sm:grid-cols-3 text-xs">
           <div className="rounded-xl border border-border/50 bg-card p-3 space-y-1">
-            <span className="font-bold text-amber-600 dark:text-amber-400 block">
+            <span className="font-bold text-amber-400 block">
               Phase 1 • 19:30
             </span>
             <p className="font-semibold text-foreground">Warm-up &amp; Technique</p>
@@ -174,7 +174,7 @@ export function StudioEventGuide({
             </p>
           </div>
           <div className="rounded-xl border border-border/50 bg-card p-3 space-y-1">
-            <span className="font-bold text-amber-600 dark:text-amber-400 block">
+            <span className="font-bold text-amber-400 block">
               Phase 2 • 20:30
             </span>
             <p className="font-semibold text-foreground">Partnerwork Combinations</p>
@@ -183,7 +183,7 @@ export function StudioEventGuide({
             </p>
           </div>
           <div className="rounded-xl border border-border/50 bg-card p-3 space-y-1">
-            <span className="font-bold text-amber-600 dark:text-amber-400 block">
+            <span className="font-bold text-amber-400 block">
               Phase 3 • 21:30 – Late
             </span>
             <p className="font-semibold text-foreground">Social Party Fiesta</p>

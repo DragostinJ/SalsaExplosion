@@ -85,14 +85,14 @@ export function CongressTravelGuide() {
       <div className="rounded-xl border border-amber-500/30 bg-amber-500/[0.04] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
         <div className="space-y-0.5">
           <span className="font-bold text-foreground flex items-center gap-1.5">
-            <MapPin className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
+            <MapPin className="h-4 w-4 text-amber-400 shrink-0" />
             Flagship Venue in Bournemouth Triangle
           </span>
           <p className="text-muted-foreground text-[11px] leading-relaxed">
             All 3 Days of Workshops, Shows &amp; Socials hosted at <strong className="text-foreground">BOH Studios Bournemouth</strong> (104 Commercial Rd, BH2 5LR).
           </p>
         </div>
-        <span className="text-[11px] font-bold text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2 py-1 rounded shrink-0">
+        <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 px-2 py-1 rounded shrink-0">
           Heart of Bournemouth
         </span>
       </div>
@@ -106,7 +106,7 @@ export function CongressTravelGuide() {
               <Badge className="bg-primary-base text-white font-bold text-[10px]">
                 Recommended Hotel Partner
               </Badge>
-              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+              <span className="text-xs font-semibold text-emerald-400">
                 Special Dancer Rate
               </span>
             </div>
@@ -127,7 +127,7 @@ export function CongressTravelGuide() {
             <div className="rounded-lg border border-border/80 bg-background/80 p-3 space-y-2">
               <div className="flex items-center justify-between font-semibold text-foreground">
                 <span>Dancer Block Rates (Code: <code className="text-primary font-mono">SALSA2026</code>)</span>
-                <span className="text-amber-600 dark:text-amber-400 font-bold">From £69/night</span>
+                <span className="text-amber-400 font-bold">From £69/night</span>
               </div>
               <ul className="space-y-1 text-[11px]">
                 <li className="flex items-center gap-1.5">
@@ -275,7 +275,7 @@ export function CongressTravelGuide() {
             <div className="flex items-center justify-between border-b border-amber-500/20 pb-2">
               <div>
                 <span className="text-sm font-bold text-foreground">Saturday, 5 December</span>
-                <span className="block text-[11px] text-amber-600 dark:text-amber-400 font-semibold">BOH Studios Bournemouth</span>
+                <span className="block text-[11px] text-amber-400 font-semibold">BOH Studios Bournemouth</span>
               </div>
               <Badge className="bg-primary-base text-white text-[10px] font-bold">
                 Gala Day

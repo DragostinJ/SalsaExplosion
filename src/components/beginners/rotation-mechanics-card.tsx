@@ -25,7 +25,7 @@ export function RotationMechanicsCard() {
                 <RotateCw className="mr-1 h-3 w-3 animate-spin duration-1000" />
                 The Rueda Dynamic
               </Badge>
-              <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">
+              <span className="text-xs font-semibold text-blue-300">
                 100% Equal Practice Time
               </span>
             </div>
@@ -39,7 +39,7 @@ export function RotationMechanicsCard() {
             variant="outline"
             size="sm"
             onClick={() => setIsExpanded((prev) => !prev)}
-            className="text-xs h-7 border-blue-500/30 text-blue-700 dark:text-blue-300 self-start sm:self-auto"
+            className="text-xs h-7 border-blue-500/30 text-blue-300 self-start sm:self-auto"
           >
             {isExpanded ? (
               <>
@@ -63,7 +63,7 @@ export function RotationMechanicsCard() {
         <div className="grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl border border-border/70 bg-card p-3 space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="font-extrabold text-blue-600 dark:text-blue-400 text-xs">
+              <span className="font-extrabold text-blue-400 text-xs">
                 Stage 1: Drill in Place
               </span>
               <span className="text-[10px] text-muted-foreground font-mono">Counts 1-2-3</span>
@@ -75,7 +75,7 @@ export function RotationMechanicsCard() {
 
           <div className="rounded-xl border border-amber-500/40 bg-amber-500/[0.05] p-3 space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="font-extrabold text-amber-700 dark:text-amber-400 text-xs">
+              <span className="font-extrabold text-amber-400 text-xs">
                 Stage 2: The Call &ldquo;¡Dame!&rdquo;
               </span>
               <span className="text-[10px] text-amber-700 font-bold">Switch!</span>
@@ -87,7 +87,7 @@ export function RotationMechanicsCard() {
 
           <div className="rounded-xl border border-border/70 bg-card p-3 space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="font-extrabold text-emerald-600 dark:text-emerald-400 text-xs">
+              <span className="font-extrabold text-emerald-400 text-xs">
                 Stage 3: Fresh Reset
               </span>
               <span className="text-[10px] text-muted-foreground font-mono">New Smile</span>

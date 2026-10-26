@@ -389,7 +389,7 @@ export function ClaveTrainerClient() {
               <div className="flex-1 space-y-1">
                 <div className="flex justify-between text-xs font-bold">
                   <span>Tempo:</span>
-                  <span className="font-mono text-amber-700 dark:text-amber-400">
+                  <span className="font-mono text-amber-400">
                     {tempo} BPM
                   </span>
                 </div>
@@ -544,7 +544,7 @@ export function ClaveTrainerClient() {
 
               {/* Maestro Note */}
               <div className="rounded-xl border border-amber-500/30 bg-amber-500/[0.04] p-3.5 space-y-1.5 text-xs">
-                <span className="font-bold text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
+                <span className="font-bold text-amber-300 flex items-center gap-1.5">
                   <Info className="h-3.5 w-3.5 text-amber-600" />
                   Maestro Enrique&apos;s Timing Advice:
                 </span>

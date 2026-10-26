@@ -151,13 +151,13 @@ export function CubanMusicHubClient() {
         {/* Tempo Breakdown Guide */}
         <div className="flex flex-wrap items-center gap-2 pt-2 border-t text-xs text-muted-foreground">
           <span className="font-bold text-foreground">Tempo & Genre Categories:</span>
-          <span className="rounded-full bg-blue-500/10 text-blue-800 dark:text-blue-300 px-2.5 py-0.5 font-semibold text-[11px]">
+          <span className="rounded-full bg-blue-500/10 text-blue-300 px-2.5 py-0.5 font-semibold text-[11px]">
             Slow Son (80–90 BPM)
           </span>
-          <span className="rounded-full bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 px-2.5 py-0.5 font-semibold text-[11px]">
+          <span className="rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-0.5 font-semibold text-[11px]">
             Classic Casino (95–102 BPM)
           </span>
-          <span className="rounded-full bg-orange-500/10 text-orange-800 dark:text-orange-300 px-2.5 py-0.5 font-semibold text-[11px]">
+          <span className="rounded-full bg-orange-500/10 text-orange-300 px-2.5 py-0.5 font-semibold text-[11px]">
             High-Energy Timba (105+ BPM)
           </span>
         </div>
@@ -230,9 +230,9 @@ export function CubanMusicHubClient() {
                   </div>
 
                   {/* Why This Song? Callout */}
-                  <div className="rounded-xl border border-amber-300/60 bg-amber-500/[0.05] dark:border-amber-500/20 dark:bg-amber-500/[0.04] p-3 space-y-1">
-                    <span className="text-[11px] font-bold text-amber-950 dark:text-amber-200 flex items-center gap-1.5">
-                      <Sparkles className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                  <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.04] p-3 space-y-1">
+                    <span className="text-[11px] font-bold text-amber-200 flex items-center gap-1.5">
+                      <Sparkles className="h-3.5 w-3.5 text-amber-400" />
                       Pedagogical Focus &amp; Why This Song:
                     </span>
                     <p className="text-xs text-stone-300 leading-relaxed">
@@ -300,7 +300,7 @@ export function CubanMusicHubClient() {
                             .getElementById("timba-song-anatomy-section")
                             ?.scrollIntoView({ behavior: "smooth" });
                         }}
-                        className="h-8 text-xs font-bold border-rose-700/30 text-rose-800 dark:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-950/30"
+                        className="h-8 text-xs font-bold border-rose-700/30 text-rose-300 hover:bg-rose-950/30"
                       >
                         <Compass className="mr-1.5 h-3.5 w-3.5" />
                         Song Map ↑

@@ -227,7 +227,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
             </div>
             <div className="flex flex-col shrink-0">
               <span className="text-lg font-black leading-none tracking-tight">
-                Salsa <span className="text-rose-700 dark:text-rose-400">Explosion</span>
+                Salsa <span className="text-rose-400">Explosion</span>
               </span>
               <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
                 Bournemouth • Cuba

@@ -67,7 +67,7 @@ export function DigitalEtiquetteModal({
 
         {/* Header */}
         <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-bold text-amber-700 dark:text-amber-400">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-bold text-amber-400">
             <ShieldCheck className="h-3.5 w-3.5 text-amber-600" />
             <span>Community Safety Protocol</span>
           </div>
@@ -82,7 +82,7 @@ export function DigitalEtiquetteModal({
         {/* 4 Pillars */}
         <div className="space-y-3 text-xs">
           <div className="rounded-xl border border-border/70 bg-muted/30 p-3.5 space-y-1">
-            <div className="flex items-center gap-2 font-bold text-amber-600 dark:text-amber-400">
+            <div className="flex items-center gap-2 font-bold text-amber-400">
               <Heart className="h-4 w-4 shrink-0" />
               <span>1. Gentle Frame & No Forceful Pulling</span>
             </div>
@@ -92,7 +92,7 @@ export function DigitalEtiquetteModal({
           </div>
 
           <div className="rounded-xl border border-border/70 bg-muted/30 p-3.5 space-y-1">
-            <div className="flex items-center gap-2 font-bold text-blue-600 dark:text-blue-400">
+            <div className="flex items-center gap-2 font-bold text-blue-400">
               <Users className="h-4 w-4 shrink-0" />
               <span>2. Equal Rotational Practice</span>
             </div>
@@ -102,7 +102,7 @@ export function DigitalEtiquetteModal({
           </div>
 
           <div className="rounded-xl border border-border/70 bg-muted/30 p-3.5 space-y-1">
-            <div className="flex items-center gap-2 font-bold text-emerald-600 dark:text-emerald-400">
+            <div className="flex items-center gap-2 font-bold text-emerald-400">
               <Sparkles className="h-4 w-4 shrink-0" />
               <span>3. Freshness & Floor Hygiene</span>
             </div>
@@ -112,7 +112,7 @@ export function DigitalEtiquetteModal({
           </div>
 
           <div className="rounded-xl border border-border/70 bg-muted/30 p-3.5 space-y-1">
-            <div className="flex items-center gap-2 font-bold text-rose-600 dark:text-rose-400">
+            <div className="flex items-center gap-2 font-bold text-rose-400">
               <ShieldCheck className="h-4 w-4 shrink-0" />
               <span>4. Zero Judgment & Safe Space</span>
             </div>

@@ -164,7 +164,7 @@ export function EventPassSelector({
         <div
           className={`rounded-xl border px-4 py-3 text-xs font-semibold ${
             banner.type === "success"
-              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
               : "border-destructive/40 bg-destructive/10 text-destructive"
           }`}
         >
@@ -238,7 +238,7 @@ export function EventPassSelector({
                         label={tier.userRegistration.qrCodeHash}
                       />
                     </div>
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-300">
                       Verified Door QR Pass ({tier.userRegistration.role})
                     </div>
                     <p className="text-[11px] text-muted-foreground">
@@ -255,7 +255,7 @@ export function EventPassSelector({
                         <span
                           className={`font-bold ${
                             remainingLeads !== null && remainingLeads <= 5
-                              ? "text-amber-600 dark:text-amber-400"
+                              ? "text-amber-400"
                               : ""
                           }`}
                         >
@@ -271,7 +271,7 @@ export function EventPassSelector({
                         <span
                           className={`font-bold ${
                             remainingFollows !== null && remainingFollows <= 5
-                              ? "text-amber-600 dark:text-amber-400"
+                              ? "text-amber-400"
                               : ""
                           }`}
                         >
@@ -290,7 +290,7 @@ export function EventPassSelector({
                   <Button
                     variant="secondary"
                     disabled
-                    className="w-full text-xs font-bold text-emerald-700 dark:text-emerald-300"
+                    className="w-full text-xs font-bold text-emerald-300"
                   >
                     <CheckCircle2 className="mr-1.5 h-4 w-4" />
                     Registered ({tier.userRegistration.qrCodeHash})
@@ -389,7 +389,7 @@ export function EventPassSelector({
             {/* Header */}
             <div className="flex items-start justify-between pb-3 border-b">
               <div>
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-0.5 text-[11px] font-bold text-amber-800 dark:text-amber-300 mb-1">
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-0.5 text-[11px] font-bold text-amber-300 mb-1">
                   <Sparkles className="h-3 w-3 text-amber-600" />
                   VIP Congress Upgrade
                 </div>
@@ -439,7 +439,7 @@ export function EventPassSelector({
                 <div className="flex-1 space-y-0.5 text-xs">
                   <div className="flex items-center justify-between font-bold">
                     <span>Official 2026 Congress T-Shirt</span>
-                    <span className="text-amber-700 dark:text-amber-400 font-extrabold">+£20</span>
+                    <span className="text-amber-400 font-extrabold">+£20</span>
                   </div>
                   <p className="text-[11px] text-muted-foreground leading-relaxed">
                     100% organic cotton Salsa Explosion UK festival tee. Sizes S–XXL collected at the BOH Studios welcome desk.
@@ -473,7 +473,7 @@ export function EventPassSelector({
                 <div className="flex-1 space-y-0.5 text-xs">
                   <div className="flex items-center justify-between font-bold">
                     <span>Maestro Private Masterclass</span>
-                    <span className="text-amber-700 dark:text-amber-400 font-extrabold">+£35</span>
+                    <span className="text-amber-400 font-extrabold">+£35</span>
                   </div>
                   <p className="text-[11px] text-muted-foreground leading-relaxed">
                     Exclusive 45-minute small-group footwork & body isolation clinic with Maestro Enrique Perez Valdes. Limited to 12 Casineros.
@@ -509,7 +509,7 @@ export function EventPassSelector({
               )}
               <div className="pt-1.5 border-t flex justify-between font-extrabold text-sm text-foreground">
                 <span>Total Amount:</span>
-                <span className="text-amber-700 dark:text-amber-400">
+                <span className="text-amber-400">
                   £
                   {upsellTarget.tier.priceInCents / 100 +
                     (addShirt ? 20 : 0) +

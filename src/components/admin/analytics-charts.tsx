@@ -70,7 +70,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Total Revenue
             </CardTitle>
-            <div className="rounded-lg bg-emerald-500/10 p-2 text-emerald-600 dark:text-emerald-400">
+            <div className="rounded-lg bg-emerald-500/10 p-2 text-emerald-400">
               <DollarSign className="h-4 w-4" />
             </div>
           </CardHeader>
@@ -89,7 +89,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Enrolled Students
             </CardTitle>
-            <div className="rounded-lg bg-blue-500/10 p-2 text-blue-600 dark:text-blue-400">
+            <div className="rounded-lg bg-blue-500/10 p-2 text-blue-400">
               <Users className="h-4 w-4" />
             </div>
           </CardHeader>
@@ -106,7 +106,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Active Bookings
             </CardTitle>
-            <div className="rounded-lg bg-amber-500/10 p-2 text-amber-600 dark:text-amber-400">
+            <div className="rounded-lg bg-amber-500/10 p-2 text-amber-400">
               <TrendingUp className="h-4 w-4" />
             </div>
           </CardHeader>
@@ -123,7 +123,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Pending Assessments
             </CardTitle>
-            <div className="rounded-lg bg-purple-500/10 p-2 text-purple-600 dark:text-purple-400">
+            <div className="rounded-lg bg-purple-500/10 p-2 text-purple-400">
               <Award className="h-4 w-4" />
             </div>
           </CardHeader>
@@ -140,7 +140,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Coaching Pipeline
             </CardTitle>
-            <div className="rounded-lg bg-sky-500/10 p-2 text-sky-600 dark:text-sky-400">
+            <div className="rounded-lg bg-sky-500/10 p-2 text-sky-400">
               <CalendarPlus className="h-4 w-4" />
             </div>
           </CardHeader>
@@ -159,7 +159,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Merch Desk Sales
             </CardTitle>
-            <div className="rounded-lg bg-rose-500/10 p-2 text-rose-600 dark:text-rose-400">
+            <div className="rounded-lg bg-rose-500/10 p-2 text-rose-400">
               <ShoppingBag className="h-4 w-4" />
             </div>
           </CardHeader>

@@ -194,7 +194,7 @@ export function ShopClient({
             BOH Studios Desk Collection: Reserved online, collected & fitted at Thursday or Sunday classes.
           </span>
         </div>
-        <Badge variant="outline" className="text-amber-800 dark:text-amber-300 font-bold border-amber-500/30">
+        <Badge variant="outline" className="text-amber-300 font-bold border-amber-500/30">
           Zero Delivery Fees • Cash or Card on Collection
         </Badge>
       </div>

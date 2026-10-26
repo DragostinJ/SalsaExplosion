@@ -191,10 +191,10 @@ export function VenueArrivalPlanner() {
                 }`}
               >
                 <div className="flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5 text-emerald-800 dark:text-emerald-300" />
+                  <Clock className="h-3.5 w-3.5 text-emerald-300" />
                   <span>Evening Class (After 18:00)</span>
                 </div>
-                <p className="text-[10px] text-emerald-800 dark:text-emerald-300 font-extrabold mt-0.5">
+                <p className="text-[10px] text-emerald-300 font-extrabold mt-0.5">
                   Best for Free Parking
                 </p>
               </button>
@@ -209,7 +209,7 @@ export function VenueArrivalPlanner() {
                 }`}
               >
                 <div className="flex items-center gap-1.5">
-                  <Car className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400" />
+                  <Car className="h-3.5 w-3.5 text-amber-400" />
                   <span>Daytime (Before 18:00)</span>
                 </div>
                 <p className="text-[10px] text-muted-foreground font-normal mt-0.5">
@@ -232,7 +232,7 @@ export function VenueArrivalPlanner() {
             <Badge
               className={`text-[10px] font-black ${
                 activeParking.isFree
-                  ? "bg-emerald-800 dark:bg-emerald-700 text-white"
+                  ? "bg-emerald-700 text-white"
                   : "bg-muted text-muted-foreground"
               }`}
             >
@@ -291,7 +291,7 @@ export function VenueArrivalPlanner() {
         {/* Late Night Safety & Reception Desk Support Card */}
         <div className="grid gap-3 sm:grid-cols-2 pt-2 border-t">
           <div className="rounded-2xl border bg-muted/20 p-4 space-y-1.5 text-xs">
-            <div className="flex items-center gap-1.5 text-emerald-800 dark:text-emerald-300 font-bold">
+            <div className="flex items-center gap-1.5 text-emerald-300 font-bold">
               <ShieldCheck className="h-4 w-4" />
               Late-Night Studio Safety
             </div>

@@ -50,7 +50,7 @@ export function FloorAmbassadorsCard() {
             <Heart className="mr-1 h-3 w-3 fill-zinc-950" />
             Floor Ambassadors
           </Badge>
-          <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">
+          <span className="text-xs font-semibold text-amber-400">
             Look for the Yellow Lanyard at BOH Studios
           </span>
         </div>
@@ -71,14 +71,14 @@ export function FloorAmbassadorsCard() {
             >
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-amber-800 dark:text-amber-300 font-bold text-xs ring-1 ring-amber-500/40">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-amber-300 font-bold text-xs ring-1 ring-amber-500/40">
                     {amb.avatarInitials}
                   </div>
                   <div className="min-w-0">
                     <h4 className="text-xs font-bold truncate text-foreground">
                       {amb.name}
                     </h4>
-                    <p className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold truncate">
+                    <p className="text-[10px] text-amber-400 font-semibold truncate">
                       {amb.role}
                     </p>
                   </div>

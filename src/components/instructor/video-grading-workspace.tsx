@@ -212,7 +212,7 @@ export function VideoGradingWorkspace({
             There are no pending student level-up videos in the queue right now.
           </p>
           {statusBanner?.type === "success" && (
-            <p className="mt-2 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+            <p className="mt-2 text-sm font-medium text-emerald-400">
               {statusBanner.text}
             </p>
           )}
@@ -228,7 +228,7 @@ export function VideoGradingWorkspace({
           role="alert"
           className={`flex items-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium ${
             statusBanner.type === "success"
-              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
               : "border-destructive/40 bg-destructive/10 text-destructive"
           }`}
         >
@@ -317,7 +317,7 @@ export function VideoGradingWorkspace({
                       <div className="flex items-center gap-1.5 text-sm font-semibold">
                         <span>{activeSubmission.currentLevel}</span>
                         <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-emerald-600 dark:text-emerald-400">
+                        <span className="text-emerald-400">
                           {activeSubmission.targetLevel}
                         </span>
                       </div>
@@ -406,7 +406,7 @@ export function VideoGradingWorkspace({
                     <div>
                       <div className="flex items-center gap-2">
                         <Sparkles className="h-4 w-4 text-amber-500" />
-                        <span className="text-xs font-extrabold uppercase tracking-wider text-amber-700 dark:text-amber-300">
+                        <span className="text-xs font-extrabold uppercase tracking-wider text-amber-300">
                           AI Dance Co-Pilot (Cuban Salsa Syllabus Pre-Grader)
                         </span>
                       </div>
@@ -437,7 +437,7 @@ export function VideoGradingWorkspace({
                           <span className="text-[10px] font-bold uppercase text-muted-foreground block">
                             Overall Score
                           </span>
-                          <span className="text-lg font-extrabold text-amber-600 dark:text-amber-400">
+                          <span className="text-lg font-extrabold text-amber-400">
                             {aiEvaluation.overallScore}/100
                           </span>
                         </div>
@@ -445,7 +445,7 @@ export function VideoGradingWorkspace({
                           <span className="text-[10px] font-bold uppercase text-muted-foreground block">
                             Clave Timing
                           </span>
-                          <span className="text-lg font-extrabold text-emerald-600 dark:text-emerald-400">
+                          <span className="text-lg font-extrabold text-emerald-400">
                             {aiEvaluation.claveTimingScore}%
                           </span>
                         </div>
@@ -453,7 +453,7 @@ export function VideoGradingWorkspace({
                           <span className="text-[10px] font-bold uppercase text-muted-foreground block">
                             Circular Frame
                           </span>
-                          <span className="text-lg font-extrabold text-blue-600 dark:text-blue-400">
+                          <span className="text-lg font-extrabold text-blue-400">
                             {aiEvaluation.circularFrameScore}%
                           </span>
                         </div>
@@ -461,7 +461,7 @@ export function VideoGradingWorkspace({
                           <span className="text-[10px] font-bold uppercase text-muted-foreground block">
                             Cuban Motion
                           </span>
-                          <span className="text-lg font-extrabold text-purple-600 dark:text-purple-400">
+                          <span className="text-lg font-extrabold text-purple-400">
                             {aiEvaluation.cubanMotionScore}%
                           </span>
                         </div>
@@ -507,7 +507,7 @@ export function VideoGradingWorkspace({
 
                 {/* Maestro Enrique Feedback Templates */}
                 <div className="space-y-2 rounded-xl border border-amber-500/30 bg-amber-500/[0.04] p-3">
-                  <div className="flex items-center justify-between text-xs font-bold text-amber-800 dark:text-amber-300">
+                  <div className="flex items-center justify-between text-xs font-bold text-amber-300">
                     <span className="flex items-center gap-1.5">
                       <Sparkles className="h-3.5 w-3.5 text-amber-600" />
                       Maestro Enrique Templates (1-Click Fill):

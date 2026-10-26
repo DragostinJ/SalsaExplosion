@@ -105,7 +105,7 @@ export function LevelMatcherQuiz() {
     >
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-primary-base/10 px-3 py-1 text-xs font-black text-rose-800 dark:text-rose-300">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-primary-base/10 px-3 py-1 text-xs font-black text-rose-300">
             <Sparkles className="h-3.5 w-3.5 text-primary-base" />
             <span>Interactive Level Finder • 15 Seconds</span>
           </div>
@@ -148,7 +148,7 @@ export function LevelMatcherQuiz() {
           <div className="rounded-2xl border border-emerald-500/40 bg-card p-6 shadow-sm space-y-4 animate-in fade-in duration-300">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3">
               <div>
-                <span className="text-[11px] font-black uppercase tracking-wider text-emerald-800 dark:text-emerald-300 bg-emerald-500/15 px-2.5 py-0.5 rounded-full inline-block mb-1">
+                <span className="text-[11px] font-black uppercase tracking-wider text-emerald-300 bg-emerald-500/15 px-2.5 py-0.5 rounded-full inline-block mb-1">
                   {result.badge}
                 </span>
                 <h3 className="text-lg sm:text-xl font-extrabold text-foreground">
@@ -172,7 +172,7 @@ export function LevelMatcherQuiz() {
             </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 text-xs">
-              <div className="flex items-center gap-1.5 text-rose-800 dark:text-rose-300 font-bold">
+              <div className="flex items-center gap-1.5 text-rose-300 font-bold">
                 <CheckCircle2 className="h-4 w-4 text-primary-base shrink-0" />
                 <span>{result.classTiming}</span>
               </div>

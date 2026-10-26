@@ -580,7 +580,7 @@ export function RuedaDictionaryClient() {
                     <h3 className="text-xl font-black tracking-tight text-foreground flex items-center gap-2">
                       {call.name}
                     </h3>
-                    <span className="text-xs font-mono font-semibold text-amber-700 dark:text-amber-400 flex items-center gap-1 mt-0.5">
+                    <span className="text-xs font-mono font-semibold text-amber-400 flex items-center gap-1 mt-0.5">
                       <Volume2 className="h-3 w-3" />
                       &ldquo;{call.phonetic}&rdquo;
                     </span>
@@ -602,7 +602,7 @@ export function RuedaDictionaryClient() {
                     </Badge>
 
                     {call.switchesPartner ? (
-                      <span className="text-[10px] font-semibold text-purple-700 dark:text-purple-300 flex items-center gap-1">
+                      <span className="text-[10px] font-semibold text-purple-300 flex items-center gap-1">
                         <Repeat className="h-3 w-3" />
                         Switches Partner
                       </span>
@@ -616,11 +616,11 @@ export function RuedaDictionaryClient() {
 
                 {/* Handhold & Entry/Exit Badges */}
                 <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                  <Badge variant="outline" className="text-[10px] font-semibold border-amber-500/30 bg-amber-500/5 text-amber-800 dark:text-amber-300">
+                  <Badge variant="outline" className="text-[10px] font-semibold border-amber-500/30 bg-amber-500/5 text-amber-300">
                     <Hand className="mr-1 h-2.5 w-2.5" />
                     {call.handholdType}
                   </Badge>
-                  <Badge variant="outline" className="text-[10px] font-semibold border-blue-500/30 bg-blue-500/5 text-blue-800 dark:text-blue-300">
+                  <Badge variant="outline" className="text-[10px] font-semibold border-blue-500/30 bg-blue-500/5 text-blue-300">
                     <Compass className="mr-1 h-2.5 w-2.5" />
                     {call.entryExitGeometry}
                   </Badge>
@@ -649,7 +649,7 @@ export function RuedaDictionaryClient() {
                     <span className="text-muted-foreground">{call.claveTiming}</span>
                   </div>
                   <div className="rounded-lg bg-amber-500/[0.04] border border-amber-500/20 p-2.5 space-y-0.5">
-                    <span className="font-bold text-amber-800 dark:text-amber-300 block">Maestro Tip:</span>
+                    <span className="font-bold text-amber-300 block">Maestro Tip:</span>
                     <span className="text-muted-foreground">{call.cantanteTip}</span>
                   </div>
                 </div>

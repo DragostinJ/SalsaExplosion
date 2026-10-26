@@ -335,7 +335,7 @@ export function SocialProofGrid() {
                     </div>
                   </div>
 
-                  <Badge variant="outline" className="text-[10px] font-semibold border-amber-500/30 text-amber-700 dark:text-amber-300">
+                  <Badge variant="outline" className="text-[10px] font-semibold border-amber-500/30 text-amber-300">
                     {item.level.split("•")[0]?.trim()}
                   </Badge>
                 </div>

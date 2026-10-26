@@ -63,7 +63,7 @@ export function PostClassCheckinModal({
 
         {/* Header */}
         <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-bold text-amber-700 dark:text-amber-400">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-xs font-bold text-amber-400">
             <Heart className="h-3.5 w-3.5 text-amber-600" />
             <span>Post-Class Check-In</span>
           </div>
@@ -77,7 +77,7 @@ export function PostClassCheckinModal({
 
         {submitted && encouragement ? (
           <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/[0.08] p-4 space-y-3 animate-in fade-in">
-            <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold text-sm">
+            <div className="flex items-center gap-2 text-emerald-300 font-bold text-sm">
               <CheckCircle2 className="h-5 w-5" />
               <span>Feedback Saved! Here&apos;s a Note From Maestro Enrique:</span>
             </div>

@@ -95,7 +95,7 @@ export function NewDancerOnboarding({
             variant="ghost"
             size="sm"
             onClick={triggerStudioTutorial}
-            className="h-7 text-xs font-bold text-amber-700 dark:text-amber-300 hover:text-amber-800"
+            className="h-7 text-xs font-bold text-amber-300 hover:text-amber-800"
           >
             <HelpCircle className="h-3 w-3 mr-1" />
             Quick Tour
@@ -117,7 +117,7 @@ export function NewDancerOnboarding({
     <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-amber-500/35 bg-gradient-to-br from-amber-500/[0.07] via-background to-orange-500/[0.04] p-4 sm:p-6 shadow-xs">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
         <div className="space-y-1">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[11px] font-bold text-amber-800 dark:text-amber-300">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[11px] font-bold text-amber-300">
             <Flame className="h-3 w-3 fill-amber-500 text-amber-600" />
             <span>New Dancer Quick Start</span>
           </div>
@@ -144,7 +144,7 @@ export function NewDancerOnboarding({
             asChild
             variant="outline"
             size="sm"
-            className="hidden sm:inline-flex h-7 sm:h-8 text-xs font-semibold px-2.5 sm:px-3 border-amber-500/30 text-amber-700 dark:text-amber-300"
+            className="hidden sm:inline-flex h-7 sm:h-8 text-xs font-semibold px-2.5 sm:px-3 border-amber-500/30 text-amber-300"
           >
             <Link href="/how-it-works">How It Works</Link>
           </Button>
@@ -182,12 +182,12 @@ export function NewDancerOnboarding({
               <div className="flex items-center justify-between">
                 <Badge
                   variant="outline"
-                  className="border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold text-[10px]"
+                  className="border-amber-500/40 bg-amber-500/10 text-amber-400 font-bold text-[10px]"
                 >
                   Step 1 • Partner Role
                 </Badge>
                 {roleSaved && (
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400">
                     <CheckCircle2 className="h-3 w-3" /> Saved
                   </span>
                 )}
@@ -208,7 +208,7 @@ export function NewDancerOnboarding({
                 onClick={() => handleSelectRole(DanceRole.LEAD)}
                 className={`rounded-lg border px-2 py-1.5 text-xs font-bold transition-all ${
                   roleSelected === DanceRole.LEAD
-                    ? "border-blue-600 bg-blue-500/15 text-blue-700 dark:text-blue-300 ring-1 ring-blue-500/40"
+                    ? "border-blue-600 bg-blue-500/15 text-blue-300 ring-1 ring-blue-500/40"
                     : "bg-muted/30 text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -220,7 +220,7 @@ export function NewDancerOnboarding({
                 onClick={() => handleSelectRole(DanceRole.FOLLOW)}
                 className={`rounded-lg border px-2 py-1.5 text-xs font-bold transition-all ${
                   roleSelected === DanceRole.FOLLOW
-                    ? "border-rose-600 bg-rose-500/15 text-rose-700 dark:text-rose-300 ring-1 ring-rose-500/40"
+                    ? "border-rose-600 bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/40"
                     : "bg-muted/30 text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -235,11 +235,11 @@ export function NewDancerOnboarding({
               <div className="flex items-center justify-between">
                 <Badge
                   variant="outline"
-                  className="border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-bold text-[10px]"
+                  className="border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-bold text-[10px]"
                 >
                   Step 2 • Your Tier
                 </Badge>
-                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400">
                   <CheckCircle2 className="h-3 w-3" /> Ready
                 </span>
               </div>
@@ -253,10 +253,10 @@ export function NewDancerOnboarding({
             </div>
 
             <div className="mt-3 flex items-center justify-between rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 text-xs">
-              <span className="font-semibold text-emerald-800 dark:text-emerald-200 text-[11px]">
+              <span className="font-semibold text-emerald-200 text-[11px]">
                 Wallet: {classCredits} Pass{classCredits === 1 ? "" : "es"}
               </span>
-              <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300">
+              <span className="text-[10px] font-bold text-emerald-300">
                 Active
               </span>
             </div>
@@ -268,12 +268,12 @@ export function NewDancerOnboarding({
               <div className="flex items-center justify-between">
                 <Badge
                   variant="outline"
-                  className="border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold text-[10px]"
+                  className="border-amber-500/40 bg-amber-500/10 text-amber-400 font-bold text-[10px]"
                 >
                   Step 3 • Reserve
                 </Badge>
                 {hasActiveBooking && (
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400">
                     <CheckCircle2 className="h-3 w-3" /> Booked!
                   </span>
                 )}

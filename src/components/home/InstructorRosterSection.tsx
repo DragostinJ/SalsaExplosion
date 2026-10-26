@@ -358,7 +358,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   <Calendar className="h-4 w-4 text-primary-base" />
                   <span>Teaching Schedule at BOH Studios</span>
                 </div>
-                <p className="text-xs text-muted-foreground dark:text-stone-300 leading-relaxed pl-6">
+                <p className="text-xs text-stone-300 leading-relaxed pl-6">
                   {selectedInstructor.teachingDays}
                 </p>
               </div>

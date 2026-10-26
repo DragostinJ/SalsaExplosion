@@ -134,7 +134,7 @@ export function ProgressionJourneyTabs({
         >
           {/* Reassurance Callout for Video Feedback */}
           <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4 sm:p-5 flex items-start gap-3">
-            <HeartHandshake className="h-5 w-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+            <HeartHandshake className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
             <div className="space-y-1 text-xs leading-relaxed">
               <span className="font-bold text-foreground block">
                 Video Submissions are 100% Optional

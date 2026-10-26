@@ -109,7 +109,7 @@ export function DanceVouchersShowcase({
               href="https://wa.me/447969633701?text=Hi%20Enrique%2C%20I%20would%20like%20to%20order%20a%20Cuban%20Salsa%20Dance%20Voucher%20please!"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-emerald-500/40 bg-emerald-500/10 px-6 py-3.5 text-sm font-black text-emerald-800 dark:text-emerald-300 hover:bg-emerald-500/20 transition-all min-h-11"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-emerald-500/40 bg-emerald-500/10 px-6 py-3.5 text-sm font-black text-emerald-300 hover:bg-emerald-500/20 transition-all min-h-11"
             >
               <MessageSquare className="h-4 w-4" />
               WhatsApp Maestro Enrique

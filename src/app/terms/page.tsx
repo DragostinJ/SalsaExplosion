@@ -84,13 +84,13 @@ export default function TermsAndLegalPage() {
               </div>
               <div>
                 <span className="block font-bold text-muted-foreground uppercase text-[10px]">Email Enquiries</span>
-                <a href="mailto:info@salsaexplosion.co.uk" className="font-extrabold text-rose-800 dark:text-rose-400 hover:underline">
+                <a href="mailto:info@salsaexplosion.co.uk" className="font-extrabold text-rose-400 hover:underline">
                   info@salsaexplosion.co.uk
                 </a>
               </div>
               <div>
                 <span className="block font-bold text-muted-foreground uppercase text-[10px]">Studio Desk Phone & WhatsApp</span>
-                <a href="tel:+447969633701" className="font-extrabold text-rose-800 dark:text-rose-400 hover:underline">
+                <a href="tel:+447969633701" className="font-extrabold text-rose-400 hover:underline">
                   07969 633701
                 </a>
               </div>
@@ -121,7 +121,7 @@ export default function TermsAndLegalPage() {
             <div className="space-y-4">
               {/* Unused Credit Packs */}
               <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-2">
-                <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-sm">
+                <div className="flex items-center gap-2 text-emerald-300 font-bold text-sm">
                   <CheckCircle2 className="h-4 w-4 shrink-0" />
                   <h3>Unused Class Credit Packs & Gift Vouchers — 14-Day Statutory Cooling-Off Period</h3>
                 </div>
@@ -142,7 +142,7 @@ export default function TermsAndLegalPage() {
 
               {/* Dated Congress & Special Events */}
               <div className="rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 space-y-2">
-                <div className="flex items-center gap-2 text-amber-900 dark:text-amber-300 font-bold text-sm">
+                <div className="flex items-center gap-2 text-amber-300 font-bold text-sm">
                   <AlertCircle className="h-4 w-4 shrink-0" />
                   <h3>Dated Events & Weekend Congresses (Regulation 28(1)(h) Exemption)</h3>
                 </div>
@@ -250,7 +250,7 @@ export default function TermsAndLegalPage() {
             </ul>
 
             <p className="font-semibold text-foreground pt-1">
-              <strong>Your Rights:</strong> Under UK GDPR, you have the right to access your personal data, request correction of errors, or request total account deletion (&ldquo;Right to be Forgotten&rdquo;). To make a Subject Access Request (SAR) or delete your account, email our Data Privacy Officer at <a href="mailto:info@salsaexplosion.co.uk" className="text-rose-800 dark:text-rose-400 font-extrabold underline">info@salsaexplosion.co.uk</a>. We respond within 30 days free of charge.
+              <strong>Your Rights:</strong> Under UK GDPR, you have the right to access your personal data, request correction of errors, or request total account deletion (&ldquo;Right to be Forgotten&rdquo;). To make a Subject Access Request (SAR) or delete your account, email our Data Privacy Officer at <a href="mailto:info@salsaexplosion.co.uk" className="text-rose-400 font-extrabold underline">info@salsaexplosion.co.uk</a>. We respond within 30 days free of charge.
             </p>
           </CardContent>
         </Card>

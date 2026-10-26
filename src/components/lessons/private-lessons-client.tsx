@@ -291,7 +291,7 @@ export function PrivateLessonsClient({
                         </span>
                         <span className="text-[10px] text-muted-foreground">/hr</span>
                       </div>
-                      <span className={`text-[11px] font-bold ${isSelected ? "text-amber-900 dark:text-amber-300" : "text-muted-foreground"}`}>
+                      <span className={`text-[11px] font-bold ${isSelected ? "text-amber-300" : "text-muted-foreground"}`}>
                         {isSelected ? "Selected" : "Select Coach"}
                       </span>
                     </div>
@@ -326,7 +326,7 @@ export function PrivateLessonsClient({
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Fast diagnosis and targeted corrections for specific figures, styling habits, or musical timing.
                 </p>
-                <div className="text-[11px] font-semibold text-amber-700 dark:text-amber-400">
+                <div className="text-[11px] font-semibold text-amber-400">
                   Ideal for quick tune-ups before a social party.
                 </div>
               </div>
@@ -353,7 +353,7 @@ export function PrivateLessonsClient({
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   Comprehensive syllabus transformation: body isolations, dynamic leading tension, and musical interpretation.
                 </p>
-                <div className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400">
+                <div className="text-[11px] font-semibold text-emerald-400">
                   Recommended for rapid level advancement or wedding routines.
                 </div>
               </div>

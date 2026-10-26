@@ -91,7 +91,7 @@ export function AnonymousQuestionBox() {
             <Lock className="mr-1 h-3 w-3" />
             100% Anonymous
           </Badge>
-          <span className="text-xs font-semibold text-purple-700 dark:text-purple-300">
+          <span className="text-xs font-semibold text-purple-300">
             Zero Judgment Ask Box
           </span>
         </div>
@@ -129,7 +129,7 @@ export function AnonymousQuestionBox() {
         {/* Submit Custom Question Form */}
         {reassurance ? (
           <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/[0.08] p-4 space-y-2 animate-in fade-in">
-            <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold text-xs">
+            <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs">
               <CheckCircle2 className="h-4 w-4" />
               <span>Question Received & Reassurance from Maestro Enrique:</span>
             </div>
@@ -222,7 +222,7 @@ export function AnonymousQuestionBox() {
             </div>
 
             {errorMessage && (
-              <p className="text-[11px] font-semibold text-rose-600 dark:text-rose-400">
+              <p className="text-[11px] font-semibold text-rose-400">
                 {errorMessage}
               </p>
             )}

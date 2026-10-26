@@ -12,6 +12,7 @@ import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { BackButton } from "@/components/navigation/back-button";
 import { QrCheckInCard } from "@/components/schedule/qr-checkin-card";
+import { reportError } from "@/lib/monitoring";
 
 interface CheckInPageProps {
   params: Promise<{ sessionId: string }>;
@@ -41,7 +42,7 @@ export default async function StudentQrCheckInPage({
       },
     });
   } catch (err) {
-    console.error("[StudentQrCheckInPage:classSession]", err);
+    reportError("StudentQrCheckInPage:classSession", err);
   }
 
   if (!classSession) {

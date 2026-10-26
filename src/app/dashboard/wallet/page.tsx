@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/card";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
+import { reportError } from "@/lib/monitoring";
 import { PASS_PRICING_LIST, VENUE_INFO } from "@/lib/academy-data";
 
 export const metadata = {
@@ -259,7 +260,7 @@ export default async function StudentWalletPage() {
     transactions = tx;
   } catch (walletErr) {
     loadFailed = true;
-    console.error("[StudentWalletPage:dataFetch]", walletErr);
+    reportError("StudentWalletPage:dataFetch", walletErr);
   }
 
   const hasActiveSub = subscription?.status === "ACTIVE";

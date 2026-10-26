@@ -31,6 +31,7 @@ import {
   StudentContext,
 } from "@/components/schedule/class-schedule-card";
 import { NewDancerOnboarding } from "@/components/schedule/new-dancer-onboarding";
+import { reportError } from "@/lib/monitoring";
 import dynamic from "next/dynamic";
 
 const BeginnerSafetyHub = dynamic(
@@ -207,7 +208,7 @@ export default async function StudentSchedulePage({
     });
   } catch (classQueryErr) {
     loadFailed = true;
-    console.error("[StudentSchedulePage:classesQuery]", classQueryErr);
+    reportError("StudentSchedulePage:classesQuery", classQueryErr);
   }
 
   // 5. Transform Database Records into Serializable Client Props

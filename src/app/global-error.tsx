@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { RotateCcw } from "lucide-react";
+import { reportError } from "@/lib/monitoring";
 
 export default function GlobalError({
   error,
@@ -11,7 +12,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("[Global Error Crash]", error);
+    reportError("Global Error Crash", error);
   }, [error]);
 
   return (

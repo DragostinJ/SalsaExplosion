@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { RotateCcw, Home, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { reportError } from "@/lib/monitoring";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -13,7 +14,7 @@ interface ErrorProps {
 export default function ErrorBoundary({ error, reset }: ErrorProps) {
   useEffect(() => {
     // Log exception safely to diagnostics without exposing details to user
-    console.error("[Salsa Explosion Boundary]", error);
+    reportError("Salsa Explosion Boundary", error);
   }, [error]);
 
   return (

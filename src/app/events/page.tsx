@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { BackButton } from "@/components/navigation/back-button";
 import { VENUE_INFO, ACADEMY_METRICS, UPCOMING_EVENTS } from "@/lib/academy-data";
+import { reportError } from "@/lib/monitoring";
 
 export const metadata = {
   title: "DANZA! 2026 | 2027 & Salsa Explosion Congresses | Bournemouth",
@@ -25,7 +26,7 @@ export default async function EventsDirectoryPage() {
   try {
     events = await getCachedUpcomingEvents(20);
   } catch (err) {
-    console.error("[EventsDirectoryPage:getCachedUpcomingEvents]", err);
+    reportError("EventsDirectoryPage:getCachedUpcomingEvents", err);
   }
 
   // Fallback to canonical events if database is empty or connection pooler is degraded

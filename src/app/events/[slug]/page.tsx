@@ -40,6 +40,7 @@ import { AddToCalendarButton } from "@/components/calendar/add-to-calendar-butto
 import { CongressTravelGuide } from "@/components/events/congress-travel-guide";
 import { StudioEventGuide } from "@/components/events/studio-event-guide";
 import { UPCOMING_EVENTS, VENUE_INFO } from "@/lib/academy-data";
+import { reportError } from "@/lib/monitoring";
 
 interface EventDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -60,7 +61,7 @@ export async function generateMetadata({
       },
     });
   } catch (err) {
-    console.error("[EventDetailPage:generateMetadata]", err);
+    reportError("EventDetailPage:generateMetadata", err);
   }
 
   if (!event) {
@@ -114,7 +115,7 @@ export default async function EventDetailPage({
   try {
     currentUser = await getOrProvisionCurrentUser();
   } catch (err) {
-    console.error("[EventDetailPage:getOrProvisionCurrentUser]", err);
+    reportError("EventDetailPage:getOrProvisionCurrentUser", err);
   }
 
   let event = null;
@@ -140,7 +141,7 @@ export default async function EventDetailPage({
       },
     });
   } catch (err) {
-    console.error("[EventDetailPage:eventQuery]", err);
+    reportError("EventDetailPage:eventQuery", err);
   }
 
   // Fallback to canonical UPCOMING_EVENTS if database is cold or degraded

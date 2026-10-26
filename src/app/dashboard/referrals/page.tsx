@@ -10,6 +10,7 @@ import {
   ReferralStats,
 } from "@/components/referrals/referral-dashboard-client";
 import { VENUE_INFO } from "@/lib/academy-data";
+import { reportError } from "@/lib/monitoring";
 
 export const metadata = {
   title: "Refer a Dancer | Give 1 Class, Get 1 Class | Salsa Explosion",
@@ -113,7 +114,7 @@ export default async function ReferralsPage() {
     redeemedRecord = redeemed;
   } catch (err) {
     loadFailed = true;
-    console.error("[ReferralsPage:queries]", err);
+    reportError("ReferralsPage:queries", err);
   }
 
   const stats: ReferralStats = {

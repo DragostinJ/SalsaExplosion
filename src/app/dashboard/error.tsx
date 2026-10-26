@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { RotateCcw, AlertCircle, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { reportError } from "@/lib/monitoring";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -12,7 +13,7 @@ interface ErrorProps {
 
 export default function DashboardErrorBoundary({ error, reset }: ErrorProps) {
   useEffect(() => {
-    console.error("[Dashboard Boundary]", error);
+    reportError("Dashboard Boundary", error);
   }, [error]);
 
   return (

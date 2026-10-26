@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { RotateCcw, ShieldAlert, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { reportError } from "@/lib/monitoring";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -12,7 +13,7 @@ interface ErrorProps {
 
 export default function AdminErrorBoundary({ error, reset }: ErrorProps) {
   useEffect(() => {
-    console.error("[Admin Boundary]", error);
+    reportError("Admin Boundary", error);
   }, [error]);
 
   return (

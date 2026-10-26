@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { RotateCcw, AlertCircle, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { reportError } from "@/lib/monitoring";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -12,7 +13,7 @@ interface ErrorProps {
 
 export default function InstructorErrorBoundary({ error, reset }: ErrorProps) {
   useEffect(() => {
-    console.error("[Instructor Boundary]", error);
+    reportError("Instructor Boundary", error);
   }, [error]);
 
   return (

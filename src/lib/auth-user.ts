@@ -3,6 +3,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { DanceLevel, DanceRole, Role } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { isNextControlFlowError } from "@/lib/safe-url";
+import { reportError } from "@/lib/monitoring";
 
 /** Complimentary credits granted to a brand-new student account. */
 export const WELCOME_CREDITS = 1;
@@ -66,7 +67,7 @@ export async function getOrProvisionCurrentUser() {
     if (isNextControlFlowError(authErr)) {
       throw authErr;
     }
-    console.error("[getOrProvisionCurrentUser:auth]", authErr);
+    reportError("getOrProvisionCurrentUser:auth", authErr);
     return null;
   }
 
@@ -132,7 +133,7 @@ export async function getOrProvisionCurrentUser() {
     if (isNextControlFlowError(dbErr)) {
       throw dbErr;
     }
-    console.error("[getOrProvisionCurrentUser:db]", dbErr);
+    reportError("getOrProvisionCurrentUser:db", dbErr);
     // Graceful in-memory fallback prevents 500 error when database connection pooler is degraded
     return {
       id: `fallback-${clerkId}`,

@@ -28,6 +28,7 @@ import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import { StudentVideoUploadDropzone } from "@/components/progression/video-upload-dropzone";
 import { PromotionCertificateCard } from "@/components/progression/promotion-certificate-card";
 import { AttendanceMilestonesCard } from "@/components/progression/attendance-milestones-card";
+import { reportError } from "@/lib/monitoring";
 import { ProgressionJourneyTabs } from "@/components/progression/progression-journey-tabs";
 import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curriculum-skill-tree";
 import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
@@ -100,7 +101,7 @@ export default async function ProgressionPage() {
     attendedBookings = bookings;
   } catch (err) {
     loadFailed = true;
-    console.error("[ProgressionPage:queries]", err);
+    reportError("ProgressionPage:queries", err);
   }
 
   const pendingSubmission = submissions.find(
@@ -135,7 +136,7 @@ export default async function ProgressionPage() {
     hasCongressPass = Boolean(congressReg);
   } catch (regErr) {
     loadFailed = true;
-    console.error("[ProgressionPage:congressReg]", regErr);
+    reportError("ProgressionPage:congressReg", regErr);
   }
 
   const isMaxLevel = user.currentLevel === DanceLevel.ADVANCED;

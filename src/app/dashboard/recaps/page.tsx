@@ -9,6 +9,7 @@ import {
 import { ClassRecapVault } from "@/components/recaps/class-recap-vault";
 import { PageHeader } from "@/components/layout/page-header";
 import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
+import { reportError } from "@/lib/monitoring";
 
 export const metadata = {
   title: "Class Recaps & Attended Figures | Salsa Explosion",
@@ -51,7 +52,7 @@ export default async function ClassRecapsPage() {
       });
     } catch (err) {
       loadFailed = true;
-      console.error("[ClassRecapsPage:activeClasses]", err);
+      reportError("ClassRecapsPage:activeClasses", err);
     }
   }
 

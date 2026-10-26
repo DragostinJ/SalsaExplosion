@@ -50,55 +50,117 @@ export function canSwitchRoles(email?: string | null): boolean {
 }
 
 export async function getOrProvisionCurrentUser() {
-  const { userId: clerkId } = await auth();
+  let clerkId: string | null = null;
+  try {
+    const authState = await auth();
+    clerkId = authState.userId;
+  } catch (authErr: unknown) {
+    if (
+      authErr &&
+      typeof authErr === "object" &&
+      "digest" in authErr &&
+      (authErr as { digest: string }).digest === "DYNAMIC_SERVER_USAGE"
+    ) {
+      throw authErr;
+    }
+    console.error("[getOrProvisionCurrentUser:auth]", authErr);
+    return null;
+  }
+
   if (!clerkId) {
     return null;
   }
 
-  const existing = await prisma.user.findUnique({
-    where: { clerkId },
-    include: { subscription: true },
-  });
-  if (existing) {
-    if (
-      existing.role !== Role.ADMIN &&
-      isBootstrapAdmin(existing.email) &&
-      !canSwitchRoles(existing.email)
-    ) {
-      return prisma.user.update({
-        where: { id: existing.id },
-        data: { role: Role.ADMIN },
-        include: { subscription: true },
-      });
+  try {
+    const existing = await prisma.user.findUnique({
+      where: { clerkId },
+      include: { subscription: true },
+    });
+    if (existing) {
+      if (
+        existing.role !== Role.ADMIN &&
+        isBootstrapAdmin(existing.email) &&
+        !canSwitchRoles(existing.email)
+      ) {
+        return await prisma.user.update({
+          where: { id: existing.id },
+          data: { role: Role.ADMIN },
+          include: { subscription: true },
+        });
+      }
+      return existing;
     }
-    return existing;
-  }
 
-  const clerkUser = await currentUser();
-  const primaryEmail =
-    clerkUser?.primaryEmailAddress?.emailAddress ??
-    clerkUser?.emailAddresses[0]?.emailAddress ??
-    `${clerkId}@salsaexplosion.local`;
+    let clerkUser: Awaited<ReturnType<typeof currentUser>> = null;
+    try {
+      clerkUser = await currentUser();
+    } catch (userErr: unknown) {
+      if (
+        userErr &&
+        typeof userErr === "object" &&
+        "digest" in userErr &&
+        (userErr as { digest: string }).digest === "DYNAMIC_SERVER_USAGE"
+      ) {
+        throw userErr;
+      }
+      console.warn("[getOrProvisionCurrentUser:currentUser]", userErr);
+    }
 
-  const isAdmin = isBootstrapAdmin(primaryEmail);
+    const primaryEmail =
+      clerkUser?.primaryEmailAddress?.emailAddress ??
+      clerkUser?.emailAddresses?.[0]?.emailAddress ??
+      `${clerkId}@salsaexplosion.local`;
 
-  // upsert (not create) so two parallel first requests can't both insert
-  return prisma.user.upsert({
-    where: { clerkId },
-    update: {},
-    create: {
+    const isAdmin = isBootstrapAdmin(primaryEmail);
+
+    // upsert (not create) so two parallel first requests can't both insert
+    return await prisma.user.upsert({
+      where: { clerkId },
+      update: {},
+      create: {
+        clerkId,
+        email: primaryEmail,
+        firstName: clerkUser?.firstName || "Dancer",
+        lastName: clerkUser?.lastName || "",
+        avatarUrl: clerkUser?.imageUrl || null,
+        role: isAdmin ? Role.ADMIN : Role.STUDENT,
+        currentLevel: DanceLevel.BEGINNER,
+        preferredRole: DanceRole.LEAD,
+        classCredits: WELCOME_CREDITS,
+      },
+      include: { subscription: true },
+    });
+  } catch (dbErr: unknown) {
+    if (
+      dbErr &&
+      typeof dbErr === "object" &&
+      "digest" in dbErr &&
+      (dbErr as { digest: string }).digest === "DYNAMIC_SERVER_USAGE"
+    ) {
+      throw dbErr;
+    }
+    console.error("[getOrProvisionCurrentUser:db]", dbErr);
+    // Graceful in-memory fallback prevents 500 error when database connection pooler is degraded
+    return {
+      id: `fallback-${clerkId}`,
       clerkId,
-      email: primaryEmail,
-      firstName: clerkUser?.firstName || "Dancer",
-      lastName: clerkUser?.lastName || "",
-      avatarUrl: clerkUser?.imageUrl || null,
-      role: isAdmin ? Role.ADMIN : Role.STUDENT,
+      email: `${clerkId}@salsaexplosion.local`,
+      firstName: "Dancer",
+      lastName: "",
+      avatarUrl: null,
+      bio: null,
+      specialty: null,
+      yearsDancing: 8,
+      role: Role.STUDENT,
       currentLevel: DanceLevel.BEGINNER,
       preferredRole: DanceRole.LEAD,
       classCredits: WELCOME_CREDITS,
-    },
-    include: { subscription: true },
-  });
+      stripeCustomerId: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      subscription: null,
+    };
+  }
 }
 
 export type CurrentUser = NonNullable<

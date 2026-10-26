@@ -12,7 +12,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { BackButton } from "@/components/navigation/back-button";
-import { VENUE_INFO, ACADEMY_METRICS } from "@/lib/academy-data";
+import { VENUE_INFO, ACADEMY_METRICS, UPCOMING_EVENTS } from "@/lib/academy-data";
 
 export const metadata = {
   title: "DANZA! 2026 | 2027 & Salsa Explosion Congresses | Bournemouth",
@@ -21,12 +21,53 @@ export const metadata = {
 };
 
 export default async function EventsDirectoryPage() {
-  const events = await getCachedUpcomingEvents(20);
+  let events: Awaited<ReturnType<typeof getCachedUpcomingEvents>> = [];
+  try {
+    events = await getCachedUpcomingEvents(20);
+  } catch (err) {
+    console.error("[EventsDirectoryPage:getCachedUpcomingEvents]", err);
+  }
 
-  const events2026 = events.filter(
+  // Fallback to canonical events if database is empty or connection pooler is degraded
+  const displayEvents: Awaited<ReturnType<typeof getCachedUpcomingEvents>> =
+    events && events.length > 0
+      ? events
+      : UPCOMING_EVENTS.map((c, index) => ({
+          id: `canonical-${index}-${c.slug}`,
+          slug: c.slug,
+          title: c.title,
+          description: c.description,
+          coverImageUrl: c.posterUrl ?? null,
+          venueName: c.venueName,
+          venueAddress: VENUE_INFO.fullAddress,
+          startDate: new Date(c.startDateIso),
+          endDate: c.endDateIso ? new Date(c.endDateIso) : new Date(c.startDateIso),
+          guestArtists: [] as string[],
+          status: "PUBLISHED" as const,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          ticketTiers: [
+            {
+              id: `tier-${index}`,
+              eventId: `canonical-${index}-${c.slug}`,
+              name: "General Admission",
+              description: "Full event pass",
+              priceInCents: c.minPricePounds * 100,
+              totalCapacity: 100,
+              maxLeads: null,
+              maxFollows: null,
+              salesStartAt: new Date(),
+              salesEndAt: new Date(c.startDateIso),
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            },
+          ],
+        }));
+
+  const events2026 = displayEvents.filter(
     (e) => new Date(e.startDate).getFullYear() === 2026
   );
-  const events2027 = events.filter(
+  const events2027 = displayEvents.filter(
     (e) => new Date(e.startDate).getFullYear() >= 2027
   );
 

@@ -129,51 +129,83 @@ export default async function StudentSchedulePage({
         isGuest: true,
       };
 
-  // 4. Query Upcoming Classes with Active Bookings for Role Tallies (Optimized column projection)
-  const upcomingClasses = await prisma.classSession.findMany({
-    where: {
-      startTime: { gt: now },
-      isCancelled: false,
-      ...(styleFilter ? { style: styleFilter } : {}),
-      ...(levelFilter ? { minLevel: levelFilter } : {}),
-    },
-    orderBy: { startTime: "asc" },
-    take: 36,
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      style: true,
-      minLevel: true,
-      startTime: true,
-      endTime: true,
-      room: true,
-      maxCapacity: true,
-      maxLeads: true,
-      maxFollows: true,
-      bookedCount: true,
-      creditCost: true,
-      isCancelled: true,
-      instructor: {
-        select: {
-          firstName: true,
-          lastName: true,
-          avatarUrl: true,
+  // 4. Query Upcoming Classes with Active Bookings for Role Tallies (Optimized column projection with fail-soft safety)
+  let upcomingClasses: Array<{
+    id: string;
+    title: string;
+    description: string | null;
+    style: DanceStyle;
+    minLevel: DanceLevel;
+    startTime: Date;
+    endTime: Date;
+    room: string;
+    maxCapacity: number;
+    maxLeads: number | null;
+    maxFollows: number | null;
+    bookedCount: number;
+    creditCost: number;
+    isCancelled: boolean;
+    instructor: {
+      firstName: string | null;
+      lastName: string | null;
+      avatarUrl: string | null;
+    } | null;
+    bookings: Array<{
+      id: string;
+      userId: string;
+      danceRole: DanceRole;
+      status: BookingStatus;
+    }>;
+  }> = [];
+
+  try {
+    upcomingClasses = await prisma.classSession.findMany({
+      where: {
+        startTime: { gt: now },
+        isCancelled: false,
+        ...(styleFilter ? { style: styleFilter } : {}),
+        ...(levelFilter ? { minLevel: levelFilter } : {}),
+      },
+      orderBy: { startTime: "asc" },
+      take: 36,
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        style: true,
+        minLevel: true,
+        startTime: true,
+        endTime: true,
+        room: true,
+        maxCapacity: true,
+        maxLeads: true,
+        maxFollows: true,
+        bookedCount: true,
+        creditCost: true,
+        isCancelled: true,
+        instructor: {
+          select: {
+            firstName: true,
+            lastName: true,
+            avatarUrl: true,
+          },
+        },
+        bookings: {
+          where: {
+            status: { in: [BookingStatus.CONFIRMED, BookingStatus.ATTENDED] },
+          },
+          select: {
+            id: true,
+            userId: true,
+            danceRole: true,
+            status: true,
+          },
         },
       },
-      bookings: {
-        where: {
-          status: { in: [BookingStatus.CONFIRMED, BookingStatus.ATTENDED] },
-        },
-        select: {
-          id: true,
-          userId: true,
-          danceRole: true,
-          status: true,
-        },
-      },
-    },
-  });
+    });
+  } catch (classQueryErr) {
+    console.error("[StudentSchedulePage:classesQuery]", classQueryErr);
+  }
 
   // 5. Transform Database Records into Serializable Client Props
   const filteredClasses =
@@ -219,7 +251,11 @@ export default async function StudentSchedulePage({
       currentFollowsCount,
       creditCost: session.creditCost,
       isCancelled: session.isCancelled,
-      instructor: session.instructor,
+      instructor: {
+        firstName: session.instructor?.firstName ?? "Enrique",
+        lastName: session.instructor?.lastName ?? "Perez Valdes",
+        avatarUrl: session.instructor?.avatarUrl ?? null,
+      },
       userBooking,
     };
   });

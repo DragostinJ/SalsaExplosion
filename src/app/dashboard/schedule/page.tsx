@@ -9,8 +9,6 @@ import {
 } from "@prisma/client";
 import {
   Sparkles,
-  CreditCard,
-  ShieldCheck,
   Users,
   Video,
   QrCode,
@@ -47,14 +45,11 @@ const PartnerMatchWaitlist = dynamic(
   }
 );
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
-import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
 import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
-import { VENUE_INFO } from "@/lib/academy-data";
 
 interface SchedulePageProps {
   searchParams: Promise<{
@@ -236,89 +231,45 @@ export default async function StudentSchedulePage({
         </div>
       )}
 
-      {/* Guest Welcome Banner */}
-      {!user && (
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-2xl border border-border bg-card p-4 sm:p-5 shadow-xs">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <Badge className="bg-primary-base text-white font-bold text-xs">
-                First-Time Visitor Offer
-              </Badge>
-              <span className="text-xs font-semibold text-muted-foreground">
-                1 Complimentary Welcome Class Credit
+      {/* "The Place" Havana Nocturne Architectural Header & Door-Pay Policy Bar */}
+      <div className="rounded-3xl border border-stone-800 bg-[#070605] p-4 sm:p-7 text-white shadow-xl space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
+          <span>BOH STUDIOS BOURNEMOUTH • PAY AT THE DOOR</span>
+          <span className="text-zinc-400 font-bold">104 COMMERCIAL RD • BH2 5LR</span>
+        </div>
+
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="space-y-1.5 max-w-2xl">
+            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase text-white leading-none">
+              THU &amp; SUN{" "}
+              <span className="font-display italic font-normal text-amber-300 lowercase">
+                programme
               </span>
-            </div>
-            <p className="text-xs sm:text-sm text-foreground font-semibold">
-              Browse live {VENUE_INFO.city} classes below. No partner required — partner rotations are 100% ratio balanced!
+            </h1>
+            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-normal">
+              Weekly Cuban Salsa &amp; Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No pre-booking or partner required. Lead &amp; Follow partner rotations are 100% ratio balanced.
             </p>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs h-9 rounded-lg">
-              <Link href="/sign-up">Claim Free Pass</Link>
+
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            {user ? (
+              <div className="flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-1.5 text-xs">
+                <Sparkles className="h-4 w-4 text-amber-400" />
+                <span className="text-stone-300">Dancer:</span>
+                <span className="font-bold text-amber-300">{user.currentLevel}</span>
+                <span className="text-stone-400 font-mono">({user.classCredits} credits)</span>
+              </div>
+            ) : null}
+            <Button asChild size="sm" className="bg-amber-500 hover:bg-amber-400 text-black font-black text-xs h-9 px-4 rounded-xl shadow-xs">
+              <Link href="/events">
+                <span>Book Festivals Online →</span>
+              </Link>
             </Button>
-            <Button asChild variant="outline" size="sm" className="text-xs font-semibold h-9 rounded-lg">
-              <Link href="/sign-in">Sign In</Link>
+            <Button asChild variant="outline" size="sm" className="border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-xs h-9 px-3.5 rounded-xl">
+              <Link href="/venues">Directions &amp; Parking</Link>
             </Button>
           </div>
         </div>
-      )}
-
-      {/* Header & Student Wallet / Progression Status Bar */}
-      <div className="flex flex-col justify-between gap-4 rounded-2xl border bg-card p-5 shadow-sm sm:flex-row sm:items-center">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-black tracking-tight sm:text-3xl uppercase">
-              THU &amp; SUN <span className="font-display italic font-normal text-amber-800 dark:text-amber-400">Programme</span>
-            </h1>
-            <Badge variant="outline" className="border-border bg-muted/40 text-muted-foreground text-xs">
-              BOH Studios Bournemouth
-            </Badge>
-          </div>
-          <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-            {user
-              ? "Book your spot in upcoming Cuban Salsa (Casino & Rueda de Casino) classes."
-              : "Live timetable. Select any class below to see Lead & Follow availability."}
-          </p>
-        </div>
-
-        {user ? (
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-2 rounded-lg border bg-muted/40 px-3 py-1.5 text-xs font-medium">
-              <Sparkles className="h-4 w-4 text-amber-500" />
-              <span>Level:</span>
-              <Badge variant="secondary" className="font-bold">
-                {user.currentLevel}
-              </Badge>
-            </div>
-
-            <div className="flex items-center gap-2 rounded-lg border bg-muted/40 px-3 py-1.5 text-xs font-medium">
-              {hasActiveSubscription ? (
-                <>
-                  <ShieldCheck className="h-4 w-4 text-emerald-500" />
-                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                    Unlimited Member
-                  </span>
-                </>
-              ) : (
-                <>
-                  <CreditCard className="h-4 w-4 text-primary" />
-                  <span>Credits:</span>
-                  <Badge variant="default">{user.classCredits}</Badge>
-                  <Link
-                    href="/pricing"
-                    className="ml-1 text-primary underline-offset-4 hover:underline"
-                  >
-                    Buy Pass
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-        ) : (
-          <Button asChild size="sm" variant="outline" className="font-semibold text-xs border-primary-base/40 text-primary-hover">
-            <Link href="/pricing">View Class Passes & Drop-ins →</Link>
-          </Button>
-        )}
       </div>
 
       {/* Day & Level Filter Bars */}
@@ -583,9 +534,6 @@ export default async function StudentSchedulePage({
         userRole={user?.preferredRole ?? DanceRole.LEAD}
         userName={user?.firstName ?? "Dancer"}
       />
-
-      {/* 2-Tap Interactive QuickBook & Live QR Drawer */}
-      <QuickBookDrawer />
     </main>
   );
 }

@@ -1,19 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Sparkles, CheckCircle2 } from "lucide-react";
+import { MapPin, CheckCircle2, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { triggerQuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import {
   WEEKLY_SCHEDULE,
   VENUE_INFO,
-  PASS_PRICING,
+  DOOR_PRICING,
   type CanonicalClassSession,
 } from "@/lib/academy-data";
 
 function TimetableRow({
   item,
-  day,
 }: {
   item: CanonicalClassSession;
   day: "thursday" | "sunday";
@@ -71,29 +69,18 @@ function TimetableRow({
 
         {/* Column 4: Action (col-span-2) */}
         <div className="lg:col-span-2 lg:text-right pt-2 lg:pt-0">
-          <a
-            href={`/dashboard/schedule?book=${item.id}`}
+          <Link
+            href="/venues"
             data-testid={`timetable-book-${item.id}`}
-            onClick={(e) => {
-              e.preventDefault();
-              triggerQuickBookDrawer({
-                title: item.title,
-                time: item.time,
-                level: item.level,
-                instructor: item.instructor,
-                isSocial: item.isSocial,
-                day,
-              });
-            }}
             className={
               item.isSocial
-                ? "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-5 py-2.5 border border-[#11100E] text-[#11100E] hover:bg-[#11100E] hover:text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer"
-                : "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-5 py-2.5 bg-[#11100E] hover:bg-[#C83E2B] text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer shadow-xs"
+                ? "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-4 py-2 border border-[#11100E] text-[#11100E] hover:bg-[#11100E] hover:text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer"
+                : "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-4 py-2 bg-[#11100E] hover:bg-[#C83E2B] text-[#F5F2EB] text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer shadow-xs"
             }
           >
-            <span>{item.ctaLabel || (item.isSocial ? "Join Social" : "Book Spot")}</span>
+            <span>{item.isSocial ? "Included / £5 Door" : "Pay at Door • £12 / £14"}</span>
             <span aria-hidden="true">→</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -164,7 +151,7 @@ export function TwoDayExhibitionTimetable() {
             <span className="col-span-2">Time</span>
             <span className="col-span-3">Level / Track</span>
             <span className="col-span-5">Class &amp; Faculty</span>
-            <span className="col-span-2 text-right">Reservation</span>
+            <span className="col-span-2 text-right">Admission (At Door)</span>
           </div>
 
           <div className="divide-y divide-black/10 border-b border-black/10">
@@ -200,7 +187,7 @@ export function TwoDayExhibitionTimetable() {
             <span className="col-span-2">Time</span>
             <span className="col-span-3">Level / Track</span>
             <span className="col-span-5">Class &amp; Faculty</span>
-            <span className="col-span-2 text-right">Reservation</span>
+            <span className="col-span-2 text-right">Admission (At Door)</span>
           </div>
 
           <div className="divide-y divide-black/10 border-b border-black/10">
@@ -214,12 +201,12 @@ export function TwoDayExhibitionTimetable() {
         <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-black/10 bg-black/[0.03]">
           <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-[#3A2D23] font-semibold">
             <span className="flex items-center gap-1.5 text-[#733500]">
-              <Sparkles className="h-3.5 w-3.5" />
-              {PASS_PRICING.PACK_SINGLE.priceDisplay} Drop-In Available
+              <CreditCard className="h-3.5 w-3.5" />
+              {DOOR_PRICING.summaryBadge}
             </span>
             <span className="flex items-center gap-1.5 text-emerald-800">
               <CheckCircle2 className="h-3.5 w-3.5" />
-              1st Class Free Trial
+              Cash or Card at Door
             </span>
             <span className="flex items-center gap-1.5 text-[#3A2D23]">
               <CheckCircle2 className="h-3.5 w-3.5 text-[#A83800]" />
@@ -227,7 +214,7 @@ export function TwoDayExhibitionTimetable() {
             </span>
             <span className="hidden md:flex items-center gap-1.5 text-[#3A2D23]">
               <CheckCircle2 className="h-3.5 w-3.5 text-[#A83800]" />
-              Strict Lead &amp; Follow Balance
+              No Online Pre-Booking Needed
             </span>
           </div>
 
@@ -238,7 +225,7 @@ export function TwoDayExhibitionTimetable() {
             className="text-xs font-bold text-[#A83800] hover:text-black p-0 sm:px-2"
           >
             <Link href="/dashboard/schedule">
-              Full Schedule &amp; Digital Passes →
+              Full Schedule &amp; Venue Directions →
             </Link>
           </Button>
         </div>

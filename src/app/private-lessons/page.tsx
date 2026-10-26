@@ -1,7 +1,8 @@
 import { PageHeader } from "@/components/layout/page-header";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
 import { isNextControlFlowError } from "@/lib/safe-url";
+import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import {
   PrivateLessonsClient,
   SerializedPrivateLessonBooking,
@@ -25,6 +26,7 @@ export default async function PrivateLessonsPage() {
   }
 
   let initialBookings: SerializedPrivateLessonBooking[] = [];
+  let loadFailed = user ? isFallbackUser(user) : false;
   if (user) {
     try {
       const rawBookings = await prisma.privateLessonBooking.findMany({
@@ -43,12 +45,14 @@ export default async function PrivateLessonsPage() {
         createdAtIso: b.createdAt.toISOString(),
       }));
     } catch (dbErr) {
+      loadFailed = true;
       console.error("[PrivateLessonsPage:bookings]", dbErr);
     }
   }
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
+      {loadFailed && <DataUnavailableNotice />}
       {/* Hero Header — "The Place" Havana Nocturne Architecture */}
       <PageHeader
         backHref="/dashboard/schedule"

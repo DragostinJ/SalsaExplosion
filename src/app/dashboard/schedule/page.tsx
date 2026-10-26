@@ -23,7 +23,8 @@ import {
   CalendarPlus,
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser, canSwitchRoles } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, canSwitchRoles, isFallbackUser } from "@/lib/auth-user";
+import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import {
   ClassScheduleCard,
   ClassScheduleItem,
@@ -130,6 +131,7 @@ export default async function StudentSchedulePage({
       };
 
   // 4. Query Upcoming Classes with Active Bookings for Role Tallies (Optimized column projection with fail-soft safety)
+  let loadFailed = user ? isFallbackUser(user) : false;
   let upcomingClasses: Array<{
     id: string;
     title: string;
@@ -204,6 +206,7 @@ export default async function StudentSchedulePage({
       },
     });
   } catch (classQueryErr) {
+    loadFailed = true;
     console.error("[StudentSchedulePage:classesQuery]", classQueryErr);
   }
 
@@ -264,6 +267,7 @@ export default async function StudentSchedulePage({
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-4 sm:space-y-6 px-4 py-3 sm:py-6 overflow-x-hidden w-full">
+      {loadFailed && <DataUnavailableNotice />}
       {(checkoutStatus === "success" || checkoutStatus === "demo_success") && (
         <div className="flex items-center justify-between rounded-2xl border border-success-line bg-success-soft px-5 py-3.5 text-xs sm:text-sm font-semibold text-success">
           <span>

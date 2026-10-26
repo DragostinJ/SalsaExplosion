@@ -11,8 +11,9 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
 import { PageHeader } from "@/components/layout/page-header";
+import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { coachingStatusTone } from "@/lib/status-tone";
@@ -197,6 +198,8 @@ export default async function StudentWalletPage() {
     createdAt: Date;
   }> = [];
 
+  let loadFailed = isFallbackUser(user);
+
   try {
     const [sub, reg, book, merch, priv, tx] = await Promise.all([
       prisma.subscription.findUnique({
@@ -276,6 +279,7 @@ export default async function StudentWalletPage() {
     privateLessons = priv as unknown as typeof privateLessons;
     transactions = tx as unknown as typeof transactions;
   } catch (walletErr) {
+    loadFailed = true;
     console.error("[StudentWalletPage:dataFetch]", walletErr);
   }
 
@@ -283,6 +287,7 @@ export default async function StudentWalletPage() {
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
+      {loadFailed && <DataUnavailableNotice />}
       <PageHeader
         title={user.firstName ?? "Dancer"}
         titleHighlight={user.lastName ?? "Wallet"}

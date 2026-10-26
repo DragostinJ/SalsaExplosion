@@ -23,7 +23,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
+import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import { StudentVideoUploadDropzone } from "@/components/progression/video-upload-dropzone";
 import { PromotionCertificateCard } from "@/components/progression/promotion-certificate-card";
 import { AttendanceMilestonesCard } from "@/components/progression/attendance-milestones-card";
@@ -64,6 +65,8 @@ export default async function ProgressionPage() {
     classSession: { startTime: Date };
   }> = [];
 
+  let loadFailed = isFallbackUser(user);
+
   try {
     const [subs, bookings] = await Promise.all([
       prisma.videoSubmission.findMany({
@@ -96,6 +99,7 @@ export default async function ProgressionPage() {
     submissions = subs;
     attendedBookings = bookings;
   } catch (err) {
+    loadFailed = true;
     console.error("[ProgressionPage:queries]", err);
   }
 
@@ -120,19 +124,25 @@ export default async function ProgressionPage() {
   }
   const streakWeeks = weekSet.size;
 
-  // Check congress event registration
-  const congressReg = await prisma.eventRegistration.findFirst({
-    where: {
-      userId: user.id,
-      paymentStatus: "PAID",
-    },
-  });
-  const hasCongressPass = Boolean(congressReg);
+  let hasCongressPass = false;
+  try {
+    const congressReg = await prisma.eventRegistration.findFirst({
+      where: {
+        userId: user.id,
+        paymentStatus: "PAID",
+      },
+    });
+    hasCongressPass = Boolean(congressReg);
+  } catch (regErr) {
+    loadFailed = true;
+    console.error("[ProgressionPage:congressReg]", regErr);
+  }
 
   const isMaxLevel = user.currentLevel === DanceLevel.ADVANCED;
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl space-y-6 px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
+      {loadFailed && <DataUnavailableNotice />}
       {/* Header — Havana Architecture */}
       <PageHeader
         title="Cuban Salsa"

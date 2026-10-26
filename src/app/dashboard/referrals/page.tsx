@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, Users, Sparkles, CheckCircle2 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
 import { PageHeader } from "@/components/layout/page-header";
+import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import { Button } from "@/components/ui/button";
 import {
   ReferralDashboardClient,
@@ -92,6 +93,7 @@ export default async function ReferralsPage() {
   // Fetch real referral stats from CreditLedger inside defensive try/catch
   let referralEarnings: Array<{ amount: number }> = [];
   let redeemedRecord = null;
+  let loadFailed = isFallbackUser(user);
   try {
     const [earnings, redeemed] = await Promise.all([
       prisma.creditLedger.findMany({
@@ -110,6 +112,7 @@ export default async function ReferralsPage() {
     referralEarnings = earnings;
     redeemedRecord = redeemed;
   } catch (err) {
+    loadFailed = true;
     console.error("[ReferralsPage:queries]", err);
   }
 
@@ -121,6 +124,7 @@ export default async function ReferralsPage() {
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
+      {loadFailed && <DataUnavailableNotice />}
       <PageHeader
         title="Refer-a-Dancer"
         titleHighlight="Program"

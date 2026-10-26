@@ -27,7 +27,7 @@ test.describe("Proxy & Role Route Guards (A4)", () => {
     // Guest browsing schedule
     await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
     expect(page.url()).not.toMatch(/sign-in/);
-    await expect(page.getByRole("link", { name: /Claim Free Pass/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /THU & SUN/i })).toBeVisible();
 
     // Protected progression route
     await page.goto("/dashboard/progression", { waitUntil: "domcontentloaded" });

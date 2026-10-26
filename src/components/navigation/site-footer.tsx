@@ -72,30 +72,25 @@ export function SiteFooter() {
             </div>
           </div>
 
-          {/* Col 3: Dancers & Classes */}
+          {/* Col 3: Classes & Culture */}
           <div className="space-y-3">
             <h4 className="font-black text-white uppercase tracking-wider text-xs">
-              Dancers &amp; Classes
+              Classes &amp; Culture
             </h4>
             <ul className="space-y-1.5">
               <li>
                 <Link href="/dashboard/schedule" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
-                  Weekly Class Timetable
+                  Thursday &amp; Sunday Timetable
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/recaps" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
-                  End-of-Class Video Vault
+                <Link href="/dashboard/rueda" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
+                  Rueda de Casino Dictionary
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/progression" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
-                  Cuban Syllabus &amp; Level-Up
-                </Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
-                  Drop-ins &amp; Monthly Passes
+                <Link href="/music" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
+                  Timba Song Trainer
                 </Link>
               </li>
               <li>
@@ -106,40 +101,30 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* Col 4: Events & Festivals */}
+          {/* Col 4: Festivals & Academy */}
           <div className="space-y-3">
             <h4 className="font-black text-white uppercase tracking-wider text-xs">
-              Congresses &amp; Socials
+              Festivals &amp; Academy
             </h4>
             <ul className="space-y-1.5">
               <li>
                 <Link href="/events/made-in-cuba-dance-weekend-2026" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
-                  MADE IN CUBA — Dance Weekend
+                  MADE IN CUBA Weekend 2026
                 </Link>
               </li>
               <li>
                 <Link href="/events" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
-                  DANZA! 2026 | 2027 Calendar
-                </Link>
-              </li>
-              <li>
-                <Link href="/how-it-works" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
-                  How QR Passes Work
+                  Halloween &amp; SB&amp;K Parties
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
-                  About Enrique &amp; Academy
+                  About Maestro Enrique
                 </Link>
               </li>
               <li>
-                <Link href="/music" className="inline-flex items-center py-1 text-xs text-amber-300 font-black hover:underline">
-                  Cuban Music &amp; Playlists
-                </Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="inline-flex items-center py-1 text-xs text-amber-300 font-black hover:underline">
-                  Dance Gift Vouchers
+                <Link href="/venues" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
+                  BOH Studios &amp; Parking (BH2 5LR)
                 </Link>
               </li>
             </ul>
@@ -169,9 +154,9 @@ export function SiteFooter() {
                 <a
                   href="tel:+447969633701"
                   data-testid="footer-phone-link"
-                  className="font-bold text-amber-300 hover:underline"
+                  className="font-bold text-white hover:text-amber-400 transition-colors"
                 >
-                  📞 07969 633701
+                  07969 633701
                 </a>
               </div>
               <div className="pt-1">

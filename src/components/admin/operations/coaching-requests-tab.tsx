@@ -109,6 +109,7 @@ export function CoachingRequestsTab({
                       <Button
                         size="sm"
                         variant="outline"
+                        aria-label="Cancel coaching request"
                         disabled={isPending}
                         onClick={() => onUpdateBooking(b.id, "CANCELLED")}
                         className="text-rose-600 hover:text-rose-700 border-rose-800 text-[11px] h-8 px-2 font-bold"

@@ -80,6 +80,7 @@ export function RecapStaffModal({
           </div>
           <button
             type="button"
+            aria-label="Close modal"
             onClick={() => setShowAttachModal(false)}
             className="rounded-full p-1 text-muted-foreground hover:text-foreground"
           >

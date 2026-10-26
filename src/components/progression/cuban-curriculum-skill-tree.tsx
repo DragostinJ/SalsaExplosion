@@ -285,7 +285,7 @@ export function CubanCurriculumSkillTree({
             <span className="text-[11px] font-black uppercase tracking-wider text-amber-200 block mb-2">
               Your First Night at BOH Studios (The Only 3 Things You Need):
             </span>
-            <div tabIndex={0} role="region" aria-label="First night essentials spotlight" className="flex overflow-x-auto no-scrollbar gap-2 sm:grid sm:grid-cols-3 text-xs pb-1 sm:pb-0 focus:outline-none rounded-xl">
+            <div tabIndex={0} role="region" aria-label="First night essentials spotlight" className="flex overflow-x-auto no-scrollbar gap-2 sm:grid sm:grid-cols-3 text-xs pb-1 sm:pb-0 rounded-xl">
               <div className="rounded-xl border border-amber-500/20 bg-card/80 p-2.5 sm:p-3 space-y-1 min-w-[210px] sm:min-w-0 shrink-0 sm:shrink">
                 <div className="flex items-center gap-1.5 font-bold text-foreground">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-500/20 text-xs font-black text-amber-200">

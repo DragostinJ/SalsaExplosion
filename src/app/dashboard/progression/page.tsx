@@ -111,7 +111,7 @@ export default async function ProgressionPage() {
   const isMaxLevel = user.currentLevel === DanceLevel.ADVANCED;
 
   return (
-    <main className="mx-auto max-w-5xl space-y-6 px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl space-y-6 px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
       {/* Header — Havana Architecture */}
       <PageHeader
         title="Cuban Salsa"

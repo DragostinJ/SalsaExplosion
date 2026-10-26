@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Volume2, Music, Pause, Disc3, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { usePrefersReducedMotion } from "@/lib/hooks/use-prefers-reduced-motion";
 
 type RhythmMode = "son-clave" | "guaguanco";
 
@@ -10,8 +11,10 @@ export function HavanaGrooveToggle() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [mode, setMode] = useState<RhythmMode>("son-clave");
   const [beatPulse, setBeatPulse] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
   const audioCtxRef = useRef<AudioContext | null>(null);
   const timerIdRef = useRef<NodeJS.Timeout | null>(null);
+  const pulseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isPlayingRef = useRef(false);
   const modeRef = useRef<RhythmMode>("son-clave");
 
@@ -193,9 +196,12 @@ export function HavanaGrooveToggle() {
           playCongaHit(ctx, baseTime + beatDuration * 7.5, 185, false);
         }
 
-        // Visual pulse trigger on beat
-        setBeatPulse(true);
-        setTimeout(() => setBeatPulse(false), 200);
+        // Visual pulse trigger on beat (suppressed if prefers-reduced-motion)
+        if (typeof window !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          setBeatPulse(true);
+          if (pulseTimeoutRef.current) clearTimeout(pulseTimeoutRef.current);
+          pulseTimeoutRef.current = setTimeout(() => setBeatPulse(false), 200);
+        }
 
         nextLoopTime += loopDuration;
       };
@@ -233,6 +239,9 @@ export function HavanaGrooveToggle() {
   useEffect(() => {
     return () => {
       stopGroove();
+      if (pulseTimeoutRef.current) {
+        clearTimeout(pulseTimeoutRef.current);
+      }
     };
   }, [stopGroove]);
 
@@ -296,7 +305,7 @@ export function HavanaGrooveToggle() {
           <div className="relative h-13 w-13 sm:h-14 sm:w-14 shrink-0 rounded-full bg-surface-2 shadow-lg flex items-center justify-center overflow-hidden border border-gold/40">
             <div
               className={`absolute inset-0 rounded-full ${
-                isPlaying ? "animate-[spin_4s_linear_infinite]" : ""
+                isPlaying && !reducedMotion ? "animate-[spin_4s_linear_infinite]" : ""
               }`}
             >
               <svg viewBox="0 0 100 100" className="h-full w-full select-none" aria-hidden="true">

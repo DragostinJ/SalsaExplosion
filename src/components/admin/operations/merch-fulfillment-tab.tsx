@@ -91,6 +91,7 @@ export function MerchFulfillmentTab({
                       <Button
                         size="sm"
                         variant="outline"
+                        aria-label="Cancel merchandise order"
                         disabled={isPending}
                         onClick={() => onUpdateMerch(m.id, "CANCELLED")}
                         className="text-rose-600 hover:text-rose-700 border-rose-800 text-[11px] h-8 px-2 font-bold"

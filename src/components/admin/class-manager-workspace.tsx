@@ -461,6 +461,7 @@ export function ClassManagerWorkspace({
                         </span>
                         <button
                           type="button"
+                          aria-label="Close studio room editor"
                           onClick={() => setEditingClassId(null)}
                           className="text-muted-foreground hover:text-foreground"
                         >
@@ -557,6 +558,7 @@ export function ClassManagerWorkspace({
                         </span>
                         <button
                           type="button"
+                          aria-label="Close cancellation panel"
                           onClick={() => setCancellingClassId(null)}
                           className="text-muted-foreground hover:text-foreground"
                         >

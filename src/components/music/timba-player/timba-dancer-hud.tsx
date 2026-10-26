@@ -250,7 +250,7 @@ export function TimbaDancerHud({
                 <span>{move.name}</span>
                 <span
                   className={`text-xs px-1.5 py-0.2 rounded-full font-mono ${
-                    isSelected ? "bg-gold/30 text-gold" : "bg-white/10 text-ivory-muted"
+                    isSelected ? "bg-surface-1 text-gold border border-gold/40" : "bg-white/10 text-ivory-muted"
                   }`}
                 >
                   {move.level}

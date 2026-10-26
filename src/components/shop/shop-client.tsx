@@ -353,6 +353,7 @@ export function ShopClient({
               </div>
               <button
                 type="button"
+                aria-label="Close reservation modal"
                 onClick={() => setActiveReservation(null)}
                 className="rounded-full p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
               >

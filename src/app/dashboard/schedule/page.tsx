@@ -227,7 +227,7 @@ export default async function StudentSchedulePage({
   const userCanManage = user?.role === Role.INSTRUCTOR || user?.role === Role.ADMIN || canSwitchRoles(user?.email);
 
   return (
-    <main className="mx-auto max-w-7xl space-y-4 sm:space-y-6 px-4 py-3 sm:py-6 overflow-x-hidden w-full">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-4 sm:space-y-6 px-4 py-3 sm:py-6 overflow-x-hidden w-full">
       {(checkoutStatus === "success" || checkoutStatus === "demo_success") && (
         <div className="flex items-center justify-between rounded-2xl border border-success-line bg-success-soft px-5 py-3.5 text-xs sm:text-sm font-semibold text-success">
           <span>

@@ -128,6 +128,7 @@ export function AdminNotificationBell() {
             <div className="flex items-center gap-2">
               <button
                 type="button"
+                aria-label="Refresh alerts"
                 onClick={handleRefresh}
                 disabled={isPending}
                 className="text-[11px] text-muted-foreground hover:text-foreground transition-colors p-1"

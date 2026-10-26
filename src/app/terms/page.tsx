@@ -22,7 +22,7 @@ export default function TermsAndLegalPage() {
   const lastUpdated = "20 October 2026";
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-10">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-10">
       {/* Header Hub with Canonical PageHeader */}
       <PageHeader
         backHref="/"

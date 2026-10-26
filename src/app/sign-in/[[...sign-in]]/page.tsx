@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 
 export default function SignInPage() {
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center p-4">
+    <main id="main-content" tabIndex={-1} className="flex min-h-[calc(100vh-4rem)] items-center justify-center p-4">
       <SignIn />
-    </div>
+    </main>
   );
 }
 

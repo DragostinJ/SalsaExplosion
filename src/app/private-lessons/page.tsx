@@ -35,7 +35,7 @@ export default async function PrivateLessonsPage() {
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
       {/* Hero Header — "The Place" Havana Nocturne Architecture */}
       <PageHeader
         backHref="/dashboard/schedule"

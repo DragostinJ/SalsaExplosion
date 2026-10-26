@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function CubanMusicPage() {
   return (
-    <main className="mx-auto max-w-7xl px-2.5 sm:px-6 lg:px-8 py-2 sm:py-6 space-y-2.5 sm:space-y-6">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-2.5 sm:px-6 lg:px-8 py-2 sm:py-6 space-y-2.5 sm:space-y-6">
       <PageHeader
         title="Cuban Music &"
         titleHighlight="Social Playlist Hub"

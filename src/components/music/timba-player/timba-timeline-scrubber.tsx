@@ -103,7 +103,7 @@ export function TimbaTimelineScrubber({
         tabIndex={0}
         role="region"
         aria-label="Mobile quick-jump timeline segments"
-        className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar py-1 snap-x snap-mandatory focus:outline-none"
+        className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar py-1 snap-x snap-mandatory"
       >
         {effectiveSegments.map((segment, idx) => {
           const isSegmentActive = idx === activeSegmentIndex;
@@ -120,7 +120,7 @@ export function TimbaTimelineScrubber({
               }`}
             >
               <span>{idx + 1}. {segment.sectionName}</span>
-              <span className="ml-1 opacity-75 font-mono text-xs">{segment.formattedRange.split(" - ")[0]}</span>
+              <span className={`ml-1 font-mono text-xs ${isSegmentActive ? "text-ivory" : "text-ivory-muted"}`}>{segment.formattedRange.split(" - ")[0]}</span>
             </button>
           );
         })}

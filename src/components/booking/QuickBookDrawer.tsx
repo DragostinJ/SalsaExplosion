@@ -249,7 +249,7 @@ export function QuickBookDrawer() {
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 placeholder="Enter your name"
-                className="w-full h-11 px-3.5 rounded-xl border border-line bg-surface-3 text-ivory placeholder:text-ivory-muted text-sm focus:outline-hidden focus:border-gold"
+                className="w-full h-11 px-3.5 rounded-xl border border-line bg-surface-3 text-ivory placeholder:text-ivory-muted text-sm focus-visible:border-gold"
               />
             </div>
 

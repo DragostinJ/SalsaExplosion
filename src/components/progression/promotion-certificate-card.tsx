@@ -134,6 +134,7 @@ export function PromotionCertificateCard({
               </span>
               <button
                 type="button"
+                aria-label="Close story preview"
                 onClick={() => setShowStoryModal(false)}
                 className="rounded-full bg-surface-3 p-1.5 text-ivory-muted hover:bg-surface-1 hover:text-white"
               >

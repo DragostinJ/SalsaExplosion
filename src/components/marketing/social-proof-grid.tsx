@@ -428,6 +428,7 @@ export function SocialProofGrid() {
               <Button
                 variant="ghost"
                 size="sm"
+                aria-label="Close reel preview"
                 className="h-8 w-8 p-0 rounded-full"
                 onClick={() => setSelectedReel(null)}
               >

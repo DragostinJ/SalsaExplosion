@@ -48,6 +48,7 @@ export function RosterRecapModal({
           </div>
           <button
             type="button"
+            aria-label="Close modal"
             onClick={onClose}
             className="rounded-full p-1 text-muted-foreground hover:text-foreground"
           >

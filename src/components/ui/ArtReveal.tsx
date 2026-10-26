@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { usePrefersReducedMotion } from "@/lib/hooks/use-prefers-reduced-motion";
 
 interface ArtRevealProps {
   children: ReactNode;
@@ -10,15 +11,12 @@ interface ArtRevealProps {
 
 export function ArtReveal({ children, className = "", delayMs = 0 }: ArtRevealProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion || typeof IntersectionObserver === "undefined") {
-      const timer = setTimeout(() => setIsVisible(true), 0);
-      return () => clearTimeout(timer);
+      return;
     }
 
     const element = containerRef.current;
@@ -43,7 +41,15 @@ export function ArtReveal({ children, className = "", delayMs = 0 }: ArtRevealPr
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [prefersReducedMotion]);
+
+  if (prefersReducedMotion) {
+    return (
+      <div ref={containerRef} className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <div

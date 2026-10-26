@@ -90,7 +90,7 @@ export default async function AdminOperationsPage({
   ]);
 
   return (
-    <main className="container max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <main id="main-content" tabIndex={-1} className="container max-w-7xl mx-auto px-4 sm:px-6 py-8">
       <AdminNav />
 
       <div className="mb-6 space-y-1">

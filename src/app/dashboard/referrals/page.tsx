@@ -111,7 +111,7 @@ export default async function ReferralsPage() {
   };
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
       <PageHeader
         title="Refer-a-Dancer"
         titleHighlight="Program"

@@ -43,7 +43,7 @@ const AMBASSADORS: Ambassador[] = [
 
 export function FloorAmbassadorsCard() {
   return (
-    <Card className="border border-amber-500/30 bg-gradient-to-br from-amber-500/[0.04] via-background to-orange-500/[0.03] shadow-xs">
+    <Card className="border border-line bg-surface-1 shadow-xs">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-2">
           <Badge className="bg-amber-500 text-stone-950 font-bold text-[10px]">

@@ -87,7 +87,7 @@ export function PromotionCertificateCard({
           </div>
 
           <div className="flex flex-col items-start sm:items-end gap-2.5 shrink-0">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-stone-950 shadow-lg shadow-gold/20">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gold text-stone-950 shadow-lg shadow-gold/20">
               <Award className="h-8 w-8" />
             </div>
             <div className="flex flex-wrap items-center gap-2">
@@ -142,7 +142,7 @@ export function PromotionCertificateCard({
             </div>
 
             {/* Print-fidelity and social story canvas — intentionally styled for export contrast */}
-            <div className="w-72 aspect-[9/16] rounded-3xl border-2 border-gold/60 bg-gradient-to-b from-stone-950 via-stone-900 to-amber-950 p-6 text-white shadow-2xl flex flex-col justify-between relative overflow-hidden">
+            <div className="w-72 aspect-[9/16] rounded-3xl border-2 border-gold/60 bg-surface-1 p-6 text-white shadow-2xl flex flex-col justify-between relative overflow-hidden">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gold text-stone-950">
@@ -158,7 +158,7 @@ export function PromotionCertificateCard({
               </div>
 
               <div className="my-auto space-y-4 text-center">
-                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-tr from-amber-500 to-orange-400 text-stone-950 shadow-xl shadow-gold/30">
+                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gold text-stone-950 shadow-xl shadow-gold/30">
                   <Award className="h-11 w-11" />
                 </div>
 

@@ -28,11 +28,11 @@ export function DanceVouchersShowcase({
   return (
     <section
       aria-label="Dance Gift Vouchers"
-      className={`relative overflow-hidden rounded-3xl border border-border/80 bg-gradient-to-br from-card via-background to-muted/30 p-6 sm:p-10 shadow-lg ${className}`}
+      className={`relative overflow-hidden rounded-3xl border border-line bg-surface-2 p-6 sm:p-10 shadow-lg ${className}`}
     >
       {/* Decorative background glow */}
-      <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary-base/5 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-rose-600/10 blur-3xl pointer-events-none" />
+      <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gold/5 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-ember/10 blur-3xl pointer-events-none" />
 
       <div className="relative z-10 grid gap-8 lg:grid-cols-12 items-center">
         {/* Left Column: Authentic Copy & Value Proposition */}
@@ -119,7 +119,7 @@ export function DanceVouchersShowcase({
 
         {/* Right Column: Physical / Digital Voucher Preview Certificate */}
         <div className="lg:col-span-5 flex justify-center">
-          <Card className="w-full max-w-md overflow-hidden rounded-3xl border border-border/60 bg-gradient-to-br from-zinc-900 via-zinc-900 to-rose-950 text-white shadow-2xl relative">
+          <Card className="w-full max-w-md overflow-hidden rounded-3xl border border-line bg-surface-1 text-ivory shadow-2xl relative">
             <div className="absolute top-0 right-0 -mr-12 -mt-12 w-36 h-36 bg-white/10 rounded-full blur-xl pointer-events-none" />
             
             <CardContent className="p-6 sm:p-8 space-y-6 flex flex-col justify-between min-h-[360px]">

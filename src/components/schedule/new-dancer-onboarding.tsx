@@ -114,7 +114,7 @@ export function NewDancerOnboarding({
   }
 
   return (
-    <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-amber-500/35 bg-gradient-to-br from-amber-500/[0.07] via-background to-orange-500/[0.04] p-4 sm:p-6 shadow-xs">
+    <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-gold/35 bg-surface-2 p-4 sm:p-6 shadow-xs">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
         <div className="space-y-1">
           <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[11px] font-bold text-amber-300">

@@ -111,7 +111,7 @@ export function QrCheckInCard({
 
   return (
     <Card className="mx-auto max-w-md border-2 shadow-lg overflow-hidden">
-      <div className="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-500 p-6 text-white text-center space-y-2">
+      <div className="bg-surface-2 border-b border-gold/30 p-6 text-white text-center space-y-2">
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-xs">
           <QrCode className="h-6 w-6 text-white" />
         </div>

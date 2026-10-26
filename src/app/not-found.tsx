@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <main className="min-h-[75vh] flex items-center justify-center px-4 py-16">
       <div className="max-w-md w-full text-center space-y-6">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-primary-base to-accent-tangerine text-white shadow-lg shadow-primary-base/20">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand text-white shadow-lg">
           <Compass className="h-8 w-8 animate-spin-slow" />
         </div>
 

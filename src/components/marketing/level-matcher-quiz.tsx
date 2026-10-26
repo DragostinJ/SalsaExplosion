@@ -101,7 +101,7 @@ export function LevelMatcherQuiz() {
   return (
     <div
       data-testid="level-matcher-card"
-      className="rounded-3xl border border-primary-base/20 bg-gradient-to-br from-primary-light/30 via-background to-secondary-light/20 p-6 sm:p-8 shadow-sm"
+      className="rounded-3xl border border-line bg-surface-2 p-6 sm:p-8 shadow-sm"
     >
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="text-center space-y-2">
@@ -126,7 +126,7 @@ export function LevelMatcherQuiz() {
                 onClick={() => setSelectedKey(q.key)}
                 className={`text-left rounded-2xl border bg-card p-4 hover:border-primary-base hover:shadow-sm transition-all group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-base ${
                   q.key === "crossover_dancer"
-                    ? "sm:col-span-2 border-primary-base/40 bg-gradient-to-r from-card via-card to-primary-light/10 shadow-xs"
+                    ? "sm:col-span-2 border-primary-base/40 bg-surface-1 shadow-xs"
                     : ""
                 }`}
               >

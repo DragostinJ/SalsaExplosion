@@ -43,16 +43,16 @@ export function CubanDanceGearsMatrix({
       <section
         data-testid="cuban-dance-gears-matrix"
         aria-label="The Cuban Dance Gears & Timba Song Anatomy Guide"
-        className={`rounded-3xl border-2 border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-card to-rose-500/5 p-4 sm:p-8 space-y-3 sm:space-y-4 shadow-sm ${className}`}
+        className={`rounded-3xl border border-gold/30 bg-surface-2 p-4 sm:p-8 space-y-3 sm:space-y-4 shadow-sm ${className}`}
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5 max-w-2xl">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge className="bg-gradient-to-r from-amber-600 to-rose-600 text-white font-black text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-0.5">
+              <Badge className="bg-gold text-stone-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-0.5">
                 <Compass className="h-3.5 w-3.5" />
                 Optional Deep-Dive • Best for Improvers &amp; Social Dancers
               </Badge>
-              <span className="text-xs font-bold text-amber-300">
+              <span className="text-xs font-bold text-gold">
                 Timba Musicality
               </span>
             </div>
@@ -68,7 +68,7 @@ export function CubanDanceGearsMatrix({
             type="button"
             data-testid="toggle-dance-gears-guide"
             onClick={() => setIsCollapsed(false)}
-            className="shrink-0 bg-amber-800 hover:bg-amber-900 text-white font-extrabold text-xs shadow-sm"
+            className="shrink-0 bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-sm"
           >
             Open Interactive Musicality &amp; Gears Guide
           </Button>
@@ -84,11 +84,11 @@ export function CubanDanceGearsMatrix({
       className={`space-y-6 ${className}`}
     >
       {/* Header Hub */}
-      <div className="rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-amber-500/10 via-card to-rose-500/5 p-6 sm:p-8 space-y-4 shadow-sm">
+      <div className="rounded-3xl border border-gold/40 bg-surface-2 p-6 sm:p-8 space-y-4 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-gradient-to-r from-amber-600 to-rose-600 text-white font-black text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
+              <Badge className="bg-gold text-stone-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
                 <Compass className="h-3.5 w-3.5" />
                 2027 Curriculum Guide
               </Badge>
@@ -261,7 +261,7 @@ export function CubanDanceGearsMatrix({
             >
               <CardHeader className="pb-3 space-y-2">
                 <div className="flex items-center justify-between">
-                  <Badge className="bg-gradient-to-r from-amber-700 to-rose-700 text-white font-black text-[11px] uppercase tracking-wider">
+                  <Badge className="bg-gold text-stone-950 font-black text-[11px] uppercase tracking-wider">
                     Gear {gear.gearNumber}
                   </Badge>
                   <span className="text-[11px] font-mono font-extrabold text-amber-300">

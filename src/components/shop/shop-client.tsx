@@ -268,7 +268,7 @@ export function ShopClient({
             <div>
               {/* Product Visual Banner */}
               <div
-                className={`relative h-44 w-full bg-gradient-to-br ${item.gradient} p-4 flex flex-col justify-between text-white`}
+                className="relative h-44 w-full bg-surface-3 p-4 flex flex-col justify-between text-white"
               >
                 <div className="flex items-center justify-between">
                   <Badge className="bg-black/40 text-white text-[10px] font-bold border-none backdrop-blur-md">

@@ -100,7 +100,7 @@ export function CongressTravelGuide() {
       {/* Grid: Official Hotel & B&B Options */}
       <div className="grid gap-6 md:grid-cols-2">
         {/* The Roundhouse Hotel Dancer Block */}
-        <Card className="border border-amber-500/30 bg-gradient-to-br from-card via-card to-amber-500/[0.04]">
+        <Card className="border border-line bg-surface-1">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <Badge className="bg-primary-base text-white font-bold text-[10px]">

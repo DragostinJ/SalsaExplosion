@@ -419,7 +419,7 @@ export function VideoGradingWorkspace({
                       size="sm"
                       disabled={isPending}
                       onClick={handleRunAiCoPilot}
-                      className="bg-gradient-to-r from-amber-600 to-orange-500 text-white text-xs font-bold shrink-0"
+                      className="bg-brand hover:bg-brand-hover text-white text-xs font-bold shrink-0"
                     >
                       {isPending ? (
                         <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
@@ -461,7 +461,7 @@ export function VideoGradingWorkspace({
                           <span className="text-[10px] font-bold uppercase text-muted-foreground block">
                             Cuban Motion
                           </span>
-                          <span className="text-lg font-extrabold text-purple-400">
+                          <span className="text-lg font-extrabold text-gold">
                             {aiEvaluation.cubanMotionScore}%
                           </span>
                         </div>

@@ -76,10 +76,10 @@ export function AttendanceMilestonesCard({
       progressText: `${Math.min(streakWeeks, 4)} / 4 Weeks Streak`,
       progressPercent: Math.min(100, Math.round((streakWeeks / 4) * 100)),
       colorScheme: {
-        unlockedBg: "bg-orange-500/10",
-        unlockedBorder: "border-orange-500/40",
-        iconColor: "text-orange-400",
-        badgeColor: "bg-orange-600 text-white",
+        unlockedBg: "bg-gold/10",
+        unlockedBorder: "border-gold/40",
+        iconColor: "text-gold",
+        badgeColor: "bg-gold text-stone-950",
       },
     },
     {
@@ -91,10 +91,10 @@ export function AttendanceMilestonesCard({
       progressText: isImproverOrAbove ? "Improver Syllabus Unlocked" : "Requires Improver Level",
       progressPercent: isImproverOrAbove ? 100 : 35,
       colorScheme: {
-        unlockedBg: "bg-emerald-500/10",
-        unlockedBorder: "border-emerald-500/40",
-        iconColor: "text-emerald-400",
-        badgeColor: "bg-emerald-600 text-white",
+        unlockedBg: "bg-success-soft",
+        unlockedBorder: "border-success-line",
+        iconColor: "text-success",
+        badgeColor: "bg-success text-white",
       },
     },
     {
@@ -106,10 +106,10 @@ export function AttendanceMilestonesCard({
       progressText: hasCongressPass ? "Congress Pass Verified" : "0 / 1 Festival Pass",
       progressPercent: hasCongressPass ? 100 : 0,
       colorScheme: {
-        unlockedBg: "bg-purple-500/10",
-        unlockedBorder: "border-purple-500/40",
-        iconColor: "text-purple-400",
-        badgeColor: "bg-purple-600 text-white",
+        unlockedBg: "bg-surface-3",
+        unlockedBorder: "border-gold/30",
+        iconColor: "text-gold",
+        badgeColor: "bg-surface-2 text-ivory border border-gold/30",
       },
     },
   ];
@@ -140,7 +140,7 @@ export function AttendanceMilestonesCard({
             <span className="text-xs font-bold text-muted-foreground">Milestone Progress:</span>
             <div className="h-2 w-28 bg-muted rounded-full overflow-hidden border">
               <div
-                className="h-full bg-gradient-to-r from-amber-500 to-orange-500 transition-all duration-500 rounded-full"
+                className="h-full bg-gold transition-all duration-500 rounded-full"
                 style={{ width: `${overallCompletion}%` }}
               />
             </div>
@@ -212,7 +212,7 @@ export function AttendanceMilestonesCard({
                     <div
                       className={`h-full rounded-full transition-all duration-300 ${
                         m.isUnlocked
-                          ? "bg-gradient-to-r from-amber-500 to-orange-500"
+                          ? "bg-gold"
                           : "bg-muted-foreground/30"
                       }`}
                       style={{ width: `${m.progressPercent}%` }}

@@ -90,7 +90,7 @@ export function ReferralDashboardClient({
   return (
     <div className="space-y-8">
       {/* Referral Code Banner Box */}
-      <div className="rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-500/[0.08] via-orange-500/[0.04] to-background p-6 sm:p-8 shadow-xs space-y-6">
+      <div className="rounded-3xl border border-line bg-surface-2 p-6 sm:p-8 shadow-xs space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <Badge className="bg-amber-600 text-white font-bold text-xs uppercase tracking-wider mb-2">
@@ -248,7 +248,7 @@ export function ReferralDashboardClient({
                 1 bonus credit per student account
               </span>
             </div>
-            <div className="h-10 w-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-xl bg-gold/15 text-gold flex items-center justify-center">
               <Gift className="h-5 w-5" />
             </div>
           </CardContent>

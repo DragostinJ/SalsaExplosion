@@ -123,7 +123,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Pending Assessments
             </CardTitle>
-            <div className="rounded-lg bg-purple-500/10 p-2 text-purple-400">
+            <div className="rounded-lg bg-gold/15 p-2 text-gold">
               <Award className="h-4 w-4" />
             </div>
           </CardHeader>

@@ -140,10 +140,10 @@ export function StudentProgressionDirectory({
         {LEVEL_ORDER.map((lvl, idx) => {
           const count = levelCounts[lvl];
           const colors = [
-            "border-emerald-500/30 bg-emerald-500/5 text-emerald-300",
-            "border-blue-500/30 bg-blue-500/5 text-blue-300",
-            "border-amber-500/30 bg-amber-500/5 text-amber-300",
-            "border-purple-500/30 bg-purple-500/5 text-purple-300",
+            "border-success-line bg-success-soft text-success",
+            "border-info-line bg-info-soft text-info",
+            "border-gold/30 bg-gold/5 text-gold",
+            "border-role-follow-line bg-role-follow-soft text-role-follow",
           ];
           return (
             <Card key={lvl} className={`border ${colors[idx]}`}>
@@ -324,7 +324,7 @@ export function StudentProgressionDirectory({
                               <div
                                 className={`h-2.5 rounded-full transition-all ${
                                   isUnlocked
-                                    ? "bg-gradient-to-r from-amber-500 to-orange-500"
+                                    ? "bg-gold"
                                     : "bg-muted"
                                 }`}
                               />

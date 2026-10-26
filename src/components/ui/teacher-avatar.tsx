@@ -85,7 +85,7 @@ export function TeacherAvatar({
           unoptimized={avatarUrl?.startsWith("http")}
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-tr from-zinc-700 via-zinc-800 to-zinc-900 font-extrabold text-white shadow-inner">
+        <div className="flex h-full w-full items-center justify-center rounded-full bg-surface-3 font-extrabold text-white shadow-inner">
           <span>{initials || "M"}</span>
         </div>
       )}

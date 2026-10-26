@@ -341,7 +341,7 @@ export function ClassManagerWorkspace({
               <Button
                 type="submit"
                 disabled={isPending}
-                className="w-full bg-gradient-to-r from-amber-600 to-orange-500 text-white font-bold"
+                className="w-full bg-brand hover:bg-brand-hover text-white font-bold"
               >
                 <Sparkles className="mr-1.5 h-4 w-4" />
                 {isPending ? "Publishing Session..." : "Publish Class to Schedule"}

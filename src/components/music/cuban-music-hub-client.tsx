@@ -89,7 +89,7 @@ export function CubanMusicHubClient() {
 
           <div className="rounded-2xl border bg-card p-4 space-y-2">
             <span className="font-bold text-foreground flex items-center gap-1.5">
-              <Flame className="h-4 w-4 text-orange-600" />
+              <Flame className="h-4 w-4 text-ember" />
               3. The Singer&apos;s Breath
             </span>
             <p>
@@ -157,7 +157,7 @@ export function CubanMusicHubClient() {
           <span className="rounded-full bg-emerald-500/10 text-emerald-300 px-2.5 py-0.5 font-semibold text-[11px]">
             Classic Casino (95–102 BPM)
           </span>
-          <span className="rounded-full bg-orange-500/10 text-orange-300 px-2.5 py-0.5 font-semibold text-[11px]">
+          <span className="rounded-full bg-gold/15 text-gold px-2.5 py-0.5 font-semibold text-[11px]">
             High-Energy Timba (105+ BPM)
           </span>
         </div>
@@ -209,12 +209,12 @@ export function CubanMusicHubClient() {
                         <Badge
                           className={`text-[10px] font-bold ${
                             track.level === "Beginner"
-                              ? "bg-blue-700 text-white"
+                              ? "bg-info-soft text-info border border-info-line"
                               : track.level === "Improver"
-                              ? "bg-emerald-800 text-white"
+                              ? "bg-success-soft text-success border border-success-line"
                               : track.level === "Intermediate"
-                              ? "bg-amber-800 text-white"
-                              : "bg-purple-700 text-white"
+                              ? "bg-gold/15 text-gold border border-gold/30"
+                              : "bg-role-follow-soft text-role-follow border border-role-follow-line"
                           }`}
                         >
                           {track.level}

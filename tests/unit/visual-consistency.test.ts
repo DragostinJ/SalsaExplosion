@@ -201,4 +201,63 @@ describe("V5: Visual Consistency & Design Drift Guard", () => {
         .join("\n")}`
     ).toEqual([]);
   });
+
+  it("Q3: proves zero forbidden raw palette classes (purple, indigo, cyan, orange, teal) in production TSX", () => {
+    const violations: { file: string; line: number; text: string }[] = [];
+    const forbiddenPattern = /\b(?:bg|text|border|ring)-(?:purple|indigo|cyan|orange|teal)-\d+\b/;
+
+    for (const file of allFiles) {
+      if (isExcluded(file) || !file.endsWith(".tsx")) continue;
+      const content = fs.readFileSync(file, "utf-8");
+      const lines = content.split("\n");
+      lines.forEach((line, index) => {
+        if (forbiddenPattern.test(line)) {
+          violations.push({
+            file: path.relative(rootSrc, file),
+            line: index + 1,
+            text: line.trim(),
+          });
+        }
+      });
+    }
+
+    expect(
+      violations,
+      `Found forbidden raw palette classes (purple/indigo/cyan/orange/teal). Use semantic tokens (gold, role-lead, info, etc.):\n${violations
+        .map((v) => `  ${v.file}:${v.line} -> ${v.text}`)
+        .join("\n")}`
+    ).toEqual([]);
+  });
+
+  it("Q3: proves raw non-brand/status palette classes are capped strictly at <= 150 across TSX files", () => {
+    let totalRawMatches = 0;
+    const rawPattern = /\b(?:bg|text|border|ring)-(?:purple|indigo|cyan|orange|teal|blue|sky)-\d+\b/g;
+
+    for (const file of allFiles) {
+      if (isExcluded(file) || !file.endsWith(".tsx")) continue;
+      const content = fs.readFileSync(file, "utf-8");
+      const matches = content.match(rawPattern);
+      if (matches) {
+        totalRawMatches += matches.length;
+      }
+    }
+
+    expect(totalRawMatches).toBeLessThanOrEqual(150);
+  });
+
+  it("Q3: proves bg-gradient-to occurrences are capped strictly at <= 25 across all TSX files", () => {
+    let totalGradients = 0;
+    const gradientPattern = /\bbg-gradient-to-[a-z]+\b/g;
+
+    for (const file of allFiles) {
+      if (!file.endsWith(".tsx")) continue;
+      const content = fs.readFileSync(file, "utf-8");
+      const matches = content.match(gradientPattern);
+      if (matches) {
+        totalGradients += matches.length;
+      }
+    }
+
+    expect(totalGradients).toBeLessThanOrEqual(25);
+  });
 });

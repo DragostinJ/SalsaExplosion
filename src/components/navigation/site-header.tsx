@@ -222,7 +222,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
             href="/"
             className="flex items-center gap-2 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85 shrink-0"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-primary-base to-accent-tangerine text-white shadow-sm shadow-primary-base/20 shrink-0">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand text-white shadow-sm shrink-0">
               <Flame className="h-5 w-5 fill-white" />
             </div>
             <div className="flex flex-col shrink-0">

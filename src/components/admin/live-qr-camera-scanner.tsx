@@ -158,7 +158,7 @@ export function LiveQrCameraScanner({
           className={`min-h-11 font-extrabold text-xs shadow-md transition-all ${
             isOpen
               ? "bg-muted text-foreground"
-              : "bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white"
+              : "bg-brand hover:bg-brand-hover text-white"
           }`}
           data-testid="toggle-camera-scanner-btn"
         >

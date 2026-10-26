@@ -187,7 +187,7 @@ export function CsvExportToolbar() {
           {/* Congress Ticket Holders Export */}
           <Button
             variant="outline"
-            className="flex h-auto flex-col items-start gap-1 p-3.5 text-left border-border hover:border-orange-500/50 hover:bg-orange-500/[0.04]"
+            className="flex h-auto flex-col items-start gap-1 p-3.5 text-left border-border hover:border-gold/50 hover:bg-gold/[0.04]"
             onClick={handleExportCongress}
             disabled={downloadingType !== null}
           >
@@ -196,7 +196,7 @@ export function CsvExportToolbar() {
                 Congress Attendees
               </span>
               {downloadingType === "congress" ? (
-                <Loader2 className="h-4 w-4 animate-spin text-orange-500" />
+                <Loader2 className="h-4 w-4 animate-spin text-gold" />
               ) : (
                 <Ticket className="h-4 w-4 text-muted-foreground" />
               )}

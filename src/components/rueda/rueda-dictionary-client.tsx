@@ -535,7 +535,7 @@ export function RuedaDictionaryClient() {
             onClick={() => setPartnerSwitchOnly((prev) => !prev)}
             className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap ${
               partnerSwitchOnly
-                ? "bg-purple-600 text-white shadow-xs"
+                ? "bg-gold text-stone-950 font-bold shadow-xs"
                 : "border bg-card text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -590,19 +590,19 @@ export function RuedaDictionaryClient() {
                     <Badge
                       className={`text-[10px] font-bold ${
                         call.level === "Beginner"
-                          ? "bg-blue-600 text-white"
+                          ? "bg-info-soft text-info border border-info-line"
                           : call.level === "Improver"
-                          ? "bg-emerald-600 text-white"
+                          ? "bg-success-soft text-success border border-success-line"
                           : call.level === "Intermediate"
-                          ? "bg-amber-600 text-white"
-                          : "bg-purple-600 text-white"
+                          ? "bg-gold/15 text-gold border border-gold/30"
+                          : "bg-role-follow-soft text-role-follow border border-role-follow-line"
                       }`}
                     >
                       {call.level}
                     </Badge>
 
                     {call.switchesPartner ? (
-                      <span className="text-[10px] font-semibold text-purple-300 flex items-center gap-1">
+                      <span className="text-[10px] font-semibold text-gold flex items-center gap-1">
                         <Repeat className="h-3 w-3" />
                         Switches Partner
                       </span>

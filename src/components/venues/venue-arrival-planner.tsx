@@ -133,7 +133,7 @@ export function VenueArrivalPlanner() {
 
   return (
     <Card className="border border-border/80 bg-card shadow-sm overflow-hidden rounded-3xl">
-      <CardHeader className="p-6 bg-gradient-to-r from-muted/50 to-muted/20 border-b">
+      <CardHeader className="p-6 bg-surface-2 border-b">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
@@ -265,10 +265,10 @@ export function VenueArrivalPlanner() {
             <Button
               asChild
               variant="outline"
-              className="text-xs h-9 font-bold border-border hover:border-purple-500 hover:bg-purple-500/10"
+              className="text-xs h-9 font-bold border-border hover:border-info-line hover:bg-info-soft"
             >
               <a href={currentDest.appleMapsUrl} target="_blank" rel="noopener noreferrer">
-                <Navigation className="mr-1.5 h-3.5 w-3.5 text-purple-600" />
+                <Navigation className="mr-1.5 h-3.5 w-3.5 text-info" />
                 Apple Maps
                 <ExternalLink className="ml-1 h-3 w-3 opacity-60" />
               </a>
@@ -277,10 +277,10 @@ export function VenueArrivalPlanner() {
             <Button
               asChild
               variant="outline"
-              className="text-xs h-9 font-bold border-border hover:border-cyan-500 hover:bg-cyan-500/10"
+              className="text-xs h-9 font-bold border-border hover:border-role-lead-line hover:bg-role-lead-soft"
             >
               <a href={currentDest.wazeUrl} target="_blank" rel="noopener noreferrer">
-                <Navigation className="mr-1.5 h-3.5 w-3.5 text-cyan-600" />
+                <Navigation className="mr-1.5 h-3.5 w-3.5 text-role-lead" />
                 Waze Navigation
                 <ExternalLink className="ml-1 h-3 w-3 opacity-60" />
               </a>

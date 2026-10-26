@@ -193,7 +193,7 @@ export function MobileNavSheet({
             onClick={onClose}
             className="flex items-center gap-2.5 font-bold tracking-tight text-ivory"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-brand to-gold text-white shadow-xs">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand text-white shadow-xs">
               <Flame className="h-4 w-4 fill-white" />
             </div>
             <div className="flex flex-col">

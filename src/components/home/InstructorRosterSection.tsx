@@ -201,7 +201,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                       {instructor.avatarFallback}
                     </div>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-transparent to-black/30 pointer-events-none z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-transparent to-black/30 pointer-events-none z-10" />
 
                     {/* Top Right Origin Badge */}
                     <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
@@ -291,7 +291,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
           onClick={() => setSelectedInstructor(null)}
         >
           <div
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-amber-500/30 bg-gradient-to-b from-[#18110d] via-[#120d0a] to-[#080605] p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 duration-200 text-left"
+            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-gold/30 bg-surface-2 p-6 sm:p-8 shadow-2xl animate-in zoom-in-95 duration-200 text-left"
             onClick={(e) => e.stopPropagation()}
             data-testid="instructor-spotlight-modal"
           >
@@ -307,7 +307,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
             {/* Modal Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-b border-white/10 pb-5">
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-[#251812] via-[#3a2217] to-[#5a3622] flex items-center justify-center text-amber-200 font-display italic font-bold text-2xl shadow-md border-2 border-amber-500/40 shrink-0">
+              <div className="h-16 w-16 rounded-2xl bg-surface-3 flex items-center justify-center text-amber-200 font-display italic font-bold text-2xl shadow-md border-2 border-gold/40 shrink-0">
                 {selectedInstructor.avatarFallback}
               </div>
               <div className="space-y-1">

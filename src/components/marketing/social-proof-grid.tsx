@@ -199,7 +199,7 @@ export function SocialProofGrid() {
                   : "border-amber-500/20 bg-black/40 text-stone-300 hover:text-white hover:bg-black/60"
               }`}
             >
-              <Award className="mr-1.5 h-3.5 w-3.5 text-orange-500" />
+              <Award className="mr-1.5 h-3.5 w-3.5 text-gold" />
               Congress Vibe
             </Button>
           </div>
@@ -219,7 +219,7 @@ export function SocialProofGrid() {
                 >
                   {/* Vertical Cinema Reel Thumbnail Banner */}
                   <div
-                    className={`relative h-72 w-full bg-gradient-to-br ${item.gradient} p-5 flex flex-col justify-between text-white overflow-hidden`}
+                    className="relative h-72 w-full bg-surface-3 p-5 flex flex-col justify-between text-white overflow-hidden"
                   >
                     {/* Cinematic Vignette Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/40 pointer-events-none" />
@@ -319,7 +319,7 @@ export function SocialProofGrid() {
                 {/* Author Info */}
                 <div className="pt-3 border-t border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[#251812] via-[#3a2217] to-[#5a3622] text-amber-200 border border-amber-500/30 text-xs font-bold shadow-xs">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-3 text-gold border border-gold/30 text-xs font-bold shadow-xs">
                       {item.avatarInitials}
                     </div>
                     <div>
@@ -327,7 +327,7 @@ export function SocialProofGrid() {
                         <span className="text-xs font-bold text-white">
                           {item.name}
                         </span>
-                        <CheckCircle2 className="h-3 w-3 text-emerald-500" />
+                        <CheckCircle2 className="h-3 w-3 text-success" />
                       </div>
                       <span className="text-[10px] text-stone-400">
                         {item.location} • {item.role}
@@ -345,10 +345,10 @@ export function SocialProofGrid() {
         </div>
 
         {/* Global Social Call-to-Action Bar */}
-        <div className="rounded-3xl border border-pink-500/25 bg-gradient-to-r from-pink-500/[0.05] via-amber-500/[0.05] to-orange-500/[0.05] p-6 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
+        <div className="rounded-3xl border border-line bg-surface-2 p-6 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="space-y-2 text-center lg:text-left max-w-xl">
             <div className="inline-flex items-center gap-2">
-              <Badge className="bg-pink-600 text-white font-bold text-xs uppercase tracking-wider">
+              <Badge className="bg-surface-3 text-ivory border border-line font-bold text-xs uppercase tracking-wider">
                 Official Channels
               </Badge>
               <span className="text-xs text-muted-foreground font-semibold">
@@ -436,9 +436,7 @@ export function SocialProofGrid() {
             </div>
 
             {/* Simulated Reel Display */}
-            <div
-              className={`relative h-60 w-full rounded-xl bg-gradient-to-br ${selectedReel.gradient} p-6 flex flex-col justify-between text-white shadow-inner overflow-hidden`}
-            >
+            <div className="relative h-60 w-full rounded-xl bg-surface-3 p-6 flex flex-col justify-between text-white shadow-inner overflow-hidden">
               <Badge className="w-fit bg-black/40 text-white text-xs border-none backdrop-blur-md">
                 {selectedReel.badgeText}
               </Badge>

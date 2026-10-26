@@ -225,7 +225,7 @@ export default async function EventDetailPage({
       </div>
 
       {/* Hero Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-700 via-orange-600 to-amber-500 p-5 sm:p-12 text-white shadow-lg">
+      <div className="relative overflow-hidden rounded-3xl border border-gold/30 bg-surface-2 p-5 sm:p-12 text-white shadow-lg">
         <div className="relative z-10 max-w-3xl space-y-4">
           <div className="flex flex-wrap items-center gap-2">
             <Badge className="bg-black/40 text-white border-none backdrop-blur-sm">
@@ -278,7 +278,7 @@ export default async function EventDetailPage({
       {event.slug.includes("made-in-cuba") && (
         <div
           data-testid="made-in-cuba-festival-showcase"
-          className="rounded-3xl border-2 border-amber-500/40 bg-gradient-to-br from-amber-950/40 via-background to-orange-950/30 p-6 sm:p-8 space-y-6 shadow-xl"
+          className="rounded-3xl border border-gold/40 bg-surface-2 p-6 sm:p-8 space-y-6 shadow-xl"
         >
           <div className="grid gap-8 lg:grid-cols-12 items-center">
             {/* Left Content Column */}
@@ -470,7 +470,7 @@ export default async function EventDetailPage({
 
       {/* Special Halloween Prizes & Party Schedule Banner */}
       {event.slug.includes("halloween") && (
-        <div className="rounded-3xl border border-rose-500/40 bg-gradient-to-br from-rose-950/40 via-background to-amber-950/40 p-6 sm:p-8 space-y-6">
+        <div className="rounded-3xl border border-line bg-surface-2 p-6 sm:p-8 space-y-6">
           <div className="grid gap-6 lg:grid-cols-12 items-center">
             <div className="lg:col-span-8 space-y-4">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -588,7 +588,7 @@ export default async function EventDetailPage({
         <Card className="border-border">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Clock className="h-5 w-5 text-orange-500" />
+              <Clock className="h-5 w-5 text-gold" />
               <CardTitle className="text-base">Instant QR Door Pass</CardTitle>
             </div>
           </CardHeader>

@@ -111,7 +111,7 @@ export function PartnerMatchWaitlist({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Card className="overflow-hidden border border-amber-500/30 bg-gradient-to-br from-card via-card to-amber-500/[0.03] shadow-md">
+    <Card className="overflow-hidden border border-line bg-surface-1 shadow-md">
       <CardHeader className="border-b border-border/60 pb-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2.5">

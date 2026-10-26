@@ -57,7 +57,7 @@ export function LiveTonightBanner() {
     <aside
       aria-label="Live classes tonight banner"
       data-testid="live-tonight-banner"
-      className="relative z-20 border-b bg-gradient-to-r from-emerald-950/90 via-[#09120e] to-emerald-950/90 border-emerald-500/40 text-emerald-100 transition-colors"
+      className="relative z-20 border-b bg-surface-2 border-success-line text-emerald-100 transition-colors"
     >
       <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">

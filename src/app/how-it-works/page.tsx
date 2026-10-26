@@ -95,12 +95,12 @@ export default function HowItWorksPage() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Pillar 1: No Partner Needed */}
-          <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
+          <Card className="border-border shadow-xs hover:border-gold/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-role-lead-soft text-role-lead">
                 <Users className="h-5 w-5" />
               </div>
-              <Badge className="w-fit bg-blue-700 text-white text-[11px]">
+              <Badge className="w-fit bg-surface-3 text-ivory border border-role-lead-line text-[11px]">
                 1. Role Balance Guarantee
               </Badge>
               <CardTitle className="text-lg font-bold">
@@ -113,25 +113,25 @@ export default function HowItWorksPage() {
             <CardContent className="pt-0">
               <div className="rounded-xl border bg-muted/30 p-3 space-y-2 text-xs">
                 <div className="flex justify-between font-semibold">
-                  <span className="text-blue-400">🕺 Lead Role</span>
-                  <span className="text-emerald-300 font-bold">✓ 50/50 Synchronized</span>
-                  <span className="text-rose-400">💃 Follow Role</span>
+                  <span className="text-role-lead">🕺 Lead Role</span>
+                  <span className="text-success font-bold">✓ 50/50 Synchronized</span>
+                  <span className="text-role-follow">💃 Follow Role</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="h-1.5 rounded-full bg-blue-600" />
-                  <div className="h-1.5 rounded-full bg-rose-600" />
+                  <div className="h-1.5 rounded-full bg-role-lead" />
+                  <div className="h-1.5 rounded-full bg-role-follow" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
           {/* Pillar 2: Studio Wallet & Credits */}
-          <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
+          <Card className="border-border shadow-xs hover:border-gold/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gold/15 text-gold">
                 <CreditCard className="h-5 w-5" />
               </div>
-              <Badge className="w-fit bg-amber-500 text-stone-950 font-bold text-[11px]">
+              <Badge className="w-fit bg-gold text-stone-950 font-bold text-[11px]">
                 2. Studio Wallet & Packs
               </Badge>
               <CardTitle className="text-lg font-bold">
@@ -142,8 +142,8 @@ export default function HowItWorksPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-0">
-              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.05] p-3 text-xs flex items-start gap-2">
-                <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="rounded-xl border border-success-line bg-success-soft p-3 text-xs flex items-start gap-2">
+                <ShieldCheck className="h-4 w-4 text-success shrink-0 mt-0.5" />
                 <span className="text-muted-foreground leading-snug">
                   <strong>12-Hour Cancellation Window:</strong> Cancel at least 12 hours before class and your credit is immediately returned to your wallet automatically.
                 </span>
@@ -152,12 +152,12 @@ export default function HowItWorksPage() {
           </Card>
 
           {/* Pillar 3: 4-Tier Syllabus & AI Co-Pilot */}
-          <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
+          <Card className="border-border shadow-xs hover:border-gold/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-success-soft text-success">
                 <Award className="h-5 w-5" />
               </div>
-              <Badge className="w-fit bg-emerald-700 text-white text-[11px]">
+              <Badge className="w-fit bg-surface-3 text-ivory border border-success-line text-[11px]">
                 3. Structured Curriculum
               </Badge>
               <CardTitle className="text-lg font-bold">
@@ -170,18 +170,18 @@ export default function HowItWorksPage() {
             <CardContent className="pt-0">
               <div className="rounded-xl border bg-muted/30 p-2.5 text-[11px] font-semibold text-muted-foreground flex items-center justify-between">
                 <span>Beginner → Improver → Intermediate → Advanced</span>
-                <Sparkles className="h-3.5 w-3.5 text-amber-500" />
+                <Sparkles className="h-3.5 w-3.5 text-gold" />
               </div>
             </CardContent>
           </Card>
 
           {/* Pillar 4: 1-Second QR Check-In */}
-          <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
+          <Card className="border-border shadow-xs hover:border-gold/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-purple-500/10 text-purple-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gold/15 text-gold">
                 <QrCode className="h-5 w-5" />
               </div>
-              <Badge className="w-fit bg-purple-700 text-white text-[11px]">
+              <Badge className="w-fit bg-surface-3 text-ivory border border-gold/30 text-[11px]">
                 4. Contactless Door Check-In
               </Badge>
               <CardTitle className="text-lg font-bold">
@@ -193,7 +193,7 @@ export default function HowItWorksPage() {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="rounded-xl border bg-muted/30 p-3 space-y-1 text-xs">
-                <div className="flex items-center gap-1.5 text-amber-400 font-bold">
+                <div className="flex items-center gap-1.5 text-gold font-bold">
                   <Share2 className="h-3.5 w-3.5" />
                   <span>9:16 Instagram Story Badges</span>
                 </div>
@@ -205,12 +205,12 @@ export default function HowItWorksPage() {
           </Card>
 
           {/* Pillar 5: End-of-Class Video Recaps */}
-          <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
+          <Card className="border-border shadow-xs hover:border-gold/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gold/15 text-gold">
                 <Video className="h-5 w-5" />
               </div>
-              <Badge className="w-fit bg-orange-700 text-white text-[11px]">
+              <Badge className="w-fit bg-surface-3 text-ivory border border-gold/30 text-[11px]">
                 5. Memory Vault
               </Badge>
               <CardTitle className="text-lg font-bold">
@@ -231,12 +231,12 @@ export default function HowItWorksPage() {
           </Card>
 
           {/* Pillar 6: Visiting Maestros & Events */}
-          <Card className="border-border shadow-xs hover:border-amber-500/40 transition-all flex flex-col justify-between">
+          <Card className="border-border shadow-xs hover:border-gold/40 transition-all flex flex-col justify-between">
             <CardHeader className="space-y-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-rose-500/10 text-rose-400">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-ember/15 text-ember">
                 <Flame className="h-5 w-5" />
               </div>
-              <Badge className="w-fit bg-rose-700 text-white text-[11px]">
+              <Badge className="w-fit bg-surface-3 text-ivory border border-ember/30 text-[11px]">
                 6. Guest Artists & Bootcamps
               </Badge>
               <CardTitle className="text-lg font-bold">
@@ -346,7 +346,7 @@ export default function HowItWorksPage() {
       <section
         data-testid="staff-operations-guide"
         aria-label="Teacher and Door Staff Operations Guide"
-        className="rounded-3xl border-2 border-amber-500/30 bg-gradient-to-br from-amber-500/10 via-card to-rose-500/5 p-6 sm:p-10 space-y-6 shadow-sm"
+        className="rounded-3xl border border-gold/30 bg-surface-2 p-6 sm:p-10 space-y-6 shadow-sm"
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border pb-4">
           <div>
@@ -467,7 +467,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Final Call to Action */}
-      <section className="rounded-3xl border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-background to-orange-500/10 p-8 sm:p-10 text-center space-y-4">
+      <section className="rounded-3xl border border-line bg-surface-2 p-8 sm:p-10 text-center space-y-4">
         <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
           Ready to Step into the Rueda Circle?
         </h2>

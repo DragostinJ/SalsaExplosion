@@ -53,7 +53,7 @@ export function ArtHouseGallerySection() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
                   <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
                     PAY AT THE DOOR • £12 / £14
@@ -88,7 +88,7 @@ export function ArtHouseGallerySection() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
                   <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
                     BOOK ONLINE • OFFICIAL PASSES
@@ -123,7 +123,7 @@ export function ArtHouseGallerySection() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
                   <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
                     40+ CUBAN CIRCLE CALLS
@@ -158,7 +158,7 @@ export function ArtHouseGallerySection() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
                   <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
                     INTERACTIVE AUDIO COCKPIT

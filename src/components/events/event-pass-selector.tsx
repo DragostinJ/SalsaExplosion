@@ -357,7 +357,7 @@ export function EventPassSelector({
                     onClick={() =>
                       onInitiateBooking(tier, DanceRole.SOLO)
                     }
-                    className="w-full bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-bold shadow-xs text-xs min-h-11 h-auto py-2.5 px-3 whitespace-normal text-center leading-snug"
+                    className="w-full bg-brand hover:bg-brand-hover text-white font-bold shadow-xs text-xs min-h-11 h-auto py-2.5 px-3 whitespace-normal text-center leading-snug"
                   >
                     <Sparkles className="mr-1.5 h-3.5 w-3.5 shrink-0" />
                     <span>{isSoldOut ? "Tier Sold Out" : `Get ${tier.name}`}</span>

@@ -148,7 +148,7 @@ export function StudioEventGuide({
             <p className="font-semibold text-foreground">Curated by DJ Enrique</p>
             <p>Timba, Son, Salsa & Reparto</p>
             <p>Sensual Bachata Room (Saturdays)</p>
-            <p className="text-[11px] text-orange-400 font-medium pt-1">
+            <p className="text-[11px] text-gold font-medium pt-1">
               Top Sound & Sprung Wood
             </p>
           </CardContent>

@@ -199,11 +199,11 @@ function EventCard({ evt }: EventCardProps) {
     <Card
       className={`flex flex-col overflow-hidden border transition-all hover:shadow-lg ${
         isMadeInCuba
-          ? "border-2 border-black/30 shadow-md ring-2 ring-amber-500/20"
+          ? "border-2 border-black/30 shadow-md ring-2 ring-gold/20"
           : isHalloween
-          ? "border-orange-500/30 shadow-sm"
+          ? "border-gold/30 shadow-sm"
           : isSBK
-          ? "border-rose-500/30 shadow-sm"
+          ? "border-danger-line shadow-sm"
           : "shadow-sm"
       }`}
     >
@@ -213,12 +213,12 @@ function EventCard({ evt }: EventCardProps) {
           isMadeInCuba
             ? "bg-gold text-stone-950 border-b border-black/15"
             : isHalloween
-            ? "bg-gradient-to-tr from-[#160600] via-[#2A0E00] to-[#E65100] text-white"
+            ? "bg-surface-2 text-ivory border-b border-gold/20"
             : isSBK
-            ? "bg-gradient-to-tr from-[#260907] via-[#120605] to-[#7B1113] text-white"
+            ? "bg-surface-2 text-ivory border-b border-danger-line"
             : isWeekendFlagship
-            ? "bg-gradient-to-tr from-stone-900 via-stone-900 to-rose-950 text-white"
-            : "bg-gradient-to-tr from-stone-900 via-brand to-rose-900 text-white"
+            ? "bg-surface-2 text-ivory border-b border-line"
+            : "bg-surface-2 text-ivory border-b border-line"
         }`}
       >
         <div className="flex flex-wrap items-center justify-between gap-2">

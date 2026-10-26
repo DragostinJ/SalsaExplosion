@@ -53,12 +53,12 @@ export const THEME_STYLES: Record<
     pillBg: "bg-amber-500",
   },
   purple: {
-    bgActive: "bg-purple-950/60 border-purple-500/40 text-purple-200",
+    bgActive: "bg-surface-2 border-gold/40 text-gold",
     bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
-    border: "border-purple-500/40",
-    text: "text-purple-200 font-bold",
-    badge: "border-purple-500/40 bg-purple-950/60 text-purple-200 font-bold",
-    pillBg: "bg-purple-500",
+    border: "border-gold/40",
+    text: "text-gold font-bold",
+    badge: "border-gold/40 bg-surface-2 text-gold font-bold",
+    pillBg: "bg-gold",
   },
   red: {
     bgActive: "bg-rose-950/60 border-rose-500/40 text-rose-200",

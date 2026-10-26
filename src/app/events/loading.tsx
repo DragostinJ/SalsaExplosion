@@ -16,7 +16,7 @@ export default function EventsLoading() {
             key={i}
             className="flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm"
           >
-            <div className="h-44 w-full bg-gradient-to-tr from-muted/80 to-muted/40 p-6 flex flex-col justify-between" />
+            <div className="h-44 w-full bg-surface-2 p-6 flex flex-col justify-between" />
             <div className="p-5 space-y-4">
               <div className="flex gap-2">
                 <div className="h-5 w-24 rounded bg-muted" />

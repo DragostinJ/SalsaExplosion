@@ -113,7 +113,7 @@ export default async function AboutPage() {
         <div className="grid gap-6 md:grid-cols-3">
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/15 text-blue-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-info-soft text-info">
                 <Calendar className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -127,7 +127,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-success-soft text-success">
                 <Award className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -141,7 +141,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 text-gold">
                 <QrCode className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -155,7 +155,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 text-gold">
                 <Users className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -169,7 +169,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/15 text-purple-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 text-gold">
                 <Flame className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -183,7 +183,7 @@ export default async function AboutPage() {
 
           <Card className="border shadow-xs">
             <CardHeader className="space-y-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-500/15 text-rose-300">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-danger-soft text-danger">
                 <Video className="h-5 w-5" />
               </div>
               <CardTitle className="text-lg font-bold">
@@ -386,11 +386,11 @@ export default async function AboutPage() {
       <WhyCubanSection />
 
       {/* 6. Call to Action Banner */}
-      <section className="rounded-3xl border border-amber-500/40 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 p-5 sm:p-12 text-white text-center shadow-lg space-y-4">
+      <section className="rounded-3xl border border-gold/40 bg-surface-2 p-5 sm:p-12 text-ivory text-center shadow-lg space-y-4">
         <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
           Ready to Step Into the Circle?
         </h2>
-        <p className="max-w-xl mx-auto text-xs sm:text-sm text-amber-50 leading-relaxed">
+        <p className="max-w-xl mx-auto text-xs sm:text-sm text-ivory-muted leading-relaxed">
           Book your first Cuban Salsa class with Enrique Perez Valdes and the Salsa Explosion team in Bournemouth. Zero experience necessary. We guarantee you&apos;ll be smiling and dancing in your very first hour!
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -412,7 +412,7 @@ export default async function AboutPage() {
         </div>
 
         {/* Social channels */}
-        <div className="pt-4 border-t border-white/20 flex flex-wrap items-center justify-center gap-3">
+        <div className="pt-4 border-t border-line flex flex-wrap items-center justify-center gap-3">
           <Button
             asChild
             size="sm"

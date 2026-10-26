@@ -453,8 +453,8 @@ export function TimbaSongAnatomyPlayer({
               onClick={() => setActiveRole("leader")}
               className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer ${
                 activeRole === "leader"
-                  ? "bg-teal-950 text-teal-200 border border-teal-500/40 shadow-xs"
-                  : "text-stone-400 hover:text-stone-200"
+                  ? "bg-role-lead-soft text-role-lead border border-role-lead-line shadow-xs"
+                  : "text-ivory-muted hover:text-ivory"
               }`}
             >
               🕺 Leader
@@ -466,8 +466,8 @@ export function TimbaSongAnatomyPlayer({
               onClick={() => setActiveRole("follower")}
               className={`rounded-lg px-2.5 py-1 text-xs font-black transition-all cursor-pointer ${
                 activeRole === "follower"
-                  ? "bg-rose-950 text-rose-200 border border-rose-500/40 shadow-xs"
-                  : "text-stone-400 hover:text-stone-200"
+                  ? "bg-role-follow-soft text-role-follow border border-role-follow-line shadow-xs"
+                  : "text-ivory-muted hover:text-ivory"
               }`}
             >
               💃 Follower

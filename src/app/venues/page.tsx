@@ -69,7 +69,7 @@ export default function VenuesGuidePage() {
         {/* Venue 1: BOH Studios Bournemouth */}
         <Card className="border shadow-xs flex flex-col justify-between overflow-hidden">
           <div>
-            <div className="relative h-48 w-full bg-gradient-to-tr from-stone-900 via-surface-1 to-stone-950 p-6 text-ivory flex flex-col justify-between">
+            <div className="relative h-48 w-full bg-surface-2 p-6 text-ivory flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
                   Thursdays & Sundays Hub
@@ -142,7 +142,7 @@ export default function VenuesGuidePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-purple-600" />
+                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-info" />
                   Apple Maps
                 </a>
               </Button>
@@ -164,7 +164,7 @@ export default function VenuesGuidePage() {
         {/* Venue 2: BOH Studios Studio 2 Bournemouth */}
         <Card className="border shadow-xs flex flex-col justify-between overflow-hidden">
           <div>
-            <div className="relative h-48 w-full bg-gradient-to-tr from-emerald-800 via-teal-700 to-amber-600 p-6 text-white flex flex-col justify-between">
+            <div className="relative h-48 w-full bg-surface-2 p-6 text-white flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
                   BOH Studios • Studio 2
@@ -234,11 +234,11 @@ export default function VenuesGuidePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-purple-600" />
+                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-info" />
                   Apple Maps
                 </a>
               </Button>
-              <Button asChild size="sm" className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs h-8">
+              <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs h-8">
                 <a
                   href="https://maps.google.com/?q=BOH+Studios+Bournemouth+104+Commercial+Rd+BH2+5LR"
                   target="_blank"
@@ -256,7 +256,7 @@ export default function VenuesGuidePage() {
         {/* Venue 3: Neptune Hall Boscombe */}
         <Card className="border shadow-sm flex flex-col justify-between overflow-hidden">
           <div>
-            <div className="relative h-48 w-full bg-gradient-to-tr from-blue-700 via-sky-600 to-amber-500 p-6 text-white flex flex-col justify-between">
+            <div className="relative h-48 w-full bg-surface-2 p-6 text-white flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
                   Special Events Venue
@@ -326,11 +326,11 @@ export default function VenuesGuidePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-purple-600" />
+                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-info" />
                   Apple Maps
                 </a>
               </Button>
-              <Button asChild size="sm" className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs h-8">
+              <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs h-8">
                 <a
                   href="https://maps.google.com/?q=Harvester+Undercliff+Drive+Boscombe+BH5+1BN"
                   target="_blank"
@@ -348,7 +348,7 @@ export default function VenuesGuidePage() {
         {/* Venue 4: The Roundhouse Hotel */}
         <Card className="border shadow-sm flex flex-col justify-between overflow-hidden">
           <div>
-            <div className="relative h-48 w-full bg-gradient-to-tr from-purple-800 via-indigo-700 to-amber-600 p-6 text-white flex flex-col justify-between">
+            <div className="relative h-48 w-full bg-surface-2 p-6 text-white flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
                   Festival Accommodation Partner
@@ -378,7 +378,7 @@ export default function VenuesGuidePage() {
               {/* Parking Info */}
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
-                  <Car className="h-4 w-4 text-purple-400" />
+                  <Car className="h-4 w-4 text-gold" />
                   Parking Advice:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
@@ -418,11 +418,11 @@ export default function VenuesGuidePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-purple-600" />
+                  <Navigation className="mr-1.5 h-3.5 w-3.5 text-info" />
                   Apple Maps
                 </a>
               </Button>
-              <Button asChild size="sm" className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs h-8">
+              <Button asChild size="sm" className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs h-8">
                 <a
                   href="https://maps.google.com/?q=The+Roundhouse+Hotel+Meyrick+Road+Bournemouth+BH1+2PR"
                   target="_blank"
@@ -439,7 +439,7 @@ export default function VenuesGuidePage() {
       </div>
 
       {/* Dedicated Nearby Hotels for Dance Weekends Section */}
-      <div className="rounded-3xl border border-primary-base/20 bg-gradient-to-br from-card via-card to-primary-light/20 p-6 sm:p-10 space-y-6">
+      <div className="rounded-3xl border border-line bg-surface-2 p-6 sm:p-10 space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <Badge className="bg-primary-base text-white text-xs font-bold uppercase tracking-wider mb-2">
@@ -502,7 +502,7 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-bold">
+                <Badge className="bg-gold/15 text-gold border border-gold/30 text-[10px] font-bold">
                   Top Value
                 </Badge>
                 <span className="text-[11px] font-bold text-rose-400">8 min walk</span>

@@ -77,20 +77,20 @@ export function AdminNotificationBell() {
   const getNotificationIcon = (type: StudioNotificationItem["type"]) => {
     switch (type) {
       case "congress":
-        return <Ticket className="h-4 w-4 text-purple-400" />;
+        return <Ticket className="h-4 w-4 text-gold" />;
       case "coaching":
-        return <CalendarPlus className="h-4 w-4 text-sky-400" />;
+        return <CalendarPlus className="h-4 w-4 text-info" />;
       case "merch":
-        return <ShoppingBag className="h-4 w-4 text-rose-400" />;
+        return <ShoppingBag className="h-4 w-4 text-danger" />;
       case "grading":
-        return <Video className="h-4 w-4 text-emerald-400" />;
+        return <Video className="h-4 w-4 text-success" />;
       case "sentiment":
-        return <HeartHandshake className="h-4 w-4 text-amber-400" />;
+        return <HeartHandshake className="h-4 w-4 text-gold" />;
       case "question":
-        return <HelpCircle className="h-4 w-4 text-indigo-400" />;
+        return <HelpCircle className="h-4 w-4 text-info" />;
       case "ratio":
       default:
-        return <Users className="h-4 w-4 text-amber-400" />;
+        return <Users className="h-4 w-4 text-gold" />;
     }
   };
 

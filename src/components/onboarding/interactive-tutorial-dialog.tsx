@@ -117,7 +117,7 @@ export function InteractiveTutorialDialog({
               onClick={() => setStep(idx)}
               className={`h-1.5 sm:h-2 rounded-full transition-all ${
                 idx <= step
-                  ? "bg-gradient-to-r from-primary-base to-accent-tangerine"
+                  ? "bg-brand"
                   : "bg-muted-foreground/25"
               }`}
             />
@@ -127,7 +127,7 @@ export function InteractiveTutorialDialog({
         {/* Sticky Header */}
         <div className="flex items-center justify-between border-b px-4 sm:px-6 py-3 sm:py-4 shrink-0 bg-card">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-amber-600 to-orange-500 text-white shadow-xs">
+            <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl bg-gold text-stone-950 shadow-xs">
               <Flame className="h-4 w-4 sm:h-5 sm:w-5 fill-white" />
             </div>
             <div className="min-w-0">
@@ -171,7 +171,7 @@ export function InteractiveTutorialDialog({
           {/* STEP 0: Lead/Follow Ratio Balance & Zero Partner Needed */}
           {step === 0 && (
             <div className="space-y-4">
-              <div className="rounded-2xl bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-transparent p-4 border border-amber-500/20 space-y-2">
+              <div className="rounded-2xl bg-surface-2 p-4 border border-line space-y-2">
                 <div className="flex items-center gap-2">
                   <Badge className="bg-amber-600 text-white font-bold text-[10px]">
                     Strict Ratio Protection
@@ -247,7 +247,7 @@ export function InteractiveTutorialDialog({
           {/* STEP 1: Studio Wallet, Credits & Flexible Cancellation */}
           {step === 1 && (
             <div className="space-y-4">
-              <div className="rounded-2xl bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-transparent p-4 border border-emerald-500/20 space-y-2">
+              <div className="rounded-2xl bg-surface-2 p-4 border border-line space-y-2">
                 <div className="flex items-center gap-2">
                   <Badge className="bg-emerald-600 text-white font-bold text-[10px]">
                     Zero Lock-In
@@ -302,9 +302,9 @@ export function InteractiveTutorialDialog({
           {/* STEP 2: 4-Tier Syllabus & AI Dance Co-Pilot */}
           {step === 2 && (
             <div className="space-y-4">
-              <div className="rounded-2xl bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-transparent p-4 border border-purple-500/20 space-y-1.5">
+              <div className="rounded-2xl bg-surface-2 p-4 border border-line space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <Badge className="bg-purple-600 text-white font-bold text-[10px]">
+                  <Badge className="bg-surface-3 text-ivory border border-line font-bold text-[10px]">
                     Audited Syllabus
                   </Badge>
                   <span className="text-muted-foreground text-xs font-semibold">
@@ -329,7 +329,7 @@ export function InteractiveTutorialDialog({
                       onClick={() => setDemoTierIndex(idx)}
                       className={`rounded-lg py-2 text-center font-bold text-xs transition-all ${
                         demoTierIndex === idx
-                          ? "bg-purple-600 text-white shadow-xs ring-2 ring-purple-400/40"
+                          ? "bg-gold text-stone-950 font-bold shadow-xs ring-2 ring-gold/40"
                           : "bg-muted text-muted-foreground hover:bg-muted/80"
                       }`}
                     >
@@ -350,7 +350,7 @@ export function InteractiveTutorialDialog({
                   <p className="text-[11px] text-muted-foreground">
                     <strong>Key Moves:</strong> {tiers[demoTierIndex].moves}
                   </p>
-                  <p className="text-[10px] text-purple-300 font-medium bg-purple-950/40 p-2 rounded-lg mt-1">
+                  <p className="text-[10px] text-gold font-medium bg-gold/10 border border-gold/20 p-2 rounded-lg mt-1">
                     💡 {tiers[demoTierIndex].tip}
                   </p>
                 </div>
@@ -363,7 +363,7 @@ export function InteractiveTutorialDialog({
                   <Link
                     href="/how-it-works"
                     onClick={onClose}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-purple-400 hover:underline"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-gold hover:underline"
                   >
                     <span>Open 2027 Syllabus</span>
                     <ExternalLink className="h-3 w-3" />
@@ -376,7 +376,7 @@ export function InteractiveTutorialDialog({
           {/* STEP 3: 1-Second Door Check-In & Social Badges */}
           {step === 3 && (
             <div className="space-y-4">
-              <div className="rounded-2xl bg-gradient-to-br from-rose-500/10 via-amber-500/5 to-transparent p-4 border border-rose-500/20 space-y-2">
+              <div className="rounded-2xl bg-surface-2 p-4 border border-line space-y-2">
                 <div className="flex items-center gap-2">
                   <Badge className="bg-rose-600 text-white font-bold text-[10px]">
                     Fast Entry at BOH Studios

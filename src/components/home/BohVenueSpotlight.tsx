@@ -83,7 +83,7 @@ export function BohVenueSpotlight() {
   return (
     <section
       id="venue-spotlight"
-      className="cv-auto py-16 sm:py-24 border-b border-border/70 bg-gradient-to-b from-background via-muted/20 to-background scroll-mt-20"
+      className="cv-auto py-16 sm:py-24 border-b border-border/70 bg-canvas scroll-mt-20"
       data-testid="boh-venue-spotlight"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -148,7 +148,7 @@ export function BohVenueSpotlight() {
                 className="w-[78vw] shrink-0 snap-center md:w-auto group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-card shadow-sm hover:border-primary-base/50 transition-all"
               >
                 <div
-                  className={`relative aspect-[16/10] w-full bg-gradient-to-br ${slot.gradient} p-4 flex flex-col justify-between border-b border-border/60`}
+                  className="relative aspect-[16/10] w-full bg-surface-3 p-4 flex flex-col justify-between border-b border-border/60"
                 >
                   <div className="flex items-center justify-between z-10">
                     <span className="rounded-md bg-black/60 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white/90 border border-white/10">

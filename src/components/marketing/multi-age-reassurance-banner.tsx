@@ -64,7 +64,7 @@ export function MultiAgeReassuranceBanner({
 
         {/* Card 2: Senior & Non-Digital Friendly Reassurance (60+ Dancers & Casual Guests) */}
         {(variant === "all" || variant === "senior-only") && (
-          <div className="rounded-2xl border-2 border-amber-500/40 bg-gradient-to-br from-amber-500/10 via-card to-amber-500/5 p-5 sm:p-6 shadow-xs space-y-3.5">
+          <div className="rounded-2xl border border-gold/40 bg-surface-2 p-5 sm:p-6 shadow-xs space-y-3.5">
             <div className="flex items-center justify-between gap-2">
               <Badge className="bg-amber-700 text-white font-extrabold text-[11px] uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
                 <HeartHandshake className="h-3.5 w-3.5" />

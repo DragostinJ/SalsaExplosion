@@ -176,7 +176,7 @@ export function CubanCurriculumSkillTree({
   return (
     <Card
       data-testid="curriculum-skill-tree"
-      className={`border-2 border-primary-base/30 bg-gradient-to-br from-card via-background to-card shadow-sm ${className}`}
+      className={`border border-line bg-surface-1 shadow-sm ${className}`}
     >
       <CardHeader className="p-3.5 sm:p-6 pb-3 sm:pb-4 space-y-2.5 sm:space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -226,7 +226,7 @@ export function CubanCurriculumSkillTree({
         <div className="pt-1">
           <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-amber-600 to-rose-600 rounded-full transition-all duration-500"
+              className="h-full bg-brand rounded-full transition-all duration-500"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -237,7 +237,7 @@ export function CubanCurriculumSkillTree({
         {/* Reassurance Banner from Maestro Enrique */}
         <div
           data-testid="curriculum-reassurance-banner"
-          className="rounded-2xl border-2 border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-background to-orange-500/10 p-3.5 sm:p-6 space-y-3 sm:space-y-4"
+          className="rounded-2xl border border-gold/30 bg-surface-2 p-3.5 sm:p-6 space-y-3 sm:space-y-4"
         >
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div className="space-y-1.5 max-w-2xl">

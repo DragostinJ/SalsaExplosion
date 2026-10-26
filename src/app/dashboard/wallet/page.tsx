@@ -277,7 +277,7 @@ export default async function StudentWalletPage() {
             {eventRegistrations.map((reg) => (
               <Card
                 key={reg.id}
-                className="rounded-2xl border border-amber-500/40 bg-gradient-to-br from-amber-500/[0.04] to-background p-5 shadow-xs flex flex-col justify-between space-y-4"
+                className="rounded-2xl border border-line bg-surface-1 p-5 shadow-xs flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">

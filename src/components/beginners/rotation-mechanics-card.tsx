@@ -16,7 +16,7 @@ export function RotationMechanicsCard() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Card className="border border-blue-500/30 bg-gradient-to-br from-blue-500/[0.04] via-background to-amber-500/[0.03] shadow-xs">
+    <Card className="border border-line bg-surface-1 shadow-xs">
       <CardHeader className="pb-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="space-y-1">

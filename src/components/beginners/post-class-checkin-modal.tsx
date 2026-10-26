@@ -132,7 +132,7 @@ export function PostClassCheckinModal({
                 type="button"
                 disabled={isPending}
                 onClick={() => handleSubmit("A_BIT_OVERWHELMED")}
-                className="rounded-xl border border-border/70 bg-card p-3.5 text-center space-y-2 hover:border-purple-500 hover:bg-purple-500/[0.05] transition-all group"
+                className="rounded-xl border border-border/70 bg-card p-3.5 text-center space-y-2 hover:border-gold/50 hover:bg-gold/[0.05] transition-all group"
               >
                 <div className="text-2xl group-hover:scale-110 transition-transform">
                   😅

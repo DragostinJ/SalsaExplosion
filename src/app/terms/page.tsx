@@ -257,7 +257,7 @@ export default function TermsAndLegalPage() {
       </section>
 
       {/* Support Strip */}
-      <div className="rounded-2xl border-2 border-amber-500/40 bg-gradient-to-r from-amber-500/10 via-background to-rose-500/10 p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div className="rounded-2xl border border-line bg-surface-2 p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
         <div>
           <h3 className="text-base font-black text-foreground">
             Have a Question About Our Terms or a Booking?

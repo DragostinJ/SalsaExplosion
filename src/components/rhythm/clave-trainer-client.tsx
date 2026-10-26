@@ -265,7 +265,7 @@ export function ClaveTrainerClient() {
   return (
     <div className="space-y-8">
       {/* Visual Step Display */}
-      <Card className="border-2 border-amber-500/30 bg-gradient-to-b from-card to-amber-500/[0.03] shadow-md overflow-hidden">
+      <Card className="border border-line bg-surface-1 shadow-md overflow-hidden">
         <CardHeader className="text-center pb-3">
           <div className="inline-flex items-center justify-center gap-2 mx-auto">
             <Badge className="bg-amber-600 text-white font-bold text-xs uppercase tracking-wider">

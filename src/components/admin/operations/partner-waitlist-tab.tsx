@@ -44,7 +44,7 @@ export function PartnerWaitlistTab({
           disabled={isPending || waitingLeadsCount === 0 || waitingFollowsCount === 0}
           onClick={onAutoPairWaitlist}
           data-testid="auto-pair-waitlist-btn"
-          className="bg-gradient-to-r from-amber-600 to-orange-500 hover:from-amber-700 hover:to-orange-600 text-white font-bold text-xs shadow-xs h-8 self-start sm:self-auto"
+          className="bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-xs h-8 self-start sm:self-auto"
         >
           <Zap className="mr-1.5 h-3.5 w-3.5" />
           ⚡ Auto-Pair Waiting Lead + Follow

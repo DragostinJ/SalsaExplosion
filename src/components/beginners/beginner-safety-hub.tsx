@@ -31,7 +31,7 @@ export function BeginnerSafetyHub() {
   return (
     <div className="space-y-4">
       {/* Beginner Psychological Safety Banner */}
-      <div className="rounded-2xl border border-secondary-base/30 bg-gradient-to-r from-secondary-light/30 via-background to-secondary-light/10 p-4 sm:p-5 shadow-xs">
+      <div className="rounded-2xl border border-line bg-surface-1 p-4 sm:p-5 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">

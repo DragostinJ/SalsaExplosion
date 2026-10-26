@@ -492,19 +492,19 @@ export default async function StudentSchedulePage({
             <div className="flex flex-wrap items-center gap-1.5">
               <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
                 <Link href="/admin/analytics">
-                  <BarChart3 className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
+                  <BarChart3 className="mr-1.5 h-3.5 w-3.5 text-gold" />
                   Analytics
                 </Link>
               </Button>
               <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
                 <Link href="/admin/classes">
-                  <CalendarPlus className="mr-1.5 h-3.5 w-3.5 text-emerald-500" />
+                  <CalendarPlus className="mr-1.5 h-3.5 w-3.5 text-success" />
                   Classes
                 </Link>
               </Button>
               <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
                 <Link href="/admin/events">
-                  <Sparkles className="mr-1.5 h-3.5 w-3.5 text-orange-500" />
+                  <Sparkles className="mr-1.5 h-3.5 w-3.5 text-gold" />
                   Events Admin
                 </Link>
               </Button>

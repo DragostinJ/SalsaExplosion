@@ -207,7 +207,7 @@ export default function Home() {
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3 flex items-center gap-1.5">
                     <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
                       SAT 31 OCT 2026
@@ -412,7 +412,7 @@ export default function Home() {
                 <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-line bg-surface-2 shadow-xl space-y-4">
                   <div className="flex items-center gap-4 border-b border-line pb-4">
                     <div className="relative shrink-0">
-                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-gold/40 overflow-hidden bg-gradient-to-tr from-stone-800 via-brand to-stone-900 flex items-center justify-center text-white shadow-md">
+                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-gold/40 overflow-hidden bg-surface-3 flex items-center justify-center text-white shadow-md">
                         <Flame className="h-8 w-8 sm:h-10 sm:w-10 fill-white" />
                       </div>
                       <div className="absolute -bottom-1 -right-1 rounded-full bg-brand text-white px-1.5 py-0.2 text-[9px] font-black uppercase tracking-wider shadow-xs">

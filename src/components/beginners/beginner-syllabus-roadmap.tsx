@@ -83,7 +83,7 @@ export function BeginnerSyllabusRoadmap() {
   const progressPercent = Math.round((masteredCount / BEGINNER_STEPS.length) * 100);
 
   return (
-    <Card className="border border-secondary-base/30 bg-gradient-to-br from-secondary-light/30 via-background to-secondary-light/10 shadow-xs">
+    <Card className="border border-line bg-surface-1 shadow-xs">
       <CardHeader className="pb-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">

@@ -84,14 +84,14 @@ export function AnonymousQuestionBox() {
   };
 
   return (
-    <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-500/[0.04] via-background to-amber-500/[0.03] shadow-xs">
+    <Card className="border border-line bg-surface-1 shadow-xs">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-2">
-          <Badge className="bg-purple-600 text-white font-bold text-[10px]">
+          <Badge className="bg-surface-3 text-ivory border border-line font-bold text-[10px]">
             <Lock className="mr-1 h-3 w-3" />
             100% Anonymous
           </Badge>
-          <span className="text-xs font-semibold text-purple-300">
+          <span className="text-xs font-semibold text-gold">
             Zero Judgment Ask Box
           </span>
         </div>
@@ -168,7 +168,7 @@ export function AnonymousQuestionBox() {
                     onClick={() => setSelectedCategory(cat.id as QuestionCategory)}
                     className={`rounded-lg px-2.5 py-1 text-[11px] font-semibold transition-all ${
                       selectedCategory === cat.id
-                        ? "bg-purple-600 text-white shadow-xs"
+                        ? "bg-gold text-stone-950 font-bold shadow-xs"
                         : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                     }`}
                   >
@@ -188,7 +188,7 @@ export function AnonymousQuestionBox() {
                 value={questionText}
                 onChange={(e) => setQuestionText(e.target.value)}
                 placeholder="e.g. Is it ok if I can only stay for the first hour of class? What should I do if I feel dizzy?"
-                className="w-full rounded-lg border border-input bg-background p-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:ring-1 focus:ring-purple-500"
+                className="w-full rounded-lg border border-input bg-background p-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-hidden focus:ring-1 focus:ring-gold"
               />
             </div>
 
@@ -198,14 +198,14 @@ export function AnonymousQuestionBox() {
                 value={emailText}
                 onChange={(e) => setEmailText(e.target.value)}
                 placeholder="Optional email if you want a direct personal reply"
-                className="rounded-lg border border-input bg-background px-2.5 py-1.5 text-[11px] text-foreground placeholder:text-muted-foreground w-full sm:max-w-xs focus:outline-hidden focus:ring-1 focus:ring-purple-500"
+                className="rounded-lg border border-input bg-background px-2.5 py-1.5 text-[11px] text-foreground placeholder:text-muted-foreground w-full sm:max-w-xs focus:outline-hidden focus:ring-1 focus:ring-gold"
               />
 
               <Button
                 type="submit"
                 size="sm"
                 disabled={isPending}
-                className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-4 shrink-0 shadow-xs"
+                className="bg-brand hover:bg-brand-hover text-white font-bold text-xs px-4 shrink-0 shadow-xs"
               >
                 {isPending ? (
                   <>

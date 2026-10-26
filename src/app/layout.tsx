@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import { prisma } from "@/lib/prisma";
 import { SiteHeader } from "@/components/navigation/site-header";
 import { SiteFooter } from "@/components/navigation/site-footer";
 import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
 import { JsonLdSchema } from "@/components/seo/JsonLdSchema";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { StageSpotlight } from "@/components/ui/StageSpotlight";
-import { getSafeAppUrl, isNextControlFlowError } from "@/lib/safe-url";
+import { getSafeAppUrl } from "@/lib/safe-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -88,48 +86,13 @@ export const metadata: Metadata = {
   },
 };
 
-import { canSwitchRoles, isBootstrapAdmin } from "@/lib/auth-user";
-import type { Role } from "@prisma/client";
-
 import { Toaster } from "sonner";
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Defensive role lookup only (no provisioning) — cheap indexed read on clerkId with cold-start resilience
-  let viewer: { role: Role; email: string } | null = null;
-  try {
-    const { userId } = await auth();
-    if (userId) {
-      viewer = await prisma.user.findUnique({
-        where: { clerkId: userId },
-        select: { role: true, email: true },
-      });
-    }
-  } catch (err: unknown) {
-    if (isNextControlFlowError(err)) {
-      throw err;
-    }
-    console.error("[RootLayout] Non-critical auth/database lookup failed:", err);
-  }
-
-  let userCanSwitchRoles = false;
-  let effectiveRole: Role | null = null;
-  try {
-    userCanSwitchRoles = viewer ? canSwitchRoles(viewer.email) : false;
-    effectiveRole = viewer
-      ? userCanSwitchRoles
-        ? viewer.role
-        : isBootstrapAdmin(viewer.email)
-          ? ("ADMIN" as Role)
-          : viewer.role
-      : null;
-  } catch (err: unknown) {
-    console.error("[RootLayout] Failed to calculate effective role:", err);
-  }
-
   return (
     <ClerkProvider>
       <html
@@ -149,7 +112,7 @@ export default async function RootLayout({
           </a>
           <div className="film-grain" aria-hidden="true" />
           <StageSpotlight />
-          <SiteHeader role={effectiveRole} canSwitchRoles={userCanSwitchRoles} />
+          <SiteHeader />
           <div className="flex-1 overflow-x-hidden relative z-10">{children}</div>
           <SiteFooter />
           <MobileBottomNav />

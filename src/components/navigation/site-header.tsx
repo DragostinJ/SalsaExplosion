@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useTransition } from "react";
+import { useState, useEffect, useTransition, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
@@ -24,7 +24,7 @@ import {
 
 import dynamic from "next/dynamic";
 import type { Role } from "@prisma/client";
-import { switchMyAccountRoleAction } from "@/actions/management.actions";
+import { switchMyAccountRoleAction, getCurrentUserRoleAction } from "@/actions/management.actions";
 import { InteractiveTutorialModal } from "@/components/onboarding/interactive-tutorial-modal";
 
 const AdminNotificationBell = dynamic(
@@ -46,18 +46,55 @@ const MobileNavSheet = dynamic(
 import { toast } from "sonner";
 
 interface SiteHeaderProps {
-  role: Role | null;
+  role?: Role | null;
   canSwitchRoles?: boolean;
 }
 
-export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
-  const isAdmin = role === "ADMIN";
+export function SiteHeader({
+  role: initialRole = null,
+  canSwitchRoles: initialCanSwitchRoles = false,
+}: SiteHeaderProps = {}) {
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
+  const [fetchedRole, setFetchedRole] = useState<Role | null>(null);
+  const [fetchedCanSwitch, setFetchedCanSwitch] = useState<boolean | null>(null);
+
+  const activeRole = initialRole ?? fetchedRole;
+  const userCanSwitchRoles = initialCanSwitchRoles || (fetchedCanSwitch ?? false);
+
   const pathname = usePathname();
   const router = useRouter();
-  const { isSignedIn } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
   const [isPending, startTransition] = useTransition();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [hasMobileNavOpened, setHasMobileNavOpened] = useState(false);
+
+  // When mounted and signed in, if role was not passed from a page layout, fetch it client-side
+  useEffect(() => {
+    if (mounted && isLoaded && isSignedIn && initialRole === null) {
+      let isSubscribed = true;
+      getCurrentUserRoleAction()
+        .then((res) => {
+          if (isSubscribed) {
+            setFetchedRole(res.role);
+            setFetchedCanSwitch(res.canSwitchRoles);
+          }
+        })
+        .catch(() => {});
+      return () => {
+        isSubscribed = false;
+      };
+    }
+  }, [mounted, isLoaded, isSignedIn, initialRole]);
+
+  // Only evaluate authenticated links and widgets after client mount to prevent React 19 SSR hydration mismatches (#441)
+  const isAuthReady = mounted && isLoaded && Boolean(isSignedIn);
+  const isAdmin = isAuthReady && activeRole === "ADMIN";
+  const isInstructor = isAuthReady && activeRole === "INSTRUCTOR";
 
   // Allow bottom nav bar to trigger the mobile drawer
   useEffect(() => {
@@ -148,7 +185,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
   ];
 
   // In authenticated mode, insert member tools (Progression, Recaps, Wallet)
-  const studentLinks = isSignedIn
+  const studentLinks = isAuthReady
     ? [
         publicLinks[0], // Thu & Sun Classes
         publicLinks[1], // Festivals & Tickets
@@ -288,7 +325,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   })}
                 </div>
               </>
-            ) : role === "INSTRUCTOR" ? (
+            ) : isInstructor ? (
               <>
                 <Link
                   href="/dashboard/schedule"
@@ -378,10 +415,10 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
 
           {isAdmin && <AdminNotificationBell />}
 
-          {isSignedIn ? (
+          {isAuthReady ? (
             <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
               {/* Interactive Studio Demo Role Switcher (Shown on sm+; mobile accesses via slide-in drawer) */}
-              {canSwitchRoles && (
+              {userCanSwitchRoles && (
                 <div
                   role="group"
                   aria-label="Portal Role Switcher"
@@ -389,7 +426,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   title="Switch active portal role for testing"
                 >
                   {(["STUDENT", "INSTRUCTOR", "ADMIN"] as Role[]).map((r) => {
-                    const isActive = (role ?? "STUDENT") === r;
+                    const isActive = (activeRole ?? "STUDENT") === r;
                     return (
                       <button
                         key={r}
@@ -464,8 +501,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
         <MobileNavSheet
           isOpen={isMobileNavOpen}
           onClose={() => setIsMobileNavOpen(false)}
-          role={role}
-          canSwitchRoles={canSwitchRoles}
+          role={activeRole}
+          canSwitchRoles={userCanSwitchRoles}
           handleRoleSwitch={handleRoleSwitch}
           isPending={isPending}
         />

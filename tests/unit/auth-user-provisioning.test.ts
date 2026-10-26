@@ -19,6 +19,7 @@ vi.mock("@/lib/prisma", () => ({
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, canSwitchRoles, isBootstrapAdmin } from "@/lib/auth-user";
+import { getCurrentUserRoleAction } from "@/actions/management.actions";
 
 describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
   const mockedAuth = vi.mocked(auth);
@@ -121,5 +122,67 @@ describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
   it("ensures isBootstrapAdmin safely fails closed on null or undefined", () => {
     expect(isBootstrapAdmin(null)).toBe(false);
     expect(isBootstrapAdmin(undefined)).toBe(false);
+  });
+
+  describe("getCurrentUserRoleAction (Client Header Role Resolution)", () => {
+    it("returns null role and canSwitchRoles: false when no user is logged in", async () => {
+      mockedAuth.mockResolvedValueOnce({ userId: null } as unknown as Awaited<ReturnType<typeof auth>>);
+      const res = await getCurrentUserRoleAction();
+      expect(res).toEqual({ role: null, canSwitchRoles: false });
+    });
+
+    it("returns active student role when authenticated student logs in", async () => {
+      mockedAuth.mockResolvedValueOnce({ userId: "student_user_1" } as unknown as Awaited<ReturnType<typeof auth>>);
+      mockedPrismaUser.findUnique.mockResolvedValueOnce({
+        id: "student-db-1",
+        clerkId: "student_user_1",
+        email: "dancer@bournemouth.co.uk",
+        firstName: "Carlos",
+        lastName: "Valdes",
+        avatarUrl: null,
+        bio: null,
+        specialty: null,
+        yearsDancing: 5,
+        role: "STUDENT",
+        currentLevel: "BEGINNER",
+        preferredRole: "LEAD",
+        classCredits: 2,
+        stripeCustomerId: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        subscription: null,
+      });
+
+      const res = await getCurrentUserRoleAction();
+      expect(res.role).toBe("STUDENT");
+      expect(res.canSwitchRoles).toBe(false);
+    });
+
+    it("identifies bootstrap admin role accurately", async () => {
+      vi.stubEnv("ADMIN_EMAILS", "enrique@salsaexplosion.co.uk");
+      mockedAuth.mockResolvedValueOnce({ userId: "admin_user_1" } as unknown as Awaited<ReturnType<typeof auth>>);
+      mockedPrismaUser.findUnique.mockResolvedValueOnce({
+        id: "admin-db-1",
+        clerkId: "admin_user_1",
+        email: "enrique@salsaexplosion.co.uk",
+        firstName: "Enrique",
+        lastName: "Perez Valdes",
+        avatarUrl: null,
+        bio: null,
+        specialty: null,
+        yearsDancing: 25,
+        role: "ADMIN",
+        currentLevel: "ADVANCED",
+        preferredRole: "LEAD",
+        classCredits: 99,
+        stripeCustomerId: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        subscription: null,
+      });
+
+      const res = await getCurrentUserRoleAction();
+      expect(res.role).toBe("ADMIN");
+    });
   });
 });

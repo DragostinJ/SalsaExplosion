@@ -13,7 +13,7 @@ import {
   SubscriptionStatus,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser, canSwitchRoles } from "@/lib/auth-user";
+import { getOrProvisionCurrentUser, canSwitchRoles, isBootstrapAdmin } from "@/lib/auth-user";
 import { recordAuditLog } from "@/lib/audit-log";
 import { CUBAN_SALSA_SYLLABUS } from "@/lib/constants/submission";
 import type {
@@ -141,6 +141,27 @@ export async function switchMyAccountRoleAction(rawInput: {
       success: false,
       error: { code: "INTERNAL_ERROR", message: "Could not switch role." },
     };
+  }
+}
+
+export async function getCurrentUserRoleAction(): Promise<{
+  role: Role | null;
+  canSwitchRoles: boolean;
+}> {
+  try {
+    const user = await getOrProvisionCurrentUser();
+    if (!user) {
+      return { role: null, canSwitchRoles: false };
+    }
+    const userCanSwitch = canSwitchRoles(user.email);
+    const effective = userCanSwitch
+      ? user.role
+      : isBootstrapAdmin(user.email)
+        ? Role.ADMIN
+        : user.role;
+    return { role: effective, canSwitchRoles: userCanSwitch };
+  } catch {
+    return { role: null, canSwitchRoles: false };
   }
 }
 

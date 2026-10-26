@@ -79,6 +79,12 @@ export async function switchMyAccountRoleAction(
   return roster.switchMyAccountRoleAction(...args);
 }
 
+export async function getCurrentUserRoleAction(
+  ...args: Parameters<typeof roster.getCurrentUserRoleAction>
+) {
+  return roster.getCurrentUserRoleAction(...args);
+}
+
 export async function updateStudentProgressionAction(
   ...args: Parameters<typeof roster.updateStudentProgressionAction>
 ) {

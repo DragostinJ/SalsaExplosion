@@ -17,7 +17,6 @@ import {
   ShieldCheck,
   Video,
   Compass,
-  MapPin,
   Menu,
   ClipboardList,
   Music,
@@ -433,13 +432,6 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                 className="rounded-xl border border-border px-3 py-1.5 text-xs font-bold text-foreground hover:bg-muted/70 transition-colors shrink-0"
               >
                 Sign In
-              </Link>
-              <Link
-                href="/venues"
-                className="hidden 2xl:inline-flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors py-2 px-1"
-              >
-                <MapPin className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400" />
-                <span>BOH Studios (BH2 5LR)</span>
               </Link>
               <Link
                 href="/events"

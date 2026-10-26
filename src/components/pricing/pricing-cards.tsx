@@ -161,13 +161,13 @@ export function PricingCards({
               key={pkg.id}
               className={`flex flex-col justify-between transition-all ${
                 isParchment
-                  ? "bg-[#F4ECE1] text-[#120D0A] border-2 border-amber-600/40 shadow-lg ring-2 ring-amber-600/25"
+                  ? "bg-[#181310] text-[#F5F2EB] border-2 border-amber-500/40 shadow-xl ring-1 ring-amber-500/30"
                   : pkg.popular
-                  ? "border-primary shadow-md ring-1 ring-primary"
-                  : ""
+                  ? "border-primary shadow-md ring-1 ring-primary bg-[#14110F]"
+                  : "bg-[#14110F] border-white/10"
               } ${
                 isSubCard
-                  ? "border-emerald-500/40 bg-emerald-500/[0.02]"
+                  ? "border-emerald-500/40 bg-emerald-950/20"
                   : ""
               }`}
             >
@@ -177,7 +177,7 @@ export function PricingCards({
                     variant={isSubCard ? "default" : "secondary"}
                     className={
                       isParchment
-                        ? "bg-[#120D0A] text-[#F4ECE1] font-black"
+                        ? "bg-amber-500 text-stone-950 font-black"
                         : isSubCard
                         ? "bg-emerald-800 hover:bg-emerald-800 text-white"
                         : ""
@@ -195,7 +195,7 @@ export function PricingCards({
                     <Badge
                       className={
                         isParchment
-                          ? "bg-amber-400 text-black font-black text-[11px]"
+                          ? "bg-amber-400 text-stone-950 font-black text-[11px]"
                           : "bg-primary-base text-white font-bold text-[11px]"
                       }
                     >
@@ -207,21 +207,21 @@ export function PricingCards({
 
                 <CardTitle
                   className={`pt-2 text-xl ${
-                    isParchment ? "text-[#120D0A] font-black" : ""
+                    isParchment ? "text-white font-black" : ""
                   }`}
                 >
                   {pkg.name}
                 </CardTitle>
                 <div
                   className={`text-3xl font-extrabold tracking-tight ${
-                    isParchment ? "text-[#120D0A]" : ""
+                    isParchment ? "text-amber-300" : ""
                   }`}
                 >
                   {pkg.priceDisplay}
                 </div>
                 <CardDescription
                   className={`text-xs leading-relaxed ${
-                    isParchment ? "text-[#524336] font-medium" : ""
+                    isParchment ? "text-stone-300 font-medium" : ""
                   }`}
                 >
                   {pkg.description}
@@ -267,7 +267,7 @@ export function PricingCards({
                     onClick={() => handleCheckout(pkg.id)}
                     className={`w-full h-10 rounded-xl font-bold shadow-xs transition-colors ${
                       isParchment
-                        ? "bg-[#120D0A] hover:bg-black text-[#F4ECE1] font-black"
+                        ? "bg-amber-500 hover:bg-amber-400 text-stone-950 font-black"
                         : isSubCard
                         ? "bg-emerald-700 hover:bg-emerald-800 text-white"
                         : pkg.popular

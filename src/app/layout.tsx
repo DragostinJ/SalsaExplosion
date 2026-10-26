@@ -135,12 +135,12 @@ export default async function RootLayout({
     <ClerkProvider>
       <html
         lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} h-full antialiased`}
+        className={`dark ${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} h-full antialiased`}
       >
         <head>
           <JsonLdSchema />
         </head>
-        <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden havana-stage-lighting relative">
+        <body className="min-h-full flex flex-col bg-[#080706] text-[#F5F2EB] overflow-x-hidden havana-stage-lighting relative">
           <div className="film-grain" aria-hidden="true" />
           <StageSpotlight />
           <SiteHeader role={effectiveRole} canSwitchRoles={userCanSwitchRoles} />

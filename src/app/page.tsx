@@ -52,7 +52,7 @@ const SocialProofGrid = dynamic(
 export default async function Home() {
   const upcomingEvents = await getCachedUpcomingEvents(3);
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
+    <div className="flex min-h-screen flex-col bg-[#080706] text-[#F5F2EB]">
       <main className="flex-1">
         <LiveTonightBanner />
 

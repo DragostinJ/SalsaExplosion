@@ -305,7 +305,7 @@ function EventCard({ evt }: EventCardProps) {
           asChild
           className={`w-full text-xs font-bold transition-colors h-10 rounded-xl shadow-xs ${
             isMadeInCuba
-              ? "bg-[#0D0907] hover:bg-black text-[#F4ECE1] font-black"
+              ? "bg-[#0D0907] hover:bg-black text-white font-black"
               : "bg-primary-base hover:bg-primary-hover text-white"
           }`}
         >

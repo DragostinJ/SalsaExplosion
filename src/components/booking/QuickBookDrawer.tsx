@@ -105,19 +105,19 @@ export function QuickBookDrawer() {
         {step === "configure" ? (
           <div className="space-y-4">
             {/* Session Summary Card */}
-            <div className="p-3.5 rounded-2xl bg-[#F4ECE1] text-[#120D0A] border border-black/15 space-y-1">
+            <div className="p-3.5 rounded-2xl bg-[#181310] text-[#F5F2EB] border border-white/10 space-y-1">
               <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-wider">
-                <span className="text-[#A83800]">{session.time}</span>
+                <span className="text-amber-300">{session.time}</span>
                 {session.level && (
-                  <span className="bg-[#120D0A] text-[#F4ECE1] px-2 py-0.5 rounded-full text-[9px]">
+                  <span className="bg-white/10 text-amber-300 px-2 py-0.5 rounded-full text-[9px] border border-white/10">
                     {session.level}
                   </span>
                 )}
               </div>
-              <h4 className="text-base font-black text-[#120D0A]">{session.title}</h4>
-              <div className="flex items-center justify-between text-xs text-[#524336] pt-1">
+              <h4 className="text-base font-black text-white">{session.title}</h4>
+              <div className="flex items-center justify-between text-xs text-stone-300 pt-1">
                 <span>{session.instructor ? `Directed by ${session.instructor}` : "Salsa Explosion Team"}</span>
-                <span className="font-bold">BOH Studios Bournemouth</span>
+                <span className="font-bold text-amber-300">BOH Studios Bournemouth</span>
               </div>
             </div>
 

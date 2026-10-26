@@ -25,6 +25,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 
 export const metadata = {
   title: "About Salsa Explosion | Cuban Salsa Academy & Community • Bournemouth, UK",
@@ -389,6 +390,9 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* 5b. Why Authentic Cuban Casino & Rueda vs Linear Styles */}
+      <WhyCubanSection />
 
       {/* 6. Call to Action Banner */}
       <section className="rounded-3xl border border-amber-500/40 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 p-5 sm:p-12 text-white text-center shadow-lg space-y-4">

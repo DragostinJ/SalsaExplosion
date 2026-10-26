@@ -492,7 +492,9 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       liveBanner.getByText(/CLASSES LIVE TONIGHT AT BOH STUDIOS|Live Tonight at BOH Studios/i)
     ).toBeVisible();
 
-    // 3. Verify Why Cuban Casino Section
+    // 3. Verify Why Cuban Casino Section (mounted on /about)
+    await page.goto("/about");
+    await page.waitForLoadState("domcontentloaded");
     const whyCuban = page.locator('[data-testid="why-cuban-section"]');
     await expect(whyCuban).toBeVisible();
     await expect(

@@ -26,14 +26,11 @@ export function ArtHouseGallerySection() {
                 BOURNEMOUTH CUBAN CULTURAL INSTITUTION • EXPLORE SALSA EXPLOSION
               </span>
               <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white leading-none">
-                Weekly Classes &amp;{" "}
-                <span className="font-display italic font-normal text-amber-300 lowercase">
-                  social fiestas
-                </span>
+                Explore Salsa Explosion
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-stone-300 max-w-md">
-              Weekly Thursday &amp; Sunday classes (£12 for 1 class / £14 for 2 classes at the door), online festival passes, and interactive Cuban dance &amp; music tools.
+              Weekly Classes, Flagship Festivals &amp; Authentic Cuban Culture. £12 for 1 class / £14 for 2 classes at the door.
             </p>
           </div>
 
@@ -50,7 +47,7 @@ export function ArtHouseGallerySection() {
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1000&q=80"
+                  src="https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=1000&q=80"
                   alt="Weekly Cuban Salsa & Rueda de Casino Classes at BOH Studios Bournemouth"
                   loading="lazy"
                   decoding="async"
@@ -86,7 +83,7 @@ export function ArtHouseGallerySection() {
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1000&q=80"
+                  src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80"
                   alt="Made in Cuba Dance Weekend 2026 Official Festival Passes"
                   loading="lazy"
                   decoding="async"

@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
-import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import {
   ArtHouseGallerySection,
   InsideCubanCircleGallery,
@@ -198,58 +197,7 @@ export default function Home() {
 
             {/* 3-Column Exhibition Poster Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Event 1: MADE IN CUBA Dance Weekend 2026 */}
-              <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
-                  <Image
-                    src="/images/made-in-cuba-2026-poster.jpg"
-                    alt="MADE IN CUBA Dance Weekend 2026 Official Festival Poster"
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/20 to-transparent pointer-events-none" />
-                  <div className="absolute top-3 left-3">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
-                      04 — 06 DEC 2026
-                    </span>
-                  </div>
-                  <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
-                      From £20
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-lg font-black text-white group-hover:text-amber-300 transition-colors leading-snug">
-                      MADE IN CUBA — Dance Weekend 2026
-                    </h3>
-                    <div className="flex items-center gap-1.5 text-xs text-stone-400 mt-1">
-                      <MapPin className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-                      <span>The Woodlands Ballroom &amp; BOH Studios</span>
-                    </div>
-                    <p className="text-xs text-stone-300 mt-2 line-clamp-2 leading-relaxed">
-                      3 nights of parties, 2 days of workshops, and dancing until 2:00 AM across 2 dedicated rooms celebrating 33 years of Salsa Explosion.
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-                    <Button
-                      asChild
-                      className="w-full bg-[#D9381E] hover:bg-[#b82d16] text-white font-black text-xs h-10 rounded-xl shadow-md"
-                    >
-                      <Link href="/events/made-in-cuba-dance-weekend-2026">
-                        <Ticket className="mr-1.5 h-3.5 w-3.5" />
-                        Book Official Pass Online →
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Event 2: Halloween Fancy Dress Latin Party */}
+              {/* Event 1: Halloween Fancy Dress Latin Party */}
               <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                   <Image
@@ -260,9 +208,12 @@ export default function Home() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/20 to-transparent pointer-events-none" />
-                  <div className="absolute top-3 left-3">
+                  <div className="absolute top-3 left-3 flex items-center gap-1.5">
                     <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
                       SAT 31 OCT 2026
+                    </span>
+                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                      THIS SATURDAY
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
@@ -300,11 +251,11 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Event 3: SB&K Night Extravaganza */}
+              {/* Event 2: SB&K Night Extravaganza */}
               <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                   <Image
-                    src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=800&q=80"
+                    src="https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&w=1000&q=80"
                     alt="SB&K Night Extravaganza Official Event Poster"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -350,14 +301,60 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+
+              {/* Event 3: MADE IN CUBA Dance Weekend 2026 */}
+              <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
+                  <Image
+                    src="/images/made-in-cuba-2026-poster.jpg"
+                    alt="MADE IN CUBA Dance Weekend 2026 Official Festival Poster"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute top-3 left-3">
+                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
+                      04 — 06 DEC 2026
+                    </span>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                      From £20
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-lg font-black text-white group-hover:text-amber-300 transition-colors leading-snug">
+                      MADE IN CUBA — Dance Weekend 2026
+                    </h3>
+                    <div className="flex items-center gap-1.5 text-xs text-stone-400 mt-1">
+                      <MapPin className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+                      <span>BOH Studios Bournemouth</span>
+                    </div>
+                    <p className="text-xs text-stone-300 mt-2 line-clamp-2 leading-relaxed">
+                      3 nights of parties, 2 days of workshops, and dancing until 2:00 AM across 2 dedicated rooms celebrating 25+ years of Salsa Explosion heritage.
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                    <Button
+                      asChild
+                      className="w-full bg-[#D9381E] hover:bg-[#b82d16] text-white font-black text-xs h-10 rounded-xl shadow-md"
+                    >
+                      <Link href="/events/made-in-cuba-dance-weekend-2026">
+                        <Ticket className="mr-1.5 h-3.5 w-3.5" />
+                        Book Official Pass Online →
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
-
-        {/* Why Authentic Cuban Casino & Rueda vs Linear Styles */}
-        <ArtReveal>
-          <WhyCubanSection />
-        </ArtReveal>
 
         {/* ================= SECTION 4: ARTISTIC DIRECTOR & RESIDENT FACULTY ================= */}
         {/* Founder & 25+ Year Cuban Heritage Spotlight */}

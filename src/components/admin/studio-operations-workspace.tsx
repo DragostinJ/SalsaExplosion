@@ -257,7 +257,7 @@ export function StudioOperationsWorkspace({
             <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground">
               Partner Waitlist Queue
             </span>
-            <Badge className="bg-amber-500 text-zinc-950 text-[10px] font-bold">
+            <Badge className="bg-amber-500 text-stone-950 text-[10px] font-bold">
               {waitingWaitlistCount} Waiting
             </Badge>
           </div>
@@ -279,8 +279,8 @@ export function StudioOperationsWorkspace({
           onClick={() => setActiveTab("coaching")}
           className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             activeTab === "coaching"
-              ? "bg-accent-tangerine text-zinc-950 shadow-sm"
-              : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
+              ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+              : "bg-surface-1 text-stone-400 hover:bg-surface-2 hover:text-ivory"
           }`}
         >
           <CalendarPlus className="h-4 w-4" />
@@ -297,8 +297,8 @@ export function StudioOperationsWorkspace({
           onClick={() => setActiveTab("merch")}
           className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             activeTab === "merch"
-              ? "bg-accent-tangerine text-zinc-950 shadow-sm"
-              : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
+              ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+              : "bg-surface-1 text-stone-400 hover:bg-surface-2 hover:text-ivory"
           }`}
         >
           <ShoppingBag className="h-4 w-4" />
@@ -315,8 +315,8 @@ export function StudioOperationsWorkspace({
           onClick={() => setActiveTab("waitlist")}
           className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             activeTab === "waitlist"
-              ? "bg-accent-tangerine text-zinc-950 shadow-sm"
-              : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
+              ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+              : "bg-surface-1 text-stone-400 hover:bg-surface-2 hover:text-ivory"
           }`}
         >
           <Users className="h-4 w-4" />
@@ -333,8 +333,8 @@ export function StudioOperationsWorkspace({
           onClick={() => setActiveTab("qa")}
           className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             activeTab === "qa"
-              ? "bg-accent-tangerine text-zinc-950 shadow-sm"
-              : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
+              ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+              : "bg-surface-1 text-stone-400 hover:bg-surface-2 hover:text-ivory"
           }`}
         >
           <MessageSquare className="h-4 w-4" />
@@ -792,7 +792,7 @@ export function StudioOperationsWorkspace({
                             size="sm"
                             disabled={isPending || !replyTexts[q.id]?.trim()}
                             onClick={() => handleReplyQuestion(q.id)}
-                            className="bg-accent-tangerine hover:bg-accent-tangerine/90 text-zinc-950 text-xs font-bold h-8"
+                            className="bg-brand hover:bg-brand-hover text-white text-xs font-bold h-8"
                           >
                             {isPending ? (
                               <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />

@@ -381,7 +381,7 @@ export function ClassManagerWorkspace({
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px]">
+                        <Badge className="bg-amber-500 text-stone-950 font-bold text-[10px]">
                           {cls.minLevel}
                         </Badge>
                         <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -534,7 +534,7 @@ export function ClassManagerWorkspace({
                           size="sm"
                           disabled={isPending}
                           onClick={() => handleSaveEdit(cls.id)}
-                          className="bg-accent-tangerine hover:bg-accent-tangerine/90 text-zinc-950 font-bold text-xs h-7"
+                          className="bg-brand hover:bg-brand-hover text-white font-bold text-xs h-7"
                         >
                           {isPending ? (
                             <Loader2 className="mr-1 h-3 w-3 animate-spin" />

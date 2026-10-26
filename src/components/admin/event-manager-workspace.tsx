@@ -577,9 +577,9 @@ export function EventManagerWorkspace({
                 <Button
                   type="submit"
                   disabled={isPending}
-                  className="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-extrabold shadow-sm transition-colors"
+                  className="w-full bg-brand hover:bg-brand-hover text-white font-extrabold shadow-sm transition-colors"
                 >
-                  <Sparkles className="mr-1.5 h-4 w-4 text-zinc-950" />
+                  <Sparkles className="mr-1.5 h-4 w-4 text-white" />
                   {isPending ? "Publishing Event..." : "Publish Guest Artist Event"}
                 </Button>
               </form>

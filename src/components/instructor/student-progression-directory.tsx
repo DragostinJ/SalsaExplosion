@@ -360,7 +360,7 @@ export function StudentProgressionDirectory({
                               }
                               className={`rounded-md px-2 py-1 text-[10px] font-bold transition-all ${
                                 isCurrent
-                                  ? "bg-amber-500 text-zinc-950 shadow-xs cursor-default"
+                                  ? "bg-amber-500 text-stone-950 shadow-xs cursor-default"
                                   : "border bg-background text-muted-foreground hover:border-amber-500 hover:text-foreground"
                               }`}
                             >

@@ -5,6 +5,7 @@ import { Users, TrendingUp, Award, DollarSign, Download, CalendarPlus, ShoppingB
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { CHART_PALETTE } from "@/lib/chart-palette";
 
 interface AnalyticsData {
   revenueByMonth: { month: string; amount: number }[];
@@ -201,19 +202,29 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
                 return (
                   <div key={item.month} className="group relative flex flex-1 flex-col items-center">
                     {/* Tooltip */}
-                    <div className="absolute -top-9 opacity-0 transition-opacity group-hover:opacity-100 bg-foreground text-background text-[11px] font-bold py-1 px-2 rounded shadow pointer-events-none whitespace-nowrap">
+                    <div
+                      style={{
+                        backgroundColor: CHART_PALETTE.tooltipBg,
+                        borderColor: CHART_PALETTE.tooltipBorder,
+                        color: CHART_PALETTE.text,
+                      }}
+                      className="absolute -top-9 opacity-0 transition-opacity group-hover:opacity-100 text-[11px] font-bold py-1 px-2.5 rounded-lg border shadow-lg pointer-events-none whitespace-nowrap"
+                    >
                       £{item.amount.toLocaleString()}
                     </div>
 
                     {/* Bar */}
-                    <div className="w-full rounded-t-lg bg-muted flex items-end overflow-hidden h-44">
+                    <div className="w-full rounded-t-lg bg-surface-3 flex items-end overflow-hidden h-44">
                       <div
-                        style={{ height: `${heightPercent}%` }}
-                        className="w-full bg-gradient-to-t from-amber-600 to-orange-500 transition-all duration-500 group-hover:brightness-110 rounded-t-lg"
+                        style={{
+                          height: `${heightPercent}%`,
+                          backgroundColor: CHART_PALETTE.brand,
+                        }}
+                        className="w-full transition-all duration-500 group-hover:brightness-110 rounded-t-lg"
                       />
                     </div>
 
-                    <span className="mt-2 text-[11px] font-medium text-muted-foreground">
+                    <span className="mt-2 text-[11px] font-medium text-stone-400">
                       {item.month}
                     </span>
                   </div>
@@ -233,19 +244,19 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Visual Balance Bar */}
-            <div className="h-6 w-full rounded-full overflow-hidden flex bg-muted p-1 gap-1">
+            <div className="h-6 w-full rounded-full overflow-hidden flex bg-surface-3 p-1 gap-1">
               {data.roleDistribution.map((role) => {
-                const colorClass =
+                const roleColor =
                   role.role === "LEAD"
-                    ? "bg-blue-600"
+                    ? CHART_PALETTE.teal
                     : role.role === "FOLLOW"
-                    ? "bg-rose-500"
-                    : "bg-amber-500";
+                    ? CHART_PALETTE.rose
+                    : CHART_PALETTE.gold;
                 return (
                   <div
                     key={role.role}
-                    style={{ width: `${role.percentage}%` }}
-                    className={`${colorClass} rounded-full transition-all duration-500`}
+                    style={{ width: `${role.percentage}%`, backgroundColor: roleColor }}
+                    className="rounded-full transition-all duration-500"
                     title={`${role.role}: ${role.count} (${role.percentage}%)`}
                   />
                 );
@@ -255,19 +266,22 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             {/* Role Breakdown List */}
             <div className="space-y-3">
               {data.roleDistribution.map((role) => {
-                const indicatorColor =
+                const roleColor =
                   role.role === "LEAD"
-                    ? "bg-blue-600"
+                    ? CHART_PALETTE.teal
                     : role.role === "FOLLOW"
-                    ? "bg-rose-500"
-                    : "bg-amber-500";
+                    ? CHART_PALETTE.rose
+                    : CHART_PALETTE.gold;
                 return (
                   <div
                     key={role.role}
-                    className="flex items-center justify-between text-xs rounded-lg border p-2.5"
+                    className="flex items-center justify-between text-xs rounded-xl border border-line bg-surface-2 p-2.5"
                   >
                     <div className="flex items-center gap-2">
-                      <div className={`h-2.5 w-2.5 rounded-full ${indicatorColor}`} />
+                      <div
+                        className="h-2.5 w-2.5 rounded-full"
+                        style={{ backgroundColor: roleColor }}
+                      />
                       <span className="font-semibold capitalize">{role.role.toLowerCase()}s</span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -295,14 +309,14 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
         <CardContent>
           <div className="space-y-4">
             {data.levelDistribution.map((lvl) => {
-              const barColor =
+              const levelColor =
                 lvl.level === "BEGINNER"
-                  ? "bg-emerald-500"
+                  ? CHART_PALETTE.emerald
                   : lvl.level === "IMPROVER"
-                  ? "bg-blue-500"
+                  ? CHART_PALETTE.teal
                   : lvl.level === "INTERMEDIATE"
-                  ? "bg-amber-500"
-                  : "bg-purple-600";
+                  ? CHART_PALETTE.gold
+                  : CHART_PALETTE.brand;
 
               return (
                 <div key={lvl.level} className="space-y-1.5">
@@ -312,10 +326,13 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
                       {lvl.count} students ({lvl.percentage}%)
                     </span>
                   </div>
-                  <div className="h-3 w-full rounded-full bg-muted overflow-hidden">
+                  <div className="h-3 w-full rounded-full bg-surface-3 overflow-hidden">
                     <div
-                      style={{ width: `${Math.max(lvl.percentage, 5)}%` }}
-                      className={`h-full ${barColor} rounded-full transition-all duration-500`}
+                      style={{
+                        width: `${Math.max(lvl.percentage, 5)}%`,
+                        backgroundColor: levelColor,
+                      }}
+                      className="h-full rounded-full transition-all duration-500"
                     />
                   </div>
                 </div>

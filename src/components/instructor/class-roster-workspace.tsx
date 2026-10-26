@@ -334,7 +334,7 @@ export function ClassRosterWorkspace({
                     avatarUrl={activeClass.instructorAvatarUrl}
                     size="sm"
                   />
-                  <Badge className="bg-amber-500 text-zinc-950 font-bold">
+                  <Badge className="bg-amber-500 text-stone-950 font-bold">
                     {activeClass.minLevel}
                   </Badge>
                   <span className="text-xs font-medium text-muted-foreground flex items-center gap-1">
@@ -579,7 +579,7 @@ export function ClassRosterWorkspace({
                     onClick={() => setFilterRole("AWAITING")}
                     className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-all ${
                       filterRole === "AWAITING"
-                        ? "bg-amber-500 text-zinc-950 shadow-xs"
+                        ? "bg-amber-500 text-stone-950 shadow-xs"
                         : "bg-muted/50 text-muted-foreground hover:bg-muted"
                     }`}
                   >
@@ -810,7 +810,7 @@ export function ClassRosterWorkspace({
                   type="submit"
                   size="sm"
                   disabled={isPending}
-                  className="bg-amber-500 text-zinc-950 font-bold hover:bg-amber-400"
+                  className="bg-brand hover:bg-brand-hover text-white font-bold"
                 >
                   {isPending ? "Publishing Recap..." : "Publish Recap to Attended Students"}
                 </Button>

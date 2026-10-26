@@ -59,7 +59,7 @@ function getActionBadge(action: AuditAction) {
       );
     case AuditAction.CSV_EXPORT:
       return (
-        <Badge className="bg-slate-700 text-white hover:bg-slate-800 flex items-center gap-1">
+        <Badge className="bg-surface-3 text-stone-200 hover:bg-surface-2 border border-line flex items-center gap-1">
           <FileSpreadsheet className="h-3 w-3" />
           CSV Export
         </Badge>

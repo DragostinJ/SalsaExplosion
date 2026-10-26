@@ -16,21 +16,28 @@ export default function GlobalError({
 
   return (
     <html lang="en">
-      <body className="min-h-screen bg-slate-50 text-slate-800 flex items-center justify-center p-4">
-        <div className="max-w-md w-full text-center space-y-4 rounded-2xl border border-slate-200 bg-white p-8 shadow-xl">
-          <h1 className="text-2xl font-black text-rose-600">
-            Salsa Explosion
+      <body
+        className="min-h-screen bg-canvas text-ivory flex items-center justify-center p-4 font-sans"
+        style={{ backgroundColor: "#080706", color: "#F5F2EB" }}
+      >
+        <div
+          className="max-w-md w-full text-center space-y-4 rounded-2xl border border-line bg-surface-1 p-8 shadow-2xl"
+          style={{ backgroundColor: "#0E0C0A", borderColor: "#26221F" }}
+        >
+          <span className="text-[11px] font-black uppercase tracking-widest text-gold block">
+            SALSA EXPLOSION BOURNEMOUTH
+          </span>
+          <h1 className="text-3xl font-extrabold uppercase tracking-tight text-ivory">
+            Application Error
           </h1>
-          <h2 className="text-lg font-bold text-slate-900">
-            Critical Studio Error
-          </h2>
-          <p className="text-sm text-slate-500 leading-relaxed">
+          <p className="text-sm text-stone-300 leading-relaxed">
             The studio platform encountered an unexpected hiccup. Please refresh the page or try again.
           </p>
           <button
             type="button"
             onClick={() => reset()}
-            className="inline-flex items-center justify-center rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-bold text-white shadow hover:bg-rose-700 transition-colors"
+            className="inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 text-sm font-bold text-white shadow-lg hover:bg-brand-hover transition-colors cursor-pointer"
+            style={{ backgroundColor: "#D9381E", color: "#FFFFFF" }}
           >
             <RotateCcw className="mr-2 h-4 w-4" />
             Reload Studio

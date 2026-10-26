@@ -120,6 +120,7 @@ export default async function PrintRosterPage({ searchParams }: PrintRosterPageP
       />
 
       {/* Printable Sheet Container */}
+      {/* Print-fidelity: intentionally black text on white paper */}
       <div className="bg-white text-zinc-950 p-8 rounded-xl border print:border-none print:p-0 print:shadow-none shadow-sm space-y-6">
         {/* Header */}
         <div className="border-b-2 border-zinc-900 pb-4 flex items-start justify-between">

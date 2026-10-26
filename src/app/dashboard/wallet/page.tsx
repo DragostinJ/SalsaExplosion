@@ -1,20 +1,18 @@
 import Link from "next/link";
 import {
-  CreditCard,
   QrCode,
   Calendar,
   ShoppingBag,
   Sparkles,
   Flame,
   ArrowRight,
-  ShieldCheck,
   Clock,
   Coins,
   CheckCircle2,
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
-import { BackButton } from "@/components/navigation/back-button";
+import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -39,34 +37,21 @@ export default async function StudentWalletPage() {
   if (!user) {
     return (
       <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
-          <Badge
-            variant="outline"
-            className="border-amber-500/40 bg-amber-500/10 text-amber-800 dark:text-amber-300 font-semibold px-3 py-1 flex items-center gap-1.5"
-          >
-            <CreditCard className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
-            BOH Studios Digital Wallet
-          </Badge>
-        </div>
+        <PageHeader
+          title="Digital Passes &"
+          titleHighlight="Studio Wallet"
+          description={`Manage your Thursday & Sunday class credits, Made in Cuba festival passes, and instant 1-tap QR door check-in at ${VENUE_INFO.name} (${VENUE_INFO.address}, ${VENUE_INFO.postcode}).`}
+          badge="BOH Studios Digital Wallet"
+          eyebrow={`INSTANT QR DOOR ADMISSION • ${VENUE_INFO.name}`}
+          backHref="/dashboard/schedule"
+          backLabel="Back to Schedule"
+        />
 
-        <div className="rounded-3xl border border-amber-500/30 bg-gradient-to-br from-[#120d0a] via-[#0c0908] to-[#070605] p-6 sm:p-10 text-white shadow-xl space-y-6">
-          <div className="max-w-2xl space-y-3">
-            <span className="text-xs font-black uppercase tracking-widest text-amber-300">
-              Instant QR Door Admission • {VENUE_INFO.name}
-            </span>
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
-              Digital Passes &amp; Studio Wallet
-            </h1>
-            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-              Manage your Thursday &amp; Sunday class credits, Made in Cuba festival passes, and instant 1-tap QR door check-in at {VENUE_INFO.name} ({VENUE_INFO.address}, {VENUE_INFO.postcode}).
-            </p>
-          </div>
-
+        <div className="rounded-2xl border border-line bg-surface-1 p-6 sm:p-10 text-ivory shadow-xl space-y-6">
           <div className="flex flex-wrap items-center gap-3">
             <Button
               asChild
-              className="bg-amber-500 hover:bg-amber-400 text-black font-black text-xs sm:text-sm h-11 px-6 rounded-xl"
+              className="bg-brand hover:bg-brand-hover text-white font-bold text-xs sm:text-sm h-11 px-6 rounded-xl"
             >
               <Link href="/sign-in">
                 Sign In to Access Your Wallet
@@ -76,7 +61,7 @@ export default async function StudentWalletPage() {
             <Button
               asChild
               variant="outline"
-              className="border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-xs sm:text-sm h-11 px-6 rounded-xl"
+              className="border-line bg-surface-3 hover:bg-surface-2 text-ivory font-bold text-xs sm:text-sm h-11 px-6 rounded-xl"
             >
               <Link href="/dashboard/schedule">
                 Browse Thursday &amp; Sunday Timetable
@@ -228,79 +213,38 @@ export default async function StudentWalletPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
-        <Badge
-          variant="outline"
-          className="border-secondary-base/40 bg-secondary-light/20 text-secondary-hover font-semibold px-3 py-1 flex items-center gap-1.5"
-        >
-          <CreditCard className="h-3.5 w-3.5 text-secondary-base" />
-          BOH Studios Digital Wallet
-        </Badge>
-      </div>
-
-      {/* Header & Balance Banner */}
-      <div className="rounded-3xl border border-secondary-base/30 bg-gradient-to-br from-secondary-light/30 via-background to-amber-500/10 p-6 sm:p-8 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="font-extrabold text-xs uppercase tracking-wider text-secondary-hover">
-              Dancer Digital Wallet
-            </span>
-            {hasActiveSub && (
-              <Badge className="bg-emerald-600 text-white font-bold text-[10px]">
-                <ShieldCheck className="mr-1 h-3 w-3" />
-                Unlimited Pass Active
-              </Badge>
-            )}
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
-            {user.firstName} {user.lastName}
-          </h1>
-          <p className="text-xs sm:text-sm text-muted-foreground max-w-md">
-            Show your digital passes and door QR codes at the BOH Studios Bournemouth entrance for instant 1-tap admission.
-          </p>
-          <div className="mt-2.5 flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-[11px] font-semibold text-emerald-800 dark:text-emerald-300">
-            <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-            <span>
-              <strong>Offline & Basement Signal Ready:</strong> Screenshot your pass or simply give your name at reception if mobile signal is weak.
-            </span>
-          </div>
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
-          <div className="rounded-2xl border bg-card p-4 text-center min-w-[140px] shadow-xs">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">
-              Available Credits
-            </span>
-            <div className="text-3xl font-black text-foreground mt-0.5">
-              {user.classCredits}
+      <PageHeader
+        title={user.firstName ?? "Dancer"}
+        titleHighlight={user.lastName ?? "Wallet"}
+        description="Show your digital passes and door QR codes at the BOH Studios Bournemouth entrance for instant 1-tap admission."
+        badge={hasActiveSub ? "Unlimited Pass Active" : "BOH Studios Wallet"}
+        eyebrow="DANCER DIGITAL WALLET • BOH STUDIOS"
+        backHref="/dashboard/schedule"
+        backLabel="Back to Schedule"
+        actions={
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="rounded-xl border border-line bg-surface-2 p-3 text-center min-w-[120px] shadow-xs">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
+                Available Credits
+              </span>
+              <div className="text-2xl font-black text-ivory mt-0.5">
+                {user.classCredits}
+              </div>
             </div>
-            <span className="text-[10px] text-muted-foreground">Class Passes</span>
+            <div className="flex flex-col gap-2">
+              <Button
+                asChild
+                className="bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-xs"
+              >
+                <Link href="/pricing">
+                  <Coins className="mr-1.5 h-3.5 w-3.5" />
+                  Top-Up Passes
+                </Link>
+              </Button>
+            </div>
           </div>
-
-          <div className="flex flex-col gap-2">
-            <Button
-              asChild
-              className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs shadow-xs"
-            >
-              <Link href="/pricing">
-                <Coins className="mr-1.5 h-3.5 w-3.5" />
-                Top-Up Class Passes
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="text-xs font-semibold"
-            >
-              <Link href="/dashboard/schedule">
-                <Calendar className="mr-1.5 h-3.5 w-3.5" />
-                Book Next Class
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </div>
+        }
+      />
 
       {/* Active Congress Passes Section */}
       <section className="space-y-4">
@@ -476,14 +420,14 @@ export default async function StudentWalletPage() {
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <ShoppingBag className="h-4 w-4 text-primary-base" />
+                <ShoppingBag className="h-4 w-4 text-brand" />
                 <CardTitle className="text-base">
                   BOH Studios Merch Pickup ({merchReservations.length})
                 </CardTitle>
               </div>
               <Link
                 href="/pricing"
-                className="text-xs font-semibold text-primary-base hover:underline"
+                className="text-xs font-semibold text-brand hover:underline"
               >
                 Gift Vouchers
               </Link>

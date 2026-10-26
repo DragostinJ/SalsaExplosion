@@ -4,10 +4,12 @@ import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface PageHeaderProps {
+  eyebrow?: string;
   eyebrowLeft?: string;
   eyebrowRight?: string;
   title: string;
   highlight?: string;
+  titleHighlight?: string;
   description?: React.ReactNode;
   actions?: React.ReactNode;
   backHref?: string;
@@ -17,10 +19,12 @@ export interface PageHeaderProps {
 }
 
 export function PageHeader({
+  eyebrow,
   eyebrowLeft,
   eyebrowRight,
   title,
   highlight,
+  titleHighlight,
   description,
   actions,
   backHref,
@@ -28,6 +32,9 @@ export function PageHeader({
   badge,
   className,
 }: PageHeaderProps) {
+  const effectiveEyebrowLeft = eyebrowLeft ?? eyebrow;
+  const effectiveHighlight = highlight ?? titleHighlight;
+
   return (
     <div className={cn("space-y-4", className)}>
       {backHref && (
@@ -46,9 +53,9 @@ export function PageHeader({
         data-testid="page-header"
         className="relative overflow-hidden rounded-3xl border border-line bg-surface-2 p-6 sm:p-10 text-ivory shadow-xs"
       >
-        {(eyebrowLeft || eyebrowRight) && (
+        {(effectiveEyebrowLeft || eyebrowRight) && (
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3 text-[11px] font-black uppercase tracking-widest text-gold">
-            <span>{eyebrowLeft}</span>
+            <span>{effectiveEyebrowLeft}</span>
             {eyebrowRight && (
               <span className="text-muted-foreground font-bold">{eyebrowRight}</span>
             )}
@@ -58,11 +65,11 @@ export function PageHeader({
         <div className="mt-5 space-y-4 max-w-3xl">
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-ivory uppercase leading-none">
             {title}
-            {highlight && (
+            {effectiveHighlight && (
               <>
                 {" "}
                 <span className="font-display italic font-normal text-gold normal-case">
-                  {highlight}
+                  {effectiveHighlight}
                 </span>
               </>
             )}

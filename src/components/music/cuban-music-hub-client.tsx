@@ -235,7 +235,7 @@ export function CubanMusicHubClient() {
                       <Sparkles className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
                       Pedagogical Focus &amp; Why This Song:
                     </span>
-                    <p className="text-xs text-slate-800 dark:text-muted-foreground leading-relaxed">
+                    <p className="text-xs text-stone-300 leading-relaxed">
                       {track.whyThisSong}
                     </p>
                   </div>

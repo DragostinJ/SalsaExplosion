@@ -20,7 +20,7 @@ import { ProgressionJourneyTabs } from "@/components/progression/progression-jou
 import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curriculum-skill-tree";
 import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
 import { PRISMA_TO_CURRICULUM_LEVEL_MAP } from "@/lib/constants/cuban-curriculum-2027";
-import { BackButton } from "@/components/navigation/back-button";
+import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -100,35 +100,26 @@ export default async function ProgressionPage() {
   const isMaxLevel = user.currentLevel === DanceLevel.ADVANCED;
 
   return (
-    <main className="mx-auto max-w-5xl space-y-4 sm:space-y-6 px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
-      <div>
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
-      </div>
-
-      {/* Header */}
-      <div className="flex flex-col justify-between gap-3 sm:gap-4 rounded-2xl border bg-card p-4 sm:p-6 shadow-sm sm:flex-row sm:items-center">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Cuban Salsa Progression
-            </h1>
-            <Badge className="bg-primary/90 font-semibold">Casino & Rueda</Badge>
-          </div>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Track your dance milestones, submit technique videos for review, and unlock higher-tier classes.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 rounded-lg border bg-muted/40 px-4 py-2.5 text-xs font-medium">
-            <Award className="h-4 w-4 text-amber-500" />
+    <main className="mx-auto max-w-5xl space-y-6 px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
+      {/* Header — Havana Architecture */}
+      <PageHeader
+        title="Cuban Salsa"
+        titleHighlight="Progression"
+        description="Track your dance milestones, submit technique videos for review, and unlock higher-tier classes."
+        badge="Casino & Rueda"
+        eyebrow="STUDENT MASTERY ROADMAP • 4 SYLLABUS TIERS"
+        backHref="/dashboard/schedule"
+        backLabel="Back to Schedule"
+        actions={
+          <div className="flex items-center gap-2 rounded-xl border border-line bg-surface-2 px-4 py-2 text-xs font-medium text-stone-200">
+            <Award className="h-4 w-4 text-gold" />
             <span>Current Level:</span>
-            <Badge variant="secondary" className="font-bold text-sm">
+            <Badge variant="gold" className="font-bold text-xs">
               {user.currentLevel}
             </Badge>
           </div>
-        </div>
-      </div>
+        }
+      />
 
       {/* 3-Tab Student Journey: Syllabus Checklist, Milestones, and Optional Video Feedback */}
       <ProgressionJourneyTabs

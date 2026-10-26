@@ -64,7 +64,7 @@ export function AttendanceMilestonesCard({
         unlockedBg: "bg-amber-500/10",
         unlockedBorder: "border-amber-500/40",
         iconColor: "text-amber-600 dark:text-amber-400",
-        badgeColor: "bg-amber-500 text-zinc-950",
+        badgeColor: "bg-amber-500 text-stone-950",
       },
     },
     {

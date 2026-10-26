@@ -319,7 +319,7 @@ export function ClassRecapVault({
             }}
             className={`rounded-lg px-3.5 py-1.5 font-bold transition-all ${
               activeTab === "MY_RECAPS"
-                ? "bg-amber-500 text-zinc-950 shadow-xs"
+                ? "bg-amber-500 text-stone-950 shadow-xs"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -333,7 +333,7 @@ export function ClassRecapVault({
             }}
             className={`rounded-lg px-3.5 py-1.5 font-bold transition-all ${
               activeTab === "STUDIO_ARCHIVE"
-                ? "bg-amber-500 text-zinc-950 shadow-xs"
+                ? "bg-amber-500 text-stone-950 shadow-xs"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -409,7 +409,7 @@ export function ClassRecapVault({
                       onClick={() => handleSpeedChange(speed)}
                       className={`rounded px-2 py-0.5 text-[11px] font-bold transition-all ${
                         playbackSpeed === speed
-                          ? "bg-amber-500 text-zinc-950 shadow-xs"
+                          ? "bg-amber-500 text-stone-950 shadow-xs"
                           : "text-muted-foreground hover:bg-muted"
                       }`}
                     >
@@ -421,7 +421,7 @@ export function ClassRecapVault({
 
               <CardHeader className="space-y-3 pb-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <Badge className="bg-amber-500 text-zinc-950 font-bold text-xs">
+                  <Badge className="bg-amber-500 text-stone-950 font-bold text-xs">
                     {selectedRecap.minLevel}
                   </Badge>
                   {selectedRecap.danceRole && (
@@ -578,7 +578,7 @@ export function ClassRecapVault({
                       onClick={() => setSearchQuery(isActive ? "" : fig)}
                       className={`rounded-full px-2 py-0.5 text-[10px] font-medium transition-all ${
                         isActive
-                          ? "bg-amber-500 text-zinc-950 font-bold shadow-xs"
+                          ? "bg-amber-500 text-stone-950 font-bold shadow-xs"
                           : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
                       }`}
                     >
@@ -882,7 +882,7 @@ export function ClassRecapVault({
                         onClick={() => handleToggleFigureTag(figure)}
                         className={`rounded-lg px-2 py-0.5 text-[10px] font-semibold transition-all ${
                           active
-                            ? "bg-amber-500 text-zinc-950 shadow-xs"
+                            ? "bg-amber-500 text-stone-950 shadow-xs"
                             : "bg-muted text-muted-foreground hover:bg-muted/80"
                         }`}
                       >
@@ -926,7 +926,7 @@ export function ClassRecapVault({
                   type="submit"
                   size="sm"
                   disabled={isPending}
-                  className="bg-amber-500 text-zinc-950 font-bold hover:bg-amber-400"
+                  className="bg-amber-500 text-stone-950 font-bold hover:bg-amber-400"
                 >
                   {isPending ? "Publishing Recap..." : "Publish Recap to Students"}
                 </Button>

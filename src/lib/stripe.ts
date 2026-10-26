@@ -1,8 +1,7 @@
 import Stripe from "stripe";
+import { env } from "@/lib/env";
 
-const stripeSecretKey = process.env.STRIPE_SECRET_KEY || "sk_test_placeholder_for_build";
-
-export const stripe = new Stripe(stripeSecretKey, {
+export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   typescript: true,
   appInfo: {
     name: "Salsa Explosion Dance Studio",

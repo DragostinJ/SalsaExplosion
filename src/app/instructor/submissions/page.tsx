@@ -1,24 +1,12 @@
 import { SubmissionStatus } from "@prisma/client";
-import { createClient } from "@supabase/supabase-js";
 import { prisma } from "@/lib/prisma";
 import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
+import { getSupabaseAdmin } from "@/lib/storage";
 import {
   QueueSubmissionItem,
   VideoGradingWorkspace,
 } from "@/components/instructor/video-grading-workspace";
 import { InstructorNav } from "@/components/navigation/instructor-nav";
-
-function getSupabaseAdmin() {
-  const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseUrl =
-    envUrl && !envUrl.includes("[")
-      ? envUrl
-      : "https://placeholder-project.supabase.co";
-  const supabaseServiceKey =
-    process.env.SUPABASE_SERVICE_ROLE_KEY || "placeholder_service_role_key";
-
-  return createClient(supabaseUrl, supabaseServiceKey);
-}
 
 export default async function InstructorSubmissionsPage() {
   const supabaseAdmin = getSupabaseAdmin();

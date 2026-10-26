@@ -4,9 +4,9 @@ import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { DanceLevel, DanceStyle, SubmissionStatus } from "@prisma/client";
-import { createClient } from "@supabase/supabase-js";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { getSupabaseAdmin, isSupabaseStorageConfigured } from "@/lib/storage";
 import {
   ALLOWED_VIDEO_MIME_TYPES,
   AllowedVideoMimeType,
@@ -17,34 +17,6 @@ import {
   SubmissionDomainError,
 } from "@/lib/constants/submission";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
-
-function isSupabaseStorageConfigured(): boolean {
-  const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
-  if (
-    !envUrl ||
-    envUrl.includes("[") ||
-    envUrl.includes("placeholder") ||
-    !serviceKey ||
-    serviceKey.includes("placeholder") ||
-    serviceKey.includes("...")
-  ) {
-    return false;
-  }
-  return true;
-}
-
-function getSupabaseAdmin() {
-  const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseUrl =
-    envUrl && !envUrl.includes("[")
-      ? envUrl
-      : "https://placeholder-project.supabase.co";
-  const supabaseServiceKey =
-    process.env.SUPABASE_SERVICE_ROLE_KEY || "placeholder_service_role_key";
-
-  return createClient(supabaseUrl, supabaseServiceKey);
-}
 
 // ==========================================
 // ZOD 4 VALIDATION SCHEMAS

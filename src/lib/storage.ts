@@ -1,8 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
+import { env } from "@/lib/env";
 
 export function isSupabaseStorageConfigured(): boolean {
-  const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
+  const envUrl = env.NEXT_PUBLIC_SUPABASE_URL ?? "";
+  const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY ?? "";
   if (
     !envUrl ||
     envUrl.includes("[") ||
@@ -17,15 +18,7 @@ export function isSupabaseStorageConfigured(): boolean {
 }
 
 export function getSupabaseAdmin() {
-  const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseUrl =
-    envUrl && !envUrl.includes("[")
-      ? envUrl
-      : "https://placeholder-project.supabase.co";
-  const supabaseServiceKey =
-    process.env.SUPABASE_SERVICE_ROLE_KEY || "placeholder_service_role_key";
-
-  return createClient(supabaseUrl, supabaseServiceKey);
+  return createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
 }
 
 export async function createSignedUploadUrlHelper(

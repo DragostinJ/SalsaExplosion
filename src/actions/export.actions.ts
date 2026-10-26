@@ -1,10 +1,19 @@
 "use server";
 
 import { AuditAction } from "@prisma/client";
+import { z } from "zod";
 import { requireRole, ADMIN_ONLY } from "@/lib/auth-user";
 import { prisma } from "@/lib/prisma";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
+
+export const exportInputSchema = z
+  .object({
+    format: z.enum(["csv"]).default("csv").optional(),
+  })
+  .optional();
+
+export type ExportInput = z.infer<typeof exportInputSchema>;
 
 function formatCsvCell(value: string | number | boolean | null | undefined): string {
   if (value === null || value === undefined) return '""';
@@ -33,7 +42,8 @@ export interface CsvExportResult {
 /**
  * 1. Export Monthly Revenue & Credit Ledger Transactions
  */
-export async function exportRevenueLedgerCsvAction(): Promise<CsvExportResult> {
+export async function exportRevenueLedgerCsvAction(rawInput?: unknown): Promise<CsvExportResult> {
+  exportInputSchema.parse(rawInput);
   const admin = await requireRole(ADMIN_ONLY);
   const identifier = await getRateLimitIdentifier(admin.id);
 
@@ -105,7 +115,8 @@ export async function exportRevenueLedgerCsvAction(): Promise<CsvExportResult> {
 /**
  * 2. Export Active Student Roster & Credit Balances
  */
-export async function exportStudentRosterCsvAction(): Promise<CsvExportResult> {
+export async function exportStudentRosterCsvAction(rawInput?: unknown): Promise<CsvExportResult> {
+  exportInputSchema.parse(rawInput);
   const admin = await requireRole(ADMIN_ONLY);
   const identifier = await getRateLimitIdentifier(admin.id);
 
@@ -175,7 +186,8 @@ export async function exportStudentRosterCsvAction(): Promise<CsvExportResult> {
 /**
  * 3. Export Bournemouth Congress Ticket Holders & Check-In Status
  */
-export async function exportCongressTicketHoldersCsvAction(): Promise<CsvExportResult> {
+export async function exportCongressTicketHoldersCsvAction(rawInput?: unknown): Promise<CsvExportResult> {
+  exportInputSchema.parse(rawInput);
   const admin = await requireRole(ADMIN_ONLY);
   const identifier = await getRateLimitIdentifier(admin.id);
 
@@ -266,7 +278,8 @@ export async function exportCongressTicketHoldersCsvAction(): Promise<CsvExportR
 /**
  * 4. Export Private Coaching & Merch Click & Collect Orders
  */
-export async function exportPrivateCoachingAndMerchCsvAction(): Promise<CsvExportResult> {
+export async function exportPrivateCoachingAndMerchCsvAction(rawInput?: unknown): Promise<CsvExportResult> {
+  exportInputSchema.parse(rawInput);
   const admin = await requireRole(ADMIN_ONLY);
   const identifier = await getRateLimitIdentifier(admin.id);
 

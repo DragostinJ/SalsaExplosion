@@ -93,10 +93,11 @@ export async function createCheckoutSessionAction(
 
     // 3. Guard Against Duplicate Active Subscriptions
     const now = new Date();
-    const hasActiveSubscription =
-      user.subscription !== null &&
+    const hasActiveSubscription = Boolean(
+      user.subscription &&
       user.subscription.status === SubscriptionStatus.ACTIVE &&
-      user.subscription.currentPeriodEnd > now;
+      user.subscription.currentPeriodEnd > now
+    );
 
     if (pkg.mode === "subscription" && hasActiveSubscription) {
       throw new CheckoutDomainError(

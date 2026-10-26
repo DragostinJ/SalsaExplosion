@@ -1,8 +1,17 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { z } from "zod";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { Role } from "@prisma/client";
+
+export const notificationsQuerySchema = z
+  .object({
+    limit: z.number().int().min(1).max(50).default(20).optional(),
+  })
+  .optional();
+
+export type NotificationsQuery = z.infer<typeof notificationsQuerySchema>;
 
 export interface StudioNotificationItem {
   id: string;
@@ -27,12 +36,13 @@ function formatRelativeTime(date: Date): string {
   return `${diffDays}d ago`;
 }
 
-export async function getAdminNotificationsAction(): Promise<{
+export async function getAdminNotificationsAction(rawInput?: unknown): Promise<{
   success: boolean;
   notifications: StudioNotificationItem[];
   unreadCount: number;
 }> {
   try {
+    notificationsQuerySchema.parse(rawInput);
     const user = await getOrProvisionCurrentUser();
     if (!user || (user.role !== Role.ADMIN && user.role !== Role.INSTRUCTOR)) {
       return { success: false, notifications: [], unreadCount: 0 };

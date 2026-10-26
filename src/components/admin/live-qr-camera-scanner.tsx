@@ -10,6 +10,25 @@ interface LiveQrCameraScannerProps {
   buttonLabel?: string;
 }
 
+interface DetectedBarcode {
+  rawValue?: string;
+  format?: string;
+}
+
+interface BarcodeDetectorLike {
+  detect(image: ImageBitmapSource): Promise<DetectedBarcode[]>;
+}
+
+interface BarcodeDetectorConstructor {
+  new (options?: { formats: string[] }): BarcodeDetectorLike;
+}
+
+declare global {
+  interface Window {
+    BarcodeDetector?: BarcodeDetectorConstructor;
+  }
+}
+
 export function LiveQrCameraScanner({
   onDetected,
   className = "",
@@ -83,11 +102,8 @@ export function LiveQrCameraScanner({
       setCameraActive(true);
 
       // Check if native BarcodeDetector API is available (modern Android Chrome, iOS 17+)
-      const hasBarcodeDetector = "BarcodeDetector" in window;
-
-      if (hasBarcodeDetector) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const barcodeDetector = new (window as any).BarcodeDetector({
+      if (typeof window !== "undefined" && window.BarcodeDetector) {
+        const barcodeDetector = new window.BarcodeDetector({
           formats: ["qr_code"],
         });
 

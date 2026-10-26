@@ -250,7 +250,16 @@ export function PricingCards({
                   isParchment ? "border-black/10 bg-black/[0.03]" : "bg-muted/10"
                 }`}
               >
-                {isSubCard && hasActiveSubscription ? (
+                {pkg.id === "PACK_SINGLE" ? (
+                  <Button
+                    asChild
+                    className="w-full h-10 rounded-xl font-bold bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs shadow-md"
+                  >
+                    <Link href="/dashboard/schedule">
+                      Pay at Door (£12/£14) • View Schedule →
+                    </Link>
+                  </Button>
+                ) : isSubCard && hasActiveSubscription ? (
                   <Button
                     type="button"
                     variant="outline"
@@ -281,7 +290,7 @@ export function PricingCards({
                         Redirecting to Stripe...
                       </>
                     ) : isSubCard ? (
-                      "Subscribe Now"
+                      "Join Unlimited Pass"
                     ) : (
                       `Buy ${pkg.creditAmount} ${
                         pkg.creditAmount === 1 ? "Credit" : "Credits"

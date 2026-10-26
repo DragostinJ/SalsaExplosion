@@ -435,11 +435,11 @@ export function ClassScheduleCard({
               />
             </div>
             <div className="flex items-center justify-between text-[11px] text-muted-foreground px-0.5">
-              <span className="flex items-center gap-1.5 font-medium text-slate-700 dark:text-slate-300">
+              <span className="flex items-center gap-1.5 font-medium text-stone-300">
                 <span className="h-2 w-2 rounded-full bg-sky-500/75" />
                 {optimisticState.leadsCount} Leads
               </span>
-              <span className="flex items-center gap-1.5 font-medium text-slate-700 dark:text-slate-300">
+              <span className="flex items-center gap-1.5 font-medium text-stone-300">
                 <span className="h-2 w-2 rounded-full bg-rose-400/75" />
                 {optimisticState.followsCount} Follows
               </span>
@@ -657,7 +657,7 @@ export function ClassScheduleCard({
             type="button"
             disabled={isPending || isSelectedRoleFull || session.isCancelled}
             onClick={attemptBook}
-            className="w-full font-bold shadow-xs transition-colors h-10 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-zinc-200 dark:text-zinc-900"
+            className="w-full font-bold shadow-xs transition-colors h-10 rounded-xl bg-brand hover:bg-brand-hover text-white"
           >
             {isPending ? (
               <>

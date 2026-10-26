@@ -34,7 +34,7 @@ export function WhyCubanSection() {
   return (
     <section
       id="why-cuban"
-      className="cv-auto py-14 sm:py-20 bg-[#080605] border-b border-amber-500/15 scroll-mt-20 text-white"
+      className="cv-auto py-14 sm:py-20 bg-canvas border-b border-amber-500/15 scroll-mt-20 text-white"
       data-testid="why-cuban-section"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -149,7 +149,7 @@ export function WeeklyCalendarOverview() {
 
               {/* Optional Venue Visual Photo */}
               {item.venueImage && (
-                <div className="relative h-44 w-full bg-zinc-950 border-b overflow-hidden">
+                <div className="relative h-44 w-full bg-surface-1 border-b border-line overflow-hidden">
                   <Image
                     src={item.venueImage}
                     alt={item.venueName}

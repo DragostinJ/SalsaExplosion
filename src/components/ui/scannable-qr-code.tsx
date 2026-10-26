@@ -97,7 +97,7 @@ export function ScannableQrCode({
   return (
     <div
       data-testid="scannable-qr-code"
-      className={`inline-flex flex-col items-center justify-center rounded-2xl bg-white p-3 shadow-md border border-zinc-200 text-zinc-950 ${className}`}
+      className={`inline-flex flex-col items-center justify-center rounded-2xl bg-white p-3 shadow-md border border-stone-200 text-stone-950 ${className}`}
     >
       <svg
         viewBox="0 0 100 100"
@@ -124,7 +124,7 @@ export function ScannableQrCode({
         )}
       </svg>
       {label && (
-        <span className="mt-1 font-mono text-[10px] font-bold text-zinc-600 tracking-wider">
+        <span className="mt-1 font-mono text-[10px] font-bold text-stone-600 tracking-wider">
           {label}
         </span>
       )}

@@ -401,7 +401,7 @@ export function InteractiveTutorialDialog({
                       ? "bg-emerald-500/15 border-emerald-500 ring-2 ring-emerald-500/30"
                       : "bg-white border-border"
                   }`}>
-                    <QrCode className={`h-16 w-16 ${demoQrCheckedIn ? "text-emerald-600" : "text-zinc-900"}`} />
+                    <QrCode className={`h-16 w-16 ${demoQrCheckedIn ? "text-emerald-600" : "text-stone-900"}`} />
                   </div>
                   {demoQrCheckedIn ? (
                     <span className="text-xs font-extrabold text-emerald-600 flex items-center gap-1 animate-in fade-in">
@@ -413,7 +413,7 @@ export function InteractiveTutorialDialog({
                       type="button"
                       size="sm"
                       onClick={() => setDemoQrCheckedIn(true)}
-                      className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs"
+                      className="bg-brand hover:bg-brand-hover text-white font-bold text-xs"
                     >
                       Scan QR at Studio Desk
                     </Button>
@@ -459,7 +459,7 @@ export function InteractiveTutorialDialog({
                 type="button"
                 size="sm"
                 onClick={() => setStep((s) => s + 1)}
-                className="bg-amber-500 text-zinc-950 hover:bg-amber-400 font-bold text-xs"
+                className="bg-brand text-white hover:bg-brand-hover font-bold text-xs"
               >
                 <span>Next</span>
                 <ArrowRight className="ml-1 h-3.5 w-3.5" />

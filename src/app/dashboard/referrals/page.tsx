@@ -23,7 +23,7 @@ export default async function ReferralsPage() {
       <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
         <PageHeader
           title="Invite Friends,"
-          titleHighlight="Earn Free Classes"
+          titleHighlight="Earn Free Class Credits"
           description={`Help grow Bournemouth's authentic Cuban Salsa & Rueda de Casino community at ${VENUE_INFO.name}. When a friend joins their first Thursday or Sunday session using your personal code, you both receive a complimentary class credit.`}
           badge="Give 1 Class, Get 1 Class"
           eyebrow="DANCER REFERRAL NETWORK • BOH STUDIOS"

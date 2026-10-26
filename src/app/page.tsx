@@ -198,7 +198,7 @@ export default function Home() {
             {/* 3-Column Exhibition Poster Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Event 1: Halloween Fancy Dress Latin Party */}
-              <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
+              <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                   <Image
                     src="/images/danza-2026-2027-calendar.png"

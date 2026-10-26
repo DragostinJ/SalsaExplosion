@@ -51,10 +51,10 @@ export function PageHeader({
 
       <div
         data-testid="page-header"
-        className="relative overflow-hidden rounded-3xl border border-line bg-surface-2 p-6 sm:p-10 text-ivory shadow-xs"
+        className="relative overflow-hidden rounded-3xl border border-line bg-surface-2 p-5 sm:p-10 text-ivory shadow-xs"
       >
         {(effectiveEyebrowLeft || eyebrowRight) && (
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3 text-[11px] font-black uppercase tracking-widest text-gold">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-2.5 sm:pb-3 text-[11px] font-black uppercase tracking-widest text-gold">
             <span>{effectiveEyebrowLeft}</span>
             {eyebrowRight && (
               <span className="text-muted-foreground font-bold">{eyebrowRight}</span>
@@ -62,7 +62,7 @@ export function PageHeader({
           </div>
         )}
 
-        <div className="mt-5 space-y-4 max-w-3xl">
+        <div className="mt-3.5 sm:mt-5 space-y-3 sm:space-y-4 max-w-3xl">
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-ivory uppercase leading-none">
             {title}
             {effectiveHighlight && (

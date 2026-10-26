@@ -99,7 +99,7 @@ export function StudioGallery() {
             onClick={() => setSelectedCategory(cat.key)}
             className={`rounded-xl px-4 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
               selectedCategory === cat.key
-                ? "bg-amber-500 text-zinc-950 shadow-xs"
+                ? "bg-amber-500 text-stone-950 shadow-xs"
                 : "border bg-card text-muted-foreground hover:border-amber-500/50 hover:text-foreground"
             }`}
           >
@@ -130,15 +130,15 @@ export function StudioGallery() {
             {/* Bottom Caption Info */}
             <div className="absolute inset-x-0 bottom-0 p-4 text-white space-y-1">
               <div className="flex items-center justify-between">
-                <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px]">
+                <Badge className="bg-amber-500 text-stone-950 font-bold text-[10px]">
                   {photo.category.replace("_", " ")}
                 </Badge>
-                <span className="text-[11px] text-zinc-300 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-[11px] text-stone-300 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Eye className="h-3 w-3" /> Click to view
                 </span>
               </div>
               <h3 className="text-sm font-extrabold line-clamp-1">{photo.title}</h3>
-              <p className="text-[11px] text-zinc-300 line-clamp-2 leading-relaxed">
+              <p className="text-[11px] text-stone-300 line-clamp-2 leading-relaxed">
                 {photo.caption}
               </p>
             </div>
@@ -156,7 +156,7 @@ export function StudioGallery() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative flex flex-col max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-3xl border border-amber-500/30 bg-zinc-950 text-white shadow-2xl"
+            className="relative flex flex-col max-w-4xl w-full max-h-[90vh] overflow-hidden rounded-3xl border border-line bg-surface-1 text-ivory shadow-2xl"
           >
             {/* Top Close Button */}
             <button
@@ -181,17 +181,17 @@ export function StudioGallery() {
             </div>
 
             {/* Caption & Location Footer */}
-            <div className="p-5 space-y-2 bg-zinc-900 border-t border-zinc-800">
+            <div className="p-5 space-y-2 bg-surface-2 border-t border-line">
               <div className="flex items-center justify-between">
-                <Badge className="bg-amber-500 text-zinc-950 font-bold text-xs">
+                <Badge className="bg-amber-500 text-stone-950 font-bold text-xs">
                   {activePhoto.category.replace("_", " ")}
                 </Badge>
-                <span className="text-xs text-zinc-400">
+                <span className="text-xs text-stone-400">
                   📍 {activePhoto.location}
                 </span>
               </div>
               <h4 className="text-lg font-extrabold">{activePhoto.title}</h4>
-              <p className="text-xs text-zinc-300 leading-relaxed max-w-3xl">
+              <p className="text-xs text-stone-300 leading-relaxed max-w-3xl">
                 {activePhoto.caption}
               </p>
             </div>

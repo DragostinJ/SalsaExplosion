@@ -107,9 +107,9 @@ export default async function EventsDirectoryPage() {
       {events.length === 0 ? (
         <Card className="text-center py-12">
           <CardContent>
-            <Sparkles className="mx-auto h-12 w-12 text-text-muted/50" />
+            <Sparkles className="mx-auto h-12 w-12 text-muted-foreground/50" />
             <h3 className="mt-4 text-lg font-semibold">No Upcoming Events Yet</h3>
-            <p className="text-sm text-text-muted mt-1">
+            <p className="text-sm text-muted-foreground mt-1">
               Check back soon! We announce visiting Cuban maestros and festival dates regularly.
             </p>
           </CardContent>
@@ -128,7 +128,7 @@ export default async function EventsDirectoryPage() {
                     Autumn &amp; Festive Special Events
                   </h2>
                 </div>
-                <span className="text-xs text-text-muted font-medium">
+                <span className="text-xs text-muted-foreground font-medium">
                   {events2026.length} Events Scheduled
                 </span>
               </div>
@@ -153,7 +153,7 @@ export default async function EventsDirectoryPage() {
                     Spring &amp; Summer Masterclasses &amp; Weekenders
                   </h2>
                 </div>
-                <span className="text-xs text-text-muted font-medium">
+                <span className="text-xs text-muted-foreground font-medium">
                   {events2027.length} Events Scheduled
                 </span>
               </div>
@@ -211,7 +211,7 @@ function EventCard({ evt }: EventCardProps) {
       <div
         className={`relative h-44 w-full p-6 flex flex-col justify-between ${
           isMadeInCuba
-            ? "bg-[#E59819] text-[#0D0907] border-b border-black/15"
+            ? "bg-gold text-stone-950 border-b border-black/15"
             : isHalloween
             ? "bg-gradient-to-tr from-[#160600] via-[#2A0E00] to-[#E65100] text-white"
             : isSBK
@@ -225,7 +225,7 @@ function EventCard({ evt }: EventCardProps) {
           <Badge
             className={`text-[10px] font-black uppercase tracking-wider border-none ${
               isMadeInCuba
-                ? "bg-black text-[#E59819]"
+                ? "bg-black text-gold"
                 : "bg-black/50 text-white backdrop-blur-sm"
             }`}
           >
@@ -253,7 +253,7 @@ function EventCard({ evt }: EventCardProps) {
         <div>
           <h3
             className={`text-lg font-black leading-snug drop-shadow-xs line-clamp-2 uppercase ${
-              isMadeInCuba ? "text-[#0D0907]" : "text-white"
+              isMadeInCuba ? "text-stone-950" : "text-white"
             }`}
           >
             {isMadeInCuba
@@ -280,12 +280,12 @@ function EventCard({ evt }: EventCardProps) {
           ))}
         </div>
 
-        <CardDescription className="line-clamp-2 text-xs text-text-muted">
+        <CardDescription className="line-clamp-2 text-xs text-muted-foreground">
           {evt.description}
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-2 text-xs text-text-muted flex-1">
+      <CardContent className="space-y-2 text-xs text-muted-foreground flex-1">
         <div className="flex items-center gap-2">
           <Calendar className="h-3.5 w-3.5 text-amber-400 shrink-0" />
           <span className="font-medium text-foreground">{startFormatted}</span>
@@ -305,7 +305,7 @@ function EventCard({ evt }: EventCardProps) {
           asChild
           className={`w-full text-xs font-bold transition-colors h-10 rounded-xl shadow-xs ${
             isMadeInCuba
-              ? "bg-[#0D0907] hover:bg-black text-white font-black"
+              ? "bg-stone-950 hover:bg-black text-white font-black"
               : "bg-primary-base hover:bg-primary-hover text-white"
           }`}
         >

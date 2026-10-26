@@ -97,7 +97,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
   return (
     <section
       id={id}
-      className="cv-auto py-14 sm:py-20 bg-[#0c0908] border-b border-amber-500/15 scroll-mt-20 text-white"
+      className="cv-auto py-14 sm:py-20 bg-canvas border-b border-line scroll-mt-20 text-ivory"
       data-testid="instructor-roster-section"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -155,14 +155,14 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                 key={instructor.id}
                 id={`instructors-${instructor.id}`}
                 data-artist-id={instructor.id}
-                className={`art-card group relative flex flex-col justify-between rounded-2xl border border-stone-800 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:border-amber-400/40 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.2)] w-full ${
+                className={`art-card group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-2 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.2)] w-full ${
                   idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden sm:flex" : "flex"
                 }`}
                 data-testid={`instructor-card-${instructor.id}`}
               >
                 <div>
                   {/* Bespoke Architectural Typographic Portrait Plate */}
-                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#14110F] border-b border-white/[0.08]">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface-3 border-b border-line">
                     {/* Fine 1px Architectural Grid Lines & Stage Crosshairs */}
                     <div className="absolute inset-0 pointer-events-none border border-white/[0.04]">
                       <div className="absolute top-2.5 right-2.5 text-white/20 text-xs font-mono select-none">+</div>

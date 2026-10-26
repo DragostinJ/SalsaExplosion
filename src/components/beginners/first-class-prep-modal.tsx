@@ -44,7 +44,7 @@ export function FirstClassPrepModal({
         </div>
 
         {/* Video Player */}
-        <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-zinc-950 border border-border shadow-inner flex items-center justify-center">
+        <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-surface-1 border border-line shadow-inner flex items-center justify-center">
           {isPlaying ? (
             <video
               src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
@@ -60,14 +60,14 @@ export function FirstClassPrepModal({
                   type="button"
                   size="lg"
                   onClick={() => setIsPlaying(true)}
-                  className="h-14 w-14 rounded-full bg-amber-500 hover:bg-amber-400 text-zinc-950 shadow-lg"
+                  className="h-14 w-14 rounded-full bg-brand hover:bg-brand-hover text-white shadow-lg"
                 >
-                  <Play className="h-6 w-6 fill-zinc-950 ml-1" />
+                  <Play className="h-6 w-6 fill-white ml-1" />
                 </Button>
                 <p className="text-xs font-bold text-white drop-shadow-sm">
                   Watch 60-Second Studio Walkthrough & Basic Step Preview
                 </p>
-                <p className="text-[11px] text-zinc-300 max-w-sm drop-shadow-sm">
+                <p className="text-[11px] text-stone-300 max-w-sm drop-shadow-sm">
                   See where to hang your coat, how door check-in works, and how the beginner circle begins.
                 </p>
               </div>

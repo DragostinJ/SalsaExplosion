@@ -374,7 +374,7 @@ export function MobileNavSheet({
           {/* Mobile Role Switcher (When allowed in non-production) */}
           {canSwitchRoles && (
             <div className="pt-4 border-t space-y-2">
-              <div className="flex items-center gap-1.5 px-2 text-xs font-bold uppercase tracking-wider text-text-muted">
+              <div className="flex items-center gap-1.5 px-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 <UserCheck className="h-3.5 w-3.5" />
                 <span>Test Role Switcher</span>
               </div>
@@ -394,11 +394,11 @@ export function MobileNavSheet({
                       className={`rounded-lg py-2 font-bold transition-all text-center ${
                         isActive
                           ? r === "ADMIN"
-                            ? "bg-accent-tangerine text-zinc-950 shadow-xs"
+                            ? "bg-accent-tangerine text-stone-950 shadow-xs"
                             : r === "INSTRUCTOR"
                               ? "bg-emerald-600 text-white shadow-xs"
                               : "bg-primary-base text-white shadow-xs"
-                          : "text-text-muted hover:text-foreground hover:bg-muted/80"
+                          : "text-stone-400 hover:text-foreground hover:bg-muted/80"
                       } ${isPending ? "opacity-60 cursor-wait" : ""}`}
                     >
                       {r === "ADMIN" ? "Owner" : r === "INSTRUCTOR" ? "Teacher" : "Dancer"}
@@ -412,7 +412,7 @@ export function MobileNavSheet({
 
         {/* Drawer Footer: Social Community Links */}
         <div className="border-t bg-muted/30 p-4 shrink-0">
-          <div className="flex items-center justify-between text-xs text-text-muted">
+          <div className="flex items-center justify-between text-xs text-muted-foreground">
             <span className="font-semibold">Join the Bournemouth Scene:</span>
             <div className="flex items-center gap-2">
               <a
@@ -420,7 +420,7 @@ export function MobileNavSheet({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-lg bg-card border text-text-muted hover:text-pink-600 hover:border-pink-500/30 transition-colors"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-card border text-muted-foreground hover:text-pink-600 hover:border-pink-500/30 transition-colors"
                 title="@salsaexplosion on Instagram"
               >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -432,7 +432,7 @@ export function MobileNavSheet({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook Page"
-                className="flex h-9 w-9 items-center justify-center rounded-lg bg-card border text-text-muted hover:text-blue-600 hover:border-blue-500/30 transition-colors"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-card border text-muted-foreground hover:text-blue-600 hover:border-blue-500/30 transition-colors"
                 title="Salsa Explosion Facebook Page"
               >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">

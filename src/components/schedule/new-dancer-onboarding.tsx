@@ -134,7 +134,7 @@ export function NewDancerOnboarding({
             type="button"
             size="sm"
             onClick={triggerStudioTutorial}
-            className="h-7 sm:h-8 bg-amber-500 text-zinc-950 hover:bg-amber-400 text-xs font-bold shadow-xs px-2.5 sm:px-3"
+            className="h-7 sm:h-8 bg-brand hover:bg-brand-hover text-white text-xs font-bold shadow-xs px-2.5 sm:px-3"
           >
             <HelpCircle className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1" />
             <span className="hidden xs:inline">Interactive</span> Tour

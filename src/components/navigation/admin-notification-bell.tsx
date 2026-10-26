@@ -120,7 +120,7 @@ export function AdminNotificationBell() {
                 Studio Alerts
               </span>
               {unreadCount > 0 && (
-                <Badge className="bg-accent-tangerine text-zinc-950 text-[10px] font-bold h-4 px-1.5">
+                <Badge className="bg-accent-tangerine text-stone-950 text-[10px] font-bold h-4 px-1.5">
                   {unreadCount} New
                 </Badge>
               )}

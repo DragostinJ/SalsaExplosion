@@ -448,7 +448,7 @@ export default function VenuesGuidePage() {
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
               Nearby Hotels for Dance Weekends &amp; DANZA! Festivals
             </h2>
-            <p className="text-xs sm:text-sm text-text-muted mt-1 max-w-2xl">
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-2xl">
               Travelling from London, Bristol, Southampton, or abroad for our weekend festivals? These verified walkable hotels are all within 3 to 10 minutes of BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR).
             </p>
           </div>
@@ -468,12 +468,12 @@ export default function VenuesGuidePage() {
                 <span className="text-[11px] font-bold text-rose-400">3–5 min walk</span>
               </div>
               <h3 className="font-extrabold text-base text-foreground">Hilton Bournemouth</h3>
-              <p className="text-xs text-text-muted">Terrace Rd, Bournemouth BH2 5EL</p>
+              <p className="text-xs text-muted-foreground">Terrace Rd, Bournemouth BH2 5EL</p>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Closest upscale hotel to BOH Studios with secure on-site parking, Schpoons &amp; Forx restaurant, heated indoor pool, and luxury rooms.
               </p>
             </div>
-            <div className="pt-2 border-t text-[11px] font-semibold text-text-muted">
+            <div className="pt-2 border-t text-[11px] font-semibold text-muted-foreground">
               Secure underground parking
             </div>
           </div>
@@ -488,12 +488,12 @@ export default function VenuesGuidePage() {
                 <span className="text-[11px] font-bold text-rose-400">5 min walk</span>
               </div>
               <h3 className="font-extrabold text-base text-foreground">Hampton by Hilton</h3>
-              <p className="text-xs text-text-muted">Upper Terrace Rd, Bournemouth BH2 5NW</p>
+              <p className="text-xs text-muted-foreground">Upper Terrace Rd, Bournemouth BH2 5NW</p>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Modern dancer favorite! Includes complimentary hot breakfast, 24/7 fitness center, on-site parking, and spacious rooms just around the corner from The Triangle.
               </p>
             </div>
-            <div className="pt-2 border-t text-[11px] font-semibold text-text-muted">
+            <div className="pt-2 border-t text-[11px] font-semibold text-muted-foreground">
               Breakfast included with every stay
             </div>
           </div>
@@ -508,12 +508,12 @@ export default function VenuesGuidePage() {
                 <span className="text-[11px] font-bold text-rose-400">8 min walk</span>
               </div>
               <h3 className="font-extrabold text-base text-foreground">Premier Inn Central</h3>
-              <p className="text-xs text-text-muted">Westover Rd, Bournemouth BH1 2BZ</p>
+              <p className="text-xs text-muted-foreground">Westover Rd, Bournemouth BH1 2BZ</p>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Superb central location overlooking Lower Gardens and 2 minutes from the pier. King-size Hypnos beds, quiet rooms, and very budget-friendly rates.
               </p>
             </div>
-            <div className="pt-2 border-t text-[11px] font-semibold text-text-muted">
+            <div className="pt-2 border-t text-[11px] font-semibold text-muted-foreground">
               Close to beach &amp; gardens
             </div>
           </div>
@@ -528,12 +528,12 @@ export default function VenuesGuidePage() {
                 <span className="text-[11px] font-bold text-rose-400">10 min walk</span>
               </div>
               <h3 className="font-extrabold text-base text-foreground">Holiday Inn Bournemouth</h3>
-              <p className="text-xs text-text-muted">Bath Rd, Lansdowne, Bournemouth BH1 2NT</p>
+              <p className="text-xs text-muted-foreground">Bath Rd, Lansdowne, Bournemouth BH1 2NT</p>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Convenient direct road access via Wessex Way with large on-site car park, open-lobby lounge bar, and full hot buffet breakfast.
               </p>
             </div>
-            <div className="pt-2 border-t text-[11px] font-semibold text-text-muted">
+            <div className="pt-2 border-t text-[11px] font-semibold text-muted-foreground">
               Easy road access &amp; ample parking
             </div>
           </div>

@@ -229,7 +229,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               <span className="text-lg font-black leading-none tracking-tight">
                 Salsa <span className="text-rose-700 dark:text-rose-400">Explosion</span>
               </span>
-              <span className="text-[10px] font-semibold text-text-muted uppercase tracking-widest mt-0.5">
+              <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
                 Bournemouth • Cuba
               </span>
             </div>
@@ -435,6 +435,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               </Link>
               <Link
                 href="/events"
+                data-testid="site-header-book-cta"
                 className="rounded-xl bg-brand px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-brand-hover transition-colors min-h-9 flex items-center justify-center whitespace-nowrap shrink-0"
               >
                 Book Festival Passes &rarr;

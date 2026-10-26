@@ -103,11 +103,11 @@ export function BeginnerSyllabusRoadmap() {
           <div className="flex items-center gap-2 text-xs bg-muted/40 px-3 py-1.5 rounded-xl border border-border/60">
             <Award className="h-4 w-4 text-emerald-400" />
             <span className="font-bold text-foreground">{masteredCount} of 8 Mastered</span>
-            <span className="text-[10px] text-text-muted">({progressPercent}%)</span>
+            <span className="text-[10px] text-muted-foreground">({progressPercent}%)</span>
           </div>
         </div>
 
-        <CardDescription className="text-xs text-text-muted leading-relaxed pt-1">
+        <CardDescription className="text-xs text-muted-foreground leading-relaxed pt-1">
           No guessing what is being taught. This visual syllabus breaks down every move taught in your first month at Salsa Explosion so you always know what&apos;s coming next.
         </CardDescription>
 
@@ -141,7 +141,7 @@ export function BeginnerSyllabusRoadmap() {
               >
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                       Figure {step.number} • {step.category}
                     </span>
                     {isMastered ? (
@@ -153,7 +153,7 @@ export function BeginnerSyllabusRoadmap() {
                         <Flame className="h-3 w-3" /> Practicing Now
                       </span>
                     ) : (
-                      <span className="text-[10px] text-text-muted font-medium">
+                      <span className="text-[10px] text-muted-foreground font-medium">
                         Coming Up
                       </span>
                     )}

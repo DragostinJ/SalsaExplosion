@@ -46,7 +46,7 @@ export function BeginnerSafetyHub() {
             <h3 className="text-sm sm:text-base font-extrabold tracking-tight text-foreground">
               New to Cuban Salsa or BOH Studios? You Are Safe Here!
             </h3>
-            <p className="text-xs text-text-muted leading-relaxed max-w-2xl">
+            <p className="text-xs text-muted-foreground leading-relaxed max-w-2xl">
               No partner required, no special shoes needed, and mistakes are celebrated.
             </p>
           </div>
@@ -106,7 +106,7 @@ export function BeginnerSafetyHub() {
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "ROTATION"
                 ? "bg-emerald-600 text-white shadow-xs"
-                : "bg-muted/50 text-text-muted hover:bg-muted hover:text-foreground"
+                : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
             <RotateCw className="h-3.5 w-3.5" />
@@ -120,7 +120,7 @@ export function BeginnerSafetyHub() {
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "AMBASSADORS"
                 ? "bg-emerald-600 text-white shadow-xs"
-                : "bg-muted/50 text-text-muted hover:bg-muted hover:text-foreground"
+                : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
             <Users className="h-3.5 w-3.5" />
@@ -134,7 +134,7 @@ export function BeginnerSafetyHub() {
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "QUESTIONS"
                 ? "bg-emerald-600 text-white shadow-xs"
-                : "bg-muted/50 text-text-muted hover:bg-muted hover:text-foreground"
+                : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
             <HelpCircle className="h-3.5 w-3.5" />

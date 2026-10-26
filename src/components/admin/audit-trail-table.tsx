@@ -95,12 +95,12 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
             <h2 className="text-lg font-bold tracking-tight">
               Administrative Audit Trail
             </h2>
-            <p className="text-xs text-text-muted">
+            <p className="text-xs text-muted-foreground">
               Immutable forensic log of privilege changes, credit grants, student evaluations, and sensitive exports (Latest 50 events).
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-text-muted">
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Clock className="h-3.5 w-3.5" />
           <span>Real-time UTC sequence</span>
         </div>
@@ -108,8 +108,8 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
 
       {logs.length === 0 ? (
         <div className="py-12 text-center">
-          <Terminal className="mx-auto h-8 w-8 text-text-muted opacity-40 mb-2" />
-          <p className="text-sm font-medium text-text-muted">
+          <Terminal className="mx-auto h-8 w-8 text-muted-foreground opacity-40 mb-2" />
+          <p className="text-sm font-medium text-muted-foreground">
             No administrative events recorded in the audit trail yet.
           </p>
         </div>
@@ -123,7 +123,7 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
               return (
                 <div key={log.id} className="p-4 space-y-2.5 text-xs font-mono">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-text-muted text-[11px]">{dateStr}</span>
+                    <span className="text-muted-foreground text-[11px]">{dateStr}</span>
                     {getActionBadge(log.action)}
                   </div>
                   <div className="flex items-start justify-between gap-2 font-sans">
@@ -133,24 +133,24 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
                           ? `${log.actor.firstName} ${log.actor.lastName || ""}`.trim()
                           : log.actor.email}
                       </div>
-                      <div className="text-[11px] text-text-muted font-mono">{log.actor.email}</div>
+                      <div className="text-[11px] text-muted-foreground font-mono">{log.actor.email}</div>
                     </div>
-                    <span className="text-text-muted font-mono text-[10px] shrink-0 bg-muted px-1.5 py-0.5 rounded">
+                    <span className="text-muted-foreground font-mono text-[10px] shrink-0 bg-muted px-1.5 py-0.5 rounded">
                       {log.ip || "internal"}
                     </span>
                   </div>
                   <div className="bg-main/60 rounded-lg p-2 space-y-1">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-text-muted text-[10px] uppercase">Target:</span>
+                      <span className="text-muted-foreground text-[10px] uppercase">Target:</span>
                       <span className="font-semibold text-text-main text-[11px]">{log.targetType}</span>
                       {log.targetId && (
-                        <span className="text-text-muted text-[10px] truncate max-w-[120px]">
+                        <span className="text-muted-foreground text-[10px] truncate max-w-[120px]">
                           ({log.targetId})
                         </span>
                       )}
                     </div>
                     {Boolean(log.metadata) && (
-                      <div className="text-[10px] text-text-muted truncate pt-0.5 border-t border-border/40">
+                      <div className="text-[10px] text-muted-foreground truncate pt-0.5 border-t border-border/40">
                         {metadataStr}
                       </div>
                     )}
@@ -164,7 +164,7 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left text-sm border-collapse">
               <thead>
-                <tr className="border-b bg-main/50 text-xs font-semibold text-text-muted uppercase tracking-wider">
+                <tr className="border-b bg-main/50 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   <th className="py-3 px-4">Timestamp (UTC)</th>
                   <th className="py-3 px-4">Action</th>
                   <th className="py-3 px-4">Actor</th>
@@ -185,7 +185,7 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
                       key={log.id}
                       className="hover:bg-main/40 transition-colors font-mono text-xs"
                     >
-                      <td className="py-3 px-4 whitespace-nowrap text-text-muted">
+                      <td className="py-3 px-4 whitespace-nowrap text-muted-foreground">
                         {dateStr}
                       </td>
                       <td className="py-3 px-4 whitespace-nowrap">
@@ -197,7 +197,7 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
                             ? `${log.actor.firstName} ${log.actor.lastName || ""}`.trim()
                             : log.actor.email}
                         </div>
-                        <div className="text-[11px] text-text-muted font-mono">
+                        <div className="text-[11px] text-muted-foreground font-mono">
                           {log.actor.email}
                         </div>
                       </td>
@@ -206,12 +206,12 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
                           {log.targetType}
                         </span>
                         {log.targetId && (
-                          <span className="text-text-muted text-[11px] block truncate max-w-[140px]">
+                          <span className="text-muted-foreground text-[11px] block truncate max-w-[140px]">
                             {log.targetId}
                           </span>
                         )}
                       </td>
-                      <td className="py-3 px-4 max-w-xs truncate text-text-muted">
+                      <td className="py-3 px-4 max-w-xs truncate text-muted-foreground">
                         <span
                           title={metadataStr}
                           className="cursor-help underline decoration-dotted decoration-text-muted/50"
@@ -219,7 +219,7 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
                           {metadataStr}
                         </span>
                       </td>
-                      <td className="py-3 px-4 whitespace-nowrap text-text-muted font-mono text-[11px]">
+                      <td className="py-3 px-4 whitespace-nowrap text-muted-foreground font-mono text-[11px]">
                         {log.ip || "internal"}
                       </td>
                     </tr>

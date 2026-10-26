@@ -290,10 +290,10 @@ export function HavanaGrooveToggle() {
       {isPlaying && (
         <aside
           aria-label="Havana Vinyl Dubplate Mini-Player"
-          className="art-card fixed bottom-20 md:bottom-6 right-3 sm:right-6 z-40 flex items-center gap-3.5 rounded-2xl border border-amber-500/30 bg-[#0c0908]/95 p-3 pr-4 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_30px_rgba(245,158,11,0.22)] backdrop-blur-xl animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-[calc(100vw-1.5rem)] sm:max-w-md"
+          className="art-card fixed bottom-20 md:bottom-6 right-3 sm:right-6 z-40 flex items-center gap-3.5 rounded-2xl border border-line bg-surface-1/95 p-3 pr-4 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-[calc(100vw-1.5rem)] sm:max-w-md"
         >
           {/* Animated 12" Vinyl Dubplate Disc */}
-          <div className="relative h-13 w-13 sm:h-14 sm:w-14 shrink-0 rounded-full bg-[#121110] shadow-[0_4px_16px_rgba(0,0,0,0.7)] flex items-center justify-center overflow-hidden border border-amber-500/40">
+          <div className="relative h-13 w-13 sm:h-14 sm:w-14 shrink-0 rounded-full bg-surface-2 shadow-lg flex items-center justify-center overflow-hidden border border-gold/40">
             <div
               className={`absolute inset-0 rounded-full ${
                 isPlaying ? "animate-[spin_4s_linear_infinite]" : ""
@@ -386,7 +386,7 @@ export function HavanaGrooveToggle() {
                 className={`text-[10px] font-semibold px-2 py-0.5 rounded-md transition-colors ${
                   mode === "son-clave"
                     ? "bg-amber-500/25 text-amber-200 border border-amber-400/50 shadow-sm"
-                    : "text-zinc-400 hover:text-zinc-200 hover:bg-white/5"
+                    : "text-stone-400 hover:text-stone-200 hover:bg-white/5"
                 }`}
               >
                 Son Clave
@@ -398,7 +398,7 @@ export function HavanaGrooveToggle() {
                 className={`text-[10px] font-semibold px-2 py-0.5 rounded-md transition-colors flex items-center gap-1 ${
                   mode === "guaguanco"
                     ? "bg-amber-500/25 text-amber-200 border border-amber-400/50 shadow-sm"
-                    : "text-zinc-400 hover:text-zinc-200 hover:bg-white/5"
+                    : "text-stone-400 hover:text-stone-200 hover:bg-white/5"
                 }`}
               >
                 <Sparkles className="h-2.5 w-2.5 text-amber-400" />
@@ -412,7 +412,7 @@ export function HavanaGrooveToggle() {
             type="button"
             onClick={stopGroove}
             aria-label="Pause rhythm"
-            className="p-1.5 rounded-full text-zinc-400 hover:text-amber-300 hover:bg-white/10 transition-colors shrink-0 ml-1"
+            className="p-1.5 rounded-full text-stone-400 hover:text-amber-300 hover:bg-white/10 transition-colors shrink-0 ml-1"
           >
             <Pause className="h-4 w-4" />
           </button>

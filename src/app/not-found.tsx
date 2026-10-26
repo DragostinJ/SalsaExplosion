@@ -17,7 +17,7 @@ export default function NotFound() {
           <h1 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
             Lost on the Dance Floor?
           </h1>
-          <p className="text-sm text-text-muted leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             We couldn&apos;t find the page you were stepping toward. In Cuban Casino, when you lose count, you simply reset to the basic step on count 1!
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function NotFound() {
           </Button>
         </div>
 
-        <p className="text-xs text-text-muted/70 pt-4">
+        <p className="text-xs text-muted-foreground/70 pt-4">
           Need assistance? Talk to any floor ambassador or visit Maestro Enrique at BOH Studios Bournemouth.
         </p>
       </div>

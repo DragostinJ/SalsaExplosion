@@ -155,7 +155,7 @@ export function ShopClient({
                           : isReservedStatus
                           ? "bg-amber-600 text-white"
                           : isCancelled
-                          ? "bg-zinc-500 text-white"
+                          ? "bg-stone-500 text-white"
                           : "bg-blue-600 text-white"
                       }
                     >

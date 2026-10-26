@@ -12,7 +12,7 @@ export function PaymentSecurityTrustBar({
   return (
     <div
       data-testid="payment-security-trust-bar"
-      className={`rounded-xl border border-white/10 bg-[#0E0C0A] p-4 text-xs text-foreground space-y-2.5 ${className}`}
+      className={`rounded-xl border border-white/10 bg-surface-1 p-4 text-xs text-foreground space-y-2.5 ${className}`}
     >
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-2.5">
         <div className="flex items-center gap-2">

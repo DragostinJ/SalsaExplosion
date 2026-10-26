@@ -191,7 +191,7 @@ export default async function EventDetailPage({
             <div className="lg:col-span-7 space-y-5">
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge className="bg-amber-500 text-zinc-950 font-black text-xs uppercase tracking-wider shadow-sm">
+                  <Badge className="bg-amber-500 text-stone-950 font-black text-xs uppercase tracking-wider shadow-sm">
                     🎉 Celebrating 33 Years of Salsa Explosion!
                   </Badge>
                   <Badge variant="outline" className="border-amber-400/40 text-amber-300 bg-amber-500/10 text-xs font-bold">
@@ -356,7 +356,7 @@ export default async function EventDetailPage({
 
             {/* Right Poster Display Column */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center">
-              <div className="relative w-full max-w-[340px] aspect-square rounded-2xl overflow-hidden border-2 border-amber-500/60 shadow-2xl group ring-4 ring-amber-500/20 bg-zinc-950">
+              <div className="relative w-full max-w-[340px] aspect-square rounded-2xl overflow-hidden border-2 border-amber-500/60 shadow-2xl group ring-4 ring-amber-500/20 bg-surface-1">
                 <Image
                   src="/images/made-in-cuba-2026-poster.jpg"
                   alt="MADE IN CUBA Dance Festival 2026 Bournemouth Official Poster — Celebrating 33 Years of Salsa Explosion"

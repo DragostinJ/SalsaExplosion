@@ -297,7 +297,7 @@ export function ClaveTrainerClient() {
                   key={beat.count}
                   className={`relative rounded-2xl border p-3 flex flex-col items-center justify-between text-center transition-all duration-100 min-h-[110px] ${
                     isActive
-                      ? "scale-105 border-amber-500 bg-amber-500 text-zinc-950 font-black shadow-lg ring-4 ring-amber-500/30 z-10"
+                      ? "scale-105 border-amber-500 bg-amber-500 text-stone-950 font-black shadow-lg ring-4 ring-amber-500/30 z-10"
                       : beat.isDanceStep
                       ? "border-amber-500/30 bg-card hover:bg-muted/40"
                       : "border-border/60 bg-muted/20 opacity-60"
@@ -308,7 +308,7 @@ export function ClaveTrainerClient() {
                     {isClaveHit && (
                       <span
                         className={`block h-2 w-2 rounded-full ${
-                          isActive ? "bg-zinc-950" : "bg-rose-500 shadow-xs"
+                          isActive ? "bg-stone-950" : "bg-rose-500 shadow-xs"
                         }`}
                         title="Clave Accent"
                       />
@@ -319,7 +319,7 @@ export function ClaveTrainerClient() {
 
                   <span
                     className={`text-[10px] leading-tight font-bold mt-1 ${
-                      isActive ? "text-zinc-950" : "text-muted-foreground"
+                      isActive ? "text-stone-950" : "text-muted-foreground"
                     }`}
                   >
                     {beat.label}
@@ -329,7 +329,7 @@ export function ClaveTrainerClient() {
                     className={`text-[9px] uppercase tracking-widest mt-1 px-1.5 py-0.5 rounded ${
                       beat.isDanceStep
                         ? isActive
-                          ? "bg-zinc-950 text-amber-400 font-extrabold"
+                          ? "bg-stone-950 text-amber-400 font-extrabold"
                           : "bg-emerald-500/10 text-emerald-600 font-bold"
                         : "text-muted-foreground"
                     }`}

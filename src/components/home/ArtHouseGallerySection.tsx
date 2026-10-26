@@ -15,7 +15,7 @@ export function ArtHouseGallerySection() {
     <section
       id="gallery"
       data-testid="art-house-gallery-section"
-      className="cv-auto py-12 sm:py-16 bg-[#080706] border-b border-white/10 text-white"
+      className="cv-auto py-12 sm:py-16 bg-canvas border-b border-white/10 text-white"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* theplace.org.uk-inspired 4-Pillar Photo Gateways ("Explore Salsa Explosion") */}
@@ -42,7 +42,7 @@ export function ArtHouseGallerySection() {
             {/* Gateway 01: Weekly Classes */}
             <Link
               href="/dashboard/schedule"
-              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden transition-all duration-500 hover:border-amber-400/50"
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden transition-all duration-500 hover:border-amber-400/50"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -78,7 +78,7 @@ export function ArtHouseGallerySection() {
             {/* Gateway 02: Festivals & Congresses */}
             <Link
               href="/events"
-              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden transition-all duration-500 hover:border-amber-400/50"
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden transition-all duration-500 hover:border-amber-400/50"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -114,7 +114,7 @@ export function ArtHouseGallerySection() {
             {/* Gateway 03: Rueda Call Dictionary (Action Photography — No Cropped Flyer!) */}
             <Link
               href="/dashboard/rueda"
-              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden transition-all duration-500 hover:border-amber-400/50"
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden transition-all duration-500 hover:border-amber-400/50"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -150,7 +150,7 @@ export function ArtHouseGallerySection() {
             {/* Gateway 04: Timba Song Trainer (Action Music/Dance Photography — No Cropped Flyer!) */}
             <Link
               href="/music"
-              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden transition-all duration-500 hover:border-amber-400/50"
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden transition-all duration-500 hover:border-amber-400/50"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -193,17 +193,17 @@ export function InsideCubanCircleGallery() {
   const [selectedPhoto, setSelectedPhoto] = useState<AcademyGalleryPhoto | null>(null);
 
   return (
-    <section className="cv-auto py-12 sm:py-16 bg-[#080706] border-b border-white/10 text-white">
+    <section className="cv-auto py-12 sm:py-16 bg-canvas border-b border-line text-ivory">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-line">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-amber-300">
+            <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gold">
               <Camera className="h-3.5 w-3.5" />
               <span>Exhibition Photo Archive • {VENUE_INFO.name}</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white leading-none">
+            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-ivory leading-none">
               INSIDE THE{" "}
-              <span className="font-display italic font-normal text-amber-300 lowercase">
+              <span className="font-display italic font-normal text-gold lowercase">
                 cuban circle
               </span>
             </h2>
@@ -217,7 +217,7 @@ export function InsideCubanCircleGallery() {
               asChild
               variant="outline"
               size="sm"
-              className="border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-xs rounded-xl"
+              className="border-line bg-surface-3 hover:bg-surface-2 text-ivory font-bold text-xs rounded-xl"
             >
               <a
                 href={VENUE_INFO.instagramUrl}
@@ -237,7 +237,7 @@ export function InsideCubanCircleGallery() {
               key={photo.id}
               type="button"
               onClick={() => setSelectedPhoto(photo)}
-              className="group relative flex flex-col text-left rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden transition-all duration-500 hover:border-amber-400/50 focus:outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer"
+              className="group relative flex flex-col text-left rounded-2xl border border-line bg-surface-2 overflow-hidden transition-all duration-500 hover:border-gold/50 focus:outline-none focus:ring-2 focus:ring-gold cursor-pointer"
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -248,9 +248,9 @@ export function InsideCubanCircleGallery() {
                   decoding="async"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080605] via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-canvas via-black/20 to-transparent pointer-events-none" />
                 <div className="absolute top-3 left-3">
-                  <span className="rounded-md bg-black/75 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
+                  <span className="rounded-md bg-black/75 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-gold">
                     {photo.kicker}
                   </span>
                 </div>
@@ -258,14 +258,14 @@ export function InsideCubanCircleGallery() {
 
               <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
+                  <h3 className="text-sm sm:text-base font-black text-ivory group-hover:text-gold transition-colors">
                     {photo.title}
                   </h3>
                   <p className="text-xs text-stone-300 line-clamp-2 mt-1 leading-relaxed">
                     {photo.caption}
                   </p>
                 </div>
-                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
+                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-gold inline-flex items-center gap-1">
                   Inspect Frame →
                 </span>
               </div>
@@ -284,7 +284,7 @@ export function InsideCubanCircleGallery() {
           onClick={() => setSelectedPhoto(null)}
         >
           <div
-            className="relative max-w-3xl w-full rounded-2xl border border-white/15 bg-[#14110F] overflow-hidden shadow-2xl"
+            className="relative max-w-3xl w-full rounded-2xl border border-line bg-surface-2 overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative aspect-[16/10] w-full bg-black">

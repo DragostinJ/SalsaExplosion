@@ -161,10 +161,10 @@ export function PricingCards({
               key={pkg.id}
               className={`flex flex-col justify-between transition-all ${
                 isParchment
-                  ? "bg-[#181310] text-[#F5F2EB] border-2 border-amber-500/40 shadow-xl ring-1 ring-amber-500/30"
+                  ? "bg-surface-3 text-ivory border-2 border-amber-500/40 shadow-xl ring-1 ring-amber-500/30"
                   : pkg.popular
-                  ? "border-primary shadow-md ring-1 ring-primary bg-[#14110F]"
-                  : "bg-[#14110F] border-white/10"
+                  ? "border-primary shadow-md ring-1 ring-primary bg-surface-2"
+                  : "bg-surface-2 border-white/10"
               } ${
                 isSubCard
                   ? "border-emerald-500/40 bg-emerald-950/20"

@@ -46,7 +46,7 @@ export function FloorAmbassadorsCard() {
     <Card className="border border-amber-500/30 bg-gradient-to-br from-amber-500/[0.04] via-background to-orange-500/[0.03] shadow-xs">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-2">
-          <Badge className="bg-amber-500 text-zinc-950 font-bold text-[10px]">
+          <Badge className="bg-amber-500 text-stone-950 font-bold text-[10px]">
             <Heart className="mr-1 h-3 w-3 fill-zinc-950" />
             Floor Ambassadors
           </Badge>

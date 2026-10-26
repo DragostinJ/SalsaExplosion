@@ -156,9 +156,9 @@ export function PrivateLessonsClient({
                         isConfirmed
                           ? "bg-emerald-800 text-white font-bold"
                           : isPending
-                          ? "bg-amber-500 text-zinc-950 font-bold"
+                          ? "bg-amber-500 text-stone-950 font-bold"
                           : isCancelled
-                          ? "bg-zinc-600 text-white font-bold"
+                          ? "bg-stone-600 text-white font-bold"
                           : "bg-blue-700 text-white font-bold"
                       }
                     >
@@ -239,7 +239,7 @@ export function PrivateLessonsClient({
           {/* Step 1: Choose Instructor */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Badge className="bg-amber-500 text-zinc-950 font-extrabold text-xs">Step 1</Badge>
+              <Badge className="bg-amber-500 text-stone-950 font-extrabold text-xs">Step 1</Badge>
               <h3 className="font-bold text-lg">Select Your Private Coach</h3>
             </div>
 
@@ -304,7 +304,7 @@ export function PrivateLessonsClient({
           {/* Step 2: Choose Package & Dancer Setup */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Badge className="bg-amber-500 text-zinc-950 font-extrabold text-xs">Step 2</Badge>
+              <Badge className="bg-amber-500 text-stone-950 font-extrabold text-xs">Step 2</Badge>
               <h3 className="font-bold text-lg">Package & Dancer Format</h3>
             </div>
 
@@ -365,7 +365,7 @@ export function PrivateLessonsClient({
                 onClick={() => setDancerType("SOLO")}
                 className={`rounded-xl p-3 text-xs font-bold transition-all ${
                   dancerType === "SOLO"
-                    ? "bg-amber-500 text-zinc-950 font-extrabold"
+                    ? "bg-amber-500 text-stone-950 font-extrabold"
                     : "border bg-card text-muted-foreground"
                 }`}
               >
@@ -376,7 +376,7 @@ export function PrivateLessonsClient({
                 onClick={() => setDancerType("COUPLE")}
                 className={`rounded-xl p-3 text-xs font-bold transition-all ${
                   dancerType === "COUPLE"
-                    ? "bg-amber-500 text-zinc-950 font-extrabold"
+                    ? "bg-amber-500 text-stone-950 font-extrabold"
                     : "border bg-card text-muted-foreground"
                 }`}
               >
@@ -388,7 +388,7 @@ export function PrivateLessonsClient({
           {/* Step 3: Focus Topic & Timing */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <Badge className="bg-amber-500 text-zinc-950 font-extrabold text-xs">Step 3</Badge>
+              <Badge className="bg-amber-500 text-stone-950 font-extrabold text-xs">Step 3</Badge>
               <h3 className="font-bold text-lg">Focus Topic & Preferred Slot</h3>
             </div>
 

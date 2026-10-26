@@ -124,7 +124,7 @@ export function SocialProofGrid() {
   });
 
   return (
-    <section className="py-16 sm:py-20 bg-[#080605] border-t border-amber-500/15 text-white">
+    <section className="py-16 sm:py-20 bg-canvas border-t border-amber-500/15 text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
@@ -140,7 +140,7 @@ export function SocialProofGrid() {
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+          <p className="text-sm sm:text-base text-stone-300 leading-relaxed">
             From packed Thursday &amp; Sunday Rueda circles at BOH Studios to the international Bournemouth Cuban Congress — see why over 4,200 dancers call Salsa Explosion their home.
           </p>
 
@@ -154,7 +154,7 @@ export function SocialProofGrid() {
               className={`rounded-full text-xs font-semibold min-h-10 px-4 shrink-0 whitespace-nowrap ${
                 activeTab === "all"
                   ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
-                  : "border-amber-500/20 bg-black/40 text-zinc-300 hover:text-white hover:bg-black/60"
+                  : "border-amber-500/20 bg-black/40 text-stone-300 hover:text-white hover:bg-black/60"
               }`}
             >
               <Sparkles className="mr-1.5 h-3.5 w-3.5" />
@@ -168,7 +168,7 @@ export function SocialProofGrid() {
               className={`rounded-full text-xs font-semibold min-h-10 px-4 shrink-0 whitespace-nowrap ${
                 activeTab === "reels"
                   ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
-                  : "border-amber-500/20 bg-black/40 text-zinc-300 hover:text-white hover:bg-black/60"
+                  : "border-amber-500/20 bg-black/40 text-stone-300 hover:text-white hover:bg-black/60"
               }`}
             >
               <Video className="mr-1.5 h-3.5 w-3.5 text-pink-500" />
@@ -182,7 +182,7 @@ export function SocialProofGrid() {
               className={`rounded-full text-xs font-semibold min-h-10 px-4 shrink-0 whitespace-nowrap ${
                 activeTab === "testimonials"
                   ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
-                  : "border-amber-500/20 bg-black/40 text-zinc-300 hover:text-white hover:bg-black/60"
+                  : "border-amber-500/20 bg-black/40 text-stone-300 hover:text-white hover:bg-black/60"
               }`}
             >
               <Users className="mr-1.5 h-3.5 w-3.5 text-emerald-500" />
@@ -196,7 +196,7 @@ export function SocialProofGrid() {
               className={`rounded-full text-xs font-semibold min-h-10 px-4 shrink-0 whitespace-nowrap ${
                 activeTab === "congress"
                   ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
-                  : "border-amber-500/20 bg-black/40 text-zinc-300 hover:text-white hover:bg-black/60"
+                  : "border-amber-500/20 bg-black/40 text-stone-300 hover:text-white hover:bg-black/60"
               }`}
             >
               <Award className="mr-1.5 h-3.5 w-3.5 text-orange-500" />
@@ -270,12 +270,12 @@ export function SocialProofGrid() {
                       <h3 className="font-bold text-base text-white line-clamp-1 group-hover:text-amber-300 transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-zinc-300 line-clamp-3 leading-relaxed">
+                      <p className="text-xs text-stone-300 line-clamp-3 leading-relaxed">
                         {item.caption}
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400">
+                    <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs text-stone-400">
                       <div className="flex flex-wrap gap-1">
                         {item.tags.slice(0, 2).map((tag) => (
                           <span key={tag} className="text-[10px] font-medium text-amber-400">
@@ -283,7 +283,7 @@ export function SocialProofGrid() {
                           </span>
                         ))}
                       </div>
-                      <span className="font-semibold text-zinc-200 inline-flex items-center gap-1 group-hover:translate-x-0.5 group-hover:text-amber-300 transition-transform">
+                      <span className="font-semibold text-stone-200 inline-flex items-center gap-1 group-hover:translate-x-0.5 group-hover:text-amber-300 transition-transform">
                         Preview Clip
                         <ExternalLink className="h-3 w-3" />
                       </span>
@@ -311,7 +311,7 @@ export function SocialProofGrid() {
                   </div>
 
                   {/* Testimonial Quote */}
-                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed italic">
+                  <p className="text-xs sm:text-sm text-stone-300 leading-relaxed italic">
                     &ldquo;{item.quote}&rdquo;
                   </p>
                 </CardContent>
@@ -329,7 +329,7 @@ export function SocialProofGrid() {
                         </span>
                         <CheckCircle2 className="h-3 w-3 text-emerald-500" />
                       </div>
-                      <span className="text-[10px] text-zinc-400">
+                      <span className="text-[10px] text-stone-400">
                         {item.location} • {item.role}
                       </span>
                     </div>

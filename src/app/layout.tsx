@@ -140,7 +140,7 @@ export default async function RootLayout({
         <head>
           <JsonLdSchema />
         </head>
-        <body className="min-h-full flex flex-col bg-[#080706] text-[#F5F2EB] overflow-x-hidden havana-stage-lighting relative">
+        <body className="min-h-full flex flex-col bg-canvas text-ivory overflow-x-hidden havana-stage-lighting relative">
           <div className="film-grain" aria-hidden="true" />
           <StageSpotlight />
           <SiteHeader role={effectiveRole} canSwitchRoles={userCanSwitchRoles} />

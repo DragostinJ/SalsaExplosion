@@ -40,10 +40,10 @@ export default function HowItWorksPage() {
       </div>
 
       {/* Hero Header — "The Place" Havana Nocturne Architecture */}
-      <section className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-12 text-white shadow-2xl">
+      <section className="relative overflow-hidden rounded-3xl border border-stone-800 bg-canvas p-6 sm:p-12 text-white shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
           <span>STUDENT HANDBOOK &amp; STUDIO ARCHITECTURE</span>
-          <span className="text-zinc-400 font-bold">CUBAN SALSA &amp; RUEDA DE CASINO</span>
+          <span className="text-stone-400 font-bold">CUBAN SALSA &amp; RUEDA DE CASINO</span>
         </div>
 
         <div className="mt-6 max-w-3xl space-y-4">
@@ -131,7 +131,7 @@ export default function HowItWorksPage() {
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-700 dark:text-amber-400">
                 <CreditCard className="h-5 w-5" />
               </div>
-              <Badge className="w-fit bg-amber-500 text-zinc-950 font-bold text-[11px]">
+              <Badge className="w-fit bg-amber-500 text-stone-950 font-bold text-[11px]">
                 2. Studio Wallet & Packs
               </Badge>
               <CardTitle className="text-lg font-bold">
@@ -261,7 +261,7 @@ export default function HowItWorksPage() {
       {/* Step-by-Step Walkthrough Container */}
       <section className="rounded-3xl border bg-card p-6 sm:p-10 space-y-8 shadow-xs">
         <div className="space-y-2">
-          <Badge className="bg-amber-500 text-zinc-950 font-bold text-xs">
+          <Badge className="bg-amber-500 text-stone-950 font-bold text-xs">
             Step-by-Step Experience
           </Badge>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -274,7 +274,7 @@ export default function HowItWorksPage() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-2 rounded-2xl border bg-muted/20 p-4">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 font-extrabold text-zinc-950 text-xs">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 font-extrabold text-stone-950 text-xs">
               1
             </div>
             <h3 className="font-bold text-sm">Select Your Role</h3>
@@ -284,7 +284,7 @@ export default function HowItWorksPage() {
           </div>
 
           <div className="space-y-2 rounded-2xl border bg-muted/20 p-4">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 font-extrabold text-zinc-950 text-xs">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 font-extrabold text-stone-950 text-xs">
               2
             </div>
             <h3 className="font-bold text-sm">Use 1 Wallet Credit</h3>
@@ -294,7 +294,7 @@ export default function HowItWorksPage() {
           </div>
 
           <div className="space-y-2 rounded-2xl border bg-muted/20 p-4">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 font-extrabold text-zinc-950 text-xs">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 font-extrabold text-stone-950 text-xs">
               3
             </div>
             <h3 className="font-bold text-sm">Scan QR at the Door</h3>
@@ -304,7 +304,7 @@ export default function HowItWorksPage() {
           </div>
 
           <div className="space-y-2 rounded-2xl border bg-muted/20 p-4">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 font-extrabold text-zinc-950 text-xs">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500 font-extrabold text-stone-950 text-xs">
               4
             </div>
             <h3 className="font-bold text-sm">Review & Level Up</h3>
@@ -475,7 +475,7 @@ export default function HowItWorksPage() {
           Join hundreds of Cuban Salsa dancers mastering timing, partner connection, and turn knots every week.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-          <Button asChild size="lg" className="bg-amber-500 text-zinc-950 hover:bg-amber-400 font-bold text-xs sm:text-sm shadow-md">
+          <Button asChild size="lg" className="bg-amber-500 text-stone-950 hover:bg-amber-400 font-bold text-xs sm:text-sm shadow-md">
             <Link href="/dashboard/schedule">
               Book Your Spot
               <ArrowRight className="ml-2 h-4 w-4" />

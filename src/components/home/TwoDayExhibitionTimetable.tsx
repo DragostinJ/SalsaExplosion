@@ -94,7 +94,7 @@ export function TwoDayExhibitionTimetable() {
   return (
     <section
       id="timetable"
-      className="cv-auto py-12 sm:py-16 bg-[#080706] border-b border-white/10 text-white scroll-mt-20"
+      className="cv-auto py-12 sm:py-16 bg-canvas border-b border-white/10 text-white scroll-mt-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Main Section Header */}
@@ -198,7 +198,7 @@ export function TwoDayExhibitionTimetable() {
         </div>
 
         {/* Bottom Editorial Confidence Strip */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-white/10 bg-[#14110F]">
+        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-white/10 bg-surface-2">
           <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-stone-300 font-semibold">
             <span className="flex items-center gap-1.5 text-amber-300">
               <CreditCard className="h-3.5 w-3.5" />

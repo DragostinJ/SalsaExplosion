@@ -129,7 +129,7 @@ export function DigitalEtiquetteModal({
             id="etiquette-agree-checkbox"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-0.5 h-4 w-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+            className="mt-0.5 h-4 w-4 rounded border-line bg-surface-3 text-gold focus:ring-gold"
           />
           <label
             htmlFor="etiquette-agree-checkbox"

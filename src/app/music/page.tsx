@@ -12,7 +12,7 @@ export default function CubanMusicPage() {
     <main className="mx-auto max-w-7xl px-2.5 sm:px-6 lg:px-8 py-2 sm:py-6 space-y-2.5 sm:space-y-6">
       <PageHeader
         title="Cuban Music &"
-        titleHighlight="Social Playlists"
+        titleHighlight="Social Playlist Hub"
         description="Learn the songs played every Thursday & Sunday at BOH Studios. Follow the live Timba Song Trainer below to master timing, clave, and find beat 1 on the dance floor."
         badge="BPM & Clave Guide"
         eyebrow="HAVANA SOCIAL FLOOR • TIMBA HUD"

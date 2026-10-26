@@ -30,7 +30,7 @@ export default function ErrorBoundary({ error, reset }: ErrorProps) {
           <h1 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
             A Misstep on the Floor
           </h1>
-          <p className="text-sm text-text-muted leading-relaxed">
+          <p className="text-sm text-muted-foreground leading-relaxed">
             Something went off-beat while loading this section. Our dance studio coordinators have been informed. Try recovering the step below:
           </p>
         </div>

@@ -36,59 +36,60 @@ export default async function EventsDirectoryPage() {
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
       </div>
 
-      {/* DANZA! 2026 | 2027 Official Calendar Hero Showcase */}
-      <div className="relative overflow-hidden rounded-3xl border border-primary-base/30 bg-gradient-to-br from-card via-card to-primary-light/30 p-6 sm:p-8 shadow-sm">
+      {/* DANZA! 2026 | 2027 Official Calendar Hero Showcase — "The Place" Havana Nocturne Architecture */}
+      <div className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-10 text-white shadow-2xl">
         <div className="grid gap-8 lg:grid-cols-12 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge className="bg-primary-base text-white font-extrabold text-xs uppercase tracking-wider">
-                Official Calendar 2026 | 2027
-              </Badge>
-              <Badge
-                variant="outline"
-                className="border-secondary-base/40 text-secondary-hover bg-secondary-light/30 text-xs font-semibold"
-              >
-                {VENUE_INFO.name}
-              </Badge>
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
+              <span>OFFICIAL ONLINE BOX OFFICE • FESTIVALS &amp; SPECIAL EVENTS</span>
+              <span className="text-zinc-400 font-bold">{VENUE_INFO.shortName} • BOURNEMOUTH</span>
             </div>
 
             <div>
-              <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-foreground">
-                DANZA! 2026 | 2027 Special Event Calendar
+              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+                DANZA! 2026 | 2027{" "}
+                <span className="font-display italic font-normal text-amber-300 normal-case">
+                  Special Event Calendar
+                </span>
               </h1>
-              <p className="text-xs text-text-muted mt-1">
+              <p className="text-xs sm:text-sm text-stone-300 mt-2 font-medium">
                 Salsa Explosion Congresses &amp; Masterclasses • Directed by {ACADEMY_METRICS.founderTitleName}
               </p>
             </div>
 
-            <div className="rounded-2xl border border-primary-base/20 bg-primary-base/5 p-4 sm:p-5 space-y-3">
-              <p className="text-xs sm:text-sm text-foreground leading-relaxed italic">
-                &ldquo;We have an extraordinary season of special events coming up at {VENUE_INFO.name} — and we would love you to be part of them. From Cuban Salsa, Rueda, Son Cubano, Afro-Cuban, Bachata, Kizomba, and Timba to flagship parties, guest maestros, dance weekends, and late-night social dancing, save these dates in your diary now.&rdquo;
+            {/* Official Online Ticket Booking Callout */}
+            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 sm:p-4 text-xs font-semibold text-amber-100 leading-relaxed">
+              🎟️ <strong>Official Online Ticket Booking:</strong> Reserve Made in Cuba 2026, Halloween Party &amp; SB&amp;K Extravaganza passes online below with instant digital ticketing. (Regular weekly Thursday &amp; Sunday classes are £12/£14 paid at the door).
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5 space-y-2">
+              <p className="text-xs sm:text-sm text-stone-200 leading-relaxed italic">
+                &ldquo;We have an extraordinary season of special events coming up at {VENUE_INFO.name} — from Cuban Salsa, Rueda, Son Cubano, Afro-Cuban, Bachata, Kizomba, and Timba to flagship parties, guest maestros, dance weekends, and late-night social dancing.&rdquo;
               </p>
-              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-primary-base/15 text-xs">
-                <span className="font-extrabold text-primary-hover">
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/10 text-xs">
+                <span className="font-bold text-amber-300">
                   Enrique &amp; The Salsa Explosion Team
                 </span>
-                <span className="text-text-muted font-medium">
+                <span className="text-stone-400 font-medium">
                   {VENUE_INFO.streetAddress}, {VENUE_INFO.city} {VENUE_INFO.postcode}
                 </span>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs text-text-muted pt-1">
-              <div className="flex items-center gap-1.5 font-medium">
-                <Sparkles className="h-4 w-4 text-primary-base shrink-0" />
+            <div className="flex flex-wrap items-center gap-4 text-xs text-stone-300 pt-1">
+              <div className="flex items-center gap-1.5 font-bold text-amber-300">
+                <Sparkles className="h-4 w-4 shrink-0" />
                 <span>12 Exclusive Parties &amp; Weekenders</span>
               </div>
-              <div className="flex items-center gap-1.5 font-medium">
-                <ShieldCheck className="h-4 w-4 text-secondary-base shrink-0" />
+              <div className="flex items-center gap-1.5 font-bold text-emerald-400">
+                <ShieldCheck className="h-4 w-4 shrink-0" />
                 <span>Instant Digital Passes &amp; Stripe Checkout</span>
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm aspect-[4/5] rounded-2xl overflow-hidden border-2 border-primary-base/30 shadow-xl group bg-muted">
+            <div className="relative w-full max-w-sm aspect-[4/5] rounded-2xl overflow-hidden border border-stone-800 shadow-2xl group bg-stone-950">
               <Image
                 src="/images/danza-2026-2027-calendar.png"
                 alt="DANZA! 2026 | 2027 Bournemouth Salsa Explosion Event Calendar"

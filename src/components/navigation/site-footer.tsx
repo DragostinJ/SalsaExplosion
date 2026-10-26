@@ -84,6 +84,16 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/dashboard/recaps" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
+                  End-of-Class Video Vault
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/progression" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
+                  Cuban Syllabus &amp; Level-Up
+                </Link>
+              </li>
+              <li>
                 <Link href="/dashboard/rueda" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
                   Rueda de Casino Dictionary
                 </Link>
@@ -125,6 +135,16 @@ export function SiteFooter() {
               <li>
                 <Link href="/venues" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-amber-300 transition-colors">
                   BOH Studios &amp; Parking (BH2 5LR)
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="inline-flex items-center py-1 text-xs text-amber-300 font-black hover:underline">
+                  Dance Gift Vouchers
+                </Link>
+              </li>
+              <li>
+                <Link href="/sign-in" className="inline-flex items-center py-1 text-xs text-zinc-300 font-bold hover:text-white transition-colors">
+                  Student Portal Login
                 </Link>
               </li>
             </ul>

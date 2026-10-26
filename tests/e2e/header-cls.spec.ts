@@ -39,10 +39,9 @@ test.describe("M5: Header Layout-Shift (CLS) Stability", () => {
           try {
             const observer = new PerformanceObserver((list) => {
               for (const entry of list.getEntries()) {
-                const shift = entry as any;
+                const shift = entry as unknown as LayoutShiftEntry;
                 if (!shift.hadRecentInput) {
-                  const sources = (shift.sources || []).map((s: any) => s.node?.nodeName || "unknown");
-                  win.__clsEntries?.push({ val: shift.value, sources });
+                  win.__clsEntries?.push(shift.value);
                   win.__cumulativeLayoutShift = (win.__cumulativeLayoutShift ?? 0) + shift.value;
                 }
               }
@@ -59,17 +58,14 @@ test.describe("M5: Header Layout-Shift (CLS) Stability", () => {
         // Wait ~2.5s for hydration and late layout settlement
         await page.waitForTimeout(2500);
 
-        const { cls, shifts } = await page.evaluate(() => {
+        const cls = await page.evaluate(() => {
           const win = window as unknown as WindowWithCls;
-          return {
-            cls: win.__cumulativeLayoutShift ?? 0,
-            shifts: win.__clsEntries ?? [],
-          };
+          return win.__cumulativeLayoutShift ?? 0;
         });
 
         test.info().annotations.push({
           type: "CLS_MEASUREMENT",
-          description: `${path} @ ${vp.name}: CLS = ${cls}, shifts = ${JSON.stringify(shifts)}`,
+          description: `${path} @ ${vp.name}: CLS = ${cls}`,
         });
 
         expect(cls).toBeLessThan(0.02);

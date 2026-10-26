@@ -4,25 +4,26 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center max-w-full text-center leading-tight whitespace-normal sm:whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center max-w-full text-center leading-tight whitespace-normal sm:whitespace-nowrap rounded-xl text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "bg-brand text-white shadow-xs hover:bg-brand-hover",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-line bg-transparent text-ivory shadow-xs hover:bg-surface-3",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-surface-3 text-ivory shadow-xs hover:bg-surface-2",
+        ghost: "text-muted-foreground hover:text-ivory hover:bg-surface-3",
+        gold: "bg-gold/10 text-gold border border-gold/30 hover:bg-gold/20",
+        link: "text-gold underline-offset-4 hover:underline",
       },
       size: {
         default: "min-h-9 h-auto px-4 py-2",
-        sm: "min-h-8 h-auto rounded-md px-3 py-1 text-xs",
-        lg: "min-h-10 h-auto rounded-md px-6 py-2.5 sm:px-8",
+        sm: "min-h-8 h-auto rounded-lg px-3 py-1 text-xs",
+        lg: "min-h-10 h-auto rounded-xl px-6 py-2.5 sm:px-8",
         icon: "h-9 w-9 shrink-0 whitespace-nowrap",
       },
     },

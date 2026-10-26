@@ -27,27 +27,31 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  /* Bournemouth Cuban Salsa Designer Tokens */
-  /* Primary (Salsa Core) */
+  /* Canonical Havana Obsidian Design Tokens */
+  --color-canvas: #080706;
+  --color-surface-1: #0E0C0A;
+  --color-surface-2: #14110F;
+  --color-surface-3: #1C1917;
+  --color-line: #26221F;
+  --color-ivory: #F5F2EB;
+  --color-brand: #D9381E;
+  --color-brand-hover: #B82D16;
+  --color-gold: #FBBF24;
+  --color-success: #10B981;
+  --color-danger: #F43F5E;
+
+  /* Bournemouth Cuban Salsa Designer Tokens (Backwards Compatibility Aliases) */
   --color-primary-base: #E11D48;
   --color-primary-hover: #BE123C;
   --color-primary-light: #FFE4E6;
-
-  /* Secondary (Coastal Trust & Safety) */
   --color-secondary-base: #14B8A6;
   --color-secondary-hover: #2DD4BF;
   --color-secondary-light: #134E4A;
-
-  /* Accent (Highlighter/Warnings) */
   --color-accent-tangerine: #F97316;
-
-  /* Backgrounds & Surfaces (The Studio Space) */
   --color-bg-main: #080706;
   --color-bg-card: #0E0C0A;
   --color-surface-warm: #181310;
   --color-bg-dark: #080706;
-
-  /* Text & Typography */
   --color-text-main: #F5F2EB;
   --color-text-muted: #A8A29E;
 }
@@ -82,7 +86,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 24 20% 16%;
     --input: 24 20% 16%;
-    --ring: 347 77% 50%;
+    --ring: 45 93% 47%; /* #FBBF24 - Havana Gold */
     --radius: 0.75rem;
   }
 
@@ -111,7 +115,7 @@
     --destructive-foreground: 0 0% 98%;
     --border: 24 20% 16%;
     --input: 24 20% 16%;
-    --ring: 347 77% 50%;
+    --ring: 45 93% 47%; /* #FBBF24 - Havana Gold */
   }
 }
 
@@ -124,9 +128,9 @@
     font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
-  /* Accessible visible focus indicators using Salsa Fiery Rose */
+  /* Accessible visible focus indicators using Havana Gold */
   :focus-visible {
-    outline: 2px solid var(--color-primary-base, #E11D48);
+    outline: 2px solid var(--color-gold, #FBBF24);
     outline-offset: 2px;
   }
 

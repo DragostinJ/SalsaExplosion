@@ -27,7 +27,7 @@ export function ArtHouseGallerySection() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-white/10">
             <div>
               <span className="text-[11px] font-black uppercase tracking-widest text-amber-300 block mb-1">
-                Bournemouth Cuban Residency • Weekly Programmes
+                BOURNEMOUTH CUBAN CULTURAL INSTITUTION • EXPLORE SALSA EXPLOSION
               </span>
               <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white leading-none">
                 Weekly Classes &amp;{" "}
@@ -37,7 +37,7 @@ export function ArtHouseGallerySection() {
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-zinc-300 max-w-md">
-              Strictly Thursdays and Sundays at BOH Studios. Photo-led programmes with partner-balanced rotations.
+              Weekly Thursday &amp; Sunday classes (£12 for 1 class / £14 for 2 classes at the door), online festival passes, and interactive Cuban dance &amp; music tools.
             </p>
           </div>
 
@@ -56,7 +56,7 @@ export function ArtHouseGallerySection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-3 left-3">
                   <span className="rounded-md bg-black/80 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
-                    EVERY THURSDAY • DOORS 18:45
+                    EVERY THURSDAY • £12 (1 CLASS) / £14 (2 CLASSES) AT DOOR
                   </span>
                 </div>
               </div>
@@ -100,7 +100,7 @@ export function ArtHouseGallerySection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-3 left-3">
                   <span className="rounded-md bg-black/80 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
-                    EVERY SUNDAY • DOORS 18:15
+                    EVERY SUNDAY • £12 MASTERCLASS AT DOOR
                   </span>
                 </div>
               </div>
@@ -129,6 +129,153 @@ export function ArtHouseGallerySection() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* The Place 4-Pillar Photo Gateway Grid */}
+          <div data-testid="theplace-four-pillars" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-4">
+            {/* Pillar 1: Weekly Classes */}
+            <Link
+              href="/dashboard/schedule"
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:border-amber-400/50"
+            >
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=800&q=80"
+                  alt="Weekly Cuban Salsa & Rueda de Casino Classes at BOH Studios Bournemouth"
+                  loading="lazy"
+                  decoding="async"
+                  className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute top-2.5 left-2.5">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
+                    PAY AT THE DOOR • £12 / £14
+                  </span>
+                </div>
+              </div>
+              <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
+                    Thu &amp; Sun Classes
+                  </h4>
+                  <p className="text-xs text-zinc-300 mt-1 leading-relaxed">
+                    £12 for 1 class or £14 for 2 classes at BOH Studios. No prior booking or partner required.
+                  </p>
+                </div>
+                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
+                  View Timetable →
+                </span>
+              </div>
+            </Link>
+
+            {/* Pillar 2: Festivals & Congresses */}
+            <Link
+              href="/events"
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:border-amber-400/50"
+            >
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/made-in-cuba-2026-poster.jpg"
+                  alt="Made in Cuba Dance Weekend 2026 Official Festival Passes"
+                  loading="lazy"
+                  decoding="async"
+                  className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute top-2.5 left-2.5">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
+                    BOOK ONLINE • OFFICIAL TICKETS
+                  </span>
+                </div>
+              </div>
+              <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
+                    Festivals &amp; Congresses
+                  </h4>
+                  <p className="text-xs text-zinc-300 mt-1 leading-relaxed">
+                    Book official online passes for Made in Cuba 2026 (4–6 Dec), Halloween Party, and SB&amp;K Nights.
+                  </p>
+                </div>
+                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
+                  Book Event Passes →
+                </span>
+              </div>
+            </Link>
+
+            {/* Pillar 3: Rueda Call Dictionary */}
+            <Link
+              href="/dashboard/rueda"
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:border-amber-400/50"
+            >
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/thursdays-moe-flex-poster.png"
+                  alt="Rueda de Casino Call Dictionary and Cuban Dance Syllabus"
+                  loading="lazy"
+                  decoding="async"
+                  className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute top-2.5 left-2.5">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
+                    40+ CUBAN CIRCLE CALLS
+                  </span>
+                </div>
+              </div>
+              <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
+                    Rueda Call Dictionary
+                  </h4>
+                  <p className="text-xs text-zinc-300 mt-1 leading-relaxed">
+                    Learn authentic Havana circle calls, hand signals, and our 4-tier Cuban Casino reference.
+                  </p>
+                </div>
+                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
+                  Explore Rueda Calls →
+                </span>
+              </div>
+            </Link>
+
+            {/* Pillar 4: Timba Song Trainer */}
+            <Link
+              href="/music"
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#120d0a] overflow-hidden transition-all duration-500 hover:border-amber-400/50"
+            >
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/danza-2026-2027-calendar.png"
+                  alt="Interactive Timba Song Trainer and Cuban Rhythm HUD"
+                  loading="lazy"
+                  decoding="async"
+                  className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#120d0a] via-black/30 to-transparent pointer-events-none" />
+                <div className="absolute top-2.5 left-2.5">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-amber-300">
+                    INTERACTIVE AUDIO COCKPIT
+                  </span>
+                </div>
+              </div>
+              <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
+                    Timba Song Trainer
+                  </h4>
+                  <p className="text-xs text-zinc-300 mt-1 leading-relaxed">
+                    Practice timing with live clave click, 8-count rhythm bar, and Leader/Follower cues.
+                  </p>
+                </div>
+                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
+                  Open Song Trainer →
+                </span>
+              </div>
+            </Link>
           </div>
         </div>
 
@@ -233,7 +380,7 @@ export function ArtHouseGallerySection() {
                   className="bg-amber-500 hover:bg-amber-400 text-black font-black text-xs h-10 px-5 rounded-xl"
                 >
                   <Link href="/dashboard/schedule#timetable">
-                    Book Thursday or Sunday Spot
+                    View Thursday &amp; Sunday Timetable
                     <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                   </Link>
                 </Button>

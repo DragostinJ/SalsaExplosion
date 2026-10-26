@@ -13,7 +13,6 @@ import { InstructorRosterSection } from "@/components/home/InstructorRosterSecti
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { ArtHouseGallerySection } from "@/components/home/ArtHouseGallerySection";
-import { QuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import { ArtReveal } from "@/components/ui/ArtReveal";
 import { ACADEMY_METRICS, VENUE_INFO } from "@/lib/academy-data";
 
@@ -222,7 +221,7 @@ export default async function Home() {
                       </Link>
                     </Button>
                     <Button asChild variant="outline" size="default" className="h-10 rounded-xl font-semibold border-white/20 bg-white/5 text-white hover:bg-white/10">
-                      <Link href="/dashboard/schedule">Book a Class with Enrique</Link>
+                      <Link href="/dashboard/schedule">Join Enrique on Thu &amp; Sun (£12 / £14 at Door)</Link>
                     </Button>
                   </div>
                 </div>
@@ -450,9 +449,6 @@ export default async function Home() {
 
         {/* Flagship BOH Studios Venue & Arrival Guide */}
         <BohVenueSpotlight />
-
-        {/* 2-Tap Interactive QuickBook & Live QR Drawer */}
-        <QuickBookDrawer />
       </main>
     </div>
   );

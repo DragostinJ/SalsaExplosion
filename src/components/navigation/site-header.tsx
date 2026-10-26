@@ -427,23 +427,23 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               />
             </div>
           ) : (
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
               <Link
                 href="/sign-in"
-                className="text-xs font-semibold text-stone-300 hover:text-white transition-colors py-2 px-1"
+                className="rounded-xl border border-border px-3 py-1.5 text-xs font-bold text-foreground hover:bg-muted/70 transition-colors shrink-0"
               >
                 Sign In
               </Link>
               <Link
                 href="/venues"
-                className="hidden lg:inline-flex items-center gap-1.5 text-xs font-bold text-stone-300 hover:text-white transition-colors py-2 px-1"
+                className="hidden 2xl:inline-flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors py-2 px-1"
               >
-                <MapPin className="h-3.5 w-3.5 text-amber-400" />
+                <MapPin className="h-3.5 w-3.5 text-amber-500 dark:text-amber-400" />
                 <span>BOH Studios (BH2 5LR)</span>
               </Link>
               <Link
                 href="/events"
-                className="rounded-xl bg-[#D9381E] px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-[#b82d16] transition-colors min-h-9 flex items-center justify-center whitespace-nowrap"
+                className="rounded-xl bg-[#D9381E] px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-[#b82d16] transition-colors min-h-9 flex items-center justify-center whitespace-nowrap shrink-0"
               >
                 Book Festival Passes &rarr;
               </Link>

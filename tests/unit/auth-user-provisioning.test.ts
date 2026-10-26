@@ -150,8 +150,7 @@ describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
         stripeCustomerId: null,
         createdAt: new Date(),
         updatedAt: new Date(),
-        subscription: null,
-      });
+      } as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>);
 
       const res = await getCurrentUserRoleAction();
       expect(res.role).toBe("STUDENT");
@@ -178,8 +177,7 @@ describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
         stripeCustomerId: null,
         createdAt: new Date(),
         updatedAt: new Date(),
-        subscription: null,
-      });
+      } as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>);
 
       const res = await getCurrentUserRoleAction();
       expect(res.role).toBe("ADMIN");

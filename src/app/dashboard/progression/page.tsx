@@ -48,19 +48,56 @@ export default async function ProgressionPage() {
     redirect("/sign-in");
   }
 
-  // Fetch all historical submissions for this student (newest first)
-  const submissions = await prisma.videoSubmission.findMany({
-    where: { studentId: user.id },
-    orderBy: { createdAt: "desc" },
-    include: {
-      instructor: {
-        select: {
-          firstName: true,
-          lastName: true,
+  // Fetch all historical submissions and attendance inside defensive try/catch
+  let submissions: Array<{
+    id: string;
+    videoUrl: string;
+    targetLevel: DanceLevel;
+    currentLevel: DanceLevel;
+    status: SubmissionStatus;
+    feedback: string | null;
+    createdAt: Date;
+    studentNotes: string | null;
+    instructor: { firstName: string | null; lastName: string | null } | null;
+  }> = [];
+  let attendedBookings: Array<{
+    classSession: { startTime: Date };
+  }> = [];
+
+  try {
+    const [subs, bookings] = await Promise.all([
+      prisma.videoSubmission.findMany({
+        where: { studentId: user.id },
+        orderBy: { createdAt: "desc" },
+        include: {
+          instructor: {
+            select: {
+              firstName: true,
+              lastName: true,
+            },
+          },
         },
-      },
-    },
-  });
+      }),
+      prisma.booking.findMany({
+        where: {
+          userId: user.id,
+          status: "ATTENDED",
+        },
+        include: {
+          classSession: {
+            select: { startTime: true },
+          },
+        },
+        orderBy: {
+          classSession: { startTime: "desc" },
+        },
+      }),
+    ]);
+    submissions = subs;
+    attendedBookings = bookings;
+  } catch (err) {
+    console.error("[ProgressionPage:queries]", err);
+  }
 
   const pendingSubmission = submissions.find(
     (s) => s.status === SubmissionStatus.PENDING
@@ -69,22 +106,6 @@ export default async function ProgressionPage() {
   const approvedCount = submissions.filter(
     (s) => s.status === SubmissionStatus.APPROVED
   ).length;
-
-  // Fetch student attendance for streaks & milestones
-  const attendedBookings = await prisma.booking.findMany({
-    where: {
-      userId: user.id,
-      status: "ATTENDED",
-    },
-    include: {
-      classSession: {
-        select: { startTime: true },
-      },
-    },
-    orderBy: {
-      classSession: { startTime: "desc" },
-    },
-  });
 
   // Calculate streak in active weeks
   const weekSet = new Set<string>();

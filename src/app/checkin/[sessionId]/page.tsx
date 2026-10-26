@@ -26,18 +26,23 @@ export default async function StudentQrCheckInPage({
     redirect("/sign-in");
   }
 
-  const classSession = await prisma.classSession.findUnique({
-    where: { id: sessionId },
-    include: {
-      instructor: {
-        select: { firstName: true, lastName: true },
+  let classSession = null;
+  try {
+    classSession = await prisma.classSession.findUnique({
+      where: { id: sessionId },
+      include: {
+        instructor: {
+          select: { firstName: true, lastName: true },
+        },
+        bookings: {
+          where: { userId: user.id },
+          select: { id: true, status: true, danceRole: true },
+        },
       },
-      bookings: {
-        where: { userId: user.id },
-        select: { id: true, status: true, danceRole: true },
-      },
-    },
-  });
+    });
+  } catch (err) {
+    console.error("[StudentQrCheckInPage:classSession]", err);
+  }
 
   if (!classSession) {
     notFound();

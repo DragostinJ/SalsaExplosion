@@ -89,20 +89,29 @@ export default async function ReferralsPage() {
   const cleanSuffix = user.id.replace(/[^a-zA-Z0-9]/g, "").slice(-4).toUpperCase();
   const referralCode = `SALSA-${cleanName}-${cleanSuffix}`;
 
-  // Fetch real referral stats from CreditLedger
-  const referralEarnings = await prisma.creditLedger.findMany({
-    where: {
-      userId: user.id,
-      description: { startsWith: "REFERRAL_REWARD_EARNED_FROM:" },
-    },
-  });
-
-  const redeemedRecord = await prisma.creditLedger.findFirst({
-    where: {
-      userId: user.id,
-      description: { startsWith: "REFERRAL_BONUS_REDEEMED:" },
-    },
-  });
+  // Fetch real referral stats from CreditLedger inside defensive try/catch
+  let referralEarnings: Array<{ amount: number }> = [];
+  let redeemedRecord = null;
+  try {
+    const [earnings, redeemed] = await Promise.all([
+      prisma.creditLedger.findMany({
+        where: {
+          userId: user.id,
+          description: { startsWith: "REFERRAL_REWARD_EARNED_FROM:" },
+        },
+      }),
+      prisma.creditLedger.findFirst({
+        where: {
+          userId: user.id,
+          description: { startsWith: "REFERRAL_BONUS_REDEEMED:" },
+        },
+      }),
+    ]);
+    referralEarnings = earnings;
+    redeemedRecord = redeemed;
+  } catch (err) {
+    console.error("[ReferralsPage:queries]", err);
+  }
 
   const stats: ReferralStats = {
     friendsInvited: referralEarnings.length,

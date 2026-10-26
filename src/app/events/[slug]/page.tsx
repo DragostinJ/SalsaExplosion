@@ -39,6 +39,7 @@ import {
 import { AddToCalendarButton } from "@/components/calendar/add-to-calendar-button";
 import { CongressTravelGuide } from "@/components/events/congress-travel-guide";
 import { StudioEventGuide } from "@/components/events/studio-event-guide";
+import { UPCOMING_EVENTS, VENUE_INFO } from "@/lib/academy-data";
 
 interface EventDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -48,16 +49,28 @@ export async function generateMetadata({
   params,
 }: EventDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const event = await prisma.event.findUnique({
-    where: { slug },
-    select: {
-      title: true,
-      description: true,
-      coverImageUrl: true,
-    },
-  });
+  let event = null;
+  try {
+    event = await prisma.event.findUnique({
+      where: { slug },
+      select: {
+        title: true,
+        description: true,
+        coverImageUrl: true,
+      },
+    });
+  } catch (err) {
+    console.error("[EventDetailPage:generateMetadata]", err);
+  }
 
   if (!event) {
+    const canonical = UPCOMING_EVENTS.find((e) => e.slug === slug);
+    if (canonical) {
+      return {
+        title: canonical.title,
+        description: canonical.description.slice(0, 160),
+      };
+    }
     return {
       title: "Event Not Found",
     };
@@ -97,28 +110,77 @@ export default async function EventDetailPage({
   params,
 }: EventDetailPageProps) {
   const { slug } = await params;
-  const currentUser = await getOrProvisionCurrentUser();
+  let currentUser: Awaited<ReturnType<typeof getOrProvisionCurrentUser>> = null;
+  try {
+    currentUser = await getOrProvisionCurrentUser();
+  } catch (err) {
+    console.error("[EventDetailPage:getOrProvisionCurrentUser]", err);
+  }
 
-  const event = await prisma.event.findUnique({
-    where: { slug },
-    include: {
-      ticketTiers: {
-        orderBy: { priceInCents: "asc" },
-        include: {
-          registrations: {
-            where: { paymentStatus: "PAID" },
-            select: {
-              id: true,
-              userId: true,
-              role: true,
-              qrCodeHash: true,
-              checkedIn: true,
+  let event = null;
+  try {
+    event = await prisma.event.findUnique({
+      where: { slug },
+      include: {
+        ticketTiers: {
+          orderBy: { priceInCents: "asc" },
+          include: {
+            registrations: {
+              where: { paymentStatus: "PAID" },
+              select: {
+                id: true,
+                userId: true,
+                role: true,
+                qrCodeHash: true,
+                checkedIn: true,
+              },
             },
           },
         },
       },
-    },
-  });
+    });
+  } catch (err) {
+    console.error("[EventDetailPage:eventQuery]", err);
+  }
+
+  // Fallback to canonical UPCOMING_EVENTS if database is cold or degraded
+  if (!event) {
+    const canonical = UPCOMING_EVENTS.find((e) => e.slug === slug);
+    if (canonical) {
+      event = {
+        id: `canonical-${canonical.slug}`,
+        slug: canonical.slug,
+        title: canonical.title,
+        description: canonical.description,
+        coverImageUrl: canonical.posterUrl ?? null,
+        venueName: canonical.venueName,
+        venueAddress: VENUE_INFO.fullAddress,
+        startDate: new Date(canonical.startDateIso),
+        endDate: canonical.endDateIso ? new Date(canonical.endDateIso) : new Date(canonical.startDateIso),
+        guestArtists: [] as string[],
+        status: "PUBLISHED" as const,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        ticketTiers: [
+          {
+            id: `tier-${canonical.slug}`,
+            eventId: `canonical-${canonical.slug}`,
+            name: "General Admission",
+            description: "Full event pass",
+            priceInCents: canonical.minPricePounds * 100,
+            totalCapacity: 100,
+            maxLeads: null,
+            maxFollows: null,
+            salesStartAt: new Date(),
+            salesEndAt: new Date(canonical.startDateIso),
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            registrations: [],
+          },
+        ],
+      };
+    }
+  }
 
   if (!event) {
     notFound();

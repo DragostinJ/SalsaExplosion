@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 import { ShieldCheck, DoorOpen, Ticket, Sparkles } from "lucide-react";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { isNextControlFlowError } from "@/lib/safe-url";
 import { PageHeader } from "@/components/layout/page-header";
 import { PricingCards } from "@/components/pricing/pricing-cards";
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
@@ -17,7 +18,15 @@ import { VENUE_INFO, DOOR_PRICING } from "@/lib/academy-data";
 import { Button } from "@/components/ui/button";
 
 export default async function PricingPage() {
-  const user = await getOrProvisionCurrentUser();
+  let user: Awaited<ReturnType<typeof getOrProvisionCurrentUser>> = null;
+  try {
+    user = await getOrProvisionCurrentUser();
+  } catch (err: unknown) {
+    if (isNextControlFlowError(err)) {
+      throw err;
+    }
+    console.error("[PricingPage:getOrProvisionCurrentUser]", err);
+  }
 
   let hasActiveSubscription = false;
   let currentCredits = 0;

@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import type { DanceLevel } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import {
@@ -30,14 +31,19 @@ export default async function ClassRecapsPage() {
 
   // 3. If Staff, fetch classes so they can attach videos
   const isStaff = user.role === "INSTRUCTOR" || user.role === "ADMIN";
-  const activeClassesForStaff = isStaff
-    ? await prisma.classSession.findMany({
+  let activeClassesForStaff: Array<{ id: string; title: string; minLevel: DanceLevel }> = [];
+  if (isStaff) {
+    try {
+      activeClassesForStaff = await prisma.classSession.findMany({
         where: { isCancelled: false },
         orderBy: { startTime: "desc" },
         take: 15,
         select: { id: true, title: true, minLevel: true },
-      })
-    : [];
+      });
+    } catch (err) {
+      console.error("[ClassRecapsPage:activeClasses]", err);
+    }
+  }
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">

@@ -131,87 +131,155 @@ export default async function StudentWalletPage() {
     );
   }
 
-  // 1. Fetch user subscription status
-  const subscription = await prisma.subscription.findUnique({
-    where: { userId: user.id },
-  });
+  // Fetch all user wallet data concurrently inside a defensive try/catch
+  let subscription = null;
+  let eventRegistrations: Array<{
+    id: string;
+    userId: string;
+    eventTicketTierId: string;
+    qrCodeHash: string;
+    checkedIn: boolean;
+    paymentStatus: string;
+    role: string;
+    leadFollowRole?: string | null;
+    createdAt: Date;
+    event: {
+      title: string;
+      venueName: string;
+      venueAddress: string;
+      startDate: Date;
+      endDate: Date;
+    };
+    ticketTier: {
+      name: string;
+    };
+  }> = [];
+  let upcomingBookings: Array<{
+    id: string;
+    danceRole: string;
+    classSession: {
+      id: string;
+      title: string;
+      startTime: Date;
+      endTime: Date;
+      room: string;
+      instructor: {
+        firstName: string | null;
+        lastName: string | null;
+      };
+    };
+  }> = [];
+  let merchReservations: Array<{
+    id: string;
+    itemName: string;
+    size: string;
+    pricePounds: number;
+    pickupLocation: string;
+    status: string;
+    createdAt: Date;
+  }> = [];
+  let privateLessons: Array<{
+    id: string;
+    instructorName: string;
+    focusTopic: string;
+    packageType: string;
+    preferredSlot: string;
+    totalPricePounds: number;
+    status: string;
+    createdAt: Date;
+  }> = [];
+  let transactions: Array<{
+    id: string;
+    amount: number;
+    balanceAfter: number;
+    type: string;
+    description: string;
+    createdAt: Date;
+  }> = [];
 
-  const hasActiveSub = subscription?.status === "ACTIVE";
-
-  // 2. Fetch active Congress & event registrations
-  const eventRegistrations = await prisma.eventRegistration.findMany({
-    where: {
-      userId: user.id,
-      paymentStatus: "PAID",
-    },
-    include: {
-      event: {
-        select: {
-          title: true,
-          venueName: true,
-          venueAddress: true,
-          startDate: true,
-          endDate: true,
+  try {
+    const [sub, reg, book, merch, priv, tx] = await Promise.all([
+      prisma.subscription.findUnique({
+        where: { userId: user.id },
+      }),
+      prisma.eventRegistration.findMany({
+        where: {
+          userId: user.id,
+          paymentStatus: "PAID",
         },
-      },
-      ticketTier: {
-        select: {
-          name: true,
-        },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-  });
-
-  // 3. Fetch upcoming confirmed class bookings
-  const upcomingBookings = await prisma.booking.findMany({
-    where: {
-      userId: user.id,
-      status: "CONFIRMED",
-      classSession: {
-        startTime: { gte: new Date() },
-        isCancelled: false,
-      },
-    },
-    include: {
-      classSession: {
         include: {
-          instructor: {
-            select: { firstName: true, lastName: true },
+          event: {
+            select: {
+              title: true,
+              venueName: true,
+              venueAddress: true,
+              startDate: true,
+              endDate: true,
+            },
+          },
+          ticketTier: {
+            select: {
+              name: true,
+            },
           },
         },
-      },
-    },
-    orderBy: {
-      classSession: { startTime: "asc" },
-    },
-    take: 5,
-  });
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.booking.findMany({
+        where: {
+          userId: user.id,
+          status: "CONFIRMED",
+          classSession: {
+            startTime: { gte: new Date() },
+            isCancelled: false,
+          },
+        },
+        include: {
+          classSession: {
+            include: {
+              instructor: {
+                select: { firstName: true, lastName: true },
+              },
+            },
+          },
+        },
+        orderBy: {
+          classSession: { startTime: "asc" },
+        },
+        take: 5,
+      }),
+      prisma.merchReservation.findMany({
+        where: {
+          userId: user.id,
+          status: "RESERVED",
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.privateLessonBooking.findMany({
+        where: {
+          studentId: user.id,
+        },
+        orderBy: { createdAt: "desc" },
+        take: 5,
+      }),
+      prisma.creditLedger.findMany({
+        where: { userId: user.id },
+        orderBy: { createdAt: "desc" },
+        take: 8,
+      }),
+    ]);
 
-  // 4. Fetch active Click & Collect Merch reservations
-  const merchReservations = await prisma.merchReservation.findMany({
-    where: {
-      userId: user.id,
-      status: "RESERVED",
-    },
-    orderBy: { createdAt: "desc" },
-  });
+    subscription = sub;
+    eventRegistrations = reg as unknown as typeof eventRegistrations;
+    upcomingBookings = book as unknown as typeof upcomingBookings;
+    merchReservations = merch as unknown as typeof merchReservations;
+    privateLessons = priv as unknown as typeof privateLessons;
+    transactions = tx as unknown as typeof transactions;
+  } catch (walletErr) {
+    console.error("[StudentWalletPage:dataFetch]", walletErr);
+  }
 
-  // 5. Fetch private coaching requests
-  const privateLessons = await prisma.privateLessonBooking.findMany({
-    where: {
-      studentId: user.id,
-    },
-    orderBy: { createdAt: "desc" },
-    take: 5,
-  });
-
-  // 6. Fetch recent credit ledger transactions
-  const transactions = await prisma.creditLedger.findMany({
-    where: { userId: user.id },
-    orderBy: { createdAt: "desc" },
-    take: 8,
-  });
+  const hasActiveSub = subscription?.status === "ACTIVE";
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">

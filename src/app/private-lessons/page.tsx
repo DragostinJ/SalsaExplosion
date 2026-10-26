@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/layout/page-header";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { isNextControlFlowError } from "@/lib/safe-url";
 import {
   PrivateLessonsClient,
   SerializedPrivateLessonBooking,
@@ -13,25 +14,37 @@ export const metadata = {
 };
 
 export default async function PrivateLessonsPage() {
-  const user = await getOrProvisionCurrentUser();
+  let user: Awaited<ReturnType<typeof getOrProvisionCurrentUser>> = null;
+  try {
+    user = await getOrProvisionCurrentUser();
+  } catch (err: unknown) {
+    if (isNextControlFlowError(err)) {
+      throw err;
+    }
+    console.error("[PrivateLessonsPage:getOrProvisionCurrentUser]", err);
+  }
 
   let initialBookings: SerializedPrivateLessonBooking[] = [];
   if (user) {
-    const rawBookings = await prisma.privateLessonBooking.findMany({
-      where: { studentId: user.id },
-      orderBy: { createdAt: "desc" },
-    });
+    try {
+      const rawBookings = await prisma.privateLessonBooking.findMany({
+        where: { studentId: user.id },
+        orderBy: { createdAt: "desc" },
+      });
 
-    initialBookings = rawBookings.map((b) => ({
-      id: b.id,
-      instructorName: b.instructorName,
-      focusTopic: b.focusTopic,
-      packageType: b.packageType,
-      preferredSlot: b.preferredSlot,
-      totalPricePounds: b.totalPricePounds,
-      status: b.status,
-      createdAtIso: b.createdAt.toISOString(),
-    }));
+      initialBookings = rawBookings.map((b) => ({
+        id: b.id,
+        instructorName: b.instructorName,
+        focusTopic: b.focusTopic,
+        packageType: b.packageType,
+        preferredSlot: b.preferredSlot,
+        totalPricePounds: b.totalPricePounds,
+        status: b.status,
+        createdAtIso: b.createdAt.toISOString(),
+      }));
+    } catch (dbErr) {
+      console.error("[PrivateLessonsPage:bookings]", dbErr);
+    }
   }
 
   return (

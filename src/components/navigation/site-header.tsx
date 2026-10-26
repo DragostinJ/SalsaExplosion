@@ -8,7 +8,6 @@ import {
   CalendarDays,
   Award,
   Sparkles,
-  CreditCard,
   BarChart3,
   ClipboardCheck,
   Flame,
@@ -22,7 +21,6 @@ import {
   Menu,
   ClipboardList,
   Music,
-  BookOpen,
 } from "lucide-react";
 
 import dynamic from "next/dynamic";
@@ -94,13 +92,25 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
     });
   };
 
-  // Define base public links accessible to all visitors
+  // Define base public links accessible to all visitors (matching theplace.org.uk architecture)
   const publicLinks = [
     {
       href: "/dashboard/schedule",
-      label: "Schedule",
+      label: "Thu & Sun Classes",
       icon: CalendarDays,
-      active: pathname === "/dashboard/schedule",
+      active: pathname === "/dashboard/schedule" || pathname === "/schedule",
+    },
+    {
+      href: "/events",
+      label: "Festivals & Tickets",
+      icon: Sparkles,
+      active: pathname.startsWith("/events"),
+    },
+    {
+      href: "/dashboard/rueda",
+      label: "Rueda Dictionary",
+      icon: Compass,
+      active: pathname.startsWith("/dashboard/rueda"),
     },
     {
       href: "/music",
@@ -109,32 +119,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
       active: pathname.startsWith("/music"),
     },
     {
-      href: "/how-it-works",
-      label: "Syllabus",
-      icon: BookOpen,
-      active: pathname.startsWith("/how-it-works"),
-    },
-    {
-      href: "/events",
-      label: "Events",
-      icon: Sparkles,
-      active: pathname.startsWith("/events"),
-    },
-    {
-      href: "/pricing",
-      label: "Passes",
-      icon: CreditCard,
-      active: pathname === "/pricing",
-    },
-    {
-      href: "/venues",
-      label: "Venues",
-      icon: MapPin,
-      active: pathname.startsWith("/venues"),
-    },
-    {
       href: "/about",
-      label: "About",
+      label: "About & Venue",
       icon: Compass,
       active: pathname.startsWith("/about"),
     },
@@ -439,18 +425,19 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               />
             </div>
           ) : (
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="flex items-center gap-2 sm:gap-3">
               <Link
-                href="/sign-in"
-                className="hidden sm:inline-flex text-xs font-semibold text-muted-foreground hover:text-foreground py-2 px-1"
+                href="/venues"
+                className="hidden lg:inline-flex items-center gap-1.5 text-xs font-bold text-stone-300 hover:text-white transition-colors py-2 px-1"
               >
-                Sign In
+                <MapPin className="h-3.5 w-3.5 text-amber-400" />
+                <span>BOH Studios (BH2 5LR)</span>
               </Link>
               <Link
-                href="/sign-up"
-                className="rounded-lg bg-primary-base px-3 py-2 text-xs font-bold text-white shadow-xs hover:bg-primary-hover transition-colors min-h-9 flex items-center justify-center whitespace-nowrap"
+                href="/events"
+                className="rounded-xl bg-[#D9381E] px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-[#b82d16] transition-colors min-h-9 flex items-center justify-center whitespace-nowrap"
               >
-                Join Studio
+                Book Festival Passes &rarr;
               </Link>
             </div>
           )}

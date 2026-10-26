@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CalendarDays, Sparkles, MapPin, Music, Menu } from "lucide-react";
+import { CalendarDays, Sparkles, Compass, Music, Menu } from "lucide-react";
 
 interface MobileBottomNavProps {
   onOpenMenu?: () => void;
@@ -24,10 +24,10 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
 
   const navItems = [
     {
-      label: "Classes",
+      label: "Thu & Sun",
       href: "/dashboard/schedule",
       icon: CalendarDays,
-      isActive: pathname.startsWith("/dashboard/schedule"),
+      isActive: pathname.startsWith("/dashboard/schedule") || pathname.startsWith("/schedule"),
       isSpecial: false,
     },
     {
@@ -38,17 +38,17 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
       isSpecial: true,
     },
     {
+      label: "Rueda",
+      href: "/dashboard/rueda",
+      icon: Compass,
+      isActive: pathname.startsWith("/dashboard/rueda"),
+      isSpecial: false,
+    },
+    {
       label: "Song Trainer",
       href: "/music",
       icon: Music,
       isActive: pathname.startsWith("/music"),
-      isSpecial: false,
-    },
-    {
-      label: "BOH Venue",
-      href: "/venues",
-      icon: MapPin,
-      isActive: pathname.startsWith("/venues"),
       isSpecial: false,
     },
   ];

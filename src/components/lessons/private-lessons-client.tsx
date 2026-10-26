@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
 import { CheckCircle2, ArrowRight, XCircle, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,7 @@ import {
   bookPrivateLessonAction,
   cancelPrivateLessonBookingAction,
 } from "@/actions/lessons.actions";
+import { getMyPrivateLessonBookingsAction } from "@/actions/viewer.actions";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 import {
   COACHING_INSTRUCTORS_CATALOG,
@@ -48,6 +50,17 @@ export function PrivateLessonsClient({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [cancellingId, setCancellingId] = useState<string | null>(null);
   const [, startTransition] = useTransition();
+  const { isLoaded, isSignedIn } = useUser();
+
+  useEffect(() => {
+    if (isLoaded && isSignedIn && initialBookings.length === 0) {
+      getMyPrivateLessonBookingsAction().then((loaded) => {
+        if (loaded && loaded.length > 0) {
+          setBookings(loaded);
+        }
+      });
+    }
+  }, [isLoaded, isSignedIn, initialBookings.length]);
 
   const activeInstructor: CoachingInstructor =
     COACHING_INSTRUCTORS_CATALOG[selectedInstructor] ?? COACHING_INSTRUCTORS_CATALOG.enrique;

@@ -1,11 +1,6 @@
 import { PageHeader } from "@/components/layout/page-header";
-import { prisma } from "@/lib/prisma";
-import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
-import { isNextControlFlowError } from "@/lib/safe-url";
-import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import {
   PrivateLessonsClient,
-  SerializedPrivateLessonBooking,
 } from "@/components/lessons/private-lessons-client";
 
 export const metadata = {
@@ -14,45 +9,9 @@ export const metadata = {
     "Book bespoke private dance coaching with Cuban Maestro Enrique Perez Valdes, Moe Flex, Justyna, Arturas, or Jim at BOH Studios Bournemouth.",
 };
 
-export default async function PrivateLessonsPage() {
-  let user: Awaited<ReturnType<typeof getOrProvisionCurrentUser>> = null;
-  try {
-    user = await getOrProvisionCurrentUser();
-  } catch (err: unknown) {
-    if (isNextControlFlowError(err)) {
-      throw err;
-    }
-    console.error("[PrivateLessonsPage:getOrProvisionCurrentUser]", err);
-  }
-
-  let initialBookings: SerializedPrivateLessonBooking[] = [];
-  let loadFailed = user ? isFallbackUser(user) : false;
-  if (user) {
-    try {
-      const rawBookings = await prisma.privateLessonBooking.findMany({
-        where: { studentId: user.id },
-        orderBy: { createdAt: "desc" },
-      });
-
-      initialBookings = rawBookings.map((b) => ({
-        id: b.id,
-        instructorName: b.instructorName,
-        focusTopic: b.focusTopic,
-        packageType: b.packageType,
-        preferredSlot: b.preferredSlot,
-        totalPricePounds: b.totalPricePounds,
-        status: b.status,
-        createdAtIso: b.createdAt.toISOString(),
-      }));
-    } catch (dbErr) {
-      loadFailed = true;
-      console.error("[PrivateLessonsPage:bookings]", dbErr);
-    }
-  }
-
+export default function PrivateLessonsPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
-      {loadFailed && <DataUnavailableNotice />}
       {/* Hero Header — "The Place" Havana Nocturne Architecture */}
       <PageHeader
         backHref="/dashboard/schedule"
@@ -65,7 +24,7 @@ export default async function PrivateLessonsPage() {
       />
 
       {/* Private Lessons Booking Wizard with Initial Bookings */}
-      <PrivateLessonsClient initialBookings={initialBookings} />
+      <PrivateLessonsClient initialBookings={[]} />
     </main>
   );
 }

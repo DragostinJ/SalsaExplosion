@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SubscriptionStatus } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: "Door Admission & Festival Passes",
@@ -8,38 +7,14 @@ export const metadata: Metadata = {
     "Transparent door admission for weekly Cuban Salsa classes at BOH Studios Bournemouth (£12 for 1 class / £14 for 2 classes), and online passes for Made in Cuba Dance Weekend.",
 };
 import { ShieldCheck, DoorOpen, Ticket, Sparkles } from "lucide-react";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
-import { isNextControlFlowError } from "@/lib/safe-url";
 import { PageHeader } from "@/components/layout/page-header";
-import { PricingCards } from "@/components/pricing/pricing-cards";
+import { PricingViewerContext } from "@/components/pricing/pricing-viewer-context";
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { VENUE_INFO, DOOR_PRICING } from "@/lib/academy-data";
 import { Button } from "@/components/ui/button";
 
-export default async function PricingPage() {
-  let user: Awaited<ReturnType<typeof getOrProvisionCurrentUser>> = null;
-  try {
-    user = await getOrProvisionCurrentUser();
-  } catch (err: unknown) {
-    if (isNextControlFlowError(err)) {
-      throw err;
-    }
-    console.error("[PricingPage:getOrProvisionCurrentUser]", err);
-  }
-
-  let hasActiveSubscription = false;
-  let currentCredits = 0;
-
-  if (user) {
-    currentCredits = user.classCredits;
-    const now = new Date();
-    hasActiveSubscription =
-      user.subscription !== null &&
-      user.subscription.status === SubscriptionStatus.ACTIVE &&
-      user.subscription.currentPeriodEnd > now;
-  }
-
+export default function PricingPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
       {/* "The Place" Havana Nocturne Architectural PageHeader */}
@@ -134,9 +109,9 @@ export default async function PricingPage() {
         </Link>
       </div>
 
-      <PricingCards
-        hasActiveSubscription={hasActiveSubscription}
-        currentCredits={currentCredits}
+      <PricingViewerContext
+        initialHasActiveSubscription={false}
+        initialCredits={0}
       />
 
       <div className="mt-12">

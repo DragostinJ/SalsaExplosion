@@ -36,7 +36,7 @@ const SPOTLIGHT_GRADIENTS: Record<string, string> = {
   jim: "from-orange-500/20 via-amber-950/30 to-black/60",
   xaris: "from-red-500/25 via-orange-950/35 to-black/60",
   anna: "from-amber-400/20 via-rose-950/30 to-black/60",
-  "alex-spindlove": "from-amber-600/20 via-zinc-900/40 to-black/60",
+  "alex-spindlove": "from-amber-600/20 via-stone-900/40 to-black/60",
 };
 
 interface InstructorRosterSectionProps {
@@ -116,7 +116,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
               Maestros &amp; Artists
             </span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+          <p className="mt-3 text-xs sm:text-sm text-stone-300 leading-relaxed">
             From Cuban-born lifetime achievers to international festival headliners, our passionate teaching team brings authentic Casino technique, high-energy Rueda circles, and warm South Coast community spirit to BOH Studios every week.
           </p>
 
@@ -135,8 +135,8 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   onClick={() => setActiveCategory(cat.key)}
                   className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all ${
                     isActive
-                      ? "bg-primary-base text-white shadow-sm shadow-primary-base/20"
-                      : "bg-black/60 text-zinc-300 hover:bg-black/80 hover:text-white border border-amber-500/20"
+                      ? "bg-brand text-white shadow-xs"
+                      : "bg-surface-3 text-stone-300 hover:bg-surface-2 hover:text-ivory border border-gold/20"
                   }`}
                 >
                   {`${cat.label} (${count})`}
@@ -173,7 +173,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     {/* Warm Directional Spotlight Wash Unique to Each Artist */}
                     <div
                       className={`absolute inset-0 bg-gradient-to-br ${
-                        SPOTLIGHT_GRADIENTS[instructor.id] || "from-amber-500/15 via-zinc-900/40 to-transparent"
+                        SPOTLIGHT_GRADIENTS[instructor.id] || "from-gold/15 via-stone-900/40 to-transparent"
                       } pointer-events-none`}
                     />
 
@@ -235,7 +235,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                       {instructor.styles.slice(0, 3).map((st) => (
                         <span
                           key={st}
-                          className="rounded-md bg-white/[0.04] text-zinc-300 border border-white/10 px-2 py-0.5 text-[10px] font-semibold"
+                          className="rounded-md bg-white/[0.04] text-stone-300 border border-white/10 px-2 py-0.5 text-[10px] font-semibold"
                         >
                           {st}
                         </span>
@@ -243,8 +243,8 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     </div>
 
                     {/* Teaching Days */}
-                    <div className="flex items-start gap-1.5 text-[11px] text-zinc-400 pt-1">
-                      <Calendar className="h-3.5 w-3.5 text-amber-400 shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-1.5 text-[11px] text-stone-400 pt-1">
+                      <Calendar className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
                       <span className="line-clamp-1">{instructor.teachingDays}</span>
                     </div>
                   </div>
@@ -256,7 +256,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     type="button"
                     onClick={() => setSelectedInstructor(instructor)}
                     size="sm"
-                    className="w-full text-xs font-bold bg-primary-base hover:bg-primary-hover text-white shadow-xs"
+                    className="w-full text-xs font-bold bg-brand hover:bg-brand-hover text-white shadow-xs"
                   >
                     View Profile & Bookings →
                   </Button>
@@ -361,7 +361,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   <Calendar className="h-4 w-4 text-primary-base" />
                   <span>Teaching Schedule at BOH Studios</span>
                 </div>
-                <p className="text-xs text-muted-foreground dark:text-zinc-300 leading-relaxed pl-6">
+                <p className="text-xs text-muted-foreground dark:text-stone-300 leading-relaxed pl-6">
                   {selectedInstructor.teachingDays}
                 </p>
               </div>

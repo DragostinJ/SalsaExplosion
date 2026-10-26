@@ -68,7 +68,7 @@ export function LiveTonightBanner() {
               CLASSES LIVE TONIGHT AT BOH STUDIOS
             </span>
 
-            <div className="font-medium text-xs leading-snug text-zinc-100">
+            <div className="font-medium text-xs leading-snug text-stone-100">
               {isThursday ? (
                 <span>
                   <strong className="text-white font-extrabold">Thursday Havana Residency Tonight:</strong>{" "}

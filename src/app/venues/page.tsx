@@ -13,7 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BackButton } from "@/components/navigation/back-button";
+import { PageHeader } from "@/components/layout/page-header";
 import { VenueArrivalPlanner } from "@/components/venues/venue-arrival-planner";
 
 export const metadata = {
@@ -25,37 +25,25 @@ export const metadata = {
 export default function VenuesGuidePage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">
-      <div>
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
-      </div>
-
-      {/* "The Place" Havana Nocturne Architectural Hero */}
-      <div className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-10 text-white shadow-2xl">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
-          <span>BOURNEMOUTH STUDIO HUB &amp; FESTIVAL PARTNER VENUES</span>
-          <span className="text-zinc-400 font-bold">TRAVEL, PARKING &amp; ARRIVAL GUIDE</span>
-        </div>
-
-        <div className="mt-5 space-y-4 max-w-3xl">
-          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
-            Venues &amp;{" "}
-            <span className="font-display italic font-normal text-amber-300 normal-case">
-              Parking Guide
-            </span>
-          </h1>
-
-          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-medium">
-            Everything you need for a smooth arrival at Maestro Enrique Perez Valdes&apos; weekly classes at BOH Studios and Salsa Explosion dance weekend festivals across Bournemouth.
-          </p>
-
-          <div className="inline-flex items-center gap-2 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-3.5 py-2 text-xs font-semibold text-amber-200">
+      {/* "The Place" Havana Nocturne Architectural PageHeader */}
+      <PageHeader
+        backHref="/dashboard/schedule"
+        backLabel="Back to Schedule"
+        eyebrowLeft="BOURNEMOUTH STUDIO HUB & FESTIVAL PARTNER VENUES"
+        eyebrowRight="TRAVEL, PARKING & ARRIVAL GUIDE"
+        title="Venues &"
+        highlight="Parking Guide"
+        description="Everything you need for a smooth arrival at Maestro Enrique Perez Valdes' weekly classes at BOH Studios and Salsa Explosion dance weekend festivals across Bournemouth."
+        badge={
+          <div className="inline-flex items-center gap-2 rounded-2xl border border-gold/30 bg-gold/10 px-3.5 py-2 text-xs font-semibold text-gold">
             <span>📍 Thu &amp; Sun Classes at BOH Studios: <strong>£12 (1 Class) / £14 (2 Classes) at the Door</strong></span>
           </div>
-
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+        }
+        actions={
+          <>
             <Button
               asChild
-              className="bg-amber-400 text-stone-950 hover:bg-amber-300 font-extrabold shadow-md text-xs sm:text-sm h-10 rounded-xl"
+              className="bg-brand text-white hover:bg-brand-hover font-extrabold shadow-xs text-xs sm:text-sm h-10 rounded-xl"
             >
               <Link href="/dashboard/schedule">
                 View Weekly Class Schedule
@@ -65,13 +53,13 @@ export default function VenuesGuidePage() {
             <Button
               asChild
               variant="outline"
-              className="bg-white/10 text-white hover:bg-white/20 border-white/20 text-xs sm:text-sm font-semibold h-10 rounded-xl"
+              className="border-line bg-surface-3 text-ivory hover:bg-surface-2 text-xs sm:text-sm font-semibold h-10 rounded-xl"
             >
               <Link href="/events">Festival Passes &amp; Info</Link>
             </Button>
-          </div>
-        </div>
-      </div>
+          </>
+        }
+      />
 
       {/* Interactive Door-to-Door Arrival Planner & Parking Calculator */}
       <VenueArrivalPlanner />
@@ -79,9 +67,9 @@ export default function VenuesGuidePage() {
       {/* Venues Grid */}
       <div className="grid gap-8 lg:grid-cols-2">
         {/* Venue 1: BOH Studios Bournemouth */}
-        <Card className="border shadow-sm flex flex-col justify-between overflow-hidden">
+        <Card className="border shadow-xs flex flex-col justify-between overflow-hidden">
           <div>
-            <div className="relative h-48 w-full bg-gradient-to-tr from-zinc-900 via-zinc-900 to-rose-950 p-6 text-white flex flex-col justify-between">
+            <div className="relative h-48 w-full bg-gradient-to-tr from-stone-900 via-surface-1 to-stone-950 p-6 text-ivory flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
                   Thursdays & Sundays Hub

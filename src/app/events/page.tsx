@@ -37,18 +37,18 @@ export default async function EventsDirectoryPage() {
       </div>
 
       {/* DANZA! 2026 | 2027 Official Calendar Hero Showcase — "The Place" Havana Nocturne Architecture */}
-      <div className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-10 text-white shadow-2xl">
+      <div data-testid="page-header" className="relative overflow-hidden rounded-3xl border border-line bg-surface-2 p-6 sm:p-10 text-ivory shadow-xs">
         <div className="grid gap-8 lg:grid-cols-12 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3 text-[11px] font-black uppercase tracking-widest text-gold">
               <span>OFFICIAL ONLINE BOX OFFICE • FESTIVALS &amp; SPECIAL EVENTS</span>
-              <span className="text-zinc-400 font-bold">{VENUE_INFO.shortName} • BOURNEMOUTH</span>
+              <span className="text-stone-400 font-bold">{VENUE_INFO.shortName} • BOURNEMOUTH</span>
             </div>
 
             <div>
-              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-ivory uppercase leading-none">
                 DANZA! 2026 | 2027{" "}
-                <span className="font-display italic font-normal text-amber-300 normal-case">
+                <span className="font-display italic font-normal text-gold normal-case">
                   Special Event Calendar
                 </span>
               </h1>
@@ -58,16 +58,16 @@ export default async function EventsDirectoryPage() {
             </div>
 
             {/* Official Online Ticket Booking Callout */}
-            <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 sm:p-4 text-xs font-semibold text-amber-100 leading-relaxed">
+            <div className="rounded-2xl border border-gold/30 bg-gold/10 p-3.5 sm:p-4 text-xs font-semibold text-amber-100 leading-relaxed">
               🎟️ <strong>Official Online Ticket Booking:</strong> Reserve Made in Cuba 2026, Halloween Party &amp; SB&amp;K Extravaganza passes online below with instant digital ticketing. (Regular weekly Thursday &amp; Sunday classes are £12/£14 paid at the door).
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5 space-y-2">
+            <div className="rounded-2xl border border-line bg-surface-3 p-4 sm:p-5 space-y-2">
               <p className="text-xs sm:text-sm text-stone-200 leading-relaxed italic">
                 &ldquo;We have an extraordinary season of special events coming up at {VENUE_INFO.name} — from Cuban Salsa, Rueda, Son Cubano, Afro-Cuban, Bachata, Kizomba, and Timba to flagship parties, guest maestros, dance weekends, and late-night social dancing.&rdquo;
               </p>
-              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-white/10 text-xs">
-                <span className="font-bold text-amber-300">
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-line text-xs">
+                <span className="font-bold text-gold">
                   Enrique &amp; The Salsa Explosion Team
                 </span>
                 <span className="text-stone-400 font-medium">
@@ -77,7 +77,7 @@ export default async function EventsDirectoryPage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-stone-300 pt-1">
-              <div className="flex items-center gap-1.5 font-bold text-amber-300">
+              <div className="flex items-center gap-1.5 font-bold text-gold">
                 <Sparkles className="h-4 w-4 shrink-0" />
                 <span>12 Exclusive Parties &amp; Weekenders</span>
               </div>
@@ -217,8 +217,8 @@ function EventCard({ evt }: EventCardProps) {
             : isSBK
             ? "bg-gradient-to-tr from-[#260907] via-[#120605] to-[#7B1113] text-white"
             : isWeekendFlagship
-            ? "bg-gradient-to-tr from-zinc-900 via-zinc-900 to-rose-950 text-white"
-            : "bg-gradient-to-tr from-zinc-900 via-primary-base to-rose-900 text-white"
+            ? "bg-gradient-to-tr from-stone-900 via-stone-900 to-rose-950 text-white"
+            : "bg-gradient-to-tr from-stone-900 via-brand to-rose-900 text-white"
         }`}
       >
         <div className="flex flex-wrap items-center justify-between gap-2">

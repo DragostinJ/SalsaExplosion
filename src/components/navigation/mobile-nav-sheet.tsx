@@ -175,7 +175,7 @@ export function MobileNavSheet({
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-zinc-950/60 backdrop-blur-xs transition-opacity duration-300"
+        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-300"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -184,23 +184,23 @@ export function MobileNavSheet({
       <div
         ref={sheetRef}
         data-testid="mobile-nav-panel"
-        className="relative z-10 flex h-dvh w-[88vw] max-w-sm flex-col bg-card shadow-2xl transition-transform duration-300 ease-in-out border-l border-border"
+        className="relative z-10 flex h-dvh w-[88vw] max-w-sm flex-col bg-surface-1 shadow-2xl transition-transform duration-300 ease-in-out border-l border-line text-ivory"
       >
         {/* Drawer Header */}
-        <div className="flex h-16 items-center justify-between border-b px-5 shrink-0">
+        <div className="flex h-16 items-center justify-between border-b border-line px-5 shrink-0">
           <Link
             href="/dashboard/schedule"
             onClick={onClose}
-            className="flex items-center gap-2.5 font-bold tracking-tight text-foreground"
+            className="flex items-center gap-2.5 font-bold tracking-tight text-ivory"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-primary-base to-accent-tangerine text-white shadow-xs">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-brand to-gold text-white shadow-xs">
               <Flame className="h-4 w-4 fill-white" />
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-extrabold leading-none tracking-tight">
-                Salsa <span className="text-rose-700 dark:text-rose-400">Explosion</span>
+                Salsa <span className="text-rose-400">Explosion</span>
               </span>
-              <span className="text-[9px] font-semibold text-text-muted uppercase tracking-widest mt-0.5">
+              <span className="text-[9px] font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
                 Bournemouth • Cuba
               </span>
             </div>
@@ -210,7 +210,7 @@ export function MobileNavSheet({
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="rounded-lg p-2 text-text-muted hover:bg-muted/80 hover:text-foreground transition-colors min-h-10 min-w-10 flex items-center justify-center"
+            className="rounded-xl p-2 text-muted-foreground hover:bg-surface-3 hover:text-ivory transition-colors min-h-10 min-w-10 flex items-center justify-center"
           >
             <X className="h-5 w-5" />
           </button>
@@ -226,13 +226,13 @@ export function MobileNavSheet({
                 onClose();
                 triggerStudioTutorial();
               }}
-              className="w-full flex items-center justify-between gap-3 rounded-xl border border-secondary-base/40 bg-secondary-light/40 px-3.5 py-2.5 text-xs font-bold text-secondary-hover hover:bg-secondary-light transition-colors shadow-xs"
+              className="w-full flex items-center justify-between gap-3 rounded-xl border border-gold/30 bg-gold/10 px-3.5 py-2.5 text-xs font-bold text-gold hover:bg-gold/20 transition-colors shadow-xs"
             >
               <div className="flex items-center gap-2">
-                <HelpCircle className="h-4 w-4 text-secondary-base" />
+                <HelpCircle className="h-4 w-4 text-gold" />
                 <span>Interactive Studio Guide</span>
               </div>
-              <span className="text-[10px] uppercase tracking-wider bg-secondary-base text-white px-2 py-0.5 rounded-full">
+              <span className="text-[10px] uppercase tracking-wider bg-gold text-stone-950 font-black px-2 py-0.5 rounded-full">
                 Learn
               </span>
             </button>
@@ -240,7 +240,7 @@ export function MobileNavSheet({
 
           {/* Persona 1: Dancer Workspace */}
           <div>
-            <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-rose-800 dark:text-rose-400">
+            <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-gold">
               <Flame className="h-3.5 w-3.5" />
               <span>Dancer Workspace</span>
             </div>
@@ -255,11 +255,11 @@ export function MobileNavSheet({
                     onClick={onClose}
                     className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-primary-base text-white font-bold shadow-xs"
-                        : "text-text-main hover:bg-muted/70 hover:text-foreground"
+                        ? "bg-surface-3 text-ivory font-bold border-l-2 border-gold shadow-xs"
+                        : "text-stone-300 hover:bg-surface-3 hover:text-ivory"
                     }`}
                   >
-                    <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-text-muted"}`} />
+                    <Icon className={`h-4 w-4 ${isActive ? "text-gold" : "text-muted-foreground"}`} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -269,11 +269,11 @@ export function MobileNavSheet({
 
           {/* Unauthenticated Student Login CTA */}
           {!role && (
-            <div className="pt-2 border-t">
+            <div className="pt-2 border-t border-line">
               <Link
                 href="/sign-in"
                 onClick={onClose}
-                className="flex items-center justify-center gap-2 w-full rounded-xl bg-primary-base py-2.5 text-xs font-bold text-white shadow-md hover:bg-primary-hover transition-colors"
+                className="flex items-center justify-center gap-2 w-full rounded-xl bg-brand py-2.5 text-xs font-bold text-white shadow-xs hover:bg-brand-hover transition-colors"
               >
                 <span>Student Portal Sign In →</span>
               </Link>
@@ -281,8 +281,8 @@ export function MobileNavSheet({
           )}
 
           {/* Explore Hub (Music, Merch, FAQs, Community) */}
-          <div className="pt-2 border-t">
-            <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-text-muted">
+          <div className="pt-2 border-t border-line">
+            <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
               <Compass className="h-3.5 w-3.5" />
               <span>Explore & Community</span>
             </div>
@@ -297,11 +297,11 @@ export function MobileNavSheet({
                     onClick={onClose}
                     className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-primary-base text-white font-bold shadow-xs"
-                        : "text-text-main hover:bg-muted/70 hover:text-foreground"
+                        ? "bg-surface-3 text-ivory font-bold border-l-2 border-gold shadow-xs"
+                        : "text-stone-300 hover:bg-surface-3 hover:text-ivory"
                     }`}
                   >
-                    <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-text-muted"}`} />
+                    <Icon className={`h-4 w-4 ${isActive ? "text-gold" : "text-muted-foreground"}`} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -311,7 +311,7 @@ export function MobileNavSheet({
 
           {/* Persona 2: Teacher Workspace (Staff only) */}
           {isStaff && (
-            <div className="pt-2 border-t">
+            <div className="pt-2 border-t border-line">
               <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-secondary-base">
                 <Users className="h-3.5 w-3.5" />
                 <span>Teacher Workspace</span>
@@ -328,7 +328,7 @@ export function MobileNavSheet({
                       className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                         isActive
                           ? "bg-emerald-600 text-white font-bold shadow-xs"
-                          : "text-text-main hover:bg-secondary-base/10 hover:text-foreground"
+                          : "text-stone-300 hover:bg-secondary-base/10 hover:text-ivory"
                       }`}
                     >
                       <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-secondary-base"}`} />
@@ -342,8 +342,8 @@ export function MobileNavSheet({
 
           {/* Persona 3: Owner Workspace (Admin only) */}
           {isAdmin && (
-            <div className="pt-2 border-t">
-              <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-accent-tangerine">
+            <div className="pt-2 border-t border-line">
+              <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-gold">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 <span>Owner & Studio Admin</span>
               </div>
@@ -358,11 +358,11 @@ export function MobileNavSheet({
                       onClick={onClose}
                       className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                         isActive
-                          ? "bg-accent-tangerine text-zinc-950 font-bold shadow-xs"
-                          : "text-text-main hover:bg-accent-tangerine/10 hover:text-foreground"
+                          ? "bg-gold text-stone-950 font-bold shadow-xs"
+                          : "text-stone-300 hover:bg-gold/15 hover:text-ivory"
                       }`}
                     >
-                      <Icon className={`h-4 w-4 ${isActive ? "text-zinc-950" : "text-accent-tangerine"}`} />
+                      <Icon className={`h-4 w-4 ${isActive ? "text-stone-950" : "text-gold"}`} />
                       <span>{item.label}</span>
                     </Link>
                   );

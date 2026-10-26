@@ -59,21 +59,21 @@ const PHOTO_SLOTS = [
     title: "Main Ballroom & Rueda Floor",
     caption: "Spacious sprung maple floor hosting our 7:00 PM – 10:30 PM Thursday & Sunday sessions.",
     tag: "Room 1 • Casino & Timba",
-    gradient: "from-zinc-950 via-rose-950/60 to-zinc-900",
+    gradient: "from-stone-950 via-rose-950/60 to-stone-900",
   },
   {
     id: "studio-two",
     title: "Studio 2 • Foundation & SB&K",
     caption: "Intimate secondary studio for Level 0 absolute beginners, Bachata Sensual, and masterclasses.",
     tag: "Room 2 • Beginners & Bachata",
-    gradient: "from-zinc-950 via-amber-950/50 to-zinc-900",
+    gradient: "from-stone-950 via-amber-950/50 to-stone-900",
   },
   {
     id: "entrance-lounge",
     title: "104 Commercial Rd Entrance & Lounge",
     caption: "Warm welcome desk, social seating area, coat storage, and licensed bar.",
     tag: "Reception & Social Bar",
-    gradient: "from-zinc-950 via-emerald-950/50 to-zinc-900",
+    gradient: "from-stone-950 via-emerald-950/50 to-stone-900",
   },
 ];
 

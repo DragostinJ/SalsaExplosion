@@ -53,12 +53,12 @@ const SocialProofGrid = dynamic(
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#080706] text-[#F5F2EB]">
+    <div className="flex min-h-screen flex-col bg-canvas text-ivory">
       <main className="flex-1">
         <LiveTonightBanner />
 
         {/* ================= SECTION 1: EDITORIAL SPLIT HERO ================= */}
-        <section className="relative overflow-hidden py-10 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-[#080706] border-b border-white/10 text-white">
+        <section className="relative overflow-hidden py-10 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-canvas border-b border-line text-ivory">
           {/* Subtle Ambient Studio Light */}
           <div
             className="absolute inset-0 pointer-events-none opacity-30 mix-blend-screen"
@@ -71,16 +71,16 @@ export default function Home() {
 
           <div className="relative z-10 mx-auto w-full max-w-7xl">
             {/* Top Cultural Tag Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4 mb-8 sm:mb-12">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4 mb-8 sm:mb-12">
               <div className="flex items-center gap-2">
-                <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-amber-300">
+                <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-gold">
                   BOH STUDIOS BOURNEMOUTH • THURSDAYS &amp; SUNDAYS
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Link
                   href="/venues"
-                  className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300 hover:text-amber-300 transition-colors"
+                  className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-stone-300 hover:text-gold transition-colors"
                 >
                   {VENUE_INFO.streetAddress.toUpperCase()}, {VENUE_INFO.postcode} →
                 </Link>
@@ -92,9 +92,9 @@ export default function Home() {
               {/* Left Column (7 cols): Editorial Typography & Direct Action */}
               <div className="lg:col-span-7 flex flex-col items-start text-left space-y-5">
                 {/* Monumental Architectural Headline */}
-                <h1 className="text-3xl sm:text-5xl lg:text-[4rem] font-extrabold tracking-tight leading-[1.02] text-white uppercase">
+                <h1 className="text-3xl sm:text-5xl lg:text-[4rem] font-extrabold tracking-tight leading-[1.02] text-ivory uppercase">
                   Cuban Salsa &amp; Rueda de Casino
-                  <span className="block text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-zinc-300 mt-3 normal-case">
+                  <span className="block text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-stone-300 mt-3 normal-case">
                     In the heart of Bournemouth with Maestro Enrique Perez Valdes.
                   </span>
                 </h1>
@@ -107,7 +107,7 @@ export default function Home() {
                 <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
                   <Button
                     asChild
-                    className="h-12 px-6 text-xs sm:text-sm font-black uppercase tracking-wider bg-[#D9381E] hover:bg-[#b82d16] text-white rounded-xl shadow-[0_10px_30px_rgba(217,56,30,0.3)] transition-transform active:scale-[0.99]"
+                    className="h-12 px-6 text-xs sm:text-sm font-black uppercase tracking-wider bg-brand hover:bg-brand-hover text-white rounded-xl shadow-xs transition-transform active:scale-[0.99]"
                   >
                     <Link href="/dashboard/schedule">
                       <span>Thu &amp; Sun Classes →</span>
@@ -116,7 +116,7 @@ export default function Home() {
                   <Button
                     asChild
                     variant="outline"
-                    className="h-12 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider border border-white/25 hover:border-white bg-white/5 text-white rounded-xl"
+                    className="h-12 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider border border-line hover:border-gold/40 bg-surface-3 text-ivory rounded-xl"
                   >
                     <Link href="/events">
                       <span>Book Festival Passes →</span>
@@ -125,25 +125,25 @@ export default function Home() {
                 </div>
 
                 {/* Architectural Metrics Bar */}
-                <div className="mt-10 pt-6 border-t border-white/10 grid grid-cols-3 gap-6 w-full">
+                <div className="mt-10 pt-6 border-t border-line grid grid-cols-3 gap-6 w-full">
                   <div>
-                    <div className="text-xl sm:text-2xl font-black text-amber-300">{ACADEMY_METRICS.yearsInUk}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">{ACADEMY_METRICS.yearsInUkLabel}</div>
+                    <div className="text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.yearsInUk}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-stone-400 uppercase tracking-wide">{ACADEMY_METRICS.yearsInUkLabel}</div>
                   </div>
                   <div>
-                    <div className="text-xl sm:text-2xl font-black text-white">{ACADEMY_METRICS.dancersMentored}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">{ACADEMY_METRICS.dancersMentoredLabel}</div>
+                    <div className="text-xl sm:text-2xl font-black text-ivory">{ACADEMY_METRICS.dancersMentored}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-stone-400 uppercase tracking-wide">{ACADEMY_METRICS.dancersMentoredLabel}</div>
                   </div>
                   <div>
-                    <div className="text-xl sm:text-2xl font-black text-amber-300">{ACADEMY_METRICS.partnerPolicy}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wide">{ACADEMY_METRICS.partnerPolicyLabel}</div>
+                    <div className="text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.partnerPolicy}</div>
+                    <div className="text-[11px] sm:text-xs font-semibold text-stone-400 uppercase tracking-wide">{ACADEMY_METRICS.partnerPolicyLabel}</div>
                   </div>
                 </div>
               </div>
 
               {/* Right Column (5 cols): Aspect-[4/5] Architectural Dance Frame */}
               <div className="lg:col-span-5 relative w-full">
-                <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-2xl border border-stone-800 bg-[#120d0a] shadow-2xl group">
+                <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-2xl border border-line bg-surface-1 shadow-2xl group">
                   <Image
                     src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80"
                     alt="Maestro Enrique Perez Valdes directing Cuban Salsa & Rueda de Casino at BOH Studios Bournemouth"
@@ -154,10 +154,10 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 text-left z-10">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-amber-300 block mb-1">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-gold block mb-1">
                       BOH Studios Bournemouth Residency
                     </span>
-                    <p className="text-xs sm:text-sm font-semibold text-zinc-200 leading-snug">
+                    <p className="text-xs sm:text-sm font-semibold text-stone-200 leading-snug">
                       Maestro Enrique Perez Valdes &amp; BOH Studios Collective
                     </p>
                   </div>
@@ -171,11 +171,11 @@ export default function Home() {
         <ArtHouseGallerySection />
 
         {/* ================= SECTION 3: WHAT'S ON: FESTIVALS & SPECIAL EVENTS (VERTICAL POSTERS) ================= */}
-        <section className="cv-auto py-14 sm:py-20 border-b border-white/10 bg-[#0E0C0A] text-white">
+        <section className="cv-auto py-14 sm:py-20 border-b border-line bg-surface-1 text-ivory">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-white/10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-line">
               <div>
-                <span className="text-[11px] font-black uppercase tracking-widest text-amber-300 block mb-1">
+                <span className="text-[11px] font-black uppercase tracking-widest text-gold block mb-1">
                   OFFICIAL ONLINE BOX OFFICE • FESTIVALS &amp; SPECIAL EVENTS
                 </span>
                 <h2 className="text-2xl font-black sm:text-4xl uppercase tracking-tight text-white leading-none">
@@ -237,10 +237,10 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                  <div className="pt-3 border-t border-line flex items-center justify-between">
                     <Button
                       asChild
-                      className="w-full bg-[#D9381E] hover:bg-[#b82d16] text-white font-black text-xs h-10 rounded-xl shadow-md"
+                      className="w-full bg-brand hover:bg-brand-hover text-white font-black text-xs h-10 rounded-xl shadow-xs"
                     >
                       <Link href="/events/halloween-fancy-dress-latin-party-2026">
                         <Ticket className="mr-1.5 h-3.5 w-3.5" />
@@ -252,7 +252,7 @@ export default function Home() {
               </div>
 
               {/* Event 2: SB&K Night Extravaganza */}
-              <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
+              <div className="group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-2 overflow-hidden shadow-xs hover:border-gold/40 transition-all duration-300">
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                   <Image
                     src="https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&w=1000&q=80"
@@ -261,14 +261,14 @@ export default function Home() {
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface-2 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
+                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-gold">
                       SAT 14 NOV 2026
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
                       From £12
                     </span>
                   </div>
@@ -288,10 +288,10 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                  <div className="pt-3 border-t border-line flex items-center justify-between">
                     <Button
                       asChild
-                      className="w-full bg-[#D9381E] hover:bg-[#b82d16] text-white font-black text-xs h-10 rounded-xl shadow-md"
+                      className="w-full bg-brand hover:bg-brand-hover text-white font-black text-xs h-10 rounded-xl shadow-xs"
                     >
                       <Link href="/events/sbk-night-extravaganza-nov-2026">
                         <Ticket className="mr-1.5 h-3.5 w-3.5" />
@@ -303,7 +303,7 @@ export default function Home() {
               </div>
 
               {/* Event 3: MADE IN CUBA Dance Weekend 2026 */}
-              <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#14110F] overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
+              <div className="group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-2 overflow-hidden shadow-xs hover:border-gold/40 transition-all duration-300">
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                   <Image
                     src="/images/made-in-cuba-2026-poster.jpg"
@@ -312,14 +312,14 @@ export default function Home() {
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface-2 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-amber-300">
+                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-gold">
                       04 — 06 DEC 2026
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">
                       From £20
                     </span>
                   </div>
@@ -327,11 +327,11 @@ export default function Home() {
 
                 <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-lg font-black text-white group-hover:text-amber-300 transition-colors leading-snug">
+                    <h3 className="text-lg font-black text-ivory group-hover:text-gold transition-colors leading-snug">
                       MADE IN CUBA — Dance Weekend 2026
                     </h3>
                     <div className="flex items-center gap-1.5 text-xs text-stone-400 mt-1">
-                      <MapPin className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+                      <MapPin className="h-3.5 w-3.5 text-gold shrink-0" />
                       <span>BOH Studios Bournemouth</span>
                     </div>
                     <p className="text-xs text-stone-300 mt-2 line-clamp-2 leading-relaxed">
@@ -339,10 +339,10 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                  <div className="pt-3 border-t border-line flex items-center justify-between">
                     <Button
                       asChild
-                      className="w-full bg-[#D9381E] hover:bg-[#b82d16] text-white font-black text-xs h-10 rounded-xl shadow-md"
+                      className="w-full bg-brand hover:bg-brand-hover text-white font-black text-xs h-10 rounded-xl shadow-xs"
                     >
                       <Link href="/events/made-in-cuba-dance-weekend-2026">
                         <Ticket className="mr-1.5 h-3.5 w-3.5" />
@@ -358,23 +358,23 @@ export default function Home() {
 
         {/* ================= SECTION 4: ARTISTIC DIRECTOR & RESIDENT FACULTY ================= */}
         {/* Founder & 25+ Year Cuban Heritage Spotlight */}
-        <section className="cv-auto py-12 sm:py-16 bg-[#080706] border-b border-white/10 text-white">
+        <section className="cv-auto py-12 sm:py-16 bg-canvas border-b border-line text-ivory">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-stone-800 bg-[#0E0C0A] p-6 sm:p-10 shadow-2xl">
+            <div className="rounded-3xl border border-line bg-surface-1 p-6 sm:p-10 shadow-2xl">
               <div className="grid gap-8 lg:grid-cols-12 items-center">
                 <div className="lg:col-span-7 space-y-4 text-left">
                   <div className="flex flex-wrap items-center gap-2">
-                    <Badge className="bg-primary-base text-white font-extrabold text-xs uppercase tracking-wider">
+                    <Badge className="bg-brand text-white font-extrabold text-xs uppercase tracking-wider">
                       Academy Founder &amp; Artistic Director
                     </Badge>
-                    <Badge variant="outline" className="border-amber-500/30 bg-amber-500/10 text-amber-300 font-black text-xs uppercase tracking-wider">
+                    <Badge variant="outline" className="border-gold/30 bg-gold/10 text-gold font-black text-xs uppercase tracking-wider">
                       UK LIFETIME ACHIEVEMENT AWARD
                     </Badge>
                   </div>
 
-                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white uppercase">
+                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-ivory uppercase">
                     Learn Cuban Casino from <br className="hidden sm:inline" />
-                    <span className="font-display italic font-normal text-amber-300 normal-case">Maestro Enrique Perez Valdes</span>
+                    <span className="font-display italic font-normal text-gold normal-case">Maestro Enrique Perez Valdes</span>
                   </h2>
 
                   <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
@@ -382,48 +382,48 @@ export default function Home() {
                   </p>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                    <div className="rounded-xl border border-white/10 bg-black/40 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-amber-300">{ACADEMY_METRICS.yearsInUk}</span>
+                    <div className="rounded-xl border border-line bg-surface-2 p-3">
+                      <span className="block text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.yearsInUk}</span>
                       <span className="text-[11px] font-semibold text-stone-400 uppercase tracking-wider">{ACADEMY_METRICS.yearsInUkLabel}</span>
                     </div>
-                    <div className="rounded-xl border border-white/10 bg-black/40 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-white">{ACADEMY_METRICS.dancersMentored}</span>
+                    <div className="rounded-xl border border-line bg-surface-2 p-3">
+                      <span className="block text-xl sm:text-2xl font-black text-ivory">{ACADEMY_METRICS.dancersMentored}</span>
                       <span className="text-[11px] font-semibold text-stone-400 uppercase tracking-wider">{ACADEMY_METRICS.dancersMentoredLabel}</span>
                     </div>
-                    <div className="col-span-2 sm:col-span-1 rounded-xl border border-white/10 bg-black/40 p-3">
+                    <div className="col-span-2 sm:col-span-1 rounded-xl border border-line bg-surface-2 p-3">
                       <span className="block text-xl sm:text-2xl font-black text-emerald-400">Havana</span>
                       <span className="text-[11px] font-semibold text-stone-400 uppercase tracking-wider">Roots &amp; Heritage</span>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3 pt-2">
-                    <Button asChild size="default" className="bg-[#D9381E] hover:bg-[#b82d16] text-white font-bold h-10 rounded-xl">
+                    <Button asChild size="default" className="bg-brand hover:bg-brand-hover text-white font-bold h-10 rounded-xl">
                       <Link href="/about">
                         Read Enrique&apos;s Full Story
                         <ArrowRight className="ml-1.5 h-4 w-4" />
                       </Link>
                     </Button>
-                    <Button asChild variant="outline" size="default" className="h-10 rounded-xl font-semibold border-white/20 bg-white/5 text-white hover:bg-white/10">
+                    <Button asChild variant="outline" size="default" className="h-10 rounded-xl font-semibold border-line bg-surface-3 text-ivory hover:bg-surface-2">
                       <Link href="/dashboard/schedule">Join Enrique on Thu &amp; Sun (£12 / £14 at Door) →</Link>
                     </Button>
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-stone-800 bg-[#14110F] shadow-xl space-y-4">
-                  <div className="flex items-center gap-4 border-b border-white/10 pb-4">
+                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-line bg-surface-2 shadow-xl space-y-4">
+                  <div className="flex items-center gap-4 border-b border-line pb-4">
                     <div className="relative shrink-0">
-                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-amber-500/40 overflow-hidden bg-gradient-to-tr from-zinc-800 via-rose-700 to-zinc-900 flex items-center justify-center text-white shadow-md">
+                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-gold/40 overflow-hidden bg-gradient-to-tr from-stone-800 via-brand to-stone-900 flex items-center justify-center text-white shadow-md">
                         <Flame className="h-8 w-8 sm:h-10 sm:w-10 fill-white" />
                       </div>
-                      <div className="absolute -bottom-1 -right-1 rounded-full bg-primary-base text-white px-1.5 py-0.2 text-[9px] font-black uppercase tracking-wider shadow-xs">
+                      <div className="absolute -bottom-1 -right-1 rounded-full bg-brand text-white px-1.5 py-0.2 text-[9px] font-black uppercase tracking-wider shadow-xs">
                         🇨🇺 Cuba
                       </div>
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-base sm:text-lg font-black text-white truncate">
+                      <h3 className="text-base sm:text-lg font-black text-ivory truncate">
                         Enrique Perez Valdes
                       </h3>
-                      <p className="text-xs font-bold text-amber-300">
+                      <p className="text-xs font-bold text-gold">
                         Havana Master Instructor • UK Pioneer
                       </p>
                       <span className="text-[11px] font-semibold text-stone-400 block mt-0.5">
@@ -433,21 +433,21 @@ export default function Home() {
                   </div>
 
                   <div className="space-y-2 text-xs">
-                    <div className="flex items-center justify-between py-1 border-b border-white/10">
+                    <div className="flex items-center justify-between py-1 border-b border-line">
                       <span className="font-semibold text-stone-400">Specialties</span>
-                      <span className="font-bold text-white">Casino • Rueda • Timba • Son</span>
+                      <span className="font-bold text-ivory">Casino • Rueda • Timba • Son</span>
                     </div>
-                    <div className="flex items-center justify-between py-1 border-b border-white/10">
+                    <div className="flex items-center justify-between py-1 border-b border-line">
                       <span className="font-semibold text-stone-400">Experience</span>
-                      <span className="font-bold text-white">{ACADEMY_METRICS.yearsInUk} {ACADEMY_METRICS.yearsInUkLabel}</span>
+                      <span className="font-bold text-ivory">{ACADEMY_METRICS.yearsInUk} {ACADEMY_METRICS.yearsInUkLabel}</span>
                     </div>
                     <div className="flex items-center justify-between py-1">
                       <span className="font-semibold text-stone-400">Recognition</span>
-                      <span className="font-extrabold text-amber-300">Salsa UK Lifetime Award</span>
+                      <span className="font-extrabold text-gold">Salsa UK Lifetime Award</span>
                     </div>
                   </div>
 
-                  <blockquote className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-3.5 text-xs italic text-amber-100 leading-relaxed font-medium">
+                  <blockquote className="rounded-xl border border-gold/20 bg-gold/10 p-3.5 text-xs italic text-amber-100 leading-relaxed font-medium">
                     &ldquo;Cuban salsa is not just steps—it is community, clave, musicality, and pure joy. No partner required, just bring your energy.&rdquo;
                   </blockquote>
 
@@ -455,7 +455,7 @@ export default function Home() {
                     asChild
                     variant="outline"
                     size="sm"
-                    className="w-full text-xs font-bold border-amber-500/40 text-amber-200 bg-amber-500/15 hover:bg-amber-500/25"
+                    className="w-full text-xs font-bold border-gold/40 text-gold bg-gold/10 hover:bg-gold/20"
                   >
                     <Link href="/private-lessons">
                       <span>Book 1-on-1 Private Coaching with Enrique</span>
@@ -475,13 +475,13 @@ export default function Home() {
 
         {/* Community Social Proof Grid */}
         <ArtReveal>
-          <div className="cv-auto bg-[#080706] border-b border-white/10">
+          <div className="cv-auto bg-canvas border-b border-line">
             <SocialProofGrid />
           </div>
         </ArtReveal>
 
         {/* Dance Vouchers Gift Showcase */}
-        <section className="cv-auto py-14 border-b border-white/10 bg-[#080706] text-white">
+        <section className="cv-auto py-14 border-b border-line bg-canvas text-ivory">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <DanceVouchersShowcase />
           </div>

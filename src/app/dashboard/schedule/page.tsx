@@ -46,6 +46,7 @@ const PartnerMatchWaitlist = dynamic(
 );
 
 import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/layout/page-header";
 import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
@@ -231,46 +232,36 @@ export default async function StudentSchedulePage({
         </div>
       )}
 
-      {/* "The Place" Havana Nocturne Architectural Header & Door-Pay Policy Bar */}
-      <div className="rounded-3xl border border-stone-800 bg-[#070605] p-4 sm:p-7 text-white shadow-xl space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
-          <span>BOH STUDIOS BOURNEMOUTH • PAY AT THE DOOR</span>
-          <span className="text-zinc-400 font-bold">104 COMMERCIAL RD • BH2 5LR</span>
-        </div>
-
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1.5 max-w-2xl">
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase text-white leading-none">
-              THU &amp; SUN{" "}
-              <span className="font-display italic font-normal text-amber-300 lowercase">
-                programme
-              </span>
-            </h1>
-            <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-normal">
-              Weekly Cuban Salsa &amp; Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No pre-booking or partner required. Lead &amp; Follow partner rotations are 100% ratio balanced.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-            {user ? (
-              <div className="flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-1.5 text-xs">
-                <Sparkles className="h-4 w-4 text-amber-400" />
-                <span className="text-stone-300">Dancer:</span>
-                <span className="font-bold text-amber-300">{user.currentLevel}</span>
-                <span className="text-stone-400 font-mono">({user.classCredits} credits)</span>
-              </div>
-            ) : null}
-            <Button asChild size="sm" className="bg-amber-500 hover:bg-amber-400 text-black font-black text-xs h-9 px-4 rounded-xl shadow-xs">
+      {/* "The Place" Havana Nocturne Architectural PageHeader & Door-Pay Policy Bar */}
+      <PageHeader
+        eyebrowLeft="BOH STUDIOS BOURNEMOUTH • PAY AT THE DOOR"
+        eyebrowRight="104 COMMERCIAL RD • BH2 5LR"
+        title="THU & SUN"
+        highlight="programme"
+        description="Weekly Cuban Salsa & Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No pre-booking or partner required. Lead & Follow partner rotations are 100% ratio balanced."
+        badge={
+          user ? (
+            <div className="inline-flex items-center gap-2 rounded-xl border border-line bg-surface-3 px-3 py-1.5 text-xs">
+              <Sparkles className="h-4 w-4 text-gold" />
+              <span className="text-stone-300">Dancer:</span>
+              <span className="font-bold text-gold">{user.currentLevel}</span>
+              <span className="text-stone-400 font-mono">({user.classCredits} credits)</span>
+            </div>
+          ) : undefined
+        }
+        actions={
+          <>
+            <Button asChild size="sm" className="bg-brand hover:bg-brand-hover text-white font-extrabold text-xs h-9 px-4 rounded-xl shadow-xs">
               <Link href="/events">
                 <span>Book Festivals Online →</span>
               </Link>
             </Button>
-            <Button asChild variant="outline" size="sm" className="border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold text-xs h-9 px-3.5 rounded-xl">
+            <Button asChild variant="outline" size="sm" className="border-line bg-surface-3 hover:bg-surface-2 text-ivory font-bold text-xs h-9 px-3.5 rounded-xl">
               <Link href="/venues">Directions &amp; Parking</Link>
             </Button>
-          </div>
-        </div>
-      </div>
+          </>
+        }
+      />
 
       {/* Day & Level Filter Bars */}
       <div className="space-y-3 border-b pb-4">

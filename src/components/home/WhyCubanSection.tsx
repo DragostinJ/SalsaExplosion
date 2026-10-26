@@ -53,7 +53,7 @@ export function WhyCubanSection() {
               So Addictive?
             </span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+          <p className="mt-3 text-xs sm:text-sm text-stone-300 leading-relaxed">
             Whether you are taking your very first dance step tonight or you already dance other styles and want to add authentic Cuban flavour to your repertoire—everyone is welcome in our circle.
           </p>
         </div>
@@ -63,7 +63,7 @@ export function WhyCubanSection() {
           {CELEBRATION_CARDS.map((card) => (
             <div
               key={card.title}
-              className="art-card group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-[#120d0a] p-6 sm:p-7 transition-all duration-500 hover:border-amber-400/40"
+              className="art-card group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-1 p-6 sm:p-7 transition-all duration-500 hover:border-gold/40"
             >
               <div>
                 {/* 1. Top Photo Frame */}

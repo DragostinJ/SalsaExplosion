@@ -243,8 +243,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/dashboard/schedule"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold transition-colors shrink-0 ${
                     pathname === "/dashboard/schedule"
-                      ? "bg-primary-base text-white shadow-xs font-bold"
-                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
+                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
                   }`}
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
@@ -254,18 +254,18 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/music"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold transition-colors shrink-0 ${
                     pathname.startsWith("/music")
-                      ? "bg-primary-base text-white shadow-xs font-bold"
-                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
+                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
                   }`}
                 >
                   <Music className="h-3.5 w-3.5" />
                   <span>Song Trainer</span>
                 </Link>
 
-                <div className="h-4 w-px bg-border mx-0.5 shrink-0" />
+                <div className="h-4 w-px bg-line mx-0.5 shrink-0" />
 
-                <div className="flex items-center gap-1 rounded-xl border border-accent-tangerine/30 bg-accent-tangerine/[0.08] p-1 shrink-0">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-accent-tangerine px-1 hidden 2xl:inline">
+                <div className="flex items-center gap-1 rounded-xl border border-gold/30 bg-gold/10 p-1 shrink-0">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-gold px-1 hidden 2xl:inline">
                     Admin:
                   </span>
                   {adminLinks.map((item) => {
@@ -276,8 +276,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                         href={item.href}
                         className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors whitespace-nowrap ${
                           item.active
-                            ? "bg-accent-tangerine text-zinc-950 font-bold shadow-xs"
-                            : "text-text-muted hover:bg-accent-tangerine/10 hover:text-foreground"
+                            ? "bg-gold text-stone-950 font-bold shadow-xs"
+                            : "text-muted-foreground hover:bg-gold/15 hover:text-ivory"
                         }`}
                       >
                         <Icon className="h-3 w-3" />
@@ -294,8 +294,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/dashboard/schedule"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname === "/dashboard/schedule"
-                      ? "bg-primary-base text-white shadow-xs font-bold"
-                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
+                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
                   }`}
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
@@ -305,8 +305,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/music"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname.startsWith("/music")
-                      ? "bg-primary-base text-white shadow-xs font-bold"
-                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
+                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
                   }`}
                 >
                   <Music className="h-3.5 w-3.5" />
@@ -316,15 +316,15 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                   href="/events"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname.startsWith("/events")
-                      ? "bg-primary-base text-white shadow-xs font-bold"
-                      : "text-text-muted hover:bg-muted/70 hover:text-foreground"
+                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
                   }`}
                 >
                   <Sparkles className="h-3.5 w-3.5" />
                   <span>Events</span>
                 </Link>
 
-                <div className="h-4 w-px bg-border mx-1" />
+                <div className="h-4 w-px bg-line mx-1" />
 
                 <div className="flex items-center gap-1 rounded-xl border border-secondary-base/30 bg-secondary-base/[0.08] px-2 py-1 shrink-0">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-secondary-base px-1">
@@ -339,7 +339,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                         className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors whitespace-nowrap ${
                           item.active
                             ? "bg-emerald-600 text-white shadow-xs font-bold"
-                            : "text-text-muted hover:bg-secondary-base/10 hover:text-foreground"
+                            : "text-muted-foreground hover:bg-secondary-base/10 hover:text-ivory"
                         }`}
                       >
                         <Icon className="h-3 w-3" />
@@ -359,8 +359,8 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                     href={item.href}
                     className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                       item.active
-                        ? "bg-primary-base text-white shadow-xs font-bold"
-                        : "text-text-muted hover:bg-muted/70 hover:text-foreground"
+                        ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
+                        : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
                     }`}
                   >
                     <Icon className="h-3.5 w-3.5" />
@@ -385,7 +385,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                 <div
                   role="group"
                   aria-label="Portal Role Switcher"
-                  className="hidden sm:inline-flex items-center rounded-lg border border-border bg-muted/60 p-0.5 text-[11px] shrink-0 shadow-xs"
+                  className="hidden sm:inline-flex items-center rounded-lg border border-line bg-surface-3/60 p-0.5 text-[11px] shrink-0 shadow-xs"
                   title="Switch active portal role for testing"
                 >
                   {(["STUDENT", "INSTRUCTOR", "ADMIN"] as Role[]).map((r) => {
@@ -399,11 +399,11 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                         className={`rounded-md px-2 py-1 font-bold transition-all whitespace-nowrap ${
                           isActive
                             ? r === "ADMIN"
-                              ? "bg-accent-tangerine text-zinc-950 shadow-xs"
+                              ? "bg-gold text-stone-950 shadow-xs"
                               : r === "INSTRUCTOR"
                                 ? "bg-emerald-600 text-white shadow-xs"
-                                : "bg-primary-base text-white shadow-xs"
-                            : "text-text-muted hover:text-foreground hover:bg-muted/80"
+                                : "bg-brand text-white shadow-xs"
+                            : "text-muted-foreground hover:text-ivory hover:bg-surface-3"
                         } ${isPending ? "opacity-60 cursor-wait" : ""}`}
                       >
                         {r === "ADMIN"
@@ -420,7 +420,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
               <UserButton
                 appearance={{
                   elements: {
-                    avatarBox: "h-8 w-8 ring-2 ring-primary/20",
+                    avatarBox: "h-8 w-8 ring-2 ring-gold/30",
                   },
                 }}
               />
@@ -429,13 +429,13 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
             <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
               <Link
                 href="/sign-in"
-                className="rounded-xl border border-border px-3 py-1.5 text-xs font-bold text-foreground hover:bg-muted/70 transition-colors shrink-0"
+                className="rounded-xl border border-line bg-transparent px-3 py-1.5 text-xs font-bold text-ivory hover:bg-surface-3 transition-colors shrink-0"
               >
                 Sign In
               </Link>
               <Link
                 href="/events"
-                className="rounded-xl bg-[#D9381E] px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-[#b82d16] transition-colors min-h-9 flex items-center justify-center whitespace-nowrap shrink-0"
+                className="rounded-xl bg-brand px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-brand-hover transition-colors min-h-9 flex items-center justify-center whitespace-nowrap shrink-0"
               >
                 Book Festival Passes &rarr;
               </Link>
@@ -451,7 +451,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
             }}
             aria-label="Open mobile navigation menu"
             aria-expanded={isMobileNavOpen}
-            className="flex xl:hidden h-10 w-10 items-center justify-center rounded-lg border border-border bg-card text-text-muted hover:text-foreground hover:bg-muted/70 transition-colors shrink-0 shadow-xs"
+            className="flex xl:hidden h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface-1 text-muted-foreground hover:text-ivory hover:bg-surface-3 transition-colors shrink-0 shadow-xs"
           >
             <Menu className="h-5 w-5" />
           </button>

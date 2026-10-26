@@ -1,4 +1,4 @@
-import { BackButton } from "@/components/navigation/back-button";
+import { PageHeader } from "@/components/layout/page-header";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import {
@@ -36,30 +36,16 @@ export default async function PrivateLessonsPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
-      <div>
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
-      </div>
-
       {/* Hero Header — "The Place" Havana Nocturne Architecture */}
-      <div className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-10 text-white shadow-2xl">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
-          <span>MAESTRO-LEVEL MENTORSHIP &amp; PRIVATE COACHING</span>
-          <span className="text-zinc-400 font-bold">BOH STUDIOS • BOURNEMOUTH BH2 5LR</span>
-        </div>
-
-        <div className="mt-5 max-w-3xl space-y-3">
-          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none text-white">
-            1-on-1 Private Lessons &amp;{" "}
-            <span className="font-display italic font-normal text-amber-300 normal-case">
-              Coaching
-            </span>
-          </h1>
-
-          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-medium">
-            Accelerate your social dancing, master complex Rueda calls, or prepare an unforgettable wedding first dance under the personal direction of Maestro Enrique Perez Valdes and Salsa Explosion faculty (Moe Flex, Justyna, Arturas, Jim).
-          </p>
-        </div>
-      </div>
+      <PageHeader
+        backHref="/dashboard/schedule"
+        backLabel="Back to Schedule"
+        eyebrowLeft="MAESTRO-LEVEL MENTORSHIP & PRIVATE COACHING"
+        eyebrowRight="BOH STUDIOS • BOURNEMOUTH BH2 5LR"
+        title="1-on-1 Private Lessons &"
+        highlight="Coaching"
+        description="Accelerate your social dancing, master complex Rueda calls, or prepare an unforgettable wedding first dance under the personal direction of Maestro Enrique Perez Valdes and Salsa Explosion faculty (Moe Flex, Justyna, Arturas, Jim)."
+      />
 
       {/* Private Lessons Booking Wizard with Initial Bookings */}
       <PrivateLessonsClient initialBookings={initialBookings} />

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import {
-  Scale,
   RefreshCw,
   HeartHandshake,
   Lock,
@@ -10,8 +9,7 @@ import {
   AlertCircle,
   CheckCircle2,
 } from "lucide-react";
-import { BackButton } from "@/components/navigation/back-button";
-import { Badge } from "@/components/ui/badge";
+import { PageHeader } from "@/components/layout/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata: Metadata = {
@@ -25,48 +23,35 @@ export default function TermsAndLegalPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-10">
-      <div>
-        <BackButton fallbackUrl="/" label="Back to Homepage" />
-      </div>
-
-      {/* Header Hub */}
-      <div className="space-y-4 text-center sm:text-left border-b pb-8">
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-          <Badge className="bg-primary-base text-white font-black text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
-            <Scale className="h-3.5 w-3.5" />
-            UK Legal & Consumer Protection
-          </Badge>
-          <Badge variant="outline" className="border-amber-500/40 text-amber-800 dark:text-amber-300 font-bold text-xs">
-            100% Transparency Guarantee
-          </Badge>
-        </div>
-
-        <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground">
-          Terms of Service, Consumer Rights & Privacy Notice
-        </h1>
-
-        <p className="text-sm sm:text-base text-muted-foreground font-medium max-w-3xl leading-relaxed">
-          Welcome to Salsa Explosion UK. We believe in clear, fair, and honest business practices. Below you will find our complete terms governing class bookings, festival passes, UK statutory consumer cancellation rights, safety guidelines, and UK GDPR data protection.
-        </p>
-
-        <p className="text-xs text-muted-foreground font-semibold">
-          Last Updated & Ratified: {lastUpdated} • Governed by the Laws of England & Wales
-        </p>
-      </div>
+      {/* Header Hub with Canonical PageHeader */}
+      <PageHeader
+        backHref="/"
+        backLabel="Back to Homepage"
+        eyebrowLeft="UK LEGAL & CONSUMER PROTECTION"
+        eyebrowRight="100% TRANSPARENCY GUARANTEE"
+        title="Terms of Service,"
+        highlight="Consumer Rights & Privacy"
+        description="Welcome to Salsa Explosion UK. We believe in clear, fair, and honest business practices. Below you will find our complete terms governing class bookings, festival passes, UK statutory consumer cancellation rights, safety guidelines, and UK GDPR data protection."
+        badge={
+          <p className="text-xs text-muted-foreground font-semibold">
+            Last Updated &amp; Ratified: {lastUpdated} • Governed by the Laws of England &amp; Wales
+          </p>
+        }
+      />
 
       {/* Quick Navigation Jump Bar */}
-      <div className="flex flex-wrap items-center gap-2 rounded-2xl border bg-muted/40 p-3.5 text-xs font-bold">
+      <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-line bg-surface-2 p-3.5 text-xs font-bold">
         <span className="text-muted-foreground uppercase tracking-wider text-[11px] mr-1">Jump to:</span>
-        <a href="#identity" className="rounded-lg bg-card px-2.5 py-1 text-foreground border hover:bg-primary-base hover:text-white transition-colors">
+        <a href="#identity" className="rounded-xl bg-surface-3 px-2.5 py-1 text-ivory border border-line hover:bg-brand hover:text-white transition-colors">
           1. Business Identity
         </a>
-        <a href="#refunds" className="rounded-lg bg-card px-2.5 py-1 text-foreground border hover:bg-primary-base hover:text-white transition-colors">
+        <a href="#refunds" className="rounded-xl bg-surface-3 px-2.5 py-1 text-ivory border border-line hover:bg-brand hover:text-white transition-colors">
           2. Refunds & Consumer Rights
         </a>
-        <a href="#health-safety" className="rounded-lg bg-card px-2.5 py-1 text-foreground border hover:bg-primary-base hover:text-white transition-colors">
+        <a href="#health-safety" className="rounded-xl bg-surface-3 px-2.5 py-1 text-ivory border border-line hover:bg-brand hover:text-white transition-colors">
           3. Health & Safety Duty of Care
         </a>
-        <a href="#privacy" className="rounded-lg bg-card px-2.5 py-1 text-foreground border hover:bg-primary-base hover:text-white transition-colors">
+        <a href="#privacy" className="rounded-xl bg-surface-3 px-2.5 py-1 text-ivory border border-line hover:bg-brand hover:text-white transition-colors">
           4. UK GDPR Privacy Notice
         </a>
       </div>

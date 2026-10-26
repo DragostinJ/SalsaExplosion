@@ -13,7 +13,7 @@ export default function CubanMusicPage() {
   return (
     <main className="mx-auto max-w-7xl px-2.5 sm:px-6 lg:px-8 py-2 sm:py-6 space-y-2.5 sm:space-y-6">
       {/* Compact 1-Line Mobile Top Bar (< md) + Full Desktop Header (md+) */}
-      <div className="flex items-center justify-between gap-2 rounded-xl sm:rounded-2xl border bg-card px-3 py-2 sm:p-5 shadow-xs">
+      <div className="flex items-center justify-between gap-2 rounded-xl sm:rounded-2xl border border-white/10 bg-[#110F0E] px-3 py-2 sm:p-5 shadow-xs">
         <div className="flex items-center gap-2 min-w-0">
           <BackButton fallbackUrl="/dashboard/schedule" label="Schedule" />
           <div className="min-w-0">

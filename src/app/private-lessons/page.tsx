@@ -1,6 +1,4 @@
 import { BackButton } from "@/components/navigation/back-button";
-import { Badge } from "@/components/ui/badge";
-import { Award } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import {
@@ -42,25 +40,23 @@ export default async function PrivateLessonsPage() {
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
       </div>
 
-      {/* Hero Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-rose-950 p-5 sm:p-12 text-white shadow-xl border border-border/40">
-        <div className="relative z-10 max-w-3xl space-y-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge className="bg-primary-base text-white border-none text-xs font-bold">
-              <Award className="mr-1.5 h-3.5 w-3.5 text-white" />
-              Maestro-Level Mentorship
-            </Badge>
-            <Badge className="bg-white/20 text-white border-none backdrop-blur-sm text-xs font-semibold">
-              BOH Studios, Bournemouth
-            </Badge>
-          </div>
+      {/* Hero Header — "The Place" Havana Nocturne Architecture */}
+      <div className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-10 text-white shadow-2xl">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
+          <span>MAESTRO-LEVEL MENTORSHIP &amp; PRIVATE COACHING</span>
+          <span className="text-zinc-400 font-bold">BOH STUDIOS • BOURNEMOUTH BH2 5LR</span>
+        </div>
 
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl leading-tight drop-shadow-sm">
-            1-on-1 Private Lessons & Coaching
+        <div className="mt-5 max-w-3xl space-y-3">
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none text-white">
+            1-on-1 Private Lessons &amp;{" "}
+            <span className="font-display italic font-normal text-amber-300 normal-case">
+              Coaching
+            </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal">
-            Accelerate your social dancing, master complex Rueda calls, or prepare an unforgettable wedding first dance under the personal direction of Maestro Enrique Perez Valdes.
+          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-medium">
+            Accelerate your social dancing, master complex Rueda calls, or prepare an unforgettable wedding first dance under the personal direction of Maestro Enrique Perez Valdes and Salsa Explosion faculty (Moe Flex, Justyna, Arturas, Jim).
           </p>
         </div>
       </div>

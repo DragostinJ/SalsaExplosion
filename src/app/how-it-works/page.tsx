@@ -39,38 +39,36 @@ export default function HowItWorksPage() {
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
       </div>
 
-      {/* Hero Header */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 p-5 sm:p-14 text-white shadow-xl">
-        <div className="relative z-10 max-w-3xl space-y-5">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge className="bg-black/30 text-white border-white/20 backdrop-blur-sm text-xs font-bold">
-              <Sparkles className="mr-1.5 h-3.5 w-3.5 text-amber-300" />
-              Student Handbook & Studio Architecture
-            </Badge>
-            <Badge className="bg-white/20 text-white border-none backdrop-blur-sm text-xs font-semibold">
-              Cuban Salsa & Rueda de Casino
-            </Badge>
-          </div>
+      {/* Hero Header — "The Place" Havana Nocturne Architecture */}
+      <section className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-12 text-white shadow-2xl">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
+          <span>STUDENT HANDBOOK &amp; STUDIO ARCHITECTURE</span>
+          <span className="text-zinc-400 font-bold">CUBAN SALSA &amp; RUEDA DE CASINO</span>
+        </div>
 
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl leading-tight drop-shadow-sm">
-            How Salsa Explosion Powers Your Dance Journey
+        <div className="mt-6 max-w-3xl space-y-4">
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none text-white">
+            How Salsa Explosion{" "}
+            <span className="font-display italic font-normal text-amber-300 normal-case">
+              Powers Your Dance Journey
+            </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-amber-50/95 leading-relaxed font-normal">
-            Traditional dance studios struggle with unbalanced classes, lost cash, long door queues, and forgotten moves. Salsa Explosion provides an all-in-one platform built specifically for Cuban Salsa academies, social dancers, and visiting masterclasses.
+          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-medium">
+            Traditional dance studios struggle with unbalanced classes, lost cash, long door queues, and forgotten moves. Salsa Explosion provides a seamless studio system built specifically for Cuban Salsa academies, social dancers, and visiting masterclasses.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 pt-3">
+          <div className="flex flex-wrap items-center gap-3 pt-2">
             <LaunchTourButton
               size="lg"
-              className="bg-white text-zinc-950 hover:bg-amber-100 font-extrabold shadow-md text-xs sm:text-sm"
+              className="bg-amber-400 text-stone-950 hover:bg-amber-300 font-extrabold shadow-md text-xs sm:text-sm h-11 rounded-xl"
               label="Launch 60-Second Interactive Tour"
             />
             <Button
               asChild
               variant="outline"
               size="lg"
-              className="border-white/30 bg-black/20 text-white hover:bg-black/30 font-bold text-xs sm:text-sm backdrop-blur-xs"
+              className="border-white/20 bg-white/10 text-white hover:bg-white/20 font-bold text-xs sm:text-sm h-11 rounded-xl backdrop-blur-xs"
             >
               <Link href="/dashboard/schedule">
                 View Class Schedule

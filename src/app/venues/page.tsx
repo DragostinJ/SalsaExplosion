@@ -7,7 +7,6 @@ import {
   Sparkles,
   ExternalLink,
   Footprints,
-  Compass,
   ArrowRight,
   Navigation,
 } from "lucide-react";
@@ -30,31 +29,33 @@ export default function VenuesGuidePage() {
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
       </div>
 
-      {/* Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-rose-950 p-8 sm:p-12 text-white shadow-xl border border-border/40">
-        <div className="relative z-10 max-w-3xl space-y-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge className="bg-primary-base text-white border-none text-xs font-bold">
-              <Compass className="mr-1.5 h-3.5 w-3.5 text-white" />
-              Bournemouth Studio Hub &amp; Festival Partner Venues
-            </Badge>
-            <Badge className="bg-white/20 text-white border-none backdrop-blur-sm text-xs font-semibold">
-              Travel, Parking &amp; Arrival Guide
-            </Badge>
-          </div>
+      {/* "The Place" Havana Nocturne Architectural Hero */}
+      <div className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-10 text-white shadow-2xl">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
+          <span>BOURNEMOUTH STUDIO HUB &amp; FESTIVAL PARTNER VENUES</span>
+          <span className="text-zinc-400 font-bold">TRAVEL, PARKING &amp; ARRIVAL GUIDE</span>
+        </div>
 
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl leading-tight drop-shadow-sm">
-            Venues &amp; Parking Guide
+        <div className="mt-5 space-y-4 max-w-3xl">
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white uppercase leading-none">
+            Venues &amp;{" "}
+            <span className="font-display italic font-normal text-amber-300 normal-case">
+              Parking Guide
+            </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal">
-            Everything you need for a smooth arrival at Maestro Enrique Perez Valdes&apos; weekly classes at BOH Studios and Salsa Explosion dance weekend festivals.
+          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-medium">
+            Everything you need for a smooth arrival at Maestro Enrique Perez Valdes&apos; weekly classes at BOH Studios and Salsa Explosion dance weekend festivals across Bournemouth.
           </p>
+
+          <div className="inline-flex items-center gap-2 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-3.5 py-2 text-xs font-semibold text-amber-200">
+            <span>📍 Thu &amp; Sun Classes at BOH Studios: <strong>£12 (1 Class) / £14 (2 Classes) at the Door</strong></span>
+          </div>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <Button
               asChild
-              className="bg-primary-base text-white hover:bg-primary-hover font-extrabold shadow-md text-xs sm:text-sm h-10 rounded-xl"
+              className="bg-amber-400 text-stone-950 hover:bg-amber-300 font-extrabold shadow-md text-xs sm:text-sm h-10 rounded-xl"
             >
               <Link href="/dashboard/schedule">
                 View Weekly Class Schedule
@@ -64,7 +65,7 @@ export default function VenuesGuidePage() {
             <Button
               asChild
               variant="outline"
-              className="bg-white/10 text-white hover:bg-white/20 border-white/30 text-xs sm:text-sm font-semibold h-10 rounded-xl"
+              className="bg-white/10 text-white hover:bg-white/20 border-white/20 text-xs sm:text-sm font-semibold h-10 rounded-xl"
             >
               <Link href="/events">Festival Passes &amp; Info</Link>
             </Button>

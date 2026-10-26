@@ -23,19 +23,27 @@ export default function RuedaDictionaryPage() {
         </Badge>
       </div>
 
-      {/* Header */}
-      <div className="flex flex-col justify-between gap-4 rounded-2xl border bg-card p-6 shadow-xs sm:flex-row sm:items-center">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Rueda de Casino Call Dictionary
+      {/* Header — "The Place" Havana Nocturne Architecture */}
+      <div className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-8 text-white shadow-2xl">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
+          <span>CANTANTE COMMAND HANDBOOK • 16+ AUTHENTIC CALLS</span>
+          <span className="text-zinc-400 font-bold">BOH STUDIOS BOURNEMOUTH</span>
+        </div>
+
+        <div className="mt-4 space-y-2 max-w-3xl">
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none text-white">
+              Rueda de Casino{" "}
+              <span className="font-display italic font-normal text-amber-300 normal-case">
+                Call Dictionary
+              </span>
             </h1>
-            <Badge className="bg-amber-500 text-zinc-950 font-bold">
+            <Badge className="bg-amber-400 text-stone-950 font-black text-xs">
               <Users className="mr-1 h-3.5 w-3.5" />
-              16+ Authentic Calls
+              Cuban Syllabus
             </Badge>
           </div>
-          <p className="mt-1 text-xs sm:text-sm text-muted-foreground max-w-3xl">
+          <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-medium">
             Master the figures called in the Rueda circle at BOH Studios and Bournemouth Havana Fiesta socials. Learn Spanish pronunciations, hand signals for loud dance floors, and exact clave timing.
           </p>
         </div>

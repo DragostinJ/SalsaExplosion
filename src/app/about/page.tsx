@@ -60,37 +60,50 @@ export default async function AboutPage() {
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-16">
-      {/* 1. Hero Section */}
-      <section className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-br from-amber-500/[0.08] via-background to-orange-500/[0.05] p-6 sm:p-12 shadow-sm text-center space-y-4">
-        <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/15 px-3.5 py-1 text-xs font-bold text-amber-800 dark:text-amber-300">
-          <Flame className="h-4 w-4 fill-amber-500 text-amber-600" />
-          <span>Salsa Explosion UK • Directed by Enrique Perez Valdes (Cuba)</span>
+      {/* 1. Hero Section — "The Place" Havana Nocturne Architecture */}
+      <section className="relative overflow-hidden rounded-3xl border border-stone-800 bg-[#070605] p-6 sm:p-12 shadow-2xl text-white">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 text-[11px] font-black uppercase tracking-widest text-amber-300">
+          <span>SALSA EXPLOSION UK • FOUNDED 1994</span>
+          <span className="text-zinc-400 font-bold">DIRECTED BY ENRIQUE PEREZ VALDES (CUBA)</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight">
-          Bournemouth&apos;s Cuban Rhythm.{" "}
-          <span className="text-amber-700 dark:text-amber-400">Authentic Cuban Soul.</span>
-        </h1>
+        <div className="mt-6 text-center space-y-4 max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight uppercase leading-tight text-white">
+            Bournemouth&apos;s Cuban Rhythm.{" "}
+            <span className="font-display italic font-normal text-amber-300 normal-case block sm:inline">
+              Authentic Cuban Soul.
+            </span>
+          </h1>
 
-        <p className="max-w-2xl mx-auto text-sm sm:text-base text-muted-foreground leading-relaxed">
-          Salsa Explosion is the UK&apos;s premier Cuban dance academy and promoter, based in Bournemouth, Dorset. Founded by Cuban maestro Enrique Perez Valdes, we have introduced thousands of dancers to the joy of authentic Casino, dynamic Rueda de Casino, Timba, and Afro-Cuban rhythms for over 25 years.
-        </p>
+          <p className="max-w-2xl mx-auto text-xs sm:text-sm text-stone-300 leading-relaxed font-medium">
+            Salsa Explosion is the UK&apos;s premier Cuban dance academy and promoter, based in Bournemouth, Dorset. Founded by Cuban maestro Enrique Perez Valdes, we have introduced thousands of dancers to the joy of authentic Casino, dynamic Rueda de Casino, Timba, and Afro-Cuban rhythms for over 25 years.
+          </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-          <Button
-            size="lg"
-            asChild
-            className="bg-amber-500 text-zinc-950 font-extrabold hover:bg-amber-400 text-sm shadow-md"
-          >
-            <Link href="/dashboard/schedule">
-              <span>View Class Schedule</span>
-              <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
-          </Button>
+          <div className="inline-flex items-center gap-2 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-3.5 py-1.5 text-xs font-semibold text-amber-200">
+            <span>Weekly Thursday &amp; Sunday Classes • £12 / £14 at the Door • BOH Studios BH2 5LR</span>
+          </div>
 
-          <Button size="lg" variant="outline" asChild className="text-sm font-semibold">
-            <Link href="/pricing">Get a Class Pass</Link>
-          </Button>
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+            <Button
+              size="lg"
+              asChild
+              className="bg-amber-400 text-stone-950 font-extrabold hover:bg-amber-300 text-xs sm:text-sm h-11 rounded-xl shadow-md"
+            >
+              <Link href="/dashboard/schedule">
+                <span>View Class Schedule</span>
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+
+            <Button
+              size="lg"
+              variant="outline"
+              asChild
+              className="bg-white/10 text-white hover:bg-white/20 border-white/20 text-xs sm:text-sm h-11 rounded-xl font-semibold"
+            >
+              <Link href="/events">Upcoming Festivals</Link>
+            </Button>
+          </div>
         </div>
       </section>
 

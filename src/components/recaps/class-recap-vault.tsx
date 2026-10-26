@@ -29,6 +29,7 @@ import {
 } from "./vault/recap-types";
 import { RecapVideoPlayer } from "./vault/recap-video-player";
 import { RecapStaffModal } from "./vault/recap-staff-modal";
+import { useTimeout } from "@/lib/hooks/use-timeout";
 
 export function ClassRecapVault({
   initialRecaps,
@@ -37,6 +38,7 @@ export function ClassRecapVault({
   activeClassesForStaff = [],
 }: ClassRecapVaultProps) {
   const isStaff = userRole === "INSTRUCTOR" || userRole === "ADMIN";
+  const { schedule: scheduleTimeout } = useTimeout();
   const [activeTab, setActiveTab] = useState<"MY_RECAPS" | "STUDIO_ARCHIVE">(
     initialRecaps.length > 0 ? "MY_RECAPS" : "STUDIO_ARCHIVE"
   );
@@ -176,7 +178,7 @@ export function ClassRecapVault({
           setAttachVideoUrl("");
           setSelectedFile(null);
           setUploadProgress(0);
-          setTimeout(() => setShowAttachModal(false), 2000);
+          scheduleTimeout(() => setShowAttachModal(false), 2000);
         } else {
           setAttachFeedback({ type: "error", text: res.error.message });
           setUploadProgress(0);

@@ -38,6 +38,7 @@ export function ClaveTrainerClient() {
   const timerWorkerRef = useRef<number | null>(null);
   const nextNoteTimeRef = useRef<number>(0);
   const stepRef = useRef<number>(0);
+  const uiTimersRef = useRef<NodeJS.Timeout[]>([]);
 
   // Ensure AudioContext exists
   const getAudioContext = () => {
@@ -191,9 +192,10 @@ export function ClaveTrainerClient() {
     // Schedule UI highlight update synchronized with audio
     if (audioCtxRef.current) {
       const delay = Math.max(0, (time - audioCtxRef.current.currentTime) * 1000);
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setCurrentStep(step);
       }, delay);
+      uiTimersRef.current.push(timer);
     }
   };
 
@@ -237,6 +239,8 @@ export function ClaveTrainerClient() {
 
     return () => {
       clearInterval(intervalId);
+      uiTimersRef.current.forEach(clearTimeout);
+      uiTimersRef.current = [];
     };
   }, [isPlaying, tempo, clavePattern, playClave, playCampana, playConga, playMetronome, isMuted]);
 

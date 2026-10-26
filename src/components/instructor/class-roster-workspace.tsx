@@ -30,6 +30,7 @@ import { RosterSidebar } from "./roster/roster-sidebar";
 import { RosterBalanceMeters } from "./roster/roster-balance-meters";
 import { RosterDancerList } from "./roster/roster-dancer-list";
 import { RosterRecapModal } from "./roster/roster-recap-modal";
+import { useTimeout } from "@/lib/hooks/use-timeout";
 
 interface ClassRosterWorkspaceProps {
   initialClasses: ClassRosterSummary[];
@@ -38,6 +39,7 @@ interface ClassRosterWorkspaceProps {
 export function ClassRosterWorkspace({
   initialClasses,
 }: ClassRosterWorkspaceProps) {
+  const { schedule: scheduleTimeout } = useTimeout();
   const [classes, setClasses] = useState<ClassRosterSummary[]>(initialClasses);
   const [selectedClassId, setSelectedClassId] = useState<string>(
     initialClasses[0]?.id ?? ""
@@ -250,7 +252,7 @@ export function ClassRosterWorkspace({
               : c
           )
         );
-        setTimeout(() => setShowRecapModal(false), 1800);
+        scheduleTimeout(() => setShowRecapModal(false), 1800);
       } else {
         setRecapFeedback({ type: "error", text: res.error.message });
       }

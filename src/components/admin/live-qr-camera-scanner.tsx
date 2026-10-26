@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Camera, CameraOff, Sparkles, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTimeout } from "@/lib/hooks/use-timeout";
 
 interface LiveQrCameraScannerProps {
   onDetected: (scannedCode: string) => void;
@@ -34,6 +35,7 @@ export function LiveQrCameraScanner({
   className = "",
   buttonLabel = "Open Camera Scanner",
 }: LiveQrCameraScannerProps) {
+  const { schedule: scheduleTimeout } = useTimeout();
   const [isOpen, setIsOpen] = useState(false);
   const [cameraActive, setCameraActive] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -66,12 +68,12 @@ export function LiveQrCameraScanner({
       setLastScanned(cleanCode);
       onDetected(cleanCode);
       // Small pause before closing or next scan
-      setTimeout(() => {
+      scheduleTimeout(() => {
         stopCamera();
         setIsOpen(false);
       }, 1200);
     },
-    [onDetected, stopCamera]
+    [onDetected, stopCamera, scheduleTimeout]
   );
 
   const startCamera = async () => {

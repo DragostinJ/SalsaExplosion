@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { X, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTimeout } from "@/lib/hooks/use-timeout";
 
 export interface QuickBookPayload {
   title: string;
@@ -23,6 +24,7 @@ export function triggerQuickBookDrawer(payload: QuickBookPayload) {
 }
 
 export function QuickBookDrawer() {
+  const { schedule: scheduleTimeout } = useTimeout();
   const [isOpen, setIsOpen] = useState(false);
   const [session, setSession] = useState<QuickBookPayload | null>(null);
   const [step, setStep] = useState<"configure" | "pass">("configure");
@@ -72,7 +74,7 @@ export function QuickBookDrawer() {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(`Salsa Explosion VIP Pass: ${passCode} for ${session.title}`);
       setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000);
+      scheduleTimeout(() => setIsCopied(false), 2000);
     }
   };
 

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useTimeout } from "@/lib/hooks/use-timeout";
 
 interface PromotionCertificateCardProps {
   studentName: string;
@@ -28,6 +29,7 @@ export function PromotionCertificateCard({
   preferredRole,
   approvedCount,
 }: PromotionCertificateCardProps) {
+  const { schedule: scheduleTimeout } = useTimeout();
   const [copied, setCopied] = useState(false);
   const [showStoryModal, setShowStoryModal] = useState(false);
 
@@ -38,7 +40,7 @@ export function PromotionCertificateCard({
       if (typeof navigator !== "undefined" && navigator.clipboard) {
         await navigator.clipboard.writeText(shareText);
         setCopied(true);
-        setTimeout(() => setCopied(false), 3000);
+        scheduleTimeout(() => setCopied(false), 3000);
       }
     } catch {
       setCopied(true);

@@ -30,6 +30,7 @@ import {
   joinPartnerWaitlistAction,
   invitePartnerBypassAction,
 } from "@/actions/waitlist.actions";
+import { useTimeout } from "@/lib/hooks/use-timeout";
 
 interface PartnerMatchWaitlistProps {
   userRole?: DanceRole;
@@ -40,6 +41,7 @@ export function PartnerMatchWaitlist({
   userRole = DanceRole.LEAD,
   userName = "Dancer",
 }: PartnerMatchWaitlistProps) {
+  const { schedule: scheduleTimeout } = useTimeout();
   const [selectedRole, setSelectedRole] = useState<DanceRole>(userRole);
   const [partnerEmail, setPartnerEmail] = useState("");
   const [copiedLink, setCopiedLink] = useState(false);
@@ -57,7 +59,7 @@ export function PartnerMatchWaitlist({
 
     navigator.clipboard.writeText(inviteUrl);
     setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2500);
+    scheduleTimeout(() => setCopiedLink(false), 2500);
   }
 
   async function handleJoinWaitlist(e: React.FormEvent) {

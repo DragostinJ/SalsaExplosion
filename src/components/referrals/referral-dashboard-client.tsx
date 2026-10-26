@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { redeemReferralCodeAction } from "@/actions/referral.actions";
+import { useTimeout } from "@/lib/hooks/use-timeout";
 
 export interface ReferralStats {
   friendsInvited: number;
@@ -36,6 +37,7 @@ export function ReferralDashboardClient({
     hasRedeemedWelcomeBonus: false,
   },
 }: ReferralDashboardClientProps) {
+  const { schedule: scheduleTimeout } = useTimeout();
   const [copied, setCopied] = useState(false);
   const [inputCode, setInputCode] = useState("");
   const [feedback, setFeedback] = useState<{
@@ -53,7 +55,7 @@ export function ReferralDashboardClient({
     try {
       await navigator.clipboard.writeText(referralUrl);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      scheduleTimeout(() => setCopied(false), 2500);
     } catch {
       // Fallback
     }

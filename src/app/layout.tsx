@@ -138,7 +138,7 @@ export default async function RootLayout({
     <ClerkProvider>
       <html
         lang="en"
-        className={`dark ${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} h-full antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} h-full antialiased`}
       >
         <head>
           <JsonLdSchema />

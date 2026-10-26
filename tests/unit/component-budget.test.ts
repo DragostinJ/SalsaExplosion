@@ -50,4 +50,33 @@ describe("Component File Size & Modularization Budget (Milestone H7)", () => {
       expect(content.length).toBeGreaterThan(50);
     }
   });
+
+  it("enforces that no server action file in src/actions exceeds the 25KB budget (Milestone Q7)", () => {
+    const actionsDir = path.resolve(process.cwd(), "src/actions");
+    function getActionFiles(dir: string): string[] {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      let files: string[] = [];
+      for (const entry of entries) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          files = files.concat(getActionFiles(full));
+        } else if (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx")) {
+          files.push(full);
+        }
+      }
+      return files;
+    }
+
+    const actionFiles = getActionFiles(actionsDir);
+    expect(actionFiles.length).toBeGreaterThan(10);
+
+    for (const filePath of actionFiles) {
+      const stats = fs.statSync(filePath);
+      const relative = path.relative(process.cwd(), filePath);
+      expect(
+        stats.size,
+        `Action file ${relative} exceeds 25KB budget (actual: ${stats.size} bytes)`
+      ).toBeLessThanOrEqual(25600);
+    }
+  });
 });

@@ -110,7 +110,7 @@ export default function Home() {
                     className="h-12 px-6 text-xs sm:text-sm font-black uppercase tracking-wider bg-brand hover:bg-brand-hover text-white rounded-xl shadow-xs transition-transform active:scale-[0.99]"
                   >
                     <Link href="/dashboard/schedule">
-                      <span>Thu &amp; Sun Classes →</span>
+                      <span>Thu &amp; Sun Classes</span>
                     </Link>
                   </Button>
                   <Button
@@ -119,10 +119,13 @@ export default function Home() {
                     className="h-12 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider border border-line hover:border-gold/40 bg-surface-3 text-ivory rounded-xl"
                   >
                     <Link href="/events">
-                      <span>Book Festival Passes →</span>
+                      <span>Festival Tickets</span>
                     </Link>
                   </Button>
                 </div>
+                <p className="text-xs text-ivory-muted mt-2">
+                  Weekly classes: pay at the door &middot; Festivals: book online
+                </p>
 
                 {/* Architectural Metrics Bar */}
                 <div className="mt-10 pt-6 border-t border-line grid grid-cols-3 gap-6 w-full">

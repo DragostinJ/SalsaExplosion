@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
   --font-display: var(--font-display), "Playfair Display", Georgia, serif;
   --color-background: hsl(var(--background));
@@ -114,34 +112,7 @@
     --input: 24 20% 16%;
     --ring: 45 93% 47%; /* #FBBF24 - Havana Gold */
     --radius: 0.75rem;
-  }
-
-  .dark {
-    /* Warm Havana Espresso-Obsidian Nocturne Palette */
-    --background: 24 25% 3%; /* #080706 */
-    --foreground: 40 20% 97%; /* #F5F2EB */
-    --card: 24 20% 6%; /* #0E0C0A */
-    --card-foreground: 40 20% 97%;
-    --popover: 24 20% 6%;
-    --popover-foreground: 40 20% 97%;
-
-    --primary: 347 77% 50%; /* #E11D48 */
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 175 80% 18%; /* Deep rich ocean teal for AAA contrast against white text */
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 24 18% 13%;
-    --muted-foreground: 38 18% 75%;
-
-    --accent: 25 95% 53%; /* #F97316 */
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 24 20% 16%;
-    --input: 24 20% 16%;
-    --ring: 45 93% 47%; /* #FBBF24 - Havana Gold */
+    color-scheme: dark;
   }
 }
 

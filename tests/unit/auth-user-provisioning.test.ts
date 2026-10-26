@@ -20,6 +20,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, canSwitchRoles, isBootstrapAdmin } from "@/lib/auth-user";
 import { getCurrentUserRoleAction } from "@/actions/management.actions";
+import { buildUser } from "./helpers/build-user";
 
 describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
   const mockedAuth = vi.mocked(auth);
@@ -133,24 +134,16 @@ describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
 
     it("returns active student role when authenticated student logs in", async () => {
       mockedAuth.mockResolvedValueOnce({ userId: "student_user_1" } as unknown as Awaited<ReturnType<typeof auth>>);
-      mockedPrismaUser.findUnique.mockResolvedValueOnce({
-        id: "student-db-1",
-        clerkId: "student_user_1",
-        email: "dancer@bournemouth.co.uk",
-        firstName: "Carlos",
-        lastName: "Valdes",
-        avatarUrl: null,
-        bio: null,
-        specialty: null,
-        yearsDancing: 5,
-        role: "STUDENT",
-        currentLevel: "BEGINNER",
-        preferredRole: "LEAD",
-        classCredits: 2,
-        stripeCustomerId: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      } as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>);
+      mockedPrismaUser.findUnique.mockResolvedValueOnce(
+        buildUser({
+          id: "student-db-1",
+          clerkId: "student_user_1",
+          email: "dancer@bournemouth.co.uk",
+          firstName: "Carlos",
+          lastName: "Valdes",
+          role: "STUDENT",
+        }) as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>
+      );
 
       const res = await getCurrentUserRoleAction();
       expect(res.role).toBe("STUDENT");
@@ -160,24 +153,16 @@ describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
     it("identifies bootstrap admin role accurately", async () => {
       vi.stubEnv("ADMIN_EMAILS", "enrique@salsaexplosion.co.uk");
       mockedAuth.mockResolvedValueOnce({ userId: "admin_user_1" } as unknown as Awaited<ReturnType<typeof auth>>);
-      mockedPrismaUser.findUnique.mockResolvedValueOnce({
-        id: "admin-db-1",
-        clerkId: "admin_user_1",
-        email: "enrique@salsaexplosion.co.uk",
-        firstName: "Enrique",
-        lastName: "Perez Valdes",
-        avatarUrl: null,
-        bio: null,
-        specialty: null,
-        yearsDancing: 25,
-        role: "ADMIN",
-        currentLevel: "ADVANCED",
-        preferredRole: "LEAD",
-        classCredits: 99,
-        stripeCustomerId: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      } as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>);
+      mockedPrismaUser.findUnique.mockResolvedValueOnce(
+        buildUser({
+          id: "admin-db-1",
+          clerkId: "admin_user_1",
+          email: "enrique@salsaexplosion.co.uk",
+          firstName: "Enrique",
+          lastName: "Perez Valdes",
+          role: "ADMIN",
+        }) as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>
+      );
 
       const res = await getCurrentUserRoleAction();
       expect(res.role).toBe("ADMIN");
@@ -189,24 +174,16 @@ describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
       vi.stubEnv("ALLOW_DEMO_ROLE_SWITCHING", "true");
       vi.stubEnv("DEMO_SWITCHER_EMAILS", "pitch@studio.com");
       mockedAuth.mockResolvedValueOnce({ userId: "demo_user_1" } as unknown as Awaited<ReturnType<typeof auth>>);
-      mockedPrismaUser.findUnique.mockResolvedValueOnce({
-        id: "demo-db-1",
-        clerkId: "demo_user_1",
-        email: "pitch@studio.com",
-        firstName: "Pitch",
-        lastName: "Owner",
-        avatarUrl: null,
-        bio: null,
-        specialty: null,
-        yearsDancing: 10,
-        role: "INSTRUCTOR",
-        currentLevel: "INTERMEDIATE",
-        preferredRole: "LEAD",
-        classCredits: 10,
-        stripeCustomerId: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      } as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>);
+      mockedPrismaUser.findUnique.mockResolvedValueOnce(
+        buildUser({
+          id: "demo-db-1",
+          clerkId: "demo_user_1",
+          email: "pitch@studio.com",
+          firstName: "Pitch",
+          lastName: "Owner",
+          role: "INSTRUCTOR",
+        }) as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>
+      );
 
       const res = await getCurrentUserRoleAction();
       expect(res).toEqual({ role: "INSTRUCTOR", canSwitchRoles: true });

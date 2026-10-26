@@ -11,6 +11,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
 import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
 import { PageHeader } from "@/components/layout/page-header";
 import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
@@ -133,70 +134,48 @@ export default async function StudentWalletPage() {
   }
 
   // Fetch all user wallet data concurrently inside a defensive try/catch
-  let subscription = null;
-  let eventRegistrations: Array<{
-    id: string;
-    userId: string;
-    eventTicketTierId: string;
-    qrCodeHash: string;
-    checkedIn: boolean;
-    paymentStatus: string;
-    role: string;
-    leadFollowRole?: string | null;
-    createdAt: Date;
-    event: {
-      title: string;
-      venueName: string;
-      venueAddress: string;
-      startDate: Date;
-      endDate: Date;
-    };
-    ticketTier: {
-      name: string;
-    };
-  }> = [];
-  let upcomingBookings: Array<{
-    id: string;
-    danceRole: string;
-    classSession: {
-      id: string;
-      title: string;
-      startTime: Date;
-      endTime: Date;
-      room: string;
-      instructor: {
-        firstName: string | null;
-        lastName: string | null;
+  type WalletEventRegistration = Prisma.EventRegistrationGetPayload<{
+    include: {
+      event: {
+        select: {
+          title: true;
+          venueName: true;
+          venueAddress: true;
+          startDate: true;
+          endDate: true;
+        };
+      };
+      ticketTier: {
+        select: {
+          name: true;
+        };
       };
     };
-  }> = [];
-  let merchReservations: Array<{
-    id: string;
-    itemName: string;
-    size: string;
-    pricePounds: number;
-    pickupLocation: string;
-    status: string;
-    createdAt: Date;
-  }> = [];
-  let privateLessons: Array<{
-    id: string;
-    instructorName: string;
-    focusTopic: string;
-    packageType: string;
-    preferredSlot: string;
-    totalPricePounds: number;
-    status: string;
-    createdAt: Date;
-  }> = [];
-  let transactions: Array<{
-    id: string;
-    amount: number;
-    balanceAfter: number;
-    type: string;
-    description: string;
-    createdAt: Date;
-  }> = [];
+  }>;
+
+  type WalletBooking = Prisma.BookingGetPayload<{
+    include: {
+      classSession: {
+        include: {
+          instructor: {
+            select: { firstName: true; lastName: true };
+          };
+        };
+      };
+    };
+  }>;
+
+  type WalletMerchReservation = Prisma.MerchReservationGetPayload<object>;
+  type WalletPrivateLesson = Prisma.PrivateLessonBookingGetPayload<object>;
+  type WalletTransaction = Prisma.CreditLedgerGetPayload<object>;
+  type WalletSubscription = Prisma.SubscriptionGetPayload<object> | null;
+
+  let subscription: WalletSubscription = null;
+  let eventRegistrations: WalletEventRegistration[] = [];
+  let upcomingBookings: WalletBooking[] = [];
+  let merchReservations: WalletMerchReservation[] = [];
+  let privateLessons: WalletPrivateLesson[] = [];
+  let transactions: WalletTransaction[] = [];
 
   let loadFailed = isFallbackUser(user);
 
@@ -273,11 +252,11 @@ export default async function StudentWalletPage() {
     ]);
 
     subscription = sub;
-    eventRegistrations = reg as unknown as typeof eventRegistrations;
-    upcomingBookings = book as unknown as typeof upcomingBookings;
-    merchReservations = merch as unknown as typeof merchReservations;
-    privateLessons = priv as unknown as typeof privateLessons;
-    transactions = tx as unknown as typeof transactions;
+    eventRegistrations = reg;
+    upcomingBookings = book;
+    merchReservations = merch;
+    privateLessons = priv;
+    transactions = tx;
   } catch (walletErr) {
     loadFailed = true;
     console.error("[StudentWalletPage:dataFetch]", walletErr);

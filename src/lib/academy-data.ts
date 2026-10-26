@@ -321,6 +321,10 @@ export interface CanonicalUpcomingEvent {
   posterUrl: string;
 }
 
+// Canonical source of truth for all academy events.
+// Database seed (prisma/seed.ts) derives published events from this list via prisma/seed-data.ts.
+// Public routes (/events, /events/[slug]) query Prisma first and fall back to UPCOMING_EVENTS
+// with ticket purchases disabled (isCanonicalFallback) if the database is cold or degraded.
 export const UPCOMING_EVENTS: CanonicalUpcomingEvent[] = [
   {
     slug: "halloween-fancy-dress-latin-party-2026",
@@ -337,7 +341,7 @@ export const UPCOMING_EVENTS: CanonicalUpcomingEvent[] = [
     posterUrl: "/images/halloween-latin-party-poster.png",
   },
   {
-    slug: "sbk-night-extravaganza-2026",
+    slug: "sbk-night-extravaganza-nov-2026",
     title: "SB&K Night! Extravaganza",
     dateBadge: "14 NOV 2026",
     startDateIso: "2026-11-14T19:30:00Z",

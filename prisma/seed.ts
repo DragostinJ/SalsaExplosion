@@ -1,5 +1,6 @@
 import {
   PrismaClient,
+  Prisma,
   Role,
   DanceLevel,
   DanceStyle,
@@ -10,6 +11,7 @@ import {
   TransactionType,
   TicketPaymentStatus,
 } from "@prisma/client";
+import { buildSeedEventsFromCanonical } from "./seed-data";
 
 const prisma = new PrismaClient();
 
@@ -680,130 +682,27 @@ async function main() {
     },
   });
 
-  // 7. Create Premiere Events Lineup — Official DANZA! 2026 | 2027 Calendar (BOH Studios Bournemouth)
-  // Event 1: Halloween Fancy Dress Latin Party (Saturday 31st October 2026)
-  const halloweenEvent = await prisma.event.create({
-    data: {
-      slug: "halloween-fancy-dress-latin-party-2026",
-      title: "★ HALLOWEEN FANCY DRESS PARTY ★ — South Coast Cuban & Latin Night",
-      description:
-        "The South Coast’s premier Cuban Dance event, Halloween Fancy Dress Edition! Alex Spindlove is bringing The Bachata flavour to our Halloween party. A night dedicated to Cuban, Latin, Kizomba music & dance featuring top South Coast teachers Anna, Xaris, Alex (BOH Studios) PLUS The Salsa Explosion team (Enrique, Moe Flex, Justyna, Arturas & Jim) with DJ Enrique SB&K Night. Best costume prizes: 1st Prize - 1 Made in Cuba Weekend, 2nd Prize - 2 Free Dance Classes, 3rd Prize - 1 Free Entry to Our Party!",
-      venueName: "BOH Studios Bournemouth",
-      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
-      startDate: new Date("2026-10-31T20:00:00Z"),
-      endDate: new Date("2026-11-01T02:00:00Z"),
-      guestArtists: ["Alex Spindlove", "Anna", "Xaris", "Alex (BOH)", "Enrique Perez Valdes", "Moe Flex", "DJ Enrique"],
-      status: EventStatus.PUBLISHED,
-      ticketTiers: {
-        create: [
-          {
-            name: "Evening Party & All Classes Pass (8PM - 2AM)",
-            description:
-              "8:15 PM Bachata Improvers onwards + 9:15 PM Rueda & Salsa classes + 10:00 PM SB&K Social Party until 2:00 AM + Costume competition entry.",
-            priceInCents: 1500,
-            totalCapacity: 120,
-            maxLeads: 60,
-            maxFollows: 60,
-            salesEndAt: new Date("2026-10-31T19:30:00Z"),
-          },
-          {
-            name: "SB&K Social Dance Party Only (10PM - 2AM)",
-            description:
-              "Admission from 10:00 PM for Salsa, Bachata & Kizomba social dancing with DJ Enrique & costume prizes.",
-            priceInCents: 1000,
-            totalCapacity: 150,
-            salesEndAt: new Date("2026-10-31T23:00:00Z"),
-          },
-        ],
-      },
-    },
-    include: { ticketTiers: true },
-  });
+  // 7. Create Premiere Events Lineup — Canonical UPCOMING_EVENTS derived via seed-data.ts
+  const canonicalSeedEvents = buildSeedEventsFromCanonical();
+  type SeededCreatedEvent = Prisma.EventGetPayload<{ include: { ticketTiers: true } }>;
+  const seededEventsMap = new Map<string, SeededCreatedEvent>();
 
-  // Event 2: SB&K Night Extravaganza (Saturday 14th November 2026)
-  await prisma.event.create({
-    data: {
-      slug: "sbk-night-extravaganza-nov-2026",
-      title: "SB&K NIGHT! EXTRAVAGANZA — Salsa, Bachata, Timba & Kizomba",
-      description:
-        "Salsa Explosion presents SB&K Night at BOH Studios Bournemouth! 2 workshop rooms from 8:00 PM followed by our high-energy 4-genre Latin social fiesta until 1:00 AM with DJ Enrique & guest maestros.",
-      venueName: "BOH Studios Bournemouth",
-      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
-      startDate: new Date("2026-11-14T20:00:00Z"),
-      endDate: new Date("2026-11-15T01:00:00Z"),
-      guestArtists: ["Enrique Perez Valdes", "Justyna", "Arturas", "DJ Enrique"],
-      status: EventStatus.PUBLISHED,
-      ticketTiers: {
-        create: [
-          {
-            name: "Workshops + Party Pass (8PM - 1AM)",
-            description: "Admission to 8PM Bachata & Cuban Salsa classes plus full social party.",
-            priceInCents: 1200,
-            totalCapacity: 100,
-            maxLeads: 50,
-            maxFollows: 50,
-            salesEndAt: new Date("2026-11-14T19:30:00Z"),
-          },
-          {
-            name: "Fiesta Social Pass Only (From 9:30 PM)",
-            description: "Late entry for Salsa, Bachata & Kizomba dancing until 1:00 AM.",
-            priceInCents: 800,
-            totalCapacity: 120,
-            salesEndAt: new Date("2026-11-14T22:30:00Z"),
-          },
-        ],
+  for (const eventData of canonicalSeedEvents) {
+    const { ticketTiers, ...rest } = eventData;
+    const createdEvent = await prisma.event.create({
+      data: {
+        ...rest,
+        ticketTiers: {
+          create: ticketTiers,
+        },
       },
-    },
-  });
+      include: { ticketTiers: true },
+    });
+    seededEventsMap.set(eventData.slug, createdEvent);
+  }
 
-  // Event 3: MADE IN CUBA Dance Weekend 2026 (4–6 December 2026) — Flagship Weekend Festival
-  const madeInCubaWeekendEvent = await prisma.event.create({
-    data: {
-      slug: "made-in-cuba-dance-weekend-2026",
-      title: "MADE IN CUBA — Dance Weekend 2026",
-      description:
-        "Celebrating 33 Years of Salsa Explosion! 3 nights of parties, 2 days of workshops, 2 spectacular shows, and social dancing until 2:00 AM across two dedicated rooms (Salsa Room & Bachata Room). Friday at The Woodlands Ballroom; Saturday and Sunday at BOH Studios Bournemouth.",
-      venueName: "BOH Studios Bournemouth",
-      venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
-      startDate: new Date("2026-12-04T18:00:00Z"),
-      endDate: new Date("2026-12-06T23:00:00Z"),
-      guestArtists: ["Enrique Perez Valdes", "Moe Flex", "Yaniel Castillo", "DJ Enrique"],
-      status: EventStatus.PUBLISHED,
-      ticketTiers: {
-        create: [
-          {
-            name: "Full 3-Day Congress Pass (Early Bird)",
-            description:
-              "All workshops (Friday, Saturday & Sunday) + All Night Parties + Masterclass Certificate",
-            priceInCents: 9500,
-            totalCapacity: 80,
-            maxLeads: 40,
-            maxFollows: 40,
-            salesEndAt: new Date("2026-12-04T17:00:00Z"),
-          },
-          {
-            name: "Saturday Masterclass Bootcamp",
-            description:
-              "Saturday 5-hour Cuban Masterclass intensive (Casino turns, Afro-Cuban isolation & dynamic partnerwork)",
-            priceInCents: 6000,
-            totalCapacity: 50,
-            maxLeads: 25,
-            maxFollows: 25,
-            salesEndAt: new Date("2026-12-04T17:00:00Z"),
-          },
-          {
-            name: "Saturday Night Havana Fiesta Pass",
-            description:
-              "Entry to the Saturday Night Gala Fiesta with live Timba DJ sets, Cuban dance shows & social dancing",
-            priceInCents: 2000,
-            totalCapacity: 150,
-            salesEndAt: new Date("2026-12-05T21:00:00Z"),
-          },
-        ],
-      },
-    },
-    include: { ticketTiers: true },
-  });
+  const halloweenEvent = seededEventsMap.get("halloween-fancy-dress-latin-party-2026")!;
+  const madeInCubaWeekendEvent = seededEventsMap.get("made-in-cuba-dance-weekend-2026")!;
 
   // Event 4: Salsa Explosion Xmas Party (Saturday 19th December 2026)
   await prisma.event.create({

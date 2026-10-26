@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   ),
   title: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
   description:
-    "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth, Rueda de Casino, end-of-class recaps, and congress passes.",
+    "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth (£12 for 1 class / £14 for 2 classes at the door), Rueda de Casino, and online festival passes for Made in Cuba Dance Weekend.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },

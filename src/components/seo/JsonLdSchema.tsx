@@ -17,14 +17,14 @@ export function JsonLdSchema() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["DanceSchool", "LocalBusiness"],
+        "@type": ["DanceGroup", "DanceSchool", "LocalBusiness"],
         "@id": "https://salsaexplosion.co.uk/#organization",
         name: "Salsa Explosion UK — Bournemouth Cuban Salsa Academy",
         description:
-          "Bournemouth's authentic Cuban Salsa & Rueda de Casino academy directed by Maestro Enrique Perez Valdes. Strictly Thursdays and Sundays at BOH Studios Bournemouth.",
+          "Bournemouth's authentic Cuban Salsa & Rueda de Casino academy directed by Maestro Enrique Perez Valdes. Strictly Thursdays and Sundays at BOH Studios Bournemouth. Drop-in welcome, no partner required.",
         url: "https://salsaexplosion.co.uk",
         telephone: VENUE_INFO.phoneE164,
-        priceRange: "£10 - £95",
+        priceRange: "£12 - £14 (Weekly Classes at Door) | £12 - £95 (Festival Passes)",
         founder: {
           "@type": "Person",
           name: ACADEMY_METRICS.founderName,

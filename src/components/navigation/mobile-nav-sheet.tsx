@@ -267,6 +267,19 @@ export function MobileNavSheet({
             </nav>
           </div>
 
+          {/* Unauthenticated Student Login CTA */}
+          {!role && (
+            <div className="pt-2 border-t">
+              <Link
+                href="/sign-in"
+                onClick={onClose}
+                className="flex items-center justify-center gap-2 w-full rounded-xl bg-primary-base py-2.5 text-xs font-bold text-white shadow-md hover:bg-primary-hover transition-colors"
+              >
+                <span>Student Portal Sign In →</span>
+              </Link>
+            </div>
+          )}
+
           {/* Explore Hub (Music, Merch, FAQs, Community) */}
           <div className="pt-2 border-t">
             <div className="flex items-center gap-1.5 px-2 mb-2 text-xs font-bold uppercase tracking-wider text-text-muted">

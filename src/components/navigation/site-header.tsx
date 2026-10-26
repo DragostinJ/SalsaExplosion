@@ -148,15 +148,17 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
     },
   ];
 
-  // In authenticated mode, insert member tools right after Passes
+  // In authenticated mode, insert member tools (Progression, Recaps, Wallet)
   const studentLinks = isSignedIn
     ? [
-        publicLinks[0], // Schedule
-        publicLinks[1], // Events
-        publicLinks[2], // Passes
-        ...memberOnlyLinks, // Progression, Wallet, Recaps
-        publicLinks[3], // Venues
-        publicLinks[4], // About
+        publicLinks[0], // Thu & Sun Classes
+        publicLinks[1], // Festivals & Tickets
+        publicLinks[2], // Rueda Dictionary
+        publicLinks[3], // Song Trainer
+        memberOnlyLinks[0], // Progression
+        memberOnlyLinks[2], // Recaps
+        memberOnlyLinks[1], // Wallet
+        publicLinks[4], // About & Venue
       ]
     : publicLinks;
 
@@ -426,6 +428,12 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
             </div>
           ) : (
             <div className="flex items-center gap-2 sm:gap-3">
+              <Link
+                href="/sign-in"
+                className="text-xs font-semibold text-stone-300 hover:text-white transition-colors py-2 px-1"
+              >
+                Sign In
+              </Link>
               <Link
                 href="/venues"
                 className="hidden lg:inline-flex items-center gap-1.5 text-xs font-bold text-stone-300 hover:text-white transition-colors py-2 px-1"

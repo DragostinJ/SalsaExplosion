@@ -3,24 +3,13 @@
 import { useState, useTransition, useMemo } from "react";
 import Link from "next/link";
 import {
-  Video,
   Play,
-  Sparkles,
   Calendar,
   Search,
   PlusCircle,
   X,
-  Gauge,
-  UploadCloud,
-  Film,
-  Trash2,
-  Loader2,
-  Link2,
-  Check,
 } from "lucide-react";
-import { DanceLevel, Role } from "@prisma/client";
 import {
-  AttendedRecapItem,
   attachClassRecapAction,
   generateRecapUploadUrlAction,
 } from "@/actions/recap.actions";
@@ -30,113 +19,16 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 
-interface ClassRecapVaultProps {
-  initialRecaps: AttendedRecapItem[];
-  allStudioRecaps?: AttendedRecapItem[];
-  userRole?: Role | null;
-  activeClassesForStaff?: Array<{ id: string; title: string; minLevel: DanceLevel }>;
-}
-
-function getSafeVideoEmbed(rawUrl: string): { type: "youtube" | "html5" | "invalid"; safeUrl: string } {
-  try {
-    const url = new URL(rawUrl);
-    if (url.protocol !== "https:" && url.protocol !== "http:") {
-      return { type: "invalid", safeUrl: "" };
-    }
-
-    const host = url.hostname.toLowerCase();
-    // Validate YouTube
-    if (host === "www.youtube.com" || host === "youtube.com" || host === "m.youtube.com") {
-      const v = url.searchParams.get("v");
-      if (v && /^[a-zA-Z0-9_-]{11}$/.test(v)) {
-        return { type: "youtube", safeUrl: `https://www.youtube-nocookie.com/embed/${v}` };
-      }
-      const match = url.pathname.match(/^\/embed\/([a-zA-Z0-9_-]{11})/);
-      if (match) {
-        return { type: "youtube", safeUrl: `https://www.youtube-nocookie.com/embed/${match[1]}` };
-      }
-    } else if (host === "youtu.be") {
-      const id = url.pathname.slice(1).split("/")[0]?.split("?")[0];
-      if (id && /^[a-zA-Z0-9_-]{11}$/.test(id)) {
-        return { type: "youtube", safeUrl: `https://www.youtube-nocookie.com/embed/${id}` };
-      }
-    }
-
-    // Direct video stream (mp4, webm, etc.) - must be HTTPS
-    if (url.protocol === "https:") {
-      return { type: "html5", safeUrl: url.toString() };
-    }
-
-    return { type: "invalid", safeUrl: "" };
-  } catch {
-    return { type: "invalid", safeUrl: "" };
-  }
-}
-
-const POPULAR_CUBAN_FIGURES = [
-  "Guapea",
-  "Dile Que No",
-  "Enchufla",
-  "Enchufla Doble",
-  "Vacilala",
-  "Setenta",
-  "Sombrero",
-  "Exhibela",
-  "Prima con la Hermana",
-  "Kentucky",
-  "Evelyn",
-  "Paseala",
-] as const;
-
-function uploadFileToSignedUrl(
-  signedUrl: string,
-  file: File,
-  onProgress: (pct: number) => void
-): Promise<void> {
-  if (signedUrl === "DEMO_DIRECT_BYPASS") {
-    return new Promise((resolve) => {
-      let pct = 15;
-      onProgress(pct);
-      const timer = setInterval(() => {
-        pct += 25;
-        if (pct >= 100) {
-          clearInterval(timer);
-          onProgress(100);
-          resolve();
-        } else {
-          onProgress(pct);
-        }
-      }, 100);
-    });
-  }
-
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("PUT", signedUrl, true);
-    xhr.setRequestHeader("Content-Type", file.type);
-    xhr.upload.onprogress = (evt) => {
-      if (evt.lengthComputable) {
-        const pct = Math.round((evt.loaded / evt.total) * 100);
-        onProgress(pct);
-      }
-    };
-    xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        onProgress(100);
-        resolve();
-      } else {
-        reject(new Error(`Upload failed with status ${xhr.status}`));
-      }
-    };
-    xhr.onerror = () => reject(new Error("Network error during video upload."));
-    xhr.send(file);
-  });
-}
+import {
+  type AttendedRecapItem,
+  type ClassRecapVaultProps,
+  uploadFileToSignedUrl,
+  POPULAR_CUBAN_FIGURES,
+} from "./vault/recap-types";
+import { RecapVideoPlayer } from "./vault/recap-video-player";
+import { RecapStaffModal } from "./vault/recap-staff-modal";
 
 export function ClassRecapVault({
   initialRecaps,
@@ -358,147 +250,11 @@ export function ClassRecapVault({
       <div className="grid gap-6 lg:grid-cols-12 items-start">
         {/* Left Column (7 Cols): Active Recap Video & Details */}
         <div className="lg:col-span-7 space-y-4">
-          {selectedRecap ? (
-            <Card className="border shadow-md overflow-hidden">
-              {/* Responsive Video Container */}
-              <div className="relative aspect-video w-full bg-black">
-                {(() => {
-                  const embed = getSafeVideoEmbed(selectedRecap.recapVideoUrl);
-                  if (embed.type === "youtube") {
-                    return (
-                      <iframe
-                        src={embed.safeUrl}
-                        title={selectedRecap.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="h-full w-full border-0"
-                      />
-                    );
-                  }
-                  if (embed.type === "html5") {
-                    return (
-                      <video
-                        id="recap-video-player"
-                        key={embed.safeUrl}
-                        controls
-                        playsInline
-                        className="h-full w-full object-contain"
-                        src={embed.safeUrl}
-                      />
-                    );
-                  }
-                  return (
-                    <div className="flex h-full w-full items-center justify-center p-6 text-center text-sm text-muted-foreground">
-                      <span>Video format not supported or invalid URL.</span>
-                    </div>
-                  );
-                })()}
-              </div>
-
-              {/* Video Playback Speed Toolbar */}
-              <div className="flex items-center justify-between border-b bg-muted/30 px-4 py-2 text-xs">
-                <span className="flex items-center gap-1.5 text-muted-foreground font-medium">
-                  <Gauge className="h-3.5 w-3.5 text-amber-400" />
-                  <span>Playback Speed:</span>
-                </span>
-                <div className="flex items-center gap-1">
-                  {[0.75, 1.0, 1.25].map((speed) => (
-                    <button
-                      key={speed}
-                      type="button"
-                      onClick={() => handleSpeedChange(speed)}
-                      className={`rounded px-2 py-0.5 text-[11px] font-bold transition-all ${
-                        playbackSpeed === speed
-                          ? "bg-amber-500 text-stone-950 shadow-xs"
-                          : "text-muted-foreground hover:bg-muted"
-                      }`}
-                    >
-                      {speed === 0.75 ? "0.75x (Slow-Mo)" : `${speed}x`}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <CardHeader className="space-y-3 pb-3">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <Badge className="bg-amber-500 text-stone-950 font-bold text-xs">
-                    {selectedRecap.minLevel}
-                  </Badge>
-                  {selectedRecap.danceRole && (
-                    <Badge
-                      className={
-                        selectedRecap.danceRole === "LEAD"
-                          ? "bg-blue-700 text-white text-xs"
-                          : "bg-rose-700 text-white text-xs"
-                      }
-                    >
-                      You Danced as {selectedRecap.danceRole}
-                    </Badge>
-                  )}
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <TeacherAvatar
-                    name={selectedRecap.instructorName}
-                    avatarUrl={selectedRecap.instructorAvatarUrl}
-                    size="md"
-                    className="mt-1"
-                  />
-                  <div>
-                    <CardTitle className="text-lg sm:text-xl font-extrabold leading-snug">
-                      {selectedRecap.title}
-                    </CardTitle>
-                    <CardDescription className="text-xs text-muted-foreground mt-0.5">
-                      Taught by Maestro {selectedRecap.instructorName} • {selectedRecap.room}
-                    </CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-
-              <CardContent className="space-y-4 pt-0">
-                {/* Figures Practiced Badges */}
-                <div className="space-y-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Cuban Figures & Calls Practiced:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {selectedRecap.recapFigures.map((fig) => (
-                      <Badge
-                        key={fig}
-                        variant="secondary"
-                        className="px-2.5 py-1 text-xs font-semibold border"
-                      >
-                        <Sparkles className="mr-1 h-3 w-3 text-amber-400" />
-                        {fig}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Maestro Notes */}
-                {selectedRecap.recapNotes && (
-                  <div className="rounded-xl border bg-muted/20 p-3.5 space-y-1 text-xs">
-                    <span className="font-bold text-amber-300">
-                      Maestro Coaching Notes:
-                    </span>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {selectedRecap.recapNotes}
-                    </p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          ) : (
-            <Card className="py-12 text-center border">
-              <CardContent>
-                <Video className="mx-auto h-12 w-12 text-muted-foreground/30" />
-                <h3 className="mt-3 text-base font-bold">No Recap Selected</h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Select a class from the list to watch the end-of-class recap video.
-                </p>
-              </CardContent>
-            </Card>
-          )}
+          <RecapVideoPlayer
+            selectedRecap={selectedRecap}
+            playbackSpeed={playbackSpeed}
+            handleSpeedChange={handleSpeedChange}
+          />
         </div>
 
         {/* Right Column (5 Cols): Search & List of Attended Classes */}
@@ -687,254 +443,30 @@ export function ClassRecapVault({
       </div>
 
       {/* Staff Modal: Attach End-of-Class Recap Video */}
-      {showAttachModal && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-xs"
-        >
-          <div className="relative w-full max-w-lg rounded-3xl border border-amber-500/30 bg-card p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between border-b pb-3">
-              <div className="flex items-center gap-2">
-                <Video className="h-5 w-5 text-amber-600" />
-                <h3 className="text-base font-extrabold">Attach End-of-Class Recap Video</h3>
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowAttachModal(false)}
-                className="rounded-full p-1 text-muted-foreground hover:text-foreground"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-
-            {attachFeedback && (
-              <div
-                className={`rounded-xl border p-3 text-xs font-semibold ${
-                  attachFeedback.type === "success"
-                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
-                    : "border-destructive/40 bg-destructive/10 text-destructive"
-                }`}
-              >
-                {attachFeedback.text}
-              </div>
-            )}
-
-            <form onSubmit={handleAttachSubmit} className="space-y-3.5 text-xs">
-              <div className="space-y-1">
-                <label className="font-semibold">Class Session</label>
-                <select
-                  aria-label="Select class session"
-                  value={attachSessionId}
-                  onChange={(e) => setAttachSessionId(e.target.value)}
-                  className="w-full rounded-xl border bg-background px-3 py-2 font-semibold"
-                >
-                  {activeClassesForStaff.map((cls) => (
-                    <option key={cls.id} value={cls.id}>
-                      [{cls.minLevel}] {cls.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Video Source Switcher */}
-              <div className="space-y-2">
-                <div className="flex rounded-xl bg-muted/60 p-1 text-[11px] font-bold">
-                  <button
-                    type="button"
-                    onClick={() => setVideoSourceMode("FILE")}
-                    className={`flex-1 rounded-lg py-1.5 transition-all flex items-center justify-center gap-1.5 ${
-                      videoSourceMode === "FILE"
-                        ? "bg-background text-foreground shadow-xs"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    <Film className="h-3.5 w-3.5 text-amber-400" />
-                    <span>Upload Video File (Phone / PC)</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setVideoSourceMode("URL")}
-                    className={`flex-1 rounded-lg py-1.5 transition-all flex items-center justify-center gap-1.5 ${
-                      videoSourceMode === "URL"
-                        ? "bg-background text-foreground shadow-xs"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    <Link2 className="h-3.5 w-3.5 text-amber-400" />
-                    <span>Paste Video Link (YouTube / URL)</span>
-                  </button>
-                </div>
-
-                {videoSourceMode === "FILE" ? (
-                  <div className="space-y-2">
-                    {!selectedFile ? (
-                      <label
-                        onDragOver={(e) => {
-                          e.preventDefault();
-                          setIsDragging(true);
-                        }}
-                        onDragLeave={() => setIsDragging(false)}
-                        onDrop={(e) => {
-                          e.preventDefault();
-                          setIsDragging(false);
-                          const f = e.dataTransfer.files?.[0];
-                          if (f) setSelectedFile(f);
-                        }}
-                        className={`flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 cursor-pointer transition-all ${
-                          isDragging
-                            ? "border-amber-500 bg-amber-500/10"
-                            : "border-muted-foreground/30 hover:border-amber-500/60 hover:bg-muted/30"
-                        }`}
-                      >
-                        <UploadCloud className="h-7 w-7 text-amber-400 mb-1.5" />
-                        <span className="font-bold text-xs text-foreground text-center">
-                          Tap to choose or record recap video
-                        </span>
-                        <span className="text-[10px] text-muted-foreground mt-0.5">
-                          Direct from camera roll or files (MP4, MOV up to 100MB)
-                        </span>
-                        <input
-                          type="file"
-                          accept="video/mp4,video/quicktime,video/webm"
-                          capture="environment"
-                          className="sr-only"
-                          onChange={(e) => {
-                            const f = e.target.files?.[0];
-                            if (f) setSelectedFile(f);
-                          }}
-                        />
-                      </label>
-                    ) : (
-                      <div className="flex items-center justify-between rounded-xl border bg-muted/40 p-3">
-                        <div className="flex items-center gap-2.5 min-w-0">
-                          <Film className="h-4 w-4 text-amber-400 shrink-0" />
-                          <div className="min-w-0">
-                            <p className="text-xs font-bold truncate">{selectedFile.name}</p>
-                            <p className="text-[10px] text-muted-foreground">
-                              {(selectedFile.size / (1024 * 1024)).toFixed(1)} MB • Ready to upload
-                            </p>
-                          </div>
-                        </div>
-                        {!isPending && (
-                          <button
-                            type="button"
-                            onClick={() => setSelectedFile(null)}
-                            className="rounded p-1 text-muted-foreground hover:text-destructive"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
-                        )}
-                      </div>
-                    )}
-
-                    {isPending && uploadProgress > 0 && (
-                      <div className="space-y-1 rounded-xl border bg-muted/20 p-2.5">
-                        <div className="flex justify-between text-[11px] font-semibold text-muted-foreground">
-                          <span className="flex items-center gap-1.5">
-                            <Loader2 className="h-3 w-3 animate-spin text-amber-600" />
-                            Uploading to studio storage...
-                          </span>
-                          <span>{uploadProgress}%</span>
-                        </div>
-                        <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-                          <div
-                            className="h-full bg-amber-500 transition-all duration-200"
-                            style={{ width: `${uploadProgress}%` }}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="space-y-1">
-                    <input
-                      type="url"
-                      placeholder="https://... (YouTube, Vimeo, or direct MP4 link)"
-                      value={attachVideoUrl}
-                      onChange={(e) => setAttachVideoUrl(e.target.value)}
-                      className="w-full rounded-xl border bg-background px-3 py-2 font-medium"
-                    />
-                    <p className="text-[10px] text-muted-foreground">
-                      Paste a public YouTube watch link, Vimeo link, or HTTPS video URL.
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Figures Practiced & Quick Chips */}
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <label className="font-semibold">Cuban Figures Practiced</label>
-                  <span className="text-[10px] text-muted-foreground">Tap chips to toggle</span>
-                </div>
-
-                <div className="flex flex-wrap gap-1 mb-1.5">
-                  {POPULAR_CUBAN_FIGURES.map((figure) => {
-                    const active = attachFiguresCsv
-                      .split(",")
-                      .map((f) => f.trim().toLowerCase())
-                      .includes(figure.toLowerCase());
-                    return (
-                      <button
-                        key={figure}
-                        type="button"
-                        onClick={() => handleToggleFigureTag(figure)}
-                        className={`rounded-lg px-2 py-0.5 text-[10px] font-semibold transition-all ${
-                          active
-                            ? "bg-amber-500 text-stone-950 shadow-xs"
-                            : "bg-muted text-muted-foreground hover:bg-muted/80"
-                        }`}
-                      >
-                        {active && <Check className="inline h-2.5 w-2.5 mr-1" />}
-                        {figure}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <input
-                  type="text"
-                  required
-                  placeholder="Guapea, Dile Que No, Enchufla Doble, Vacilala"
-                  value={attachFiguresCsv}
-                  onChange={(e) => setAttachFiguresCsv(e.target.value)}
-                  className="w-full rounded-xl border bg-background px-3 py-2"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-semibold">Maestro Coaching Notes & Tips</label>
-                <textarea
-                  rows={3}
-                  value={attachNotes}
-                  onChange={(e) => setAttachNotes(e.target.value)}
-                  className="w-full rounded-xl border bg-background px-3 py-2"
-                />
-              </div>
-
-              <div className="flex items-center justify-end gap-2 pt-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setShowAttachModal(false)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  size="sm"
-                  disabled={isPending}
-                  className="bg-amber-500 text-stone-950 font-bold hover:bg-amber-400"
-                >
-                  {isPending ? "Publishing Recap..." : "Publish Recap to Students"}
-                </Button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <RecapStaffModal
+        showAttachModal={showAttachModal}
+        setShowAttachModal={setShowAttachModal}
+        attachFeedback={attachFeedback}
+        handleAttachSubmit={handleAttachSubmit}
+        attachSessionId={attachSessionId}
+        setAttachSessionId={setAttachSessionId}
+        activeClassesForStaff={activeClassesForStaff}
+        videoSourceMode={videoSourceMode}
+        setVideoSourceMode={setVideoSourceMode}
+        selectedFile={selectedFile}
+        setSelectedFile={setSelectedFile}
+        isDragging={isDragging}
+        setIsDragging={setIsDragging}
+        isPending={isPending}
+        uploadProgress={uploadProgress}
+        attachVideoUrl={attachVideoUrl}
+        setAttachVideoUrl={setAttachVideoUrl}
+        attachFiguresCsv={attachFiguresCsv}
+        setAttachFiguresCsv={setAttachFiguresCsv}
+        handleToggleFigureTag={handleToggleFigureTag}
+        attachNotes={attachNotes}
+        setAttachNotes={setAttachNotes}
+      />
     </div>
   );
 }

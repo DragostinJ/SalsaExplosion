@@ -2,18 +2,10 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import {
-  Play,
-  Pause,
-  RotateCcw,
   Headphones,
   Music,
   ExternalLink,
-  Sparkles,
-  AlertTriangle,
   Compass,
-  BookOpen,
-  X,
-  Clock,
   Radio,
   Volume2,
   VolumeX,
@@ -25,10 +17,13 @@ import {
   SongAnatomy,
   SongSegment,
   resolveCurriculumMove,
-  SegmentColorTheme,
 } from "@/lib/constants/timba-song-anatomy";
 import { CurriculumSkillItem } from "@/lib/constants/cuban-curriculum-2027";
 import { CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
+import { TimbaBeatBar } from "./timba-player/timba-beat-bar";
+import { TimbaTimelineScrubber } from "./timba-player/timba-timeline-scrubber";
+import { TimbaDancerHud } from "./timba-player/timba-dancer-hud";
+import { YouTubeIcon, formatSeconds } from "./timba-player/timba-types";
 
 interface YTPlayerInstance {
   playVideo: () => void;
@@ -65,81 +60,6 @@ declare global {
 interface TimbaSongAnatomyPlayerProps {
   initialSongId?: string;
   className?: string;
-}
-
-function YouTubeIcon({ className = "h-4 w-4" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-    </svg>
-  );
-}
-
-const THEME_STYLES: Record<
-  SegmentColorTheme,
-  {
-    bgActive: string;
-    bgInactive: string;
-    border: string;
-    text: string;
-    badge: string;
-    pillBg: string;
-  }
-> = {
-  slate: {
-    bgActive: "bg-stone-800/80 border-stone-500/50 text-stone-100",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
-    border: "border-stone-500/40",
-    text: "text-stone-100 font-bold",
-    badge: "border-stone-500/40 bg-stone-800/80 text-stone-200 font-bold",
-    pillBg: "bg-stone-500",
-  },
-  blue: {
-    bgActive: "bg-sky-950/60 border-sky-500/40 text-sky-200",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
-    border: "border-sky-500/40",
-    text: "text-sky-200 font-bold",
-    badge: "border-sky-500/40 bg-sky-950/60 text-sky-200 font-bold",
-    pillBg: "bg-sky-500",
-  },
-  emerald: {
-    bgActive: "bg-emerald-950/60 border-emerald-500/40 text-emerald-200",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
-    border: "border-emerald-500/40",
-    text: "text-emerald-200 font-bold",
-    badge: "border-emerald-500/40 bg-emerald-950/60 text-emerald-200 font-bold",
-    pillBg: "bg-emerald-500",
-  },
-  amber: {
-    bgActive: "bg-amber-950/60 border-amber-500/40 text-amber-200",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
-    border: "border-amber-500/40",
-    text: "text-amber-200 font-bold",
-    badge: "border-amber-500/40 bg-amber-950/60 text-amber-200 font-bold",
-    pillBg: "bg-amber-500",
-  },
-  purple: {
-    bgActive: "bg-purple-950/60 border-purple-500/40 text-purple-200",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
-    border: "border-purple-500/40",
-    text: "text-purple-200 font-bold",
-    badge: "border-purple-500/40 bg-purple-950/60 text-purple-200 font-bold",
-    pillBg: "bg-purple-500",
-  },
-  red: {
-    bgActive: "bg-rose-950/60 border-rose-500/40 text-rose-200",
-    bgInactive: "bg-surface-3 text-stone-400 border-line hover:bg-surface-2 hover:text-stone-200",
-    border: "border-rose-500/40",
-    text: "text-rose-200 font-bold",
-    badge: "border-rose-500/40 bg-rose-950/60 text-rose-200 font-bold",
-    pillBg: "bg-rose-500",
-  },
-};
-
-function formatSeconds(secs: number): string {
-  const m = Math.floor(secs / 60);
-  const s = Math.floor(secs % 60);
-  return `${m}:${s < 10 ? "0" : ""}${s}`;
 }
 
 const getNow = () => (typeof Date !== "undefined" ? Date.now() : 0);
@@ -685,505 +605,37 @@ export function TimbaSongAnatomyPlayer({
       </div>
 
       {/* 8-Count Dancer Beat Bar */}
-      <div
-        data-testid="dancer-beat-bar"
-        className="rounded-xl sm:rounded-2xl border border-line bg-surface-2 p-1.5 sm:p-3 flex items-center justify-between gap-1.5 sm:gap-2.5 text-xs shadow-xs"
-      >
-        <div className="flex items-center gap-1 sm:gap-1.5 font-bold text-ivory shrink-0">
-          <Headphones className="h-3.5 w-3.5 text-gold" />
-          <span className="text-[11px] sm:text-xs">Dancer Rhythm Bar:</span>
-        </div>
-
-        <div className="flex items-center gap-0.5 sm:gap-1.5">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((beatNum) => {
-            const isCurrent = isPlaying && currentDancerBeat === beatNum;
-            const isBreakOn1 = beatNum === 1;
-            const isSonOn2 = beatNum === 2;
-
-            return (
-              <div
-                key={beatNum}
-                className={`h-6 sm:h-7 px-1.5 sm:px-2.5 rounded-lg flex items-center justify-center font-mono font-black text-[11px] sm:text-xs transition-all ${
-                  isCurrent
-                    ? "bg-gold text-stone-950 font-black shadow-xs scale-105 ring-2 ring-gold"
-                    : isBreakOn1
-                    ? "border border-rose-500/40 bg-rose-500/20 text-rose-300"
-                    : isSonOn2
-                    ? "border border-sky-500/40 bg-sky-500/20 text-sky-300"
-                    : "border border-line bg-surface-1 text-stone-400"
-                }`}
-                title={
-                  isBreakOn1
-                    ? "Beat 1: Casino On1 Break Step"
-                    : isSonOn2
-                    ? "Beat 2: Son Contratiempo Step"
-                    : `Beat ${beatNum}`
-                }
-              >
-                {beatNum}
-              </div>
-            );
-          })}
-        </div>
-
-        <span className="text-[10px] text-stone-400 font-medium hidden lg:inline">
-          Red = Beat 1 (On1) • Blue = Beat 2 (Son)
-        </span>
-      </div>
+      <TimbaBeatBar
+        isPlaying={isPlaying}
+        currentDancerBeat={currentDancerBeat}
+      />
 
       {/* 3. Proportional Interactive Timeline Scrubber */}
-      <div className="space-y-2 sm:space-y-3">
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-bold text-stone-400 uppercase text-[10px] tracking-wider flex items-center gap-1.5">
-            <Clock className="h-3.5 w-3.5 text-gold" />
-            Song Progression Timeline (Click Any Segment to Jump)
-          </span>
-          <span className="font-mono font-extrabold text-stone-200">
-            {formatSeconds(currentTime)} / {formatSeconds(effectiveDuration)}
-          </span>
-        </div>
-
-        {/* Multi-segment proportional bar */}
-        <div
-          role="region"
-          aria-label="Song Segments Bar"
-          className="relative h-11 sm:h-12 w-full rounded-xl sm:rounded-2xl border border-line overflow-hidden bg-surface-3 flex"
-        >
-          {effectiveSegments.map((segment, idx) => {
-            const segmentDuration = segment.endTimeSeconds - segment.startTimeSeconds;
-            const widthPct = (segmentDuration / effectiveDuration) * 100;
-            const isSegmentActive = idx === activeSegmentIndex;
-            const theme = THEME_STYLES[segment.colorTheme];
-
-            return (
-              <button
-                key={segment.id}
-                type="button"
-                data-testid={`timeline-segment-${idx}`}
-                onClick={() => handleSeek(segment.startTimeSeconds)}
-                title={`${segment.formattedRange} • ${segment.sectionName} (${segment.danceGear})`}
-                style={{ width: `${widthPct}%` }}
-                className={`relative h-full text-left transition-all px-1 sm:px-2 flex flex-col justify-center border-r border-white/10 last:border-r-0 ${
-                  isSegmentActive
-                    ? "bg-amber-500/25 text-amber-200 shadow-[inset_0_0_15px_rgba(245,158,11,0.2)] ring-1 ring-inset ring-amber-400/60"
-                    : theme.bgInactive
-                }`}
-              >
-                <div className="truncate text-[10px] font-bold text-white">
-                  {widthPct < 12 ? (
-                    <>
-                      <span className="md:hidden text-[9px] font-bold">{idx + 1}</span>
-                      <span className="hidden md:inline">{segment.sectionName}</span>
-                    </>
-                  ) : (
-                    <span>{segment.sectionName}</span>
-                  )}
-                </div>
-                <div className="hidden md:block truncate text-[9px] text-stone-300 font-semibold">
-                  {segment.danceGear}
-                </div>
-              </button>
-            );
-          })}
-
-          {/* Live Playhead Marker */}
-          <div
-            className="absolute top-0 bottom-0 w-0.5 bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.9)] pointer-events-none z-10"
-            style={{
-              left: `${Math.min(
-                100,
-                (currentTime / effectiveDuration) * 100
-              )}%`,
-            }}
-          />
-        </div>
-
-        {/* Mobile Quick-Jump Thumb-Friendly Segment Strip */}
-        <div tabIndex={0} role="region" aria-label="Mobile quick-jump timeline segments" className="flex md:hidden items-center gap-1.5 overflow-x-auto no-scrollbar py-1 snap-x snap-mandatory focus:outline-none">
-          {effectiveSegments.map((segment, idx) => {
-            const isSegmentActive = idx === activeSegmentIndex;
-            return (
-              <button
-                key={`mobile-seg-${segment.id}`}
-                type="button"
-                data-testid={`mobile-segment-chip-${idx}`}
-                onClick={() => handleSeek(segment.startTimeSeconds)}
-                className={`rounded-lg px-2.5 py-1 text-[11px] font-bold shrink-0 transition-all border snap-start ${
-                  isSegmentActive
-                    ? "bg-gold/25 border-gold/50 text-gold ring-1 ring-gold/50 shadow-xs"
-                    : "border-line bg-surface-3 text-stone-400 hover:bg-surface-2 hover:text-stone-200"
-                }`}
-              >
-                <span>{idx + 1}. {segment.sectionName}</span>
-                <span className="ml-1 opacity-75 font-mono text-[9px]">{segment.formattedRange.split(" - ")[0]}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Playback Controls & Range Scrubber */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 pt-1">
-          <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              data-testid="playback-toggle"
-              onClick={togglePlay}
-              className="h-9 px-4 text-xs font-bold bg-brand hover:bg-brand-hover text-white rounded-xl shadow-xs"
-            >
-              {isPlaying ? (
-                <>
-                  <Pause className="mr-1.5 h-3.5 w-3.5" />
-                  Pause
-                </>
-              ) : (
-                <>
-                  <Play className="mr-1.5 h-3.5 w-3.5 fill-current" />
-                  {currentTime >= effectiveDuration ? "Replay" : "Play Along"}
-                </>
-              )}
-            </Button>
-
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              className="h-9 text-xs font-semibold rounded-xl border-line bg-surface-3 text-stone-200 hover:bg-surface-2 hover:text-white"
-              title="Reset to 0:00"
-            >
-              <RotateCcw className="h-3.5 w-3.5 mr-1" />
-              Reset
-            </Button>
-
-            {/* Speed Toggle */}
-            <div className="flex items-center rounded-xl border border-line bg-surface-3 p-0.5 text-xs">
-              {([1, 2, 4] as const).map((spd) => (
-                <button
-                  key={spd}
-                  type="button"
-                  onClick={() => setPlaybackSpeed(spd)}
-                  className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition-all ${
-                    playbackSpeed === spd
-                      ? "bg-gold text-stone-950 shadow-xs"
-                      : "text-stone-400 hover:text-stone-200"
-                  }`}
-                >
-                  {spd}x
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Slider Scrubber */}
-          <div className="flex-1 max-w-xs flex items-center gap-2">
-            <input
-              type="range"
-              aria-label="Timeline position scrubber"
-              min={0}
-              max={effectiveDuration}
-              step={1}
-              value={Math.floor(currentTime)}
-              onChange={(e) => handleSeek(Number(e.target.value))}
-              className="w-full accent-amber-500 cursor-pointer"
-            />
-          </div>
-        </div>
-      </div>
+      <TimbaTimelineScrubber
+        currentTime={currentTime}
+        effectiveDuration={effectiveDuration}
+        effectiveSegments={effectiveSegments}
+        activeSegmentIndex={activeSegmentIndex}
+        isPlaying={isPlaying}
+        playbackSpeed={playbackSpeed}
+        handleSeek={handleSeek}
+        togglePlay={togglePlay}
+        handleReset={handleReset}
+        setPlaybackSpeed={setPlaybackSpeed}
+      />
 
       {/* 4. Live "Dancer HUD" Panel */}
-      <div className="space-y-3 sm:space-y-4 pt-2 border-t border-line">
-        {/* Active Segment Announcement Banner */}
-        <div
-          data-testid="active-segment-hud"
-          className="rounded-xl sm:rounded-2xl border border-gold/30 bg-gradient-to-r from-gold/10 via-surface-2 to-surface-1 text-ivory p-3 sm:p-5 space-y-2 sm:space-y-3 shadow-md transition-colors"
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3">
-            <div className="space-y-0.5 min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[10px] uppercase font-bold tracking-wider text-gold/80">
-                  Current Segment ({activeSegmentIndex + 1} of {effectiveSegments.length})
-                </span>
-                <span className="font-mono text-[11px] sm:text-xs font-bold text-gold">
-                  {activeSegment.formattedRange}
-                </span>
-              </div>
-              <h3 className="text-sm sm:text-2xl font-black text-ivory truncate sm:whitespace-normal">
-                {activeSegment.sectionName}
-              </h3>
-            </div>
-
-            {/* Next Shift Countdown */}
-            {nextSegment ? (
-              <div className="inline-flex sm:block items-center gap-1.5 rounded-lg sm:rounded-xl border border-line bg-surface-1/90 px-2.5 sm:px-3.5 py-1 sm:py-2 text-[11px] sm:text-xs sm:text-right self-start sm:self-auto shadow-xs shrink-0">
-                <span className="text-[10px] text-stone-400 font-semibold inline sm:block">
-                  Next in <strong className="text-gold font-mono text-xs">{secondsUntilNextShift}s</strong>:
-                </span>
-                <span className="font-bold text-ivory text-[11px] truncate max-w-[220px] sm:max-w-none">
-                  {nextSegment.sectionName} ({nextSegment.danceGear})
-                </span>
-              </div>
-            ) : (
-              <div className="inline-flex sm:block items-center gap-1.5 rounded-lg sm:rounded-xl border border-line bg-surface-1/90 px-2.5 sm:px-3.5 py-1 sm:py-2 text-[11px] sm:text-xs sm:text-right self-start sm:self-auto shadow-xs shrink-0">
-                <span className="text-[10px] text-stone-400 font-semibold inline sm:block">
-                  Song Climax
-                </span>
-                <span className="font-bold text-gold text-[11px]">
-                  Final Section • Strike Pose
-                </span>
-              </div>
-            )}
-          </div>
-
-          {/* Active Dance Gear Pill & Timing Mode Badges */}
-          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-0.5 sm:pt-1 text-[11px] sm:text-xs">
-            <span className="text-[11px] sm:text-xs font-bold text-stone-200">Recommended Gear:</span>
-            <Badge className="border-gold/40 bg-gold/20 text-gold text-[10px] sm:text-xs font-black px-2 py-0.5">
-              {activeSegment.danceGear}
-            </Badge>
-
-            {activeSegment.timingMode && (
-              <Badge
-                variant="outline"
-                data-testid="active-timing-mode-badge"
-                className="border-gold/40 bg-gold/10 text-gold text-[10px] sm:text-xs font-black flex items-center gap-1 px-2 sm:px-2.5 py-0.5"
-              >
-                <Sparkles className="h-3 w-3 text-gold shrink-0" />
-                <span className="truncate">Timing: {activeSegment.timingMode}</span>
-              </Badge>
-            )}
-          </div>
-        </div>
-
-        {/* 3-Zone Body Telemetry (Polyrhythm Zone Separation) */}
-        {activeSegment.instrumentMapping && (
-          <div
-            data-testid="body-telemetry-widget"
-            className="rounded-xl border border-line bg-surface-2 p-1.5 sm:p-3 space-y-1 sm:space-y-1.5 shadow-xs"
-          >
-            <div className="hidden md:flex items-center justify-between gap-2 border-b border-line pb-1">
-              <div className="flex items-center gap-2 flex-wrap">
-                <Badge className="bg-gold/20 text-gold border border-gold/30 text-[9px] font-black uppercase tracking-wider px-1.5 py-0.2">
-                  Level 4 Body Separation
-                </Badge>
-                <h4 className="text-[11px] sm:text-xs font-black text-stone-200 uppercase tracking-wide">
-                  3-Zone Body Telemetry
-                </h4>
-              </div>
-              <span className="text-[10px] text-stone-400 font-medium hidden sm:inline">
-                Polyrhythmic Body Isolation Map
-              </span>
-            </div>
-
-            <div className="grid grid-cols-3 gap-1 sm:gap-1.5">
-              {/* Zone 1: Chest & Shoulders */}
-              <div className="rounded-lg border border-line bg-surface-3 p-1.5 sm:p-2 space-y-0.5">
-                <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-sky-300 flex items-center gap-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-sky-400 shrink-0" />
-                  Chest &amp; Shoulders
-                </span>
-                <p className="text-[10px] sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
-                  {activeSegment.instrumentMapping.chestAndShoulders}
-                </p>
-              </div>
-
-              {/* Zone 2: Hips & Knees */}
-              <div className="rounded-lg border border-line bg-surface-3 p-1.5 sm:p-2 space-y-0.5">
-                <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-gold flex items-center gap-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
-                  Hips &amp; Knees
-                </span>
-                <p className="text-[10px] sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
-                  {activeSegment.instrumentMapping.hipsAndKnees}
-                </p>
-              </div>
-
-              {/* Zone 3: Feet */}
-              <div className="rounded-lg border border-line bg-surface-3 p-1.5 sm:p-2 space-y-0.5">
-                <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-wider text-emerald-300 flex items-center gap-1">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
-                  Feet
-                </span>
-                <p className="text-[10px] sm:text-xs text-stone-200 font-bold leading-tight line-clamp-2 sm:line-clamp-none">
-                  {activeSegment.instrumentMapping.feet}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* 2-Card Live Cue Row: Permanent Trigger + Strictly Conditional Active Role (Leader XOR Follower) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {/* Card 1: What to Listen For (100% Permanently Visible) */}
-          <div data-testid="trigger-cue-card" className="rounded-xl border border-line border-l-2 border-l-gold bg-surface-2 p-2.5 sm:p-3 space-y-0.5 shadow-xs">
-            <span className="text-[10px] uppercase font-black tracking-wider text-gold flex items-center gap-1.5">
-              <Headphones className="h-3.5 w-3.5 text-gold shrink-0" />
-              🎧 What to Listen For (Trigger)
-            </span>
-            <p className="text-xs text-stone-100 font-semibold leading-snug">
-              {activeSegment.musicalTrigger}
-            </p>
-          </div>
-
-          {/* Card 2: Strictly Conditional Role Action (ONLY Leader OR Follower in DOM!) */}
-          {activeRole === "leader" ? (
-            <div
-              data-testid="leader-action-card"
-              className="rounded-xl border border-teal-500/25 bg-teal-950/35 p-2.5 sm:p-3 space-y-0.5 shadow-xs text-teal-100"
-            >
-              <span className="text-[10px] uppercase font-black tracking-wider text-teal-300 flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-teal-400 shrink-0" />
-                🕺 Leader Action
-              </span>
-              <p className="text-xs text-teal-100 font-semibold leading-snug">
-                {activeSegment.leaderCue}
-              </p>
-            </div>
-          ) : (
-            <div
-              data-testid="follower-action-card"
-              className="rounded-xl border border-rose-500/25 bg-rose-950/35 p-2.5 sm:p-3 space-y-0.5 shadow-xs text-rose-100"
-            >
-              <span className="text-[10px] uppercase font-black tracking-wider text-rose-300 flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-rose-400 shrink-0" />
-                💃 Follower Action
-              </span>
-              <p className="text-xs text-rose-100 font-semibold leading-snug">
-                {activeSegment.followerCue}
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Compact Warning Pill Strip */}
-        <div
-          data-testid="un-confuser-alert"
-          className="rounded-lg border border-gold/20 bg-amber-950/30 py-1.5 px-3 flex items-center gap-2 text-xs text-amber-200/90 leading-snug shadow-xs"
-        >
-          <AlertTriangle className="h-3.5 w-3.5 text-gold shrink-0" />
-          <p className="line-clamp-2 sm:line-clamp-none">
-            <strong className="font-black uppercase tracking-wider text-gold mr-1.5">
-              ⚠️ Avoid:
-            </strong>
-            {activeSegment.commonMistakeWarning}
-          </p>
-        </div>
-
-        {/* Recommended Curriculum Moves Bar */}
-        <div className="space-y-2 pt-1">
-          <div className="flex items-center justify-between text-xs">
-            <span className="font-bold text-stone-200 flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-gold" />
-              Recommended Curriculum Moves for this Section:
-            </span>
-            <span className="text-[11px] text-stone-400">
-              Tap any move for instant breakdown
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-            {activeSegment.recommendedMoveSlugs.map((slug) => {
-              const move = resolveCurriculumMove(slug);
-              if (!move) return null;
-              const isSelected = inspectingMove?.id === move.id;
-
-              return (
-                <button
-                  key={move.id}
-                  type="button"
-                  data-testid={`move-pill-${move.id}`}
-                  onClick={() =>
-                    setInspectingMove(isSelected ? null : move)
-                  }
-                  className={`rounded-xl border px-3 py-1.5 text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
-                    isSelected
-                      ? "border-gold bg-gold/20 text-gold shadow-xs"
-                      : "border-line bg-surface-3 text-stone-300 hover:bg-surface-2 hover:text-white"
-                  }`}
-                >
-                  <BookOpen className="h-3 w-3" />
-                  <span>{move.name}</span>
-                  <span
-                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                      isSelected ? "bg-gold/30 text-gold" : "bg-white/10 text-stone-400"
-                    }`}
-                  >
-                    {move.level}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Slide-Up Move Breakdown Overlay / Inspector Modal */}
-          {inspectingMove && (
-            <div
-              data-testid="move-inspector-card"
-              className="fixed inset-x-3 bottom-16 sm:static sm:inset-auto sm:bottom-auto z-50 rounded-2xl border border-line bg-surface-2 p-4 sm:p-5 space-y-2.5 mt-3 shadow-2xl backdrop-blur-md text-stone-100"
-            >
-              <button
-                type="button"
-                data-testid="close-move-inspector"
-                aria-label="Close move preview"
-                onClick={() => setInspectingMove(null)}
-                className="absolute top-3.5 right-3.5 rounded-full p-1 text-stone-400 hover:text-white hover:bg-white/10 transition-colors"
-                title="Close move preview"
-              >
-                <X className="h-4 w-4" />
-              </button>
-
-              <div className="space-y-1 pr-6">
-                <div className="flex items-center gap-2">
-                  <Badge className="bg-gold/20 text-gold border border-gold/30 text-[10px] font-bold">
-                    {inspectingMove.level} Syllabus
-                  </Badge>
-                  {inspectingMove.phonetic && (
-                    <span className="text-xs text-stone-400 italic">
-                      Pronounced: &ldquo;{inspectingMove.phonetic}&rdquo;
-                    </span>
-                  )}
-                </div>
-                <h4 className="text-base sm:text-lg font-black text-ivory">
-                  {inspectingMove.name}
-                </h4>
-                <p className="text-xs text-stone-300 leading-relaxed line-clamp-2 sm:line-clamp-none">
-                  {inspectingMove.summary}
-                </p>
-              </div>
-
-              <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-2 text-xs pt-1">
-                {inspectingMove.handholdType && (
-                  <div className="rounded-xl border border-line bg-surface-3 p-2 sm:p-2.5 space-y-0.5">
-                    <span className="text-[10px] font-bold uppercase text-stone-400 block">
-                      Handhold &amp; Connection
-                    </span>
-                    <p className="font-semibold text-stone-200 text-xs">{inspectingMove.handholdType}</p>
-                  </div>
-                )}
-                {inspectingMove.entryExitGeometry && (
-                  <div className="rounded-xl border border-line bg-surface-3 p-2 sm:p-2.5 space-y-0.5">
-                    <span className="text-[10px] font-bold uppercase text-stone-400 block">
-                      Circular Geometry
-                    </span>
-                    <p className="font-semibold text-stone-200 text-xs">{inspectingMove.entryExitGeometry}</p>
-                  </div>
-                )}
-              </div>
-
-              <div className="rounded-xl border border-amber-500/30 bg-amber-950/25 p-2.5 sm:p-3 text-xs flex items-start gap-2 shadow-xs">
-                <Sparkles className="h-3.5 w-3.5 text-amber-400 shrink-0 mt-0.5" />
-                <div className="space-y-0.5">
-                  <span className="font-extrabold text-amber-300 text-[10px] uppercase tracking-wider block">
-                    💡 Un-Confuser Tip:
-                  </span>
-                  <p className="text-stone-200 font-semibold leading-relaxed">
-                    {inspectingMove.unConfuserTip}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+      <TimbaDancerHud
+        activeSegment={activeSegment}
+        activeSegmentIndex={activeSegmentIndex}
+        totalSegments={effectiveSegments.length}
+        nextSegment={nextSegment}
+        secondsUntilNextShift={secondsUntilNextShift}
+        activeRole={activeRole}
+        inspectingMove={inspectingMove}
+        setInspectingMove={setInspectingMove}
+        resolveCurriculumMove={resolveCurriculumMove}
+      />
     </div>
   );
 }

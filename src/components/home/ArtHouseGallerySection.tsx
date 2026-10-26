@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { X, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -45,12 +46,11 @@ export function ArtHouseGallerySection() {
               className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden transition-all duration-500 hover:border-amber-400/50"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=1000&q=80"
                   alt="Weekly Cuban Salsa & Rueda de Casino Classes at BOH Studios Bournemouth"
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/30 to-transparent pointer-events-none" />
@@ -81,12 +81,11 @@ export function ArtHouseGallerySection() {
               className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden transition-all duration-500 hover:border-amber-400/50"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80"
                   alt="Made in Cuba Dance Weekend 2026 Official Festival Passes"
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/30 to-transparent pointer-events-none" />
@@ -117,12 +116,11 @@ export function ArtHouseGallerySection() {
               className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden transition-all duration-500 hover:border-amber-400/50"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80"
                   alt="Authentic Cuban Rueda de Casino Dance Circle Action"
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/30 to-transparent pointer-events-none" />
@@ -153,12 +151,11 @@ export function ArtHouseGallerySection() {
               className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden transition-all duration-500 hover:border-amber-400/50"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1000&q=80"
                   alt="Cuban Salsa Percussion Clave & Timba Musicality"
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#14110F] via-black/30 to-transparent pointer-events-none" />
@@ -240,12 +237,11 @@ export function InsideCubanCircleGallery() {
               className="group relative flex flex-col text-left rounded-2xl border border-line bg-surface-2 overflow-hidden transition-all duration-500 hover:border-gold/50 focus:outline-none focus:ring-2 focus:ring-gold cursor-pointer"
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={photo.imageUrl}
                   alt={photo.title}
-                  loading="lazy"
-                  decoding="async"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-canvas via-black/20 to-transparent pointer-events-none" />
@@ -288,10 +284,11 @@ export function InsideCubanCircleGallery() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative aspect-[16/10] w-full bg-black">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={selectedPhoto.imageUrl}
                 alt={selectedPhoto.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
                 className="h-full w-full object-cover"
               />
               <button

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useId } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Calendar,
@@ -186,16 +187,12 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
                     {/* Authentic Image if Available / Error-Safe */}
                     {photoSrc && (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
+                      <Image
                         src={photoSrc}
                         alt={instructor.name}
-                        loading="lazy"
-                        decoding="async"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="editorial-photo relative z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        onError={(e) => {
-                          (e.currentTarget as HTMLElement).style.display = "none";
-                        }}
                       />
                     )}
 

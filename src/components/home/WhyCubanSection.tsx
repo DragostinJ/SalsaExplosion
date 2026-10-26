@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -68,16 +69,12 @@ export function WhyCubanSection() {
               <div>
                 {/* 1. Top Photo Frame */}
                 <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-stone-900 mb-5 border border-white/10">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={card.photo}
                     alt={card.title}
-                    loading="lazy"
-                    decoding="async"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    onError={(e) => {
-                      (e.currentTarget.parentElement as HTMLElement).style.display = "none";
-                    }}
                   />
                 </div>
 

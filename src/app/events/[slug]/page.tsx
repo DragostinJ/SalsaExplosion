@@ -144,6 +144,7 @@ export default async function EventDetailPage({
   }
 
   // Fallback to canonical UPCOMING_EVENTS if database is cold or degraded
+  const isCanonicalFallback = !event;
   if (!event) {
     const canonical = UPCOMING_EVENTS.find((e) => e.slug === slug);
     if (canonical) {
@@ -674,6 +675,7 @@ export default async function EventDetailPage({
         <EventPassSelector
           tiers={serializedTiers}
           defaultPreferredRole={currentUser?.preferredRole ?? DanceRole.LEAD}
+          purchasesUnavailable={isCanonicalFallback}
         />
 
         {/* UK Consumer Rights Notice (Dated Leisure Events) */}

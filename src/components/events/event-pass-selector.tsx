@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/card";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
+import { VENUE_INFO } from "@/lib/academy-data";
 
 export interface SerializedEventTier {
   id: string;
@@ -50,11 +51,13 @@ export interface SerializedEventTier {
 interface EventPassSelectorProps {
   tiers: SerializedEventTier[];
   defaultPreferredRole: DanceRole;
+  purchasesUnavailable?: boolean;
 }
 
 export function EventPassSelector({
   tiers: initialTiers,
   defaultPreferredRole,
+  purchasesUnavailable = false,
 }: EventPassSelectorProps) {
   const [tiers, setTiers] = useState<SerializedEventTier[]>(initialTiers);
   const [banner, setBanner] = useState<{
@@ -72,6 +75,7 @@ export function EventPassSelector({
   const router = useRouter();
 
   const onInitiateBooking = (tier: SerializedEventTier, role: DanceRole) => {
+    if (purchasesUnavailable) return;
     const isCongressPass =
       tier.name.toLowerCase().includes("full") ||
       tier.name.toLowerCase().includes("congress") ||
@@ -160,6 +164,35 @@ export function EventPassSelector({
 
   return (
     <div className="space-y-6">
+      {purchasesUnavailable && (
+        <div
+          data-testid="event-purchases-unavailable"
+          role="status"
+          className="rounded-2xl border border-gold/40 bg-gold/10 p-4 text-xs text-white/90 space-y-2 backdrop-blur-md shadow-lg"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <p className="font-bold text-gold text-sm tracking-wide">
+                Online Booking Opening Soon
+              </p>
+              <p className="text-white/80 mt-0.5">
+                Online booking is temporarily unavailable. Please check back shortly or message us on WhatsApp.
+              </p>
+            </div>
+            {VENUE_INFO.whatsappHref && (
+              <a
+                href={VENUE_INFO.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl border border-gold/50 bg-gold/20 px-4 py-2 font-bold text-gold hover:bg-gold/30 transition-colors shrink-0"
+              >
+                Message on WhatsApp →
+              </a>
+            )}
+          </div>
+        </div>
+      )}
+
       {banner && (
         <div
           className={`rounded-xl border px-4 py-3 text-xs font-semibold ${
@@ -300,10 +333,12 @@ export function EventPassSelector({
                     <Button
                       type="button"
                       disabled={
+                        purchasesUnavailable ||
                         isPending ||
                         isSoldOut ||
                         (remainingLeads !== null && remainingLeads <= 0)
                       }
+                      aria-disabled={purchasesUnavailable || undefined}
                       onClick={() =>
                         onInitiateBooking(tier, DanceRole.LEAD)
                       }
@@ -326,10 +361,12 @@ export function EventPassSelector({
                     <Button
                       type="button"
                       disabled={
+                        purchasesUnavailable ||
                         isPending ||
                         isSoldOut ||
                         (remainingFollows !== null && remainingFollows <= 0)
                       }
+                      aria-disabled={purchasesUnavailable || undefined}
                       onClick={() =>
                         onInitiateBooking(tier, DanceRole.FOLLOW)
                       }
@@ -353,7 +390,8 @@ export function EventPassSelector({
                 ) : (
                   <Button
                     type="button"
-                    disabled={isPending || isSoldOut}
+                    disabled={purchasesUnavailable || isPending || isSoldOut}
+                    aria-disabled={purchasesUnavailable || undefined}
                     onClick={() =>
                       onInitiateBooking(tier, DanceRole.SOLO)
                     }

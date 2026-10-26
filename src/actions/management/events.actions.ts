@@ -97,6 +97,21 @@ export async function registerForEventTierAction(rawInput: {
 
         const { eventId, ticketTierId, role } = parsed.data;
 
+        // Safety net: canonical / fallback mock tier check
+        if (
+          ticketTierId.startsWith("tier-") ||
+          ticketTierId.startsWith("canonical-") ||
+          eventId.startsWith("canonical-")
+        ) {
+          return {
+            success: false,
+            error: {
+              code: "NOT_FOUND",
+              message: "This event isn't open for online booking yet.",
+            },
+          };
+        }
+
         const result = await prisma.$transaction(async (tx) => {
           await tx.$queryRaw`SELECT id FROM "EventTicketTier" WHERE id = ${ticketTierId} FOR UPDATE`;
 

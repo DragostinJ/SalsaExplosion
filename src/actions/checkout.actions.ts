@@ -378,6 +378,18 @@ export async function createEventCheckoutSessionAction(
 
     const { eventId, ticketTierId, role, addShirt = false, addMasterclass = false } = parsed.data;
 
+    // Safety net: canonical / fallback mock tier check
+    if (
+      ticketTierId.startsWith("tier-") ||
+      ticketTierId.startsWith("canonical-") ||
+      eventId.startsWith("canonical-")
+    ) {
+      throw new CheckoutDomainError(
+        "PLAN_UNAVAILABLE",
+        "This event isn't open for online booking yet."
+      );
+    }
+
     const tier = await prisma.eventTicketTier.findUnique({
       where: { id: ticketTierId },
       include: {

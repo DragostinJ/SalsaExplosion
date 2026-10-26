@@ -29,8 +29,9 @@ export default async function EventsDirectoryPage() {
   }
 
   // Fallback to canonical events if database is empty or connection pooler is degraded
+  const isCanonicalFallback = !events || events.length === 0;
   const displayEvents: Awaited<ReturnType<typeof getCachedUpcomingEvents>> =
-    events && events.length > 0
+    !isCanonicalFallback
       ? events
       : UPCOMING_EVENTS.map((c, index) => ({
           id: `canonical-${index}-${c.slug}`,
@@ -145,7 +146,7 @@ export default async function EventsDirectoryPage() {
       </div>
 
       {/* Event Grid by Season */}
-      {events.length === 0 ? (
+      {displayEvents.length === 0 ? (
         <Card className="text-center py-12">
           <CardContent>
             <Sparkles className="mx-auto h-12 w-12 text-muted-foreground/50" />
@@ -176,7 +177,11 @@ export default async function EventsDirectoryPage() {
 
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {events2026.map((evt) => (
-                  <EventCard key={evt.id} evt={evt} />
+                  <EventCard
+                    key={evt.id}
+                    evt={evt}
+                    isCanonicalFallback={isCanonicalFallback}
+                  />
                 ))}
               </div>
             </section>
@@ -201,7 +206,11 @@ export default async function EventsDirectoryPage() {
 
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {events2027.map((evt) => (
-                  <EventCard key={evt.id} evt={evt} />
+                  <EventCard
+                    key={evt.id}
+                    evt={evt}
+                    isCanonicalFallback={isCanonicalFallback}
+                  />
                 ))}
               </div>
             </section>
@@ -214,9 +223,10 @@ export default async function EventsDirectoryPage() {
 
 interface EventCardProps {
   evt: Awaited<ReturnType<typeof getCachedUpcomingEvents>>[number];
+  isCanonicalFallback?: boolean;
 }
 
-function EventCard({ evt }: EventCardProps) {
+function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
   const minPrice = evt.ticketTiers[0]?.priceInCents
     ? `£${(evt.ticketTiers[0].priceInCents / 100).toFixed(0)}`
     : "TBA";
@@ -341,7 +351,12 @@ function EventCard({ evt }: EventCardProps) {
         </div>
       </CardContent>
 
-      <CardFooter className="pt-3 border-t">
+      <CardFooter className="pt-3 border-t flex flex-col gap-1.5 items-stretch">
+        {isCanonicalFallback && (
+          <span className="text-[11px] font-semibold text-amber-300/90 text-center">
+            Online booking opening soon
+          </span>
+        )}
         <Button
           asChild
           className={`w-full text-xs font-bold transition-colors h-10 rounded-xl shadow-xs ${

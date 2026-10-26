@@ -30,12 +30,14 @@ describe("Content Security Policy Guard (Milestone C1 & C2)", () => {
 
   it("asserts style-src allows unsafe-inline and Google Fonts", () => {
     const content = fs.readFileSync(nextConfigPath, "utf-8");
-    expect(content).toContain("style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;");
+    expect(content).toContain("style-src 'self' 'unsafe-inline'");
+    expect(content).toContain("https://fonts.googleapis.com");
   });
 
   it("asserts font-src allows data: and Google Fonts static", () => {
     const content = fs.readFileSync(nextConfigPath, "utf-8");
-    expect(content).toContain("font-src 'self' data: https://fonts.gstatic.com;");
+    expect(content).toContain("font-src 'self' data:");
+    expect(content).toContain("https://fonts.gstatic.com");
   });
 
   it("asserts connect-src includes Google Analytics, Clerk, Stripe, Supabase, and YouTube", () => {
@@ -52,5 +54,12 @@ describe("Content Security Policy Guard (Milestone C1 & C2)", () => {
     expect(content).toContain("https://img.clerk.com");
     expect(content).toContain("https://i.ytimg.com");
     expect(content).toContain("https://www.google-analytics.com");
+  });
+
+  it("L1: whitelists vercel.live and pusher in script-src, connect-src, frame-src, and styles", () => {
+    const content = fs.readFileSync(nextConfigPath, "utf-8");
+    expect(content).toContain("https://vercel.live");
+    expect(content).toContain("https://*.pusher.com");
+    expect(content).toContain("wss://*.pusher.com");
   });
 });

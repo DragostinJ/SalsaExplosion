@@ -40,13 +40,13 @@ const nextConfig: NextConfig = {
   async headers() {
     const enforcedCspDirectives = `
       default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://*.clerk.com https://cdn.protect.clerk.com https://js.stripe.com https://www.youtube.com https://s.ytimg.com https://www.googletagmanager.com https://www.google-analytics.com;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://*.clerk.com https://cdn.protect.clerk.com https://js.stripe.com https://www.youtube.com https://s.ytimg.com https://www.googletagmanager.com https://www.google-analytics.com;
       worker-src 'self' blob:;
-      connect-src 'self' https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://clerk.salsaexplosion.co.uk https://www.youtube.com https://*.googlevideo.com https://www.google-analytics.com https://analytics.google.com;
-      img-src 'self' data: blob: https://images.unsplash.com https://*.clerk.com https://img.clerk.com https://i.ytimg.com https://*.youtube.com https://www.google-analytics.com https://*.stripe.com https://commondatastorage.googleapis.com;
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-      font-src 'self' data: https://fonts.gstatic.com;
-      frame-src 'self' https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev https://www.youtube.com https://www.youtube-nocookie.com;
+      connect-src 'self' https://vercel.live https://*.pusher.com wss://*.pusher.com https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://clerk.salsaexplosion.co.uk https://www.youtube.com https://*.googlevideo.com https://www.google-analytics.com https://analytics.google.com;
+      img-src 'self' data: blob: https://vercel.live https://vercel.com https://images.unsplash.com https://*.clerk.com https://img.clerk.com https://i.ytimg.com https://*.youtube.com https://www.google-analytics.com https://*.stripe.com https://commondatastorage.googleapis.com;
+      style-src 'self' 'unsafe-inline' https://vercel.live https://fonts.googleapis.com;
+      font-src 'self' data: https://vercel.live https://fonts.gstatic.com;
+      frame-src 'self' https://vercel.live https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev https://www.youtube.com https://www.youtube-nocookie.com;
       media-src 'self' blob: https://*.supabase.co https://commondatastorage.googleapis.com;
       object-src 'none';
       base-uri 'self';

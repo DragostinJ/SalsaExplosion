@@ -2,6 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { auth } from "@clerk/nextjs/server";
+import { isNextControlFlowError } from "@/lib/safe-url";
 import {
   AuditAction,
   DanceLevel,
@@ -150,19 +152,42 @@ export async function getCurrentUserRoleAction(): Promise<{
   canSwitchRoles: boolean;
 }> {
   try {
-    // fallback-guard-exempt: read-only role lookup
-    const user = await getOrProvisionCurrentUser();
+    let clerkId: string | null = null;
+    try {
+      const authState = await auth();
+      clerkId = authState.userId;
+    } catch (authErr: unknown) {
+      if (isNextControlFlowError(authErr)) {
+        throw authErr;
+      }
+      return { role: null, canSwitchRoles: false };
+    }
+
+    if (!clerkId) {
+      return { role: null, canSwitchRoles: false };
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { clerkId },
+      select: { role: true, email: true },
+    });
+
     if (!user) {
       return { role: null, canSwitchRoles: false };
     }
+
     const userCanSwitch = canSwitchRoles(user.email);
     const effective = userCanSwitch
       ? user.role
       : isBootstrapAdmin(user.email)
         ? Role.ADMIN
         : user.role;
+
     return { role: effective, canSwitchRoles: userCanSwitch };
-  } catch {
+  } catch (error: unknown) {
+    if (isNextControlFlowError(error)) {
+      throw error;
+    }
     return { role: null, canSwitchRoles: false };
   }
 }

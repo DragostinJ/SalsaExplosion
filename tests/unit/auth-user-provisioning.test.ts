@@ -181,6 +181,53 @@ describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
 
       const res = await getCurrentUserRoleAction();
       expect(res.role).toBe("ADMIN");
+      expect(mockedPrismaUser.upsert).not.toHaveBeenCalled();
+      expect(mockedCurrentUser).not.toHaveBeenCalled();
+    });
+
+    it("returns canSwitchRoles: true and stored role for whitelisted demo switcher email", async () => {
+      vi.stubEnv("ALLOW_DEMO_ROLE_SWITCHING", "true");
+      vi.stubEnv("DEMO_SWITCHER_EMAILS", "pitch@studio.com");
+      mockedAuth.mockResolvedValueOnce({ userId: "demo_user_1" } as unknown as Awaited<ReturnType<typeof auth>>);
+      mockedPrismaUser.findUnique.mockResolvedValueOnce({
+        id: "demo-db-1",
+        clerkId: "demo_user_1",
+        email: "pitch@studio.com",
+        firstName: "Pitch",
+        lastName: "Owner",
+        avatarUrl: null,
+        bio: null,
+        specialty: null,
+        yearsDancing: 10,
+        role: "INSTRUCTOR",
+        currentLevel: "INTERMEDIATE",
+        preferredRole: "LEAD",
+        classCredits: 10,
+        stripeCustomerId: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      } as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>);
+
+      const res = await getCurrentUserRoleAction();
+      expect(res).toEqual({ role: "INSTRUCTOR", canSwitchRoles: true });
+      expect(mockedPrismaUser.upsert).not.toHaveBeenCalled();
+      expect(mockedCurrentUser).not.toHaveBeenCalled();
+    });
+
+    it("returns null role and canSwitchRoles: false on database rejection", async () => {
+      mockedAuth.mockResolvedValueOnce({ userId: "error_user_1" } as unknown as Awaited<ReturnType<typeof auth>>);
+      mockedPrismaUser.findUnique.mockRejectedValueOnce(new Error("DB connection terminated"));
+
+      const res = await getCurrentUserRoleAction();
+      expect(res).toEqual({ role: null, canSwitchRoles: false });
+    });
+
+    it("returns null role and canSwitchRoles: false for unknown user (no row in DB)", async () => {
+      mockedAuth.mockResolvedValueOnce({ userId: "unprovisioned_clerk_id" } as unknown as Awaited<ReturnType<typeof auth>>);
+      mockedPrismaUser.findUnique.mockResolvedValueOnce(null);
+
+      const res = await getCurrentUserRoleAction();
+      expect(res).toEqual({ role: null, canSwitchRoles: false });
     });
   });
 });

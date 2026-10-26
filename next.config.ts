@@ -38,9 +38,28 @@ const nextConfig: NextConfig = {
     ];
   },
   async headers() {
+    const isProd = process.env.NODE_ENV === "production";
+    const scriptSrcDirectives = [
+      "'self'",
+      "'unsafe-inline'",
+      !isProd && "'unsafe-eval'",
+      "https://vercel.live",
+      "https://*.clerk.accounts.dev",
+      "https://clerk.salsaexplosion.co.uk",
+      "https://*.clerk.com",
+      "https://cdn.protect.clerk.com",
+      "https://js.stripe.com",
+      "https://www.youtube.com",
+      "https://s.ytimg.com",
+      "https://www.googletagmanager.com",
+      "https://www.google-analytics.com",
+    ]
+      .filter(Boolean)
+      .join(" ");
+
     const enforcedCspDirectives = `
       default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.clerk.accounts.dev https://clerk.salsaexplosion.co.uk https://*.clerk.com https://cdn.protect.clerk.com https://js.stripe.com https://www.youtube.com https://s.ytimg.com https://www.googletagmanager.com https://www.google-analytics.com;
+      script-src ${scriptSrcDirectives};
       worker-src 'self' blob:;
       connect-src 'self' https://vercel.live https://*.pusher.com wss://*.pusher.com https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://clerk.salsaexplosion.co.uk https://www.youtube.com https://*.googlevideo.com https://www.google-analytics.com https://analytics.google.com;
       img-src 'self' data: blob: https://vercel.live https://vercel.com https://images.unsplash.com https://*.clerk.com https://img.clerk.com https://i.ytimg.com https://*.youtube.com https://www.google-analytics.com https://*.stripe.com https://commondatastorage.googleapis.com;

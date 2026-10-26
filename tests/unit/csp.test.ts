@@ -16,10 +16,10 @@ describe("Content Security Policy Guard (Milestone C1 & C2)", () => {
     expect(content).not.toContain('"Content-Security-Policy-Report-Only"');
   });
 
-  it("asserts script-src contains unsafe-inline, unsafe-eval, Clerk, Stripe, YouTube, and Google Analytics", () => {
+  it("asserts script-src contains unsafe-inline, conditional unsafe-eval, Clerk, Stripe, YouTube, and Google Analytics", () => {
     const content = fs.readFileSync(nextConfigPath, "utf-8");
     expect(content).toContain("'unsafe-inline'");
-    expect(content).toContain("'unsafe-eval'");
+    expect(content).toContain("!isProd && \"'unsafe-eval'\"");
     expect(content).toContain("https://*.clerk.accounts.dev");
     expect(content).toContain("https://clerk.salsaexplosion.co.uk");
     expect(content).toContain("https://js.stripe.com");

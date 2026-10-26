@@ -34,11 +34,37 @@
   --color-surface-3: #1C1917;
   --color-line: #26221F;
   --color-ivory: #F5F2EB;
+  --color-ivory-muted: #C9C2B6;
+  --color-gold: #E8B04A;
+  --color-ember: #D9381E;
   --color-brand: #D9381E;
   --color-brand-hover: #B82D16;
-  --color-gold: #FBBF24;
-  --color-success: #10B981;
-  --color-danger: #F43F5E;
+
+  /* Semantic Status Tokens & Soft / Line Variants */
+  --color-success: #4FB286;
+  --color-success-soft: rgba(79, 178, 134, 0.12);
+  --color-success-line: rgba(79, 178, 134, 0.35);
+
+  --color-warning: #E0A030;
+  --color-warning-soft: rgba(224, 160, 48, 0.12);
+  --color-warning-line: rgba(224, 160, 48, 0.35);
+
+  --color-danger: #E5584B;
+  --color-danger-soft: rgba(229, 88, 75, 0.12);
+  --color-danger-line: rgba(229, 88, 75, 0.35);
+
+  --color-info: #6BA7D6;
+  --color-info-soft: rgba(107, 167, 214, 0.12);
+  --color-info-line: rgba(107, 167, 214, 0.35);
+
+  /* Dance Role Differentiation Tokens */
+  --color-role-lead: #5FB3C4;
+  --color-role-lead-soft: rgba(95, 179, 196, 0.15);
+  --color-role-lead-line: rgba(95, 179, 196, 0.35);
+
+  --color-role-follow: #D9708A;
+  --color-role-follow-soft: rgba(217, 112, 138, 0.15);
+  --color-role-follow-line: rgba(217, 112, 138, 0.35);
 
   /* Bournemouth Cuban Salsa Designer Tokens (Backwards Compatibility Aliases) */
   --color-primary-base: #E11D48;

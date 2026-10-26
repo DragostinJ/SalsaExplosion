@@ -50,11 +50,17 @@ describe("V1: Design Tokens & Canonical Palette Verification", () => {
     "--color-surface-3": "#1C1917",
     "--color-line": "#26221F",
     "--color-ivory": "#F5F2EB",
+    "--color-ivory-muted": "#C9C2B6",
+    "--color-gold": "#E8B04A",
+    "--color-ember": "#D9381E",
     "--color-brand": "#D9381E",
     "--color-brand-hover": "#B82D16",
-    "--color-gold": "#FBBF24",
-    "--color-success": "#10B981",
-    "--color-danger": "#F43F5E",
+    "--color-success": "#4FB286",
+    "--color-warning": "#E0A030",
+    "--color-danger": "#E5584B",
+    "--color-info": "#6BA7D6",
+    "--color-role-lead": "#5FB3C4",
+    "--color-role-follow": "#D9708A",
   };
 
   it("verifies all canonical Havana Obsidian design tokens are declared in globals.css", () => {

@@ -222,17 +222,17 @@ export const PASS_PRICING: Record<
 > = {
   "first-timer": {
     id: "first-timer",
-    name: "First-Timer Welcome Trial",
-    shortLabel: "Welcome Trial",
-    priceDisplay: "Free Intro / £10",
-    priceInPounds: 0,
-    perClassNote: "New local dancers",
+    name: "Weekly Class Door Admission (1 or 2 Classes)",
+    shortLabel: "Pay at Door",
+    priceDisplay: "£12 / £14",
+    priceInPounds: 12,
+    perClassNote: "£12 for 1 class • £14 for 2 classes at door",
     description:
-      "Reserve your first Thursday or Sunday beginner session at BOH Studios with instant QR check-in.",
+      "Weekly Cuban Salsa and Rueda classes at BOH Studios Bournemouth. Pay directly at the door with cash or contactless card. Includes the Havana Social Fiesta.",
     features: [
-      "Valid on Thursday or Sunday at BOH Studios",
-      "Zero partner required — continuous circle rotation",
-      "Includes evening Havana Social Fiesta",
+      "£12 for 1 Class + Havana Social Fiesta",
+      "£14 for 2 Classes + Havana Social Fiesta",
+      "Zero partner required — rotating circle",
     ],
   },
   PACK_SINGLE: {

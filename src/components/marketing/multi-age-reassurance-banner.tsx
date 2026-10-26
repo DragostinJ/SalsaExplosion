@@ -43,7 +43,7 @@ export function MultiAgeReassuranceBanner({
               <div className="flex items-start gap-2">
                 <CreditCard className="h-4 w-4 text-emerald-700 dark:text-emerald-400 shrink-0 mt-0.5" />
                 <span className="text-foreground">
-                  <strong className="font-extrabold">Door Pricing:</strong> £7 single class • £10 for both classes & social dancing (Card or Cash).
+                  <strong className="font-extrabold">Door Pricing:</strong> £12 for 1 class • £14 for 2 classes &amp; social fiesta (Card or Cash at the Door).
                 </span>
               </div>
               <div className="flex items-start gap-2">

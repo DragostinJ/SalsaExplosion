@@ -119,7 +119,7 @@ export function WhyCubanSection() {
             className="h-11 px-7 text-xs sm:text-sm font-extrabold bg-primary-base hover:bg-primary-hover text-white shadow-md shadow-primary-base/20"
           >
             <Link href="/dashboard/schedule">
-              Join the Cuban Circle • Claim Free Welcome Trial
+              Join the Cuban Circle • £12 / £14 at the Door
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

@@ -203,10 +203,10 @@ export function QuickBookDrawer() {
                   }`}
                 >
                   <div>
-                    <div className="text-xs font-black">SINGLE DROP-IN (£10)</div>
+                    <div className="text-xs font-black">SINGLE DROP-IN (£12)</div>
                     <div className="text-[10px] text-zinc-400">Includes evening classes + social fiesta</div>
                   </div>
-                  <span className="text-xs font-black text-amber-300">£10 Drop-In</span>
+                  <span className="text-xs font-black text-amber-300">£12 Drop-In</span>
                 </button>
 
                 <button

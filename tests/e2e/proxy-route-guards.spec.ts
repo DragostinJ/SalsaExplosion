@@ -72,4 +72,16 @@ test.describe("Proxy & Role Route Guards (A4)", () => {
     expect(page.url()).not.toMatch(/sign-in/);
     expect(page.url()).toContain("/dashboard/schedule");
   });
+
+  test("6. I4: Core routes return status < 400 and never render Application Error crash screen", async ({
+    page,
+  }) => {
+    const routes = ["/", "/events", "/pricing", "/music", "/sign-in"];
+    for (const route of routes) {
+      const response = await page.goto(route, { waitUntil: "domcontentloaded" });
+      expect(response?.status(), `Route ${route} must return HTTP status < 400`).toBeLessThan(400);
+      const appErrorHeading = page.getByRole("heading", { name: "Application Error" });
+      await expect(appErrorHeading, `Route ${route} must never display Application Error`).not.toBeVisible();
+    }
+  });
 });

@@ -33,7 +33,7 @@ export const VENUE_INFO = {
   region: "Dorset",
   country: "GB",
   floor: "Canadian Sprung Maple Floor",
-  parkingSummary: "Free on-street parking after 6 PM & Bournemouth Library Car Park (2-min walk, BH2 5SL)",
+  parkingSummary: "Free on-street parking after 18:00 & Bournemouth Library Car Park (2-min walk, BH2 5SL)",
   phoneDisplay: "07969 633701",
   phoneE164: "+447969633701",
   phoneHref: "tel:+447969633701",
@@ -439,6 +439,6 @@ export const ACADEMY_FAQS = [
   {
     question: "What shoes should I wear and where do I park?",
     answer:
-      "Wear comfortable flat shoes, trainers, or dance shoes that slide smoothly on our Canadian sprung maple floor. Free on-street parking is available after 6:00 PM on surrounding streets, plus Bournemouth Library Car Park (BH2 5SL) is a 2-minute walk away.",
+      "Wear comfortable flat shoes, trainers, or dance shoes that slide smoothly on our Canadian sprung maple floor. Free on-street parking is available after 18:00 on surrounding streets, plus Bournemouth Library Car Park (BH2 5SL) is a 2-minute walk away.",
   },
 ] as const;

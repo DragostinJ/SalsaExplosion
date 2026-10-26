@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Weekly Class Schedule & Timetable",
+  description:
+    "Live weekly Cuban Salsa and Rueda de Casino timetable in Bournemouth. Thursdays and Sundays at BOH Studios. Pay at the door: £12 for 1 class / £14 for 2 classes.",
+};
 import {
   BookingStatus,
   DanceLevel,

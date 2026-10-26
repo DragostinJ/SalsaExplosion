@@ -1,5 +1,16 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Student Progression & Curriculum",
+  description:
+    "Track your Cuban dance journey through the 2027 curriculum gears, skill trees, and instructor video feedback.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 import { DanceLevel, SubmissionStatus } from "@prisma/client";
 import {
   Sparkles,

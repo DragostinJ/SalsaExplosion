@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { SubmissionStatus } from "@prisma/client";
+
+export const metadata: Metadata = {
+  title: "Instructor Assessment Queue",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 import { prisma } from "@/lib/prisma";
 import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import { getSupabaseAdmin } from "@/lib/storage";

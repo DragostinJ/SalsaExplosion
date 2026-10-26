@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Fast-Track Door Check-In",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { BackButton } from "@/components/navigation/back-button";

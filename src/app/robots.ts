@@ -10,6 +10,8 @@ export default function robots(): MetadataRoute.Robots {
     "/checkin/",
     "/dashboard/progression",
     "/dashboard/recaps",
+    "/dashboard/wallet",
+    "/dashboard/referrals",
   ];
 
   return {

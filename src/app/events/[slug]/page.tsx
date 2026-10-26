@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -41,6 +42,55 @@ import { StudioEventGuide } from "@/components/events/studio-event-guide";
 
 interface EventDetailPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: EventDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const event = await prisma.event.findUnique({
+    where: { slug },
+    select: {
+      title: true,
+      description: true,
+      coverImageUrl: true,
+    },
+  });
+
+  if (!event) {
+    return {
+      title: "Event Not Found",
+    };
+  }
+
+  const ogImages = event.coverImageUrl
+    ? [
+        {
+          url: event.coverImageUrl,
+          width: 1200,
+          height: 630,
+          alt: event.title,
+        },
+      ]
+    : [];
+
+  return {
+    title: event.title,
+    description:
+      event.description?.slice(0, 160) ||
+      `Official festival pass registration for ${event.title} in Bournemouth with Salsa Explosion.`,
+    openGraph: {
+      title: event.title,
+      description: event.description?.slice(0, 160),
+      images: ogImages,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: event.title,
+      description: event.description?.slice(0, 160),
+      images: event.coverImageUrl ? [event.coverImageUrl] : [],
+    },
+  };
 }
 
 export default async function EventDetailPage({
@@ -124,8 +174,52 @@ export default async function EventDetailPage({
     }
   );
 
+  const eventJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: event.title,
+    startDate: new Date(event.startDate).toISOString(),
+    endDate: new Date(event.endDate).toISOString(),
+    description: event.description,
+    image: event.coverImageUrl || undefined,
+    location: {
+      "@type": "Place",
+      name: event.venueName || "BOH Studios",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: event.venueAddress || "BOH Studios, 114 Commercial Road",
+        addressLocality: "Bournemouth",
+        postalCode: "BH2 5LR",
+        addressCountry: "GB",
+      },
+    },
+    performer: {
+      "@type": "Person",
+      name: "Enrique Perez Valdes",
+      jobTitle: "Artistic Director",
+    },
+    organizer: {
+      "@type": "Organization",
+      name: "Salsa Explosion UK",
+      url: "https://salsaexplosion.co.uk",
+    },
+    offers: event.ticketTiers.map((tier) => ({
+      "@type": "Offer",
+      name: tier.name,
+      price: (tier.priceInCents / 100).toFixed(2),
+      priceCurrency: "GBP",
+      availability: "https://schema.org/InStock",
+      url: `https://salsaexplosion.co.uk/events/${event.slug}`,
+    })),
+  };
+
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
+      />
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
       <div>
         <BackButton fallbackUrl="/events" label="Back to Events" />
       </div>
@@ -544,5 +638,6 @@ export default async function EventDetailPage({
         <StudioEventGuide eventTitle={event.title} venueName={event.venueName} />
       )}
     </main>
+    </>
   );
 }

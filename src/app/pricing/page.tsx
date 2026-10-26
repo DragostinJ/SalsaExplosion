@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SubscriptionStatus } from "@prisma/client";
+
+export const metadata: Metadata = {
+  title: "Door Admission & Festival Passes",
+  description:
+    "Transparent door admission for weekly Cuban Salsa classes at BOH Studios Bournemouth (£12 for 1 class / £14 for 2 classes), and online passes for Made in Cuba Dance Weekend.",
+};
 import { ShieldCheck, DoorOpen, Ticket, Sparkles } from "lucide-react";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { PageHeader } from "@/components/layout/page-header";

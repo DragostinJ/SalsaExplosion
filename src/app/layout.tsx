@@ -36,7 +36,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL || "https://salsaexplosion.co.uk"
   ),
-  title: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
+  title: {
+    default: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
+    template: "%s | Salsa Explosion",
+  },
   description:
     "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth (£12 for 1 class / £14 for 2 classes at the door), Rueda de Casino, and online festival passes for Made in Cuba Dance Weekend.",
   icons: {

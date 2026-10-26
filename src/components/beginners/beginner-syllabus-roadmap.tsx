@@ -88,10 +88,10 @@ export function BeginnerSyllabusRoadmap() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-secondary-base text-white font-bold text-[10px]">
+              <Badge className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-[10px]">
                 Level 0 → Level 1 Roadmap
               </Badge>
-              <span className="text-xs font-semibold text-secondary-base">
+              <span className="text-xs font-semibold text-emerald-400">
                 Foundational Cuban Figures
               </span>
             </div>
@@ -101,7 +101,7 @@ export function BeginnerSyllabusRoadmap() {
           </div>
 
           <div className="flex items-center gap-2 text-xs bg-muted/40 px-3 py-1.5 rounded-xl border border-border/60">
-            <Award className="h-4 w-4 text-secondary-base" />
+            <Award className="h-4 w-4 text-emerald-400" />
             <span className="font-bold text-foreground">{masteredCount} of 8 Mastered</span>
             <span className="text-[10px] text-text-muted">({progressPercent}%)</span>
           </div>
@@ -115,7 +115,7 @@ export function BeginnerSyllabusRoadmap() {
         <div className="pt-2">
           <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
             <div
-              className="h-full bg-secondary-base rounded-full transition-all duration-500"
+              className="h-full bg-emerald-500 rounded-full transition-all duration-500"
               style={{ width: `${progressPercent}%` }}
             />
           </div>

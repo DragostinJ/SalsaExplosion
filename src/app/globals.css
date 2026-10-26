@@ -34,22 +34,22 @@
   --color-primary-light: #FFE4E6;
 
   /* Secondary (Coastal Trust & Safety) */
-  --color-secondary-base: #0F766E;
-  --color-secondary-hover: #115E59;
-  --color-secondary-light: #CCFBF1;
+  --color-secondary-base: #14B8A6;
+  --color-secondary-hover: #2DD4BF;
+  --color-secondary-light: #134E4A;
 
   /* Accent (Highlighter/Warnings) */
   --color-accent-tangerine: #F97316;
 
   /* Backgrounds & Surfaces (The Studio Space) */
-  --color-bg-main: #F8FAFC;
-  --color-bg-card: #FFFFFF;
-  --color-surface-warm: #E7E5E4;
-  --color-bg-dark: #0F172A;
+  --color-bg-main: #080706;
+  --color-bg-card: #0E0C0A;
+  --color-surface-warm: #181310;
+  --color-bg-dark: #080706;
 
   /* Text & Typography */
-  --color-text-main: #1E293B;
-  --color-text-muted: #475569;
+  --color-text-main: #F5F2EB;
+  --color-text-muted: #A8A29E;
 }
 
 @layer base {
@@ -67,7 +67,7 @@
     --primary-foreground: 0 0% 100%;
 
     /* Coastal Trust & Safety (Secondary) */
-    --secondary: 174 84% 32%; /* #0D9488 */
+    --secondary: 175 80% 18%; /* Deep rich ocean teal for AAA contrast against white text */
     --secondary-foreground: 0 0% 100%;
 
     /* Surfaces & Muted */
@@ -98,7 +98,7 @@
     --primary: 347 77% 50%; /* #E11D48 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 174 84% 32%; /* #0D9488 */
+    --secondary: 175 80% 18%; /* Deep rich ocean teal for AAA contrast against white text */
     --secondary-foreground: 0 0% 100%;
 
     --muted: 24 18% 13%;

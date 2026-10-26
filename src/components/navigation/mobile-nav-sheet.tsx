@@ -314,7 +314,7 @@ export function MobileNavSheet({
                       onClick={onClose}
                       className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                         isActive
-                          ? "bg-secondary-base text-white font-bold shadow-xs"
+                          ? "bg-emerald-600 text-white font-bold shadow-xs"
                           : "text-text-main hover:bg-secondary-base/10 hover:text-foreground"
                       }`}
                     >
@@ -383,7 +383,7 @@ export function MobileNavSheet({
                           ? r === "ADMIN"
                             ? "bg-accent-tangerine text-zinc-950 shadow-xs"
                             : r === "INSTRUCTOR"
-                              ? "bg-secondary-base text-white shadow-xs"
+                              ? "bg-emerald-600 text-white shadow-xs"
                               : "bg-primary-base text-white shadow-xs"
                           : "text-text-muted hover:text-foreground hover:bg-muted/80"
                       } ${isPending ? "opacity-60 cursor-wait" : ""}`}

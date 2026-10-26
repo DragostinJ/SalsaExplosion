@@ -272,8 +272,8 @@ function EventCard({ evt }: EventCardProps) {
           {evt.guestArtists.map((artist) => (
             <Badge
               key={artist}
-              variant="secondary"
-              className="text-[11px] font-semibold bg-secondary-light/40 text-secondary-hover border-secondary-base/30"
+              variant="outline"
+              className="text-[11px] font-semibold bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
             >
               ★ {artist}
             </Badge>
@@ -287,15 +287,15 @@ function EventCard({ evt }: EventCardProps) {
 
       <CardContent className="space-y-2 text-xs text-text-muted flex-1">
         <div className="flex items-center gap-2">
-          <Calendar className="h-3.5 w-3.5 text-secondary-base shrink-0" />
+          <Calendar className="h-3.5 w-3.5 text-amber-400 shrink-0" />
           <span className="font-medium text-foreground">{startFormatted}</span>
         </div>
         <div className="flex items-center gap-2">
-          <MapPin className="h-3.5 w-3.5 text-secondary-base shrink-0" />
+          <MapPin className="h-3.5 w-3.5 text-amber-400 shrink-0" />
           <span className="truncate">{evt.venueName}</span>
         </div>
         <div className="flex items-center gap-2">
-          <Users className="h-3.5 w-3.5 text-secondary-base shrink-0" />
+          <Users className="h-3.5 w-3.5 text-amber-400 shrink-0" />
           <span>{evt.ticketTiers.length} Pass Tiers Available</span>
         </div>
       </CardContent>

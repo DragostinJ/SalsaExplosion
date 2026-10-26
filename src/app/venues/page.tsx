@@ -464,7 +464,7 @@ export default function VenuesGuidePage() {
               Travelling from London, Bristol, Southampton, or abroad for our weekend festivals? These verified walkable hotels are all within 3 to 10 minutes of BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR).
             </p>
           </div>
-          <Badge variant="outline" className="border-secondary-base/40 text-secondary-hover bg-secondary-light/30 text-xs font-semibold shrink-0">
+          <Badge variant="outline" className="border-emerald-500/30 text-emerald-300 bg-emerald-500/10 text-xs font-semibold shrink-0">
             Walking Distance to BOH Studios
           </Badge>
         </div>
@@ -474,10 +474,10 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-amber-900 text-white text-[10px] font-bold">
+                <Badge className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold">
                   4-Star Premium
                 </Badge>
-                <span className="text-[11px] font-bold text-primary-hover">3–5 min walk</span>
+                <span className="text-[11px] font-bold text-rose-400">3–5 min walk</span>
               </div>
               <h3 className="font-extrabold text-base text-foreground">Hilton Bournemouth</h3>
               <p className="text-xs text-text-muted">Terrace Rd, Bournemouth BH2 5EL</p>
@@ -494,10 +494,10 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-emerald-900 text-white text-[10px] font-bold">
+                <Badge className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">
                   Free Hot Breakfast
                 </Badge>
-                <span className="text-[11px] font-bold text-primary-hover">5 min walk</span>
+                <span className="text-[11px] font-bold text-rose-400">5 min walk</span>
               </div>
               <h3 className="font-extrabold text-base text-foreground">Hampton by Hilton</h3>
               <p className="text-xs text-text-muted">Upper Terrace Rd, Bournemouth BH2 5NW</p>
@@ -514,10 +514,10 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-purple-600 text-white text-[10px] font-bold">
+                <Badge className="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-bold">
                   Top Value
                 </Badge>
-                <span className="text-[11px] font-bold text-primary-hover">8 min walk</span>
+                <span className="text-[11px] font-bold text-rose-400">8 min walk</span>
               </div>
               <h3 className="font-extrabold text-base text-foreground">Premier Inn Central</h3>
               <p className="text-xs text-text-muted">Westover Rd, Bournemouth BH1 2BZ</p>
@@ -534,10 +534,10 @@ export default function VenuesGuidePage() {
           <div className="rounded-2xl border bg-card p-5 space-y-3 shadow-xs flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Badge className="bg-blue-600 text-white text-[10px] font-bold">
+                <Badge className="bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] font-bold">
                   Full Service
                 </Badge>
-                <span className="text-[11px] font-bold text-primary-hover">10 min walk</span>
+                <span className="text-[11px] font-bold text-rose-400">10 min walk</span>
               </div>
               <h3 className="font-extrabold text-base text-foreground">Holiday Inn Bournemouth</h3>
               <p className="text-xs text-text-muted">Bath Rd, Lansdowne, Bournemouth BH1 2NT</p>

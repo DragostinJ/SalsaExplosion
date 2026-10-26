@@ -528,7 +528,7 @@ export function ClassScheduleCard({
             role="status"
             className={`flex items-start gap-2 rounded-md border p-2.5 text-xs font-medium ${
               feedback.type === "success"
-                ? "border-secondary-base/30 bg-secondary-light/30 text-secondary-hover"
+                ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
                 : feedback.type === "warning"
                   ? "border-accent-tangerine/30 bg-accent-tangerine/10 text-accent-tangerine"
                   : "border-destructive/40 bg-destructive/10 text-destructive"
@@ -559,8 +559,8 @@ export function ClassScheduleCard({
             <div className="w-full space-y-2">
               <Button
                 asChild
-                variant="secondary"
-                className="w-full border border-secondary-base/40 bg-secondary-light/40 text-secondary-hover font-bold"
+                variant="outline"
+                className="w-full border-emerald-500/40 bg-emerald-500/20 text-emerald-300 font-bold hover:bg-emerald-500/30"
               >
                 <Link href={`/checkin/${session.id}`}>
                   <CheckCircle2 className="mr-2 h-4 w-4" />

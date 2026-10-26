@@ -351,7 +351,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                         href={item.href}
                         className={`inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold transition-colors whitespace-nowrap ${
                           item.active
-                            ? "bg-secondary-base text-white shadow-xs font-bold"
+                            ? "bg-emerald-600 text-white shadow-xs font-bold"
                             : "text-text-muted hover:bg-secondary-base/10 hover:text-foreground"
                         }`}
                       >
@@ -414,7 +414,7 @@ export function SiteHeader({ role, canSwitchRoles = false }: SiteHeaderProps) {
                             ? r === "ADMIN"
                               ? "bg-accent-tangerine text-zinc-950 shadow-xs"
                               : r === "INSTRUCTOR"
-                                ? "bg-secondary-base text-white shadow-xs"
+                                ? "bg-emerald-600 text-white shadow-xs"
                                 : "bg-primary-base text-white shadow-xs"
                             : "text-text-muted hover:text-foreground hover:bg-muted/80"
                         } ${isPending ? "opacity-60 cursor-wait" : ""}`}

@@ -35,11 +35,11 @@ export function BeginnerSafetyHub() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Badge className="bg-secondary-base text-white font-bold text-[10px]">
-                <Heart className="mr-1 h-3 w-3 fill-white" />
-                First-Timer & Beginner Zone
+              <Badge className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-[10px]">
+                <Heart className="mr-1 h-3 w-3 fill-emerald-300" />
+                First-Timer &amp; Beginner Zone
               </Badge>
-              <span className="text-xs font-semibold text-secondary-base">
+              <span className="text-xs font-semibold text-emerald-400">
                 100% Judgment-Free Studio
               </span>
             </div>
@@ -105,7 +105,7 @@ export function BeginnerSafetyHub() {
             onClick={() => setActiveTab(activeTab === "ROTATION" ? "NONE" : "ROTATION")}
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "ROTATION"
-                ? "bg-secondary-base text-white shadow-xs"
+                ? "bg-emerald-600 text-white shadow-xs"
                 : "bg-muted/50 text-text-muted hover:bg-muted hover:text-foreground"
             }`}
           >
@@ -119,7 +119,7 @@ export function BeginnerSafetyHub() {
             onClick={() => setActiveTab(activeTab === "AMBASSADORS" ? "NONE" : "AMBASSADORS")}
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "AMBASSADORS"
-                ? "bg-secondary-base text-white shadow-xs"
+                ? "bg-emerald-600 text-white shadow-xs"
                 : "bg-muted/50 text-text-muted hover:bg-muted hover:text-foreground"
             }`}
           >
@@ -133,7 +133,7 @@ export function BeginnerSafetyHub() {
             onClick={() => setActiveTab(activeTab === "QUESTIONS" ? "NONE" : "QUESTIONS")}
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "QUESTIONS"
-                ? "bg-secondary-base text-white shadow-xs"
+                ? "bg-emerald-600 text-white shadow-xs"
                 : "bg-muted/50 text-text-muted hover:bg-muted hover:text-foreground"
             }`}
           >

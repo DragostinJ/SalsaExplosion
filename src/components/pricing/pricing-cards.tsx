@@ -234,10 +234,10 @@ export function PricingCards({
                     <li key={feature} className="flex items-start gap-2">
                       <Check
                         className={`mt-0.5 h-4 w-4 shrink-0 ${
-                          isParchment ? "text-amber-800" : "text-emerald-500"
+                          isParchment ? "text-amber-400" : "text-emerald-500"
                         }`}
                       />
-                      <span className={isParchment ? "text-[#3D2C1E] font-semibold" : ""}>
+                      <span className={isParchment ? "text-stone-200 font-semibold" : ""}>
                         {feature}
                       </span>
                     </li>
@@ -272,7 +272,7 @@ export function PricingCards({
                         ? "bg-emerald-700 hover:bg-emerald-800 text-white"
                         : pkg.popular
                         ? "bg-primary-base hover:bg-primary-hover text-white shadow-sm"
-                        : "border-2 border-primary-base/30 bg-primary-base/5 text-primary-hover hover:bg-primary-base hover:text-white"
+                        : "border-2 border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-600 hover:text-white"
                     }`}
                   >
                     {isCurrentLoading ? (

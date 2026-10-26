@@ -233,7 +233,7 @@ export default function Home() {
                       <span>BOH Studios Bournemouth</span>
                     </div>
                     <p className="text-xs text-stone-300 mt-2 line-clamp-2 leading-relaxed">
-                      Cash prizes for best dressed, Cuban Salsa &amp; Bachata workshops, guest maestros, and dancing until 2:00 AM.
+                      Cash prizes for best dressed, Cuban Salsa &amp; Bachata workshops, guest maestros, and dancing until 02:00.
                     </p>
                   </div>
 
@@ -335,7 +335,7 @@ export default function Home() {
                       <span>BOH Studios Bournemouth</span>
                     </div>
                     <p className="text-xs text-stone-300 mt-2 line-clamp-2 leading-relaxed">
-                      3 nights of parties, 2 days of workshops, and dancing until 2:00 AM across 2 dedicated rooms celebrating 25+ years of Salsa Explosion heritage.
+                      3 nights of parties, 2 days of workshops, and dancing until 02:00 across 2 dedicated rooms celebrating 25+ years of Salsa Explosion heritage.
                     </p>
                   </div>
 

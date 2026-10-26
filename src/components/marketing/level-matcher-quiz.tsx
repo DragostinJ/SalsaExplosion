@@ -21,9 +21,9 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
     badge: "Crossover Welcome: Explore Cuban Flavour",
     description:
       "Welcome to our circle! Because you already have natural rhythm and partner frame from other styles, you'll pick up Cuban Casino with ease. We warmly guide your transition into circular Guapea, Dile Que No, and high-energy Rueda de Casino calls with zero ego and pure fun.",
-    classTiming: "Every Thursday 7:00 PM (Solo Musicality / Beginners) & 8:15 PM Partnerwork • BOH Studios",
+    classTiming: "Every Thursday 19:00 (Solo Musicality / Beginners) & 20:15 Partnerwork • BOH Studios",
     recommendedTrack:
-      "Start with Moe Flex's All-Levels Musicality & Pasitos at 7:00 PM, followed by Justyna's Improvers or Enrique's Foundation to master fluid circular transitions.",
+      "Start with Moe Flex's All-Levels Musicality & Pasitos at 19:00, followed by Justyna's Improvers or Enrique's Foundation to master fluid circular transitions.",
     href: "/dashboard/schedule",
     ctaLabel: "Explore the Timetable & Book Your Session →",
   },
@@ -32,7 +32,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
     badge: "Level 1: No Experience Needed",
     description:
       "Start with basic footwork (Paso Básico), Cuban frame connection, Dile Que No, and your very first Dame in the Rueda circle. Zero partner needed!",
-    classTiming: "Every Thursday 7:00 PM • BOH Studios",
+    classTiming: "Every Thursday 19:00 • BOH Studios",
     recommendedTrack: "Claim your 1 Free Welcome Credit and join our friendly Thursday cohort with Maestro Enrique.",
     href: "/dashboard/schedule",
   },
@@ -41,7 +41,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
     badge: "Level 2: 1-3 Months Dancing",
     description:
       "Master Vacílala, Enchúfla doble, Sombrero, and fluid partner lead/follow technique with Cuban musicality on Clave.",
-    classTiming: "Every Thursday 8:15 PM & Sunday 6:30 PM",
+    classTiming: "Every Thursday 20:15 & Sunday 18:30",
     recommendedTrack: "Great fit to build confidence with turn patterns and fast Rueda transitions with Justyna.",
     href: "/dashboard/schedule",
   },
@@ -50,7 +50,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
     badge: "Level 3: 6+ Months Dancing",
     description:
       "Tackle Setenta Complicada, El Dedo, Bayamo, fast partner switches, and body isolations (Despelote).",
-    classTiming: "Every Thursday 8:00 PM • BOH Studios",
+    classTiming: "Every Thursday 20:15 • BOH Studios",
     recommendedTrack: "High-energy Cuban Timba dancing with Maestro Enrique's advanced cohort.",
     href: "/dashboard/schedule",
   },

@@ -48,8 +48,8 @@ const DESTINATIONS: DestinationInfo[] = [
     wazeUrl: "https://waze.com/ul?q=104+Commercial+Road+Bournemouth",
     eveningParking: {
       title: "Bournemouth Library (Avenue Rd, BH2 5SL) & West Hill (BH2 5PG)",
-      description: "Convenient parking 2-3 mins walk away. Free on-street parking along Commercial Road and surrounding streets after 6:00 PM.",
-      estimatedCost: "£0.00 (FREE after 6 PM on-street)",
+      description: "Convenient parking 2-3 mins walk away. Free on-street parking along Commercial Road and surrounding streets after 18:00.",
+      estimatedCost: "£0.00 (FREE after 18:00 on-street)",
       isFree: true,
     },
     daytimeParking: {
@@ -60,23 +60,23 @@ const DESTINATIONS: DestinationInfo[] = [
     },
   },
   {
-    id: "woodlands",
-    name: "The Woodlands Ballroom (Made in Cuba Festival)",
-    address: "Parkstone Trades & Labour Club, 485 Ashley Rd, Upper Parkstone, Poole BH14 0BB (Tel: 01202 746491)",
-    postcode: "BH14 0BB",
-    googleMapsUrl: "https://maps.google.com/?q=Parkstone+Trade+and+Labour+Club+485+Ashley+Rd+Poole+BH14+0BB",
-    appleMapsUrl: "https://maps.apple.com/?address=485+Ashley+Road,Poole,BH14+0BB",
-    wazeUrl: "https://waze.com/ul?q=485+Ashley+Road+Poole",
+    id: "boh-studio-2",
+    name: "BOH Studios Studio 2 (Foundation & SB&K Lounge)",
+    address: "104 Commercial Road, The Triangle, Bournemouth BH2 5LR (Tel: 07969 633701)",
+    postcode: "BH2 5LR",
+    googleMapsUrl: "https://maps.google.com/?q=BOH+Studios+Bournemouth+104+Commercial+Rd+BH2+5LR",
+    appleMapsUrl: "https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR",
+    wazeUrl: "https://waze.com/ul?q=104+Commercial+Road+Bournemouth",
     eveningParking: {
-      title: "Free On-Site Club Car Park & Ashley Road Bays",
-      description: "Free private on-site parking at the club plus plentiful free street parking along Ashley Road. Famous original vintage sprung wooden dance floor with 100+ dancer capacity and private licensed bar.",
-      estimatedCost: "£0.00 (FREE Parking on-site & street)",
+      title: "Bournemouth Library (Avenue Rd, BH2 5SL) & Commercial Road",
+      description: "Convenient parking minutes from the studio. Free on-street parking along Commercial Road and Poole Hill after 18:00.",
+      estimatedCost: "£0.00 (FREE after 18:00 on-street)",
       isFree: true,
     },
     daytimeParking: {
-      title: "Ashley Road Shoppers Car Park",
-      description: "Short stay shopper parking available along Ashley Road.",
-      estimatedCost: "£1.20 / hour",
+      title: "West Hill Car Park (BH2 5PG)",
+      description: "Large council car park adjacent to The Triangle.",
+      estimatedCost: "£1.60 / hour",
       isFree: false,
     },
   },
@@ -90,7 +90,7 @@ const DESTINATIONS: DestinationInfo[] = [
     wazeUrl: "https://waze.com/ul?q=Undercliff+Drive+Boscombe",
     eveningParking: {
       title: "Boscombe Undercliff Car Park (Code 59200) & Overcliff Drive",
-      description: "Beachfront function room directly opposite Boscombe Pier with panoramic Poole Bay sea views. Boscombe Undercliff Car Park right next door (PayByPhone Code: 59200, 2.1m height barrier, closes midnight so exit before 12:00 AM). Free evening street parking along Boscombe Overcliff Drive (2-min walk down the Zig-Zag path).",
+      description: "Beachfront function room directly opposite Boscombe Pier with panoramic Poole Bay sea views. Boscombe Undercliff Car Park right next door (PayByPhone Code: 59200, 2.1m height barrier, closes midnight). Free evening street parking along Boscombe Overcliff Drive (2-min walk down the Zig-Zag path).",
       estimatedCost: "£0.00 (FREE on Overcliff Drive / PayByPhone 59200)",
       isFree: true,
     },
@@ -192,7 +192,7 @@ export function VenueArrivalPlanner() {
               >
                 <div className="flex items-center gap-1.5">
                   <Clock className="h-3.5 w-3.5 text-emerald-800 dark:text-emerald-300" />
-                  <span>Evening Class (After 6 PM)</span>
+                  <span>Evening Class (After 18:00)</span>
                 </div>
                 <p className="text-[10px] text-emerald-800 dark:text-emerald-300 font-extrabold mt-0.5">
                   Best for Free Parking
@@ -210,7 +210,7 @@ export function VenueArrivalPlanner() {
               >
                 <div className="flex items-center gap-1.5">
                   <Car className="h-3.5 w-3.5 text-amber-700 dark:text-amber-400" />
-                  <span>Daytime (Before 6 PM)</span>
+                  <span>Daytime (Before 18:00)</span>
                 </div>
                 <p className="text-[10px] text-muted-foreground font-normal mt-0.5">
                   Pay & Display Car Parks
@@ -296,7 +296,7 @@ export function VenueArrivalPlanner() {
               Late-Night Studio Safety
             </div>
             <p className="text-muted-foreground leading-relaxed text-[11px]">
-              Boscombe high street and Hawkwood Road car parks are fully streetlit. When leaving after 10:30 PM, instructors and reception staff are happy to walk dancers back to their vehicles upon request.
+              Boscombe high street and Hawkwood Road car parks are fully streetlit. When leaving after 22:30, instructors and reception staff are happy to walk dancers back to their vehicles upon request.
             </p>
           </div>
 

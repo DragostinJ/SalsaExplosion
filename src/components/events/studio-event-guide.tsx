@@ -33,7 +33,7 @@ const STUDIO_FAQS: FaqItem[] = [
   {
     question: "Where can I park near BOH Studios Bournemouth?",
     answer:
-      "Convenient parking is located 2 minutes walk away at Bournemouth Library (Avenue Rd, BH2 5SL) and West Hill Car Park (BH2 5PG). Free on-street parking along Commercial Road and surrounding streets is usually available after 6:00 PM.",
+      "Convenient parking is located 2 minutes walk away at Bournemouth Library (Avenue Rd, BH2 5SL) and West Hill Car Park (BH2 5PG). Free on-street parking along Commercial Road and surrounding streets is usually available after 18:00.",
   },
   {
     question: "Is there a licensed bar inside the venue?",
@@ -115,7 +115,7 @@ export function StudioEventGuide({
             <p>2 mins walk (BH2 5RH)</p>
             <p>Avenue Rd Multi-Storey</p>
             <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium pt-1">
-              Free on-street after 6pm
+              Free on-street after 18:00
             </p>
           </CardContent>
         </Card>
@@ -166,25 +166,25 @@ export function StudioEventGuide({
         <div className="grid gap-3 sm:grid-cols-3 text-xs">
           <div className="rounded-xl border border-border/50 bg-card p-3 space-y-1">
             <span className="font-bold text-amber-600 dark:text-amber-400 block">
-              Phase 1 • 7:30 PM
+              Phase 1 • 19:30
             </span>
-            <p className="font-semibold text-foreground">Warm-up & Technique</p>
+            <p className="font-semibold text-foreground">Warm-up &amp; Technique</p>
             <p className="text-muted-foreground text-[11px]">
               Cuban body isolation, footwork drill, and Rueda de Casino basics.
             </p>
           </div>
           <div className="rounded-xl border border-border/50 bg-card p-3 space-y-1">
             <span className="font-bold text-amber-600 dark:text-amber-400 block">
-              Phase 2 • 8:30 PM
+              Phase 2 • 20:30
             </span>
             <p className="font-semibold text-foreground">Partnerwork Combinations</p>
             <p className="text-muted-foreground text-[11px]">
-              Turn patterns, dynamic Dile Que No transitions & lead/follow frame.
+              Turn patterns, dynamic Dile Que No transitions &amp; lead/follow frame.
             </p>
           </div>
           <div className="rounded-xl border border-border/50 bg-card p-3 space-y-1">
             <span className="font-bold text-amber-600 dark:text-amber-400 block">
-              Phase 3 • 9:30 PM – Late
+              Phase 3 • 21:30 – Late
             </span>
             <p className="font-semibold text-foreground">Social Party Fiesta</p>
             <p className="text-muted-foreground text-[11px]">

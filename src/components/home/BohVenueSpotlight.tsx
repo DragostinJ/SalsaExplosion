@@ -57,7 +57,7 @@ const PHOTO_SLOTS = [
   {
     id: "main-ballroom",
     title: "Main Ballroom & Rueda Floor",
-    caption: "Spacious sprung maple floor hosting our 7:00 PM – 10:30 PM Thursday & Sunday sessions.",
+    caption: "Spacious sprung maple floor hosting our 19:00 – 22:30 Thursday & Sunday sessions.",
     tag: "Room 1 • Casino & Timba",
     gradient: "from-stone-950 via-rose-950/60 to-stone-900",
   },
@@ -249,7 +249,7 @@ export function BohVenueSpotlight() {
                     <span>The Avenue Multi-Storey (BH2 5SL)</span>
                   </div>
                   <p className="text-muted-foreground">
-                    Only a 3-minute flat walk to BOH Studios. Covered, well-lit, and CCTV-monitored with affordable evening flat rates after 6:00 PM.
+                    Only a 3-minute flat walk to BOH Studios. Covered, well-lit, and CCTV-monitored with affordable evening flat rates after 18:00.
                   </p>
                 </div>
                 <div className="rounded-xl border border-border/70 bg-background/80 p-3.5 space-y-1">
@@ -267,7 +267,7 @@ export function BohVenueSpotlight() {
                     <span>Cotlands Road & Triangle Bays</span>
                   </div>
                   <p className="text-muted-foreground">
-                    Free on-street evening parking bays available around The Triangle and Poole Hill after 8:00 PM (subject to council signs).
+                    Free on-street evening parking bays available around The Triangle and Poole Hill after 20:00 (subject to council signs).
                   </p>
                 </div>
               </div>
@@ -303,7 +303,7 @@ export function BohVenueSpotlight() {
                   <span>104 Commercial Road (The Triangle) • Reception & Check-In</span>
                 </div>
                 <p className="text-muted-foreground">
-                  Located directly opposite Poole Hill in Bournemouth town centre. Studio doors open <strong>15 minutes before class</strong> (6:45 PM on Thursdays). No physical ticket printing needed—simply present your 1-second QR pass from your phone digital wallet or pay contactless at the reception desk. Staff and greeters will guide you to your level hall!
+                  Located directly opposite Poole Hill in Bournemouth town centre. Studio doors open <strong>15 minutes before class</strong> (18:45 on Thursdays). No physical ticket printing needed—simply present your 1-second QR pass from your phone digital wallet or pay contactless at the reception desk. Staff and greeters will guide you to your level hall!
                 </p>
               </div>
             )}

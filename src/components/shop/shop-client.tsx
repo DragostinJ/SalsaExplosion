@@ -381,7 +381,7 @@ export function ShopClient({
                     <strong className="text-foreground">Collection Desk:</strong> BOH Studios, 104 Commercial Road, Bournemouth (BH2 5LR)
                   </div>
                   <div>
-                    <strong className="text-foreground">Hours:</strong> Thursdays &amp; Sundays 6:30 PM – 10:30 PM
+                    <strong className="text-foreground">Hours:</strong> Thursdays &amp; Sundays 18:30 – 22:30
                   </div>
                 </div>
                 <Button

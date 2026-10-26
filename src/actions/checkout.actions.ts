@@ -290,7 +290,7 @@ export async function createBillingPortalSessionAction(): Promise<CheckoutAction
       if (!user.stripeCustomerId) {
         throw new CheckoutDomainError(
           "USER_NOT_FOUND",
-          "Your Unlimited Studio Membership is currently managed in local demo mode."
+          "Memberships and weekly class admissions are handled directly at the door."
         );
       }
 

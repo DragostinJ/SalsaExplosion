@@ -102,7 +102,7 @@ const SOCIAL_ITEMS: SocialItem[] = [
     likes: "4,120",
     track: "Maykel Blanco y Su Salsa Mayor - Chaca Chaca",
     caption:
-      "3 nights of parties, 2 dedicated rooms, live Cuban percussion, and dancers from across the UK and abroad! Celebrating 33 years of Salsa Explosion.",
+      "3 nights of parties, 2 dedicated rooms, live Cuban percussion, and dancers from across the UK and abroad! Celebrating 25+ years of Salsa Explosion heritage.",
     tags: ["#MadeInCuba2026", "#SalsaExplosion", "#HavanaFiesta", "#CubanSalsaUK"],
     gradient: "from-rose-600 via-purple-700 to-amber-700",
     duration: "0:56",

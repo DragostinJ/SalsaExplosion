@@ -138,7 +138,7 @@ export default function HowItWorksPage() {
                 1-Tap Booking & Fair Cancellations
               </CardTitle>
               <CardDescription className="text-xs leading-relaxed">
-                Purchase drop-in credits, 5 or 10 class packs, or unlimited monthly memberships securely via Stripe. Credits live in your Studio Wallet so booking any session takes 1 tap without repeated credit card entry.
+                Weekly classes are paid directly at the door (£12 for 1 class / £14 for 2 classes, card or cash). Official festival passes and gift vouchers can be booked online via Stripe.
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-0">

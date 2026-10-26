@@ -25,13 +25,13 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     location: "BOH Studios Bournemouth (104 Commercial Rd)",
   },
   {
-    id: "photo-woodlands-ballroom",
-    title: "The Woodlands Ballroom @ Parkstone Trade & Labour Club",
+    id: "photo-boh-ballroom",
+    title: "BOH Studios Main Ballroom & Rueda Floor",
     caption:
-      "Flagship Made in Cuba Dance Festival venue with Enrique Perez Valdes. Gorgeous sprung hardwood ballroom for 100+ dancers with free on-site parking.",
+      "Flagship Made in Cuba Dance Festival & weekly classes venue with Enrique Perez Valdes. Gorgeous sprung Canadian maple ballroom for 100+ dancers.",
     category: "STUDIO_LIFE",
-    imageUrl: "/images/woodlands-ballroom.png",
-    location: "Upper Parkstone, Poole (485 Ashley Rd)",
+    imageUrl: "/images/danza-2026-2027-calendar.png",
+    location: "BOH Studios Bournemouth (104 Commercial Rd)",
   },
   {
     id: "photo-halloween-latin-party",

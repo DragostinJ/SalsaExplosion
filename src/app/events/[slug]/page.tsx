@@ -192,7 +192,7 @@ export default async function EventDetailPage({
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge className="bg-amber-500 text-stone-950 font-black text-xs uppercase tracking-wider shadow-sm">
-                    🎉 Celebrating 33 Years of Salsa Explosion!
+                    🎉 Celebrating 25+ Years of Salsa Explosion Heritage!
                   </Badge>
                   <Badge variant="outline" className="border-amber-400/40 text-amber-300 bg-amber-500/10 text-xs font-bold">
                     South Coast’s Premier Cuban Dance Event
@@ -235,7 +235,7 @@ export default async function EventDetailPage({
                   </div>
                   <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-center font-bold text-foreground col-span-2 sm:col-span-2">
                     <span className="block text-lg">💃</span>
-                    Social Dancing Until 2:00 AM
+                    Social Dancing Until 02:00
                   </div>
                   <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 text-center font-bold text-foreground">
                     <span className="block text-lg">🇨🇺</span>
@@ -261,13 +261,13 @@ export default async function EventDetailPage({
                         Friday 4 Dec
                       </span>
                     </div>
-                    <p className="font-extrabold text-foreground">7:00 PM – 12:00 AM</p>
+                    <p className="font-extrabold text-foreground">19:00 – 00:00</p>
                     <p className="text-muted-foreground text-[11px] leading-snug">
                       Classes &amp; Welcome Party
                     </p>
                     <div className="pt-1">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-rose-700 dark:text-rose-400 bg-rose-500/10 px-1.5 py-0.5 rounded">
-                        <MapPin className="h-2.5 w-2.5" /> The Woodlands Ballroom
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                        <MapPin className="h-2.5 w-2.5" /> BOH Studios Bournemouth
                       </span>
                     </div>
                   </div>
@@ -278,8 +278,8 @@ export default async function EventDetailPage({
                         Saturday 5 Dec
                       </span>
                     </div>
-                    <p className="font-extrabold text-foreground">12:00 PM – 5:00 PM Workshops</p>
-                    <p className="font-extrabold text-foreground">8:00 PM – 2:00 AM Fiesta</p>
+                    <p className="font-extrabold text-foreground">12:00 – 17:00 Workshops</p>
+                    <p className="font-extrabold text-foreground">20:00 – 02:00 Fiesta</p>
                     <p className="text-muted-foreground text-[11px] leading-snug">
                       Classes, 2 Shows &amp; 2-Room Party
                     </p>
@@ -296,7 +296,7 @@ export default async function EventDetailPage({
                         Sunday 6 Dec
                       </span>
                     </div>
-                    <p className="font-extrabold text-foreground">6:00 PM – 12:00 AM</p>
+                    <p className="font-extrabold text-foreground">18:00 – 00:00</p>
                     <p className="text-muted-foreground text-[11px] leading-snug">
                       Classes &amp; Social Dancing Finale
                     </p>
@@ -359,7 +359,7 @@ export default async function EventDetailPage({
               <div className="relative w-full max-w-[340px] aspect-square rounded-2xl overflow-hidden border-2 border-amber-500/60 shadow-2xl group ring-4 ring-amber-500/20 bg-surface-1">
                 <Image
                   src="/images/made-in-cuba-2026-poster.jpg"
-                  alt="MADE IN CUBA Dance Festival 2026 Bournemouth Official Poster — Celebrating 33 Years of Salsa Explosion"
+                  alt="MADE IN CUBA Dance Festival 2026 Bournemouth Official Poster — Celebrating 25+ Years of Salsa Explosion Heritage"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 360px"
@@ -414,20 +414,20 @@ export default async function EventDetailPage({
               <div className="rounded-2xl border bg-card/60 p-5 space-y-3">
                 <h4 className="font-bold text-sm text-foreground flex items-center gap-2">
                   <Clock className="h-4 w-4 text-amber-500" />
-                  Evening Timetable (8:00 PM – 2:00 AM):
+                  Evening Timetable (20:00 – 02:00):
                 </h4>
                 <div className="grid gap-2 sm:grid-cols-3 text-xs">
                   <div className="p-2.5 rounded-xl border bg-muted/40">
-                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">8:00 PM • Doors Open</span>
-                    <span className="text-foreground">8:15 PM • Bachata Improvers onwards with Alex Spindlove</span>
+                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">20:00 • Doors Open</span>
+                    <span className="text-foreground">20:15 • Bachata Improvers onwards with Alex Spindlove</span>
                   </div>
                   <div className="p-2.5 rounded-xl border bg-muted/40">
-                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">9:15 PM • Workshop Rooms</span>
-                    <span className="text-foreground">Rueda De Casino Intermediates + Salsa/Timba Improvers & Int</span>
+                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">21:15 • Workshop Rooms</span>
+                    <span className="text-foreground">Rueda De Casino Intermediates + Salsa/Timba Improvers &amp; Int</span>
                   </div>
                   <div className="p-2.5 rounded-xl border bg-muted/40">
-                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">10:00 PM – 2:00 AM • Fiesta</span>
-                    <span className="text-foreground">SB&K Social Dance Party with DJ Enrique</span>
+                    <span className="font-extrabold text-amber-800 dark:text-amber-300 block">22:00 – 02:00 • Fiesta</span>
+                    <span className="text-foreground">SB&amp;K Social Dance Party with DJ Enrique</span>
                   </div>
                 </div>
               </div>

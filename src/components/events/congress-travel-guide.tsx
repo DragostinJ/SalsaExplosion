@@ -30,7 +30,7 @@ const FAQS: FaqItem[] = [
   {
     question: "Where do the festival events take place across the weekend?",
     answer:
-      "Friday 4 Dec (7pm–12am) takes place at The Woodlands Ballroom (Parkstone, Poole) for our Welcome Party. Saturday 5 Dec (12pm–5pm workshops, 8pm–2am shows & party) and Sunday 6 Dec (6pm–12am classes & dancing) take place at BOH Studios Bournemouth in The Triangle. A direct 10-minute taxi or M1/M2 bus connects both venues.",
+      "All 3 days of Made in Cuba Dance Weekend take place at BOH Studios Bournemouth, 104 Commercial Rd in The Triangle (BH2 5LR). Friday 4 Dec (19:00–00:00 Welcome Party & Masterclasses), Saturday 5 Dec (12:00–17:00 workshops, 20:00–02:00 shows & party), and Sunday 6 Dec (18:00–00:00 classes & farewell fiesta).",
   },
   {
     question: "What are the two dedicated rooms during the parties?",
@@ -38,9 +38,9 @@ const FAQS: FaqItem[] = [
       "Both Friday and Saturday nights feature two separate rooms with dedicated sound systems: Room 1 is the Cuban Salsa & Timba Room with authentic Havana rhythms, and Room 2 is the Bachata Room playing modern, sensual, and traditional Dominican Bachata.",
   },
   {
-    question: "Is dancer parking available on-site at both venues?",
+    question: "Is dancer parking available on-site at the venue?",
     answer:
-      "Yes. The Woodlands Ballroom has an on-site private car park. For BOH Studios, the Bournemouth Library Car Park (Avenue Rd, BH2 5SL) is just a 2-minute walk away. The Roundhouse Hotel also has secure underground parking with discounted dancer permits.",
+      "Yes. For BOH Studios, the Bournemouth Library Car Park (Avenue Rd, BH2 5SL) is just a 2-minute walk away, with free on-street evening parking along Commercial Road after 18:00. The Roundhouse Hotel also has secure underground parking with discounted dancer permits.",
   },
   {
     question: "What is the dress code for Saturday Gala & Shows Night?",
@@ -77,23 +77,23 @@ export function CongressTravelGuide() {
           Hotel, Travel &amp; Weekend Festival Guide
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Everything you need for an unforgettable coastal Cuban dance weekend celebrating 33 years of Salsa Explosion: partner hotel rates, nearby Bournemouth accommodations, full 3-day dual-venue timetable, and transit directions.
+          Everything you need for an unforgettable coastal Cuban dance weekend celebrating 25+ years of Salsa Explosion heritage: partner hotel rates, nearby Bournemouth accommodations, full 3-day programme, and transit directions.
         </p>
       </div>
 
-      {/* Dual-Venue Transit Quick Tip */}
+      {/* Flagship Venue Quick Tip */}
       <div className="rounded-xl border border-amber-500/30 bg-amber-500/[0.04] p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
         <div className="space-y-0.5">
           <span className="font-bold text-foreground flex items-center gap-1.5">
             <MapPin className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
-            Dual-Venue Weekend Programme (Poole &amp; Bournemouth)
+            Flagship Venue in Bournemouth Triangle
           </span>
           <p className="text-muted-foreground text-[11px] leading-relaxed">
-            Friday Welcome Party at <strong className="text-foreground">The Woodlands Ballroom</strong> (BH14 0BB) • Saturday &amp; Sunday Workshops, Shows &amp; Socials at <strong className="text-foreground">BOH Studios Bournemouth</strong> (BH2 5LR).
+            All 3 Days of Workshops, Shows &amp; Socials hosted at <strong className="text-foreground">BOH Studios Bournemouth</strong> (104 Commercial Rd, BH2 5LR).
           </p>
         </div>
         <span className="text-[11px] font-bold text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2 py-1 rounded shrink-0">
-          10 min taxi or M1/M2 bus
+          Heart of Bournemouth
         </span>
       </div>
 
@@ -140,7 +140,7 @@ export function CongressTravelGuide() {
                 </li>
                 <li className="flex items-center gap-1.5">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-                  <span>Late 2:30 AM bar access &amp; complimentary dancer parking permit</span>
+                  <span>Late 02:30 bar access &amp; complimentary dancer parking permit</span>
                 </li>
               </ul>
             </div>
@@ -242,7 +242,7 @@ export function CongressTravelGuide() {
             <div className="flex items-center justify-between border-b pb-2">
               <div>
                 <span className="text-sm font-bold text-foreground">Friday, 4 December</span>
-                <span className="block text-[11px] text-muted-foreground">The Woodlands Ballroom</span>
+                <span className="block text-[11px] text-muted-foreground">BOH Studios Bournemouth</span>
               </div>
               <Badge variant="secondary" className="text-[10px]">
                 Day 1
@@ -297,7 +297,7 @@ export function CongressTravelGuide() {
               <li className="flex items-start gap-2">
                 <Clock className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">21:00 - 02:00:</span> 2 Spectacular Shows &amp; Social Fiesta Until 2:00 AM (2 Rooms)
+                  <span className="font-semibold text-foreground">21:00 - 02:00:</span> 2 Spectacular Shows &amp; Social Fiesta Until 02:00 (2 Rooms)
                 </div>
               </li>
             </ul>
@@ -330,7 +330,7 @@ export function CongressTravelGuide() {
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-foreground">Closing Social:</span> Celebrating 33 Years of Salsa Explosion
+                  <span className="font-semibold text-foreground">Closing Social:</span> Celebrating 25+ Years of Salsa Explosion Heritage
                 </div>
               </li>
             </ul>

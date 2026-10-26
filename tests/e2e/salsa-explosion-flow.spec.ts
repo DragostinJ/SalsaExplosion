@@ -128,7 +128,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     }
   });
 
-  test("4. Venues directory renders BOH Studios Bournemouth, Woodlands Ballroom, Neptune Hall, and Roundhouse Hotel", async ({
+  test("4. Venues directory renders BOH Studios Bournemouth, BOH Studio 2, Neptune Hall, and Roundhouse Hotel", async ({
     page,
   }) => {
     await page.goto("/venues", { waitUntil: "domcontentloaded" });
@@ -137,7 +137,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByText("BOH Studios Bournemouth").first()
     ).toBeVisible();
     await expect(
-      page.getByText("The Woodlands Ballroom").first()
+      page.getByText("BOH Studios Studio 2").first()
     ).toBeVisible();
     await expect(
       page.getByText("Neptune Hall").first()
@@ -146,7 +146,6 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByText("The Roundhouse Hotel").first()
     ).toBeVisible();
     await expect(page.getByText(/Commercial Road/i).first()).toBeVisible();
-    await expect(page.getByText(/Ashley Road/i).first()).toBeVisible();
   });
 
   test("5. Referrals page enforces authentication for dancer rewards", async ({
@@ -248,7 +247,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByText(/Door-to-Door Arrival Planner/i).first()
     ).toBeVisible();
     await expect(page.getByText(/BOH Studios/i).first()).toBeVisible();
-    await expect(page.getByText(/The Woodlands Ballroom/i).first()).toBeVisible();
+    await expect(page.getByText(/BOH Studios Studio 2/i).first()).toBeVisible();
     await expect(page.getByText(/Neptune Hall/i).first()).toBeVisible();
     await expect(page.getByText(/59200/i).first()).toBeVisible();
     await expect(page.getByText(/The Roundhouse Hotel/i).first()).toBeVisible();

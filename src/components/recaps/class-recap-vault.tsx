@@ -337,7 +337,7 @@ export function ClassRecapVault({
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Studio Video Vault ({allStudioRecaps.length})
+            Studio Class Recaps ({allStudioRecaps.length})
           </button>
         </div>
 

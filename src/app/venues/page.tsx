@@ -19,7 +19,7 @@ import { VenueArrivalPlanner } from "@/components/venues/venue-arrival-planner";
 export const metadata = {
   title: "Venues & Parking Guide | BOH Studios Bournemouth | Salsa Explosion",
   description:
-    "Official venue, parking, bus routes, and arrival guide for Salsa Explosion classes at BOH Studios, The Woodlands Ballroom, and Salsa Explosion dance weekend festivals.",
+    "Official venue, parking, bus routes, and arrival guide for Salsa Explosion classes and dance weekend festivals at BOH Studios Bournemouth.",
 };
 
 export default function VenuesGuidePage() {
@@ -110,7 +110,7 @@ export default function VenuesGuidePage() {
                     <strong>West Hill Car Park (BH2 5PG):</strong> Multi-storey and surface parking adjacent to The Triangle.
                   </li>
                   <li>
-                    <strong>Commercial Road & Surrounding Streets:</strong> Free on-street parking after 6:00 PM.
+                    <strong>Commercial Road &amp; Surrounding Streets:</strong> Free on-street parking after 18:00.
                   </li>
                 </ul>
               </div>
@@ -161,25 +161,25 @@ export default function VenuesGuidePage() {
           </div>
         </Card>
 
-        {/* Venue 2: The Woodlands Ballroom Poole */}
-        <Card className="border shadow-sm flex flex-col justify-between overflow-hidden">
+        {/* Venue 2: BOH Studios Studio 2 Bournemouth */}
+        <Card className="border shadow-xs flex flex-col justify-between overflow-hidden">
           <div>
             <div className="relative h-48 w-full bg-gradient-to-tr from-emerald-800 via-teal-700 to-amber-600 p-6 text-white flex flex-col justify-between">
               <div className="flex items-center justify-between">
                 <Badge className="bg-black/40 text-white border-none backdrop-blur-sm text-xs font-bold">
-                  Made in Cuba Festival Venue
+                  BOH Studios • Studio 2
                 </Badge>
                 <span className="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full backdrop-blur-sm">
-                  Upper Parkstone, Poole
+                  The Triangle, Bournemouth
                 </span>
               </div>
 
               <div>
-                <h2 className="text-2xl font-black drop-shadow-sm">
-                  The Woodlands Ballroom
+                <h2 className="text-2xl font-black drop-shadow-xs">
+                  BOH Studios Studio 2
                 </h2>
                 <p className="text-xs text-white/90 font-medium mt-0.5">
-                  @ Parkstone Trades &amp; Labour Club, 485 Ashley Rd, Poole BH14 0BB • Tel: 01202 746491
+                  104 Commercial Rd, Bournemouth BH2 5LR • Tel: 07969 633701
                 </p>
               </div>
             </div>
@@ -187,7 +187,7 @@ export default function VenuesGuidePage() {
             <CardContent className="p-6 space-y-5">
               <div className="space-y-2 text-xs text-muted-foreground leading-relaxed">
                 <p>
-                  Official venue for the Friday Welcome Party of our annual MADE IN CUBA Dance Weekend festival celebrating 33 years of Salsa Explosion. A stunning, spacious ballroom with a famous <strong>original vintage sprung wooden dance floor</strong>, private licensed bar, stage area, and 100+ dancer capacity.
+                  Intimate secondary studio and social lounge for Level 0 beginners foundation drills, Bachata Sensual styling, and multi-room festival parties. Featuring mirror walls, high-definition sound, and sprung dance flooring.
                 </p>
               </div>
 
@@ -199,13 +199,13 @@ export default function VenuesGuidePage() {
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>Free On-Site Club Car Park:</strong> Generous free parking directly in the Parkstone Trades &amp; Labour Club rear car park.
+                    <strong>Bournemouth Library (BH2 5SL):</strong> 2-minute flat walk from the studio entrance.
                   </li>
                   <li>
-                    <strong>Ashley Road On-Street Parking:</strong> Plentiful free on-street parking bays right outside the venue doors.
+                    <strong>Commercial Road &amp; Poole Hill:</strong> Free on-street parking bays after 18:00.
                   </li>
                   <li>
-                    <strong>Amenities:</strong> Traditional sprung timber floor, private member club bar, and high-ceiling acoustics.
+                    <strong>Amenities:</strong> Air-conditioned, full-wall dance mirrors, reception lounge, and licensed social bar.
                   </li>
                 </ul>
               </div>
@@ -214,11 +214,11 @@ export default function VenuesGuidePage() {
               <div className="rounded-xl border bg-muted/30 p-4 space-y-2">
                 <h3 className="text-xs font-bold flex items-center gap-2 text-foreground">
                   <Clock className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                  Festival Programme:
+                  Session Timetable:
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>Friday 4 December:</strong> 7:00 PM – 12:00 AM Made in Cuba Dance Festival Welcome Party &amp; Masterclasses.
+                    <strong>Thursdays &amp; Sundays:</strong> 19:00 – 23:00 Beginners Foundation, Bachata Sensual &amp; Festival Multi-Room Fiestas.
                   </li>
                 </ul>
               </div>
@@ -226,11 +226,11 @@ export default function VenuesGuidePage() {
           </div>
 
           <div className="p-6 pt-0 border-t mt-4 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-xs text-muted-foreground">Postcode: BH14 0BB • Tel: 01202 746491</span>
+            <span className="text-xs text-muted-foreground">Postcode: BH2 5LR • Tel: 07969 633701</span>
             <div className="flex items-center gap-2">
               <Button asChild size="sm" variant="outline" className="text-xs h-8 font-semibold">
                 <a
-                  href="https://maps.apple.com/?address=485+Ashley+Road,Poole,BH14+0BB"
+                  href="https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -240,7 +240,7 @@ export default function VenuesGuidePage() {
               </Button>
               <Button asChild size="sm" className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs h-8">
                 <a
-                  href="https://maps.google.com/?q=Parkstone+Trade+and+Labour+Club+485+Ashley+Rd+Poole+BH14+0BB"
+                  href="https://maps.google.com/?q=BOH+Studios+Bournemouth+104+Commercial+Rd+BH2+5LR"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -291,7 +291,7 @@ export default function VenuesGuidePage() {
                 </h3>
                 <ul className="text-xs text-muted-foreground space-y-1.5 list-disc pl-4">
                   <li>
-                    <strong>Boscombe Undercliff Car Park (Right Next Door, BH5 1BN):</strong> BCP Council PayByPhone Code <strong>59200</strong>. Hundreds of bays with direct beach level access. Note: 2.1m height barrier, car park gates close at midnight until 8:00 AM, so exit before 12:00 AM.
+                    <strong>Boscombe Undercliff Car Park (Right Next Door, BH5 1BN):</strong> BCP Council PayByPhone Code <strong>59200</strong>. Hundreds of bays with direct beach level access. Note: 2.1m height barrier, car park gates close at midnight until 08:00.
                   </li>
                   <li>
                     <strong>Free Evening Street Parking:</strong> Plentiful free evening bays up along <strong>Boscombe Overcliff Drive</strong> (a brisk 2-minute stroll down the illuminated Zig-Zag cliff path).

@@ -283,8 +283,8 @@ export const PASS_PRICING: Record<
   },
   SUB_UNLIMITED_MONTHLY: {
     id: "SUB_UNLIMITED_MONTHLY",
-    name: "Unlimited Studio Membership",
-    shortLabel: "Unlimited Monthly",
+    name: "Full Studio Pass",
+    shortLabel: "Full Studio Pass",
     priceDisplay: "£95 / month",
     priceInPounds: 95,
     perClassNote: "All Thursdays & Sundays",
@@ -293,7 +293,7 @@ export const PASS_PRICING: Record<
     features: [
       "Unlimited Thursday & Sunday classes + socials",
       "Zero credit deductions when booking",
-      "Full access to End-of-Class Video Vault",
+      "Full access to End-of-Class Recaps",
       "Cancel anytime via Billing Portal",
     ],
   },
@@ -333,7 +333,7 @@ export const UPCOMING_EVENTS: CanonicalUpcomingEvent[] = [
     minPricePounds: 12,
     categoryLabel: "Special Party & Masterclass",
     description:
-      "South Coast Cuban & Latin Halloween fiesta featuring masterclasses, costume prizes, Rueda circles, and social dancing until 1:00 AM.",
+      "South Coast Cuban & Latin Halloween fiesta featuring masterclasses, costume prizes, Rueda circles, and social dancing until 01:00.",
     posterUrl: "/images/halloween-latin-party-poster.png",
   },
   {
@@ -357,12 +357,12 @@ export const UPCOMING_EVENTS: CanonicalUpcomingEvent[] = [
     startDateIso: "2026-12-04T18:00:00Z",
     endDateIso: "2026-12-06T23:00:00Z",
     timeRange: "3-Day Cuban Congress",
-    venueName: "BOH Studios & The Woodlands Ballroom",
+    venueName: "BOH Studios Bournemouth",
     priceDisplay: "From £20 / £65 Full Pass",
     minPricePounds: 20,
     categoryLabel: "Flagship 3-Day Congress",
     description:
-      "3 nights of parties, 2 days of authentic Cuban workshops, 2 spectacular shows, and dancing until 2:00 AM across 2 dedicated rooms.",
+      "3 nights of parties, 2 days of authentic Cuban workshops, 2 spectacular shows, and dancing until 02:00 across 2 dedicated rooms.",
     posterUrl: "/images/made-in-cuba-2026-poster.jpg",
   },
 ];
@@ -394,7 +394,7 @@ export const ACADEMY_GALLERY_PHOTOS: AcademyGalleryPhoto[] = [
     title: "MADE IN CUBA — Dance Weekend",
     caption:
       "Celebrating over 25 years of Cuban dance heritage in the UK with international maestros, 2 days of workshops, and 3 nights of Havana fiestas.",
-    location: "BOH Studios & The Woodlands Ballroom",
+    location: "BOH Studios Bournemouth",
     imageUrl: "/images/made-in-cuba-2026-poster.jpg",
     aspectClass: "aspect-[4/5]",
   },

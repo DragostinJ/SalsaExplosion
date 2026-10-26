@@ -45,11 +45,11 @@ export const SHOP_CATALOG: Record<string, CatalogShopItem> = {
   },
   tshirt: {
     id: "tshirt",
-    name: "MADE IN CUBA 2026 — 33rd Anniversary Festival Tee",
+    name: "MADE IN CUBA 2026 — 25th Anniversary Festival Tee",
     category: "APPAREL",
     pricePounds: 20,
     description:
-      "Commemorative 2026 MADE IN CUBA Dance Festival t-shirt celebrating 33 years of Salsa Explosion with authentic Havana artwork.",
+      "Commemorative 2026 MADE IN CUBA Dance Festival t-shirt celebrating 25+ years of Salsa Explosion heritage with authentic Havana artwork.",
     features: [
       "100% breathable ringspun cotton",
       "Screen-printed in Dorset, UK",

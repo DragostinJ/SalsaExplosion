@@ -85,7 +85,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link href="/dashboard/recaps" className="inline-flex items-center py-1 text-xs text-stone-300 font-bold hover:text-gold transition-colors">
-                  End-of-Class Video Vault
+                  End-of-Class Recaps
                 </Link>
               </li>
               <li>

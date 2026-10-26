@@ -58,7 +58,10 @@ function buildServerEnvSchema(isProduction: boolean) {
 
 export type ServerEnv = z.infer<ReturnType<typeof buildServerEnvSchema>>;
 
+let cachedEnv: ServerEnv | null = null;
+
 export function getValidatedEnv(customEnv?: Record<string, string | undefined>): ServerEnv {
+  if (!customEnv && cachedEnv) return cachedEnv;
   const source = customEnv || process.env;
   const isBuildPhase =
     !customEnv &&
@@ -76,7 +79,21 @@ export function getValidatedEnv(customEnv?: Record<string, string | undefined>):
     throw new Error(`[ENVIRONMENT_CONFIGURATION_ERROR] Invalid environment variables: ${errorDetails}`);
   }
 
+  if (!customEnv) {
+    cachedEnv = result.data;
+  }
   return result.data;
 }
 
-export const env = getValidatedEnv();
+/**
+ * Lazy proxy prevents top-level module import crashes during serverless cold starts.
+ * Validation only triggers when environment keys are actively accessed.
+ */
+export const env: ServerEnv = new Proxy({} as ServerEnv, {
+  get(_target, prop: string) {
+    if (!cachedEnv) {
+      cachedEnv = getValidatedEnv();
+    }
+    return (cachedEnv as Record<string, unknown>)[prop];
+  },
+});

@@ -9,6 +9,7 @@ import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
 import { JsonLdSchema } from "@/components/seo/JsonLdSchema";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { StageSpotlight } from "@/components/ui/StageSpotlight";
+import { getSafeAppUrl, isNextControlFlowError } from "@/lib/safe-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,9 +34,7 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://salsaexplosion.co.uk"
-  ),
+  metadataBase: getSafeAppUrl(process.env.NEXT_PUBLIC_APP_URL),
   title: {
     default: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
     template: "%s | Salsa Explosion",
@@ -110,29 +109,26 @@ export default async function RootLayout({
       });
     }
   } catch (err: unknown) {
-    const isDynamicUsageError =
-      typeof err === "object" &&
-      err !== null &&
-      "digest" in err &&
-      (err as { digest?: string }).digest === "DYNAMIC_SERVER_USAGE";
-
-    if (!isDynamicUsageError) {
-      console.warn("[RootLayout] Non-critical auth/database lookup failed:", err);
-    }
-    // Re-throw Next.js dynamic bail-out so Next.js handles route dynamic bail-out cleanly
-    if (isDynamicUsageError) {
+    if (isNextControlFlowError(err)) {
       throw err;
     }
+    console.error("[RootLayout] Non-critical auth/database lookup failed:", err);
   }
 
-  const userCanSwitchRoles = viewer ? canSwitchRoles(viewer.email) : false;
-  const effectiveRole = viewer
-    ? userCanSwitchRoles
-      ? viewer.role
-      : isBootstrapAdmin(viewer.email)
-        ? ("ADMIN" as Role)
-        : viewer.role
-    : null;
+  let userCanSwitchRoles = false;
+  let effectiveRole: Role | null = null;
+  try {
+    userCanSwitchRoles = viewer ? canSwitchRoles(viewer.email) : false;
+    effectiveRole = viewer
+      ? userCanSwitchRoles
+        ? viewer.role
+        : isBootstrapAdmin(viewer.email)
+          ? ("ADMIN" as Role)
+          : viewer.role
+      : null;
+  } catch (err: unknown) {
+    console.error("[RootLayout] Failed to calculate effective role:", err);
+  }
 
   return (
     <ClerkProvider>

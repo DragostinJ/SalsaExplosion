@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Video, Play, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 interface FirstClassPrepModalProps {
   isOpen: boolean;
@@ -47,7 +48,7 @@ export function FirstClassPrepModal({
         <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-surface-1 border border-line shadow-inner flex items-center justify-center">
           {isPlaying ? (
             <video
-              src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+              src={MEDIA_MANIFEST.videos.beginnerWelcome}
               controls
               autoPlay
               className="h-full w-full object-cover"

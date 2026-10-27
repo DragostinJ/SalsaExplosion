@@ -27,6 +27,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 import { reportError } from "@/lib/monitoring";
 
@@ -43,7 +44,7 @@ const CANONICAL_FACULTY = [
     firstName: "Enrique",
     lastName: "Perez Valdes",
     avatarUrl:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+      MEDIA_MANIFEST.instructors.enrique || MEDIA_MANIFEST.instructors.enriquePortrait,
     bio: "Founder & Artistic Director of Salsa Explosion. Born in Cuba, Enrique has been promoting authentic Cuban Salsa, Rueda de Casino, and Afro-Cuban culture across the UK for over 25 years. Awarded the Salsa UK Lifetime Achievement Award and voted UK's Most Popular Salsa Promoter.",
     specialty: "Cuban Salsa, Rueda de Casino, Timba & Afro-Cuban",
     yearsDancing: 28,

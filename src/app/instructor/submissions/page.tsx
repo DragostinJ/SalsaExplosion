@@ -16,6 +16,7 @@ import {
   VideoGradingWorkspace,
 } from "@/components/instructor/video-grading-workspace";
 import { InstructorNav } from "@/components/navigation/instructor-nav";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 export default async function InstructorSubmissionsPage() {
   const supabaseAdmin = getSupabaseAdmin();
@@ -52,8 +53,7 @@ export default async function InstructorSubmissionsPage() {
         if (data?.signedUrl) {
           signedVideoUrl = data.signedUrl;
         } else {
-          signedVideoUrl =
-            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
+          signedVideoUrl = MEDIA_MANIFEST.videos.sampleStudentSubmission;
         }
       }
 

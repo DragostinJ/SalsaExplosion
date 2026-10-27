@@ -15,6 +15,7 @@ import {
 } from "@/lib/constants/submission";
 import { createSignedUploadUrlHelper } from "@/lib/storage";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 // ==========================================
 // SCHEMAS
@@ -134,7 +135,7 @@ export async function generateRecapUploadUrlAction(rawInput: GenerateRecapUpload
             signedUrl: "DEMO_DIRECT_BYPASS",
             token: "demo-token",
             storagePath: `recaps/${storagePath}`,
-            publicUrl: `https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80`,
+            publicUrl: MEDIA_MANIFEST.videos.demoRecapThumbnail,
           },
           message: "Studio direct upload channel ready.",
         };

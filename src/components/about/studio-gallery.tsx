@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { X, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 export interface GalleryPhoto {
   id: string;
@@ -21,7 +22,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     caption:
       "High-energy Cuban Salsa, Pasitos, Musicality, and Rueda de Casino at BOH Studios Bournemouth with Moe Flex, Justyna, Arturas, Jim & Enrique.",
     category: "BOOTCAMPS",
-    imageUrl: "/images/thursdays-moe-flex-poster.png",
+    imageUrl: MEDIA_MANIFEST.posters.weeklyClasses.src,
     location: "BOH Studios Bournemouth (104 Commercial Rd)",
   },
   {
@@ -30,7 +31,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     caption:
       "Flagship Made in Cuba Dance Festival & weekly classes venue with Enrique Perez Valdes. Gorgeous sprung Canadian maple ballroom for 100+ dancers.",
     category: "STUDIO_LIFE",
-    imageUrl: "/images/danza-2026-2027-calendar.png",
+    imageUrl: MEDIA_MANIFEST.posters.danzaCalendar.src,
     location: "BOH Studios Bournemouth (104 Commercial Rd)",
   },
   {
@@ -39,7 +40,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     caption:
       "Premier South Coast Cuban & Latin Halloween event featuring Bachata masterclasses with Alex Spindlove, SB&K social dancing, and best costume prizes.",
     category: "SOCIALS",
-    imageUrl: "/images/halloween-latin-party-poster.png",
+    imageUrl: MEDIA_MANIFEST.posters.halloweenParty.src,
     location: "BOH Studios Bournemouth",
   },
   {
@@ -48,7 +49,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     caption:
       "Full weekly rhythm: Thursdays & Sundays at BOH Studios Bournemouth.",
     category: "RUEDA",
-    imageUrl: "/images/weekly-calendar-poster.png",
+    imageUrl: MEDIA_MANIFEST.posters.weeklyCalendar.src,
     location: "Bournemouth, Boscombe & Poole Hubs",
   },
   {
@@ -57,7 +58,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     caption:
       "Dancers rotating in synchronized harmony to Alexander Abreu & Havana D'Primera. Every lead and follow in flow.",
     category: "RUEDA",
-    imageUrl: "/images/rueda-social.jpg",
+    imageUrl: MEDIA_MANIFEST.gateways.rueda.src,
     location: "BOH Studios Bournemouth",
   },
   {
@@ -66,7 +67,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     caption:
       "Full house for our international guest maestros weekend festival with 3 days of workshops and Havana nights social parties.",
     category: "BOOTCAMPS",
-    imageUrl: "/images/danza-2026-2027-calendar.png",
+    imageUrl: MEDIA_MANIFEST.posters.madeInCuba2026.src,
     location: "BOH Studios Bournemouth",
   },
 ];

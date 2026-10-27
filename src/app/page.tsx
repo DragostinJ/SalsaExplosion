@@ -1,12 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  ArrowRight,
   MapPin,
-  Flame,
   Ticket,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
@@ -194,9 +191,6 @@ export default function Home() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-line">
               <div>
-                <span className="text-[11px] font-black uppercase tracking-widest text-gold block mb-1">
-                  OFFICIAL ONLINE BOX OFFICE • FESTIVALS &amp; SPECIAL EVENTS
-                </span>
                 <h2 className="text-2xl font-black sm:text-4xl uppercase tracking-tight text-white leading-none">
                   What&apos;s On:{" "}
                   <span className="font-display italic font-normal text-amber-300 lowercase">
@@ -369,118 +363,6 @@ export default function Home() {
                       </Link>
                     </Button>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ================= SECTION 4: ARTISTIC DIRECTOR & RESIDENT FACULTY ================= */}
-        {/* Founder & 25+ Year Cuban Heritage Spotlight */}
-        <section className="cv-auto py-12 sm:py-16 bg-canvas border-b border-line text-ivory">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl border border-line bg-surface-1 p-6 sm:p-10 shadow-2xl">
-              <div className="grid gap-8 lg:grid-cols-12 items-center">
-                <div className="lg:col-span-7 space-y-4 text-left">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge className="bg-brand text-white font-extrabold text-xs uppercase tracking-wider">
-                      Academy Founder &amp; Artistic Director
-                    </Badge>
-                    <Badge variant="outline" className="border-gold/30 bg-gold/10 text-gold font-black text-xs uppercase tracking-wider">
-                      UK LIFETIME ACHIEVEMENT AWARD
-                    </Badge>
-                  </div>
-
-                  <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-ivory uppercase">
-                    Learn Cuban Casino from <br className="hidden sm:inline" />
-                    <span className="font-display italic font-normal text-gold normal-case">Maestro Enrique Perez Valdes</span>
-                  </h2>
-
-                  <p className="text-xs sm:text-sm text-ivory-muted leading-relaxed">
-                    Born and raised in Havana, Cuba, Enrique Perez Valdes brought authentic Cuban Casino and Rueda de Casino to the UK over 25 years ago. Honored with the prestigious <strong>Salsa UK Lifetime Achievement Award</strong>, Enrique has trained over 4,200 dancers and organized Bournemouth&apos;s most celebrated Cuban congresses.
-                  </p>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                    <div className="rounded-xl border border-line bg-surface-2 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.yearsInUk}</span>
-                      <span className="text-[11px] font-semibold text-ivory-muted uppercase tracking-wider">{ACADEMY_METRICS.yearsInUkLabel}</span>
-                    </div>
-                    <div className="rounded-xl border border-line bg-surface-2 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-ivory">{ACADEMY_METRICS.dancersMentored}</span>
-                      <span className="text-[11px] font-semibold text-ivory-muted uppercase tracking-wider">{ACADEMY_METRICS.dancersMentoredLabel}</span>
-                    </div>
-                    <div className="col-span-2 sm:col-span-1 rounded-xl border border-line bg-surface-2 p-3">
-                      <span className="block text-xl sm:text-2xl font-black text-emerald-400">Havana</span>
-                      <span className="text-[11px] font-semibold text-ivory-muted uppercase tracking-wider">Roots &amp; Heritage</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-3 pt-2">
-                    <Button asChild size="default" className="bg-brand hover:bg-brand-hover text-white font-bold h-10 rounded-xl">
-                      <Link href="/about">
-                        Read Enrique&apos;s Full Story
-                        <ArrowRight className="ml-1.5 h-4 w-4" />
-                      </Link>
-                    </Button>
-                    <Button asChild variant="outline" size="default" className="h-10 rounded-xl font-semibold border-line bg-surface-3 text-ivory hover:bg-surface-2">
-                      <Link href="/dashboard/schedule">Join Enrique on Thu &amp; Sun (£12 / £14 at Door) →</Link>
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="lg:col-span-5 flex flex-col p-6 rounded-2xl border border-line bg-surface-2 shadow-xl space-y-4">
-                  <div className="flex items-center gap-4 border-b border-line pb-4">
-                    <div className="relative shrink-0">
-                      <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-full ring-2 ring-gold/40 overflow-hidden bg-surface-3 flex items-center justify-center text-white shadow-md">
-                        <Flame className="h-8 w-8 sm:h-10 sm:w-10 fill-white" />
-                      </div>
-                      <div className="absolute -bottom-1 -right-1 rounded-full bg-brand text-white px-1.5 py-0.2 text-[11px] font-black uppercase tracking-wider shadow-xs">
-                        🇨🇺 Cuba
-                      </div>
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="text-base sm:text-lg font-black text-ivory truncate">
-                        Enrique Perez Valdes
-                      </h3>
-                      <p className="text-xs font-bold text-gold">
-                        Havana Master Instructor • UK Pioneer
-                      </p>
-                      <span className="text-[11px] font-semibold text-ivory-muted block mt-0.5">
-                        Director, Salsa Explosion UK
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 text-xs">
-                    <div className="flex items-center justify-between py-1 border-b border-line">
-                      <span className="font-semibold text-ivory-muted">Specialties</span>
-                      <span className="font-bold text-ivory">Casino • Rueda • Timba • Son</span>
-                    </div>
-                    <div className="flex items-center justify-between py-1 border-b border-line">
-                      <span className="font-semibold text-ivory-muted">Experience</span>
-                      <span className="font-bold text-ivory">{ACADEMY_METRICS.yearsInUk} {ACADEMY_METRICS.yearsInUkLabel}</span>
-                    </div>
-                    <div className="flex items-center justify-between py-1">
-                      <span className="font-semibold text-ivory-muted">Recognition</span>
-                      <span className="font-extrabold text-gold">Salsa UK Lifetime Award</span>
-                    </div>
-                  </div>
-
-                  <blockquote className="rounded-xl border border-gold/20 bg-gold/10 p-3.5 text-xs italic text-amber-100 leading-relaxed font-medium">
-                    &ldquo;Cuban salsa is not just steps—it is community, clave, musicality, and pure joy. No partner required, just bring your energy.&rdquo;
-                  </blockquote>
-
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="w-full text-xs font-bold border-gold/40 text-gold bg-gold/10 hover:bg-gold/20"
-                  >
-                    <Link href="/private-lessons">
-                      <span>Book 1-on-1 Private Coaching with Enrique</span>
-                      <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                    </Link>
-                  </Button>
                 </div>
               </div>
             </div>

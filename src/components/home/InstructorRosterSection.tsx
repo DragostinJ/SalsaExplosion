@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Calendar,
-  Sparkles,
   ExternalLink,
   MessageCircle,
   X,
@@ -139,13 +138,6 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <Badge
-            variant="outline"
-            className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5 backdrop-blur-sm"
-          >
-            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-            Resident Maestros & Guest Specialists
-          </Badge>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             Meet the Salsa Explosion Faculty{" "}
             <span className="block sm:inline font-display italic font-normal text-amber-300 sm:ml-2">
@@ -244,13 +236,6 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                       } pointer-events-none`}
                     />
 
-                    {/* Vertical Micro-Typography Role Badge Along Left Margin */}
-                    <div className="absolute left-2.5 top-3 bottom-3 flex items-center justify-center z-10 pointer-events-none">
-                      <span className="[writing-mode:vertical-rl] text-[11px] font-black uppercase tracking-[0.2em] text-amber-400/80 rotate-180 select-none">
-                        {instructor.role.split("•")[0]?.trim() || "Faculty Artist"}
-                      </span>
-                    </div>
-
                     {/* Authentic Image if Available / Error-Safe */}
                     {photoSrc && (
                       <Image
@@ -263,7 +248,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     )}
 
                     {/* Museum-Grade Typographic Monogram */}
-                    <div className="absolute inset-0 flex items-center justify-center pl-4 font-display italic font-bold text-4xl sm:text-5xl text-amber-200/90 select-none z-0">
+                    <div className="absolute inset-0 flex items-center justify-center font-display italic font-bold text-4xl sm:text-5xl text-amber-200/90 select-none z-0">
                       {instructor.avatarFallback}
                     </div>
 
@@ -273,13 +258,6 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
                       <span className="rounded-md bg-black/70 backdrop-blur-xs px-2 py-0.5 text-[11px] font-bold text-white/90 border border-white/10 uppercase">
                         {instructor.origin}
-                      </span>
-                    </div>
-
-                    {/* Bottom Accolade Badge */}
-                    <div className="absolute bottom-3 inset-x-3 z-20 truncate pl-4">
-                      <span className="rounded-md bg-black/80 backdrop-blur-xs px-2.5 py-1 text-xs font-bold text-amber-300 border border-amber-500/30 truncate block">
-                        {instructor.badge}
                       </span>
                     </div>
                   </div>

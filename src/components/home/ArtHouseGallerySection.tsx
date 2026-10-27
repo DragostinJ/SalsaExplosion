@@ -24,9 +24,6 @@ export function ArtHouseGallerySection() {
         <div data-testid="theplace-classes-gateway" className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-white/10">
             <div>
-              <span className="text-[11px] font-black uppercase tracking-widest text-amber-300 block mb-1">
-                BOURNEMOUTH CUBAN CULTURAL INSTITUTION • EXPLORE SALSA EXPLOSION
-              </span>
               <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-white leading-none">
                 Explore Salsa Explosion
               </h2>
@@ -125,11 +122,6 @@ export function ArtHouseGallerySection() {
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
-                <div className="absolute top-2.5 left-2.5">
-                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-300">
-                    40+ CUBAN CIRCLE CALLS
-                  </span>
-                </div>
               </div>
               <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
                 <div>
@@ -160,11 +152,6 @@ export function ArtHouseGallerySection() {
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
-                <div className="absolute top-2.5 left-2.5">
-                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-300">
-                    INTERACTIVE AUDIO COCKPIT
-                  </span>
-                </div>
               </div>
               <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
                 <div>

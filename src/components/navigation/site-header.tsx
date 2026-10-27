@@ -124,7 +124,11 @@ export function SiteHeader({
         }
       } catch (err) {
         console.error("[handleRoleSwitch] Failed:", err);
-        toast.error("An unexpected error occurred while switching roles.");
+        toast.error("Updating workspace session...");
+        // Auto-recover from build-skew or deployment mismatch by refreshing client assets
+        if (typeof window !== "undefined") {
+          window.location.reload();
+        }
       }
     });
   };

@@ -5,7 +5,7 @@ import { z } from "zod";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { Role } from "@prisma/client";
 
-export const notificationsQuerySchema = z
+const notificationsQuerySchema = z
   .object({
     limit: z.number().int().min(1).max(50).default(20).optional(),
   })

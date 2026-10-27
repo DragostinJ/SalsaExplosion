@@ -7,7 +7,7 @@ import { prisma } from "@/lib/prisma";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
 
-export const exportInputSchema = z
+const exportInputSchema = z
   .object({
     format: z.enum(["csv"]).default("csv").optional(),
   })

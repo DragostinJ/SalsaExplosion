@@ -147,15 +147,30 @@ export default function Home() {
 
               {/* Right Column (5 cols): Aspect-[4/5] Architectural Dance Frame */}
               <div className="lg:col-span-5 relative w-full">
-                <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-2xl border border-line bg-surface-1 shadow-2xl group">
-                  <Image
-                    src={MEDIA_MANIFEST.heroPortrait.src}
-                    alt={MEDIA_MANIFEST.heroPortrait.alt}
-                    fill
-                    priority
-                    sizes={MEDIA_MANIFEST.heroPortrait.sizes}
-                    className="object-cover editorial-photo transition-transform duration-700 group-hover:scale-105"
-                  />
+                <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-2xl border border-line bg-surface-2 shadow-2xl group">
+                  {MEDIA_MANIFEST.heroPortrait.src ? (
+                    <Image
+                      src={MEDIA_MANIFEST.heroPortrait.src}
+                      alt={MEDIA_MANIFEST.heroPortrait.alt}
+                      fill
+                      priority
+                      sizes={MEDIA_MANIFEST.heroPortrait.sizes}
+                      className="object-cover editorial-photo transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <>
+                      {/* Architectural Stage Frame awaiting official portrait */}
+                      <div className="absolute inset-0 pointer-events-none border border-white/[0.04]">
+                        <div className="absolute top-3 right-3 text-white/20 text-xs font-mono select-none">+</div>
+                        <div className="absolute bottom-3 right-3 text-white/20 text-xs font-mono select-none">+</div>
+                        <div className="absolute inset-x-0 top-1/2 border-t border-white/[0.03]" />
+                      </div>
+                      <div className="absolute inset-0 flex items-center justify-center font-display italic font-bold text-6xl sm:text-7xl text-amber-200/30 select-none">
+                        EPV
+                      </div>
+                    </>
+                  )}
+                  {/* Shared directional gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 text-left z-10">
                     <span className="text-[11px] font-black uppercase tracking-widest text-gold block mb-1">

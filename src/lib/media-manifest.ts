@@ -39,10 +39,10 @@ export const MEDIA_MANIFEST = {
   },
   /**
    * Hero Right-Column Architectural Dance Portrait (Aspect 4/5)
-   * Authentic BOH Studios crowd shot
+   * Left blank until Maestro Enrique Perez Valdes provides official portrait
    */
   heroPortrait: {
-    src: "/images/photos/hero-crowd.jpg",
+    src: "",
     alt: "Maestro Enrique Perez Valdes directing Cuban Salsa & Rueda de Casino at BOH Studios Bournemouth",
     width: 1200,
     height: 1500,
@@ -166,7 +166,7 @@ export const MEDIA_MANIFEST = {
   whyCuban: {
     rueda: "/images/photos/rueda-circle.jpg",
     musicality: "/images/photos/timba-connection.jpg",
-    community: "/images/photos/hero-crowd.jpg",
+    community: "/images/photos/classes-gateway.jpg",
   },
 
   // ==========================================
@@ -175,7 +175,7 @@ export const MEDIA_MANIFEST = {
   // ==========================================
   instructors: {
     enrique: "",
-    enriquePortrait: "/images/photos/hero-crowd.jpg",
+    enriquePortrait: "",
     justyna: "/images/instructors/justyna.jpg",
     arturas: "/images/instructors/arturas.jpg",
     "moe-flex": "",
@@ -193,6 +193,6 @@ export const MEDIA_MANIFEST = {
   videos: {
     beginnerWelcome: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     sampleStudentSubmission: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    demoRecapThumbnail: "/images/photos/hero-crowd.jpg",
+    demoRecapThumbnail: "/images/photos/classes-gateway.jpg",
   },
 } as const;

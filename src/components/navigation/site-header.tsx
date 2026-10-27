@@ -63,9 +63,6 @@ export function SiteHeader({
   const [fetchedRole, setFetchedRole] = useState<Role | null>(null);
   const [fetchedCanSwitch, setFetchedCanSwitch] = useState<boolean | null>(null);
 
-  const activeRole = initialRole ?? fetchedRole;
-  const userCanSwitchRoles = initialCanSwitchRoles || (fetchedCanSwitch ?? false);
-
   const pathname = usePathname();
   const router = useRouter();
   const { isSignedIn, isLoaded } = useUser();
@@ -73,13 +70,17 @@ export function SiteHeader({
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [hasMobileNavOpened, setHasMobileNavOpened] = useState(false);
 
+  // Derived active role strictly bounded to active authenticated session
+  const activeRole = isSignedIn ? (initialRole ?? fetchedRole) : null;
+  const userCanSwitchRoles = Boolean(isSignedIn) && (initialCanSwitchRoles || (fetchedCanSwitch ?? false));
+
   // When mounted and signed in, if role was not passed from a page layout, fetch it client-side
   useEffect(() => {
-    if (mounted && isLoaded && isSignedIn && initialRole === null) {
+    if (mounted && isLoaded && isSignedIn && initialRole === null && fetchedRole === null) {
       let isSubscribed = true;
       getCurrentUserRoleAction()
         .then((res) => {
-          if (isSubscribed) {
+          if (isSubscribed && res) {
             setFetchedRole(res.role);
             setFetchedCanSwitch(res.canSwitchRoles);
           }
@@ -89,7 +90,7 @@ export function SiteHeader({
         isSubscribed = false;
       };
     }
-  }, [mounted, isLoaded, isSignedIn, initialRole]);
+  }, [mounted, isLoaded, isSignedIn, initialRole, fetchedRole]);
 
   // Only evaluate authenticated links and widgets after client mount to prevent React 19 SSR hydration mismatches (#441)
   const isAuthReady = mounted && isLoaded && Boolean(isSignedIn);

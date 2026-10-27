@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useId } from "react";
+import { useState, useEffect, useId, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -11,6 +11,8 @@ import {
   X,
   CheckCircle2,
   GraduationCap,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 function InstagramIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -54,7 +56,8 @@ const CATEGORIES: { key: InstructorCategory | "all"; label: string }[] = [
 export function InstructorRosterSection({ id = "instructors" }: InstructorRosterSectionProps) {
   const [activeCategory, setActiveCategory] = useState<InstructorCategory | "all">("all");
   const [selectedInstructor, setSelectedInstructor] = useState<InstructorProfile | null>(null);
-  const [isMobileExpanded, setIsMobileExpanded] = useState(false);
+  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
+  const reelRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
 
   // Escape key listener & body scroll lock
@@ -95,6 +98,38 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
       ? INSTRUCTORS
       : INSTRUCTORS.filter((i) => i.categories.includes(activeCategory));
 
+  const handleCategoryChange = (catKey: InstructorCategory | "all") => {
+    setActiveCategory(catKey);
+    setActiveMobileIndex(0);
+    reelRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+  };
+
+  const handleReelScroll = () => {
+    const el = reelRef.current;
+    if (!el) return;
+    const firstCard = el.firstElementChild as HTMLElement | null;
+    if (!firstCard) return;
+    const cardStride = firstCard.offsetWidth + 16; // 16px = gap-4
+    if (cardStride <= 0) return;
+    const index = Math.round(el.scrollLeft / cardStride);
+    const clamped = Math.max(0, Math.min(filteredInstructors.length - 1, index));
+    if (clamped !== activeMobileIndex) {
+      setActiveMobileIndex(clamped);
+    }
+  };
+
+  const scrollToCard = (targetIndex: number) => {
+    const el = reelRef.current;
+    if (!el) return;
+    const clamped = Math.max(0, Math.min(filteredInstructors.length - 1, targetIndex));
+    const firstCard = el.firstElementChild as HTMLElement | null;
+    if (firstCard) {
+      const cardStride = firstCard.offsetWidth + 16;
+      el.scrollTo({ left: clamped * cardStride, behavior: "smooth" });
+    }
+    setActiveMobileIndex(clamped);
+  };
+
   return (
     <section
       id={id}
@@ -103,7 +138,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <Badge
             variant="outline"
             className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5 backdrop-blur-sm"
@@ -133,7 +168,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                 <button
                   key={cat.key}
                   type="button"
-                  onClick={() => setActiveCategory(cat.key)}
+                  onClick={() => handleCategoryChange(cat.key)}
                   className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all ${
                     isActive
                       ? "bg-brand text-white shadow-xs"
@@ -147,18 +182,49 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
           </div>
         </div>
 
-        {/* 8-Card Responsive Architectural Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredInstructors.map((instructor, idx) => {
+        {/* Mobile Snap Reel Header Controls (< 640px) */}
+        {filteredInstructors.length > 1 && (
+          <div className="flex sm:hidden items-center justify-between mb-3 px-0.5">
+            <span className="text-xs font-bold text-amber-300/90 tracking-wide">
+              Artist {Math.min(activeMobileIndex + 1, filteredInstructors.length)} of {filteredInstructors.length} • Swipe →
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Previous instructor"
+                disabled={activeMobileIndex <= 0}
+                onClick={() => scrollToCard(activeMobileIndex - 1)}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next instructor"
+                disabled={activeMobileIndex >= filteredInstructors.length - 1}
+                onClick={() => scrollToCard(activeMobileIndex + 1)}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Snap Reel / Desktop 4-Column Architectural Grid */}
+        <div
+          ref={reelRef}
+          onScroll={handleReelScroll}
+          className="flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none gap-4 sm:gap-6 pb-2 sm:pb-0 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {filteredInstructors.map((instructor) => {
             const photoSrc = sitePhotos.instructors[instructor.id as keyof typeof sitePhotos.instructors];
             return (
               <div
                 key={instructor.id}
                 id={`instructors-${instructor.id}`}
                 data-artist-id={instructor.id}
-                className={`art-card group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-2 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.2)] w-full ${
-                  idx >= 4 && !isMobileExpanded && activeCategory === "all" ? "hidden sm:flex" : "flex"
-                }`}
+                className="art-card group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-2 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_12px_35px_-8px_rgba(245,158,11,0.2)] w-[82vw] max-w-[310px] sm:w-full sm:max-w-none shrink-0 sm:shrink snap-center sm:snap-align-none"
                 data-testid={`instructor-card-${instructor.id}`}
               >
                 <div>
@@ -191,7 +257,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                         src={photoSrc}
                         alt={instructor.name}
                         fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        sizes="(max-width: 640px) 82vw, (max-width: 1024px) 50vw, 25vw"
                         className="editorial-photo relative z-10 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
                     )}
@@ -263,20 +329,45 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
           })}
         </div>
 
-        {/* Mobile Expand / Collapse Toggle for "All" Category */}
-        {activeCategory === "all" && (
-          <div className="mt-6 flex justify-center md:hidden">
-            <Button
+        {/* Mobile Pagination Dots & Bottom Arrow Controls (< 640px) */}
+        {filteredInstructors.length > 1 && (
+          <div className="mt-4 flex sm:hidden items-center justify-between px-1">
+            <button
               type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => setIsMobileExpanded(!isMobileExpanded)}
-              className="text-xs font-bold border-primary-base/40 text-primary-base hover:bg-primary-light/40 h-10 px-5 rounded-full shadow-xs"
+              aria-label="Previous artist card"
+              disabled={activeMobileIndex <= 0}
+              onClick={() => scrollToCard(activeMobileIndex - 1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
             >
-              {isMobileExpanded
-                ? "Show Fewer Artists ↑"
-                : "Show All 8 Maestros & Guest Artists (+4) ↓"}
-            </Button>
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+
+            <div className="flex items-center gap-1.5">
+              {filteredInstructors.map((inst, idx) => {
+                const isCurrent = idx === activeMobileIndex;
+                return (
+                  <button
+                    key={inst.id}
+                    type="button"
+                    aria-label={`View ${inst.name}`}
+                    onClick={() => scrollToCard(idx)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      isCurrent ? "w-6 bg-gold" : "w-2 bg-white/20 hover:bg-white/40"
+                    }`}
+                  />
+                );
+              })}
+            </div>
+
+            <button
+              type="button"
+              aria-label="Next artist card"
+              disabled={activeMobileIndex >= filteredInstructors.length - 1}
+              onClick={() => scrollToCard(activeMobileIndex + 1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
         )}
       </div>

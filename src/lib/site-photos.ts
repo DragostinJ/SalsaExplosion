@@ -1,8 +1,10 @@
 /**
  * Salsa Explosion UK - Central Photo Pipeline
- * Maps editorial photo slots to verified high-resolution photography assets.
- * All photos consume the .editorial-photo duotone-to-colour CSS filter.
+ * Maps editorial photo slots to verified photography assets.
+ * Backwards-compatible facade over MEDIA_MANIFEST (src/lib/media-manifest.ts).
  */
+
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 export interface SitePhotosConfig {
   heroBackground: string;
@@ -16,27 +18,22 @@ export interface SitePhotosConfig {
 }
 
 export const sitePhotos: SitePhotosConfig = {
-  heroBackground:
-    "https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1600&q=80",
+  heroBackground: MEDIA_MANIFEST.heroPortrait.src,
   whyCuban: {
-    rueda:
-      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80",
-    musicality:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80",
-    community:
-      "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1200&q=80",
+    rueda: MEDIA_MANIFEST.whyCuban.rueda,
+    musicality: MEDIA_MANIFEST.whyCuban.musicality,
+    community: MEDIA_MANIFEST.whyCuban.community,
   },
-  madeInCuba:
-    "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1200&q=80",
+  madeInCuba: MEDIA_MANIFEST.events.madeInCuba2026,
   instructors: {
-    enrique: "",
-    justyna: "",
-    arturas: "",
-    "moe-flex": "",
-    jim: "",
-    xaris: "",
-    anna: "",
-    alex: "",
-    "alex-spindlove": "",
+    enrique: MEDIA_MANIFEST.instructors.enrique,
+    justyna: MEDIA_MANIFEST.instructors.justyna,
+    arturas: MEDIA_MANIFEST.instructors.arturas,
+    "moe-flex": MEDIA_MANIFEST.instructors["moe-flex"],
+    jim: MEDIA_MANIFEST.instructors.jim,
+    xaris: MEDIA_MANIFEST.instructors.xaris,
+    anna: MEDIA_MANIFEST.instructors.anna,
+    alex: MEDIA_MANIFEST.instructors.alex,
+    "alex-spindlove": MEDIA_MANIFEST.instructors["alex-spindlove"],
   },
 };

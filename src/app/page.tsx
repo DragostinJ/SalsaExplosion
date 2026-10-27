@@ -17,6 +17,7 @@ import {
 } from "@/components/home/ArtHouseGallerySection";
 import { ArtReveal } from "@/components/ui/ArtReveal";
 import { ACADEMY_METRICS, VENUE_INFO } from "@/lib/academy-data";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 const DanceVouchersShowcase = dynamic(
   () => import("@/components/marketing/dance-vouchers-showcase").then((m) => m.DanceVouchersShowcase),
@@ -148,11 +149,11 @@ export default function Home() {
               <div className="lg:col-span-5 relative w-full">
                 <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-2xl border border-line bg-surface-1 shadow-2xl group">
                   <Image
-                    src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80"
-                    alt="Maestro Enrique Perez Valdes directing Cuban Salsa & Rueda de Casino at BOH Studios Bournemouth"
+                    src={MEDIA_MANIFEST.heroPortrait.src}
+                    alt={MEDIA_MANIFEST.heroPortrait.alt}
                     fill
                     priority
-                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    sizes={MEDIA_MANIFEST.heroPortrait.sizes}
                     className="object-cover editorial-photo transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
@@ -204,7 +205,7 @@ export default function Home() {
               <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                   <Image
-                    src="/images/danza-2026-2027-calendar.png"
+                    src={MEDIA_MANIFEST.events.halloweenParty}
                     alt="Halloween Fancy Dress Latin Party Official Event Poster"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -258,7 +259,7 @@ export default function Home() {
               <div className="group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-2 overflow-hidden shadow-xs hover:border-gold/40 transition-all duration-300">
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                   <Image
-                    src="https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&w=1000&q=80"
+                    src={MEDIA_MANIFEST.events.sbkNight}
                     alt="SB&K Night Extravaganza Official Event Poster"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -309,7 +310,7 @@ export default function Home() {
               <div className="group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-2 overflow-hidden shadow-xs hover:border-gold/40 transition-all duration-300">
                 <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                   <Image
-                    src="/images/made-in-cuba-2026-poster.jpg"
+                    src={MEDIA_MANIFEST.events.madeInCuba2026}
                     alt="MADE IN CUBA Dance Weekend 2026 Official Festival Poster"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"

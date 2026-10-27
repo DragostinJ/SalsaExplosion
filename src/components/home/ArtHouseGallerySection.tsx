@@ -10,6 +10,7 @@ import {
   VENUE_INFO,
   type AcademyGalleryPhoto,
 } from "@/lib/academy-data";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 export function ArtHouseGallerySection() {
   return (
@@ -47,10 +48,10 @@ export function ArtHouseGallerySection() {
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 <Image
-                  src="https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=1000&q=80"
-                  alt="Weekly Cuban Salsa & Rueda de Casino Classes at BOH Studios Bournemouth"
+                  src={MEDIA_MANIFEST.gateways.weeklyClasses.src}
+                  alt={MEDIA_MANIFEST.gateways.weeklyClasses.alt}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes={MEDIA_MANIFEST.gateways.weeklyClasses.sizes}
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
@@ -82,10 +83,10 @@ export function ArtHouseGallerySection() {
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 <Image
-                  src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80"
-                  alt="Made in Cuba Dance Weekend 2026 Official Festival Passes"
+                  src={MEDIA_MANIFEST.gateways.festivals.src}
+                  alt={MEDIA_MANIFEST.gateways.festivals.alt}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes={MEDIA_MANIFEST.gateways.festivals.sizes}
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
@@ -117,10 +118,10 @@ export function ArtHouseGallerySection() {
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 <Image
-                  src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80"
-                  alt="Authentic Cuban Rueda de Casino Dance Circle Action"
+                  src={MEDIA_MANIFEST.gateways.rueda.src}
+                  alt={MEDIA_MANIFEST.gateways.rueda.alt}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes={MEDIA_MANIFEST.gateways.rueda.sizes}
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
@@ -152,10 +153,10 @@ export function ArtHouseGallerySection() {
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-950">
                 <Image
-                  src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1000&q=80"
-                  alt="Cuban Salsa Percussion Clave & Timba Musicality"
+                  src={MEDIA_MANIFEST.gateways.timba.src}
+                  alt={MEDIA_MANIFEST.gateways.timba.alt}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes={MEDIA_MANIFEST.gateways.timba.sizes}
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />

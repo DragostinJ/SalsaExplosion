@@ -92,6 +92,29 @@ export function SiteHeader({
     }
   }, [mounted, isLoaded, isSignedIn, initialRole, fetchedRole]);
 
+  // Guard Clerk's internal onBeforeSetActive to prevent hung sign-out spinners if cache invalidation errors occur
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const win = window as Window & {
+      __internal_onBeforeSetActive?: (intent?: string) => Promise<void>;
+      __ritmoflow_wrapped_before_set_active?: boolean;
+    };
+    if (
+      typeof win.__internal_onBeforeSetActive === "function" &&
+      !win.__ritmoflow_wrapped_before_set_active
+    ) {
+      const original = win.__internal_onBeforeSetActive;
+      win.__internal_onBeforeSetActive = async (intent?: string) => {
+        try {
+          await original(intent);
+        } catch (err) {
+          console.warn("[Clerk:onBeforeSetActive] Ignored cache invalidation error during auth transition:", err);
+        }
+      };
+      win.__ritmoflow_wrapped_before_set_active = true;
+    }
+  }, []);
+
   // Only evaluate authenticated links and widgets after client mount to prevent React 19 SSR hydration mismatches (#441)
   const isAuthReady = mounted && isLoaded && Boolean(isSignedIn);
   const isAdmin = isAuthReady && activeRole === "ADMIN";

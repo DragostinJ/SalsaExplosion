@@ -15,6 +15,11 @@ export function isFallbackUser(user: { id: string }): boolean {
 export const SERVICE_UNAVAILABLE_MESSAGE =
   "We can't reach our booking system right now. Please try again in a minute.";
 
+/** Safe post-auth and post-sign-out destination routes */
+export const CLERK_AFTER_SIGN_OUT_URL = process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_OUT_URL || "/";
+export const CLERK_SIGN_IN_FALLBACK_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL || "/";
+export const CLERK_SIGN_UP_FALLBACK_URL = process.env.NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL || "/";
+
 /**
  * Comma-separated list of emails that are bootstrapped as ADMIN on first sign-in
  * (e.g. ADMIN_EMAILS="you@example.com,owner@studio.com").

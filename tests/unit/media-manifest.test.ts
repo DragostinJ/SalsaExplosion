@@ -28,4 +28,68 @@ describe("H5: Media Manifest & Asset Weight Integrity", () => {
       expect(gateway.height).toBeGreaterThan(0);
     });
   });
+
+  it("asserts key media-displaying components import MEDIA_MANIFEST and contain zero raw Unsplash or sample video literals", () => {
+    const filesToCheck = [
+      "src/app/page.tsx",
+      "src/components/home/ArtHouseGallerySection.tsx",
+      "src/components/about/studio-gallery.tsx",
+      "src/components/beginners/first-class-prep-modal.tsx",
+    ];
+
+    for (const relPath of filesToCheck) {
+      const fullPath = path.resolve(process.cwd(), relPath);
+      expect(fs.existsSync(fullPath), `File ${relPath} must exist`).toBe(true);
+      const content = fs.readFileSync(fullPath, "utf-8");
+
+      expect(
+        content.includes("MEDIA_MANIFEST"),
+        `${relPath} must import and reference MEDIA_MANIFEST`
+      ).toBe(true);
+      expect(
+        content.includes("images.unsplash.com"),
+        `${relPath} must not contain hardcoded images.unsplash.com URLs`
+      ).toBe(false);
+      expect(
+        content.includes("ForBiggerBlazes.mp4"),
+        `${relPath} must not contain hardcoded ForBiggerBlazes.mp4 URLs`
+      ).toBe(false);
+    }
+  });
+
+  it("asserts no component in src/ references 134-byte blank dummy image placeholders", () => {
+    const forbiddenPlaceholders = [
+      "/images/rueda-social.jpg",
+      "/images/boh-studios.jpg",
+      "/images/congress-2025.jpg",
+      "/images/enrique.jpg",
+    ];
+
+    function scanDir(dir: string): string[] {
+      let results: string[] = [];
+      const list = fs.readdirSync(dir);
+      for (const item of list) {
+        const itemPath = path.join(dir, item);
+        const stat = fs.statSync(itemPath);
+        if (stat.isDirectory()) {
+          results = results.concat(scanDir(itemPath));
+        } else if (/\.(tsx?|jsx?|json|css|md)$/.test(item)) {
+          results.push(itemPath);
+        }
+      }
+      return results;
+    }
+
+    const srcFiles = scanDir(path.resolve(process.cwd(), "src"));
+
+    for (const file of srcFiles) {
+      const content = fs.readFileSync(file, "utf-8");
+      for (const forbidden of forbiddenPlaceholders) {
+        expect(
+          content.includes(forbidden),
+          `File ${path.relative(process.cwd(), file)} must not reference blank placeholder ${forbidden}`
+        ).toBe(false);
+      }
+    }
+  });
 });

@@ -39,10 +39,10 @@ export const MEDIA_MANIFEST = {
   },
   /**
    * Hero Right-Column Architectural Dance Portrait (Aspect 4/5)
-   * Left blank until Maestro Enrique Perez Valdes provides official portrait
+   * Authentic portrait of Maestro Enrique Perez Valdes
    */
   heroPortrait: {
-    src: "",
+    src: "/images/instructors/enrique.jpg",
     alt: "Maestro Enrique Perez Valdes directing Cuban Salsa & Rueda de Casino at BOH Studios Bournemouth",
     width: 1200,
     height: 1500,
@@ -174,8 +174,8 @@ export const MEDIA_MANIFEST = {
   // Empty string defaults to high-contrast monogram fallback initials
   // ==========================================
   instructors: {
-    enrique: "",
-    enriquePortrait: "",
+    enrique: "/images/instructors/enrique.jpg",
+    enriquePortrait: "/images/instructors/enrique.jpg",
     justyna: "/images/instructors/justyna.jpg",
     arturas: "/images/instructors/arturas.jpg",
     "moe-flex": "/images/instructors/moe-flex.jpg",

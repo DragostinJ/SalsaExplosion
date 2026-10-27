@@ -82,7 +82,11 @@ export async function switchMyAccountRoleAction(
 export async function getCurrentUserRoleAction(
   ...args: Parameters<typeof roster.getCurrentUserRoleAction>
 ) {
-  return roster.getCurrentUserRoleAction(...args);
+  try {
+    return await roster.getCurrentUserRoleAction(...args);
+  } catch {
+    return { role: null, canSwitchRoles: false };
+  }
 }
 
 export async function updateStudentProgressionAction(

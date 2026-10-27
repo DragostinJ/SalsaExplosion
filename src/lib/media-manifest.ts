@@ -187,6 +187,18 @@ export const MEDIA_MANIFEST = {
   },
 
   // ==========================================
+  // FACULTY CIRCULAR PROFILE PHOTOS (Aspect 1/1)
+  // Cropped around the face for circular avatars in /about and rosters
+  // ==========================================
+  instructorProfiles: {
+    enrique: "/images/instructors/enrique-profile.jpg",
+    justyna: "/images/instructors/justyna-profile.jpg",
+    arturas: "/images/instructors/arturas-profile.jpg",
+    "moe-flex": "/images/instructors/moe-flex-profile.jpg",
+    jim: "/images/instructors/jim-profile.jpg",
+  },
+
+  // ==========================================
   // DEMO VIDEO ASSETS & RECAP THUMBNAILS
   // To replace: drop .mp4 into public/videos/ or use YouTube embed URLs
   // ==========================================

@@ -29,6 +29,7 @@ describe("H5: Media Manifest & Asset Weight Integrity", () => {
       ...Object.values(MEDIA_MANIFEST.archive),
       ...ACADEMY_GALLERY_PHOTOS.map((p) => p.imageUrl),
       ...Object.values(MEDIA_MANIFEST.instructors).filter((src) => src.startsWith("/images/")),
+      ...Object.values(MEDIA_MANIFEST.instructorProfiles).filter((src) => src.startsWith("/images/")),
     ].filter(Boolean);
 
     for (const srcPath of localPaths) {

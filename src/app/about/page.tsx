@@ -43,14 +43,42 @@ const CANONICAL_FACULTY = [
     email: "enrique@salsaexplosion.co.uk",
     firstName: "Enrique",
     lastName: "Perez Valdes",
-    avatarUrl:
-      MEDIA_MANIFEST.instructors.enrique || MEDIA_MANIFEST.instructors.enriquePortrait,
+    avatarUrl: MEDIA_MANIFEST.instructorProfiles.enrique,
     bio: "Founder & Artistic Director of Salsa Explosion. Born in Cuba, Enrique has been promoting authentic Cuban Salsa, Rueda de Casino, and Afro-Cuban culture across the UK for over 25 years. Awarded the Salsa UK Lifetime Achievement Award and voted UK's Most Popular Salsa Promoter.",
     specialty: "Cuban Salsa, Rueda de Casino, Timba & Afro-Cuban",
     yearsDancing: 28,
     role: Role.ADMIN,
   },
 ];
+
+const FACULTY_PROFILE_MAP: Record<string, string> = {
+  "enrique@salsaexplosion.co.uk": MEDIA_MANIFEST.instructorProfiles.enrique,
+  "moe@salsaexplosion.co.uk": MEDIA_MANIFEST.instructorProfiles["moe-flex"],
+  "justyna@salsaexplosion.co.uk": MEDIA_MANIFEST.instructorProfiles.justyna,
+  "arturas@salsaexplosion.co.uk": MEDIA_MANIFEST.instructorProfiles.arturas,
+  "jim@salsaexplosion.co.uk": MEDIA_MANIFEST.instructorProfiles.jim,
+  enrique: MEDIA_MANIFEST.instructorProfiles.enrique,
+  moe: MEDIA_MANIFEST.instructorProfiles["moe-flex"],
+  justyna: MEDIA_MANIFEST.instructorProfiles.justyna,
+  arturas: MEDIA_MANIFEST.instructorProfiles.arturas,
+  jim: MEDIA_MANIFEST.instructorProfiles.jim,
+};
+
+function resolveFacultyAvatar(
+  email?: string | null,
+  firstName?: string | null,
+  fallbackAvatar?: string | null
+): string | null {
+  const normalizedEmail = email?.toLowerCase().trim();
+  if (normalizedEmail && FACULTY_PROFILE_MAP[normalizedEmail]) {
+    return FACULTY_PROFILE_MAP[normalizedEmail];
+  }
+  const normalizedName = firstName?.toLowerCase().trim();
+  if (normalizedName && FACULTY_PROFILE_MAP[normalizedName]) {
+    return FACULTY_PROFILE_MAP[normalizedName];
+  }
+  return fallbackAvatar || null;
+}
 
 export default async function AboutPage() {
   // Query Instructors and Studio Owner (strictly authentic faculty)
@@ -262,7 +290,11 @@ export default async function AboutPage() {
                 <div className="flex items-start gap-4">
                   <TeacherAvatar
                     name={`${teacher.firstName} ${teacher.lastName}`}
-                    avatarUrl={teacher.avatarUrl}
+                    avatarUrl={resolveFacultyAvatar(
+                      teacher.email,
+                      teacher.firstName,
+                      teacher.avatarUrl
+                    )}
                     size="xl"
                     className="shrink-0"
                   />

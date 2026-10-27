@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import fs from "fs";
 import path from "path";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import { ACADEMY_GALLERY_PHOTOS } from "@/lib/academy-data";
 
 describe("H5: Media Manifest & Asset Weight Integrity", () => {
   it("verifies all local poster assets in manifest exist in public directory and stay under 350KB", () => {
@@ -18,6 +19,24 @@ describe("H5: Media Manifest & Asset Weight Integrity", () => {
         `Asset ${key} (${sizeKb.toFixed(1)} KB) should stay under 350KB`
       ).toBeLessThan(350);
     });
+  });
+
+  it("verifies all local studio photos, gateways, archive shots, and instructor portraits exist and are > 10KB", () => {
+    const publicDir = path.resolve(process.cwd(), "public");
+    const localPaths: string[] = [
+      MEDIA_MANIFEST.heroPortrait.src,
+      ...Object.values(MEDIA_MANIFEST.gateways).map((g) => g.src),
+      ...Object.values(MEDIA_MANIFEST.archive),
+      ...ACADEMY_GALLERY_PHOTOS.map((p) => p.imageUrl),
+      ...Object.values(MEDIA_MANIFEST.instructors).filter((src) => src.startsWith("/images/")),
+    ];
+
+    for (const srcPath of localPaths) {
+      const filePath = path.join(publicDir, srcPath.replace(/^\//, ""));
+      expect(fs.existsSync(filePath), `Local photo ${srcPath} must exist on disk`).toBe(true);
+      const stats = fs.statSync(filePath);
+      expect(stats.size, `Local photo ${srcPath} must be > 10KB (not a blank placeholder)`).toBeGreaterThan(10 * 1024);
+    }
   });
 
   it("verifies all gateway images have explicit aspect ratios and responsive size definitions", () => {

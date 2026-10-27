@@ -389,7 +389,7 @@ export const ACADEMY_GALLERY_PHOTOS: AcademyGalleryPhoto[] = [
     caption:
       "Every Thursday from 19:00: Solo Salsa Musicality with Moe Flex, Beginners with Maestro Enrique, Improvers with Justyna, and Intermediates/Rueda with Arturas & Jim.",
     location: "BOH Studios Bournemouth (104 Commercial Rd)",
-    imageUrl: "/images/thursdays-moe-flex-poster.png",
+    imageUrl: "/images/photos/archive-1.jpg",
     aspectClass: "aspect-[4/5]",
   },
   {
@@ -399,7 +399,7 @@ export const ACADEMY_GALLERY_PHOTOS: AcademyGalleryPhoto[] = [
     caption:
       "Celebrating over 25 years of Cuban dance heritage in the UK with international maestros, 2 days of workshops, and 3 nights of Havana fiestas.",
     location: "BOH Studios Bournemouth",
-    imageUrl: "/images/made-in-cuba-2026-poster.jpg",
+    imageUrl: "/images/photos/archive-2.jpg",
     aspectClass: "aspect-[4/5]",
   },
   {
@@ -409,7 +409,7 @@ export const ACADEMY_GALLERY_PHOTOS: AcademyGalleryPhoto[] = [
     caption:
       "Curated monthly Latin extravaganzas, Afro-Cuban & Rumba intensives, and guest artist showcases in the heart of Bournemouth.",
     location: "BOH Studios Bournemouth",
-    imageUrl: "/images/danza-2026-2027-calendar.png",
+    imageUrl: "/images/photos/archive-3.jpg",
     aspectClass: "aspect-[4/5]",
   },
   {
@@ -419,7 +419,7 @@ export const ACADEMY_GALLERY_PHOTOS: AcademyGalleryPhoto[] = [
     caption:
       "Bournemouth's flagship autumn social featuring guest workshops, Rueda circles, and late-night social dancing.",
     location: "BOH Studios Bournemouth",
-    imageUrl: "/images/halloween-latin-party-poster.png",
+    imageUrl: "/images/photos/archive-4.jpg",
     aspectClass: "aspect-[4/5]",
   },
 ];

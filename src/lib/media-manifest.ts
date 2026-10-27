@@ -39,10 +39,10 @@ export const MEDIA_MANIFEST = {
   },
   /**
    * Hero Right-Column Architectural Dance Portrait (Aspect 4/5)
-   * To replace: place high-res portrait in public/images/ and update src
+   * Authentic BOH Studios crowd shot
    */
   heroPortrait: {
-    src: "https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80",
+    src: "/images/photos/hero-crowd.jpg",
     alt: "Maestro Enrique Perez Valdes directing Cuban Salsa & Rueda de Casino at BOH Studios Bournemouth",
     width: 1200,
     height: 1500,
@@ -104,11 +104,11 @@ export const MEDIA_MANIFEST = {
 
   // ==========================================
   // THE PLACE 4-PILLAR PHOTO GATEWAYS (Aspect 16/10)
-  // To replace: drop landscape action shots into public/images/ and update src
+  // Authentic Salsa Explosion Bournemouth photography
   // ==========================================
   gateways: {
     weeklyClasses: {
-      src: "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?auto=format&fit=crop&w=1000&q=80",
+      src: "/images/photos/classes-gateway.jpg",
       alt: "Weekly Cuban Salsa & Rueda de Casino Classes at BOH Studios Bournemouth",
       width: 1000,
       height: 625,
@@ -116,7 +116,7 @@ export const MEDIA_MANIFEST = {
       sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
     festivals: {
-      src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1000&q=80",
+      src: "/images/photos/festivals-gateway.jpg",
       alt: "Made in Cuba Dance Weekend 2026 Official Festival Passes",
       width: 1000,
       height: 625,
@@ -124,7 +124,7 @@ export const MEDIA_MANIFEST = {
       sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
     rueda: {
-      src: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1000&q=80",
+      src: "/images/photos/rueda-circle.jpg",
       alt: "Authentic Cuban Rueda de Casino Dance Circle Action",
       width: 1000,
       height: 625,
@@ -132,7 +132,7 @@ export const MEDIA_MANIFEST = {
       sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
     timba: {
-      src: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1000&q=80",
+      src: "/images/photos/timba-connection.jpg",
       alt: "Cuban Salsa Percussion Clave & Timba Musicality",
       width: 1000,
       height: 625,
@@ -142,11 +142,21 @@ export const MEDIA_MANIFEST = {
   },
 
   // ==========================================
+  // INSIDE THE CUBAN CIRCLE EXHIBITION ARCHIVE (Aspect 4/5)
+  // ==========================================
+  archive: {
+    archive1: "/images/photos/archive-1.jpg",
+    archive2: "/images/photos/archive-2.jpg",
+    archive3: "/images/photos/archive-3.jpg",
+    archive4: "/images/photos/archive-4.jpg",
+  },
+
+  // ==========================================
   // WHAT'S ON / HOMEPAGE EVENT CARDS (Aspect 4/5)
   // ==========================================
   events: {
     halloweenParty: "/images/halloween-latin-party-poster.png",
-    sbkNight: "https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&w=1000&q=80",
+    sbkNight: "/images/danza-2026-2027-calendar.png",
     madeInCuba2026: "/images/made-in-cuba-2026-poster.jpg",
   },
 
@@ -154,22 +164,22 @@ export const MEDIA_MANIFEST = {
   // WHY CUBAN 3-PILLAR CARDS (Rueda, Musicality, Community)
   // ==========================================
   whyCuban: {
-    rueda: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80",
-    musicality: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80",
-    community: "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1200&q=80",
+    rueda: "/images/photos/rueda-circle.jpg",
+    musicality: "/images/photos/timba-connection.jpg",
+    community: "/images/photos/hero-crowd.jpg",
   },
 
   // ==========================================
-  // INSTRUCTORS & FACULTY PORTRAITS (Square 1:1)
+  // INSTRUCTORS & FACULTY PORTRAITS (Aspect 4/5)
   // Empty string defaults to high-contrast monogram fallback initials
   // ==========================================
   instructors: {
     enrique: "",
-    enriquePortrait: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-    justyna: "",
-    arturas: "",
+    enriquePortrait: "/images/photos/hero-crowd.jpg",
+    justyna: "/images/instructors/justyna.jpg",
+    arturas: "/images/instructors/arturas.jpg",
     "moe-flex": "",
-    jim: "",
+    jim: "/images/instructors/jim.jpg",
     xaris: "",
     anna: "",
     alex: "",
@@ -183,6 +193,6 @@ export const MEDIA_MANIFEST = {
   videos: {
     beginnerWelcome: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     sampleStudentSubmission: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    demoRecapThumbnail: "https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80",
+    demoRecapThumbnail: "/images/photos/hero-crowd.jpg",
   },
 } as const;

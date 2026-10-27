@@ -192,7 +192,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                         alt={instructor.name}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="editorial-photo relative z-10 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="editorial-photo relative z-10 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
                     )}
 

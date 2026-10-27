@@ -40,12 +40,14 @@ describe("Content Security Policy Guard (Milestone C1 & C2)", () => {
     expect(content).toContain("https://fonts.gstatic.com");
   });
 
-  it("asserts connect-src includes Google Analytics, Clerk, Stripe, Supabase, and YouTube", () => {
+  it("asserts connect-src includes Google Analytics, Clerk, Stripe, Supabase, YouTube, and Clerk Telemetry", () => {
     const content = fs.readFileSync(nextConfigPath, "utf-8");
     expect(content).toContain("https://analytics.google.com");
     expect(content).toContain("https://www.google-analytics.com");
     expect(content).toContain("https://*.supabase.co");
     expect(content).toContain("https://api.stripe.com");
+    expect(content).toContain("https://clerk-telemetry.com");
+    expect(content).toContain("https://*.clerk-telemetry.com");
   });
 
   it("asserts img-src includes Unsplash, Clerk, YouTube, and Google Analytics", () => {

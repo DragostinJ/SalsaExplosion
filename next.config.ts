@@ -61,7 +61,7 @@ const nextConfig: NextConfig = {
       default-src 'self';
       script-src ${scriptSrcDirectives};
       worker-src 'self' blob:;
-      connect-src 'self' https://vercel.live https://*.pusher.com wss://*.pusher.com https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://clerk.salsaexplosion.co.uk https://www.youtube.com https://*.googlevideo.com https://www.google-analytics.com https://analytics.google.com;
+      connect-src 'self' https://vercel.live https://*.pusher.com wss://*.pusher.com https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://clerk.salsaexplosion.co.uk https://clerk-telemetry.com https://*.clerk-telemetry.com https://www.youtube.com https://*.googlevideo.com https://www.google-analytics.com https://analytics.google.com;
       img-src 'self' data: blob: https://vercel.live https://vercel.com https://images.unsplash.com https://*.clerk.com https://img.clerk.com https://i.ytimg.com https://*.youtube.com https://www.google-analytics.com https://*.stripe.com https://commondatastorage.googleapis.com;
       style-src 'self' 'unsafe-inline' https://vercel.live https://fonts.googleapis.com;
       font-src 'self' data: https://vercel.live https://fonts.gstatic.com;

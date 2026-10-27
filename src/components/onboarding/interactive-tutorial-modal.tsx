@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { HelpCircle } from "lucide-react";
 import { InteractiveTutorialDialog } from "./interactive-tutorial-dialog";
 
 const TUTORIAL_STORAGE_KEY = "salsa_explosion_studio_tutorial_seen_v1";
@@ -62,23 +61,6 @@ export function InteractiveTutorialModal({
 
   return (
     <>
-      {/* Trigger Pill in Header */}
-      <button
-        type="button"
-        data-testid="how-it-works-tutorial-button"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setStep(0);
-          setIsOpen(true);
-        }}
-        aria-label="How It Works - Interactive studio tutorial"
-        className="hidden md:inline-flex items-center gap-1.5 shrink-0 rounded-lg border border-secondary-base/50 bg-secondary-light text-secondary-hover px-2 sm:px-2.5 py-1.5 text-xs font-bold transition-colors hover:bg-secondary-base hover:text-white shadow-xs cursor-pointer select-none"
-      >
-        <HelpCircle className="h-3.5 w-3.5 text-secondary-base shrink-0 group-hover:text-white" />
-        <span className="inline">How It Works</span>
-      </button>
-
       {/* Heavy dialog portaled and mounted dynamically only on open */}
       {isOpen && (
         <InteractiveTutorialDialog

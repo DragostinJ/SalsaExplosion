@@ -337,15 +337,14 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     await page.goto("/dashboard/schedule");
     await page.waitForLoadState("domcontentloaded");
 
-    const tutorialBtn = page.locator('[data-testid="how-it-works-tutorial-button"]');
-    await expect(tutorialBtn).toBeVisible();
-
     // Verify modal is not mounted yet
     const tutorialDialog = page.locator('[data-testid="interactive-tutorial-dialog"]');
     await expect(tutorialDialog).toHaveCount(0);
 
-    // Click trigger pill in header
-    await tutorialBtn.click();
+    // Trigger studio tutorial
+    await page.evaluate(() => {
+      window.dispatchEvent(new CustomEvent("salsa_explosion:open-tutorial"));
+    });
     await expect(tutorialDialog).toBeVisible();
 
     // Verify Step 1

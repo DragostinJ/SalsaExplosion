@@ -178,12 +178,12 @@ export const MEDIA_MANIFEST = {
     enriquePortrait: "",
     justyna: "/images/instructors/justyna.jpg",
     arturas: "/images/instructors/arturas.jpg",
-    "moe-flex": "",
+    "moe-flex": "/images/instructors/moe-flex.jpg",
     jim: "/images/instructors/jim.jpg",
-    xaris: "",
-    anna: "",
-    alex: "",
-    "alex-spindlove": "",
+    xaris: "/images/instructors/xaris.jpg",
+    anna: "/images/instructors/anna.jpg",
+    alex: "/images/instructors/alex-spindlove.jpg",
+    "alex-spindlove": "/images/instructors/alex-spindlove.jpg",
   },
 
   // ==========================================

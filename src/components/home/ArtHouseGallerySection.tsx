@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { X, Camera } from "lucide-react";
+import { X, Camera, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   ACADEMY_GALLERY_PHOTOS,
@@ -189,10 +189,38 @@ export function ArtHouseGallerySection() {
 
 export function InsideCubanCircleGallery() {
   const [selectedPhoto, setSelectedPhoto] = useState<AcademyGalleryPhoto | null>(null);
+  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
+  const reelRef = useRef<HTMLDivElement>(null);
+
+  const handleReelScroll = () => {
+    const el = reelRef.current;
+    if (!el) return;
+    const firstCard = el.firstElementChild as HTMLElement | null;
+    if (!firstCard) return;
+    const cardStride = firstCard.offsetWidth + 16; // 16px = gap-4
+    if (cardStride <= 0) return;
+    const index = Math.round(el.scrollLeft / cardStride);
+    const clamped = Math.max(0, Math.min(ACADEMY_GALLERY_PHOTOS.length - 1, index));
+    if (clamped !== activeMobileIndex) {
+      setActiveMobileIndex(clamped);
+    }
+  };
+
+  const scrollToFrame = (targetIndex: number) => {
+    const el = reelRef.current;
+    if (!el) return;
+    const clamped = Math.max(0, Math.min(ACADEMY_GALLERY_PHOTOS.length - 1, targetIndex));
+    const firstCard = el.firstElementChild as HTMLElement | null;
+    if (firstCard) {
+      const cardStride = firstCard.offsetWidth + 16;
+      el.scrollTo({ left: clamped * cardStride, behavior: "smooth" });
+    }
+    setActiveMobileIndex(clamped);
+  };
 
   return (
     <section className="cv-auto py-12 sm:py-16 bg-canvas border-b border-line text-ivory">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-line">
           <div className="space-y-2 max-w-2xl">
             <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-gold">
@@ -228,21 +256,54 @@ export function InsideCubanCircleGallery() {
           </div>
         </div>
 
-        {/* 4-Frame Asymmetric Architectural Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Mobile Snap Reel Header Controls (< 640px) */}
+        {ACADEMY_GALLERY_PHOTOS.length > 1 && (
+          <div className="flex sm:hidden items-center justify-between px-0.5">
+            <span className="text-xs font-bold text-amber-300/90 tracking-wide">
+              Frame {Math.min(activeMobileIndex + 1, ACADEMY_GALLERY_PHOTOS.length)} of {ACADEMY_GALLERY_PHOTOS.length} • Swipe →
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Previous archive photo"
+                disabled={activeMobileIndex <= 0}
+                onClick={() => scrollToFrame(activeMobileIndex - 1)}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next archive photo"
+                disabled={activeMobileIndex >= ACADEMY_GALLERY_PHOTOS.length - 1}
+                onClick={() => scrollToFrame(activeMobileIndex + 1)}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Snap Reel / Desktop 4-Frame Asymmetric Architectural Gallery Grid */}
+        <div
+          ref={reelRef}
+          onScroll={handleReelScroll}
+          className="flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none gap-4 sm:gap-5 pb-2 sm:pb-0 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {ACADEMY_GALLERY_PHOTOS.map((photo) => (
             <button
               key={photo.id}
               type="button"
               onClick={() => setSelectedPhoto(photo)}
-              className="group relative flex flex-col text-left rounded-2xl border border-line bg-surface-2 overflow-hidden transition-all duration-500 hover:border-gold/50 focus:outline-none focus:ring-2 focus:ring-gold cursor-pointer"
+              className="group relative flex flex-col text-left rounded-2xl border border-line bg-surface-2 overflow-hidden transition-all duration-500 hover:border-gold/50 focus:outline-none focus:ring-2 focus:ring-gold cursor-pointer w-[82vw] max-w-[310px] sm:w-full sm:max-w-none shrink-0 sm:shrink snap-center sm:snap-align-none"
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
                 <Image
                   src={photo.imageUrl}
                   alt={photo.title}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  sizes="(max-width: 640px) 82vw, (max-width: 1024px) 50vw, 25vw"
                   className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-canvas via-black/20 to-transparent pointer-events-none" />
@@ -269,6 +330,48 @@ export function InsideCubanCircleGallery() {
             </button>
           ))}
         </div>
+
+        {/* Mobile Pagination Dots & Bottom Arrow Controls (< 640px) */}
+        {ACADEMY_GALLERY_PHOTOS.length > 1 && (
+          <div className="flex sm:hidden items-center justify-between px-1">
+            <button
+              type="button"
+              aria-label="Previous archive frame"
+              disabled={activeMobileIndex <= 0}
+              onClick={() => scrollToFrame(activeMobileIndex - 1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+
+            <div className="flex items-center gap-1.5">
+              {ACADEMY_GALLERY_PHOTOS.map((photo, idx) => {
+                const isCurrent = idx === activeMobileIndex;
+                return (
+                  <button
+                    key={photo.id}
+                    type="button"
+                    aria-label={`View ${photo.title}`}
+                    onClick={() => scrollToFrame(idx)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      isCurrent ? "w-6 bg-gold" : "w-2 bg-white/20 hover:bg-white/40"
+                    }`}
+                  />
+                );
+              })}
+            </div>
+
+            <button
+              type="button"
+              aria-label="Next archive frame"
+              disabled={activeMobileIndex >= ACADEMY_GALLERY_PHOTOS.length - 1}
+              onClick={() => scrollToFrame(activeMobileIndex + 1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Lightbox Modal */}

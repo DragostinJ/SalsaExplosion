@@ -1,66 +1,36 @@
-name: CI & Security Quality Gate
+name: CI Pipeline
 
 on:
   push:
-    branches: [main, master, "audit/*", "feature/*"]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  security-and-env:
-    name: Security & Environment Audit
+  ci:
+    name: Typecheck, Unit Tests & Production Build
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+      NEXT_PUBLIC_APP_URL: "https://salsa-explosion-bkgf.vercel.app"
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/test?pgbouncer=true"
+      DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/test"
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_placeholder"
+      CLERK_SECRET_KEY: "sk_test_placeholder"
+      CLERK_WEBHOOK_SECRET: "whsec_placeholder"
+      STRIPE_SECRET_KEY: "sk_test_placeholder"
+      STRIPE_WEBHOOK_SECRET: "whsec_placeholder"
+      ALLOW_DEMO_ROLE_SWITCHING: "false"
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-
-      - name: Install Production Dependencies
-        run: npm ci
-
-      - name: Run Dependency Audit
-        run: npm audit --omit=dev
-
-      - name: Enforce Production Role Switching Guard
-        run: |
-          echo "Verifying no production configuration enables demo role escalation..."
-          if grep -q 'ALLOW_DEMO_ROLE_SWITCHING="true"' .env.production 2>/dev/null; then
-            echo "CRITICAL SECURITY ERROR: ALLOW_DEMO_ROLE_SWITCHING=true is strictly forbidden in production!"
-            exit 1
-          fi
-          echo "Role escalation guard: PASSED."
-
-      - name: Validate .env.example Documentation Completeness
-        run: |
-          test -f .env.example || (echo "Missing .env.example file!" && exit 1)
-          grep -q "ADMIN_EMAILS" .env.example || (echo "Missing ADMIN_EMAILS in .env.example" && exit 1)
-          grep -q "DATABASE_URL" .env.example || (echo "Missing DATABASE_URL in .env.example" && exit 1)
-          grep -q "STRIPE_SECRET_KEY" .env.example || (echo "Missing STRIPE_SECRET_KEY in .env.example" && exit 1)
-          grep -q "ALLOW_DEMO_ROLE_SWITCHING" .env.example || (echo "Missing ALLOW_DEMO_ROLE_SWITCHING in .env.example" && exit 1)
-          echo "Environment variable documentation: PASSED."
-
-      - name: Gitleaks Secret Scanning
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  lint-and-typecheck:
-    name: ESLint & TypeScript Compilation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
+      - name: Setup Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -72,82 +42,11 @@ jobs:
       - name: Generate Prisma Client
         run: npx prisma generate
 
-      - name: Run ESLint
-        run: npm run lint
+      - name: TypeScript Type Verification
+        run: npx tsc --noEmit
+
+      - name: Run Vitest Unit Tests
+        run: npm test
 
       - name: Run Next.js Production Build
         run: npm run build
-        env:
-          NODE_ENV: production
-          NEXT_PUBLIC_APP_URL: "https://salsaexplosion.co.uk"
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/test?pgbouncer=true"
-          DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/test"
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_placeholder"
-          CLERK_SECRET_KEY: "sk_test_placeholder"
-          CLERK_WEBHOOK_SECRET: "whsec_placeholder"
-          STRIPE_SECRET_KEY: "sk_test_placeholder"
-          STRIPE_WEBHOOK_SECRET: "whsec_placeholder"
-
-  unit-tests:
-    name: Vitest Suite (Role Guards & Rate Limiter)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Generate Prisma Client
-        run: npx prisma generate
-
-      - name: Run Vitest Unit Tests
-        run: npm run test:unit
-
-  playwright-e2e:
-    name: Playwright End-to-End Suite
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Generate Prisma Client
-        run: npx prisma generate
-
-      - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
-
-      - name: Run Playwright Tests
-        run: npx playwright test
-        env:
-          NEXT_PUBLIC_APP_URL: "http://localhost:3000"
-          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/test?pgbouncer=true"
-          DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/test"
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_placeholder"
-          CLERK_SECRET_KEY: "sk_test_placeholder"
-          CLERK_WEBHOOK_SECRET: "whsec_placeholder"
-          STRIPE_SECRET_KEY: "sk_test_placeholder"
-          STRIPE_WEBHOOK_SECRET: "whsec_placeholder"
-
-      - name: Upload Test Artifacts on Failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 7

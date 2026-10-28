@@ -48,3 +48,7 @@ next-env.d.ts
 
 # staging raw media
 /public/images/raw/
+
+# automated visual design audit screenshots
+/.audit-screenshots/
+.audit-screenshots/

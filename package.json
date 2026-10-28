@@ -15,7 +15,8 @@
     "db:deploy": "prisma migrate deploy && prisma db seed",
     "db:seed": "prisma db seed",
     "test:e2e:degraded": "node scripts/run-degraded-e2e.mjs",
-    "media:check": "node scripts/check-media.mjs"
+    "media:check": "node scripts/check-media.mjs",
+    "audit:design": "node scripts/visual-audit.mjs"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.16",

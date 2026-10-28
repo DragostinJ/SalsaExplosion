@@ -34,7 +34,7 @@ export function TimbaTimelineScrubber({
   return (
     <div className="space-y-2 sm:space-y-3">
       <div className="flex items-center justify-between text-xs">
-        <span className="font-bold text-ivory-muted uppercase text-[11px] tracking-wider flex items-center gap-1.5">
+        <span className="font-bold text-ivory-muted uppercase text-xs tracking-wider flex items-center gap-1.5">
           <Clock className="h-3.5 w-3.5 text-gold" />
           Song Progression Timeline (Click Any Segment to Jump)
         </span>
@@ -113,7 +113,7 @@ export function TimbaTimelineScrubber({
               type="button"
               data-testid={`mobile-segment-chip-${idx}`}
               onClick={() => handleSeek(segment.startTimeSeconds)}
-              className={`rounded-lg px-2.5 py-1 text-[11px] font-bold shrink-0 transition-all border snap-start ${
+              className={`rounded-lg px-3 py-2 min-h-[40px] text-xs font-bold shrink-0 transition-all border snap-start flex items-center ${
                 isSegmentActive
                   ? "bg-gold/25 border-gold/50 text-gold ring-1 ring-gold/50 shadow-xs"
                   : "border-line bg-surface-3 text-ivory-muted hover:bg-surface-2 hover:text-stone-200"
@@ -167,7 +167,7 @@ export function TimbaTimelineScrubber({
                 key={spd}
                 type="button"
                 onClick={() => setPlaybackSpeed(spd)}
-                className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition-all ${
+                className={`min-h-[40px] min-w-[40px] px-3 py-2 rounded-lg font-bold text-xs flex items-center justify-center transition-all ${
                   playbackSpeed === spd
                     ? "bg-gold text-stone-950 shadow-xs"
                     : "text-ivory-muted hover:text-stone-200"

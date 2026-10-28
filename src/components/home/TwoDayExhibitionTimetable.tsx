@@ -30,7 +30,7 @@ function TimetableRow({
         {/* Column 2: Level / Category Badge (col-span-3) */}
         <div className="lg:col-span-3 flex items-center gap-2 flex-wrap">
           <span
-            className={`text-[11px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+            className={`text-xs font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
               item.isSocial
                 ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
                 : "bg-amber-500/20 text-amber-300 border-amber-500/30"
@@ -102,7 +102,7 @@ export function TwoDayExhibitionTimetable() {
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] font-black uppercase tracking-widest text-amber-300">
+              <span className="text-xs font-black uppercase tracking-widest text-amber-300">
                 Official {VENUE_INFO.shortName} Residency • Thursdays &amp; Sundays
               </span>
             </div>
@@ -147,7 +147,7 @@ export function TwoDayExhibitionTimetable() {
           </div>
 
           {/* Table Header (Desktop only) */}
-          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-ivory-muted border-b border-white/10">
+          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ivory-muted border-b border-white/10">
             <span className="col-span-2">Time</span>
             <span className="col-span-3">Level / Track</span>
             <span className="col-span-5">Class &amp; Faculty</span>
@@ -183,7 +183,7 @@ export function TwoDayExhibitionTimetable() {
           </div>
 
           {/* Table Header (Desktop only) */}
-          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-[11px] font-black uppercase tracking-wider text-ivory-muted border-b border-white/10">
+          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ivory-muted border-b border-white/10">
             <span className="col-span-2">Time</span>
             <span className="col-span-3">Level / Track</span>
             <span className="col-span-5">Class &amp; Faculty</span>

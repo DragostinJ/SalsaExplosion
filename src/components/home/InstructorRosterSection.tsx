@@ -161,7 +161,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   key={cat.key}
                   type="button"
                   onClick={() => handleCategoryChange(cat.key)}
-                  className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all ${
+                  className={`rounded-full px-4 py-2 min-h-[40px] text-xs font-bold transition-all inline-flex items-center justify-center ${
                     isActive
                       ? "bg-brand text-white shadow-xs"
                       : "bg-surface-3 text-ivory-muted hover:bg-surface-2 hover:text-ivory border border-gold/20"
@@ -186,7 +186,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                 aria-label="Previous instructor"
                 disabled={activeMobileIndex <= 0}
                 onClick={() => scrollToCard(activeMobileIndex - 1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+                className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -195,7 +195,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                 aria-label="Next instructor"
                 disabled={activeMobileIndex >= filteredInstructors.length - 1}
                 onClick={() => scrollToCard(activeMobileIndex + 1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+                className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -243,6 +243,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                         alt={instructor.name}
                         fill
                         sizes="(max-width: 640px) 82vw, (max-width: 1024px) 50vw, 25vw"
+                        style={{ objectPosition: "top" }}
                         className="editorial-photo relative z-10 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                       />
                     )}
@@ -256,7 +257,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
                     {/* Top Right Origin Badge */}
                     <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
-                      <span className="rounded-md bg-black/70 backdrop-blur-xs px-2 py-0.5 text-[11px] font-bold text-white/90 border border-white/10 uppercase">
+                      <span className="rounded-md bg-black/70 backdrop-blur-xs px-2 py-0.5 text-xs font-bold text-white/90 border border-white/10 uppercase">
                         {instructor.origin}
                       </span>
                     </div>
@@ -284,7 +285,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     </div>
 
                     {/* Teaching Days */}
-                    <div className="flex items-start gap-1.5 text-[11px] text-ivory-muted pt-1">
+                    <div className="flex items-start gap-1.5 text-xs text-ivory-muted pt-1">
                       <Calendar className="h-3.5 w-3.5 text-gold shrink-0 mt-0.5" />
                       <span className="line-clamp-1">{instructor.teachingDays}</span>
                     </div>
@@ -315,7 +316,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
               aria-label="Previous artist card"
               disabled={activeMobileIndex <= 0}
               onClick={() => scrollToCard(activeMobileIndex - 1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+              className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -342,7 +343,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
               aria-label="Next artist card"
               disabled={activeMobileIndex >= filteredInstructors.length - 1}
               onClick={() => scrollToCard(activeMobileIndex + 1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+              className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
@@ -384,7 +385,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   <Badge className="bg-primary-base text-white text-xs font-bold">
                     {selectedInstructor.origin}
                   </Badge>
-                  <span className="text-[11px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
+                  <span className="text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
                     {selectedInstructor.badge}
                   </span>
                 </div>

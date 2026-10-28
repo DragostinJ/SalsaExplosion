@@ -16,7 +16,7 @@ export function TimbaBeatBar({ isPlaying, currentDancerBeat }: TimbaBeatBarProps
     >
       <div className="flex items-center gap-1 sm:gap-1.5 font-bold text-ivory shrink-0">
         <Headphones className="h-3.5 w-3.5 text-gold" />
-        <span className="text-[11px] sm:text-xs">Dancer Rhythm Bar:</span>
+        <span className="text-xs">Dancer Rhythm Bar:</span>
       </div>
 
       <div className="flex items-center gap-0.5 sm:gap-1.5">
@@ -28,7 +28,7 @@ export function TimbaBeatBar({ isPlaying, currentDancerBeat }: TimbaBeatBarProps
           return (
             <div
               key={beatNum}
-              className={`h-6 sm:h-7 px-1.5 sm:px-2.5 rounded-lg flex items-center justify-center font-mono font-black text-[11px] sm:text-xs transition-all ${
+              className={`h-6 sm:h-7 px-1.5 sm:px-2.5 rounded-lg flex items-center justify-center font-mono font-black text-xs transition-all ${
                 isCurrent
                   ? "bg-gold text-stone-950 font-black shadow-xs scale-105 ring-2 ring-gold"
                   : isBreakOn1

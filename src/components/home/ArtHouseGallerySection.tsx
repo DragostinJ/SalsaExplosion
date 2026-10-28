@@ -53,7 +53,7 @@ export function ArtHouseGallerySection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
-                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-300">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-amber-300">
                     PAY AT THE DOOR • £12 / £14
                   </span>
                 </div>
@@ -63,11 +63,11 @@ export function ArtHouseGallerySection() {
                   <h3 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
                     Weekly Classes &amp; Socials
                   </h3>
-                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed">
+                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed line-clamp-2">
                     Thursdays (19:00 &amp; 20:15) and Sundays (18:30) at BOH Studios. £12 for 1 class or £14 for 2 classes at the door. No partner needed.
                   </p>
                 </div>
-                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
+                <span className="pt-2 text-xs font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
                   View Thu &amp; Sun Timetable →
                 </span>
               </div>
@@ -88,7 +88,7 @@ export function ArtHouseGallerySection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/30 to-transparent pointer-events-none" />
                 <div className="absolute top-2.5 left-2.5">
-                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-300">
+                  <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2 py-0.5 text-xs font-black uppercase tracking-wider text-amber-300">
                     BOOK ONLINE • OFFICIAL PASSES
                   </span>
                 </div>
@@ -98,11 +98,11 @@ export function ArtHouseGallerySection() {
                   <h3 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
                     Festivals &amp; Special Events
                   </h3>
-                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed">
+                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed line-clamp-2">
                     Reserve your official online passes for Made in Cuba Dance Weekend 2026 (4–6 Dec), Halloween Party, and SB&amp;K Nights.
                   </p>
                 </div>
-                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
+                <span className="pt-2 text-xs font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
                   Book Festival Tickets →
                 </span>
               </div>
@@ -128,11 +128,11 @@ export function ArtHouseGallerySection() {
                   <h3 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
                     Rueda Call Dictionary
                   </h3>
-                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed">
+                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed line-clamp-2">
                     Master authentic Havana Rueda de Casino calls, caller hand signals, and our 4-tier Cuban syllabus.
                   </p>
                 </div>
-                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
+                <span className="pt-2 text-xs font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
                   Explore Rueda Library →
                 </span>
               </div>
@@ -158,11 +158,11 @@ export function ArtHouseGallerySection() {
                   <h3 className="text-sm sm:text-base font-black text-white group-hover:text-amber-300 transition-colors">
                     Timba Song Trainer
                   </h3>
-                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed">
+                  <p className="text-xs text-ivory-muted mt-1 leading-relaxed line-clamp-2">
                     Train your ear with our real-time song progression map, 8-count rhythm bar, and Leader/Follower cues.
                   </p>
                 </div>
-                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
+                <span className="pt-2 text-xs font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">
                   Open Song Trainer →
                 </span>
               </div>
@@ -255,7 +255,7 @@ export function InsideCubanCircleGallery() {
                 aria-label="Previous archive photo"
                 disabled={activeMobileIndex <= 0}
                 onClick={() => scrollToFrame(activeMobileIndex - 1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+                className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -264,7 +264,7 @@ export function InsideCubanCircleGallery() {
                 aria-label="Next archive photo"
                 disabled={activeMobileIndex >= ACADEMY_GALLERY_PHOTOS.length - 1}
                 onClick={() => scrollToFrame(activeMobileIndex + 1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+                className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -295,7 +295,7 @@ export function InsideCubanCircleGallery() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-canvas via-black/20 to-transparent pointer-events-none" />
                 <div className="absolute top-3 left-3">
-                  <span className="rounded-md bg-black/75 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-gold">
+                  <span className="rounded-md bg-black/75 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-gold">
                     {photo.kicker}
                   </span>
                 </div>
@@ -310,7 +310,7 @@ export function InsideCubanCircleGallery() {
                     {photo.caption}
                   </p>
                 </div>
-                <span className="pt-2 text-[11px] font-bold uppercase tracking-wider text-gold inline-flex items-center gap-1">
+                <span className="pt-2 text-xs font-bold uppercase tracking-wider text-gold inline-flex items-center gap-1">
                   Inspect Frame →
                 </span>
               </div>
@@ -326,7 +326,7 @@ export function InsideCubanCircleGallery() {
               aria-label="Previous archive frame"
               disabled={activeMobileIndex <= 0}
               onClick={() => scrollToFrame(activeMobileIndex - 1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+              className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -353,7 +353,7 @@ export function InsideCubanCircleGallery() {
               aria-label="Next archive frame"
               disabled={activeMobileIndex >= ACADEMY_GALLERY_PHOTOS.length - 1}
               onClick={() => scrollToFrame(activeMobileIndex + 1)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
+              className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-gold/30 bg-surface-2 text-ivory hover:border-gold hover:text-gold disabled:opacity-35 disabled:pointer-events-none transition-all"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
@@ -393,7 +393,7 @@ export function InsideCubanCircleGallery() {
             </div>
             <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <span className="text-[11px] font-black uppercase tracking-widest text-amber-300">
+                <span className="text-xs font-black uppercase tracking-widest text-amber-300">
                   {selectedPhoto.kicker}
                 </span>
                 <h4 className="text-lg font-black text-white mt-0.5">

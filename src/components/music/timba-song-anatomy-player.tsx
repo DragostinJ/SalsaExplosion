@@ -328,7 +328,7 @@ export function TimbaSongAnatomyPlayer({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-2.5 sm:gap-4 border-b border-line pb-2.5 sm:pb-4">
         <div className="hidden md:block space-y-1">
           <div className="flex items-center gap-2">
-            <Badge className="bg-brand text-white text-[11px] font-black uppercase tracking-wider flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1">
+            <Badge className="bg-brand text-white text-xs font-black uppercase tracking-wider flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1">
               <Compass className="h-3.5 w-3.5" />
               Interactive Song Map
             </Badge>
@@ -350,7 +350,7 @@ export function TimbaSongAnatomyPlayer({
             <Music className="h-3.5 w-3.5 text-gold shrink-0" aria-hidden="true" />
             <span>Timba Trainer • {activeSong.title.replace(/\s*\(.*?\)\s*/g, "")} • {activeSong.bpm} Tempo</span>
           </span>
-          <span className="font-mono text-[11px] font-extrabold text-ivory-muted shrink-0">
+          <span className="font-mono text-xs font-extrabold text-ivory-muted shrink-0">
             {formatSeconds(currentTime)} elapsed
           </span>
         </div>
@@ -379,7 +379,7 @@ export function TimbaSongAnatomyPlayer({
                 <Music className="h-3.5 w-3.5 shrink-0" />
                 <span className="truncate max-w-[130px] sm:max-w-none">{song.title}</span>
                 {isBoss ? (
-                  <Badge className="bg-amber-500 text-stone-950 font-black text-[11px] uppercase px-1.5 py-0 tracking-wider">
+                  <Badge className="bg-amber-500 text-stone-950 font-black text-xs uppercase px-1.5 py-0 tracking-wider">
                     Boss Track
                   </Badge>
                 ) : (
@@ -418,21 +418,21 @@ export function TimbaSongAnatomyPlayer({
             <h3 className="font-extrabold text-sm text-ivory">
               {activeSong.title}
             </h3>
-            <p className="text-ivory-muted text-[11px]">
+            <p className="text-ivory-muted text-xs">
               {activeSong.artist} • <span className="font-mono font-semibold text-ivory-muted">{activeSong.bpm} BPM</span>
             </p>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="outline" className="text-[11px] font-bold border-line bg-surface-3 text-ivory-muted">
+          <Badge variant="outline" className="text-xs font-bold border-line bg-surface-3 text-ivory-muted">
             {activeSong.claveType.toLowerCase().includes("clave") ||
             activeSong.claveType.toLowerCase().includes("hybrid")
               ? activeSong.claveType
               : `${activeSong.claveType} Clave`}
           </Badge>
           <Badge
-            className={`text-[11px] font-bold ${
+            className={`text-xs font-bold ${
               activeSong.difficultyLevel === "Beginner"
                 ? "bg-sky-950/80 text-sky-200 border border-sky-500/30"
                 : activeSong.difficultyLevel === "Advanced"
@@ -608,25 +608,28 @@ export function TimbaSongAnatomyPlayer({
         </div>
       </div>
 
-      {/* 8-Count Dancer Beat Bar */}
-      <TimbaBeatBar
-        isPlaying={isPlaying}
-        currentDancerBeat={currentDancerBeat}
-      />
+      {/* Interactive Playback Cockpit Stage (Fits within mobile viewport) */}
+      <div data-testid="timba-dancer-stage" className="space-y-2.5 sm:space-y-4">
+        {/* 8-Count Dancer Beat Bar */}
+        <TimbaBeatBar
+          isPlaying={isPlaying}
+          currentDancerBeat={currentDancerBeat}
+        />
 
-      {/* 3. Proportional Interactive Timeline Scrubber */}
-      <TimbaTimelineScrubber
-        currentTime={currentTime}
-        effectiveDuration={effectiveDuration}
-        effectiveSegments={effectiveSegments}
-        activeSegmentIndex={activeSegmentIndex}
-        isPlaying={isPlaying}
-        playbackSpeed={playbackSpeed}
-        handleSeek={handleSeek}
-        togglePlay={togglePlay}
-        handleReset={handleReset}
-        setPlaybackSpeed={setPlaybackSpeed}
-      />
+        {/* 3. Proportional Interactive Timeline Scrubber */}
+        <TimbaTimelineScrubber
+          currentTime={currentTime}
+          effectiveDuration={effectiveDuration}
+          effectiveSegments={effectiveSegments}
+          activeSegmentIndex={activeSegmentIndex}
+          isPlaying={isPlaying}
+          playbackSpeed={playbackSpeed}
+          handleSeek={handleSeek}
+          togglePlay={togglePlay}
+          handleReset={handleReset}
+          setPlaybackSpeed={setPlaybackSpeed}
+        />
+      </div>
 
       {/* 4. Live "Dancer HUD" Panel */}
       <TimbaDancerHud

@@ -71,14 +71,14 @@ export default function Home() {
             {/* Top Cultural Tag Bar */}
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4 mb-8 sm:mb-12">
               <div className="flex items-center gap-2">
-                <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-gold">
+                <span className="text-xs font-black uppercase tracking-widest text-gold">
                   BOH STUDIOS BOURNEMOUTH • THURSDAYS &amp; SUNDAYS
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Link
                   href="/venues"
-                  className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-ivory-muted hover:text-gold transition-colors"
+                  className="text-xs font-bold uppercase tracking-widest text-ivory-muted hover:text-gold transition-colors"
                 >
                   {VENUE_INFO.streetAddress.toUpperCase()}, {VENUE_INFO.postcode} →
                 </Link>
@@ -92,7 +92,7 @@ export default function Home() {
                 {/* Monumental Architectural Headline */}
                 <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight leading-[1.08] text-ivory">
                   Cuban Salsa &amp; Rueda de Casino
-                  <span className="block font-sans text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-ivory-muted mt-3">
+                  <span className="block font-sans text-xl sm:text-2xl font-normal tracking-tight text-ivory-muted mt-3">
                     In the heart of Bournemouth with Maestro Enrique Perez Valdes.
                   </span>
                 </h1>
@@ -129,15 +129,15 @@ export default function Home() {
                 <div className="mt-10 pt-6 border-t border-line grid grid-cols-3 gap-6 w-full">
                   <div>
                     <div className="text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.yearsInUk}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.yearsInUkLabel}</div>
+                    <div className="text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.yearsInUkLabel}</div>
                   </div>
                   <div>
                     <div className="text-xl sm:text-2xl font-black text-ivory">{ACADEMY_METRICS.dancersMentored}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.dancersMentoredLabel}</div>
+                    <div className="text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.dancersMentoredLabel}</div>
                   </div>
                   <div>
                     <div className="text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.partnerPolicy}</div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.partnerPolicyLabel}</div>
+                    <div className="text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.partnerPolicyLabel}</div>
                   </div>
                 </div>
               </div>
@@ -152,7 +152,8 @@ export default function Home() {
                       fill
                       priority
                       sizes={MEDIA_MANIFEST.heroPortrait.sizes}
-                      className="object-cover editorial-photo transition-transform duration-700 group-hover:scale-105"
+                      style={{ objectPosition: "top" }}
+                      className="object-cover object-top editorial-photo transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
                     <>
@@ -170,7 +171,7 @@ export default function Home() {
                   {/* Shared directional gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 text-left z-10">
-                    <span className="text-[11px] font-black uppercase tracking-widest text-gold block mb-1">
+                    <span className="text-xs font-black uppercase tracking-widest text-gold block mb-1">
                       BOH Studios Bournemouth Residency
                     </span>
                     <p className="text-xs sm:text-sm font-semibold text-stone-200 leading-snug">
@@ -222,15 +223,15 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-amber-300">
+                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-amber-300">
                       SAT 31 OCT 2026
                     </span>
-                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-xs font-black uppercase tracking-wider">
                       THIS SATURDAY
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-xs font-black uppercase tracking-wider">
                       From £12
                     </span>
                   </div>
@@ -276,12 +277,12 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-2 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-gold">
+                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-gold">
                       SAT 14 NOV 2026
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-xs font-black uppercase tracking-wider">
                       From £12
                     </span>
                   </div>
@@ -327,12 +328,12 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface-2 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-gold">
+                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-gold">
                       04 — 06 DEC 2026
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-[11px] font-black uppercase tracking-wider">
+                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-xs font-black uppercase tracking-wider">
                       From £20
                     </span>
                   </div>

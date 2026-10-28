@@ -11,8 +11,8 @@ import { CUBAN_CURRICULUM_DATA } from "@/lib/constants/cuban-curriculum-2027";
 import { getClaveStrokeBeats, CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
 
 describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dataset", () => {
-  it("validates all 3 production song maps against SongAnatomySchema and checks valid youtubeVideoId & youtubeUrl", () => {
-    expect(TIMBA_SONG_ANATOMY_DATA.length).toBe(3);
+  it("validates all 4 production song maps against SongAnatomySchema and checks valid youtubeVideoId & youtubeUrl", () => {
+    expect(TIMBA_SONG_ANATOMY_DATA.length).toBe(4);
 
     for (const song of TIMBA_SONG_ANATOMY_DATA) {
       const parsed = SongAnatomySchema.safeParse(song);
@@ -153,7 +153,17 @@ describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dat
 
   it("checks helper functions getSongAnatomyById and getAllSongAnatomies", () => {
     const all = getAllSongAnatomies();
-    expect(all.length).toBe(3);
+    expect(all.length).toBe(4);
+
+    const aguanile = getSongAnatomyById("aguanile");
+    expect(aguanile).toBeDefined();
+    expect(aguanile?.youtubeVideoId).toBe("b4rd9VfMhWM");
+    expect(aguanile?.bpm).toBe(105);
+    expect(aguanile?.segments.length).toBe(8);
+    for (const seg of aguanile!.segments) {
+      expect(seg.handGesture).toBeDefined();
+      expect(seg.instrumentMapping).toBeDefined();
+    }
 
     const nonExistent = getSongAnatomyById("non-existent-track");
     expect(nonExistent).toBeUndefined();

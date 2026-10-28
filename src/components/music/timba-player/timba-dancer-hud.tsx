@@ -97,6 +97,16 @@ export function TimbaDancerHud({
               <span className="truncate">Timing: {activeSegment.timingMode}</span>
             </Badge>
           )}
+
+          {activeSegment.handGesture && (
+            <Badge
+              variant="outline"
+              data-testid="active-hand-gesture-badge"
+              className="border-amber-400/50 bg-amber-400/15 text-amber-200 text-xs font-black flex items-center gap-1 px-2 sm:px-2.5 py-0.5"
+            >
+              <span className="truncate">✋ Gesture: {activeSegment.handGesture}</span>
+            </Badge>
+          )}
         </div>
       </div>
 

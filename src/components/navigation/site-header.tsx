@@ -282,19 +282,20 @@ export function SiteHeader({
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-3 sm:gap-4">
         {/* Brand Logo & Context-Aware Left Nav */}
-        <div className="flex items-center gap-2.5 lg:gap-5 min-w-0 flex-1 overflow-x-clip">
+        <div className="flex items-center gap-2.5 lg:gap-5 min-w-0 flex-1">
           <Link
             href="/"
-            className="flex items-center gap-2 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85 shrink-0"
+            data-testid="site-header-brand"
+            className="flex items-center gap-2 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85 shrink-0 whitespace-nowrap"
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand text-white shadow-sm shrink-0">
               <Flame className="h-5 w-5 fill-white" />
             </div>
-            <div className="flex flex-col shrink-0">
-              <span className="text-lg font-black leading-none tracking-tight">
+            <div className="flex flex-col shrink-0 whitespace-nowrap">
+              <span className="text-lg font-black leading-none tracking-tight whitespace-nowrap">
                 Salsa <span className="text-rose-400">Explosion</span>
               </span>
-              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mt-0.5">
+              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mt-0.5 whitespace-nowrap">
                 Bournemouth • Cuba
               </span>
             </div>
@@ -491,7 +492,7 @@ export function SiteHeader({
               />
             </div>
           ) : (
-            <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            <div className="hidden md:flex items-center gap-2 sm:gap-2.5 shrink-0">
               <Link
                 href="/sign-in"
                 className="rounded-xl border border-line bg-transparent px-3 py-1.5 text-xs font-bold text-ivory hover:bg-surface-3 transition-colors shrink-0"

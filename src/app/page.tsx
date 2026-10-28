@@ -12,7 +12,6 @@ import {
   ArtHouseGallerySection,
   InsideCubanCircleGallery,
 } from "@/components/home/ArtHouseGallerySection";
-import { ArtReveal } from "@/components/ui/ArtReveal";
 import { ACADEMY_METRICS, VENUE_INFO } from "@/lib/academy-data";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
@@ -30,7 +29,7 @@ export default function Home() {
         <LiveTonightBanner />
 
         {/* ================= SECTION 1: EDITORIAL SPLIT HERO ================= */}
-        <section className="relative overflow-hidden py-10 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-canvas border-b border-line text-ivory">
+        <section className="relative overflow-hidden py-4 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-canvas border-b border-line text-ivory">
           {/* Subtle Ambient Studio Light */}
           <div
             className="absolute inset-0 pointer-events-none opacity-30 mix-blend-screen"
@@ -43,7 +42,7 @@ export default function Home() {
 
           <div className="relative z-10 mx-auto w-full max-w-7xl">
             {/* Top Cultural Tag Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4 mb-8 sm:mb-12">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-2.5 mb-4 sm:pb-4 sm:mb-8">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-black uppercase tracking-widest text-gold">
                   BOH STUDIOS BOURNEMOUTH • THURSDAYS &amp; SUNDAYS
@@ -59,24 +58,24 @@ export default function Home() {
               </div>
             </div>
 
-            {/* 12-Column Architectural Split */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-              {/* Left Column (7 cols): Editorial Typography & Direct Action */}
-              <div className="lg:col-span-7 flex flex-col items-start text-left space-y-5">
+            {/* 12-Column Architectural Split (6/6 Balanced on Desktop, Top Visual on Mobile) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-10 items-center">
+              {/* Left Column (6 cols): Editorial Typography & Direct Action */}
+              <div className="order-2 lg:order-1 lg:col-span-6 flex flex-col items-start text-left space-y-3.5 sm:space-y-5">
                 {/* Monumental Architectural Headline */}
-                <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight leading-[1.08] text-ivory">
+                <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-ivory">
                   Cuban Salsa &amp; Rueda de Casino
-                  <span className="block font-sans text-xl sm:text-2xl font-normal tracking-tight text-ivory-muted mt-3">
+                  <span className="block font-sans text-lg sm:text-2xl font-normal tracking-tight text-ivory-muted mt-2 sm:mt-3">
                     In the heart of Bournemouth with Maestro Enrique Perez Valdes.
                   </span>
                 </h1>
 
-                <p className="text-base sm:text-lg text-ivory-muted leading-relaxed max-w-xl mt-6">
+                <p className="text-sm sm:text-lg text-ivory-muted leading-relaxed max-w-xl mt-2 sm:mt-4">
                   Directed by Salsa UK Lifetime Achievement Award winner Maestro Enrique Perez Valdes. Join our weekly Thursday and Sunday classes (£12 / £14 at the door) and major Cuban festivals.
                 </p>
 
                 {/* Two Solid Architectural CTAs */}
-                <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+                <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
                   <Button
                     asChild
                     className="h-12 px-6 text-xs sm:text-sm font-black uppercase tracking-wider bg-brand hover:bg-brand-hover text-white rounded-xl shadow-xs transition-transform active:scale-[0.99]"
@@ -95,12 +94,12 @@ export default function Home() {
                     </Link>
                   </Button>
                 </div>
-                <p className="text-xs text-ivory-muted mt-2">
+                <p className="text-xs text-ivory-muted mt-1 sm:mt-2">
                   Weekly classes: pay at the door &middot; Festivals: book online
                 </p>
 
                 {/* Architectural Metrics Bar */}
-                <div className="mt-10 pt-6 border-t border-line grid grid-cols-3 gap-6 w-full">
+                <div className="mt-4 sm:mt-8 pt-4 sm:pt-6 border-t border-line grid grid-cols-3 gap-4 sm:gap-6 w-full">
                   <div>
                     <div className="text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.yearsInUk}</div>
                     <div className="text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.yearsInUkLabel}</div>
@@ -116,9 +115,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right Column (5 cols): Cinematic Architectural Dance Frame */}
-              <div className="lg:col-span-5 relative w-full">
-                <div className="relative aspect-[4/3] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-white/10 bg-surface-2 shadow-2xl group">
+              {/* Right Column (6 cols on desktop, top banner on mobile): Full-Colour Cinematic Dance Frame */}
+              <div className="order-1 lg:order-2 lg:col-span-6 relative w-full">
+                <div className="relative aspect-[16/10] lg:aspect-[4/3] w-full overflow-hidden rounded-2xl bg-canvas shadow-2xl group">
                   {MEDIA_MANIFEST.heroPortrait.src ? (
                     <Image
                       src={MEDIA_MANIFEST.heroPortrait.src}
@@ -126,7 +125,7 @@ export default function Home() {
                       fill
                       priority
                       sizes={MEDIA_MANIFEST.heroPortrait.sizes}
-                      className="object-cover object-center editorial-photo transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
                     <>
@@ -142,10 +141,10 @@ export default function Home() {
                     </>
                   )}
                   {/* Soft left-edge and bottom-edge gradient vignettes to melt into Obsidian background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#080706] via-[#080706]/25 to-transparent pointer-events-none z-10" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080706] via-transparent to-transparent pointer-events-none z-10" />
-                  <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 text-left z-20">
-                    <span className="text-xs font-black uppercase tracking-widest text-gold block mb-1">
+                  <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#080706] via-[#080706]/15 to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080706] via-[#080706]/10 to-transparent pointer-events-none z-10" />
+                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-5 text-left z-20">
+                    <span className="text-xs font-black uppercase tracking-widest text-gold block mb-0.5">
                       BOH Studios Bournemouth Residency
                     </span>
                     <p className="text-xs sm:text-sm font-semibold text-stone-200 leading-snug">
@@ -345,9 +344,7 @@ export default function Home() {
         </section>
 
         {/* Interactive Instructor Roster Section */}
-        <ArtReveal>
-          <InstructorRosterSection id="instructors" />
-        </ArtReveal>
+        <InstructorRosterSection id="instructors" />
 
         {/* Sleek Architectural Callout Banner for Gift Vouchers */}
         <div className="border-b border-line bg-surface-2/60 py-3.5 px-4 text-center">

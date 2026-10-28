@@ -16,6 +16,7 @@ export const ClaveTypeSchema = z.enum([
   "2-3 Rumba Clave",
   "3-2 Rumba",
   "2-3 Son / 6/8 Afro-Bembé Hybrid",
+  "2-3 Son/Rumba Clave",
 ]);
 export type ClaveType = z.infer<typeof ClaveTypeSchema>;
 
@@ -84,6 +85,7 @@ export const SongSegmentSchema = z.object({
   commonMistakeWarning: z.string(),
   recommendedMoveSlugs: z.array(z.string()).default([]),
   timingMode: TimingModeSchema.optional(),
+  handGesture: z.string().optional(),
   instrumentMapping: InstrumentMappingSchema.optional(),
 });
 export type SongSegment = z.infer<typeof SongSegmentSchema>;
@@ -818,6 +820,227 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
           chestAndShoulders: "Stutter-hit freeze at 6:50",
         },
         recommendedMoveSlugs: ["int-pw-3", "adv-pw-1"],
+      },
+    ],
+  },
+
+  // -----------------------------------------------------------------
+  // 4. "Aguanile" - Marc Anthony (El Cantante / Héctor Lavoe Tribute)
+  // Level: Advanced • 105 BPM • 2-3 Son/Rumba Clave • 316 seconds (5:16)
+  // Official Video ID: b4rd9VfMhWM
+  // -----------------------------------------------------------------
+  {
+    id: "aguanile",
+    title: "Aguanile (Advanced Afro-Cuban & Casino Masterclass)",
+    artist: "Marc Anthony",
+    bpm: 105,
+    claveType: "2-3 Son/Rumba Clave",
+    difficultyLevel: "Advanced",
+    durationSeconds: 316,
+    youtubeVideoId: "b4rd9VfMhWM",
+    youtubeUrl: "https://www.youtube.com/watch?v=b4rd9VfMhWM",
+    spotifyOrYoutubeEmbedUrl:
+      "https://open.spotify.com/search/Marc%20Anthony%20Aguanile",
+    segments: [
+      {
+        id: "ag-seg-1",
+        startTimeSeconds: 0,
+        endTimeSeconds: 26,
+        formattedRange: "0:00 - 0:26",
+        sectionName: "01. Ritual Batá & Oggún Invocation",
+        danceGear: "Afro-Cuban Orishas",
+        colorTheme: "amber",
+        timingMode: "Free / Polyrhythmic (6/8)",
+        handGesture: "Oggún Machete Slice & Water Flick",
+        musicalTrigger:
+          "Sacred Batá drums, chekeré, and Afro-Cuban Lucumí chant ('Aguanile Mai Mai, Oggún Arere') invoke Oggún and purify the floor before the 4/4 groove begins.",
+        leaderCue:
+          "Start apart in solo Suelta! Ground your knees and lead Oggún's symbolic machete-clearing strikes across the body combined with holy-water flicks.",
+        followerCue:
+          "Answer with grounded 6/8 Afro-Cuban torso undulations (ondulación) and expressive Yemayá/Oggún arm sweeps.",
+        commonMistakeWarning:
+          "Grabbing closed partner frame on 0:01 and forcing 1-2-3-5-6-7 steps over sacred 6/8 Batá ritual percussion.",
+        instrumentMapping: {
+          feet: "6/8 grounded Orisha earth-stomp",
+          hipsAndKnees: "Deep Afro-Cuban knee compression",
+          chestAndShoulders: "Oggún machete strike & chest contraction",
+        },
+        recommendedMoveSlugs: ["adv-sub-1", "adv-mus-1"],
+      },
+      {
+        id: "ag-seg-2",
+        startTimeSeconds: 26,
+        endTimeSeconds: 50,
+        formattedRange: "0:27 - 0:50",
+        sectionName: "02. The Sacred Liturgical Freeze",
+        danceGear: "Wait / Breathe",
+        colorTheme: "slate",
+        timingMode: "Ambient (No Beat)",
+        handGesture: "Palms-Up Prayer / Silencio Freeze",
+        musicalTrigger:
+          "At 0:27 percussion drops out completely as Marc Anthony delivers a dramatic, rubato liturgical cry ('¡Señor...!') suspended in open space.",
+        leaderCue:
+          "Signal 'Palms-Up Prayer / Silencio Freeze'! Hold a slow, theatrical suspension facing your partner and build eye-contact tension for the 0:51 drop.",
+        followerCue:
+          "Match the theatrical freeze with a slow, poised arm extension and breathing suspension until the clave ignites at 0:51.",
+        commonMistakeWarning:
+          "Fidgeting or stepping aimlessly during the dramatic rubato vocal prayer.",
+        instrumentMapping: {
+          feet: "Anchored split-weight stance",
+          hipsAndKnees: "Poised stillness",
+          chestAndShoulders: "Slow theatrical breath expansion",
+        },
+        recommendedMoveSlugs: ["beg-mus-1", "adv-mus-1"],
+      },
+      {
+        id: "ag-seg-3",
+        startTimeSeconds: 50,
+        endTimeSeconds: 98,
+        formattedRange: "0:51 - 1:38",
+        sectionName: "03. Clave & Trombone Ignition",
+        danceGear: "Casino (Flow)",
+        colorTheme: "emerald",
+        timingMode: "A Tiempo (On1)",
+        handGesture: "'70' Fingers + Neck Wrap — Setenta Complicado",
+        musicalTrigger:
+          "At 0:51 the piano montuno, upright bass tumbao, and roaring trombones lock into a driving 105 BPM 2-3 clave groove.",
+        leaderCue:
+          "Flash '70' fingers into neck-wrap signal! Connect on 0:51 and launch into high-velocity Setenta Complicado, Sombrero Doble, and circular Casino flow.",
+        followerCue:
+          "Frame up with active lat connection at 0:51, keeping tight axis control through fast Setenta and Sombrero combinations.",
+        commonMistakeWarning:
+          "Missing the 0:51 beat-1 trombone explosion or letting arms go limp at 105 BPM.",
+        instrumentMapping: {
+          feet: "Crisp 105 BPM circular Casino steps",
+          hipsAndKnees: "Driven Cuban motion on conga tumbao",
+          chestAndShoulders: "Connected rotational partner frame",
+        },
+        recommendedMoveSlugs: ["int-pw-1", "adv-pw-1"],
+      },
+      {
+        id: "ag-seg-4",
+        startTimeSeconds: 98,
+        endTimeSeconds: 125,
+        formattedRange: "1:39 - 2:05",
+        sectionName: "04. First Trombone Mambo Attack",
+        danceGear: "Suelta / Shines",
+        colorTheme: "purple",
+        timingMode: "Contrapunto (On2 <-> On1)",
+        handGesture: "Double Chest Tap + 2 Fingers Down — Pasitos",
+        musicalTrigger:
+          "At 1:39 the brass section unleashes a ferocious, syncopated trombone Mambo riff while bongo and timbales trade artillery.",
+        leaderCue:
+          "Tap chest twice + point 2 fingers down for Pasitos! Break apart via Enchufla into fiery Suelta footwork, syncopated kicks, and Columbia touches.",
+        followerCue:
+          "Explode into solo shines—hit the trombone stabs with sharp Cuban body rolls, heel-toe syncopations, and shoulder shimmies.",
+        commonMistakeWarning:
+          "Staying locked in closed-hold partnerwork when the trombones demand solo Suelta footwork.",
+        instrumentMapping: {
+          feet: "Fast Columbia & Mambo syncopations",
+          hipsAndKnees: "Sharp rhythmic accents",
+          chestAndShoulders: "Trombone-hit shoulder shimmies",
+        },
+        recommendedMoveSlugs: ["int-solo-1", "adv-solo-1"],
+      },
+      {
+        id: "ag-seg-5",
+        startTimeSeconds: 125,
+        endTimeSeconds: 166,
+        formattedRange: "2:06 - 2:46",
+        sectionName: "05. 'Tambores' Earth-Shaker Coro",
+        danceGear: "Casino (Flow)",
+        colorTheme: "emerald",
+        timingMode: "A Tiempo (On1)",
+        handGesture: "Air-Drum Fingers + Crazy 7 — Siete Loco",
+        musicalTrigger:
+          "The iconic 'Aguanile Mai Mai' coro returns at 2:06 with rolling conga/timbal fills ('¡Que suenen los tambores!').",
+        leaderCue:
+          "Signal Air-Drum Fingers into Crazy 7 ('Siete Loco')! Reconnect and lead intricate Coca-Cola, Siete Loco, and Montana turn patterns.",
+        followerCue:
+          "Spot cleanly through rapid traveling turns and accent the 'Mai Mai' vocal hits with hip and ribcage punctuation.",
+        commonMistakeWarning:
+          "Rushing the prep on count 7-8 during fast traveling turns.",
+        instrumentMapping: {
+          feet: "Quick pivot turns & circular travel",
+          hipsAndKnees: "Grounded axis stability",
+          chestAndShoulders: "Compact arm-knot transitions",
+        },
+        recommendedMoveSlugs: ["int-pw-2", "adv-pw-2"],
+      },
+      {
+        id: "ag-seg-6",
+        startTimeSeconds: 166,
+        endTimeSeconds: 226,
+        formattedRange: "2:47 - 3:46",
+        sectionName: "06. Staccato Brass Drops & Storytelling",
+        danceGear: "Rumba Guaguancó",
+        colorTheme: "red",
+        timingMode: "Contrapunto (On2 <-> On1)",
+        handGesture: "Flat Palm Horizontal Slice — Congelado Check",
+        musicalTrigger:
+          "Between 2:47 and 3:46, the arrangement alternates between sharp staccato brass drops, dramatic silences, and rumba percussion breaks.",
+        leaderCue:
+          "Use the Flat Palm Horizontal Slice ('Congelado') on every brass cutoff! Alternate between cheeky Rumba Guaguancó vacunao play and sudden musical freezes.",
+        followerCue:
+          "React instantly to the brass cutoffs with sharp freezes and playful Guaguancó skirt/hand defense on the percussion fills.",
+        commonMistakeWarning:
+          "Spinning blindly through the staccato horn stops instead of hitting the freezes.",
+        instrumentMapping: {
+          feet: "Precision check-steps & Rumba timing",
+          hipsAndKnees: "Instant stop-and-go compression",
+          chestAndShoulders: "Sharp staccato brass isolation",
+        },
+        recommendedMoveSlugs: ["int-sub-1", "adv-mus-1"],
+      },
+      {
+        id: "ag-seg-7",
+        startTimeSeconds: 226,
+        endTimeSeconds: 280,
+        formattedRange: "3:47 - 4:40",
+        sectionName: "07. Timbal, Campana & Montuno Climax",
+        danceGear: "Despelote / Reparto",
+        colorTheme: "amber",
+        timingMode: "Syncopated Reparto",
+        handGesture: "Overhead Lasso + Shoulder Point — Tornillo & Despelote",
+        musicalTrigger:
+          "At 3:47 the timbales, bongo bell, and screaming brass hit maximum overdrive in a relentless Montuno climax.",
+        leaderCue:
+          "Signal Overhead Lasso + Shoulder Point! Unleash high-speed Tornillo spins, Tembleque vibration, and face-to-face Despelote body isolation.",
+        followerCue:
+          "Match the climax energy with rapid hip-shimmy Tembleque, polyrhythmic Despelote isolations, and lightning-fast spins.",
+        commonMistakeWarning:
+          "Losing posture or tensing the neck during high-speed Tembleque and Despelote.",
+        instrumentMapping: {
+          feet: "Rapid timbal-roll footwork",
+          hipsAndKnees: "High-frequency Tembleque vibration",
+          chestAndShoulders: "Explosive Despelote & Rumba Columbia",
+        },
+        recommendedMoveSlugs: ["adv-solo-1", "adv-pw-1"],
+      },
+      {
+        id: "ag-seg-8",
+        startTimeSeconds: 280,
+        endTimeSeconds: 316,
+        formattedRange: "4:41 - 5:16",
+        sectionName: "08. Final Ritual Coda & Big Finish",
+        danceGear: "Casino (Flow)",
+        colorTheme: "emerald",
+        timingMode: "A Tiempo (On1)",
+        handGesture: "Crossed Wrists Overhead — Fin de Fiesta Lunge",
+        musicalTrigger:
+          "From 4:41 to 5:16 the full orchestra races toward the final ritual brass crescendo and decisive cutoff.",
+        leaderCue:
+          "Signal Crossed Wrists Overhead ('Fin de Fiesta')! Lead a final Enchufla Doble into a dramatic, supported lunge/pose right on the final brass chord.",
+        followerCue:
+          "Maintain core engagement through the final spin and lock into a clean, theatrical finish line pose on the final cutoff.",
+        commonMistakeWarning:
+          "Dropping your frame early before the final brass chord finishes ringing.",
+        instrumentMapping: {
+          feet: "Anchored final lunge stance",
+          hipsAndKnees: "Supported counterbalance",
+          chestAndShoulders: "Triumphant theatrical finish line",
+        },
+        recommendedMoveSlugs: ["adv-pw-1", "adv-pw-2"],
       },
     ],
   },

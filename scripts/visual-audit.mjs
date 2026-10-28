@@ -194,6 +194,32 @@ function evaluatePageDesign(isMobile) {
     }
   }
 
+  // Verify all 8 instructor card images inside InstructorRosterSection have height > 150 and opacity === "1"
+  if (window.location.pathname === "/") {
+    const rosterSection = document.getElementById("instructors");
+    const rosterImgs = rosterSection
+      ? Array.from(rosterSection.querySelectorAll("img"))
+      : [];
+    if (rosterImgs.length < 8) {
+      imageIssues.push({
+        src: "#instructors",
+        issue: "MISSING_FACULTY_CARDS",
+        details: `Expected 8 faculty images in #instructors, found ${rosterImgs.length}`,
+      });
+    }
+    for (const rImg of rosterImgs) {
+      const rRect = rImg.getBoundingClientRect();
+      const rStyle = window.getComputedStyle(rImg);
+      if (rRect.height <= 150 || rStyle.opacity !== "1") {
+        imageIssues.push({
+          src: (rImg.src || "").slice(-35),
+          issue: "INSTRUCTOR_CARD_HIDDEN_OR_COLLAPSED",
+          details: `Instructor image height=${Math.round(rRect.height)}px (expected >150px), opacity=${rStyle.opacity} (expected "1")`,
+        });
+      }
+    }
+  }
+
   // 4. Mobile Ergonomics & Touch Targets
   const mobileIssues = [];
   const scrollWidth = document.documentElement.scrollWidth;
@@ -206,6 +232,21 @@ function evaluatePageDesign(isMobile) {
   }
 
   if (isMobile) {
+    // Check header brand lockup width >= 140px and unclipped on 390px mobile
+    const brandEl = document.querySelector('[data-testid="site-header-brand"]');
+    if (brandEl) {
+      const brandRect = brandEl.getBoundingClientRect();
+      const parentRect = brandEl.parentElement
+        ? brandEl.parentElement.getBoundingClientRect()
+        : brandRect;
+      if (brandRect.width < 140 || parentRect.width < brandRect.width - 2) {
+        mobileIssues.push({
+          issue: "HEADER_BRAND_CLIPPED",
+          details: `Brand width=${Math.round(brandRect.width)}px, parent width=${Math.round(parentRect.width)}px (expected >=140px unclipped)`,
+        });
+      }
+    }
+
     const interactives = Array.from(
       document.querySelectorAll("button, a[href]")
     );

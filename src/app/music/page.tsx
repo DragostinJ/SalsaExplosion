@@ -9,11 +9,12 @@ export const metadata = {
 
 export default function CubanMusicPage() {
   return (
-    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-2.5 sm:px-6 lg:px-8 py-2 sm:py-6 space-y-2.5 sm:space-y-6">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-2.5 sm:px-6 lg:px-8 py-2 sm:py-3.5 space-y-2.5 sm:space-y-4">
       <PageHeader
+        compact
         title="Cuban Music &"
         titleHighlight="Social Playlist Hub"
-        description="Learn the songs played every Thursday & Sunday at BOH Studios. Follow the live Timba Song Trainer below to master timing, clave, and find beat 1 on the dance floor."
+        description="Learn the songs played every Thursday & Sunday at BOH Studios. Master timing, clave, and gear shifts."
         badge="BPM & Clave Guide"
         eyebrow="HAVANA SOCIAL FLOOR • TIMBA HUD"
         backHref="/dashboard/schedule"

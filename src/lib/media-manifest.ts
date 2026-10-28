@@ -38,16 +38,16 @@ export const MEDIA_MANIFEST = {
     priority: false,
   },
   /**
-   * Hero Right-Column Architectural Dance Portrait (Aspect 4/5)
-   * Authentic portrait of Maestro Enrique Perez Valdes
+   * Hero Right-Column Architectural Dance Portrait (Aspect 4/3)
+   * Authentic Cuban Salsa Social Dancing at BOH Studios Bournemouth
    */
   heroPortrait: {
-    src: "/images/instructors/enrique.jpg",
-    alt: "Maestro Enrique Perez Valdes directing Cuban Salsa & Rueda de Casino at BOH Studios Bournemouth",
-    width: 1200,
-    height: 1500,
-    aspectRatio: "4/5",
-    sizes: "(max-width: 1024px) 100vw, 40vw",
+    src: "/images/photos/hero-social.jpg",
+    alt: "Salsa Explosion Cuban Salsa Social Dancing at BOH Studios Bournemouth",
+    width: 2400,
+    height: 1792,
+    aspectRatio: "4/3",
+    sizes: "(max-width: 1024px) 100vw, 50vw",
     priority: true,
   },
 

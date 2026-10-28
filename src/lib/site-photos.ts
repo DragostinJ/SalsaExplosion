@@ -37,3 +37,7 @@ export const sitePhotos: SitePhotosConfig = {
     "alex-spindlove": MEDIA_MANIFEST.instructors["alex-spindlove"],
   },
 };
+
+export const SITE_PHOTOS = {
+  hero: "/images/photos/hero-social.jpg",
+} as const;

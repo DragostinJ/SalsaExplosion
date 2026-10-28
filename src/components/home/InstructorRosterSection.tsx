@@ -253,7 +253,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                       {instructor.avatarFallback}
                     </div>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-transparent to-black/30 pointer-events-none z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent pointer-events-none z-10" />
 
                     {/* Top Right Origin Badge */}
                     <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20">
@@ -292,16 +292,16 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   </div>
                 </div>
 
-                {/* Action Buttons */}
+                {/* Gallery-Grade Architectural Action Link */}
                 <div className="p-4 pt-0">
-                  <Button
+                  <button
                     type="button"
                     onClick={() => setSelectedInstructor(instructor)}
-                    size="sm"
-                    className="w-full text-xs font-bold bg-brand hover:bg-brand-hover text-white shadow-xs"
+                    className="w-full min-h-[40px] px-1 pt-2 border-t border-white/10 bg-transparent hover:bg-transparent text-stone-300 group-hover:text-amber-400 text-xs font-medium uppercase tracking-wider flex items-center justify-between transition-colors cursor-pointer"
                   >
-                    View Profile & Bookings →
-                  </Button>
+                    <span>View Profile &amp; Bookings</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </button>
                 </div>
               </div>
             );

@@ -8,74 +8,14 @@ import {
   Bus,
   DoorOpen,
   ExternalLink,
-  Camera,
-  Layers,
-  Volume2,
-  Coffee,
-  Sparkles,
+  Clock,
   ShieldCheck,
+  Ticket,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 type ArrivalTab = "parking" | "transit" | "door";
-
-interface Amenity {
-  icon: typeof Layers;
-  title: string;
-  description: string;
-}
-
-const AMENITIES: Amenity[] = [
-  {
-    icon: Layers,
-    title: "Sprung Hardwood Dance Floors",
-    description:
-      "Engineered for effortless spins, friction-free pivot turns, and maximum joint protection during 4-hour high-energy Cuban socials.",
-  },
-  {
-    icon: Volume2,
-    title: "Multi-Room Sound Isolation",
-    description:
-      "Dedicated Cuban Casino & Timba main ballroom + separate Bachata & Kizomba room opened specifically during our special monthly events and SB&K parties.",
-  },
-  {
-    icon: Coffee,
-    title: "Social Lounge & Licensed Bar",
-    description:
-      "Grab water, soft drinks, or a relaxed social beverage and catch up with friends between fast-paced Rueda circles.",
-  },
-  {
-    icon: Sparkles,
-    title: "Full-Wall Mirrors & Air Conditioning",
-    description:
-      "Bright rehearsal lighting for focused footwork classes, shifting to warm Havana club lighting for Thursday & Sunday socials.",
-  },
-];
-
-const PHOTO_SLOTS = [
-  {
-    id: "main-ballroom",
-    title: "Main Ballroom & Rueda Floor",
-    caption: "Spacious sprung maple floor hosting our 19:00 – 22:30 Thursday & Sunday sessions.",
-    tag: "Room 1 • Casino & Timba",
-    gradient: "from-stone-950 via-rose-950/60 to-stone-900",
-  },
-  {
-    id: "studio-two",
-    title: "Studio 2 • Foundation & SB&K",
-    caption: "Intimate secondary studio for Level 0 absolute beginners, Bachata Sensual, and masterclasses.",
-    tag: "Room 2 • Beginners & Bachata",
-    gradient: "from-stone-950 via-amber-950/50 to-stone-900",
-  },
-  {
-    id: "entrance-lounge",
-    title: "104 Commercial Rd Entrance & Lounge",
-    caption: "Warm welcome desk, social seating area, coat storage, and licensed bar.",
-    tag: "Reception & Social Bar",
-    gradient: "from-stone-950 via-emerald-950/50 to-stone-900",
-  },
-];
 
 export function BohVenueSpotlight() {
   const [activeTab, setActiveTab] = useState<ArrivalTab>("parking");
@@ -104,82 +44,45 @@ export function BohVenueSpotlight() {
           </p>
         </div>
 
-        {/* 4 Amenity Cards Grid */}
-        <div className="flex sm:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-4 mb-8 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
-          {AMENITIES.map((amenity) => {
-            const Icon = amenity.icon;
-            return (
-              <div
-                key={amenity.title}
-                className="w-[75vw] shrink-0 snap-center sm:w-auto rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs hover:border-secondary-base/50 transition-all space-y-2"
-              >
-                <div className="h-9 w-9 rounded-xl bg-secondary-light text-secondary-hover flex items-center justify-center font-bold">
-                  <Icon className="h-4.5 w-4.5 text-secondary-base" />
-                </div>
-                <h3 className="text-sm font-bold text-foreground">
-                  {amenity.title}
-                </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {amenity.description}
-                </p>
+        {/* Crisp 3-Pillar Venue Specification Strip */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+          <div className="rounded-2xl border border-border/80 bg-card p-5 flex flex-col justify-between shadow-xs">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-400">
+                <MapPin className="h-4 w-4 shrink-0 text-amber-400" />
+                <span>Flagship Location</span>
               </div>
-            );
-          })}
-        </div>
-
-        {/* 3-Slot Visual Gallery */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <Camera className="h-4 w-4 text-primary-base" />
-              <h3 className="text-sm font-extrabold text-foreground uppercase tracking-wider">
-                Inside BOH Studios
-              </h3>
+              <h4 className="text-base font-bold text-foreground">104 Commercial Rd, BH2 5LR</h4>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                The Triangle, Bournemouth town centre. Dual-room venue featuring authentic Canadian sprung maple dance floors.
+              </p>
             </div>
-            <span className="text-xs text-muted-foreground">
-              Studio Photography Showcase
-            </span>
           </div>
 
-          <div className="flex md:grid grid-cols-1 md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory gap-4 -mx-4 px-4 md:mx-0 md:px-0 no-scrollbar">
-            {PHOTO_SLOTS.map((slot) => (
-              <div
-                key={slot.id}
-                className="w-[78vw] shrink-0 snap-center md:w-auto group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-card shadow-sm hover:border-primary-base/50 transition-all"
-              >
-                <div
-                  className="relative aspect-[16/10] w-full bg-surface-3 p-4 flex flex-col justify-between border-b border-border/60"
-                >
-                  <div className="flex items-center justify-between z-10">
-                    <span className="rounded-md bg-black/60 backdrop-blur-xs px-2 py-0.5 text-xs font-bold text-white/90 border border-white/10">
-                      {slot.tag}
-                    </span>
-                    <span className="inline-flex items-center gap-1 rounded-md bg-white/10 backdrop-blur-xs px-1.5 py-0.5 text-xs font-semibold text-white/80">
-                      <Camera className="h-2.5 w-2.5" />
-                      📸 BOH Studios
-                    </span>
-                  </div>
-
-                  <div className="my-auto flex flex-col items-center justify-center py-4 text-center">
-                    <div className="h-12 w-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white/90 mb-2 group-hover:scale-105 transition-transform">
-                      <Sparkles className="h-6 w-6 text-accent-tangerine" />
-                    </div>
-                    <span className="text-xs font-bold text-white/90">
-                      {slot.title}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-4 space-y-1">
-                  <h4 className="text-sm font-extrabold text-foreground">
-                    {slot.title}
-                  </h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {slot.caption}
-                  </p>
-                </div>
+          <div className="rounded-2xl border border-border/80 bg-card p-5 flex flex-col justify-between shadow-xs">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-400">
+                <Clock className="h-4 w-4 shrink-0 text-amber-400" />
+                <span>Weekly Schedule</span>
               </div>
-            ))}
+              <h4 className="text-base font-bold text-foreground">Thursdays 18:45 &amp; Sundays 18:15</h4>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Doors open 15 minutes before class. Progressive levels 1–4 followed by Bournemouth&apos;s late-night Havana social fiesta.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-border/80 bg-card p-5 flex flex-col justify-between shadow-xs">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-400">
+                <Ticket className="h-4 w-4 shrink-0 text-amber-400" />
+                <span>Door Admission</span>
+              </div>
+              <h4 className="text-base font-bold text-foreground">£12 / £14 at the Door</h4>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                £12 for 1 class or £14 for 2 classes on the same night (includes social party). Pay contactless or cash at reception.
+              </p>
+            </div>
           </div>
         </div>
 

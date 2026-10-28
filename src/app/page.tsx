@@ -16,36 +16,10 @@ import { ArtReveal } from "@/components/ui/ArtReveal";
 import { ACADEMY_METRICS, VENUE_INFO } from "@/lib/academy-data";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
-const DanceVouchersShowcase = dynamic(
-  () => import("@/components/marketing/dance-vouchers-showcase").then((m) => m.DanceVouchersShowcase),
-  {
-    loading: () => <div className="py-12 min-h-[300px] animate-pulse bg-muted/10 rounded-3xl" />,
-  }
-);
-
 const BohVenueSpotlight = dynamic(
   () => import("@/components/home/BohVenueSpotlight").then((m) => m.BohVenueSpotlight),
   {
     loading: () => <div className="py-20 min-h-[400px] animate-pulse bg-muted/20" />,
-  }
-);
-
-const SocialProofGrid = dynamic(
-  () => import("@/components/marketing/social-proof-grid").then((m) => m.SocialProofGrid),
-  {
-    loading: () => (
-      <div className="py-20 flex justify-center items-center min-h-[400px]">
-        <div className="animate-pulse space-y-4 w-full max-w-7xl px-4">
-          <div className="h-8 bg-muted rounded-xl w-64 mx-auto" />
-          <div className="h-4 bg-muted/60 rounded-lg w-96 mx-auto" />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-            <div className="h-64 bg-muted/40 rounded-2xl" />
-            <div className="h-64 bg-muted/40 rounded-2xl" />
-            <div className="h-64 bg-muted/40 rounded-2xl" />
-          </div>
-        </div>
-      </div>
-    ),
   }
 );
 
@@ -142,9 +116,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right Column (5 cols): Aspect-[4/5] Architectural Dance Frame */}
+              {/* Right Column (5 cols): Cinematic Architectural Dance Frame */}
               <div className="lg:col-span-5 relative w-full">
-                <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-2xl border border-line bg-surface-2 shadow-2xl group">
+                <div className="relative aspect-[4/3] lg:aspect-[16/10] w-full overflow-hidden rounded-2xl border border-white/10 bg-surface-2 shadow-2xl group">
                   {MEDIA_MANIFEST.heroPortrait.src ? (
                     <Image
                       src={MEDIA_MANIFEST.heroPortrait.src}
@@ -152,8 +126,7 @@ export default function Home() {
                       fill
                       priority
                       sizes={MEDIA_MANIFEST.heroPortrait.sizes}
-                      style={{ objectPosition: "top" }}
-                      className="object-cover object-top editorial-photo transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover object-center editorial-photo transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
                     <>
@@ -168,14 +141,15 @@ export default function Home() {
                       </div>
                     </>
                   )}
-                  {/* Shared directional gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
-                  <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 text-left z-10">
+                  {/* Soft left-edge and bottom-edge gradient vignettes to melt into Obsidian background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#080706] via-[#080706]/25 to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080706] via-transparent to-transparent pointer-events-none z-10" />
+                  <div className="absolute bottom-0 inset-x-0 p-4 sm:p-5 text-left z-20">
                     <span className="text-xs font-black uppercase tracking-widest text-gold block mb-1">
                       BOH Studios Bournemouth Residency
                     </span>
                     <p className="text-xs sm:text-sm font-semibold text-stone-200 leading-snug">
-                      Maestro Enrique Perez Valdes &amp; BOH Studios Collective
+                      Cuban Salsa Social Dancing &amp; Rueda de Casino
                     </p>
                   </div>
                 </div>
@@ -375,19 +349,15 @@ export default function Home() {
           <InstructorRosterSection id="instructors" />
         </ArtReveal>
 
-        {/* Community Social Proof Grid */}
-        <ArtReveal>
-          <div className="cv-auto bg-canvas border-b border-line">
-            <SocialProofGrid />
-          </div>
-        </ArtReveal>
-
-        {/* Dance Vouchers Gift Showcase */}
-        <section className="cv-auto py-14 border-b border-line bg-canvas text-ivory">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <DanceVouchersShowcase />
-          </div>
-        </section>
+        {/* Sleek Architectural Callout Banner for Gift Vouchers */}
+        <div className="border-b border-line bg-surface-2/60 py-3.5 px-4 text-center">
+          <p className="text-xs text-ivory-muted">
+            Looking for a unique Cuban dance gift?{" "}
+            <Link href="/pricing#vouchers" className="font-bold text-amber-300 hover:text-amber-200 underline underline-offset-4 decoration-amber-400/40 ml-1">
+              Explore Salsa Explosion Dance Gift Vouchers &rarr;
+            </Link>
+          </p>
+        </div>
 
         {/* ================= SECTION 5: INSIDE THE CUBAN CIRCLE & BOH VENUE ================= */}
         <InsideCubanCircleGallery />

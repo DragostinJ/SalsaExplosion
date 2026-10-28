@@ -446,3 +446,8 @@ export const ACADEMY_FAQS = [
       "Wear comfortable flat shoes, trainers, or dance shoes that slide smoothly on our Canadian sprung maple floor. Free on-street parking is available after 18:00 on surrounding streets, plus Bournemouth Library Car Park (BH2 5SL) is a 2-minute walk away.",
   },
 ] as const;
+
+export const SITE_PHOTOS = {
+  hero: "/images/photos/hero-social.jpg",
+} as const;
+

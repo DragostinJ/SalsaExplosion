@@ -226,10 +226,10 @@ export function SocialProofGrid() {
 
                     {/* Top Badges */}
                     <div className="flex items-center justify-between z-10">
-                      <Badge className="bg-black/60 text-amber-300 backdrop-blur-md text-[11px] font-bold border border-amber-500/30">
+                      <Badge className="bg-black/60 text-amber-300 backdrop-blur-md text-xs font-bold border border-amber-500/30">
                         {item.badgeText}
                       </Badge>
-                      <span className="flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-0.5 text-[11px] font-semibold backdrop-blur-md border border-white/10">
+                      <span className="flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-0.5 text-xs font-semibold backdrop-blur-md border border-white/10">
                         <InstagramIcon className="h-3 w-3 text-pink-300" />
                         {item.duration}
                       </span>
@@ -257,7 +257,7 @@ export function SocialProofGrid() {
                           {item.likes}
                         </span>
                       </div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full bg-black/70 border border-gold/30 px-3 py-1 text-[11px] font-semibold text-gold backdrop-blur-md drop-shadow-xs max-w-full truncate">
+                      <div className="inline-flex items-center gap-1.5 rounded-full bg-black/70 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold backdrop-blur-md drop-shadow-xs max-w-full truncate">
                         <Music2 className="h-3 w-3 text-gold shrink-0" aria-hidden="true" />
                         <span className="truncate">{item.track}</span>
                       </div>
@@ -452,7 +452,7 @@ export function SocialProofGrid() {
               </div>
 
               <div className="flex items-center justify-between text-xs text-white/80 drop-shadow-xs">
-                <span className="flex items-center gap-1 text-[11px]">
+                <span className="flex items-center gap-1 text-xs">
                   <Music2 className="h-3 w-3" />
                   {selectedReel.track}
                 </span>

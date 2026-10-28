@@ -125,7 +125,7 @@ export function DanceVouchersShowcase({
             <CardContent className="p-6 sm:p-8 space-y-6 flex flex-col justify-between min-h-[360px]">
               <div className="flex items-start justify-between border-b border-white/20 pb-4">
                 <div>
-                  <span className="text-[11px] font-black uppercase tracking-widest text-amber-200 block">
+                  <span className="text-xs font-black uppercase tracking-widest text-amber-200 block">
                     Official Gift Certificate
                   </span>
                   <h3 className="text-2xl font-black tracking-tight drop-shadow-sm">
@@ -141,7 +141,7 @@ export function DanceVouchersShowcase({
               </div>
 
               <div className="space-y-3 bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
-                <span className="text-[11px] uppercase font-bold tracking-wider text-amber-200">
+                <span className="text-xs uppercase font-bold tracking-wider text-amber-200">
                   Presented To:
                 </span>
                 <p className="text-lg font-black italic tracking-wide">
@@ -154,11 +154,11 @@ export function DanceVouchersShowcase({
 
               <div className="pt-2 border-t border-white/20 flex items-center justify-between text-xs">
                 <div>
-                  <span className="block text-[11px] text-amber-200 font-bold uppercase">Locations</span>
+                  <span className="block text-xs text-amber-200 font-bold uppercase">Locations</span>
                   <span className="font-bold">Bournemouth • Poole</span>
                 </div>
                 <div className="text-right">
-                  <span className="block text-[11px] text-amber-200 font-bold uppercase">Order Direct</span>
+                  <span className="block text-xs text-amber-200 font-bold uppercase">Order Direct</span>
                   <span className="font-extrabold text-amber-300">07969 633701</span>
                 </div>
               </div>

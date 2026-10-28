@@ -331,7 +331,7 @@ export function InsideCubanCircleGallery() {
               <ChevronLeft className="h-4 w-4" />
             </button>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1">
               {ACADEMY_GALLERY_PHOTOS.map((photo, idx) => {
                 const isCurrent = idx === activeMobileIndex;
                 return (
@@ -340,10 +340,14 @@ export function InsideCubanCircleGallery() {
                     type="button"
                     aria-label={`View ${photo.title}`}
                     onClick={() => scrollToFrame(idx)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      isCurrent ? "w-6 bg-gold" : "w-2 bg-white/20 hover:bg-white/40"
-                    }`}
-                  />
+                    className="p-2 min-h-[40px] min-w-[28px] inline-flex items-center justify-center cursor-pointer"
+                  >
+                    <span
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        isCurrent ? "w-6 bg-gold" : "w-2 bg-white/20 hover:bg-white/40"
+                      }`}
+                    />
+                  </button>
                 );
               })}
             </div>

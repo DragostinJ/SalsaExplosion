@@ -151,11 +151,11 @@ function evaluatePageDesign(isMobile) {
   for (const img of images) {
     const rect = img.getBoundingClientRect();
     if (rect.width === 0 && rect.height === 0) continue;
-    if (img.naturalWidth === 0) {
+    if (img.complete && img.naturalWidth === 0) {
       imageIssues.push({
         src: img.src.slice(-35),
         issue: "BROKEN_IMAGE",
-        details: "Image failed to load (naturalWidth === 0)",
+        details: "Image failed to load (complete && naturalWidth === 0)",
       });
       continue;
     }

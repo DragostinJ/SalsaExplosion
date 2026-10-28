@@ -2,6 +2,21 @@
   "name": "salsa-explosion",
   "version": "0.1.0",
   "private": true,
+  "description": "Full-stack dance academy management, event ticketing, and interactive music trainer built with Next.js 16, TypeScript, Prisma, PostgreSQL, Clerk, and Stripe.",
+  "author": "Dragostin J.",
+  "keywords": [
+    "nextjs",
+    "react19",
+    "typescript",
+    "prisma",
+    "postgresql",
+    "supabase",
+    "clerk",
+    "stripe",
+    "web-audio-api",
+    "playwright",
+    "vitest"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

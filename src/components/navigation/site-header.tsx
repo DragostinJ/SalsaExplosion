@@ -228,6 +228,12 @@ export function SiteHeader({
 
   const instructorLinks = [
     {
+      href: "/instructor/ai-studio",
+      label: "AI Studio",
+      icon: Sparkles,
+      active: pathname.startsWith("/instructor/ai-studio"),
+    },
+    {
       href: "/instructor/students",
       label: "Students",
       icon: Users,
@@ -248,6 +254,13 @@ export function SiteHeader({
   ];
 
   const adminLinks = [
+    {
+      href: "/instructor/ai-studio",
+      shortLabel: "AI Studio",
+      fullLabel: "AI Studio",
+      icon: Sparkles,
+      active: pathname.startsWith("/instructor/ai-studio"),
+    },
     {
       href: "/admin/operations",
       shortLabel: "Ops",

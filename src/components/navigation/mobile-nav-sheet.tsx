@@ -153,12 +153,14 @@ export function MobileNavSheet({
     : publicLinks;
 
   const teacherLinks = [
+    { href: "/instructor/ai-studio", label: "AI Studio & Copilot", icon: Sparkles },
     { href: "/instructor/students", label: "Student Roster & Notes", icon: Users },
     { href: "/instructor/submissions", label: "Video Grading Queue", icon: ClipboardCheck },
     { href: "/instructor/roster", label: "Live QR Class Check-In", icon: QrCode },
   ];
 
   const ownerLinks = [
+    { href: "/instructor/ai-studio", label: "AI Studio & Event Importer", icon: Sparkles },
     { href: "/admin/operations", label: "Studio Desk Operations", icon: ClipboardList },
     { href: "/admin/analytics", label: "Executive Analytics", icon: BarChart3 },
     { href: "/admin/classes", label: "Schedule Class Sessions", icon: CalendarPlus },

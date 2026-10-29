@@ -15,16 +15,19 @@ jobs:
     name: Typecheck, Unit Tests & Production Build
     runs-on: ubuntu-latest
     env:
-      NODE_ENV: production
+      NODE_ENV: test
       NEXT_PUBLIC_APP_URL: "https://salsa-explosion-bkgf.vercel.app"
       DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/test?pgbouncer=true"
       DIRECT_URL: "postgresql://postgres:postgres@localhost:5432/test"
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_placeholder"
-      CLERK_SECRET_KEY: "sk_test_placeholder"
-      CLERK_WEBHOOK_SECRET: "whsec_placeholder"
-      STRIPE_SECRET_KEY: "sk_test_placeholder"
-      STRIPE_WEBHOOK_SECRET: "whsec_placeholder"
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_Y2xlcmsuaW5jbHVkZWQua2V5JC"
+      CLERK_SECRET_KEY: "sk_test_mock_clerk_secret_key_for_ci_runner"
+      CLERK_WEBHOOK_SECRET: "whsec_mock_clerk_webhook_secret_ci"
+      STRIPE_SECRET_KEY: "sk_test_mock_stripe_secret_key_for_ci_runner"
+      STRIPE_WEBHOOK_SECRET: "whsec_mock_stripe_webhook_secret_ci"
+      NEXT_PUBLIC_SUPABASE_URL: "https://mock-project.supabase.co"
+      SUPABASE_SERVICE_ROLE_KEY: "mock_supabase_service_role_key_for_ci"
       ALLOW_DEMO_ROLE_SWITCHING: "false"
+      ADMIN_EMAILS: "admin@salsaexplosion.co.uk"
 
     steps:
       - name: Checkout Repository
@@ -50,3 +53,5 @@ jobs:
 
       - name: Run Next.js Production Build
         run: npm run build
+        env:
+          NODE_ENV: production

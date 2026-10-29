@@ -21,8 +21,8 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           if [ -z "$DATABASE_URL" ]; then
-            echo "DATABASE_URL secret is not configured in repository secrets."
-            exit 1
+            echo "DATABASE_URL secret is not configured in repository secrets. Skipping scheduled backup gracefully."
+            exit 0
           fi
           DATE_STAMP=$(date +%Y-%m-%d-%H%M%S)
           BACKUP_FILE="salsaexplosion-backup-${DATE_STAMP}.sql.gz"
@@ -32,6 +32,7 @@ jobs:
 
       - name: Upload Backup to Private Artifacts (90-Day Retention)
         uses: actions/upload-artifact@v4
+        if: ${{ env.DATABASE_URL != '' }}
         with:
           name: database-backup-${{ github.run_id }}
           path: salsaexplosion-backup-*.sql.gz

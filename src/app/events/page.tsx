@@ -14,6 +14,7 @@ import {
 import { BackButton } from "@/components/navigation/back-button";
 import { VENUE_INFO, ACADEMY_METRICS, UPCOMING_EVENTS } from "@/lib/academy-data";
 import { reportError } from "@/lib/monitoring";
+import { getPublishedEvents } from "@/lib/stores/published-events-store";
 
 export const metadata = {
   title: "DANZA! 2026 | 2027 & Salsa Explosion Congresses | Bournemouth",
@@ -72,6 +73,8 @@ export default async function EventsDirectoryPage() {
   const events2027 = displayEvents.filter(
     (e) => new Date(e.startDate).getFullYear() >= 2027
   );
+
+  const liveAnnouncements = getPublishedEvents();
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-10">
@@ -147,7 +150,7 @@ export default async function EventsDirectoryPage() {
       </div>
 
       {/* Event Grid by Season */}
-      {displayEvents.length === 0 ? (
+      {displayEvents.length === 0 && liveAnnouncements.length === 0 ? (
         <Card className="text-center py-12">
           <CardContent>
             <Sparkles className="mx-auto h-12 w-12 text-muted-foreground/50" />
@@ -159,6 +162,102 @@ export default async function EventsDirectoryPage() {
         </Card>
       ) : (
         <div className="space-y-12">
+          {/* Live AI-Approved Announcements Section */}
+          {liveAnnouncements.length > 0 && (
+            <section className="space-y-6">
+              <div className="flex items-center justify-between border-b border-line pb-3">
+                <div className="flex items-center gap-3">
+                  <Badge className="bg-emerald-600 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-sm">
+                    <Sparkles className="h-3.5 w-3.5 text-gold" />
+                    NEW • LIVE ANNOUNCEMENTS
+                  </Badge>
+                  <h2 className="text-xl sm:text-2xl font-black tracking-tight text-ivory">
+                    Special Announcements &amp; Guest Workshops
+                  </h2>
+                </div>
+                <span className="text-xs text-ivory-muted font-medium">
+                  {liveAnnouncements.length} Live Announcements
+                </span>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {liveAnnouncements.map((liveEvt) => (
+                  <Card
+                    key={liveEvt.id}
+                    className="overflow-hidden border border-gold/40 bg-surface-1 shadow-xl flex flex-col justify-between"
+                  >
+                    <div>
+                      {liveEvt.posterPreviewUrl ? (
+                        <div className="relative h-48 w-full bg-surface-2 overflow-hidden border-b border-line">
+                          <img
+                            src={liveEvt.posterPreviewUrl}
+                            alt={liveEvt.title}
+                            className="h-full w-full object-cover"
+                          />
+                          <div className="absolute top-3 right-3">
+                            <Badge className="bg-canvas/90 text-gold border border-gold/40 font-mono text-xs">
+                              {liveEvt.bookingType === "ONLINE_TICKET" ? "ONLINE TICKET" : "DOOR ENTRY"}
+                            </Badge>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="p-4 border-b border-line bg-surface-2/60 flex items-center justify-between">
+                          <Badge className="bg-gold/20 text-gold border border-gold/40 font-mono text-xs">
+                            {liveEvt.bookingType === "ONLINE_TICKET" ? "ONLINE TICKET" : "DOOR ENTRY"}
+                          </Badge>
+                          <span className="text-xs font-bold text-gold">
+                            {liveEvt.priceDisplay}
+                          </span>
+                        </div>
+                      )}
+
+                      <CardHeader className="space-y-2 p-5">
+                        <div className="flex items-center gap-2 text-xs text-gold font-bold">
+                          <Calendar className="h-4 w-4 shrink-0" />
+                          <span>{liveEvt.dateDisplay}</span>
+                        </div>
+                        <h3 className="text-lg font-black text-ivory leading-snug">
+                          {liveEvt.title}
+                        </h3>
+                        <p className="text-xs text-ivory-muted line-clamp-2">
+                          {liveEvt.subtitle}
+                        </p>
+                      </CardHeader>
+
+                      <CardContent className="px-5 pb-4 space-y-3">
+                        <div className="flex items-start gap-2 text-xs text-stone-300">
+                          <MapPin className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                          <span className="line-clamp-1">{liveEvt.venue}</span>
+                        </div>
+                        <p className="text-xs text-ivory-muted italic border-l-2 border-gold/40 pl-3 line-clamp-2">
+                          "{liveEvt.instagramOrFbSummary}"
+                        </p>
+                      </CardContent>
+                    </div>
+
+                    <CardFooter className="p-5 pt-0 border-t border-line/50 mt-2">
+                      <div className="w-full pt-3 flex items-center justify-between gap-3">
+                        <span className="text-xs font-black text-gold">
+                          {liveEvt.priceDisplay}
+                        </span>
+                        <Button
+                          asChild
+                          size="sm"
+                          className="bg-gold hover:bg-gold-light text-canvas font-bold text-xs rounded-xl"
+                        >
+                          <Link href={liveEvt.ctaUrl || "/events"}>
+                            <span>View Event Details</span>
+                            <ArrowRight className="h-3.5 w-3.5 ml-1" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </CardFooter>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* 2026 Season Section */}
           {events2026.length > 0 && (
             <section className="space-y-6">

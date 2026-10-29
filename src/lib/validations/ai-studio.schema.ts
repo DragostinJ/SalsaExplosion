@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+  sanitizeExtractedString,
+  sanitizeSafeEventUrl,
+} from "@/lib/security/upload-and-ai-guard";
 
 /**
  * Strict Zod Schemas for Salsa Explosion / BOH Studios AI Features
@@ -59,39 +63,100 @@ export const AiCoachingOutputSchema = z.object({
 export type AiCoachingOutput = z.infer<typeof AiCoachingOutputSchema>;
 
 
-// --- 2. Facebook Event Importer Schemas ---
+// --- 2. Multimodal Flyer & Facebook Event Importer Schemas ---
 
-export const FacebookEventImportInputSchema = z.object({
-  rawFacebookText: z
-    .string()
-    .trim()
-    .min(10, "Paste at least 10 characters from the Facebook post.")
-    .max(3000, "Facebook post text cannot exceed 3000 characters."),
-});
+export const FlyerAndPostImportInputSchema = z
+  .object({
+    rawFacebookText: z
+      .string()
+      .trim()
+      .max(3000, "Facebook post text cannot exceed 3000 characters.")
+      .optional(),
+    flyerImageBase64: z
+      .string()
+      .max(
+        6 * 1024 * 1024,
+        "Base64 image payload exceeds safe limits (max ~4MB binary)."
+      )
+      .optional(),
+    flyerMimeType: z
+      .enum(["image/jpeg", "image/png", "image/webp"])
+      .optional(),
+  })
+  .refine(
+    (data) => {
+      const hasText =
+        Boolean(data.rawFacebookText) &&
+        (data.rawFacebookText?.length ?? 0) >= 10;
+      const hasImage = Boolean(data.flyerImageBase64);
+      return hasText || hasImage;
+    },
+    {
+      message:
+        "Please provide either event text (at least 10 characters) OR an event flyer poster image.",
+    }
+  );
 
-export type FacebookEventImportInput = z.infer<
-  typeof FacebookEventImportInputSchema
+export type FlyerAndPostImportInput = z.infer<
+  typeof FlyerAndPostImportInputSchema
 >;
 
+// Backwards compatibility alias
+export const FacebookEventImportInputSchema = FlyerAndPostImportInputSchema;
+export type FacebookEventImportInput = FlyerAndPostImportInput;
+
 export const ParsedEventCardSchema = z.object({
-  title: z.string().min(1, "Event title is required"),
-  subtitle: z.string().min(1, "Event subtitle is required"),
-  dateDisplay: z.string().min(1, "Event date display is required"),
-  doorsTime: z.string().min(1, "Doors time is required"),
-  venue: z.string().min(1, "Venue is required"),
-  priceDisplay: z.string().min(1, "Price display is required"),
+  id: z
+    .string()
+    .min(2, "ID is required")
+    .transform((val) =>
+      val
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "")
+    ),
+  title: z
+    .string()
+    .min(1, "Event title is required")
+    .transform(sanitizeExtractedString),
+  subtitle: z
+    .string()
+    .min(1, "Event subtitle is required")
+    .transform(sanitizeExtractedString),
+  dateDisplay: z
+    .string()
+    .min(1, "Event date display is required")
+    .transform(sanitizeExtractedString),
+  doorsTime: z
+    .string()
+    .min(1, "Doors time is required")
+    .transform(sanitizeExtractedString),
+  venue: z
+    .string()
+    .min(1, "Venue is required")
+    .transform(sanitizeExtractedString),
+  priceDisplay: z
+    .string()
+    .min(1, "Price display is required")
+    .transform(sanitizeExtractedString),
   bookingType: z.enum(["DOOR_ONLY", "ONLINE_TICKET"]),
   highlights: z
-    .array(z.string().min(1))
+    .array(z.string().min(1).transform(sanitizeExtractedString))
     .min(3, "Must include at least 3 highlights")
     .max(5, "Maximum 5 highlights"),
   instagramOrFbSummary: z
     .string()
-    .min(10, "Summary must be at least 10 characters"),
+    .min(10, "Summary must be at least 10 characters")
+    .transform(sanitizeExtractedString),
+  ctaUrl: z
+    .string()
+    .optional()
+    .default("/events")
+    .transform(sanitizeSafeEventUrl),
+  posterPreviewUrl: z.string().optional(),
 });
 
 export type ParsedEventCard = z.infer<typeof ParsedEventCardSchema>;
-
 export const FacebookEventImportOutputSchema = ParsedEventCardSchema;
 
 

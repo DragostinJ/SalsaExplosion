@@ -26,7 +26,7 @@ export function SiteFooter() {
                 <span className="text-base font-black leading-none tracking-tight text-ivory">
                   Salsa <span className="text-rose-400">Explosion</span>
                 </span>
-                <span className="text-[11px] font-black text-ivory-muted uppercase tracking-widest mt-0.5">
+                <span className="text-xs font-black text-ivory-muted uppercase tracking-widest mt-0.5">
                   Bournemouth • Cuban Salsa
                 </span>
               </div>

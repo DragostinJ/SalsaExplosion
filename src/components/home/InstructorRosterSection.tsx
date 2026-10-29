@@ -242,6 +242,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                         src={photoSrc}
                         alt={instructor.name}
                         fill
+                        loading="eager"
                         sizes="(max-width: 640px) 82vw, (max-width: 1024px) 50vw, 25vw"
                         style={{ objectPosition: "top" }}
                         className="editorial-photo relative z-10 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
@@ -330,7 +331,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     type="button"
                     aria-label={`View ${inst.name}`}
                     onClick={() => scrollToCard(idx)}
-                    className="p-2 min-h-[40px] min-w-[28px] inline-flex items-center justify-center cursor-pointer"
+                    className="p-2 min-h-[40px] min-w-[38px] inline-flex items-center justify-center cursor-pointer"
                   >
                     <span
                       className={`h-2 rounded-full transition-all duration-300 ${

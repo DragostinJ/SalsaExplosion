@@ -63,7 +63,7 @@ export function LiveTonightBanner() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
           {/* Status Message */}
           <div className="flex items-center gap-2.5 flex-wrap justify-center sm:justify-start text-center sm:text-left">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-0.5 text-[11px] font-extrabold text-emerald-300 uppercase tracking-wider animate-pulse">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-0.5 text-xs font-extrabold text-emerald-300 uppercase tracking-wider animate-pulse">
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
               CLASSES LIVE TONIGHT AT BOH STUDIOS
             </span>
@@ -88,7 +88,7 @@ export function LiveTonightBanner() {
             <Button
               asChild
               size="sm"
-              className="h-7 px-3 text-[11px] font-black bg-emerald-400 hover:bg-emerald-300 text-emerald-950 border border-emerald-300 shadow-xs"
+              className="min-h-[40px] px-3.5 text-xs font-black bg-emerald-400 hover:bg-emerald-300 text-emerald-950 border border-emerald-300 shadow-xs"
             >
               <a href={targetAnchor}>
                 {isSunday ? "View Sunday Lineup & Book ↓" : "View Tonight's Lineup & Book ↓"}
@@ -98,10 +98,10 @@ export function LiveTonightBanner() {
             <button
               type="button"
               onClick={() => setIsDismissed(true)}
-              className="rounded-full p-1 text-emerald-200/80 hover:text-white transition-colors cursor-pointer"
+              className="inline-flex min-h-[40px] min-w-[40px] items-center justify-center rounded-full p-2 text-emerald-200/80 hover:text-white transition-colors cursor-pointer"
               aria-label="Dismiss banner"
             >
-              <X className="h-3.5 w-3.5" />
+              <X className="h-4 w-4" />
             </button>
           </div>
         </div>

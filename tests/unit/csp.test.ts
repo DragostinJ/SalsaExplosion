@@ -48,6 +48,7 @@ describe("Content Security Policy Guard (Milestone C1 & C2)", () => {
     expect(content).toContain("https://api.stripe.com");
     expect(content).toContain("https://clerk-telemetry.com");
     expect(content).toContain("https://*.clerk-telemetry.com");
+    expect(content).toContain("https://*.client.protect.clerk.com:*");
   });
 
   it("asserts img-src includes Unsplash, Clerk, YouTube, and Google Analytics", () => {

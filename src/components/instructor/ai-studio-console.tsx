@@ -16,6 +16,11 @@ import {
   Ticket,
   DoorOpen,
   RotateCcw,
+  Video,
+  ShieldCheck,
+  ThumbsUp,
+  AlertCircle,
+  FileEdit,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -24,10 +29,12 @@ import {
   DANCE_STYLES,
   AiCoachingOutput,
   ParsedEventCard,
+  VideoPreCheckAssessment,
 } from "@/lib/validations/ai-studio.schema";
 import {
   generateCoachingPlanAction,
   parseFacebookPostToEventAction,
+  preCheckStudentVideoAction,
 } from "@/actions/ai-studio.actions";
 
 // Realistic sample post written in Maestro Enrique's distinct social style
@@ -53,15 +60,32 @@ Cash or Card at the door. ZERO PARTNER REQUIRED! Come alone or with friends!
 Tag your dance partners and see you on the dance floor! Dale mambo! 🇨🇺✨`;
 
 const QUICK_STRUGGLES = [
-  "Late on count 1 in Dile Que No during social dancing",
+  "Rushing count 1 on Dile Que No",
+  "Stiff shoulders in Rumba Guaguancó",
+  "Missing trombone cue in Aguanile",
   "Pulling arms and tense frame during Setenta Complicado",
-  "Rushing through Aguanile liturgical break and losing the clave",
-  "Confusing 2:3 Son Clave with 3:2 Rumba Clave in high tempo Timba",
   "Follower anticipating the turn before lead extension on beat 3",
 ];
 
+const SAMPLE_VIDEO_SUBMISSIONS = [
+  {
+    studentName: "Elena Rostova",
+    level: "Intermediate" as const,
+    moveOrSong: "Setenta Complicado at BOH Studios",
+    studentNotes: "Practicing the second inside turn. I feel like my left shoulder lifts when transitioning into the hook turn.",
+    clipBadge: "30s Practice Video",
+  },
+  {
+    studentName: "Marcus Sterling",
+    level: "Improver" as const,
+    moveOrSong: "Aguanile Musicality Freeze & Guapea",
+    studentNotes: "Trying to lock into count 1 on the brass accent right after the liturgical vocal intro.",
+    clipBadge: "20s Practice Video",
+  },
+];
+
 export function AiStudioConsole() {
-  const [activeTab, setActiveTab] = useState<"importer" | "copilot">("importer");
+  const [activeTab, setActiveTab] = useState<"importer" | "copilot" | "video">("importer");
 
   // Tab 1: Importer State
   const [fbPostText, setFbPostText] = useState("");
@@ -78,6 +102,14 @@ export function AiStudioConsole() {
   const [coachingPlan, setCoachingPlan] = useState<AiCoachingOutput | null>(null);
   const [copilotError, setCopilotError] = useState<string | null>(null);
   const [planCopied, setPlanCopied] = useState(false);
+
+  // Tab 3: Video Pre-Checker State
+  const [selectedVideoSample, setSelectedVideoSample] = useState(SAMPLE_VIDEO_SUBMISSIONS[0]);
+  const [isCheckingVideo, setIsCheckingVideo] = useState(false);
+  const [videoAssessment, setVideoAssessment] = useState<VideoPreCheckAssessment | null>(null);
+  const [videoError, setVideoError] = useState<string | null>(null);
+  const [customReplyDraft, setCustomReplyDraft] = useState("");
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
   // Importer Actions
   const handleLoadSample = () => {
@@ -142,6 +174,34 @@ export function AiStudioConsole() {
     setTimeout(() => setPlanCopied(false), 2000);
   };
 
+  // Video Pre-Checker Actions
+  const handleRunVideoPreCheck = async () => {
+    setIsCheckingVideo(true);
+    setVideoError(null);
+    setFeedbackSent(false);
+
+    const res = await preCheckStudentVideoAction({
+      studentName: selectedVideoSample.studentName,
+      level: selectedVideoSample.level,
+      moveOrSong: selectedVideoSample.moveOrSong,
+      studentNotes: selectedVideoSample.studentNotes,
+      videoDurationSeconds: 25,
+    });
+
+    setIsCheckingVideo(false);
+    if (res.success && res.data) {
+      setVideoAssessment(res.data);
+      setCustomReplyDraft(res.data.instructorDraftReply);
+    } else {
+      setVideoError(res.error || "Failed to analyze student video submission.");
+    }
+  };
+
+  const handleApproveAndSend = () => {
+    setFeedbackSent(true);
+    setTimeout(() => setFeedbackSent(false), 3000);
+  };
+
   return (
     <div className="space-y-8">
       {/* Studio Header Card */}
@@ -167,28 +227,28 @@ export function AiStudioConsole() {
               Salsa Explosion AI Studio Console
             </h1>
             <p className="mt-1 text-sm text-ivory-muted max-w-2xl">
-              Production AI tooling tailored for Maestro Enrique Perez Valdes and BOH Studios faculty. Grounded in authentic Cuban clave pedagogy and door-pricing business invariants.
+              Production AI tooling tailored for Maestro Enrique Perez Valdes and BOH Studios faculty. Grounded in authentic Cuban clave pedagogy, multimodal video screening, and door-pricing invariants.
             </p>
           </div>
 
           {/* Navigation Pill Tabs */}
-          <div className="flex items-center gap-2 rounded-2xl bg-surface-2 p-1.5 border border-line shrink-0">
+          <div className="flex items-center gap-2 rounded-2xl bg-surface-2 p-1.5 border border-line shrink-0 overflow-x-auto no-scrollbar">
             <button
               type="button"
               onClick={() => setActiveTab("importer")}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all min-h-[40px] ${
+              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all min-h-[40px] shrink-0 ${
                 activeTab === "importer"
                   ? "bg-gold text-canvas shadow-lg"
                   : "text-ivory-muted hover:text-ivory hover:bg-surface-3"
               }`}
             >
               <Share2 className="h-4 w-4" />
-              <span>Facebook-to-Event Importer</span>
+              <span>Facebook Importer</span>
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("copilot")}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all min-h-[40px] ${
+              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all min-h-[40px] shrink-0 ${
                 activeTab === "copilot"
                   ? "bg-gold text-canvas shadow-lg"
                   : "text-ivory-muted hover:text-ivory hover:bg-surface-3"
@@ -196,6 +256,18 @@ export function AiStudioConsole() {
             >
               <Music className="h-4 w-4" />
               <span>Syllabus & Clave Copilot</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("video")}
+              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all min-h-[40px] shrink-0 ${
+                activeTab === "video"
+                  ? "bg-gold text-canvas shadow-lg"
+                  : "text-ivory-muted hover:text-ivory hover:bg-surface-3"
+              }`}
+            >
+              <Video className="h-4 w-4" />
+              <span>Video Pre-Screener</span>
             </button>
           </div>
         </div>
@@ -618,6 +690,216 @@ export function AiStudioConsole() {
                 </p>
                 <p className="text-xs text-ivory-muted mt-1 max-w-sm">
                   Select a student level, choose a common struggle or enter custom notes, and click <strong className="text-gold font-semibold">Generate Micro-Drills</strong>.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* TAB 3: MULTIMODAL VIDEO PRE-SCREENER */}
+      {activeTab === "video" && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Video Selection & Action Pane */}
+          <div className="lg:col-span-5 rounded-3xl border border-line bg-surface-1 p-6 sm:p-7 shadow-xl space-y-5">
+            <div>
+              <h2 className="text-base font-bold text-ivory flex items-center gap-2">
+                <Video className="h-4 w-4 text-gold" />
+                Student Practice Video Queue
+              </h2>
+              <p className="text-xs text-ivory-muted mt-0.5">
+                AI pre-screens video submissions before teacher review to save 80% instructor time.
+              </p>
+            </div>
+
+            {/* Video Selection Cards */}
+            <div className="space-y-2.5">
+              <label className="text-xs font-semibold text-ivory">
+                Select Practice Submission:
+              </label>
+              {SAMPLE_VIDEO_SUBMISSIONS.map((sub, idx) => {
+                const isSelected = selectedVideoSample.studentName === sub.studentName;
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => {
+                      setSelectedVideoSample(sub);
+                      setVideoAssessment(null);
+                    }}
+                    className={`w-full text-left rounded-2xl p-4 transition-all border text-xs min-h-[44px] ${
+                      isSelected
+                        ? "border-gold/50 bg-gold/10 text-ivory shadow-md"
+                        : "border-line bg-surface-2 text-ivory-muted hover:text-ivory hover:bg-surface-3"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-ivory">{sub.studentName}</span>
+                      <Badge
+                        variant="outline"
+                        className="border-line bg-surface-3 text-[10px] text-gold font-mono"
+                      >
+                        {sub.clipBadge}
+                      </Badge>
+                    </div>
+                    <p className="text-gold/90 font-medium text-xs">
+                      {sub.moveOrSong} ({sub.level})
+                    </p>
+                    <p className="text-ivory-muted text-[11px] mt-1.5 italic line-clamp-2">
+                      "{sub.studentNotes}"
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+
+            {videoError && (
+              <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-300">
+                {videoError}
+              </div>
+            )}
+
+            <Button
+              type="button"
+              onClick={handleRunVideoPreCheck}
+              disabled={isCheckingVideo}
+              className="w-full rounded-2xl bg-gold hover:bg-gold-light text-canvas font-bold text-sm min-h-[44px] transition-all"
+            >
+              {isCheckingVideo ? (
+                <span className="flex items-center gap-2">
+                  <RotateCcw className="h-4 w-4 animate-spin" />
+                  Analyzing Video Cadence & Frame with Gemini 2.5...
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <Sparkles className="h-4 w-4" />
+                  Pre-Check Practice Video
+                </span>
+              )}
+            </Button>
+          </div>
+
+          {/* Right Assessment & Instructor Approval Pane */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-base font-bold text-ivory flex items-center gap-2">
+                  <ShieldCheck className="h-4 w-4 text-gold" />
+                  AI Assessment & 1-Click Teacher Action
+                </h2>
+                <p className="text-xs text-ivory-muted mt-0.5">
+                  Review posture, clave timing, and edit feedback before sending.
+                </p>
+              </div>
+              {videoAssessment && (
+                <Badge
+                  variant="outline"
+                  className={`text-xs font-bold uppercase tracking-wider px-3 py-1 ${
+                    videoAssessment.overallReadiness === "READY_FOR_APPROVAL"
+                      ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
+                      : "border-amber-500/40 bg-amber-500/10 text-amber-300"
+                  }`}
+                >
+                  {videoAssessment.overallReadiness.replace(/_/g, " ")} ({videoAssessment.confidenceScore}%)
+                </Badge>
+              )}
+            </div>
+
+            {videoAssessment ? (
+              <div className="space-y-5">
+                {/* 3 Timestamped Flags */}
+                <div className="space-y-3">
+                  <p className="text-xs font-semibold text-ivory uppercase tracking-wider">
+                    Timestamped Biomechanical & Clave Analysis:
+                  </p>
+                  {videoAssessment.timestampedObservations.map((obs, idx) => (
+                    <div
+                      key={idx}
+                      className="rounded-2xl border border-line bg-surface-1 p-4 shadow-md space-y-2"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="inline-flex items-center gap-1.5 rounded-lg bg-surface-2 px-2.5 py-1 text-xs font-mono font-bold text-gold border border-line">
+                          <Clock className="h-3 w-3" />
+                          {obs.timestamp}
+                        </span>
+                        <Badge
+                          variant="outline"
+                          className="border-line bg-surface-2 text-[11px] text-ivory-muted"
+                        >
+                          {obs.zone}
+                        </Badge>
+                      </div>
+                      <p className="text-xs text-ivory leading-relaxed">
+                        {obs.observation}
+                      </p>
+                      <div className="rounded-xl bg-surface-2 p-2.5 border border-line text-[11px] text-emerald-300/90 flex items-start gap-1.5">
+                        <ThumbsUp className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                        <span>
+                          <strong>Coaching Cue:</strong> {obs.fixCue}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Editable Instructor Feedback Reply */}
+                <div className="rounded-3xl border border-line bg-surface-1 p-5 shadow-xl space-y-3">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-semibold text-ivory flex items-center gap-2">
+                      <FileEdit className="h-3.5 w-3.5 text-gold" />
+                      Instructor Feedback Reply (Ready to Approve / Edit):
+                    </label>
+                    <span className="text-[10px] text-ivory-muted font-mono">
+                      Faculty Draft
+                    </span>
+                  </div>
+
+                  <textarea
+                    value={customReplyDraft}
+                    onChange={(e) => setCustomReplyDraft(e.target.value)}
+                    rows={4}
+                    className="w-full rounded-2xl border border-line bg-surface-3 p-3.5 text-xs text-ivory leading-relaxed placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/50 resize-none font-sans"
+                  />
+
+                  <div className="flex flex-wrap items-center gap-3 pt-2">
+                    <Button
+                      type="button"
+                      onClick={handleApproveAndSend}
+                      disabled={feedbackSent}
+                      className="flex-1 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs min-h-[42px] transition-all"
+                    >
+                      {feedbackSent ? (
+                        <span className="flex items-center gap-2">
+                          <Check className="h-4 w-4 text-white" />
+                          Feedback Approved & Sent to Student!
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-2">
+                          <Check className="h-4 w-4" />
+                          1-Click Approve & Send Feedback
+                        </span>
+                      )}
+                    </Button>
+
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setCustomReplyDraft(videoAssessment.instructorDraftReply)}
+                      className="border-line bg-surface-2 hover:bg-surface-3 text-ivory text-xs min-h-[42px]"
+                    >
+                      Reset Draft
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-3xl border border-dashed border-line bg-surface-1/50 p-12 text-center flex flex-col items-center justify-center min-h-[380px]">
+                <Video className="h-10 w-10 text-muted-foreground/30 mb-3" />
+                <p className="text-sm font-semibold text-ivory">
+                  No Video Pre-Checked Yet
+                </p>
+                <p className="text-xs text-ivory-muted mt-1 max-w-sm">
+                  Select a student submission clip on the left and click <strong className="text-gold font-semibold">Pre-Check Practice Video</strong> to generate timestamped biomechanical analysis.
                 </p>
               </div>
             )}

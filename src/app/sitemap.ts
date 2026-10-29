@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/how-it-works",
     "/private-lessons",
+    "/review",
     "/terms",
     "/llms.txt",
   ];

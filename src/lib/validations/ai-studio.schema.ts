@@ -93,3 +93,90 @@ export const ParsedEventCardSchema = z.object({
 export type ParsedEventCard = z.infer<typeof ParsedEventCardSchema>;
 
 export const FacebookEventImportOutputSchema = ParsedEventCardSchema;
+
+
+// --- 3. Multimodal Student Video Pre-Checker Schemas ---
+
+export const VideoPreCheckInputSchema = z.object({
+  studentName: z.string().trim().min(2, "Student name is required"),
+  level: z.enum(DANCE_LEVELS),
+  moveOrSong: z.string().trim().min(2, "Move or song name is required"),
+  studentNotes: z.string().max(500).optional(),
+  videoDurationSeconds: z.number().int().min(5).max(120).default(20),
+  videoMimeType: z.string().optional(),
+});
+
+export type VideoPreCheckInput = z.infer<typeof VideoPreCheckInputSchema>;
+
+export const TimestampedObservationSchema = z.object({
+  timestamp: z.string().min(1, "Timestamp is required (e.g., 0:04)"),
+  zone: z.enum([
+    "Frame & Posture",
+    "Clave & Timing",
+    "Footwork & Weight Transfer",
+  ]),
+  observation: z.string().min(5, "Observation is required"),
+  fixCue: z.string().min(5, "Fix cue is required"),
+});
+
+export type TimestampedObservation = z.infer<typeof TimestampedObservationSchema>;
+
+export const VideoPreCheckOutputSchema = z.object({
+  overallReadiness: z.enum([
+    "READY_FOR_APPROVAL",
+    "NEEDS_MINOR_TWEAK",
+    "RE_RECORD_SUGGESTED",
+  ]),
+  confidenceScore: z.number().min(0).max(100),
+  timestampedObservations: z
+    .array(TimestampedObservationSchema)
+    .length(3, "Must return exactly 3 timestamped observations"),
+  instructorDraftReply: z
+    .string()
+    .min(20, "Instructor draft reply must be comprehensive and supportive"),
+});
+
+export type VideoPreCheckAssessment = z.infer<typeof VideoPreCheckOutputSchema>;
+
+
+// --- 4. Google Maps 5-Star Review Helper Schemas ---
+
+export const REVIEW_FAVORITE_ASPECTS = [
+  "Thursday & Sunday Social Vibe",
+  "Enrique's Authentic Cuban Teaching",
+  "Beginner-Friendly Rueda de Casino",
+  "Music & Timba Atmosphere at BOH Studios",
+] as const;
+
+export const REVIEW_INSTRUCTOR_HIGHLIGHTS = [
+  "Maestro Enrique",
+  "Whole Salsa Explosion Team",
+  "Justyna, Arturas & Jim",
+] as const;
+
+export const REVIEW_DANCER_LEVELS = [
+  "First-Timer / Beginner",
+  "Regular Social Dancer",
+  "Festival Visitor",
+] as const;
+
+export const GoogleReviewDraftInputSchema = z.object({
+  favoriteAspect: z.enum(REVIEW_FAVORITE_ASPECTS),
+  instructorHighlight: z.enum(REVIEW_INSTRUCTOR_HIGHLIGHTS),
+  dancerLevel: z.enum(REVIEW_DANCER_LEVELS),
+});
+
+export type GoogleReviewDraftInput = z.infer<typeof GoogleReviewDraftInputSchema>;
+
+export const GoogleReviewDraftOutputSchema = z.object({
+  reviewText: z
+    .string()
+    .min(20, "Review text must be at least 20 characters"),
+  localSeoKeywordsIncluded: z
+    .array(z.string().min(2))
+    .min(2, "Must include at least 2 local SEO keywords"),
+});
+
+export type GoogleReviewDraftOutput = z.infer<
+  typeof GoogleReviewDraftOutputSchema
+>;

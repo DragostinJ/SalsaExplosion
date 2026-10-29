@@ -143,6 +143,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/review" className="inline-flex items-center py-1 text-xs text-amber-300 font-bold hover:text-gold transition-colors">
+                  Leave a 5★ Google Review
+                </Link>
+              </li>
+              <li>
                 <Link href="/sign-in" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-ivory transition-colors">
                   Student Portal Login
                 </Link>

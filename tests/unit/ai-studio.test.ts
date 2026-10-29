@@ -4,10 +4,16 @@ import {
   AiCoachingOutputSchema,
   FacebookEventImportInputSchema,
   FacebookEventImportOutputSchema,
+  VideoPreCheckInputSchema,
+  VideoPreCheckOutputSchema,
+  GoogleReviewDraftInputSchema,
+  GoogleReviewDraftOutputSchema,
 } from "@/lib/validations/ai-studio.schema";
 import {
   generateCoachingPlanAction,
   parseFacebookPostToEventAction,
+  preCheckStudentVideoAction,
+  generateGoogleReviewHelperAction,
 } from "@/actions/ai-studio.actions";
 
 describe("AI Studio Validations & Server Actions", () => {
@@ -100,6 +106,64 @@ describe("AI Studio Validations & Server Actions", () => {
       const result = AiCoachingOutputSchema.safeParse(invalidOutput);
       expect(result.success).toBe(false);
     });
+
+    it("validates compliant VideoPreCheckInputSchema & VideoPreCheckOutputSchema", () => {
+      const validInput = {
+        studentName: "Carlos Mendez",
+        level: "Intermediate" as const,
+        moveOrSong: "Setenta Complicado",
+        studentNotes: "Looking for feedback on hook turn connection",
+        videoDurationSeconds: 25,
+      };
+      expect(VideoPreCheckInputSchema.safeParse(validInput).success).toBe(true);
+
+      const validOutput = {
+        overallReadiness: "READY_FOR_APPROVAL" as const,
+        confidenceScore: 90,
+        timestampedObservations: [
+          {
+            timestamp: "0:04",
+            zone: "Frame & Posture" as const,
+            observation: "Shoulders square to partner",
+            fixCue: "Keep frame engaged",
+          },
+          {
+            timestamp: "0:12",
+            zone: "Clave & Timing" as const,
+            observation: "Strong accent on 1",
+            fixCue: "Hold count 4",
+          },
+          {
+            timestamp: "0:20",
+            zone: "Footwork & Weight Transfer" as const,
+            observation: "Weight fully committed on ball of foot",
+            fixCue: "Pivot on ball of foot",
+          },
+        ],
+        instructorDraftReply:
+          "Excellent work on your Setenta Complicado, Carlos! Keep practicing the arm tension at BOH Studios.",
+      };
+      expect(VideoPreCheckOutputSchema.safeParse(validOutput).success).toBe(true);
+    });
+
+    it("validates compliant GoogleReviewDraftInputSchema & OutputSchema", () => {
+      const validInput = {
+        favoriteAspect: "Thursday & Sunday Social Vibe" as const,
+        instructorHighlight: "Maestro Enrique" as const,
+        dancerLevel: "Regular Social Dancer" as const,
+      };
+      expect(GoogleReviewDraftInputSchema.safeParse(validInput).success).toBe(true);
+
+      const validOutput = {
+        reviewText:
+          "The Thursday and Sunday Cuban Salsa nights at BOH Studios Bournemouth are incredible! Maestro Enrique brings authentic Havana energy.",
+        localSeoKeywordsIncluded: [
+          "Cuban Salsa Bournemouth",
+          "BOH Studios Bournemouth",
+        ],
+      };
+      expect(GoogleReviewDraftOutputSchema.safeParse(validOutput).success).toBe(true);
+    });
   });
 
   describe("Server Actions with Deterministic Fallbacks", () => {
@@ -152,6 +216,36 @@ describe("AI Studio Validations & Server Actions", () => {
       expect(res.data).toBeDefined();
       expect(res.data?.bookingType).toBe("ONLINE_TICKET");
       expect(res.data?.priceDisplay).toContain("Pass");
+    });
+
+    it("executes preCheckStudentVideoAction with deterministic fallback", async () => {
+      const res = await preCheckStudentVideoAction({
+        studentName: "Elena Rostova",
+        level: "Intermediate",
+        moveOrSong: "Setenta Complicado",
+        studentNotes: "Practicing the hook turn",
+        videoDurationSeconds: 25,
+      });
+
+      expect(res.success).toBe(true);
+      expect(res.data).toBeDefined();
+      expect(res.data?.timestampedObservations).toHaveLength(3);
+      expect(res.data?.confidenceScore).toBeGreaterThanOrEqual(80);
+      expect(res.data?.instructorDraftReply).toContain("Elena Rostova");
+      expect(res.data?.instructorDraftReply).toContain("BOH Studios");
+    });
+
+    it("executes generateGoogleReviewHelperAction with deterministic fallback", async () => {
+      const res = await generateGoogleReviewHelperAction({
+        favoriteAspect: "Enrique's Authentic Cuban Teaching",
+        instructorHighlight: "Maestro Enrique",
+        dancerLevel: "First-Timer / Beginner",
+      });
+
+      expect(res.success).toBe(true);
+      expect(res.data).toBeDefined();
+      expect(res.data?.reviewText).toContain("Bournemouth");
+      expect(res.data?.localSeoKeywordsIncluded.length).toBeGreaterThanOrEqual(2);
     });
   });
 });

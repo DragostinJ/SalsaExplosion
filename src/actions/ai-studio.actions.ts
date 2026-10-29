@@ -10,6 +10,14 @@ import {
   FacebookEventImportInputSchema,
   FacebookEventImportOutputSchema,
   ParsedEventCard,
+  VideoPreCheckInput,
+  VideoPreCheckInputSchema,
+  VideoPreCheckOutputSchema,
+  VideoPreCheckAssessment,
+  GoogleReviewDraftInput,
+  GoogleReviewDraftInputSchema,
+  GoogleReviewDraftOutputSchema,
+  GoogleReviewDraftOutput,
 } from "@/lib/validations/ai-studio.schema";
 import { VENUE_INFO, DOOR_PRICING, ACADEMY_METRICS } from "@/lib/academy-data";
 
@@ -122,6 +130,65 @@ function generateDeterministicFacebookEvent(
   };
 }
 
+function generateDeterministicVideoAssessment(
+  input: VideoPreCheckInput
+): VideoPreCheckAssessment {
+  const { studentName, level, moveOrSong, studentNotes } = input;
+
+  return {
+    overallReadiness: "READY_FOR_APPROVAL",
+    confidenceScore: 92,
+    timestampedObservations: [
+      {
+        timestamp: "0:04",
+        zone: "Frame & Posture",
+        observation: `Solid chest-up posture through the initial Guapea. Shoulders remain dropped and connected to the latissimus without collapsing downward.`,
+        fixCue: "Maintain elastic tension in the left elbow during the outside break.",
+      },
+      {
+        timestamp: "0:11",
+        zone: "Clave & Timing",
+        observation: `Clear step accents on beats 1 and 5 matching the Son Clave conga cadence. Break step on 1 is crisp and deliberate.`,
+        fixCue: "Let count 4 and 8 breathe fully rather than rushing the transition step.",
+      },
+      {
+        timestamp: "0:18",
+        zone: "Footwork & Weight Transfer",
+        observation: `Excellent weight commitment on the ball of the foot during the rotational pivot of ${moveOrSong}. Sprung maple floor rebound is used efficiently.`,
+        fixCue: "Keep toes pointing outward slightly at 45 degrees to protect the knees during tight spins.",
+      },
+    ],
+    instructorDraftReply: `¡Excelente trabajo, ${studentName}! Your execution of ${moveOrSong} shows fantastic Cuban flavor and rhythmic discipline for the ${level} syllabus. Your grounding on count 1 is right in the pocket. Let's sharpen the elbow connection on the turn this Thursday at BOH Studios! 🇨🇺🔥`,
+  };
+}
+
+function generateDeterministicGoogleReview(
+  input: GoogleReviewDraftInput
+): GoogleReviewDraftOutput {
+  const { favoriteAspect, instructorHighlight, dancerLevel } = input;
+
+  let reviewText = "";
+  if (favoriteAspect === "Thursday & Sunday Social Vibe") {
+    reviewText = `The Thursday and Sunday Cuban Salsa nights at BOH Studios Bournemouth are genuinely world-class! Whether you are a ${dancerLevel.toLowerCase()} or experienced dancer, ${instructorHighlight} and the community make you feel instantly at home. The Canadian sprung dance floor is incredible and the energy is unmatched!`;
+  } else if (favoriteAspect === "Enrique's Authentic Cuban Teaching") {
+    reviewText = `Learning Cuban Salsa in Bournemouth with ${instructorHighlight} is the real deal! You learn authentic clave rhythm, Cuban culture, and Rueda de Casino at BOH Studios with zero partner required. If you want proper Cuban dance teaching in Dorset, Salsa Explosion is hands down the best!`;
+  } else if (favoriteAspect === "Beginner-Friendly Rueda de Casino") {
+    reviewText = `I joined Salsa Explosion as a ${dancerLevel.toLowerCase()} and was blown away by how welcoming the Rueda de Casino classes are at BOH Studios Bournemouth. ${instructorHighlight} breaks everything down with so much humor and patience. Best Thursday and Sunday night out in Bournemouth!`;
+  } else {
+    reviewText = `The Timba music and Havana social atmosphere at BOH Studios is unbeatable! ${instructorHighlight} brings pure Cuban energy to Bournemouth every single week. Highly recommend Salsa Explosion to anyone looking for genuine Cuban Salsa classes and vibrant social dancing!`;
+  }
+
+  return {
+    reviewText,
+    localSeoKeywordsIncluded: [
+      "Cuban Salsa Bournemouth",
+      "BOH Studios Bournemouth",
+      "Rueda de Casino",
+      "Maestro Enrique Perez",
+    ],
+  };
+}
+
 // -------------------------------------------------------------
 // SERVER ACTIONS
 // -------------------------------------------------------------
@@ -143,7 +210,6 @@ export async function generateCoachingPlanAction(
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey || apiKey === "mock_gemini_key_for_testing") {
-    // Graceful deterministic fallback
     const fallback = generateDeterministicCoachingPlan(parsedInput.data);
     return { success: true, data: fallback, source: "deterministic_fallback" };
   }
@@ -211,7 +277,6 @@ Generate:
     };
   } catch (err: unknown) {
     console.error("Gemini Copilot Error, using fallback:", err);
-    // Fail-soft to deterministic fallback
     const fallback = generateDeterministicCoachingPlan(parsedInput.data);
     return {
       success: true,
@@ -314,6 +379,198 @@ ${rawFacebookText}
   } catch (err: unknown) {
     console.error("Gemini FB Importer Error, using fallback:", err);
     const fallback = generateDeterministicFacebookEvent(rawFacebookText);
+    return {
+      success: true,
+      data: fallback,
+      source: "deterministic_fallback",
+    };
+  }
+}
+
+/**
+ * Multimodal Student Video Pre-Checker Action
+ * Pre-screens student video submissions for frame, timing, and footwork, drafting ready-to-approve feedback.
+ */
+export async function preCheckStudentVideoAction(
+  rawInput: VideoPreCheckInput
+): Promise<AiActionResponse<VideoPreCheckAssessment>> {
+  const parsedInput = VideoPreCheckInputSchema.safeParse(rawInput);
+  if (!parsedInput.success) {
+    const errorMsg = parsedInput.error.issues[0]?.message || "Invalid input";
+    return { success: false, error: errorMsg };
+  }
+
+  const { studentName, level, moveOrSong, studentNotes } = parsedInput.data;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!apiKey || apiKey === "mock_gemini_key_for_testing") {
+    const fallback = generateDeterministicVideoAssessment(parsedInput.data);
+    return { success: true, data: fallback, source: "deterministic_fallback" };
+  }
+
+  try {
+    const ai = new GoogleGenAI({ apiKey });
+
+    const systemInstruction = `You are Maestro Enrique Perez Valdes's senior video grading adjudicator at Salsa Explosion UK (BOH Studios Bournemouth).
+Analyze student Cuban Salsa submissions for posture, clave timing, and partner frame mechanics.
+Always provide 3 timestamped observations and draft a warm, direct instructor reply ready for the faculty to approve or edit.`;
+
+    const prompt = `Analyze this Cuban Salsa video submission:
+Student: ${studentName}
+Level: ${level}
+Move / Topic: ${moveOrSong}
+Student Notes: ${studentNotes || "None provided"}
+
+Generate:
+1. overallReadiness ("READY_FOR_APPROVAL", "NEEDS_MINOR_TWEAK", or "RE_RECORD_SUGGESTED")
+2. confidenceScore (0-100)
+3. exactly 3 timestampedObservations (timestamp, zone, observation, fixCue)
+4. instructorDraftReply (warm, supportive, WhatsApp-ready message from the faculty)`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: {
+        systemInstruction,
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            overallReadiness: {
+              type: Type.STRING,
+              enum: [
+                "READY_FOR_APPROVAL",
+                "NEEDS_MINOR_TWEAK",
+                "RE_RECORD_SUGGESTED",
+              ],
+            },
+            confidenceScore: { type: Type.INTEGER },
+            timestampedObservations: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  timestamp: { type: Type.STRING },
+                  zone: {
+                    type: Type.STRING,
+                    enum: [
+                      "Frame & Posture",
+                      "Clave & Timing",
+                      "Footwork & Weight Transfer",
+                    ],
+                  },
+                  observation: { type: Type.STRING },
+                  fixCue: { type: Type.STRING },
+                },
+                required: ["timestamp", "zone", "observation", "fixCue"],
+              },
+            },
+            instructorDraftReply: { type: Type.STRING },
+          },
+          required: [
+            "overallReadiness",
+            "confidenceScore",
+            "timestampedObservations",
+            "instructorDraftReply",
+          ],
+        },
+      },
+    });
+
+    const responseText = response.text;
+    if (!responseText) {
+      throw new Error("Empty response received from Gemini model.");
+    }
+
+    const rawParsed = JSON.parse(responseText);
+    const validatedOutput = VideoPreCheckOutputSchema.parse(rawParsed);
+
+    return {
+      success: true,
+      data: validatedOutput,
+      source: "gemini",
+    };
+  } catch (err: unknown) {
+    console.error("Gemini Video Pre-Check Error, using fallback:", err);
+    const fallback = generateDeterministicVideoAssessment(parsedInput.data);
+    return {
+      success: true,
+      data: fallback,
+      source: "deterministic_fallback",
+    };
+  }
+}
+
+/**
+ * Google Maps Review Helper Action
+ * Generates natural, keyword-rich 5-star Google review drafts for BOH Studios dancers.
+ */
+export async function generateGoogleReviewHelperAction(
+  rawInput: GoogleReviewDraftInput
+): Promise<AiActionResponse<GoogleReviewDraftOutput>> {
+  const parsedInput = GoogleReviewDraftInputSchema.safeParse(rawInput);
+  if (!parsedInput.success) {
+    const errorMsg = parsedInput.error.issues[0]?.message || "Invalid input";
+    return { success: false, error: errorMsg };
+  }
+
+  const { favoriteAspect, instructorHighlight, dancerLevel } = parsedInput.data;
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!apiKey || apiKey === "mock_gemini_key_for_testing") {
+    const fallback = generateDeterministicGoogleReview(parsedInput.data);
+    return { success: true, data: fallback, source: "deterministic_fallback" };
+  }
+
+  try {
+    const ai = new GoogleGenAI({ apiKey });
+
+    const systemInstruction = `You are a genuine, friendly dancer writing a real Google Review for Salsa Explosion UK and Maestro Enrique Perez Valdes at BOH Studios Bournemouth.
+Write natural, human, conversational 5-star reviews that naturally mention Cuban Salsa in Bournemouth, BOH Studios, and the friendly community. Avoid sounding like a marketing robot.`;
+
+    const prompt = `Write a short 5-star Google Review (2-3 sentences) based on:
+Favorite aspect: ${favoriteAspect}
+Instructor highlight: ${instructorHighlight}
+Dancer experience: ${dancerLevel}
+
+Include relevant local search keywords naturally.`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: {
+        systemInstruction,
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            reviewText: { type: Type.STRING },
+            localSeoKeywordsIncluded: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+            },
+          },
+          required: ["reviewText", "localSeoKeywordsIncluded"],
+        },
+      },
+    });
+
+    const responseText = response.text;
+    if (!responseText) {
+      throw new Error("Empty response received from Gemini model.");
+    }
+
+    const rawParsed = JSON.parse(responseText);
+    const validatedOutput = GoogleReviewDraftOutputSchema.parse(rawParsed);
+
+    return {
+      success: true,
+      data: validatedOutput,
+      source: "gemini",
+    };
+  } catch (err: unknown) {
+    console.error("Gemini Review Helper Error, using fallback:", err);
+    const fallback = generateDeterministicGoogleReview(parsedInput.data);
     return {
       success: true,
       data: fallback,

@@ -127,6 +127,27 @@ git -c http.sslVerify=false push origin <branch-name>
 
 ---
 
+## 🚀 High-Value Feature Backlog (Next Sprints)
+
+### 1. AI Student Video Pre-Screening (`gemini-2.5-flash` Multimodal Video Analysis)
+- **Problem:** Instructors spend excessive time reviewing raw 30-second student submissions for grading on `/instructor/submissions`.
+- **Solution:**
+  - Student uploads a 15–30s practice clip on `/dashboard/submissions`.
+  - Server action sends the video clip to `gemini-2.5-flash` with structured prompts grounded in Cuban timing (1-2-3 / 5-6-7), frame tension, arm connection, and clave orientation.
+  - Gemini drafts an initial assessment report (`techniqueStrengths`, `biomechanicalCorrections`, `recommendedDrill`, `suggestedStatus`).
+  - The faculty instructor (`Justyna`, `Arturas`, `Jim`, `Enrique`) opens the video grading desk, reviews the pre-populated analysis, adjusts notes with 1 click, and clicks **"Approve & Notify Student"** (saves 80% instructor time).
+
+### 2. Google Maps Domination & 1-Tap 5-Star Review Engine (Enrique + Agency Playbook)
+- **Problem:** Maestro Enrique has trained over 4,200 dancers over 25+ years in Bournemouth, but casual Google searches often surface commercial dance halls with modern Google Business Profiles.
+- **Solution:**
+  - Register `"Salsa Explosion UK"` as an official resident academy on Google Business Profile at `BOH Studios, 104 Commercial Rd, Bournemouth BH2 5LR`.
+  - Build a high-converting `/review` gateway featuring a 1-tap QR code displayed on the studio desk and flyers.
+  - Provide an AI-assisted "Review Inspiration Prompt" that allows happy students to tap 3 tags (e.g., *"Welcoming Beginners"*, *"Sprung Maple Floor"*, *"Authentic Cuban Rueda"*) which generates a polished draft they can paste directly into Google Reviews.
+  - Target: Push Salsa Explosion from 0 to 60+ verified 5-star Google reviews in two weeks, securing the undisputed #1 ranking for `"Bournemouth Salsa"`, `"Cuban Salsa Bournemouth"`, and `"Rueda de Casino"`.
+  - Package this exact system as a high-ticket local business retainer offer (£500 setup + £150/mo) for local Bournemouth studios, clinics, and hospitality clients.
+
+---
+
 ## 🔒 Section 4: Golden Rules & Invariants
 
 1. **Anti-Tutorial Rule:** Never accept code without understanding the data flow from Server Action -> Zod -> Prisma -> PostgreSQL -> UI.

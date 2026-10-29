@@ -17,27 +17,58 @@ export function JsonLdSchema() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["DanceGroup", "DanceSchool", "LocalBusiness"],
+        "@type": ["DanceSchool", "LocalBusiness", "PerformingArtsTheater"],
         "@id": "https://salsaexplosion.co.uk/#organization",
-        name: "Salsa Explosion UK — Bournemouth Cuban Salsa Academy",
+        name: "Salsa Explosion UK — Cuban Salsa & Rueda de Casino Bournemouth",
+        alternateName: "Salsa Explosion UK — Bournemouth Cuban Salsa Academy",
         description:
           "Bournemouth's authentic Cuban Salsa & Rueda de Casino academy directed by Maestro Enrique Perez Valdes. Strictly Thursdays and Sundays at BOH Studios Bournemouth. Drop-in welcome, no partner required.",
         url: "https://salsaexplosion.co.uk",
         telephone: VENUE_INFO.phoneE164,
-        priceRange: "£12 - £14 (Weekly Classes at Door) | £12 - £95 (Festival Passes)",
+        priceRange: "£12 - £14",
         founder: {
           "@type": "Person",
-          name: ACADEMY_METRICS.founderName,
+          name: "Maestro Enrique Perez Valdes",
           jobTitle: "Maestro & Artistic Director",
           award: ACADEMY_METRICS.founderAward,
         },
         address: {
           "@type": "PostalAddress",
-          streetAddress: `BOH Studios, ${VENUE_INFO.streetAddress}`,
+          streetAddress: "104 Commercial Rd, The Triangle",
           addressLocality: VENUE_INFO.city,
-          postalCode: VENUE_INFO.postcode,
-          addressCountry: VENUE_INFO.country,
+          postalCode: "BH2 5LR",
+          addressCountry: "GB",
         },
+        containedInPlace: {
+          "@type": "Place",
+          name: "BOH Studios Bournemouth",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "104 Commercial Rd, The Triangle",
+            addressLocality: "Bournemouth",
+            postalCode: "BH2 5LR",
+            addressCountry: "GB",
+          },
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 50.7208,
+          longitude: -1.8845,
+        },
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Thursday"],
+            opens: "18:45",
+            closes: "23:30",
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Sunday"],
+            opens: "18:15",
+            closes: "22:30",
+          },
+        ],
         areaServed: [
           "Bournemouth",
           "Boscombe",

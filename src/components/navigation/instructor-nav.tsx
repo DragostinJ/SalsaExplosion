@@ -8,6 +8,7 @@ import {
   QrCode,
   ShieldCheck,
   BarChart3,
+  Sparkles,
 } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +17,12 @@ export function InstructorNav() {
   const pathname = usePathname();
 
   const tabs = [
+    {
+      href: "/instructor/ai-studio",
+      label: "AI Studio & Copilot",
+      icon: Sparkles,
+      active: pathname.startsWith("/instructor/ai-studio"),
+    },
     {
       href: "/instructor/students",
       label: "Student Progression & Credits",

@@ -5,7 +5,14 @@ import { Minus, Plus, X } from "lucide-react";
 import type { SongDanceGear, SongSegment } from "@/lib/constants/timba-song-anatomy";
 import { DANCE_GEAR_LEGEND, ENERGY_LABELS } from "@/lib/music/dance-gear-legend";
 import { formatSongTime } from "@/lib/music/song-timing";
+import { LEAD_IN_CHOICES, type LeadInSeconds } from "@/lib/music/practice-navigation";
 import { cn } from "@/lib/utils";
+import {
+  PRACTICE_MODES,
+  PRACTICE_MODE_HINTS,
+  PRACTICE_MODE_LABELS,
+  type PracticeMode,
+} from "./player-settings";
 
 export type DancerRole = "leader" | "follower";
 
@@ -19,7 +26,20 @@ interface SongPlayerMoreSheetProps {
   role: DancerRole;
   latencyOffsetSeconds: number;
   onChangeLatency: (seconds: number) => void;
+  mode: PracticeMode;
+  onChangeMode: (mode: PracticeMode) => void;
+  leadInSeconds: LeadInSeconds;
+  onChangeLeadIn: (seconds: LeadInSeconds) => void;
+  /** null when the device can't vibrate (e.g. iPhone) */
+  hapticsEnabled: boolean | null;
+  onChangeHaptics: (enabled: boolean) => void;
 }
+
+const choiceButton = (selected: boolean) =>
+  cn(
+    "min-h-[44px] flex-1 rounded-xl border px-2 text-xs font-bold",
+    selected ? "border-gold bg-gold/15 text-gold" : "border-line bg-surface-3 text-ivory-muted"
+  );
 
 export function SongPlayerMoreSheet({
   open,
@@ -28,6 +48,12 @@ export function SongPlayerMoreSheet({
   role,
   latencyOffsetSeconds,
   onChangeLatency,
+  mode,
+  onChangeMode,
+  leadInSeconds,
+  onChangeLeadIn,
+  hapticsEnabled,
+  onChangeHaptics,
 }: SongPlayerMoreSheetProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -53,7 +79,7 @@ export function SongPlayerMoreSheet({
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Section details"
+        aria-label="Section details and practice settings"
         onClick={(event) => event.stopPropagation()}
         className="max-h-[85dvh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-line bg-surface-2 px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] text-ivory"
       >
@@ -96,6 +122,56 @@ export function SongPlayerMoreSheet({
             </div>
           )}
         </dl>
+
+        <section className="mt-5 border-t border-line pt-4" aria-label="Practice settings">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-ivory-muted">Practice mode</h3>
+          <div className="mt-2 flex gap-2" role="radiogroup" aria-label="Practice mode">
+            {PRACTICE_MODES.map((option) => (
+              <button
+                key={option}
+                type="button"
+                role="radio"
+                aria-checked={mode === option}
+                onClick={() => onChangeMode(option)}
+                className={choiceButton(mode === option)}
+              >
+                {PRACTICE_MODE_LABELS[option]}
+              </button>
+            ))}
+          </div>
+          <p className="mt-1 text-xs text-ivory-muted">{PRACTICE_MODE_HINTS[mode]}</p>
+
+          <h3 className="mt-4 text-[11px] font-bold uppercase tracking-widest text-ivory-muted">
+            Lead-in when jumping or looping
+          </h3>
+          <div className="mt-2 flex gap-2" role="radiogroup" aria-label="Lead-in">
+            {LEAD_IN_CHOICES.map((seconds) => (
+              <button
+                key={seconds}
+                type="button"
+                role="radio"
+                aria-checked={leadInSeconds === seconds}
+                onClick={() => onChangeLeadIn(seconds)}
+                className={choiceButton(leadInSeconds === seconds)}
+              >
+                {seconds === 0 ? "Off" : `${seconds}s before`}
+              </button>
+            ))}
+          </div>
+          <p className="mt-1 text-xs text-ivory-muted">Hear the change coming instead of landing on it.</p>
+
+          {hapticsEnabled !== null && (
+            <label className="mt-4 flex min-h-[44px] items-center justify-between gap-3 text-sm">
+              <span>Vibrate on each section change</span>
+              <input
+                type="checkbox"
+                checked={hapticsEnabled}
+                onChange={(event) => onChangeHaptics(event.target.checked)}
+                className="h-5 w-5 accent-gold"
+              />
+            </label>
+          )}
+        </section>
 
         <section className="mt-5 border-t border-line pt-4">
           <h3 className="text-[11px] font-bold uppercase tracking-widest text-ivory-muted">Song map colours</h3>

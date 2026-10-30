@@ -128,172 +128,50 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     expect(seriousOrCriticalViolations).toEqual([]);
   });
 
-  test("4. Interactive Timba Song Anatomy Player on /music: switches tracks, scrubs timeline, and inspects moves", async ({
+  test("4. Practice player: /music lists songs, player shows live section, modes, lead/follow and settings", async ({
     page,
   }) => {
     await page.goto("/music");
     await page.waitForLoadState("domcontentloaded");
 
-    const player = page.locator('[data-testid="timba-song-anatomy-player"]');
+    // /music is now the song list; each song opens the full-screen practice player
+    const practiceLink = page.locator('a[href="/music/me-dicen-cuba"]').first();
+    await expect(practiceLink).toBeVisible();
+    await practiceLink.click();
+    await expect(page).toHaveURL(/\/music\/me-dicen-cuba$/);
+
+    const player = page.locator('[data-testid="song-player-screen"]');
     await expect(player).toBeVisible();
+    await expect(player.getByRole("heading", { name: "Me Dicen Cuba" })).toBeVisible();
 
-    // Verify initial song is Me Dicen Cuba with calibrated 5:28 duration
-    await expect(player.getByRole("heading", { name: "Me Dicen Cuba (Official Video)" })).toBeVisible();
-    await expect(player.getByText("91 BPM").first()).toBeVisible();
-    await expect(player.getByText("2-3 Son Clave").first()).toBeVisible();
-    await expect(player.getByText(/0:00 \/ 5:28/)).toBeVisible();
+    // NOW card starts on the authored first section
+    const nowCard = player.locator('section[aria-label="What to dance now"]');
+    await expect(nowCard.getByRole("heading", { name: "Intro Cinematográfico (No Music)" })).toBeVisible();
 
-    // Verify all 3 song tabs are rendered
-    const meDicenCubaTab = player.locator('[data-testid="select-song-me-dicen-cuba"]');
-    const laCosaMalaTab = player.locator('[data-testid="select-song-la-cosa-mala"]');
-    const aguaPaYemayaTab = player.locator('[data-testid="select-song-agua-pa-yemaya"]');
+    // Song map: one jump button per authored section
+    await expect(player.getByRole("group", { name: "Song sections" }).getByRole("button")).toHaveCount(9);
 
-    await expect(meDicenCubaTab).toBeVisible();
-    await expect(laCosaMalaTab).toBeVisible();
-    await expect(aguaPaYemayaTab).toBeVisible();
-    await expect(aguaPaYemayaTab.getByText(/boss track/i)).toBeVisible();
+    // Lead / Follow swaps the cue shown
+    await expect(nowCard.getByText(/Do not step yet!/)).toBeVisible();
+    await player.getByRole("radio", { name: "Follow" }).click();
+    await expect(nowCard.getByText(/Relax your shoulders/)).toBeVisible();
+    await player.getByRole("radio", { name: "Lead" }).click();
 
-    // Verify YouTube player container is mounted and visible by default
-    const videoContainer = player.locator('[data-testid="embedded-youtube-player-container"]');
-    await expect(videoContainer).toBeVisible();
-    await expect(videoContainer.locator('[data-testid="youtube-iframe"]')).toBeVisible();
+    // Modes: Learn → Dance → Ear training
+    await player.locator('[data-testid="player-mode"]').click();
+    await expect(player.locator('[data-testid="dance-view"]')).toBeVisible();
+    await player.locator('[data-testid="player-mode"]').click();
+    await expect(player.locator('[data-testid="quiz-view"]')).toBeVisible();
+    await player.locator('[data-testid="player-mode"]').click();
 
-    // Verify drawer toggle hides and restores video container
-    const streamToggle = player.locator('[data-testid="toggle-song-stream"]');
-    await expect(streamToggle).toBeVisible();
-    await streamToggle.click();
-    await expect(videoContainer).not.toBeVisible();
-    await streamToggle.click();
-    await expect(videoContainer).toBeVisible();
-
-    // Verify timeline segments exist (9 segments for Me Dicen Cuba)
-    const seg0 = player.locator('[data-testid="timeline-segment-0"]');
-    const seg5 = player.locator('[data-testid="timeline-segment-5"]');
-    await expect(seg0).toBeVisible();
-    await expect(seg5).toBeVisible();
-
-    // Initial HUD check: Intro Cinematográfico (No Music) (Wait / Breathe)
-    const hud = player.locator('[data-testid="active-segment-hud"]');
-    await expect(hud).toBeVisible();
-    await expect(hud.getByText(/Intro Cinematográfico/i)).toBeVisible();
-    await expect(hud.getByText(/Wait \/ Breathe/i)).toBeVisible();
-
-    // Click segment 5: Montuno 1 ('Para saber de verdad') (2:35 - 3:20)
-    await seg5.click();
-
-    // Verify HUD updates to Montuno 1
-    await expect(hud.getByText(/Montuno 1/i)).toBeVisible();
-    await expect(hud.getByText("Casino (Flow)")).toBeVisible();
-
-    // Verify Un-Confuser alert is rendered
-    const alert = player.locator('[data-testid="un-confuser-alert"]');
-    await expect(alert).toBeVisible();
-
-    // Verify clickable move pills are present and click one
-    const movePill = player.locator('[data-testid^="move-pill-"]').first();
-    await expect(movePill).toBeVisible();
-    await movePill.click();
-
-    // Verify inline move preview card opens
-    const moveCard = player.locator('[data-testid="move-inspector-card"]');
-    await expect(moveCard).toBeVisible();
-    await expect(moveCard.getByText(/un-confuser tip/i)).toBeVisible();
-
-    // Switch to "La Cosa Mala"
-    await laCosaMalaTab.click();
-
-    // Verify La Cosa Mala metadata, calibrated 5:47 duration, 95 BPM, and 8 segments
-    await expect(player.getByRole("heading", { name: "La Cosa Mala (Official Audio)" })).toBeVisible();
-    await expect(player.getByText("95 BPM").first()).toBeVisible();
-    await expect(player.getByText("2-3 Son Clave").first()).toBeVisible();
-    await expect(player.getByText(/0:00 \/ 5:47/)).toBeVisible();
-    const seg7 = player.locator('[data-testid="timeline-segment-7"]');
-    await expect(seg7).toBeVisible();
-
-    // Verify version switch buttons exist (Studio Audio 5:46 vs Music Video 6:11)
-    const studioBtn = player.locator('[data-testid="switch-version-studio"]');
-    const videoBtn = player.locator('[data-testid="switch-version-video"]');
-    await expect(studioBtn).toBeVisible();
-    await expect(videoBtn).toBeVisible();
-
-    // Click segment 5: El Conteo Regresivo ('4, 3, 2, 1... ¡Se le quitó!')
-    const lcmSeg5 = player.locator('[data-testid="timeline-segment-5"]');
-    await lcmSeg5.click();
-    await expect(hud.getByText(/El Conteo Regresivo/i)).toBeVisible();
-    await expect(hud.getByText(/Despelote \/ Reparto/i)).toBeVisible();
-
-    // Switch to Level 4 Boss Track "Agua Pa' Yemayá"
-    await aguaPaYemayaTab.click();
-
-    // Verify Agua Pa' Yemayá metadata, 6:57 duration, 99 BPM, and 10 segments
-    await expect(player.getByRole("heading", { name: "Agua Pa' Yemayá (2026 Official Video)" })).toBeVisible();
-    await expect(player.getByText("99 BPM").first()).toBeVisible();
-    await expect(player.getByText("2-3 Son / 6/8 Afro-Bembé Hybrid").first()).toBeVisible();
-    await expect(player.getByText(/0:00 \/ 6:57/)).toBeVisible();
-    await expect(player.getByText("Advanced Level")).toBeVisible();
-    const apySeg9 = player.locator('[data-testid="timeline-segment-9"]');
-    await expect(apySeg9).toBeVisible();
-
-    // Verify Active Timing Mode Pill & 3-Zone Body Telemetry Widget
-    const timingModeBadge = player.locator('[data-testid="active-timing-mode-badge"]');
-    await expect(timingModeBadge).toBeVisible();
-    await expect(timingModeBadge).toContainText("Free / Polyrhythmic (6/8)");
-
-    const telemetryWidget = player.locator('[data-testid="body-telemetry-widget"]');
-    await expect(telemetryWidget).toBeVisible();
-    await expect(telemetryWidget.getByText(/chest & shoulders/i)).toBeVisible();
-    await expect(telemetryWidget.getByText(/Iyá Batá drum accents/i)).toBeVisible();
-    await expect(telemetryWidget.getByText(/hips & knees/i)).toBeVisible();
-    await expect(telemetryWidget.getByText(/rolling ocean swell/i)).toBeVisible();
-    await expect(telemetryWidget.getByText(/feet/i)).toBeVisible();
-    await expect(telemetryWidget.getByText(/grounded 6\/8 earth connection/i)).toBeVisible();
-
-    // Test Play, Jump to Finale, and Replay run-through
-    const playToggleBtn = player.locator('[data-testid="playback-toggle"]');
-    await playToggleBtn.click();
-    await expect(playToggleBtn).toContainText("Pause");
-
-    // Click last segment (Coda Final 6:36 - 6:57)
-    await apySeg9.click();
-
-    // Verify HUD updates to Coda Final
-    await expect(hud.getByText(/Coda Final/i)).toBeVisible();
-
-    // Reset and replay
-    const resetBtn = player.getByRole("button", { name: "Reset" });
-    await resetBtn.click();
-    await expect(player.getByText(/0:00 \/ 6:57/)).toBeVisible();
-
-    // Click Play Along
-    await playToggleBtn.click();
-    await expect(playToggleBtn).toContainText("Pause");
-    await playToggleBtn.click(); // Pause
-
-    // Verify 8-Count Dancer Beat Bar exists
-    const beatBar = player.locator('[data-testid="dancer-beat-bar"]');
-    await expect(beatBar).toBeVisible();
-    await expect(beatBar.getByText(/dancer rhythm bar/i)).toBeVisible();
-
-    // Verify Clave Audio Helper Toggle works
-    const claveBtn = player.locator('[data-testid="toggle-rhythm-audio"]');
-    await expect(claveBtn).toBeVisible();
-    await expect(claveBtn).toContainText("Clave Click: OFF");
-    await claveBtn.click();
-    await expect(claveBtn).toContainText("Clave Click: ON");
-    await claveBtn.click();
-    await expect(claveBtn).toContainText("Clave Click: OFF");
-
-    // Verify zero serious or critical accessibility violations on /music (excluding third-party YouTube embed iframe)
-    const accessibilityScanResults = await new AxeBuilder({ page })
-      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-      .exclude("iframe")
-      .analyze();
-
-    const seriousOrCriticalViolations = accessibilityScanResults.violations.filter(
-      (v) => v.impact === "serious" || v.impact === "critical"
-    );
-
-    expect(seriousOrCriticalViolations).toEqual([]);
+    // Settings sheet: practice mode, lead-in, sync adjust
+    await player.getByRole("button", { name: "Section details and practice settings" }).click();
+    const sheet = page.getByRole("dialog", { name: "Section details and practice settings" });
+    await expect(sheet.getByRole("radiogroup", { name: "Practice mode" })).toBeVisible();
+    await expect(sheet.getByRole("radiogroup", { name: "Lead-in" })).toBeVisible();
+    await expect(sheet.getByText("Sync adjust (this phone)")).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(sheet).toHaveCount(0);
   });
 
   test("5. Zero serious or critical WCAG 2.1 AA violations under OS dark mode (prefers-color-scheme: dark)", async ({
@@ -379,52 +257,36 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     const overflowUnlocked = await page.evaluate(() => document.body.style.overflow);
     expect(overflowUnlocked).not.toBe("hidden");
   });
-  test("7. Mobile-First UX: verifies zero horizontal overflow, quick-jump segment chip bar, mobile cue focus, and single-row level tabs on 390px mobile viewport", async ({
+  test("7. Mobile-First UX: practice player fits one 390px screen with thumb-zone controls and role cues, plus zero overflow and single-row level tabs", async ({
     page,
   }) => {
     // 390x844 (iPhone 14 standard mobile viewport)
     await page.setViewportSize({ width: 390, height: 844 });
 
-    // 1. Audit /music on mobile
-    await page.goto("/music");
+    // 1. Audit the practice player on mobile: one screen, no scroll in either direction
+    await page.goto("/music/me-dicen-cuba");
     await page.waitForLoadState("domcontentloaded");
 
-    const player = page.locator('[data-testid="timba-song-anatomy-player"]');
+    const player = page.locator('[data-testid="song-player-screen"]');
     await expect(player).toBeVisible();
 
-    // Verify zero horizontal page overflow on mobile
-    const musicOverflow = await page.evaluate(() => {
-      return document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1;
-    });
-    expect(musicOverflow).toBe(true);
+    const playerFits = await page.evaluate(() => ({
+      noHorizontal: document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1,
+      noVertical: document.documentElement.scrollHeight <= window.innerHeight + 1,
+    }));
+    expect(playerFits).toEqual({ noHorizontal: true, noVertical: true });
 
-    // Verify mobile quick-jump segment strip is mounted and visible
-    const mobileChip0 = page.locator('[data-testid="mobile-segment-chip-0"]');
-    const mobileChip1 = page.locator('[data-testid="mobile-segment-chip-1"]');
-    await expect(mobileChip0).toBeVisible();
-    await expect(mobileChip1).toBeVisible();
+    // Thumb-zone transport is present
+    for (const name of ["Previous section", "Play", "Next section", "Loop this section"]) {
+      await expect(player.getByRole("button", { name })).toBeVisible();
+    }
 
-    // Tap mobile chip 1 to jump timeline
-    await mobileChip1.click();
-    const hud = page.locator('[data-testid="active-segment-hud"]');
-    await expect(hud).toBeVisible();
-
-    // Test mobile cue role focus toggles & strict conditional rendering
-    const leaderCard = page.locator('[data-testid="leader-action-card"]');
-    const followerCard = page.locator('[data-testid="follower-action-card"]');
-    const roleSwitchFollower = page.locator('[data-testid="role-switch-follower"]');
-    const roleSwitchLeader = page.locator('[data-testid="role-switch-leader"]');
-
-    await expect(leaderCard).toBeVisible();
-    await expect(followerCard).toHaveCount(0);
-
-    await roleSwitchFollower.click();
-    await expect(followerCard).toBeVisible();
-    await expect(leaderCard).toHaveCount(0);
-
-    await roleSwitchLeader.click();
-    await expect(leaderCard).toBeVisible();
-    await expect(followerCard).toHaveCount(0);
+    // Role toggle swaps the single cue shown
+    const nowCard = player.locator('section[aria-label="What to dance now"]');
+    await player.getByRole("radio", { name: "Follow" }).click();
+    await expect(nowCard.getByText(/Relax your shoulders/)).toBeVisible();
+    await player.getByRole("radio", { name: "Lead" }).click();
+    await expect(nowCard.getByText(/Do not step yet!/)).toBeVisible();
 
     // 2. Audit /how-it-works on mobile
     await page.goto("/how-it-works");

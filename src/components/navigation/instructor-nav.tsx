@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   BarChart3,
   Sparkles,
+  Music,
 } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +23,12 @@ export function InstructorNav() {
       label: "AI Studio & Copilot",
       icon: Sparkles,
       active: pathname.startsWith("/instructor/ai-studio"),
+    },
+    {
+      href: "/instructor/song-maps",
+      label: "Song Map Importer",
+      icon: Music,
+      active: pathname.startsWith("/instructor/song-maps"),
     },
     {
       href: "/instructor/students",

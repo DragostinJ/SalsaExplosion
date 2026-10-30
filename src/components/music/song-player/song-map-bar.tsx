@@ -12,6 +12,8 @@ interface SongMapBarProps {
   activeIndex: number;
   /** Section being previewed in the NOW card (outlined on the map), null when live */
   previewIndex?: number | null;
+  /** Ear-training: sections after this index are drawn neutral so colours don't give answers away */
+  concealAfterIndex?: number | null;
   onSelectSection: (index: number) => void;
 }
 
@@ -26,6 +28,7 @@ export function SongMapBar({
   currentTime,
   activeIndex,
   previewIndex = null,
+  concealAfterIndex = null,
   onSelectSection,
 }: SongMapBarProps) {
   const progress = durationSeconds > 0 ? Math.min(1, currentTime / durationSeconds) : 0;
@@ -39,12 +42,17 @@ export function SongMapBar({
             ((segment.endTimeSeconds - segment.startTimeSeconds) / durationSeconds) * 100;
           const isActive = index === activeIndex;
           const isPreviewed = index === previewIndex;
+          const isConcealed = concealAfterIndex !== null && index > concealAfterIndex;
           return (
             <button
               key={segment.id}
               type="button"
               onClick={() => onSelectSection(index)}
-              aria-label={`Jump to ${segment.sectionName} at ${formatSongTime(segment.startTimeSeconds)}`}
+              aria-label={
+                isConcealed
+                  ? `Jump to section ${index + 1} at ${formatSongTime(segment.startTimeSeconds)}`
+                  : `Jump to ${segment.sectionName} at ${formatSongTime(segment.startTimeSeconds)}`
+              }
               aria-current={isActive ? "step" : undefined}
               style={{ width: `${widthPercent}%` }}
               className="flex h-full min-w-[6px] items-center focus-visible:outline-2 focus-visible:outline-gold"
@@ -52,7 +60,7 @@ export function SongMapBar({
               <span
                 className={cn(
                   "block w-full rounded-sm transition-all",
-                  gear.fillClass,
+                  isConcealed ? "bg-line" : gear.fillClass,
                   isActive ? "h-4 opacity-100" : "h-2.5 opacity-45",
                   isPreviewed && "h-4 opacity-100 ring-2 ring-ivory ring-offset-1 ring-offset-canvas"
                 )}

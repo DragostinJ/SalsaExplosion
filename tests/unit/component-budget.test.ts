@@ -5,7 +5,7 @@ import path from "node:path";
 describe("Component File Size & Modularization Budget (Milestone H7)", () => {
   it("enforces that key modularized components remain under 25KB", () => {
     const targetFiles = [
-      "src/components/music/timba-song-anatomy-player.tsx",
+      "src/components/music/song-player/song-player-screen.tsx",
       "src/components/recaps/class-recap-vault.tsx",
       "src/components/admin/studio-operations-workspace.tsx",
       "src/components/instructor/class-roster-workspace.tsx",
@@ -25,10 +25,11 @@ describe("Component File Size & Modularization Budget (Milestone H7)", () => {
 
   it("verifies extracted subcomponents exist and are valid modules", () => {
     const subcomponents = [
-      "src/components/music/timba-player/timba-types.tsx",
-      "src/components/music/timba-player/timba-beat-bar.tsx",
-      "src/components/music/timba-player/timba-timeline-scrubber.tsx",
-      "src/components/music/timba-player/timba-dancer-hud.tsx",
+      "src/components/music/song-player/now-card-views.tsx",
+      "src/components/music/song-player/player-controls.tsx",
+      "src/components/music/song-player/song-map-bar.tsx",
+      "src/components/music/song-player/section-list.tsx",
+      "src/components/music/song-player/song-player-more-sheet.tsx",
       "src/components/recaps/vault/recap-types.ts",
       "src/components/recaps/vault/recap-video-player.tsx",
       "src/components/recaps/vault/recap-staff-modal.tsx",

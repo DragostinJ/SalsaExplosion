@@ -10,6 +10,8 @@ export interface YTPlayerInstance {
   getCurrentTime: () => number;
   getPlayerState: () => number;
   getDuration?: () => number;
+  setPlaybackRate?: (rate: number) => void;
+  getPlaybackRate?: () => number;
   getVideoData?: () => { video_id?: string };
   destroy?: () => void;
 }
@@ -22,6 +24,7 @@ export interface YTPlayerOptions {
   events?: {
     onReady?: (event: { target: YTPlayerInstance }) => void;
     onStateChange?: (event: { data: number }) => void;
+    onPlaybackRateChange?: (event: { data: number }) => void;
     onError?: (event: { data: number }) => void;
   };
 }

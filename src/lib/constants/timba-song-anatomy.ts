@@ -102,6 +102,23 @@ export const SongAnatomySchema = z.object({
   youtubeUrl: z.string().url().optional(),
   alternateYoutubeVideoId: z.string().optional(),
   spotifyOrYoutubeEmbedUrl: z.string().optional(),
+  /**
+   * Rights-cleared audio we host ourselves (e.g. a studio recording). When set,
+   * the practice player plays this instead of the YouTube video, which unlocks
+   * features YouTube's terms forbid on its player. `license` documents the rights.
+   */
+  licensedAudio: z
+    .object({
+      url: z
+        .string()
+        .min(1)
+        .refine(
+          (value) => value.startsWith("/") || value.startsWith("https://") || value.startsWith("data:audio/"),
+          "Audio must be a site path (/audio/...), an https URL or a data:audio URL"
+        ),
+      license: z.string().min(3, "Describe the licence / permission for this audio"),
+    })
+    .optional(),
   segments: z.array(SongSegmentSchema).min(1),
 });
 export type SongAnatomy = z.infer<typeof SongAnatomySchema>;

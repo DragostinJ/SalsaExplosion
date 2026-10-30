@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import {
   Music,
   Headphones,
@@ -20,13 +21,11 @@ import {
   CurriculumReferenceSong,
   CurriculumLevel,
 } from "@/lib/constants/cuban-curriculum-2027";
-import { TimbaSongAnatomyPlayer } from "@/components/music/timba-song-anatomy-player";
 import { SongPracticeList } from "@/components/music/song-player/song-practice-list";
 
 export function CubanMusicHubClient() {
   const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel | "ALL">("ALL");
   const [searchQuery, setSearchQuery] = useState("");
-  const [featuredSongId, setFeaturedSongId] = useState<string>("me-dicen-cuba");
 
   const filteredTracks = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
@@ -49,11 +48,6 @@ export function CubanMusicHubClient() {
     <div className="space-y-8">
       {/* Practice mode: full-screen section-by-section player per song */}
       <SongPracticeList />
-
-      {/* Interactive Timba Song Anatomy Trainer (Featured at Top of /music) */}
-      <div id="timba-song-anatomy-section">
-        <TimbaSongAnatomyPlayer key={featuredSongId} initialSongId={featuredSongId} />
-      </div>
 
       {/* Musicality Guide from Maestro Enrique */}
       <div className="rounded-3xl border border-border/80 bg-muted/20 p-6 sm:p-8 space-y-4">
@@ -291,23 +285,15 @@ export function CubanMusicHubClient() {
                   <div className="flex items-center gap-2">
                     {(track.id === "ref-beg-1" || track.id === "ref-int-1") && (
                       <Button
-                        type="button"
+                        asChild
                         variant="outline"
                         size="sm"
-                        onClick={() => {
-                          const targetId =
-                            track.id === "ref-beg-1"
-                              ? "me-dicen-cuba"
-                              : "la-cosa-mala";
-                          setFeaturedSongId(targetId);
-                          document
-                            .getElementById("timba-song-anatomy-section")
-                            ?.scrollIntoView({ behavior: "smooth" });
-                        }}
-                        className="h-8 text-xs font-bold border-rose-700/30 text-rose-300 hover:bg-rose-950/30"
+                        className="h-10 sm:h-8 text-xs font-bold border-rose-700/30 text-rose-300 hover:bg-rose-950/30"
                       >
-                        <Compass className="mr-1.5 h-3.5 w-3.5" />
-                        Song Map ↑
+                        <Link href={`/music/${track.id === "ref-beg-1" ? "me-dicen-cuba" : "la-cosa-mala"}`}>
+                          <Compass className="mr-1.5 h-3.5 w-3.5" />
+                          Practice player
+                        </Link>
                       </Button>
                     )}
 

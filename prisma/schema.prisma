@@ -112,6 +112,7 @@ model User {
   merchReservations  MerchReservation[]
   postClassFeedbacks PostClassFeedback[]
   auditLogs          AuditLog[]
+  songSectionProgress SongSectionProgress[]
 
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
@@ -465,4 +466,19 @@ model PublishedAnnouncement {
   updatedAt     DateTime @updatedAt
 
   @@index([updatedAt])
+}
+
+// Dancer marks a song section as "got it" in the practice player.
+// songId/sectionId reference TIMBA_SONG_ANATOMY_DATA (validated in the server action).
+model SongSectionProgress {
+  id        String   @id @default(cuid())
+  userId    String
+  songId    String
+  sectionId String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, songId, sectionId])
+  @@index([userId, songId])
 }

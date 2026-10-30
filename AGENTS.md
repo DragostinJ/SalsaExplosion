@@ -52,8 +52,10 @@ The visual and ergonomic language is inspired by *The Place* London Contemporary
    - Enforced by `scripts/visual-audit.mjs`.
 3. **Touch Target Ergonomics:**
    - Interactive elements (buttons, nav items, accordion triggers, tab selectors) must meet a minimum touch target height of **`min-h-[40px]`** on mobile viewports.
-4. **Mobile Audio Discipline (`/music`):**
-   - The interactive music analyzer must maintain a strict **`100dvh` zero-scroll** layout on mobile viewports. The video player, waveform scrubber, clave synthesizer, and 3-zone telemetry HUD must remain in single-screen thumb reach without vertical page jumping.
+4. **Mobile Audio Discipline (`/music/[songId]` practice player):**
+   - `/music` is the song list; each song opens the full-screen practice player at `/music/[songId]`, which must keep a strict **`100dvh` zero-scroll** layout on mobile (enforced by the `zeroScroll` route in `scripts/visual-audit.mjs`). Video, song map, NOW/NEXT cards and the thumb-zone controls stay on one screen; extra detail goes behind disclosure (moves accordion, details sheet, swipe-to-preview).
+   - **Timing is sacred:** section cues are driven only by the media clock (`src/lib/music/`), never a simulated timer. Song timings come from Argus and are validated with the `/instructor/song-maps` importer; never invent or "adjust" timestamps without Argus output or calibration data.
+   - **YouTube terms:** player viewport ≥ 200×200px, nothing overlaid on it, never hidden while playing, no extra audio mixed over it. Features that need those (clave over the music, background audio) require `licensedAudio`.
 
 ---
 

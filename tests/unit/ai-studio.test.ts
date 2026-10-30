@@ -3,7 +3,6 @@ import {
   AiCoachingInputSchema,
   AiCoachingOutputSchema,
   FacebookEventImportInputSchema,
-  FacebookEventImportOutputSchema,
   VideoPreCheckInputSchema,
   VideoPreCheckOutputSchema,
   GoogleReviewDraftInputSchema,

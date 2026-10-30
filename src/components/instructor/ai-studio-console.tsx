@@ -6,9 +6,7 @@ import {
   Sparkles,
   Music,
   Share2,
-  Calendar,
   Clock,
-  MapPin,
   Check,
   Copy,
   ChevronRight,
@@ -1078,7 +1076,7 @@ export function AiStudioConsole() {
                       {sub.moveOrSong} ({sub.level})
                     </p>
                     <p className="text-ivory-muted text-[11px] mt-1.5 italic line-clamp-2">
-                      "{sub.studentNotes}"
+                      &ldquo;{sub.studentNotes}&rdquo;
                     </p>
                   </button>
                 );

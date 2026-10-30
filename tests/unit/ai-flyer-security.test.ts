@@ -19,6 +19,7 @@ import {
 } from "@/actions/ai-studio.actions";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { recordAuditLog } from "@/lib/audit-log";
+import { uploadEventPoster } from "@/lib/storage";
 
 const { announcementRows } = vi.hoisted(() => ({
   announcementRows: new Map<string, { id: string; title: string; card: unknown; updatedAt: Date }>(),
@@ -32,6 +33,12 @@ vi.mock("@/lib/auth-user", async (importOriginal) => {
 });
 
 vi.mock("@/lib/audit-log", () => ({ recordAuditLog: vi.fn() }));
+
+const POSTER_PREFIX = "https://test.supabase.co/storage/v1/object/public/event-posters/";
+vi.mock("@/lib/storage", () => ({
+  getEventPosterPublicPrefix: () => POSTER_PREFIX,
+  uploadEventPoster: vi.fn(async (eventId: string) => `${POSTER_PREFIX}${eventId}/1.jpg`),
+}));
 
 // In-memory stand-in for the PublishedAnnouncement table
 vi.mock("@/lib/prisma", () => {
@@ -218,6 +225,46 @@ describe("Multimodal Flyer Upload & AI Vision Defense-in-Depth Security Suite", 
         action: "EVENT_MUTATION",
         targetId: extracted.id,
       });
+    });
+
+    it("moves the flyer to storage and never persists base64 or foreign poster URLs", async () => {
+      const baseCard = {
+        id: "poster-party",
+        title: "Poster Party",
+        subtitle: "Flyer test",
+        dateDisplay: "Saturday",
+        doorsTime: "9pm",
+        venue: "BOH Studios",
+        priceDisplay: "£10",
+        bookingType: "DOOR_ONLY" as const,
+        highlights: ["a", "b", "c"],
+        instagramOrFbSummary: "A poster party summary",
+      };
+
+      const uploaded = await approveAndPublishEventAction({
+        ...baseCard,
+        posterPreviewUrl: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/",
+      });
+      expect(uploaded.success).toBe(true);
+      expect(uploadEventPoster).toHaveBeenCalledWith("poster-party", expect.any(Uint8Array), "image/jpeg");
+      expect(uploaded.data?.publishedEvent.posterPreviewUrl).toBe(`${POSTER_PREFIX}poster-party/1.jpg`);
+      expect(uploaded.data?.posterDropped).toBe(false);
+
+      const spoofed = await approveAndPublishEventAction({
+        ...baseCard,
+        posterPreviewUrl: `data:image/jpeg;base64,${Buffer.from("<svg onload=alert(1)>").toString("base64")}`,
+      });
+      expect(spoofed.data?.publishedEvent.posterPreviewUrl).toBeUndefined();
+      expect(spoofed.data?.posterDropped).toBe(true);
+
+      const foreign = await approveAndPublishEventAction({
+        ...baseCard,
+        posterPreviewUrl: "https://evil.example.com/tracker.png",
+      });
+      expect(foreign.data?.publishedEvent.posterPreviewUrl).toBeUndefined();
+
+      const live = await getLivePublishedEventsAction();
+      expect(JSON.stringify(live.data)).not.toContain("base64");
     });
 
     it("blocks students and anonymous visitors from publishing or removing events", async () => {

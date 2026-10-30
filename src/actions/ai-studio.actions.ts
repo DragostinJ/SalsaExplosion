@@ -44,6 +44,7 @@ import {
 } from "@/lib/auth-user";
 import { recordAuditLog } from "@/lib/audit-log";
 import { reportError } from "@/lib/monitoring";
+import { getEventPosterPublicPrefix, uploadEventPoster } from "@/lib/storage";
 import { AuditAction } from "@prisma/client";
 
 export interface AiActionResponse<T> {
@@ -354,12 +355,52 @@ ${rawFacebookText || "See attached flyer poster image"}
 }
 
 /**
+ * Moves an approved poster out of the card and into Supabase Storage so neither the
+ * database row nor the /events HTML carries megabytes of base64. Only data: URLs
+ * (re-verified here) and URLs already in our own bucket are kept; anything else is dropped.
+ */
+async function resolvePublishedPosterUrl(
+  eventId: string,
+  posterPreviewUrl: string | undefined
+): Promise<{ url: string | undefined; dropped: boolean }> {
+  if (!posterPreviewUrl) {
+    return { url: undefined, dropped: false };
+  }
+
+  const publicPrefix = getEventPosterPublicPrefix();
+  if (publicPrefix && posterPreviewUrl.startsWith(publicPrefix)) {
+    return { url: posterPreviewUrl, dropped: false };
+  }
+
+  if (!posterPreviewUrl.startsWith("data:image/")) {
+    return { url: undefined, dropped: true };
+  }
+
+  try {
+    const base64 = posterPreviewUrl.replace(/^data:image\/[a-zA-Z+]+;base64,/, "");
+    const bytes = Buffer.from(base64, "base64");
+    const magicCheck = verifyImageMagicBytes(bytes);
+    if (!magicCheck.valid || !magicCheck.mimeType) {
+      return { url: undefined, dropped: true };
+    }
+
+    const url = await uploadEventPoster(eventId, bytes, magicCheck.mimeType);
+    return { url: url ?? undefined, dropped: !url };
+  } catch (err) {
+    reportError("resolvePublishedPosterUrl", err);
+    return { url: undefined, dropped: true };
+  }
+}
+
+/**
  * Human-in-the-Loop Event Approval & Publishing Action
  * Validates reviewed event data and publishes directly to /events (staff only)
  */
 export async function approveAndPublishEventAction(
   rawCard: unknown
-): Promise<AiActionResponse<{ publishedEvent: ParsedEventCard; totalLiveEvents: number }>> {
+): Promise<
+  AiActionResponse<{ publishedEvent: ParsedEventCard; totalLiveEvents: number; posterDropped: boolean }>
+> {
   const staff = await requireAiStudioStaff();
   if (!staff.ok) {
     return { success: false, error: staff.error };
@@ -373,9 +414,12 @@ export async function approveAndPublishEventAction(
     };
   }
 
+  const poster = await resolvePublishedPosterUrl(parsed.data.id, parsed.data.posterPreviewUrl);
+  const publishedEvent: ParsedEventCard = { ...parsed.data, posterPreviewUrl: poster.url };
+
   let totalLiveEvents: number;
   try {
-    totalLiveEvents = await addPublishedEvent(parsed.data, staff.userId);
+    totalLiveEvents = await addPublishedEvent(publishedEvent, staff.userId);
   } catch (err) {
     reportError("approveAndPublishEventAction", err);
     return { success: false, error: "Could not publish the event. Please try again." };
@@ -399,8 +443,9 @@ export async function approveAndPublishEventAction(
   return {
     success: true,
     data: {
-      publishedEvent: parsed.data,
+      publishedEvent,
       totalLiveEvents,
+      posterDropped: poster.dropped,
     },
   };
 }

@@ -235,7 +235,9 @@ export function AiStudioConsole() {
 
     if (res.success && res.data) {
       setPublishSuccessBanner(
-        `"${parsedEvent.title}" is now approved and live on /events!`
+        res.data.posterDropped
+          ? `"${parsedEvent.title}" is live on /events, but the flyer image could not be stored, so it is shown without a poster.`
+          : `"${parsedEvent.title}" is now approved and live on /events!`
       );
       // Reload live events list
       const liveRes = await getLivePublishedEventsAction();

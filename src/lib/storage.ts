@@ -58,3 +58,66 @@ export async function createSignedUploadUrlHelper(
     return null;
   }
 }
+
+export const EVENT_POSTER_BUCKET = "event-posters";
+const EVENT_POSTER_MAX_BYTES = 5 * 1024 * 1024;
+const EVENT_POSTER_EXTENSIONS = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+} as const;
+
+/** Public URL prefix for poster objects; used to accept only our own bucket's URLs. */
+export function getEventPosterPublicPrefix(): string | null {
+  if (!isSupabaseStorageConfigured()) return null;
+  return `${env.NEXT_PUBLIC_SUPABASE_URL.replace(/\/$/, "")}/storage/v1/object/public/${EVENT_POSTER_BUCKET}/`;
+}
+
+let posterBucketReady = false;
+
+async function ensureEventPosterBucket(
+  supabaseAdmin: ReturnType<typeof getSupabaseAdmin>
+): Promise<void> {
+  if (posterBucketReady) return;
+  const { data } = await supabaseAdmin.storage.getBucket(EVENT_POSTER_BUCKET);
+  if (!data) {
+    const { error } = await supabaseAdmin.storage.createBucket(EVENT_POSTER_BUCKET, {
+      public: true,
+      fileSizeLimit: EVENT_POSTER_MAX_BYTES,
+      allowedMimeTypes: Object.keys(EVENT_POSTER_EXTENSIONS),
+    });
+    if (error && !/already exists/i.test(error.message)) {
+      throw new Error(`Could not create ${EVENT_POSTER_BUCKET} bucket: ${error.message}`);
+    }
+  }
+  posterBucketReady = true;
+}
+
+/**
+ * Uploads an already magic-byte-verified poster to the public event-posters bucket.
+ * Returns the public URL, or null when storage is not configured.
+ */
+export async function uploadEventPoster(
+  eventId: string,
+  bytes: Uint8Array,
+  mimeType: keyof typeof EVENT_POSTER_EXTENSIONS
+): Promise<string | null> {
+  if (!isSupabaseStorageConfigured()) return null;
+  if (bytes.length > EVENT_POSTER_MAX_BYTES) {
+    throw new Error("Poster image exceeds the 5MB limit.");
+  }
+
+  const supabaseAdmin = getSupabaseAdmin();
+  await ensureEventPosterBucket(supabaseAdmin);
+
+  // Timestamped path so a re-published poster never serves a stale CDN copy
+  const path = `${eventId}/${Date.now()}.${EVENT_POSTER_EXTENSIONS[mimeType]}`;
+  const { error } = await supabaseAdmin.storage
+    .from(EVENT_POSTER_BUCKET)
+    .upload(path, bytes, { contentType: mimeType, cacheControl: "31536000", upsert: false });
+  if (error) {
+    throw new Error(`Poster upload failed: ${error.message}`);
+  }
+
+  return supabaseAdmin.storage.from(EVENT_POSTER_BUCKET).getPublicUrl(path).data.publicUrl;
+}

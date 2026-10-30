@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: SongPlayerPageProps): Promise
   if (!song) return {};
   const title = song.title.replace(/\s*\(Official Video\)/i, "");
   return {
-    title: `${title} – What to Dance in Every Section | Salsa Explosion`,
+    title: `${title} – What to Dance in Every Section`,
     description: `Section-by-section timba guide for ${title} by ${song.artist}: when to dance son, casino, rumba or shines, with leader and follower cues.`,
     alternates: { canonical: `/music/${song.id}` },
   };

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronLeft, Info, Loader2, Pause, Play, SkipBack, SkipForward } from "lucide-react";
 import type { SongAnatomy } from "@/lib/constants/timba-song-anatomy";
@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { SongMapBar } from "./song-map-bar";
 import { SongPlayerMoreSheet, type DancerRole } from "./song-player-more-sheet";
 import { SongCalibrationPanel } from "./song-calibration-panel";
+import { SectionMovesList } from "./section-moves-list";
 
 const ROLE_STORAGE_KEY = "ritmoflow:player-role";
 const LATENCY_STORAGE_KEY = "ritmoflow:player-latency-offset";
@@ -84,6 +85,13 @@ export function SongPlayerScreen({ song }: SongPlayerScreenProps) {
 
   const closeMore = useCallback(() => setIsMoreOpen(false), []);
 
+  // Each new section starts at the top of the NOW card, not where the last one was scrolled to
+  const nowCardRef = useRef<HTMLElement>(null);
+  const activeSegmentId = song.segments[Math.max(0, clock.segmentIndex)]?.id;
+  useEffect(() => {
+    nowCardRef.current?.scrollTo({ top: 0 });
+  }, [activeSegmentId]);
+
   const segments = song.segments;
   const activeIndex = Math.max(0, clock.segmentIndex);
   const active = segments[activeIndex];
@@ -148,7 +156,8 @@ export function SongPlayerScreen({ song }: SongPlayerScreenProps) {
         </div>
       </header>
 
-      <div className="flex min-h-0 flex-1 flex-col gap-2 lg:grid lg:grid-cols-[1.4fr_1fr] lg:gap-6">
+      {/* Portrait phone: stacked. Landscape phone: video left, cards right. Desktop: wide video left. */}
+      <div className="flex min-h-0 flex-1 flex-col gap-2 max-lg:landscape:grid max-lg:landscape:grid-cols-2 max-lg:landscape:gap-3 lg:grid lg:grid-cols-[1.4fr_1fr] lg:gap-6">
         {/* Video + map */}
         <div className="flex shrink-0 flex-col gap-1.5">
           <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-line bg-surface-1">
@@ -194,6 +203,7 @@ export function SongPlayerScreen({ song }: SongPlayerScreenProps) {
         {/* NOW / NEXT */}
         <div className="flex min-h-0 flex-1 flex-col gap-2">
           <section
+            ref={nowCardRef}
             aria-live="polite"
             aria-label="What to dance now"
             className={cn("min-h-0 flex-1 overflow-y-auto rounded-2xl border p-3.5", gear.chipClass)}
@@ -245,6 +255,9 @@ export function SongPlayerScreen({ song }: SongPlayerScreenProps) {
               ))}
             </dl>
             )}
+
+            {/* Keyed by section so open moves collapse when the section changes */}
+            <SectionMovesList key={active.id} segment={active} />
           </section>
 
           {next && nextGear ? (

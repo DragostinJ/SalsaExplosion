@@ -91,7 +91,7 @@ export function WeeklyCalendarOverview() {
               Every Thursday &amp; Sunday • BOH Studios Bournemouth
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
             BOH Studios Bournemouth Weekly Schedule
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl">

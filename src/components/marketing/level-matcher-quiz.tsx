@@ -109,7 +109,7 @@ export function LevelMatcherQuiz() {
             <Sparkles className="h-3.5 w-3.5 text-primary-base" />
             <span>Interactive Level Finder • 15 Seconds</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
             Not Sure Which Cuban Salsa Level to Book?
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground">

@@ -118,11 +118,17 @@ export function CubanMusicHubClient() {
         </div>
 
         {/* Level Filters */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar border-t pt-3">
+        <div
+          role="radiogroup"
+          aria-label="Filter tracks by level"
+          className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar border-t pt-3"
+        >
           <button
             type="button"
+            role="radio"
+            aria-checked={selectedLevel === "ALL"}
             onClick={() => setSelectedLevel("ALL")}
-            className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
+            className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center focus-visible:outline-2 focus-visible:outline-gold ${
               selectedLevel === "ALL"
                 ? "bg-foreground text-background shadow-xs"
                 : "border bg-card text-muted-foreground hover:text-foreground"
@@ -134,8 +140,10 @@ export function CubanMusicHubClient() {
             <button
               key={lvl}
               type="button"
+              role="radio"
+              aria-checked={selectedLevel === lvl}
               onClick={() => setSelectedLevel(lvl)}
-              className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
+              className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center focus-visible:outline-2 focus-visible:outline-gold ${
                 selectedLevel === lvl
                   ? "bg-foreground text-background shadow-xs"
                   : "border bg-card text-muted-foreground hover:text-foreground"
@@ -300,15 +308,16 @@ export function CubanMusicHubClient() {
                     <Button
                       asChild
                       size="sm"
-                      className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs h-8 shadow-xs"
+                      className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs h-10 sm:h-8 shadow-xs"
                     >
                       <a
                         href={track.spotifySearchUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Search ${track.title} on Spotify (opens in new tab)`}
                       >
                         Spotify
-                        <ExternalLink className="ml-1.5 h-3 w-3" />
+                        <ExternalLink className="ml-1.5 h-3 w-3" aria-hidden="true" />
                       </a>
                     </Button>
                   </div>

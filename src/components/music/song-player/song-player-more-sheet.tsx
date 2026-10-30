@@ -37,7 +37,7 @@ interface SongPlayerMoreSheetProps {
 
 const choiceButton = (selected: boolean) =>
   cn(
-    "min-h-[44px] flex-1 rounded-xl border px-2 text-xs font-bold",
+    "min-h-[44px] flex-1 rounded-xl border px-2 text-xs font-bold focus-visible:outline-2 focus-visible:outline-gold",
     selected ? "border-gold bg-gold/15 text-gold" : "border-line bg-surface-3 text-ivory-muted"
   );
 
@@ -92,7 +92,7 @@ export function SongPlayerMoreSheet({
             type="button"
             onClick={onClose}
             aria-label="Close details"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-surface-3"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-surface-3 focus-visible:outline-2 focus-visible:outline-gold"
           >
             <X className="h-5 w-5" />
           </button>

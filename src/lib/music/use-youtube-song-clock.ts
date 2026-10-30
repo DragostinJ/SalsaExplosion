@@ -32,8 +32,8 @@ interface UseYouTubeSongClockOptions {
 }
 
 export interface YouTubeSongClock {
-  /** Attach to an empty element; the YouTube iframe is created inside it. */
-  containerRef: React.RefObject<HTMLDivElement | null>;
+  /** Callback ref for an empty element; the YouTube iframe is created inside it. */
+  containerRef: (node: HTMLDivElement | null) => void;
   isReady: boolean;
   isPlaying: boolean;
   isBuffering: boolean;
@@ -59,7 +59,7 @@ export function useYouTubeSongClock({
   segments,
   latencyOffsetSeconds = 0,
 }: UseYouTubeSongClockOptions): YouTubeSongClock {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [host, setHost] = useState<HTMLDivElement | null>(null);
   const playerRef = useRef<YTPlayerInstance | null>(null);
   const stateRef = useRef<number>(YT_STATE.UNSTARTED);
   const lastReportRef = useRef<{ videoTime: number; at: number }>({ videoTime: 0, at: 0 });
@@ -128,7 +128,6 @@ export function useYouTubeSongClock({
   // Create / recreate the player when the video changes
   useEffect(() => {
     let cancelled = false;
-    const host = containerRef.current;
     if (!host) return;
 
     // YouTube replaces this node with an iframe, so React must not own it
@@ -137,9 +136,6 @@ export function useYouTubeSongClock({
     mount.style.height = "100%";
     host.replaceChildren(mount);
 
-    setIsReady(false);
-    setErrorCode(null);
-    setActualDurationSeconds(null);
     lastReportRef.current = { videoTime: 0, at: performance.now() };
 
     const readDuration = (player: YTPlayerInstance) => {
@@ -203,8 +199,13 @@ export function useYouTubeSongClock({
       playerRef.current = null;
       stateRef.current = YT_STATE.UNSTARTED;
       host.replaceChildren();
+      // Reset for the next video (state starts in this shape on first mount)
+      setIsReady(false);
+      setPlayerState(YT_STATE.UNSTARTED);
+      setErrorCode(null);
+      setActualDurationSeconds(null);
     };
-  }, [videoId]);
+  }, [videoId, host]);
 
   // Frame loop: section index per frame, display time throttled
   useEffect(() => {
@@ -269,7 +270,7 @@ export function useYouTubeSongClock({
   }, []);
 
   return {
-    containerRef,
+    containerRef: setHost,
     isReady,
     isPlaying: playerState === YT_STATE.PLAYING,
     isBuffering: playerState === YT_STATE.BUFFERING,

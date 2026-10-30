@@ -10,6 +10,8 @@ interface SongMapBarProps {
   durationSeconds: number;
   currentTime: number;
   activeIndex: number;
+  /** Section being previewed in the NOW card (outlined on the map), null when live */
+  previewIndex?: number | null;
   onSelectSection: (index: number) => void;
 }
 
@@ -23,6 +25,7 @@ export function SongMapBar({
   durationSeconds,
   currentTime,
   activeIndex,
+  previewIndex = null,
   onSelectSection,
 }: SongMapBarProps) {
   const progress = durationSeconds > 0 ? Math.min(1, currentTime / durationSeconds) : 0;
@@ -35,6 +38,7 @@ export function SongMapBar({
           const widthPercent =
             ((segment.endTimeSeconds - segment.startTimeSeconds) / durationSeconds) * 100;
           const isActive = index === activeIndex;
+          const isPreviewed = index === previewIndex;
           return (
             <button
               key={segment.id}
@@ -49,7 +53,8 @@ export function SongMapBar({
                 className={cn(
                   "block w-full rounded-sm transition-all",
                   gear.fillClass,
-                  isActive ? "h-4 opacity-100" : "h-2.5 opacity-45"
+                  isActive ? "h-4 opacity-100" : "h-2.5 opacity-45",
+                  isPreviewed && "h-4 opacity-100 ring-2 ring-ivory ring-offset-1 ring-offset-canvas"
                 )}
               />
             </button>

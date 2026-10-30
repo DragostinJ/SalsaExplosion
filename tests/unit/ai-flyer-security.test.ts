@@ -1,4 +1,5 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { Role } from "@prisma/client";
 import {
   verifyImageMagicBytes,
   sanitizeExtractedString,
@@ -16,12 +17,69 @@ import {
   removePublishedEventAction,
   getLivePublishedEventsAction,
 } from "@/actions/ai-studio.actions";
-import { clearPublishedEvents } from "@/lib/stores/published-events-store";
+import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import { recordAuditLog } from "@/lib/audit-log";
+
+const { announcementRows } = vi.hoisted(() => ({
+  announcementRows: new Map<string, { id: string; title: string; card: unknown; updatedAt: Date }>(),
+}));
+
+vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
+
+vi.mock("@/lib/auth-user", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("@/lib/auth-user")>();
+  return { ...mod, getOrProvisionCurrentUser: vi.fn() };
+});
+
+vi.mock("@/lib/audit-log", () => ({ recordAuditLog: vi.fn() }));
+
+// In-memory stand-in for the PublishedAnnouncement table
+vi.mock("@/lib/prisma", () => {
+  const publishedAnnouncement = {
+    findMany: vi.fn(async () =>
+      [...announcementRows.values()].sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+    ),
+    deleteMany: vi.fn(async ({ where }: { where: { id?: string | { not: string }; title?: string } }) => {
+      for (const row of [...announcementRows.values()]) {
+        const idMatches =
+          typeof where.id === "string" ? row.id === where.id : where.id ? row.id !== where.id.not : true;
+        const titleMatches = where.title === undefined || row.title === where.title;
+        if (idMatches && titleMatches) announcementRows.delete(row.id);
+      }
+    }),
+    upsert: vi.fn(async ({ create }: { create: { id: string; title: string; card: unknown } }) => {
+      announcementRows.set(create.id, { ...create, updatedAt: new Date() });
+    }),
+    count: vi.fn(async () => announcementRows.size),
+  };
+  return {
+    prisma: {
+      publishedAnnouncement,
+      $transaction: vi.fn(async (ops: Promise<unknown>[]) => Promise.all(ops)),
+    },
+  };
+});
+
+function mockUser(role: Role, id = "user_staff_1") {
+  return {
+    id,
+    clerkId: `clerk_${id}`,
+    email: `${id}@example.com`,
+    firstName: "Test",
+    lastName: "User",
+    role,
+    currentLevel: "BEGINNER" as const,
+    preferredRole: "LEAD" as const,
+    classCredits: 0,
+  } as Awaited<ReturnType<typeof getOrProvisionCurrentUser>>;
+}
 
 describe("Multimodal Flyer Upload & AI Vision Defense-in-Depth Security Suite", () => {
   beforeEach(() => {
     resetAiRateLimitStore();
-    clearPublishedEvents();
+    announcementRows.clear();
+    vi.mocked(recordAuditLog).mockClear();
+    vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(mockUser(Role.INSTRUCTOR));
   });
 
   describe("1. Magic-Byte Binary Signature Verification", () => {
@@ -152,6 +210,46 @@ describe("Multimodal Flyer Upload & AI Vision Defense-in-Depth Security Suite", 
 
       const afterRemove = await getLivePublishedEventsAction();
       expect(afterRemove.data?.some((e) => e.id === extracted.id)).toBe(false);
+
+      // Both mutations leave a forensic trail
+      expect(recordAuditLog).toHaveBeenCalledTimes(2);
+      expect(vi.mocked(recordAuditLog).mock.calls[0][0]).toMatchObject({
+        actorId: "user_staff_1",
+        action: "EVENT_MUTATION",
+        targetId: extracted.id,
+      });
+    });
+
+    it("blocks students and anonymous visitors from publishing or removing events", async () => {
+      const card = ParsedEventCardSchema.parse({
+        id: "fake-party",
+        title: "Fake Party",
+        subtitle: "Not real",
+        dateDisplay: "Friday",
+        doorsTime: "8pm",
+        venue: "Somewhere",
+        priceDisplay: "£5",
+        bookingType: "DOOR_ONLY",
+        highlights: ["a", "b", "c"],
+        instagramOrFbSummary: "A fake party summary",
+      });
+
+      vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(mockUser(Role.STUDENT, "user_student_1"));
+      const studentPublish = await approveAndPublishEventAction(card);
+      expect(studentPublish.success).toBe(false);
+      expect(studentPublish.error).toContain("Only instructors and owners");
+
+      vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(null);
+      const anonRemove = await removePublishedEventAction("fake-party");
+      expect(anonRemove.success).toBe(false);
+      expect(anonRemove.error).toContain("signed in");
+
+      vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(mockUser(Role.ADMIN, "fallback-user_x"));
+      const fallbackPublish = await approveAndPublishEventAction(card);
+      expect(fallbackPublish.success).toBe(false);
+
+      expect(announcementRows.size).toBe(0);
+      expect(recordAuditLog).not.toHaveBeenCalled();
     });
 
     it("rejects parseFacebookPostToEventAction when image magic bytes are spoofed", async () => {

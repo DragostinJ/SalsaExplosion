@@ -453,3 +453,16 @@ model AuditLog {
   @@index([action, createdAt])
 }
 
+
+// AI Studio announcements approved by staff and shown on /events.
+// The card is stored as validated JSON and re-parsed with ParsedEventCardSchema on read.
+model PublishedAnnouncement {
+  id            String   @id
+  title         String
+  card          Json
+  publishedById String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([updatedAt])
+}

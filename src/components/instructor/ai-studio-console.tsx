@@ -248,7 +248,11 @@ export function AiStudioConsole() {
   };
 
   const handleRemovePublished = async (id: string) => {
-    await removePublishedEventAction(id);
+    const res = await removePublishedEventAction(id);
+    if (!res.success) {
+      setFbError(res.error || "Failed to remove event.");
+      return;
+    }
     const liveRes = await getLivePublishedEventsAction();
     if (liveRes.success && liveRes.data) {
       setLiveApprovedEvents(liveRes.data);

@@ -36,13 +36,43 @@ import {
   removePublishedEvent,
 } from "@/lib/stores/published-events-store";
 import { VENUE_INFO } from "@/lib/academy-data";
-import { getOrProvisionCurrentUser } from "@/lib/auth-user";
+import {
+  getOrProvisionCurrentUser,
+  isFallbackUser,
+  SERVICE_UNAVAILABLE_MESSAGE,
+  STAFF_ROLES,
+} from "@/lib/auth-user";
+import { recordAuditLog } from "@/lib/audit-log";
+import { reportError } from "@/lib/monitoring";
+import { AuditAction } from "@prisma/client";
 
 export interface AiActionResponse<T> {
   success: boolean;
   data?: T;
   error?: string;
   source?: "gemini" | "deterministic_fallback";
+}
+
+type StaffGuardResult =
+  | { ok: true; userId: string }
+  | { ok: false; error: string };
+
+/**
+ * Server actions are public endpoints, so page-level requireRole() is not enough.
+ * Every mutating AI Studio action must call this before touching shared state.
+ */
+async function requireAiStudioStaff(): Promise<StaffGuardResult> {
+  const user = await getOrProvisionCurrentUser(); // fallback-guard
+  if (!user) {
+    return { ok: false, error: "You must be signed in to manage events." };
+  }
+  if (isFallbackUser(user)) {
+    return { ok: false, error: SERVICE_UNAVAILABLE_MESSAGE };
+  }
+  if (!STAFF_ROLES.includes(user.role)) {
+    return { ok: false, error: "Only instructors and owners can manage published events." };
+  }
+  return { ok: true, userId: user.id };
 }
 
 /**
@@ -325,11 +355,16 @@ ${rawFacebookText || "See attached flyer poster image"}
 
 /**
  * Human-in-the-Loop Event Approval & Publishing Action
- * Validates reviewed event data and publishes directly to /events
+ * Validates reviewed event data and publishes directly to /events (staff only)
  */
 export async function approveAndPublishEventAction(
   rawCard: unknown
 ): Promise<AiActionResponse<{ publishedEvent: ParsedEventCard; totalLiveEvents: number }>> {
+  const staff = await requireAiStudioStaff();
+  if (!staff.ok) {
+    return { success: false, error: staff.error };
+  }
+
   const parsed = ParsedEventCardSchema.safeParse(rawCard);
   if (!parsed.success) {
     return {
@@ -338,7 +373,21 @@ export async function approveAndPublishEventAction(
     };
   }
 
-  const publishedList = addPublishedEvent(parsed.data);
+  let totalLiveEvents: number;
+  try {
+    totalLiveEvents = await addPublishedEvent(parsed.data, staff.userId);
+  } catch (err) {
+    reportError("approveAndPublishEventAction", err);
+    return { success: false, error: "Could not publish the event. Please try again." };
+  }
+
+  await recordAuditLog({
+    actorId: staff.userId,
+    action: AuditAction.EVENT_MUTATION,
+    targetType: "PUBLISHED_ANNOUNCEMENT",
+    targetId: parsed.data.id,
+    metadata: { operation: "PUBLISH", title: parsed.data.title },
+  });
 
   try {
     revalidatePath("/events");
@@ -351,22 +400,42 @@ export async function approveAndPublishEventAction(
     success: true,
     data: {
       publishedEvent: parsed.data,
-      totalLiveEvents: publishedList.length,
+      totalLiveEvents,
     },
   };
 }
 
 /**
- * Removes an AI-published event from live store
+ * Removes an AI-published event from /events (staff only)
  */
 export async function removePublishedEventAction(
   eventId: string
 ): Promise<AiActionResponse<{ remainingEvents: number }>> {
-  if (!eventId) {
+  const staff = await requireAiStudioStaff();
+  if (!staff.ok) {
+    return { success: false, error: staff.error };
+  }
+
+  if (!eventId || typeof eventId !== "string") {
     return { success: false, error: "Event ID required." };
   }
 
-  const remaining = removePublishedEvent(eventId);
+  let remainingEvents: number;
+  try {
+    remainingEvents = await removePublishedEvent(eventId);
+  } catch (err) {
+    reportError("removePublishedEventAction", err);
+    return { success: false, error: "Could not remove the event. Please try again." };
+  }
+
+  await recordAuditLog({
+    actorId: staff.userId,
+    action: AuditAction.EVENT_MUTATION,
+    targetType: "PUBLISHED_ANNOUNCEMENT",
+    targetId: eventId,
+    metadata: { operation: "UNPUBLISH" },
+  });
+
   try {
     revalidatePath("/events");
     revalidatePath("/");
@@ -376,19 +445,19 @@ export async function removePublishedEventAction(
 
   return {
     success: true,
-    data: { remainingEvents: remaining.length },
+    data: { remainingEvents },
   };
 }
 
 /**
- * Returns currently published events in store
+ * Returns currently published events (public data, also rendered on /events)
  */
 export async function getLivePublishedEventsAction(): Promise<
   AiActionResponse<ParsedEventCard[]>
 > {
   return {
     success: true,
-    data: getPublishedEvents(),
+    data: await getPublishedEvents(),
   };
 }
 

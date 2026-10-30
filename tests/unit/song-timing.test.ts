@@ -29,8 +29,9 @@ describe("song timing: section lookup", () => {
 
   it("matches a linear scan at every tenth of a second for every song", () => {
     for (const song of TIMBA_SONG_ANATOMY_DATA) {
-      for (let t = 0; t < song.durationSeconds; t += 0.1) {
-        const time = Math.round(t * 10) / 10;
+      // Whole tenths (no float accumulation), strictly inside the song
+      for (let tenths = 0; tenths < song.durationSeconds * 10; tenths++) {
+        const time = tenths / 10;
         const expected = song.segments.findIndex(
           (s) => time >= s.startTimeSeconds && time < s.endTimeSeconds
         );

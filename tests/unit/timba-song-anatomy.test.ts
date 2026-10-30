@@ -11,8 +11,8 @@ import { CUBAN_CURRICULUM_DATA } from "@/lib/constants/cuban-curriculum-2027";
 import { getClaveStrokeBeats, CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
 
 describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dataset", () => {
-  it("validates all 4 production song maps against SongAnatomySchema and checks valid youtubeVideoId & youtubeUrl", () => {
-    expect(TIMBA_SONG_ANATOMY_DATA.length).toBe(4);
+  it("validates all 8 production song maps against SongAnatomySchema and checks valid youtubeVideoId & youtubeUrl", () => {
+    expect(TIMBA_SONG_ANATOMY_DATA.length).toBe(8);
 
     for (const song of TIMBA_SONG_ANATOMY_DATA) {
       const parsed = SongAnatomySchema.safeParse(song);
@@ -153,7 +153,7 @@ describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dat
 
   it("checks helper functions getSongAnatomyById and getAllSongAnatomies", () => {
     const all = getAllSongAnatomies();
-    expect(all.length).toBe(4);
+    expect(all.length).toBe(8);
 
     const aguanile = getSongAnatomyById("aguanile");
     expect(aguanile).toBeDefined();

@@ -21,6 +21,7 @@ import {
   CurriculumLevel,
 } from "@/lib/constants/cuban-curriculum-2027";
 import { TimbaSongAnatomyPlayer } from "@/components/music/timba-song-anatomy-player";
+import { SongPracticeList } from "@/components/music/song-player/song-practice-list";
 
 export function CubanMusicHubClient() {
   const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel | "ALL">("ALL");
@@ -46,6 +47,9 @@ export function CubanMusicHubClient() {
 
   return (
     <div className="space-y-8">
+      {/* Practice mode: full-screen section-by-section player per song */}
+      <SongPracticeList />
+
       {/* Interactive Timba Song Anatomy Trainer (Featured at Top of /music) */}
       <div id="timba-song-anatomy-section">
         <TimbaSongAnatomyPlayer key={featuredSongId} initialSongId={featuredSongId} />

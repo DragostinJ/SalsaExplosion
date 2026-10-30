@@ -8,7 +8,9 @@ describe("H3: SEO, Metadata, Sitemap & Robots Validation", () => {
     const urls = sitemapEntries.map((e) => e.url);
 
     // Verify key public landing and gateway pages exist
-    expect(urls.some((u) => u === "https://salsaexplosion.co.uk" || u.endsWith("/"))).toBe(true);
+    // Base URL comes from NEXT_PUBLIC_APP_URL when set (Prisma-backed imports load .env)
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://salsaexplosion.co.uk";
+    expect(urls.some((u) => u === baseUrl || u.endsWith("/"))).toBe(true);
     expect(urls.some((u) => u.includes("/dashboard/schedule"))).toBe(true);
     expect(urls.some((u) => u.includes("/events"))).toBe(true);
     expect(urls.some((u) => u.includes("/pricing"))).toBe(true);
@@ -16,6 +18,7 @@ describe("H3: SEO, Metadata, Sitemap & Robots Validation", () => {
     expect(urls.some((u) => u.includes("/music"))).toBe(true);
     expect(urls.some((u) => u.includes("/shop"))).toBe(true);
     expect(urls.some((u) => u.includes("/how-it-works"))).toBe(true);
+    expect(urls.some((u) => u.endsWith("/music/me-dicen-cuba"))).toBe(true);
 
     // Verify private pages are excluded
     expect(urls.some((u) => u.includes("/admin"))).toBe(false);

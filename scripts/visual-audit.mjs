@@ -23,6 +23,8 @@ const ROUTES = [
   { slug: "events", path: "/events" },
   { slug: "schedule", path: "/dashboard/schedule" },
   { slug: "rueda", path: "/dashboard/rueda" },
+  // Full-screen practice player: must fit one mobile screen with zero page scroll
+  { slug: "song-player", path: "/music/me-dicen-cuba", zeroScroll: true },
 ];
 
 const VIEWPORTS = [
@@ -401,6 +403,20 @@ async function runVisualAudit() {
 
         // 3. Automated DOM design evaluation
         const domAnalysis = await page.evaluate(evaluatePageDesign, vp.isMobile);
+
+        // 4. 100dvh zero-scroll contract for immersive mobile screens
+        if (route.zeroScroll && vp.isMobile) {
+          const { scrollHeight, innerHeight } = await page.evaluate(() => ({
+            scrollHeight: document.documentElement.scrollHeight,
+            innerHeight: window.innerHeight,
+          }));
+          if (scrollHeight > innerHeight + 1) {
+            domAnalysis.mobileIssues.push({
+              issue: "VERTICAL_SCROLL_ON_ZERO_SCROLL_ROUTE",
+              details: `scrollHeight (${scrollHeight}px) exceeds viewport (${innerHeight}px) by ${scrollHeight - innerHeight}px`,
+            });
+          }
+        }
 
         routeResult[vp.name] = {
           screenshots: { fold: foldFilename, full: fullFilename },

@@ -25,38 +25,8 @@ import { TimbaBeatBar } from "./timba-player/timba-beat-bar";
 import { TimbaTimelineScrubber } from "./timba-player/timba-timeline-scrubber";
 import { TimbaDancerHud } from "./timba-player/timba-dancer-hud";
 import { YouTubeIcon, formatSeconds } from "./timba-player/timba-types";
+import type { YTPlayerInstance } from "@/lib/music/youtube-iframe-api";
 
-interface YTPlayerInstance {
-  playVideo: () => void;
-  pauseVideo: () => void;
-  seekTo: (seconds: number, allowSeekAhead: boolean) => void;
-  getCurrentTime: () => number;
-  getPlayerState: () => number;
-  getDuration?: () => number;
-  destroy?: () => void;
-}
-
-declare global {
-  interface Window {
-    YT?: {
-      Player: new (
-        elementId: string | HTMLElement,
-        options: {
-          events?: {
-            onReady?: (event: { target: YTPlayerInstance }) => void;
-            onStateChange?: (event: { data: number }) => void;
-          };
-        }
-      ) => YTPlayerInstance;
-      PlayerState: {
-        PLAYING: number;
-        PAUSED: number;
-        ENDED: number;
-      };
-    };
-    onYouTubeIframeAPIReady?: () => void;
-  }
-}
 
 interface TimbaSongAnatomyPlayerProps {
   initialSongId?: string;

@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { SiteHeader } from "@/components/navigation/site-header";
 import { SiteFooter } from "@/components/navigation/site-footer";
 import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
+import { ImmersiveRouteGate } from "@/components/navigation/immersive-route-gate";
 import { JsonLdSchema } from "@/components/seo/JsonLdSchema";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { StageSpotlight } from "@/components/ui/StageSpotlight";
@@ -115,10 +116,14 @@ export default function RootLayout({
           </a>
           <div className="film-grain" aria-hidden="true" />
           <StageSpotlight />
-          <SiteHeader />
+          <ImmersiveRouteGate>
+            <SiteHeader />
+          </ImmersiveRouteGate>
           <div className="flex-1 overflow-x-hidden relative z-10">{children}</div>
-          <SiteFooter />
-          <MobileBottomNav />
+          <ImmersiveRouteGate>
+            <SiteFooter />
+            <MobileBottomNav />
+          </ImmersiveRouteGate>
           <GoogleAnalytics />
           <Toaster richColors position="top-right" />
         </body>

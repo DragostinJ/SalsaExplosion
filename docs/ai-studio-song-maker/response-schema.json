@@ -1,0 +1,344 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "kebab-case song id, title without the artist"
+    },
+    "title": {
+      "type": "string",
+      "description": "Song title as on the video, e.g. 'Me Dicen Cuba (Official Video)'"
+    },
+    "artist": {
+      "type": "string",
+      "description": "Artist and band"
+    },
+    "style": {
+      "type": "string",
+      "format": "enum",
+      "enum": [
+        "Timba",
+        "Cuban Son",
+        "Cuban Salsa-Pop",
+        "Puerto Rican Salsa",
+        "New York Salsa",
+        "Cuban Hip-Hop / Fusion"
+      ],
+      "description": "Genre of the whole track; Timba only for modern Cuban timba bands"
+    },
+    "bpm": {
+      "type": "integer",
+      "description": "Main tempo in beats per minute"
+    },
+    "claveType": {
+      "type": "string",
+      "format": "enum",
+      "enum": [
+        "2-3 Son",
+        "2-3 Son Clave",
+        "3-2 Son",
+        "2-3 Rumba",
+        "2-3 Rumba Clave",
+        "3-2 Rumba",
+        "2-3 Son / 6/8 Afro-Bembé Hybrid",
+        "2-3 Son/Rumba Clave"
+      ],
+      "description": "Clave of the song"
+    },
+    "difficultyLevel": {
+      "type": "string",
+      "format": "enum",
+      "enum": [
+        "Beginner",
+        "Improver",
+        "Intermediate",
+        "Advanced"
+      ],
+      "description": "One level only"
+    },
+    "durationSeconds": {
+      "type": "integer",
+      "description": "Full length of THIS video in whole seconds"
+    },
+    "youtubeVideoId": {
+      "type": "string",
+      "description": "11-character id of the attached video"
+    },
+    "youtubeUrl": {
+      "type": "string",
+      "description": "https://www.youtube.com/watch?v=<id>"
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Short song prefix plus number, e.g. \"pupy-seg-1\""
+          },
+          "startTimeSeconds": {
+            "type": "number",
+            "description": "Second the section is HEARD in this video (downbeat). First section 0."
+          },
+          "endTimeSeconds": {
+            "type": "number",
+            "description": "Equals the next section's start; last section ends at durationSeconds."
+          },
+          "formattedRange": {
+            "type": "string",
+            "description": "\"m:ss - m:ss\" matching the numbers"
+          },
+          "sectionName": {
+            "type": "string",
+            "description": "Intro / Tema / Coro / Montuno / Mambo / Bloque / Despelote / Final …, with the coro words if useful"
+          },
+          "bars": {
+            "type": "integer",
+            "description": "4/4 bars in this section; close to duration x bpm / 240"
+          },
+          "startsOnOne": {
+            "type": "boolean",
+            "description": "True when the section starts on a downbeat (the 1)"
+          },
+          "danceGear": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "Wait / Breathe",
+              "Son Cubano",
+              "Casino (Smooth)",
+              "Casino (Flow)",
+              "Rumba Guaguancó",
+              "Afro-Cuban Orishas",
+              "Suelta / Shines",
+              "Despelote / Reparto"
+            ],
+            "description": "What the dancers should do (see system instructions)"
+          },
+          "colorTheme": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "slate",
+              "blue",
+              "emerald",
+              "amber",
+              "red",
+              "purple"
+            ],
+            "description": "Colour that matches the dance gear"
+          },
+          "timingMode": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "Ambient (No Beat)",
+              "Free / Polyrhythmic (6/8)",
+              "Contratiempo (On2)",
+              "Contratiempo (On2) or Smooth On1",
+              "A Tiempo (On1)",
+              "Contrapunto (On2 <-> On1)",
+              "Syncopated Reparto"
+            ],
+            "description": "How to time the steps in this section"
+          },
+          "musicalTrigger": {
+            "type": "string",
+            "description": "What you hear at the start of this section"
+          },
+          "leaderCue": {
+            "type": "string",
+            "description": "What the leader dances, at most ~20 words"
+          },
+          "followerCue": {
+            "type": "string",
+            "description": "What the follower dances, at most ~20 words"
+          },
+          "commonMistakeWarning": {
+            "type": "string",
+            "description": "The typical mistake here"
+          },
+          "instrumentMapping": {
+            "type": "object",
+            "properties": {
+              "feet": {
+                "type": "string",
+                "description": "Instrument the feet follow"
+              },
+              "hipsAndKnees": {
+                "type": "string",
+                "description": "Instrument the hips and knees follow"
+              },
+              "chestAndShoulders": {
+                "type": "string",
+                "description": "Instrument the chest and shoulders follow"
+              }
+            },
+            "required": [
+              "feet",
+              "hipsAndKnees",
+              "chestAndShoulders"
+            ],
+            "propertyOrdering": [
+              "feet",
+              "hipsAndKnees",
+              "chestAndShoulders"
+            ]
+          },
+          "recommendedMoveSlugs": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "items": {
+              "type": "string",
+              "format": "enum",
+              "enum": [
+                "beg-pw-1",
+                "beg-pw-2",
+                "beg-pw-3",
+                "beg-pw-4",
+                "beg-pw-5",
+                "beg-solo-1",
+                "beg-sub-1",
+                "beg-mus-1",
+                "imp-pw-1",
+                "imp-pw-2",
+                "imp-pw-3",
+                "imp-pw-4",
+                "imp-pw-5",
+                "imp-pw-6",
+                "imp-solo-1",
+                "imp-sub-1",
+                "imp-mus-1",
+                "int-pw-1",
+                "int-pw-2",
+                "int-pw-3",
+                "int-pw-4",
+                "int-solo-1",
+                "int-sub-1",
+                "int-mus-1",
+                "adv-pw-1",
+                "adv-pw-2",
+                "adv-solo-1",
+                "adv-sub-1",
+                "adv-sub-2",
+                "adv-mus-1"
+              ],
+              "description": "Curriculum move id that fits this section"
+            }
+          },
+          "handGesture": {
+            "type": "string",
+            "description": "Real rueda call \"Call (signal)\" or \"\" when none"
+          }
+        },
+        "required": [
+          "id",
+          "startTimeSeconds",
+          "endTimeSeconds",
+          "formattedRange",
+          "sectionName",
+          "bars",
+          "startsOnOne",
+          "danceGear",
+          "colorTheme",
+          "timingMode",
+          "musicalTrigger",
+          "leaderCue",
+          "followerCue",
+          "commonMistakeWarning",
+          "instrumentMapping",
+          "recommendedMoveSlugs",
+          "handGesture"
+        ],
+        "propertyOrdering": [
+          "id",
+          "startTimeSeconds",
+          "endTimeSeconds",
+          "formattedRange",
+          "sectionName",
+          "bars",
+          "startsOnOne",
+          "danceGear",
+          "colorTheme",
+          "timingMode",
+          "musicalTrigger",
+          "leaderCue",
+          "followerCue",
+          "commonMistakeWarning",
+          "instrumentMapping",
+          "recommendedMoveSlugs",
+          "handGesture"
+        ]
+      }
+    },
+    "unsureBoundaries": {
+      "type": "array",
+      "description": "Section starts you are not sure of to within 1 second; empty when sure of all",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sectionId": {
+            "type": "string",
+            "description": "Section id"
+          },
+          "start": {
+            "type": "number",
+            "description": "The start you gave"
+          },
+          "couldBe": {
+            "type": "string",
+            "description": "Range it could be, e.g. \"2:50-3:00\""
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why it is unclear"
+          }
+        },
+        "required": [
+          "sectionId",
+          "start",
+          "couldBe",
+          "reason"
+        ],
+        "propertyOrdering": [
+          "sectionId",
+          "start",
+          "couldBe",
+          "reason"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "artist",
+    "style",
+    "bpm",
+    "claveType",
+    "difficultyLevel",
+    "durationSeconds",
+    "youtubeVideoId",
+    "youtubeUrl",
+    "segments",
+    "unsureBoundaries"
+  ],
+  "propertyOrdering": [
+    "id",
+    "title",
+    "artist",
+    "style",
+    "bpm",
+    "claveType",
+    "difficultyLevel",
+    "durationSeconds",
+    "youtubeVideoId",
+    "youtubeUrl",
+    "segments",
+    "unsureBoundaries"
+  ]
+}

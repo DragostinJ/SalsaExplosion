@@ -98,6 +98,10 @@ export const SongSegmentSchema = z.object({
   timingMode: TimingModeSchema.optional(),
   handGesture: z.string().optional(),
   instrumentMapping: InstrumentMappingSchema.optional(),
+  /** 4/4 bars in this section (from the AI Studio song maker; for a future beat count) */
+  bars: z.number().int().positive().optional(),
+  /** True when the section starts on a downbeat ("1") */
+  startsOnOne: z.boolean().optional(),
 });
 export type SongSegment = z.infer<typeof SongSegmentSchema>;
 

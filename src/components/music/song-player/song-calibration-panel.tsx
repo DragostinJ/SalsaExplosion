@@ -7,6 +7,7 @@ import { formatSongTime, getDurationMismatchSeconds } from "@/lib/music/song-tim
 import { clampBoundary, describeBoundaryChanges, nearestBoundaryIndex } from "@/lib/music/calibration";
 import { cn } from "@/lib/utils";
 import { resetBoundaryOverrides, setBoundaryOverride, useCalibratedSegments } from "./calibration-store";
+import { TapTempoPanel, type SectionBeatFit } from "./tap-tempo-panel";
 
 interface CalibrationMark {
   markedAt: number;
@@ -47,6 +48,8 @@ export function SongCalibrationPanel({
   const [marks, setMarks] = useState<CalibrationMark[]>([]);
   const [selected, setSelected] = useState(1);
   const [copied, setCopied] = useState(false);
+  const [showTaps, setShowTaps] = useState(false);
+  const [beatFits, setBeatFits] = useState<SectionBeatFit[]>([]);
   const durationMismatch = getDurationMismatchSeconds(song, actualDurationSeconds);
   const changes = describeBoundaryChanges(song.segments, segments);
 
@@ -82,6 +85,7 @@ export function SongCalibrationPanel({
       authoredDurationSeconds: song.durationSeconds,
       actualDurationSeconds,
       changes,
+      beatFits,
       marks: [...marks].reverse().map((mark) => ({
         section: segments[mark.boundaryIndex]?.id,
         heardAt: Math.round(mark.markedAt * 10) / 10,
@@ -131,7 +135,7 @@ export function SongCalibrationPanel({
         <button
           type="button"
           onClick={copyReport}
-          disabled={marks.length === 0 && changes.length === 0}
+          disabled={marks.length === 0 && changes.length === 0 && beatFits.length === 0}
           className="flex min-h-[44px] items-center gap-1.5 rounded-xl border border-warning-line px-3 font-semibold disabled:opacity-40"
         >
           <Copy className="h-4 w-4" aria-hidden="true" />
@@ -212,6 +216,24 @@ export function SongCalibrationPanel({
             </button>
           </div>
         </div>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setShowTaps((open) => !open)}
+        aria-expanded={showTaps}
+        className={cn(smallButton, "mt-2 w-full")}
+      >
+        {showTaps ? "Hide tap tempo" : `Tap tempo${beatFits.length ? ` · ${beatFits.length} saved` : ""}`}
+      </button>
+      {showTaps && (
+        <TapTempoPanel
+          segments={segments}
+          songBpm={song.bpm}
+          getExactTime={getExactTime}
+          fits={beatFits}
+          onSaveFit={(fit) => setBeatFits((previous) => [...previous.filter((f) => f.section !== fit.section), fit])}
+        />
       )}
 
       {marks.length > 0 && (

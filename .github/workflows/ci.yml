@@ -1,8 +1,11 @@
 name: CI Pipeline
 
 on:
+  # Every branch push is checked, so work from Claude/Antigravity branches is
+  # verified before it reaches main
   push:
-    branches: [main]
+    branches: ["**"]
+    paths-ignore: ["**/*.md"]
   pull_request:
     branches: [main]
 
@@ -47,6 +50,9 @@ jobs:
 
       - name: TypeScript Type Verification
         run: npx tsc --noEmit
+
+      - name: ESLint
+        run: npm run lint
 
       - name: Run Vitest Unit Tests
         run: npm test

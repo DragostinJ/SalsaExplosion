@@ -4,6 +4,7 @@ import {
   SongAnatomySchema,
   SongDanceGearSchema,
   SongDifficultySchema,
+  SongStyleSchema,
   TIMBA_SONG_ANATOMY_DATA,
   TimingModeSchema,
   formatSecondsToTime,
@@ -94,6 +95,9 @@ export function parseSongMapInput(raw: string): SongMapImportResult {
     if (segment.recommendedMoveSlugs.length === 0) {
       warnings.push(`${segment.id}: no recommended moves.`);
     }
+    if (song.style !== "Timba" && segment.danceGear === "Despelote / Reparto") {
+      warnings.push(`${segment.id}: despelote in a ${song.style} song; despelote belongs to timba.`);
+    }
   }
 
   return { song: errors.length ? null : withFixedRanges(song), errors, warnings };
@@ -114,7 +118,7 @@ export function toSongDataEntry(song: SongAnatomy): string {
   const header = [
     "  // -----------------------------------------------------------------",
     `  // "${song.title}" - ${song.artist}`,
-    `  // ${song.difficultyLevel} • ${song.bpm} BPM • ${song.claveType} • ${song.durationSeconds}s`,
+    `  // ${song.style} • ${song.difficultyLevel} • ${song.bpm} BPM • ${song.claveType} • ${song.durationSeconds}s`,
     `  // Video ID: ${song.youtubeVideoId} • timings from Argus`,
     "  // -----------------------------------------------------------------",
   ].join("\n");
@@ -137,6 +141,7 @@ Listen to the YouTube video and return ONLY a JSON object (no prose) with this e
   "id": "kebab-case-song-id",
   "title": "Song title (Official Video)",
   "artist": "Artist",
+  "style": ${quote(SongStyleSchema.options)},
   "bpm": 95,
   "claveType": ${quote(ClaveTypeSchema.options)},
   "difficultyLevel": ${quote(SongDifficultySchema.options)},
@@ -169,6 +174,10 @@ Timing rules (critical, the app switches cues on these exact seconds):
 - First segment starts at 0. Each segment starts exactly where the previous one ends (no gaps, no overlaps).
 - The last segment ends exactly at durationSeconds.
 - Put each boundary on the moment the new section is HEARD (the downbeat where the change lands).
+
+Style rules:
+- "style" is the genre of the whole track. Only use "Timba" for modern Cuban timba bands.
+- For any other style, never use the "Despelote / Reparto" gear, and only use "Rumba Guaguancó" or "Afro-Cuban Orishas" when that rhythm is really played in the section.
 
 Allowed move ids for recommendedMoveSlugs: ${moveIds}`;
 }

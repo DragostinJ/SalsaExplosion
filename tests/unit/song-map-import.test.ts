@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
+import { SongStyleSchema, TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { buildArgusPrompt, parseSongMapInput, toSongDataEntry } from "@/lib/music/song-map-import";
+import { displaySongTitle, isTimba, SONG_STYLE_HINTS } from "@/lib/music/song-style";
 
 const existing = TIMBA_SONG_ANATOMY_DATA.find((s) => s.id === "me-dicen-cuba")!;
 const freshSong = { ...existing, id: "test-new-song", title: "Test Song (Official Video)" };
@@ -81,5 +82,45 @@ describe("Argus song map import", () => {
     expect(prompt).toContain('"Contratiempo (On2)"');
     expect(prompt).toContain("beg-solo-1");
     expect(prompt).toContain("no gaps, no overlaps");
+    expect(prompt).toContain('"Puerto Rican Salsa"');
+  });
+
+  it("requires a style and warns about despelote outside timba", () => {
+    const noStyle: Record<string, unknown> = { ...freshSong };
+    delete noStyle.style;
+    expect(parseSongMapInput(JSON.stringify(noStyle)).errors.join(" ")).toContain("style");
+
+    const salsa = { ...freshSong, style: "Puerto Rican Salsa" };
+    const withDespelote = {
+      ...salsa,
+      segments: salsa.segments.map((segment, index) =>
+        index === 1 ? { ...segment, danceGear: "Despelote / Reparto" } : segment
+      ),
+    };
+    expect(parseSongMapInput(JSON.stringify(withDespelote)).warnings.join(" ")).toContain("despelote belongs to timba");
+    expect(parseSongMapInput(JSON.stringify(salsa)).warnings.join(" ")).not.toContain("despelote");
+  });
+});
+
+describe("song style", () => {
+  it("only timba songs use the despelote gear", () => {
+    for (const song of TIMBA_SONG_ANATOMY_DATA) {
+      if (isTimba(song.style)) continue;
+      const despelote = song.segments.filter((segment) => segment.danceGear === "Despelote / Reparto");
+      expect(despelote.map((segment) => segment.id), song.id).toEqual([]);
+    }
+  });
+
+  it("has a dancer hint for every style", () => {
+    for (const style of SongStyleSchema.options) {
+      expect(SONG_STYLE_HINTS[style].length, style).toBeGreaterThan(20);
+    }
+  });
+
+  it("strips YouTube upload tags from titles", () => {
+    expect(displaySongTitle("Me Dicen Cuba (Official Video)")).toBe("Me Dicen Cuba");
+    expect(displaySongTitle("Toda Una Vida (Video Oficial)")).toBe("Toda Una Vida");
+    expect(displaySongTitle("Tremenda Pinta (Studio Video)")).toBe("Tremenda Pinta");
+    expect(displaySongTitle("537 C.U.B.A.")).toBe("537 C.U.B.A.");
   });
 });

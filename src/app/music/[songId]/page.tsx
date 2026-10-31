@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { SongPlayerScreen } from "@/components/music/song-player/song-player-screen";
+import { displaySongTitle, isTimba } from "@/lib/music/song-style";
 
 interface SongPlayerPageProps {
   params: Promise<{ songId: string }>;
@@ -20,10 +21,11 @@ export const dynamicParams = false;
 export async function generateMetadata({ params }: SongPlayerPageProps): Promise<Metadata> {
   const song = findSong((await params).songId);
   if (!song) return {};
-  const title = song.title.replace(/\s*\(Official Video\)/i, "");
+  const title = displaySongTitle(song.title);
+  const style = isTimba(song.style) ? "timba" : song.style;
   return {
     title: `${title} – What to Dance in Every Section`,
-    description: `Section-by-section timba guide for ${title} by ${song.artist}: when to dance son, casino, rumba or shines, with leader and follower cues.`,
+    description: `Section-by-section ${style} guide for ${title} by ${song.artist}: what to dance in every section, with leader and follower cues.`,
     alternates: { canonical: `/music/${song.id}` },
   };
 }

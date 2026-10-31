@@ -2,8 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { Minus, Plus, X } from "lucide-react";
-import type { SongDanceGear, SongSegment } from "@/lib/constants/timba-song-anatomy";
+import type { SongDanceGear, SongSegment, SongStyle } from "@/lib/constants/timba-song-anatomy";
 import { DANCE_GEAR_LEGEND, ENERGY_LABELS } from "@/lib/music/dance-gear-legend";
+import { SONG_STYLE_HINTS } from "@/lib/music/song-style";
 import { formatSongTime } from "@/lib/music/song-timing";
 import { LEAD_IN_CHOICES, type LeadInSeconds } from "@/lib/music/practice-navigation";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ interface SongPlayerMoreSheetProps {
   open: boolean;
   onClose: () => void;
   segment: SongSegment;
+  songStyle: SongStyle;
   role: DancerRole;
   latencyOffsetSeconds: number;
   onChangeLatency: (seconds: number) => void;
@@ -45,6 +47,7 @@ export function SongPlayerMoreSheet({
   open,
   onClose,
   segment,
+  songStyle,
   role,
   latencyOffsetSeconds,
   onChangeLatency,
@@ -171,6 +174,13 @@ export function SongPlayerMoreSheet({
               />
             </label>
           )}
+        </section>
+
+        <section className="mt-5 border-t border-line pt-4">
+          <h3 className="text-[11px] font-bold uppercase tracking-widest text-ivory-muted">Song style</h3>
+          <p className="mt-1 text-sm">
+            <span className="font-bold text-gold">{songStyle}</span> · {SONG_STYLE_HINTS[songStyle]}
+          </p>
         </section>
 
         <section className="mt-5 border-t border-line pt-4">

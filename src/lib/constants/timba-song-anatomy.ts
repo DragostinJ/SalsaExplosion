@@ -28,6 +28,17 @@ export const SongDifficultySchema = z.enum([
 ]);
 export type SongDifficulty = z.infer<typeof SongDifficultySchema>;
 
+/** Musical style of the whole track, so non-timba songs are labelled honestly. */
+export const SongStyleSchema = z.enum([
+  "Timba",
+  "Cuban Son",
+  "Cuban Salsa-Pop",
+  "Puerto Rican Salsa",
+  "New York Salsa",
+  "Cuban Hip-Hop / Fusion",
+]);
+export type SongStyle = z.infer<typeof SongStyleSchema>;
+
 export const SongSectionNameSchema = z.string().min(1);
 export type SongSectionName = z.infer<typeof SongSectionNameSchema>;
 
@@ -94,6 +105,7 @@ export const SongAnatomySchema = z.object({
   id: z.string(),
   title: z.string(),
   artist: z.string(),
+  style: SongStyleSchema,
   bpm: z.number().positive(),
   claveType: ClaveTypeSchema,
   difficultyLevel: SongDifficultySchema,
@@ -137,6 +149,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     id: "me-dicen-cuba",
     title: "Me Dicen Cuba (Official Video)",
     artist: "Alexander Abreu & Havana D'Primera",
+    style: "Timba",
     bpm: 91,
     claveType: "2-3 Son Clave",
     difficultyLevel: "Beginner",
@@ -374,6 +387,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     id: "la-cosa-mala",
     title: "La Cosa Mala (Official Audio)",
     artist: "El Niño y La Verdad",
+    style: "Timba",
     bpm: 95,
     claveType: "2-3 Son Clave",
     difficultyLevel: "Intermediate",
@@ -588,6 +602,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     id: "agua-pa-yemaya",
     title: "Agua Pa' Yemayá (2026 Official Video)",
     artist: "El Niño y La Verdad & Elito Revé y su Charangón",
+    style: "Timba",
     bpm: 99,
     claveType: "2-3 Son / 6/8 Afro-Bembé Hybrid",
     difficultyLevel: "Advanced",
@@ -850,6 +865,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     id: "aguanile",
     title: "Aguanile (Advanced Afro-Cuban & Casino Masterclass)",
     artist: "Marc Anthony",
+    style: "New York Salsa",
     bpm: 105,
     claveType: "2-3 Son/Rumba Clave",
     difficultyLevel: "Advanced",
@@ -1015,24 +1031,24 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         endTimeSeconds: 280,
         formattedRange: "3:47 - 4:40",
         sectionName: "07. Timbal, Campana & Montuno Climax",
-        danceGear: "Despelote / Reparto",
-        colorTheme: "amber",
-        timingMode: "Syncopated Reparto",
-        handGesture: "Overhead Lasso + Shoulder Point — Tornillo & Despelote",
+        danceGear: "Casino (Flow)",
+        colorTheme: "emerald",
+        timingMode: "A Tiempo (On1)",
+        handGesture: "Dedo (Index finger pointing straight up)",
         musicalTrigger:
           "At 3:47 the timbales, bongo bell, and screaming brass hit maximum overdrive in a relentless Montuno climax.",
         leaderCue:
-          "Signal Overhead Lasso + Shoulder Point! Unleash high-speed Tornillo spins, Tembleque vibration, and face-to-face Despelote body isolation.",
+          "Full-energy casino: Dedo, Siete and Setenta Complicado on the campana, with a quick shine on the timbal breaks.",
         followerCue:
-          "Match the climax energy with rapid hip-shimmy Tembleque, polyrhythmic Despelote isolations, and lightning-fast spins.",
+          "Match the climax with fast, tight spins on your own axis and sharp styling on the brass hits.",
         commonMistakeWarning:
-          "Losing posture or tensing the neck during high-speed Tembleque and Despelote.",
+          "Treating this New York salsa climax like a timba despelote and dropping the partnerwork.",
         instrumentMapping: {
-          feet: "Rapid timbal-roll footwork",
-          hipsAndKnees: "High-frequency Tembleque vibration",
-          chestAndShoulders: "Explosive Despelote & Rumba Columbia",
+          feet: "Rapid timbal and bongo bell",
+          hipsAndKnees: "Driving Cuban motion on the campana",
+          chestAndShoulders: "Screaming brass hits",
         },
-        recommendedMoveSlugs: ["adv-solo-1", "adv-pw-1"],
+        recommendedMoveSlugs: ["int-pw-2", "int-pw-3", "imp-pw-2"],
       },
       {
         id: "ag-seg-8",
@@ -1070,6 +1086,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "id": "esto-te-pone-la-cabeza-mala",
     "title": "Esto Te Pone La Cabeza Mala",
     "artist": "Los Van Van (Juan Formell)",
+    "style": "Timba",
     "bpm": 98,
     "claveType": "2-3 Rumba Clave",
     "difficultyLevel": "Advanced",
@@ -1250,6 +1267,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "id": "pasaporte",
     "title": "Pasaporte",
     "artist": "Alexander Abreu & Havana D'Primera",
+    "style": "Timba",
     "bpm": 94,
     "claveType": "2-3 Son/Rumba Clave",
     "difficultyLevel": "Intermediate",
@@ -1408,6 +1426,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "id": "esto-esta",
     "title": "Esto Está",
     "artist": "Maykel Blanco y su Salsa Mayor",
+    "style": "Timba",
     "bpm": 104,
     "claveType": "2-3 Rumba Clave",
     "difficultyLevel": "Advanced",
@@ -1565,6 +1584,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "id": "537-cuba",
     "title": "537 C.U.B.A.",
     "artist": "Orishas",
+    "style": "Cuban Hip-Hop / Fusion",
     "bpm": 96,
     "claveType": "2-3 Son Clave",
     "difficultyLevel": "Beginner",
@@ -1746,6 +1766,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "id": "toda-una-vida",
     "title": "Toda Una Vida (Video Oficial)",
     "artist": "Leoni Torres",
+    "style": "Cuban Salsa-Pop",
     "bpm": 93,
     "claveType": "2-3 Son Clave",
     "difficultyLevel": "Beginner",
@@ -1936,7 +1957,6 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         "commonMistakeWarning": "Looking down at your feet during solo shines instead of connecting with your partner.",
         "recommendedMoveSlugs": [
           "beg-solo-1",
-          "int-solo-1",
           "beg-pw-2"
         ],
         "timingMode": "A Tiempo (On1)",
@@ -2006,6 +2026,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "id": "tremenda-pinta",
     "title": "Tremenda Pinta (Studio Video)",
     "artist": "Maykel Blanco y su Salsa Mayor",
+    "style": "Timba",
     "bpm": 102,
     "claveType": "2-3 Rumba Clave",
     "difficultyLevel": "Intermediate",
@@ -2217,6 +2238,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "id": "marcando-la-distancia",
     "title": "Marcando La Distancia",
     "artist": "Manolito Simonet y su Trabuco",
+    "style": "Timba",
     "bpm": 97,
     "claveType": "2-3 Son Clave",
     "difficultyLevel": "Intermediate",
@@ -2431,6 +2453,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "id": "baile-inolvidable",
     "title": "BAILE INoLVIDABLE (Video Oficial)",
     "artist": "Bad Bunny",
+    "style": "Puerto Rican Salsa",
     "bpm": 96,
     "claveType": "2-3 Son Clave",
     "difficultyLevel": "Improver",
@@ -2451,8 +2474,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         "followerCue": "Relax into the close embrace and follow the slow bolero weight shifts.",
         "commonMistakeWarning": "Trying to count 1-2-3, 5-6-7 during the rubato bolero intro.",
         "recommendedMoveSlugs": [
-          "beg-mus-1",
-          "imp-sub-1"
+          "beg-mus-1"
         ],
         "timingMode": "Ambient (No Beat)",
         "instrumentMapping": {
@@ -2490,22 +2512,22 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         "endTimeSeconds": 152,
         "formattedRange": "1:38 - 2:32",
         "sectionName": "Salsa Ignition — Pensaba Que Contigo",
-        "danceGear": "Son Cubano",
-        "colorTheme": "blue",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
         "musicalTrigger": "Full salsa band drops in at 1:38 with 'Pensaba que contigo iba a envejecer' (1:42)",
-        "leaderCue": "Start smooth Son or close-hold Casino, opening into Dile Que No and Paséala at 2:09.",
+        "leaderCue": "Start in smooth close-hold Casino, opening into Dile Que No and Paséala at 2:09.",
         "followerCue": "Savor the sudden salsa drop with smooth, grounded steps and soft hip figure-8s.",
         "commonMistakeWarning": "Over-spinning on the very first verse instead of letting the groove settle.",
         "recommendedMoveSlugs": [
-          "imp-sub-1",
+          "beg-pw-1",
           "beg-pw-2",
           "imp-pw-6"
         ],
-        "timingMode": "Contratiempo (On2) or Smooth On1",
+        "timingMode": "A Tiempo (On1)",
         "handGesture": "Dile Que No (Thumb out)",
         "instrumentMapping": {
           "feet": "Conga tumbao and bass drop (1:38)",
-          "hipsAndKnees": "Smooth Cuban Son motion",
+          "hipsAndKnees": "Smooth, grounded Cuban motion",
           "chestAndShoulders": "Warm trombone melody and vocals"
         }
       },
@@ -2572,8 +2594,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         "followerCue": "Shine solo with Paso Básico, lateral steps, and shoulder shimmies on 'esto suena cabrón' (3:58).",
         "commonMistakeWarning": "Staying tangled in two-hand wraps during the band callout at 3:58.",
         "recommendedMoveSlugs": [
-          "beg-solo-1",
-          "int-solo-1"
+          "beg-solo-1"
         ],
         "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
@@ -2591,15 +2612,13 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         "danceGear": "Suelta / Shines",
         "colorTheme": "purple",
         "musicalTrigger": "Call '¡Aprieta, chamaquito, aprieta!' (4:11, 4:28) over the fiery piano and timbal solo",
-        "leaderCue": "Trade playful solo footwork challenges and Rumba Guaguancó steps with your partner.",
-        "followerCue": "Answer the piano solo with rapid footwork shines and playful Rumba hip accents.",
+        "leaderCue": "Trade playful salsa footwork shines with your partner, hitting the piano and timbal breaks.",
+        "followerCue": "Answer the piano solo with quick footwork shines and playful hip and shoulder accents.",
         "commonMistakeWarning": "Standing still watching the leader instead of trading shines during the piano solo.",
         "recommendedMoveSlugs": [
-          "imp-solo-1",
-          "int-solo-1",
           "beg-solo-1"
         ],
-        "timingMode": "Contratiempo (On2) or Smooth On1",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
           "feet": "Virtuoso piano solo syncopations",
           "hipsAndKnees": "Fast rhythmic hip snaps",

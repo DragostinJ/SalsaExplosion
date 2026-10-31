@@ -28,6 +28,7 @@ import {
 import { buildGearQuizOptions, QUIZ_REVEAL_MS, shouldAskQuiz } from "@/lib/music/gear-quiz";
 import { useScreenWakeLock } from "@/lib/hooks/use-screen-wake-lock";
 import { useStoredString, writeStoredString } from "@/lib/hooks/use-stored-string";
+import { displaySongTitle } from "@/lib/music/song-style";
 import { cn } from "@/lib/utils";
 import { SongMapBar } from "./song-map-bar";
 import { SongPlayerMoreSheet, type DancerRole } from "./song-player-more-sheet";
@@ -272,7 +273,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
   }, [isMoreOpen, togglePlay, goPrevious, goNext]);
 
   const ModeIcon = MODE_ICONS[mode];
-  const title = song.title.replace(/\s*\(Official Video\)/i, "");
+  const title = displaySongTitle(song.title);
 
   return (
     <main
@@ -304,7 +305,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
         <div className="min-w-0 flex-1">
           <h1 className="truncate text-sm font-bold">{title}</h1>
           <p className="truncate text-xs text-ivory-muted">
-            {song.artist} · {song.bpm} BPM
+            {song.style} · {song.artist} · {song.bpm} BPM
           </p>
         </div>
         <button
@@ -545,6 +546,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
         open={isMoreOpen}
         onClose={closeMore}
         segment={shown}
+        songStyle={song.style}
         role={role}
         latencyOffsetSeconds={latencyOffsetSeconds}
         onChangeLatency={changeLatency}

@@ -209,6 +209,10 @@ describe("song maker output guards", () => {
     expect(result.errors).toEqual([]);
     expect(result.song?.segments[0].bars).toBeUndefined();
 
+    const doubleTime = { ...freshSong, bpm: 202 };
+    expect(parseSongMapInput(JSON.stringify(doubleTime)).warnings.join(" ")).toContain("double time");
+    expect(parseSongMapInput(JSON.stringify(freshSong)).warnings.join(" ")).not.toContain("double time");
+
     const invented = { ...freshSong, youtubeVideoId: "vanvantemba", youtubeUrl: "https://www.youtube.com/watch?v=vanvantemba" };
     expect(parseSongMapInput(JSON.stringify(invented)).warnings.join(" ")).toContain("looks made up");
     expect(parseSongMapInput(JSON.stringify(freshSong)).warnings.join(" ")).not.toContain("looks made up");

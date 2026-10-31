@@ -94,6 +94,13 @@ export function parseSongMapInput(raw: string): SongMapImportResult {
     warnings.push(`youtubeVideoId "${song.youtubeVideoId}" looks made up; copy the id from the video link.`);
   }
 
+  // Both AI Studio Argon (202) and Pro (190) once counted half-beats on a ~100 BPM timba
+  if (song.bpm > 140 || song.bpm < 60) {
+    warnings.push(
+      `bpm ${song.bpm} is outside 60-140; salsa is usually 80-120. If it is double time, halve bpm and every bars count.`
+    );
+  }
+
   if (TIMBA_SONG_ANATOMY_DATA.some((existing) => existing.id === song.id)) {
     warnings.push(`A song with id "${song.id}" already exists; this entry would replace it.`);
   }

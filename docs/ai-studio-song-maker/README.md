@@ -6,7 +6,9 @@ Both files here are generated from the app's own values: re-run
 
 ## One-time setup
 
-1. AI Studio → **Playground** → new chat. Model: **Gemini Pro (latest)**.
+1. AI Studio → **Playground** → new chat. Model: **Gemini 4 Argon** (paid). On Marcando La
+   Distancia (31 Oct 2026) two Argon runs agreed within 0.5 s on 9 of 11 section starts;
+   Gemini Pro Latest (3.1 Pro Preview) matched only 4 of them.
 2. **System instructions**: replace everything with the contents of `system-instructions.txt`.
 3. **Temperature**: leave the default `1` (Google advises against lowering it for Gemini 3
    models). **Thinking level**: `High`.
@@ -45,6 +47,9 @@ Both files here are generated from the app's own values: re-run
 - `"On1"`, a missing `style`, or adjectives in `handGesture` mean the schema wasn't
   applied: check Structured outputs is on and the saved schema is this one.
 - Wildly wrong section times: check the video was attached (step 2), not just linked.
+- "An internal error has occurred" with the JSON cut off: run it again (Argon stopped once after
+  about 60 s). Don't paste a cut-off answer; the importer can't read it.
+- bpm around 180-220: the model counted half-beats. The importer warns; halve bpm and bars.
 - Times like `118` where formattedRange says `1:18`: the model typed m:ss as digits. The
   importer repairs this from formattedRange and says so; still check those starts by ear.
 - A video id that isn't the one you gave (e.g. `vanvantemba`): the importer warns that it

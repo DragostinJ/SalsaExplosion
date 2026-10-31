@@ -28,7 +28,7 @@
     },
     "bpm": {
       "type": "integer",
-      "description": "Main tempo in beats per minute"
+      "description": "Tempo dancers step to; salsa/timba is 80-120. Halve it if you counted 160-240"
     },
     "claveType": {
       "type": "string",

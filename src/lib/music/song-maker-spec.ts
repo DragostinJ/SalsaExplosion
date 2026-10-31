@@ -46,9 +46,10 @@ HOW TO WORK (one song per run)
 2. durationSeconds = the full length of this video in whole seconds, including any talking, silence or cinematic intro. No section can start at or after durationSeconds: if your times run past the end of the video, you are not listening to this video; start again.
 3. Find every section change by ear: vocals entering, tema to coro, coro-pregón montuno, mambo/brass, bloque or break, despelote/bomba drop, piano or timbal solo, outro.
 4. Put each section start on the downbeat (the "1") where the new section is HEARD, not where the singer breathes before it. One decimal is allowed (e.g. 61.5).
-5. Count the 4/4 bars in each section ("bars"; 0 when the section has no steady beat) and say whether it starts on a "1" ("startsOnOne").
-6. Self-check every section: bars should be close to (endTimeSeconds - startTimeSeconds) x bpm / 240. If it is off by more than one bar, listen again and fix the boundary or the bar count.
-7. List every section start you are not sure of to within 1 second in "unsureBoundaries" (with the range it could be and why). An empty list means you are sure of all of them.
+5. bpm = the tempo dancers step to (one step per beat, 8 beats per dance count). Salsa and timba are almost always 80-120 BPM; if you get 160-240 you are counting half-beats: halve it. Bars use the same beat: 4 beats per bar.
+6. Count the 4/4 bars in each section ("bars"; 0 when the section has no steady beat) and say whether it starts on a "1" ("startsOnOne").
+7. Self-check every section: bars should be close to (endTimeSeconds - startTimeSeconds) x bpm / 240. If it is off by more than one bar, listen again and fix the boundary or the bar count.
+8. List every section start you are not sure of to within 1 second in "unsureBoundaries" (with the range it could be and why). An empty list means you are sure of all of them.
 
 TIMING RULES (the app rejects anything else)
 - The first section starts at 0. endTimeSeconds of a section = startTimeSeconds of the next one (0-28, 28-60, never 0-27, 28-59). The last section ends exactly at durationSeconds.
@@ -147,7 +148,7 @@ export function buildSongMakerResponseSchema(): JsonSchema {
     title: text("Song title as on the video, e.g. 'Me Dicen Cuba (Official Video)'"),
     artist: text("Artist and band"),
     style: choice(SongStyleSchema.options, "Genre of the whole track; Timba only for modern Cuban timba bands"),
-    bpm: { type: "integer", description: "Main tempo in beats per minute" },
+    bpm: { type: "integer", description: "Tempo dancers step to; salsa/timba is 80-120. Halve it if you counted 160-240" },
     claveType: choice(ClaveTypeSchema.options, "Clave of the song"),
     difficultyLevel: choice(SongDifficultySchema.options, "One level only"),
     durationSeconds: { type: "integer", description: "Full length of THIS video in whole seconds; copy it when the message gives it" },

@@ -55,3 +55,4 @@ next-env.d.ts
 
 # Playwright MCP snapshots and screenshots
 /.playwright-mcp/
+/video-check-report.md

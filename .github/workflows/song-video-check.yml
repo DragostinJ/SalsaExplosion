@@ -1,0 +1,52 @@
+name: Weekly Song Video Check
+
+# Several practice-player songs are fan uploads on YouTube. If one is removed,
+# blocked from embedding or re-cut, the player breaks or its section times
+# drift. This opens (or updates) an issue so you hear about it first.
+
+on:
+  schedule:
+    # Mondays 07:00 UTC
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: Check every song video
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Check videos
+        env:
+          # Optional: enables the length comparison (YouTube Data API v3 key)
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: npx tsx scripts/check-song-videos.ts
+
+      - name: Open or update an issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="Song video check failed"
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$TITLE\"" --json number --jq '.[0].number')
+          if [ -f video-check-report.md ]; then BODY_FILE=video-check-report.md; else echo "The check crashed; see the workflow log." > fallback.md; BODY_FILE=fallback.md; fi
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" --body-file "$BODY_FILE"
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file "$BODY_FILE"
+          fi

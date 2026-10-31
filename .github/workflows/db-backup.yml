@@ -31,7 +31,7 @@ jobs:
           echo "Backup file generated. Size: $(ls -lh "${BACKUP_FILE}" | awk '{print $5}')"
 
       - name: Upload Backup to Private Artifacts (90-Day Retention)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: ${{ env.DATABASE_URL != '' }}
         with:
           name: database-backup-${{ github.run_id }}

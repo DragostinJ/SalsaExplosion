@@ -142,8 +142,9 @@ export function buildSongMakerResponseSchema(): JsonSchema {
     youtubeUrl: text("https://www.youtube.com/watch?v=<id>"),
     segments: {
       type: "array",
+      // No maxItems: Gemini rejects a size cap on an array of objects this complex
+      // ("Request contains an invalid argument"); the 8-16 rule is in the instructions.
       minItems: 3,
-      maxItems: 20,
       items: { type: "object", properties: segmentProperties, required: segmentKeys, propertyOrdering: segmentKeys },
     },
     unsureBoundaries: {

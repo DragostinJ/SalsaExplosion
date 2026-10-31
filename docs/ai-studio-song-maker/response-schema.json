@@ -71,7 +71,6 @@
     "segments": {
       "type": "array",
       "minItems": 3,
-      "maxItems": 20,
       "items": {
         "type": "object",
         "properties": {

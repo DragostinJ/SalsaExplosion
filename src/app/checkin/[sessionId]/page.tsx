@@ -12,6 +12,8 @@ import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { BackButton } from "@/components/navigation/back-button";
 import { QrCheckInCard } from "@/components/schedule/qr-checkin-card";
+import { ClassSongLinks } from "@/components/music/class-song-links";
+import { summarizeClassSongs } from "@/lib/music/class-songs";
 import { reportError } from "@/lib/monitoring";
 
 interface CheckInPageProps {
@@ -72,6 +74,10 @@ export default async function StudentQrCheckInPage({
         existingBooking={existingBooking}
         preferredRole={user.preferredRole}
       />
+
+      <div className="mt-6">
+        <ClassSongLinks songs={summarizeClassSongs(classSession.practiceSongIds)} />
+      </div>
     </main>
   );
 }

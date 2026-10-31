@@ -16,6 +16,7 @@ import {
 import { createSignedUploadUrlHelper } from "@/lib/storage";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import { summarizeClassSongs, type ClassSongSummary } from "@/lib/music/class-songs";
 
 // ==========================================
 // SCHEMAS
@@ -72,6 +73,8 @@ export interface AttendedRecapItem {
   recapNotes: string;
   recapFigures: string[];
   recapRecordedAt: string | null;
+  /** Practice-player songs the teacher linked to this class */
+  practiceSongs: ClassSongSummary[];
 }
 
 // ==========================================
@@ -312,6 +315,7 @@ export async function getMyAttendedClassRecapsAction() {
       recapVideoUrl: b.classSession.recapVideoUrl!,
       recapNotes: b.classSession.recapNotes ?? "",
       recapFigures: b.classSession.recapFigures,
+      practiceSongs: summarizeClassSongs(b.classSession.practiceSongIds),
       recapRecordedAt: b.classSession.recapRecordedAt
         ? b.classSession.recapRecordedAt.toISOString()
         : null,
@@ -368,6 +372,7 @@ export async function getAllPublishedClassRecapsAction() {
       recapVideoUrl: c.recapVideoUrl!,
       recapNotes: c.recapNotes ?? "",
       recapFigures: c.recapFigures,
+      practiceSongs: summarizeClassSongs(c.practiceSongIds),
       recapRecordedAt: c.recapRecordedAt ? c.recapRecordedAt.toISOString() : null,
     }));
 

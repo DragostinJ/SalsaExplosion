@@ -5,6 +5,8 @@ import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import { ClassRosterSummary } from "@/lib/constants/management";
 import { InstructorNav } from "@/components/navigation/instructor-nav";
 import { ClassRosterWorkspace } from "@/components/instructor/class-roster-workspace";
+import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
+import { summarizeClassSongs } from "@/lib/music/class-songs";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
@@ -82,6 +84,7 @@ export default async function InstructorRosterPage() {
       recapNotes: cls.recapNotes,
       recapFigures: cls.recapFigures,
       recapPublished: cls.recapPublished,
+      practiceSongIds: cls.practiceSongIds,
       bookings: cls.bookings.map((b) => ({
         id: b.id,
         userId: b.user.id,
@@ -123,7 +126,10 @@ export default async function InstructorRosterPage() {
         </Badge>
       </div>
 
-      <ClassRosterWorkspace initialClasses={serializedClasses} />
+      <ClassRosterWorkspace
+        initialClasses={serializedClasses}
+        songOptions={summarizeClassSongs(TIMBA_SONG_ANATOMY_DATA.map((song) => song.id))}
+      />
     </main>
   );
 }

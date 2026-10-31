@@ -60,6 +60,8 @@ export interface ClassRosterSummary {
   recapNotes?: string | null;
   recapFigures?: string[];
   recapPublished?: boolean;
+  /** "Tonight's songs" linked to this class (practice-player song ids) */
+  practiceSongIds?: string[];
   bookings: RosterBookingItem[];
 }
 

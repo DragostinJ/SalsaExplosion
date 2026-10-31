@@ -31,13 +31,18 @@ import { RosterBalanceMeters } from "./roster/roster-balance-meters";
 import { RosterDancerList } from "./roster/roster-dancer-list";
 import { RosterRecapModal } from "./roster/roster-recap-modal";
 import { useTimeout } from "@/lib/hooks/use-timeout";
+import type { ClassSongSummary } from "@/lib/music/class-songs";
+import { ClassSongsPicker } from "./roster/class-songs-picker";
 
 interface ClassRosterWorkspaceProps {
   initialClasses: ClassRosterSummary[];
+  /** Practice-player songs a teacher can link to a class (resolved on the server) */
+  songOptions?: ClassSongSummary[];
 }
 
 export function ClassRosterWorkspace({
   initialClasses,
+  songOptions = [],
 }: ClassRosterWorkspaceProps) {
   const { schedule: scheduleTimeout } = useTimeout();
   const [classes, setClasses] = useState<ClassRosterSummary[]>(initialClasses);
@@ -349,6 +354,20 @@ export function ClassRosterWorkspace({
           <CardContent className="space-y-4">
             {/* Live Lead / Follow Floor Balance Meters */}
             <RosterBalanceMeters activeClass={activeClass} />
+
+            {songOptions.length > 0 && (
+              <ClassSongsPicker
+                key={activeClass.id}
+                classSessionId={activeClass.id}
+                initialSongIds={activeClass.practiceSongIds ?? []}
+                songOptions={songOptions}
+                onSaved={(songIds) =>
+                  setClasses((previous) =>
+                    previous.map((cls) => (cls.id === activeClass.id ? { ...cls, practiceSongIds: songIds } : cls))
+                  )
+                }
+              />
+            )}
 
             {/* Expandable Studio Door QR Code Display */}
             {showQrModal && (

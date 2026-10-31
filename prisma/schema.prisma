@@ -150,6 +150,9 @@ model ClassSession {
   recapRecordedAt DateTime?
   recapPublished Boolean    @default(false)
 
+  // Practice-player songs the teacher used in this class (ids from TIMBA_SONG_ANATOMY_DATA)
+  practiceSongIds String[]  @default([])
+
   // Relations
   instructorId   String
   instructor     User       @relation("InstructorClasses", fields: [instructorId], references: [id], onDelete: Restrict)

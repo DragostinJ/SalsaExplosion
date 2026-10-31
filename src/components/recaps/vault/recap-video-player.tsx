@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
+import { ClassSongLinks } from "@/components/music/class-song-links";
 import { getSafeVideoEmbed, type AttendedRecapItem } from "./recap-types";
 
 interface RecapVideoPlayerProps {
@@ -154,6 +155,8 @@ export function RecapVideoPlayer({
             ))}
           </div>
         </div>
+
+        <ClassSongLinks songs={selectedRecap.practiceSongs ?? []} heading="Songs from this class" />
 
         {/* Maestro Notes */}
         {selectedRecap.recapNotes && (

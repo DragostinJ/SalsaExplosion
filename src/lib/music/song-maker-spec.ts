@@ -9,6 +9,7 @@ import {
   type SongDanceGear,
 } from "@/lib/constants/timba-song-anatomy";
 import { CUBAN_CURRICULUM_DATA } from "@/lib/constants/cuban-curriculum-2027";
+import { NO_RUEDA_CALL, RUEDA_CALLS } from "@/lib/music/rueda-calls";
 
 /**
  * Setup for the Google AI Studio "song maker" (Argus): system instructions and
@@ -40,8 +41,9 @@ WHAT THE APP DOES WITH YOUR ANSWER
 The player plays the attached YouTube video full-screen on a phone and shows a NOW card (what to dance in this section) and a NEXT card. The card flips on the EXACT second you give as a section start. Dancers use it to learn where to dance slow, fast, contratiempo, son, rumba, shines or despelote. Timing accuracy matters more than anything else. Your answer must follow the response schema exactly; every label comes from fixed lists.
 
 HOW TO WORK (one song per run)
+0. Every run is independent. Ignore any earlier songs, videos or answers in this conversation: never reuse their id, youtubeVideoId, durationSeconds or section times. youtubeVideoId is the id of the video attached to the LATEST message.
 1. Listen to the WHOLE attached video from 0:00 to the end. Use only what you hear in THIS video. Never use timings from the album version, another upload, lyrics sites or memory.
-2. durationSeconds = the full length of this video in whole seconds, including any talking, silence or cinematic intro.
+2. durationSeconds = the full length of this video in whole seconds, including any talking, silence or cinematic intro. No section can start at or after durationSeconds: if your times run past the end of the video, you are not listening to this video; start again.
 3. Find every section change by ear: vocals entering, tema to coro, coro-pregón montuno, mambo/brass, bloque or break, despelote/bomba drop, piano or timbal solo, outro.
 4. Put each section start on the downbeat (the "1") where the new section is HEARD, not where the singer breathes before it. One decimal is allowed (e.g. 61.5).
 5. Count the 4/4 bars in each section ("bars") and say whether it starts on a "1" ("startsOnOne").
@@ -74,7 +76,7 @@ CUES (read on a phone while dancing)
 MOVES: recommendedMoveSlugs = 1 to 3 ids that really fit the section and the song's level. Vary them; don't repeat the same pair in every section.
 ${moves}
 
-RUEDA CALL: handGesture = a real rueda call and its hand signal, written "Call (signal)", e.g. "Dedo (Index finger pointing straight up)", only where a caller would really call it. Otherwise an empty string "". Never adjectives like "relaxed" or "dynamic".
+RUEDA CALL: handGesture = the rueda call a caller would really shout in this section, picked from the allowed list (e.g. "Dedo", "Setenta"). Use "none" for most sections; only sections where a rueda would actually call get a name.
 
 Answer with the JSON only.`;
 }
@@ -125,7 +127,7 @@ export function buildSongMakerResponseSchema(): JsonSchema {
         "Curriculum move id that fits this section"
       ),
     },
-    handGesture: text('Real rueda call "Call (signal)" or "" when none'),
+    handGesture: choice([NO_RUEDA_CALL, ...RUEDA_CALLS], 'Rueda call a caller would shout here, or "none"'),
   };
   const segmentKeys = Object.keys(segmentProperties);
 

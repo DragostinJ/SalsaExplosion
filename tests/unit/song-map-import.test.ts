@@ -2,9 +2,16 @@ import { describe, it, expect } from "vitest";
 import { SongStyleSchema, TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { buildArgusPrompt, parseSongMapInput, toSongDataEntry } from "@/lib/music/song-map-import";
 import { displaySongTitle, isTimba, SONG_STYLE_HINTS } from "@/lib/music/song-style";
+import { normalizeRuedaCall } from "@/lib/music/rueda-calls";
 
 const existing = TIMBA_SONG_ANATOMY_DATA.find((s) => s.id === "me-dicen-cuba")!;
-const freshSong = { ...existing, id: "test-new-song", title: "Test Song (Official Video)" };
+const freshSong = {
+  ...existing,
+  id: "test-new-song",
+  title: "Test Song (Official Video)",
+  youtubeVideoId: "TestVideo01",
+  youtubeUrl: "https://www.youtube.com/watch?v=TestVideo01",
+};
 
 describe("Argus song map import", () => {
   it("accepts a valid song, including JSON wrapped in a markdown fence", () => {
@@ -122,5 +129,45 @@ describe("song style", () => {
     expect(displaySongTitle("Toda Una Vida (Video Oficial)")).toBe("Toda Una Vida");
     expect(displaySongTitle("Tremenda Pinta (Studio Video)")).toBe("Tremenda Pinta");
     expect(displaySongTitle("537 C.U.B.A.")).toBe("537 C.U.B.A.");
+  });
+});
+
+describe("song maker output guards", () => {
+  it("rejects a new song on a video another song already uses (copied from an earlier chat)", () => {
+    const copied = { ...freshSong, youtubeVideoId: existing.youtubeVideoId };
+    const result = parseSongMapInput(JSON.stringify(copied));
+    expect(result.song).toBeNull();
+    expect(result.errors.join(" ")).toContain(`already used by "${existing.id}"`);
+    // Re-importing the same song on its own video is fine
+    expect(parseSongMapInput(JSON.stringify(existing)).errors).toEqual([]);
+  });
+
+  it("keeps real rueda calls and drops adjectives and 'none'", () => {
+    expect(normalizeRuedaCall("Dedo")).toBe("Dedo");
+    expect(normalizeRuedaCall("Dedo (Index finger pointing straight up)")).toBe("Dedo (Index finger pointing straight up)");
+    expect(normalizeRuedaCall("vacilala")).toBe("vacilala");
+    expect(normalizeRuedaCall("Enchufla Doble")).toBe("Enchufla Doble");
+    for (const junk of ["relaxed", "dramatic", "none", "", undefined, "Dedos everywhere"]) {
+      expect(normalizeRuedaCall(junk), String(junk)).toBeUndefined();
+    }
+    const withJunk = {
+      ...freshSong,
+      segments: freshSong.segments.map((segment, index) => ({ ...segment, handGesture: index === 0 ? "dramatic" : "Setenta" })),
+    };
+    const result = parseSongMapInput(JSON.stringify(withJunk));
+    expect(result.warnings.join(" ")).toContain('"dramatic" isn\'t a rueda call');
+    expect(result.song?.segments[0].handGesture).toBeUndefined();
+    expect(result.song?.segments[1].handGesture).toBe("Setenta");
+  });
+
+  it("flags bar counts that don't fit the section length", () => {
+    const segment = freshSong.segments[1];
+    const expected = ((segment.endTimeSeconds - segment.startTimeSeconds) * freshSong.bpm) / 240;
+    const withBars = (bars: number) => ({
+      ...freshSong,
+      segments: freshSong.segments.map((s, index) => (index === 1 ? { ...s, bars } : s)),
+    });
+    expect(parseSongMapInput(JSON.stringify(withBars(Math.round(expected)))).warnings.join(" ")).not.toContain("bars but");
+    expect(parseSongMapInput(JSON.stringify(withBars(Math.round(expected) + 4))).warnings.join(" ")).toContain("bars but");
   });
 });

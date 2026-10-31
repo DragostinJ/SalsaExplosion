@@ -19,7 +19,11 @@ Both files here are generated from the app's own values: re-run
 
 ## Each song (one song per run)
 
-1. Open a fresh copy of the saved prompt (or a new chat with the same settings).
+1. **Start a brand-new chat for every song** (a fresh copy of the saved prompt). Don't
+   continue the chat you used for the last song: the model copies the earlier song's
+   video id, length and times. That happened with Temba, Tumba, Timba on 31 Oct 2026.
+   In the new chat, check the System instructions box starts with
+   "You are Argus, the song maker for RitmoFlow".
 2. Attach the video: **+** (insert) → **YouTube video** → paste the link. The video must
    appear as an attachment. A link typed as text is not watched, and the model then
    guesses timings from memory.

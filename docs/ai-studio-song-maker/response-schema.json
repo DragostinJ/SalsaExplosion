@@ -231,7 +231,39 @@
           },
           "handGesture": {
             "type": "string",
-            "description": "Real rueda call \"Call (signal)\" or \"\" when none"
+            "format": "enum",
+            "enum": [
+              "none",
+              "Guapea",
+              "Dile Que No",
+              "Enchufla",
+              "Enchufla Doble",
+              "Dame",
+              "Dame Dos",
+              "Exhíbela",
+              "Prima",
+              "Setenta",
+              "Setenta Complicado",
+              "Vacílala",
+              "Sombrero",
+              "Kentucky",
+              "Paséala",
+              "Montana",
+              "Dedo",
+              "El Uno",
+              "El Dos",
+              "Siete",
+              "Siete Loco",
+              "Coca-Cola",
+              "Bayamo",
+              "Abanico",
+              "Candado",
+              "Tarro",
+              "Rodeo",
+              "Al Medio",
+              "Pa'Fuera"
+            ],
+            "description": "Rueda call a caller would shout here, or \"none\""
           }
         },
         "required": [

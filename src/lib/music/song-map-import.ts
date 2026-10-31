@@ -13,6 +13,7 @@ import {
 } from "@/lib/constants/timba-song-anatomy";
 import { CUBAN_CURRICULUM_DATA } from "@/lib/constants/cuban-curriculum-2027";
 import { validateSongTimeline } from "@/lib/music/song-timing";
+import { NO_RUEDA_CALL, normalizeRuedaCall } from "@/lib/music/rueda-calls";
 
 /**
  * Import pipeline for song maps produced by Argus (the Gemini timing tool):
@@ -83,7 +84,29 @@ export function parseSongMapInput(raw: string): SongMapImportResult {
     warnings.push(`A song with id "${song.id}" already exists; this entry would replace it.`);
   }
 
+  // A different song on the same video almost always means the song maker
+  // copied an earlier song from the same chat (wrong id, length and times).
+  const sameVideo = TIMBA_SONG_ANATOMY_DATA.find(
+    (existing) => existing.youtubeVideoId === song.youtubeVideoId && existing.id !== song.id
+  );
+  if (sameVideo) {
+    errors.push(
+      `youtubeVideoId ${song.youtubeVideoId} is already used by "${sameVideo.id}". The song maker probably copied an earlier song: re-run it in a fresh chat with this song's video attached.`
+    );
+  }
+
   for (const segment of song.segments) {
+    if (segment.handGesture && !normalizeRuedaCall(segment.handGesture) && segment.handGesture !== NO_RUEDA_CALL) {
+      warnings.push(`${segment.id}: "${segment.handGesture}" isn't a rueda call (dropped on copy).`);
+    }
+    if (segment.bars !== undefined) {
+      const expectedBars = ((segment.endTimeSeconds - segment.startTimeSeconds) * song.bpm) / 240;
+      if (Math.abs(segment.bars - expectedBars) > 1.5) {
+        warnings.push(
+          `${segment.id}: ${segment.bars} bars but its length at ${song.bpm} BPM is about ${expectedBars.toFixed(1)}; check this boundary by ear.`
+        );
+      }
+    }
     const expectedRange = `${formatSecondsToTime(segment.startTimeSeconds)} - ${formatSecondsToTime(segment.endTimeSeconds)}`;
     if (segment.formattedRange !== expectedRange) {
       warnings.push(`${segment.id}: formattedRange "${segment.formattedRange}" should be "${expectedRange}" (fixed on copy).`);
@@ -106,10 +129,14 @@ export function parseSongMapInput(raw: string): SongMapImportResult {
 function withFixedRanges(song: SongAnatomy): SongAnatomy {
   return {
     ...song,
-    segments: song.segments.map((segment) => ({
-      ...segment,
-      formattedRange: `${formatSecondsToTime(segment.startTimeSeconds)} - ${formatSecondsToTime(segment.endTimeSeconds)}`,
-    })),
+    segments: song.segments.map(({ handGesture, ...segment }) => {
+      const ruedaCall = normalizeRuedaCall(handGesture);
+      return {
+        ...segment,
+        ...(ruedaCall ? { handGesture: ruedaCall } : {}),
+        formattedRange: `${formatSecondsToTime(segment.startTimeSeconds)} - ${formatSecondsToTime(segment.endTimeSeconds)}`,
+      };
+    }),
   };
 }
 

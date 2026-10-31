@@ -6,7 +6,7 @@ import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import { getRateLimitIdentifier, withRateLimit } from "@/lib/ratelimit";
 import { reportError } from "@/lib/monitoring";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
-import { displaySongTitle } from "@/lib/music/song-style";
+import { rankPracticeHotspots, type PracticeHotspot } from "@/lib/music/practice-hotspots";
 
 /**
  * Anonymous practice hotspots: the player reports when someone loops a section
@@ -58,16 +58,6 @@ export async function recordPracticeEventAction(rawInput: PracticeEventInput): P
   }
 }
 
-export interface PracticeHotspot {
-  songId: string;
-  songTitle: string;
-  sectionId: string;
-  sectionName: string;
-  startTimeSeconds: number;
-  loops: number;
-  replays: number;
-}
-
 /** Staff only: sections looped or replayed most in the last `days` days. */
 export async function getPracticeHotspotsAction(days = 30, limit = 15): Promise<PracticeHotspot[]> {
   await requireRole(STAFF_ROLES);
@@ -80,25 +70,15 @@ export async function getPracticeHotspotsAction(days = 30, limit = 15): Promise<
       _sum: { loops: true, replays: true },
     });
 
-    return rows
-      .flatMap((row) => {
-        const song = TIMBA_SONG_ANATOMY_DATA.find((candidate) => candidate.id === row.songId);
-        const section = song?.segments.find((segment) => segment.id === row.sectionId);
-        if (!song || !section) return [];
-        return [
-          {
-            songId: song.id,
-            songTitle: displaySongTitle(song.title),
-            sectionId: section.id,
-            sectionName: section.sectionName,
-            startTimeSeconds: section.startTimeSeconds,
-            loops: row._sum.loops ?? 0,
-            replays: row._sum.replays ?? 0,
-          },
-        ];
-      })
-      .sort((a, b) => b.loops + b.replays - (a.loops + a.replays))
-      .slice(0, Math.max(1, Math.min(limit, 50)));
+    return rankPracticeHotspots(
+      rows.map((row) => ({
+        songId: row.songId,
+        sectionId: row.sectionId,
+        loops: row._sum.loops ?? 0,
+        replays: row._sum.replays ?? 0,
+      })),
+      limit
+    );
   } catch (error) {
     reportError("getPracticeHotspotsAction", error);
     return [];

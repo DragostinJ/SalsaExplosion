@@ -101,6 +101,7 @@ describe("L3: User Provisioning Resilience & Fail-Soft Auth", () => {
       preferredRole: "LEAD" as const,
       classCredits: 1,
       stripeCustomerId: null,
+      classRemindersOptOut: false,
       createdAt: new Date(),
       updatedAt: new Date(),
       subscription: null,

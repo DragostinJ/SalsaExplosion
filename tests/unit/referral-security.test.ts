@@ -59,6 +59,7 @@ describe("B3: Referral Anti-Exploit Security & Concurrency Hardening", () => {
     classCredits: 2,
     stripeCustomerId: null,
     subscription: null,
+    classRemindersOptOut: false,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -79,6 +80,7 @@ describe("B3: Referral Anti-Exploit Security & Concurrency Hardening", () => {
     classCredits: 3,
     stripeCustomerId: null,
     subscription: null,
+    classRemindersOptOut: false,
     createdAt: new Date(),
     updatedAt: new Date(),
   };

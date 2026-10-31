@@ -24,6 +24,9 @@ const isPublicRoute = createRouteMatcher([
   "/api/health(.*)",
   "/api/webhooks/clerk",
   "/api/webhooks/stripe",
+  // Own auth: CRON_SECRET bearer token / signed unsubscribe link
+  "/api/cron/(.*)",
+  "/api/email/unsubscribe",
   "/robots.txt",
   "/sitemap.xml",
   "/llms.txt",

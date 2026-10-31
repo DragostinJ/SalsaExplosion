@@ -114,6 +114,8 @@ model User {
   auditLogs          AuditLog[]
   songSectionProgress SongSectionProgress[]
 
+  classRemindersOptOut Boolean @default(false) // unsubscribed from class reminder emails
+
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
 
@@ -176,6 +178,7 @@ model Booking {
   
   checkedInAt    DateTime?
   cancelledAt    DateTime?
+  reminderSentAt DateTime? // class reminder email sent (one per booking)
 
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   classSession   ClassSession  @relation(fields: [classSessionId], references: [id], onDelete: Cascade)

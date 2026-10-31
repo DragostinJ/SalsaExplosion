@@ -16,6 +16,7 @@ export function buildUser(overrides: Partial<User> = {}): User {
     preferredRole: DanceRole.LEAD,
     classCredits: 2,
     stripeCustomerId: null,
+    classRemindersOptOut: false,
     createdAt: new Date(),
     updatedAt: new Date(),
     ...overrides,

@@ -24,8 +24,5 @@ export default defineConfig({
     url: "http://localhost:3100",
     reuseExistingServer: false,
     timeout: 120 * 1000,
-    env: {
-      NODE_TLS_REJECT_UNAUTHORIZED: "0",
-    },
   },
 });

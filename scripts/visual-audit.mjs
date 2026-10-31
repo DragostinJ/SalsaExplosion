@@ -4,8 +4,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// Disable TLS verification warnings for Windows local root cert environments
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

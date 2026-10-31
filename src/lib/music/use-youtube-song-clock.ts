@@ -27,6 +27,8 @@ const MAX_BACKWARD_CORRECTION_SECONDS = 0.35;
 interface UseYouTubeSongClockOptions extends SongClockOptions {
   videoId: string;
   segments: readonly SongSegment[];
+  /** Whole second the video starts at when first played (section links). Read once per player. */
+  startSeconds?: number;
 }
 
 export interface YouTubeSongClock extends SongClock {
@@ -39,6 +41,7 @@ export function useYouTubeSongClock({
   segments,
   latencyOffsetSeconds = 0,
   onFrame,
+  startSeconds = 0,
 }: UseYouTubeSongClockOptions): YouTubeSongClock {
   const [host, setHost] = useState<HTMLDivElement | null>(null);
   const playerRef = useRef<YTPlayerInstance | null>(null);
@@ -48,6 +51,7 @@ export function useYouTubeSongClock({
   const rateRef = useRef(1);
   const segmentsRef = useRef(segments);
   const onFrameRef = useRef(onFrame);
+  const startRef = useRef(startSeconds);
 
   const [isReady, setIsReady] = useState(false);
   const [playerState, setPlayerState] = useState<number>(YT_STATE.UNSTARTED);
@@ -60,6 +64,11 @@ export function useYouTubeSongClock({
   useEffect(() => {
     offsetRef.current = latencyOffsetSeconds;
   }, [latencyOffsetSeconds]);
+
+  // Only read when the player is created, so changing it never restarts the video
+  useEffect(() => {
+    startRef.current = startSeconds;
+  }, [startSeconds]);
 
   useEffect(() => {
     segmentsRef.current = segments;
@@ -144,6 +153,7 @@ export function useYouTubeSongClock({
           rel: 0,
           modestbranding: 1,
           origin: window.location.origin,
+          ...(startRef.current > 0 ? { start: Math.floor(startRef.current) } : {}),
         },
         events: {
           onReady: (event) => {

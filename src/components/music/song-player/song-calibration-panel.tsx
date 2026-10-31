@@ -152,17 +152,15 @@ export function SongCalibrationPanel({
               <ChevronLeft className="h-4 w-4" aria-hidden="true" />
             </button>
             <p className="min-w-0 flex-1 truncate text-center">
-              <span className="font-bold">
-                {boundaryIndex + 1}. {boundary.sectionName}
-              </span>{" "}
-              <span className="font-mono">{formatSongTime(boundary.startTimeSeconds, true)}</span>
+              <span className="font-mono font-bold">{formatSongTime(boundary.startTimeSeconds, true)}</span>
               {shift !== 0 && (
                 <span className="font-mono text-warning">
                   {" "}
                   ({shift > 0 ? "+" : ""}
                   {shift.toFixed(1)}s)
                 </span>
-              )}
+              )}{" "}
+              · {boundaryIndex + 1}. {boundary.sectionName}
             </p>
             <button
               type="button"

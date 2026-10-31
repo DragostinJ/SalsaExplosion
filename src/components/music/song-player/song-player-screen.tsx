@@ -1,8 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
-import Link from "next/link";
-import { AudioLines, BookOpen, ChevronLeft, Ear, Loader2, Maximize2 } from "lucide-react";
+import { AudioLines, Loader2 } from "lucide-react";
 import type { SongAnatomy, SongDanceGear } from "@/lib/constants/timba-song-anatomy";
 import { DANCE_GEAR_LEGEND, ENERGY_LABELS } from "@/lib/music/dance-gear-legend";
 import {
@@ -29,11 +28,13 @@ import { buildGearQuizOptions, QUIZ_REVEAL_MS, shouldAskQuiz } from "@/lib/music
 import { useScreenWakeLock } from "@/lib/hooks/use-screen-wake-lock";
 import { useStoredString, writeStoredString } from "@/lib/hooks/use-stored-string";
 import { displaySongTitle } from "@/lib/music/song-style";
+import { linkedSectionIndex, linkedStartSeconds, readLinkedSectionId } from "@/lib/music/section-link";
 import { cn } from "@/lib/utils";
 import { SongMapBar } from "./song-map-bar";
 import { SongPlayerMoreSheet, type DancerRole } from "./song-player-more-sheet";
 import { SongCalibrationPanel } from "./song-calibration-panel";
 import { useCalibratedSegments } from "./calibration-store";
+import { PlayerHeader } from "./player-header";
 import { PlayerControls } from "./player-controls";
 import { SectionList } from "./section-list";
 import { DanceView, LearnView, QuizView, type QuizState } from "./now-card-views";
@@ -44,7 +45,6 @@ import { PLAYER_STORAGE_KEYS as KEYS, PRACTICE_MODES, parsePracticeMode, type Pr
 const GET_READY_SECONDS = 4;
 const HAPTIC_PULSE_MS = 35;
 const ALL_GEARS = Object.keys(DANCE_GEAR_LEGEND) as SongDanceGear[];
-const MODE_ICONS = { learn: BookOpen, dance: Maximize2, quiz: Ear } as const;
 
 const noopSubscribe = () => () => {};
 const readCalibrateFlag = () => new URLSearchParams(window.location.search).has("calibrate");
@@ -70,6 +70,9 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
   const isCalibrating = useSyncExternalStore(noopSubscribe, readCalibrateFlag, () => false);
   // Authored map; nudged boundaries only while calibrating
   const segments = useCalibratedSegments(song, isCalibrating);
+  // ?section=<id> link: preview that section until playback starts there
+  const linkedIndex = linkedSectionIndex(segments, useSyncExternalStore(noopSubscribe, readLinkedSectionId, () => null));
+  const linkStart = linkedStartSeconds(segments, linkedIndex);
 
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
@@ -91,6 +94,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
     segments,
     latencyOffsetSeconds,
     onFrame,
+    startSeconds: linkStart,
   });
   const audioClock = useAudioSongClock({ audioUrl, segments, latencyOffsetSeconds, onFrame });
   const clock: SongClock = audioUrl ? audioClock : youtubeClock;
@@ -109,7 +113,14 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
 
   // Derived section state
   const activeIndex = Math.max(0, clock.segmentIndex);
-  const effectivePreview = previewIndex !== null && previewIndex !== activeIndex ? previewIndex : null;
+  // Paused at the start or in the linked lead-in (YouTube reports the cued start time)
+  const atLink =
+    linkedIndex !== null &&
+    !clock.isPlaying &&
+    (clock.currentTime < 0.5 ||
+      (clock.currentTime >= linkStart - 0.5 && clock.currentTime < segments[linkedIndex].startTimeSeconds));
+  const requested = previewIndex ?? (atLink ? linkedIndex : null);
+  const effectivePreview = requested !== null && requested !== activeIndex ? requested : null;
   const isPreviewing = effectivePreview !== null;
   const shownIndex = effectivePreview ?? activeIndex;
   const shown = segments[shownIndex];
@@ -274,7 +285,6 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [isMoreOpen, togglePlay, goPrevious, goNext]);
 
-  const ModeIcon = MODE_ICONS[mode];
   const title = displaySongTitle(song.title);
 
   return (
@@ -285,62 +295,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
       className="mx-auto flex h-dvh w-full max-w-5xl flex-col overflow-hidden px-3 pt-[max(0.5rem,env(safe-area-inset-top))] pb-[max(0.5rem,env(safe-area-inset-bottom))] text-ivory"
     >
       {/* Top bar */}
-      <header className="flex shrink-0 items-center gap-2 pb-2">
-        {onExit ? (
-          <button
-            type="button"
-            onClick={onExit}
-            aria-label="Close preview"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-2"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-        ) : (
-          <Link
-            href="/music"
-            aria-label="Back to all songs"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-2"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Link>
-        )}
-        <div className="min-w-0 flex-1">
-          <h1 className="truncate text-sm font-bold">{title}</h1>
-          <p className="truncate text-xs text-ivory-muted">
-            {song.style} · {song.artist} · {song.bpm} BPM
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={cycleMode}
-          aria-label={`Practice mode: ${mode}. Tap to switch`}
-          data-testid="player-mode"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-2 text-gold"
-        >
-          <ModeIcon className="h-5 w-5" />
-        </button>
-        <div className="flex shrink-0 rounded-full border border-line bg-surface-2 p-0.5" role="radiogroup" aria-label="Your role">
-          {(["leader", "follower"] as const).map((option) => (
-            <button
-              key={option}
-              type="button"
-              role="radio"
-              aria-checked={role === option}
-              onClick={() => changeRole(option)}
-              className={cn(
-                "min-h-[40px] rounded-full px-2.5 text-xs font-bold",
-                role === option
-                  ? option === "leader"
-                    ? "bg-role-lead-soft text-role-lead"
-                    : "bg-role-follow-soft text-role-follow"
-                  : "text-ivory-muted"
-              )}
-            >
-              {option === "leader" ? "Lead" : "Follow"}
-            </button>
-          ))}
-        </div>
-      </header>
+      <PlayerHeader song={song} title={title} mode={mode} onCycleMode={cycleMode} role={role} onChangeRole={changeRole} onExit={onExit} />
 
       {/* Portrait phone: stacked. Landscape phone: media left, cards right. Desktop: media + section list left. */}
       <div className="flex min-h-0 flex-1 flex-col gap-2 max-lg:landscape:grid max-lg:landscape:grid-cols-2 max-lg:landscape:gap-3 lg:grid lg:grid-cols-[1.4fr_1fr] lg:gap-6">
@@ -550,6 +505,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
         open={isMoreOpen}
         onClose={closeMore}
         segment={shown}
+        songId={song.id}
         songStyle={song.style}
         role={role}
         latencyOffsetSeconds={latencyOffsetSeconds}

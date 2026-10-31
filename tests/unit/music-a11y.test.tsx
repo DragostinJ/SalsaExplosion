@@ -74,6 +74,7 @@ describe("Music Practice Hub Accessibility (A11y & WCAG 2.1)", () => {
         open={true}
         onClose={() => {}}
         segment={segment}
+        songId={song.id}
         songStyle={song.style}
         role="leader"
         latencyOffsetSeconds={0}

@@ -8,6 +8,7 @@ import {
   nearestBoundaryIndex,
 } from "@/lib/music/calibration";
 import { validateSongTimeline } from "@/lib/music/song-timing";
+import { buildSectionLink, linkedSectionIndex, linkedStartSeconds } from "@/lib/music/section-link";
 
 const song = TIMBA_SONG_ANATOMY_DATA.find((s) => s.id === "me-dicen-cuba")!;
 const segments = song.segments; // intro 0-18, rumba 18-40, 40-60 ...
@@ -43,6 +44,18 @@ describe("calibration: boundary nudges", () => {
     expect(describeBoundaryChanges(segments, adjusted)).toEqual([
       { section: segments[2].id, sectionName: segments[2].sectionName, from: 40, to: 42.3, shift: 2.3 },
     ]);
+  });
+
+  it("section links resolve to a real section and start 2 whole seconds early", () => {
+    expect(linkedSectionIndex(segments, segments[2].id)).toBe(2);
+    expect(linkedSectionIndex(segments, segments[0].id)).toBeNull(); // first section: just play from 0
+    expect(linkedSectionIndex(segments, "nope")).toBeNull();
+    expect(linkedSectionIndex(segments, null)).toBeNull();
+    expect(linkedStartSeconds(segments, 2)).toBe(38); // 40s - 2s lead-in
+    expect(linkedStartSeconds(segments, null)).toBe(0);
+    expect(buildSectionLink("https://x.test", song.id, segments[2].id)).toBe(
+      `https://x.test/music/${song.id}?section=${segments[2].id}`
+    );
   });
 
   it("finds the section start nearest to a heard change", () => {

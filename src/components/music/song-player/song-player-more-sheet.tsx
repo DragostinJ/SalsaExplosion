@@ -5,6 +5,7 @@ import { Minus, Plus, X } from "lucide-react";
 import type { SongDanceGear, SongSegment, SongStyle } from "@/lib/constants/timba-song-anatomy";
 import { DANCE_GEAR_LEGEND, ENERGY_LABELS } from "@/lib/music/dance-gear-legend";
 import { SONG_STYLE_HINTS } from "@/lib/music/song-style";
+import { ShareSectionButton } from "./share-section-button";
 import { formatSongTime } from "@/lib/music/song-timing";
 import { LEAD_IN_CHOICES, type LeadInSeconds } from "@/lib/music/practice-navigation";
 import { cn } from "@/lib/utils";
@@ -24,6 +25,7 @@ interface SongPlayerMoreSheetProps {
   open: boolean;
   onClose: () => void;
   segment: SongSegment;
+  songId: string;
   songStyle: SongStyle;
   role: DancerRole;
   latencyOffsetSeconds: number;
@@ -47,6 +49,7 @@ export function SongPlayerMoreSheet({
   open,
   onClose,
   segment,
+  songId,
   songStyle,
   role,
   latencyOffsetSeconds,
@@ -125,6 +128,8 @@ export function SongPlayerMoreSheet({
             </div>
           )}
         </dl>
+
+        <ShareSectionButton songId={songId} segment={segment} />
 
         <section className="mt-5 border-t border-line pt-4" aria-label="Practice settings">
           <h3 className="text-[11px] font-bold uppercase tracking-widest text-ivory-muted">Practice mode</h3>

@@ -1418,160 +1418,428 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     ]
   },
   // -----------------------------------------------------------------
-  // "Esto Está" - Maykel Blanco y su Salsa Mayor
-  // Advanced • 104 BPM • 2-3 Rumba Clave • 388s
+  // "Esto Está (Live at Le New Morning, Paris)" - Maykel Blanco y su Salsa Mayor
+  // Timba • Intermediate • 107 BPM • 2-3 Rumba Clave • 388s
   // Video ID: VD9Oe2zf748 • timings from Argus
+  // Gemini 4 Argon in AI Studio 2026-10-31 (live Paris video). Gemini 3.8 Flash agreed within 2 s on 7 of 15 starts. Ear-check: 'Ustedes solos' 1:46.5 or 1:53; 'Arriba, abajo' 2:26.5 or 2:42; how long the despelote lasts after 3:36.8 and 4:48 (Argon ~10 s, Flash 30-40 s); ending 5:52/6:17 or 6:07.
   // -----------------------------------------------------------------
   {
     "id": "esto-esta",
-    "title": "Esto Está",
+    "title": "Esto Está (Live at Le New Morning, Paris)",
     "artist": "Maykel Blanco y su Salsa Mayor",
     "style": "Timba",
-    "bpm": 104,
+    "bpm": 107,
     "claveType": "2-3 Rumba Clave",
-    "difficultyLevel": "Advanced",
+    "difficultyLevel": "Intermediate",
     "durationSeconds": 388,
     "youtubeVideoId": "VD9Oe2zf748",
     "youtubeUrl": "https://www.youtube.com/watch?v=VD9Oe2zf748",
     "segments": [
       {
-        "id": "ee-seg-1",
+        "id": "esto-seg-1",
         "startTimeSeconds": 0,
-        "endTimeSeconds": 75,
-        "formattedRange": "0:00 - 1:15",
-        "sectionName": "Crowd Invocation & Piano Tumbao Ignition",
+        "endTimeSeconds": 21.5,
+        "formattedRange": "0:00 - 0:21",
+        "sectionName": "Live Intro & Crowd Singalong (Arriba París / Se le lai la la)",
+        "danceGear": "Wait / Breathe",
+        "colorTheme": "slate",
+        "musicalTrigger": "Maykel Blanco plays piano tumbao while the singer hypes Paris and leads 'Se le lai la la'",
+        "leaderCue": "Stand relaxed with your partner, clap the clave at 0:18, and wait for the brass pickup.",
+        "followerCue": "Breathe, mirror the crowd claps, and set your weight ready to step on the horn entry.",
+        "commonMistakeWarning": "Starting partnerwork during the piano teaser before the band stops at 0:18.",
+        "recommendedMoveSlugs": [
+          "beg-mus-1",
+          "imp-mus-1"
+        ],
+        "timingMode": "Ambient (No Beat)",
+        "instrumentMapping": {
+          "feet": "Crowd clave claps",
+          "hipsAndKnees": "Piano tumbao",
+          "chestAndShoulders": "Lead vocal call"
+        },
+        "startsOnOne": false
+      },
+      {
+        "id": "esto-seg-2",
+        "startTimeSeconds": 21.5,
+        "endTimeSeconds": 47.2,
+        "formattedRange": "0:21 - 0:47",
+        "sectionName": "Intro Coro & Brass Bloque (Se le lai la la / Maykel Blanco)",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Full band and horns enter on 'Vamos arriba, dice! Se le lai la la' followed by bloque hits at 0:32.8",
+        "leaderCue": "Dance solo Paso Básico and side steps, then hit the sharp brass bloques at 0:33 before connecting.",
+        "followerCue": "Match the coro energy with solo footwork and sharp shoulder accents on the horn hits.",
+        "commonMistakeWarning": "Rushing into closed hold right before the syncopated brass bloque at 0:32.8.",
+        "recommendedMoveSlugs": [
+          "beg-solo-1",
+          "int-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Bass and conga tumbao",
+          "hipsAndKnees": "Piano montuno",
+          "chestAndShoulders": "Brass bloque hits"
+        },
+        "bars": 11,
+        "startsOnOne": true
+      },
+      {
+        "id": "esto-seg-3",
+        "startTimeSeconds": 47.2,
+        "endTimeSeconds": 113,
+        "formattedRange": "0:47 - 1:53",
+        "sectionName": "Tema (Se creó, se formó, nació en La Habana)",
         "danceGear": "Casino (Smooth)",
         "colorTheme": "emerald",
-        "musicalTrigger": "Crowd call, then the piano tumbao kicks in; Casino starts at 0:36.",
-        "leaderCue": "Use the opening call to clap clave or build partner anticipation before dropping into Casino at 0:36.",
-        "followerCue": "Keep steps small and fast—at 104 BPM, big steps will make you late on count 1.",
-        "commonMistakeWarning": "Avoid taking huge backward lunges on Guapea.",
+        "musicalTrigger": "Singers enter in harmony on 'Se creó, se formó, nació en La Habana'",
+        "leaderCue": "Connect for Guapea, Dile Que No, Paséala, and Vacílala; keep turns smooth and musical.",
+        "followerCue": "Keep steps compact and grounded, styling smoothly with your free arm on 'somos salsa, timba y guaguancó'.",
+        "commonMistakeWarning": "Over-leading fast complicated patterns during the lyrical storytelling verse.",
         "recommendedMoveSlugs": [
-          "beg-pw-1",
+          "beg-pw-2",
+          "imp-pw-6",
+          "imp-pw-3"
+        ],
+        "timingMode": "Contratiempo (On2) or Smooth On1",
+        "instrumentMapping": {
+          "feet": "Conga tumbao",
+          "hipsAndKnees": "Bass line",
+          "chestAndShoulders": "Vocal melody and trombone fills"
+        },
+        "bars": 29,
+        "startsOnOne": true,
+        "handGesture": "Dile Que No"
+      },
+      {
+        "id": "esto-seg-4",
+        "startTimeSeconds": 113,
+        "endTimeSeconds": 121.8,
+        "formattedRange": "1:53 - 2:01",
+        "sectionName": "Crowd Clave Breakdown (Ustedes solos / Dale la clave cubana)",
+        "danceGear": "Wait / Breathe",
+        "colorTheme": "slate",
+        "musicalTrigger": "Band drops out completely on 'Ustedes solos!' leaving crowd singing and clapping clave",
+        "leaderCue": "Release hold immediately, clap the 2-3 clave with the crowd, and prep the 2:01.8 drum pickup.",
+        "followerCue": "Pause turn patterns, groove in place with clave claps, and watch the leader for the trombone drop.",
+        "commonMistakeWarning": "Continuing full turn patterns through the 8-second a cappella crowd breakdown.",
+        "recommendedMoveSlugs": [
+          "imp-mus-1",
           "beg-mus-1"
         ],
-        "handGesture": "Clap Above Head (Palmas / Call to Floor)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Compact, fast footwork directly under hips",
-          "hipsAndKnees": "Snappy 104 BPM Cuban motion",
-          "chestAndShoulders": "Alert, rhythmic bounce"
-        }
+          "feet": "Implicit pulse",
+          "hipsAndKnees": "Crowd singing rhythm",
+          "chestAndShoulders": "2-3 clave handclaps"
+        },
+        "bars": 4,
+        "startsOnOne": true
       },
       {
-        "id": "ee-seg-2",
-        "startTimeSeconds": 75,
-        "endTimeSeconds": 178,
-        "formattedRange": "1:15 - 2:58",
-        "sectionName": "Main Verse & Salsa Mayor Brass Drive",
-        "danceGear": "Casino (Flow)",
-        "colorTheme": "emerald",
-        "musicalTrigger": "Main verse with driving Salsa Mayor brass, building at 2:45.",
-        "leaderCue": "Execute clean, high-efficiency patterns (Enchufla Doble, Adiós con la Hermana, Prima).",
-        "followerCue": "Keep your free arm compact and engage your lats on every Dile Que No reception.",
-        "commonMistakeWarning": "Avoid letting centrifugal force pull the circle wide during the 2:45 build.",
-        "recommendedMoveSlugs": [
-          "beg-pw-3",
-          "beg-pw-4",
-          "beg-pw-2"
-        ],
-        "handGesture": "Thumb Out (Dile Que No) + Index Spin (Enchufla Doble)",
-        "instrumentMapping": {
-          "feet": "Quick ball-flat weight shifts",
-          "hipsAndKnees": "Continuous tight figure-8",
-          "chestAndShoulders": "Strong, quiet core to control momentum"
-        }
-      },
-      {
-        "id": "ee-seg-3",
-        "startTimeSeconds": 178,
-        "endTimeSeconds": 228,
-        "formattedRange": "2:58 - 3:48",
-        "sectionName": "'Esto Está Comer' & Rumba Guaguancó Call",
-        "danceGear": "Rumba Guaguancó",
-        "colorTheme": "amber",
-        "musicalTrigger": "'Esto está comer', then 'traigo la rumba, traigo la clave del guaguancó' at 3:19 and 'uno, dos, tres, con la mano arriba' at 3:32.",
-        "leaderCue": "At 3:19 ('traigo la rumba, traigo la clave del guaguancó'), break into Rumba Guaguancó play and hit 'uno, dos, tres, con la mano arriba' at 3:32.",
-        "followerCue": "Answer the Rumba challenge with sharp shoulder shimmies and hit the 'mano arriba' cue at 3:32.",
-        "commonMistakeWarning": "Avoid sleeping through the explicit 'uno, dos, tres, con la mano arriba' count at 3:32.",
+        "id": "esto-seg-5",
+        "startTimeSeconds": 121.8,
+        "endTimeSeconds": 153,
+        "formattedRange": "2:01 - 2:33",
+        "sectionName": "Trombone Mambo & Coro (Trombones / Es que me crié con la clave)",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Singer shouts 'Trombones!' as heavy brass mambo riffs and campana kick in",
+        "leaderCue": "Break into energetic suelta shines and rumba guaguancó steps, hitting 'Ven, ven, ven' horn calls.",
+        "followerCue": "Dance solo shines with strong hip motion and ribcage isolations matching the trombone riffs.",
+        "commonMistakeWarning": "Staying static instead of matching the surge in brass energy at 2:01.8.",
         "recommendedMoveSlugs": [
           "imp-solo-1",
-          "adv-mus-1"
+          "int-mus-1"
         ],
-        "handGesture": "Hand Rubbing Belly ('Está Comer') + Rumba Shoulder Roll",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Lateral Guaguancó steps & 1-2-3 freezes (3:32)",
-          "hipsAndKnees": "Quick pelvic snaps on percussion hits",
-          "chestAndShoulders": "Aggressive Rumba torso isolations"
-        }
+          "feet": "Campana and conga slaps",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Trombone and trumpet mambo"
+        },
+        "bars": 14,
+        "startsOnOne": true
       },
       {
-        "id": "ee-seg-4",
-        "startTimeSeconds": 228,
-        "endTimeSeconds": 266,
-        "formattedRange": "3:48 - 4:26",
-        "sectionName": "'Esto Está' Brass Hammer Coro",
-        "danceGear": "Casino (Flow)",
-        "colorTheme": "emerald",
-        "musicalTrigger": "Explosive 'Esto está' chorus with hammering brass.",
-        "leaderCue": "Unleash dynamic multi-part combinations (Setenta y Cuatro, El Uno, El Dos) riding the explosive 'Esto está' chorus.",
-        "followerCue": "Keep your chin level and spot the leader through rapid arm wraps.",
-        "commonMistakeWarning": "Avoid rushing the prep on count 1—wait for the heavy bass downbeat.",
-        "recommendedMoveSlugs": [
-          "int-pw-2",
-          "imp-pw-2"
-        ],
-        "handGesture": "4 Fingers Up (Setenta y Cuatro / Complicado)",
-        "instrumentMapping": {
-          "feet": "Sharp directional pivots",
-          "hipsAndKnees": "Grounded Timba pulse",
-          "chestAndShoulders": "Locked frame connection for fast wraps"
-        }
-      },
-      {
-        "id": "ee-seg-5",
-        "startTimeSeconds": 266,
-        "endTimeSeconds": 317,
-        "formattedRange": "4:26 - 5:17",
-        "sectionName": "'La Mano en la Cintura' Breakdown",
+        "id": "esto-seg-6",
+        "startTimeSeconds": 153,
+        "endTimeSeconds": 162,
+        "formattedRange": "2:33 - 2:42",
+        "sectionName": "Bloque Call & Response (Se le lai la la)",
         "danceGear": "Despelote / Reparto",
         "colorTheme": "red",
-        "musicalTrigger": "'La mano en la cintura' breakdown at 4:26; chorus returns at 5:03.",
-        "leaderCue": "At 4:26 ('la mano en la cintura'), place hands on hips (or lead waist-connection Cintura groove) and isolate the lower body.",
-        "followerCue": "Own the spotlight with circular hip rolls and Despelote until the chorus returns at 5:03.",
-        "commonMistakeWarning": "Avoid staying in a standard handhold when the band calls 'la mano en la cintura' at 4:26.",
+        "musicalTrigger": "Singer calls 'Ustedes solos! Se le lai la la' answered by sharp syncopated band bloques",
+        "leaderCue": "Freeze on the vocal call, then hit the syncopated band stabs with chest isolations and despelote.",
+        "followerCue": "Play with the call-and-response by freezing on the crowd vocal and shaking on the brass stabs.",
+        "commonMistakeWarning": "Stepping a straight basic through the stop-and-go bloque hits.",
         "recommendedMoveSlugs": [
           "int-solo-1",
           "adv-solo-1"
         ],
-        "handGesture": "Both Hands on Hips (Mano en la Cintura)",
+        "timingMode": "Syncopated Reparto",
         "instrumentMapping": {
-          "feet": "Wide, knee-bent Timba stance",
-          "hipsAndKnees": "Maximum Cintura (waist/hip) circular grind",
-          "chestAndShoulders": "Isolated ribcage circles"
-        }
+          "feet": "Syncopated bass hits",
+          "hipsAndKnees": "Timbal and conga fills",
+          "chestAndShoulders": "Brass bloque stabs"
+        },
+        "bars": 4,
+        "startsOnOne": true
       },
       {
-        "id": "ee-seg-6",
-        "startTimeSeconds": 317,
-        "endTimeSeconds": 388,
-        "formattedRange": "5:17 - 6:28",
-        "sectionName": "'Salud, Amor, Dinero' & 'Shalalala' Rueda Party Finale",
+        "id": "esto-seg-7",
+        "startTimeSeconds": 162,
+        "endTimeSeconds": 180.2,
+        "formattedRange": "2:42 - 3:00",
+        "sectionName": "Piano & Synth Montuno Solo (Arriba, abajo)",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Steady groove resumes on 'Eeeeh!' with Maykel Blanco's piano tumbao and high keyboard solo at 2:48",
+        "leaderCue": "Groove in suelta footwork following the playful keyboard melody, then reconnect on 2:59 'Canta ese coro'.",
+        "followerCue": "Use fast footwork variations and playful shoulder shimmies to echo the high synth solo.",
+        "commonMistakeWarning": "Missing the cue at 2:59 to reconnect for the main coro-pregón montuno.",
+        "recommendedMoveSlugs": [
+          "beg-solo-1",
+          "int-solo-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Piano montuno",
+          "hipsAndKnees": "Bass and conga groove",
+          "chestAndShoulders": "High synth lead melody"
+        },
+        "bars": 8,
+        "startsOnOne": true
+      },
+      {
+        "id": "esto-seg-8",
+        "startTimeSeconds": 180.2,
+        "endTimeSeconds": 216.8,
+        "formattedRange": "3:00 - 3:36",
+        "sectionName": "Montuno 1 (Esto está pa' comer y pa' llevar)",
         "danceGear": "Casino (Flow)",
         "colorTheme": "emerald",
-        "musicalTrigger": "Calls of Amor (5:17), Salud and Dinero (5:23), then the 'shalalala' singalong (5:34) to the finale.",
-        "leaderCue": "Raise your hand on the 3 calls—Amor (5:17), Salud, and Dinero (5:23)—then groove playfully through the 'shalalala' singalong.",
-        "followerCue": "Sing along, mirror the raised-hand calls, and finish with a big finale spin at 6:20.",
-        "commonMistakeWarning": "Avoid treating the playful 'Shalalala' section too seriously—this is pure Cuban party joy!",
+        "musicalTrigger": "Coro enters on 'Esto está pa' comer y pa' llevar' with driving campana",
+        "leaderCue": "Lead flowing casino combinations: Setenta, Sombrero, and Montana, keeping momentum circular.",
+        "followerCue": "Maintain a responsive hook-finger connection and spot cleanly through continuous traveling turns.",
+        "commonMistakeWarning": "Pulling the arms during multi-turn figures instead of stepping around the circle.",
         "recommendedMoveSlugs": [
-          "beg-sub-1",
-          "adv-sub-2"
+          "imp-pw-1",
+          "imp-pw-4",
+          "int-pw-1"
         ],
-        "handGesture": "Hand Raised Wave (Festival Singalong & Finale)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Playful Festival walks & final applause pose (6:24)",
-          "hipsAndKnees": "Playful bounce on 'Shalalala' (5:34)",
-          "chestAndShoulders": "Joyful, open social connection"
-        }
+          "feet": "Campana and bass tumbao",
+          "hipsAndKnees": "Conga marcha",
+          "chestAndShoulders": "Coro-pregón call and response"
+        },
+        "bars": 16,
+        "startsOnOne": true,
+        "handGesture": "Setenta"
+      },
+      {
+        "id": "esto-seg-9",
+        "startTimeSeconds": 216.8,
+        "endTimeSeconds": 226.8,
+        "formattedRange": "3:36 - 3:46",
+        "sectionName": "Despelote Drop 1 (Uno, dos, tres, con la mano arriba)",
+        "danceGear": "Despelote / Reparto",
+        "colorTheme": "red",
+        "musicalTrigger": "Singer counts 'Uno! Dos! Uno, dos, tres, con la mano arriba!' as percussion drops into bomba gear",
+        "leaderCue": "Drop hands and hit the 'Uno, dos' accents, then get low into thoracic isolations and cintura.",
+        "followerCue": "Throw a hand up on the count and let your ribcage and hips ride the heavy timba breakdown.",
+        "commonMistakeWarning": "Staying locked in closed partnerwork during the 'Uno, dos, tres' crowd call.",
+        "recommendedMoveSlugs": [
+          "int-solo-1",
+          "adv-solo-1"
+        ],
+        "timingMode": "Syncopated Reparto",
+        "instrumentMapping": {
+          "feet": "Kick drum and bass bombs",
+          "hipsAndKnees": "Syncopated timbal and conga",
+          "chestAndShoulders": "Vocal count and brass stabs"
+        },
+        "bars": 4,
+        "startsOnOne": true
+      },
+      {
+        "id": "esto-seg-10",
+        "startTimeSeconds": 226.8,
+        "endTimeSeconds": 251.2,
+        "formattedRange": "3:46 - 4:11",
+        "sectionName": "Mambo & Short Coro 1 (Esto está)",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Horns blast a fiery mambo riff answered every two bars by the short coro 'Esto está'",
+        "leaderCue": "Stay in open suelta for high-energy footwork and rumba columbia/guaguancó flair with your partner.",
+        "followerCue": "Project big energy on the horn lines and punctuate 'Esto está' with sharp hip or shoulder hits.",
+        "commonMistakeWarning": "Losing the downbeat during the syncopated horn riffs before 'Esto está'.",
+        "recommendedMoveSlugs": [
+          "imp-solo-1",
+          "adv-sub-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Driving campana",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Layered trombone and trumpet mambo"
+        },
+        "bars": 11,
+        "startsOnOne": true
+      },
+      {
+        "id": "esto-seg-11",
+        "startTimeSeconds": 251.2,
+        "endTimeSeconds": 288,
+        "formattedRange": "4:11 - 4:48",
+        "sectionName": "Montuno 2 (Pa' que lo baile Chencha / Yo meto la mano en la candela)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Singer calls 'Y escucha mi cuento!' and full coro 'Esto está pa' comer y pa' llevar' returns",
+        "leaderCue": "Reconnect for Siete, Dedo, and Coca-Cola, matching the playful 'no metas la mano que te quemas' pregón.",
+        "followerCue": "Keep your frame light and playful, adding cheeky styling on 'no metas la mano que te quemas'.",
+        "commonMistakeWarning": "Rushing the prep on Siete or Coca-Cola as the vocal pregones speed up.",
+        "recommendedMoveSlugs": [
+          "int-pw-3",
+          "int-pw-2",
+          "int-pw-4"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Conga and cowbell pulse",
+          "hipsAndKnees": "Piano and bass tumbao",
+          "chestAndShoulders": "Rapid-fire lead vocal pregón"
+        },
+        "bars": 16,
+        "startsOnOne": true,
+        "handGesture": "Siete"
+      },
+      {
+        "id": "esto-seg-12",
+        "startTimeSeconds": 288,
+        "endTimeSeconds": 296.8,
+        "formattedRange": "4:48 - 4:56",
+        "sectionName": "Despelote Drop 2 (Uno, dos, tres, con la mano arriba)",
+        "danceGear": "Despelote / Reparto",
+        "colorTheme": "red",
+        "musicalTrigger": "Second 'Uno! Dos! Ahora, uno, dos, tres, con la mano arriba!' breakdown",
+        "leaderCue": "Break apart instantly on 'Uno, dos', hit the freezes, and unleash tembleque and body rolls.",
+        "followerCue": "Hit the 'Uno, dos' stops cleanly and use high-frequency tembleque through the horn build-up.",
+        "commonMistakeWarning": "Getting caught mid-turn when the band hits the 'Uno, dos' brake at 4:48.",
+        "recommendedMoveSlugs": [
+          "adv-solo-1",
+          "int-solo-1"
+        ],
+        "timingMode": "Syncopated Reparto",
+        "instrumentMapping": {
+          "feet": "Brass and bass hits",
+          "hipsAndKnees": "Bomba percussion groove",
+          "chestAndShoulders": "Crowd call and horn build-up"
+        },
+        "bars": 4,
+        "startsOnOne": true
+      },
+      {
+        "id": "esto-seg-13",
+        "startTimeSeconds": 296.8,
+        "endTimeSeconds": 320,
+        "formattedRange": "4:56 - 5:20",
+        "sectionName": "Mambo & Short Coro 2 (Esto está / Repítelo)",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Full brass mambo roars back on 'Canta ese coro!' with 'Esto está'",
+        "leaderCue": "Dance explosive solo footwork or challenge your partner with playful rumba vacunao feints.",
+        "followerCue": "Answer the leader's footwork challenge and defend the vacunao with sharp hip and skirt/hand accents.",
+        "commonMistakeWarning": "Failing to wind down energy at 5:19 when the band drops for the speech.",
+        "recommendedMoveSlugs": [
+          "imp-solo-1",
+          "adv-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Timbal and campana drive",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Full brass mambo section"
+        },
+        "bars": 10,
+        "startsOnOne": true
+      },
+      {
+        "id": "esto-seg-14",
+        "startTimeSeconds": 320,
+        "endTimeSeconds": 352,
+        "formattedRange": "5:20 - 5:52",
+        "sectionName": "Breakdown & Smooth Singalong (Con la mano arriba / Sha la la la la)",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Band drops to soft piano and percussion on 'Todo el que quiera el amor' then sings 'Sha la la la la' at 5:29.8",
+        "leaderCue": "Keep it super relaxed: sway during the call, then lead gentle Guapea, Dile Que No, and Kentucky.",
+        "followerCue": "Take a breath, sing along to 'Sha la la la la', and keep your steps small, soft, and unhurried.",
+        "commonMistakeWarning": "Dancing at peak montuno intensity when the band strips the arrangement down.",
+        "recommendedMoveSlugs": [
+          "beg-pw-1",
+          "beg-pw-2",
+          "imp-pw-5"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Soft bass and conga pulse",
+          "hipsAndKnees": "Gentle piano montuno",
+          "chestAndShoulders": "Smooth 'Sha la la la la' vocal chorus"
+        },
+        "bars": 14,
+        "startsOnOne": true,
+        "handGesture": "Kentucky"
+      },
+      {
+        "id": "esto-seg-15",
+        "startTimeSeconds": 352,
+        "endTimeSeconds": 377.2,
+        "formattedRange": "5:52 - 6:17",
+        "sectionName": "Final Brass Climax (Sha la la la la / Eeeeh)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Full brass section blasts back in over 'Sha la la la la' at 5:52",
+        "leaderCue": "Pour on the finale energy with Setenta Complicado and Enchufla Doble before the 6:17 stop.",
+        "followerCue": "Match the final brass surge with crisp turns and prepare to freeze on the sung ending notes.",
+        "commonMistakeWarning": "Missing the sudden final cadence when the singers intone 'Sol, si, re, do' at 6:17.2.",
+        "recommendedMoveSlugs": [
+          "imp-pw-2",
+          "beg-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Full percussion drive",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Triumphant brass riffs and coro"
+        },
+        "bars": 11,
+        "startsOnOne": true,
+        "handGesture": "Setenta Complicado"
+      },
+      {
+        "id": "esto-seg-16",
+        "startTimeSeconds": 377.2,
+        "endTimeSeconds": 388,
+        "formattedRange": "6:17 - 6:28",
+        "sectionName": "Final Cadence & Applause (Sol, si, re, do / Gracias París)",
+        "danceGear": "Wait / Breathe",
+        "colorTheme": "slate",
+        "musicalTrigger": "Singers hold the final notes 'Sol, si, re, do!' followed by a final band hit and Paris applause",
+        "leaderCue": "Hit a clean final pose with your partner on 'Sol, si, re, do' and thank them for the dance.",
+        "followerCue": "Style the final sustained chord 'do!' and celebrate the finish with your partner.",
+        "commonMistakeWarning": "Stepping out of your final pose before the band's closing hit at 6:21.",
+        "recommendedMoveSlugs": [
+          "beg-mus-1"
+        ],
+        "timingMode": "Ambient (No Beat)",
+        "instrumentMapping": {
+          "feet": "Final band chord",
+          "hipsAndKnees": "Sustained brass note",
+          "chestAndShoulders": "Sung 'Sol, si, re, do' cadence"
+        },
+        "startsOnOne": true
       }
     ]
   },

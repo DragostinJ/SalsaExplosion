@@ -8,7 +8,8 @@ Both files here are generated from the app's own values: re-run
 
 1. AI Studio → **Playground** → new chat. Model: **Gemini Pro (latest)**.
 2. **System instructions**: replace everything with the contents of `system-instructions.txt`.
-3. **Temperature**: `0.2`. **Thinking level**: `High`.
+3. **Temperature**: leave the default `1` (Google advises against lowering it for Gemini 3
+   models). **Thinking level**: `High`.
 4. **Structured outputs**: on → **Edit** → code editor → replace everything with
    `response-schema.json` → Save.
 5. Tools: **Code execution, Function calling, Grounding with Google Search, Grounding
@@ -25,13 +26,15 @@ Both files here are generated from the app's own values: re-run
    In the new chat, check the System instructions box starts with
    "You are Argus, the song maker for RitmoFlow".
 2. Attach the video: **+** (insert) → **YouTube video** → paste the link. The video must
-   appear as an attachment. A link typed as text is not watched, and the model then
-   guesses timings from memory.
-3. Message:
+   appear as an attachment (a thumbnail in your message, and the token count goes up by
+   tens of thousands). A link typed as text is not watched, and the model then guesses
+   timings from memory.
+3. Message (fill in the id and the length shown on YouTube, in seconds):
 
    ```
    Time this song: <Title> by <Artist>.
-   The attached video is the exact upload the app plays: https://www.youtube.com/watch?v=<id>
+   The attached video is the exact upload the app plays.
+   youtubeVideoId: <id>, youtubeUrl: https://www.youtube.com/watch?v=<id>, durationSeconds: <length>
    ```
 
 4. Run, copy the JSON, paste it to Claude (or into /instructor/song-maps).
@@ -42,3 +45,7 @@ Both files here are generated from the app's own values: re-run
 - `"On1"`, a missing `style`, or adjectives in `handGesture` mean the schema wasn't
   applied: check Structured outputs is on and the saved schema is this one.
 - Wildly wrong section times: check the video was attached (step 2), not just linked.
+- Times like `118` where formattedRange says `1:18`: the model typed m:ss as digits. The
+  importer repairs this from formattedRange and says so; still check those starts by ear.
+- A video id that isn't the one you gave (e.g. `vanvantemba`): the importer warns that it
+  looks made up. Put the real id in the message (step 3).

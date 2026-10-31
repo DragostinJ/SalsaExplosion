@@ -41,18 +41,18 @@ WHAT THE APP DOES WITH YOUR ANSWER
 The player plays the attached YouTube video full-screen on a phone and shows a NOW card (what to dance in this section) and a NEXT card. The card flips on the EXACT second you give as a section start. Dancers use it to learn where to dance slow, fast, contratiempo, son, rumba, shines or despelote. Timing accuracy matters more than anything else. Your answer must follow the response schema exactly; every label comes from fixed lists.
 
 HOW TO WORK (one song per run)
-0. Every run is independent. Ignore any earlier songs, videos or answers in this conversation: never reuse their id, youtubeVideoId, durationSeconds or section times. youtubeVideoId is the id of the video attached to the LATEST message.
+0. Every run is independent. Ignore any earlier songs, videos or answers in this conversation: never reuse their id, youtubeVideoId, durationSeconds or section times. youtubeVideoId is the id of the video attached to the LATEST message. When the message gives youtubeVideoId, youtubeUrl or durationSeconds, copy them character for character. Never make up a video id: a wrong id plays the wrong video, or none.
 1. Listen to the WHOLE attached video from 0:00 to the end. Use only what you hear in THIS video. Never use timings from the album version, another upload, lyrics sites or memory.
 2. durationSeconds = the full length of this video in whole seconds, including any talking, silence or cinematic intro. No section can start at or after durationSeconds: if your times run past the end of the video, you are not listening to this video; start again.
 3. Find every section change by ear: vocals entering, tema to coro, coro-pregón montuno, mambo/brass, bloque or break, despelote/bomba drop, piano or timbal solo, outro.
 4. Put each section start on the downbeat (the "1") where the new section is HEARD, not where the singer breathes before it. One decimal is allowed (e.g. 61.5).
-5. Count the 4/4 bars in each section ("bars") and say whether it starts on a "1" ("startsOnOne").
+5. Count the 4/4 bars in each section ("bars"; 0 when the section has no steady beat) and say whether it starts on a "1" ("startsOnOne").
 6. Self-check every section: bars should be close to (endTimeSeconds - startTimeSeconds) x bpm / 240. If it is off by more than one bar, listen again and fix the boundary or the bar count.
 7. List every section start you are not sure of to within 1 second in "unsureBoundaries" (with the range it could be and why). An empty list means you are sure of all of them.
 
 TIMING RULES (the app rejects anything else)
 - The first section starts at 0. endTimeSeconds of a section = startTimeSeconds of the next one (0-28, 28-60, never 0-27, 28-59). The last section ends exactly at durationSeconds.
-- formattedRange matches the numbers as "m:ss - m:ss".
+- Write formattedRange ("m:ss - m:ss") first, then convert it: startTimeSeconds and endTimeSeconds are TOTAL seconds from 0:00 = minutes x 60 + seconds. 1:18 is 78 (never 118), 3:10.5 is 190.5, 4:56 is 296. Every number must be less than or equal to durationSeconds.
 - 8 to 16 sections per song. No section shorter than 6 seconds unless it is a real break the dancers must react to. Merge neighbouring sections that would get the same dance instructions.
 - Section ids: a short prefix for the song plus a number, e.g. "pupy-seg-1". Song id: kebab-case title without the artist.
 
@@ -67,11 +67,14 @@ TIMING MODES: "A Tiempo (On1)" for normal casino on 1; "Contratiempo (On2)" or "
 
 LEVEL: Beginner = steady beat, long clear sections. Improver = some breaks and gear changes. Intermediate = frequent gear changes, montuno/mambo shifts. Advanced = fast tempo, many bloques, contratiempo/contrapunto, despelote.
 
-CUES (read on a phone while dancing)
+CUES (read on a phone while dancing; write like a casino teacher who knows THIS song)
 - Every cue at most ~20 words, plain English; Spanish dance terms are fine.
-- leaderCue and followerCue must differ when the roles really do different things.
-- musicalTrigger = what you HEAR at the start of the section (instrument, vocal line, coro words), with timestamps like 2:55 when useful.
-- instrumentMapping = which instrument the feet, hips/knees and chest/shoulders follow.
+- A cue that could fit any song is a bad cue: rewrite it for this section.
+- leaderCue names 1-3 real casino figures that suit the section and level, e.g. "Guapea into Dile Que No, then Exhíbela; keep it conversational for the story". Never just "use dynamic turn patterns".
+- followerCue is the follower's own technique for those figures (spotting, free-arm styling, hook-finger connection, hips, footwork), not a copy of the leader cue.
+- musicalTrigger = what you HEAR at the start of the section: quote the first pregón or coro words, or name the instrument (e.g. "brass mambo enters", "piano montuno alone", "bass drops out for the bomba").
+- instrumentMapping = the specific instrument each body zone follows in THIS section (e.g. "campana", "bass tumbao", "conga slaps", "timbal cáscara", "coro"). Change it when the arrangement changes; never "None" when there is a beat.
+- commonMistakeWarning = a concrete mistake dancers make in this section, not a general tip.
 
 MOVES: recommendedMoveSlugs = 1 to 3 ids that really fit the section and the song's level. Vary them; don't repeat the same pair in every section.
 ${moves}
@@ -95,11 +98,19 @@ const choice = (values: readonly string[], description: string): JsonSchema => (
 export function buildSongMakerResponseSchema(): JsonSchema {
   const segmentProperties: Record<string, JsonSchema> = {
     id: text('Short song prefix plus number, e.g. "pupy-seg-1"'),
-    startTimeSeconds: { type: "number", description: "Second the section is HEARD in this video (downbeat). First section 0." },
-    endTimeSeconds: { type: "number", description: "Equals the next section's start; last section ends at durationSeconds." },
-    formattedRange: text('"m:ss - m:ss" matching the numbers'),
+    // formattedRange comes before the seconds so the model converts its own m:ss
+    // (it has written "1:18" as 118 when asked for the seconds first)
+    formattedRange: text('"m:ss - m:ss" of this section in THIS video, heard on the downbeat; write this first'),
+    startTimeSeconds: {
+      type: "number",
+      description: "formattedRange start as TOTAL seconds (minutes x 60 + seconds): 1:18 is 78, never 118. First section 0.",
+    },
+    endTimeSeconds: {
+      type: "number",
+      description: "formattedRange end as total seconds; equals the next section's start; last section ends at durationSeconds.",
+    },
     sectionName: text("Intro / Tema / Coro / Montuno / Mambo / Bloque / Despelote / Final …, with the coro words if useful"),
-    bars: { type: "integer", description: "4/4 bars in this section; close to duration x bpm / 240" },
+    bars: { type: "integer", description: "4/4 bars in this section, close to duration x bpm / 240; 0 when there is no steady beat" },
     startsOnOne: { type: "boolean", description: "True when the section starts on a downbeat (the 1)" },
     danceGear: choice(SongDanceGearSchema.options, "What the dancers should do (see system instructions)"),
     colorTheme: choice(SegmentColorThemeSchema.options, "Colour that matches the dance gear"),
@@ -139,8 +150,8 @@ export function buildSongMakerResponseSchema(): JsonSchema {
     bpm: { type: "integer", description: "Main tempo in beats per minute" },
     claveType: choice(ClaveTypeSchema.options, "Clave of the song"),
     difficultyLevel: choice(SongDifficultySchema.options, "One level only"),
-    durationSeconds: { type: "integer", description: "Full length of THIS video in whole seconds" },
-    youtubeVideoId: text("11-character id of the attached video"),
+    durationSeconds: { type: "integer", description: "Full length of THIS video in whole seconds; copy it when the message gives it" },
+    youtubeVideoId: text("11-character id of the attached video, copied exactly from the message or link; never invented"),
     youtubeUrl: text("https://www.youtube.com/watch?v=<id>"),
     segments: {
       type: "array",

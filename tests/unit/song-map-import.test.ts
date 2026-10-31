@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { SongStyleSchema, TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
+import { SongStyleSchema, TIMBA_SONG_ANATOMY_DATA, formatSecondsToTime } from "@/lib/constants/timba-song-anatomy";
 import { buildArgusPrompt, parseSongMapInput, toSongDataEntry } from "@/lib/music/song-map-import";
 import { displaySongTitle, isTimba, SONG_STYLE_HINTS } from "@/lib/music/song-style";
 import { normalizeRuedaCall } from "@/lib/music/rueda-calls";
@@ -169,5 +169,39 @@ describe("song maker output guards", () => {
     });
     expect(parseSongMapInput(JSON.stringify(withBars(Math.round(expected)))).warnings.join(" ")).not.toContain("bars but");
     expect(parseSongMapInput(JSON.stringify(withBars(Math.round(expected) + 4))).warnings.join(" ")).toContain("bars but");
+  });
+
+  it("repairs m:ss typed as digits (1:18 -> 118) from the song maker's own formattedRange", () => {
+    const asDigits = (t: number) => (t < 60 ? t : Math.floor(t / 60) * 100 + (t % 60));
+    const last = freshSong.segments.length - 1;
+    const typed = {
+      ...freshSong,
+      segments: freshSong.segments.map((s, index) => ({
+        ...s,
+        formattedRange: `${formatSecondsToTime(s.startTimeSeconds)} - ${formatSecondsToTime(s.endTimeSeconds)}`,
+        startTimeSeconds: asDigits(s.startTimeSeconds),
+        endTimeSeconds: index === last ? s.endTimeSeconds : asDigits(s.endTimeSeconds),
+      })),
+    };
+    const result = parseSongMapInput(JSON.stringify(typed));
+    expect(result.errors).toEqual([]);
+    expect(result.warnings.join(" ")).toContain("typed as digits");
+    expect(result.song?.segments.map((s) => s.startTimeSeconds)).toEqual(freshSong.segments.map((s) => s.startTimeSeconds));
+    // A valid timeline is never touched
+    expect(parseSongMapInput(JSON.stringify(freshSong)).warnings.join(" ")).not.toContain("typed as digits");
+  });
+
+  it("treats bars: 0 as a section without a beat and flags made-up video ids", () => {
+    const noBeatIntro = {
+      ...freshSong,
+      segments: freshSong.segments.map((s, index) => (index === 0 ? { ...s, bars: 0 } : s)),
+    };
+    const result = parseSongMapInput(JSON.stringify(noBeatIntro));
+    expect(result.errors).toEqual([]);
+    expect(result.song?.segments[0].bars).toBeUndefined();
+
+    const invented = { ...freshSong, youtubeVideoId: "vanvantemba", youtubeUrl: "https://www.youtube.com/watch?v=vanvantemba" };
+    expect(parseSongMapInput(JSON.stringify(invented)).warnings.join(" ")).toContain("looks made up");
+    expect(parseSongMapInput(JSON.stringify(freshSong)).warnings.join(" ")).not.toContain("looks made up");
   });
 });

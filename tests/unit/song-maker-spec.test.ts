@@ -20,6 +20,12 @@ describe("AI Studio song maker setup", () => {
     for (const gear of SongDanceGearSchema.options) expect(GEAR_GUIDE[gear]).toBeDefined();
   });
 
+  it("asks for m:ss before the seconds (Gemini typed 1:18 as 118 when the seconds came first)", () => {
+    const root = buildSongMakerResponseSchema() as unknown as { properties: { segments: { items: { propertyOrdering: string[] } } } };
+    const order = root.properties.segments.items.propertyOrdering;
+    expect(order.indexOf("formattedRange")).toBeLessThan(order.indexOf("startTimeSeconds"));
+  });
+
   it("checked-in files match the generator (run: npx tsx scripts/ai-studio-song-maker.ts)", () => {
     expect(readFileSync(path.join(docs, "system-instructions.txt"), "utf8")).toBe(buildSongMakerSystemInstructions() + "\n");
     expect(JSON.parse(readFileSync(path.join(docs, "response-schema.json"), "utf8"))).toEqual(buildSongMakerResponseSchema());

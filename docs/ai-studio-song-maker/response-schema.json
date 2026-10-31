@@ -58,11 +58,11 @@
     },
     "durationSeconds": {
       "type": "integer",
-      "description": "Full length of THIS video in whole seconds"
+      "description": "Full length of THIS video in whole seconds; copy it when the message gives it"
     },
     "youtubeVideoId": {
       "type": "string",
-      "description": "11-character id of the attached video"
+      "description": "11-character id of the attached video, copied exactly from the message or link; never invented"
     },
     "youtubeUrl": {
       "type": "string",
@@ -78,17 +78,17 @@
             "type": "string",
             "description": "Short song prefix plus number, e.g. \"pupy-seg-1\""
           },
+          "formattedRange": {
+            "type": "string",
+            "description": "\"m:ss - m:ss\" of this section in THIS video, heard on the downbeat; write this first"
+          },
           "startTimeSeconds": {
             "type": "number",
-            "description": "Second the section is HEARD in this video (downbeat). First section 0."
+            "description": "formattedRange start as TOTAL seconds (minutes x 60 + seconds): 1:18 is 78, never 118. First section 0."
           },
           "endTimeSeconds": {
             "type": "number",
-            "description": "Equals the next section's start; last section ends at durationSeconds."
-          },
-          "formattedRange": {
-            "type": "string",
-            "description": "\"m:ss - m:ss\" matching the numbers"
+            "description": "formattedRange end as total seconds; equals the next section's start; last section ends at durationSeconds."
           },
           "sectionName": {
             "type": "string",
@@ -96,7 +96,7 @@
           },
           "bars": {
             "type": "integer",
-            "description": "4/4 bars in this section; close to duration x bpm / 240"
+            "description": "4/4 bars in this section, close to duration x bpm / 240; 0 when there is no steady beat"
           },
           "startsOnOne": {
             "type": "boolean",
@@ -268,9 +268,9 @@
         },
         "required": [
           "id",
+          "formattedRange",
           "startTimeSeconds",
           "endTimeSeconds",
-          "formattedRange",
           "sectionName",
           "bars",
           "startsOnOne",
@@ -287,9 +287,9 @@
         ],
         "propertyOrdering": [
           "id",
+          "formattedRange",
           "startTimeSeconds",
           "endTimeSeconds",
-          "formattedRange",
           "sectionName",
           "bars",
           "startsOnOne",

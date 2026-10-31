@@ -61,7 +61,7 @@ export function parseSongMapInput(raw: string): SongMapImportResult {
     candidate = candidate[0];
   }
 
-  const parsed = SongAnatomySchema.safeParse(candidate);
+  const parsed = SongAnatomySchema.safeParse(dropZeroBars(candidate));
   if (!parsed.success) {
     for (const issue of parsed.error.issues.slice(0, 25)) {
       errors.push(`${issue.path.join(".") || "(root)"}: ${issue.message}`);
@@ -69,8 +69,19 @@ export function parseSongMapInput(raw: string): SongMapImportResult {
     return { song: null, errors, warnings };
   }
 
-  const song = parsed.data;
-  errors.push(...validateSongTimeline(song));
+  let song = parsed.data;
+  let timelineErrors = validateSongTimeline(song);
+  if (timelineErrors.length) {
+    const repair = repairDigitTimes(song);
+    if (repair.sectionIds.length && validateSongTimeline(repair.song).length === 0) {
+      song = repair.song;
+      timelineErrors = [];
+      warnings.push(
+        `Times in ${repair.sectionIds.join(", ")} were m:ss typed as digits (e.g. 118 for 1:18); fixed from formattedRange. Check them by ear.`
+      );
+    }
+  }
+  errors.push(...timelineErrors);
 
   const ids = song.segments.map((segment) => segment.id);
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
@@ -78,6 +89,9 @@ export function parseSongMapInput(raw: string): SongMapImportResult {
 
   if (!/^[A-Za-z0-9_-]{11}$/.test(song.youtubeVideoId)) {
     warnings.push(`youtubeVideoId "${song.youtubeVideoId}" doesn't look like an 11-character YouTube id.`);
+  } else if (/^([a-z]+|[A-Z]+)$/.test(song.youtubeVideoId)) {
+    // Real ids are random: one-case letters only (e.g. "vanvantemba") means the song maker made it up
+    warnings.push(`youtubeVideoId "${song.youtubeVideoId}" looks made up; copy the id from the video link.`);
   }
 
   if (TIMBA_SONG_ANATOMY_DATA.some((existing) => existing.id === song.id)) {
@@ -124,6 +138,59 @@ export function parseSongMapInput(raw: string): SongMapImportResult {
   }
 
   return { song: errors.length ? null : withFixedRanges(song), errors, warnings };
+}
+
+/** The song maker must fill "bars" and writes 0 for a section with no beat: there is no bar count to keep. */
+function dropZeroBars(candidate: unknown): unknown {
+  if (!candidate || typeof candidate !== "object" || !("segments" in candidate) || !Array.isArray(candidate.segments)) {
+    return candidate;
+  }
+  return {
+    ...candidate,
+    segments: candidate.segments.map((segment: unknown) =>
+      segment && typeof segment === "object" && "bars" in segment && segment.bars === 0
+        ? Object.fromEntries(Object.entries(segment).filter(([key]) => key !== "bars"))
+        : segment
+    ),
+  };
+}
+
+function parseRangeSeconds(range: string): [number, number] | null {
+  const match = range.match(/^\s*(\d+):(\d{2}(?:\.\d+)?)\s*-\s*(\d+):(\d{2}(?:\.\d+)?)\s*$/);
+  return match ? [Number(match[1]) * 60 + Number(match[2]), Number(match[3]) * 60 + Number(match[4])] : null;
+}
+
+/** 118 read as the digits of "1:18" (78s); null when the number can't be m:ss digits. */
+function digitsAsMinutes(value: number): number | null {
+  if (value < 100) return null;
+  const minutes = Math.floor(value / 100);
+  const seconds = value - minutes * 100;
+  return seconds < 60 ? minutes * 60 + seconds : null;
+}
+
+/**
+ * Gemini sometimes types m:ss as digits after the first minute (1:18 -> 118)
+ * while its own formattedRange is right. A time with exactly that shape, whose
+ * range agrees with the digit reading, takes the range's value. The caller only
+ * keeps the result when it turns a broken timeline into a valid one.
+ */
+function repairDigitTimes(song: SongAnatomy): { song: SongAnatomy; sectionIds: string[] } {
+  const sectionIds: string[] = [];
+  const fix = (value: number, heard: number | undefined) => {
+    const asMinutes = digitsAsMinutes(value);
+    const typedAsDigits =
+      asMinutes !== null && heard !== undefined && Math.abs(value - heard) > 1 && Math.abs(asMinutes - heard) < 1;
+    return typedAsDigits ? asMinutes : value;
+  };
+  const segments = song.segments.map((segment) => {
+    const range = parseRangeSeconds(segment.formattedRange);
+    const startTimeSeconds = fix(segment.startTimeSeconds, range?.[0]);
+    const endTimeSeconds = fix(segment.endTimeSeconds, range?.[1]);
+    if (startTimeSeconds === segment.startTimeSeconds && endTimeSeconds === segment.endTimeSeconds) return segment;
+    sectionIds.push(segment.id);
+    return { ...segment, startTimeSeconds, endTimeSeconds };
+  });
+  return { song: { ...song, segments }, sectionIds };
 }
 
 function withFixedRanges(song: SongAnatomy): SongAnatomy {
@@ -200,7 +267,9 @@ Timing rules (critical, the app switches cues on these exact seconds):
 - Time against THIS video, including any intro before the music starts.
 - First segment starts at 0. Each segment starts exactly where the previous one ends (no gaps, no overlaps).
 - The last segment ends exactly at durationSeconds.
+- Times are TOTAL seconds from 0:00 (minutes x 60 + seconds): 1:18 is 78, never 118.
 - Put each boundary on the moment the new section is HEARD (the downbeat where the change lands).
+- When I give you the video id or length, copy them exactly; never make up a video id.
 
 Style rules:
 - "style" is the genre of the whole track. Only use "Timba" for modern Cuban timba bands.

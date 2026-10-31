@@ -69,8 +69,7 @@ test.describe("Practice Player Tools & Engagement E2E Suite", () => {
 
     // Override navigator.share to undefined to test clipboard fallback cleanly
     await page.addInitScript(() => {
-      // @ts-expect-error - testing fallback
-      delete (navigator as unknown as Record<string, unknown>).share;
+      delete (navigator as unknown as { share?: unknown }).share;
     });
 
     await page.goto("/music/me-dicen-cuba", { waitUntil: "domcontentloaded" });

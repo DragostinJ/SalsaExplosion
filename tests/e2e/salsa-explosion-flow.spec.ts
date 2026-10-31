@@ -36,14 +36,10 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     );
     await expect(facebookLinks.first()).toBeVisible();
 
-    // 5. Verify Social Proof Grid Section
-    await expect(
-      page.getByText("Feel the Energy of Bournemouth's Cuban Community")
-    ).toBeVisible();
-    await expect(
-      page.getByText("Thursday Night Rueda de Casino at BOH Studios")
-    ).toBeVisible();
-    await expect(page.getByText("Mark Townsend")).toBeVisible();
+    // 5. Verify Faculty Roster & BOH Residency Sections
+    await expect(page.locator('[data-testid="instructor-roster-section"]')).toBeVisible();
+    await expect(page.getByText("Meet the Salsa Explosion Faculty")).toBeVisible();
+    await expect(page.locator('[data-testid="boh-venue-spotlight"]')).toBeVisible();
 
     // 6. Verify theplace-inspired Classes Gateway on landing page and Level Finder Quiz on /dashboard/schedule
     await expect(page.locator('[data-testid="theplace-classes-gateway"]')).toBeVisible();
@@ -339,21 +335,15 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   test("17. Dance Vouchers showcase renders authentic gift benefits and phone order CTA", async ({
     page,
   }) => {
-    // 1. Check Homepage
-    await page.goto("/", { waitUntil: "domcontentloaded" });
+    // 1. Check Pricing page
+    await page.goto("/pricing", { waitUntil: "domcontentloaded" });
     await expect(
       page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
     ).toBeVisible();
     await expect(page.getByText("ORDER NOW: 07969 633701").first()).toBeVisible();
     await expect(page.getByText("🎂 Birthday presents").first()).toBeVisible();
 
-    // 2. Check Pricing page
-    await page.goto("/pricing", { waitUntil: "domcontentloaded" });
-    await expect(
-      page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
-    ).toBeVisible();
-
-    // 3. Check Shop page
+    // 2. Check Shop page
     await page.goto("/shop", { waitUntil: "domcontentloaded" });
     await expect(
       page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
@@ -519,18 +509,15 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByRole("link", { name: /Explore the Timetable & Book Your Session/i })
     ).toBeVisible();
 
-    // 5. Verify Mobile Expand Toggle on mobile viewport
+    // 5. Verify Mobile Snap Reel Controls on mobile viewport (commit 29fc7fd)
     await page.goto("/?liveDemo=thursday");
     await page.waitForLoadState("domcontentloaded");
     await page.setViewportSize({ width: 375, height: 667 });
-    const mobileToggle = page.getByRole("button", {
-      name: /Show All 8 Maestros & Guest Artists/i,
-    });
-    await expect(mobileToggle).toBeVisible();
-    await mobileToggle.click();
-    await expect(
-      page.getByRole("button", { name: /Show Fewer Artists/i })
-    ).toBeVisible();
+    const nextBtn = page.getByRole("button", { name: "Next instructor" });
+    await expect(nextBtn).toBeVisible();
+    await expect(page.getByText(/Artist 1 of \d+/i)).toBeVisible();
+    await nextBtn.click();
+    await expect(page.getByText(/Artist 2 of \d+/i)).toBeVisible();
   });
 });
 

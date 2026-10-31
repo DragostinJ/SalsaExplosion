@@ -1,4 +1,6 @@
-import { formatSecondsToTime, type SongSegment } from "@/lib/constants/timba-song-anatomy";
+import type { SongSegment } from "@/lib/constants/timba-song-anatomy";
+// Not formatSecondsToTime: a value import from the song data module bundles every song into the player
+import { formatSongTime } from "@/lib/music/song-timing";
 
 /**
  * Ear-calibration helpers (player opened with ?calibrate=1).
@@ -33,7 +35,7 @@ export function applyBoundaryOverrides(
       ...segment,
       startTimeSeconds: start,
       endTimeSeconds: end,
-      formattedRange: `${formatSecondsToTime(start)} - ${formatSecondsToTime(end)}`,
+      formattedRange: `${formatSongTime(start)} - ${formatSongTime(end)}`,
     };
   });
 }

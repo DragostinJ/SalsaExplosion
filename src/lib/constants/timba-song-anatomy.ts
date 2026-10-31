@@ -1,8 +1,4 @@
 import { z } from "zod";
-import {
-  CUBAN_CURRICULUM_DATA,
-  CurriculumSkillItem,
-} from "./cuban-curriculum-2027";
 
 // ==========================================
 // 1. ZOD SCHEMAS & TYPES
@@ -3011,11 +3007,8 @@ export function getAllSongAnatomies(): SongAnatomy[] {
   return TIMBA_SONG_ANATOMY_DATA;
 }
 
-export function resolveCurriculumMove(slugOrId: string): CurriculumSkillItem | undefined {
-  return CUBAN_CURRICULUM_DATA.find(
-    (skill) => skill.id === slugOrId || skill.name.toLowerCase() === slugOrId.toLowerCase()
-  );
-}
+// Lives with the curriculum so the player can resolve moves without bundling every song
+export { resolveCurriculumMove } from "./cuban-curriculum-2027";
 
 export function formatSecondsToTime(seconds: number): string {
   const m = Math.floor(seconds / 60);

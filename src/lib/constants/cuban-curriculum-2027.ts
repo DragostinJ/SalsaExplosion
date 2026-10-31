@@ -703,6 +703,13 @@ export const CURRICULUM_REFERENCE_SONGS: CurriculumReferenceSong[] = [
 // 6. QUERY / FILTER HELPER FUNCTIONS
 // ==========================================
 
+/** Move for a song section's recommendedMoveSlugs entry (id, or name in any case). */
+export function resolveCurriculumMove(slugOrId: string): CurriculumSkillItem | undefined {
+  return CUBAN_CURRICULUM_DATA.find(
+    (skill) => skill.id === slugOrId || skill.name.toLowerCase() === slugOrId.toLowerCase()
+  );
+}
+
 export function getSkillsByLevel(level: CurriculumLevel): CurriculumSkillItem[] {
   return CUBAN_CURRICULUM_DATA.filter((s) => s.level === level);
 }

@@ -1,8 +1,9 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import { resolveCurriculumMove, type SongSegment } from "@/lib/constants/timba-song-anatomy";
-import type { CurriculumSkillItem } from "@/lib/constants/cuban-curriculum-2027";
+import type { SongSegment } from "@/lib/constants/timba-song-anatomy";
+// From the curriculum, not the song data module: that would bundle every song into the player
+import { resolveCurriculumMove, type CurriculumSkillItem } from "@/lib/constants/cuban-curriculum-2027";
 
 /** Opened details can land below the card's visible area; bring them into view. */
 function revealWhenOpened(event: React.SyntheticEvent<HTMLDetailsElement>) {

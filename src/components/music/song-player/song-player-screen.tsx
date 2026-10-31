@@ -33,6 +33,7 @@ import { cn } from "@/lib/utils";
 import { SongMapBar } from "./song-map-bar";
 import { SongPlayerMoreSheet, type DancerRole } from "./song-player-more-sheet";
 import { SongCalibrationPanel } from "./song-calibration-panel";
+import { useCalibratedSegments } from "./calibration-store";
 import { PlayerControls } from "./player-controls";
 import { SectionList } from "./section-list";
 import { DanceView, LearnView, QuizView, type QuizState } from "./now-card-views";
@@ -56,7 +57,6 @@ interface SongPlayerScreenProps {
 }
 
 export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
-  const segments = song.segments;
   const audioUrl = song.licensedAudio?.url ?? null;
 
   // Per-device settings
@@ -68,6 +68,8 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
   const hapticsSupported = useSyncExternalStore(noopSubscribe, readHapticsSupport, () => false);
   const hapticsEnabled = useStoredString(KEYS.haptics) !== "off";
   const isCalibrating = useSyncExternalStore(noopSubscribe, readCalibrateFlag, () => false);
+  // Authored map; nudged boundaries only while calibrating
+  const segments = useCalibratedSegments(song, isCalibrating);
 
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
@@ -392,6 +394,8 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
               currentTime={clock.currentTime}
               actualDurationSeconds={clock.actualDurationSeconds}
               getExactTime={getExactTime}
+              seek={seek}
+              play={play}
             />
           )}
 

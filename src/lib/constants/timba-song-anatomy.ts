@@ -2675,6 +2675,324 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       }
     ]
   },
+  // -----------------------------------------------------------------
+  // "De La Timba a Pogolotti" - Pupy y Los Que Son Son
+  // Timba • Intermediate • 104 BPM • 2-3 Son Clave • 345s
+  // Video ID: gBh_lrPOpvQ • timings from the AI Studio song maker (fan upload by "Inversión En Fácil")
+  // -----------------------------------------------------------------
+  {
+    "id": "de-la-timba-a-pogolotti",
+    "title": "De La Timba a Pogolotti",
+    "artist": "Pupy y Los Que Son Son",
+    "style": "Timba",
+    "bpm": 104,
+    "claveType": "2-3 Son Clave",
+    "difficultyLevel": "Intermediate",
+    "durationSeconds": 345,
+    "youtubeVideoId": "gBh_lrPOpvQ",
+    "youtubeUrl": "https://www.youtube.com/watch?v=gBh_lrPOpvQ",
+    "segments": [
+      {
+        "id": "pupy-seg-1",
+        "startTimeSeconds": 0,
+        "endTimeSeconds": 28,
+        "formattedRange": "0:00 - 0:28",
+        "sectionName": "Intro",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Piano and bass intro",
+        "leaderCue": "Relaxed basic steps, establish connection and find the groove.",
+        "followerCue": "Follow the smooth flow, keep steps light and grounded.",
+        "commonMistakeWarning": "Rushing the beat before the vocals start.",
+        "recommendedMoveSlugs": [
+          "beg-pw-1",
+          "beg-solo-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Tumbao bass",
+          "hipsAndKnees": "Guiro",
+          "chestAndShoulders": "Piano montuno"
+        }
+      },
+      {
+        "id": "pupy-seg-2",
+        "startTimeSeconds": 28,
+        "endTimeSeconds": 45,
+        "formattedRange": "0:28 - 0:45",
+        "sectionName": "Verse 1",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Vocals 'Yo nací en la timba...'",
+        "leaderCue": "Simple figures, focus on storytelling and musicality.",
+        "followerCue": "Smooth styling, maintain frame and connection.",
+        "commonMistakeWarning": "Overcomplicating figures during the verse.",
+        "recommendedMoveSlugs": [
+          "beg-pw-2",
+          "beg-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Clave",
+          "hipsAndKnees": "Congas",
+          "chestAndShoulders": "Vocals"
+        }
+      },
+      {
+        "id": "pupy-seg-3",
+        "startTimeSeconds": 45,
+        "endTimeSeconds": 64,
+        "formattedRange": "0:45 - 1:04",
+        "sectionName": "Coro 1",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Coro 'Ven, ven, no te confundas...'",
+        "leaderCue": "Increase energy, introduce dynamic turn patterns.",
+        "followerCue": "Match the energy, sharp stops if led.",
+        "commonMistakeWarning": "Not matching the increased energy of the coro.",
+        "recommendedMoveSlugs": [
+          "imp-pw-1",
+          "imp-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana",
+          "hipsAndKnees": "Congas",
+          "chestAndShoulders": "Coro"
+        }
+      },
+      {
+        "id": "pupy-seg-4",
+        "startTimeSeconds": 64,
+        "endTimeSeconds": 81,
+        "formattedRange": "1:04 - 1:21",
+        "sectionName": "Mambo 1",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Brass section",
+        "leaderCue": "Break apart, show your footwork and musicality.",
+        "followerCue": "Express yourself with shines and body movement.",
+        "commonMistakeWarning": "Staying in closed hold during the mambo.",
+        "recommendedMoveSlugs": [
+          "int-solo-1",
+          "adv-solo-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Timbales",
+          "hipsAndKnees": "Bass",
+          "chestAndShoulders": "Brass"
+        }
+      },
+      {
+        "id": "pupy-seg-5",
+        "startTimeSeconds": 81,
+        "endTimeSeconds": 99,
+        "formattedRange": "1:21 - 1:39",
+        "sectionName": "Verse 2",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Vocals 'Entonces yo quiero darte...'",
+        "leaderCue": "Reconnect, fluid and continuous figures.",
+        "followerCue": "Smooth transition back to partner work.",
+        "commonMistakeWarning": "Hesitating on the reconnection.",
+        "recommendedMoveSlugs": [
+          "imp-pw-4",
+          "imp-pw-5"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Clave",
+          "hipsAndKnees": "Congas",
+          "chestAndShoulders": "Vocals"
+        }
+      },
+      {
+        "id": "pupy-seg-6",
+        "startTimeSeconds": 99,
+        "endTimeSeconds": 153,
+        "formattedRange": "1:39 - 2:33",
+        "sectionName": "Coro & Pregones",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Coro 'Ven, ven, no te confundas...'",
+        "leaderCue": "High energy, use the full space, complex knots.",
+        "followerCue": "Dynamic styling, strong frame, sharp spins.",
+        "commonMistakeWarning": "Losing timing during complex patterns.",
+        "recommendedMoveSlugs": [
+          "int-pw-2",
+          "int-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana",
+          "hipsAndKnees": "Congas",
+          "chestAndShoulders": "Coro"
+        }
+      },
+      {
+        "id": "pupy-seg-7",
+        "startTimeSeconds": 153,
+        "endTimeSeconds": 171,
+        "formattedRange": "2:33 - 2:51",
+        "sectionName": "Mambo 2",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Brass section",
+        "leaderCue": "Separate for shines, interact playfully.",
+        "followerCue": "Playful footwork, engage with your partner.",
+        "commonMistakeWarning": "Ignoring your partner while doing shines.",
+        "recommendedMoveSlugs": [
+          "int-solo-1",
+          "adv-solo-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Timbales",
+          "hipsAndKnees": "Bass",
+          "chestAndShoulders": "Brass"
+        }
+      },
+      {
+        "id": "pupy-seg-8",
+        "startTimeSeconds": 171,
+        "endTimeSeconds": 189,
+        "formattedRange": "2:51 - 3:09",
+        "sectionName": "Pregón",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Vocals 'Se me hierve la sangre...'",
+        "leaderCue": "Back to partner work, keep the flow going.",
+        "followerCue": "Maintain momentum, responsive styling.",
+        "commonMistakeWarning": "Dropping the energy level.",
+        "recommendedMoveSlugs": [
+          "imp-pw-2",
+          "imp-pw-6"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Clave",
+          "hipsAndKnees": "Congas",
+          "chestAndShoulders": "Vocals"
+        }
+      },
+      {
+        "id": "pupy-seg-9",
+        "startTimeSeconds": 189,
+        "endTimeSeconds": 214,
+        "formattedRange": "3:09 - 3:34",
+        "sectionName": "Montuno 1",
+        "danceGear": "Despelote / Reparto",
+        "colorTheme": "red",
+        "musicalTrigger": "Coro 'Yo te pongo y tú tocas...'",
+        "leaderCue": "Open up, body isolations, playful interaction.",
+        "followerCue": "Hips and shoulders, express the rhythm.",
+        "commonMistakeWarning": "Being too stiff during the rhythmic section.",
+        "recommendedMoveSlugs": [
+          "int-solo-1",
+          "adv-solo-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Bass",
+          "hipsAndKnees": "Congas",
+          "chestAndShoulders": "Coro"
+        }
+      },
+      {
+        "id": "pupy-seg-10",
+        "startTimeSeconds": 214,
+        "endTimeSeconds": 233,
+        "formattedRange": "3:34 - 3:53",
+        "sectionName": "Montuno 2",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Coro 'Que me dice ven...'",
+        "leaderCue": "Reconnect for dynamic turn patterns.",
+        "followerCue": "Sharp turns, maintain connection.",
+        "commonMistakeWarning": "Losing the beat during the transition.",
+        "recommendedMoveSlugs": [
+          "adv-pw-1",
+          "adv-pw-2"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana",
+          "hipsAndKnees": "Congas",
+          "chestAndShoulders": "Coro"
+        }
+      },
+      {
+        "id": "pupy-seg-11",
+        "startTimeSeconds": 233,
+        "endTimeSeconds": 253,
+        "formattedRange": "3:53 - 4:13",
+        "sectionName": "Montuno 3",
+        "danceGear": "Despelote / Reparto",
+        "colorTheme": "red",
+        "musicalTrigger": "Coro 'Yo te pongo y tú tocas...'",
+        "leaderCue": "Break apart again, high energy body movement.",
+        "followerCue": "Tembleque, full body expression.",
+        "commonMistakeWarning": "Holding back on the energy.",
+        "recommendedMoveSlugs": [
+          "int-solo-1",
+          "adv-solo-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Bass",
+          "hipsAndKnees": "Congas",
+          "chestAndShoulders": "Coro"
+        }
+      },
+      {
+        "id": "pupy-seg-12",
+        "startTimeSeconds": 253,
+        "endTimeSeconds": 293,
+        "formattedRange": "4:13 - 4:53",
+        "sectionName": "Montuno Pregones",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Vocals 'La gente a mí me pregunta...'",
+        "leaderCue": "Continuous flow, complex figures.",
+        "followerCue": "Fluid movement, strong frame.",
+        "commonMistakeWarning": "Tensing up arms during fast turns.",
+        "recommendedMoveSlugs": [
+          "int-pw-1",
+          "int-pw-4"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana",
+          "hipsAndKnees": "Congas",
+          "chestAndShoulders": "Vocals"
+        }
+      },
+      {
+        "id": "pupy-seg-13",
+        "startTimeSeconds": 293,
+        "endTimeSeconds": 345,
+        "formattedRange": "4:53 - 5:45",
+        "sectionName": "Outro",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Coro 'Yo te pongo y tú tocas...' fading out",
+        "leaderCue": "Final shines, hit the breaks, wind down.",
+        "followerCue": "Big finish, pose on the final beat.",
+        "commonMistakeWarning": "Missing the final musical accents.",
+        "recommendedMoveSlugs": [
+          "int-solo-1",
+          "adv-solo-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Timbales",
+          "hipsAndKnees": "Bass",
+          "chestAndShoulders": "Brass"
+        }
+      }
+    ]
+  },
 ];
 
 // ==========================================

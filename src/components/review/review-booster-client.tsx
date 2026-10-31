@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import {
   Star,
   Sparkles,
@@ -9,7 +8,6 @@ import {
   Check,
   ExternalLink,
   QrCode,
-  Share2,
   Heart,
   MapPin,
   Calendar,
@@ -24,7 +22,6 @@ import {
   GoogleReviewDraftOutput,
 } from "@/lib/validations/ai-studio.schema";
 import { generateGoogleReviewHelperAction } from "@/actions/ai-studio.actions";
-import { VENUE_INFO } from "@/lib/academy-data";
 
 export function ReviewBoosterClient() {
   const [favoriteAspect, setFavoriteAspect] = useState<

@@ -17,7 +17,8 @@ export function SongPracticeList() {
           <li key={song.id}>
             <Link
               href={`/music/${song.id}`}
-              className="flex min-h-[64px] items-center gap-3 rounded-2xl border border-line bg-surface-2 p-3 transition-colors hover:border-gold/50"
+              aria-label={`Open practice player for ${song.title.replace(/\s*\(Official Video\)/i, "")} by ${song.artist}`}
+              className="flex min-h-[64px] items-center gap-3 rounded-2xl border border-line bg-surface-2 p-3 transition-colors hover:border-gold/50 focus-visible:outline-2 focus-visible:outline-gold"
             >
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-bold text-ivory">

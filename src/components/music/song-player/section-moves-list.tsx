@@ -41,7 +41,7 @@ export function SectionMovesList({ segment }: SectionMovesListProps) {
               onToggle={revealWhenOpened}
               className="group rounded-xl border border-line bg-canvas/40"
             >
-              <summary className="flex min-h-[44px] cursor-pointer list-none items-center gap-2 px-3 [&::-webkit-details-marker]:hidden">
+              <summary className="flex min-h-[44px] cursor-pointer list-none items-center gap-2 px-3 focus-visible:outline-2 focus-visible:outline-gold rounded-xl [&::-webkit-details-marker]:hidden">
                 <span className="min-w-0 flex-1 truncate text-sm font-semibold">{move.name}</span>
                 <span className="shrink-0 text-[11px] text-ivory-muted">{move.level}</span>
                 <ChevronDown

@@ -39,7 +39,7 @@ export function SectionList({ segments, activeIndex, mastered, onSelectSection, 
               <span className="min-w-0 flex-1 truncate text-sm font-semibold">{segment.sectionName}</span>
               <span className={cn("shrink-0 text-xs font-bold", gear.textClass)}>{gear.shortLabel}</span>
               {mastered.has(segment.id) && (
-                <CircleCheck className="h-4 w-4 shrink-0 text-success" aria-label="Got it" />
+                <CircleCheck className="h-4 w-4 shrink-0 text-success" aria-hidden="true" />
               )}
             </button>
           </li>

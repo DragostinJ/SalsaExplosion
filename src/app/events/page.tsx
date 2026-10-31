@@ -230,7 +230,7 @@ export default async function EventsDirectoryPage() {
                           <span className="line-clamp-1">{liveEvt.venue}</span>
                         </div>
                         <p className="text-xs text-ivory-muted italic border-l-2 border-gold/40 pl-3 line-clamp-2">
-                          "{liveEvt.instagramOrFbSummary}"
+                          &ldquo;{liveEvt.instagramOrFbSummary}&rdquo;
                         </p>
                       </CardContent>
                     </div>

@@ -6,12 +6,13 @@ import {
   getAllSongAnatomies,
   resolveCurriculumMove,
   scaleSongSegmentsToDuration,
+  formatSecondsToTime,
 } from "@/lib/constants/timba-song-anatomy";
 import { CUBAN_CURRICULUM_DATA } from "@/lib/constants/cuban-curriculum-2027";
 import { getClaveStrokeBeats, CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-synth";
 
 describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dataset", () => {
-  it("validates all 13 production song maps against SongAnatomySchema and checks valid youtubeVideoId & youtubeUrl", () => {
+  it("validates every production song map against SongAnatomySchema and checks valid youtubeVideoId & youtubeUrl", () => {
     expect(TIMBA_SONG_ANATOMY_DATA.length).toBe(14);
 
     for (const song of TIMBA_SONG_ANATOMY_DATA) {
@@ -46,94 +47,55 @@ describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dat
     synth.stop();
   });
 
-  it("verifies 'Me Dicen Cuba' has 9 continuous, non-overlapping segments covering the calibrated 328s (5:28) duration", () => {
-    const song = getSongAnatomyById("me-dicen-cuba");
-    expect(song).toBeDefined();
-    expect(song?.bpm).toBe(91);
-    expect(song?.claveType).toBe("2-3 Son Clave");
-    expect(song?.difficultyLevel).toBe("Beginner");
-    expect(song?.durationSeconds).toBe(328);
-    expect(song?.segments.length).toBe(9);
+  // Song maps are re-timed by the AI Studio song maker and ear-calibrated, so these
+  // check invariants for every song rather than pinning one song's times or bpm.
+  it("every song is a continuous, non-overlapping section map covering exactly its video length", () => {
+    for (const song of TIMBA_SONG_ANATOMY_DATA) {
+      expect(song.segments.length, song.id).toBeGreaterThanOrEqual(3);
+      expect(song.bpm, song.id).toBeGreaterThanOrEqual(60);
+      expect(song.bpm, song.id).toBeLessThanOrEqual(140);
 
-    let currentExpectedStart = 0;
-    for (const segment of song!.segments) {
-      expect(segment.startTimeSeconds).toBe(currentExpectedStart);
-      expect(segment.endTimeSeconds).toBeGreaterThan(segment.startTimeSeconds);
-      expect(segment.timingMode).toBeDefined();
-      expect(segment.instrumentMapping).toBeDefined();
-      currentExpectedStart = segment.endTimeSeconds;
+      let currentExpectedStart = 0;
+      for (const segment of song.segments) {
+        expect(segment.startTimeSeconds, segment.id).toBe(currentExpectedStart);
+        expect(segment.endTimeSeconds, segment.id).toBeGreaterThan(segment.startTimeSeconds);
+        expect(segment.formattedRange, segment.id).toBe(
+          `${formatSecondsToTime(segment.startTimeSeconds)} - ${formatSecondsToTime(segment.endTimeSeconds)}`
+        );
+        // timingMode and instrumentMapping are optional; when present the 3 zones are filled
+        if (segment.instrumentMapping) {
+          expect(segment.instrumentMapping.feet, segment.id).toBeTruthy();
+          expect(segment.instrumentMapping.hipsAndKnees, segment.id).toBeTruthy();
+          expect(segment.instrumentMapping.chestAndShoulders, segment.id).toBeTruthy();
+        }
+        currentExpectedStart = segment.endTimeSeconds;
+      }
+      expect(currentExpectedStart, song.id).toBe(song.durationSeconds);
     }
-    expect(currentExpectedStart).toBe(328);
-    expect(song!.segments[0].formattedRange).toBe("0:00 - 0:18");
-    expect(song!.segments[0].danceGear).toBe("Wait / Breathe");
-    expect(song!.segments[0].colorTheme).toBe("slate");
-    expect(song!.segments[8].formattedRange).toBe("4:16 - 5:28");
   });
 
-  it("verifies 'La Cosa Mala' has 8 continuous, non-overlapping segments covering the exact 347s (5:47) duration", () => {
-    const song = getSongAnatomyById("la-cosa-mala");
-    expect(song).toBeDefined();
-    expect(song?.bpm).toBe(95);
-    expect(song?.claveType).toBe("2-3 Son Clave");
-    expect(song?.difficultyLevel).toBe("Intermediate");
-    expect(song?.durationSeconds).toBe(347);
-    expect(song?.segments.length).toBe(8);
-
-    let currentExpectedStart = 0;
-    for (const segment of song!.segments) {
-      expect(segment.startTimeSeconds).toBe(currentExpectedStart);
-      expect(segment.endTimeSeconds).toBeGreaterThan(segment.startTimeSeconds);
-      expect(segment.timingMode).toBeDefined();
-      expect(segment.instrumentMapping).toBeDefined();
-      currentExpectedStart = segment.endTimeSeconds;
-    }
-    expect(currentExpectedStart).toBe(347);
-    expect(song!.segments[0].formattedRange).toBe("0:00 - 0:15");
-    expect(song!.segments[5].sectionName).toBe("El Conteo Regresivo ('4, 3, 2, 1... ¡Se le quitó!')");
-    expect(song!.segments[5].formattedRange).toBe("3:52 - 4:12");
-    expect(song!.segments[7].formattedRange).toBe("5:10 - 5:47");
-  });
-
-  it("verifies 'Agua Pa' Yemayá' has 10 continuous segments covering 417s (6:57) with timingMode and 3-zone instrumentMapping", () => {
-    const song = getSongAnatomyById("agua-pa-yemaya");
-    expect(song).toBeDefined();
-    expect(song?.bpm).toBe(99);
-    expect(song?.claveType).toBe("2-3 Son / 6/8 Afro-Bembé Hybrid");
-    expect(song?.difficultyLevel).toBe("Advanced");
-    expect(song?.durationSeconds).toBe(417);
-    expect(song?.segments.length).toBe(10);
-
-    let currentExpectedStart = 0;
-    for (const segment of song!.segments) {
-      expect(segment.startTimeSeconds).toBe(currentExpectedStart);
-      expect(segment.endTimeSeconds).toBeGreaterThan(segment.startTimeSeconds);
-      expect(segment.timingMode).toBeDefined();
-      expect(segment.instrumentMapping).toBeDefined();
-      expect(segment.instrumentMapping?.feet).toBeDefined();
-      expect(segment.instrumentMapping?.hipsAndKnees).toBeDefined();
-      expect(segment.instrumentMapping?.chestAndShoulders).toBeDefined();
-      currentExpectedStart = segment.endTimeSeconds;
-    }
-    expect(currentExpectedStart).toBe(417);
-    expect(song!.segments[0].formattedRange).toBe("0:00 - 0:29");
-    expect(song!.segments[9].formattedRange).toBe("6:36 - 6:57");
+  it("keeps the anchor songs on their videos and lengths", () => {
+    expect(getSongAnatomyById("me-dicen-cuba")).toMatchObject({ youtubeVideoId: "jBNgDYJjZP8", durationSeconds: 328 });
+    expect(getSongAnatomyById("la-cosa-mala")).toMatchObject({ youtubeVideoId: "et8gHrBf_6s", durationSeconds: 347 });
+    expect(getSongAnatomyById("agua-pa-yemaya")).toMatchObject({ youtubeVideoId: "ZuaNY9AKoLc", durationSeconds: 417 });
   });
 
   it("proves scaleSongSegmentsToDuration preserves all intermediate transition timestamps and extends final segment if longer", () => {
     const song = getSongAnatomyById("la-cosa-mala")!;
     // When duration matches, returns original segments
-    const unchanged = scaleSongSegmentsToDuration(song, 347);
-    expect(unchanged).toBe(song.segments);
+    expect(scaleSongSegmentsToDuration(song, song.durationSeconds)).toBe(song.segments);
 
-    // When duration is 360s
-    const scaled = scaleSongSegmentsToDuration(song, 360);
-    expect(scaled.length).toBe(8);
-    expect(scaled[0].startTimeSeconds).toBe(0);
-    expect(scaled[0].endTimeSeconds).toBe(15); // Unchanged intermediate!
-    expect(scaled[1].startTimeSeconds).toBe(15);
-    expect(scaled[1].endTimeSeconds).toBe(102); // Unchanged intermediate!
-    expect(scaled[7].startTimeSeconds).toBe(310);
-    expect(scaled[7].endTimeSeconds).toBe(360); // Only the final segment extends!
+    const longer = song.durationSeconds + 13;
+    const scaled = scaleSongSegmentsToDuration(song, longer);
+    const last = song.segments.length - 1;
+    expect(scaled.length).toBe(song.segments.length);
+    scaled.slice(0, last).forEach((segment, index) => {
+      // Unchanged intermediates!
+      expect(segment.startTimeSeconds).toBe(song.segments[index].startTimeSeconds);
+      expect(segment.endTimeSeconds).toBe(song.segments[index].endTimeSeconds);
+    });
+    expect(scaled[last].startTimeSeconds).toBe(song.segments[last].startTimeSeconds);
+    expect(scaled[last].endTimeSeconds).toBe(longer); // Only the final segment extends!
   });
 
   it("ensures every recommendedMoveSlug in every segment resolves to a valid curriculum move", () => {

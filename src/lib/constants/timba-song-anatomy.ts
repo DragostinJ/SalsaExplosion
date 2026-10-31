@@ -379,218 +379,393 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
   },
 
   // -----------------------------------------------------------------
-  // 2. "La Cosa Mala" - El Niño y La Verdad
-  // Level: Intermediate / Advanced • 95 BPM • 2-3 Son Clave • 347 seconds (5:47)
-  // Official Audio ID: et8gHrBf_6s | Backup ID: 8GXd6UuNJ7A
+  // "La Cosa Mala" - El Niño y La Verdad
+  // Timba • Intermediate • 96 BPM • 2-3 Son Clave • 347s
+  // Video ID: et8gHrBf_6s • timings from Argus
+  // Gemini 4 Argon in AI Studio 2026-10-31. 5 of 13 starts within 2 s of the old map. Ear-check: 1:15.5 (Mi prima Katy, not in the old map), bomba end 3:44.5 (old map 3:52), countdown 4:04 to 4:12.
   // -----------------------------------------------------------------
   {
-    id: "la-cosa-mala",
-    title: "La Cosa Mala (Official Audio)",
-    artist: "El Niño y La Verdad",
-    style: "Timba",
-    bpm: 95,
-    claveType: "2-3 Son Clave",
-    difficultyLevel: "Intermediate",
-    durationSeconds: 347,
-    youtubeVideoId: "et8gHrBf_6s",
-    alternateYoutubeVideoId: "8GXd6UuNJ7A",
-    youtubeUrl: "https://www.youtube.com/watch?v=et8gHrBf_6s",
-    spotifyOrYoutubeEmbedUrl:
-      "https://open.spotify.com/search/El%20Nino%20y%20La%20Verdad%20La%20Cosa%20Mala",
-    segments: [
+    "id": "la-cosa-mala",
+    "title": "La Cosa Mala",
+    "artist": "El Niño y La Verdad",
+    "style": "Timba",
+    "bpm": 96,
+    "claveType": "2-3 Son Clave",
+    "difficultyLevel": "Intermediate",
+    "durationSeconds": 347,
+    "youtubeVideoId": "et8gHrBf_6s",
+    "youtubeUrl": "https://www.youtube.com/watch?v=et8gHrBf_6s",
+    "alternateYoutubeVideoId": "8GXd6UuNJ7A",
+    "spotifyOrYoutubeEmbedUrl": "https://open.spotify.com/search/El%20Nino%20y%20La%20Verdad%20La%20Cosa%20Mala",
+    "segments": [
       {
-        id: "lcm-seg-1",
-        startTimeSeconds: 0,
-        endTimeSeconds: 15,
-        formattedRange: "0:00 - 0:15",
-        sectionName: "Intro de Tres Cubano ('Tú ten cuidado')",
-        danceGear: "Son Cubano",
-        colorTheme: "blue",
-        timingMode: "Contratiempo (On2)",
-        musicalTrigger:
-          "Opens immediately with the syncopated Cuban Tres guitar, bongo martillo, and maracas as El Niño warns 'Tú ten cuidado no te dé... la cosa mala'.",
-        leaderCue:
-          "Start apart marking Contratiempo (On2) to the Tres guitar, and connect into elegant closed Son hold at 0:15.",
-        followerCue:
-          "Feel the syncopated Tres guitar and step smoothly onto counts 2-3-4 / 6-7-8.",
-        commonMistakeWarning:
-          "Rushing On1 turn patterns over a classic Tres Cubano Son intro.",
-        instrumentMapping: {
-          feet: "Tres guitar tumbao (2-3-4 / 6-7-8)",
-          hipsAndKnees: "Delayed Son weight transfer",
-          chestAndShoulders: "Upright Son frame",
+        "id": "cosa-seg-1",
+        "startTimeSeconds": 0,
+        "endTimeSeconds": 15.5,
+        "formattedRange": "0:00 - 0:15",
+        "sectionName": "Intro: Tú Ten Cuidado No Te Dé",
+        "danceGear": "Wait / Breathe",
+        "colorTheme": "slate",
+        "musicalTrigger": "Syncopated piano-tres tumbao and bongó enter with El Niño warning 'Tú ten cuidado no te dé... La cosa mala'.",
+        "leaderCue": "Stand relaxed with your partner, sway to the tres tumbao, and find beat 1 before the story starts.",
+        "followerCue": "Match the leader's weight transfer in place and feel the conga slap on 2 and 4.",
+        "commonMistakeWarning": "Rushing into full turn patterns during the spoken warning before the first verse begins at 0:15.5.",
+        "recommendedMoveSlugs": [
+          "beg-mus-1",
+          "imp-mus-1"
+        ],
+        "timingMode": "Contratiempo (On2) or Smooth On1",
+        "instrumentMapping": {
+          "feet": "Conga slap on 2 and 4",
+          "hipsAndKnees": "Bass and tres tumbao",
+          "chestAndShoulders": "Bongó martillo"
         },
-        recommendedMoveSlugs: ["beg-solo-1", "int-sub-1"],
+        "bars": 6,
+        "startsOnOne": true
       },
       {
-        id: "lcm-seg-2",
-        startTimeSeconds: 15,
-        endTimeSeconds: 102,
-        formattedRange: "0:15 - 1:42",
-        sectionName: "Tema Narrativo (Las 3 Historias en Son)",
-        danceGear: "Son Cubano",
-        colorTheme: "blue",
-        timingMode: "Contrapunto (On2 <-> On1)",
-        musicalTrigger:
-          "Three humorous Havana stories (the bank queue at 0:15, Felo the vendor at 0:44, and the park Wi-Fi girl at 1:15) backed by acoustic Son percussion with NO cowbell.",
-        leaderCue:
-          "Stay in Son Cubano (On2) or ultra-smooth Closed/One-Hand Casino (Paseala, Kentucky, slow Setenta). Hit the funny vocal break at 1:33 ('¡No te oigo!').",
-        followerCue:
-          "Keep movements smooth and grounded; play with the '¡No te oigo!' (cupping ear) lyrical break at 1:33!",
-        commonMistakeWarning:
-          "Dancing high-stress Timba knots during a laid-back Son storytelling section.",
-        instrumentMapping: {
-          feet: "Bongo martillo & Maracas",
-          hipsAndKnees: "Smooth circular walking",
-          chestAndShoulders: "Playful stop at 1:33 ('¡No te oigo!')",
+        "id": "cosa-seg-2",
+        "startTimeSeconds": 15.5,
+        "endTimeSeconds": 75.5,
+        "formattedRange": "0:15 - 1:15",
+        "sectionName": "Tema 1 & 2: La Cola del Banco y El Vendedor",
+        "danceGear": "Son Cubano",
+        "colorTheme": "blue",
+        "musicalTrigger": "El Niño begins the first story verse 'El otro día en la cola del banco' followed by 'Un vendedor con su carretilla'.",
+        "leaderCue": "Dance compact Son Cubano or close-hold Paso Básico, Dile Que No, and Paséala to let the stories breathe.",
+        "followerCue": "Keep steps small and grounded, styling softly on the 'Le dio una cosa mala' coro refrains.",
+        "commonMistakeWarning": "Over-leading big fast Casino combinations over the traditional Son storytelling verses.",
+        "recommendedMoveSlugs": [
+          "imp-sub-1",
+          "beg-solo-1",
+          "imp-pw-6"
+        ],
+        "timingMode": "Contratiempo (On2) or Smooth On1",
+        "instrumentMapping": {
+          "feet": "Conga tumbao and clave",
+          "hipsAndKnees": "Syncopated bass tumbao",
+          "chestAndShoulders": "Piano-tres guajeo"
         },
-        recommendedMoveSlugs: ["imp-sub-1", "beg-pw-2", "imp-pw-6"],
+        "bars": 24,
+        "startsOnOne": true,
+        "handGesture": "Paséala"
       },
       {
-        id: "lcm-seg-3",
-        startTimeSeconds: 102,
-        endTimeSeconds: 133,
-        formattedRange: "1:42 - 2:13",
-        sectionName: "Montuno de Son ('Tienen que relajarse')",
-        danceGear: "Casino (Smooth)",
-        colorTheme: "emerald",
-        timingMode: "A Tiempo (On1)",
-        musicalTrigger:
-          "At 1:40 El Niño shouts '¡Señores!' and launches the first call-and-response chorus ('Le dio una cosa mala'), still keeping the warm Son percussion.",
-        leaderCue:
-          "Transition to flowing circular Casino (Sombrero, Vacilala, Montana). Prepare to break apart when the horns hit at 2:13!",
-        followerCue:
-          "Open up your turns and listen for the brass transition right after 'te puede dar una cosa mala' at 2:12.",
-        commonMistakeWarning:
-          "Missing the brass transition at 2:13 because you're stuck mid-combination.",
-        instrumentMapping: {
-          feet: "4/4 Casino flow",
-          hipsAndKnees: "Relaxed rotational momentum",
-          chestAndShoulders: "Fluid two-hand and one-hand connection",
+        "id": "cosa-seg-3",
+        "startTimeSeconds": 75.5,
+        "endTimeSeconds": 105,
+        "formattedRange": "1:15 - 1:45",
+        "sectionName": "Tema 3 & Break: Mi Prima Katy",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "El Niño sings 'Mi prima Katy estaba en un parque', building to the '¡No te oigo nada!' and '¡Señores!' breaks.",
+        "leaderCue": "Open into Guapea, Dile Que No, and Exhíbela; hit a playful freeze on '¡No te oigo nada!' at 1:33.",
+        "followerCue": "Maintain a responsive frame through Exhíbela and accent the vocal breaks at 1:33 and 1:40.5.",
+        "commonMistakeWarning": "Stepping straight through the '¡No te oigo nada!' stop at 1:33 without acknowledging the vocal break.",
+        "recommendedMoveSlugs": [
+          "beg-pw-1",
+          "beg-pw-2",
+          "beg-pw-5"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Bass downbeat and conga",
+          "hipsAndKnees": "Piano montuno",
+          "chestAndShoulders": "Brass punctuations and vocal breaks"
         },
-        recommendedMoveSlugs: ["beg-pw-1", "imp-pw-3", "imp-pw-4"],
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Exhíbela"
       },
       {
-        id: "lcm-seg-4",
-        startTimeSeconds: 133,
-        endTimeSeconds: 174,
-        formattedRange: "2:13 - 2:54",
-        sectionName: "Mambo & Tumbao de Pachy ('Dicen que es el estrés')",
-        danceGear: "Suelta / Shines",
-        colorTheme: "amber",
-        timingMode: "A Tiempo (On1)",
-        musicalTrigger:
-          "At 2:13 the horns fire ('Metales que no mienten'); at 2:24 El Niño calls '¡Dale tumbao, Pachy!' as the piano tumbao enters, stripping down to a funky bass/piano groove at 2:35 ('Dicen que es el estrés').",
-        leaderCue:
-          "Break apart at 2:13 for horn-section Suelta shines! At 2:35 when the horns drop out, lower your posture into a groovy Rumba/Timba solo play with your partner.",
-        followerCue:
-          "Hit sharp footwork on the 2:13-2:34 horns, then switch to low, isolation-heavy body movement on the 2:35 'Dicen que es el estrés' breakdown.",
-        commonMistakeWarning:
-          "Staying locked in closed partnerwork during the stripped-back 2:35-2:54 'Dicen que es el estrés' groove!",
-        instrumentMapping: {
-          feet: "Pachy's syncopated piano tumbao",
-          hipsAndKnees: "Low Timba & Rumba groove",
-          chestAndShoulders: "Playful shoulder/torso isolations",
+        "id": "cosa-seg-4",
+        "startTimeSeconds": 105,
+        "endTimeSeconds": 135,
+        "formattedRange": "1:45 - 2:15",
+        "sectionName": "Montuno 1: Tienes Que Relajarte",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Campana and coro-pregón enter in full swing as El Niño sings 'Oye, tienes que relajarte'.",
+        "leaderCue": "Flow into Setenta, Sombrero, and Vacílala as the campana drives the first montuno.",
+        "followerCue": "Keep turns crisp and spot cleanly, using free-arm styling on each 'Le dio una cosa mala' coro.",
+        "commonMistakeWarning": "Letting your arms go limp during two-handed Sombrero and Setenta transitions.",
+        "recommendedMoveSlugs": [
+          "imp-pw-1",
+          "imp-pw-4",
+          "imp-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Bongó campana and bass",
+          "hipsAndKnees": "Conga and piano montuno",
+          "chestAndShoulders": "Coro-pregón call and response"
         },
-        recommendedMoveSlugs: ["imp-solo-1", "int-sub-1"],
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Setenta"
       },
       {
-        id: "lcm-seg-5",
-        startTimeSeconds: 174,
-        endTimeSeconds: 232,
-        formattedRange: "2:54 - 3:52",
-        sectionName: "Montuno Timbero (Entra la Campana)",
-        danceGear: "Casino (Flow)",
-        colorTheme: "emerald",
-        timingMode: "A Tiempo (On1)",
-        musicalTrigger:
-          "At 2:54 ('Ay pero sé que les da...') the Bongo and Timbal bells slam in at full Timba power, including the 3:14 '¡Mano pa' arriba!' and 3:24 '¡Alaroye!' shoutouts.",
-        leaderCue:
-          "Reconnect at 2:54! Now the full Timba engine is roaring—lead your best Intermediate/Advanced combinations (Dedo, Siete Loco, Coca-Cola, Bayamo).",
-        followerCue:
-          "Match the driving cowbell energy with crisp turns and hit a quick Eleguá/Afro accent on '¡Alaroye!' at 3:24.",
-        commonMistakeWarning:
-          "Not shifting up a gear when the heavy Timba bells finally drop at 2:54.",
-        instrumentMapping: {
-          feet: "Driving Bongo & Timbal bells",
-          hipsAndKnees: "High-energy circular Casino",
-          chestAndShoulders: "3:14 'Mano pa' arriba' & 3:24 'Alaroye' accents",
+        "id": "cosa-seg-5",
+        "startTimeSeconds": 135,
+        "endTimeSeconds": 155,
+        "formattedRange": "2:15 - 2:35",
+        "sectionName": "Mambo: Metales Que No Mienten",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Percussion drop at 2:15 followed by El Niño shouting '¡Metales que no mienten! ¡De vuelta al barrio!' and brass mambo.",
+        "leaderCue": "Release after Vacílala into solo footwork, grooving to Pachi's piano tumbao and sharp brass riffs.",
+        "followerCue": "Dance solo shines facing the leader, hitting the brass accents and building energy on 'Y dicen que es el estrés'.",
+        "commonMistakeWarning": "Staying locked in closed partner hold when the brass mambo calls for open footwork.",
+        "recommendedMoveSlugs": [
+          "beg-solo-1",
+          "int-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Syncopated brass mambo hits",
+          "hipsAndKnees": "Piano tumbao ('Dale tumbao Pachi')",
+          "chestAndShoulders": "Timbal and campana drive"
         },
-        recommendedMoveSlugs: ["int-pw-3", "int-pw-4", "adv-mus-1"],
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Pa'Fuera"
       },
       {
-        id: "lcm-seg-6",
-        startTimeSeconds: 232,
-        endTimeSeconds: 252,
-        formattedRange: "3:52 - 4:12",
-        sectionName: "El Conteo Regresivo ('4, 3, 2, 1... ¡Se le quitó!')",
-        danceGear: "Despelote / Reparto",
-        colorTheme: "red",
-        timingMode: "Syncopated Reparto",
-        musicalTrigger:
-          "At 3:52 El Niño announces '¡Preparados pa'l conteo regresivo!', counts '4, 3, 2, 1' (4:03-4:06), shouts '¡Se le quitó!' (4:07), and the band hits a DEAD-SILENT STOP from 4:09 to 4:11!",
-        leaderCue:
-          "ULTIMATE MUSICALITY FLEX: Enter Shadow Position or Despelote at 3:52, mark '4-3-2-1' with body hits, and FREEZE COMPLETELY on the 4:08 horn stab until 4:12!",
-        followerCue:
-          "Hit the 4-3-2-1 countdown accents and hold a dramatic, statuesque freeze with zero movement during the 4:09-4:11 silence!",
-        commonMistakeWarning:
-          "Stepping through the famous 4:09-4:11 dead-silent freeze while the entire social dance floor stops!",
-        instrumentMapping: {
-          feet: "Planted on the 4-3-2-1 countdown",
-          hipsAndKnees: "Despelote roll into total lock at 4:08",
-          chestAndShoulders: "Complete freeze from 4:08 to 4:12",
+        "id": "cosa-seg-6",
+        "startTimeSeconds": 155,
+        "endTimeSeconds": 175,
+        "formattedRange": "2:35 - 2:55",
+        "sectionName": "Coro Melódico: Dicen Que Es El Estrés",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Horns drop out and the singers harmonize smoothly on 'Y dicen que es el estrés, yo no sé qué es'.",
+        "leaderCue": "Reconnect with Dile Que No into smooth Kentucky and Paséala, matching the relaxed vocal harmony.",
+        "followerCue": "Breathe and smooth out your steps, gliding through Paséala after the high-energy mambo.",
+        "commonMistakeWarning": "Keeping frantic mambo intensity when the band suddenly drops the volume for this melodic chorus.",
+        "recommendedMoveSlugs": [
+          "beg-pw-2",
+          "imp-pw-5",
+          "imp-pw-6"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Smooth bass and conga pulse",
+          "hipsAndKnees": "Melodic vocal phrasing",
+          "chestAndShoulders": "Light cáscara and maracas"
         },
-        recommendedMoveSlugs: ["int-solo-1", "adv-solo-1", "int-mus-1"],
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Kentucky"
       },
       {
-        id: "lcm-seg-7",
-        startTimeSeconds: 252,
-        endTimeSeconds: 310,
-        formattedRange: "4:12 - 5:10",
-        sectionName: "Mambo Fuerte & Montuno Climax",
-        danceGear: "Casino (Flow)",
-        colorTheme: "purple",
-        timingMode: "A Tiempo (On1)",
-        musicalTrigger:
-          "Explosive brass Mambo erupts out of the silence at 4:12, followed by rapid-fire pregones ('Sé que la vida está muy dura...') and international shoutouts.",
-        leaderCue:
-          "Explode out of the freeze at 4:12 into fast Suelta or high-velocity rotational Casino combinations.",
-        followerCue:
-          "Snap right back into full-speed motion on the 4:12 chorus entrance.",
-        commonMistakeWarning:
-          "Recovering too slowly from the 4:09 freeze and missing the 4:12 drop.",
-        instrumentMapping: {
-          feet: "Fast Mambo & Timba footwork",
-          hipsAndKnees: "Compact high-speed turns",
-          chestAndShoulders: "Sharp brass section accents",
+        "id": "cosa-seg-7",
+        "startTimeSeconds": 175,
+        "endTimeSeconds": 195,
+        "formattedRange": "2:55 - 3:15",
+        "sectionName": "Montuno 2: Cuidado Que Te Da",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "El Niño re-enters with high-energy pregones 'Ay pero sé que les da' and rapid-fire 'Y ten cuidado que te da'.",
+        "leaderCue": "Pick up the pace with Setenta Complicado and Dedo; finish in open position on '¡Mano pa'rriba!' at 3:14.",
+        "followerCue": "Keep hook-finger tension crisp and prepare to separate when El Niño shouts '¡Mano pa'rriba!'.",
+        "commonMistakeWarning": "Starting a long wrapped figure right at 3:14 when the timbal roll announces the Bomba drop.",
+        "recommendedMoveSlugs": [
+          "imp-pw-2",
+          "int-pw-2"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana and conga tumbao",
+          "hipsAndKnees": "Bass and piano montuno",
+          "chestAndShoulders": "Rapid-fire pregón rhythm"
         },
-        recommendedMoveSlugs: ["imp-pw-4", "int-pw-2", "adv-pw-1"],
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Dedo"
       },
       {
-        id: "lcm-seg-8",
-        startTimeSeconds: 310,
-        endTimeSeconds: 347,
-        formattedRange: "5:10 - 5:47",
-        sectionName: "Coda Final ('Sin presión y sin estrés')",
-        danceGear: "Casino (Flow)",
-        colorTheme: "emerald",
-        timingMode: "A Tiempo (On1)",
-        musicalTrigger:
-          "Final pregón block at 5:10 leading into a syncopated piano/brass outro at 5:32 ('¡Vaya la cosa mala!') and a sharp final cutoff at 5:42.",
-        leaderCue:
-          "Wind down with smooth, celebratory combinations and hit a clean final dip or pose on the last brass hit at 5:41-5:42.",
-        followerCue:
-          "Finish your final turn cleanly on count 7 and lock into the final pose at 5:42.",
-        commonMistakeWarning:
-          "Missing the 5:42 final brass cutoff.",
-        instrumentMapping: {
-          feet: "Syncopated outro cadence",
-          hipsAndKnees: "Grounded final weight lock",
-          chestAndShoulders: "Final pose at 5:42",
+        "id": "cosa-seg-8",
+        "startTimeSeconds": 195,
+        "endTimeSeconds": 224.5,
+        "formattedRange": "3:15 - 3:44",
+        "sectionName": "Bomba / Presión: ¡Mano Pa'rriba!",
+        "danceGear": "Despelote / Reparto",
+        "colorTheme": "red",
+        "musicalTrigger": "Timbal roll on '¡Mano pa'rriba!' drops into heavy bass presión, synth sweeps, and band shout-outs.",
+        "leaderCue": "Hands off for Despelote, ribcage isolations, and cintura groove while trading playful attitude with your partner.",
+        "followerCue": "Work body rolls, hip isolations, and tembleque accents on the synth sweeps and 'Una cosa mala' hits.",
+        "commonMistakeWarning": "Trying to lead standard Casino turn patterns when the piano drops out for the heavy bass Bomba.",
+        "recommendedMoveSlugs": [
+          "int-solo-1",
+          "adv-solo-1"
+        ],
+        "timingMode": "Syncopated Reparto",
+        "instrumentMapping": {
+          "feet": "Heavy bass bombo and kick",
+          "hipsAndKnees": "Syncopated conga and bass presión",
+          "chestAndShoulders": "Synth sweeps and vocal shout-outs"
         },
-        recommendedMoveSlugs: ["imp-pw-1", "imp-pw-2", "int-pw-1"],
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Al Medio"
       },
-    ],
+      {
+        "id": "cosa-seg-9",
+        "startTimeSeconds": 224.5,
+        "endTimeSeconds": 244,
+        "formattedRange": "3:44 - 4:04",
+        "sectionName": "Montuno Build: Preparado Pa'l Conteo",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Piano montuno and brass return on 'Ay pero sé que les da... Y preparado pa'l conteo regresivo'.",
+        "leaderCue": "Scoop your partner back with Dile Que No into Siete and Enchufla, setting up for the countdown at 4:04.",
+        "followerCue": "Re-engage your frame immediately from Despelote and stay alert for the '4, 3, 2, 1' break.",
+        "commonMistakeWarning": "Ignoring the lyric warning 'Preparado pa'l conteo regresivo' and getting caught mid-turn at 4:04.",
+        "recommendedMoveSlugs": [
+          "beg-pw-2",
+          "int-pw-3",
+          "beg-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana and bass tumbao",
+          "hipsAndKnees": "Returning piano montuno",
+          "chestAndShoulders": "Brass hits and coro"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Siete"
+      },
+      {
+        "id": "cosa-seg-10",
+        "startTimeSeconds": 244,
+        "endTimeSeconds": 252,
+        "formattedRange": "4:04 - 4:12",
+        "sectionName": "Bloque: Conteo Regresivo (4, 3, 2, 1)",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Band hits the countdown '¡Cuatro! ¡Tres! ¡Dos! ¡Uno! ¡Se le quitó! ¡No!' followed by a dramatic pause on '¡Señores!'.",
+        "leaderCue": "Mark 4-3-2-1 with sharp foot or hand accents, freeze completely on '¡No!' at 4:09, and wait for 4:12.",
+        "followerCue": "Count down with your body, hit a dramatic pose on '¡No!', and hold the silence through '¡Señores!'.",
+        "commonMistakeWarning": "Restarting your basic step during the '¡Señores!' silence before the downbeat drops at 4:12.",
+        "recommendedMoveSlugs": [
+          "int-mus-1",
+          "adv-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Countdown hits (4, 3, 2, 1)",
+          "hipsAndKnees": "Bass stop on '¡No!'",
+          "chestAndShoulders": "Dramatic freeze on '¡Señores!'"
+        },
+        "bars": 3,
+        "startsOnOne": true
+      },
+      {
+        "id": "cosa-seg-11",
+        "startTimeSeconds": 252,
+        "endTimeSeconds": 282,
+        "formattedRange": "4:12 - 4:42",
+        "sectionName": "Montuno 3: Sé Que La Vida Está Muy Dura",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Full band explodes back on 'Le dio una cosa mala' followed by El Niño's long pregón 'Sé que la vida está muy dura'.",
+        "leaderCue": "Launch right on 4:12 into Montana and Coca-Cola, riding the soaring brass and melodic pregón.",
+        "followerCue": "Power out of the freeze with strong spotting on Coca-Cola turns and fluid momentum.",
+        "commonMistakeWarning": "Hesitating on the 4:12 downbeat after the countdown silence.",
+        "recommendedMoveSlugs": [
+          "int-pw-1",
+          "int-pw-4"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Driving campana and conga",
+          "hipsAndKnees": "Bass and piano montuno",
+          "chestAndShoulders": "Soaring brass and pregón melody"
+        },
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Montana"
+      },
+      {
+        "id": "cosa-seg-12",
+        "startTimeSeconds": 282,
+        "endTimeSeconds": 311.5,
+        "formattedRange": "4:42 - 5:11",
+        "sectionName": "Mambo & Shout-Outs: Vamos Pa' Allá La Gozadera",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "El Niño shouts '¡Vamos pa' allá la gozadera!' as layered brass mambos and DJ/friend shout-outs take over.",
+        "leaderCue": "Break into Suelta shines and Rumba Guaguancó play, matching the punchy horn riffs at 5:02.",
+        "followerCue": "Answer with solo footwork, guaguancó vacunao defense, and shoulder shimmies on the brass mambo.",
+        "commonMistakeWarning": "Running out of stamina—use grounded Afro-Cuban and Rumba steps instead of rushing your feet.",
+        "recommendedMoveSlugs": [
+          "imp-solo-1",
+          "adv-sub-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Brass mambo riffs",
+          "hipsAndKnees": "Conga and timbal drive",
+          "chestAndShoulders": "Horn section hits"
+        },
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Pa'Fuera"
+      },
+      {
+        "id": "cosa-seg-13",
+        "startTimeSeconds": 311.5,
+        "endTimeSeconds": 331.5,
+        "formattedRange": "5:11 - 5:31",
+        "sectionName": "Montuno Final: Consejo del Niño",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "El Niño cries '¡Oye! No cojas lucha con nada, sin presión y sin estrés... es un consejo del Niño'.",
+        "leaderCue": "Reconnect for a final burst of Siete Loco or Enchufla Doble into Sombrero to celebrate the closing advice.",
+        "followerCue": "Give full energy for the final partnerwork combinations while keeping your steps compact and on time.",
+        "commonMistakeWarning": "Over-complicating the final bars and losing connection right before the outro.",
+        "recommendedMoveSlugs": [
+          "int-pw-3",
+          "beg-pw-3",
+          "imp-pw-4"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana and bass tumbao",
+          "hipsAndKnees": "Conga and piano montuno",
+          "chestAndShoulders": "El Niño's final pregón"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Siete Loco"
+      },
+      {
+        "id": "cosa-seg-14",
+        "startTimeSeconds": 331.5,
+        "endTimeSeconds": 347,
+        "formattedRange": "5:31 - 5:47",
+        "sectionName": "Final: ¡Vaya, La Cosa Mala!",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Piano-tres tumbao returns to the intro motif as El Niño calls '¡Vaya, la cosa mala!' before the final brass hit at 5:41.5.",
+        "leaderCue": "Dance playful side-by-side shines to the tres motif and hit a sharp final dip or pose at 5:41.5.",
+        "followerCue": "Style out the final piano-tres groove and lock in your finishing pose on the brass hit at 5:41.5.",
+        "commonMistakeWarning": "Missing the final brass hit at 5:41.5—prepare your ending pose two beats early.",
+        "recommendedMoveSlugs": [
+          "beg-solo-1",
+          "beg-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Final brass cadence at 5:41.5",
+          "hipsAndKnees": "Tres-piano outro tumbao",
+          "chestAndShoulders": "Bongó and timbal fill"
+        },
+        "bars": 6,
+        "startsOnOne": true
+      }
+    ]
   },
 
   // -----------------------------------------------------------------
@@ -904,7 +1079,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         id: "ag-seg-2",
         startTimeSeconds: 26,
         endTimeSeconds: 50,
-        formattedRange: "0:27 - 0:50",
+        formattedRange: "0:26 - 0:50",
         sectionName: "02. The Sacred Liturgical Freeze",
         danceGear: "Wait / Breathe",
         colorTheme: "slate",
@@ -929,7 +1104,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         id: "ag-seg-3",
         startTimeSeconds: 50,
         endTimeSeconds: 98,
-        formattedRange: "0:51 - 1:38",
+        formattedRange: "0:50 - 1:38",
         sectionName: "03. Clave & Trombone Ignition",
         danceGear: "Casino (Flow)",
         colorTheme: "emerald",
@@ -954,7 +1129,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         id: "ag-seg-4",
         startTimeSeconds: 98,
         endTimeSeconds: 125,
-        formattedRange: "1:39 - 2:05",
+        formattedRange: "1:38 - 2:05",
         sectionName: "04. First Trombone Mambo Attack",
         danceGear: "Suelta / Shines",
         colorTheme: "purple",
@@ -979,7 +1154,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         id: "ag-seg-5",
         startTimeSeconds: 125,
         endTimeSeconds: 166,
-        formattedRange: "2:06 - 2:46",
+        formattedRange: "2:05 - 2:46",
         sectionName: "05. 'Tambores' Earth-Shaker Coro",
         danceGear: "Casino (Flow)",
         colorTheme: "emerald",
@@ -1004,7 +1179,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         id: "ag-seg-6",
         startTimeSeconds: 166,
         endTimeSeconds: 226,
-        formattedRange: "2:47 - 3:46",
+        formattedRange: "2:46 - 3:46",
         sectionName: "06. Staccato Brass Drops & Storytelling",
         danceGear: "Rumba Guaguancó",
         colorTheme: "red",
@@ -1029,7 +1204,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         id: "ag-seg-7",
         startTimeSeconds: 226,
         endTimeSeconds: 280,
-        formattedRange: "3:47 - 4:40",
+        formattedRange: "3:46 - 4:40",
         sectionName: "07. Timbal, Campana & Montuno Climax",
         danceGear: "Casino (Flow)",
         colorTheme: "emerald",
@@ -1054,7 +1229,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
         id: "ag-seg-8",
         startTimeSeconds: 280,
         endTimeSeconds: 316,
-        formattedRange: "4:41 - 5:16",
+        formattedRange: "4:40 - 5:16",
         sectionName: "08. Final Ritual Coda & Big Finish",
         danceGear: "Casino (Flow)",
         colorTheme: "emerald",
@@ -1260,16 +1435,17 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
   },
   // -----------------------------------------------------------------
   // "Pasaporte" - Alexander Abreu & Havana D'Primera
-  // Intermediate • 94 BPM • 2-3 Son/Rumba Clave • 303s
+  // Timba • Intermediate • 89 BPM • 2-3 Son Clave • 303s
   // Video ID: wtWV9P9x4NM • timings from Argus
+  // Gemini 4 Argon in AI Studio 2026-10-31 (old map: 6 sections). Starts sit on an ~89 BPM bar grid from 0:00, yet Argon says the first downbeat is at 0:01.3: if every card flips about 1 s early, shift them all. Ear-check 2:01.8 (breakdown), 2:12.7 (coro), 3:31.3 (mambo).
   // -----------------------------------------------------------------
   {
     "id": "pasaporte",
     "title": "Pasaporte",
     "artist": "Alexander Abreu & Havana D'Primera",
     "style": "Timba",
-    "bpm": 94,
-    "claveType": "2-3 Son/Rumba Clave",
+    "bpm": 89,
+    "claveType": "2-3 Son Clave",
     "difficultyLevel": "Intermediate",
     "durationSeconds": 303,
     "youtubeVideoId": "wtWV9P9x4NM",
@@ -1278,142 +1454,351 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       {
         "id": "pas-seg-1",
         "startTimeSeconds": 0,
-        "endTimeSeconds": 52,
-        "formattedRange": "0:00 - 0:52",
-        "sectionName": "Melodic Piano & Trumpet Prelude ('Ella dice que la vida...')",
-        "danceGear": "Son Cubano",
-        "colorTheme": "blue",
-        "musicalTrigger": "Lyrical piano and trumpet prelude: 'Ella dice que la vida...'.",
-        "leaderCue": "Start in close embrace or slow Paseo; focus 100% on musicality and partner connection.",
-        "followerCue": "Delay weight transfer slightly to milk the emotional piano chords.",
-        "commonMistakeWarning": "Avoid treating a lyrical Havana D'Primera intro like a 110 BPM cardio sprint.",
+        "endTimeSeconds": 21.5,
+        "formattedRange": "0:00 - 0:21",
+        "sectionName": "Intro: Brass Fanfare & Groove",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Two-beat drum fill into warm brass fanfare, piano tumbao, and steady conga groove.",
+        "leaderCue": "Wait through the pickup fill, then connect in closed hold for Paso Básico and Dile Que No.",
+        "followerCue": "Settle into a soft frame on the brass downbeat and keep steps compact during the opening groove.",
+        "commonMistakeWarning": "Rushing into big turns on the opening drum pickup instead of waiting for beat 1 at 0:01.3.",
         "recommendedMoveSlugs": [
-          "imp-sub-1",
-          "beg-solo-1"
+          "beg-mus-1",
+          "beg-solo-1",
+          "beg-pw-2"
         ],
-        "handGesture": "Open Palm Over Heart (Son & Bolero Feel)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Gliding slow-weight transfers",
-          "hipsAndKnees": "Smooth, unhurried Cuban Son figure-8",
-          "chestAndShoulders": "Soft, breathing connection with partner"
-        }
+          "feet": "Conga tumbao",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Trumpet melody"
+        },
+        "bars": 8,
+        "startsOnOne": false
       },
       {
         "id": "pas-seg-2",
-        "startTimeSeconds": 52,
-        "endTimeSeconds": 98,
-        "formattedRange": "0:52 - 1:38",
-        "sectionName": "Groove Ignition ('En la calle está lo único...')",
-        "danceGear": "Casino (Flow)",
-        "colorTheme": "emerald",
-        "musicalTrigger": "Bass and percussion lock in under 'En la calle está lo único...'.",
-        "leaderCue": "Transition smoothly into Dile Que No, Vacilala, and Paseala as the bass and percussion lock in.",
-        "followerCue": "Complete full 360-degree visual spotting on Vacilala free turns.",
-        "commonMistakeWarning": "Avoid over-leading with heavy thumbs during free turns.",
+        "startTimeSeconds": 21.5,
+        "endTimeSeconds": 43.2,
+        "formattedRange": "0:21 - 0:43",
+        "sectionName": "Tema 1: Ella dice que la vida",
+        "danceGear": "Son Cubano",
+        "colorTheme": "blue",
+        "musicalTrigger": "Alexander enters singing 'Ella dice que la vida se le da bien dura' over piano and bongó.",
+        "leaderCue": "Dance small, grounded Guapea and Paséala steps to let the opening story breathe.",
+        "followerCue": "Maintain unhurried weight transfers and soft ribcage movement matching the lyrical vocal phrasing.",
+        "commonMistakeWarning": "Over-leading fast turns while the arrangement drops down for the first storytelling verse.",
         "recommendedMoveSlugs": [
-          "beg-pw-2",
-          "imp-pw-3",
+          "imp-sub-1",
+          "beg-pw-1",
           "imp-pw-6"
         ],
-        "handGesture": "Circular Index Finger (Paseala / Exhibela)",
+        "timingMode": "Contratiempo (On2) or Smooth On1",
         "instrumentMapping": {
-          "feet": "Clean circular Casino stepping",
-          "hipsAndKnees": "Natural contra-body motion on 1-2-3",
-          "chestAndShoulders": "Upright, calm Casino frame"
-        }
+          "feet": "Bass tumbao",
+          "hipsAndKnees": "Conga slaps",
+          "chestAndShoulders": "Lead vocal phrasing"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Paséala"
       },
       {
         "id": "pas-seg-3",
-        "startTimeSeconds": 98,
-        "endTimeSeconds": 159,
-        "formattedRange": "1:38 - 2:39",
-        "sectionName": "Second Verse & Harmonic Build ('Carita de Pasaporte')",
-        "danceGear": "Casino (Flow)",
+        "startTimeSeconds": 43.2,
+        "endTimeSeconds": 64.9,
+        "formattedRange": "0:43 - 1:04",
+        "sectionName": "Tema 2: Ella se aferra al amor",
+        "danceGear": "Casino (Smooth)",
         "colorTheme": "emerald",
-        "musicalTrigger": "Second verse and harmonic build on 'carita de pasaporte'.",
-        "leaderCue": "Layer in Sombrero, Kentucky, and Montaña patterns while keeping circular geometry tight.",
-        "followerCue": "Keep elbows gently in front of the ribcage to absorb directional changes.",
-        "commonMistakeWarning": "Avoid letting the slot stretch into linear Cross-Body Salsa—keep it circular!",
+        "musicalTrigger": "Second verse 'Ella se aferra al amor, pero el amor le da golpes' with brass responses.",
+        "leaderCue": "Flow from Guapea into Exhíbela and Vacílala, accenting the brass swell on 'le parte pa' rriba'.",
+        "followerCue": "Spot cleanly through Exhíbela and use free-arm styling on the horn answers.",
+        "commonMistakeWarning": "Ignoring the brass accents in the second half of the verse and keeping flat dynamics.",
         "recommendedMoveSlugs": [
-          "imp-pw-4",
-          "imp-pw-5",
-          "int-pw-1"
+          "beg-pw-5",
+          "imp-pw-3",
+          "beg-pw-3"
         ],
-        "handGesture": "3 Fingers Up (Sombrero / Complicado)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Precise cross-body and hook turns",
-          "hipsAndKnees": "Fluid rotation through Enchufla switches",
-          "chestAndShoulders": "Disciplined upper-body dissociation"
-        }
+          "feet": "Conga tumbao",
+          "hipsAndKnees": "Piano montuno",
+          "chestAndShoulders": "Brass responses"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Vacílala"
       },
       {
         "id": "pas-seg-4",
-        "startTimeSeconds": 159,
-        "endTimeSeconds": 203,
-        "formattedRange": "2:39 - 3:23",
-        "sectionName": "First Timba Gear-Shift ('Y ahora te dice...')",
-        "danceGear": "Despelote / Reparto",
-        "colorTheme": "red",
-        "musicalTrigger": "'Y ahora te dice...' then the Timba bass drop at 2:55 with brass pressure.",
-        "leaderCue": "When the bass drops at 2:55, lower knees 2 inches and switch from traveling turns to tight rhythmic body-isolation play.",
-        "followerCue": "Match the level change and echo the horn syncopations in the hips.",
-        "commonMistakeWarning": "Avoid staying tall on locked knees when the Timba bass shifts gears.",
+        "startTimeSeconds": 64.9,
+        "endTimeSeconds": 89.3,
+        "formattedRange": "1:04 - 1:29",
+        "sectionName": "Pre-Coro 1: Nadie sabe bien",
+        "danceGear": "Son Cubano",
+        "colorTheme": "blue",
+        "musicalTrigger": "Melodic bridge 'Nadie sabe bien lo que se esconde en su alma' with long sustained notes.",
+        "leaderCue": "Use sweeping circular Paséala and Sombrero, holding the extra 9th bar on 'sin fin' before the break.",
+        "followerCue": "Extend through your back and arms on the long vocal notes and prepare for the bloque at 1:29.3.",
+        "commonMistakeWarning": "Forgetting the extra 9th bar on 'sin fin' and starting the next figure two beats early.",
         "recommendedMoveSlugs": [
-          "int-solo-1",
-          "int-mus-1"
+          "imp-pw-6",
+          "imp-pw-4",
+          "imp-sub-1"
         ],
-        "handGesture": "Two Fists Pump Down (Bomba / Timba Drop)",
+        "timingMode": "Contratiempo (On2) or Smooth On1",
         "instrumentMapping": {
-          "feet": "Syncopated heel-toe Piso footwork",
-          "hipsAndKnees": "Heavy bass-synced pelvic groove",
-          "chestAndShoulders": "Low-center, grounded Afro-Cuban pulse"
-        }
+          "feet": "Bass tumbao",
+          "hipsAndKnees": "Bongó martillo",
+          "chestAndShoulders": "Sustained vocal line"
+        },
+        "bars": 9,
+        "startsOnOne": true,
+        "handGesture": "Sombrero"
       },
       {
         "id": "pas-seg-5",
-        "startTimeSeconds": 203,
-        "endTimeSeconds": 246,
-        "formattedRange": "3:23 - 4:06",
-        "sectionName": "Street Rumba & Horn Breakdown",
+        "startTimeSeconds": 89.3,
+        "endTimeSeconds": 100.1,
+        "formattedRange": "1:29 - 1:40",
+        "sectionName": "Bloque & Mambo Interlude",
         "danceGear": "Suelta / Shines",
         "colorTheme": "purple",
-        "musicalTrigger": "Horn breakdown opens space for shines, with musical breaks at 3:46 and 3:56.",
-        "leaderCue": "Open up into solo/mirror shines at 3:23 and hit the musical breaks at 3:46 and 3:56.",
-        "followerCue": "Use the open space at 3:46 for expressive arm styling and footwork shines.",
-        "commonMistakeWarning": "Avoid panicking during solo breakaways—lock eyes with your partner and play off each other's rhythm.",
+        "musicalTrigger": "Two-bar syncopated percussion bloque followed by a two-bar brass mambo melody.",
+        "leaderCue": "Release hold on beat 1 to hit the two-bar percussion bloque, then groove footwork on the brass.",
+        "followerCue": "Hit the syncopated bloque with sharp ribcage and foot accents, then reconnect after 4 bars.",
+        "commonMistakeWarning": "Staying locked in a turn pattern during the sharp 4-bar instrumental break.",
         "recommendedMoveSlugs": [
-          "imp-solo-1",
+          "int-mus-1",
+          "int-solo-1",
           "beg-solo-1"
         ],
-        "handGesture": "2 Fingers Pointing to Floor (Suave / Pasitos)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Quick triple-step Pasitos & freezes",
-          "hipsAndKnees": "Sharp Columbia / Guaguancó hip locks",
-          "chestAndShoulders": "Expressive Rumba shoulder rolls"
-        }
+          "feet": "Timbal and bass bloque",
+          "hipsAndKnees": "Conga tumbao",
+          "chestAndShoulders": "Trumpet mambo line"
+        },
+        "bars": 4,
+        "startsOnOne": true
       },
       {
         "id": "pas-seg-6",
-        "startTimeSeconds": 246,
-        "endTimeSeconds": 303,
-        "formattedRange": "4:06 - 5:03",
-        "sectionName": "'Pasaporte Sin Fecha' Montuno Climax",
+        "startTimeSeconds": 100.1,
+        "endTimeSeconds": 121.8,
+        "formattedRange": "1:40 - 2:01",
+        "sectionName": "Pre-Coro 2: Nadie sabe bien",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Vocal returns on 'Nadie sabe bien lo que se esconde en su alma' over full rhythm section.",
+        "leaderCue": "Reconnect with Dile Que No into Setenta and Kentucky, keeping the flow smooth and connected.",
+        "followerCue": "Keep steady hook-finger tension through Setenta and follow the circular lead smoothly.",
+        "commonMistakeWarning": "Rushing the end of Setenta instead of letting the lyrical melody guide your pace.",
+        "recommendedMoveSlugs": [
+          "beg-pw-2",
+          "imp-pw-1",
+          "imp-pw-5"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Conga tumbao",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Lead vocal and piano"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Kentucky"
+      },
+      {
+        "id": "pas-seg-7",
+        "startTimeSeconds": 121.8,
+        "endTimeSeconds": 132.7,
+        "formattedRange": "2:01 - 2:12",
+        "sectionName": "Breakdown: Con su carita así, de pasaporte",
+        "danceGear": "Despelote / Reparto",
+        "colorTheme": "red",
+        "musicalTrigger": "Band drops down as Alexander sings 'Ella está con su carita así, de pasaporte' and shouts '¡Ah, ah!'.",
+        "leaderCue": "Drop into low body isolations and cintura play for 4 bars, freezing on the '¡Ah, ah!' brass hits.",
+        "followerCue": "Answer with thoracic ribcage isolations and hit the two brass stabs on '¡Ah, ah!' before the coro.",
+        "commonMistakeWarning": "Missing the two-stab brass break on '¡Ah, ah!' right before the full coro erupts at 2:12.7.",
+        "recommendedMoveSlugs": [
+          "int-solo-1",
+          "adv-solo-1",
+          "int-mus-1"
+        ],
+        "timingMode": "Syncopated Reparto",
+        "instrumentMapping": {
+          "feet": "Syncopated bass",
+          "hipsAndKnees": "Conga and cáscara",
+          "chestAndShoulders": "Vocal call and brass stabs"
+        },
+        "bars": 4,
+        "startsOnOne": true,
+        "handGesture": "Al Medio"
+      },
+      {
+        "id": "pas-seg-8",
+        "startTimeSeconds": 132.7,
+        "endTimeSeconds": 178.8,
+        "formattedRange": "2:12 - 2:58",
+        "sectionName": "Montuno 1: Ella está con su carita de pasaporte",
         "danceGear": "Casino (Flow)",
         "colorTheme": "emerald",
-        "musicalTrigger": "'Pasaporte sin fecha' montuno with Alexander Abreu's trumpet climax, final hit at 4:55.",
-        "leaderCue": "Ride Alexander Abreu's soaring trumpet climax with your sharpest signature moves, finishing on the 4:55 hit.",
-        "followerCue": "Channel full Havana social floor energy through the final chorus.",
-        "commonMistakeWarning": "Avoid running out of stamina—use floor push rather than upper-body force.",
+        "musicalTrigger": "Full coro enters singing 'Ella está con su carita de pasaporte, sobreviviendo a la crisis'.",
+        "leaderCue": "Launch into Setenta Complicado, Dedo, and Siete, riding the coro-pregón energy.",
+        "followerCue": "Keep active footwork and a responsive frame through multi-turn combinations.",
+        "commonMistakeWarning": "Getting thrown off by the 5-bar pregón 'Si el amor le dio a la vida... Repite mi coro'.",
         "recommendedMoveSlugs": [
+          "imp-pw-2",
           "int-pw-2",
+          "int-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana and conga",
+          "hipsAndKnees": "Piano montuno",
+          "chestAndShoulders": "Coro and pregón"
+        },
+        "bars": 17,
+        "startsOnOne": true,
+        "handGesture": "Setenta Complicado"
+      },
+      {
+        "id": "pas-seg-9",
+        "startTimeSeconds": 178.8,
+        "endTimeSeconds": 211.3,
+        "formattedRange": "2:58 - 3:31",
+        "sectionName": "Montuno 2: Y ahora te dicen que se va",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Coro shifts to 'Y ahora te dicen que se va, y que se va, caminando' with driving campana.",
+        "leaderCue": "Drive the circle with Montana and Siete Loco, matching the urgent 'con la guagua andando' groove.",
+        "followerCue": "Stay grounded on quick direction changes and keep turns tight and centered.",
+        "commonMistakeWarning": "Letting arms get wide and pulling off-balance as the montuno intensity rises.",
+        "recommendedMoveSlugs": [
+          "int-pw-1",
+          "int-pw-3",
+          "int-pw-4"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Bongó bell (campana)",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Coro responses"
+        },
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Montana"
+      },
+      {
+        "id": "pas-seg-10",
+        "startTimeSeconds": 211.3,
+        "endTimeSeconds": 224.9,
+        "formattedRange": "3:31 - 3:44",
+        "sectionName": "Mambo con Coro: Por arriba del Mambo",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Timbal fill and Alexander calls 'Vaya camina por arriba del Mambo' as brass mambo enters.",
+        "leaderCue": "Break into suelta shines for 5 bars, hitting the timbal roll and brass mambo riffs.",
+        "followerCue": "Show off sharp mambo footwork and shoulder shimmies until Alexander calls '¡Ella está!'.",
+        "commonMistakeWarning": "Reconnecting on bar 4 instead of dancing through the 1-bar 'Vaya camina' call plus 4-bar mambo.",
+        "recommendedMoveSlugs": [
+          "int-mus-1",
+          "adv-solo-1",
+          "int-solo-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Timbal and campana",
+          "hipsAndKnees": "Syncopated bass",
+          "chestAndShoulders": "Brass mambo riffs"
+        },
+        "bars": 5,
+        "startsOnOne": true,
+        "handGesture": "Pa'Fuera"
+      },
+      {
+        "id": "pas-seg-11",
+        "startTimeSeconds": 224.9,
+        "endTimeSeconds": 246.6,
+        "formattedRange": "3:44 - 4:06",
+        "sectionName": "Montuno 1 Reprise: Ella está con su carita de pasaporte",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Alexander shouts '¡Ella está, ella está!' bringing back 'Ella está con su carita de pasaporte'.",
+        "leaderCue": "Pick up partnerwork with Dile Que No into Coca-Cola and Bayamo.",
+        "followerCue": "Spot sharply on the Coca-Cola inside turns and keep your frame energized.",
+        "commonMistakeWarning": "Over-rotating on Coca-Cola and losing the downbeat of the second coro repetition.",
+        "recommendedMoveSlugs": [
+          "beg-pw-2",
+          "int-pw-4",
           "imp-pw-1"
         ],
-        "handGesture": "Passport Stamp Gesture (Flat Hand Slap onto Open Palm)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Fast, celebratory Dedo and Tornillo combinations",
-          "hipsAndKnees": "Relentless montuno drive",
-          "chestAndShoulders": "High-voltage, expansive stage presence"
-        }
+          "feet": "Conga and campana",
+          "hipsAndKnees": "Piano montuno",
+          "chestAndShoulders": "Coro melody"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Coca-Cola"
+      },
+      {
+        "id": "pas-seg-12",
+        "startTimeSeconds": 246.6,
+        "endTimeSeconds": 268.3,
+        "formattedRange": "4:06 - 4:28",
+        "sectionName": "Montuno 3: Un pasaporte sin fecha de vencimiento",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Anthemic coro 'Un pasaporte sin fecha de vencimiento, un pasaporte libre como el viento'.",
+        "leaderCue": "Smooth out the energy with Sombrero and Paséala to match the soaring 'libre como el viento' coro.",
+        "followerCue": "Breathe into the wider, flowing turns and enjoy the melodic lift before the final climax.",
+        "commonMistakeWarning": "Keeping frantic footwork when the coro opens up into a smoother, anthemic groove.",
+        "recommendedMoveSlugs": [
+          "imp-pw-4",
+          "imp-pw-6",
+          "beg-pw-5"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Bass tumbao",
+          "hipsAndKnees": "Conga tumbao",
+          "chestAndShoulders": "Anthemic coro vocals"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Sombrero"
+      },
+      {
+        "id": "pas-seg-13",
+        "startTimeSeconds": 268.3,
+        "endTimeSeconds": 303,
+        "formattedRange": "4:28 - 5:03",
+        "sectionName": "Clímax & Final: Libre como el viento",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Alexander shouts '¡Es ahora! ¡Dale!' and '¡Visa!' with full brass climax through the fade-out.",
+        "leaderCue": "Go all out with El Uno, El Dos, and Enchufla Doble, winding down smoothly as the track fades.",
+        "followerCue": "Match the climax energy with crisp turns, then soften your steps during the final fade-out.",
+        "commonMistakeWarning": "Stopping abruptly before the music finishes fading out at 5:03.",
+        "recommendedMoveSlugs": [
+          "int-pw-2",
+          "beg-pw-3",
+          "adv-pw-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana and timbal",
+          "hipsAndKnees": "Piano and bass tumbao",
+          "chestAndShoulders": "Brass hits and pregones"
+        },
+        "bars": 13,
+        "startsOnOne": true,
+        "handGesture": "El Uno"
       }
     ]
   },
@@ -2839,17 +3224,17 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     ]
   },
   // -----------------------------------------------------------------
-  // "BAILE INoLVIDABLE (Video Oficial)" - Bad Bunny
-  // Improver • 96 BPM • 2-3 Son Clave • 379s
+  // "BAILE INoLVIDABLE (Official Video)" - Bad Bunny
+  // Puerto Rican Salsa • Improver • 100 BPM • 2-3 Son Clave • 379s
   // Video ID: a1Femq4NPxs • timings from Argus
-  // Argus unsure: 1:38 (1:36-1:40)
+  // Gemini 4 Argon in AI Studio 2026-10-31. The old map ran 1-7 s earlier at most changes (salsa entry 1:05 vs 1:11.5). Argon unsure: 2:35.5 (2:34.5-2:36), 4:39.5 (4:38.5-4:40.5). Ear-check also 1:11.5 and 3:47 (old 3:40).
   // -----------------------------------------------------------------
   {
     "id": "baile-inolvidable",
-    "title": "BAILE INoLVIDABLE (Video Oficial)",
+    "title": "BAILE INoLVIDABLE (Official Video)",
     "artist": "Bad Bunny",
     "style": "Puerto Rican Salsa",
-    "bpm": 96,
+    "bpm": 100,
     "claveType": "2-3 Son Clave",
     "difficultyLevel": "Improver",
     "durationSeconds": 379,
@@ -2857,216 +3242,368 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "youtubeUrl": "https://www.youtube.com/watch?v=a1Femq4NPxs",
     "segments": [
       {
-        "id": "bi-seg-1",
+        "id": "baile-seg-1",
         "startTimeSeconds": 0,
-        "endTimeSeconds": 65,
-        "formattedRange": "0:00 - 1:05",
-        "sectionName": "Intro Bolero / Nostalgic Synth Prelude",
+        "endTimeSeconds": 71.5,
+        "formattedRange": "0:00 - 1:11",
+        "sectionName": "Intro: Synth Ballad & Spoken Word",
         "danceGear": "Wait / Breathe",
         "colorTheme": "slate",
-        "musicalTrigger": "Slow bolero-style intro 'Pensaba que contigo iba a envejecer' (0:03) with no salsa percussion",
-        "leaderCue": "Hold a slow, intimate close embrace and sway gently without forcing a salsa basic.",
-        "followerCue": "Relax into the close embrace and follow the slow bolero weight shifts.",
-        "commonMistakeWarning": "Trying to count 1-2-3, 5-6-7 during the rubato bolero intro.",
+        "musicalTrigger": "Nostalgic synth pad with vocals 'Pensaba que contigo iba a envejecer', followed by spoken dialogue.",
+        "leaderCue": "Stand tall in solo line formation, breathe with the synth intro, and get ready for percussion.",
+        "followerCue": "Relax your shoulders, center your weight over the balls of your feet, and wait for the conga.",
+        "commonMistakeWarning": "Starting to step during the slow synth ballad before the salsa percussion enters at 1:11.5.",
         "recommendedMoveSlugs": [
           "beg-mus-1"
         ],
         "timingMode": "Ambient (No Beat)",
         "instrumentMapping": {
-          "feet": "Slow bolero weight transfer",
-          "hipsAndKnees": "Soft, unhurried sway",
-          "chestAndShoulders": "Nostalgic vocal and synth chords"
-        }
+          "feet": "Floor grounding only",
+          "hipsAndKnees": "Soft knee sway",
+          "chestAndShoulders": "Breath with synth phrasing"
+        },
+        "startsOnOne": false
       },
       {
-        "id": "bi-seg-2",
-        "startTimeSeconds": 65,
-        "endTimeSeconds": 98,
-        "formattedRange": "1:05 - 1:38",
-        "sectionName": "Cinematic Dialogue & Piano Ignition",
-        "danceGear": "Wait / Breathe",
-        "colorTheme": "slate",
-        "musicalTrigger": "Spoken dialogue 'Mientras uno está vivo, uno debe amar lo más que pueda' (1:06) into piano buildup",
-        "leaderCue": "Pause during the spoken scene, then feel the piano montuno enter and prep on beat 8.",
-        "followerCue": "Listen to the piano introduction and wait for the leader's frame prep before stepping.",
-        "commonMistakeWarning": "Jumping in prematurely during the spoken dialogue break.",
+        "id": "baile-seg-2",
+        "startTimeSeconds": 71.5,
+        "endTimeSeconds": 103,
+        "formattedRange": "1:11 - 1:43",
+        "sectionName": "Instrumental Intro: Brass Mambo & Shines Class",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Congas and cowbell kick in for one bar before the brass mambo blasts at 1:14.",
+        "leaderCue": "Dance Paso Básico, Lateral, and Atrás in solo lines; freeze on the 1:35 break, then take closed hold.",
+        "followerCue": "Keep footwork compact underneath your hips, match the teacher's clave claps, and connect in closed hold at 1:36.",
+        "commonMistakeWarning": "Dancing past the brass break at 1:35 instead of pausing to form your Rueda circle.",
         "recommendedMoveSlugs": [
+          "beg-solo-1",
           "beg-mus-1",
           "imp-mus-1"
         ],
-        "timingMode": "Ambient (No Beat)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Wait for the conga and bass entrance",
-          "hipsAndKnees": "Subtle pulse as piano starts",
-          "chestAndShoulders": "Breath and frame connection"
-        }
+          "feet": "Conga tumbao and clave claps",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Trombone and trumpet mambo"
+        },
+        "bars": 13,
+        "startsOnOne": true,
+        "handGesture": "Al Medio"
       },
       {
-        "id": "bi-seg-3",
-        "startTimeSeconds": 98,
-        "endTimeSeconds": 152,
-        "formattedRange": "1:38 - 2:32",
-        "sectionName": "Salsa Ignition — Pensaba Que Contigo",
+        "id": "baile-seg-3",
+        "startTimeSeconds": 103,
+        "endTimeSeconds": 124.5,
+        "formattedRange": "1:43 - 2:04",
+        "sectionName": "Tema 1A: Pensaba Que Contigo Iba a Envejecer",
         "danceGear": "Casino (Smooth)",
         "colorTheme": "emerald",
-        "musicalTrigger": "Full salsa band drops in at 1:38 with 'Pensaba que contigo iba a envejecer' (1:42)",
-        "leaderCue": "Start in smooth close-hold Casino, opening into Dile Que No and Paséala at 2:09.",
-        "followerCue": "Savor the sudden salsa drop with smooth, grounded steps and soft hip figure-8s.",
-        "commonMistakeWarning": "Over-spinning on the very first verse instead of letting the groove settle.",
+        "musicalTrigger": "Bad Bunny enters on the salsa beat singing 'Pensaba que contigo iba a envejecer' over piano montuno.",
+        "leaderCue": "Start in closed hold with smooth Paso Básico, then open via Dile Que No into relaxed Guapea.",
+        "followerCue": "Maintain a soft, responsive frame in closed position and complete your Dile Que No walk cleanly on 5-6-7.",
+        "commonMistakeWarning": "Rushing into big turn patterns while the verse arrangement is still intimate and lyrical.",
         "recommendedMoveSlugs": [
           "beg-pw-1",
           "beg-pw-2",
-          "imp-pw-6"
+          "beg-sub-1"
         ],
         "timingMode": "A Tiempo (On1)",
-        "handGesture": "Dile Que No (Thumb out)",
         "instrumentMapping": {
-          "feet": "Conga tumbao and bass drop (1:38)",
-          "hipsAndKnees": "Smooth, grounded Cuban motion",
-          "chestAndShoulders": "Warm trombone melody and vocals"
-        }
+          "feet": "Piano montuno",
+          "hipsAndKnees": "Conga slap on 2 and 6",
+          "chestAndShoulders": "Lead vocal phrasing"
+        },
+        "bars": 9,
+        "startsOnOne": true,
+        "handGesture": "Dile Que No"
       },
       {
-        "id": "bi-seg-4",
-        "startTimeSeconds": 152,
-        "endTimeSeconds": 186,
-        "formattedRange": "2:32 - 3:06",
-        "sectionName": "Coro 1 — No, No Te Puedo Olvidar",
+        "id": "baile-seg-4",
+        "startTimeSeconds": 124.5,
+        "endTimeSeconds": 144,
+        "formattedRange": "2:04 - 2:24",
+        "sectionName": "Tema 1B: Si Me Ven Solo y Triste",
         "danceGear": "Casino (Flow)",
         "colorTheme": "emerald",
-        "musicalTrigger": "Main chorus 'No, no te puedo olvidar, no, no te puedo borrar, tú me enseñaste a bailar' (2:34)",
-        "leaderCue": "Flow into Guapea, Enchufla, Vacílala, and Setenta on the iconic 'me enseñaste a bailar' hook.",
-        "followerCue": "Express the lyric 'me enseñaste a bailar' with joyful arm styling and crisp turns.",
-        "commonMistakeWarning": "Cutting the follower's free turn short on Vacílala.",
+        "musicalTrigger": "Vocals rise on 'Si me ven solo y triste no me hablen' as warm brass swells enter.",
+        "leaderCue": "Lead Enchufla and Dame to switch partners around the Rueda circle, finishing with Exhíbela on 'baile inolvidable'.",
+        "followerCue": "Spot the next leader quickly on every Dame call and keep your right arm curved through Enchufla turns.",
+        "commonMistakeWarning": "Taking wide steps during Dame and arriving late to your new partner on beat 1.",
         "recommendedMoveSlugs": [
           "beg-pw-3",
-          "imp-pw-3",
-          "imp-pw-1"
-        ],
-        "timingMode": "A Tiempo (On1)",
-        "handGesture": "Setenta (7 fingers up)",
-        "instrumentMapping": {
-          "feet": "Driving tumbadora and bass",
-          "hipsAndKnees": "Full Cuban figure-8 motion",
-          "chestAndShoulders": "Singalong chorus hook"
-        }
-      },
-      {
-        "id": "bi-seg-5",
-        "startTimeSeconds": 186,
-        "endTimeSeconds": 220,
-        "formattedRange": "3:06 - 3:40",
-        "sectionName": "Pregón — Hay Un Paso Nuevo Que Quiero Enseñarte",
-        "danceGear": "Casino (Smooth)",
-        "colorTheme": "emerald",
-        "musicalTrigger": "Verse 'Dime cómo le hago pa' olvidarte, hay un paso nuevo que quiero enseñarte' (3:07)",
-        "leaderCue": "Play with Sombrero, Exhíbela, and a cheeky footwork check on 'hay un paso nuevo' (3:09).",
-        "followerCue": "Match the playful footwork accent on 'un paso nuevo' and glide through Sombrero.",
-        "commonMistakeWarning": "Missing the lyrical cue 'hay un paso nuevo que quiero enseñarte' at 3:09.",
-        "recommendedMoveSlugs": [
-          "imp-pw-4",
           "beg-pw-5",
-          "beg-solo-1"
+          "beg-sub-1"
         ],
         "timingMode": "A Tiempo (On1)",
-        "handGesture": "Sombrero (Touch top of head)",
         "instrumentMapping": {
-          "feet": "Piano montuno and bongó bell",
-          "hipsAndKnees": "Playful weight checks and pivots",
-          "chestAndShoulders": "Conversational vocal phrasing"
-        }
+          "feet": "Bass and conga pulse",
+          "hipsAndKnees": "Piano guajeo",
+          "chestAndShoulders": "Swelling brass chords"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Dame"
       },
       {
-        "id": "bi-seg-6",
-        "startTimeSeconds": 220,
-        "endTimeSeconds": 248,
-        "formattedRange": "3:40 - 4:08",
-        "sectionName": "Mi Diabla, Mi Ángel & Brass Break",
-        "danceGear": "Suelta / Shines",
-        "colorTheme": "purple",
-        "musicalTrigger": "'Mi diabla, mi ángel, mi loquita' (3:41) into 'Esto suena cabrón, vamos a hacerlo otra vez' (3:58)",
-        "leaderCue": "Break apart into solo Suelta shines at 3:55 to celebrate the live band shoutout.",
-        "followerCue": "Shine solo with Paso Básico, lateral steps, and shoulder shimmies on 'esto suena cabrón' (3:58).",
-        "commonMistakeWarning": "Staying tangled in two-hand wraps during the band callout at 3:58.",
+        "id": "baile-seg-5",
+        "startTimeSeconds": 144,
+        "endTimeSeconds": 155.5,
+        "formattedRange": "2:24 - 2:35",
+        "sectionName": "Electric Piano Interlude",
+        "danceGear": "Son Cubano",
+        "colorTheme": "blue",
+        "musicalTrigger": "Melancholic electric keyboard melody takes the lead after 'baile inolvidable'.",
+        "leaderCue": "Slow your upper body down into smooth Paséala and Prima, softening the frame for the keyboard solo.",
+        "followerCue": "Let your hips glide smoothly with the keyboard melody and prepare for the brass walk-up break at 2:33.",
+        "commonMistakeWarning": "Ignoring the nostalgic keyboard drop and continuing high-energy turns through the interlude.",
         "recommendedMoveSlugs": [
-          "beg-solo-1"
+          "beg-pw-4",
+          "imp-pw-6",
+          "imp-sub-1"
         ],
-        "timingMode": "A Tiempo (On1)",
+        "timingMode": "Contratiempo (On2) or Smooth On1",
         "instrumentMapping": {
-          "feet": "Syncopated percussion and horn hits",
-          "hipsAndKnees": "Loose street-style Cuban groove",
-          "chestAndShoulders": "Thoracic isolation on brass hits"
-        }
+          "feet": "Soft bass tumbao",
+          "hipsAndKnees": "Conga marcha",
+          "chestAndShoulders": "Electric keyboard melody"
+        },
+        "bars": 5,
+        "startsOnOne": true,
+        "handGesture": "Prima"
       },
       {
-        "id": "bi-seg-7",
-        "startTimeSeconds": 248,
-        "endTimeSeconds": 276,
-        "formattedRange": "4:08 - 4:36",
-        "sectionName": "Mambo & Piano Solo — ¡Aprieta Chamaquito!",
-        "danceGear": "Suelta / Shines",
-        "colorTheme": "purple",
-        "musicalTrigger": "Call '¡Aprieta, chamaquito, aprieta!' (4:11, 4:28) over the fiery piano and timbal solo",
-        "leaderCue": "Trade playful salsa footwork shines with your partner, hitting the piano and timbal breaks.",
-        "followerCue": "Answer the piano solo with quick footwork shines and playful hip and shoulder accents.",
-        "commonMistakeWarning": "Standing still watching the leader instead of trading shines during the piano solo.",
-        "recommendedMoveSlugs": [
-          "beg-solo-1"
-        ],
-        "timingMode": "A Tiempo (On1)",
-        "instrumentMapping": {
-          "feet": "Virtuoso piano solo syncopations",
-          "hipsAndKnees": "Fast rhythmic hip snaps",
-          "chestAndShoulders": "Expressive shoulder shimmies"
-        }
-      },
-      {
-        "id": "bi-seg-8",
-        "startTimeSeconds": 276,
-        "endTimeSeconds": 335,
-        "formattedRange": "4:36 - 5:35",
-        "sectionName": "Montuno Climax — Solo Con Usted Yo Bailo",
+        "id": "baile-seg-6",
+        "startTimeSeconds": 155.5,
+        "endTimeSeconds": 187,
+        "formattedRange": "2:35 - 3:07",
+        "sectionName": "Coro & Mambo 1: No Te Puedo Olvidar",
         "danceGear": "Casino (Flow)",
         "colorTheme": "emerald",
-        "musicalTrigger": "'¡Ahí, ahí, vamos allá! No, no te puedo olvidar' (4:36) and 'Solo con usted yo bailo' (4:52)",
-        "leaderCue": "Reconnect on 4:36 for full-energy Setenta Complicado, Kentucky, and Siete combinations.",
-        "followerCue": "Reconnect with warm eye contact on 'solo con usted yo bailo' (4:52) and flow through turns.",
-        "commonMistakeWarning": "Losing connection with your partner during the most emotional montuno of the track.",
+        "musicalTrigger": "Coro shouts 'No, no te puedo olvidar, no, no te puedo borrar' followed by the 2:45 brass mambo.",
+        "leaderCue": "Full Casino flow: lead Vacílala into Setenta and Sombrero, matching the center-circle showcase energy.",
+        "followerCue": "Use dynamic free-arm styling on Vacílala, keep hook-finger tension in Setenta, and hit the 3:05 break.",
+        "commonMistakeWarning": "Dropping your frame tension during the 2:45 brass mambo when the arrangement hits peak drive.",
         "recommendedMoveSlugs": [
-          "imp-pw-2",
-          "imp-pw-5",
-          "int-pw-3"
+          "imp-pw-3",
+          "imp-pw-1",
+          "imp-pw-4"
         ],
         "timingMode": "A Tiempo (On1)",
-        "handGesture": "Kentucky (Wrists crossed)",
         "instrumentMapping": {
-          "feet": "Full campana and tumbadora drive",
-          "hipsAndKnees": "Deep, joyful Cuban motion",
-          "chestAndShoulders": "Climax coro and brass swells"
-        }
+          "feet": "Bongo campana",
+          "hipsAndKnees": "Driving bass and conga",
+          "chestAndShoulders": "Coro vocals and brass mambo"
+        },
+        "bars": 13,
+        "startsOnOne": true,
+        "handGesture": "Setenta"
       },
       {
-        "id": "bi-seg-9",
-        "startTimeSeconds": 335,
-        "endTimeSeconds": 379,
-        "formattedRange": "5:35 - 6:19",
-        "sectionName": "Final — Brass Coda & Studio Outro",
+        "id": "baile-seg-7",
+        "startTimeSeconds": 187,
+        "endTimeSeconds": 227,
+        "formattedRange": "3:07 - 3:47",
+        "sectionName": "Pregón Verse: Hay Un Paso Nuevo / Mi Diabla, Mi Ángel",
         "danceGear": "Casino (Smooth)",
         "colorTheme": "emerald",
-        "musicalTrigger": "Extended brass outro after the final 'mi diabla, mi ángel, mi loquita' (5:27 - 5:35)",
-        "leaderCue": "Wind down the turn complexity into smooth Paséala and hit the final musical cutoff.",
-        "followerCue": "Breathe out, slow your turns with the band, and hold the final embrace at 6:05.",
-        "commonMistakeWarning": "Continuing to spin after the music resolves into the final video outro.",
+        "musicalTrigger": "Bad Bunny drops in with 'Dime cómo le hago pa' olvidarte, hay un paso nuevo que quiero enseñarte'.",
+        "leaderCue": "Keep it playful and conversational with Kentucky, Paséala, and Enchufla Doble on the 3:16 coro return.",
+        "followerCue": "Play with eye contact and subtle shoulder shimmy during 'Mi diabla, mi ángel, mi loquita'.",
+        "commonMistakeWarning": "Over-leading complex hammerlocks over Bad Bunny's rhythmic vocal delivery.",
         "recommendedMoveSlugs": [
+          "imp-pw-5",
           "imp-pw-6",
-          "beg-pw-1"
+          "beg-pw-3"
         ],
         "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Closing brass and timbal cadence",
-          "hipsAndKnees": "Settling weight cleanly on the final hit",
-          "chestAndShoulders": "Final breath and partner connection"
-        }
+          "feet": "Maracas and conga pulse",
+          "hipsAndKnees": "Syncopated bass tumbao",
+          "chestAndShoulders": "Rap-sung pregón flow"
+        },
+        "bars": 17,
+        "startsOnOne": true,
+        "handGesture": "Kentucky"
+      },
+      {
+        "id": "baile-seg-8",
+        "startTimeSeconds": 227,
+        "endTimeSeconds": 239,
+        "formattedRange": "3:47 - 3:59",
+        "sectionName": "Spotlight Brass Mambo Transition",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Bad Bunny shouts '¡Ey!' and layered trumpets and trombones launch a 5-bar mambo.",
+        "leaderCue": "Release into open suelta shines, accenting the syncopated horn hits before reconnecting at 3:59.",
+        "followerCue": "Step forward with confidence like the spotlight entrance, styling arms and hips with the brass.",
+        "commonMistakeWarning": "Staying locked in closed partnerwork when the horns call for open shines.",
+        "recommendedMoveSlugs": [
+          "beg-solo-1",
+          "imp-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Timbal and campana drive",
+          "hipsAndKnees": "Conga tumbao",
+          "chestAndShoulders": "Layered brass punches"
+        },
+        "bars": 5,
+        "startsOnOne": true,
+        "handGesture": "Pa'Fuera"
+      },
+      {
+        "id": "baile-seg-9",
+        "startTimeSeconds": 239,
+        "endTimeSeconds": 271,
+        "formattedRange": "3:59 - 4:31",
+        "sectionName": "Spotlight Campana & Piano Groove: Como Anoche",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Horns drop out to crisp piano montuno and bongo bell as Bad Bunny says 'Esto suena cabrón'.",
+        "leaderCue": "Lead tight Setenta Complicado and Dedo under the spotlight groove, finishing with a dip on the 4:30 chord.",
+        "followerCue": "Dig your feet into the bongo bell rhythm, keep turns sharp, and brace your core for the 4:30 dip.",
+        "commonMistakeWarning": "Missing the sudden musical stop and sustained chord at 4:30.",
+        "recommendedMoveSlugs": [
+          "imp-pw-2",
+          "int-pw-2",
+          "beg-pw-5"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Crisp bongo campana",
+          "hipsAndKnees": "Acoustic piano montuno",
+          "chestAndShoulders": "Spoken ad-libs 'Aprieta chamaquito'"
+        },
+        "bars": 13,
+        "startsOnOne": true,
+        "handGesture": "Setenta Complicado"
+      },
+      {
+        "id": "baile-seg-10",
+        "startTimeSeconds": 271,
+        "endTimeSeconds": 279.5,
+        "formattedRange": "4:31 - 4:39",
+        "sectionName": "Rubato Piano Solo Break: ¡Vamo' Allá!",
+        "danceGear": "Wait / Breathe",
+        "colorTheme": "slate",
+        "musicalTrigger": "All percussion stops for an acoustic upright piano solo ending with the shout '¡Ay, ay, ay, vamo' allá!'",
+        "leaderCue": "Hold your dip or slow-pose with your partner, breathe with the piano arpeggios, and prep for 4:39.5.",
+        "followerCue": "Maintain balance and elegant arm lines during the piano solo, ready to explode on '¡Vamo' allá!'",
+        "commonMistakeWarning": "Trying to keep stepping a basic when the percussion and bass have completely stopped.",
+        "recommendedMoveSlugs": [
+          "beg-mus-1"
+        ],
+        "timingMode": "Ambient (No Beat)",
+        "instrumentMapping": {
+          "feet": "Stillness and weight prep",
+          "hipsAndKnees": "Slow weight transfer",
+          "chestAndShoulders": "Upright piano solo melody"
+        },
+        "startsOnOne": false
+      },
+      {
+        "id": "baile-seg-11",
+        "startTimeSeconds": 279.5,
+        "endTimeSeconds": 311.5,
+        "formattedRange": "4:39 - 5:11",
+        "sectionName": "Stage Montuno 1: Solo Con Usted",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Full band slams back in on the coro 'No, no te puedo olvidar' after '¡Vamo' allá!'",
+        "leaderCue": "Explode back into Montana and Siete, then smooth out slightly on 'Solo con usted, yo bailo con usted'.",
+        "followerCue": "Match the band's sudden drop with crisp footwork and active spotting through Montana and Siete.",
+        "commonMistakeWarning": "Entering late after the rubato piano solo because you missed the '¡Vamo' allá!' cue.",
+        "recommendedMoveSlugs": [
+          "int-pw-1",
+          "int-pw-3",
+          "imp-pw-4"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Full campana and timbal drive",
+          "hipsAndKnees": "Double bass tumbao",
+          "chestAndShoulders": "Coro and pregón 'Solo con usted'"
+        },
+        "bars": 13,
+        "startsOnOne": true,
+        "handGesture": "Montana"
+      },
+      {
+        "id": "baile-seg-12",
+        "startTimeSeconds": 311.5,
+        "endTimeSeconds": 333,
+        "formattedRange": "5:11 - 5:33",
+        "sectionName": "Stage Pregón 2: Yo He Tenido Muchas Novias",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Bad Bunny sings 'Yo he tenido muchas novias, pero como tú ninguna' with trombone fills.",
+        "leaderCue": "Combine Vacílala con la Mano and Coca-Cola, building momentum toward the final mambo at 5:33.",
+        "followerCue": "Style your free arm during Vacílala con la Mano and ride the momentum of the Coca-Cola turn.",
+        "commonMistakeWarning": "Running out of stamina right before the climax brass mambo hits at 5:33.",
+        "recommendedMoveSlugs": [
+          "imp-pw-3",
+          "int-pw-4",
+          "beg-pw-2"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Conga and maraca groove",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Trombone responses and vocals"
+        },
+        "bars": 9,
+        "startsOnOne": true,
+        "handGesture": "Coca-Cola"
+      },
+      {
+        "id": "baile-seg-13",
+        "startTimeSeconds": 333,
+        "endTimeSeconds": 366,
+        "formattedRange": "5:33 - 6:06",
+        "sectionName": "Climax Brass Mambo, Conga Jam & Finale Coda",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Fiery brass mambo and conga/timbal jam erupt at 5:33, shifting into the syncopated brass coda at 5:54.5.",
+        "leaderCue": "Go all out with solo shines and rumba-flavored body movement, then hit a final pose on the 6:05 chord.",
+        "followerCue": "Unleash fast footwork and hip isolations with the conga slaps, freezing on the dramatic 6:05 brass hit.",
+        "commonMistakeWarning": "Not adapting your footwork at 5:54.5 when the percussion shifts into the syncopated brass coda.",
+        "recommendedMoveSlugs": [
+          "beg-solo-1",
+          "imp-solo-1",
+          "adv-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Conga solo slaps and timbal",
+          "hipsAndKnees": "Syncopated bass and piano",
+          "chestAndShoulders": "Blazing trumpets and trombones"
+        },
+        "bars": 14,
+        "startsOnOne": true
+      },
+      {
+        "id": "baile-seg-14",
+        "startTimeSeconds": 366,
+        "endTimeSeconds": 379,
+        "formattedRange": "6:06 - 6:19",
+        "sectionName": "Studio Outro & Applause",
+        "danceGear": "Wait / Breathe",
+        "colorTheme": "slate",
+        "musicalTrigger": "Concert applause fades into quiet dance studio chatter and distant background music.",
+        "leaderCue": "Hold your final pose, thank your partner, and applaud the class.",
+        "followerCue": "Smile, breathe out after the finale, and thank your partner.",
+        "commonMistakeWarning": "Trying to dance to the faint background audio during the cinematic closing scene.",
+        "recommendedMoveSlugs": [
+          "beg-mus-1"
+        ],
+        "timingMode": "Ambient (No Beat)",
+        "instrumentMapping": {
+          "feet": "Rest",
+          "hipsAndKnees": "Rest",
+          "chestAndShoulders": "Natural breathing"
+        },
+        "startsOnOne": false
       }
     ]
   },

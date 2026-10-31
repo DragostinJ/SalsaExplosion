@@ -2993,6 +2993,333 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
       }
     ]
   },
+  // -----------------------------------------------------------------
+  // "Temba, Tumba, Timba" - Los Van Van
+  // Timba • Intermediate • 102 BPM • 2-3 Son Clave • 296s
+  // Video ID: EGabg9DgBPU • timings from Argus
+  // AI Studio song maker 2026-10-31 (starts are a 102 BPM bar grid from 0:11.5). Ear-check first: 2:46.8 (another run heard 2:43), 3:38.6 (other run 3:29), 4:11.5 (could be 4:09-4:13).
+  // -----------------------------------------------------------------
+  {
+    "id": "temba-tumba-timba",
+    "title": "Temba, Tumba, Timba",
+    "artist": "Los Van Van",
+    "style": "Timba",
+    "bpm": 102,
+    "claveType": "2-3 Son Clave",
+    "difficultyLevel": "Intermediate",
+    "durationSeconds": 296,
+    "youtubeVideoId": "EGabg9DgBPU",
+    "youtubeUrl": "https://www.youtube.com/watch?v=EGabg9DgBPU",
+    "segments": [
+      {
+        "id": "vanvan-ttt-1",
+        "startTimeSeconds": 0,
+        "endTimeSeconds": 11.5,
+        "formattedRange": "0:00 - 0:11",
+        "sectionName": "Intro (Oye!)",
+        "danceGear": "Wait / Breathe",
+        "colorTheme": "slate",
+        "musicalTrigger": "Talking intro 'Oye! Temba, tumba, timba...' leading into a drum fill",
+        "leaderCue": "Stand relaxed, wait for the talking to end and the groove to drop in",
+        "followerCue": "Listen to the speech, find your balance and prepare your frame",
+        "commonMistakeWarning": "Starting to dance before the actual downbeat hits at the end of the intro",
+        "recommendedMoveSlugs": [
+          "beg-mus-1"
+        ],
+        "timingMode": "Ambient (No Beat)",
+        "instrumentMapping": {
+          "feet": "timbal accents",
+          "hipsAndKnees": "vocal rhythm",
+          "chestAndShoulders": "breathing"
+        },
+        "bars": 5,
+        "startsOnOne": false
+      },
+      {
+        "id": "vanvan-ttt-2",
+        "startTimeSeconds": 11.5,
+        "endTimeSeconds": 30.3,
+        "formattedRange": "0:11 - 0:30",
+        "sectionName": "Tema 1 (Voy a hacerte...)",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Vocals start the story: 'Voy a hacerte una versión...'",
+        "leaderCue": "Ease into the dance with soft basics like Paséala and Dile Que No",
+        "followerCue": "Keep steps small and smooth, matching the storytelling vibe of the singer",
+        "commonMistakeWarning": "Dancing too aggressively; keep it conversational and relaxed here",
+        "recommendedMoveSlugs": [
+          "beg-pw-1",
+          "imp-pw-6"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "conga tumbao",
+          "hipsAndKnees": "bass tumbao",
+          "chestAndShoulders": "vocals"
+        },
+        "bars": 8,
+        "startsOnOne": true
+      },
+      {
+        "id": "vanvan-ttt-3",
+        "startTimeSeconds": 30.3,
+        "endTimeSeconds": 49.1,
+        "formattedRange": "0:30 - 0:49",
+        "sectionName": "Coro 1 (Temba tumba y timba)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Chorus hits for the first time: 'Temba, tumba y timba...'",
+        "leaderCue": "Increase the energy, use Setenta and continuous flowing turn patterns",
+        "followerCue": "Spot sharply on your turns and extend your free arm lines to the music",
+        "commonMistakeWarning": "Losing your frame tension when the musical energy goes up",
+        "recommendedMoveSlugs": [
+          "imp-pw-1",
+          "int-pw-4"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "campana",
+          "hipsAndKnees": "bass",
+          "chestAndShoulders": "coro"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Setenta"
+      },
+      {
+        "id": "vanvan-ttt-4",
+        "startTimeSeconds": 49.1,
+        "endTimeSeconds": 77.4,
+        "formattedRange": "0:49 - 1:17",
+        "sectionName": "Tema 2 (Asi fue...)",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Verse returns to the story: 'Asi fue, tremendo lio...'",
+        "leaderCue": "Bring the energy back down, smooth out the moves with Sombrero",
+        "followerCue": "Breathe, reconnect with your partner, and relax your styling",
+        "commonMistakeWarning": "Ignoring the drop in intensity and rushing the moves",
+        "recommendedMoveSlugs": [
+          "imp-pw-4",
+          "imp-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "conga slaps",
+          "hipsAndKnees": "bass tumbao",
+          "chestAndShoulders": "vocals"
+        },
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Sombrero"
+      },
+      {
+        "id": "vanvan-ttt-5",
+        "startTimeSeconds": 77.4,
+        "endTimeSeconds": 96.2,
+        "formattedRange": "1:17 - 1:36",
+        "sectionName": "Coro 2 (Temba tumba y timba)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Chorus returns: 'Temba, tumba y timba...'",
+        "leaderCue": "Open up the slot with Enchufla Doble and playful dynamic changes",
+        "followerCue": "Engage your core for quick changes of direction on the double turns",
+        "commonMistakeWarning": "Stepping too wide; keep your steps directly under your center",
+        "recommendedMoveSlugs": [
+          "beg-pw-3",
+          "imp-pw-2"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "campana",
+          "hipsAndKnees": "conga tumbao",
+          "chestAndShoulders": "coro"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Enchufla Doble"
+      },
+      {
+        "id": "vanvan-ttt-6",
+        "startTimeSeconds": 96.2,
+        "endTimeSeconds": 124.5,
+        "formattedRange": "1:36 - 2:04",
+        "sectionName": "Tema 3 (Ay nada mas...)",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Verse starts again: 'Ay nada mas que se formo la corredera...'",
+        "leaderCue": "Smooth Paséala and Dedo, listen to the ongoing narrative",
+        "followerCue": "Maintain a light, responsive connection in closed hold",
+        "commonMistakeWarning": "Anticipating the next move instead of following the soft lead",
+        "recommendedMoveSlugs": [
+          "imp-pw-6",
+          "int-pw-2"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "guiro",
+          "hipsAndKnees": "bass",
+          "chestAndShoulders": "vocals"
+        },
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Dedo"
+      },
+      {
+        "id": "vanvan-ttt-7",
+        "startTimeSeconds": 124.5,
+        "endTimeSeconds": 143.3,
+        "formattedRange": "2:04 - 2:23",
+        "sectionName": "Coro 3 (Temba tumba y timba)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Chorus is back: 'Temba, tumba y timba...'",
+        "leaderCue": "Build the flow, chain Siete into a smooth Dile Que No",
+        "followerCue": "Use the rotational momentum to style your basic steps beautifully",
+        "commonMistakeWarning": "Disconnecting visually from your partner during the turns",
+        "recommendedMoveSlugs": [
+          "int-pw-3",
+          "beg-pw-2"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "campana",
+          "hipsAndKnees": "bass",
+          "chestAndShoulders": "coro"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Siete"
+      },
+      {
+        "id": "vanvan-ttt-8",
+        "startTimeSeconds": 143.3,
+        "endTimeSeconds": 166.8,
+        "formattedRange": "2:23 - 2:46",
+        "sectionName": "Montuno 1 (La de Brasil)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Pregón calls: 'La de Brasil...'",
+        "leaderCue": "Keep it flowing, add Montana and focus on the musicality of the track",
+        "followerCue": "Play with your shoulder movement matching the faster vocal phrases",
+        "commonMistakeWarning": "Rushing the beat during the lively pregones",
+        "recommendedMoveSlugs": [
+          "int-pw-1",
+          "imp-pw-5"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "piano montuno",
+          "hipsAndKnees": "bass",
+          "chestAndShoulders": "timbal cáscara"
+        },
+        "bars": 10,
+        "startsOnOne": true,
+        "handGesture": "Montana"
+      },
+      {
+        "id": "vanvan-ttt-9",
+        "startTimeSeconds": 166.8,
+        "endTimeSeconds": 190.4,
+        "formattedRange": "2:46 - 3:10",
+        "sectionName": "Montuno 2 (Y ahora me pide...)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "New coro enters: 'Y ahora me pide la temba de tumba...'",
+        "leaderCue": "High energy casino, use complex variations like Setenta Complicado",
+        "followerCue": "Stay grounded, executing quick footwork during complex turn patterns",
+        "commonMistakeWarning": "Losing your balance by stepping too large on complex turns",
+        "recommendedMoveSlugs": [
+          "imp-pw-2",
+          "int-pw-4"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "campana",
+          "hipsAndKnees": "piano montuno",
+          "chestAndShoulders": "coro"
+        },
+        "bars": 10,
+        "startsOnOne": true,
+        "handGesture": "Setenta Complicado"
+      },
+      {
+        "id": "vanvan-ttt-10",
+        "startTimeSeconds": 190.4,
+        "endTimeSeconds": 218.6,
+        "formattedRange": "3:10 - 3:38",
+        "sectionName": "Montuno 3 (Llego el doctor)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Pregón announces: 'Y en eso llego el doctor...'",
+        "leaderCue": "Dynamic flow, try El Uno or El Dos to match the rhythmic drive",
+        "followerCue": "Sharp spotting on your turns and active free arm styling",
+        "commonMistakeWarning": "Tensing the arms instead of keeping a flexible frame",
+        "recommendedMoveSlugs": [
+          "int-pw-2",
+          "beg-pw-5"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "timbal bell",
+          "hipsAndKnees": "bass tumbao",
+          "chestAndShoulders": "brass hits"
+        },
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "El Uno"
+      },
+      {
+        "id": "vanvan-ttt-11",
+        "startTimeSeconds": 218.6,
+        "endTimeSeconds": 251.5,
+        "formattedRange": "3:38 - 4:11",
+        "sectionName": "Bomba (La gente que anoche)",
+        "danceGear": "Despelote / Reparto",
+        "colorTheme": "red",
+        "musicalTrigger": "Bass drops to bomba gear, coro: 'La gente que anoche no durmio...'",
+        "leaderCue": "Break apart, hit some body isolations and tembleque to the bass drops",
+        "followerCue": "Full body movement, roll your chest and hips to the heavy bass accents",
+        "commonMistakeWarning": "Continuing standard casino instead of breaking away for timba despelote",
+        "recommendedMoveSlugs": [
+          "int-solo-1",
+          "adv-solo-1"
+        ],
+        "timingMode": "Syncopated Reparto",
+        "instrumentMapping": {
+          "feet": "conga slaps",
+          "hipsAndKnees": "bass drum",
+          "chestAndShoulders": "coro"
+        },
+        "bars": 14,
+        "startsOnOne": true
+      },
+      {
+        "id": "vanvan-ttt-12",
+        "startTimeSeconds": 251.5,
+        "endTimeSeconds": 296,
+        "formattedRange": "4:11 - 4:56",
+        "sectionName": "Mambo Final",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Brass mambo section kicks in powerfully with a shout",
+        "leaderCue": "Solo footwork, shine with syncopated steps until the song fades out completely",
+        "followerCue": "Express the aggressive brass lines with sharp shines and arm strikes",
+        "commonMistakeWarning": "Standing still instead of engaging in solo play during the instrumental climax",
+        "recommendedMoveSlugs": [
+          "imp-solo-1",
+          "int-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "brass section",
+          "hipsAndKnees": "bass",
+          "chestAndShoulders": "timbal accents"
+        },
+        "bars": 19,
+        "startsOnOne": true
+      }
+    ]
+  },
 ];
 
 // ==========================================

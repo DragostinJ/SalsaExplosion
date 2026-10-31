@@ -74,6 +74,15 @@ describe("Argus song map import", () => {
     expect(warnings).toContain("not-a-move");
     expect(warnings).toContain("formattedRange");
     expect(result.song?.segments[0].formattedRange).toBe("0:00 - 0:18");
+
+    // Decimal ranges that agree with the seconds are only tidied, not warned about
+    const decimal = {
+      ...freshSong,
+      segments: freshSong.segments.map((segment, index) => (index === 0 ? { ...segment, formattedRange: "0:00 - 0:18.0" } : segment)),
+    };
+    const tidy = parseSongMapInput(JSON.stringify(decimal));
+    expect(tidy.warnings.join(" ")).not.toContain("formattedRange");
+    expect(tidy.song?.segments[0].formattedRange).toBe("0:00 - 0:18");
   });
 
   it("produces a data entry that round-trips through the importer", () => {

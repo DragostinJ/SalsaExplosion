@@ -122,7 +122,13 @@ export function parseSongMapInput(raw: string): SongMapImportResult {
       }
     }
     const expectedRange = `${formatSecondsToTime(segment.startTimeSeconds)} - ${formatSecondsToTime(segment.endTimeSeconds)}`;
-    if (segment.formattedRange !== expectedRange) {
+    // "0:11.5 - 0:30.3" agrees with 11.5-30.3: rewritten to the canonical form on copy without a warning
+    const range = parseRangeSeconds(segment.formattedRange);
+    const rangeAgrees =
+      range !== null &&
+      Math.abs(range[0] - segment.startTimeSeconds) < 1 &&
+      Math.abs(range[1] - segment.endTimeSeconds) < 1;
+    if (segment.formattedRange !== expectedRange && !rangeAgrees) {
       warnings.push(`${segment.id}: formattedRange "${segment.formattedRange}" should be "${expectedRange}" (fixed on copy).`);
     }
     const unknownMoves = segment.recommendedMoveSlugs.filter((slug) => !resolveCurriculumMove(slug));

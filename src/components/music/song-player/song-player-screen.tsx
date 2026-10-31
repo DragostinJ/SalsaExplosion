@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { AudioLines, Loader2 } from "lucide-react";
 import type { SongAnatomy, SongDanceGear } from "@/lib/constants/timba-song-anatomy";
-import { DANCE_GEAR_LEGEND, ENERGY_LABELS } from "@/lib/music/dance-gear-legend";
+import { DANCE_GEAR_LEGEND } from "@/lib/music/dance-gear-legend";
 import {
   findSegmentIndexAt,
   formatSongTime,
@@ -39,6 +39,7 @@ import { usePracticeReporter } from "./use-practice-reporter";
 import { PlayerControls } from "./player-controls";
 import { SectionList } from "./section-list";
 import { DanceView, LearnView, QuizView, type QuizState } from "./now-card-views";
+import { NextSectionStrip } from "./next-section-strip";
 import { useSongProgress } from "./use-song-progress";
 import { PLAYER_STORAGE_KEYS as KEYS, PRACTICE_MODES, parsePracticeMode, type PracticeMode } from "./player-settings";
 
@@ -129,7 +130,6 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
   const shown = segments[shownIndex];
   const next = segments[activeIndex + 1];
   const shownGear = DANCE_GEAR_LEGEND[shown.danceGear];
-  const nextGear = next ? DANCE_GEAR_LEGEND[next.danceGear] : null;
   const mediaUntilNext = secondsUntilNextSection(segments, clock.currentTime);
   const realUntilNext = mediaUntilNext === null ? null : mediaUntilNext / (clock.playbackRate || 1);
   const isGetReady = clock.isPlaying && realUntilNext !== null && realUntilNext <= GET_READY_SECONDS;
@@ -460,34 +460,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
             {progress.error && <p className="mt-2 text-xs text-danger">{progress.error}</p>}
           </section>
 
-          {next && nextGear ? (
-            <div
-              className={cn(
-                "flex shrink-0 items-center gap-2.5 rounded-2xl border px-3 py-2 transition-colors",
-                isGetReady && !isQuiz ? cn(nextGear.chipClass, "animate-pulse") : "border-line bg-surface-2"
-              )}
-            >
-              <span
-                className={cn("h-8 w-1.5 shrink-0 rounded-full", isQuiz ? "bg-line" : nextGear.fillClass)}
-                aria-hidden="true"
-              />
-              <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-ivory-muted">
-                  {isQuiz
-                    ? "Next · listen for it"
-                    : `${isGetReady ? "Get ready" : "Next"} · ${nextGear.shortLabel} · ${ENERGY_LABELS[nextGear.energy]}`}
-                </p>
-                <p className="truncate text-sm font-semibold">{isQuiz ? "???" : next.sectionName}</p>
-              </div>
-              <span className={cn("shrink-0 font-mono text-base font-bold", isGetReady && !isQuiz && nextGear.textClass)}>
-                {realUntilNext !== null ? formatSongTime(Math.ceil(realUntilNext)) : ""}
-              </span>
-            </div>
-          ) : (
-            <div className="shrink-0 rounded-2xl border border-line bg-surface-2 px-3 py-2 text-sm text-ivory-muted">
-              Final section, dance it out until the end.
-            </div>
-          )}
+          <NextSectionStrip next={next} isGetReady={isGetReady} isQuiz={isQuiz} secondsUntilNext={realUntilNext} />
 
           <PlayerControls
             isReady={clock.isReady}

@@ -26,6 +26,8 @@ export const RATE_LIMIT_RULES: Record<string, RateLimitConfig> = {
   SUBMISSION: { maxRequests: 10, windowSeconds: 60 },
   RECAP: { maxRequests: 20, windowSeconds: 60 },
   MANAGEMENT: { maxRequests: 30, windowSeconds: 60 },
+  // Practice-player loop/replay counters (anonymous, fire-and-forget)
+  PRACTICE_EVENT: { maxRequests: 30, windowSeconds: 600 },
 } as const;
 
 export interface RateLimitResult {

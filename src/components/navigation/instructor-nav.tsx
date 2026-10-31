@@ -10,6 +10,7 @@ import {
   BarChart3,
   Sparkles,
   Music,
+  Flame,
 } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +30,12 @@ export function InstructorNav() {
       label: "Song Map Importer",
       icon: Music,
       active: pathname.startsWith("/instructor/song-maps"),
+    },
+    {
+      href: "/instructor/practice-insights",
+      label: "Practice Hotspots",
+      icon: Flame,
+      active: pathname.startsWith("/instructor/practice-insights"),
     },
     {
       href: "/instructor/students",

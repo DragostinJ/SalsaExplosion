@@ -35,6 +35,7 @@ import { SongPlayerMoreSheet, type DancerRole } from "./song-player-more-sheet";
 import { SongCalibrationPanel } from "./song-calibration-panel";
 import { useCalibratedSegments } from "./calibration-store";
 import { PlayerHeader } from "./player-header";
+import { usePracticeReporter } from "./use-practice-reporter";
 import { PlayerControls } from "./player-controls";
 import { SectionList } from "./section-list";
 import { DanceView, LearnView, QuizView, type QuizState } from "./now-card-views";
@@ -101,6 +102,8 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
   const { seek, getExactTime, togglePlay, play, pause, setPlaybackRate } = clock;
 
   const progress = useSongProgress(song.id, !onExit);
+  // Anonymous loop/replay counts for teachers (not from import previews or calibration)
+  const reportPractice = usePracticeReporter(song.id, !onExit && !isCalibrating);
 
   useEffect(() => {
     const mismatch = getDurationMismatchSeconds(song, clock.actualDurationSeconds);
@@ -223,18 +226,20 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
     [getExactTime, leadIn]
   );
   const goPrevious = useCallback(() => {
-    const target = previousSectionSeekTarget(segments, currentNavigationTime());
-    seekToSection(findSegmentIndexAt(segments, target));
-  }, [segments, currentNavigationTime, seekToSection]);
+    const index = findSegmentIndexAt(segments, previousSectionSeekTarget(segments, currentNavigationTime()));
+    reportPractice(segments[index].id, "replay");
+    seekToSection(index);
+  }, [segments, currentNavigationTime, seekToSection, reportPractice]);
   const goNext = useCallback(() => {
     const target = nextSectionSeekTarget(segments, currentNavigationTime());
     if (target !== null) seekToSection(findSegmentIndexAt(segments, target));
   }, [segments, currentNavigationTime, seekToSection]);
 
-  const toggleLoop = () =>
-    setLoopSectionIndex((current) =>
-      current === null ? findSegmentIndexAt(segments, currentNavigationTime()) : null
-    );
+  const toggleLoop = () => {
+    const index = findSegmentIndexAt(segments, currentNavigationTime());
+    if (loopSectionIndex === null) reportPractice(segments[index].id, "loop");
+    setLoopSectionIndex((current) => (current === null ? index : null));
+  };
   const cycleRate = () => setPlaybackRate(nextPlaybackRate(clock.playbackRate));
   const stepPreview = (direction: -1 | 1) =>
     setPreviewIndex(stepPreviewIndex(effectivePreview, activeIndex, direction, segments.length));

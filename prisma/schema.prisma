@@ -485,3 +485,17 @@ model SongSectionProgress {
   @@unique([userId, songId, sectionId])
   @@index([userId, songId])
 }
+
+// Anonymous practice-player counts per section per day (no user ids are stored):
+// how often dancers loop or go back to a section. Shows teachers where students struggle.
+model PracticeSectionStat {
+  id        String   @id @default(cuid())
+  songId    String
+  sectionId String
+  day       DateTime @db.Date
+  loops     Int      @default(0)
+  replays   Int      @default(0)
+
+  @@unique([songId, sectionId, day])
+  @@index([day])
+}

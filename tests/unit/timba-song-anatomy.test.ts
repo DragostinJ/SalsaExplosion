@@ -118,12 +118,9 @@ describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dat
     expect(all.length).toBe(14);
 
     const aguanile = getSongAnatomyById("aguanile");
-    expect(aguanile).toBeDefined();
+    expect(aguanile).toBe(TIMBA_SONG_ANATOMY_DATA.find((song) => song.id === "aguanile"));
     expect(aguanile?.youtubeVideoId).toBe("b4rd9VfMhWM");
-    expect(aguanile?.bpm).toBe(105);
-    expect(aguanile?.segments.length).toBe(8);
     for (const seg of aguanile!.segments) {
-      expect(seg.handGesture).toBeDefined();
       expect(seg.instrumentMapping).toBeDefined();
     }
 

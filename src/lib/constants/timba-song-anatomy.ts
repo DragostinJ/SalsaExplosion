@@ -1032,225 +1032,363 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
   },
 
   // -----------------------------------------------------------------
-  // 4. "Aguanile" - Marc Anthony (El Cantante / Héctor Lavoe Tribute)
-  // Level: Advanced • 105 BPM • 2-3 Son/Rumba Clave • 316 seconds (5:16)
-  // Official Video ID: b4rd9VfMhWM
+  // "Aguanile" - Marc Anthony
+  // New York Salsa • Advanced • 120 BPM • 2-3 Son / 6/8 Afro-Bembé Hybrid • 316s
+  // Video ID: b4rd9VfMhWM • timings from Argus
+  // Gemini 4 Argon in AI Studio 2026-10-31 (old map: 8 sections; 4 of 12 new starts near it). Title cleaned (was 'Aguanile (Advanced Afro-Cuban & Casino Masterclass)'). Argon unsure: 0:21.5 (0:21-0:22.5), 2:47.5 (2:47-2:48.5). Ear-check also the drum-only drop 2:38.5 and the short final sections 4:49, 4:56.5, 5:04.
   // -----------------------------------------------------------------
   {
-    id: "aguanile",
-    title: "Aguanile (Advanced Afro-Cuban & Casino Masterclass)",
-    artist: "Marc Anthony",
-    style: "New York Salsa",
-    bpm: 105,
-    claveType: "2-3 Son/Rumba Clave",
-    difficultyLevel: "Advanced",
-    durationSeconds: 316,
-    youtubeVideoId: "b4rd9VfMhWM",
-    youtubeUrl: "https://www.youtube.com/watch?v=b4rd9VfMhWM",
-    spotifyOrYoutubeEmbedUrl:
-      "https://open.spotify.com/search/Marc%20Anthony%20Aguanile",
-    segments: [
+    "id": "aguanile",
+    "title": "Aguanile",
+    "artist": "Marc Anthony",
+    "style": "New York Salsa",
+    "bpm": 120,
+    "claveType": "2-3 Son / 6/8 Afro-Bembé Hybrid",
+    "difficultyLevel": "Advanced",
+    "durationSeconds": 316,
+    "youtubeVideoId": "b4rd9VfMhWM",
+    "youtubeUrl": "https://www.youtube.com/watch?v=b4rd9VfMhWM",
+    "spotifyOrYoutubeEmbedUrl": "https://open.spotify.com/search/Marc%20Anthony%20Aguanile",
+    "segments": [
       {
-        id: "ag-seg-1",
-        startTimeSeconds: 0,
-        endTimeSeconds: 26,
-        formattedRange: "0:00 - 0:26",
-        sectionName: "01. Ritual Batá & Oggún Invocation",
-        danceGear: "Afro-Cuban Orishas",
-        colorTheme: "amber",
-        timingMode: "Free / Polyrhythmic (6/8)",
-        handGesture: "Oggún Machete Slice & Water Flick",
-        musicalTrigger:
-          "Sacred Batá drums, chekeré, and Afro-Cuban Lucumí chant ('Aguanile Mai Mai, Oggún Arere') invoke Oggún and purify the floor before the 4/4 groove begins.",
-        leaderCue:
-          "Start apart in solo Suelta! Ground your knees and lead Oggún's symbolic machete-clearing strikes across the body combined with holy-water flicks.",
-        followerCue:
-          "Answer with grounded 6/8 Afro-Cuban torso undulations (ondulación) and expressive Yemayá/Oggún arm sweeps.",
-        commonMistakeWarning:
-          "Grabbing closed partner frame on 0:01 and forcing 1-2-3-5-6-7 steps over sacred 6/8 Batá ritual percussion.",
-        instrumentMapping: {
-          feet: "6/8 grounded Orisha earth-stomp",
-          hipsAndKnees: "Deep Afro-Cuban knee compression",
-          chestAndShoulders: "Oggún machete strike & chest contraction",
+        "id": "agua-seg-1",
+        "startTimeSeconds": 0,
+        "endTimeSeconds": 21.5,
+        "formattedRange": "0:00 - 0:21",
+        "sectionName": "Intro Fanfare & Rubato Cry (Aguanile)",
+        "danceGear": "Wait / Breathe",
+        "colorTheme": "slate",
+        "musicalTrigger": "Dramatic brass fanfare hits, timbal rolls, and Marc Anthony's sustained rubato cry 'Aguanile'",
+        "leaderCue": "Stand tall facing your partner, breathe with the brass swells, and wait for the percussion groove.",
+        "followerCue": "Hold a grounded posture, mirror the leader's stillness, and let the vocal cry build tension.",
+        "commonMistakeWarning": "Stepping into a basic during the rubato brass swells when there is no steady pulse yet.",
+        "recommendedMoveSlugs": [
+          "beg-mus-1",
+          "adv-pw-1"
+        ],
+        "timingMode": "Ambient (No Beat)",
+        "instrumentMapping": {
+          "feet": "Stillness on the floor",
+          "hipsAndKnees": "Soft knee release on timbal rolls",
+          "chestAndShoulders": "Breath expansion with brass swells"
         },
-        recommendedMoveSlugs: ["adv-sub-1", "adv-mus-1"],
+        "startsOnOne": false
       },
       {
-        id: "ag-seg-2",
-        startTimeSeconds: 26,
-        endTimeSeconds: 50,
-        formattedRange: "0:26 - 0:50",
-        sectionName: "02. The Sacred Liturgical Freeze",
-        danceGear: "Wait / Breathe",
-        colorTheme: "slate",
-        timingMode: "Ambient (No Beat)",
-        handGesture: "Palms-Up Prayer / Silencio Freeze",
-        musicalTrigger:
-          "At 0:27 percussion drops out completely as Marc Anthony delivers a dramatic, rubato liturgical cry ('¡Señor...!') suspended in open space.",
-        leaderCue:
-          "Signal 'Palms-Up Prayer / Silencio Freeze'! Hold a slow, theatrical suspension facing your partner and build eye-contact tension for the 0:51 drop.",
-        followerCue:
-          "Match the theatrical freeze with a slow, poised arm extension and breathing suspension until the clave ignites at 0:51.",
-        commonMistakeWarning:
-          "Fidgeting or stepping aimlessly during the dramatic rubato vocal prayer.",
-        instrumentMapping: {
-          feet: "Anchored split-weight stance",
-          hipsAndKnees: "Poised stillness",
-          chestAndShoulders: "Slow theatrical breath expansion",
+        "id": "agua-seg-2",
+        "startTimeSeconds": 21.5,
+        "endTimeSeconds": 48,
+        "formattedRange": "0:21 - 0:48",
+        "sectionName": "Afro-Cuban Prayer Invocation (Santo Dios)",
+        "danceGear": "Afro-Cuban Orishas",
+        "colorTheme": "amber",
+        "musicalTrigger": "Afro-Cuban conga and cowbell groove enters followed by 'Santo Dios, Santo Fuerte, Santo Inmortal'",
+        "leaderCue": "Dance solo Eleguá and Oggún Orisha movements, keeping knees bent and torso undulating.",
+        "followerCue": "Channel Yemayá and Ochún undulating ribcage waves, sweeping arms with the liturgical chant.",
+        "commonMistakeWarning": "Trying to force rigid 4/4 partnerwork turns over the ritualistic Afro-Cuban prayer.",
+        "recommendedMoveSlugs": [
+          "int-sub-1",
+          "adv-sub-1",
+          "adv-mus-1"
+        ],
+        "timingMode": "Free / Polyrhythmic (6/8)",
+        "instrumentMapping": {
+          "feet": "Conga open tones",
+          "hipsAndKnees": "Afro-bembé bell pulse",
+          "chestAndShoulders": "Vocal chant phrasing"
         },
-        recommendedMoveSlugs: ["beg-mus-1", "adv-mus-1"],
+        "bars": 14,
+        "startsOnOne": true
       },
       {
-        id: "ag-seg-3",
-        startTimeSeconds: 50,
-        endTimeSeconds: 98,
-        formattedRange: "0:50 - 1:38",
-        sectionName: "03. Clave & Trombone Ignition",
-        danceGear: "Casino (Flow)",
-        colorTheme: "emerald",
-        timingMode: "A Tiempo (On1)",
-        handGesture: "'70' Fingers + Neck Wrap — Setenta Complicado",
-        musicalTrigger:
-          "At 0:51 the piano montuno, upright bass tumbao, and roaring trombones lock into a driving 105 BPM 2-3 clave groove.",
-        leaderCue:
-          "Flash '70' fingers into neck-wrap signal! Connect on 0:51 and launch into high-velocity Setenta Complicado, Sombrero Doble, and circular Casino flow.",
-        followerCue:
-          "Frame up with active lat connection at 0:51, keeping tight axis control through fast Setenta and Sombrero combinations.",
-        commonMistakeWarning:
-          "Missing the 0:51 beat-1 trombone explosion or letting arms go limp at 105 BPM.",
-        instrumentMapping: {
-          feet: "Crisp 105 BPM circular Casino steps",
-          hipsAndKnees: "Driven Cuban motion on conga tumbao",
-          chestAndShoulders: "Connected rotational partner frame",
+        "id": "agua-seg-3",
+        "startTimeSeconds": 48,
+        "endTimeSeconds": 96,
+        "formattedRange": "0:48 - 1:36",
+        "sectionName": "Montuno I: Coro & Pregón (Aguanile, Mai Mai)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Full band explodes with coro 'Aguanile, aguanile, mai mai' and driving campana",
+        "leaderCue": "Launch into Dile Que No, Setenta Complicado, and Montana; keep steps compact for the fast tempo.",
+        "followerCue": "Take small, quick steps underneath your body and keep active hook-finger tension through rapid turns.",
+        "commonMistakeWarning": "Taking huge steps on the fast coro explosion and falling behind the campana.",
+        "recommendedMoveSlugs": [
+          "imp-pw-2",
+          "int-pw-1",
+          "adv-pw-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Bass tumbao and conga marcha",
+          "hipsAndKnees": "Piano montuno drive",
+          "chestAndShoulders": "Coro call-and-response"
         },
-        recommendedMoveSlugs: ["int-pw-1", "adv-pw-1"],
+        "bars": 25,
+        "startsOnOne": true,
+        "handGesture": "Montana"
       },
       {
-        id: "ag-seg-4",
-        startTimeSeconds: 98,
-        endTimeSeconds: 125,
-        formattedRange: "1:38 - 2:05",
-        sectionName: "04. First Trombone Mambo Attack",
-        danceGear: "Suelta / Shines",
-        colorTheme: "purple",
-        timingMode: "Contrapunto (On2 <-> On1)",
-        handGesture: "Double Chest Tap + 2 Fingers Down — Pasitos",
-        musicalTrigger:
-          "At 1:39 the brass section unleashes a ferocious, syncopated trombone Mambo riff while bongo and timbales trade artillery.",
-        leaderCue:
-          "Tap chest twice + point 2 fingers down for Pasitos! Break apart via Enchufla into fiery Suelta footwork, syncopated kicks, and Columbia touches.",
-        followerCue:
-          "Explode into solo shines—hit the trombone stabs with sharp Cuban body rolls, heel-toe syncopations, and shoulder shimmies.",
-        commonMistakeWarning:
-          "Staying locked in closed-hold partnerwork when the trombones demand solo Suelta footwork.",
-        instrumentMapping: {
-          feet: "Fast Columbia & Mambo syncopations",
-          hipsAndKnees: "Sharp rhythmic accents",
-          chestAndShoulders: "Trombone-hit shoulder shimmies",
+        "id": "agua-seg-4",
+        "startTimeSeconds": 96,
+        "endTimeSeconds": 127,
+        "formattedRange": "1:36 - 2:07",
+        "sectionName": "Mambo I: Blazing Trombone Descarga",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Fierce syncopated trombone mambo riffs take over after 'eso será una rareza'",
+        "leaderCue": "Release hold after Vacílala into fast suelta footwork, rumba columbia taps, and sharp brass hits.",
+        "followerCue": "Match the trombone stabs with syncopated suelta shines, sharp shoulder accents, and clean spins.",
+        "commonMistakeWarning": "Staying locked in closed partnerwork and ignoring the blazing 16-bar trombone mambo.",
+        "recommendedMoveSlugs": [
+          "imp-pw-3",
+          "adv-sub-1",
+          "adv-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Syncopated trombone riffs",
+          "hipsAndKnees": "Bongo bell drive",
+          "chestAndShoulders": "Sharp brass stabs"
         },
-        recommendedMoveSlugs: ["int-solo-1", "adv-solo-1"],
+        "bars": 16,
+        "startsOnOne": true,
+        "handGesture": "Pa'Fuera"
       },
       {
-        id: "ag-seg-5",
-        startTimeSeconds: 125,
-        endTimeSeconds: 166,
-        formattedRange: "2:05 - 2:46",
-        sectionName: "05. 'Tambores' Earth-Shaker Coro",
-        danceGear: "Casino (Flow)",
-        colorTheme: "emerald",
-        timingMode: "A Tiempo (On1)",
-        handGesture: "Air-Drum Fingers + Crazy 7 — Siete Loco",
-        musicalTrigger:
-          "The iconic 'Aguanile Mai Mai' coro returns at 2:06 with rolling conga/timbal fills ('¡Que suenen los tambores!').",
-        leaderCue:
-          "Signal Air-Drum Fingers into Crazy 7 ('Siete Loco')! Reconnect and lead intricate Coca-Cola, Siete Loco, and Montana turn patterns.",
-        followerCue:
-          "Spot cleanly through rapid traveling turns and accent the 'Mai Mai' vocal hits with hip and ribcage punctuation.",
-        commonMistakeWarning:
-          "Rushing the prep on count 7-8 during fast traveling turns.",
-        instrumentMapping: {
-          feet: "Quick pivot turns & circular travel",
-          hipsAndKnees: "Grounded axis stability",
-          chestAndShoulders: "Compact arm-knot transitions",
+        "id": "agua-seg-5",
+        "startTimeSeconds": 127,
+        "endTimeSeconds": 158.5,
+        "formattedRange": "2:07 - 2:38",
+        "sectionName": "Montuno II: Tambores Umaculli",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Coro 'Aguanile, aguanile, mai mai' returns followed by 'Ay tambores umaculli'",
+        "leaderCue": "Reconnect for Siete Loco and Dedo; hit a sharp freeze on the 'muchachas' break at 2:38.5.",
+        "followerCue": "Spot cleanly through Siete Loco and be ready to freeze instantly on the cymbal crash at 2:38.5.",
+        "commonMistakeWarning": "Plowing through the sudden band drop after 'rociar a las muchachas' at 2:38.5.",
+        "recommendedMoveSlugs": [
+          "int-pw-2",
+          "int-pw-3",
+          "adv-pw-2"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana and bass pulse",
+          "hipsAndKnees": "Conga tumbao",
+          "chestAndShoulders": "Pregón vocal phrasing"
         },
-        recommendedMoveSlugs: ["int-pw-2", "adv-pw-2"],
+        "bars": 16,
+        "startsOnOne": true,
+        "handGesture": "Siete Loco"
       },
       {
-        id: "ag-seg-6",
-        startTimeSeconds: 166,
-        endTimeSeconds: 226,
-        formattedRange: "2:46 - 3:46",
-        sectionName: "06. Staccato Brass Drops & Storytelling",
-        danceGear: "Rumba Guaguancó",
-        colorTheme: "red",
-        timingMode: "Contrapunto (On2 <-> On1)",
-        handGesture: "Flat Palm Horizontal Slice — Congelado Check",
-        musicalTrigger:
-          "Between 2:47 and 3:46, the arrangement alternates between sharp staccato brass drops, dramatic silences, and rumba percussion breaks.",
-        leaderCue:
-          "Use the Flat Palm Horizontal Slice ('Congelado') on every brass cutoff! Alternate between cheeky Rumba Guaguancó vacunao play and sudden musical freezes.",
-        followerCue:
-          "React instantly to the brass cutoffs with sharp freezes and playful Guaguancó skirt/hand defense on the percussion fills.",
-        commonMistakeWarning:
-          "Spinning blindly through the staccato horn stops instead of hitting the freezes.",
-        instrumentMapping: {
-          feet: "Precision check-steps & Rumba timing",
-          hipsAndKnees: "Instant stop-and-go compression",
-          chestAndShoulders: "Sharp staccato brass isolation",
+        "id": "agua-seg-6",
+        "startTimeSeconds": 158.5,
+        "endTimeSeconds": 167.5,
+        "formattedRange": "2:38 - 2:47",
+        "sectionName": "Bloque & Pure Percussion Drop",
+        "danceGear": "Rumba Guaguancó",
+        "colorTheme": "red",
+        "musicalTrigger": "Brass and bass drop out completely, leaving naked conga, chekere, and clave",
+        "leaderCue": "Break apart on the crash and Circle your partner with low Rumba Guaguancó steps and vacunao play.",
+        "followerCue": "Drop your center into grounded guaguancó motion, guarding and parrying the leader's vacunao.",
+        "commonMistakeWarning": "Continuing high-speed casino turn patterns when only naked drums and clave are playing.",
+        "recommendedMoveSlugs": [
+          "imp-solo-1",
+          "adv-mus-1"
+        ],
+        "timingMode": "Contrapunto (On2 <-> On1)",
+        "instrumentMapping": {
+          "feet": "Clave and low conga tones",
+          "hipsAndKnees": "Quinto slaps",
+          "chestAndShoulders": "Chekere pulse"
         },
-        recommendedMoveSlugs: ["int-sub-1", "adv-mus-1"],
+        "bars": 4,
+        "startsOnOne": true
       },
       {
-        id: "ag-seg-7",
-        startTimeSeconds: 226,
-        endTimeSeconds: 280,
-        formattedRange: "3:46 - 4:40",
-        sectionName: "07. Timbal, Campana & Montuno Climax",
-        danceGear: "Casino (Flow)",
-        colorTheme: "emerald",
-        timingMode: "A Tiempo (On1)",
-        handGesture: "Dedo (Index finger pointing straight up)",
-        musicalTrigger:
-          "At 3:47 the timbales, bongo bell, and screaming brass hit maximum overdrive in a relentless Montuno climax.",
-        leaderCue:
-          "Full-energy casino: Dedo, Siete and Setenta Complicado on the campana, with a quick shine on the timbal breaks.",
-        followerCue:
-          "Match the climax with fast, tight spins on your own axis and sharp styling on the brass hits.",
-        commonMistakeWarning:
-          "Treating this New York salsa climax like a timba despelote and dropping the partnerwork.",
-        instrumentMapping: {
-          feet: "Rapid timbal and bongo bell",
-          hipsAndKnees: "Driving Cuban motion on the campana",
-          chestAndShoulders: "Screaming brass hits",
+        "id": "agua-seg-7",
+        "startTimeSeconds": 167.5,
+        "endTimeSeconds": 205.5,
+        "formattedRange": "2:47 - 3:25",
+        "sectionName": "Liturgical Lament (Los Tres Clavos de la Cruz)",
+        "danceGear": "Afro-Cuban Orishas",
+        "colorTheme": "amber",
+        "musicalTrigger": "Marc Anthony sings the dramatic lament 'Ay que los tres clavos de la cruz' over sparse percussion",
+        "leaderCue": "Move with slow, theatrical Afro-Cuban Orisha gestures and grounded contratiempo steps as tension builds.",
+        "followerCue": "Use expressive arm styling and slow torso undulations, building intensity on 'yo tengo aguanile mai mai'.",
+        "commonMistakeWarning": "Rushing the slow, dramatic vocal lament instead of letting the theatrical suspense build.",
+        "recommendedMoveSlugs": [
+          "int-sub-1",
+          "adv-sub-1",
+          "imp-sub-1"
+        ],
+        "timingMode": "Free / Polyrhythmic (6/8)",
+        "instrumentMapping": {
+          "feet": "Sparse conga and clave pulse",
+          "hipsAndKnees": "Slow bongo rolls",
+          "chestAndShoulders": "Dramatic vocal lament"
         },
-        recommendedMoveSlugs: ["int-pw-2", "int-pw-3", "imp-pw-2"],
+        "bars": 19,
+        "startsOnOne": true
       },
       {
-        id: "ag-seg-8",
-        startTimeSeconds: 280,
-        endTimeSeconds: 316,
-        formattedRange: "4:40 - 5:16",
-        sectionName: "08. Final Ritual Coda & Big Finish",
-        danceGear: "Casino (Flow)",
-        colorTheme: "emerald",
-        timingMode: "A Tiempo (On1)",
-        handGesture: "Crossed Wrists Overhead — Fin de Fiesta Lunge",
-        musicalTrigger:
-          "From 4:41 to 5:16 the full orchestra races toward the final ritual brass crescendo and decisive cutoff.",
-        leaderCue:
-          "Signal Crossed Wrists Overhead ('Fin de Fiesta')! Lead a final Enchufla Doble into a dramatic, supported lunge/pose right on the final brass chord.",
-        followerCue:
-          "Maintain core engagement through the final spin and lock into a clean, theatrical finish line pose on the final cutoff.",
-        commonMistakeWarning:
-          "Dropping your frame early before the final brass chord finishes ringing.",
-        instrumentMapping: {
-          feet: "Anchored final lunge stance",
-          hipsAndKnees: "Supported counterbalance",
-          chestAndShoulders: "Triumphant theatrical finish line",
+        "id": "agua-seg-8",
+        "startTimeSeconds": 205.5,
+        "endTimeSeconds": 260,
+        "formattedRange": "3:25 - 4:20",
+        "sectionName": "Montuno III: Full Band Explosion (Un Judío a Caballo)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Full band crashes back in at top speed with coro 'Aguanile, aguanile, mai mai'",
+        "leaderCue": "Drive full-throttle casino with Coca-Cola, Bayamo, and El Uno; keep frame micro-modulated.",
+        "followerCue": "Maintain a light, responsive frame through fast 360 Coca-Cola turns and rapid direction changes.",
+        "commonMistakeWarning": "Losing posture or pulling on the arms during this long, high-speed 28-bar montuno.",
+        "recommendedMoveSlugs": [
+          "int-pw-4",
+          "int-pw-2",
+          "adv-pw-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Driving campana and bass",
+          "hipsAndKnees": "Piano montuno",
+          "chestAndShoulders": "Coro and pregón interplay"
         },
-        recommendedMoveSlugs: ["adv-pw-1", "adv-pw-2"],
+        "bars": 28,
+        "startsOnOne": true,
+        "handGesture": "Coca-Cola"
       },
-    ],
+      {
+        "id": "agua-seg-9",
+        "startTimeSeconds": 260,
+        "endTimeSeconds": 266.5,
+        "formattedRange": "4:20 - 4:26",
+        "sectionName": "Percussion Solo Break (¡Ataca Quintero!)",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Marc Anthony shouts '¡Ataca Quintero!' and timbales/congas launch a 4-bar solo",
+        "leaderCue": "Let go immediately on '¡Ataca Quintero!' for high-speed timbal shines and tembleque vibration.",
+        "followerCue": "Explode into fast solo footwork and rapid hip/shoulder shimmies matching Quintero's drum rolls.",
+        "commonMistakeWarning": "Missing the '¡Ataca Quintero!' call and staying in closed hold during the drum solo.",
+        "recommendedMoveSlugs": [
+          "adv-solo-1",
+          "adv-mus-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Rapid timbal and bongo rolls",
+          "hipsAndKnees": "Conga slaps",
+          "chestAndShoulders": "High-frequency tembleque"
+        },
+        "bars": 4,
+        "startsOnOne": true,
+        "handGesture": "Al Medio"
+      },
+      {
+        "id": "agua-seg-10",
+        "startTimeSeconds": 266.5,
+        "endTimeSeconds": 289,
+        "formattedRange": "4:26 - 4:49",
+        "sectionName": "Climax Coro & Brass Moñas",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Coro 'Aguanile, aguanile, mai mai' returns alternating with roaring brass moñas",
+        "leaderCue": "Pick up your partner for Sombrero and Setenta, accenting the roaring 4-bar brass moña in the middle.",
+        "followerCue": "Snap cleanly into Sombrero wraps and style with your free arm on the brass moña hits.",
+        "commonMistakeWarning": "Over-rotating turns when the conga break arrives suddenly at 4:49.",
+        "recommendedMoveSlugs": [
+          "imp-pw-4",
+          "imp-pw-1",
+          "adv-sub-2"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Bass and campana",
+          "hipsAndKnees": "Conga marcha",
+          "chestAndShoulders": "Roaring brass moñas"
+        },
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Sombrero"
+      },
+      {
+        "id": "agua-seg-11",
+        "startTimeSeconds": 289,
+        "endTimeSeconds": 296.5,
+        "formattedRange": "4:49 - 4:56",
+        "sectionName": "Final Conga Drop & Brass Pickup",
+        "danceGear": "Rumba Guaguancó",
+        "colorTheme": "red",
+        "musicalTrigger": "Band drops to solo congas for 2 bars before a roaring 2-bar brass pickup",
+        "leaderCue": "Drop into 2 bars of grounded guaguancó, then prep your partner on the brass pickup at 4:53.",
+        "followerCue": "Sink into your hips for the conga drop, then gather your frame on the brass pickup.",
+        "commonMistakeWarning": "Being caught off-guard when the brass re-enters mid-break at 4:53.",
+        "recommendedMoveSlugs": [
+          "imp-solo-1",
+          "adv-pw-2"
+        ],
+        "timingMode": "Contrapunto (On2 <-> On1)",
+        "instrumentMapping": {
+          "feet": "Conga tumbao",
+          "hipsAndKnees": "Clave pulse",
+          "chestAndShoulders": "Brass pickup crescendo"
+        },
+        "bars": 4,
+        "startsOnOne": true
+      },
+      {
+        "id": "agua-seg-12",
+        "startTimeSeconds": 296.5,
+        "endTimeSeconds": 304,
+        "formattedRange": "4:56 - 5:04",
+        "sectionName": "Final Coro (Aguanile, Mai Mai)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Last full coro 'Aguanile, aguanile, mai mai' enters at 4:56.5",
+        "leaderCue": "Execute one crisp Enchufla Doble into Exhíbela to set up the final coda.",
+        "followerCue": "Keep your turns tight and centered so you finish facing the leader for the coda.",
+        "commonMistakeWarning": "Starting a long 8-bar figure when this final coro is only 4 bars long.",
+        "recommendedMoveSlugs": [
+          "beg-pw-3",
+          "beg-pw-5"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Campana drive",
+          "hipsAndKnees": "Bass tumbao",
+          "chestAndShoulders": "Final coro chant"
+        },
+        "bars": 4,
+        "startsOnOne": true,
+        "handGesture": "Enchufla Doble"
+      },
+      {
+        "id": "agua-seg-13",
+        "startTimeSeconds": 304,
+        "endTimeSeconds": 316,
+        "formattedRange": "5:04 - 5:16",
+        "sectionName": "Final Mambo Coda & Big Finish",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "High-brass coda fanfare launches into the final climactic hit at 5:12.5",
+        "leaderCue": "Break into explosive Changó footwork and hit a dramatic final pose with your partner on the 5:12.5 crash.",
+        "followerCue": "Match the brass fanfare with fast shines and lock into a sharp final styling pose at 5:12.5.",
+        "commonMistakeWarning": "Dancing past the final brass hit at 5:12.5 during the audio decay.",
+        "recommendedMoveSlugs": [
+          "adv-sub-1",
+          "adv-solo-1"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "Syncopated timbal fills",
+          "hipsAndKnees": "Conga rolls",
+          "chestAndShoulders": "Final brass fanfare hits"
+        },
+        "bars": 6,
+        "startsOnOne": true
+      }
+    ]
   },
   // -----------------------------------------------------------------
   // "Esto Te Pone La Cabeza Mala" - Los Van Van (Juan Formell)
@@ -2230,183 +2368,359 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
   },
   // -----------------------------------------------------------------
   // "537 C.U.B.A." - Orishas
-  // Beginner • 96 BPM • 2-3 Son Clave • 265s
+  // Cuban Hip-Hop / Fusion • Improver • 84 BPM • 2-3 Son Clave • 265s
   // Video ID: dAHVvpdbsps • timings from Argus
+  // Gemini 4 Argon in AI Studio 2026-10-31 (old map: 7 sections; 3 of 12 new starts near it). Ear-check: percussion entry 0:08.5, the 4-bar sung bridge 2:17, coro after 'jamás, jamás' 3:37.
   // -----------------------------------------------------------------
   {
     "id": "537-cuba",
     "title": "537 C.U.B.A.",
     "artist": "Orishas",
     "style": "Cuban Hip-Hop / Fusion",
-    "bpm": 96,
+    "bpm": 84,
     "claveType": "2-3 Son Clave",
-    "difficultyLevel": "Beginner",
+    "difficultyLevel": "Improver",
     "durationSeconds": 265,
     "youtubeVideoId": "dAHVvpdbsps",
     "youtubeUrl": "https://www.youtube.com/watch?v=dAHVvpdbsps",
     "segments": [
       {
-        "id": "c537-seg-1",
+        "id": "537-seg-1",
         "startTimeSeconds": 0,
-        "endTimeSeconds": 28,
-        "formattedRange": "0:00 - 0:28",
-        "sectionName": "Compay Segundo 'Chan Chan' Tres Guitar Intro",
-        "danceGear": "Son Cubano",
-        "colorTheme": "blue",
-        "musicalTrigger": "Acoustic tres guitar plays the 'Chan Chan' intro.",
-        "leaderCue": "Start in classic Cuban Son frame; step smoothly on Contratiempo (2-3-4, 6-7-8) to honor the acoustic tres guitar.",
-        "followerCue": "Glide across the floor with zero bounce, extending through the back knee.",
-        "commonMistakeWarning": "Avoid stomping heavily on beat 1 during the delicate acoustic guitar intro.",
+        "endTimeSeconds": 8.5,
+        "formattedRange": "0:00 - 0:08",
+        "sectionName": "Intro: Sub-Bass Tumbao",
+        "danceGear": "Wait / Breathe",
+        "colorTheme": "slate",
+        "musicalTrigger": "Deep solo bass tumbao plays the Chan Chan progression alone",
+        "leaderCue": "Stand relaxed with your partner, feel the slow bass pulse and wait for the percussion.",
+        "followerCue": "Breathe, soften your knees to the sub-bass and wait for the clave before stepping.",
+        "commonMistakeWarning": "Starting full partnerwork immediately on the bare bassline before the percussion enters.",
         "recommendedMoveSlugs": [
-          "imp-sub-1",
-          "imp-mus-1"
+          "beg-mus-1"
         ],
-        "timingMode": "Contratiempo (On2)",
-        "handGesture": "2-Finger 'Son' Elegance Gesture (Slow Contratiempo)",
+        "timingMode": "Ambient (No Beat)",
         "instrumentMapping": {
-          "feet": "Slow gliding Son step (accenting beats 2 & 4)",
-          "hipsAndKnees": "Subtle, delayed figure-8 on beats 2-3-4",
-          "chestAndShoulders": "Aristocratic, upright Son posture"
-        }
+          "feet": "bass tumbao pulse",
+          "hipsAndKnees": "sub-bass resonance",
+          "chestAndShoulders": "steady breathing"
+        },
+        "bars": 3,
+        "startsOnOne": true
       },
       {
-        "id": "c537-seg-2",
-        "startTimeSeconds": 28,
-        "endTimeSeconds": 58,
-        "formattedRange": "0:28 - 0:58",
-        "sectionName": "First Rap Verse Drop ('De Cuba lo que impuso...')",
-        "danceGear": "Casino (Smooth)",
-        "colorTheme": "emerald",
-        "musicalTrigger": "Hip-hop beat drops at 0:28 under the first rap verse.",
-        "leaderCue": "When the beat drops at 0:28, blend crisp Casino turns (Dile Que No, Cortico) with a relaxed, street-style shoulder groove.",
-        "followerCue": "Add subtle head-nod and ribcage isolation matching the staccato rap cadence.",
-        "commonMistakeWarning": "Avoid dancing stiffly—let the hip-hop drum kick soften your knees.",
-        "recommendedMoveSlugs": [
-          "beg-pw-2",
-          "beg-pw-1"
-        ],
-        "handGesture": "Fist Nod / Urban Bounce (Callejero Groove)",
-        "instrumentMapping": {
-          "feet": "Grounded Casino with urban weight-drop on 1 & 5",
-          "hipsAndKnees": "Heavy hip-hop meets Rumba groove",
-          "chestAndShoulders": "Street-style urban Cuban chest pulse"
-        }
-      },
-      {
-        "id": "c537-seg-3",
-        "startTimeSeconds": 58,
-        "endTimeSeconds": 100,
-        "formattedRange": "0:58 - 1:40",
-        "sectionName": "'De Alto Cedro Voy Para Marcané' Melodic Chorus",
-        "danceGear": "Casino (Smooth)",
-        "colorTheme": "emerald",
-        "musicalTrigger": "Sung chorus: 'De Alto Cedro voy para Marcané'.",
-        "leaderCue": "Contrast the punchy rap verse by opening into long, sweeping Paseo, Siete, and Coca-Cola turns on the sung chorus.",
-        "followerCue": "Extend the free arm gracefully and breathe through the long vocal phrases.",
-        "commonMistakeWarning": "Avoid chopping up the smooth sung chorus with jerky stop-and-go leads.",
-        "recommendedMoveSlugs": [
-          "int-pw-3",
-          "int-pw-4",
-          "imp-pw-6"
-        ],
-        "handGesture": "Open Arm Sweep (Paseo de Son / Exhibela)",
-        "instrumentMapping": {
-          "feet": "Wide, sweeping circular Paseo & Siete",
-          "hipsAndKnees": "Deep, lyrical Cuban sway",
-          "chestAndShoulders": "Expansive, nostalgic upper body"
-        }
-      },
-      {
-        "id": "c537-seg-4",
-        "startTimeSeconds": 100,
-        "endTimeSeconds": 150,
-        "formattedRange": "1:40 - 2:30",
-        "sectionName": "Nostalgia Rap Verse ('Extraño mi tierra...')",
+        "id": "537-seg-2",
+        "startTimeSeconds": 8.5,
+        "endTimeSeconds": 23,
+        "formattedRange": "0:08 - 0:23",
+        "sectionName": "Intro Groove: Clave, Tres & Trumpet",
         "danceGear": "Suelta / Shines",
         "colorTheme": "purple",
-        "musicalTrigger": "Second rap verse: 'Extraño mi tierra...'.",
-        "leaderCue": "Use the rapid lyrical flow for close-range Cortico (short-range chest/hip play) and conversational partner shines.",
-        "followerCue": "Play with rhythm variations—double-time foot taps contrasting slow body rolls.",
-        "commonMistakeWarning": "Avoid doing repetitive high-speed spins that ignore the rap pocket.",
+        "musicalTrigger": "Maracas, 2-3 son clave, bongo and muted trumpet enter on the groove",
+        "leaderCue": "Warm up apart with Paso Básico and Lateral steps, adding a relaxed hip-hop shoulder bounce.",
+        "followerCue": "Dance solo basic and side steps facing your leader, letting the maracas guide your hips.",
+        "commonMistakeWarning": "Rushing the slow 84 BPM groove instead of letting each step sink into the floor.",
         "recommendedMoveSlugs": [
+          "beg-solo-1",
+          "imp-mus-1"
+        ],
+        "timingMode": "Contratiempo (On2) or Smooth On1",
+        "instrumentMapping": {
+          "feet": "conga and bongo pulse",
+          "hipsAndKnees": "maracas shaker",
+          "chestAndShoulders": "muted trumpet line"
+        },
+        "bars": 5,
+        "startsOnOne": true
+      },
+      {
+        "id": "537-seg-3",
+        "startTimeSeconds": 23,
+        "endTimeSeconds": 34,
+        "formattedRange": "0:23 - 0:34",
+        "sectionName": "Coro 1: Vengo de donde hay un río",
+        "danceGear": "Son Cubano",
+        "colorTheme": "blue",
+        "musicalTrigger": "Chorus sings 'Vengo de donde hay un río, tabaco y cañaveral'",
+        "leaderCue": "Take closed hold for smooth Son basic and a slow Dile Que No to open up.",
+        "followerCue": "Connect into a soft closed frame, stepping small and smooth underneath your body.",
+        "commonMistakeWarning": "Taking huge steps during the intimate Chan Chan chorus melody.",
+        "recommendedMoveSlugs": [
+          "imp-sub-1",
+          "beg-pw-2"
+        ],
+        "timingMode": "Contratiempo (On2) or Smooth On1",
+        "instrumentMapping": {
+          "feet": "bass tumbao and conga",
+          "hipsAndKnees": "son clave",
+          "chestAndShoulders": "sung coro melody"
+        },
+        "bars": 4,
+        "startsOnOne": true,
+        "handGesture": "Dile Que No"
+      },
+      {
+        "id": "537-seg-4",
+        "startTimeSeconds": 34,
+        "endTimeSeconds": 57,
+        "formattedRange": "0:34 - 0:57",
+        "sectionName": "Rap 1: Soy de Cuba lo que impuso",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Rapper enters with 'Soy de Cuba lo que impuso y que se pega'",
+        "leaderCue": "Dance grounded Guapea, Exhíbela and Enchufla with a laid-back Havana street-flow bounce.",
+        "followerCue": "Keep your turns unhurried on Exhíbela and add subtle hip-hop ribcage groove in Guapea.",
+        "commonMistakeWarning": "Pulling arms forcefully when the rap flow is conversational and grounded.",
+        "recommendedMoveSlugs": [
+          "beg-pw-1",
+          "beg-pw-5",
+          "beg-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "hip-hop kick and snare",
+          "hipsAndKnees": "bass tumbao",
+          "chestAndShoulders": "rap vocal cadence"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Exhíbela"
+      },
+      {
+        "id": "537-seg-5",
+        "startTimeSeconds": 57,
+        "endTimeSeconds": 80,
+        "formattedRange": "0:57 - 1:20",
+        "sectionName": "Tema Cantado: Allá lejos donde el sol calienta",
+        "danceGear": "Son Cubano",
+        "colorTheme": "blue",
+        "musicalTrigger": "Lead singer enters high and lyrical with 'Allá lejos, donde el sol calienta'",
+        "leaderCue": "Bring your partner closer for Paséala and Prima, letting the nostalgic vocal breathe.",
+        "followerCue": "Extend your free arm gracefully on Prima and glide smoothly through the Paséala walks.",
+        "commonMistakeWarning": "Ignoring the switch from rap to lyrical son singing and keeping stiff mechanics.",
+        "recommendedMoveSlugs": [
+          "imp-pw-6",
+          "beg-pw-4",
+          "imp-sub-1"
+        ],
+        "timingMode": "Contratiempo (On2) or Smooth On1",
+        "instrumentMapping": {
+          "feet": "bongo and conga tumbao",
+          "hipsAndKnees": "acoustic tres guitar",
+          "chestAndShoulders": "lead vocal melody"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Prima"
+      },
+      {
+        "id": "537-seg-6",
+        "startTimeSeconds": 80,
+        "endTimeSeconds": 103,
+        "formattedRange": "1:20 - 1:43",
+        "sectionName": "Coro 2: Vengo de donde hay un río (Doble)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Chorus returns with 'Vengo de donde hay un río' for two full cycles",
+        "leaderCue": "Flow into Setenta and Sombrero, keeping a circular paseo around each other.",
+        "followerCue": "Maintain soft hook-finger tension through Setenta and style the Sombrero wrap.",
+        "commonMistakeWarning": "Cutting the circular walk short instead of using the full slow bar.",
+        "recommendedMoveSlugs": [
+          "imp-pw-1",
+          "imp-pw-4"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "conga and bassbeat",
+          "hipsAndKnees": "maracas and clave",
+          "chestAndShoulders": "coro harmonies"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Setenta"
+      },
+      {
+        "id": "537-seg-7",
+        "startTimeSeconds": 103,
+        "endTimeSeconds": 137,
+        "formattedRange": "1:43 - 2:17",
+        "sectionName": "Rap 2: Extraño mi tierra querida",
+        "danceGear": "Casino (Smooth)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Second rap verse begins: 'Extraño mi tierra querida, hablar de ella ni lo intentes'",
+        "leaderCue": "Combine Vacílala, Kentucky and Dile Que No, giving your partner space to style.",
+        "followerCue": "Spot cleanly on Vacílala and use the extra time in the slow tempo for body movement.",
+        "commonMistakeWarning": "Over-leading Vacílala with a push instead of a clear, light wrist prep.",
+        "recommendedMoveSlugs": [
+          "imp-pw-3",
+          "imp-pw-5",
+          "beg-pw-2"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "boom-bap drum beat",
+          "hipsAndKnees": "bassline groove",
+          "chestAndShoulders": "rap rhythm and flow"
+        },
+        "bars": 12,
+        "startsOnOne": true,
+        "handGesture": "Vacílala"
+      },
+      {
+        "id": "537-seg-8",
+        "startTimeSeconds": 137,
+        "endTimeSeconds": 149,
+        "formattedRange": "2:17 - 2:29",
+        "sectionName": "Puente Cantado: Me arrancaré el corazón",
+        "danceGear": "Son Cubano",
+        "colorTheme": "blue",
+        "musicalTrigger": "Melodic bridge enters: 'Me arrancaré el corazón y esperaré mi regreso'",
+        "leaderCue": "Reconnect in close hold for four slow bars of Son basic and Paséala.",
+        "followerCue": "Sink into your knees and match your leader's chest frame for a lyrical four-bar pause.",
+        "commonMistakeWarning": "Starting a long complicated turn pattern right as this short 4-bar bridge ends.",
+        "recommendedMoveSlugs": [
+          "imp-sub-1",
+          "imp-pw-6"
+        ],
+        "timingMode": "Contratiempo (On2) or Smooth On1",
+        "instrumentMapping": {
+          "feet": "soft conga pulse",
+          "hipsAndKnees": "bass tumbao",
+          "chestAndShoulders": "emotional vocal line"
+        },
+        "bars": 4,
+        "startsOnOne": true,
+        "handGesture": "Paséala"
+      },
+      {
+        "id": "537-seg-9",
+        "startTimeSeconds": 149,
+        "endTimeSeconds": 171.5,
+        "formattedRange": "2:29 - 2:51",
+        "sectionName": "Coro 3: Vengo de donde hay un río",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Chorus swells back in with 'Vengo de donde hay un río'",
+        "leaderCue": "Lead Setenta Complicado into Enchufla Doble, riding the chorus momentum.",
+        "followerCue": "Keep your elbow soft on the overhead checks in Setenta Complicado.",
+        "commonMistakeWarning": "Losing posture during the arm wraps of Setenta Complicado.",
+        "recommendedMoveSlugs": [
+          "imp-pw-2",
+          "beg-pw-3"
+        ],
+        "timingMode": "A Tiempo (On1)",
+        "instrumentMapping": {
+          "feet": "percussion and bass",
+          "hipsAndKnees": "2-3 son clave",
+          "chestAndShoulders": "coro vocals"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Setenta Complicado"
+      },
+      {
+        "id": "537-seg-10",
+        "startTimeSeconds": 171.5,
+        "endTimeSeconds": 194.5,
+        "formattedRange": "2:51 - 3:14",
+        "sectionName": "Rap 3A: Barrios de La Habana",
+        "danceGear": "Suelta / Shines",
+        "colorTheme": "purple",
+        "musicalTrigger": "Fast neighborhood roll-call rap: 'Cayo Hueso salió por Buenavista, Miramar, Alamar'",
+        "leaderCue": "Release after Vacílala con la Mano to trade solo footwork and Cuban hip-hop grooves.",
+        "followerCue": "Play with solo footwork, shoulder isolations and rumba-flavored steps facing your leader.",
+        "commonMistakeWarning": "Looking down at the floor instead of engaging with your partner during shines.",
+        "recommendedMoveSlugs": [
+          "imp-pw-3",
           "beg-solo-1",
           "imp-solo-1"
         ],
-        "handGesture": "Hand Over Heart + 2 Fingers Down (Pasitos Callejeros)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Syncopated tap-steps, Guaguancó slides & body waves",
-          "hipsAndKnees": "Controlled rhythmic snaps",
-          "chestAndShoulders": "Sharp isolations hitting the lyric rhymes"
-        }
+          "feet": "snare and conga slaps",
+          "hipsAndKnees": "bass tumbao",
+          "chestAndShoulders": "rapid-fire rap delivery"
+        },
+        "bars": 8,
+        "startsOnOne": true
       },
       {
-        "id": "c537-seg-5",
-        "startTimeSeconds": 150,
-        "endTimeSeconds": 171,
-        "formattedRange": "2:30 - 2:51",
-        "sectionName": "Second Marcané / Mayarí Chorus",
+        "id": "537-seg-11",
+        "startTimeSeconds": 194.5,
+        "endTimeSeconds": 217,
+        "formattedRange": "3:14 - 3:37",
+        "sectionName": "Rap 3B: Soy Yoruba / Jamás, Jamás",
         "danceGear": "Casino (Smooth)",
         "colorTheme": "emerald",
-        "musicalTrigger": "The Marcané / Mayarí chorus returns.",
-        "leaderCue": "Lead a slow, stylish Enrosque or Rodeo (2:30–2:47), letting the follower walk around you smoothly.",
-        "followerCue": "Maintain continuous circular momentum and connection through the fingertips.",
-        "commonMistakeWarning": "Avoid rushing the exit out of the Rodeo.",
+        "musicalTrigger": "Sung backing chants and muted trumpet join the rap on 'Cambio si le soy Yoruba'",
+        "leaderCue": "Pick up your partner with Dile Que No into Sombrero and pause on 'jamás, jamás!'",
+        "followerCue": "Flow back into partner hold and hit a clean freeze with attitude on 'jamás, jamás!'",
+        "commonMistakeWarning": "Blowing past the dramatic vocal accent 'jamás, jamás' at the end of the verse.",
         "recommendedMoveSlugs": [
-          "adv-pw-1",
-          "beg-pw-3"
+          "beg-pw-2",
+          "imp-pw-4"
         ],
-        "handGesture": "Palm-to-Palm Slide (Caricia / Enrosque)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Slow Enrosque (corkscrew pivot) & Rodeo",
-          "hipsAndKnees": "Liquid figure-8 continuity",
-          "chestAndShoulders": "Smooth torso rotation"
-        }
+          "feet": "kick drum and conga",
+          "hipsAndKnees": "bassline",
+          "chestAndShoulders": "trumpet counter-melody and rap"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Sombrero"
       },
       {
-        "id": "c537-seg-6",
-        "startTimeSeconds": 171,
-        "endTimeSeconds": 220,
-        "formattedRange": "2:51 - 3:40",
-        "sectionName": "Havana Neighborhood Roll-Call ('Habana Vieja, Malecón')",
-        "danceGear": "Rumba Guaguancó",
-        "colorTheme": "amber",
-        "musicalTrigger": "Roll-call of Havana neighbourhoods, 'calor y rezos yoruba' at 3:09 and the 9 o'clock cannon at 3:33.",
-        "leaderCue": "When lyrics call out 'calor y rezos yoruba' (3:09) and the 9 o'clock cannon (3:33), infuse Afro-Cuban Rumba and Orisha chest movement.",
-        "followerCue": "Echo the Afro-Cuban pride with grounded footwork and expressive torso waves.",
-        "commonMistakeWarning": "Avoid missing the emotional peak of the Havana neighborhood tribute.",
+        "id": "537-seg-12",
+        "startTimeSeconds": 217,
+        "endTimeSeconds": 240,
+        "formattedRange": "3:37 - 4:00",
+        "sectionName": "Coro 4: Vengo de donde hay un río (Con Trompeta)",
+        "danceGear": "Casino (Flow)",
+        "colorTheme": "emerald",
+        "musicalTrigger": "Coro returns after 'jamás, jamás' with soaring muted trumpet solos",
+        "leaderCue": "Dance full-flow Setenta, Exhíbela and Kentucky, matching the trumpet's energy.",
+        "followerCue": "Add expressive arm styling and smooth hip motion to echo the trumpet solo.",
+        "commonMistakeWarning": "Getting sloppy with footwork near the end of the track.",
         "recommendedMoveSlugs": [
-          "int-sub-1",
-          "imp-solo-1"
+          "imp-pw-1",
+          "beg-pw-5",
+          "imp-pw-5"
         ],
-        "handGesture": "Salute to Forehead ('Malecón / Cañonazo de las 9' 3:33)",
+        "timingMode": "A Tiempo (On1)",
         "instrumentMapping": {
-          "feet": "Earthy, grounded Rumba & Son footwork",
-          "hipsAndKnees": "Deep Rumba & Orisha-inflected movement",
-          "chestAndShoulders": "Proud, grounded Afro-Cuban Yoruba posture (3:09)"
-        }
+          "feet": "conga and bongo drive",
+          "hipsAndKnees": "bass and maracas",
+          "chestAndShoulders": "muted trumpet solo and coro"
+        },
+        "bars": 8,
+        "startsOnOne": true,
+        "handGesture": "Kentucky"
       },
       {
-        "id": "c537-seg-7",
-        "startTimeSeconds": 220,
+        "id": "537-seg-13",
+        "startTimeSeconds": 240,
         "endTimeSeconds": 265,
-        "formattedRange": "3:40 - 4:25",
-        "sectionName": "Final Marcané Chorus & Tres Guitar Fade",
+        "formattedRange": "4:00 - 4:25",
+        "sectionName": "Outro: Coro Final & Fade-Out",
         "danceGear": "Son Cubano",
         "colorTheme": "blue",
-        "musicalTrigger": "Last Marcané chorus, then the acoustic tres guitar fades out.",
-        "leaderCue": "Gradually wind down turn complexity from 3:40 to 4:00, finishing with a slow, musical Caída (Cuban dip) on the final acoustic guitar notes.",
-        "followerCue": "Support your own weight in the final dip and hold the closing frame.",
-        "commonMistakeWarning": "Avoid ending a cool-down acoustic outro with an aggressive fast spin.",
+        "musicalTrigger": "Final chorus cycles begin to fade out gradually with trumpet ad-libs",
+        "leaderCue": "Wind down into close-hold Son basic and Paséala, slowing to a gentle finish as it fades.",
+        "followerCue": "Make your steps smaller and softer as the volume fades, finishing in a calm embrace.",
+        "commonMistakeWarning": "Launching high-energy turns while the music is fading to silence.",
         "recommendedMoveSlugs": [
           "imp-sub-1",
-          "adv-pw-1"
+          "imp-pw-6"
         ],
-        "handGesture": "Slow Hand Lowering (Silencio / Final Dip)",
+        "timingMode": "Contratiempo (On2) or Smooth On1",
         "instrumentMapping": {
-          "feet": "Slow final Paseo into a classic Cuban dip",
-          "hipsAndKnees": "Softening into stillness",
-          "chestAndShoulders": "Calm, decelerating breath"
-        }
+          "feet": "fading bass tumbao",
+          "hipsAndKnees": "maracas and clave",
+          "chestAndShoulders": "fading trumpet and coro"
+        },
+        "bars": 9,
+        "startsOnOne": true
       }
     ]
   },

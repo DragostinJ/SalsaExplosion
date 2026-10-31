@@ -1,4 +1,7 @@
 import { test, expect } from "@playwright/test";
+import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
+import { linkedStartSeconds } from "@/lib/music/section-link";
+import { formatSongTime } from "@/lib/music/song-timing";
 
 test.describe("Practice Player Tools & Engagement E2E Suite", () => {
   test.beforeEach(async ({ page }) => {
@@ -39,24 +42,35 @@ test.describe("Practice Player Tools & Engagement E2E Suite", () => {
     }
   });
 
-  // Task 1.b: Section links on /music/tremenda-pinta?section=tp-seg-6
-  test("1b. /music/tremenda-pinta?section=tp-seg-6 shows NOW card as Section preview and iframe start=173", async ({
+  // Task 1.b: Section links on /music/tremenda-pinta?section=<despelote-id>
+  test("1b. /music/tremenda-pinta section link shows NOW card as Section preview and iframe start time", async ({
     page,
   }) => {
-    await page.goto("/music/tremenda-pinta?section=tp-seg-6", { waitUntil: "domcontentloaded" });
+    const tremendaPinta = TIMBA_SONG_ANATOMY_DATA.find((s) => s.id === "tremenda-pinta");
+    expect(tremendaPinta).toBeDefined();
+    const despeloteIndex = tremendaPinta!.segments.findIndex(
+      (seg) => seg.danceGear === "Despelote / Reparto" || seg.sectionName.toLowerCase().includes("despelote")
+    );
+    expect(despeloteIndex).toBeGreaterThan(0);
+    const targetSegment = tremendaPinta!.segments[despeloteIndex];
+    const expectedStartParam = linkedStartSeconds(tremendaPinta!.segments, despeloteIndex);
+
+    await page.goto(`/music/${tremendaPinta!.id}?section=${targetSegment.id}`, {
+      waitUntil: "domcontentloaded",
+    });
 
     // The NOW card should indicate "Section preview"
     const nowSection = page.locator('section[aria-label="Section preview"]');
     await expect(nowSection).toBeVisible();
 
-    // Verify section name "Despelote Breakdown" is visible
-    await expect(page.getByText("Despelote Breakdown").first()).toBeVisible();
+    // Verify section name is visible
+    await expect(page.getByText(targetSegment.sectionName).first()).toBeVisible();
 
-    // Verify YouTube iframe src contains start=173
+    // Verify YouTube iframe src contains the dynamically computed start parameter
     const iframe = page.locator("iframe");
     await expect(iframe).toBeAttached();
     const src = await iframe.getAttribute("src");
-    expect(src).toContain("start=173");
+    expect(src).toContain(`start=${expectedStartParam}`);
   });
 
   // Task 1.c: Share button in details sheet
@@ -105,25 +119,35 @@ test.describe("Practice Player Tools & Engagement E2E Suite", () => {
       localStorage.clear();
     });
 
-    await page.goto("/music/me-dicen-cuba?calibrate=1", { waitUntil: "domcontentloaded" });
+    const meDicenCuba = TIMBA_SONG_ANATOMY_DATA.find((s) => s.id === "me-dicen-cuba");
+    expect(meDicenCuba).toBeDefined();
+    // Calibration selects index 1 by default (second section)
+    const sectionIndex = 1;
+    const initialSegment = meDicenCuba!.segments[sectionIndex];
+    const initialStart = initialSegment.startTimeSeconds;
+    const initialFormatted = formatSongTime(initialStart, true);
+    const nudgedFormatted = formatSongTime(initialStart + 1, true);
+    const nudgedMapLabel = `at ${formatSongTime(initialStart + 1)}`;
+
+    await page.goto(`/music/${meDicenCuba!.id}?calibrate=1`, { waitUntil: "domcontentloaded" });
 
     const nudgeContainer = page.locator('[data-testid="calibration-nudge"]');
     await expect(nudgeContainer).toBeVisible();
 
-    // Authored start of section 2 is 0:18.0
-    await expect(nudgeContainer.getByText("0:18.0")).toBeVisible();
+    // Authored start of section 2
+    await expect(nudgeContainer.getByText(initialFormatted)).toBeVisible();
 
     // Click "+1s" nudge button
     const plusOneButton = nudgeContainer.getByRole("button", { name: "+1s" });
     await expect(plusOneButton).toBeVisible();
     await plusOneButton.click();
 
-    // Nudge row updates to 0:19.0 (+1.0s)
-    await expect(nudgeContainer.getByText("0:19.0")).toBeVisible();
+    // Nudge row updates to new time (+1.0s)
+    await expect(nudgeContainer.getByText(nudgedFormatted)).toBeVisible();
     await expect(nudgeContainer.getByText("(+1.0s)")).toBeVisible();
 
-    // Song map button for that section now announces "at 0:19"
-    const sectionMapButton = page.locator('button[aria-label*="at 0:19"]');
+    // Song map button for that section now announces the nudged start time
+    const sectionMapButton = page.locator(`button[aria-label*="${nudgedMapLabel}"]`);
     await expect(sectionMapButton.first()).toBeVisible();
 
     // Click "Undo all changes" button
@@ -131,34 +155,49 @@ test.describe("Practice Player Tools & Engagement E2E Suite", () => {
     await expect(undoButton).toBeVisible();
     await undoButton.click();
 
-    // Restores original 0:18.0
-    await expect(nudgeContainer.getByText("0:18.0")).toBeVisible();
+    // Restores original start time
+    await expect(nudgeContainer.getByText(initialFormatted)).toBeVisible();
   });
 
   // Task 1.e: Without ?calibrate=1, ignores leftover calibration in localStorage
   test("1e. Without ?calibrate=1, leftover overrides in localStorage are ignored", async ({
     page,
   }) => {
-    // Seed localStorage with a mock calibration override
-    await page.addInitScript(() => {
-      localStorage.setItem(
-        "ritmoflow:calibration:me-dicen-cuba",
-        JSON.stringify({ "mdc-seg-2": 25 })
-      );
-    });
+    const meDicenCuba = TIMBA_SONG_ANATOMY_DATA.find((s) => s.id === "me-dicen-cuba");
+    expect(meDicenCuba).toBeDefined();
+    const sectionIndex = 1;
+    const segment = meDicenCuba!.segments[sectionIndex];
+    const authoredMapLabel = `at ${formatSongTime(segment.startTimeSeconds)}`;
+    const syntheticOverrideTime = segment.startTimeSeconds + 7;
+    const overriddenMapLabel = `at ${formatSongTime(syntheticOverrideTime)}`;
 
-    await page.goto("/music/me-dicen-cuba", { waitUntil: "domcontentloaded" });
+    // Seed localStorage with a mock calibration override
+    await page.addInitScript(
+      ({ songId, segId, overrideTime }) => {
+        localStorage.setItem(
+          `ritmoflow:calibration:${songId}`,
+          JSON.stringify({ [segId]: overrideTime })
+        );
+      },
+      {
+        songId: meDicenCuba!.id,
+        segId: segment.id,
+        overrideTime: syntheticOverrideTime,
+      }
+    );
+
+    await page.goto(`/music/${meDicenCuba!.id}`, { waitUntil: "domcontentloaded" });
 
     // The calibration panel should not be rendered
     const nudgeContainer = page.locator('[data-testid="calibration-nudge"]');
     await expect(nudgeContainer).toHaveCount(0);
 
-    // The map button for section 2 must still reflect authored 0:18 (not 0:25)
-    const sectionMapButton = page.locator('button[aria-label*="at 0:18"]');
+    // The map button for section 2 must still reflect authored start time (not synthetic override)
+    const sectionMapButton = page.locator(`button[aria-label*="${authoredMapLabel}"]`);
     await expect(sectionMapButton.first()).toBeVisible();
 
-    const overriddenMapButton = page.locator('button[aria-label*="at 0:25"]');
-    await expect(overriddenMapButton).toHaveCount(0);
+    const overriddenButton = page.locator(`button[aria-label*="${overriddenMapLabel}"]`);
+    await expect(overriddenButton).toHaveCount(0);
   });
 
   // Task 1.f: API route security tests (/api/cron/daily and /api/email/unsubscribe)
@@ -199,3 +238,4 @@ test.describe("Practice Player Tools & Engagement E2E Suite", () => {
     expect(page.url()).toMatch(/sign-in/);
   });
 });
+

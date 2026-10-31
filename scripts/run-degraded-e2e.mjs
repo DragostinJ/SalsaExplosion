@@ -6,7 +6,6 @@ const childEnv = {
   ...process.env,
   DATABASE_URL: unreachableDbUrl,
   DIRECT_URL: unreachableDbUrl,
-  NODE_TLS_REJECT_UNAUTHORIZED: "0",
 };
 
 function runCommand(command, args) {

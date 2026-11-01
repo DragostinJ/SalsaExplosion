@@ -1,196 +1,132 @@
-# Salsa Explosion (RitmoFlow) 🇨🇺
-### Senior Engineering Case Study: Multi-Tenant Dance Academy Operating System & Real-Time Polyrhythmic Audio Engine
+# RitmoFlow · Salsa Explosion
 
-[![CI Pipeline](https://github.com/DragostinJ/SalsaExplosion/actions/workflows/ci.yml/badge.svg)](https://github.com/DragostinJ/SalsaExplosion/actions/workflows/ci.yml)
-[![Next.js 16](https://img.shields.io/badge/Next.js-16.4.1_(Turbopack)-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript 5](https://img.shields.io/badge/TypeScript-5.0_(Strict,_0_any)-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS 4](https://img.shields.io/badge/Tailwind-CSS_v4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
-[![Prisma ORM](https://img.shields.io/badge/Prisma-6.x-2D3748?logo=prisma)](https://www.prisma.io/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-336791?logo=postgresql)](https://supabase.com/)
-[![Clerk Auth](https://img.shields.io/badge/Auth-Clerk_v7-6C47FF?logo=clerk)](https://clerk.com/)
-[![Vitest](https://img.shields.io/badge/Unit_Tests-230_Passed-6E9F18?logo=vitest)](https://vitest.dev/)
-[![Playwright](https://img.shields.io/badge/Visual_Critic-Playwright-45BA4B?logo=playwright)](https://playwright.dev/)
+**A practice app and studio platform for a real Cuban salsa school in Bournemouth.** Dancers open a song on their
+phone and the app tells them, in time with the music, what to dance *now* and what's coming *next*. Around it:
+the weekly timetable, festival ticketing, teacher tools and class emails.
 
-> **🌐 Live Production Platform:** [salsa-explosion-bkgf.vercel.app](https://salsa-explosion-bkgf.vercel.app/)  
-> **📍 Flagship Residency:** BOH Studios, 104 Commercial Rd, Bournemouth, UK  
-> **🏆 Client Heritage:** Maestro Enrique Perez Valdes (Havana master instructor, UK Lifetime Achievement Award winner, 25+ years UK teaching heritage, 4,200+ dancers mentored).
+[![CI](https://github.com/DragostinJ/SalsaExplosion/actions/workflows/ci.yml/badge.svg)](https://github.com/DragostinJ/SalsaExplosion/actions/workflows/ci.yml)
+![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![TypeScript strict](https://img.shields.io/badge/TypeScript-strict%2C%20no%20any-blue?logo=typescript)
+![Tests](https://img.shields.io/badge/unit%20tests-350-6E9F18?logo=vitest)
+![Playwright](https://img.shields.io/badge/e2e-Playwright-45BA4B?logo=playwright)
 
----
+**Live:** [salsa-explosion.vercel.app](https://salsa-explosion.vercel.app) ·
+**Try the player:** [/music](https://salsa-explosion.vercel.app/music) ·
+**Art-direction study:** [/mockups](https://salsa-explosion.vercel.app/mockups) ·
+**Case study:** [docs/case-study.md](docs/case-study.md)
 
-## 📖 Executive Case Study Overview
+<p>
+  <img src="docs/screenshots/player-now-next.jpg" width="260" alt="Practice player on a phone: the NOW card says what to dance in this section, the NEXT strip counts down to the next one" />
+  <img src="docs/screenshots/song-list.jpg" width="236" alt="The song list with a coloured section map for every song" />
+  <img src="docs/screenshots/calibration.jpg" width="260" alt="Calibration mode for fixing section timings by ear" />
+</p>
 
-**Salsa Explosion (RitmoFlow)** is a production-grade, multi-tenant workspace application engineered to modernize physical dance studio operations. Designed around the real-world operational rhythm of Bournemouth's premier Cuban Salsa academy, the system resolves a classic physical-to-digital friction: **bridging in-person cash/card door ticketing (£12 / £14 pay-at-the-door) with online festival commerce, student syllabus progression, real-time polyrhythmic audio training, and multi-persona role governance.**
+## What it does
 
-Built as a senior engineering portfolio showcase, the repository demonstrates end-to-end full-stack craftsmanship: strict TypeScript typing (zero `any`), App Router server/client boundary discipline, browser-native Web Audio API synthesis, zero layout shift media architecture, and an automated Playwright visual design critic operating alongside 230 Vitest unit and security tests.
+| For | Feature |
+|---|---|
+| **Dancers** | 14 songs mapped section by section (169 sections, 75 minutes of music). Full-screen, one-screen phone player driven by the YouTube clock: NOW card, NEXT countdown, loop a section, slow down, swipe to preview, share a link to an exact section. |
+| **Teachers** | Pick "tonight's songs" for a class; students get them on check-in and in their class recap. A practice-hotspots page shows which sections students loop and replay most. |
+| **The studio** | Weekly classes stay pay-at-the-door (£12 / £14, no online payment by design). Festivals sell passes through Stripe Checkout. Class reminders and a weekly owner digest are built in (with one-click unsubscribe); sending switches on with an email API key. |
+| **Song curators** | Song maps come from an AI Studio "song maker" (Gemini), go through an importer that catches the model's known mistakes, and are then fine-tuned by ear in a calibration mode with tap-tempo beat fitting. |
 
----
+## Engineering highlights
 
-## 🏗️ System Architecture & Data Flow
+Each one has the full story and numbers in the [case study](docs/case-study.md).
+
+- **Timing you can trust from an AI that guesses.** I benchmarked three Gemini setups on the same songs. The best
+  one (Gemini 4 Argon) agreed with itself within 0.5 s on 9 of 11 section starts; another matched only 4. The
+  importer now repairs or flags each failure I saw: "1:18" typed as 118 s, invented video ids, double-time BPM,
+  songs copied from an earlier chat.
+- **Beat maths for humans.** Tap-tempo calibration fits a least-squares beat grid through your taps, so 32 taps that
+  are each ±40 ms off still place the beats within about 10 ms.
+- **A 96 KB bundle leak found and fixed.** Two innocent imports pulled every song's data into the player page.
+  Moving them cut the player's JavaScript from 1,202 KB to 1,106 KB, and it no longer grows as songs are added.
+- **Measured, not guessed.** A layout jump in the NEXT strip was traced frame by frame during real playback
+  (55 → 71 px at 360 px wide) and fixed so that it measures 0 px.
+- **Security reviewed, including the AI agents' work.** Content-Security-Policy, IDOR tests, signed unsubscribe
+  links, a fail-closed cron secret, rate limits, and an RLS plan for the database. Reviewing an agent's branch
+  caught it removing the live CSP, and a security test that passed only because of a code comment.
+
+## Architecture
 
 ```mermaid
 flowchart TD
-    Client["Dancer / Teacher / Owner Client"] -->|HTTPS / Next.js 16 App Router| Edge["Vercel Edge & Middleware"]
-    Edge -->|Clerk Session Guard| AuthGuard["Authentication & RBAC Barrier"]
-    AuthGuard -->|Tenant & IDOR Guard| ActionLayer["Server Actions (Zod Schema Validated)"]
-    ActionLayer -->|Prisma Connection Pooler (PgBouncer)| DB[("Supabase PostgreSQL")]
-    ActionLayer -->|Secure Checkout & Webhooks| Stripe["Stripe API & Webhook Verification"]
-    ActionLayer -->|Fail-Soft User Provisioning| ClerkAPI["Clerk Backend SDK"]
-    Edge -->|Browser-Native Web Audio API| AudioEngine["Client-Side Clave Synth & HUD"]
-    Edge -->|Playwright Visual Critic (scripts/visual-audit.mjs)| VisualAudit["Multi-Viewport Visual & Ergonomics Gate"]
+    Phone["Dancer's phone"] --> App["Next.js 16 App Router on Vercel"]
+    App --> Proxy["proxy.ts: Clerk auth + public routes"]
+    App --> Actions["Server components + server actions (Zod-validated)"]
+    Actions --> DB[("Supabase Postgres via Prisma")]
+    Actions --> Stripe["Stripe Checkout (festivals only)"]
+    Actions --> Email["Resend email"]
+    Cron["Vercel Cron, daily"] --> CronRoute["/api/cron/daily (CRON_SECRET)"]
+    Phone --> YT["YouTube IFrame API = the media clock"]
 ```
 
-### Architectural Principles
-1. **Server Components by Default:** Push `"use client"` strictly to the interactive leaves of the DOM tree (audio waveform scrubbers, modal sheets, and filter bars), minimizing client JavaScript bundle size and guaranteeing ultra-low Total Blocking Time (TBT).
-2. **Server Actions with Runtime Zod Schemas:** All state mutations (event purchases, QR attendance check-ins, student submissions) are processed via server actions with exhaustive Zod input validation, eliminating parameter tampering.
-3. **Database Connection Pooling:** Managed with PgBouncer/Supavisor to eliminate serverless connection exhaustion on high-concurrency event drops.
-4. **Fail-Soft User Provisioning:** Integrated fallback handlers that provision and reconcile user database records even during third-party webhook latency or rate limits.
-
----
-
-## 💎 Key Engineering Deep-Dives
-
-### 1. Real-Time Polyrhythmic Audio Synthesizer & Telemetry HUD (`/music`)
-- **Zero-Asset Web Audio API Synthesizer (`CubanRhythmSynth`):** Generates authentic 2-3 Son, 3-2 Son, 2-3 Rumba, and 6/8 Afro-Bembé clave pulses dynamically in the browser using Web Audio API oscillators and gain envelopes. Zero audio files downloaded (£0/month asset bandwidth, microsecond timing precision).
-- **Bi-Directional Video Telemetry:** Synchronizes YouTube masterclass video streams with a live **Dancer HUD**, providing:
-  - **3-Zone Body Telemetry:** Real-time physiological breakdowns for **Chest** (contra-body torso isolation), **Hips** (Cuban pelvic weight transfers), and **Feet** (guapea / son timing).
-  - **Havana Caller Hand Signals:** Displays exact hand gestures (e.g., finger signals for *Enchufla*, ear tugs for *Dile Que No*, and Orisha gestures for *Oggún* and *Yemayá*).
-  - **Dynamic Clave Indicator:** Visual flashing pulse aligned with the active clave polarity.
-- **`100dvh` Zero-Scroll Mobile Discipline:** The entire audio training suite operates within a strict single-screen mobile viewport, ensuring dancers never lose view of the scrubber or telemetry while training.
-
-### 2. Brutalist Gallery UI Inspired by *The Place* London
-- **Aesthetic Direction:** Replaces generic SaaS cards with a refined editorial aesthetic inspired by *The Place* (London Contemporary Dance School) and international arts galleries.
-- **Deep Theatre Obsidian Canvas (`#080706`):** Natural stage contrast paired with Warm Ivory (`#F5F2EB`), Havana Crimson (`#DC2626`), and Subtle Amber accents.
-- **Zero Layout Shift (CLS = 0) Media Pipeline:** Centralized media manifest ([`src/lib/media-manifest.ts`](src/lib/media-manifest.ts)) defining canonical aspect ratios, intrinsic dimensions, and responsive loading behaviors for all photography.
-
-### 3. Single Source of Truth Domain Architecture
-- **Academy Specifications & Operating Schedule:** Centralized in [`src/lib/academy-data.ts`](src/lib/academy-data.ts) and [`src/lib/constants/`](src/lib/constants/). Venue specifications, weekly class timetables, door pricing, instructor bios, and festival pass tiers originate from one single data contract.
-- **Polyrhythmic Timba Anatomy Registry:** Defined in [`src/lib/constants/timba-song-anatomy.ts`](src/lib/constants/timba-song-anatomy.ts), cataloging complete multi-gear progression maps for benchmark tracks (*Me Dicen Cuba*, *La Cosa Mala*, *Agua Pa' Yemayá*, and Marc Anthony's *Aguanile*).
-
-### 4. AI-Augmented Quality Engineering & Automated Visual Critic
-- **Automated Visual & Ergonomics Critic ([`scripts/visual-audit.mjs`](scripts/visual-audit.mjs)):** An in-tree Playwright audit tool executing against Desktop (`1440x900`) and Mobile (`390x844`) viewports that programmatically evaluates:
-  - **Typography Entropy:** Asserts that no route exceeds 9 distinct font-size combinations.
-  - **Color Bleed:** Detects computed colors falling outside approved Obsidian, Ivory, and Crimson design tokens.
-  - **Mobile Overflow:** Validates `scrollWidth === innerWidth` on 390px mobile viewports.
-  - **Touch Target Ergonomics:** Flags interactive buttons smaller than the 40px mobile thumb comfort standard.
-  - **Faculty Visibility & Zero Voids:** Proves all instructor cards render with computed `opacity: 1` and `height > 150px`.
-
----
-
-## 🛡️ Role-Based Access Control (RBAC) & Security Model
-
-The platform enforces three distinct operational personas with zero credential or data leakage:
-
-| Persona | Capabilities | Security Boundary |
-| :--- | :--- | :--- |
-| **Dancer (Student)** | Timetable, class progression, QR wallet passes, song analyzer, event pass checkout | Strict IDOR guards prevent reading or modifying other students' data |
-| **Teacher (Instructor)** | Mobile QR class scanner, student level progression, submission grading, attendance | Scoped to assigned classes; cannot view global financials |
-| **Owner (Admin)** | Studio operations workspace, revenue analytics, door check-ins, coach assignment, audit logs | Protected by admin session validation and forensic audit logging |
-
-- **IDOR Prevention:** Validated via unit tests (`tests/unit/idor-ownership.test.ts`) proving students cannot read or cancel tickets belonging to another user.
-- **Secret Hygiene Guard:** Production builds immediately abort if `CLERK_WEBHOOK_SECRET` or `STRIPE_WEBHOOK_SECRET` contain dummy placeholder values.
-- **Production Role Lock:** The demo role switcher is hard-locked in production via `ALLOW_DEMO_ROLE_SWITCHING=false`.
-
----
-
-## 🗄️ Database Schema (Supabase PostgreSQL & Prisma)
-
-| Model | Purpose | Key Relationships |
-| :--- | :--- | :--- |
-| **`User`** | Unified account entity linked to Clerk identity | `Role`, `Bookings`, `Attendances`, `Submissions`, `Referrals` |
-| **`ClassSession`** | Weekly Thursday/Sunday studio sessions at BOH Studios | `Instructor`, `Attendances`, `Level` |
-| **`Event`** | Special congresses, weekenders & costume parties | `TicketTiers`, `Bookings`, `Venue` |
-| **`Booking`** | Online pass purchases with Stripe payment intent tracking | `User`, `Event`, `TicketTier` |
-| **`Attendance`** | Physical door check-ins and QR-scanned admissions | `User`, `ClassSession` |
-| **`StudentSubmission`** | Video submissions for syllabus skill accreditation | `User`, `Instructor`, `Skill` |
-| **`AuditLog`** | Forensic security log recording critical actions and role changes | `ActorId`, `Action`, `Metadata` |
-
----
-
-## 🧪 Comprehensive Testing Suite (38 Suites, 230 Tests)
-
-```bash
-# 1. Run Vitest Unit & Security Test Suite
-npm test
-
-# 2. Run TypeScript Strict Compilation Check
-npx tsc --noEmit
-
-# 3. Run Production Next.js Build
-npm run build
-
-# 4. Run Playwright Automated Visual Critic & Ergonomics Audit
-npm run audit:design
+```mermaid
+flowchart LR
+    Video["YouTube video"] --> Maker["AI Studio song maker (Gemini + response schema)"]
+    Maker --> Importer["Importer: Zod + guards for known model mistakes"]
+    Importer --> Data[("Song data")]
+    Data --> Player["Practice player: NOW / NEXT"]
+    Player -->|"?calibrate=1"| Calibration["Calibration: nudges, marks, tap tempo"]
+    Calibration -->|"report"| Data
 ```
 
-### Critical Security & Invariant Test Suites:
-- `tests/unit/idor-ownership.test.ts` — Proves tenant isolation across bookings, passes, and submissions.
-- `tests/unit/auth-role-escalation.test.ts` — Proves non-admins cannot invoke administrative server actions.
-- `tests/unit/webhook-safeguards.test.ts` — Proves webhook verification fails securely with placeholder secrets.
-- `tests/unit/media-manifest.test.ts` — Asserts all photography assets exist on disk, exceed 10KB, and eliminate CLS.
-- `tests/unit/timba-song-anatomy.test.ts` — Validates frame-accurate timing segments and clave metadata across all songs.
+Principles: **single sources of truth** (schedule, prices and venue in
+[`academy-data.ts`](src/lib/academy-data.ts), songs in [`timba-song-anatomy.ts`](src/lib/constants/timba-song-anatomy.ts),
+images in [`media-manifest.ts`](src/lib/media-manifest.ts)), **the media clock is the only timer** (no simulated
+timing), and **strict YouTube terms** (player never covered, never hidden, never under 200×200 px).
 
----
+## Quality gates
 
-## 🚀 Quickstart & Local Setup
+Every change, mine or an AI agent's, has to pass all of these. CI runs the first four on every branch push.
 
-### Prerequisites
-- Node.js 20+
-- PostgreSQL database (local or Supabase connection pool)
-- Clerk API keys
-- Stripe API test keys
-
-### 1. Clone & Install
 ```bash
-git clone https://github.com/DragostinJ/SalsaExplosion.git
-cd SalsaExplosion
+npx tsc --noEmit        # strict TypeScript, no `any`
+npm run lint            # ESLint
+npm test                # Vitest: 53 files, 350 tests (IDOR, role escalation, webhooks, CSP, importer, tap tempo…)
+npm run build           # production build
+npm run audit:design    # Playwright design critic: overflow, ≤ 9 font sizes, 40 px touch targets, natural-colour photos
+npx playwright test     # e2e: player tools, routes, guards, layout shift
+```
+
+A weekly GitHub Action also checks that every song's YouTube video still exists (and, with a YouTube API key,
+still has the length the map was timed for), opening an issue if not.
+
+## Working with AI agents
+
+Built by one developer working with three AI tools, each in its own lane:
+
+| Tool | Role |
+|---|---|
+| **Claude Code** | Feature work on branches, reviews, verification. |
+| **Gemini in Google AI Studio** | The song maker; image generation (Nano Banana). |
+| **Google Antigravity** | Long unattended briefs: tests, upgrades, reports. |
+
+The rules live in [`AGENTS.md`](AGENTS.md): business invariants (weekly classes are never sold online), design
+tokens, and the gates above. Agents work on branches; nothing reaches `main` without passing every gate and
+being reviewed.
+
+## Run it locally
+
+```bash
+git clone https://github.com/DragostinJ/SalsaExplosion.git && cd SalsaExplosion
 npm install
+cp .env.example .env     # database, Clerk and Stripe test keys
+npx prisma generate && npm run db:push && npm run db:seed
+npm run dev              # http://localhost:3000
 ```
 
-### 2. Configure Environment Variables
-Copy `.env.example` to `.env`:
-```bash
-cp .env.example .env
-```
-Fill in your database connection string, Clerk credentials, and Stripe test keys.
+Main routes:
+- `/`: home
+- `/music` and `/music/[songId]`: song list and practice player (`?calibrate=1` for curators)
+- `/dashboard/schedule`: weekly timetable
+- `/events`: festivals and tickets
+- `/instructor/*`: teacher tools (roster, song maps importer, practice hotspots)
+- `/admin/*`: studio operations
 
-### 3. Generate Prisma Client & Run Migrations
-```bash
-npx prisma generate
-npm run db:push
-npm run db:seed
-```
+## Credits
 
-### 4. Start Development Server
-```bash
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) to view the application.
-
----
-
-## 📱 Core Application Routes
-
-- `/` — Split Hero (`hero-social.jpg`), Architectural Gateways, What's On Posters, Faculty Roster, Inside the Cuban Circle, BOH Studios Venue Guide.
-- `/music` — Interactive Timba Song Anatomy Player, Web Audio Clave Synthesizer, 3-Zone Body Telemetry, and BPM guide.
-- `/events` — Online ticket box office for flagship festivals (*Made in Cuba Dance Weekend 2026*, *Halloween Party*, *SB&K Nights*).
-- `/dashboard/schedule` — Weekly Thursday & Sunday timetable, door pricing guide (£12 / £14), and BOH Studios arrival planner.
-- `/dashboard/rueda` — Comprehensive Havana Rueda de Casino call dictionary with caller hand gestures and 4-tier syllabus breakdown.
-- `/about` — Academy heritage, Maestro Enrique Perez Valdes biography, and BOH Studios Canadian sprung maple floor specifications.
-- `/admin/operations` — Studio owner dashboard: real-time attendee roster, revenue analytics, coaching requests, and forensic audit logs.
-
----
-
-## 🤖 AI Governance & Development Methodology
-
-This repository is governed under the **[`AGENTS.md`](AGENTS.md)** engineering protocol. Every feature, refactor, and bug fix follows a strict pre-merge verification pipeline:
-1. Architectural alignment with single-source-of-truth registries.
-2. Preservation of weekly class door pricing invariants.
-3. 100% green status across all 38 Vitest suites (230 tests) and production build.
-4. Visual critic approval across Desktop and Mobile screenshots.
-
----
-
-## 📄 License & Credits
-
-Built for **Salsa Explosion UK** and **BOH Studios Bournemouth**. All rights reserved.  
-Architected and developed by **Dragostin J.** as a demonstration of production-grade full-stack web engineering.
+Built for **Salsa Explosion UK** (Maestro Enrique Perez Valdes) at BOH Studios, Bournemouth, by **Dragostin J.**
+Songs play through YouTube's official embedded player from their owners' uploads. The editorial images on
+`/mockups` are AI-generated (Nano Banana Pro); real teachers and the venue appear only in real photos.

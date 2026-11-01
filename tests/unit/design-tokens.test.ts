@@ -39,53 +39,75 @@ function getContrastRatio(hex1: string, hex2: string): number {
   return (lighter + 0.05) / (darker + 0.05);
 }
 
-describe("V1: Design Tokens & Canonical Palette Verification", () => {
+/** Value of a custom property inside one CSS block (the first block whose selector matches) */
+function tokenIn(css: string, blockStart: string, token: string): string | undefined {
+  const from = css.indexOf(blockStart);
+  if (from === -1) return undefined;
+  const block = css.slice(from, css.indexOf("\n}", from));
+  return block.match(new RegExp(`${token}:\\s*(#[0-9A-Fa-f]{6})`))?.[1];
+}
+
+describe("V1: ICAIC Poster design tokens (paper default + ink scope)", () => {
   const cssPath = path.resolve(__dirname, "../../src/app/globals.css");
   const cssContent = fs.readFileSync(cssPath, "utf-8");
 
-  const expectedTokens: Record<string, string> = {
-    "--color-canvas": "#080706",
-    "--color-surface-1": "#0E0C0A",
-    "--color-surface-2": "#14110F",
-    "--color-surface-3": "#1C1917",
-    "--color-line": "#26221F",
-    "--color-ivory": "#F5F2EB",
-    "--color-ivory-muted": "#C9C2B6",
-    "--color-gold": "#E8B04A",
-    "--color-ember": "#D9381E",
-    "--color-brand": "#D9381E",
-    "--color-brand-hover": "#B82D16",
-    "--color-success": "#4FB286",
-    "--color-warning": "#E0A030",
-    "--color-danger": "#E5584B",
-    "--color-info": "#6BA7D6",
-    "--color-role-lead": "#5FB3C4",
-    "--color-role-follow": "#D9708A",
+  // Paper is the default surface (@theme); .theme-ink flips a subtree to the night-poster surface
+  const paperTokens: Record<string, string> = {
+    "--color-canvas": "#F1E6D0",
+    "--color-surface-1": "#E9DCC1",
+    "--color-surface-2": "#E2D2B4",
+    "--color-surface-3": "#D8C7A6",
+    "--color-line": "#BFAE8E",
+    "--color-ivory": "#161311",
+    "--color-ivory-muted": "#4E453B",
+    "--color-gold": "#22418F",
+    "--color-brand": "#EA4A33",
+    "--color-success": "#0B6F6B",
+    "--color-warning": "#8A5200",
+    "--color-danger": "#B8301C",
+    "--color-info": "#22418F",
   };
+  const inkTokens: Record<string, string> = {
+    "--color-canvas": "#161311",
+    "--color-ivory": "#F1E6D0",
+    "--color-ivory-muted": "#C8BBA2",
+    "--color-gold": "#F4B41A",
+    "--color-brand": "#C4321C",
+    "--color-white": "#FAF4E6",
+  };
+  const posterInks = ["#F1E6D0", "#161311", "#E4412B", "#F4B41A", "#12938F", "#22418F"];
 
-  it("verifies all canonical Havana Obsidian design tokens are declared in globals.css", () => {
-    for (const [tokenName, tokenHex] of Object.entries(expectedTokens)) {
-      const tokenRegex = new RegExp(`${tokenName}:\\s*${tokenHex}`, "i");
-      expect(
-        tokenRegex.test(cssContent),
-        `Expected token ${tokenName}: ${tokenHex} to exist in globals.css`
-      ).toBe(true);
+  it("declares the paper tokens in @theme and the ink tokens in .theme-ink", () => {
+    for (const [token, hex] of Object.entries(paperTokens)) {
+      expect(tokenIn(cssContent, "@theme {", token), `paper ${token}`).toBe(hex);
+    }
+    for (const [token, hex] of Object.entries(inkTokens)) {
+      expect(tokenIn(cssContent, ".theme-ink {", token), `ink ${token}`).toBe(hex);
     }
   });
 
-  it("verifies the primary brand CTA color passes WCAG AA contrast ratio (>= 4.5:1) against pure white text", () => {
-    const brandHex = expectedTokens["--color-brand"];
-    const whiteHex = "#FFFFFF";
-    const contrastRatio = getContrastRatio(brandHex, whiteHex);
-
-    expect(contrastRatio).toBeGreaterThanOrEqual(4.5);
+  it("declares the six ICAIC poster inks", () => {
+    for (const hex of posterInks) {
+      expect(cssContent.toUpperCase()).toContain(hex);
+    }
   });
 
-  it("verifies gold accent color has strong contrast against dark canvas", () => {
-    const goldHex = expectedTokens["--color-gold"];
-    const canvasHex = expectedTokens["--color-canvas"];
-    const contrastRatio = getContrastRatio(goldHex, canvasHex);
+  it("keeps body text, muted text and accents at WCAG AA (>= 4.5:1) on both surfaces", () => {
+    const textTokens = ["--color-ivory", "--color-ivory-muted", "--color-gold", "--color-success", "--color-warning", "--color-danger", "--color-info"];
+    for (const [scope, blockStart] of [
+      ["paper", "@theme {"],
+      ["ink", ".theme-ink {"],
+    ]) {
+      const canvas = tokenIn(cssContent, blockStart, "--color-canvas") ?? "";
+      for (const token of textTokens) {
+        const value = tokenIn(cssContent, blockStart, token) ?? "";
+        expect(getContrastRatio(value, canvas), `${scope} ${token} on canvas`).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+  });
 
-    expect(contrastRatio).toBeGreaterThanOrEqual(7.0);
+  it("keeps brand CTA text readable: ink on the paper red, warm white on the ink red", () => {
+    expect(getContrastRatio(paperTokens["--color-brand"], paperTokens["--color-ivory"])).toBeGreaterThanOrEqual(4.5);
+    expect(getContrastRatio(inkTokens["--color-brand"], inkTokens["--color-white"])).toBeGreaterThanOrEqual(4.5);
   });
 });

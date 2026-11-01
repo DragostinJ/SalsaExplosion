@@ -57,7 +57,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
     <nav
       data-testid="mobile-bottom-nav"
       aria-label="Mobile Bottom Navigation"
-      className="md:hidden fixed bottom-4 inset-x-4 z-50 h-16 rounded-full bg-surface-1/90 backdrop-blur-xl border border-line shadow-2xl flex items-center justify-around px-2"
+      className="md:hidden fixed bottom-3 inset-x-3 z-50 h-16 border-4 border-ink bg-paper text-ink shadow-[5px_5px_0_var(--color-ink)] flex items-center justify-around px-1.5"
     >
       {navItems.map((item) => {
         const Icon = item.icon;
@@ -66,13 +66,11 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
             <Link
               key={item.href}
               href={item.href}
-              className={`relative flex flex-col items-center justify-center h-11 px-2.5 sm:px-3 rounded-full text-xs font-black transition-all ${
-                item.isActive
-                  ? "bg-brand text-white shadow-xs scale-105"
-                  : "bg-brand/90 hover:bg-brand text-white shadow-xs active:scale-95"
+              className={`relative flex flex-col items-center justify-center h-11 px-2.5 sm:px-3 border-2 border-ink bg-poster-red text-ink text-xs font-black uppercase transition-all ${
+                item.isActive ? "-translate-y-0.5" : "active:scale-95"
               }`}
             >
-              <Icon className="h-4 w-4 mb-0.5 text-white" />
+              <Icon className="h-4 w-4 mb-0.5" />
               <span className="leading-tight tracking-tight whitespace-nowrap">{item.label}</span>
             </Link>
           );
@@ -84,16 +82,16 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
             href={item.href}
             className={`relative flex flex-col items-center justify-center flex-1 h-full py-1 text-xs font-bold transition-all ${
               item.isActive
-                ? "text-gold font-black scale-105"
-                : "text-ivory-muted hover:text-ivory"
+                ? "text-ink font-black"
+                : "text-ivory-muted hover:text-ink"
             }`}
           >
             {item.isActive && (
-              <span className="absolute top-1.5 flex h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_8px_rgba(251,191,36,0.9)]" />
+              <span className="absolute inset-x-3 top-0 h-1 bg-poster-red" />
             )}
             <Icon
               className={`h-4.5 w-4.5 mb-0.5 transition-colors ${
-                item.isActive ? "text-gold" : "text-ivory-muted"
+                item.isActive ? "text-ink" : "text-ivory-muted"
               }`}
             />
             <span className="leading-tight tracking-tight whitespace-nowrap">{item.label}</span>

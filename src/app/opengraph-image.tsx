@@ -4,6 +4,13 @@ export const alt = "Salsa Explosion — Bournemouth Cuban Salsa & Rueda Academy"
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// ICAIC poster inks (globals.css)
+const PAPER = "#F1E6D0";
+const INK = "#161311";
+const RED = "#E4412B";
+const MUSTARD = "#F4B41A";
+const BLUE = "#22418F";
+
 export default async function Image() {
   return new ImageResponse(
     (
@@ -13,75 +20,43 @@ export default async function Image() {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
           justifyContent: "space-between",
-          backgroundColor: "#080706",
-          padding: 80,
+          position: "relative",
+          backgroundColor: PAPER,
+          padding: 72,
           fontFamily: "sans-serif",
-          color: "#FAF8F5",
+          color: INK,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div
-            style={{
-              padding: "8px 16px",
-              backgroundColor: "rgba(235, 68, 50, 0.15)",
-              border: "1px solid rgba(235, 68, 50, 0.4)",
-              borderRadius: 8,
-              fontSize: 18,
-              fontWeight: 700,
-              letterSpacing: "0.2em",
-              color: "#EB4432",
-              textTransform: "uppercase",
-            }}
-          >
-            Bournemouth, UK
-          </div>
-          <div style={{ fontSize: 18, color: "#8B8279", letterSpacing: "0.15em" }}>
-            BOH STUDIOS
-          </div>
+        {/* Poster shapes: the red sun and a mustard band */}
+        <div style={{ position: "absolute", right: -90, top: -60, width: 520, height: 520, borderRadius: 9999, backgroundColor: RED }} />
+        <div style={{ position: "absolute", left: 0, bottom: 150, width: 420, height: 90, backgroundColor: MUSTARD }} />
+
+        <div style={{ display: "flex", fontSize: 22, fontWeight: 800, letterSpacing: "0.3em", textTransform: "uppercase" }}>
+          Bournemouth · Cuban salsa · BOH Studios
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div
-            style={{
-              fontSize: 64,
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "#FAF8F5",
-            }}
-          >
-            SALSA EXPLOSION
-          </div>
-          <div
-            style={{
-              fontSize: 28,
-              color: "#C5BDB3",
-              lineHeight: 1.4,
-              maxWidth: 900,
-            }}
-          >
-            Bournemouth Cuban Salsa & Rueda de Casino Academy directed by Cuban maestro Enrique Perez Valdes.
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", fontSize: 150, fontWeight: 900, lineHeight: 0.9, letterSpacing: "-0.04em" }}>SALSA</div>
+          <div style={{ display: "flex", fontSize: 150, fontWeight: 900, lineHeight: 0.9, letterSpacing: "-0.04em" }}>
+            EXPLO<span style={{ color: BLUE }}>S</span>ION
           </div>
         </div>
 
         <div
           style={{
             display: "flex",
-            alignItems: "center",
             justifyContent: "space-between",
             width: "100%",
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-            paddingTop: 32,
+            borderTop: `6px solid ${INK}`,
+            paddingTop: 24,
+            fontSize: 26,
+            fontWeight: 800,
+            textTransform: "uppercase",
           }}
         >
-          <div style={{ fontSize: 20, color: "#DF7A24", fontWeight: 600 }}>
-            Thursdays & Sundays • £12 / £14 at the door
-          </div>
-          <div style={{ fontSize: 20, color: "#8B8279" }}>
-            salsaexplosion.co.uk
-          </div>
+          <div style={{ display: "flex" }}>Thursdays &amp; Sundays · £12 / £14 at the door</div>
+          <div style={{ display: "flex" }}>Maestro Enrique Perez Valdes</div>
         </div>
       </div>
     ),

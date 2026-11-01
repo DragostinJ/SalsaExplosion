@@ -49,7 +49,7 @@ export default function HowItWorksPage() {
         <div className="mt-6 max-w-3xl space-y-4">
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase leading-none text-white">
             How Salsa Explosion{" "}
-            <span className="font-display italic font-normal text-amber-300 normal-case">
+            <span className="font-display font-normal text-amber-300 ">
               Powers Your Dance Journey
             </span>
           </h1>

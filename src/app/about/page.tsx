@@ -486,7 +486,7 @@ export default async function AboutPage() {
           <Button
             asChild
             size="sm"
-            className="bg-gradient-to-r from-[#833ab4] via-[#e1306c] to-[#f77737] hover:brightness-110 text-white font-extrabold text-xs shadow-md"
+            className="border-2 border-ink bg-poster-pink text-ink hover:-translate-y-0.5 font-extrabold text-xs shadow-md"
           >
             <a
               href="https://www.instagram.com/salsaexplosion/"
@@ -500,7 +500,7 @@ export default async function AboutPage() {
           <Button
             asChild
             size="sm"
-            className="bg-[#0866ff] hover:bg-[#0756d6] text-white font-extrabold text-xs shadow-md"
+            className="border-2 border-ink bg-poster-blue text-paper hover:-translate-y-0.5 font-extrabold text-xs shadow-md"
           >
             <a
               href="https://www.facebook.com/salsaexplosion"

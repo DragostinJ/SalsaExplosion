@@ -140,7 +140,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             Meet the Salsa Explosion Faculty{" "}
-            <span className="block sm:inline font-display italic font-normal text-amber-300 sm:ml-2">
+            <span className="block sm:inline font-display font-normal text-amber-300 sm:ml-2">
               Maestros &amp; Artists
             </span>
           </h2>
@@ -250,7 +250,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                     )}
 
                     {/* Museum-Grade Typographic Monogram */}
-                    <div className="absolute inset-0 flex items-center justify-center font-display italic font-bold text-4xl sm:text-5xl text-amber-200/90 select-none z-0">
+                    <div className="absolute inset-0 flex items-center justify-center font-display font-bold text-4xl sm:text-5xl text-amber-200/90 select-none z-0">
                       {instructor.avatarFallback}
                     </div>
 
@@ -382,7 +382,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
 
             {/* Modal Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-b border-white/10 pb-5">
-              <div className="h-16 w-16 rounded-2xl bg-surface-3 flex items-center justify-center text-amber-200 font-display italic font-bold text-2xl shadow-md border-2 border-gold/40 shrink-0">
+              <div className="h-16 w-16 rounded-2xl bg-surface-3 flex items-center justify-center text-amber-200 font-display font-bold text-2xl shadow-md border-2 border-gold/40 shrink-0">
                 {selectedInstructor.avatarFallback}
               </div>
               <div className="space-y-1">

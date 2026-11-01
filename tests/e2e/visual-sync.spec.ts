@@ -11,7 +11,7 @@ test.describe("V5: Visual Design Synchronization & Drift Prevention", () => {
     { name: "Cuban Music Hub", path: "/music" },
   ];
 
-  test("verifies all core routes share the canonical deep obsidian canvas (#080706)", async ({
+  test("verifies all core routes share the canonical ICAIC paper canvas (#F1E6D0)", async ({
     page,
   }) => {
     for (const route of routes) {
@@ -24,12 +24,12 @@ test.describe("V5: Visual Design Synchronization & Drift Prevention", () => {
 
       expect(
         bodyBg,
-        `Page ${route.name} (${route.path}) body backgroundColor should be rgb(8, 7, 6) (#080706)`
-      ).toBe("rgb(8, 7, 6)");
+        `Page ${route.name} (${route.path}) body backgroundColor should be rgb(241, 230, 208) (#F1E6D0)`
+      ).toBe("rgb(241, 230, 208)");
     }
   });
 
-  test("verifies primary header CTA has canonical brand background (rgb(217, 56, 30)) across desktop pages", async ({
+  test("verifies primary header CTA has canonical brand background (rgb(234, 74, 51)) across desktop pages", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
@@ -47,8 +47,8 @@ test.describe("V5: Visual Design Synchronization & Drift Prevention", () => {
 
       expect(
         ctaBg,
-        `Page ${route.name} (${route.path}) site-header-book-cta backgroundColor should be rgb(217, 56, 30)`
-      ).toBe("rgb(217, 56, 30)");
+        `Page ${route.name} (${route.path}) site-header-book-cta backgroundColor should be rgb(234, 74, 51)`
+      ).toBe("rgb(234, 74, 51)");
     }
   });
 

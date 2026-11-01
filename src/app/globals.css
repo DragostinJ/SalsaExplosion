@@ -1,128 +1,685 @@
 @import "tailwindcss";
 
+/*
+ * ICAIC Poster design system (chosen by Enrique, 2026-11-01).
+ * Paper is the default surface; `.theme-ink` flips any subtree to the ink
+ * (night-poster) surface — used by the practice player and ink sections.
+ * Both scopes expose the same token names, and every Tailwind palette ladder is
+ * mirrored on paper, so dark-first classes (text-amber-300, bg-white/5, ...)
+ * keep their contrast. Ladders come from scripts/icaic-palette.mjs; edit the scoped tokens in pairs.
+ */
 @theme {
-  --font-display: var(--font-display), "Playfair Display", Georgia, serif;
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
+  --font-display: var(--font-anton), "Anton", "Arial Narrow", Impact, sans-serif;
+  --font-sans: var(--font-archivo), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  /* Canonical Havana Obsidian Design Tokens */
-  --color-canvas: #080706;
-  --color-surface-1: #0E0C0A;
-  --color-surface-2: #14110F;
-  --color-surface-3: #1C1917;
-  --color-line: #26221F;
-  --color-ivory: #F5F2EB;
-  --color-ivory-muted: #C9C2B6;
-  --color-gold: #E8B04A;
-  --color-ember: #D9381E;
-  --color-brand: #D9381E;
-  --color-brand-hover: #B82D16;
+  /* Poster inks: the same in both scopes (solid blocks, illustrations, stamps) */
+  --color-paper: #F1E6D0;
+  --color-ink: #161311;
+  --color-poster-red: #E4412B;
+  --color-poster-mustard: #F4B41A;
+  --color-poster-teal: #12938F;
+  --color-poster-blue: #22418F;
+  --color-poster-pink: #EE7BA0;
+  --color-poster-plum: #5B2A6E;
 
-  /* Semantic Status Tokens & Soft / Line Variants */
-  --color-success: #4FB286;
-  --color-success-soft: rgba(79, 178, 134, 0.12);
-  --color-success-line: rgba(79, 178, 134, 0.35);
+  /* Silkscreen corners: square everywhere except pills and circles */
+  --radius-xs: 0;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
 
-  --color-warning: #E0A030;
-  --color-warning-soft: rgba(224, 160, 48, 0.12);
-  --color-warning-line: rgba(224, 160, 48, 0.35);
+  /* Canvas & surfaces */
+  --color-canvas: #F1E6D0;
+  --color-surface-1: #E9DCC1;
+  --color-surface-2: #E2D2B4;
+  --color-surface-3: #D8C7A6;
+  --color-line: #BFAE8E;
+  --color-ivory: #161311;
+  --color-ivory-muted: #4E453B;
+  --color-gold: #22418F;
+  --color-ember: #EA4A33;
+  --color-brand: #EA4A33;
+  --color-brand-hover: #F05B44;
 
-  --color-danger: #E5584B;
-  --color-danger-soft: rgba(229, 88, 75, 0.12);
-  --color-danger-line: rgba(229, 88, 75, 0.35);
+  /* Status */
+  --color-success: #0B6F6B;
+  --color-success-soft: rgba(11, 111, 107, 0.12);
+  --color-success-line: rgba(11, 111, 107, 0.35);
+  --color-warning: #8A5200;
+  --color-warning-soft: rgba(138, 82, 0, 0.12);
+  --color-warning-line: rgba(138, 82, 0, 0.35);
+  --color-danger: #B8301C;
+  --color-danger-soft: rgba(184, 48, 28, 0.12);
+  --color-danger-line: rgba(184, 48, 28, 0.35);
+  --color-info: #22418F;
+  --color-info-soft: rgba(34, 65, 143, 0.12);
+  --color-info-line: rgba(34, 65, 143, 0.35);
 
-  --color-info: #6BA7D6;
-  --color-info-soft: rgba(107, 167, 214, 0.12);
-  --color-info-line: rgba(107, 167, 214, 0.35);
+  /* Dance roles */
+  --color-role-lead: #0F6E73;
+  --color-role-lead-soft: rgba(15, 110, 115, 0.14);
+  --color-role-lead-line: rgba(15, 110, 115, 0.35);
+  --color-role-follow: #A8305E;
+  --color-role-follow-soft: rgba(168, 48, 94, 0.14);
+  --color-role-follow-line: rgba(168, 48, 94, 0.35);
 
-  /* Dance Role Differentiation Tokens */
-  --color-role-lead: #5FB3C4;
-  --color-role-lead-soft: rgba(95, 179, 196, 0.15);
-  --color-role-lead-line: rgba(95, 179, 196, 0.35);
+  /* shadcn/ui semantic roles */
+  --color-background: #F1E6D0;
+  --color-foreground: #161311;
+  --color-card: #E9DCC1;
+  --color-card-foreground: #161311;
+  --color-popover: #E9DCC1;
+  --color-popover-foreground: #161311;
+  --color-primary: #EA4A33;
+  --color-primary-foreground: #161311;
+  --color-secondary: #0B6F6B;
+  --color-secondary-foreground: #F1E6D0;
+  --color-muted: #E2D2B4;
+  --color-muted-foreground: #4E453B;
+  --color-accent: #F4B41A;
+  --color-accent-foreground: #161311;
+  --color-destructive: #B8301C;
+  --color-destructive-foreground: #F1E6D0;
+  --color-border: #BFAE8E;
+  --color-input: #BFAE8E;
+  --color-ring: #22418F;
 
-  --color-role-follow: #D9708A;
-  --color-role-follow-soft: rgba(217, 112, 138, 0.15);
-  --color-role-follow-line: rgba(217, 112, 138, 0.35);
+  /* Legacy aliases (older components) */
+  --color-primary-base: #EA4A33;
+  --color-primary-hover: #F05B44;
+  --color-primary-light: #F7D5CC;
+  --color-secondary-base: #0B6F6B;
+  --color-secondary-hover: #0E5E5B;
+  --color-secondary-light: #CDE7E3;
+  --color-accent-tangerine: #A54A0A;
+  --color-bg-main: #F1E6D0;
+  --color-bg-card: #E9DCC1;
+  --color-surface-warm: #E2D2B4;
+  --color-bg-dark: #F1E6D0;
+  --color-text-main: #161311;
+  --color-text-muted: #4E453B;
 
-  /* Bournemouth Cuban Salsa Designer Tokens (Backwards Compatibility Aliases) */
-  --color-primary-base: #E11D48;
-  --color-primary-hover: #BE123C;
-  --color-primary-light: #FFE4E6;
-  --color-secondary-base: #14B8A6;
-  --color-secondary-hover: #2DD4BF;
-  --color-secondary-light: #134E4A;
-  --color-accent-tangerine: #F97316;
-  --color-bg-main: #080706;
-  --color-bg-card: #0E0C0A;
-  --color-surface-warm: #181310;
-  --color-bg-dark: #080706;
-  --color-text-main: #F5F2EB;
+  /* Tailwind white/black swap so dark-first classes keep their contrast */
+  --color-white: #161311;
+  --color-black: #F1E6D0;
+
+  /* Tailwind ladders, mirrored for paper */
+  --color-amber-50: #3F1500;
+  --color-amber-100: #521E00;
+  --color-amber-200: #6A2A01;
+  --color-amber-300: #803801;
+  --color-amber-400: #8B4A03;
+  --color-amber-500: #9D6303;
+  --color-amber-600: #B88A02;
+  --color-amber-700: #DCB204;
+  --color-amber-800: #E2D6A9;
+  --color-amber-900: #F4E8BC;
+  --color-amber-950: #F7F3E2;
+  --color-yellow-50: #3F1500;
+  --color-yellow-100: #521E00;
+  --color-yellow-200: #6A2A01;
+  --color-yellow-300: #803801;
+  --color-yellow-400: #8B4A03;
+  --color-yellow-500: #9D6303;
+  --color-yellow-600: #B88A02;
+  --color-yellow-700: #DCB204;
+  --color-yellow-800: #E2D6A9;
+  --color-yellow-900: #F4E8BC;
+  --color-yellow-950: #F7F3E2;
+  --color-orange-50: #450D00;
+  --color-orange-100: #581701;
+  --color-orange-200: #721F01;
+  --color-orange-300: #8B2A01;
+  --color-orange-400: #9E3802;
+  --color-orange-500: #B44F04;
+  --color-orange-600: #DA7303;
+  --color-orange-700: #FBA02D;
+  --color-orange-800: #EAD1B5;
+  --color-orange-900: #F7E5CD;
+  --color-orange-950: #F9F1E7;
+  --color-red-50: #480700;
+  --color-red-100: #5E0A00;
+  --color-red-200: #771401;
+  --color-red-300: #921D01;
+  --color-red-400: #AA2200;
+  --color-red-500: #D11F00;
+  --color-red-600: #EA5E51;
+  --color-red-700: #FF968D;
+  --color-red-800: #EECDCA;
+  --color-red-900: #FBE1DE;
+  --color-red-950: #FBF0EF;
+  --color-rose-50: #480700;
+  --color-rose-100: #5E0A00;
+  --color-rose-200: #771401;
+  --color-rose-300: #921D01;
+  --color-rose-400: #AA2200;
+  --color-rose-500: #D11F00;
+  --color-rose-600: #EA5E51;
+  --color-rose-700: #FF968D;
+  --color-rose-800: #EECDCA;
+  --color-rose-900: #FBE1DE;
+  --color-rose-950: #FBF0EF;
+  --color-pink-50: #49001E;
+  --color-pink-100: #5D002B;
+  --color-pink-200: #790037;
+  --color-pink-300: #940045;
+  --color-pink-400: #AB0358;
+  --color-pink-500: #CA037A;
+  --color-pink-600: #E751A4;
+  --color-pink-700: #FF8ACD;
+  --color-pink-800: #EBCBDD;
+  --color-pink-900: #F6E1ED;
+  --color-pink-950: #FAEFF5;
+  --color-purple-50: #2F0F4E;
+  --color-purple-100: #3E1C5B;
+  --color-purple-200: #4E2B72;
+  --color-purple-300: #603591;
+  --color-purple-400: #7040A6;
+  --color-purple-500: #8458B6;
+  --color-purple-600: #A380C9;
+  --color-purple-700: #C9A5EF;
+  --color-purple-800: #DBD1E5;
+  --color-purple-900: #EBE5F2;
+  --color-purple-950: #F4F1F6;
+  --color-violet-50: #2F0F4E;
+  --color-violet-100: #3E1C5B;
+  --color-violet-200: #4E2B72;
+  --color-violet-300: #603591;
+  --color-violet-400: #7040A6;
+  --color-violet-500: #8458B6;
+  --color-violet-600: #A380C9;
+  --color-violet-700: #C9A5EF;
+  --color-violet-800: #DBD1E5;
+  --color-violet-900: #EBE5F2;
+  --color-violet-950: #F4F1F6;
+  --color-fuchsia-50: #2F0F4E;
+  --color-fuchsia-100: #3E1C5B;
+  --color-fuchsia-200: #4E2B72;
+  --color-fuchsia-300: #603591;
+  --color-fuchsia-400: #7040A6;
+  --color-fuchsia-500: #8458B6;
+  --color-fuchsia-600: #A380C9;
+  --color-fuchsia-700: #C9A5EF;
+  --color-fuchsia-800: #DBD1E5;
+  --color-fuchsia-900: #EBE5F2;
+  --color-fuchsia-950: #F4F1F6;
+  --color-emerald-50: #022A2A;
+  --color-emerald-100: #013935;
+  --color-emerald-200: #034A46;
+  --color-emerald-300: #015D56;
+  --color-emerald-400: #036D63;
+  --color-emerald-500: #018476;
+  --color-emerald-600: #02A997;
+  --color-emerald-700: #16D4BC;
+  --color-emerald-800: #B8E0D7;
+  --color-emerald-900: #CAF2E9;
+  --color-emerald-950: #E9F6F3;
+  --color-green-50: #022A2A;
+  --color-green-100: #013935;
+  --color-green-200: #034A46;
+  --color-green-300: #015D56;
+  --color-green-400: #036D63;
+  --color-green-500: #018476;
+  --color-green-600: #02A997;
+  --color-green-700: #16D4BC;
+  --color-green-800: #B8E0D7;
+  --color-green-900: #CAF2E9;
+  --color-green-950: #E9F6F3;
+  --color-teal-50: #022A2A;
+  --color-teal-100: #013935;
+  --color-teal-200: #034A46;
+  --color-teal-300: #015D56;
+  --color-teal-400: #036D63;
+  --color-teal-500: #018476;
+  --color-teal-600: #02A997;
+  --color-teal-700: #16D4BC;
+  --color-teal-800: #B8E0D7;
+  --color-teal-900: #CAF2E9;
+  --color-teal-950: #E9F6F3;
+  --color-cyan-50: #022A2A;
+  --color-cyan-100: #013935;
+  --color-cyan-200: #034A46;
+  --color-cyan-300: #015D56;
+  --color-cyan-400: #036D63;
+  --color-cyan-500: #018476;
+  --color-cyan-600: #02A997;
+  --color-cyan-700: #16D4BC;
+  --color-cyan-800: #B8E0D7;
+  --color-cyan-900: #CAF2E9;
+  --color-cyan-950: #E9F6F3;
+  --color-blue-50: #0A1F53;
+  --color-blue-100: #152C62;
+  --color-blue-200: #1D3A80;
+  --color-blue-300: #2348A1;
+  --color-blue-400: #3057B2;
+  --color-blue-500: #496EBE;
+  --color-blue-600: #7291D1;
+  --color-blue-700: #97B7F8;
+  --color-blue-800: #CCD6EB;
+  --color-blue-900: #E1E8F6;
+  --color-blue-950: #EFF2F8;
+  --color-sky-50: #0A1F53;
+  --color-sky-100: #152C62;
+  --color-sky-200: #1D3A80;
+  --color-sky-300: #2348A1;
+  --color-sky-400: #3057B2;
+  --color-sky-500: #496EBE;
+  --color-sky-600: #7291D1;
+  --color-sky-700: #97B7F8;
+  --color-sky-800: #CCD6EB;
+  --color-sky-900: #E1E8F6;
+  --color-sky-950: #EFF2F8;
+  --color-indigo-50: #0A1F53;
+  --color-indigo-100: #152C62;
+  --color-indigo-200: #1D3A80;
+  --color-indigo-300: #2348A1;
+  --color-indigo-400: #3057B2;
+  --color-indigo-500: #496EBE;
+  --color-indigo-600: #7291D1;
+  --color-indigo-700: #97B7F8;
+  --color-indigo-800: #CCD6EB;
+  --color-indigo-900: #E1E8F6;
+  --color-indigo-950: #EFF2F8;
+  --color-stone-50: #151210;
+  --color-stone-100: #1F1B19;
+  --color-stone-200: #2D2825;
+  --color-stone-300: #453E39;
+  --color-stone-400: #5D534B;
+  --color-stone-500: #7F7266;
+  --color-stone-600: #AA9C8B;
+  --color-stone-700: #CFC0AB;
+  --color-stone-800: #E5D7C1;
+  --color-stone-900: #F3E7D3;
+  --color-stone-950: #FAF6EE;
+  --color-zinc-50: #151210;
+  --color-zinc-100: #1F1B19;
+  --color-zinc-200: #2D2825;
+  --color-zinc-300: #453E39;
+  --color-zinc-400: #5D534B;
+  --color-zinc-500: #7F7266;
+  --color-zinc-600: #AA9C8B;
+  --color-zinc-700: #CFC0AB;
+  --color-zinc-800: #E5D7C1;
+  --color-zinc-900: #F3E7D3;
+  --color-zinc-950: #FAF6EE;
+  --color-neutral-50: #151210;
+  --color-neutral-100: #1F1B19;
+  --color-neutral-200: #2D2825;
+  --color-neutral-300: #453E39;
+  --color-neutral-400: #5D534B;
+  --color-neutral-500: #7F7266;
+  --color-neutral-600: #AA9C8B;
+  --color-neutral-700: #CFC0AB;
+  --color-neutral-800: #E5D7C1;
+  --color-neutral-900: #F3E7D3;
+  --color-neutral-950: #FAF6EE;
+  --color-gray-50: #151210;
+  --color-gray-100: #1F1B19;
+  --color-gray-200: #2D2825;
+  --color-gray-300: #453E39;
+  --color-gray-400: #5D534B;
+  --color-gray-500: #7F7266;
+  --color-gray-600: #AA9C8B;
+  --color-gray-700: #CFC0AB;
+  --color-gray-800: #E5D7C1;
+  --color-gray-900: #F3E7D3;
+  --color-gray-950: #FAF6EE;
+  --color-slate-50: #151210;
+  --color-slate-100: #1F1B19;
+  --color-slate-200: #2D2825;
+  --color-slate-300: #453E39;
+  --color-slate-400: #5D534B;
+  --color-slate-500: #7F7266;
+  --color-slate-600: #AA9C8B;
+  --color-slate-700: #CFC0AB;
+  --color-slate-800: #E5D7C1;
+  --color-slate-900: #F3E7D3;
+  --color-slate-950: #FAF6EE;
+}
+
+.theme-ink {
+  color-scheme: dark;
+  /* Canvas & surfaces */
+  --color-canvas: #161311;
+  --color-surface-1: #1E1A17;
+  --color-surface-2: #27221E;
+  --color-surface-3: #312B26;
+  --color-line: #3D3630;
+  --color-ivory: #F1E6D0;
+  --color-ivory-muted: #C8BBA2;
+  --color-gold: #F4B41A;
+  --color-ember: #C4321C;
+  --color-brand: #C4321C;
+  --color-brand-hover: #A92A16;
+
+  /* Status */
+  --color-success: #3DBDB4;
+  --color-success-soft: rgba(61, 189, 180, 0.12);
+  --color-success-line: rgba(61, 189, 180, 0.35);
+  --color-warning: #F4B41A;
+  --color-warning-soft: rgba(244, 180, 26, 0.12);
+  --color-warning-line: rgba(244, 180, 26, 0.35);
+  --color-danger: #F06A52;
+  --color-danger-soft: rgba(240, 106, 82, 0.12);
+  --color-danger-line: rgba(240, 106, 82, 0.35);
+  --color-info: #8FA8E8;
+  --color-info-soft: rgba(143, 168, 232, 0.12);
+  --color-info-line: rgba(143, 168, 232, 0.35);
+
+  /* Dance roles */
+  --color-role-lead: #5FC4C0;
+  --color-role-lead-soft: rgba(95, 196, 192, 0.15);
+  --color-role-lead-line: rgba(95, 196, 192, 0.35);
+  --color-role-follow: #EE7BA0;
+  --color-role-follow-soft: rgba(238, 123, 160, 0.15);
+  --color-role-follow-line: rgba(238, 123, 160, 0.35);
+
+  /* shadcn/ui semantic roles */
+  --color-background: #161311;
+  --color-foreground: #F1E6D0;
+  --color-card: #1E1A17;
+  --color-card-foreground: #F1E6D0;
+  --color-popover: #1E1A17;
+  --color-popover-foreground: #F1E6D0;
+  --color-primary: #C4321C;
+  --color-primary-foreground: #FAF4E6;
+  --color-secondary: #3DBDB4;
+  --color-secondary-foreground: #161311;
+  --color-muted: #27221E;
+  --color-muted-foreground: #C8BBA2;
+  --color-accent: #F4B41A;
+  --color-accent-foreground: #161311;
+  --color-destructive: #F06A52;
+  --color-destructive-foreground: #161311;
+  --color-border: #3D3630;
+  --color-input: #3D3630;
+  --color-ring: #F4B41A;
+
+  /* Legacy aliases (older components) */
+  --color-primary-base: #C4321C;
+  --color-primary-hover: #A92A16;
+  --color-primary-light: #3A1A14;
+  --color-secondary-base: #3DBDB4;
+  --color-secondary-hover: #5FC4C0;
+  --color-secondary-light: #0E3533;
+  --color-accent-tangerine: #F58A3D;
+  --color-bg-main: #161311;
+  --color-bg-card: #1E1A17;
+  --color-surface-warm: #27221E;
+  --color-bg-dark: #161311;
+  --color-text-main: #F1E6D0;
   --color-text-muted: #A8A29E;
+
+  /* Tailwind white/black swap so dark-first classes keep their contrast */
+  --color-white: #FAF4E6;
+  --color-black: #0C0A08;
+
+  /* Tailwind ladders, normal for ink */
+  --color-amber-50: #FFFBEC;
+  --color-amber-100: #FEF3C6;
+  --color-amber-200: #FEE685;
+  --color-amber-300: #FFD239;
+  --color-amber-400: #F9BC06;
+  --color-amber-500: #F69E03;
+  --color-amber-600: #D97708;
+  --color-amber-700: #B55200;
+  --color-amber-800: #943E03;
+  --color-amber-900: #7B3306;
+  --color-amber-950: #461901;
+  --color-yellow-50: #FFFBEC;
+  --color-yellow-100: #FEF3C6;
+  --color-yellow-200: #FEE685;
+  --color-yellow-300: #FFD239;
+  --color-yellow-400: #F9BC06;
+  --color-yellow-500: #F69E03;
+  --color-yellow-600: #D97708;
+  --color-yellow-700: #B55200;
+  --color-yellow-800: #943E03;
+  --color-yellow-900: #7B3306;
+  --color-yellow-950: #461901;
+  --color-orange-50: #FEF7EE;
+  --color-orange-100: #FEEDD6;
+  --color-orange-200: #FED7A9;
+  --color-orange-300: #FFBA71;
+  --color-orange-400: #FF8B1F;
+  --color-orange-500: #FC7101;
+  --color-orange-600: #EB5601;
+  --color-orange-700: #C43E01;
+  --color-orange-800: #9F2E02;
+  --color-orange-900: #7E2A0C;
+  --color-orange-950: #441306;
+  --color-red-50: #FEF3F2;
+  --color-red-100: #FDE3E0;
+  --color-red-200: #FDCBC7;
+  --color-red-300: #FDA69D;
+  --color-red-400: #FA6D5E;
+  --color-red-500: #F34127;
+  --color-red-600: #D93003;
+  --color-red-700: #B62600;
+  --color-red-800: #991D02;
+  --color-red-900: #7E2112;
+  --color-red-950: #440D05;
+  --color-rose-50: #FEF3F2;
+  --color-rose-100: #FDE3E0;
+  --color-rose-200: #FDCBC7;
+  --color-rose-300: #FDA69D;
+  --color-rose-400: #FA6D5E;
+  --color-rose-500: #F34127;
+  --color-rose-600: #D93003;
+  --color-rose-700: #B62600;
+  --color-rose-800: #991D02;
+  --color-rose-900: #7E2112;
+  --color-rose-950: #440D05;
+  --color-pink-50: #FDF2F8;
+  --color-pink-100: #FCE7F3;
+  --color-pink-200: #FCCEE8;
+  --color-pink-300: #FDA5D5;
+  --color-pink-400: #FB64B6;
+  --color-pink-500: #F6339A;
+  --color-pink-600: #E20276;
+  --color-pink-700: #C2015C;
+  --color-pink-800: #A2034C;
+  --color-pink-900: #861043;
+  --color-pink-950: #510424;
+  --color-purple-50: #F9F6FC;
+  --color-purple-100: #F0EAF7;
+  --color-purple-200: #E4D9F1;
+  --color-purple-300: #D1BCE9;
+  --color-purple-400: #B390DA;
+  --color-purple-500: #9C6FCF;
+  --color-purple-600: #8658BF;
+  --color-purple-700: #7249A6;
+  --color-purple-800: #603E87;
+  --color-purple-900: #4F336B;
+  --color-purple-950: #341F4D;
+  --color-violet-50: #F9F6FC;
+  --color-violet-100: #F0EAF7;
+  --color-violet-200: #E4D9F1;
+  --color-violet-300: #D1BCE9;
+  --color-violet-400: #B390DA;
+  --color-violet-500: #9C6FCF;
+  --color-violet-600: #8658BF;
+  --color-violet-700: #7249A6;
+  --color-violet-800: #603E87;
+  --color-violet-900: #4F336B;
+  --color-violet-950: #341F4D;
+  --color-fuchsia-50: #F9F6FC;
+  --color-fuchsia-100: #F0EAF7;
+  --color-fuchsia-200: #E4D9F1;
+  --color-fuchsia-300: #D1BCE9;
+  --color-fuchsia-400: #B390DA;
+  --color-fuchsia-500: #9C6FCF;
+  --color-fuchsia-600: #8658BF;
+  --color-fuchsia-700: #7249A6;
+  --color-fuchsia-800: #603E87;
+  --color-fuchsia-900: #4F336B;
+  --color-fuchsia-950: #341F4D;
+  --color-emerald-50: #F0FDFA;
+  --color-emerald-100: #CBFBF1;
+  --color-emerald-200: #96F7E4;
+  --color-emerald-300: #46ECD5;
+  --color-emerald-400: #0DD3BD;
+  --color-emerald-500: #0EB8A6;
+  --color-emerald-600: #0C9488;
+  --color-emerald-700: #07766E;
+  --color-emerald-800: #005F5A;
+  --color-emerald-900: #0B4F4A;
+  --color-emerald-950: #022F2E;
+  --color-green-50: #F0FDFA;
+  --color-green-100: #CBFBF1;
+  --color-green-200: #96F7E4;
+  --color-green-300: #46ECD5;
+  --color-green-400: #0DD3BD;
+  --color-green-500: #0EB8A6;
+  --color-green-600: #0C9488;
+  --color-green-700: #07766E;
+  --color-green-800: #005F5A;
+  --color-green-900: #0B4F4A;
+  --color-green-950: #022F2E;
+  --color-teal-50: #F0FDFA;
+  --color-teal-100: #CBFBF1;
+  --color-teal-200: #96F7E4;
+  --color-teal-300: #46ECD5;
+  --color-teal-400: #0DD3BD;
+  --color-teal-500: #0EB8A6;
+  --color-teal-600: #0C9488;
+  --color-teal-700: #07766E;
+  --color-teal-800: #005F5A;
+  --color-teal-900: #0B4F4A;
+  --color-teal-950: #022F2E;
+  --color-cyan-50: #F0FDFA;
+  --color-cyan-100: #CBFBF1;
+  --color-cyan-200: #96F7E4;
+  --color-cyan-300: #46ECD5;
+  --color-cyan-400: #0DD3BD;
+  --color-cyan-500: #0EB8A6;
+  --color-cyan-600: #0C9488;
+  --color-cyan-700: #07766E;
+  --color-cyan-800: #005F5A;
+  --color-cyan-900: #0B4F4A;
+  --color-cyan-950: #022F2E;
+  --color-blue-50: #F2F5FB;
+  --color-blue-100: #E2E9F6;
+  --color-blue-200: #CCD9F1;
+  --color-blue-300: #ABC1EC;
+  --color-blue-400: #80A0E1;
+  --color-blue-500: #5D84D7;
+  --color-blue-600: #416BC8;
+  --color-blue-700: #3259B4;
+  --color-blue-800: #2A4A91;
+  --color-blue-900: #294072;
+  --color-blue-950: #1B2845;
+  --color-sky-50: #F2F5FB;
+  --color-sky-100: #E2E9F6;
+  --color-sky-200: #CCD9F1;
+  --color-sky-300: #ABC1EC;
+  --color-sky-400: #80A0E1;
+  --color-sky-500: #5D84D7;
+  --color-sky-600: #416BC8;
+  --color-sky-700: #3259B4;
+  --color-sky-800: #2A4A91;
+  --color-sky-900: #294072;
+  --color-sky-950: #1B2845;
+  --color-indigo-50: #F2F5FB;
+  --color-indigo-100: #E2E9F6;
+  --color-indigo-200: #CCD9F1;
+  --color-indigo-300: #ABC1EC;
+  --color-indigo-400: #80A0E1;
+  --color-indigo-500: #5D84D7;
+  --color-indigo-600: #416BC8;
+  --color-indigo-700: #3259B4;
+  --color-indigo-800: #2A4A91;
+  --color-indigo-900: #294072;
+  --color-indigo-950: #1B2845;
+  --color-stone-50: #FAF6EE;
+  --color-stone-100: #F3E7D3;
+  --color-stone-200: #E5D7C1;
+  --color-stone-300: #CFC0AB;
+  --color-stone-400: #AA9C8B;
+  --color-stone-500: #7F7266;
+  --color-stone-600: #5D534B;
+  --color-stone-700: #453E39;
+  --color-stone-800: #2D2825;
+  --color-stone-900: #1F1B19;
+  --color-stone-950: #151210;
+  --color-zinc-50: #FAF6EE;
+  --color-zinc-100: #F3E7D3;
+  --color-zinc-200: #E5D7C1;
+  --color-zinc-300: #CFC0AB;
+  --color-zinc-400: #AA9C8B;
+  --color-zinc-500: #7F7266;
+  --color-zinc-600: #5D534B;
+  --color-zinc-700: #453E39;
+  --color-zinc-800: #2D2825;
+  --color-zinc-900: #1F1B19;
+  --color-zinc-950: #151210;
+  --color-neutral-50: #FAF6EE;
+  --color-neutral-100: #F3E7D3;
+  --color-neutral-200: #E5D7C1;
+  --color-neutral-300: #CFC0AB;
+  --color-neutral-400: #AA9C8B;
+  --color-neutral-500: #7F7266;
+  --color-neutral-600: #5D534B;
+  --color-neutral-700: #453E39;
+  --color-neutral-800: #2D2825;
+  --color-neutral-900: #1F1B19;
+  --color-neutral-950: #151210;
+  --color-gray-50: #FAF6EE;
+  --color-gray-100: #F3E7D3;
+  --color-gray-200: #E5D7C1;
+  --color-gray-300: #CFC0AB;
+  --color-gray-400: #AA9C8B;
+  --color-gray-500: #7F7266;
+  --color-gray-600: #5D534B;
+  --color-gray-700: #453E39;
+  --color-gray-800: #2D2825;
+  --color-gray-900: #1F1B19;
+  --color-gray-950: #151210;
+  --color-slate-50: #FAF6EE;
+  --color-slate-100: #F3E7D3;
+  --color-slate-200: #E5D7C1;
+  --color-slate-300: #CFC0AB;
+  --color-slate-400: #AA9C8B;
+  --color-slate-500: #7F7266;
+  --color-slate-600: #5D534B;
+  --color-slate-700: #453E39;
+  --color-slate-800: #2D2825;
+  --color-slate-900: #1F1B19;
+  --color-slate-950: #151210;
 }
 
 @layer base {
   :root {
-    /* Backgrounds & Surfaces — Deep Theatre Obsidian-Black Gallery Canvas */
-    --background: 24 25% 3%; /* #080706 - Deep Obsidian */
-    --foreground: 40 20% 97%; /* #F5F2EB - Warm Ivory */
-    --card: 24 20% 6%; /* #0E0C0A - Elevated Dark Obsidian */
-    --card-foreground: 40 20% 97%; /* #F5F2EB */
-    --popover: 24 20% 6%;
-    --popover-foreground: 40 20% 97%;
-
-    /* Salsa Energy (Primary) */
-    --primary: 347 77% 50%; /* #E11D48 - Fiery Rose */
-    --primary-foreground: 0 0% 100%;
-
-    /* Coastal Trust & Safety (Secondary) */
-    --secondary: 175 80% 18%; /* Deep rich ocean teal for AAA contrast against white text */
-    --secondary-foreground: 0 0% 100%;
-
-    /* Surfaces & Muted */
-    --muted: 24 18% 13%;
-    --muted-foreground: 38 18% 75%; /* WCAG AA compliant */
-
-    /* Accent & Warnings */
-    --accent: 25 95% 53%; /* #F97316 - Accent Tangerine */
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 75% 42%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 24 20% 16%;
-    --input: 24 20% 16%;
-    --ring: 45 93% 47%; /* #FBBF24 - Havana Gold */
-    --radius: 0.75rem;
-    color-scheme: dark;
+    color-scheme: light;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
+  /* An ink subtree repaints its own text colour (the body's is paper-ink) */
+  .theme-ink {
+    color: var(--color-ivory);
+  }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-sans);
+  }
+
+  /* Poster headlines: Anton has one weight, so never fake bold or italic */
+  h1,
+  h2,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-synthesis: none;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
   }
 
   /* Accessible visible focus indicators using Havana Gold */
@@ -149,12 +706,10 @@
     position: relative;
   }
 
-  /* Warm Havana Nocturne Stage Lighting and Film Grain */
-  .havana-stage-lighting {
-    background-image:
-      radial-gradient(circle at 15% 15%, rgba(245, 158, 11, 0.12), transparent 55%),
-      radial-gradient(circle at 85% 30%, rgba(225, 29, 72, 0.10), transparent 60%);
-    background-attachment: fixed;
+  /* Paper grain under every page (9 KB tile) */
+  .paper-grain {
+    background-image: url("/images/editorial/paper-texture.jpg");
+    background-size: 384px;
   }
 
   .film-grain {
@@ -211,31 +766,16 @@
     will-change: transform;
   }
 
-  /* 3D Specular Glass Art-House Cards */
+  /* Print cards: flat, ruled, a hard ink offset on hover */
   .art-card {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.065) 0%, rgba(255, 255, 255, 0.015) 50%, rgba(245, 158, 11, 0.04) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease;
-  }
-
-  .art-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.45) 50%, transparent 100%);
-    pointer-events: none;
-    z-index: 1;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
   }
 
   .art-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 25px 60px -15px rgba(245, 158, 11, 0.22);
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 var(--color-ivory);
   }
 
   /* Dancing Waveform Equalizer */

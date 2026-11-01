@@ -47,7 +47,7 @@ export function SectionHeading({
           {highlight && (
             <>
               {" "}
-              <span className="font-display italic font-normal text-gold normal-case">
+              <span className="font-display font-normal text-gold ">
                 {highlight}
               </span>
             </>

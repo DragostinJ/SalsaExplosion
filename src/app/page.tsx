@@ -1,210 +1,390 @@
-import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import dynamic from "next/dynamic";
+import Link from "next/link";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
-import { UpcomingEventPosters } from "@/components/home/UpcomingEventPosters";
+import { ClaveMark, HeroPicture, SongStripes } from "@/components/poster/poster-art";
 import {
-  ArtHouseGallerySection,
-  InsideCubanCircleGallery,
-} from "@/components/home/ArtHouseGallerySection";
-import { ACADEMY_METRICS, VENUE_INFO } from "@/lib/academy-data";
+  GEAR_INKS,
+  KICKER,
+  POSTER_BLOCKS,
+  POSTER_BUTTON,
+  POSTER_BUTTON_COLORS,
+  POSTER_INK,
+  TYPE,
+  gearTextInk,
+  halftone,
+} from "@/components/poster/poster-kit";
+import { upcomingCanonicalEvents } from "@/lib/academy-data";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import {
+  DOOR_PRICING,
+  FACTS,
+  FEATURED_SONG,
+  MOVE_FAMILIES,
+  PHOTOS,
+  REAL_PHOTOS,
+  SCHEDULE,
+  SONG_COUNT,
+  SPANISH_DAY,
+  VENUE_INFO,
+  gearsIn,
+} from "@/lib/site-content";
 
-const BohVenueSpotlight = dynamic(
-  () => import("@/components/home/BohVenueSpotlight").then((m) => m.BohVenueSpotlight),
-  {
-    loading: () => <div className="py-20 min-h-[400px] animate-pulse bg-muted/20" />,
-  }
-);
-
-// Re-render hourly so finished events leave the "What's On" posters without a redeploy
+// Re-render hourly so finished events leave the "Próximas funciones" stubs without a redeploy
 export const revalidate = 3600;
 
+const GRAPHICS = MEDIA_MANIFEST.mockupGraphics;
+
+/** Screen-print illustrations (transparent cut-outs on the paper) */
+const FRIEZE = [
+  { art: GRAPHICS.trumpet, word: "Metales" },
+  { art: GRAPHICS.couple, word: "La pareja" },
+  { art: GRAPHICS.conga, word: "Tumbadora" },
+  { art: GRAPHICS.palmMalecon, word: "Malecón" },
+  { art: GRAPHICS.guiro, word: "Güiro" },
+  { art: GRAPHICS.rueda, word: "La rueda" },
+  { art: GRAPHICS.timbales, word: "Timbales" },
+  { art: GRAPHICS.car, word: "Almendrón" },
+] as const;
+
+/** Caption inks that read on the paper (mustard doesn't) */
+const FRIEZE_INKS = ["text-poster-red", "text-poster-teal", "text-ink", "text-poster-blue"];
+
 export default function Home() {
+  const events = upcomingCanonicalEvents().slice(0, 3);
+  const legend = gearsIn(FEATURED_SONG);
+
   return (
-    <div className="flex min-h-screen flex-col bg-canvas text-ivory">
+    <div className="flex min-h-screen flex-col text-ink">
       <main id="main-content" tabIndex={-1} className="flex-1">
         <LiveTonightBanner />
 
-        {/* ================= SECTION 1: EDITORIAL SPLIT HERO ================= */}
-        <section className="relative overflow-hidden py-4 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-canvas border-b border-line text-ivory">
-          {/* Subtle Ambient Studio Light */}
+        {/* HERO: film-poster composition */}
+        <section className="relative overflow-hidden px-4 pb-10 pt-8 md:px-10 md:pb-14 md:pt-12">
           <div
-            className="absolute inset-0 pointer-events-none opacity-30 mix-blend-screen"
-            style={{
-              backgroundImage:
-                "radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.18), transparent 70%), radial-gradient(circle at 10% 30%, rgba(225, 29, 72, 0.12), transparent 50%)",
-            }}
             aria-hidden="true"
+            className="absolute -right-28 top-16 h-[380px] w-[380px] rounded-full bg-poster-red md:right-[8%] md:top-10 md:h-[600px] md:w-[600px]"
           />
+          <div aria-hidden="true" className="absolute left-0 top-[52%] h-40 w-3/4 md:top-24 md:h-64 md:w-1/3" style={halftone(POSTER_INK.mustard)} />
 
-          <div className="relative z-10 mx-auto w-full max-w-7xl">
-            {/* Top Cultural Tag Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-2.5 mb-4 sm:pb-4 sm:mb-8">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-black uppercase tracking-widest text-gold">
-                  BOH STUDIOS BOURNEMOUTH • THURSDAYS &amp; SUNDAYS
+          <div className="relative mx-auto grid max-w-7xl gap-8 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-7">
+              <p className={KICKER}>
+                Bournemouth · Cuban salsa · since {FACTS.since}
+              </p>
+              <h1 className={`mt-3 ${TYPE.hero}`}>
+                Salsa
+                <br />
+                Explo<span className="text-poster-blue">s</span>ion
+                <span className="mt-4 block font-sans text-lg font-bold normal-case leading-snug tracking-normal md:text-2xl">
+                  Cuban salsa &amp; rueda de casino classes in Bournemouth
                 </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Link
-                  href="/venues"
-                  className="text-xs font-bold uppercase tracking-widest text-ivory-muted hover:text-gold transition-colors"
-                >
-                  {VENUE_INFO.streetAddress.toUpperCase()}, {VENUE_INFO.postcode} →
+              </h1>
+              <p className="mt-4 max-w-md text-lg font-medium">
+                With {FACTS.founderShort}, every Thursday and Sunday at {VENUE_INFO.shortName}. £{DOOR_PRICING.oneClassPounds}{" "}
+                for one class, £{DOOR_PRICING.twoClassesPounds} for two, paid at the door. Then practise every song at home.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/dashboard/schedule" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink}`}>
+                  Thu &amp; Sun classes
+                </Link>
+                <Link href="/music" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper`}>
+                  Practise the songs
                 </Link>
               </div>
             </div>
 
-            {/* 12-Column Architectural Split (6/6 Balanced on Desktop, Top Visual on Mobile) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-10 items-center">
-              {/* Left Column (6 cols): Editorial Typography & Direct Action */}
-              <div className="order-2 lg:order-1 lg:col-span-6 flex flex-col items-start text-left space-y-3.5 sm:space-y-5">
-                {/* Monumental Architectural Headline */}
-                <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-ivory">
-                  Cuban Salsa &amp; Rueda de Casino
-                  <span className="block font-sans text-lg sm:text-2xl font-normal tracking-tight text-ivory-muted mt-2 sm:mt-3">
-                    In the heart of Bournemouth with Maestro Enrique Perez Valdes.
-                  </span>
-                </h1>
-
-                <p className="text-sm sm:text-lg text-ivory-muted leading-relaxed max-w-xl mt-2 sm:mt-4">
-                  Directed by Salsa UK Lifetime Achievement Award winner Maestro Enrique Perez Valdes. Join our weekly Thursday and Sunday classes (£12 / £14 at the door) and major Cuban festivals.
-                </p>
-
-                {/* Two Solid Architectural CTAs */}
-                <div className="pt-1 sm:pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-                  <Button
-                    asChild
-                    className="h-12 px-6 text-xs sm:text-sm font-black uppercase tracking-wider bg-brand hover:bg-brand-hover text-white rounded-xl shadow-xs transition-transform active:scale-[0.99]"
-                  >
-                    <Link href="/dashboard/schedule">
-                      <span>Thu &amp; Sun Classes</span>
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="h-12 px-6 text-xs sm:text-sm font-bold uppercase tracking-wider border border-line hover:border-gold/40 bg-surface-3 text-ivory rounded-xl"
-                  >
-                    <Link href="/events">
-                      <span>Festival Tickets</span>
-                    </Link>
-                  </Button>
-                </div>
-                <p className="text-xs text-ivory-muted mt-1 sm:mt-2">
-                  Weekly classes: pay at the door &middot; Festivals: book online
-                </p>
-
-                {/* Architectural Metrics Bar */}
-                <div className="mt-4 sm:mt-8 pt-4 sm:pt-6 border-t border-line grid grid-cols-3 gap-4 sm:gap-6 w-full">
-                  <div>
-                    <div className="text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.yearsInUk}</div>
-                    <div className="text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.yearsInUkLabel}</div>
-                  </div>
-                  <div>
-                    <div className="text-xl sm:text-2xl font-black text-ivory">{ACADEMY_METRICS.dancersMentored}</div>
-                    <div className="text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.dancersMentoredLabel}</div>
-                  </div>
-                  <div>
-                    <div className="text-xl sm:text-2xl font-black text-gold">{ACADEMY_METRICS.partnerPolicy}</div>
-                    <div className="text-xs font-semibold text-ivory-muted uppercase tracking-wide">{ACADEMY_METRICS.partnerPolicyLabel}</div>
-                  </div>
-                </div>
+            <div className="md:col-span-5">
+              <div className="relative rotate-[-3deg] border-[6px] border-ink shadow-[14px_14px_0_var(--color-poster-teal)]">
+                <HeroPicture
+                  desktop={PHOTOS.laVueltaHero}
+                  mobile={PHOTOS.laVueltaHeroMobile}
+                  className="aspect-[4/5] w-full object-cover object-[68%_center] md:aspect-[5/4]"
+                />
               </div>
+            </div>
+          </div>
 
-              {/* Right Column (6 cols on desktop, top banner on mobile): Full-Colour Cinematic Dance Frame */}
-              <div className="order-1 lg:order-2 lg:col-span-6 relative w-full">
-                <div className="relative aspect-[16/10] lg:aspect-[4/3] w-full overflow-hidden rounded-2xl bg-canvas shadow-2xl group">
-                  {MEDIA_MANIFEST.heroPortrait.src ? (
-                    <Image
-                      src={MEDIA_MANIFEST.heroPortrait.src}
-                      alt={MEDIA_MANIFEST.heroPortrait.alt}
-                      fill
-                      priority
-                      sizes={MEDIA_MANIFEST.heroPortrait.sizes}
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                    />
-                  ) : (
-                    <>
-                      {/* Architectural Stage Frame awaiting official portrait */}
-                      <div className="absolute inset-0 pointer-events-none border border-white/[0.04]">
-                        <div className="absolute top-3 right-3 text-white/20 text-xs font-mono select-none">+</div>
-                        <div className="absolute bottom-3 right-3 text-white/20 text-xs font-mono select-none">+</div>
-                        <div className="absolute inset-x-0 top-1/2 border-t border-white/[0.03]" />
-                      </div>
-                      <div className="absolute inset-0 flex items-center justify-center font-display italic font-bold text-6xl sm:text-7xl text-amber-200/30 select-none">
-                        EPV
-                      </div>
-                    </>
-                  )}
-                  {/* Soft left-edge and bottom-edge gradient vignettes to melt into Obsidian background */}
-                  <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#080706] via-[#080706]/15 to-transparent pointer-events-none z-10" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080706] via-[#080706]/10 to-transparent pointer-events-none z-10" />
-                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-5 text-left z-20">
-                    <span className="text-xs font-black uppercase tracking-widest text-gold block mb-0.5">
-                      BOH Studios Bournemouth Residency
-                    </span>
-                    <p className="text-xs sm:text-sm font-semibold text-stone-200 leading-snug">
-                      Cuban Salsa Social Dancing &amp; Rueda de Casino
+          <dl className="relative mx-auto mt-12 grid max-w-7xl grid-cols-2 gap-x-6 gap-y-3 border-t-4 border-ink bg-paper px-1 pb-2 pt-4 text-xs uppercase tracking-wider md:grid-cols-4">
+            {[
+              ["Dirección", FACTS.founder],
+              ["Desde", FACTS.origin],
+              ["Lugar", VENUE_INFO.name],
+              ["Funciones", SCHEDULE.map((day) => SPANISH_DAY[day.dayName]).join(" & ")],
+            ].map(([term, value]) => (
+              <div key={term}>
+                <dt className="opacity-70">{term}</dt>
+                <dd className="font-bold">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        {/* ILLUSTRATION FRIEZE */}
+        <section aria-label="Illustrations" className="grid grid-cols-2 border-y-4 border-ink md:grid-cols-4">
+          {FRIEZE.map((item, index) => (
+            <figure
+              key={item.word}
+              className="flex flex-col items-center border-ink px-4 pb-4 max-md:odd:border-r-4 max-md:[&:nth-last-child(n+3)]:border-b-4 md:[&:not(:nth-child(4n))]:border-r-4 md:[&:nth-child(-n+4)]:border-b-4"
+            >
+              <Image
+                src={item.art.src}
+                alt={item.art.alt}
+                width={item.art.width}
+                height={item.art.height}
+                sizes={item.art.sizes}
+                className="w-full max-w-[220px]"
+              />
+              <figcaption className={`font-display ${TYPE.card} ${FRIEZE_INKS[index % FRIEZE_INKS.length]}`}>{item.word}</figcaption>
+            </figure>
+          ))}
+        </section>
+
+        {/* WEEKLY SCHEDULE: the "cartelera" */}
+        <section id="cartelera" className="bg-poster-mustard px-4 py-14 md:px-10 md:py-20">
+          <div className="mx-auto max-w-7xl">
+            <p className={KICKER}>Pay at the door · no partner needed</p>
+            <h2 className={`mt-3 ${TYPE.section}`}>Cartelera semanal</h2>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {SCHEDULE.map((day) => (
+                <article key={day.id} className="border-4 border-ink bg-paper p-5 md:p-7">
+                  <h3 className={`font-display text-poster-red ${TYPE.section}`}>{SPANISH_DAY[day.dayName]}</h3>
+                  <p className="mt-2 font-bold uppercase tracking-wider">{day.headline}</p>
+                  <p className="text-sm">Doors {day.doorsTime}</p>
+                  <ul className="mt-5 border-t-4 border-ink">
+                    {day.classes.map((session) => (
+                      <li key={session.id} className="flex gap-4 border-b-2 border-ink py-3">
+                        <span className={`w-20 shrink-0 font-display tabular-nums ${TYPE.card}`}>{session.time}</span>
+                        <span>
+                          <span className="block font-bold">{session.title}</span>
+                          <span className="text-sm">
+                            {session.level} · {session.instructor}
+                          </span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  {day.social && (
+                    <p className="mt-4 text-sm font-bold uppercase">
+                      Then: {day.social.title} · {day.social.time}
                     </p>
-                  </div>
-                </div>
-              </div>
+                  )}
+                </article>
+              ))}
             </div>
+            <div className="mt-10 flex flex-col gap-4 border-t-4 border-ink pt-6 md:flex-row md:items-center md:gap-10">
+              <p className={`font-display ${TYPE.number}`}>
+                £{DOOR_PRICING.oneClassPounds} / £{DOOR_PRICING.twoClassesPounds}
+              </p>
+              <p className="max-w-xl font-semibold">
+                {DOOR_PRICING.summaryBadge}. {DOOR_PRICING.paymentMethodNote}.
+              </p>
+              <Link href="/dashboard/schedule" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} md:ml-auto`}>
+                Full timetable
+              </Link>
+            </div>
+            <figure className="mt-10 border-4 border-ink">
+              <div className="relative aspect-[16/9] md:aspect-[21/9]">
+                <Image src={PHOTOS.socialNight.src} alt={PHOTOS.socialNight.alt} fill sizes="100vw" className="object-cover" />
+              </div>
+              <figcaption className={`border-t-4 border-ink bg-poster-red px-4 py-2 font-display text-ink ${TYPE.card}`}>
+                Y después: la fiesta
+              </figcaption>
+            </figure>
           </div>
         </section>
 
-        {/* ================= SECTION 2: 4 CORE PHOTO GATEWAYS ================= */}
-        <ArtHouseGallerySection />
-
-        {/* ================= SECTION 3: WHAT'S ON: FESTIVALS & SPECIAL EVENTS (VERTICAL POSTERS) ================= */}
-        <section className="cv-auto py-14 sm:py-20 border-b border-line bg-surface-1 text-ivory">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-line">
-              <div>
-                <h2 className="text-2xl font-black sm:text-4xl uppercase tracking-tight text-white leading-none">
-                  What&apos;s On:{" "}
-                  <span className="font-display italic font-normal text-amber-300 lowercase">
-                    festivals &amp; congresses
-                  </span>
-                </h2>
-                <p className="mt-2 text-xs sm:text-sm text-ivory-muted">
-                  Book official online passes for Salsa Explosion flagship congresses, bank holiday weekenders, and costume parties in Bournemouth.
-                </p>
-              </div>
-              <Button asChild variant="outline" size="sm" className="shrink-0 text-xs font-bold border-white/20 bg-white/5 text-stone-200 hover:bg-white/10 hover:text-white transition-colors rounded-xl">
-                <Link href="/events">
-                  Browse All 2026/2027 Passes →
+        {/* SONG ANATOMY: the practice player, on ink */}
+        <section className="theme-ink bg-ink px-4 py-14 text-paper md:px-10 md:py-20">
+          <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-12">
+            <div className="min-w-0 md:col-span-5">
+              <p className={`${KICKER} text-poster-mustard`}>Practica en casa</p>
+              <h2 className={`mt-3 ${TYPE.section}`}>La anatomía de una timba</h2>
+              <p className="mt-6 max-w-sm">
+                <strong>{FEATURED_SONG.title}</strong> by {FEATURED_SONG.artist}: {FEATURED_SONG.segments.length} sections at{" "}
+                {FEATURED_SONG.bpm} BPM. The player shows what to dance now and what&apos;s next, timed to the music.{" "}
+                {SONG_COUNT} songs mapped so far.
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-2 text-xs font-bold uppercase">
+                {legend.map((gear) => (
+                  <li key={gear} className="flex items-center gap-2 border-2 border-paper px-2 py-1">
+                    <span className="h-3 w-3 border border-paper" style={{ backgroundColor: GEAR_INKS[gear] }} aria-hidden="true" />
+                    {gear}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href={`/music/${FEATURED_SONG.id}`} className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.mustard}`}>
+                  Open the player →
                 </Link>
-              </Button>
+                <Link href="/music" className={`${POSTER_BUTTON} border-paper text-paper`}>
+                  All {SONG_COUNT} songs
+                </Link>
+              </div>
+              <figure className="mt-10 max-w-sm border-4 border-paper">
+                <Image
+                  src={PHOTOS.practiceHome.src}
+                  alt={PHOTOS.practiceHome.alt}
+                  width={PHOTOS.practiceHome.width}
+                  height={PHOTOS.practiceHome.height}
+                  sizes="(max-width: 768px) 100vw, 24rem"
+                  className="w-full object-cover"
+                />
+                <figcaption className={`bg-paper px-3 py-2 font-display text-poster-red ${TYPE.card}`}>La clase sigue en casa</figcaption>
+              </figure>
             </div>
-
-            {/* Next festivals & parties from UPCOMING_EVENTS (finished ones drop off) */}
-            <UpcomingEventPosters />
+            <div className="min-w-0 md:col-span-7">
+              <SongStripes
+                song={FEATURED_SONG}
+                palette={GEAR_INKS}
+                inkOn={gearTextInk}
+                className="h-[680px] border-4 border-paper text-sm font-bold uppercase md:h-[760px]"
+              />
+            </div>
           </div>
         </section>
 
-        {/* Interactive Instructor Roster Section */}
+        {/* EVENTS: ticket stubs */}
+        {events.length > 0 && (
+          <section className="bg-poster-red px-4 py-14 text-ink md:px-10 md:py-20">
+            <div className="mx-auto max-w-7xl">
+              <p className={KICKER}>Festivals &amp; parties · book online</p>
+              <h2 className={`mt-3 ${TYPE.section}`}>Próximas funciones</h2>
+              <ul className="mt-10 grid gap-5 md:grid-cols-3">
+                {events.map((event, index) => (
+                  <li key={event.slug} className="flex border-4 border-ink bg-paper">
+                    <p className="flex items-center border-r-4 border-dashed border-ink px-3 text-sm font-bold uppercase tracking-wider [writing-mode:vertical-rl]">
+                      {event.dateBadge}
+                    </p>
+                    <div className="flex flex-1 flex-col gap-2 p-4">
+                      <p className="text-xs font-bold uppercase tracking-wider">
+                        {index === 0 ? "Next up · " : ""}
+                        {event.categoryLabel}
+                      </p>
+                      <h3 className={`font-display ${TYPE.card}`}>{event.title}</h3>
+                      <p className="text-sm font-semibold">{event.priceDisplay}</p>
+                      <Link
+                        href={`/events/${event.slug}`}
+                        className="mt-auto inline-flex min-h-[40px] items-center font-bold uppercase underline underline-offset-4"
+                      >
+                        Tickets →
+                      </Link>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/events" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} mt-8`}>
+                All festivals &amp; passes
+              </Link>
+            </div>
+          </section>
+        )}
+
+        {/* EL MAESTRO (real photo) */}
+        <section className="px-4 py-14 md:px-10 md:py-20">
+          <div className="mx-auto grid max-w-7xl items-center gap-8 md:grid-cols-12">
+            <div className="relative mx-auto w-64 md:col-span-4 md:w-full">
+              <div className="absolute -left-4 -top-4 h-full w-full" style={halftone(POSTER_INK.red)} aria-hidden="true" />
+              <Image
+                src={REAL_PHOTOS.maestro.src}
+                alt={REAL_PHOTOS.maestro.alt}
+                width={REAL_PHOTOS.maestro.width}
+                height={REAL_PHOTOS.maestro.height}
+                sizes="(max-width: 768px) 16rem, 30vw"
+                className="relative w-full border-[6px] border-ink object-cover"
+              />
+            </div>
+            <div className="md:col-span-8">
+              <p className={KICKER}>El maestro</p>
+              <h2 className={`mt-3 ${TYPE.section}`}>{FACTS.founder}</h2>
+              <dl className="mt-8 grid grid-cols-2 gap-6 md:grid-cols-3">
+                {[
+                  [FACTS.heritage, "of Cuban dance in the UK"],
+                  [FACTS.dancers, FACTS.dancersLabel.toLowerCase()],
+                  [FACTS.origin, FACTS.award],
+                ].map(([value, label]) => (
+                  <div key={value} className="border-t-4 border-ink pt-3">
+                    <dt className={`font-display ${TYPE.card}`}>{value}</dt>
+                    <dd className="mt-1 text-sm">{label}</dd>
+                  </div>
+                ))}
+              </dl>
+              <Link href="/about" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} mt-8`}>
+                Our story
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* The teaching team */}
         <InstructorRosterSection id="instructors" />
 
-        {/* Sleek Architectural Callout Banner for Gift Vouchers */}
-        <div className="border-b border-line bg-surface-2/60 py-3.5 px-4 text-center">
-          <p className="text-xs text-ivory-muted">
-            Looking for a unique Cuban dance gift?{" "}
-            <Link href="/pricing#vouchers" className="font-bold text-amber-300 hover:text-amber-200 underline underline-offset-4 decoration-amber-400/40 ml-1">
-              Explore Salsa Explosion Dance Gift Vouchers &rarr;
+        {/* THE VENUE (real photo) */}
+        <section className="grid border-y-4 border-ink md:grid-cols-2">
+          <figure className="relative aspect-[4/3] border-b-4 border-ink md:border-b-0 md:border-r-4">
+            <Image
+              src={REAL_PHOTOS.venueSocial.src}
+              alt={REAL_PHOTOS.venueSocial.alt}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <figcaption className="absolute bottom-3 left-3 bg-paper px-2 py-1 text-xs font-bold uppercase">{VENUE_INFO.name}</figcaption>
+          </figure>
+          <div className="flex flex-col justify-center gap-4 bg-poster-teal p-6 text-ink md:p-10">
+            <h2 className={TYPE.section}>{VENUE_INFO.shortName}</h2>
+            <p className="text-lg font-medium">{VENUE_INFO.fullAddress}</p>
+            <p>
+              {VENUE_INFO.floor}. {VENUE_INFO.parkingSummary}.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <a href={VENUE_INFO.googleMapsUrl} className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink}`}>
+                Directions
+              </a>
+              <Link href="/venues" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline}`}>
+                Parking guide
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* MOVE LIBRARY TEASER: six mini posters */}
+        <section className="px-4 py-14 md:px-10 md:py-20">
+          <div className="mx-auto max-w-7xl">
+            <p className={KICKER}>Próximamente · coming soon</p>
+            <h2 className={`mt-3 ${TYPE.section}`}>La biblioteca de pasos</h2>
+            <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {MOVE_FAMILIES.map((family, index) => {
+                const block = POSTER_BLOCKS[index % POSTER_BLOCKS.length];
+                return (
+                  <li key={family.name} className={`border-4 border-ink ${block.bg}`}>
+                    <div className="relative m-3 aspect-[4/5] overflow-hidden border-4 border-ink">
+                      <Image src={family.photo.src} alt={family.photo.alt} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-cover" />
+                    </div>
+                    <div className={`px-4 pb-5 ${block.text}`}>
+                      <p className={`font-display ${TYPE.number}`}>{String(index + 1).padStart(2, "0")}</p>
+                      <h3 className={`mt-1 font-display ${TYPE.card}`}>{family.spanish}</h3>
+                      <p className="mt-2 text-sm font-medium">
+                        {family.name}: {family.note}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+
+        {/* Gift vouchers */}
+        <div className="flex flex-col items-center gap-3 border-t-4 border-ink bg-ink px-4 py-6 text-center text-paper md:flex-row md:justify-center md:gap-6">
+          <ClaveMark color={POSTER_INK.mustard} className="h-5 w-40" />
+          <p className="text-sm">
+            Looking for a Cuban dance gift?{" "}
+            <Link href="/pricing#vouchers" className="font-bold text-poster-mustard underline underline-offset-4">
+              Salsa Explosion gift vouchers →
             </Link>
           </p>
         </div>
-
-        {/* ================= SECTION 5: INSIDE THE CUBAN CIRCLE & BOH VENUE ================= */}
-        <InsideCubanCircleGallery />
-
-        {/* Flagship BOH Studios Venue & Arrival Guide */}
-        <BohVenueSpotlight />
       </main>
     </div>
   );

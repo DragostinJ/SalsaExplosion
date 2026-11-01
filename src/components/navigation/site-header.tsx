@@ -292,7 +292,7 @@ export function SiteHeader({
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b-4 border-ink bg-paper/95 text-ink backdrop-blur supports-[backdrop-filter]:bg-paper/85">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8 gap-3 sm:gap-4">
         {/* Brand Logo & Context-Aware Left Nav */}
         <div className="flex items-center gap-2.5 lg:gap-5 min-w-0 flex-1">
@@ -301,14 +301,14 @@ export function SiteHeader({
             data-testid="site-header-brand"
             className="flex items-center gap-2 font-bold tracking-tight text-foreground transition-opacity hover:opacity-85 shrink-0 whitespace-nowrap"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand text-white shadow-sm shrink-0">
-              <Flame className="h-5 w-5 fill-white" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border-[3px] border-ink bg-poster-red text-ink shrink-0">
+              <Flame className="h-5 w-5 fill-ink" />
             </div>
             <div className="flex flex-col shrink-0 whitespace-nowrap">
-              <span className="text-lg font-black leading-none tracking-tight whitespace-nowrap">
-                Salsa <span className="text-rose-400">Explosion</span>
+              <span className="font-display text-2xl leading-none whitespace-nowrap">
+                Salsa <span className="text-poster-red">Explosion</span>
               </span>
-              <span className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mt-0.5 whitespace-nowrap">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] mt-0.5 whitespace-nowrap">
                 Bournemouth • Cuba
               </span>
             </div>
@@ -322,8 +322,8 @@ export function SiteHeader({
                   href="/dashboard/schedule"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold transition-colors shrink-0 ${
                     pathname === "/dashboard/schedule"
-                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
+                      ? "bg-ink text-paper font-bold"
+                      : "text-ink hover:bg-ink/10"
                   }`}
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
@@ -333,8 +333,8 @@ export function SiteHeader({
                   href="/music"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold transition-colors shrink-0 ${
                     pathname.startsWith("/music")
-                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
+                      ? "bg-ink text-paper font-bold"
+                      : "text-ink hover:bg-ink/10"
                   }`}
                 >
                   <Music className="h-3.5 w-3.5" />
@@ -373,8 +373,8 @@ export function SiteHeader({
                   href="/dashboard/schedule"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname === "/dashboard/schedule"
-                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
+                      ? "bg-ink text-paper font-bold"
+                      : "text-ink hover:bg-ink/10"
                   }`}
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
@@ -384,8 +384,8 @@ export function SiteHeader({
                   href="/music"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname.startsWith("/music")
-                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
+                      ? "bg-ink text-paper font-bold"
+                      : "text-ink hover:bg-ink/10"
                   }`}
                 >
                   <Music className="h-3.5 w-3.5" />
@@ -395,8 +395,8 @@ export function SiteHeader({
                   href="/events"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
                     pathname.startsWith("/events")
-                      ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-                      : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
+                      ? "bg-ink text-paper font-bold"
+                      : "text-ink hover:bg-ink/10"
                   }`}
                 >
                   <Sparkles className="h-3.5 w-3.5" />
@@ -438,8 +438,8 @@ export function SiteHeader({
                     href={item.href}
                     className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors whitespace-nowrap ${
                       item.active
-                        ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-                        : "text-muted-foreground hover:bg-surface-3/80 hover:text-ivory"
+                        ? "bg-ink text-paper font-bold"
+                        : "text-ink hover:bg-ink/10"
                     }`}
                   >
                     <Icon className="h-3.5 w-3.5" />
@@ -508,16 +508,16 @@ export function SiteHeader({
             <div className="hidden md:flex items-center gap-2 sm:gap-2.5 shrink-0">
               <Link
                 href="/sign-in"
-                className="rounded-xl border border-line bg-transparent px-3 py-1.5 text-xs font-bold text-ivory hover:bg-surface-3 transition-colors shrink-0"
+                className="inline-flex min-h-9 items-center border-2 border-ink bg-transparent px-3 text-xs font-bold uppercase tracking-wider text-ink hover:bg-ink hover:text-paper transition-colors shrink-0"
               >
                 Sign In
               </Link>
               <Link
                 href="/events"
                 data-testid="site-header-book-cta"
-                className="rounded-xl bg-brand px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-brand-hover transition-colors min-h-9 flex items-center justify-center whitespace-nowrap shrink-0"
+                className="border-2 border-ink bg-brand px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-ink hover:-translate-y-0.5 transition-transform min-h-9 flex items-center justify-center whitespace-nowrap shrink-0"
               >
-                Book Festival Passes &rarr;
+                Festival passes &rarr;
               </Link>
             </div>
           )}
@@ -531,7 +531,7 @@ export function SiteHeader({
             }}
             aria-label="Open mobile navigation menu"
             aria-expanded={isMobileNavOpen}
-            className="flex xl:hidden h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface-1 text-muted-foreground hover:text-ivory hover:bg-surface-3 transition-colors shrink-0 shadow-xs"
+            className="flex xl:hidden h-10 w-10 items-center justify-center border-2 border-ink text-ink hover:bg-ink hover:text-paper transition-colors shrink-0"
           >
             <Menu className="h-5 w-5" />
           </button>

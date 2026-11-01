@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Bournemouth's Premier Cuban Salsa & Rueda de Casino Academy directed by Enrique Perez Valdes.",
     start_url: "/dashboard/schedule",
     display: "standalone",
-    background_color: "#0F172A",
-    theme_color: "#E11D48",
+    background_color: "#F1E6D0",
+    theme_color: "#E4412B",
     icons: [
       {
         src: "/favicon.svg",

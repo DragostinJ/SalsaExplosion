@@ -50,7 +50,7 @@ export function WhyCubanSection() {
           </Badge>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             What Makes Cuban Casino &amp; Rueda{" "}
-            <span className="font-display italic font-normal text-amber-300 drop-shadow-sm">
+            <span className="font-display font-normal text-amber-300 drop-shadow-sm">
               So Addictive?
             </span>
           </h2>

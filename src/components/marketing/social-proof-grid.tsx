@@ -135,7 +135,7 @@ export function SocialProofGrid() {
 
           <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-white">
             Feel the Energy of{" "}
-            <span className="font-display italic font-normal text-amber-300 drop-shadow-sm">
+            <span className="font-display font-normal text-amber-300 drop-shadow-sm">
               Bournemouth&apos;s Cuban Community
             </span>
           </h2>
@@ -367,7 +367,7 @@ export function SocialProofGrid() {
             <Button
               asChild
               size="lg"
-              className="w-full sm:w-auto bg-gradient-to-r from-[#833ab4] via-[#e1306c] to-[#f77737] hover:brightness-110 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all"
+              className="w-full sm:w-auto border-2 border-ink bg-poster-pink text-ink hover:-translate-y-0.5 font-extrabold text-xs sm:text-sm shadow-md transition-all"
             >
               <a
                 href="https://www.instagram.com/salsaexplosion/"
@@ -382,7 +382,7 @@ export function SocialProofGrid() {
             <Button
               asChild
               size="lg"
-              className="w-full sm:w-auto bg-[#0866ff] hover:bg-[#0756d6] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all"
+              className="w-full sm:w-auto border-2 border-ink bg-poster-blue text-paper hover:-translate-y-0.5 font-extrabold text-xs sm:text-sm shadow-md transition-all"
             >
               <a
                 href="https://www.facebook.com/salsaexplosion"

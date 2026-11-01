@@ -1,59 +1,58 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { DANCE_GEAR_LEGEND } from "@/lib/music/dance-gear-legend";
 import { formatSongTime } from "@/lib/music/song-timing";
-import { displaySongTitle, isTimba } from "@/lib/music/song-style";
+import { displaySongTitle } from "@/lib/music/song-style";
 import { cn } from "@/lib/utils";
 
-/** Song list for /music: each row opens the full-screen practice player. */
+/** Number inks for the poster rows (all read on paper) */
+const NUMBER_INKS = ["text-poster-red", "text-poster-teal", "text-poster-blue", "text-ink"];
+
+/** Song list for /music: each numbered poster row opens the full-screen practice player. */
 export function SongPracticeList() {
   return (
-    <section aria-labelledby="practice-mode-heading" className="space-y-2">
-      <h2 id="practice-mode-heading" className="text-xs font-black uppercase tracking-widest text-gold">
-        Practice mode · what to dance in every section
+    <section aria-labelledby="practice-mode-heading">
+      <h2 id="practice-mode-heading" className="sr-only">
+        Practice mode: what to dance in every section
       </h2>
-      <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-        {TIMBA_SONG_ANATOMY_DATA.map((song) => (
-          <li key={song.id}>
+      <ol className="border-t-4 border-ink">
+        {TIMBA_SONG_ANATOMY_DATA.map((song, index) => (
+          <li key={song.id} className="border-b-4 border-ink">
             <Link
               href={`/music/${song.id}`}
               aria-label={`Open practice player for ${displaySongTitle(song.title)} by ${song.artist}`}
-              className="flex min-h-[64px] items-center gap-3 rounded-2xl border border-line bg-surface-2 p-3 transition-colors hover:border-gold/50 focus-visible:outline-2 focus-visible:outline-gold"
+              className="group grid min-h-[88px] grid-cols-[3.25rem_minmax(0,1fr)] gap-x-3 gap-y-3 px-2 py-4 transition-colors hover:bg-ink/5 focus-visible:outline-2 focus-visible:outline-gold md:grid-cols-[5rem_minmax(0,1fr)_16rem_12rem] md:items-center md:px-4"
             >
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <p className="min-w-0 truncate text-sm font-bold text-ivory">{displaySongTitle(song.title)}</p>
+              <span className={cn("font-display text-5xl leading-none tabular-nums", NUMBER_INKS[index % NUMBER_INKS.length])}>
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate font-display text-3xl leading-none group-hover:underline">
+                  {displaySongTitle(song.title)}
+                </span>
+                <span className="mt-1 block truncate text-sm font-medium">{song.artist}</span>
+              </span>
+              {/* Mini song map in the shared gear inks */}
+              <span className="col-span-2 flex h-5 border-2 border-ink md:col-span-1" aria-hidden="true">
+                {song.segments.map((segment) => (
                   <span
-                    className={cn(
-                      "shrink-0 rounded-full border px-2 text-xs font-bold",
-                      isTimba(song.style) ? "border-line text-ivory-muted" : "border-gold/60 text-gold"
-                    )}
-                  >
-                    {song.style}
-                  </span>
-                </div>
-                <p className="truncate text-xs text-ivory-muted">
-                  {song.artist} · {song.difficultyLevel} · {formatSongTime(song.durationSeconds)}
-                </p>
-                {/* Mini song map in the shared gear colours */}
-                <div className="mt-1.5 flex h-1.5 gap-px overflow-hidden rounded-full" aria-hidden="true">
-                  {song.segments.map((segment) => (
-                    <span
-                      key={segment.id}
-                      className={cn("h-full", DANCE_GEAR_LEGEND[segment.danceGear].fillClass)}
-                      style={{
-                        width: `${((segment.endTimeSeconds - segment.startTimeSeconds) / song.durationSeconds) * 100}%`,
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-              <ChevronRight className="h-5 w-5 shrink-0 text-ivory-muted" aria-hidden="true" />
+                    key={segment.id}
+                    className={cn("h-full", DANCE_GEAR_LEGEND[segment.danceGear].fillClass)}
+                    style={{ flexGrow: Math.max(segment.endTimeSeconds - segment.startTimeSeconds, 1) }}
+                  />
+                ))}
+              </span>
+              <span className="col-span-2 flex flex-wrap gap-2 text-xs font-bold uppercase md:col-span-1 md:justify-end">
+                <span className="border-2 border-ink px-2 py-0.5">{song.style}</span>
+                <span className="px-1 py-0.5">{song.difficultyLevel}</span>
+                <span className="px-1 py-0.5 tabular-nums">
+                  {formatSongTime(song.durationSeconds)} · {song.bpm} BPM
+                </span>
+              </span>
             </Link>
           </li>
         ))}
-      </ul>
+      </ol>
     </section>
   );
 }

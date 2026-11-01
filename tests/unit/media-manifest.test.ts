@@ -52,7 +52,7 @@ describe("H5: Media Manifest & Asset Weight Integrity", () => {
   it("asserts key media-displaying components import MEDIA_MANIFEST and contain zero raw Unsplash or sample video literals", () => {
     const filesToCheck = [
       "src/app/page.tsx",
-      "src/components/home/ArtHouseGallerySection.tsx",
+      "src/app/music/page.tsx",
       "src/components/about/studio-gallery.tsx",
       "src/components/beginners/first-class-prep-modal.tsx",
     ];

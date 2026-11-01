@@ -1,12 +1,13 @@
+/** Chart colours on the ICAIC paper surface: poster inks for series, ink for text and rules. */
 export const CHART_PALETTE = {
-  brand: "#D9381E",
-  gold: "#FBBF24",
-  emerald: "#10B981",
-  teal: "#14B8A6",
-  rose: "#F43F5E",
-  stoneMuted: "#78716C",
-  grid: "#26221F",
-  tooltipBg: "#14110F",
-  tooltipBorder: "#26221F",
-  text: "#F5F2EB",
+  brand: "#E4412B",
+  gold: "#C98F00",
+  emerald: "#12938F",
+  teal: "#22418F",
+  rose: "#EE7BA0",
+  stoneMuted: "#7F7266",
+  grid: "#BFAE8E",
+  tooltipBg: "#E9DCC1",
+  tooltipBorder: "#161311",
+  text: "#161311",
 } as const;

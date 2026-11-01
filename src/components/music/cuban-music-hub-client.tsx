@@ -60,7 +60,7 @@ export function CubanMusicHubClient() {
           </span>
         </div>
 
-        <h2 className="text-xl sm:text-2xl font-black text-foreground">
+        <h2 className="text-2xl font-black text-foreground">
           Never Lose the Clave on the Social Floor
         </h2>
 

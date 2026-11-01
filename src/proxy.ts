@@ -33,6 +33,8 @@ const isPublicRoute = createRouteMatcher([
   "/sitemap.xml",
   "/llms.txt",
   "/manifest.webmanifest",
+  // Social share card for the home page (event cards are covered by /events)
+  "/opengraph-image(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {

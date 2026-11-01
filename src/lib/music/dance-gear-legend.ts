@@ -14,7 +14,8 @@ import type { SongDanceGear } from "@/lib/constants/timba-song-anatomy";
 /**
  * App-wide visual vocabulary for dance gears. Every song uses the same colour,
  * icon and energy level for a gear so dancers learn to read the song map at a glance.
- * Colours come only from design tokens in globals.css.
+ * Fills are the ICAIC poster inks (identical on paper and ink); text and chip
+ * colours are scope-aware tokens, so they read on either surface.
  */
 export interface DanceGearStyle {
   shortLabel: string;
@@ -23,7 +24,7 @@ export interface DanceGearStyle {
   icon: LucideIcon;
   /** Solid fill, used for song-map blocks and dots */
   fillClass: string;
-  /** Text colour on dark surfaces */
+  /** Text colour that reads on the current surface */
   textClass: string;
   /** Soft tinted background + border for chips and cards */
   chipClass: string;
@@ -42,7 +43,7 @@ export const DANCE_GEAR_LEGEND: Record<SongDanceGear, DanceGearStyle> = {
     shortLabel: "Son",
     energy: 1,
     icon: Footprints,
-    fillClass: "bg-info",
+    fillClass: "bg-poster-blue",
     textClass: "text-info",
     chipClass: "bg-info-soft border-info-line",
   },
@@ -50,49 +51,49 @@ export const DANCE_GEAR_LEGEND: Record<SongDanceGear, DanceGearStyle> = {
     shortLabel: "Casino smooth",
     energy: 2,
     icon: Waves,
-    fillClass: "bg-role-lead",
-    textClass: "text-role-lead",
-    chipClass: "bg-role-lead-soft border-role-lead-line",
+    fillClass: "bg-poster-teal",
+    textClass: "text-success",
+    chipClass: "bg-success-soft border-success-line",
   },
   "Casino (Flow)": {
     shortLabel: "Casino flow",
     energy: 3,
     icon: RefreshCw,
-    fillClass: "bg-success",
-    textClass: "text-success",
-    chipClass: "bg-success-soft border-success-line",
+    fillClass: "bg-poster-mustard",
+    textClass: "text-warning",
+    chipClass: "bg-warning-soft border-warning-line",
   },
   "Rumba Guaguancó": {
     shortLabel: "Rumba",
     energy: 1,
     icon: Drum,
-    fillClass: "bg-gold",
-    textClass: "text-gold",
-    chipClass: "bg-warning-soft border-warning-line",
+    fillClass: "bg-poster-red",
+    textClass: "text-danger",
+    chipClass: "bg-danger-soft border-danger-line",
   },
   "Afro-Cuban Orishas": {
     shortLabel: "Orishas",
     energy: 1,
     icon: Sparkles,
-    fillClass: "bg-role-follow",
-    textClass: "text-role-follow",
-    chipClass: "bg-role-follow-soft border-role-follow-line",
+    fillClass: "bg-poster-plum",
+    textClass: "text-purple-300",
+    chipClass: "bg-purple-500/10 border-purple-400/40",
   },
   "Suelta / Shines": {
     shortLabel: "Shines",
     energy: 2,
     icon: Star,
-    fillClass: "bg-ember",
-    textClass: "text-ember",
-    chipClass: "bg-danger-soft border-danger-line",
+    fillClass: "bg-poster-pink",
+    textClass: "text-role-follow",
+    chipClass: "bg-role-follow-soft border-role-follow-line",
   },
   "Despelote / Reparto": {
     shortLabel: "Despelote",
     energy: 3,
     icon: Flame,
-    fillClass: "bg-danger",
-    textClass: "text-danger",
-    chipClass: "bg-danger-soft border-danger-line",
+    fillClass: "bg-ivory",
+    textClass: "text-ivory",
+    chipClass: "bg-ivory/10 border-ivory/30",
   },
 };
 

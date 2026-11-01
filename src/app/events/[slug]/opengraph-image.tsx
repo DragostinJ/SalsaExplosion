@@ -35,10 +35,10 @@ export default async function Image({
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          backgroundColor: "#080706",
+          backgroundColor: "#F1E6D0",
           padding: 80,
           fontFamily: "sans-serif",
-          color: "#FAF8F5",
+          color: "#161311",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -51,13 +51,13 @@ export default async function Image({
               fontSize: 18,
               fontWeight: 700,
               letterSpacing: "0.2em",
-              color: "#DF7A24",
+              color: "#B8301C",
               textTransform: "uppercase",
             }}
           >
             Festival & Congress
           </div>
-          <div style={{ fontSize: 18, color: "#8B8279", letterSpacing: "0.15em" }}>
+          <div style={{ fontSize: 18, color: "#4E453B", letterSpacing: "0.15em" }}>
             {location}
           </div>
         </div>
@@ -69,12 +69,12 @@ export default async function Image({
               fontWeight: 800,
               letterSpacing: "-0.02em",
               lineHeight: 1.1,
-              color: "#FAF8F5",
+              color: "#161311",
             }}
           >
             {title}
           </div>
-          <div style={{ fontSize: 26, color: "#C5BDB3" }}>
+          <div style={{ fontSize: 26, color: "#4E453B" }}>
             {dateFormatted}
           </div>
         </div>
@@ -85,14 +85,14 @@ export default async function Image({
             alignItems: "center",
             justifyContent: "space-between",
             width: "100%",
-            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            borderTop: "1px solid #161311",
             paddingTop: 32,
           }}
         >
-          <div style={{ fontSize: 20, color: "#EB4432", fontWeight: 600 }}>
+          <div style={{ fontSize: 20, color: "#C4321C", fontWeight: 600 }}>
             Online Festival Passes Available
           </div>
-          <div style={{ fontSize: 20, color: "#8B8279" }}>
+          <div style={{ fontSize: 20, color: "#4E453B" }}>
             salsaexplosion.co.uk
           </div>
         </div>

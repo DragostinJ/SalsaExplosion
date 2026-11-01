@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Anton, Archivo, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SiteHeader } from "@/components/navigation/site-header";
 import { SiteFooter } from "@/components/navigation/site-footer";
@@ -7,12 +7,12 @@ import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
 import { ImmersiveRouteGate } from "@/components/navigation/immersive-route-gate";
 import { JsonLdSchema } from "@/components/seo/JsonLdSchema";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
-import { StageSpotlight } from "@/components/ui/StageSpotlight";
 import { getSafeAppUrl } from "@/lib/safe-url";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// ICAIC Poster type: Anton for the headlines, Archivo for everything else
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
   display: "swap",
 });
@@ -24,12 +24,11 @@ const geistMono = Geist_Mono({
   preload: false,
 });
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-display",
+const anton = Anton({
+  variable: "--font-anton",
   subsets: ["latin"],
   display: "swap",
-  style: ["normal", "italic"],
-  weight: ["400", "600", "700"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -101,21 +100,20 @@ export default function RootLayout({
     >
       <html
         lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} h-full antialiased`}
+        className={`${archivo.variable} ${geistMono.variable} ${anton.variable} h-full antialiased`}
       >
         <head>
           <JsonLdSchema />
         </head>
-        <body className="min-h-full flex flex-col bg-canvas text-ivory overflow-x-hidden havana-stage-lighting relative">
+        <body className="min-h-full flex flex-col bg-canvas text-ivory overflow-x-hidden paper-grain relative">
           <a
             href="#main-content"
             data-testid="skip-to-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-gold focus:text-stone-950 focus:font-bold focus:rounded-xl focus:shadow-lg focus:outline-none"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-ink focus:text-paper focus:font-bold focus:rounded-xl focus:shadow-lg focus:outline-none"
           >
             Skip to main content
           </a>
           <div className="film-grain" aria-hidden="true" />
-          <StageSpotlight />
           <ImmersiveRouteGate>
             <SiteHeader />
           </ImmersiveRouteGate>

@@ -33,5 +33,10 @@ export async function generateMetadata({ params }: SongPlayerPageProps): Promise
 export default async function SongPlayerPage({ params }: SongPlayerPageProps) {
   const song = findSong((await params).songId);
   if (!song) notFound();
-  return <SongPlayerScreen song={song} />;
+  // The player is the cinema screen of the poster system: always on ink
+  return (
+    <div className="theme-ink bg-canvas">
+      <SongPlayerScreen song={song} />
+    </div>
+  );
 }

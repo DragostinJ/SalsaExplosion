@@ -108,7 +108,7 @@ export function TwoDayExhibitionTimetable() {
             </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-none">
               WEEKLY PROGRAMME{" "}
-              <span className="font-display italic font-normal text-amber-300 lowercase">
+              <span className="font-display font-normal text-amber-300 ">
                 lineup
               </span>
             </h2>

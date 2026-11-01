@@ -8,10 +8,7 @@ import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
-import {
-  ArtHouseGallerySection,
-  InsideCubanCircleGallery,
-} from "@/components/home/ArtHouseGallerySection";
+import { ArtHouseGallerySection } from "@/components/home/ArtHouseGallerySection";
 import { ACADEMY_METRICS, VENUE_INFO } from "@/lib/academy-data";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
@@ -19,6 +16,16 @@ const BohVenueSpotlight = dynamic(
   () => import("@/components/home/BohVenueSpotlight").then((m) => m.BohVenueSpotlight),
   {
     loading: () => <div className="py-20 min-h-[400px] animate-pulse bg-muted/20" />,
+  }
+);
+
+const InsideCubanCircleGallery = dynamic(
+  () =>
+    import("@/components/home/ArtHouseGallerySection").then(
+      (m) => m.InsideCubanCircleGallery
+    ),
+  {
+    loading: () => <div className="py-16 min-h-[300px] bg-canvas" />,
   }
 );
 

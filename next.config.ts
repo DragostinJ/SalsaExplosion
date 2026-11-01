@@ -42,43 +42,6 @@ const nextConfig: NextConfig = {
     ];
   },
   async headers() {
-    const isProd = process.env.NODE_ENV === "production";
-    const scriptSrcDirectives = [
-      "'self'",
-      "'unsafe-inline'",
-      !isProd && "'unsafe-eval'",
-      "https://vercel.live",
-      "https://*.clerk.accounts.dev",
-      "https://clerk.salsaexplosion.co.uk",
-      "https://*.clerk.com",
-      "https://cdn.protect.clerk.com",
-      "https://js.stripe.com",
-      "https://www.youtube.com",
-      "https://s.ytimg.com",
-      "https://www.googletagmanager.com",
-      "https://www.google-analytics.com",
-    ]
-      .filter(Boolean)
-      .join(" ");
-
-    const enforcedCspDirectives = `
-      default-src 'self';
-      script-src ${scriptSrcDirectives};
-      worker-src 'self' blob:;
-      connect-src 'self' https://vercel.live https://*.pusher.com wss://*.pusher.com https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://*.clerk.com:* https://*.protect.clerk.com:* https://*.client.protect.clerk.com:* https://clerk.salsaexplosion.co.uk https://clerk-telemetry.com https://*.clerk-telemetry.com https://www.youtube.com https://*.googlevideo.com https://www.google-analytics.com https://analytics.google.com;
-      img-src 'self' data: blob: https://vercel.live https://vercel.com https://images.unsplash.com https://*.clerk.com https://img.clerk.com https://i.ytimg.com https://*.youtube.com https://www.google-analytics.com https://*.stripe.com https://commondatastorage.googleapis.com https://*.supabase.co;
-      style-src 'self' 'unsafe-inline' https://vercel.live https://fonts.googleapis.com;
-      font-src 'self' data: https://vercel.live https://fonts.gstatic.com;
-      frame-src 'self' https://vercel.live https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev https://www.youtube.com https://www.youtube-nocookie.com;
-      media-src 'self' blob: https://*.supabase.co https://commondatastorage.googleapis.com;
-      object-src 'none';
-      base-uri 'self';
-      form-action 'self' https://checkout.stripe.com;
-      frame-ancestors 'self';
-    `
-      .replace(/\s{2,}/g, " ")
-      .trim();
-
     return [
       {
         source: "/(.*)",
@@ -97,15 +60,12 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Strict-Transport-Security",
-            value: "max-age=31536000; includeSubDomains; preload",
+            value: "max-age=63072000; includeSubDomains",
           },
           {
             key: "Permissions-Policy",
-            value: 'camera=(self), microphone=(), geolocation=(), payment=(self "https://js.stripe.com")',
-          },
-          {
-            key: "Content-Security-Policy",
-            value: enforcedCspDirectives,
+            value:
+              'camera=(), microphone=(), geolocation=(), usb=(), bluetooth=(), midi=(), payment=(self "https://js.stripe.com")',
           },
         ],
       },

@@ -52,35 +52,40 @@ export default function MockupComparePage() {
               FEATURED_SONG.segments.map((segment, index) => [segment.danceGear, style.swatches[index % style.swatches.length]])
             ) as GearPalette;
             return (
-              <li key={direction.slug}>
-                <Link
-                  href={`/mockups/${direction.slug}`}
-                  className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 transition-transform hover:-translate-y-1"
-                  style={{ backgroundColor: style.background, color: style.text }}
-                >
+              <li
+                key={direction.slug}
+                className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10"
+                style={{ backgroundColor: style.background, color: style.text }}
+              >
+                <Link href={`/mockups/${direction.slug}`} tabIndex={-1} aria-hidden="true">
                   <Image
                     src={style.photo.src}
-                    alt={style.photo.alt}
+                    alt=""
                     width={style.photo.width}
                     height={style.photo.height}
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="aspect-[16/10] w-full object-cover"
+                    className="aspect-[16/10] w-full object-cover transition-opacity hover:opacity-90"
                   />
-                  <div className="flex flex-1 flex-col gap-3 p-5">
-                    <h2 className="text-2xl font-bold">{direction.name}</h2>
-                    <p className="text-sm opacity-80">{direction.summary}</p>
-                    <div className="flex gap-1.5" aria-label="Palette">
-                      {style.swatches.map((swatch) => (
-                        <span key={swatch} className="h-6 flex-1 rounded border border-white/10" style={{ backgroundColor: swatch }} />
-                      ))}
-                    </div>
-                    <SongScore song={FEATURED_SONG} palette={palette} className="h-2" gap={2} />
-                    <p className="text-xs uppercase tracking-wider opacity-70">Type: {style.fonts}</p>
-                    <span className="mt-auto inline-flex min-h-[44px] items-center font-semibold" style={{ color: style.accent }}>
-                      Open {direction.name} →
-                    </span>
-                  </div>
                 </Link>
+                <div className="flex flex-1 flex-col gap-3 p-5">
+                  <h2 className="text-2xl font-bold">{direction.name}</h2>
+                  <p className="text-sm opacity-80">{direction.summary}</p>
+                  <div className="flex gap-1.5" aria-label="Palette">
+                    {style.swatches.map((swatch) => (
+                      <span key={swatch} className="h-6 flex-1 rounded border border-white/10" style={{ backgroundColor: swatch }} />
+                    ))}
+                  </div>
+                  <SongScore song={FEATURED_SONG} palette={palette} className="h-2" gap={2} />
+                  <p className="text-xs uppercase tracking-wider opacity-70">Type: {style.fonts}</p>
+                  <div className="mt-auto flex flex-wrap gap-x-5">
+                    <Link href={`/mockups/${direction.slug}`} className="inline-flex min-h-[44px] items-center font-semibold" style={{ color: style.accent }}>
+                      Home →
+                    </Link>
+                    <Link href={`/mockups/${direction.slug}/music`} className="inline-flex min-h-[44px] items-center font-semibold" style={{ color: style.accent }}>
+                      Song list →
+                    </Link>
+                  </div>
+                </div>
               </li>
             );
           })}

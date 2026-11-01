@@ -1,8 +1,7 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Instrument_Serif } from "next/font/google";
 import { ClaveMark, HeroPicture, MockupSwitcher, SongScore } from "@/components/mockups/mockup-art";
+import { GEARS, H1, H2, H3, WALL, WallLabel, instrument, serif, textLink } from "@/components/mockups/gallery-theme";
 import {
   DOOR_PRICING,
   FACTS,
@@ -14,46 +13,9 @@ import {
   SONG_COUNT,
   VENUE_INFO,
   songDurationLabel,
-  type GearPalette,
 } from "@/components/mockups/mockup-data";
 
-const instrument = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--gl-display",
-  display: "swap",
-});
-
 export const metadata = { title: "Mock-up · Gallery" };
-
-/** The current site tokens (obsidian, ivory, crimson, amber) plus two gallery greys. */
-const WALL = {
-  obsidian: "#080706",
-  ivory: "#F5F2EB",
-  crimson: "#DC2626",
-  amber: "#F59E0B",
-  frame: "#1A1715",
-  ash: "#9A9187",
-  line: "#2E2925",
-} as const;
-
-const GEARS: GearPalette = {
-  "Wait / Breathe": "#3A3430",
-  "Son Cubano": "#8A7F70",
-  "Casino (Smooth)": "#C9BFAE",
-  "Casino (Flow)": WALL.ivory,
-  "Rumba Guaguancó": WALL.crimson,
-  "Afro-Cuban Orishas": "#B45309",
-  "Suelta / Shines": WALL.amber,
-  "Despelote / Reparto": "#991B1B",
-};
-
-// Type scale (max 9 sizes per route)
-const H1 = "text-[17vw] leading-[0.85] md:text-[9vw]";
-const H2 = "text-5xl leading-none md:text-7xl";
-const H3 = "text-3xl leading-tight";
-const serif: CSSProperties = { fontFamily: "var(--gl-display)" };
 
 const EXHIBITS = [
   { photo: PHOTOS.rumbaSolar, title: "Guaguancó", medium: "Rumba · the vacunao", span: "md:col-span-7" },
@@ -61,28 +23,9 @@ const EXHIBITS = [
   { photo: PHOTOS.feetHavanaTiles, title: "Pasitos", medium: "Shines · solo footwork", span: "md:col-span-4" },
   { photo: PHOTOS.ruedaOverhead, title: "La rueda", medium: "Six couples, one caller", span: "md:col-span-4 md:mt-16" },
   { photo: PHOTOS.congaHands, title: "Tumbadora", medium: "Musicality · the conga", span: "md:col-span-4" },
+  { photo: PHOTOS.sonCouple, title: "Son", medium: "Close hold · contratiempo", span: "md:col-span-5" },
+  { photo: PHOTOS.casinoCouple, title: "Casino", medium: "Partnerwork · the turn", span: "md:col-span-7 md:mt-20" },
 ] as const;
-
-/** Museum wall label */
-function WallLabel({ number, title, medium, note }: { number: number; title: string; medium: string; note?: string }) {
-  return (
-    <p className="mt-3 border-l pl-3 text-xs leading-relaxed" style={{ borderColor: WALL.crimson, color: WALL.ash }}>
-      <span className="font-semibold uppercase tracking-widest" style={{ color: WALL.ivory }}>
-        {String(number).padStart(2, "0")} · {title}
-      </span>
-      <br />
-      {medium}
-      {note && (
-        <>
-          <br />
-          {note}
-        </>
-      )}
-    </p>
-  );
-}
-
-const textLink = "inline-flex min-h-[44px] items-center gap-2 border-b text-sm uppercase tracking-widest";
 
 export default function GalleryMockupPage() {
   return (
@@ -252,7 +195,7 @@ export default function GalleryMockupPage() {
               className="w-full object-cover"
             />
           </div>
-          <WallLabel number={7} title={VENUE_INFO.shortName} medium={VENUE_INFO.fullAddress} note="Real photograph" />
+          <WallLabel number={EXHIBITS.length + 2} title={VENUE_INFO.shortName} medium={VENUE_INFO.fullAddress} note="Real photograph" />
           <a href={VENUE_INFO.googleMapsUrl} className={`${textLink} mt-4`} style={{ borderColor: WALL.crimson }}>
             Directions →
           </a>
@@ -272,7 +215,7 @@ export default function GalleryMockupPage() {
               className="w-full object-cover"
             />
           </div>
-          <WallLabel number={8} title={FACTS.founderShort} medium={`Born in ${FACTS.origin}`} note="Real photograph" />
+          <WallLabel number={EXHIBITS.length + 3} title={FACTS.founderShort} medium={`Born in ${FACTS.origin}`} note="Real photograph" />
         </div>
         <div className="md:col-span-8">
           <h2 className={H2} style={serif}>

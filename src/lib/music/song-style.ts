@@ -17,7 +17,7 @@ export function isTimba(style: SongStyle): boolean {
   return style === "Timba";
 }
 
-/** Song title without the YouTube upload tag, e.g. "(Official Video)" or "(Video Oficial)". */
+/** Song title without the YouTube upload tag, e.g. "(Official Video)", "(Video Oficial)" or "(2026 Official Video)". */
 export function displaySongTitle(title: string): string {
-  return title.replace(/\s*\((official video|video oficial|studio video|official audio|audio oficial)\)/i, "");
+  return title.replace(/\s*\((?:\d{4}\s+)?(official video|video oficial|studio video|official audio|audio oficial)\)/i, "");
 }

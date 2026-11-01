@@ -12,6 +12,7 @@ import {
   type SongDanceGear,
 } from "@/lib/constants/timba-song-anatomy";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import { displaySongTitle } from "@/lib/music/song-style";
 
 /**
  * Content for the three art-direction mock-ups (/mockups). Every business fact
@@ -43,6 +44,7 @@ export const MOCKUP_DIRECTIONS = [
 export type MockupSlug = (typeof MOCKUP_DIRECTIONS)[number]["slug"];
 
 export const PHOTOS = MEDIA_MANIFEST.editorial;
+export const GRAPHICS = MEDIA_MANIFEST.mockupGraphics;
 
 /** Real photography for the places where real-world proof matters (venue, teacher). */
 export const REAL_PHOTOS = {
@@ -86,8 +88,17 @@ export const MOVE_FAMILIES = [
   { name: "Shines", spanish: "Pasitos", photo: PHOTOS.feetHavanaTiles, note: "Solo footwork for mambos and breaks" },
   { name: "Body movement", spanish: "Despelote", photo: PHOTOS.despelote, note: "Ribcage, shoulders, cintura, tembleque" },
   { name: "Rumba", spanish: "Guaguancó", photo: PHOTOS.rumbaSolar, note: "Yambú, guaguancó, columbia" },
-  { name: "Rueda & casino", spanish: "La rueda", photo: PHOTOS.ruedaOverhead, note: "Calls, combos and partner figures" },
+  { name: "Rueda", spanish: "La rueda", photo: PHOTOS.ruedaOverhead, note: "Calls and combos in the circle" },
+  { name: "Casino", spanish: "Casino", photo: PHOTOS.casinoCouple, note: "Partner figures, turns and hand changes" },
+  { name: "Son", spanish: "Son", photo: PHOTOS.sonCouple, note: "Close hold, small steps, contratiempo" },
 ] as const;
+
+/** Every song in the practice player, for the /mockups/<direction>/music lists. */
+export const PRACTICE_SONGS = TIMBA_SONG_ANATOMY_DATA.map((song) => ({
+  song,
+  title: displaySongTitle(song.title),
+  duration: songDurationLabel(song),
+}));
 
 export const FACTS = {
   founder: ACADEMY_METRICS.founderTitleName,
@@ -107,6 +118,11 @@ export { DOOR_PRICING, VENUE_INFO };
 export const NEXT_EVENTS = UPCOMING_EVENTS.filter(
   (event) => Date.parse(event.endDateIso ?? event.startDateIso) >= Date.now()
 );
+
+/** Every dance gear used across all practice songs (for page-level legends). */
+export function allGears(): SongDanceGear[] {
+  return [...new Set(TIMBA_SONG_ANATOMY_DATA.flatMap((song) => song.segments.map((segment) => segment.danceGear)))];
+}
 
 /** The dance gears a song uses, in order of first appearance (for legends). */
 export function gearsIn(song: SongAnatomy): SongDanceGear[] {

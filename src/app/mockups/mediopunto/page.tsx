@@ -1,8 +1,20 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Cormorant_Garamond, Jost } from "next/font/google";
 import { ClaveMark, DecorativeFan, HeroPicture, MockupSwitcher, SongFan } from "@/components/mockups/mockup-art";
+import {
+  FAN_COLORS,
+  GEARS,
+  GLASS,
+  H1,
+  H2,
+  H3,
+  TileBand,
+  arch,
+  cormorant,
+  jost,
+  pill,
+  serif,
+} from "@/components/mockups/mediopunto-theme";
 import {
   DOOR_PRICING,
   FACTS,
@@ -17,75 +29,9 @@ import {
   VENUE_INFO,
   gearsIn,
   songDurationLabel,
-  type GearPalette,
 } from "@/components/mockups/mockup-data";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600"],
-  style: ["normal", "italic"],
-  variable: "--mp-display",
-  display: "swap",
-});
-const jost = Jost({ subsets: ["latin"], variable: "--mp-text", display: "swap" });
-
 export const metadata = { title: "Mock-up · Mediopunto" };
-
-/** Candidate stained-glass palette; would become design tokens if this direction wins. */
-const GLASS = {
-  night: "#120E0C",
-  plaster: "#EFE5D3",
-  ruby: "#A3212C",
-  amber: "#E0A02A",
-  cobalt: "#23509A",
-  emerald: "#1F7552",
-  amethyst: "#5A3B8C",
-  rose: "#C76A7A",
-  ivory: "#F5F2EB",
-  lead: "#2A221C",
-} as const;
-
-const GEARS: GearPalette = {
-  "Wait / Breathe": "#CFC3AD",
-  "Son Cubano": GLASS.cobalt,
-  "Casino (Smooth)": GLASS.emerald,
-  "Casino (Flow)": GLASS.amber,
-  "Rumba Guaguancó": GLASS.ruby,
-  "Afro-Cuban Orishas": GLASS.amethyst,
-  "Suelta / Shines": GLASS.rose,
-  "Despelote / Reparto": "#7A1A22",
-};
-const FAN_COLORS = [GLASS.ruby, GLASS.amber, GLASS.cobalt, GLASS.emerald, GLASS.amber, GLASS.rose];
-
-// Type scale (max 9 sizes per route)
-const H1 = "text-5xl leading-[0.95] md:text-7xl";
-const H2 = "text-4xl leading-tight md:text-6xl";
-const H3 = "text-2xl leading-snug";
-const serif: CSSProperties = { fontFamily: "var(--mp-display)" };
-
-const pill = "inline-flex min-h-[48px] items-center rounded-full px-6 text-sm font-medium tracking-wide";
-const arch = "overflow-hidden rounded-t-full";
-
-/** A band of Havana hydraulic floor tiles (inline SVG pattern). */
-function TileBand({ id, className }: { id: string; className?: string }) {
-  return (
-    <svg className={className} width="100%" height="56" aria-hidden="true">
-      <defs>
-        <pattern id={id} width="56" height="56" patternUnits="userSpaceOnUse">
-          <rect width="56" height="56" fill={GLASS.plaster} />
-          <path d="M0 0 h14 a14 14 0 0 1 -14 14 Z" fill={GLASS.ruby} />
-          <path d="M56 0 v14 a14 14 0 0 1 -14 -14 Z" fill={GLASS.ruby} />
-          <path d="M0 56 v-14 a14 14 0 0 1 14 14 Z" fill={GLASS.ruby} />
-          <path d="M56 56 h-14 a14 14 0 0 1 14 -14 Z" fill={GLASS.ruby} />
-          <path d="M28 10 L46 28 L28 46 L10 28 Z" fill={GLASS.cobalt} />
-          <circle cx="28" cy="28" r="6" fill={GLASS.amber} />
-          <rect width="56" height="56" fill="none" stroke={GLASS.lead} strokeOpacity="0.25" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="56" fill={`url(#${id})`} />
-    </svg>
-  );
-}
 
 export default function MediopuntoMockupPage() {
   const [featured, ...others] = SCORE_SONGS.length ? SCORE_SONGS : [FEATURED_SONG];
@@ -153,6 +99,19 @@ export default function MediopuntoMockupPage() {
       {/* EVERY SONG IS A WINDOW */}
       <section className="px-4 py-16 md:px-10 md:py-24" style={{ backgroundColor: GLASS.plaster, color: GLASS.night }}>
         <div className="mx-auto max-w-6xl text-center">
+          <figure className="mb-12">
+            <Image
+              src={PHOTOS.mediopuntoWindow.src}
+              alt={PHOTOS.mediopuntoWindow.alt}
+              width={PHOTOS.mediopuntoWindow.width}
+              height={PHOTOS.mediopuntoWindow.height}
+              sizes="(max-width: 1152px) 100vw, 72rem"
+              className="w-full rounded-t-[50%]"
+            />
+            <figcaption className="mt-3 text-sm italic" style={serif}>
+              A mediopunto above a Havana door. Below, every song drawn as one.
+            </figcaption>
+          </figure>
           <p className="text-xs uppercase tracking-[0.35em]" style={{ color: GLASS.ruby }}>
             Practise at home
           </p>
@@ -200,7 +159,7 @@ export default function MediopuntoMockupPage() {
           )}
         </div>
       </section>
-      <TileBand id="mp-tiles-a" />
+      <TileBand />
 
       {/* MOVE LIBRARY TEASER: arched doorways */}
       <section className="px-4 py-16 md:px-10 md:py-24">
@@ -211,10 +170,10 @@ export default function MediopuntoMockupPage() {
           <h2 className={`mt-3 italic ${H2}`} style={serif}>
             The move library
           </h2>
-          <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {MOVE_FAMILIES.map((family, index) => (
               <li key={family.name}>
-                <div className="rounded-t-full border p-1.5" style={{ borderColor: FAN_COLORS[index] }}>
+                <div className="rounded-t-full border p-1.5" style={{ borderColor: FAN_COLORS[index % FAN_COLORS.length] }}>
                   <div className={`relative aspect-[3/4] ${arch}`}>
                     <Image src={family.photo.src} alt={family.photo.alt} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-cover" />
                   </div>
@@ -232,7 +191,7 @@ export default function MediopuntoMockupPage() {
       </section>
 
       {/* WEEKLY SCHEDULE on plaster, between tile bands */}
-      <TileBand id="mp-tiles-b" />
+      <TileBand />
       <section id="semana" className="px-4 py-16 md:px-10 md:py-24" style={{ backgroundColor: GLASS.plaster, color: GLASS.night }}>
         <div className="mx-auto max-w-6xl">
           <h2 className={`italic ${H2}`} style={serif}>
@@ -280,7 +239,7 @@ export default function MediopuntoMockupPage() {
           </p>
         </div>
       </section>
-      <TileBand id="mp-tiles-c" />
+      <TileBand />
 
       {/* REAL PHOTOS: maestro + venue */}
       <section className="px-4 py-16 md:px-10 md:py-24">

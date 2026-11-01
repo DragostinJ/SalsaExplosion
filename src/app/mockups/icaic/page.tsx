@@ -1,12 +1,28 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Anton, Archivo } from "next/font/google";
 import { ClaveMark, HeroPicture, MockupSwitcher, SongStripes } from "@/components/mockups/mockup-art";
+import {
+  BIG,
+  DARK_TEXT_GEARS,
+  GEARS,
+  H1,
+  H2,
+  H3,
+  INK,
+  ON_POSTER,
+  POSTER_COLORS,
+  anton,
+  archivo,
+  button,
+  display,
+  halftone,
+  paper,
+} from "@/components/mockups/icaic-theme";
 import {
   DOOR_PRICING,
   FACTS,
   FEATURED_SONG,
+  GRAPHICS,
   MOVE_FAMILIES,
   NEXT_EVENTS,
   PHOTOS,
@@ -16,54 +32,17 @@ import {
   SPANISH_DAY,
   VENUE_INFO,
   gearsIn,
-  type GearPalette,
 } from "@/components/mockups/mockup-data";
-
-const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--ic-display", display: "swap" });
-const archivo = Archivo({ subsets: ["latin"], variable: "--ic-text", display: "swap" });
 
 export const metadata = { title: "Mock-up · ICAIC Poster" };
 
-/** Candidate silkscreen inks; they would become design tokens if this direction wins. */
-const INK = {
-  paper: "#F1E6D0",
-  ink: "#161311",
-  red: "#E4412B",
-  mustard: "#F4B41A",
-  teal: "#12938F",
-  blue: "#22418F",
-  pink: "#EE7BA0",
-  plum: "#5B2A6E",
-} as const;
-
-const GEARS: GearPalette = {
-  "Wait / Breathe": "#D9CCB2",
-  "Son Cubano": INK.blue,
-  "Casino (Smooth)": INK.teal,
-  "Casino (Flow)": INK.mustard,
-  "Rumba Guaguancó": INK.red,
-  "Afro-Cuban Orishas": INK.plum,
-  "Suelta / Shines": INK.pink,
-  "Despelote / Reparto": INK.ink,
-};
-const DARK_TEXT_GEARS = new Set(["Wait / Breathe", "Casino (Flow)", "Suelta / Shines"]);
-const POSTER_COLORS = [INK.red, INK.teal, INK.mustard, INK.blue];
-
-// Type scale (max 9 sizes per route)
-const H1 = "text-[21vw] leading-[0.82] md:text-[10.5vw]";
-const H2 = "text-6xl leading-[0.9] md:text-8xl";
-const H3 = "text-3xl leading-none";
-const BIG = "text-5xl leading-none";
-const display: CSSProperties = { fontFamily: "var(--ic-display)" };
-
-const halftone = (color: string): CSSProperties => ({
-  backgroundColor: color,
-  backgroundImage: `radial-gradient(circle, ${INK.ink} 1.4px, transparent 1.8px)`,
-  backgroundSize: "9px 9px",
-});
-
-const button =
-  "inline-flex min-h-[48px] items-center border-4 px-5 font-bold uppercase tracking-wider transition-transform hover:-translate-y-0.5";
+/** A frieze of screen-print illustrations (transparent cut-outs on the paper). */
+const FRIEZE = [
+  { art: GRAPHICS.trumpet, word: "Metales" },
+  { art: GRAPHICS.couple, word: "La pareja" },
+  { art: GRAPHICS.conga, word: "Tumbadora" },
+  { art: GRAPHICS.palmMalecon, word: "Malecón" },
+] as const;
 
 export default function IcaicMockupPage() {
   const legend = gearsIn(FEATURED_SONG);
@@ -71,7 +50,7 @@ export default function IcaicMockupPage() {
   return (
     <main
       className={`${anton.variable} ${archivo.variable} min-h-screen`}
-      style={{ backgroundColor: INK.paper, color: INK.ink, fontFamily: "var(--ic-text)" }}
+      style={{ ...paper(GRAPHICS.paperTexture.src), color: INK.ink, fontFamily: "var(--ic-text)" }}
     >
       <MockupSwitcher current="icaic" />
 
@@ -137,6 +116,29 @@ export default function IcaicMockupPage() {
         </dl>
       </section>
 
+      {/* ILLUSTRATION FRIEZE */}
+      <section aria-label="Illustrations" className="grid grid-cols-2 border-y-4 md:grid-cols-4" style={{ borderColor: INK.ink }}>
+        {FRIEZE.map((item, index) => (
+          <figure
+            key={item.word}
+            className="flex flex-col items-center px-4 pb-4 max-md:odd:border-r-4 max-md:[&:nth-child(-n+2)]:border-b-4 md:border-r-4 md:last:border-r-0"
+            style={{ borderColor: INK.ink }}
+          >
+            <Image
+              src={item.art.src}
+              alt={item.art.alt}
+              width={item.art.width}
+              height={item.art.height}
+              sizes={item.art.sizes}
+              className="w-full max-w-[220px]"
+            />
+            <figcaption className={`uppercase ${H3}`} style={{ ...display, color: index === 2 ? INK.ink : POSTER_COLORS[index] }}>
+              {item.word}
+            </figcaption>
+          </figure>
+        ))}
+      </section>
+
       {/* SONG ANATOMY POSTER */}
       <section className="px-4 py-14 md:px-10 md:py-20" style={{ backgroundColor: INK.ink, color: INK.paper }}>
         <div className="grid gap-10 md:grid-cols-12">
@@ -179,19 +181,19 @@ export default function IcaicMockupPage() {
         </div>
       </section>
 
-      {/* MOVE LIBRARY TEASER: four mini posters */}
+      {/* MOVE LIBRARY TEASER: six mini posters */}
       <section className="px-4 py-14 md:px-10 md:py-20">
         <p className="text-xs font-bold uppercase tracking-[0.3em]">Próximamente · coming soon</p>
         <h2 className={`mt-3 uppercase ${H2}`} style={display}>
           La biblioteca de pasos
         </h2>
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {MOVE_FAMILIES.map((family, index) => (
             <li key={family.name} className="border-4" style={{ borderColor: INK.ink, backgroundColor: POSTER_COLORS[index] }}>
               <div className="relative m-3 aspect-[4/5] overflow-hidden border-4" style={{ borderColor: INK.ink }}>
                 <Image src={family.photo.src} alt={family.photo.alt} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-cover" />
               </div>
-              <div className="px-4 pb-5" style={{ color: index === 2 ? INK.ink : INK.paper }}>
+              <div className="px-4 pb-5" style={{ color: ON_POSTER[index] }}>
                 <p className={BIG} style={display}>
                   {String(index + 1).padStart(2, "0")}
                 </p>

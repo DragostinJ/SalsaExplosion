@@ -5,19 +5,19 @@ import type { MediaAssetConfig } from "@/lib/media-manifest";
 import { cn } from "@/lib/utils";
 import { MOCKUP_DIRECTIONS, type GearPalette, type MockupSlug } from "./mockup-data";
 
-/** Sticky bar to hop between the three art directions; deliberately neutral. */
-export function MockupSwitcher({ current }: { current: MockupSlug | "compare" }) {
+/** Sticky bar to hop between the three art directions and their pages; deliberately neutral. */
+export function MockupSwitcher({ current, page = "home" }: { current: MockupSlug | "compare"; page?: "home" | "music" }) {
   return (
     <nav
       aria-label="Art-direction mock-ups"
-      className="sticky top-0 z-50 flex items-center gap-1 overflow-x-auto bg-black/90 px-2 py-1 font-sans text-xs text-white backdrop-blur"
+      className="sticky top-0 z-50 flex flex-wrap items-center gap-1 bg-black/90 px-2 py-1 font-sans text-xs text-white backdrop-blur"
     >
       <span className="hidden shrink-0 px-2 font-semibold uppercase tracking-wider text-white/60 sm:inline">Mock-up</span>
       {MOCKUP_DIRECTIONS.map((direction) => (
         <Link
           key={direction.slug}
-          href={`/mockups/${direction.slug}`}
-          aria-current={current === direction.slug ? "page" : undefined}
+          href={`/mockups/${direction.slug}${page === "music" ? "/music" : ""}`}
+          aria-current={current === direction.slug ? "true" : undefined}
           className={cn(
             "flex min-h-[40px] shrink-0 items-center rounded-md px-3",
             current === direction.slug ? "bg-white text-black" : "hover:bg-white/15"
@@ -26,6 +26,23 @@ export function MockupSwitcher({ current }: { current: MockupSlug | "compare" })
           {direction.name}
         </Link>
       ))}
+      {current !== "compare" && (
+        <span className="ml-2 flex shrink-0 items-center gap-1 border-l border-white/20 pl-2">
+          {(["home", "music"] as const).map((target) => (
+            <Link
+              key={target}
+              href={`/mockups/${current}${target === "music" ? "/music" : ""}`}
+              aria-current={page === target ? "page" : undefined}
+              className={cn(
+                "flex min-h-[40px] shrink-0 items-center rounded-md px-3",
+                page === target ? "bg-white/25" : "hover:bg-white/15"
+              )}
+            >
+              {target === "home" ? "Home" : "Songs"}
+            </Link>
+          ))}
+        </span>
+      )}
       <Link
         href="/mockups"
         aria-current={current === "compare" ? "page" : undefined}

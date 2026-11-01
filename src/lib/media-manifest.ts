@@ -145,6 +145,93 @@ export const MEDIA_MANIFEST = {
       aspectRatio: "2400/1340",
       sizes: "(max-width: 768px) 100vw, 60vw",
     },
+    sonCouple: {
+      src: "/images/editorial/son-couple.jpg",
+      alt: "An older couple dancing son in close hold in a warm Havana living room",
+      width: 1856,
+      height: 2304,
+      aspectRatio: "4/5",
+      sizes: "(max-width: 768px) 100vw, 40vw",
+    },
+    casinoCouple: {
+      src: "/images/editorial/casino-couple.jpg",
+      alt: "A couple mid casino turn at a crowded salsa social",
+      width: 1856,
+      height: 2304,
+      aspectRatio: "4/5",
+      sizes: "(max-width: 768px) 100vw, 40vw",
+    },
+    mediopuntoWindow: {
+      src: "/images/editorial/mediopunto-window.jpg",
+      alt: "A Havana stained-glass mediopunto fan window glowing above an old wooden door",
+      width: 2400,
+      height: 1018,
+      aspectRatio: "2400/1018",
+      sizes: "100vw",
+    },
+    congaStage: {
+      src: "/images/editorial/conga-stage.jpg",
+      alt: "A conga drum on a dark stage in a beam of crimson light",
+      width: 2400,
+      height: 1340,
+      aspectRatio: "2400/1340",
+      sizes: "100vw",
+    },
+  },
+
+  // ==========================================
+  // ART-DIRECTION GRAPHICS (screen-print illustrations and textures,
+  // Nano Banana Pro round 2; illustrations cut out to transparent PNGs)
+  // ==========================================
+  mockupGraphics: {
+    trumpet: {
+      src: "/images/editorial/icaic-trumpet.png",
+      alt: "Screen-print illustration of a trumpet with bursts of colour",
+      width: 1024,
+      height: 1024,
+      aspectRatio: "1/1",
+      sizes: "(max-width: 768px) 50vw, 20vw",
+    },
+    couple: {
+      src: "/images/editorial/icaic-couple.png",
+      alt: "Screen-print illustration of a couple dancing salsa",
+      width: 1024,
+      height: 1024,
+      aspectRatio: "1/1",
+      sizes: "(max-width: 768px) 50vw, 20vw",
+    },
+    palmMalecon: {
+      src: "/images/editorial/icaic-palm-malecon.png",
+      alt: "Screen-print illustration of a palm tree and a wave breaking on the Malecón",
+      width: 1024,
+      height: 1024,
+      aspectRatio: "1/1",
+      sizes: "(max-width: 768px) 50vw, 20vw",
+    },
+    conga: {
+      src: "/images/editorial/icaic-conga.png",
+      alt: "Screen-print illustration of a conga drum and a pair of claves",
+      width: 1024,
+      height: 1024,
+      aspectRatio: "1/1",
+      sizes: "(max-width: 768px) 50vw, 20vw",
+    },
+    havanaTile: {
+      src: "/images/editorial/havana-tile.jpg",
+      alt: "",
+      width: 768,
+      height: 768,
+      aspectRatio: "1/1",
+      sizes: "112px",
+    },
+    paperTexture: {
+      src: "/images/editorial/paper-texture.jpg",
+      alt: "",
+      width: 768,
+      height: 768,
+      aspectRatio: "1/1",
+      sizes: "384px",
+    },
   },
 
   // ==========================================

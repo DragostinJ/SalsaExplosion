@@ -137,7 +137,10 @@ describe("song style", () => {
     expect(displaySongTitle("Me Dicen Cuba (Official Video)")).toBe("Me Dicen Cuba");
     expect(displaySongTitle("Toda Una Vida (Video Oficial)")).toBe("Toda Una Vida");
     expect(displaySongTitle("Tremenda Pinta (Studio Video)")).toBe("Tremenda Pinta");
+    expect(displaySongTitle("Agua Pa' Yemayá (2026 Official Video)")).toBe("Agua Pa' Yemayá");
     expect(displaySongTitle("537 C.U.B.A.")).toBe("537 C.U.B.A.");
+    // A live recording's place is part of the title, not an upload tag
+    expect(displaySongTitle("Esto Está (Live at Le New Morning, Paris)")).toBe("Esto Está (Live at Le New Morning, Paris)");
   });
 });
 

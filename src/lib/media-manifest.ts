@@ -100,15 +100,6 @@ export const MEDIA_MANIFEST = {
       sizes: "(max-width: 768px) 100vw, 50vw",
       priority: false,
     },
-    liveAnnouncementFlyer: {
-      src: "/images/halloween-latin-party-poster.png",
-      alt: "Live Published Event Flyer",
-      width: 1200,
-      height: 800,
-      aspectRatio: "16/9",
-      sizes: "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
-      priority: false,
-    },
   },
 
   // ==========================================

@@ -1,11 +1,9 @@
 import type { NextConfig } from "next";
 
 /**
- * Proposed Content-Security-Policy (CSP) Architecture:
- * Key: "Content-Security-Policy"
- * Preserved for documentation and audit purposes in docs/reports/antigravity-overnight-polish.md.
- * In accordance with Task 3 instructions, this header is deliberately not attached to live responses
- * to prevent third-party DevTools console noise during Playwright e2e runs.
+ * Content-Security-Policy, enforced on every response (main has shipped it for
+ * months). The overnight-polish run had moved it into a comment to quieten
+ * e2e console noise; that silently removed a live protection, so it's back.
  */
 const isProd = process.env.NODE_ENV === "production";
 const scriptSrcDirectives = [
@@ -26,7 +24,7 @@ const scriptSrcDirectives = [
   .filter(Boolean)
   .join(" ");
 
-export const PROPOSED_CSP_DIRECTIVES = `
+const CSP_DIRECTIVES = `
   default-src 'self';
   script-src ${scriptSrcDirectives};
   worker-src 'self' blob:;
@@ -108,8 +106,13 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
+            // camera=(self): the check-in QR scanner (live-qr-camera-scanner.tsx) uses getUserMedia
             value:
-              'camera=(), microphone=(), geolocation=(), usb=(), bluetooth=(), midi=(), payment=(self "https://js.stripe.com")',
+              'camera=(self), microphone=(), geolocation=(), usb=(), bluetooth=(), midi=(), payment=(self "https://js.stripe.com")',
+          },
+          {
+            key: "Content-Security-Policy",
+            value: CSP_DIRECTIVES,
           },
         ],
       },

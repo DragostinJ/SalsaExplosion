@@ -54,3 +54,20 @@ Both files here are generated from the app's own values: re-run
   importer repairs this from formattedRange and says so; still check those starts by ear.
 - A video id that isn't the one you gave (e.g. `vanvantemba`): the importer warns that it
   looks made up. Put the real id in the message (step 3).
+
+## After importing: ear calibration
+
+1. On your phone (phone speaker or wired headphones, **not Bluetooth**, which delays the sound), open
+   `/music/<song>?calibrate=1`.
+2. Play. Tap **Mark change** the moment you hear a section change; use the ±0.1 s / ±1 s buttons and **Hear it**
+   to fine-tune a start. Optional: **Tap tempo** on a section for its exact BPM.
+3. Tap **Copy** and paste the report (several songs can go in one message) to Claude, or save them to a file and run:
+
+   ```bash
+   npx tsx scripts/apply-calibration.ts reports.json          # dry run: shows every move
+   npx tsx scripts/apply-calibration.ts reports.json --write  # updates the song data
+   npm test
+   ```
+
+The script refuses a report if the song was re-timed after you calibrated it (its "from" times no longer match),
+so an old report can never scramble a new map.

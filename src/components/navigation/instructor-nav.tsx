@@ -11,6 +11,7 @@ import {
   Sparkles,
   Music,
   Flame,
+  CheckSquare,
 } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
@@ -30,6 +31,12 @@ export function InstructorNav() {
       label: "Song Map Importer",
       icon: Music,
       active: pathname.startsWith("/instructor/song-maps"),
+    },
+    {
+      href: "/instructor/moves",
+      label: "Move Library Review",
+      icon: CheckSquare,
+      active: pathname.startsWith("/instructor/moves"),
     },
     {
       href: "/instructor/practice-insights",

@@ -71,6 +71,27 @@ export const MoveReviewReportSchema = z.object({
 export type MoveReviewReport = z.infer<typeof MoveReviewReportSchema>;
 
 /**
+ * Input for the video oEmbed validation server action.
+ */
+export const CheckMoveVideoOembedInputSchema = z.object({
+  videoId: z
+    .string()
+    .regex(/^[A-Za-z0-9_-]{11}$/, "Must be an 11-character YouTube video ID"),
+});
+export type CheckMoveVideoOembedInput = z.infer<typeof CheckMoveVideoOembedInputSchema>;
+
+export const MoveVideoOembedResultSchema = z.object({
+  success: z.boolean(),
+  videoId: z.string(),
+  title: z.string().optional(),
+  channelTitle: z.string().optional(),
+  availability: z.enum(["ok", "not-embeddable", "unavailable", "unknown"]),
+  checkedAt: z.string().optional(),
+  error: z.string().optional(),
+});
+export type MoveVideoOembedResult = z.infer<typeof MoveVideoOembedResultSchema>;
+
+/**
  * Deterministic fingerprint of a move's content fields (excluding reviewedBy and videos).
  * Uses FNV-1a 32-bit hash on key-sorted content to ensure exact matching between browser and server.
  */

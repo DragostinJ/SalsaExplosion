@@ -302,7 +302,7 @@ export function ClassScheduleCard({
         <div className="flex flex-wrap items-center justify-between gap-2">
           <Badge
             variant="outline"
-            className="border-border bg-muted/50 text-muted-foreground font-medium text-[11px]"
+            className="border-border bg-muted/50 text-muted-foreground font-medium text-xs"
           >
             {session.minLevel === DanceLevel.BEGINNER
               ? "Level 0: Absolute Beginner"
@@ -379,7 +379,7 @@ export function ClassScheduleCard({
               <MapPin className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
               <span className="truncate">{session.room}</span>
             </div>
-            <div className="flex items-center gap-1.5 text-[11px] font-medium text-foreground/85">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-foreground/85">
               <Users className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
               <span>No Partner Needed • Rotations</span>
             </div>
@@ -434,7 +434,7 @@ export function ClassScheduleCard({
                 }}
               />
             </div>
-            <div className="flex items-center justify-between text-[11px] text-muted-foreground px-0.5">
+            <div className="flex items-center justify-between text-xs text-muted-foreground px-0.5">
               <span className="flex items-center gap-1.5 font-medium text-ivory-muted">
                 <span className="h-2 w-2 rounded-full bg-sky-500/75" />
                 {optimisticState.leadsCount} Leads
@@ -471,7 +471,7 @@ export function ClassScheduleCard({
                 </span>
                 {session.maxLeads !== null && (
                   <span
-                    className={`text-[11px] font-bold ${
+                    className={`text-xs font-bold ${
                       selectedRole === DanceRole.LEAD
                         ? "text-sky-200/80"
                         : "text-muted-foreground"
@@ -506,7 +506,7 @@ export function ClassScheduleCard({
                 </span>
                 {session.maxFollows !== null && (
                   <span
-                    className={`text-[11px] font-bold ${
+                    className={`text-xs font-bold ${
                       selectedRole === DanceRole.FOLLOW
                         ? "text-rose-200/80"
                         : "text-muted-foreground"

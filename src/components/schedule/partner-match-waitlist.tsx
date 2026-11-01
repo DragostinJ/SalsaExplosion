@@ -181,14 +181,14 @@ export function PartnerMatchWaitlist({
                     <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                     Priority Waitlist Activated!
                   </div>
-                  <p className="mt-1 text-[11px] text-emerald-300">
+                  <p className="mt-1 text-xs text-emerald-300">
                     You are in the queue as a <span className="font-bold">{selectedRole}</span>. You will receive an SMS and email notification the moment a {oppositeRole} books.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleJoinWaitlist} className="space-y-3 pt-1">
                   <div>
-                    <Label className="text-[11px] font-semibold text-muted-foreground">
+                    <Label className="text-xs font-semibold text-muted-foreground">
                       Your Dance Role
                     </Label>
                     <div className="mt-1 flex gap-2">
@@ -214,7 +214,7 @@ export function PartnerMatchWaitlist({
                   </div>
 
                   {errorMessage && (
-                    <p className="text-[11px] font-semibold text-destructive">
+                    <p className="text-xs font-semibold text-destructive">
                       {errorMessage}
                     </p>
                   )}
@@ -253,14 +253,14 @@ export function PartnerMatchWaitlist({
                     <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                     Invitation Dispatched!
                   </div>
-                  <p className="mt-1 text-[11px] text-emerald-300">
+                  <p className="mt-1 text-xs text-emerald-300">
                     We sent a paired bypass link to <span className="font-semibold">{partnerEmail}</span>. As soon as they confirm their {oppositeRole} registration, both your spots are guaranteed!
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSendBypassInvite} className="space-y-3 pt-1">
                   <div>
-                    <Label className="text-[11px] font-semibold text-muted-foreground">
+                    <Label className="text-xs font-semibold text-muted-foreground">
                       Invite a {oppositeRole} Friend
                     </Label>
                     <div className="mt-1 flex gap-2">
@@ -311,7 +311,7 @@ export function PartnerMatchWaitlist({
         </div>
       </CardContent>
 
-      <CardFooter className="border-t border-border/60 bg-muted/20 py-3 text-[11px] text-muted-foreground">
+      <CardFooter className="border-t border-border/60 bg-muted/20 py-3 text-xs text-muted-foreground">
         <div className="flex flex-wrap items-center justify-between gap-2 w-full">
           <div className="flex items-center gap-2">
             <UserCheck className="h-3.5 w-3.5 text-emerald-500" />

@@ -54,12 +54,12 @@ const PartnerMatchWaitlist = dynamic(
   }
 );
 
-import { Button } from "@/components/ui/button";
-import { PageHeader } from "@/components/layout/page-header";
 import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
 import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
+import { VENUE_INFO } from "@/lib/academy-data";
+import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 interface SchedulePageProps {
   searchParams: Promise<{
@@ -267,140 +267,141 @@ export default async function StudentSchedulePage({
   const userCanManage = user?.role === Role.INSTRUCTOR || user?.role === Role.ADMIN || canSwitchRoles(user?.email);
 
   return (
-    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-4 sm:space-y-6 px-4 py-3 sm:py-6 overflow-x-hidden w-full">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-6 sm:space-y-8 px-4 py-4 sm:py-8 overflow-x-hidden w-full">
       {loadFailed && <DataUnavailableNotice />}
       {(checkoutStatus === "success" || checkoutStatus === "demo_success") && (
-        <div className="flex items-center justify-between rounded-2xl border border-success-line bg-success-soft px-5 py-3.5 text-xs sm:text-sm font-semibold text-success">
+        <div className="flex items-center justify-between border-4 border-ink bg-poster-teal p-4 text-xs sm:text-sm font-bold text-ink shadow-[4px_4px_0_0_#161311]">
           <span>
             Pass activated! Your studio wallet has been updated ({user?.classCredits ?? 0} credits available). Select any class below to book your spot!
           </span>
-          <Link href="/dashboard/schedule" className="underline ml-4 text-xs">
+          <Link href="/dashboard/schedule" className="underline ml-4 text-xs font-black">
             Dismiss
           </Link>
         </div>
       )}
 
-      {/* "The Place" Havana Nocturne Architectural PageHeader & Door-Pay Policy Bar */}
-      <PageHeader
-        eyebrowLeft="BOH STUDIOS BOURNEMOUTH • PAY AT THE DOOR"
-        eyebrowRight="104 COMMERCIAL RD • BH2 5LR"
-        title="THU & SUN"
-        highlight="programme"
-        description="Weekly Cuban Salsa & Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No pre-booking or partner required. Lead & Follow partner rotations are 100% ratio balanced."
-        badge={
-          user ? (
-            <div className="inline-flex items-center gap-2 rounded-xl border border-line bg-surface-3 px-3 py-1.5 text-xs">
-              <Sparkles className="h-4 w-4 text-gold" />
-              <span className="text-ivory-muted">Dancer:</span>
-              <span className="font-bold text-gold">{user.currentLevel}</span>
-              <span className="text-ivory-muted font-mono">({user.classCredits} credits)</span>
-            </div>
-          ) : undefined
-        }
-        actions={
-          <>
-            <Button asChild size="sm" className="bg-brand hover:bg-brand-hover text-white font-extrabold text-xs h-9 px-4 rounded-xl shadow-xs">
-              <Link href="/events">
-                <span>Book Festivals Online →</span>
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="sm" className="border-line bg-surface-3 hover:bg-surface-2 text-ivory font-bold text-xs h-9 px-3.5 rounded-xl">
-              <Link href="/venues">Directions &amp; Parking</Link>
-            </Button>
-          </>
-        }
-      />
+      {/* Cartelera Poster Hero Header & Door-Pay Policy Bar */}
+      <section
+        data-testid="page-header"
+        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
+          <span>{VENUE_INFO.shortName} BOURNEMOUTH • PAY AT THE DOOR</span>
+          <span className="opacity-70">{VENUE_INFO.streetAddress} • {VENUE_INFO.postcode}</span>
+        </div>
+
+        <div className="mt-4 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-3">
+            <p className={KICKER}>Thursdays &amp; Sundays · BOH Studios</p>
+            <h1 className={`${TYPE.section} text-ink`}>
+              THU &amp; SUN <span className="text-poster-red">Programme</span>
+            </h1>
+            <p className="max-w-2xl text-sm font-semibold text-ink/80 leading-relaxed">
+              Weekly Cuban Salsa &amp; Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No pre-booking or partner required. Lead &amp; Follow partner rotations are 100% ratio balanced.
+            </p>
+            {user && (
+              <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
+                <Sparkles className="h-4 w-4 text-poster-red" />
+                <span>Dancer:</span>
+                <span className="font-black uppercase">{user.currentLevel}</span>
+                <span className="opacity-80">({user.classCredits} credits)</span>
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/events"
+              className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-paper hover:bg-ink hover:text-paper text-xs font-bold min-h-[40px] px-3.5 inline-flex items-center justify-center`}
+            >
+              Book Festivals Online →
+            </Link>
+            <Link
+              href="/venues"
+              className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold min-h-[40px] px-3.5 inline-flex items-center justify-center`}
+            >
+              Directions &amp; Parking
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Day & Level Filter Bars */}
-      <div className="space-y-3 border-b pb-4">
+      <div className="space-y-4 border-4 border-ink bg-paper p-4 sm:p-5 text-ink shadow-[4px_4px_0_0_#161311]">
         {/* Day of Week Filter Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Select Day:
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
+          <span className="text-xs font-bold uppercase tracking-wider text-ink/80">
+            Select Day:
+          </span>
+          <div className="flex items-center gap-2 flex-wrap">
             {DAY_TABS.map((tab) => {
               const isActive = (!dayParam && tab.id === "all") || dayParam === tab.id;
               return (
-                <Button
+                <Link
                   key={tab.id}
-                  asChild
-                  variant={isActive ? "default" : "outline"}
-                  size="sm"
-                  className={`h-8 text-xs font-bold min-h-8 shrink-0 whitespace-nowrap ${
+                  href={{
+                    pathname: "/dashboard/schedule",
+                    query: {
+                      ...(styleFilter ? { style: styleFilter } : {}),
+                      ...(levelFilter ? { level: levelFilter } : {}),
+                      ...(tab.id !== "all" ? { day: tab.id } : {}),
+                    },
+                  }}
+                  className={`${POSTER_BUTTON} ${
                     isActive
-                      ? "bg-primary-base text-white hover:bg-primary-hover shadow-xs"
-                      : "border bg-card text-foreground hover:bg-muted"
-                  }`}
+                      ? POSTER_BUTTON_COLORS.ink
+                      : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+                  } text-xs font-bold min-h-[40px] px-3 py-1 flex items-center justify-center`}
                 >
-                  <Link
-                    href={{
-                      pathname: "/dashboard/schedule",
-                      query: {
-                        ...(styleFilter ? { style: styleFilter } : {}),
-                        ...(levelFilter ? { level: levelFilter } : {}),
-                        ...(tab.id !== "all" ? { day: tab.id } : {}),
-                      },
-                    }}
-                  >
-                    {tab.label}
-                  </Link>
-                </Button>
+                  {tab.label}
+                </Link>
               );
             })}
           </div>
         </div>
 
         {/* Syllabus Level Filter Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-border/50">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-              Syllabus Level:
-            </span>
-          </div>
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t-2 border-ink">
+          <span className="text-xs font-bold uppercase tracking-wider text-ink/80">
+            Syllabus Level:
+          </span>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
-            <Button
-              asChild
-              variant={!levelFilter ? "secondary" : "ghost"}
-              size="sm"
-              className="h-8 text-xs font-bold min-h-8 shrink-0 whitespace-nowrap"
+          <div className="flex items-center gap-2 flex-wrap">
+            <Link
+              href={{
+                pathname: "/dashboard/schedule",
+                query: {
+                  ...(styleFilter ? { style: styleFilter } : {}),
+                  ...(dayParam ? { day: dayParam } : {}),
+                },
+              }}
+              className={`${POSTER_BUTTON} ${
+                !levelFilter
+                  ? POSTER_BUTTON_COLORS.mustard
+                  : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+              } text-xs font-bold min-h-[40px] px-3 py-1 flex items-center justify-center`}
             >
+              All Levels ({filteredClasses.length})
+            </Link>
+            {Object.values(DanceLevel).map((level) => (
               <Link
+                key={level}
                 href={{
                   pathname: "/dashboard/schedule",
                   query: {
                     ...(styleFilter ? { style: styleFilter } : {}),
                     ...(dayParam ? { day: dayParam } : {}),
+                    level,
                   },
                 }}
+                className={`${POSTER_BUTTON} ${
+                  levelFilter === level
+                    ? POSTER_BUTTON_COLORS.mustard
+                    : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+                } text-xs font-bold min-h-[40px] px-3 py-1 flex items-center justify-center`}
               >
-                All Levels ({filteredClasses.length})
+                {level}
               </Link>
-            </Button>
-            {Object.values(DanceLevel).map((level) => (
-              <Button
-                key={level}
-                asChild
-                variant={levelFilter === level ? "secondary" : "ghost"}
-                size="sm"
-                className="h-8 text-xs font-semibold min-h-8 shrink-0 whitespace-nowrap"
-              >
-                <Link
-                  href={{
-                    pathname: "/dashboard/schedule",
-                    query: {
-                      ...(styleFilter ? { style: styleFilter } : {}),
-                      ...(dayParam ? { day: dayParam } : {}),
-                      level,
-                    },
-                  }}
-                >
-                  {level}
-                </Link>
-              </Button>
             ))}
           </div>
         </div>
@@ -412,17 +413,17 @@ export default async function StudentSchedulePage({
 
         {/* Live Interactive Database Sessions (When Scheduled) */}
         {scheduleItems.length > 0 ? (
-          <div className="space-y-4 pt-6 border-t border-border/60">
+          <div className="space-y-4 pt-6 border-t-4 border-ink">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <h3 className="text-lg font-black uppercase tracking-tight text-foreground">
+                <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
                   Live Interactive Sessions &amp; Ratio Capacity
                 </h3>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-ink/80 font-medium">
                   Select your dance role (Lead / Follow) for live ratio-balanced reservation.
                 </p>
               </div>
-              <span className="text-xs font-bold text-muted-foreground bg-muted/40 px-3 py-1 rounded-full border">
+              <span className="text-xs font-bold text-ink bg-poster-mustard px-3 py-1 border border-ink shadow-[2px_2px_0_0_#161311]">
                 {scheduleItems.length} Sessions Available
               </span>
             </div>
@@ -437,118 +438,127 @@ export default async function StudentSchedulePage({
             </div>
           </div>
         ) : (styleFilter || levelFilter || dayParam) ? (
-          <div className="rounded-xl border border-dashed py-8 text-center bg-card">
-            <p className="text-sm font-semibold">
+          <div className="border-4 border-dashed border-ink p-8 text-center bg-paper text-ink">
+            <p className="text-sm font-bold">
               No live database sessions match your current filter selection.
             </p>
-            <Button asChild variant="outline" size="sm" className="mt-3 text-xs font-bold">
-              <Link href="/dashboard/schedule">Reset Filters</Link>
-            </Button>
+            <Link
+              href="/dashboard/schedule"
+              className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} mt-3 text-xs inline-flex items-center`}
+            >
+              Reset Filters
+            </Link>
           </div>
         ) : null}
       </div>
 
-      {/* Interactive Level Matcher & First-Timer Quick Guide (Moved from Landing Page) */}
-      <section className="rounded-3xl border border-border/70 bg-card p-5 sm:p-8 shadow-xs space-y-6">
+      {/* Interactive Level Matcher & First-Timer Quick Guide */}
+      <section className="border-4 border-ink bg-paper p-5 sm:p-8 text-ink shadow-[6px_6px_0_0_#161311] space-y-6">
         <LevelMatcherQuiz />
 
-        <div className="rounded-2xl border border-border/70 bg-background/80 p-4 shadow-xs">
-          <div className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground mb-3 text-center sm:text-left">
+        <div className="border-2 border-ink bg-poster-mustard/20 p-4 shadow-[3px_3px_0_0_#161311]">
+          <div className="text-xs font-bold uppercase tracking-wider text-ink mb-3 text-center sm:text-left">
             First-Timer Quick Guide
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
-            <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-card px-3.5 py-2.5 text-xs text-foreground">
-              <span className="font-bold text-amber-400">Footwear</span>
-              <span className="text-muted-foreground">Comfortable flat shoes or trainers</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="border-2 border-ink bg-paper p-3 text-xs text-ink">
+              <span className="font-bold text-poster-red block">Footwear</span>
+              <span className="text-ink/80 font-medium">Comfortable flat shoes or trainers</span>
             </div>
-            <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-card px-3.5 py-2.5 text-xs text-foreground">
-              <span className="font-bold text-amber-400">No Partner Needed</span>
-              <span className="text-muted-foreground">Zero partner required (we rotate continuously)</span>
+            <div className="border-2 border-ink bg-paper p-3 text-xs text-ink">
+              <span className="font-bold text-poster-red block">No Partner Needed</span>
+              <span className="text-ink/80 font-medium">Zero partner required (we rotate continuously)</span>
             </div>
-            <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-card px-3.5 py-2.5 text-xs text-foreground">
-              <span className="font-bold text-amber-400">Studio Bar &amp; Lounge</span>
-              <span className="text-muted-foreground">Refreshments &amp; social lounge at BOH Studios</span>
+            <div className="border-2 border-ink bg-paper p-3 text-xs text-ink">
+              <span className="font-bold text-poster-red block">Studio Bar &amp; Lounge</span>
+              <span className="text-ink/80 font-medium">Refreshments &amp; social lounge at BOH Studios</span>
             </div>
-            <div className="flex flex-col gap-0.5 rounded-xl border border-border/60 bg-card px-3.5 py-2.5 text-xs text-foreground">
-              <span className="font-bold text-amber-400">Town-Centre Parking</span>
-              <span className="text-muted-foreground">Easy parking nearby (The Triangle, BH2 5LR)</span>
+            <div className="border-2 border-ink bg-paper p-3 text-xs text-ink">
+              <span className="font-bold text-poster-red block">Town-Centre Parking</span>
+              <span className="text-ink/80 font-medium">Easy parking nearby (The Triangle, BH2 5LR)</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Weekly Calendar Overview: Days of the Week Only */}
-      <div className="pt-6 border-t">
+      <div className="pt-6 border-t-4 border-ink">
         <WeeklyCalendarOverview />
       </div>
 
       {/* Multi-Generational UX: Fast-Track Arrival Essentials & 60+ Senior Reassurance */}
-      <div className="pt-6 border-t">
+      <div className="pt-6 border-t-4 border-ink">
         <MultiAgeReassuranceBanner />
       </div>
 
       {/* Instructor & Studio Admin Quick-Access Command Bar (Shown only to Staff/Admin) */}
       {userCanManage && (
         <div className="grid gap-4 md:grid-cols-2 pt-4">
-          <div className="flex flex-col justify-between gap-3 rounded-2xl border border-success-line bg-success-soft p-4 sm:flex-row sm:items-center">
+          <div className="flex flex-col justify-between gap-3 border-4 border-ink bg-poster-teal p-4 text-ink sm:flex-row sm:items-center shadow-[4px_4px_0_0_#161311]">
             <div>
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400">
+              <span className="text-xs font-bold uppercase tracking-wider text-ink/80 block">
                 Instructor Portal
               </span>
               <h2 className="text-sm font-bold">
-                Teaching Desk, Progression & QR Roster
+                Teaching Desk, Progression &amp; QR Roster
               </h2>
             </div>
             <div className="flex flex-wrap items-center gap-1.5">
-              <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
-                <Link href="/instructor/students">
-                  <Users className="mr-1.5 h-3.5 w-3.5 text-emerald-600" />
-                  Students
-                </Link>
-              </Button>
-              <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
-                <Link href="/instructor/submissions">
-                  <Video className="mr-1.5 h-3.5 w-3.5 text-amber-500" />
-                  Video Queue
-                </Link>
-              </Button>
-              <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
-                <Link href="/instructor/roster">
-                  <QrCode className="mr-1.5 h-3.5 w-3.5 text-blue-500" />
-                  QR Roster
-                </Link>
-              </Button>
+              <Link
+                href="/instructor/students"
+                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs px-2.5 py-1 min-h-[40px] flex items-center`}
+              >
+                <Users className="mr-1.5 h-3.5 w-3.5" />
+                Students
+              </Link>
+              <Link
+                href="/instructor/submissions"
+                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs px-2.5 py-1 min-h-[40px] flex items-center`}
+              >
+                <Video className="mr-1.5 h-3.5 w-3.5" />
+                Video Queue
+              </Link>
+              <Link
+                href="/instructor/roster"
+                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs px-2.5 py-1 min-h-[40px] flex items-center`}
+              >
+                <QrCode className="mr-1.5 h-3.5 w-3.5" />
+                QR Roster
+              </Link>
             </div>
           </div>
 
-          <div className="flex flex-col justify-between gap-3 rounded-2xl border border-border bg-card p-4 sm:flex-row sm:items-center">
+          <div className="flex flex-col justify-between gap-3 border-4 border-ink bg-poster-mustard p-4 text-ink sm:flex-row sm:items-center shadow-[4px_4px_0_0_#161311]">
             <div>
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">
+              <span className="text-xs font-bold uppercase tracking-wider text-ink/80 block">
                 Studio Owner Admin
               </span>
               <h2 className="text-sm font-bold">
-                Revenue Charts, Classes & Events
+                Revenue Charts, Classes &amp; Events
               </h2>
             </div>
             <div className="flex flex-wrap items-center gap-1.5">
-              <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
-                <Link href="/admin/analytics">
-                  <BarChart3 className="mr-1.5 h-3.5 w-3.5 text-gold" />
-                  Analytics
-                </Link>
-              </Button>
-              <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
-                <Link href="/admin/classes">
-                  <CalendarPlus className="mr-1.5 h-3.5 w-3.5 text-success" />
-                  Classes
-                </Link>
-              </Button>
-              <Button size="sm" variant="outline" asChild className="h-8 text-xs font-semibold">
-                <Link href="/admin/events">
-                  <Sparkles className="mr-1.5 h-3.5 w-3.5 text-gold" />
-                  Events Admin
-                </Link>
-              </Button>
+              <Link
+                href="/admin/analytics"
+                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs px-2.5 py-1 min-h-[40px] flex items-center`}
+              >
+                <BarChart3 className="mr-1.5 h-3.5 w-3.5" />
+                Analytics
+              </Link>
+              <Link
+                href="/admin/classes"
+                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs px-2.5 py-1 min-h-[40px] flex items-center`}
+              >
+                <CalendarPlus className="mr-1.5 h-3.5 w-3.5" />
+                Classes
+              </Link>
+              <Link
+                href="/admin/events"
+                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs px-2.5 py-1 min-h-[40px] flex items-center`}
+              >
+                <Sparkles className="mr-1.5 h-3.5 w-3.5" />
+                Events Admin
+              </Link>
             </div>
           </div>
         </div>

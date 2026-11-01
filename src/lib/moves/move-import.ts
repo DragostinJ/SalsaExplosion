@@ -36,7 +36,7 @@ function extractJson(raw: string): unknown {
  * Checks if step counts align with the declared eightCounts value.
  * Returns a warning message if a mismatch is detected.
  */
-function checkEightCountAlignment(move: Move): string | null {
+export function checkEightCountAlignment(move: Move): string | null {
   const allCounts = [...move.leaderSteps, ...move.followerSteps].map((s) => s.counts);
 
   // Look for count numbers across all step labels

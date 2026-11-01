@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   Sparkles,
-  CheckCircle2,
   AlertTriangle,
   XCircle,
   Plus,
@@ -60,7 +59,7 @@ export function MoveImportConsole() {
       <Card className="p-5 rounded-2xl border bg-card text-card-foreground space-y-3">
         <div className="flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-amber-400" />
-          <h2 className="text-base font-bold">Import AI Studio "Move Maker" Drafts</h2>
+          <h2 className="text-base font-bold">Import AI Studio &quot;Move Maker&quot; Drafts</h2>
         </div>
         <p className="text-xs text-muted-foreground leading-relaxed">
           Paste JSON output directly from Google AI Studio. Output can be a single move object, an array of moves, or fenced markdown (```json ... ```). Every imported move enters the queue as an unapproved draft requiring teacher verification.

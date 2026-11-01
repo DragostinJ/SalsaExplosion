@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import {
   CheckCircle2,
   AlertTriangle,
@@ -53,38 +52,71 @@ interface MoveReviewDetailConsoleProps {
   currentUserName: string;
 }
 
+function loadStoredReview(key: string): MoveReview | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
 export function MoveReviewDetailConsole({
   move,
   reviewState,
   sections,
   currentUserName,
 }: MoveReviewDetailConsoleProps) {
-  const router = useRouter();
+  const storageKey = `ritmoflow:move-review:${move.id}`;
+  const baseFingerprint = reviewState.fingerprint || moveFingerprint(move);
+  const storedReview = loadStoredReview(storageKey);
 
   // Local editable draft state (mirroring edits)
-  const [name, setName] = useState<string>(move.name);
-  const [spanishName, setSpanishName] = useState<string>(move.spanishName ?? "");
-  const [level, setLevel] = useState<string>(move.level);
-  const [eightCounts, setEightCounts] = useState<number>(move.eightCounts);
-  const [summary, setSummary] = useState<string>(move.summary);
-  const [leaderSteps, setLeaderSteps] = useState<MoveStep[]>(move.leaderSteps);
-  const [followerSteps, setFollowerSteps] = useState<MoveStep[]>(move.followerSteps);
-  const [commonMistakes, setCommonMistakes] = useState<string[]>(move.commonMistakes);
-  const [variations, setVariations] = useState<string[]>(move.variations);
-  const [prerequisites, setPrerequisites] = useState<string[]>(move.prerequisites);
-  const [videos, setVideos] = useState<MoveVideo[]>(move.videos);
+  const [hasLocalEdits, setHasLocalEdits] = useState<boolean>(() => Boolean(storedReview));
+  const [name, setName] = useState<string>(() => storedReview?.edits?.name ?? move.name);
+  const [spanishName, setSpanishName] = useState<string>(
+    () => storedReview?.edits?.spanishName ?? (move.spanishName ?? "")
+  );
+  const [level, setLevel] = useState<string>(() => storedReview?.edits?.level ?? move.level);
+  const [eightCounts, setEightCounts] = useState<number>(
+    () => storedReview?.edits?.eightCounts ?? move.eightCounts
+  );
+  const [summary, setSummary] = useState<string>(() => storedReview?.edits?.summary ?? move.summary);
+  const [leaderSteps, setLeaderSteps] = useState<MoveStep[]>(
+    () => storedReview?.edits?.leaderSteps ?? move.leaderSteps
+  );
+  const [followerSteps, setFollowerSteps] = useState<MoveStep[]>(
+    () => storedReview?.edits?.followerSteps ?? move.followerSteps
+  );
+  const [commonMistakes, setCommonMistakes] = useState<string[]>(
+    () => storedReview?.edits?.commonMistakes ?? move.commonMistakes
+  );
+  const [variations, setVariations] = useState<string[]>(
+    () => storedReview?.edits?.variations ?? move.variations
+  );
+  const [prerequisites, setPrerequisites] = useState<string[]>(
+    () => storedReview?.edits?.prerequisites ?? move.prerequisites
+  );
+  const [videos, setVideos] = useState<MoveVideo[]>(() => storedReview?.videos ?? move.videos);
 
   // Review decision controls
   const [reviewedBy, setReviewedBy] = useState<string>(
-    reviewState.review?.reviewedBy || currentUserName || "Maestro Enrique"
+    () =>
+      storedReview?.reviewedBy ||
+      reviewState.review?.reviewedBy ||
+      currentUserName ||
+      "Maestro Enrique"
   );
   const [decision, setDecision] = useState<MoveReviewDecision>(
-    reviewState.review?.decision || "approved"
+    () => storedReview?.decision || reviewState.review?.decision || "approved"
   );
   const [countsVerified, setCountsVerified] = useState<boolean>(
-    reviewState.review?.countsVerified ?? false
+    () => storedReview?.countsVerified ?? reviewState.review?.countsVerified ?? false
   );
-  const [notes, setNotes] = useState<string>(reviewState.review?.notes ?? "");
+  const [notes, setNotes] = useState<string>(
+    () => storedReview?.notes ?? reviewState.review?.notes ?? ""
+  );
 
   // Video attacher states
   const [youtubeInput, setYoutubeInput] = useState<string>("");
@@ -97,41 +129,6 @@ export function MoveReviewDetailConsole({
 
   // UI status helpers
   const [savedLocally, setSavedLocally] = useState<boolean>(false);
-  const [hasLocalEdits, setHasLocalEdits] = useState<boolean>(false);
-
-  const storageKey = `ritmoflow:move-review:${move.id}`;
-  const baseFingerprint = reviewState.fingerprint || moveFingerprint(move);
-
-  // Load from localStorage on mount if present
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(storageKey);
-      if (raw) {
-        const stored: MoveReview = JSON.parse(raw);
-        setHasLocalEdits(true);
-        setDecision(stored.decision);
-        setCountsVerified(stored.countsVerified);
-        if (stored.reviewedBy) setReviewedBy(stored.reviewedBy);
-        if (stored.notes) setNotes(stored.notes);
-        if (stored.videos) setVideos(stored.videos);
-
-        if (stored.edits) {
-          if (stored.edits.name) setName(stored.edits.name);
-          if (stored.edits.spanishName !== undefined) setSpanishName(stored.edits.spanishName);
-          if (stored.edits.level) setLevel(stored.edits.level);
-          if (stored.edits.eightCounts) setEightCounts(stored.edits.eightCounts);
-          if (stored.edits.summary) setSummary(stored.edits.summary);
-          if (stored.edits.leaderSteps) setLeaderSteps(stored.edits.leaderSteps);
-          if (stored.edits.followerSteps) setFollowerSteps(stored.edits.followerSteps);
-          if (stored.edits.commonMistakes) setCommonMistakes(stored.edits.commonMistakes);
-          if (stored.edits.variations) setVariations(stored.edits.variations);
-          if (stored.edits.prerequisites) setPrerequisites(stored.edits.prerequisites);
-        }
-      }
-    } catch {
-      // localStorage unavailable or restricted
-    }
-  }, [storageKey]);
 
   // Step manipulation helpers
   const updateStep = (

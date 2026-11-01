@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import {
   CheckCircle2,
@@ -9,7 +9,6 @@ import {
   Clock,
   Copy,
   Check,
-  Filter,
   PlusCircle,
   ExternalLink,
   Video,
@@ -20,10 +19,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
   type Move,
-  type MoveCategory,
   MOVE_CATEGORIES,
 } from "@/lib/moves/move-schema";
-import { type CurriculumLevel } from "@/lib/constants/cuban-curriculum-2027";
 import { type MoveReviewState } from "@/lib/moves/move-library";
 import { type MoveReview, type MoveReviewReport } from "@/lib/moves/move-review";
 
@@ -31,6 +28,30 @@ interface MoveReviewListConsoleProps {
   moves: Move[];
   reviewStates: Record<string, MoveReviewState>;
   songSectionsCounts: Record<string, number>;
+}
+
+function loadLocalReviews(): Record<string, MoveReview> {
+  if (typeof window === "undefined") return {};
+  try {
+    const stored: Record<string, MoveReview> = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith("ritmoflow:move-review:")) {
+        const moveId = key.replace("ritmoflow:move-review:", "");
+        const raw = localStorage.getItem(key);
+        if (raw) {
+          try {
+            stored[moveId] = JSON.parse(raw);
+          } catch {
+            // ignore corrupted entries
+          }
+        }
+      }
+    }
+    return stored;
+  } catch {
+    return {};
+  }
 }
 
 export function MoveReviewListConsole({
@@ -43,34 +64,10 @@ export function MoveReviewListConsole({
   const [levelFilter, setLevelFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const [localReviews, setLocalReviews] = useState<Record<string, MoveReview>>({});
+  const [localReviews] = useState<Record<string, MoveReview>>(loadLocalReviews);
   const [copied, setCopied] = useState<boolean>(false);
   const [showExportModal, setShowExportModal] = useState<boolean>(false);
   const [exportJson, setExportJson] = useState<string>("");
-
-  // Scan localStorage for in-flight reviews
-  useEffect(() => {
-    try {
-      const stored: Record<string, MoveReview> = {};
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith("ritmoflow:move-review:")) {
-          const moveId = key.replace("ritmoflow:move-review:", "");
-          const raw = localStorage.getItem(key);
-          if (raw) {
-            try {
-              stored[moveId] = JSON.parse(raw);
-            } catch {
-              // ignore corrupted entries
-            }
-          }
-        }
-      }
-      setLocalReviews(stored);
-    } catch {
-      // localStorage unavailable or restricted
-    }
-  }, []);
 
   // Compute status counts
   const counts = {

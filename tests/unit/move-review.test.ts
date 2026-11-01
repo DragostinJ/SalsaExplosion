@@ -9,10 +9,8 @@ import {
   type MoveReview,
 } from "@/lib/moves/move-review";
 import {
-  getAllMoves,
   getPublishedMoves,
   getMoveReviewState,
-  SEEDED_MOVES,
 } from "@/lib/moves/move-library";
 import { MoveSchema, type Move } from "@/lib/moves/move-schema";
 

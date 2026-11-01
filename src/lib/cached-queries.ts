@@ -3,14 +3,14 @@ import { EventStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 /**
- * Cached fetcher for published public events.
+ * Cached fetcher for published public events that haven't finished yet.
  * Cached for 60 seconds or invalidated via tag "public-events".
  */
 export const getCachedUpcomingEvents = (limit: number = 3) =>
   unstable_cache(
     async () => {
       return prisma.event.findMany({
-        where: { status: EventStatus.PUBLISHED },
+        where: { status: EventStatus.PUBLISHED, endDate: { gte: new Date() } },
         orderBy: { startDate: "asc" },
         take: limit,
         include: {

@@ -1,13 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-  MapPin,
-  Ticket,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
+import { UpcomingEventPosters } from "@/components/home/UpcomingEventPosters";
 import {
   ArtHouseGallerySection,
   InsideCubanCircleGallery,
@@ -21,6 +18,9 @@ const BohVenueSpotlight = dynamic(
     loading: () => <div className="py-20 min-h-[400px] animate-pulse bg-muted/20" />,
   }
 );
+
+// Re-render hourly so finished events leave the "What's On" posters without a redeploy
+export const revalidate = 3600;
 
 export default function Home() {
   return (
@@ -182,164 +182,8 @@ export default function Home() {
               </Button>
             </div>
 
-            {/* 3-Column Exhibition Poster Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Event 1: Halloween Fancy Dress Latin Party */}
-              <div className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-surface-2 overflow-hidden shadow-2xl hover:border-amber-400/50 transition-all duration-300">
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
-                  <Image
-                    src={MEDIA_MANIFEST.events.halloweenParty}
-                    alt="Halloween Fancy Dress Latin Party Official Event Poster"
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface-1 via-black/20 to-transparent pointer-events-none" />
-                  <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-amber-300">
-                      SAT 31 OCT 2026
-                    </span>
-                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-xs font-black uppercase tracking-wider">
-                      THIS SATURDAY
-                    </span>
-                  </div>
-                  <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-amber-400 text-stone-950 px-2 py-0.5 text-xs font-black uppercase tracking-wider">
-                      From £12
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-lg font-black text-white group-hover:text-amber-300 transition-colors leading-snug">
-                      Halloween Fancy Dress Latin Party
-                    </h3>
-                    <div className="flex items-center gap-1.5 text-xs text-ivory-muted mt-1">
-                      <MapPin className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-                      <span>BOH Studios Bournemouth</span>
-                    </div>
-                    <p className="text-xs text-ivory-muted mt-2 line-clamp-2 leading-relaxed">
-                      Cash prizes for best dressed, Cuban Salsa &amp; Bachata workshops, guest maestros, and dancing until 02:00.
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-line flex items-center justify-between">
-                    <Button
-                      asChild
-                      className="w-full bg-brand hover:bg-brand-hover text-white font-black text-xs h-10 rounded-xl shadow-xs"
-                    >
-                      <Link href="/events/halloween-fancy-dress-latin-party-2026">
-                        <Ticket className="mr-1.5 h-3.5 w-3.5" />
-                        Book Party Pass Online →
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Event 2: SB&K Night Extravaganza */}
-              <div className="group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-2 overflow-hidden shadow-xs hover:border-gold/40 transition-all duration-300">
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
-                  <Image
-                    src={MEDIA_MANIFEST.events.sbkNight}
-                    alt="SB&K Night Extravaganza Official Event Poster"
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface-2 via-black/20 to-transparent pointer-events-none" />
-                  <div className="absolute top-3 left-3">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-gold">
-                      SAT 14 NOV 2026
-                    </span>
-                  </div>
-                  <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-xs font-black uppercase tracking-wider">
-                      From £12
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-lg font-black text-white group-hover:text-amber-300 transition-colors leading-snug">
-                      SB&amp;K Night! Extravaganza
-                    </h3>
-                    <div className="flex items-center gap-1.5 text-xs text-ivory-muted mt-1">
-                      <MapPin className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-                      <span>BOH Studios Bournemouth</span>
-                    </div>
-                    <p className="text-xs text-ivory-muted mt-2 line-clamp-2 leading-relaxed">
-                      Salsa, Bachata &amp; Kizomba across 2 vibrant rooms. 20:00 workshops followed by Bournemouth&apos;s premier Saturday social.
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-line flex items-center justify-between">
-                    <Button
-                      asChild
-                      className="w-full bg-brand hover:bg-brand-hover text-white font-black text-xs h-10 rounded-xl shadow-xs"
-                    >
-                      <Link href="/events/sbk-night-extravaganza-nov-2026">
-                        <Ticket className="mr-1.5 h-3.5 w-3.5" />
-                        Book SB&amp;K Pass Online →
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Event 3: MADE IN CUBA Dance Weekend 2026 */}
-              <div className="group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-2 overflow-hidden shadow-xs hover:border-gold/40 transition-all duration-300">
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-stone-950">
-                  <Image
-                    src={MEDIA_MANIFEST.events.madeInCuba2026}
-                    alt="MADE IN CUBA Dance Weekend 2026 Official Festival Poster"
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface-2 via-black/20 to-transparent pointer-events-none" />
-                  <div className="absolute top-3 left-3">
-                    <span className="rounded-md bg-black/85 backdrop-blur-xs border border-white/15 px-2.5 py-1 text-xs font-black uppercase tracking-wider text-gold">
-                      04 — 06 DEC 2026
-                    </span>
-                  </div>
-                  <div className="absolute top-3 right-3">
-                    <span className="rounded-md bg-gold text-stone-950 px-2 py-0.5 text-xs font-black uppercase tracking-wider">
-                      From £20
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-5 space-y-3 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-lg font-black text-ivory group-hover:text-gold transition-colors leading-snug">
-                      MADE IN CUBA — Dance Weekend 2026
-                    </h3>
-                    <div className="flex items-center gap-1.5 text-xs text-ivory-muted mt-1">
-                      <MapPin className="h-3.5 w-3.5 text-gold shrink-0" />
-                      <span>BOH Studios Bournemouth</span>
-                    </div>
-                    <p className="text-xs text-ivory-muted mt-2 line-clamp-2 leading-relaxed">
-                      3 nights of parties, 2 days of workshops, and dancing until 02:00 across 2 dedicated rooms celebrating 25+ years of Salsa Explosion heritage.
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-line flex items-center justify-between">
-                    <Button
-                      asChild
-                      className="w-full bg-brand hover:bg-brand-hover text-white font-black text-xs h-10 rounded-xl shadow-xs"
-                    >
-                      <Link href="/events/made-in-cuba-dance-weekend-2026">
-                        <Ticket className="mr-1.5 h-3.5 w-3.5" />
-                        Book Official Pass Online →
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Next festivals & parties from UPCOMING_EVENTS (finished ones drop off) */}
+            <UpcomingEventPosters />
           </div>
         </section>
 

@@ -16,6 +16,7 @@ import {
 } from "@/lib/constants/pricing";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
+import { ticketSalesBlockReason } from "@/lib/event-sales";
 
 // ==========================================
 // ZOD VALIDATION SCHEMA
@@ -393,7 +394,7 @@ export async function createEventCheckoutSessionAction(
     const tier = await prisma.eventTicketTier.findUnique({
       where: { id: ticketTierId },
       include: {
-        event: { select: { id: true, slug: true, title: true } },
+        event: { select: { id: true, slug: true, title: true, status: true, endDate: true } },
         registrations: {
           where: { paymentStatus: "PAID" },
           select: { id: true, userId: true, role: true },
@@ -403,6 +404,11 @@ export async function createEventCheckoutSessionAction(
 
     if (!tier || tier.eventId !== eventId) {
       throw new CheckoutDomainError("USER_NOT_FOUND", "Ticket tier not found.");
+    }
+
+    const salesBlocked = ticketSalesBlockReason(tier.event, tier);
+    if (salesBlocked) {
+      throw new CheckoutDomainError("PLAN_UNAVAILABLE", salesBlocked);
     }
 
     const existingUserPass = tier.registrations.find((r) => r.userId === user.id);

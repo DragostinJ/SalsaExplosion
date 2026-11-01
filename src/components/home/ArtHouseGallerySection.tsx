@@ -99,7 +99,7 @@ export function ArtHouseGallerySection() {
                     Festivals &amp; Special Events
                   </h3>
                   <p className="text-xs text-ivory-muted mt-1 leading-relaxed line-clamp-2">
-                    Reserve your official online passes for Made in Cuba Dance Weekend 2026 (4–6 Dec), Halloween Party, and SB&amp;K Nights.
+                    Reserve your official online passes for Made in Cuba Dance Weekend 2026 (4–6 Dec), SB&amp;K Nights and seasonal parties.
                   </p>
                 </div>
                 <span className="pt-2 text-xs font-bold uppercase tracking-wider text-amber-300 inline-flex items-center gap-1">

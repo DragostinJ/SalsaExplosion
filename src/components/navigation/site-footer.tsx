@@ -124,7 +124,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link href="/events" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
-                  Halloween &amp; SB&amp;K Parties
+                  SB&amp;K &amp; Seasonal Parties
                 </Link>
               </li>
               <li>

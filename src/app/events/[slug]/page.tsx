@@ -39,7 +39,8 @@ import {
 import { AddToCalendarButton } from "@/components/calendar/add-to-calendar-button";
 import { CongressTravelGuide } from "@/components/events/congress-travel-guide";
 import { StudioEventGuide } from "@/components/events/studio-event-guide";
-import { UPCOMING_EVENTS, VENUE_INFO } from "@/lib/academy-data";
+import { UPCOMING_EVENTS, VENUE_INFO, canonicalEventEnd } from "@/lib/academy-data";
+import { hasEventEnded } from "@/lib/event-sales";
 import { reportError } from "@/lib/monitoring";
 
 interface EventDetailPageProps {
@@ -158,7 +159,7 @@ export default async function EventDetailPage({
         venueName: canonical.venueName,
         venueAddress: VENUE_INFO.fullAddress,
         startDate: new Date(canonical.startDateIso),
-        endDate: canonical.endDateIso ? new Date(canonical.endDateIso) : new Date(canonical.startDateIso),
+        endDate: canonicalEventEnd(canonical),
         guestArtists: [] as string[],
         status: "PUBLISHED" as const,
         createdAt: new Date(),
@@ -187,6 +188,9 @@ export default async function EventDetailPage({
   if (!event) {
     notFound();
   }
+
+  // Past events stay viewable (old links, posters) but can't be booked
+  const eventFinished = hasEventEnded(new Date(event.endDate));
 
   const startFormatted = new Intl.DateTimeFormat("en-GB", {
     weekday: "long",
@@ -272,7 +276,7 @@ export default async function EventDetailPage({
       name: tier.name,
       price: (tier.priceInCents / 100).toFixed(2),
       priceCurrency: "GBP",
-      availability: "https://schema.org/InStock",
+      availability: eventFinished ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
       url: `https://salsaexplosion.co.uk/events/${event.slug}`,
     })),
   };
@@ -666,10 +670,12 @@ export default async function EventDetailPage({
       <div className="space-y-6">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">
-            Available Passes & Tickets
+            {eventFinished ? "Passes & Tickets" : "Available Passes & Tickets"}
           </h2>
           <p className="text-sm text-muted-foreground mt-1">
-            Select your pass tier and dance role below. Your QR door pass will be generated immediately.
+            {eventFinished
+              ? "Online sales for this event have closed."
+              : "Select your pass tier and dance role below. Your QR door pass will be generated immediately."}
           </p>
         </div>
 
@@ -677,6 +683,7 @@ export default async function EventDetailPage({
           tiers={serializedTiers}
           defaultPreferredRole={currentUser?.preferredRole ?? DanceRole.LEAD}
           purchasesUnavailable={isCanonicalFallback}
+          eventFinished={eventFinished}
         />
 
         {/* UK Consumer Rights Notice (Dated Leisure Events) */}

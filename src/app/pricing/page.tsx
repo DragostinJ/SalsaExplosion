@@ -68,7 +68,7 @@ export default function PricingPage() {
                 Festivals, Special Nights &amp; Gift Vouchers
               </span>
               <p className="text-xs text-ivory-muted leading-relaxed">
-                Official online passes for Made in Cuba Dance Weekend 2026, Halloween Fancy Dress Party, SB&amp;K Nights, and digital gift vouchers below.
+                Official online passes for Made in Cuba Dance Weekend 2026, SB&amp;K Nights, seasonal parties and digital gift vouchers below.
               </p>
             </div>
           </div>

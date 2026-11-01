@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { Role, DanceLevel, DanceRole } from "@prisma/client";
+import { Role, DanceLevel, DanceRole, EventStatus } from "@prisma/client";
 import {
   createCheckoutSessionAction,
   createEventCheckoutSessionAction,
@@ -96,23 +96,7 @@ describe("H2: Checkout Demo-Payment Production Guards", () => {
     delete process.env.ALLOW_DEMO_PAYMENTS;
     delete process.env.STRIPE_PRICE_CONGRESS_PASS;
 
-    vi.mocked(prisma.eventTicketTier.findUnique).mockResolvedValue({
-      id: "tier_made_in_cuba_pass",
-      name: "Full Congress Pass",
-      priceInCents: 9500,
-      totalCapacity: 100,
-      maxLeads: null,
-      maxFollows: null,
-      eventId: "evt_123",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      event: {
-        id: "evt_123",
-        title: "MADE IN CUBA 2026",
-        slug: "made-in-cuba-dance-weekend-2026",
-      },
-      registrations: [],
-    } as unknown as NonNullable<Awaited<ReturnType<typeof prisma.eventTicketTier.findUnique>>>);
+    vi.mocked(prisma.eventTicketTier.findUnique).mockResolvedValue(congressTier());
 
     const result = await createEventCheckoutSessionAction({
       eventId: "evt_123",
@@ -126,4 +110,51 @@ describe("H2: Checkout Demo-Payment Production Guards", () => {
       expect(result.error.message).toMatch(/Live payment processing is not configured for this pass/);
     }
   });
+
+  it("refuses to sell a pass for an event that has already finished", async () => {
+    Object.assign(process.env, { NODE_ENV: "production", STRIPE_SECRET_KEY: "sk_test_placeholder_for_build" });
+    const yesterday = new Date(Date.now() - DAY_MS);
+    vi.mocked(prisma.eventTicketTier.findUnique).mockResolvedValue(
+      congressTier({ eventEndDate: yesterday, salesEndAt: yesterday })
+    );
+
+    const result = await createEventCheckoutSessionAction({
+      eventId: "evt_123",
+      ticketTierId: "tier_made_in_cuba_pass",
+      role: "LEAD",
+    });
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.code).toBe("PLAN_UNAVAILABLE");
+      expect(result.error.message).toMatch(/has finished/);
+    }
+  });
 });
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/** A published congress tier on sale now (override the dates to test the sales window). */
+function congressTier(dates: { eventEndDate?: Date; salesEndAt?: Date } = {}) {
+  return {
+    id: "tier_made_in_cuba_pass",
+    name: "Full Congress Pass",
+    priceInCents: 9500,
+    totalCapacity: 100,
+    maxLeads: null,
+    maxFollows: null,
+    eventId: "evt_123",
+    salesStartAt: new Date(Date.now() - 30 * DAY_MS),
+    salesEndAt: dates.salesEndAt ?? new Date(Date.now() + 30 * DAY_MS),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    event: {
+      id: "evt_123",
+      title: "MADE IN CUBA 2026",
+      slug: "made-in-cuba-dance-weekend-2026",
+      status: EventStatus.PUBLISHED,
+      endDate: dates.eventEndDate ?? new Date(Date.now() + 33 * DAY_MS),
+    },
+    registrations: [],
+  } as unknown as NonNullable<Awaited<ReturnType<typeof prisma.eventTicketTier.findUnique>>>;
+}

@@ -14,6 +14,7 @@ import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
+import { TICKET_SALES_MESSAGES, ticketSalesBlockReason } from "@/lib/event-sales";
 import type { ManagementActionResponse } from "@/lib/constants/management";
 
 const RegisterEventTierSchema = z.object({
@@ -118,7 +119,7 @@ export async function registerForEventTierAction(rawInput: {
           const tier = await tx.eventTicketTier.findUnique({
             where: { id: ticketTierId },
             include: {
-              event: { select: { id: true, slug: true, title: true } },
+              event: { select: { id: true, slug: true, title: true, status: true, endDate: true } },
               registrations: {
                 where: { paymentStatus: TicketPaymentStatus.PAID },
                 select: { id: true, userId: true, role: true },
@@ -128,6 +129,11 @@ export async function registerForEventTierAction(rawInput: {
 
           if (!tier || tier.eventId !== eventId) {
             throw new Error("Ticket tier not found.");
+          }
+
+          const salesBlocked = ticketSalesBlockReason(tier.event, tier);
+          if (salesBlocked) {
+            throw new Error(salesBlocked);
           }
 
           const existingUserPass = tier.registrations.find((r) => r.userId === user.id);
@@ -216,6 +222,7 @@ export async function registerForEventTierAction(rawInput: {
           "Lead spots for this tier are currently full to maintain partner balance.",
           "Follow spots for this tier are currently full to maintain partner balance.",
           "Direct registration is only available for free tiers or RSVPs. Paid passes must be purchased via Stripe checkout.",
+          ...Object.values(TICKET_SALES_MESSAGES),
         ];
         const rawMsg = error instanceof Error ? error.message : "";
         const isSafe = SAFE_ERRORS.includes(rawMsg);

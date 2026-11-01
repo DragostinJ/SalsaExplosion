@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { DanceRole } from "@prisma/client";
 import {
@@ -52,13 +53,17 @@ interface EventPassSelectorProps {
   tiers: SerializedEventTier[];
   defaultPreferredRole: DanceRole;
   purchasesUnavailable?: boolean;
+  /** The event is over: show it as finished and disable every booking button. */
+  eventFinished?: boolean;
 }
 
 export function EventPassSelector({
   tiers: initialTiers,
   defaultPreferredRole,
-  purchasesUnavailable = false,
+  purchasesUnavailable: bookingOffline = false,
+  eventFinished = false,
 }: EventPassSelectorProps) {
+  const purchasesUnavailable = bookingOffline || eventFinished;
   const [tiers, setTiers] = useState<SerializedEventTier[]>(initialTiers);
   const [banner, setBanner] = useState<{
     type: "success" | "error";
@@ -164,7 +169,28 @@ export function EventPassSelector({
 
   return (
     <div className="space-y-6">
-      {purchasesUnavailable && (
+      {eventFinished && (
+        <div
+          data-testid="event-finished"
+          role="status"
+          className="rounded-2xl border border-gold/40 bg-gold/10 p-4 text-xs text-white/90 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+        >
+          <div>
+            <p className="font-bold text-gold text-sm tracking-wide">This event has finished</p>
+            <p className="text-white/80 mt-0.5">
+              Thank you to everyone who danced with us. Passes for the next parties and weekenders are on sale now.
+            </p>
+          </div>
+          <Link
+            href="/events"
+            className="inline-flex min-h-[40px] items-center justify-center rounded-xl border border-gold/50 bg-gold/20 px-4 py-2 font-bold text-gold hover:bg-gold/30 transition-colors shrink-0"
+          >
+            See what&apos;s on next →
+          </Link>
+        </div>
+      )}
+
+      {bookingOffline && !eventFinished && (
         <div
           data-testid="event-purchases-unavailable"
           role="status"

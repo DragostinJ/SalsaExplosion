@@ -371,6 +371,20 @@ export const UPCOMING_EVENTS: CanonicalUpcomingEvent[] = [
   },
 ];
 
+/** When a canonical event ends: its end date, or 6 hours after an evening party starts (as in prisma/seed-data.ts). */
+export function canonicalEventEnd(event: CanonicalUpcomingEvent): Date {
+  return event.endDateIso
+    ? new Date(event.endDateIso)
+    : new Date(Date.parse(event.startDateIso) + 6 * 60 * 60 * 1000);
+}
+
+/** Canonical events that haven't finished yet, soonest first. */
+export function upcomingCanonicalEvents(now: Date = new Date()): CanonicalUpcomingEvent[] {
+  return UPCOMING_EVENTS.filter((event) => canonicalEventEnd(event).getTime() >= now.getTime()).sort(
+    (a, b) => Date.parse(a.startDateIso) - Date.parse(b.startDateIso)
+  );
+}
+
 export interface AcademyGalleryPhoto {
   id: string;
   kicker: string;
@@ -414,7 +428,7 @@ export const ACADEMY_GALLERY_PHOTOS: AcademyGalleryPhoto[] = [
   },
   {
     id: "gallery-halloween-fiesta",
-    kicker: "SPECIAL EVENT • 31 OCT 2026",
+    kicker: "SPECIAL EVENT • HALLOWEEN 2026",
     title: "Halloween Fancy Dress Latin Party",
     caption:
       "Bournemouth's flagship autumn social featuring guest workshops, Rueda circles, and late-night social dancing.",

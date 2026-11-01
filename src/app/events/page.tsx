@@ -12,7 +12,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { BackButton } from "@/components/navigation/back-button";
-import { VENUE_INFO, ACADEMY_METRICS, UPCOMING_EVENTS } from "@/lib/academy-data";
+import { VENUE_INFO, ACADEMY_METRICS, upcomingCanonicalEvents } from "@/lib/academy-data";
 import { reportError } from "@/lib/monitoring";
 import { getPublishedEvents } from "@/lib/stores/published-events-store";
 
@@ -35,7 +35,7 @@ export default async function EventsDirectoryPage() {
   const displayEvents: Awaited<ReturnType<typeof getCachedUpcomingEvents>> =
     !isCanonicalFallback
       ? events
-      : UPCOMING_EVENTS.map((c, index) => ({
+      : upcomingCanonicalEvents().map((c, index) => ({
           id: `canonical-${index}-${c.slug}`,
           slug: c.slug,
           title: c.title,
@@ -105,7 +105,7 @@ export default async function EventsDirectoryPage() {
 
             {/* Official Online Ticket Booking Callout */}
             <div className="rounded-2xl border border-gold/30 bg-gold/10 p-3.5 sm:p-4 text-xs font-semibold text-amber-100 leading-relaxed">
-              🎟️ <strong>Official Online Ticket Booking:</strong> Reserve Made in Cuba 2026, Halloween Party &amp; SB&amp;K Extravaganza passes online below with instant digital ticketing. (Regular weekly Thursday &amp; Sunday classes are £12/£14 paid at the door).
+              🎟️ <strong>Official Online Ticket Booking:</strong> Reserve Made in Cuba 2026, SB&amp;K Extravaganza and party passes online below with instant digital ticketing. (Regular weekly Thursday &amp; Sunday classes are £12/£14 paid at the door).
             </div>
 
             <div className="rounded-2xl border border-line bg-surface-3 p-4 sm:p-5 space-y-2">

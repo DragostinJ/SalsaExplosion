@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { UPCOMING_EVENTS } from "../../src/lib/academy-data";
+import { UPCOMING_EVENTS, upcomingCanonicalEvents } from "../../src/lib/academy-data";
 
 const DEGRADED_ROUTES_TO_TEST = [
   "/",
@@ -37,7 +37,13 @@ test.describe("M15: Degraded Cold-Start & DB-Down Resilience", () => {
   test("verifies event detail page on degraded fallback displays purchases-unavailable notice and disables checkout", async ({
     page,
   }) => {
-    await page.goto(`/events/${UPCOMING_EVENTS[0].slug}`);
+    // An event that hasn't happened yet (a finished one shows "This event has finished" instead)
+    const nextEvent = upcomingCanonicalEvents()[0];
+    if (!nextEvent) {
+      test.skip(true, "No upcoming canonical event left to book");
+      return;
+    }
+    await page.goto(`/events/${nextEvent.slug}`);
 
     const notice = page.locator('[data-testid="event-purchases-unavailable"]');
     await expect(notice).toBeVisible();

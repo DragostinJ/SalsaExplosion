@@ -6,6 +6,7 @@ import {
   CartelDaySchema,
   CartelFormatSchema,
   cartelAssets,
+  classNightSongs,
   cartelSchedule,
   nextClassNight,
   spanishDate,
@@ -28,10 +29,12 @@ export async function GET(request: Request, { params }: { params: Promise<{ dia:
   const schedule = cartelSchedule(day.data);
   const classes = schedule.sessions.filter((session) => !session.isSocial);
   const social = schedule.sessions.find((session) => session.isSocial);
-  const date = spanishDate(nextClassNight(schedule.dayOfWeekNumber)).split(" ").slice(1).join(" ");
-  const { anton, archivoBlack, couple, rueda } = await cartelAssets();
-  // The couple fills the story's top half, and the feed post's empty half on short nights
-  const showArt = story || classes.length <= 2;
+  const night = nextClassNight(schedule.dayOfWeekNumber);
+  const date = spanishDate(night).split(" ").slice(1).join(" ");
+  const [{ anton, archivoBlack, couple, rueda }, songs] = await Promise.all([cartelAssets(), classNightSongs(night)]);
+  // A busy night with songs needs the story's top half for text; otherwise the couple fills it
+  const crowded = songs.length > 0 && classes.length > 2;
+  const showArt = story ? !crowded : classes.length <= 2;
 
   return new ImageResponse(
     (
@@ -63,7 +66,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ dia:
           />
         )}
         {/* A short night leaves the story's lower half free: the rueda fills it */}
-        {story && classes.length <= 2 && (
+        {story && classes.length <= 2 && songs.length === 0 && (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={rueda} width={560} height={560} style={{ position: "absolute", left: 260, top: 1140 }} alt="" />
         )}
@@ -79,7 +82,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ dia:
         </div>
 
         {/* The night's classes */}
-        <div style={{ display: "flex", flexDirection: "column", marginTop: story ? 330 : 40, borderTop: `8px solid ${INK}` }}>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: story ? (crowded ? 70 : 330) : 40, flexShrink: 0, borderTop: `8px solid ${INK}` }}>
           {classes.map((session) => (
             <div key={session.id} style={{ display: "flex", alignItems: "center", borderBottom: `4px solid ${INK}`, padding: story ? "14px 0" : "12px 0" }}>
               <div style={{ display: "flex", width: story ? 230 : 200, fontFamily: "Anton", fontSize: story ? 84 : 68 }}>{session.time}</div>
@@ -94,13 +97,22 @@ export async function GET(request: Request, { params }: { params: Promise<{ dia:
         </div>
 
         {social && (
-          <div style={{ display: "flex", marginTop: story ? 32 : 20, backgroundColor: RED, padding: "14px 24px", fontFamily: "Anton", fontSize: story ? 60 : 48, textTransform: "uppercase" }}>
+          <div style={{ display: "flex", flexShrink: 0, marginTop: story ? 32 : 20, backgroundColor: RED, padding: "14px 24px", fontFamily: "Anton", fontSize: story ? 60 : 48, textTransform: "uppercase" }}>
             Y después: la fiesta · {social.time}
           </div>
         )}
 
+        {songs.length > 0 && (
+          <div style={{ display: "flex", flexDirection: "column", flexShrink: 0, marginTop: story ? 28 : 16 }}>
+            <div style={{ display: "flex", fontSize: story ? 24 : 20, letterSpacing: 4, textTransform: "uppercase" }}>Canciones de la noche</div>
+            <div style={{ display: "flex", marginTop: 6, fontFamily: "Anton", fontSize: story ? 48 : 38, textTransform: "uppercase", lineHeight: 1.05 }}>
+              {songs.join(" · ")}
+            </div>
+          </div>
+        )}
+
         {/* The door price, as a ticket stub */}
-        <div style={{ display: "flex", marginTop: "auto", border: `6px solid ${INK}`, backgroundColor: PAPER }}>
+        <div style={{ display: "flex", flexShrink: 0, marginTop: "auto", border: `6px solid ${INK}`, backgroundColor: PAPER }}>
           <div style={{ display: "flex", flexShrink: 0, alignItems: "center", padding: "0 24px", borderRight: `6px dashed ${INK}`, fontFamily: "Anton", fontSize: story ? 72 : 64, whiteSpace: "nowrap" }}>
             £{DOOR_PRICING.oneClassPounds} / £{DOOR_PRICING.twoClassesPounds}
           </div>

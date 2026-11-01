@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { CartelDaySchema, CartelFormatSchema, cartelSchedule, nextClassNight, spanishDate } from "@/lib/cartel";
 
 describe("class-night posters (cartel)", () => {
@@ -22,5 +22,31 @@ describe("class-night posters (cartel)", () => {
   it("draws each night from the canonical timetable", () => {
     expect(cartelSchedule("jueves").dayName).toBe("Thursday");
     expect(cartelSchedule("domingo").dayName).toBe("Sunday");
+  });
+});
+
+describe("class-night poster songs", () => {
+  it("lists the teachers' practice songs for that night: deduped, known songs only, at most three", async () => {
+    vi.resetModules();
+    const findMany = vi.fn().mockResolvedValue([
+      { practiceSongIds: ["temba-tumba-timba", "not-a-song"] },
+      { practiceSongIds: ["temba-tumba-timba", "me-dicen-cuba", "esto-esta", "pasaporte"] },
+    ]);
+    vi.doMock("@/lib/prisma", () => ({ prisma: { classSession: { findMany } } }));
+    const { classNightSongs } = await import("@/lib/cartel");
+
+    const songs = await classNightSongs(new Date("2026-11-05T10:00:00Z"));
+    expect(songs).toEqual(["Temba, Tumba, Timba", "Me Dicen Cuba", "Esto Está (Live at Le New Morning, Paris)"]);
+    // Thursday 5 Nov in London, evening window in UTC
+    const where = findMany.mock.calls[0][0].where;
+    expect(where.startTime.gte.toISOString()).toBe("2026-11-05T12:00:00.000Z");
+    expect(where.isCancelled).toBe(false);
+  });
+
+  it("renders without songs when the database is unreachable", async () => {
+    vi.resetModules();
+    vi.doMock("@/lib/prisma", () => ({ prisma: { classSession: { findMany: vi.fn().mockRejectedValue(new Error("down")) } } }));
+    const { classNightSongs } = await import("@/lib/cartel");
+    await expect(classNightSongs(new Date("2026-11-05T10:00:00Z"))).resolves.toEqual([]);
   });
 });

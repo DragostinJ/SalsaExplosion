@@ -2,6 +2,9 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { z } from "zod";
 import { WEEKLY_SCHEDULE, type CanonicalDaySchedule } from "@/lib/academy-data";
+import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
+import { displaySongTitle } from "@/lib/music/song-style";
+import { prisma } from "@/lib/prisma";
 
 /**
  * "Cartel de la noche": the poster for a class night, made from the canonical timetable.
@@ -38,6 +41,30 @@ export function nextClassNight(dayOfWeekNumber: number, now: Date = new Date()):
 /** "jueves 5 de noviembre" */
 export function spanishDate(date: Date): string {
   return new Intl.DateTimeFormat("es-ES", { weekday: "long", day: "numeric", month: "long", timeZone: LONDON }).format(date);
+}
+
+/**
+ * Practice-player songs the teachers attached to that night's classes, in the order they were
+ * picked (at most `limit`). The poster still renders without them if the database is down.
+ */
+export async function classNightSongs(night: Date, limit = 3): Promise<string[]> {
+  const day = new Intl.DateTimeFormat("en-CA", { timeZone: LONDON }).format(night); // YYYY-MM-DD
+  try {
+    // Classes run in the evening, so 12:00-23:59 UTC covers the London night in GMT and BST
+    const sessions = await prisma.classSession.findMany({
+      where: { isCancelled: false, startTime: { gte: new Date(`${day}T12:00:00Z`), lte: new Date(`${day}T23:59:59Z`) } },
+      select: { practiceSongIds: true },
+      orderBy: { startTime: "asc" },
+    });
+    const ids = [...new Set(sessions.flatMap((session) => session.practiceSongIds))];
+    return ids
+      .map((id) => TIMBA_SONG_ANATOMY_DATA.find((song) => song.id === id))
+      .filter((song): song is (typeof TIMBA_SONG_ANATOMY_DATA)[number] => Boolean(song))
+      .slice(0, limit)
+      .map((song) => displaySongTitle(song.title));
+  } catch {
+    return [];
+  }
 }
 
 /** Fonts and art for ImageResponse, read once per server instance (bundled via outputFileTracingIncludes). */

@@ -10,11 +10,20 @@ import {
 import { RUEDA_CALLS, normalizeRuedaCall } from "@/lib/music/rueda-calls";
 import {
   MoveSchema,
+  isMoveDraft,
   type Move,
   type MoveCategory,
   type MoveStep,
   type Combo,
 } from "./move-schema";
+import {
+  STORED_REVIEWS,
+  STORED_DRAFTS,
+  applyReviewToMove,
+  moveFingerprint,
+  type MoveReview,
+  type MoveReviewDecision,
+} from "./move-review";
 
 /**
  * Maps a curriculum item's pillar and name to one of the canonical MoveCategory enum values:
@@ -259,19 +268,85 @@ function seedMoves(): Move[] {
 export const SEEDED_MOVES: readonly Move[] = Object.freeze(seedMoves());
 
 /**
+ * Merges seeds, stored drafts, and stored reviews.
+ * Latest review per move wins.
+ */
+function computeAllMoves(): Move[] {
+  const baseMoves: Move[] = [...SEEDED_MOVES, ...STORED_DRAFTS];
+
+  // Map reviews by moveId (latest review wins)
+  const reviewsByMove = new Map<string, MoveReview>();
+  for (const review of STORED_REVIEWS) {
+    const existing = reviewsByMove.get(review.moveId);
+    if (!existing || new Date(review.reviewedAt) >= new Date(existing.reviewedAt)) {
+      reviewsByMove.set(review.moveId, review);
+    }
+  }
+
+  return baseMoves.map((baseMove) => {
+    const review = reviewsByMove.get(baseMove.id);
+    if (!review) return baseMove;
+    return applyReviewToMove(baseMove, review);
+  });
+}
+
+const ALL_MERGED_MOVES: readonly Move[] = Object.freeze(computeAllMoves());
+
+/**
  * Lookup a move by either its kebab-case Move ID or its curriculum ID (e.g. 'beg-pw-1').
  */
 export function findMove(idOrCurriculumId: string): Move | undefined {
-  return SEEDED_MOVES.find(
+  return getAllMoves().find(
     (m) => m.id === idOrCurriculumId || m.curriculumId === idOrCurriculumId
   );
 }
 
 /**
- * Returns all seeded moves.
+ * Returns all moves: seeds + drafts, with reviews applied.
  */
 export function getAllMoves(): readonly Move[] {
-  return SEEDED_MOVES;
+  return ALL_MERGED_MOVES;
+}
+
+/**
+ * Returns published (approved) moves only, for dancer-facing pages.
+ * Never includes drafts, needs-work, or rejected moves.
+ */
+export function getPublishedMoves(): readonly Move[] {
+  return getAllMoves().filter((m) => !isMoveDraft(m));
+}
+
+export interface MoveReviewState {
+  status: "draft" | MoveReviewDecision;
+  review?: MoveReview;
+  fingerprint: string;
+}
+
+/**
+ * Returns the review state and base draft fingerprint for a given move.
+ */
+export function getMoveReviewState(moveId: string): MoveReviewState | undefined {
+  const baseMoves = [...SEEDED_MOVES, ...STORED_DRAFTS];
+  const baseMove = baseMoves.find((m) => m.id === moveId || m.curriculumId === moveId);
+  if (!baseMove) return undefined;
+
+  const fingerprint = moveFingerprint(baseMove);
+
+  // Find latest review
+  const reviews = STORED_REVIEWS.filter((r) => r.moveId === baseMove.id);
+  if (reviews.length === 0) {
+    return { status: "draft", fingerprint };
+  }
+
+  const latestReview = reviews.reduce((latest, current) =>
+    new Date(current.reviewedAt) >= new Date(latest.reviewedAt) ? current : latest
+  );
+
+  return {
+    status: latestReview.decision,
+    review: latestReview,
+    fingerprint,
+  };
 }
 
 export interface MoveSongSectionLink {
@@ -347,7 +422,7 @@ export function songSectionsForMove(
 export function movesForSection(
   song: SongAnatomy,
   sectionId: string,
-  moveLibrary: readonly Move[] = SEEDED_MOVES
+  moveLibrary: readonly Move[] = getAllMoves()
 ): Move[] {
   const section = song.segments.find((seg) => seg.id === sectionId);
   if (!section) return [];

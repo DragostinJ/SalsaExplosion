@@ -15,19 +15,10 @@ import {
 } from "lucide-react";
 import { registerForEventTierAction } from "@/actions/management.actions";
 import { createEventCheckoutSessionAction } from "@/actions/checkout.actions";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
 import { VENUE_INFO } from "@/lib/academy-data";
+import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export interface SerializedEventTier {
   id: string;
@@ -173,17 +164,17 @@ export function EventPassSelector({
         <div
           data-testid="event-finished"
           role="status"
-          className="rounded-2xl border border-gold/40 bg-gold/10 p-4 text-xs text-white/90 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+          className="border-4 border-ink bg-poster-mustard p-5 text-ink shadow-[6px_6px_0_0_#161311] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
         >
           <div>
-            <p className="font-bold text-gold text-sm tracking-wide">This event has finished</p>
-            <p className="text-white/80 mt-0.5">
+            <p className="font-display text-2xl text-ink">This event has finished</p>
+            <p className="text-xs sm:text-sm font-semibold text-ink/80 mt-1">
               Thank you to everyone who danced with us. Passes for the next parties and weekenders are on sale now.
             </p>
           </div>
           <Link
             href="/events"
-            className="inline-flex min-h-[40px] items-center justify-center rounded-xl border border-gold/50 bg-gold/20 px-4 py-2 font-bold text-gold hover:bg-gold/30 transition-colors shrink-0"
+            className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} shrink-0 text-xs`}
           >
             See what&apos;s on next →
           </Link>
@@ -194,14 +185,14 @@ export function EventPassSelector({
         <div
           data-testid="event-purchases-unavailable"
           role="status"
-          className="rounded-2xl border border-gold/40 bg-gold/10 p-4 text-xs text-white/90 space-y-2 backdrop-blur-md shadow-lg"
+          className="border-4 border-ink bg-poster-mustard p-5 text-ink shadow-[6px_6px_0_0_#161311] space-y-2"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <p className="font-bold text-gold text-sm tracking-wide">
+              <p className="font-display text-2xl text-ink">
                 Online Booking Opening Soon
               </p>
-              <p className="text-white/80 mt-0.5">
+              <p className="text-xs sm:text-sm font-semibold text-ink/80 mt-1">
                 Online booking is temporarily unavailable. Please check back shortly or message us on WhatsApp.
               </p>
             </div>
@@ -210,7 +201,7 @@ export function EventPassSelector({
                 href={VENUE_INFO.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border border-gold/50 bg-gold/20 px-4 py-2 font-bold text-gold hover:bg-gold/30 transition-colors shrink-0"
+                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} shrink-0 text-xs`}
               >
                 Message on WhatsApp →
               </a>
@@ -221,16 +212,17 @@ export function EventPassSelector({
 
       {banner && (
         <div
-          className={`rounded-xl border px-4 py-3 text-xs font-semibold ${
+          className={`border-4 border-ink p-4 text-xs font-bold ${
             banner.type === "success"
-              ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
-              : "border-destructive/40 bg-destructive/10 text-destructive"
+              ? "bg-poster-teal text-ink"
+              : "bg-poster-red text-paper"
           }`}
         >
           {banner.text}
         </div>
       )}
 
+      {/* Pass Tiers as Ticket Stubs */}
       <div className="grid gap-6 md:grid-cols-3">
         {tiers.map((tier) => {
           const price = (tier.priceInCents / 100).toFixed(0);
@@ -249,47 +241,53 @@ export function EventPassSelector({
           const hasRoleCap = tier.maxLeads !== null && tier.maxFollows !== null;
 
           return (
-            <Card
+            <article
               key={tier.id}
-              className={`flex flex-col justify-between border shadow-sm transition-all ${
-                tier.userRegistration
-                  ? "border-emerald-500/50 bg-emerald-500/[0.02]"
-                  : "hover:border-amber-500/50"
+              className={`flex flex-col border-4 border-ink bg-paper text-ink transition-transform hover:-translate-y-0.5 shadow-[6px_6px_0_0_#161311] ${
+                tier.userRegistration ? "ring-4 ring-poster-teal" : ""
               }`}
             >
-              <CardHeader>
-                <div className="flex items-start justify-between gap-2">
-                  <CardTitle className="text-lg font-bold leading-tight">{tier.name}</CardTitle>
+              {/* Ticket Stub Perforated Header */}
+              <div className="flex items-start justify-between gap-3 border-b-4 border-dashed border-ink bg-poster-mustard/20 p-5">
+                <div>
+                  <span className={`font-display ${TYPE.card} leading-none text-ink block`}>
+                    {tier.name}
+                  </span>
                   {tier.userRegistration ? (
-                    <Badge className="bg-emerald-600 text-white shrink-0 whitespace-nowrap">
+                    <span className="mt-2 inline-block border-2 border-ink bg-poster-teal px-2 py-0.5 text-xs font-bold uppercase text-ink">
                       Pass Active
-                    </Badge>
+                    </span>
                   ) : isSoldOut ? (
-                    <Badge variant="destructive" className="shrink-0 whitespace-nowrap">Sold Out</Badge>
+                    <span className="mt-2 inline-block border-2 border-ink bg-poster-red px-2 py-0.5 text-xs font-bold uppercase text-paper">
+                      Sold Out
+                    </span>
                   ) : (
-                    <Badge variant="secondary" className="font-semibold text-xs shrink-0 whitespace-nowrap">
+                    <span className="mt-2 inline-block border border-ink bg-paper px-2 py-0.5 text-xs font-bold uppercase text-ink">
                       {remainingSpots} spots left
-                    </Badge>
+                    </span>
                   )}
                 </div>
 
-                <div className="mt-3 flex items-baseline gap-1">
-                  <span className="text-3xl font-extrabold tracking-tight">
+                <div className="text-right shrink-0">
+                  <span className={`font-display ${TYPE.number} text-poster-red leading-none block`}>
                     £{price}
                   </span>
-                  <span className="text-xs text-muted-foreground">/ pass</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-ink/70">
+                    / pass
+                  </span>
                 </div>
+              </div>
 
+              {/* Ticket Stub Body */}
+              <div className="flex flex-1 flex-col justify-between p-5 gap-4">
                 {tier.description && (
-                  <CardDescription className="text-xs mt-2 line-clamp-3">
+                  <p className="text-xs font-medium text-ink/80 leading-relaxed line-clamp-3">
                     {tier.description}
-                  </CardDescription>
+                  </p>
                 )}
-              </CardHeader>
 
-              <CardContent className="space-y-3">
                 {tier.userRegistration ? (
-                  <div className="rounded-2xl border-2 border-dashed border-emerald-500/40 bg-emerald-500/10 p-4 text-center space-y-3">
+                  <div className="border-4 border-dashed border-ink bg-paper p-4 text-center space-y-3">
                     <div className="flex justify-center">
                       <ScannableQrCode
                         value={tier.userRegistration.qrCodeHash}
@@ -297,25 +295,25 @@ export function EventPassSelector({
                         label={tier.userRegistration.qrCodeHash}
                       />
                     </div>
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-300">
+                    <div className="text-xs font-bold uppercase tracking-wider text-poster-red">
                       Verified Door QR Pass ({tier.userRegistration.role})
                     </div>
-                    <p className="text-[11px] text-muted-foreground">
+                    <p className="text-xs font-medium text-ink/70">
                       Show this code at the festival entrance for 1-second check-in.
                     </p>
                   </div>
                 ) : (
                   hasRoleCap && (
-                    <div className="rounded-xl border bg-muted/40 p-3 space-y-2 text-xs">
+                    <div className="border-2 border-ink bg-surface-1 p-3 space-y-2 text-xs">
                       <div className="flex items-center justify-between">
-                        <span className="font-medium text-muted-foreground">
+                        <span className="font-bold text-ink/70">
                           Lead Spots:
                         </span>
                         <span
-                          className={`font-bold ${
+                          className={`font-display text-sm ${
                             remainingLeads !== null && remainingLeads <= 5
-                              ? "text-amber-400"
-                              : ""
+                              ? "text-poster-red"
+                              : "text-ink"
                           }`}
                         >
                           {remainingLeads !== null && remainingLeads > 0
@@ -323,15 +321,15 @@ export function EventPassSelector({
                             : "Full"}
                         </span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium text-muted-foreground">
+                      <div className="flex items-center justify-between border-t border-ink/20 pt-1.5">
+                        <span className="font-bold text-ink/70">
                           Follow Spots:
                         </span>
                         <span
-                          className={`font-bold ${
+                          className={`font-display text-sm ${
                             remainingFollows !== null && remainingFollows <= 5
-                              ? "text-amber-400"
-                              : ""
+                              ? "text-poster-red"
+                              : "text-ink"
                           }`}
                         >
                           {remainingFollows !== null && remainingFollows > 0
@@ -342,127 +340,123 @@ export function EventPassSelector({
                     </div>
                   )
                 )}
-              </CardContent>
 
-              <CardFooter className="pt-2 border-t flex flex-col gap-2">
-                {tier.userRegistration ? (
-                  <Button
-                    variant="secondary"
-                    disabled
-                    className="w-full text-xs font-bold text-emerald-300"
-                  >
-                    <CheckCircle2 className="mr-1.5 h-4 w-4" />
-                    Registered ({tier.userRegistration.qrCodeHash})
-                  </Button>
-                ) : hasRoleCap ? (
-                  <div className="grid grid-cols-2 gap-2 w-full">
-                    <Button
+                {/* Ticket Action Button(s) */}
+                <div className="border-t-2 border-ink pt-3 flex flex-col gap-2">
+                  {tier.userRegistration ? (
+                    <button
                       type="button"
-                      disabled={
-                        purchasesUnavailable ||
-                        isPending ||
-                        isSoldOut ||
-                        (remainingLeads !== null && remainingLeads <= 0)
-                      }
+                      disabled
+                      className={`${POSTER_BUTTON} border-poster-teal bg-poster-teal text-ink w-full text-xs font-bold cursor-default`}
+                    >
+                      <CheckCircle2 className="mr-1.5 h-4 w-4" />
+                      Registered ({tier.userRegistration.qrCodeHash})
+                    </button>
+                  ) : hasRoleCap ? (
+                    <div className="grid grid-cols-2 gap-2 w-full">
+                      <button
+                        type="button"
+                        disabled={
+                          purchasesUnavailable ||
+                          isPending ||
+                          isSoldOut ||
+                          (remainingLeads !== null && remainingLeads <= 0)
+                        }
+                        aria-disabled={purchasesUnavailable || undefined}
+                        onClick={() =>
+                          onInitiateBooking(tier, DanceRole.LEAD)
+                        }
+                        className={`${POSTER_BUTTON} ${
+                          defaultPreferredRole === DanceRole.LEAD
+                            ? POSTER_BUTTON_COLORS.ink
+                            : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+                        } text-xs min-h-[44px] py-2 px-2 text-center justify-center leading-tight`}
+                      >
+                        {isPending ? (
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                        ) : (
+                          <>
+                            <Ticket className="mr-1 h-3.5 w-3.5 shrink-0" />
+                            <span>Book Lead</span>
+                          </>
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        disabled={
+                          purchasesUnavailable ||
+                          isPending ||
+                          isSoldOut ||
+                          (remainingFollows !== null && remainingFollows <= 0)
+                        }
+                        aria-disabled={purchasesUnavailable || undefined}
+                        onClick={() =>
+                          onInitiateBooking(tier, DanceRole.FOLLOW)
+                        }
+                        className={`${POSTER_BUTTON} ${
+                          defaultPreferredRole === DanceRole.FOLLOW
+                            ? POSTER_BUTTON_COLORS.ink
+                            : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+                        } text-xs min-h-[44px] py-2 px-2 text-center justify-center leading-tight`}
+                      >
+                        {isPending ? (
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                        ) : (
+                          <>
+                            <Ticket className="mr-1 h-3.5 w-3.5 shrink-0" />
+                            <span>Book Follow</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled={purchasesUnavailable || isPending || isSoldOut}
                       aria-disabled={purchasesUnavailable || undefined}
                       onClick={() =>
-                        onInitiateBooking(tier, DanceRole.LEAD)
+                        onInitiateBooking(tier, DanceRole.SOLO)
                       }
-                      variant={
-                        defaultPreferredRole === DanceRole.LEAD
-                          ? "default"
-                          : "outline"
-                      }
-                      className="text-xs font-bold min-h-11 h-auto py-2.5 px-2 whitespace-normal text-center flex items-center justify-center leading-tight"
+                      className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} w-full text-xs min-h-[44px] py-2.5 px-3`}
                     >
-                      {isPending ? (
-                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                      ) : (
-                        <>
-                          <Ticket className="mr-1 h-3.5 w-3.5 shrink-0" />
-                          <span>Book as Lead</span>
-                        </>
-                      )}
-                    </Button>
-                    <Button
-                      type="button"
-                      disabled={
-                        purchasesUnavailable ||
-                        isPending ||
-                        isSoldOut ||
-                        (remainingFollows !== null && remainingFollows <= 0)
-                      }
-                      aria-disabled={purchasesUnavailable || undefined}
-                      onClick={() =>
-                        onInitiateBooking(tier, DanceRole.FOLLOW)
-                      }
-                      variant={
-                        defaultPreferredRole === DanceRole.FOLLOW
-                          ? "default"
-                          : "outline"
-                      }
-                      className="text-xs font-bold min-h-11 h-auto py-2.5 px-2 whitespace-normal text-center flex items-center justify-center leading-tight"
-                    >
-                      {isPending ? (
-                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                      ) : (
-                        <>
-                          <Ticket className="mr-1 h-3.5 w-3.5 shrink-0" />
-                          <span>Book as Follow</span>
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                ) : (
-                  <Button
-                    type="button"
-                    disabled={purchasesUnavailable || isPending || isSoldOut}
-                    aria-disabled={purchasesUnavailable || undefined}
-                    onClick={() =>
-                      onInitiateBooking(tier, DanceRole.SOLO)
-                    }
-                    className="w-full bg-brand hover:bg-brand-hover text-white font-bold shadow-xs text-xs min-h-11 h-auto py-2.5 px-3 whitespace-normal text-center leading-snug"
-                  >
-                    <Sparkles className="mr-1.5 h-3.5 w-3.5 shrink-0" />
-                    <span>{isSoldOut ? "Tier Sold Out" : `Get ${tier.name}`}</span>
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
+                      <Sparkles className="mr-1.5 h-3.5 w-3.5 shrink-0" />
+                      <span>{isSoldOut ? "Tier Sold Out" : `Get ${tier.name}`}</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </article>
           );
         })}
       </div>
 
-      {/* Payment Security & Direct Registration Trust Bar */}
+      {/* Payment Security Trust Bar */}
       <div className="pt-2">
         <PaymentSecurityTrustBar showRefundPolicy={false} />
       </div>
 
-      {/* Congress VIP Upsell Modal / Drawer */}
+      {/* Congress VIP Upsell Modal */}
       {upsellTarget && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/80 p-4 animate-in fade-in duration-200"
           onClick={() => setUpsellTarget(null)}
         >
           <div
-            className="relative w-full max-w-lg rounded-2xl border bg-card p-6 shadow-2xl space-y-5 max-h-[90dvh] overflow-y-auto"
+            className="relative w-full max-w-lg border-4 border-ink bg-paper p-6 text-ink shadow-[12px_12px_0_0_#161311] space-y-5 max-h-[90dvh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-start justify-between pb-3 border-b">
+            <div className="flex items-start justify-between pb-3 border-b-4 border-ink">
               <div>
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-0.5 text-[11px] font-bold text-amber-300 mb-1">
-                  <Sparkles className="h-3 w-3 text-amber-600" />
-                  VIP Congress Upgrade
-                </div>
-                <h3 className="text-lg font-black tracking-tight text-foreground">
-                  Upgrade Your Bournemouth Congress Pass
+                <p className={`${KICKER} text-poster-red`}>VIP Congress Upgrade</p>
+                <h3 className={`font-display ${TYPE.card} text-ink leading-tight mt-1`}>
+                  Upgrade Your Pass
                 </h3>
-                <p className="text-xs text-muted-foreground mt-0.5">
+                <p className="text-xs font-semibold text-ink/70 mt-1">
                   Base Selection:{" "}
-                  <span className="font-bold text-foreground">
+                  <span className="font-bold text-ink">
                     {upsellTarget.tier.name} ({upsellTarget.role}) — £
                     {(upsellTarget.tier.priceInCents / 100).toFixed(0)}
                   </span>
@@ -472,7 +466,7 @@ export function EventPassSelector({
                 type="button"
                 aria-label="Close dialog"
                 onClick={() => setUpsellTarget(null)}
-                className="rounded-full p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+                className="border-2 border-ink p-1 text-ink hover:bg-ink hover:text-paper transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -480,22 +474,22 @@ export function EventPassSelector({
 
             {/* Add-ons options */}
             <div className="space-y-3">
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+              <span className="text-xs font-bold text-ink/70 uppercase tracking-wider block">
                 Official Festival Add-Ons (Optional):
               </span>
 
               {/* Add-on 1: Official Congress T-Shirt */}
               <div
                 onClick={() => setAddShirt((prev) => !prev)}
-                className={`cursor-pointer rounded-xl border p-3.5 flex items-start gap-3 transition-all ${
+                className={`cursor-pointer border-2 border-ink p-3.5 flex items-start gap-3 transition-colors ${
                   addShirt
-                    ? "border-amber-500 bg-amber-500/[0.08] ring-1 ring-amber-500/30"
-                    : "border-border hover:bg-muted/30"
+                    ? "bg-poster-mustard/30 ring-2 ring-ink"
+                    : "bg-paper hover:bg-surface-1"
                 }`}
               >
                 <div
-                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
-                    addShirt ? "bg-amber-600 text-white" : "bg-muted text-muted-foreground"
+                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center border-2 border-ink ${
+                    addShirt ? "bg-ink text-paper" : "bg-paper text-ink"
                   }`}
                 >
                   <Shirt className="h-4 w-4" />
@@ -503,15 +497,15 @@ export function EventPassSelector({
                 <div className="flex-1 space-y-0.5 text-xs">
                   <div className="flex items-center justify-between font-bold">
                     <span>Official 2026 Congress T-Shirt</span>
-                    <span className="text-amber-400 font-extrabold">+£20</span>
+                    <span className="font-display text-base text-poster-red">+£20</span>
                   </div>
-                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  <p className="text-[11px] text-ink/70 leading-relaxed font-medium">
                     100% organic cotton Salsa Explosion UK festival tee. Sizes S–XXL collected at the BOH Studios welcome desk.
                   </p>
                 </div>
                 <div
-                  className={`h-4 w-4 rounded-xs border-2 flex items-center justify-center text-xs font-bold ${
-                    addShirt ? "border-amber-600 bg-amber-600 text-white" : "border-muted-foreground"
+                  className={`h-5 w-5 border-2 border-ink flex items-center justify-center text-xs font-bold ${
+                    addShirt ? "bg-ink text-paper" : "bg-paper"
                   }`}
                 >
                   {addShirt ? "✓" : ""}
@@ -521,15 +515,15 @@ export function EventPassSelector({
               {/* Add-on 2: Maestro Private Masterclass */}
               <div
                 onClick={() => setAddMasterclass((prev) => !prev)}
-                className={`cursor-pointer rounded-xl border p-3.5 flex items-start gap-3 transition-all ${
+                className={`cursor-pointer border-2 border-ink p-3.5 flex items-start gap-3 transition-colors ${
                   addMasterclass
-                    ? "border-amber-500 bg-amber-500/[0.08] ring-1 ring-amber-500/30"
-                    : "border-border hover:bg-muted/30"
+                    ? "bg-poster-mustard/30 ring-2 ring-ink"
+                    : "bg-paper hover:bg-surface-1"
                 }`}
               >
                 <div
-                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
-                    addMasterclass ? "bg-amber-600 text-white" : "bg-muted text-muted-foreground"
+                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center border-2 border-ink ${
+                    addMasterclass ? "bg-ink text-paper" : "bg-paper text-ink"
                   }`}
                 >
                   <GraduationCap className="h-4 w-4" />
@@ -537,15 +531,15 @@ export function EventPassSelector({
                 <div className="flex-1 space-y-0.5 text-xs">
                   <div className="flex items-center justify-between font-bold">
                     <span>Maestro Private Masterclass</span>
-                    <span className="text-amber-400 font-extrabold">+£35</span>
+                    <span className="font-display text-base text-poster-red">+£35</span>
                   </div>
-                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  <p className="text-[11px] text-ink/70 leading-relaxed font-medium">
                     Exclusive 45-minute small-group footwork & body isolation clinic with Maestro Enrique Perez Valdes. Limited to 12 Casineros.
                   </p>
                 </div>
                 <div
-                  className={`h-4 w-4 rounded-xs border-2 flex items-center justify-center text-xs font-bold ${
-                    addMasterclass ? "border-amber-600 bg-amber-600 text-white" : "border-muted-foreground"
+                  className={`h-5 w-5 border-2 border-ink flex items-center justify-center text-xs font-bold ${
+                    addMasterclass ? "bg-ink text-paper" : "bg-paper"
                   }`}
                 >
                   {addMasterclass ? "✓" : ""}
@@ -554,26 +548,26 @@ export function EventPassSelector({
             </div>
 
             {/* Total breakdown */}
-            <div className="rounded-xl border bg-muted/40 p-3 space-y-1.5 text-xs">
-              <div className="flex justify-between text-muted-foreground">
+            <div className="border-2 border-ink bg-surface-1 p-3.5 space-y-1.5 text-xs font-semibold">
+              <div className="flex justify-between text-ink/70">
                 <span>{upsellTarget.tier.name} ({upsellTarget.role})</span>
                 <span>£{(upsellTarget.tier.priceInCents / 100).toFixed(0)}</span>
               </div>
               {addShirt && (
-                <div className="flex justify-between text-muted-foreground">
+                <div className="flex justify-between text-ink/70">
                   <span>Official Congress T-Shirt</span>
                   <span>+£20</span>
                 </div>
               )}
               {addMasterclass && (
-                <div className="flex justify-between text-muted-foreground">
+                <div className="flex justify-between text-ink/70">
                   <span>Maestro Private Masterclass</span>
                   <span>+£35</span>
                 </div>
               )}
-              <div className="pt-1.5 border-t flex justify-between font-extrabold text-sm text-foreground">
+              <div className="pt-2 border-t-2 border-ink flex justify-between font-display text-lg text-ink">
                 <span>Total Amount:</span>
-                <span className="text-amber-400">
+                <span className="text-poster-red">
                   £
                   {upsellTarget.tier.priceInCents / 100 +
                     (addShirt ? 20 : 0) +
@@ -583,12 +577,10 @@ export function EventPassSelector({
             </div>
 
             {/* Actions */}
-            <div className="flex flex-col sm:flex-row items-center gap-2 pt-2 border-t">
-              <Button
+            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2 border-t-4 border-ink">
+              <button
                 type="button"
-                variant="outline"
-                size="sm"
-                className="w-full sm:w-auto text-xs"
+                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper w-full sm:w-auto text-xs`}
                 onClick={() => {
                   handleRegister(
                     upsellTarget.tier.eventId,
@@ -601,11 +593,10 @@ export function EventPassSelector({
                 }}
               >
                 Pass Only (£{(upsellTarget.tier.priceInCents / 100).toFixed(0)})
-              </Button>
-              <Button
+              </button>
+              <button
                 type="button"
-                size="sm"
-                className="w-full sm:flex-1 bg-primary-base hover:bg-primary-hover text-white font-bold text-xs shadow-xs"
+                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} w-full sm:flex-1 text-xs`}
                 onClick={() => {
                   handleRegister(
                     upsellTarget.tier.eventId,
@@ -623,7 +614,7 @@ export function EventPassSelector({
                   (addShirt ? 20 : 0) +
                   (addMasterclass ? 35 : 0)}
                 )
-              </Button>
+              </button>
             </div>
           </div>
         </div>

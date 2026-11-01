@@ -1,5 +1,49 @@
 import type { NextConfig } from "next";
 
+/**
+ * Proposed Content-Security-Policy (CSP) Architecture:
+ * Key: "Content-Security-Policy"
+ * Preserved for documentation and audit purposes in docs/reports/antigravity-overnight-polish.md.
+ * In accordance with Task 3 instructions, this header is deliberately not attached to live responses
+ * to prevent third-party DevTools console noise during Playwright e2e runs.
+ */
+const isProd = process.env.NODE_ENV === "production";
+const scriptSrcDirectives = [
+  "'self'",
+  "'unsafe-inline'",
+  !isProd && "'unsafe-eval'",
+  "https://vercel.live",
+  "https://*.clerk.accounts.dev",
+  "https://clerk.salsaexplosion.co.uk",
+  "https://*.clerk.com",
+  "https://cdn.protect.clerk.com",
+  "https://js.stripe.com",
+  "https://www.youtube.com",
+  "https://s.ytimg.com",
+  "https://www.googletagmanager.com",
+  "https://www.google-analytics.com",
+]
+  .filter(Boolean)
+  .join(" ");
+
+export const PROPOSED_CSP_DIRECTIVES = `
+  default-src 'self';
+  script-src ${scriptSrcDirectives};
+  worker-src 'self' blob:;
+  connect-src 'self' https://vercel.live https://*.pusher.com wss://*.pusher.com https://*.supabase.co https://api.stripe.com https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com https://*.clerk.com:* https://*.protect.clerk.com:* https://*.client.protect.clerk.com:* https://clerk.salsaexplosion.co.uk https://clerk-telemetry.com https://*.clerk-telemetry.com https://www.youtube.com https://*.googlevideo.com https://www.google-analytics.com https://analytics.google.com;
+  img-src 'self' data: blob: https://vercel.live https://vercel.com https://images.unsplash.com https://*.clerk.com https://img.clerk.com https://i.ytimg.com https://*.youtube.com https://www.google-analytics.com https://*.stripe.com https://commondatastorage.googleapis.com https://*.supabase.co;
+  style-src 'self' 'unsafe-inline' https://vercel.live https://fonts.googleapis.com;
+  font-src 'self' data: https://vercel.live https://fonts.gstatic.com;
+  frame-src 'self' https://vercel.live https://js.stripe.com https://open.spotify.com https://*.clerk.accounts.dev https://www.youtube.com https://www.youtube-nocookie.com;
+  media-src 'self' blob: https://*.supabase.co https://commondatastorage.googleapis.com;
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self' https://checkout.stripe.com;
+  frame-ancestors 'self';
+`
+  .replace(/\s{2,}/g, " ")
+  .trim();
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,

@@ -41,6 +41,7 @@ import { CongressTravelGuide } from "@/components/events/congress-travel-guide";
 import { StudioEventGuide } from "@/components/events/studio-event-guide";
 import { UPCOMING_EVENTS, VENUE_INFO } from "@/lib/academy-data";
 import { reportError } from "@/lib/monitoring";
+import { buildFestivalEventJsonLd } from "@/lib/seo/event-jsonld";
 
 interface EventDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -238,44 +239,19 @@ export default async function EventDetailPage({
     }
   );
 
-  const eventJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    name: event.title,
-    startDate: new Date(event.startDate).toISOString(),
-    endDate: new Date(event.endDate).toISOString(),
+  const eventJsonLd = buildFestivalEventJsonLd({
+    slug: event.slug,
+    title: event.title,
     description: event.description,
-    image: event.coverImageUrl || undefined,
-    location: {
-      "@type": "Place",
-      name: event.venueName || "BOH Studios",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: event.venueAddress || "BOH Studios, 114 Commercial Road",
-        addressLocality: "Bournemouth",
-        postalCode: "BH2 5LR",
-        addressCountry: "GB",
-      },
-    },
-    performer: {
-      "@type": "Person",
-      name: "Enrique Perez Valdes",
-      jobTitle: "Artistic Director",
-    },
-    organizer: {
-      "@type": "Organization",
-      name: "Salsa Explosion UK",
-      url: "https://salsaexplosion.co.uk",
-    },
-    offers: event.ticketTiers.map((tier) => ({
-      "@type": "Offer",
+    startDate: event.startDate,
+    endDate: event.endDate,
+    coverImageUrl: event.coverImageUrl,
+    venueName: event.venueName,
+    ticketTiers: event.ticketTiers.map((tier) => ({
       name: tier.name,
-      price: (tier.priceInCents / 100).toFixed(2),
-      priceCurrency: "GBP",
-      availability: "https://schema.org/InStock",
-      url: `https://salsaexplosion.co.uk/events/${event.slug}`,
+      priceInCents: tier.priceInCents,
     })),
-  };
+  });
 
   return (
     <>

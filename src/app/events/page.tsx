@@ -15,6 +15,7 @@ import { BackButton } from "@/components/navigation/back-button";
 import { VENUE_INFO, ACADEMY_METRICS, UPCOMING_EVENTS } from "@/lib/academy-data";
 import { reportError } from "@/lib/monitoring";
 import { getPublishedEvents } from "@/lib/stores/published-events-store";
+import { buildFestivalEventJsonLd } from "@/lib/seo/event-jsonld";
 
 export const metadata = {
   title: "DANZA! 2026 | 2027 & Salsa Explosion Congresses | Bournemouth",
@@ -76,8 +77,36 @@ export default async function EventsDirectoryPage() {
 
   const liveAnnouncements = await getPublishedEvents();
 
+  const eventsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Salsa Explosion Festivals & Special Events Calendar",
+    itemListElement: displayEvents.map((evt, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      item: buildFestivalEventJsonLd({
+        slug: evt.slug,
+        title: evt.title,
+        description: evt.description,
+        startDate: evt.startDate,
+        endDate: evt.endDate,
+        coverImageUrl: evt.coverImageUrl,
+        venueName: evt.venueName,
+        ticketTiers: evt.ticketTiers?.map((t) => ({
+          name: t.name,
+          priceInCents: t.priceInCents,
+        })),
+      }),
+    })),
+  };
+
   return (
-    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-10">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsJsonLd) }}
+      />
+      <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-10">
       <div>
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
       </div>
@@ -324,6 +353,7 @@ export default async function EventsDirectoryPage() {
         </div>
       )}
     </main>
+    </>
   );
 }
 

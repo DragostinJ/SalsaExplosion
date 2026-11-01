@@ -102,7 +102,7 @@ export default function HowItWorksPage() {
             <div className="border-2 border-ink bg-poster-mustard/20 p-3 space-y-2 text-xs font-bold">
               <div className="flex justify-between">
                 <span>🕺 Lead Role</span>
-                <span className="text-poster-teal">✓ 50/50 Balanced</span>
+                <span className="font-black text-ink">✓ 50/50 Balanced</span>
                 <span>💃 Follow Role</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
@@ -325,7 +325,7 @@ export default function HowItWorksPage() {
       <section
         data-testid="staff-operations-guide"
         aria-label="Teacher and Door Staff Operations Guide"
-        className="border-4 border-ink bg-poster-teal p-6 sm:p-10 text-ink shadow-[6px_6px_0_0_#161311] space-y-6"
+        className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[6px_6px_0_0_#161311] space-y-6"
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-4 border-ink pb-4">
           <div>
@@ -340,7 +340,7 @@ export default function HowItWorksPage() {
             <h2 className="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-ink mt-2">
               How Teachers &amp; Door Staff Run Class Check-In
             </h2>
-            <p className="text-xs sm:text-sm text-ink/80 font-medium mt-0.5">
+            <p className="text-xs sm:text-sm text-ink font-medium mt-0.5">
               Designed for Maestro Enrique, Moe Flex, Justyna, Arturas, and Jim. Run seamless door entry right from your phone.
             </p>
           </div>

@@ -66,7 +66,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
             <Link
               key={item.href}
               href={item.href}
-              className={`relative flex flex-col items-center justify-center h-11 px-2.5 sm:px-3 border-2 border-ink bg-poster-red text-ink text-xs font-black uppercase transition-all ${
+              className={`relative flex flex-col items-center justify-center h-11 px-2.5 sm:px-3 border-2 border-ink bg-ink text-paper text-xs font-black uppercase transition-all ${
                 item.isActive ? "-translate-y-0.5" : "active:scale-95"
               }`}
             >

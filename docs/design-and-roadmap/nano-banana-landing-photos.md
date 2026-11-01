@@ -120,3 +120,27 @@ and tell Claude; Claude optimises them and adds them to the media manifest.
 ### R6. Social-share image background (1200×630)
 > Dark stage, crimson rim light, a conga silhouette on the right third, haze, the left two-thirds calm and
 > nearly black for a headline. Same film-grain style.
+
+---
+
+# Round 3: fill the gaps in the mock-ups (2026-11-01, before the meeting with Enrique)
+
+Every prompt has a slot waiting for it. In order of importance, so stop wherever the quota runs out.
+
+**Style A** (prompts 1, 6, 7): the round 1 style block above.
+
+**Style B** (Mediopunto shots, 2–4):
+> Photorealistic editorial photograph, full-frame camera, soft natural film grain. Warm late-afternoon Havana
+> light coming through a stained-glass mediopunto, so the only strong colours are the glass colours: ruby red,
+> amber, cobalt blue and emerald, falling as soft coloured patches. Peeling plaster, worn wood, real skin texture,
+> natural hands with five fingers, no CGI look. No text, no letters, no logos, no watermarks.
+
+| # | Slot | Ratio | Prompt |
+|---|------|-------|--------|
+| 1 | "Practise at home" in all three directions | 4:5 | A woman in her thirties practising Cuban salsa steps alone in a small living room at dusk, mid-step with a little motion blur on her feet, focused and smiling. A phone is propped on a bookshelf playing music, screen turned away from the camera with only a soft glow on the wall. A warm floor lamp, a rug pushed aside, a crimson cushion on the sofa, her trainers on a wooden floor. Shot from the doorway, 35 mm, f/2. *(A)* |
+| 2 | Mediopunto "light through glass" | 3:2 | A Cuban casino couple dancing in the open courtyard of a Havana colonial house, framed by a tall wooden doorway with a stained-glass mediopunto above it. The coloured light from the glass falls across their shoulders and the floor tiles; her skirt mid-swing with slight motion blur, both faces sharp and smiling. Potted plants, a wrought-iron rail, high plaster walls. 35 mm, eye level. *(B)* |
+| 3 | Mediopunto move library (casino) | 1:1 | Close-up of a leader's and follower's hands connected in a casino hold, fingers relaxed, palms touching lightly, at the moment before a turn. Ruby and cobalt patches of stained-glass light lie across the skin and a white linen sleeve. Dark plaster background, shallow depth of field, 85 mm. *(B)* |
+| 4 | Mediopunto Songs page hero | 16:9 | A vintage turntable on a worn wooden table playing a black vinyl record, beside a stack of old Cuban LP sleeves with no readable text. Amber, ruby and cobalt light from a stained-glass window falls across the record and the wall. Dust in the light, the left half of the frame calm and dark for a headline. No people. *(B)* |
+| 5 | ICAIC frieze and La lista | 1:1 each | R1's screen-print prompt with [OBJECT] = güiro + maracas, timbales + cowbell, a 1950s American car on the Malecón, a rueda circle from above as simple shapes, a vintage radio, a pair of dance shoes. Add: "On a perfectly plain, flat warm cream background with nothing touching the edges. No shadow under the object." (Claude cuts these out to transparent PNGs.) |
+| 6 | Gallery exhibit / Songs page | 4:5 | A timbales player mid-fill on a small stage, sticks blurred, cowbell and cymbal catching amber light, sweat on his forehead, eyes closed in concentration. Crimson back light, haze, the band dark behind him. Shot from the dance floor, 85 mm, f/2. *(A)* |
+| 7 | Gallery exhibit "the kit" | 4:5 | A still life on a dark wooden studio bench: a pair of worn suede dance shoes, wooden claves, a folded white towel and a red water bottle, lit from the side by a single amber light like a museum display. Deep black background, everything sharp, 50 mm, f/5.6. No people. *(A)* |

@@ -27,9 +27,10 @@ The commercial model reflects the real-world operational requirements of Salsa E
 1. **Weekly Classes at BOH Studios:**
    - **Pricing:** Strictly **£12 for 1 Class** or **£14 for 2 Classes** (Classes + Free Social).
    - **Payment Channel:** Strictly **Pay at the Door** (Cash or Card on arrival).
-   - **Invariant:** Agents must **never** wire Stripe checkout buttons or payment gateways for weekly Thursday or Sunday classes.
+   - **Invariant:** Agents must **never** wire Stripe checkout buttons or payment gateways for weekly Thursday or Sunday classes. That includes class-credit packs, memberships and subscriptions: they were retired on 2026-11-01 and `createCheckoutSessionAction` always refuses.
+   - **Reservations:** booking a class only reserves a role-balanced spot. It is free and takes no credits; dancers pay at the door. Refunds only return credits a booking really deducted (`src/lib/booking-credits.ts`).
 2. **Festivals & Special Events:**
-   - Online advance ticketing (Full Passes, Day Passes, Party Passes) is reserved **exclusively** for high-ticket weekenders (e.g., *Made in Cuba Dance Weekend 2026*, *Halloween Party*, *SB&K Fiesta*).
+   - Online advance ticketing (Full Passes, Day Passes, Party Passes) is reserved **exclusively** for festivals and special events: the weekenders and the parties (e.g., *Made in Cuba Dance Weekend*, *SB&K Night*, the Xmas and NYE parties), through `createEventCheckoutSessionAction`.
    - All online transactions route through secure Stripe Checkout sessions with Zod-validated server actions.
 3. **Multi-Role RBAC & Zero Privilege Escalation:**
    - Three distinct operational personas: `DANCER`, `TEACHER`, and `OWNER`.

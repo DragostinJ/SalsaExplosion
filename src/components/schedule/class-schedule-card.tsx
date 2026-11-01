@@ -45,6 +45,7 @@ import {
   ETIQUETTE_STORAGE_KEY,
 } from "@/components/beginners/digital-etiquette-modal";
 import { PostClassCheckinModal } from "@/components/beginners/post-class-checkin-modal";
+import { DOOR_PRICING } from "@/lib/academy-data";
 
 // ==========================================
 // TYPES & INTERFACES
@@ -202,11 +203,6 @@ export function ClassScheduleCard({
     (selectedRole === DanceRole.LEAD && isLeadFull) ||
     (selectedRole === DanceRole.FOLLOW && isFollowFull);
 
-  const canAfford = isGuest
-    ? true
-    : student.hasActiveSubscription ||
-      student.classCredits >= session.creditCost;
-
   const spotsRemaining = Math.max(
     0,
     session.maxCapacity - optimisticState.bookedCount
@@ -321,11 +317,7 @@ export function ClassScheduleCard({
             </Badge>
           ) : (
             <Badge variant="outline" className="text-xs">
-              {student?.hasActiveSubscription
-                ? "Included in Membership"
-                : `${session.creditCost} ${
-                    session.creditCost === 1 ? "Credit (or \u00A310 Drop-In)" : "Credits (or \u00A310 Drop-In)"
-                  }`}
+              Pay at the door \u00B7 \u00A3{DOOR_PRICING.oneClassPounds} / \u00A3{DOOR_PRICING.twoClassesPounds}
             </Badge>
           )}
         </div>
@@ -646,12 +638,6 @@ export function ClassScheduleCard({
               </Link>
             </Button>
           </div>
-        ) : !canAfford ? (
-          <Button asChild variant="secondary" className="w-full h-10 rounded-xl font-bold">
-            <Link href="/pricing">
-              Top Up Credits ({session.creditCost} Required)
-            </Link>
-          </Button>
         ) : (
           <Button
             type="button"
@@ -667,7 +653,7 @@ export function ClassScheduleCard({
             ) : isSelectedRoleFull ? (
               `${selectedRole} Spots Full`
             ) : (
-              `Book as ${selectedRole}`
+              `Reserve as ${selectedRole}`
             )}
           </Button>
         )}

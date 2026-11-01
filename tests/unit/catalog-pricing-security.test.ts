@@ -270,7 +270,7 @@ describe("F12: Catalog Pricing Security & Transaction Integrity Unit Suite", () 
   });
 
   describe("4. Class Session Cancellation & Refund Engine", () => {
-    it("refunds class credits to students without active unlimited subscriptions inside transaction", async () => {
+    it("refunds only credits a booking really deducted: free door-paid reservations mint no credits", async () => {
       const admin = createMockAdmin();
       vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(admin);
 
@@ -286,7 +286,7 @@ describe("F12: Catalog Pricing Security & Transaction Integrity Unit Suite", () 
             user: {
               id: "student_regular",
               classCredits: 2,
-              subscription: null, // Regular credit user -> MUST BE REFUNDED
+              subscription: null, // Older credit-based booking (ledger deduction) -> MUST BE REFUNDED
             },
           },
           {
@@ -296,6 +296,15 @@ describe("F12: Catalog Pricing Security & Transaction Integrity Unit Suite", () 
               id: "student_unlimited",
               classCredits: 0,
               subscription: { status: SubscriptionStatus.ACTIVE }, // Unlimited sub -> NO CREDIT REFUND NEEDED
+            },
+          },
+          {
+            id: "book_3",
+            userId: "student_door",
+            user: {
+              id: "student_door",
+              classCredits: 0,
+              subscription: null, // Free reservation, pays at the door -> NOTHING TO REFUND
             },
           },
         ],
@@ -314,6 +323,10 @@ describe("F12: Catalog Pricing Security & Transaction Integrity Unit Suite", () 
             update: vi.fn().mockResolvedValue({ id: "student_regular", classCredits: 3 }),
           },
           creditLedger: {
+            // Only book_1 has a deduction on the ledger
+            findFirst: vi.fn(({ where }: { where: { bookingId: string } }) =>
+              Promise.resolve(where.bookingId === "book_1" ? { amount: -1 } : null)
+            ),
             create: vi.fn().mockResolvedValue({}),
           },
         };
@@ -330,7 +343,7 @@ describe("F12: Catalog Pricing Security & Transaction Integrity Unit Suite", () 
       if (!res.success) {
         throw new Error("Expected res.success to be true");
       }
-      expect(res.data.refundedCount).toBe(1); // Only the regular credit user was refunded
+      expect(res.data.refundedCount).toBe(1); // Only the booking that really paid credits
       expect(res.message).toMatch(/Refunded 1 student credit/i);
     });
   });

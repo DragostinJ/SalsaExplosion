@@ -115,8 +115,9 @@ describe("M1: Fallback User Guard for Mutating Server Actions", () => {
     });
 
     it("blocks checkout session creation when user is fallback", async () => {
-      const { createCheckoutSessionAction } = await import("@/actions/checkout.actions");
-      const res = await createCheckoutSessionAction({ packageId: "PACK_SINGLE" });
+      // Festival/special-event passes are the only online checkout (classes are paid at the door)
+      const { createEventCheckoutSessionAction } = await import("@/actions/checkout.actions");
+      const res = await createEventCheckoutSessionAction({ eventId: "event-1", ticketTierId: "tier-1", role: "LEAD" });
       expect(res.success).toBe(false);
       if (!res.success) {
         expect(res.error.code).toBe("SERVICE_UNAVAILABLE");

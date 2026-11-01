@@ -194,35 +194,12 @@ export async function bookClassAction(
           }
         }
 
-        // 3g. Determine Payment Method: Active Subscription vs. Class Credits
+        // 3g. Weekly classes are paid at the door (£12 / £14), never online: a booking only
+        // reserves a role-balanced spot, so it takes no credits and no payment.
         const hasActiveSubscription =
           user.subscription !== null &&
           user.subscription.status === SubscriptionStatus.ACTIVE &&
           user.subscription.currentPeriodEnd > now;
-
-        let updatedCredits = user.classCredits;
-
-        if (!hasActiveSubscription) {
-          // Atomic conditional deduction prevents negative balances under concurrent clicks
-          const creditDeduction = await tx.user.updateMany({
-            where: {
-              id: user.id,
-              classCredits: { gte: classSession.creditCost },
-            },
-            data: {
-              classCredits: { decrement: classSession.creditCost },
-            },
-          });
-
-          if (creditDeduction.count === 0) {
-            throw new BookingDomainError(
-              "INSUFFICIENT_CREDITS",
-              `You need ${classSession.creditCost} credit(s) to book this class (current balance: ${user.classCredits}).`
-            );
-          }
-
-          updatedCredits = user.classCredits - classSession.creditCost;
-        }
 
         // 3h. Upsert Booking Record (handles both fresh bookings and re-activated cancellations)
         const booking = await tx.booking.upsert({
@@ -245,24 +222,10 @@ export async function bookClassAction(
           },
         });
 
-        // 3i. Record Immutable Credit Ledger Entry (if credits were used)
-        if (!hasActiveSubscription && classSession.creditCost > 0) {
-          await tx.creditLedger.create({
-            data: {
-              userId: user.id,
-              amount: -classSession.creditCost,
-              balanceAfter: updatedCredits,
-              type: TransactionType.CLASS_BOOKING_DEDUCTION,
-              bookingId: booking.id,
-              description: `Booked ${classSession.title} (${danceRole}) for ${classSession.startTime.toISOString()}`,
-            },
-          });
-        }
-
         return {
           bookingId: booking.id,
           usedSubscription: hasActiveSubscription,
-          remainingCredits: updatedCredits,
+          remainingCredits: user.classCredits,
         };
       },
       {
@@ -283,9 +246,7 @@ export async function bookClassAction(
     return {
       success: true,
       data: result,
-      message: result.usedSubscription
-        ? "Spot confirmed using your active membership!"
-        : "Spot confirmed! Credit deducted from your pass.",
+      message: "Spot reserved! Pay at the door when you arrive (£12 for 1 class, £14 for 2).",
     };
   } catch (error) {
     if (error instanceof BookingDomainError) {

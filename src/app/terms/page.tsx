@@ -115,28 +115,28 @@ export default function TermsAndLegalPage() {
         <Card className="border shadow-xs">
           <CardContent className="p-6 space-y-6 text-xs sm:text-sm text-foreground/90 font-medium leading-relaxed">
             <p>
-              Your rights when purchasing digital credits, passes, and event tickets are protected under the <strong>Consumer Rights Act 2015</strong> and the <strong>Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013</strong>.
+              Your rights when buying festival and special-event passes or gift vouchers are protected under the <strong>Consumer Rights Act 2015</strong> and the <strong>Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013</strong>.
             </p>
 
             <div className="space-y-4">
-              {/* Unused Credit Packs */}
+              {/* Gift vouchers */}
               <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4 space-y-2">
                 <div className="flex items-center gap-2 text-emerald-300 font-bold text-sm">
                   <CheckCircle2 className="h-4 w-4 shrink-0" />
-                  <h3>Unused Class Credit Packs & Gift Vouchers — 14-Day Statutory Cooling-Off Period</h3>
+                  <h3>Gift Vouchers — 14-Day Statutory Cooling-Off Period</h3>
                 </div>
                 <p className="text-xs">
-                  Under Regulation 29 of the Consumer Contracts Regulations 2013, you have the right to cancel your purchase of any unused digital class credit pack (e.g. 5-Class Rhythm Pack, 10-Class Master Pack) or Dance Gift Voucher within <strong>14 calendar days</strong> from the date of purchase without giving any reason, and receive a 100% full refund to your original payment method. To exercise this right, simply email <a href="mailto:info@salsaexplosion.co.uk" className="font-bold underline">info@salsaexplosion.co.uk</a> with your purchase email before the 14 days expire.
+                  Under Regulation 29 of the Consumer Contracts Regulations 2013, you have the right to cancel your purchase of any unused Dance Gift Voucher within <strong>14 calendar days</strong> from the date of purchase without giving any reason, and receive a 100% full refund to your original payment method. To exercise this right, simply email <a href="mailto:info@salsaexplosion.co.uk" className="font-bold underline">info@salsaexplosion.co.uk</a> with your purchase email before the 14 days expire.
                 </p>
               </div>
 
               {/* Weekly Class Bookings */}
               <div className="rounded-xl border bg-card p-4 space-y-2">
                 <h3 className="font-bold text-sm text-foreground">
-                  Weekly Class Cancellations & Re-credits
+                  Weekly Class Reservations
                 </h3>
                 <p className="text-xs">
-                  If you have booked a weekly class (Thursday or Sunday at BOH Studios) and are unable to attend, you may cancel your booking online up to <strong>2 hours prior to class start time</strong>. Your class credit will be instantly returned to your digital wallet for future use. If Salsa Explosion cancels a class due to teacher illness or venue emergency, all booked credits are refunded to affected students automatically.
+                  Weekly classes (Thursday or Sunday at BOH Studios) are paid at the door, so nothing is charged online. If you have reserved a spot and can't come, please cancel your reservation in the app so the Lead/Follow balance stays fair for everyone. If Salsa Explosion cancels a class, reservations are released automatically.
                 </p>
               </div>
 
@@ -228,7 +228,7 @@ export default function TermsAndLegalPage() {
                   </tr>
                   <tr>
                     <td className="p-3 font-semibold">Door Check-In Timestamp</td>
-                    <td className="p-3">Fire safety roll-call, class attendance validation, and credit deduction.</td>
+                    <td className="p-3">Fire safety roll-call and class attendance validation.</td>
                     <td className="p-3 text-muted-foreground font-mono">Art. 6(1)(f) Legitimate Interest</td>
                   </tr>
                   <tr>

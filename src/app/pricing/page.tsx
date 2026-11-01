@@ -8,7 +8,6 @@ export const metadata: Metadata = {
 };
 import { ShieldCheck, DoorOpen, Ticket, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
-import { PricingViewerContext } from "@/components/pricing/pricing-viewer-context";
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { VENUE_INFO, DOOR_PRICING } from "@/lib/academy-data";
@@ -25,7 +24,7 @@ export default function PricingPage() {
         eyebrowRight={`${VENUE_INFO.shortName} • BOURNEMOUTH BH2 5LR`}
         title="DOOR ADMISSION &"
         highlight="Festival Passes"
-        description={`Strictly Thursdays & Sundays at ${VENUE_INFO.name}. Transparent door admission for weekly studio classes, and secure online Stripe checkout for festivals, parties, and vouchers.`}
+        description={`Weekly classes on Thursdays & Sundays at ${VENUE_INFO.name} are paid at the door. Festivals and special events are booked online with secure Stripe checkout.`}
       />
 
       {/* 2-Column Policy Summary */}
@@ -65,10 +64,10 @@ export default function PricingPage() {
             </div>
             <div className="mt-2 space-y-1.5">
               <span className="text-lg sm:text-xl font-extrabold text-ivory">
-                Festivals, Special Nights &amp; Gift Vouchers
+                Festivals &amp; Special Events
               </span>
               <p className="text-xs text-ivory-muted leading-relaxed">
-                Official online passes for Made in Cuba Dance Weekend 2026, SB&amp;K Nights, seasonal parties and digital gift vouchers below.
+                Official online passes for Made in Cuba Dance Weekend, SB&amp;K Nights and the seasonal parties, paid securely with Stripe. Gift vouchers are ordered from Enrique directly (below).
               </p>
             </div>
           </div>
@@ -98,7 +97,7 @@ export default function PricingPage() {
         <div className="flex items-center gap-2 text-foreground font-medium">
           <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
           <span>
-            <strong className="font-extrabold">UK Consumer Rights Guarantee:</strong> 14-day statutory cooling-off refund right on unused credit packs &amp; vouchers. Cancel weekly classes up to 2 hours before start for instant 100% credit return.
+            <strong className="font-extrabold">UK Consumer Rights:</strong> festival and special-event passes bought online follow our refund policy. Weekly classes are paid at the door, so there is nothing to pay or refund online.
           </span>
         </div>
         <Link
@@ -108,11 +107,6 @@ export default function PricingPage() {
           Read Refund Policy →
         </Link>
       </div>
-
-      <PricingViewerContext
-        initialHasActiveSubscription={false}
-        initialCredits={0}
-      />
 
       <div className="mt-12">
         <MultiAgeReassuranceBanner />

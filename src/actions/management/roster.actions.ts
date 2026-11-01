@@ -12,9 +12,9 @@ import {
   Role,
   TransactionType,
   BookingStatus,
-  SubscriptionStatus,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { creditsDeductedFor } from "@/lib/booking-credits";
 import { getOrProvisionCurrentUser, canSwitchRoles, isBootstrapAdmin, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { recordAuditLog } from "@/lib/audit-log";
 import { CUBAN_SALSA_SYLLABUS } from "@/lib/constants/submission";
@@ -713,14 +713,13 @@ export async function cancelClassSessionWithRefundsAction(
           },
         });
 
-        const hasActiveSubscription =
-          booking.user.subscription?.status === SubscriptionStatus.ACTIVE;
+        const refund = await creditsDeductedFor(tx, booking.id, booking.userId);
 
-        if (!hasActiveSubscription && classSession.creditCost > 0) {
+        if (refund > 0) {
           const updatedUser = await tx.user.update({
             where: { id: booking.userId },
             data: {
-              classCredits: { increment: classSession.creditCost },
+              classCredits: { increment: refund },
             },
             select: { classCredits: true },
           });
@@ -728,7 +727,7 @@ export async function cancelClassSessionWithRefundsAction(
           await tx.creditLedger.create({
             data: {
               userId: booking.userId,
-              amount: classSession.creditCost,
+              amount: refund,
               balanceAfter: updatedUser.classCredits,
               type: TransactionType.CLASS_CANCELLATION_REFUND,
               description: `Refund: Class cancellation for "${classSession.title}" (${parsed.data.reason})`,

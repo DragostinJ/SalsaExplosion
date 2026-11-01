@@ -216,10 +216,10 @@ export interface CanonicalPassTier {
   popular?: boolean;
 }
 
-export const PASS_PRICING: Record<
-  "first-timer" | "PACK_SINGLE" | "PACK_5" | "PACK_10" | "SUB_UNLIMITED_MONTHLY",
-  CanonicalPassTier
-> = {
+// Weekly classes are paid at the door only (Enrique, 2026-11-01): the online class packs
+// and the monthly membership were retired. Festivals and special events are the only
+// things sold online, as event passes (see UPCOMING_EVENTS and the events checkout).
+export const PASS_PRICING: Record<"first-timer" | "PACK_SINGLE", CanonicalPassTier> = {
   "first-timer": {
     id: "first-timer",
     name: "Weekly Class Door Admission (1 or 2 Classes)",
@@ -250,61 +250,9 @@ export const PASS_PRICING: Record<
       "Cash or contactless card accepted at the door",
     ],
   },
-  PACK_5: {
-    id: "PACK_5",
-    name: "5-Class Havana Credit Pack",
-    shortLabel: "5-Class Pack",
-    priceDisplay: "£40",
-    priceInPounds: 40,
-    perClassNote: "£8 / session (Save 20%)",
-    description:
-      "Ideal for weekly dancers building consistent Cuban Casino & Rueda technique on Thursdays and Sundays.",
-    features: [
-      "5 Class Credits (£8 / session — Save £10)",
-      "Valid any Thursday or Sunday at BOH Studios",
-      "Includes evening social fiesta on every visit",
-    ],
-  },
-  PACK_10: {
-    id: "PACK_10",
-    name: "10-Class Casinero Pass",
-    shortLabel: "10-Class Pass",
-    priceDisplay: "£75",
-    priceInPounds: 75,
-    perClassNote: "£7.50 / session (Best Value)",
-    description:
-      "Best value credit bundle for dedicated Cuban Salsa & Rueda dancers at BOH Studios Bournemouth.",
-    popular: true,
-    features: [
-      "10 Class Credits (£7.50 / session — Save £25)",
-      "Priority Lead/Follow ratio lock on busy nights",
-      "Priority 4-tier syllabus video level-up reviews",
-    ],
-  },
-  SUB_UNLIMITED_MONTHLY: {
-    id: "SUB_UNLIMITED_MONTHLY",
-    name: "Full Studio Pass",
-    shortLabel: "Full Studio Pass",
-    priceDisplay: "£95 / month",
-    priceInPounds: 95,
-    perClassNote: "All Thursdays & Sundays",
-    description:
-      "All-access monthly pass covering every Thursday and Sunday class and social fiesta at BOH Studios.",
-    features: [
-      "Unlimited Thursday & Sunday classes + socials",
-      "Zero credit deductions when booking",
-      "Full access to End-of-Class Recaps",
-      "Cancel anytime via Billing Portal",
-    ],
-  },
 };
 
-export const PASS_PRICING_LIST: CanonicalPassTier[] = [
-  PASS_PRICING.PACK_SINGLE,
-  PASS_PRICING.PACK_5,
-  PASS_PRICING.PACK_10,
-  PASS_PRICING.SUB_UNLIMITED_MONTHLY,
-];
+export const PASS_PRICING_LIST: CanonicalPassTier[] = [PASS_PRICING.PACK_SINGLE];
 
 export interface CanonicalUpcomingEvent {
   slug: string;

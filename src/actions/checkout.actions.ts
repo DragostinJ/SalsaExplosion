@@ -4,34 +4,21 @@ import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import Stripe from "stripe";
-import { SubscriptionStatus, TransactionType } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { stripe } from "@/lib/stripe";
 import {
-  PackageId,
-  PRICING_CATALOG,
+  CLASSES_PAY_AT_DOOR_MESSAGE,
   CheckoutDomainError,
+  type PackageId,
   type CheckoutActionResponse,
 } from "@/lib/constants/pricing";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
 import { ticketSalesBlockReason } from "@/lib/event-sales";
 
-// ==========================================
-// ZOD VALIDATION SCHEMA
-// ==========================================
-
-const CreateCheckoutSchema = z.object({
-  packageId: z.enum(
-    ["PACK_SINGLE", "PACK_5", "PACK_10", "SUB_UNLIMITED_MONTHLY"] as const,
-    {
-      message: "Invalid pricing package selected.",
-    }
-  ),
-});
-
-export type CreateCheckoutInput = z.infer<typeof CreateCheckoutSchema>;
+/** The retired class-pack request shape (kept so stale clients get a clear refusal) */
+export type CreateCheckoutInput = { packageId: PackageId };
 
 // ==========================================
 // HELPER: RESOLVE APP BASE URL
@@ -59,221 +46,24 @@ function isLiveStripeConfigured(priceId: string): boolean {
 }
 
 // ==========================================
-// 1. CREATE STRIPE CHECKOUT SESSION ACTION
+// 1. WEEKLY CLASSES: NEVER SOLD ONLINE
 // ==========================================
 
+/**
+ * Weekly Thursday and Sunday classes are paid at the door only (AGENTS.md §2, Enrique's rule).
+ * This action used to sell class-credit packs and a monthly membership through Stripe; it now
+ * always refuses, so no button can ever take money online for a class. Festival and
+ * special-event passes go through createEventCheckoutSessionAction below.
+ */
 export async function createCheckoutSessionAction(
   rawInput: CreateCheckoutInput
 ): Promise<CheckoutActionResponse> {
-  // fallback-guard
-  const user = await getOrProvisionCurrentUser();
-  const identifier = await getRateLimitIdentifier(user?.id);
-
-  return withRateLimit(identifier, "CHECKOUT", async (): Promise<CheckoutActionResponse> => {
-    try {
-      // 1. Verify Authentication & Provision User
-      if (!user) {
-        throw new CheckoutDomainError(
-          "UNAUTHORIZED",
-          "Please sign in to purchase a class pass or membership."
-        );
-      }
-      if (isFallbackUser(user)) {
-        throw new CheckoutDomainError("SERVICE_UNAVAILABLE", SERVICE_UNAVAILABLE_MESSAGE);
-      }
-
-    // 2. Validate Package Selection
-    const parsed = CreateCheckoutSchema.safeParse(rawInput);
-    if (!parsed.success) {
-      throw new CheckoutDomainError(
-        "VALIDATION_ERROR",
-        parsed.error.issues[0]?.message ?? "Invalid package selection."
-      );
-    }
-
-    const pkg = PRICING_CATALOG[parsed.data.packageId as PackageId];
-    const stripePriceId =
-      process.env[pkg.stripePriceIdEnvVar] ||
-      `price_${pkg.id.toLowerCase()}_placeholder`;
-
-    // 3. Guard Against Duplicate Active Subscriptions
-    const now = new Date();
-    const hasActiveSubscription = Boolean(
-      user.subscription &&
-      user.subscription.status === SubscriptionStatus.ACTIVE &&
-      user.subscription.currentPeriodEnd > now
-    );
-
-    if (pkg.mode === "subscription" && hasActiveSubscription) {
-      throw new CheckoutDomainError(
-        "ALREADY_SUBSCRIBED",
-        "You already have an active Unlimited Studio Membership."
-      );
-    }
-
-    // 4. Local / Studio Demo Direct Fulfillment Mode (when Stripe Price IDs or Keys are placeholders)
-    if (!isLiveStripeConfigured(stripePriceId)) {
-      if (
-        process.env.NODE_ENV === "production" &&
-        process.env.ALLOW_DEMO_PAYMENTS !== "true"
-      ) {
-        throw new CheckoutDomainError(
-          "MISSING_STRIPE_CONFIG",
-          "Live payment processing is not configured for this package. Contact the studio administrator."
-        );
-      }
-
-      await prisma.$transaction(async (tx) => {
-        if (pkg.mode === "subscription") {
-          const periodEnd = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-          await tx.subscription.upsert({
-            where: { userId: user.id },
-            update: {
-              status: SubscriptionStatus.ACTIVE,
-              stripePriceId,
-              currentPeriodStart: now,
-              currentPeriodEnd: periodEnd,
-              cancelAtPeriodEnd: false,
-            },
-            create: {
-              userId: user.id,
-              stripeSubscriptionId: `sub_demo_${randomUUID().slice(0, 10)}`,
-              stripePriceId,
-              status: SubscriptionStatus.ACTIVE,
-              currentPeriodStart: now,
-              currentPeriodEnd: periodEnd,
-              cancelAtPeriodEnd: false,
-            },
-          });
-        } else {
-          const updatedUser = await tx.user.update({
-            where: { id: user.id },
-            data: { classCredits: { increment: pkg.creditAmount } },
-            select: { classCredits: true },
-          });
-
-          await tx.creditLedger.create({
-            data: {
-              userId: user.id,
-              amount: pkg.creditAmount,
-              balanceAfter: updatedUser.classCredits,
-              type: TransactionType.CREDIT_PACK_PURCHASE,
-              stripePaymentIntentId: `pi_demo_${randomUUID()}`,
-              description: `Purchased ${pkg.name} (+${pkg.creditAmount} credits)`,
-            },
-          });
-        }
-      });
-
-      revalidatePath("/dashboard/schedule");
-      revalidatePath("/pricing");
-      revalidatePath("/instructor/students");
-      revalidatePath("/admin/analytics");
-
-      return {
-        success: true,
-        data: {
-          url: `/dashboard/schedule?checkout=demo_success&pkg=${pkg.id}`,
-        },
-      };
-    }
-
-    // 5. Ensure User Has a Linked Stripe Customer ID
-    let stripeCustomerId = user.stripeCustomerId;
-
-    if (!stripeCustomerId) {
-      const customer = await stripe.customers.create({
-        email: user.email,
-        name: `${user.firstName} ${user.lastName}`.trim(),
-        metadata: {
-          userId: user.id,
-          clerkId: user.clerkId,
-        },
-      });
-
-      stripeCustomerId = customer.id;
-
-      await prisma.user.update({
-        where: { id: user.id },
-        data: { stripeCustomerId },
-      });
-    }
-
-    const baseUrl = getAppBaseUrl();
-
-    // 6. Construct Mode-Specific Metadata & Session Parameters
-    const sharedMetadata: Record<string, string> = {
-      userId: user.id,
-      clerkId: user.clerkId,
-      packageId: pkg.id,
-      packName: pkg.name,
-      creditAmount: String(pkg.creditAmount),
-    };
-
-    const sessionParams: Stripe.Checkout.SessionCreateParams = {
-      customer: stripeCustomerId,
-      client_reference_id: user.id,
-      mode: pkg.mode,
-      line_items: [
-        {
-          price: stripePriceId,
-          quantity: 1,
-        },
-      ],
-      metadata: sharedMetadata,
-      allow_promotion_codes: true,
-      billing_address_collection: "auto",
-      success_url: `${baseUrl}/dashboard/schedule?checkout=success&pkg=${pkg.id}`,
-      cancel_url: `${baseUrl}/pricing?checkout=cancelled`,
-      ...(pkg.mode === "subscription"
-        ? {
-            subscription_data: {
-              metadata: {
-                userId: user.id,
-                clerkId: user.clerkId,
-                packageId: pkg.id,
-              },
-            },
-          }
-        : {
-            payment_intent_data: {
-              metadata: sharedMetadata,
-            },
-          }),
-    };
-
-    // 7. Create Stripe Checkout Session
-    const checkoutSession = await stripe.checkout.sessions.create(sessionParams);
-
-    if (!checkoutSession.url) {
-      throw new CheckoutDomainError(
-        "STRIPE_API_ERROR",
-        "Failed to generate a Stripe Checkout redirect URL."
-      );
-    }
-
-    return {
-      success: true,
-      data: { url: checkoutSession.url },
-    };
-  } catch (error) {
-    if (error instanceof CheckoutDomainError) {
-      return {
-        success: false,
-        error: { code: error.code, message: error.message },
-      };
-    }
-
-    console.error("[createCheckoutSessionAction Error]:", error);
-    return {
-      success: false,
-      error: {
-        code: "STRIPE_API_ERROR",
-        message: "Unable to connect to payment processor. Please try again.",
-      },
-    };
-  }
-  });
+  // An attempt means a stale page or someone probing: worth seeing in the logs
+  console.warn("[createCheckoutSessionAction] Refused online class purchase:", String(rawInput?.packageId).slice(0, 40));
+  return {
+    success: false,
+    error: { code: "PLAN_UNAVAILABLE", message: CLASSES_PAY_AT_DOOR_MESSAGE },
+  };
 }
 
 // ==========================================

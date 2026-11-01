@@ -74,21 +74,22 @@ describe("H2: Checkout Demo-Payment Production Guards", () => {
     process.env = originalEnv;
   });
 
-  it("blocks unconfigured package demo checkout in production when ALLOW_DEMO_PAYMENTS is not true", async () => {
-    Object.assign(process.env, { NODE_ENV: "production", STRIPE_SECRET_KEY: "sk_test_placeholder_for_build" });
-    delete process.env.ALLOW_DEMO_PAYMENTS;
-    delete process.env.STRIPE_PRICE_5_PACK;
-    delete process.env.STRIPE_PRICE_ID_PACK_5;
+  it("never sells weekly classes online: every class package is refused, even with demo payments on", async () => {
+    // Weekly classes are pay-at-the-door only (AGENTS.md §2); demo mode must not open a back door
+    Object.assign(process.env, { NODE_ENV: "development", ALLOW_DEMO_PAYMENTS: "true", STRIPE_SECRET_KEY: "sk_live_realistic_key" });
 
-    const result = await createCheckoutSessionAction({
-      packageId: "PACK_5",
-    });
+    for (const packageId of ["PACK_SINGLE", "PACK_5", "PACK_10", "SUB_UNLIMITED_MONTHLY"] as const) {
+      const result = await createCheckoutSessionAction({ packageId });
 
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      expect(result.error.code).toBe("MISSING_STRIPE_CONFIG");
-      expect(result.error.message).toMatch(/Live payment processing is not configured for this package/);
+      expect(result.success).toBe(false);
+      if (!result.success) {
+        expect(result.error.code).toBe("PLAN_UNAVAILABLE");
+        expect(result.error.message).toMatch(/paid at the door/);
+      }
     }
+    // No credits granted, no Stripe customer created, nothing written
+    expect(prisma.$transaction).not.toHaveBeenCalled();
+    expect(prisma.user.update).not.toHaveBeenCalled();
   });
 
   it("blocks unconfigured festival event pass demo registration in production when ALLOW_DEMO_PAYMENTS is not true", async () => {

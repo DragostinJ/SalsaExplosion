@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function ReviewPage() {
   return (
-    <div className="min-h-screen bg-canvas text-ivory py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-paper text-ink py-10 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <ReviewBoosterClient />
       </div>

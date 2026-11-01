@@ -43,7 +43,8 @@ test.describe("All Songs Browser E2E Suite", () => {
           text.includes("youtube.com/api/stats") ||
           text.includes("ytimg.com") ||
           text.includes("play.google.com") ||
-          text.includes("ERR_BLOCKED_BY_CLIENT")
+          text.includes("ERR_BLOCKED_BY_CLIENT") ||
+          text.includes("compute-pressure")
         ) {
           return;
         }

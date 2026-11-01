@@ -278,7 +278,7 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
 
     // Thumb-zone transport is present
     for (const name of ["Previous section", "Play", "Next section", "Loop this section"]) {
-      await expect(player.getByRole("button", { name })).toBeVisible();
+      await expect(player.getByRole("button", { name, exact: true })).toBeVisible();
     }
 
     // Role toggle swaps the single cue shown

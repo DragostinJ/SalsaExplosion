@@ -177,7 +177,7 @@ export function RuedaFlashcards() {
           <button
             type="button"
             onClick={() => setFlipped((f) => !f)}
-            aria-label={flipped ? "Show the front of the card" : "Turn the card over"}
+            aria-pressed={flipped}
             className={cn(
               "block min-h-[320px] w-full border-[6px] border-ink bg-paper p-6 text-left transition-transform active:translate-x-1 active:translate-y-1",
               LEVEL_SHADOW[card.level]

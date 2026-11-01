@@ -126,7 +126,7 @@ export function CongressTravelGuide() {
 
             <div className="rounded-lg border border-border/80 bg-background/80 p-3 space-y-2">
               <div className="flex items-center justify-between font-semibold text-foreground">
-                <span>Dancer Block Rates (Code: <code className="text-primary font-mono">SALSA2026</code>)</span>
+                <span>Dancer Block Rates (Code: <code className="text-accent-red font-mono">SALSA2026</code>)</span>
                 <span className="text-amber-400 font-bold">From £69/night</span>
               </div>
               <ul className="space-y-1 text-[11px]">

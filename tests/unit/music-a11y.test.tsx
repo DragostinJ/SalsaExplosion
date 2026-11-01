@@ -5,12 +5,18 @@ import { PlayerControls } from "@/components/music/song-player/player-controls";
 import { SongPlayerMoreSheet } from "@/components/music/song-player/song-player-more-sheet";
 import { SectionMovesList } from "@/components/music/song-player/section-moves-list";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
+import { displaySongTitle } from "@/lib/music/song-style";
 
 describe("Music Practice Hub Accessibility (A11y & WCAG 2.1)", () => {
-  it("renders SongPracticeList with explicit descriptive aria-labels for each song", () => {
+  it("renders SongPracticeList rows named by their visible title and artist (label in name)", () => {
     const html = renderToStaticMarkup(<SongPracticeList />);
     expect(html).toContain('aria-labelledby="practice-mode-heading"');
-    expect(html).toContain('aria-label="Open practice player for');
+    // No aria-label overriding the visible text (WCAG 2.5.3): the row's own title and artist name the link
+    expect(html).not.toContain('aria-label="Open practice player for');
+    for (const song of TIMBA_SONG_ANATOMY_DATA) {
+      const row = html.slice(html.indexOf(`href="/music/${song.id}"`));
+      expect(row.slice(0, row.indexOf("</a>"))).toContain(displaySongTitle(song.title).replace(/'/g, "&#x27;").replace(/&(?!#)/g, "&amp;"));
+    }
     expect(html).toContain("focus-visible:outline-gold");
   });
 

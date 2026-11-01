@@ -27,12 +27,8 @@ test.describe("Practice Player Tools & Engagement E2E Suite", () => {
       const row = songLinks.nth(i);
       await expect(row).toBeVisible();
 
-      // Verify chevron icon is visible within the row
-      const chevron = row.locator("svg");
-      await expect(chevron.last()).toBeVisible();
-
       // Verify style chip ("Timba", "Cuban Salsa", "Puerto Rican Salsa", etc.)
-      const styleChip = row.locator("span.rounded-full");
+      const styleChip = row.locator('[data-testid="song-style-chip"]');
       await expect(styleChip).toBeVisible();
       const chipText = await styleChip.textContent();
       expect(chipText?.trim().length).toBeGreaterThan(0);

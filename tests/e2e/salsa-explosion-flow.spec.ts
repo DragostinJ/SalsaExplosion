@@ -216,9 +216,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   }) => {
     await page.goto("/music", { waitUntil: "domcontentloaded" });
 
-    await expect(
-      page.getByText("Cuban Music & Social Playlist Hub")
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /La lista/i })).toBeVisible();
     await expect(
       page.getByText(/Slow Son/i).first()
     ).toBeVisible();
@@ -460,21 +458,16 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await modal.getByRole("button", { name: /Close spotlight modal/i }).click();
     await expect(modal).not.toBeVisible();
 
-    // 5. Verify BOH Studios Venue Spotlight
-    const venueSection = page.locator('[data-testid="boh-venue-spotlight"]');
+    // 5. Verify the BOH Studios venue block (the full arrival guide lives on /venues)
+    const venueSection = page.locator('[data-testid="home-venue"]');
     await expect(venueSection).toBeVisible();
-    await expect(page.getByText("Hosted at BOH Studios Bournemouth")).toBeVisible();
+    await expect(venueSection.getByText(/104 Commercial Rd/i)).toBeVisible();
 
-    // Verify arrival planner tabs switch
-    await page.getByRole("button", { name: /Bus & Train/i }).click();
-    await expect(page.getByText("Bournemouth Square & Poole Hill Bus Stops")).toBeVisible();
-
-    await page.getByRole("button", { name: /First-Timer Door Guide/i }).click();
-    await expect(page.getByText(/104 Commercial Road \(The Triangle\)/i)).toBeVisible();
-
-    // Verify Google Maps external link
-    const mapsLink = venueSection.locator('a[href*="google.com/maps"]');
-    await expect(mapsLink).toBeVisible();
+    // Directions open Google Maps; the parking & transport guide is one tap away
+    await expect(venueSection.getByRole("link", { name: /Directions/i })).toHaveAttribute("href", /google\.com/);
+    await venueSection.getByRole("link", { name: /Parking guide/i }).click();
+    await expect(page).toHaveURL(/\/venues/);
+    await expect(page.getByText(/Bournemouth Central Train Station/i).first()).toBeVisible();
   });
 
   test("25. Pre-pitch competitor kill-shot features (live banner, why cuban comparison, crossover quiz, and mobile roster toggle)", async ({

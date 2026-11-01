@@ -92,7 +92,7 @@ export default async function EventsDirectoryPage() {
             </div>
 
             <div>
-              <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-ivory leading-tight">
+              <h1 className="text-4xl sm:text-5xl text-ivory leading-[0.92]">
                 DANZA! 2026 | 2027{" "}
                 <span className="italic font-normal text-gold">
                   Special Event Calendar

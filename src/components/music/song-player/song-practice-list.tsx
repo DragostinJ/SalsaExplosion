@@ -20,7 +20,6 @@ export function SongPracticeList() {
           <li key={song.id} className="border-b-4 border-ink">
             <Link
               href={`/music/${song.id}`}
-              aria-label={`Open practice player for ${displaySongTitle(song.title)} by ${song.artist}`}
               className="group grid min-h-[88px] grid-cols-[3.25rem_minmax(0,1fr)] gap-x-3 gap-y-3 px-2 py-4 transition-colors hover:bg-ink/5 focus-visible:outline-2 focus-visible:outline-gold md:grid-cols-[5rem_minmax(0,1fr)_16rem_12rem] md:items-center md:px-4"
             >
               <span className={cn("font-display text-5xl leading-none tabular-nums", NUMBER_INKS[index % NUMBER_INKS.length])}>
@@ -43,7 +42,7 @@ export function SongPracticeList() {
                 ))}
               </span>
               <span className="col-span-2 flex flex-wrap gap-2 text-xs font-bold uppercase md:col-span-1 md:justify-end">
-                <span className="border-2 border-ink px-2 py-0.5">{song.style}</span>
+                <span data-testid="song-style-chip" className="border-2 border-ink px-2 py-0.5">{song.style}</span>
                 <span className="px-1 py-0.5">{song.difficultyLevel}</span>
                 <span className="px-1 py-0.5 tabular-nums">
                   {formatSongTime(song.durationSeconds)} · {song.bpm} BPM

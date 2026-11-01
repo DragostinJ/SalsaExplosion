@@ -1,6 +1,6 @@
 /** Chart colours on the ICAIC paper surface: poster inks for series, ink for text and rules. */
 export const CHART_PALETTE = {
-  brand: "#E4412B",
+  brand: "#E8462F",
   gold: "#C98F00",
   emerald: "#12938F",
   teal: "#22418F",

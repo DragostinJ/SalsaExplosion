@@ -68,7 +68,7 @@ const LADDERS = {
 };
 
 // Paper ladder: mirror each step, re-lit so "light text" steps become dark enough to read on paper
-const PAPER_L = { 50: 0.26, 100: 0.31, 200: 0.37, 300: 0.43, 400: 0.48, 500: 0.55, 600: 0.66, 700: 0.78, 800: 0.875, 900: 0.93, 950: 0.962 };
+const PAPER_L = { 50: 0.24, 100: 0.29, 200: 0.34, 300: 0.39, 400: 0.43, 500: 0.5, 600: 0.66, 700: 0.78, 800: 0.875, 900: 0.93, 950: 0.962 };
 const MIRROR = { 50: 950, 100: 900, 200: 800, 300: 700, 400: 600, 500: 500, 600: 400, 700: 300, 800: 200, 900: 100, 950: 50 };
 const paperOf = (ladder, s) => {
   const src = ladder[MIRROR[s]];

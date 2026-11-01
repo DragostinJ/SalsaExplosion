@@ -195,7 +195,7 @@ export default function Home() {
         </section>
 
         {/* SONG ANATOMY: the practice player, on ink */}
-        <section className="theme-ink bg-ink px-4 py-14 text-paper md:px-10 md:py-20">
+        <section className="cv-auto theme-ink bg-ink px-4 py-14 text-paper md:px-10 md:py-20">
           <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-12">
             <div className="min-w-0 md:col-span-5">
               <p className={`${KICKER} text-poster-mustard`}>Practica en casa</p>
@@ -246,7 +246,7 @@ export default function Home() {
 
         {/* EVENTS: ticket stubs */}
         {events.length > 0 && (
-          <section className="bg-poster-red px-4 py-14 text-ink md:px-10 md:py-20">
+          <section className="cv-auto bg-poster-red px-4 py-14 text-ink md:px-10 md:py-20">
             <div className="mx-auto max-w-7xl">
               <p className={KICKER}>Festivals &amp; parties · book online</p>
               <h2 className={`mt-3 ${TYPE.section}`}>Próximas funciones</h2>
@@ -281,7 +281,7 @@ export default function Home() {
         )}
 
         {/* EL MAESTRO (real photo) */}
-        <section className="px-4 py-14 md:px-10 md:py-20">
+        <section className="cv-auto px-4 py-14 md:px-10 md:py-20">
           <div className="mx-auto grid max-w-7xl items-center gap-8 md:grid-cols-12">
             <div className="relative mx-auto w-64 md:col-span-4 md:w-full">
               <div className="absolute -left-4 -top-4 h-full w-full" style={halftone(POSTER_INK.red)} aria-hidden="true" />
@@ -319,8 +319,8 @@ export default function Home() {
         {/* The teaching team */}
         <InstructorRosterSection id="instructors" />
 
-        {/* THE VENUE (real photo) */}
-        <section className="grid border-y-4 border-ink md:grid-cols-2">
+        {/* THE VENUE (real photo); the full arrival guide lives on /venues */}
+        <section data-testid="home-venue" className="cv-auto grid border-y-4 border-ink md:grid-cols-2">
           <figure className="relative aspect-[4/3] border-b-4 border-ink md:border-b-0 md:border-r-4">
             <Image
               src={REAL_PHOTOS.venueSocial.src}
@@ -349,7 +349,7 @@ export default function Home() {
         </section>
 
         {/* MOVE LIBRARY TEASER: six mini posters */}
-        <section className="px-4 py-14 md:px-10 md:py-20">
+        <section className="cv-auto px-4 py-14 md:px-10 md:py-20">
           <div className="mx-auto max-w-7xl">
             <p className={KICKER}>Próximamente · coming soon</p>
             <h2 className={`mt-3 ${TYPE.section}`}>La biblioteca de pasos</h2>

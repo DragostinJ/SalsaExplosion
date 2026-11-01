@@ -62,9 +62,9 @@ describe("V1: ICAIC Poster design tokens (paper default + ink scope)", () => {
     "--color-ivory-muted": "#4E453B",
     "--color-gold": "#22418F",
     "--color-brand": "#EA4A33",
-    "--color-success": "#0B6F6B",
-    "--color-warning": "#8A5200",
-    "--color-danger": "#B8301C",
+    "--color-success": "#055A56",
+    "--color-warning": "#704100",
+    "--color-danger": "#9A2615",
     "--color-info": "#22418F",
   };
   const inkTokens: Record<string, string> = {
@@ -75,7 +75,7 @@ describe("V1: ICAIC Poster design tokens (paper default + ink scope)", () => {
     "--color-brand": "#C4321C",
     "--color-white": "#FAF4E6",
   };
-  const posterInks = ["#F1E6D0", "#161311", "#E4412B", "#F4B41A", "#12938F", "#22418F"];
+  const posterInks = ["#F1E6D0", "#161311", "#E8462F", "#F4B41A", "#12938F", "#22418F"];
 
   it("declares the paper tokens in @theme and the ink tokens in .theme-ink", () => {
     for (const [token, hex] of Object.entries(paperTokens)) {

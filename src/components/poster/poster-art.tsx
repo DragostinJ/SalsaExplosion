@@ -120,7 +120,7 @@ export function SongStripes({
           }}
         >
           <span className="min-w-0 truncate">{segment.sectionName}</span>
-          <span className="shrink-0 tabular-nums opacity-80">{segment.formattedRange.split(" - ")[0]}</span>
+          <span className="shrink-0 tabular-nums">{segment.formattedRange.split(" - ")[0]}</span>
         </li>
       ))}
     </ol>

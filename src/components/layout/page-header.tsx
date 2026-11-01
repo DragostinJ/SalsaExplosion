@@ -62,7 +62,7 @@ export function PageHeader({
               {effectiveHighlight && (
                 <>
                   {" "}
-                  <span className="text-poster-red">{effectiveHighlight}</span>
+                  <span className="text-accent-red">{effectiveHighlight}</span>
                 </>
               )}
             </h1>
@@ -116,7 +116,7 @@ export function PageHeader({
             {effectiveHighlight && (
               <>
                 {" "}
-                <span className="text-poster-red">{effectiveHighlight}</span>
+                <span className="text-accent-red">{effectiveHighlight}</span>
               </>
             )}
           </h1>

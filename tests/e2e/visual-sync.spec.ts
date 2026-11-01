@@ -55,7 +55,8 @@ test.describe("V5: Visual Design Synchronization & Drift Prevention", () => {
   test("verifies consistent H1 font sizes across all inner pages with PageHeader at desktop (1280px) and mobile (390px)", async ({
     page,
   }) => {
-    const innerRoutes = routes.filter((r) => r.path !== "/");
+    // Home and the song list open with their own ICAIC poster hero instead of a PageHeader
+    const innerRoutes = routes.filter((r) => r.path !== "/" && r.path !== "/music");
 
     // Test Desktop
     await page.setViewportSize({ width: 1280, height: 800 });

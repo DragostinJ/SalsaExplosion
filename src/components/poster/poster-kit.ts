@@ -31,8 +31,14 @@ export const GEAR_INKS: GearPalette = {
   "Despelote / Reparto": "var(--color-ivory)",
 };
 
-/** Gears whose ink is light enough to need ink-coloured text on top */
-export const DARK_TEXT_GEARS: ReadonlySet<string> = new Set(["Wait / Breathe", "Casino (Flow)", "Suelta / Shines"]);
+/** Gears whose ink needs ink-coloured text on top (paper text only reads on blue and plum) */
+export const DARK_TEXT_GEARS: ReadonlySet<string> = new Set([
+  "Wait / Breathe",
+  "Casino (Smooth)",
+  "Casino (Flow)",
+  "Rumba Guaguancó",
+  "Suelta / Shines",
+]);
 
 export const gearTextInk = (gear: string) =>
   gear === "Despelote / Reparto" ? "var(--color-canvas)" : DARK_TEXT_GEARS.has(gear) ? POSTER_INK.ink : POSTER_INK.paper;

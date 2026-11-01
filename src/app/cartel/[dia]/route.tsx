@@ -13,7 +13,7 @@ import {
 // Poster inks (globals.css)
 const PAPER = "#F1E6D0";
 const INK = "#161311";
-const RED = "#E4412B";
+const RED = "#E8462F";
 const MUSTARD = "#F4B41A";
 const BLUE = "#22418F";
 

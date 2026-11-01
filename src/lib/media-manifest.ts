@@ -122,7 +122,7 @@ export const MEDIA_MANIFEST = {
       width: 1000,
       height: 625,
       aspectRatio: "16/10",
-      sizes: "(max-width: 640px) 400px, (max-width: 1024px) 50vw, 25vw",
+      sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
     festivals: {
       src: "/images/photos/festivals-gateway.jpg",
@@ -130,7 +130,7 @@ export const MEDIA_MANIFEST = {
       width: 1000,
       height: 625,
       aspectRatio: "16/10",
-      sizes: "(max-width: 640px) 400px, (max-width: 1024px) 50vw, 25vw",
+      sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
     rueda: {
       src: "/images/photos/rueda-circle.jpg",
@@ -138,7 +138,7 @@ export const MEDIA_MANIFEST = {
       width: 1000,
       height: 625,
       aspectRatio: "16/10",
-      sizes: "(max-width: 640px) 400px, (max-width: 1024px) 50vw, 25vw",
+      sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
     timba: {
       src: "/images/photos/timba-connection.jpg",
@@ -146,7 +146,7 @@ export const MEDIA_MANIFEST = {
       width: 1000,
       height: 625,
       aspectRatio: "16/10",
-      sizes: "(max-width: 640px) 400px, (max-width: 1024px) 50vw, 25vw",
+      sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
   },
 

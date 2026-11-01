@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CalendarDays, Sparkles, Compass, Music, Menu } from "lucide-react";
+import { CalendarDays, Sparkles, Ticket, Music, Menu } from "lucide-react";
+import { DOORS, isDoorActive } from "@/components/navigation/doors";
 
 interface MobileBottomNavProps {
   onOpenMenu?: () => void;
@@ -22,36 +23,16 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
     }
   }
 
-  const navItems = [
-    {
-      label: "Thu & Sun",
-      href: "/dashboard/schedule",
-      icon: CalendarDays,
-      isActive: pathname.startsWith("/dashboard/schedule") || pathname.startsWith("/schedule"),
-      isSpecial: false,
-    },
-    {
-      label: "Festivals",
-      href: "/events",
-      icon: Sparkles,
-      isActive: pathname.startsWith("/events"),
-      isSpecial: true,
-    },
-    {
-      label: "Rueda",
-      href: "/dashboard/rueda",
-      icon: Compass,
-      isActive: pathname.startsWith("/dashboard/rueda"),
-      isSpecial: false,
-    },
-    {
-      label: "Song Trainer",
-      href: "/music",
-      icon: Music,
-      isActive: pathname.startsWith("/music"),
-      isSpecial: false,
-    },
-  ];
+  // The three doors (Clases · Canciones · Fiestas) and your own carnet
+  const icons = { clases: CalendarDays, canciones: Music, fiestas: Sparkles, carnet: Ticket } as const;
+  const navItems = DOORS.map((door) => ({
+    label: door.label,
+    english: door.english,
+    href: door.href,
+    icon: icons[door.id],
+    isActive: isDoorActive(door, pathname),
+    isSpecial: door.id === "fiestas",
+  }));
 
   return (
     <nav
@@ -72,6 +53,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
             >
               <Icon className="h-4 w-4 mb-0.5" />
               <span className="leading-tight tracking-tight whitespace-nowrap">{item.label}</span>
+              <span className="sr-only"> ({item.english})</span>
             </Link>
           );
         }
@@ -95,6 +77,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
               }`}
             />
             <span className="leading-tight tracking-tight whitespace-nowrap">{item.label}</span>
+            <span className="sr-only"> ({item.english})</span>
           </Link>
         );
       })}

@@ -6,8 +6,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
 import {
   CalendarDays,
-  Award,
   Sparkles,
+  Ticket,
   BarChart3,
   ClipboardCheck,
   Flame,
@@ -26,6 +26,7 @@ import dynamic from "next/dynamic";
 import type { Role } from "@prisma/client";
 import { switchMyAccountRoleAction, getCurrentUserRoleAction } from "@/actions/management.actions";
 import { InteractiveTutorialModal } from "@/components/onboarding/interactive-tutorial-modal";
+import { DOORS, isDoorActive } from "@/components/navigation/doors";
 
 const AdminNotificationBell = dynamic(
   () =>
@@ -156,75 +157,27 @@ export function SiteHeader({
     });
   };
 
-  // Define base public links accessible to all visitors (matching theplace.org.uk architecture)
-  const publicLinks = [
-    {
-      href: "/dashboard/schedule",
-      label: "Thu & Sun Classes",
-      icon: CalendarDays,
-      active: pathname === "/dashboard/schedule" || pathname === "/schedule",
-    },
-    {
-      href: "/events",
-      label: "Festivals & Tickets",
-      icon: Sparkles,
-      active: pathname.startsWith("/events"),
-    },
-    {
-      href: "/dashboard/rueda",
-      label: "Rueda Dictionary",
-      icon: Compass,
-      active: pathname.startsWith("/dashboard/rueda"),
-    },
-    {
-      href: "/music",
-      label: "Song Trainer",
-      icon: Music,
-      active: pathname.startsWith("/music"),
-    },
-    {
-      href: "/about",
-      label: "About & Venue",
-      icon: Compass,
-      active: pathname.startsWith("/about"),
-    },
-  ];
-
-  // Additional member-only links injected only when authenticated
-  const memberOnlyLinks = [
-    {
-      href: "/dashboard/progression",
-      label: "Progression",
-      icon: Award,
-      active: pathname.startsWith("/dashboard/progression"),
-    },
-    {
-      href: "/dashboard/wallet",
-      label: "Wallet",
-      icon: QrCode,
-      active: pathname.startsWith("/dashboard/wallet"),
-    },
-    {
-      href: "/dashboard/recaps",
-      label: "Recaps",
-      icon: Video,
-      active: pathname.startsWith("/dashboard/recaps"),
-    },
-  ];
-
-  // In authenticated mode, insert member tools (Progression, Recaps, Wallet)
-  const studentLinks = isAuthReady
-    ? [
-        publicLinks[0], // Thu & Sun Classes
-        publicLinks[1], // Festivals & Tickets
-        publicLinks[2], // Rueda Dictionary
-        publicLinks[3], // Song Trainer
-        memberOnlyLinks[0], // Progression
-        memberOnlyLinks[2], // Recaps
-        memberOnlyLinks[1], // Wallet
-        publicLinks[4], // About & Venue
-      ]
-    : publicLinks;
+  // The three doors (Clases · Canciones · Fiestas) plus your carnet when signed in
+  const doorIcons = { clases: CalendarDays, canciones: Music, fiestas: Sparkles, carnet: Ticket } as const;
+  const doorLinks = DOORS.filter((door) => isAuthReady || door.id !== "carnet").map((door) => ({
+    href: door.href,
+    label: door.label,
+    icon: doorIcons[door.id],
+    active: isDoorActive(door, pathname),
+  }));
+  const aboutLink = {
+    href: "/about",
+    label: "Nosotros",
+    icon: Compass,
+    active: pathname.startsWith("/about"),
+  };
+  const recapsLink = {
+    href: "/dashboard/recaps",
+    label: "Recaps",
+    icon: Video,
+    active: pathname.startsWith("/dashboard/recaps"),
+  };
+  const studentLinks = isAuthReady ? [...doorLinks, recapsLink, aboutLink] : [...doorLinks, aboutLink];
 
   const instructorLinks = [
     {
@@ -327,7 +280,7 @@ export function SiteHeader({
                   }`}
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
-                  <span>Schedule</span>
+                  <span>Clases</span>
                 </Link>
                 <Link
                   href="/music"
@@ -338,7 +291,7 @@ export function SiteHeader({
                   }`}
                 >
                   <Music className="h-3.5 w-3.5" />
-                  <span>Song Trainer</span>
+                  <span>Canciones</span>
                 </Link>
 
                 <div className="h-4 w-px bg-line mx-0.5 shrink-0" />
@@ -378,7 +331,7 @@ export function SiteHeader({
                   }`}
                 >
                   <CalendarDays className="h-3.5 w-3.5" />
-                  <span>Schedule</span>
+                  <span>Clases</span>
                 </Link>
                 <Link
                   href="/music"
@@ -389,7 +342,7 @@ export function SiteHeader({
                   }`}
                 >
                   <Music className="h-3.5 w-3.5" />
-                  <span>Song Trainer</span>
+                  <span>Canciones</span>
                 </Link>
                 <Link
                   href="/events"
@@ -400,7 +353,7 @@ export function SiteHeader({
                   }`}
                 >
                   <Sparkles className="h-3.5 w-3.5" />
-                  <span>Events</span>
+                  <span>Fiestas</span>
                 </Link>
 
                 <div className="h-4 w-px bg-line mx-1" />

@@ -136,7 +136,7 @@ export default function TermsAndLegalPage() {
                   Weekly Class Reservations
                 </h3>
                 <p className="text-xs">
-                  Weekly classes (Thursday or Sunday at BOH Studios) are paid at the door, so nothing is charged online. If you have reserved a spot and can't come, please cancel your reservation in the app so the Lead/Follow balance stays fair for everyone. If Salsa Explosion cancels a class, reservations are released automatically.
+                  Weekly classes (Thursday or Sunday at BOH Studios) are paid at the door, so nothing is charged online. If you have reserved a spot and can&apos;t come, please cancel your reservation in the app so the Lead/Follow balance stays fair for everyone. If Salsa Explosion cancels a class, reservations are released automatically.
                 </p>
               </div>
 

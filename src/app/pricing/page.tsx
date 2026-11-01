@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 import { ShieldCheck, DoorOpen, Ticket, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
+import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { VENUE_INFO, DOOR_PRICING } from "@/lib/academy-data";
 import { Button } from "@/components/ui/button";
@@ -106,6 +107,11 @@ export default function PricingPage() {
         >
           Read Refund Policy →
         </Link>
+      </div>
+
+      {/* Online passes (festivals and special events) are paid through Stripe */}
+      <div className="max-w-3xl">
+        <PaymentSecurityTrustBar />
       </div>
 
       <div className="mt-12">

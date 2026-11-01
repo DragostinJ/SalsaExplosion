@@ -13,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/pricing",
     "/venues",
     "/music",
+    "/dashboard/rueda",
+    "/dashboard/rueda/tarjetas",
     ...TIMBA_SONG_ANATOMY_DATA.map((song) => `/music/${song.id}`),
     "/shop",
     "/about",

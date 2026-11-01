@@ -20,6 +20,7 @@ import {
   Menu,
   ClipboardList,
   Music,
+  Image as ImageIcon,
 } from "lucide-react";
 
 import dynamic from "next/dynamic";
@@ -241,6 +242,13 @@ export function SiteHeader({
       fullLabel: "Events",
       icon: ShieldCheck,
       active: pathname.startsWith("/admin/events"),
+    },
+    {
+      href: "/cartel",
+      shortLabel: "Posters",
+      fullLabel: "Posters",
+      icon: ImageIcon,
+      active: pathname.startsWith("/cartel"),
     },
   ];
 

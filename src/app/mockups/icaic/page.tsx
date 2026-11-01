@@ -169,6 +169,19 @@ export default function IcaicMockupPage() {
             >
               Open the player →
             </Link>
+            <figure className="mt-10 max-w-sm border-4" style={{ borderColor: INK.paper }}>
+              <Image
+                src={PHOTOS.countingHands.src}
+                alt={PHOTOS.countingHands.alt}
+                width={PHOTOS.countingHands.width}
+                height={PHOTOS.countingHands.height}
+                sizes="(max-width: 768px) 100vw, 24rem"
+                className="w-full object-cover"
+              />
+              <figcaption className={`px-3 py-2 uppercase ${H3}`} style={{ ...display, backgroundColor: INK.paper, color: INK.red }}>
+                Cinco, seis, siete, ocho
+              </figcaption>
+            </figure>
           </div>
           <div className="min-w-0 md:col-span-7">
             <SongStripes
@@ -253,6 +266,14 @@ export default function IcaicMockupPage() {
             {DOOR_PRICING.summaryBadge}. {DOOR_PRICING.paymentMethodNote}.
           </p>
         </div>
+        <figure className="mt-10 border-4" style={{ borderColor: INK.ink }}>
+          <div className="relative aspect-[16/9] md:aspect-[21/9]">
+            <Image src={PHOTOS.socialNight.src} alt={PHOTOS.socialNight.alt} fill sizes="100vw" className="object-cover" />
+          </div>
+          <figcaption className={`border-t-4 px-4 py-2 uppercase ${H3}`} style={{ ...display, borderColor: INK.ink, backgroundColor: INK.red, color: INK.paper }}>
+            Y después: la fiesta
+          </figcaption>
+        </figure>
       </section>
 
       {/* REAL PHOTOS: venue + maestro */}

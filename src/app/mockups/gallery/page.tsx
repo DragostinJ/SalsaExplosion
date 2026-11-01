@@ -106,13 +106,30 @@ export default function GalleryMockupPage() {
 
       {/* SCORES: songs as thin section maps */}
       <section className="border-y px-4 py-16 md:px-12 md:py-24" style={{ borderColor: WALL.line }}>
-        <h2 className={H2} style={serif}>
-          Every song, <em style={{ color: WALL.amber }}>scored</em>
-        </h2>
-        <p className="mt-4 max-w-xl text-sm" style={{ color: WALL.ash }}>
-          {SONG_COUNT} songs mapped section by section. In the player each bar lights up as the music reaches it: what to
-          dance now, what comes next.
-        </p>
+        <div className="grid gap-10 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-7">
+            <h2 className={H2} style={serif}>
+              Every song, <em style={{ color: WALL.amber }}>scored</em>
+            </h2>
+            <p className="mt-4 max-w-xl text-sm" style={{ color: WALL.ash }}>
+              {SONG_COUNT} songs mapped section by section. In the player each bar lights up as the music reaches it: what
+              to dance now, what comes next.
+            </p>
+          </div>
+          <div className="md:col-span-5">
+            <div className="border p-2" style={{ borderColor: WALL.line, backgroundColor: WALL.frame }}>
+              <Image
+                src={PHOTOS.countingHands.src}
+                alt={PHOTOS.countingHands.alt}
+                width={PHOTOS.countingHands.width}
+                height={PHOTOS.countingHands.height}
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="w-full object-cover"
+              />
+            </div>
+            <WallLabel number={EXHIBITS.length + 2} title="Cinco, seis, siete, ocho" medium="Counting in, before the music" note="Editorial image" />
+          </div>
+        </div>
         <ul className="mt-12 space-y-10">
           {SCORE_SONGS.map((song) => (
             <li key={song.id}>
@@ -195,7 +212,7 @@ export default function GalleryMockupPage() {
               className="w-full object-cover"
             />
           </div>
-          <WallLabel number={EXHIBITS.length + 2} title={VENUE_INFO.shortName} medium={VENUE_INFO.fullAddress} note="Real photograph" />
+          <WallLabel number={EXHIBITS.length + 3} title={VENUE_INFO.shortName} medium={VENUE_INFO.fullAddress} note="Real photograph" />
           <a href={VENUE_INFO.googleMapsUrl} className={`${textLink} mt-4`} style={{ borderColor: WALL.crimson }}>
             Directions →
           </a>
@@ -215,7 +232,7 @@ export default function GalleryMockupPage() {
               className="w-full object-cover"
             />
           </div>
-          <WallLabel number={EXHIBITS.length + 3} title={FACTS.founderShort} medium={`Born in ${FACTS.origin}`} note="Real photograph" />
+          <WallLabel number={EXHIBITS.length + 4} title={FACTS.founderShort} medium={`Born in ${FACTS.origin}`} note="Real photograph" />
         </div>
         <div className="md:col-span-8">
           <h2 className={H2} style={serif}>
@@ -243,26 +260,43 @@ export default function GalleryMockupPage() {
       {/* UPCOMING EXHIBITIONS = events */}
       {NEXT_EVENTS.length > 0 && (
         <section className="border-t px-4 py-16 md:px-12 md:py-24" style={{ borderColor: WALL.line }}>
-          <h2 className={H2} style={serif}>
-            Upcoming
-          </h2>
-          <ul className="mt-10 divide-y border-y" style={{ borderColor: WALL.line }}>
-            {NEXT_EVENTS.map((event) => (
-              <li key={event.slug} style={{ borderColor: WALL.line }}>
-                <Link href={`/events/${event.slug}`} className="group grid gap-2 py-6 md:grid-cols-[14rem_1fr_auto] md:items-baseline md:gap-8">
-                  <span className="text-xs uppercase tracking-widest" style={{ color: WALL.amber }}>
-                    {event.dateBadge}
-                  </span>
-                  <span className={`${H3} group-hover:italic`} style={serif}>
-                    {event.title}
-                  </span>
-                  <span className="text-sm" style={{ color: WALL.ash }}>
-                    {event.priceDisplay} →
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="grid gap-10 md:grid-cols-12 md:items-start">
+            <div className="md:col-span-8">
+              <h2 className={H2} style={serif}>
+                Upcoming
+              </h2>
+              <ul className="mt-10 divide-y border-y" style={{ borderColor: WALL.line }}>
+                {NEXT_EVENTS.map((event) => (
+                  <li key={event.slug} style={{ borderColor: WALL.line }}>
+                    <Link href={`/events/${event.slug}`} className="group grid gap-2 py-6 md:grid-cols-[14rem_1fr_auto] md:items-baseline md:gap-8">
+                      <span className="text-xs uppercase tracking-widest" style={{ color: WALL.amber }}>
+                        {event.dateBadge}
+                      </span>
+                      <span className={`${H3} group-hover:italic`} style={serif}>
+                        {event.title}
+                      </span>
+                      <span className="text-sm" style={{ color: WALL.ash }}>
+                        {event.priceDisplay} →
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="md:col-span-4">
+              <div className="border p-2" style={{ borderColor: WALL.line, backgroundColor: WALL.frame }}>
+                <Image
+                  src={PHOTOS.brassSection.src}
+                  alt={PHOTOS.brassSection.alt}
+                  width={PHOTOS.brassSection.width}
+                  height={PHOTOS.brassSection.height}
+                  sizes="(max-width: 768px) 100vw, 30vw"
+                  className="w-full object-cover"
+                />
+              </div>
+              <WallLabel number={EXHIBITS.length + 5} title="La orquesta" medium="Live timba, the brass section" note="Editorial image" />
+            </div>
+          </div>
         </section>
       )}
 

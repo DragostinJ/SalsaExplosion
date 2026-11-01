@@ -229,6 +229,20 @@ export default function MediopuntoMockupPage() {
               </article>
             ))}
           </div>
+          <figure className="mt-10">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-t-[3rem] md:aspect-[21/9]">
+              <Image
+                src={PHOTOS.socialNight.src}
+                alt={PHOTOS.socialNight.alt}
+                fill
+                sizes="(max-width: 1152px) 100vw, 72rem"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="mt-3 text-center text-sm italic" style={serif}>
+              After the classes, the social.
+            </figcaption>
+          </figure>
           <p className="mt-10 text-center">
             <span className={`italic ${H2}`} style={{ ...serif, color: GLASS.ruby }}>
               £{DOOR_PRICING.oneClassPounds} · £{DOOR_PRICING.twoClassesPounds}

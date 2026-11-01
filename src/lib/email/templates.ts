@@ -16,12 +16,12 @@ export function escapeHtml(value: string): string {
 }
 
 const wrap = (body: string, footer: string) =>
-  `<!doctype html><html><body style="margin:0;background:#080706;color:#F5F2EB;font-family:Arial,Helvetica,sans-serif">` +
+  `<!doctype html><html><body style="margin:0;background:#F1E6D0;color:#161311;font-family:Arial,Helvetica,sans-serif">` +
   `<div style="max-width:560px;margin:0 auto;padding:24px 16px">${body}` +
-  `<p style="margin-top:32px;font-size:12px;color:#a8a29e">${footer}</p></div></body></html>`;
+  `<p style="margin-top:32px;font-size:12px;color:#59534c">${footer}</p></div></body></html>`;
 
 const link = (href: string, label: string) =>
-  `<a href="${escapeHtml(href)}" style="color:#F59E0B;font-weight:bold">${escapeHtml(label)}</a>`;
+  `<a href="${escapeHtml(href)}" style="color:#E4412B;font-weight:bold">${escapeHtml(label)}</a>`;
 
 export interface ClassReminderInput {
   firstName: string;
@@ -45,9 +45,9 @@ export function classReminderEmail(input: ClassReminderInput) {
     `<p style="font-size:16px">Hi ${escapeHtml(input.firstName)},</p>` +
       `<p style="font-size:16px">You're booked for <strong>${escapeHtml(input.classTitle)}</strong> ` +
       `${escapeHtml(day)} at <strong>${escapeHtml(time)}</strong>, ${escapeHtml(input.room)}, with ${escapeHtml(input.instructorName)}.</p>` +
-      `<p style="font-size:14px;color:#d6d3d1">Pay at the door as usual (cash or card).</p>` +
+      `<p style="font-size:14px;color:#59534c">Pay at the door as usual (cash or card).</p>` +
       (songLines.length
-        ? `<p style="font-size:14px;margin-top:20px"><strong style="color:#F59E0B">Songs for this class</strong> (open one to see what to dance in every section):</p><ul>` +
+        ? `<p style="font-size:14px;margin-top:20px"><strong style="color:#E4412B">Songs for this class</strong> (open one to see what to dance in every section):</p><ul>` +
           songLines.map((song) => `<li style="margin:6px 0">${link(song.href, song.label)}</li>`).join("") +
           `</ul>`
         : "") +
@@ -123,14 +123,14 @@ export function ownerDigestEmail(input: OwnerDigestInput) {
 
   const html = wrap(
     `<h1 style="font-size:20px;margin:0 0 4px">Your week at Salsa Explosion</h1>` +
-      `<p style="font-size:13px;color:#a8a29e;margin:0 0 16px">${escapeHtml(input.periodLabel)} · change vs the week before</p>` +
+      `<p style="font-size:13px;color:#59534c;margin:0 0 16px">${escapeHtml(input.periodLabel)} · change vs the week before</p>` +
       `<table style="width:100%;border-collapse:collapse;font-size:14px">` +
       rows
         .map(
           ([label, value, change]) =>
-            `<tr><td style="padding:8px 0;border-bottom:1px solid #292524">${escapeHtml(label)}</td>` +
-            `<td style="padding:8px 0;border-bottom:1px solid #292524;text-align:right;font-weight:bold">${escapeHtml(value)}</td>` +
-            `<td style="padding:8px 0 8px 12px;border-bottom:1px solid #292524;text-align:right;color:#F59E0B">${escapeHtml(change)}</td></tr>`
+            `<tr><td style="padding:8px 0;border-bottom:1px solid #d4c8b2">${escapeHtml(label)}</td>` +
+            `<td style="padding:8px 0;border-bottom:1px solid #d4c8b2;text-align:right;font-weight:bold">${escapeHtml(value)}</td>` +
+            `<td style="padding:8px 0 8px 12px;border-bottom:1px solid #d4c8b2;text-align:right;color:#E4412B">${escapeHtml(change)}</td></tr>`
         )
         .join("") +
       `</table>` +

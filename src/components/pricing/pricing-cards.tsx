@@ -21,17 +21,8 @@ import {
   PRICING_CATALOG,
   PricingPackage,
 } from "@/lib/constants/pricing";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
+import { TYPE, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 interface PricingCardsProps {
   hasActiveSubscription: boolean;
@@ -97,43 +88,43 @@ export function PricingCards({
   return (
     <div className="space-y-6">
       {/* Wallet Summary Banner */}
-      <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border bg-muted/30 px-5 py-4">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-4 border-ink bg-paper p-4 sm:p-5 text-ink shadow-[6px_6px_0_0_#161311]">
         <div className="flex items-center gap-3 text-sm">
-          <CreditCard className="h-5 w-5 text-primary" />
-          <span>
+          <CreditCard className="h-5 w-5 text-poster-red" />
+          <span className="font-semibold">
             Current Balance:{" "}
-            <strong className="font-semibold">{currentCredits} Credits</strong>
+            <strong className="font-extrabold text-ink">{currentCredits} Credits</strong>
           </span>
           {hasActiveSubscription && (
-            <Badge className="bg-emerald-700 text-white">
-              Unlimited Membership Active
-            </Badge>
+            <span className="border border-ink bg-poster-teal text-ink font-bold uppercase text-xs px-2 py-0.5">
+              Unlimited Pass Active
+            </span>
           )}
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <Button variant="outline" size="sm" asChild className="text-xs font-semibold">
-            <Link href="/dashboard/schedule">
-              <CalendarDays className="mr-1.5 h-3.5 w-3.5 text-amber-400" />
-              Go to Class Schedule
-            </Link>
-          </Button>
+          <Link
+            href="/dashboard/schedule"
+            className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs min-h-[40px] px-3 flex items-center gap-1.5`}
+          >
+            <CalendarDays className="h-3.5 w-3.5 text-poster-mustard" />
+            Go to Class Schedule
+          </Link>
 
           {hasActiveSubscription && (
-            <Button
+            <button
               type="button"
-              variant="outline"
-              size="sm"
               disabled={isPending}
               onClick={handleOpenBillingPortal}
+              className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper text-xs min-h-[40px] px-3 flex items-center gap-1.5`}
             >
               {isPending && activePackageId === "PORTAL" ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : (
                 <Settings className="mr-2 h-4 w-4" />
               )}
-              Manage Subscription in Stripe
-            </Button>
+              Manage in Stripe
+            </button>
           )}
         </div>
       </div>
@@ -142,7 +133,7 @@ export function PricingCards({
       {errorMessage && (
         <div
           role="alert"
-          className="flex items-center gap-2 rounded-lg border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm font-medium text-destructive"
+          className="flex items-center gap-2 border-2 border-poster-red bg-poster-red/10 p-4 text-xs font-bold text-poster-red shadow-[4px_4px_0_0_#161311]"
         >
           <AlertCircle className="h-4 w-4 shrink-0" />
           <span>{errorMessage}</span>
@@ -157,132 +148,92 @@ export function PricingCards({
           const isCurrentLoading = isPending && activePackageId === pkg.id;
 
           return (
-            <Card
+            <div
               key={pkg.id}
-              className={`flex flex-col justify-between transition-all ${
-                isParchment
-                  ? "bg-surface-3 text-ivory border-2 border-amber-500/40 shadow-xl ring-1 ring-amber-500/30"
-                  : pkg.popular
-                  ? "border-primary shadow-md ring-1 ring-primary bg-surface-2"
-                  : "bg-surface-2 border-white/10"
-              } ${
-                isSubCard
-                  ? "border-emerald-500/40 bg-emerald-950/20"
+              className={`flex flex-col justify-between border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_#161311] ${
+                pkg.popular
+                  ? "ring-2 ring-poster-red"
                   : ""
               }`}
             >
-              <CardHeader className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Badge
-                    variant={isSubCard ? "default" : "secondary"}
-                    className={
+              <div className="p-5 space-y-3">
+                <div className="flex items-center justify-between gap-1 border-b-2 border-ink pb-2.5">
+                  <span
+                    className={`border border-ink font-bold text-xs uppercase tracking-wider px-2 py-0.5 ${
                       isParchment
-                        ? "bg-amber-500 text-stone-950 font-black"
+                        ? "bg-poster-mustard text-ink"
                         : isSubCard
-                        ? "bg-emerald-800 hover:bg-emerald-800 text-white"
-                        : ""
-                    }
+                        ? "bg-poster-teal text-ink"
+                        : pkg.id === "PACK_10"
+                        ? "bg-poster-blue text-paper"
+                        : "bg-paper text-ink"
+                    }`}
                   >
                     {isParchment
-                      ? "Havana Rhythm Pack"
+                      ? "Havana Pack"
                       : isSubCard
-                      ? "Monthly Membership"
+                      ? "Monthly Pass"
                       : pkg.id === "PACK_10"
-                      ? "Best Value Casinero"
-                      : "Class Pack"}
-                  </Badge>
+                      ? "Best Value"
+                      : "Door Single"}
+                  </span>
                   {(pkg.popular || isParchment) && (
-                    <Badge
-                      className={
-                        isParchment
-                          ? "bg-amber-400 text-stone-950 font-black text-[11px]"
-                          : "bg-primary-base text-white font-bold text-[11px]"
-                      }
-                    >
-                      <Sparkles className="mr-1 h-3 w-3" />
-                      {isParchment ? "Maestro Pick" : "Most Popular"}
-                    </Badge>
+                    <span className="border border-ink bg-poster-red text-paper font-bold uppercase text-[10px] px-2 py-0.5 flex items-center gap-1">
+                      <Sparkles className="h-3 w-3" />
+                      {isParchment ? "Maestro Pick" : "Popular"}
+                    </span>
                   )}
                 </div>
 
-                <CardTitle
-                  className={`pt-2 text-xl ${
-                    isParchment ? "text-white font-black" : ""
-                  }`}
-                >
+                <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink pt-1">
                   {pkg.name}
-                </CardTitle>
-                <div
-                  className={`text-3xl font-extrabold tracking-tight ${
-                    isParchment ? "text-amber-300" : ""
-                  }`}
-                >
+                </h3>
+                <div className={`font-display font-black ${TYPE.number} text-ink`}>
                   {pkg.priceDisplay}
                 </div>
-                <CardDescription
-                  className={`text-xs leading-relaxed ${
-                    isParchment ? "text-ivory-muted font-medium" : ""
-                  }`}
-                >
+                <p className="text-xs text-ink/75 font-medium leading-relaxed min-h-[36px]">
                   {pkg.description}
-                </CardDescription>
-              </CardHeader>
+                </p>
 
-              <CardContent className="pt-2">
-                <ul className="space-y-2.5 text-xs">
-                  {pkg.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2">
-                      <Check
-                        className={`mt-0.5 h-4 w-4 shrink-0 ${
-                          isParchment ? "text-amber-400" : "text-emerald-500"
-                        }`}
-                      />
-                      <span className={isParchment ? "text-stone-200 font-semibold" : ""}>
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
+                <div className="border-t-2 border-ink pt-3">
+                  <ul className="space-y-2 text-xs font-medium">
+                    {pkg.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-poster-teal" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
 
-              <CardFooter
-                className={`border-t pt-4 ${
-                  isParchment ? "border-black/10 bg-black/[0.03]" : "bg-muted/10"
-                }`}
-              >
+              <div className="border-t-4 border-ink bg-surface-1 p-4">
                 {pkg.id === "PACK_SINGLE" ? (
-                  <Button
-                    asChild
-                    className="w-full h-10 rounded-xl font-bold bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs shadow-md"
+                  <Link
+                    href="/dashboard/schedule"
+                    className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.mustard} w-full text-center text-xs min-h-[44px] flex items-center justify-center font-bold`}
                   >
-                    <Link href="/dashboard/schedule">
-                      Pay at Door (£12/£14) • View Schedule →
-                    </Link>
-                  </Button>
+                    Pay at Door (£12/£14) • View Schedule →
+                  </Link>
                 ) : isSubCard && hasActiveSubscription ? (
-                  <Button
+                  <button
                     type="button"
-                    variant="outline"
                     disabled={isPending}
                     onClick={handleOpenBillingPortal}
-                    className="w-full h-10 rounded-xl font-bold"
+                    className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper w-full text-center text-xs min-h-[44px] flex items-center justify-center font-bold`}
                   >
                     Manage Membership
-                  </Button>
+                  </button>
                 ) : (
-                  <Button
+                  <button
                     type="button"
                     disabled={isPending}
                     onClick={() => handleCheckout(pkg.id)}
-                    className={`w-full h-10 rounded-xl font-bold shadow-xs transition-colors ${
-                      isParchment
-                        ? "bg-amber-500 hover:bg-amber-400 text-stone-950 font-black"
-                        : isSubCard
-                        ? "bg-emerald-700 hover:bg-emerald-800 text-white"
-                        : pkg.popular
-                        ? "bg-primary-base hover:bg-primary-hover text-white shadow-sm"
-                        : "border-2 border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-600 hover:text-white"
-                    }`}
+                    className={`${POSTER_BUTTON} ${
+                      pkg.popular
+                        ? "border-poster-red bg-poster-red text-paper hover:bg-ink hover:text-paper"
+                        : POSTER_BUTTON_COLORS.ink
+                    } w-full text-center text-xs min-h-[44px] flex items-center justify-center font-bold`}
                   >
                     {isCurrentLoading ? (
                       <>
@@ -296,10 +247,10 @@ export function PricingCards({
                         pkg.creditAmount === 1 ? "Credit" : "Credits"
                       }`
                     )}
-                  </Button>
+                  </button>
                 )}
-              </CardFooter>
-            </Card>
+              </div>
+            </div>
           );
         })}
       </div>

@@ -1,5 +1,5 @@
 import { Zap, HeartHandshake, Phone, MapPin, CreditCard, CheckCircle2 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 interface MultiAgeReassuranceBannerProps {
   className?: string;
@@ -16,46 +16,46 @@ export function MultiAgeReassuranceBanner({
       aria-label="Class Attendance & Booking Flexibility for All Dancers"
       className={`space-y-4 ${className}`}
     >
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Card 1: Fast-Track Arrival (Busy 35–55 Professionals who want instant clarity) */}
         {(variant === "all" || variant === "fast-track-only") && (
-          <div className="rounded-2xl border-2 border-primary-base/20 bg-card p-5 sm:p-6 shadow-xs space-y-3.5">
-            <div className="flex items-center justify-between gap-2">
-              <Badge className="bg-primary-base text-white font-extrabold text-[11px] uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
+          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[6px_6px_0_0_#161311] text-ink space-y-3.5">
+            <div className="flex items-center justify-between gap-2 border-b-2 border-ink pb-2.5">
+              <span className="border border-ink bg-ink text-paper font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-2.5 py-0.5">
                 <Zap className="h-3.5 w-3.5 fill-current" />
                 15-Second Quick Guide
-              </Badge>
-              <span className="text-xs font-bold text-muted-foreground">
+              </span>
+              <span className="text-xs font-bold text-ink/75 uppercase tracking-wider">
                 No Partner Required
               </span>
             </div>
 
             <div>
-              <h3 className="text-base sm:text-lg font-black tracking-tight text-foreground">
+              <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
                 Joining Us Tonight? Quick Arrival Essentials
               </h3>
-              <p className="text-xs text-muted-foreground mt-0.5 font-medium leading-relaxed">
+              <p className="text-xs text-ink/80 mt-1 font-medium leading-relaxed">
                 Book online in 15 seconds or simply pay on arrival at the studio desk.
               </p>
             </div>
 
-            <div className="grid gap-2 text-xs font-medium pt-1">
+            <div className="border-t-2 border-ink pt-2 space-y-2 text-xs font-medium">
               <div className="flex items-start gap-2">
-                <CreditCard className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span className="text-foreground">
-                  <strong className="font-extrabold">Door Pricing:</strong> £12 for 1 class • £14 for 2 classes &amp; social fiesta (Card or Cash at the Door).
+                <CreditCard className="h-4 w-4 text-poster-teal shrink-0 mt-0.5" />
+                <span>
+                  <strong className="font-bold text-ink">Door Pricing:</strong> £12 for 1 class • £14 for 2 classes &amp; social fiesta (Card or Cash at the Door).
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 text-rose-400 shrink-0 mt-0.5" />
-                <span className="text-foreground">
-                  <strong className="font-extrabold">Home Hub &amp; Parking:</strong> BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR) • Free on-street parking after 18:00 &amp; nearby Library Car Park.
+                <MapPin className="h-4 w-4 text-poster-red shrink-0 mt-0.5" />
+                <span>
+                  <strong className="font-bold text-ink">Home Hub &amp; Parking:</strong> BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR) • Free on-street parking after 18:00 &amp; nearby Library Car Park.
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
-                <span className="text-foreground">
-                  <strong className="font-extrabold">What to Wear:</strong> Casual comfortable clothes & smooth-soled shoes or trainers.
+                <CheckCircle2 className="h-4 w-4 text-poster-teal shrink-0 mt-0.5" />
+                <span>
+                  <strong className="font-bold text-ink">What to Wear:</strong> Casual comfortable clothes &amp; smooth-soled shoes or trainers.
                 </span>
               </div>
             </div>
@@ -64,35 +64,35 @@ export function MultiAgeReassuranceBanner({
 
         {/* Card 2: Senior & Non-Digital Friendly Reassurance (60+ Dancers & Casual Guests) */}
         {(variant === "all" || variant === "senior-only") && (
-          <div className="rounded-2xl border border-gold/40 bg-surface-2 p-5 sm:p-6 shadow-xs space-y-3.5">
-            <div className="flex items-center justify-between gap-2">
-              <Badge className="bg-amber-700 text-white font-extrabold text-[11px] uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
+          <div className="border-4 border-ink bg-poster-mustard p-5 sm:p-6 shadow-[6px_6px_0_0_#161311] text-ink space-y-3.5">
+            <div className="flex items-center justify-between gap-2 border-b-2 border-ink pb-2.5">
+              <span className="border border-ink bg-poster-red text-paper font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-2.5 py-0.5">
                 <HeartHandshake className="h-3.5 w-3.5" />
                 Everyone Welcome
-              </Badge>
-              <span className="text-xs font-black text-amber-300">
+              </span>
+              <span className="text-xs font-black uppercase tracking-wider text-ink">
                 Ages 18 to 80+
               </span>
             </div>
 
             <div>
-              <h3 className="text-base sm:text-lg font-black tracking-tight text-foreground">
+              <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
                 Prefer Not to Use Apps or QR Codes?
               </h3>
-              <p className="text-xs text-foreground/90 font-medium leading-relaxed mt-0.5">
+              <p className="text-xs text-ink/90 font-medium leading-relaxed mt-1">
                 You never need a smartphone or app to dance with Salsa Explosion!
               </p>
             </div>
 
-            <div className="rounded-xl border border-amber-500/30 bg-background/80 p-3 text-xs text-foreground font-medium space-y-2">
+            <div className="border-2 border-ink bg-paper p-3.5 text-xs text-ink font-medium space-y-2">
               <p className="leading-relaxed">
-                If you book online, our door staff can simply look you up by <strong className="font-extrabold text-foreground">your name</strong> on the door sheet. Or turn up and pay cash or card at the desk.
+                If you book online, our door staff can simply look you up by <strong className="font-bold text-ink">your name</strong> on the door sheet. Or turn up and pay cash or card at the desk.
               </p>
-              <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-border">
-                <span className="text-muted-foreground font-semibold">Need advice or have questions?</span>
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2 border-ink">
+                <span className="text-ink/80 font-bold">Need advice or have questions?</span>
                 <a
                   href="tel:+447969633701"
-                  className="inline-flex items-center gap-1 font-black text-amber-300 hover:underline"
+                  className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs px-2.5 py-1 min-h-[40px] flex items-center gap-1`}
                 >
                   <Phone className="h-3.5 w-3.5" />
                   Call or text Enrique: 07969 633701

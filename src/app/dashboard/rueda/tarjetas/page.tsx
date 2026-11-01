@@ -1,7 +1,7 @@
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, TYPE } from "@/components/poster/poster-kit";
 import { RuedaFlashcards } from "@/components/rueda/rueda-flashcards";
-import { RUEDA_CALLS } from "@/components/rueda/rueda-dictionary-client";
+import { RUEDA_CALLS } from "@/lib/rueda/rueda-calls-dictionary";
 
 export const metadata = {
   title: "Rueda Call Flashcards | Salsa Explosion Bournemouth",

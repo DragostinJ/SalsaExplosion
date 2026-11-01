@@ -837,3 +837,15 @@
     scrollbar-width: none;
   }
 }
+
+/* The wall poster prints on its own A3 page, edge to edge, with its poster colours */
+@page poster {
+  size: A3 portrait;
+  margin: 0;
+}
+
+.poster-sheet {
+  page: poster;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}

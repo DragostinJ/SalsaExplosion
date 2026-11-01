@@ -118,7 +118,7 @@ describe("song player helpers", () => {
     expect(formatSongTime(65.47, true)).toBe("1:05.4");
   });
 
-  it("hides site chrome only on single-song player routes and the art-direction mock-ups", () => {
+  it("hides site chrome only on single-song player routes, the mock-ups and the wall poster", () => {
     expect(isImmersiveRoute("/music/me-dicen-cuba")).toBe(true);
     expect(isImmersiveRoute("/music")).toBe(false);
     expect(isImmersiveRoute("/music/a/b")).toBe(false);
@@ -126,5 +126,7 @@ describe("song player helpers", () => {
     expect(isImmersiveRoute("/mockups")).toBe(true);
     expect(isImmersiveRoute("/mockups/icaic")).toBe(true);
     expect(isImmersiveRoute("/mockupsx")).toBe(false);
+    expect(isImmersiveRoute("/cartel/pared")).toBe(true);
+    expect(isImmersiveRoute("/cartel")).toBe(false);
   });
 });

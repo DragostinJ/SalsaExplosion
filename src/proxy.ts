@@ -35,6 +35,8 @@ const isPublicRoute = createRouteMatcher([
   "/manifest.webmanifest",
   // Social share card for the home page (event cards are covered by /events)
   "/opengraph-image(.*)",
+  // Class-night posters for Instagram and the printable wall poster (public timetable only)
+  "/cartel(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {

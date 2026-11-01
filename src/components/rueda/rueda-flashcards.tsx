@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { RotateCcw } from "lucide-react";
-import { RUEDA_CALLS, type RuedaCall } from "@/components/rueda/rueda-dictionary-client";
+import { RUEDA_CALLS, type RuedaCall } from "@/lib/rueda/rueda-calls-dictionary";
 import { POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 import { cn } from "@/lib/utils";
 

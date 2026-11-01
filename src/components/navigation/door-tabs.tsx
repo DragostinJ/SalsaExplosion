@@ -4,8 +4,9 @@ import { cn } from "@/lib/utils";
 /** The rooms behind the Canciones door: everything you practise at home. */
 const CANCIONES_TABS = [
   { href: "/music", label: "Canciones", english: "Songs" },
-  { href: "/dashboard/rueda", label: "Rueda", english: "Call dictionary" },
+  { href: "/dashboard/rueda", label: "Rueda", english: "Calls" },
   { href: "/dashboard/rueda/tarjetas", label: "Tarjetas", english: "Flashcards" },
+  { href: "/moves", label: "Pasos", english: "Moves" },
 ] as const;
 
 export type CancionesTab = (typeof CANCIONES_TABS)[number]["href"];
@@ -26,7 +27,7 @@ export function CancionesTabs({ current, className }: { current: CancionesTab; c
               active ? "bg-ink text-paper" : "bg-paper text-ink hover:bg-poster-mustard"
             )}
           >
-            <span className="font-display text-2xl leading-none">{tab.label}</span>
+            <span className="font-display text-lg leading-none sm:text-2xl">{tab.label}</span>
             <span className="text-xs font-semibold">{tab.english}</span>
           </Link>
         );

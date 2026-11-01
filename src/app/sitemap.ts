@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
+import { getPublishedMoves } from "@/lib/moves/move-library";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://salsaexplosion.co.uk";
@@ -15,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/music",
     "/dashboard/rueda",
     "/dashboard/rueda/tarjetas",
+    "/moves",
+    ...getPublishedMoves().map((move) => `/moves/${move.id}`),
     ...TIMBA_SONG_ANATOMY_DATA.map((song) => `/music/${song.id}`),
     "/shop",
     "/about",

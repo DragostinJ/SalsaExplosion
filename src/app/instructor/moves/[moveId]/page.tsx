@@ -8,6 +8,7 @@ import {
   songSectionsForMove,
 } from "@/lib/moves/move-library";
 import { MoveReviewDetailConsole } from "@/components/instructor/move-review/move-review-detail-console";
+import { MovePosterCard } from "@/components/moves/move-poster-card";
 
 export const metadata: Metadata = {
   title: "Review Move | Salsa Explosion Faculty",
@@ -46,6 +47,13 @@ export default async function MoveReviewDetailPage({ params }: MoveDetailPagePro
           sections={sections}
           currentUserName={currentUserName}
         />
+        {/* What dancers will see on /moves once this move is approved */}
+        <section aria-labelledby="dancer-preview-heading" className="mt-10 max-w-sm space-y-3">
+          <h2 id="dancer-preview-heading" className="text-xs font-bold uppercase tracking-[0.3em]">
+            Dancer preview · how the card will look
+          </h2>
+          <MovePosterCard move={move} />
+        </section>
       </div>
     </div>
   );

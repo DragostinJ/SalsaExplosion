@@ -353,6 +353,9 @@ export default function Home() {
           <div className="mx-auto max-w-7xl">
             <p className={KICKER}>Próximamente · coming soon</p>
             <h2 className={`mt-3 ${TYPE.section}`}>La biblioteca de pasos</h2>
+            <Link href="/moves" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} mt-6`}>
+              The move library
+            </Link>
             <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {MOVE_FAMILIES.map((family, index) => {
                 const block = POSTER_BLOCKS[index % POSTER_BLOCKS.length];

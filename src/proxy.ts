@@ -17,6 +17,8 @@ const isPublicRoute = createRouteMatcher([
   "/private-lessons(.*)",
   "/vouchers(.*)",
   "/music(.*)",
+  // Dancer move library (approved moves only)
+  "/moves(.*)",
   // Art-direction mock-ups (noindex comparison pages)
   "/mockups(.*)",
   "/shop(.*)",

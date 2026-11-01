@@ -42,7 +42,14 @@ const FRIEZE = [
   { art: GRAPHICS.couple, word: "La pareja" },
   { art: GRAPHICS.conga, word: "Tumbadora" },
   { art: GRAPHICS.palmMalecon, word: "Malecón" },
+  { art: GRAPHICS.guiro, word: "Güiro" },
+  { art: GRAPHICS.rueda, word: "La rueda" },
+  { art: GRAPHICS.timbales, word: "Timbales" },
+  { art: GRAPHICS.car, word: "Almendrón" },
 ] as const;
+
+/** Caption colours that read on the paper (mustard doesn't) */
+const FRIEZE_INKS = [INK.red, INK.teal, INK.ink, INK.blue];
 
 export default function IcaicMockupPage() {
   const legend = gearsIn(FEATURED_SONG);
@@ -121,7 +128,7 @@ export default function IcaicMockupPage() {
         {FRIEZE.map((item, index) => (
           <figure
             key={item.word}
-            className="flex flex-col items-center px-4 pb-4 max-md:odd:border-r-4 max-md:[&:nth-child(-n+2)]:border-b-4 md:border-r-4 md:last:border-r-0"
+            className="flex flex-col items-center px-4 pb-4 max-md:odd:border-r-4 max-md:[&:nth-last-child(n+3)]:border-b-4 md:[&:not(:nth-child(4n))]:border-r-4 md:[&:nth-child(-n+4)]:border-b-4"
             style={{ borderColor: INK.ink }}
           >
             <Image
@@ -132,7 +139,7 @@ export default function IcaicMockupPage() {
               sizes={item.art.sizes}
               className="w-full max-w-[220px]"
             />
-            <figcaption className={`uppercase ${H3}`} style={{ ...display, color: index === 2 ? INK.ink : POSTER_COLORS[index] }}>
+            <figcaption className={`uppercase ${H3}`} style={{ ...display, color: FRIEZE_INKS[index % FRIEZE_INKS.length] }}>
               {item.word}
             </figcaption>
           </figure>
@@ -171,15 +178,15 @@ export default function IcaicMockupPage() {
             </Link>
             <figure className="mt-10 max-w-sm border-4" style={{ borderColor: INK.paper }}>
               <Image
-                src={PHOTOS.countingHands.src}
-                alt={PHOTOS.countingHands.alt}
-                width={PHOTOS.countingHands.width}
-                height={PHOTOS.countingHands.height}
+                src={PHOTOS.practiceHome.src}
+                alt={PHOTOS.practiceHome.alt}
+                width={PHOTOS.practiceHome.width}
+                height={PHOTOS.practiceHome.height}
                 sizes="(max-width: 768px) 100vw, 24rem"
                 className="w-full object-cover"
               />
               <figcaption className={`px-3 py-2 uppercase ${H3}`} style={{ ...display, backgroundColor: INK.paper, color: INK.red }}>
-                Cinco, seis, siete, ocho
+                La clase sigue en casa
               </figcaption>
             </figure>
           </div>

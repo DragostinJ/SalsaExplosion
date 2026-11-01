@@ -25,6 +25,8 @@ const EXHIBITS = [
   { photo: PHOTOS.congaHands, title: "Tumbadora", medium: "Musicality · the conga", span: "md:col-span-4" },
   { photo: PHOTOS.sonCouple, title: "Son", medium: "Close hold · contratiempo", span: "md:col-span-5" },
   { photo: PHOTOS.casinoCouple, title: "Casino", medium: "Partnerwork · the turn", span: "md:col-span-7 md:mt-20" },
+  { photo: PHOTOS.timbalero, title: "Timbalero", medium: "Musicality · the timbales", span: "md:col-span-6" },
+  { photo: PHOTOS.dancerKit, title: "El equipo", medium: "Still life · shoes, claves, towel", span: "md:col-span-6 md:mt-24" },
 ] as const;
 
 export default function GalleryMockupPage() {

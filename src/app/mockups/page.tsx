@@ -1,7 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MockupSwitcher, SongScore } from "@/components/mockups/mockup-art";
-import { FEATURED_SONG, MOCKUP_DIRECTIONS, PHOTOS, type GearPalette } from "@/components/mockups/mockup-data";
+import { GEARS as CARD_GEARS } from "@/components/mockups/gallery-theme";
+import {
+  FEATURED_SONG,
+  MOCKUP_DIRECTIONS,
+  PHOTOS,
+  SCORE_SONGS,
+  SONG_COUNT,
+  type GearPalette,
+} from "@/components/mockups/mockup-data";
+import { displaySongTitle } from "@/lib/music/song-style";
 
 export const metadata = { title: "Compare art directions" };
 
@@ -41,8 +50,8 @@ export default function MockupComparePage() {
         <p className="text-xs uppercase tracking-[0.3em] text-white/60">Salsa Explosion · art direction</p>
         <h1 className="mt-3 text-4xl font-bold md:text-6xl">Three directions, same content</h1>
         <p className="mt-4 max-w-2xl text-white/70">
-          Every page uses the same real schedule, prices, venue and songs, and the same 11 editorial photos. Only the look
-          changes. Open each one on your phone too: the hero photo switches to the tall crop.
+          Every page uses the same real schedule, prices, venue and songs. Only the look changes. Open each one on your
+          phone too: the layouts are built for it.
         </p>
 
         <ul className="mt-12 grid gap-6 md:grid-cols-3">
@@ -90,6 +99,31 @@ export default function MockupComparePage() {
             );
           })}
         </ul>
+
+        <div className="mt-14 rounded-2xl border border-white/10 p-5 md:p-8">
+          <p className="text-xs uppercase tracking-[0.3em] text-white/60">Already working on the live site</p>
+          <h2 className="mt-2 text-2xl font-bold">The practice player</h2>
+          <p className="mt-2 max-w-2xl text-sm text-white/70">
+            Whichever look you choose, this is what dancers use at home today: every section of the song, what to dance
+            now and what comes next, in time with the music. Best on a phone.
+          </p>
+          <ul className="mt-6 grid gap-4 md:grid-cols-3">
+            {SCORE_SONGS.map((song) => (
+              <li key={song.id}>
+                <Link href={`/music/${song.id}`} className="block rounded-xl border border-white/10 p-4 hover:border-white/30">
+                  <span className="block font-semibold">{displaySongTitle(song.title)}</span>
+                  <span className="block text-xs uppercase tracking-wider text-white/60">
+                    {song.artist} · {song.segments.length} sections
+                  </span>
+                  <SongScore song={song} palette={CARD_GEARS} className="mt-3 h-2" gap={2} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link href="/music" className="mt-4 inline-flex min-h-[44px] items-center font-semibold text-amber-400">
+            All {SONG_COUNT} songs →
+          </Link>
+        </div>
 
         <p className="mt-10 text-sm text-white/60">
           Photos: AI-generated editorial images for atmosphere (prompts in docs/design-and-roadmap). Teachers and the

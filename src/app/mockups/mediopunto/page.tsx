@@ -71,8 +71,8 @@ export default function MediopuntoMockupPage() {
             <div className="mx-auto max-w-sm rounded-t-full border p-2" style={{ borderColor: GLASS.amber }}>
               <div className={arch}>
                 <HeroPicture
-                  desktop={PHOTOS.laVueltaHeroMobile}
-                  mobile={PHOTOS.laVueltaHeroMobile}
+                  desktop={PHOTOS.glassCouple}
+                  mobile={PHOTOS.glassCouple}
                   className="aspect-[3/4] w-full object-cover"
                 />
               </div>
@@ -157,6 +157,20 @@ export default function MediopuntoMockupPage() {
               ))}
             </ul>
           )}
+
+          <figure className="mx-auto mt-16 max-w-sm">
+            <div className="rounded-t-full border p-2" style={{ borderColor: GLASS.ruby }}>
+              <div className={`relative aspect-[4/5] ${arch}`}>
+                <Image src={PHOTOS.practiceHome.src} alt={PHOTOS.practiceHome.alt} fill sizes="(max-width: 640px) 90vw, 24rem" className="object-cover" />
+              </div>
+            </div>
+            <figcaption className="mt-3 text-sm italic" style={serif}>
+              Between classes, the song plays at home.
+            </figcaption>
+          </figure>
+          <Link href="/music" className={`${pill} mt-6`} style={{ backgroundColor: GLASS.ruby, color: GLASS.ivory }}>
+            Practise the songs
+          </Link>
         </div>
       </section>
       <TileBand />
@@ -171,21 +185,25 @@ export default function MediopuntoMockupPage() {
             The move library
           </h2>
           <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {MOVE_FAMILIES.map((family, index) => (
-              <li key={family.name}>
-                <div className="rounded-t-full border p-1.5" style={{ borderColor: FAN_COLORS[index % FAN_COLORS.length] }}>
-                  <div className={`relative aspect-[3/4] ${arch}`}>
-                    <Image src={family.photo.src} alt={family.photo.alt} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-cover" />
+            {MOVE_FAMILIES.map((family, index) => {
+              // Casino gets the hands in stained-glass light: this direction's own photo
+              const photo = family.name === "Casino" ? PHOTOS.glassHands : family.photo;
+              return (
+                <li key={family.name}>
+                  <div className="rounded-t-full border p-1.5" style={{ borderColor: FAN_COLORS[index % FAN_COLORS.length] }}>
+                    <div className={`relative aspect-[3/4] ${arch}`}>
+                      <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-cover" />
+                    </div>
                   </div>
-                </div>
-                <h3 className={`mt-4 italic ${H3}`} style={serif}>
-                  {family.spanish}
-                </h3>
-                <p className="text-sm font-light">
-                  {family.name}: {family.note}
-                </p>
-              </li>
-            ))}
+                  <h3 className={`mt-4 italic ${H3}`} style={serif}>
+                    {family.spanish}
+                  </h3>
+                  <p className="text-sm font-light">
+                    {family.name}: {family.note}
+                  </p>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>

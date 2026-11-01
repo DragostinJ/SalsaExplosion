@@ -46,10 +46,10 @@ export default function IcaicMusicMockupPage() {
         </div>
         <div className="md:col-span-4">
           <Image
-            src={GRAPHICS.trumpet.src}
-            alt={GRAPHICS.trumpet.alt}
-            width={GRAPHICS.trumpet.width}
-            height={GRAPHICS.trumpet.height}
+            src={GRAPHICS.radio.src}
+            alt={GRAPHICS.radio.alt}
+            width={GRAPHICS.radio.width}
+            height={GRAPHICS.radio.height}
             sizes="(max-width: 768px) 60vw, 25vw"
             className="mx-auto w-3/5 md:w-full"
           />

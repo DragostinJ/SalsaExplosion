@@ -37,6 +37,16 @@ export default function MediopuntoMusicMockupPage() {
         </p>
       </header>
 
+      <figure>
+        <Image
+          src={PHOTOS.glassRecord.src}
+          alt={PHOTOS.glassRecord.alt}
+          width={PHOTOS.glassRecord.width}
+          height={PHOTOS.glassRecord.height}
+          sizes="100vw"
+          className="aspect-[16/9] w-full object-cover md:aspect-[21/8]"
+        />
+      </figure>
       <TileBand />
       <section className="px-4 py-16 md:px-10 md:py-20" style={{ backgroundColor: GLASS.plaster, color: GLASS.night }}>
         <ul className="mx-auto grid max-w-6xl gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">

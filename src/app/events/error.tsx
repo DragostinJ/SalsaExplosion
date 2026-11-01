@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { RotateCcw, AlertCircle, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { reportError } from "@/lib/monitoring";
+import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -18,48 +18,43 @@ export default function EventsErrorBoundary({ error, reset }: ErrorProps) {
 
   return (
     <main className="min-h-[60vh] flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full text-center space-y-6">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-destructive/10 text-destructive border border-destructive/20 shadow-xs">
+      <div className="max-w-lg w-full border-4 border-ink bg-paper p-6 sm:p-8 text-center text-ink shadow-[8px_8px_0_0_#161311] space-y-6">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center border-4 border-ink bg-poster-red text-ink">
           <AlertCircle className="h-8 w-8" />
         </div>
 
         <div className="space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-destructive">
-            Festival Calendar
-          </span>
-          <h1 className="text-2xl font-extrabold tracking-tight text-ivory sm:text-3xl">
+          <p className={KICKER}>Festival Calendar</p>
+          <h1 className={`font-display ${TYPE.card} text-ink`}>
             Could Not Load Festival Information
           </h1>
-          <p className="text-sm text-ivory-muted leading-relaxed">
+          <p className="text-sm text-ink/80 leading-relaxed font-medium">
             The festival and congress passes directory encountered an issue while retrieving ticket tiers.
           </p>
           {error?.digest && (
-            <p className="text-[11px] font-mono tracking-wider uppercase text-stone-400 pt-1">
+            <p className="text-[11px] font-mono uppercase tracking-wider text-ink/60 pt-1">
               Reference: {typeof error.digest === "string" ? error.digest : "SESSION_ERROR"}
             </p>
           )}
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-          <Button
+          <button
             type="button"
             onClick={() => reset()}
-            className="w-full sm:w-auto bg-primary-base hover:bg-primary-hover text-white font-bold"
+            className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} w-full sm:w-auto text-xs`}
           >
             <RotateCcw className="mr-2 h-4 w-4" />
             Retry Events
-          </Button>
+          </button>
 
-          <Button
-            asChild
-            variant="outline"
-            className="w-full sm:w-auto border-white/10 text-ivory-muted hover:bg-white/5"
+          <Link
+            href="/dashboard/schedule"
+            className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper w-full sm:w-auto text-xs`}
           >
-            <Link href="/dashboard/schedule">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Weekly Classes
-            </Link>
-          </Button>
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Weekly Classes
+          </Link>
         </div>
       </div>
     </main>

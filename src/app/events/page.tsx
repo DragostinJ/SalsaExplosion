@@ -1,20 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, MapPin, Sparkles, Users, ArrowRight, ShieldCheck } from "lucide-react";
+import { MapPin, Sparkles, ShieldCheck } from "lucide-react";
 import { getCachedUpcomingEvents } from "@/lib/cached-queries";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
 import { BackButton } from "@/components/navigation/back-button";
 import { VENUE_INFO, ACADEMY_METRICS, upcomingCanonicalEvents } from "@/lib/academy-data";
 import { reportError } from "@/lib/monitoring";
 import { getPublishedEvents } from "@/lib/stores/published-events-store";
+import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata = {
   title: "DANZA! 2026 | 2027 & Salsa Explosion Congresses | Bournemouth",
@@ -77,57 +69,58 @@ export default async function EventsDirectoryPage() {
   const liveAnnouncements = await getPublishedEvents();
 
   return (
-    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-10">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">
       <div>
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
       </div>
 
-      {/* DANZA! 2026 | 2027 Official Calendar Hero Showcase — "The Place" Havana Nocturne Architecture */}
-      <div data-testid="page-header" className="relative overflow-hidden rounded-3xl border border-line bg-surface-2 p-6 sm:p-10 text-ivory shadow-xs">
+      {/* DANZA! 2026 | 2027 Official Calendar Hero Showcase */}
+      <section
+        data-testid="page-header"
+        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+      >
         <div className="grid gap-8 lg:grid-cols-12 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-3 text-[11px] font-black uppercase tracking-widest text-gold">
-              <span>OFFICIAL ONLINE BOX OFFICE • FESTIVALS &amp; SPECIAL EVENTS</span>
-              <span className="text-ivory-muted font-bold">{VENUE_INFO.shortName} • BOURNEMOUTH</span>
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
+              <span>Cartelera · Online Box Office</span>
+              <span className="opacity-70">{VENUE_INFO.shortName} · BOURNEMOUTH</span>
             </div>
 
             <div>
-              <h1 className="font-display text-4xl sm:text-6xl font-bold tracking-tight text-ivory leading-tight">
-                DANZA! 2026 | 2027{" "}
-                <span className="italic font-normal text-gold">
-                  Special Event Calendar
-                </span>
+              <p className={KICKER}>Salsa Explosion Congresses &amp; Masterclasses</p>
+              <h1 className={`mt-2 ${TYPE.section} text-ink`}>
+                DANZA! 2026 | 2027 <span className="text-poster-red">Funciones</span>
               </h1>
-              <p className="text-xs sm:text-sm text-ivory-muted mt-2 font-medium">
-                Salsa Explosion Congresses &amp; Masterclasses • Directed by {ACADEMY_METRICS.founderTitleName}
+              <p className="mt-2 text-sm font-semibold text-ink/80">
+                Directed by {ACADEMY_METRICS.founderTitleName}
               </p>
             </div>
 
             {/* Official Online Ticket Booking Callout */}
-            <div className="rounded-2xl border border-gold/30 bg-gold/10 p-3.5 sm:p-4 text-xs font-semibold text-amber-100 leading-relaxed">
+            <div className="border-2 border-ink bg-poster-mustard p-3.5 sm:p-4 text-xs font-bold text-ink leading-relaxed">
               🎟️ <strong>Official Online Ticket Booking:</strong> Reserve Made in Cuba 2026, SB&amp;K Extravaganza and party passes online below with instant digital ticketing. (Regular weekly Thursday &amp; Sunday classes are £12/£14 paid at the door).
             </div>
 
-            <div className="rounded-2xl border border-line bg-surface-3 p-4 sm:p-5 space-y-2">
-              <p className="text-xs sm:text-sm text-stone-200 leading-relaxed italic">
+            <div className="border-2 border-ink bg-surface-1 p-4 sm:p-5 space-y-2 text-ink">
+              <p className="text-xs sm:text-sm leading-relaxed italic">
                 &ldquo;We have an extraordinary season of special events coming up at {VENUE_INFO.name} — from Cuban Salsa, Rueda, Son Cubano, Afro-Cuban, Bachata, Kizomba, and Timba to flagship parties, guest maestros, dance weekends, and late-night social dancing.&rdquo;
               </p>
-              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-line text-xs">
-                <span className="font-bold text-gold">
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2 border-ink text-xs font-bold">
+                <span className="text-poster-red">
                   Enrique &amp; The Salsa Explosion Team
                 </span>
-                <span className="text-ivory-muted font-medium">
+                <span className="opacity-70 font-medium">
                   {VENUE_INFO.streetAddress}, {VENUE_INFO.city} {VENUE_INFO.postcode}
                 </span>
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs text-ivory-muted pt-1">
-              <div className="flex items-center gap-1.5 font-bold text-gold">
+            <div className="flex flex-wrap items-center gap-4 text-xs pt-1 font-bold">
+              <div className="flex items-center gap-1.5 text-poster-red">
                 <Sparkles className="h-4 w-4 shrink-0" />
                 <span>12 Exclusive Parties &amp; Weekenders</span>
               </div>
-              <div className="flex items-center gap-1.5 font-bold text-emerald-400">
+              <div className="flex items-center gap-1.5 text-poster-teal">
                 <ShieldCheck className="h-4 w-4 shrink-0" />
                 <span>Instant Digital Passes &amp; Stripe Checkout</span>
               </div>
@@ -135,124 +128,112 @@ export default async function EventsDirectoryPage() {
           </div>
 
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm aspect-[4/5] rounded-2xl overflow-hidden border border-stone-800 shadow-2xl group bg-stone-950">
-              <Image
-                src="/images/danza-2026-2027-calendar.png"
-                alt="DANZA! 2026 | 2027 Bournemouth Salsa Explosion Event Calendar"
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 380px"
-                priority
-              />
+            <div className="relative w-full max-w-sm rotate-[-2deg] border-[6px] border-ink shadow-[12px_12px_0_0_#161311]">
+              <div className="relative aspect-[4/5] w-full bg-ink">
+                <Image
+                  src="/images/danza-2026-2027-calendar.png"
+                  alt="DANZA! 2026 | 2027 Bournemouth Salsa Explosion Event Calendar"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 380px"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Event Grid by Season */}
       {displayEvents.length === 0 && liveAnnouncements.length === 0 ? (
-        <Card className="text-center py-12">
-          <CardContent>
-            <Sparkles className="mx-auto h-12 w-12 text-muted-foreground/50" />
-            <h3 className="mt-4 text-lg font-semibold">No Upcoming Events Yet</h3>
-            <p className="text-sm text-muted-foreground mt-1">
-              Check back soon! We announce visiting Cuban maestros and festival dates regularly.
-            </p>
-          </CardContent>
-        </Card>
+        <section className="border-4 border-ink bg-paper p-12 text-center text-ink">
+          <Sparkles className="mx-auto h-12 w-12 opacity-50" />
+          <h3 className={`mt-4 font-display ${TYPE.card}`}>No Upcoming Events Yet</h3>
+          <p className="mt-2 text-sm text-ink/70">
+            Check back soon! We announce visiting Cuban maestros and festival dates regularly.
+          </p>
+        </section>
       ) : (
         <div className="space-y-12">
           {/* Live AI-Approved Announcements Section */}
           {liveAnnouncements.length > 0 && (
             <section className="space-y-6">
-              <div className="flex items-center justify-between border-b border-line pb-3">
-                <div className="flex items-center gap-3">
-                  <Badge className="bg-emerald-600 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-sm">
-                    <Sparkles className="h-3.5 w-3.5 text-gold" />
-                    NEW • LIVE ANNOUNCEMENTS
-                  </Badge>
-                  <h2 className="text-xl sm:text-2xl font-black tracking-tight text-ivory">
-                    Special Announcements &amp; Guest Workshops
+              <div className="border-b-4 border-ink pb-3 flex flex-wrap items-baseline justify-between gap-2">
+                <div className="flex items-baseline gap-3">
+                  <span className="border-2 border-ink bg-poster-teal px-2 py-0.5 font-display text-lg uppercase text-ink">
+                    Avisos
+                  </span>
+                  <h2 className={`font-display text-3xl sm:text-4xl text-ink leading-none`}>
+                    Live Announcements &amp; Guest Workshops
                   </h2>
                 </div>
-                <span className="text-xs text-ivory-muted font-medium">
+                <span className="text-xs font-bold uppercase tracking-wider text-ink/70">
                   {liveAnnouncements.length} Live Announcements
                 </span>
               </div>
 
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {liveAnnouncements.map((liveEvt) => (
-                  <Card
+                  <article
                     key={liveEvt.id}
-                    className="overflow-hidden border border-gold/40 bg-surface-1 shadow-xl flex flex-col justify-between"
+                    className="flex flex-col border-4 border-ink bg-paper text-ink transition-transform hover:-translate-y-0.5"
                   >
-                    <div>
-                      {liveEvt.posterPreviewUrl ? (
-                        <div className="relative h-48 w-full bg-surface-2 overflow-hidden border-b border-line">
-                          <img
-                            src={liveEvt.posterPreviewUrl}
-                            alt={liveEvt.title}
-                            className="h-full w-full object-cover"
-                          />
-                          <div className="absolute top-3 right-3">
-                            <Badge className="bg-canvas/90 text-gold border border-gold/40 font-mono text-xs">
-                              {liveEvt.bookingType === "ONLINE_TICKET" ? "ONLINE TICKET" : "DOOR ENTRY"}
-                            </Badge>
-                          </div>
+                    {liveEvt.posterPreviewUrl ? (
+                      <div className="relative h-48 w-full border-b-4 border-ink bg-ink">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={liveEvt.posterPreviewUrl}
+                          alt={liveEvt.title}
+                          className="h-full w-full object-cover"
+                        />
+                        <div className="absolute top-2 right-2 border-2 border-ink bg-paper px-2 py-0.5 text-xs font-bold uppercase text-ink">
+                          {liveEvt.bookingType === "ONLINE_TICKET" ? "ONLINE TICKET" : "DOOR ENTRY"}
                         </div>
-                      ) : (
-                        <div className="p-4 border-b border-line bg-surface-2/60 flex items-center justify-between">
-                          <Badge className="bg-gold/20 text-gold border border-gold/40 font-mono text-xs">
-                            {liveEvt.bookingType === "ONLINE_TICKET" ? "ONLINE TICKET" : "DOOR ENTRY"}
-                          </Badge>
-                          <span className="text-xs font-bold text-gold">
-                            {liveEvt.priceDisplay}
-                          </span>
-                        </div>
-                      )}
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-between border-b-4 border-ink bg-poster-mustard/30 p-3 text-xs font-bold uppercase text-ink">
+                        <span className="border border-ink bg-paper px-2 py-0.5">
+                          {liveEvt.bookingType === "ONLINE_TICKET" ? "ONLINE TICKET" : "DOOR ENTRY"}
+                        </span>
+                        <span className="font-display text-base text-poster-red">{liveEvt.priceDisplay}</span>
+                      </div>
+                    )}
 
-                      <CardHeader className="space-y-2 p-5">
-                        <div className="flex items-center gap-2 text-xs text-gold font-bold">
-                          <Calendar className="h-4 w-4 shrink-0" />
-                          <span>{liveEvt.dateDisplay}</span>
-                        </div>
-                        <h3 className="text-lg font-black text-ivory leading-snug">
+                    <div className="flex flex-1 flex-col justify-between p-5 gap-3">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-wider text-poster-red">
+                          {liveEvt.dateDisplay}
+                        </p>
+                        <h3 className={`mt-1 font-display ${TYPE.card} leading-none text-ink`}>
                           {liveEvt.title}
                         </h3>
-                        <p className="text-xs text-ivory-muted line-clamp-2">
+                        <p className="mt-2 text-xs font-medium text-ink/80 line-clamp-2">
                           {liveEvt.subtitle}
                         </p>
-                      </CardHeader>
-
-                      <CardContent className="px-5 pb-4 space-y-3">
-                        <div className="flex items-start gap-2 text-xs text-stone-300">
-                          <MapPin className="h-4 w-4 text-gold shrink-0 mt-0.5" />
+                        <div className="mt-3 flex items-start gap-1.5 text-xs font-semibold text-ink/70">
+                          <MapPin className="h-3.5 w-3.5 shrink-0 mt-0.5" />
                           <span className="line-clamp-1">{liveEvt.venue}</span>
                         </div>
-                        <p className="text-xs text-ivory-muted italic border-l-2 border-gold/40 pl-3 line-clamp-2">
-                          &ldquo;{liveEvt.instagramOrFbSummary}&rdquo;
-                        </p>
-                      </CardContent>
-                    </div>
+                        {liveEvt.instagramOrFbSummary && (
+                          <p className="mt-2 text-xs italic text-ink/70 border-l-2 border-ink pl-2 line-clamp-2">
+                            &ldquo;{liveEvt.instagramOrFbSummary}&rdquo;
+                          </p>
+                        )}
+                      </div>
 
-                    <CardFooter className="p-5 pt-0 border-t border-line/50 mt-2">
-                      <div className="w-full pt-3 flex items-center justify-between gap-3">
-                        <span className="text-xs font-black text-gold">
+                      <div className="mt-3 border-t-2 border-ink pt-3 flex items-center justify-between gap-2">
+                        <span className="font-display text-lg text-ink">
                           {liveEvt.priceDisplay}
                         </span>
-                        <Button
-                          asChild
-                          size="sm"
-                          className="bg-gold hover:bg-gold-light text-canvas font-bold text-xs rounded-xl"
+                        <Link
+                          href={liveEvt.ctaUrl || "/events"}
+                          className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-3 text-xs`}
                         >
-                          <Link href={liveEvt.ctaUrl || "/events"}>
-                            <span>View Event Details</span>
-                            <ArrowRight className="h-3.5 w-3.5 ml-1" />
-                          </Link>
-                        </Button>
+                          <span>Details →</span>
+                        </Link>
                       </div>
-                    </CardFooter>
-                  </Card>
+                    </div>
+                  </article>
                 ))}
               </div>
             </section>
@@ -261,16 +242,16 @@ export default async function EventsDirectoryPage() {
           {/* 2026 Season Section */}
           {events2026.length > 0 && (
             <section className="space-y-6">
-              <div className="flex items-center justify-between border-b pb-3">
-                <div className="flex items-center gap-3">
-                  <Badge className="bg-amber-900 text-white font-extrabold text-xs">
-                    2026 Season
-                  </Badge>
-                  <h2 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
-                    Autumn &amp; Festive Special Events
+              <div className="border-b-4 border-ink pb-3 flex flex-wrap items-baseline justify-between gap-2">
+                <div className="flex items-baseline gap-3">
+                  <span className="border-2 border-ink bg-poster-mustard px-2 py-0.5 font-display text-lg uppercase text-ink">
+                    2026
+                  </span>
+                  <h2 className={`font-display ${TYPE.card} sm:text-4xl text-ink leading-none`}>
+                    Temporada 2026 · Autumn &amp; Festive Special Events
                   </h2>
                 </div>
-                <span className="text-xs text-muted-foreground font-medium">
+                <span className="text-xs font-bold uppercase tracking-wider text-ink/70">
                   {events2026.length} Events Scheduled
                 </span>
               </div>
@@ -290,16 +271,16 @@ export default async function EventsDirectoryPage() {
           {/* 2027 Season Section */}
           {events2027.length > 0 && (
             <section className="space-y-6">
-              <div className="flex items-center justify-between border-b pb-3">
-                <div className="flex items-center gap-3">
-                  <Badge className="bg-primary-base text-white font-extrabold text-xs">
-                    2027 Season
-                  </Badge>
-                  <h2 className="text-xl sm:text-2xl font-black tracking-tight text-foreground">
-                    Spring &amp; Summer Masterclasses &amp; Weekenders
+              <div className="border-b-4 border-ink pb-3 flex flex-wrap items-baseline justify-between gap-2">
+                <div className="flex items-baseline gap-3">
+                  <span className="border-2 border-ink bg-poster-red px-2 py-0.5 font-display text-lg uppercase text-paper">
+                    2027
+                  </span>
+                  <h2 className={`font-display ${TYPE.card} sm:text-4xl text-ink leading-none`}>
+                    Temporada 2027 · Spring &amp; Summer Masterclasses &amp; Weekenders
                   </h2>
                 </div>
-                <span className="text-xs text-muted-foreground font-medium">
+                <span className="text-xs font-bold uppercase tracking-wider text-ink/70">
                   {events2027.length} Events Scheduled
                 </span>
               </div>
@@ -331,146 +312,89 @@ function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
     ? `£${(evt.ticketTiers[0].priceInCents / 100).toFixed(0)}`
     : "TBA";
 
+  const dateObj = new Date(evt.startDate);
+  const dateBadge = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short",
+  }).format(dateObj).toUpperCase();
+
   const startFormatted = new Intl.DateTimeFormat("en-GB", {
     weekday: "short",
     day: "numeric",
     month: "short",
     year: "numeric",
-  }).format(new Date(evt.startDate));
+  }).format(dateObj);
 
   const isMadeInCuba = evt.slug.includes("made-in-cuba");
   const isHalloween = evt.slug.includes("halloween");
   const isSBK = evt.slug.includes("sb-k") || evt.slug.includes("sbk");
-  const isWeekendFlagship =
-    isMadeInCuba ||
-    evt.slug.includes("barbara-jimenez") ||
-    evt.slug.includes("valentine");
 
   return (
-    <Card
-      className={`flex flex-col overflow-hidden border transition-all hover:shadow-lg ${
-        isMadeInCuba
-          ? "border-2 border-black/30 shadow-md ring-2 ring-gold/20"
-          : isHalloween
-          ? "border-gold/30 shadow-sm"
-          : isSBK
-          ? "border-danger-line shadow-sm"
-          : "shadow-sm"
-      }`}
-    >
-      {/* Visual Header / Cuban Cartel Poster */}
-      <div
-        className={`relative h-44 w-full p-6 flex flex-col justify-between ${
-          isMadeInCuba
-            ? "bg-gold text-stone-950 border-b border-black/15"
-            : isHalloween
-            ? "bg-surface-2 text-ivory border-b border-gold/20"
-            : isSBK
-            ? "bg-surface-2 text-ivory border-b border-danger-line"
-            : isWeekendFlagship
-            ? "bg-surface-2 text-ivory border-b border-line"
-            : "bg-surface-2 text-ivory border-b border-line"
-        }`}
-      >
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <Badge
-            className={`text-[11px] font-black uppercase tracking-wider border-none ${
-              isMadeInCuba
-                ? "bg-black text-gold"
-                : "bg-black/50 text-white backdrop-blur-sm"
-            }`}
-          >
-            {isMadeInCuba
-              ? "04–06 DEC 2026"
-              : isHalloween
-              ? "31 OCT 2026"
-              : isSBK
-              ? "14 NOV 2026"
-              : isWeekendFlagship
-              ? "Weekend Festival"
-              : "Special Event"}
-          </Badge>
-          <span
-            className={`text-xs font-black px-2.5 py-1 rounded-full ${
-              isMadeInCuba
-                ? "bg-black text-white"
-                : "bg-white/20 text-white backdrop-blur-sm"
-            }`}
-          >
-            From {minPrice}
-          </span>
-        </div>
-
-        <div>
-          <h3
-            className={`text-lg font-black leading-snug drop-shadow-xs line-clamp-2 uppercase ${
-              isMadeInCuba ? "text-stone-950" : "text-white"
-            }`}
-          >
-            {isMadeInCuba
-              ? "★ MADE IN CUBA DANCE FESTIVAL 2026 ★"
-              : isHalloween
-              ? "★ HALLOWEEN FANCY DRESS PARTY ★"
-              : isSBK
-              ? "★ SB&K NIGHT! EXTRAVAGANZA ★"
-              : evt.title}
-          </h3>
-        </div>
+    <article className="flex border-4 border-ink bg-paper text-ink transition-transform hover:-translate-y-0.5">
+      {/* Perforated Stub Date Badge */}
+      <div className="flex items-center justify-center border-r-4 border-dashed border-ink bg-poster-mustard/20 px-3 text-xs sm:text-sm font-bold uppercase tracking-wider [writing-mode:vertical-rl] select-none text-ink">
+        {dateBadge}
       </div>
 
-      <CardHeader className="pb-3">
-        <div className="flex flex-wrap gap-1.5 mb-2">
-          {evt.guestArtists.map((artist) => (
-            <Badge
-              key={artist}
-              variant="outline"
-              className="text-[11px] font-semibold bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
+      {/* Ticket Body */}
+      <div className="flex flex-1 flex-col justify-between p-4 sm:p-5 gap-3">
+        <div>
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold uppercase tracking-wider text-ink/70">
+            <span>{startFormatted}</span>
+            <span className="border border-ink bg-paper px-2 py-0.5 font-display text-sm text-ink">
+              From {minPrice}
+            </span>
+          </div>
+
+          <h3 className={`mt-2 font-display ${TYPE.card} leading-none text-ink`}>
+            {isMadeInCuba
+              ? "MADE IN CUBA DANCE FESTIVAL 2026"
+              : isHalloween
+              ? "HALLOWEEN FANCY DRESS PARTY"
+              : isSBK
+              ? "SB&K NIGHT! EXTRAVAGANZA"
+              : evt.title}
+          </h3>
+
+          {evt.guestArtists.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-1">
+              {evt.guestArtists.map((artist) => (
+                <span
+                  key={artist}
+                  className="border border-ink bg-poster-teal/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-ink"
+                >
+                  ★ {artist}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <p className="mt-2 line-clamp-2 text-xs font-medium text-ink/80 leading-relaxed">
+            {evt.description}
+          </p>
+        </div>
+
+        <div className="border-t-2 border-ink pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-ink/70">
+            <MapPin className="h-3.5 w-3.5 shrink-0" />
+            <span className="truncate max-w-[150px]">{evt.venueName}</span>
+          </div>
+
+          <div className="flex flex-col items-end gap-1">
+            {isCanonicalFallback && (
+              <span className="text-[10px] font-bold uppercase text-poster-red">
+                Opening soon
+              </span>
+            )}
+            <Link
+              href={`/events/${evt.slug}`}
+              className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-3 text-xs w-full sm:w-auto text-center justify-center`}
             >
-              ★ {artist}
-            </Badge>
-          ))}
+              <span>Passes &amp; Tickets →</span>
+            </Link>
+          </div>
         </div>
-
-        <CardDescription className="line-clamp-2 text-xs text-muted-foreground">
-          {evt.description}
-        </CardDescription>
-      </CardHeader>
-
-      <CardContent className="space-y-2 text-xs text-muted-foreground flex-1">
-        <div className="flex items-center gap-2">
-          <Calendar className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-          <span className="font-medium text-foreground">{startFormatted}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <MapPin className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-          <span className="truncate">{evt.venueName}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Users className="h-3.5 w-3.5 text-amber-400 shrink-0" />
-          <span>{evt.ticketTiers.length} Pass Tiers Available</span>
-        </div>
-      </CardContent>
-
-      <CardFooter className="pt-3 border-t flex flex-col gap-1.5 items-stretch">
-        {isCanonicalFallback && (
-          <span className="text-[11px] font-semibold text-amber-300/90 text-center">
-            Online booking opening soon
-          </span>
-        )}
-        <Button
-          asChild
-          className={`w-full text-xs font-bold transition-colors h-10 rounded-xl shadow-xs ${
-            isMadeInCuba
-              ? "bg-stone-950 hover:bg-black text-white font-black"
-              : "bg-primary-base hover:bg-primary-hover text-white"
-          }`}
-        >
-          <Link href={`/events/${evt.slug}`}>
-            View Passes &amp; Details
-            <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-          </Link>
-        </Button>
-      </CardFooter>
-    </Card>
+      </div>
+    </article>
   );
 }

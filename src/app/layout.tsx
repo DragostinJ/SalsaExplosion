@@ -43,8 +43,9 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
     ],
+    // iOS ignores SVG touch icons: the poster mark rendered as a 180px PNG
     apple: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
   manifest: "/manifest.webmanifest",

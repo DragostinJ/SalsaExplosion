@@ -1,11 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <defs>
-    <linearGradient id="salsaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#E11D48" />
-      <stop offset="100%" stop-color="#F97316" />
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="8" fill="url(#salsaGrad)" />
-  <path d="M16 6c-1.5 3-4 5.5-4 8.5 0 2.5 1.8 4.5 4 4.5s4-2 4-4.5c0-3-2.5-5.5-4-8.5z" fill="#FFFFFF" opacity="0.95" />
-  <circle cx="16" cy="18" r="2.5" fill="#FFE4E6" />
+  <!-- ICAIC poster mark: paper ground, red sun with an ink rim, ink flame (the header logo) -->
+  <rect width="32" height="32" fill="#F1E6D0" />
+  <circle cx="16" cy="16" r="13" fill="#E8462F" stroke="#161311" stroke-width="2.5" />
+  <path transform="translate(6 5.5) scale(0.84)" d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" fill="#161311" />
 </svg>

@@ -3,9 +3,6 @@
 import { useState, useTransition, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { CheckCircle2, ArrowRight, XCircle, Clock } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import {
   bookPrivateLessonAction,
@@ -18,6 +15,7 @@ import {
   COACHING_FOCUS_TOPICS,
   CoachingInstructor,
 } from "@/lib/constants/coaching";
+import { TYPE, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export interface SerializedPrivateLessonBooking {
   id: string;
@@ -130,18 +128,18 @@ export function PrivateLessonsClient({
     <div className="space-y-8">
       {/* Existing Student Requests Drawer / Queue */}
       {bookings.length > 0 && (
-        <div className="rounded-2xl border border-amber-500/30 bg-muted/20 p-5 space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="border-4 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_#161311] text-ink">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink pb-2">
             <h3 className="font-bold text-sm flex items-center gap-2">
-              <Clock className="h-4 w-4 text-amber-600" />
+              <Clock className="h-4 w-4 text-poster-red" />
               Your Private Coaching Requests ({bookings.length})
             </h3>
-            <span className="text-[11px] text-muted-foreground">
+            <span className="text-xs text-ink/70 font-semibold">
               Direct with BOH Studios Reception
             </span>
           </div>
 
-          <div className="grid gap-2.5 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             {bookings.map((booking) => {
               const isPending = booking.status === "PENDING";
               const isConfirmed = booking.status === "CONFIRMED";
@@ -150,57 +148,55 @@ export function PrivateLessonsClient({
               return (
                 <div
                   key={booking.id}
-                  className="rounded-xl border bg-card p-3.5 flex flex-col justify-between space-y-2 text-xs"
+                  className="border-2 border-ink bg-paper p-3.5 flex flex-col justify-between space-y-2 text-xs"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <div className="font-bold text-foreground">
+                      <div className="font-bold text-ink">
                         {booking.instructorName}
                       </div>
-                      <div className="text-[11px] text-muted-foreground">
+                      <div className="text-xs text-ink/75 font-semibold">
                         {booking.packageType === "SINGLE_1HR"
                           ? "1-Hour Session"
                           : "5-Hour Intensive Package"}{" "}
                         • £{booking.totalPricePounds}
                       </div>
                     </div>
-                    <Badge
-                      className={
+                    <span
+                      className={`border border-ink font-bold text-xs uppercase px-2 py-0.5 ${
                         isConfirmed
-                          ? "bg-emerald-800 text-white font-bold"
+                          ? "bg-poster-teal text-ink"
                           : isPending
-                          ? "bg-amber-500 text-stone-950 font-bold"
+                          ? "bg-poster-mustard text-ink"
                           : isCancelled
-                          ? "bg-stone-600 text-white font-bold"
-                          : "bg-blue-700 text-white font-bold"
-                      }
+                          ? "bg-ink text-paper"
+                          : "bg-poster-blue text-paper"
+                      }`}
                     >
                       {booking.status}
-                    </Badge>
+                    </span>
                   </div>
 
-                  <div className="text-[11px] text-muted-foreground">
+                  <div className="text-xs text-ink/80 font-medium">
                     <div>
-                      <strong className="text-foreground">Focus:</strong> {booking.focusTopic}
+                      <strong className="text-ink">Focus:</strong> {booking.focusTopic}
                     </div>
                     <div>
-                      <strong className="text-foreground">Slot:</strong> {booking.preferredSlot}
+                      <strong className="text-ink">Slot:</strong> {booking.preferredSlot}
                     </div>
                   </div>
 
                   {isPending && (
-                    <div className="pt-2 border-t flex justify-end">
-                      <Button
+                    <div className="pt-2 border-t border-ink flex justify-end">
+                      <button
                         type="button"
-                        variant="ghost"
-                        size="sm"
                         disabled={cancellingId === booking.id}
                         onClick={() => handleCancelBooking(booking.id)}
-                        className="h-7 text-[11px] text-destructive hover:bg-destructive/10"
+                        className="text-xs text-poster-red font-bold hover:underline flex items-center gap-1"
                       >
-                        <XCircle className="mr-1 h-3.5 w-3.5" />
+                        <XCircle className="h-3.5 w-3.5" />
                         {cancellingId === booking.id ? "Cancelling..." : "Cancel Request"}
-                      </Button>
+                      </button>
                     </div>
                   )}
                 </div>
@@ -211,49 +207,49 @@ export function PrivateLessonsClient({
       )}
 
       {isSubmitted ? (
-        <Card className="border-2 border-emerald-500/40 bg-emerald-500/[0.04] p-8 text-center space-y-4 rounded-3xl">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-600 text-white shadow-lg animate-bounce">
+        <div className="border-4 border-ink bg-poster-teal/20 p-8 text-center space-y-4 shadow-[8px_8px_0_0_#161311] text-ink">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center border-4 border-ink bg-poster-teal text-ink shadow-[4px_4px_0_0_#161311]">
             <CheckCircle2 className="h-8 w-8" />
           </div>
-          <h2 className="text-2xl font-black text-foreground">
+          <h2 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
             Private Lesson Request Received!
           </h2>
-          <p className="text-xs sm:text-sm text-muted-foreground max-w-lg mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-ink/80 max-w-lg mx-auto leading-relaxed font-semibold">
             Thank you! Maestro {activeInstructor.name} and the BOH Studios Bournemouth desk will confirm your {selectedPackage === "SINGLE" ? "1-Hour Lesson" : "5-Hour Intensive Package"} ({selectedDay}) within 24 hours.
           </p>
-          <div className="rounded-2xl border bg-background/80 p-4 max-w-md mx-auto text-xs space-y-1.5 text-left">
+          <div className="border-2 border-ink bg-paper p-4 max-w-md mx-auto text-xs space-y-1.5 text-left text-ink shadow-[2px_2px_0_0_#161311]">
             <div>
-              <span className="font-bold text-muted-foreground">Instructor:</span>{" "}
-              <span className="font-semibold text-foreground">{activeInstructor.name}</span>
+              <span className="font-bold text-ink/70">Instructor:</span>{" "}
+              <span className="font-bold text-ink">{activeInstructor.name}</span>
             </div>
             <div>
-              <span className="font-bold text-muted-foreground">Focus Area:</span>{" "}
-              <span className="font-semibold text-foreground">{selectedTopic}</span>
+              <span className="font-bold text-ink/70">Focus Area:</span>{" "}
+              <span className="font-bold text-ink">{selectedTopic}</span>
             </div>
             <div>
-              <span className="font-bold text-muted-foreground">Package Total:</span>{" "}
-              <span className="font-bold text-amber-600">£{price}.00</span>
+              <span className="font-bold text-ink/70">Package Total:</span>{" "}
+              <span className="font-bold text-poster-red">£{price}.00</span>
             </div>
             <div>
-              <span className="font-bold text-muted-foreground">Studio Location:</span>{" "}
-              <span className="font-semibold text-foreground">BOH Studios, 104 Commercial Road, Bournemouth (BH2 5LR)</span>
+              <span className="font-bold text-ink/70">Studio Location:</span>{" "}
+              <span className="font-semibold text-ink">BOH Studios, 104 Commercial Road, Bournemouth (BH2 5LR)</span>
             </div>
           </div>
-          <Button
+          <button
             type="button"
             onClick={() => setIsSubmitted(false)}
-            className="bg-primary-base hover:bg-primary-hover text-white font-bold text-xs"
+            className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold px-6 py-2.5 min-h-[40px]`}
           >
             Submit Another Request
-          </Button>
-        </Card>
+          </button>
+        </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Step 1: Choose Instructor */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Badge className="bg-amber-500 text-stone-950 font-extrabold text-xs">Step 1</Badge>
-              <h3 className="font-bold text-lg">Select Your Private Coach</h3>
+            <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
+              <span className="border border-ink bg-poster-mustard text-ink font-bold text-xs uppercase px-2 py-0.5">Step 1</span>
+              <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">Select Your Private Coach</h3>
             </div>
 
             <div className="grid gap-4 md:grid-cols-3">
@@ -263,24 +259,24 @@ export function PrivateLessonsClient({
                   <div
                     key={inst.id}
                     onClick={() => setSelectedInstructor(inst.id)}
-                    className={`cursor-pointer rounded-2xl border p-5 transition-all flex flex-col justify-between space-y-4 ${
+                    className={`cursor-pointer border-4 border-ink p-5 transition-all flex flex-col justify-between space-y-4 shadow-[4px_4px_0_0_#161311] ${
                       isSelected
-                        ? "border-amber-500 bg-amber-500/[0.08] shadow-md ring-2 ring-amber-500/30"
-                        : "bg-card hover:border-border/80 hover:bg-muted/30"
+                        ? "bg-poster-mustard/30 ring-2 ring-poster-red"
+                        : "bg-paper hover:bg-black/5"
                     }`}
                   >
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
-                        <TeacherAvatar name={inst.name} avatarUrl={inst.avatarUrl} size="md" />
+                        <TeacherAvatar name={inst.name} avatarUrl={inst.avatarUrl} size="md" className="border-2 border-ink" />
                         <div>
-                          <h4 className="font-bold text-sm text-foreground">{inst.name}</h4>
-                          <span className="text-xs text-muted-foreground block line-clamp-1">
+                          <h4 className="font-display font-black text-base uppercase text-ink">{inst.name}</h4>
+                          <span className="text-xs text-ink/75 font-semibold block line-clamp-1">
                             {inst.title}
                           </span>
                         </div>
                       </div>
 
-                      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                      <p className="text-xs text-ink/80 leading-relaxed font-medium line-clamp-3">
                         {inst.bio}
                       </p>
 
@@ -288,7 +284,7 @@ export function PrivateLessonsClient({
                         {inst.specialties.slice(0, 2).map((s) => (
                           <span
                             key={s}
-                            className="rounded bg-muted px-2 py-0.5 text-xs font-semibold text-muted-foreground"
+                            className="border border-ink bg-paper px-2 py-0.5 text-xs font-bold text-ink"
                           >
                             {s}
                           </span>
@@ -296,15 +292,15 @@ export function PrivateLessonsClient({
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t flex items-center justify-between text-xs">
+                    <div className="pt-3 border-t-2 border-ink flex items-center justify-between text-xs">
                       <div>
-                        <span className="text-muted-foreground">From</span>{" "}
-                        <span className="font-extrabold text-sm text-foreground">
+                        <span className="text-ink/70">From</span>{" "}
+                        <span className="font-display font-black text-lg text-ink">
                           £{inst.hourlyRatePounds}
                         </span>
-                        <span className="text-xs text-muted-foreground">/hr</span>
+                        <span className="text-xs text-ink/70">/hr</span>
                       </div>
-                      <span className={`text-[11px] font-bold ${isSelected ? "text-amber-300" : "text-muted-foreground"}`}>
+                      <span className={`text-xs font-bold ${isSelected ? "text-poster-red uppercase" : "text-ink/70"}`}>
                         {isSelected ? "Selected" : "Select Coach"}
                       </span>
                     </div>
@@ -316,57 +312,57 @@ export function PrivateLessonsClient({
 
           {/* Step 2: Choose Package & Dancer Setup */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Badge className="bg-amber-500 text-stone-950 font-extrabold text-xs">Step 2</Badge>
-              <h3 className="font-bold text-lg">Package & Dancer Format</h3>
+            <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
+              <span className="border border-ink bg-poster-mustard text-ink font-bold text-xs uppercase px-2 py-0.5">Step 2</span>
+              <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">Package &amp; Format</h3>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div
                 onClick={() => setSelectedPackage("SINGLE")}
-                className={`cursor-pointer rounded-2xl border p-5 transition-all space-y-2 ${
+                className={`cursor-pointer border-4 border-ink p-5 transition-all space-y-2 shadow-[4px_4px_0_0_#161311] ${
                   selectedPackage === "SINGLE"
-                    ? "border-amber-500 bg-amber-500/[0.08] ring-2 ring-amber-500/30"
-                    : "bg-card hover:bg-muted/30"
+                    ? "bg-poster-mustard/30 ring-2 ring-poster-red"
+                    : "bg-paper hover:bg-black/5"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <h4 className="font-bold text-sm">1-Hour Intensive Session</h4>
-                  <span className="text-lg font-black text-foreground">
+                  <h4 className="font-display font-black text-base uppercase text-ink">1-Hour Intensive Session</h4>
+                  <span className={`font-display font-black text-2xl text-ink ${TYPE.card}`}>
                     £{activeInstructor.hourlyRatePounds}
                   </span>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-ink/80 leading-relaxed font-medium">
                   Fast diagnosis and targeted corrections for specific figures, styling habits, or musical timing.
                 </p>
-                <div className="text-[11px] font-semibold text-amber-400">
+                <div className="text-xs font-bold text-poster-red">
                   Ideal for quick tune-ups before a social party.
                 </div>
               </div>
 
               <div
                 onClick={() => setSelectedPackage("BLOCK")}
-                className={`cursor-pointer rounded-2xl border p-5 transition-all space-y-2 ${
+                className={`cursor-pointer border-4 border-ink p-5 transition-all space-y-2 shadow-[4px_4px_0_0_#161311] ${
                   selectedPackage === "BLOCK"
-                    ? "border-amber-500 bg-amber-500/[0.08] ring-2 ring-amber-500/30"
-                    : "bg-card hover:bg-muted/30"
+                    ? "bg-poster-mustard/30 ring-2 ring-poster-red"
+                    : "bg-paper hover:bg-black/5"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <h4 className="font-bold text-sm">5-Hour Mastery Block</h4>
-                    <Badge className="bg-emerald-800 text-white font-extrabold text-xs px-1.5 py-0">
+                    <h4 className="font-display font-black text-base uppercase text-ink">5-Hour Mastery Block</h4>
+                    <span className="border border-ink bg-poster-teal text-ink font-bold text-xs px-1.5 py-0">
                       Save £50
-                    </Badge>
+                    </span>
                   </div>
-                  <span className="text-lg font-black text-foreground">
+                  <span className={`font-display font-black text-2xl text-ink ${TYPE.card}`}>
                     £{activeInstructor.blockRatePounds}
                   </span>
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-ink/80 leading-relaxed font-medium">
                   Comprehensive syllabus transformation: body isolations, dynamic leading tension, and musical interpretation.
                 </p>
-                <div className="text-[11px] font-semibold text-emerald-400">
+                <div className="text-xs font-bold text-poster-teal">
                   Recommended for rapid level advancement or wedding routines.
                 </div>
               </div>
@@ -376,43 +372,43 @@ export function PrivateLessonsClient({
               <button
                 type="button"
                 onClick={() => setDancerType("SOLO")}
-                className={`rounded-xl p-3 text-xs font-bold transition-all ${
+                className={`${POSTER_BUTTON} ${
                   dancerType === "SOLO"
-                    ? "bg-amber-500 text-stone-950 font-extrabold"
-                    : "border bg-card text-muted-foreground"
-                }`}
+                    ? POSTER_BUTTON_COLORS.ink
+                    : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+                } text-xs font-bold min-h-[44px] flex items-center justify-center`}
               >
                 Solo Dancer (1-on-1 with Maestro)
               </button>
               <button
                 type="button"
                 onClick={() => setDancerType("COUPLE")}
-                className={`rounded-xl p-3 text-xs font-bold transition-all ${
+                className={`${POSTER_BUTTON} ${
                   dancerType === "COUPLE"
-                    ? "bg-amber-500 text-stone-950 font-extrabold"
-                    : "border bg-card text-muted-foreground"
-                }`}
+                    ? POSTER_BUTTON_COLORS.ink
+                    : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+                } text-xs font-bold min-h-[44px] flex items-center justify-center`}
               >
-                Couple (Lead & Follow)
+                Couple (Lead &amp; Follow)
               </button>
             </div>
           </div>
 
           {/* Step 3: Focus Topic & Timing */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Badge className="bg-amber-500 text-stone-950 font-extrabold text-xs">Step 3</Badge>
-              <h3 className="font-bold text-lg">Focus Topic & Preferred Slot</h3>
+            <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
+              <span className="border border-ink bg-poster-mustard text-ink font-bold text-xs uppercase px-2 py-0.5">Step 3</span>
+              <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">Focus Topic &amp; Preferred Slot</h3>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-foreground">Primary Technique Focus</label>
+                <label className="text-xs font-bold text-ink uppercase tracking-wider block">Primary Technique Focus</label>
                 <select
                   aria-label="Select Focus Topic"
                   value={selectedTopic}
                   onChange={(e) => setSelectedTopic(e.target.value)}
-                  className="w-full rounded-xl border bg-background px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full border-2 border-ink bg-paper px-3 py-2 text-xs font-bold text-ink focus:outline-none focus:ring-2 focus:ring-poster-red"
                 >
                   {COACHING_FOCUS_TOPICS.map((topic) => (
                     <option key={topic} value={topic}>
@@ -423,12 +419,12 @@ export function PrivateLessonsClient({
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-foreground">Preferred Day / Slot</label>
+                <label className="text-xs font-bold text-ink uppercase tracking-wider block">Preferred Day / Slot</label>
                 <select
                   aria-label="Select Preferred Slot"
                   value={selectedDay}
                   onChange={(e) => setSelectedDay(e.target.value)}
-                  className="w-full rounded-xl border bg-background px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full border-2 border-ink bg-paper px-3 py-2 text-xs font-bold text-ink focus:outline-none focus:ring-2 focus:ring-poster-red"
                 >
                   <option value="Sunday Afternoon (BOH Studios)">Sunday Afternoon (14:00 – 17:30)</option>
                   <option value="Thursday Afternoon (BOH Studios)">Thursday Afternoon (14:00 – 17:30)</option>
@@ -439,52 +435,51 @@ export function PrivateLessonsClient({
             </div>
 
             <div className="space-y-1.5 pt-2">
-              <label className="text-xs font-bold text-foreground">
-                Your Dance Experience & Goals (Optional)
+              <label className="text-xs font-bold text-ink uppercase tracking-wider block">
+                Your Dance Experience &amp; Goals (Optional)
               </label>
               <textarea
                 rows={3}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Tell Maestro Enrique about your current dancing, any specific figures you want to polish, or upcoming events..."
-                className="w-full rounded-xl border bg-background p-3 text-xs focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full border-2 border-ink bg-paper p-3 text-xs font-medium text-ink focus:outline-none focus:ring-2 focus:ring-poster-red"
               />
             </div>
           </div>
 
           {/* Checkout & Summary Bar */}
-          <div className="rounded-3xl border border-amber-500/30 bg-muted/20 p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="border-4 border-ink bg-poster-mustard p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[6px_6px_0_0_#161311] text-ink">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block">
+              <span className="text-xs font-bold uppercase tracking-wider text-ink/75 block">
                 Lesson Summary
               </span>
-              <div className="text-lg font-black text-foreground mt-0.5">
+              <div className="font-display font-black text-xl uppercase tracking-tight text-ink mt-0.5">
                 {activeInstructor.name} • {selectedPackage === "SINGLE" ? "1-Hour Lesson" : "5-Hour Block"}
               </div>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-ink/80 font-medium">
                 Studio: BOH Studios Bournemouth • {dancerType === "SOLO" ? "1 Dancer" : "Couple"}
               </span>
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 w-full sm:w-auto">
               {errorMessage && (
-                <span className="text-xs font-semibold text-destructive">
+                <span className="text-xs font-bold text-poster-red">
                   {errorMessage}
                 </span>
               )}
               <div className="text-left sm:text-right">
-                <span className="text-2xl font-black text-foreground block">£{price}.00</span>
-                <span className="text-xs text-muted-foreground">No upfront payment required</span>
+                <span className={`font-display font-black ${TYPE.number} text-ink block`}>£{price}.00</span>
+                <span className="text-xs text-ink/80 font-semibold">No upfront payment required</span>
               </div>
-              <Button
+              <button
                 type="submit"
-                size="lg"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto bg-primary-base hover:bg-primary-hover text-white font-bold text-sm px-7 min-h-12 flex items-center justify-center shadow-md shadow-primary-base/20"
+                className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-paper hover:bg-ink hover:text-paper font-display text-sm font-black uppercase tracking-wider px-7 min-h-[48px] shadow-[4px_4px_0_0_#161311] flex items-center justify-center`}
               >
                 {isSubmitting ? "Submitting..." : "Request Coaching Slot"}
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              </button>
             </div>
           </div>
 

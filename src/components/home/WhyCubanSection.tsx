@@ -3,9 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { sitePhotos } from "@/lib/site-photos";
+import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 const CELEBRATION_CARDS = [
   {
@@ -35,70 +34,67 @@ export function WhyCubanSection() {
   return (
     <section
       id="why-cuban"
-      className="cv-auto py-14 sm:py-20 bg-canvas border-b border-amber-500/15 scroll-mt-20 text-white"
+      className="cv-auto py-12 sm:py-16 bg-paper border-b-4 border-ink scroll-mt-20 text-ink"
       data-testid="why-cuban-section"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <Badge
-            variant="outline"
-            className="border-amber-500/30 bg-amber-500/10 text-amber-300 px-3.5 py-1 text-xs font-semibold mb-3 inline-flex items-center gap-1.5 backdrop-blur-sm"
-          >
-            <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+        <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
+          <div className="inline-flex items-center gap-1.5 border border-ink bg-poster-mustard text-ink px-3 py-1 text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0_0_#161311]">
+            <Sparkles className="h-3.5 w-3.5 text-poster-red" />
             THE HEARTBEAT OF HAVANA IN BOURNEMOUTH
-          </Badge>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
-            What Makes Cuban Casino &amp; Rueda{" "}
-            <span className="font-display font-normal text-amber-300 drop-shadow-sm">
-              So Addictive?
+          </div>
+          <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.section} pt-1`}>
+            WHAT MAKES CUBAN CASINO &amp; RUEDA{" "}
+            <span className="text-poster-red">
+              SO ADDICTIVE?
             </span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-ivory-muted leading-relaxed">
+          <p className="mt-2 text-xs sm:text-sm text-ink/80 font-semibold leading-relaxed">
             Whether you are taking your very first dance step tonight or you already dance other styles and want to add authentic Cuban flavour to your repertoire—everyone is welcome in our circle.
           </p>
         </div>
 
         {/* 3-Card Pure Editorial Architecture Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {CELEBRATION_CARDS.map((card) => (
             <div
               key={card.title}
-              className="art-card group relative flex flex-col justify-between rounded-2xl border border-line bg-surface-1 p-6 sm:p-7 transition-all duration-500 hover:border-gold/40"
+              className="group relative flex flex-col justify-between border-4 border-ink bg-paper p-5 sm:p-6 shadow-[6px_6px_0_0_#161311] transition-transform duration-300 hover:-translate-y-1"
             >
               <div>
                 {/* 1. Top Photo Frame */}
-                <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-stone-900 mb-5 border border-white/10">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-ink mb-4 border-2 border-ink">
                   <Image
                     src={card.photo}
                     alt={card.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="editorial-photo h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="editorial-photo h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
 
                 {/* 2. Clean Kicker */}
-                <div className="text-xs font-bold uppercase tracking-[0.18em] text-amber-400 mb-2">
+                <div className={`${KICKER} text-poster-red mb-1.5`}>
                   {card.kicker}
                 </div>
 
                 {/* 3. Bold Editorial Title */}
-                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-3 leading-snug">
+                <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink mb-2 leading-snug">
                   {card.title}
                 </h3>
 
                 {/* 4. Concise 2-Sentence Paragraph */}
-                <p className="text-ivory-muted text-sm leading-relaxed mb-6 font-normal">
+                <p className="text-ink/80 text-xs sm:text-sm leading-relaxed mb-4 font-medium">
                   {card.description}
                 </p>
               </div>
 
               {/* 5. Clean Bottom Link */}
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-3 border-t-2 border-ink">
                 <Link
                   href="/dashboard/schedule"
-                  className="text-xs font-bold uppercase tracking-wider text-amber-300 hover:text-white inline-flex items-center gap-1.5 transition-colors"
+                  className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold w-full inline-flex items-center justify-center gap-1.5 min-h-[40px]`}
                 >
                   <span>Explore Classes</span>
                   <span aria-hidden="true">→</span>
@@ -110,16 +106,13 @@ export function WhyCubanSection() {
 
         {/* Bottom CTA & Reassurance Bar */}
         <div className="mt-10 flex flex-col items-center justify-center gap-4 text-center">
-          <Button
-            asChild
-            size="lg"
-            className="h-11 px-7 text-xs sm:text-sm font-extrabold bg-primary-base hover:bg-primary-hover text-white shadow-md shadow-primary-base/20"
+          <Link
+            href="/dashboard/schedule"
+            className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-paper hover:bg-ink hover:text-paper text-xs sm:text-sm font-black uppercase tracking-wider px-6 py-3 min-h-[44px] shadow-[4px_4px_0_0_#161311] inline-flex items-center`}
           >
-            <Link href="/dashboard/schedule">
-              Join the Cuban Circle • £12 / £14 at the Door
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+            Join the Cuban Circle • £12 / £14 at the Door
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

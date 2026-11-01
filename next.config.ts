@@ -2,9 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  // The class-night poster images read their fonts and illustrations from disk
+  // The poster images (class nights, song and home share cards) read fonts and illustrations from disk
   outputFileTracingIncludes: {
     "/cartel/*": ["./assets/fonts/**/*", "./public/images/editorial/icaic-couple.png", "./public/images/editorial/icaic-rueda.png"],
+    "/music/*/opengraph-image": ["./assets/fonts/**/*", "./public/images/editorial/icaic-couple.png", "./public/images/editorial/icaic-rueda.png"],
+    "/opengraph-image": ["./assets/fonts/**/*", "./public/images/editorial/icaic-couple.png", "./public/images/editorial/icaic-rueda.png"],
   },
   compress: true,
   images: {

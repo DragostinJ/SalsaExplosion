@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { POSTER_HEX } from "@/components/poster/poster-kit";
 import { DOOR_PRICING, VENUE_INFO } from "@/lib/academy-data";
 import {
   CARTEL_SIZES,
@@ -10,12 +11,7 @@ import {
   spanishDate,
 } from "@/lib/cartel";
 
-// Poster inks (globals.css)
-const PAPER = "#F1E6D0";
-const INK = "#161311";
-const RED = "#E8462F";
-const MUSTARD = "#F4B41A";
-const BLUE = "#22418F";
+const { paper: PAPER, ink: INK, red: RED, mustard: MUSTARD, blue: BLUE } = POSTER_HEX;
 
 /**
  * GET /cartel/jueves?formato=story|post: tonight's class poster as a PNG for Instagram

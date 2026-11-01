@@ -34,6 +34,7 @@ import {
 export const revalidate = 3600;
 
 const GRAPHICS = MEDIA_MANIFEST.mockupGraphics;
+const BANNERS = MEDIA_MANIFEST.editorial;
 
 /** Screen-print illustrations (transparent cut-outs on the paper) */
 const FRIEZE = [
@@ -143,8 +144,20 @@ export default function Home() {
         {/* WEEKLY SCHEDULE: the "cartelera" */}
         <section id="cartelera" className="bg-poster-mustard px-4 py-14 md:px-10 md:py-20">
           <div className="mx-auto max-w-7xl">
-            <p className={KICKER}>Pay at the door · no partner needed</p>
-            <h2 className={`mt-3 ${TYPE.section}`}>Cartelera semanal</h2>
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className={KICKER}>Pay at the door · no partner needed</p>
+                <h2 className={`mt-3 ${TYPE.section}`}>Cartelera semanal</h2>
+              </div>
+              <Image
+                src={GRAPHICS.clock.src}
+                alt=""
+                width={GRAPHICS.clock.width}
+                height={GRAPHICS.clock.height}
+                sizes="(max-width: 768px) 7rem, 11rem"
+                className="w-28 shrink-0 -rotate-6 md:w-44"
+              />
+            </div>
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               {SCHEDULE.map((day) => (
                 <article key={day.id} className="border-4 border-ink bg-paper p-5 md:p-7">
@@ -173,7 +186,8 @@ export default function Home() {
               ))}
             </div>
             <div className="mt-10 flex flex-col gap-4 border-t-4 border-ink pt-6 md:flex-row md:items-center md:gap-10">
-              <p className={`font-display ${TYPE.number}`}>
+              <p className={`flex items-center gap-3 font-display ${TYPE.number}`}>
+                <Image src={GRAPHICS.ticket.src} alt="" width={GRAPHICS.ticket.width} height={GRAPHICS.ticket.height} sizes="6rem" className="w-24" />
                 £{DOOR_PRICING.oneClassPounds} / £{DOOR_PRICING.twoClassesPounds}
               </p>
               <p className="max-w-xl font-semibold">
@@ -250,7 +264,17 @@ export default function Home() {
             <div className="mx-auto max-w-7xl">
               <p className={KICKER}>Festivals &amp; parties · book online</p>
               <h2 className={`mt-3 ${TYPE.section}`}>Próximas funciones</h2>
-              <ul className="mt-10 grid gap-5 md:grid-cols-3">
+              <figure className="mt-8 border-4 border-ink bg-paper">
+                <Image
+                  src={BANNERS.bannerBigBand.src}
+                  alt={BANNERS.bannerBigBand.alt}
+                  width={BANNERS.bannerBigBand.width}
+                  height={BANNERS.bannerBigBand.height}
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  className="aspect-[21/9] w-full object-cover"
+                />
+              </figure>
+              <ul className="mt-8 grid gap-5 md:grid-cols-3">
                 {events.map((event, index) => (
                   <li key={event.slug} className="flex border-4 border-ink bg-paper">
                     <p className="flex items-center border-r-4 border-dashed border-ink px-3 text-sm font-bold uppercase tracking-wider [writing-mode:vertical-rl]">
@@ -332,6 +356,7 @@ export default function Home() {
             <figcaption className="absolute bottom-3 left-3 bg-paper px-2 py-1 text-xs font-bold uppercase">{VENUE_INFO.name}</figcaption>
           </figure>
           <div className="flex flex-col justify-center gap-4 bg-poster-teal p-6 text-ink md:p-10">
+            <Image src={GRAPHICS.pier.src} alt="" width={GRAPHICS.pier.width} height={GRAPHICS.pier.height} sizes="10rem" className="w-32 md:w-40" />
             <h2 className={TYPE.section}>{VENUE_INFO.shortName}</h2>
             <p className="text-lg font-medium">{VENUE_INFO.fullAddress}</p>
             <p>
@@ -379,14 +404,15 @@ export default function Home() {
         </section>
 
         {/* Gift vouchers */}
-        <div className="flex flex-col items-center gap-3 border-t-4 border-ink bg-ink px-4 py-6 text-center text-paper md:flex-row md:justify-center md:gap-6">
-          <ClaveMark color={POSTER_INK.mustard} className="h-5 w-40" />
-          <p className="text-sm">
+        <div className="flex flex-col items-center gap-3 border-t-4 border-ink bg-poster-mustard px-4 py-6 text-center text-ink md:flex-row md:justify-center md:gap-6">
+          <Image src={GRAPHICS.gift.src} alt="" width={GRAPHICS.gift.width} height={GRAPHICS.gift.height} sizes="5rem" className="w-20" />
+          <p className="text-sm font-semibold">
             Looking for a Cuban dance gift?{" "}
-            <Link href="/pricing#vouchers" className="font-bold text-poster-mustard underline underline-offset-4">
+            <Link href="/pricing#vouchers" className="inline-flex min-h-[40px] items-center font-bold underline underline-offset-4">
               Salsa Explosion gift vouchers →
             </Link>
           </p>
+          <ClaveMark color={POSTER_INK.ink} className="h-5 w-40" />
         </div>
       </main>
     </div>

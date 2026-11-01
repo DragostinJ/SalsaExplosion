@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { BookingStatus } from "@prisma/client";
 import { TicketStub } from "@/components/carnet/ticket-stub";
@@ -5,6 +6,7 @@ import { KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS, TYPE, halftone, POSTER_INK
 import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
 import { DOOR_PRICING, VENUE_INFO } from "@/lib/academy-data";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
 import { reportError } from "@/lib/monitoring";
 import { prisma } from "@/lib/prisma";
@@ -14,6 +16,8 @@ export const metadata = {
   description: "Your festival passes, class reservations and the season of classes you've danced, in one place.",
   robots: { index: false },
 };
+
+const ART = MEDIA_MANIFEST.mockupGraphics;
 
 /** Stub counts that earn a stamp on the carnet */
 const MILESTONES = [10, 25, 50, 100] as const;
@@ -85,7 +89,8 @@ export default async function CarnetPage() {
               {[user.firstName, user.lastName].filter(Boolean).join(" ") || "Dancer"} · {titleCase(user.currentLevel)}
             </span>
           </h1>
-          <dl className="mt-8 grid max-w-md grid-cols-2 gap-4 border-t-4 border-ink pt-4">
+          <div className="mt-8 flex items-end justify-between gap-4">
+          <dl className="grid max-w-md flex-1 grid-cols-2 gap-4 border-t-4 border-ink pt-4">
             <div>
               <dt className="text-xs font-bold uppercase tracking-wider">Clases bailadas</dt>
               <dd className={`font-display ${TYPE.number}`}>{attendedCount}</dd>
@@ -95,6 +100,8 @@ export default async function CarnetPage() {
               <dd className={`font-display ${TYPE.number}`}>{passes.length}</dd>
             </div>
           </dl>
+          <Image src={ART.medal.src} alt="" width={ART.medal.width} height={ART.medal.height} sizes="9rem" className="w-20 shrink-0 md:w-32" />
+          </div>
           <p className="mt-4 text-sm font-semibold">
             {nextMilestone
               ? `${nextMilestone - attendedCount} more ${nextMilestone - attendedCount === 1 ? "class" : "classes"} to your ${nextMilestone}-class stamp.`
@@ -114,8 +121,13 @@ export default async function CarnetPage() {
 
       {/* FESTIVAL AND PARTY PASSES (bought online) */}
       <section aria-labelledby="passes-heading" className="space-y-4">
-        <p className={KICKER}>Fiestas · show the code at the door</p>
-        <h2 id="passes-heading" className={TYPE.section}>Tus pases</h2>
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className={KICKER}>Fiestas · show the code at the door</p>
+            <h2 id="passes-heading" className={TYPE.section}>Tus pases</h2>
+          </div>
+          <Image src={ART.phone.src} alt="" width={ART.phone.width} height={ART.phone.height} sizes="7rem" className="w-20 shrink-0 md:w-28" />
+        </div>
         {passes.length === 0 ? (
           <p className="max-w-xl">
             No festival or party passes yet.{" "}

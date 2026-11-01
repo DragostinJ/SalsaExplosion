@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { MovePosterCard } from "@/components/moves/move-poster-card";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, POSTER_BLOCKS, TYPE } from "@/components/poster/poster-kit";
 import { getPublishedMoves } from "@/lib/moves/move-library";
@@ -40,13 +41,23 @@ export default function MovesPage() {
 
       {families.length === 0 ? (
         <section aria-labelledby="coming-heading" className="space-y-8">
-          <div className="border-4 border-ink bg-poster-mustard p-6 text-ink">
-            <h2 id="coming-heading" className={TYPE.card}>
-              Próximamente · coming soon
-            </h2>
-            <p className="mt-2 max-w-2xl font-medium">
-              Maestro Enrique is checking every move on the music. The first ones appear here as soon as they&apos;re approved.
-            </p>
+          <div className="flex items-center gap-6 border-4 border-ink bg-poster-mustard p-6 text-ink">
+            <div className="flex-1">
+              <h2 id="coming-heading" className={TYPE.card}>
+                Próximamente · coming soon
+              </h2>
+              <p className="mt-2 max-w-2xl font-medium">
+                Maestro Enrique is checking every move on the music. The first ones appear here as soon as they&apos;re approved.
+              </p>
+            </div>
+            <Image
+              src={MEDIA_MANIFEST.mockupGraphics.camera.src}
+              alt=""
+              width={MEDIA_MANIFEST.mockupGraphics.camera.width}
+              height={MEDIA_MANIFEST.mockupGraphics.camera.height}
+              sizes="8rem"
+              className="hidden w-32 shrink-0 sm:block"
+            />
           </div>
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {MOVE_FAMILIES.map((family, index) => {

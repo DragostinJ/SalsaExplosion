@@ -63,19 +63,25 @@ The open double doors of a dance hall at night, warm light spilling out onto the
 
 ## Where each image goes (for Claude, not for Gemini)
 
-| # | Image | Page |
-|---|-------|------|
-| 1 | Admission ticket | /pricing: door prices block |
-| 2 | Alarm clock | /dashboard/schedule: timetable header |
-| 3 | Pier and palm | /venues: getting to Bournemouth |
-| 4 | Phone with a pattern | /how-it-works and /dashboard/wallet: digital pass |
-| 5 | The caller's hand | /dashboard/rueda: call dictionary header |
-| 6 | Gift envelope | /pricing#vouchers |
-| 7 | Medal on a ribbon | /dashboard/progression |
-| 8 | Vintage cine camera | /dashboard/recaps |
-| 9 | Vinyl record | 404 page ("the record skipped") and empty states |
-| 10 | The big band | /events hero |
-| 11 | Havana at sunset | /about hero ("Desde La Habana") |
-| 12 | The dance-hall door | /private-lessons or /venues hero |
+Delivered 2026-11-01 and processed into `public/images/editorial/` (`icaic-*.png` cut-outs, `banner-*.jpg`),
+registered in `MEDIA_MANIFEST.mockupGraphics` (ticket, clock, pier, phone, caller, gift, medal, camera, record)
+and `MEDIA_MANIFEST.editorial` (bannerBigBand, bannerHavana, bannerDoor).
+
+The cut-outs lose their cream interiors on ink, so put them on paper or a light poster ink.
+
+| # | Image | Placed (2026-11-01) | Still to place (pages Antigravity restyled overnight) |
+|---|-------|---------------------|-------------------------------------------------------|
+| 1 | Admission ticket | Home: next to the £12 / £14 door price | /pricing door prices |
+| 2 | Alarm clock | Home: cartelera heading | /dashboard/schedule header |
+| 3 | Pier and palm | Home: venue block | /venues "getting here" |
+| 4 | Phone with a pattern | Mi carnet: "Tus pases" | /how-it-works, /dashboard/wallet |
+| 5 | The caller's hand | Rueda flashcards header | /dashboard/rueda dictionary header |
+| 6 | Gift envelope | Home: gift voucher band | /pricing#vouchers |
+| 7 | Medal on a ribbon | Mi carnet: next to the counts | /dashboard/progression |
+| 8 | Vintage cine camera | /moves "Próximamente" | /dashboard/recaps |
+| 9 | Vinyl record | 404 page ("Se rayó el disco") | empty states |
+| 10 | The big band | Home: "Próximas funciones" | /events hero |
+| 11 | Havana at sunset | none yet | /about hero ("Desde La Habana") |
+| 12 | The dance-hall door | none yet | /private-lessons or /venues hero |
 
 Items 1–9 are cut out to transparent PNGs (1024 px) like rounds 2–3; items 10–12 are optimised JPEGs (max 2400 px). Save Gemini's files into `public/images/editorial/` as before; Claude processes and places them.

@@ -18,6 +18,18 @@ export const POSTER_INK = {
   plum: "var(--color-poster-plum)",
 } as const;
 
+/** The same inks as hex, for image renderers (ImageResponse can't read CSS variables) */
+export const POSTER_HEX = {
+  paper: "#F1E6D0",
+  ink: "#161311",
+  red: "#E8462F",
+  mustard: "#F4B41A",
+  teal: "#12938F",
+  blue: "#22418F",
+  pink: "#EE7BA0",
+  plum: "#5B2A6E",
+} as const;
+
 /** One silkscreen ink per dance gear (song maps, stripes, legends) */
 export const GEAR_INKS: GearPalette = {
   "Wait / Breathe": "#D9CCB2",
@@ -29,6 +41,18 @@ export const GEAR_INKS: GearPalette = {
   "Suelta / Shines": POSTER_INK.pink,
   // Black on paper, paper on ink: the one gear that swaps with the surface
   "Despelote / Reparto": "var(--color-ivory)",
+};
+
+/** Gear inks as hex, on a paper ground (Despelote is ink), for share images */
+export const GEAR_HEX: GearPalette = {
+  "Wait / Breathe": "#D9CCB2",
+  "Son Cubano": POSTER_HEX.blue,
+  "Casino (Smooth)": POSTER_HEX.teal,
+  "Casino (Flow)": POSTER_HEX.mustard,
+  "Rumba Guaguancó": POSTER_HEX.red,
+  "Afro-Cuban Orishas": POSTER_HEX.plum,
+  "Suelta / Shines": POSTER_HEX.pink,
+  "Despelote / Reparto": POSTER_HEX.ink,
 };
 
 /** Gears whose ink needs ink-coloured text on top (paper text only reads on blue and plum) */

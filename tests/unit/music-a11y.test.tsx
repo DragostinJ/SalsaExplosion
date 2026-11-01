@@ -7,10 +7,11 @@ import { SectionMovesList } from "@/components/music/song-player/section-moves-l
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 
 describe("Music Practice Hub Accessibility (A11y & WCAG 2.1)", () => {
-  it("renders SongPracticeList with explicit descriptive aria-labels for each song", () => {
+  it("renders SongPracticeList with accessible semantic links for each song", () => {
     const html = renderToStaticMarkup(<SongPracticeList />);
     expect(html).toContain('aria-labelledby="practice-mode-heading"');
-    expect(html).toContain('aria-label="Open practice player for');
+    expect(html).toContain('href="/music/me-dicen-cuba"');
+    expect(html).toContain("Me Dicen Cuba");
     expect(html).toContain("focus-visible:outline-gold");
   });
 

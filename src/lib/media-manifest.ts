@@ -52,6 +52,102 @@ export const MEDIA_MANIFEST = {
   },
 
   // ==========================================
+  // EDITORIAL ART-DIRECTION PHOTOGRAPHY (public/images/editorial, AI-generated
+  // atmosphere with Nano Banana Pro; prompts in docs/design-and-roadmap/).
+  // Mood imagery only: real teachers, students and BOH Studios use real photos.
+  // ==========================================
+  editorial: {
+    laVueltaHero: {
+      src: "/images/editorial/la-vuelta-hero.jpg",
+      alt: "A Cuban casino couple mid-turn in a dark studio, her skirt sweeping in crimson light",
+      width: 2400,
+      height: 1340,
+      aspectRatio: "2400/1340",
+      sizes: "100vw",
+    },
+    laVueltaHeroMobile: {
+      src: "/images/editorial/la-vuelta-hero-mobile.jpg",
+      alt: "A Cuban casino couple mid-turn in a dark studio, her skirt sweeping in crimson light",
+      width: 1340,
+      height: 2400,
+      aspectRatio: "1340/2400",
+      sizes: "100vw",
+    },
+    mediopuntoLight: {
+      src: "/images/editorial/mediopunto-light.jpg",
+      alt: "Coloured light from a Havana stained-glass fan window falling on a dancer in an old colonial room",
+      width: 2400,
+      height: 1018,
+      aspectRatio: "2400/1018",
+      sizes: "100vw",
+    },
+    feetHavanaTiles: {
+      src: "/images/editorial/feet-havana-tiles.jpg",
+      alt: "Dancers' feet mid-step on worn Cuban patterned floor tiles beside a pair of claves",
+      width: 1856,
+      height: 2304,
+      aspectRatio: "4/5",
+      sizes: "(max-width: 768px) 100vw, 40vw",
+    },
+    congaHands: {
+      src: "/images/editorial/conga-hands.jpg",
+      alt: "Hands striking a conga drum under red stage light",
+      width: 1856,
+      height: 2304,
+      aspectRatio: "4/5",
+      sizes: "(max-width: 768px) 100vw, 40vw",
+    },
+    ruedaOverhead: {
+      src: "/images/editorial/rueda-overhead.jpg",
+      alt: "Six couples dancing a rueda de casino circle, seen from above",
+      width: 2048,
+      height: 2048,
+      aspectRatio: "1/1",
+      sizes: "(max-width: 768px) 100vw, 50vw",
+    },
+    despelote: {
+      src: "/images/editorial/despelote.jpg",
+      alt: "A laughing dancer mid shoulder isolation in timba despelote style",
+      width: 1856,
+      height: 2304,
+      aspectRatio: "4/5",
+      sizes: "(max-width: 768px) 100vw, 40vw",
+    },
+    rumbaSolar: {
+      src: "/images/editorial/rumba-solar.jpg",
+      alt: "A rumba guaguancó couple in white dancing in a Havana courtyard with percussionists behind",
+      width: 2400,
+      height: 1610,
+      aspectRatio: "2400/1610",
+      sizes: "(max-width: 768px) 100vw, 60vw",
+    },
+    countingHands: {
+      src: "/images/editorial/counting-hands.jpg",
+      alt: "A teacher's hands counting in a class reflected in the studio mirror",
+      width: 2400,
+      height: 1340,
+      aspectRatio: "2400/1340",
+      sizes: "(max-width: 768px) 100vw, 60vw",
+    },
+    socialNight: {
+      src: "/images/editorial/social-night.jpg",
+      alt: "Couples dancing at a salsa social under warm festoon lights",
+      width: 2400,
+      height: 1340,
+      aspectRatio: "2400/1340",
+      sizes: "(max-width: 768px) 100vw, 60vw",
+    },
+    brassSection: {
+      src: "/images/editorial/brass-section.jpg",
+      alt: "Trumpets and trombones of a timba band glowing in amber stage light",
+      width: 2400,
+      height: 1340,
+      aspectRatio: "2400/1340",
+      sizes: "(max-width: 768px) 100vw, 60vw",
+    },
+  },
+
+  // ==========================================
   // VERIFIED LOCAL POSTERS (public/images/*.png|jpg under 350KB)
   // ==========================================
   posters: {

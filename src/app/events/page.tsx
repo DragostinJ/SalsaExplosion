@@ -189,12 +189,18 @@ export default async function EventsDirectoryPage() {
                     <div>
                       {liveEvt.posterPreviewUrl ? (
                         <div className="relative h-48 w-full bg-surface-2 overflow-hidden border-b border-line">
-                          <img
+                          <Image
                             src={liveEvt.posterPreviewUrl}
                             alt={liveEvt.title}
-                            className="h-full w-full object-cover"
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-cover"
+                            unoptimized={
+                              liveEvt.posterPreviewUrl.startsWith("data:") ||
+                              liveEvt.posterPreviewUrl.startsWith("http")
+                            }
                           />
-                          <div className="absolute top-3 right-3">
+                          <div className="absolute top-3 right-3 z-10">
                             <Badge className="bg-canvas/90 text-gold border border-gold/40 font-mono text-xs">
                               {liveEvt.bookingType === "ONLINE_TICKET" ? "ONLINE TICKET" : "DOOR ENTRY"}
                             </Badge>

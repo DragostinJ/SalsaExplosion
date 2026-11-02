@@ -6,7 +6,7 @@ import { StudioOperationsWorkspace } from "@/components/admin/studio-operations-
 
 export const metadata: Metadata = {
   title: "Studio Desk Operations | Salsa Explosion Admin",
-  description: "Fulfill private lesson requests, manage merchandise click & collect, pair dancers on the waitlist, and respond to beginner student sentiment.",
+  description: "Fulfill private lesson requests, manage merchandise click & collect, and respond to beginner student sentiment.",
 };
 
 interface AdminOperationsPageProps {
@@ -24,7 +24,6 @@ export default async function AdminOperationsPage({
   const [
     privateBookings,
     merchReservations,
-    waitlistEntries,
     sentimentFeedbacks,
     anonymousQuestions,
   ] = await Promise.all([
@@ -42,19 +41,6 @@ export default async function AdminOperationsPage({
       },
     }),
     prisma.merchReservation.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        user: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-          },
-        },
-      },
-    }),
-    prisma.partnerWaitlistEntry.findMany({
       orderBy: { createdAt: "desc" },
       include: {
         user: {
@@ -98,7 +84,7 @@ export default async function AdminOperationsPage({
           Studio Desk Operations Hub
         </h1>
         <p className="text-sm text-muted-foreground">
-          Centralized command center to confirm 1-on-1 private coaching, hand out reserved studio gear, pair dance partners, and address beginner questions.
+          Centralized command center to confirm 1-on-1 private coaching, hand out reserved studio gear, and address beginner questions.
         </p>
       </div>
 
@@ -106,7 +92,6 @@ export default async function AdminOperationsPage({
         initialTab={tab || "coaching"}
         privateBookings={privateBookings}
         merchReservations={merchReservations}
-        waitlistEntries={waitlistEntries}
         sentimentFeedbacks={sentimentFeedbacks}
         anonymousQuestions={anonymousQuestions}
       />

@@ -81,7 +81,7 @@ export function LearnView({ segment, role, mastered, ...gotIt }: LearnViewProps)
         </span>
         <EnergyBars gear={gear} />
         {segment.timingMode && (
-          <span className="rounded-full border border-line bg-canvas/40 px-2 py-0.5 text-[11px] font-semibold">
+          <span className="max-w-full truncate rounded-full border border-line bg-canvas/40 px-2 py-0.5 text-[11px] font-semibold">
             {segment.timingMode}
           </span>
         )}
@@ -90,7 +90,7 @@ export function LearnView({ segment, role, mastered, ...gotIt }: LearnViewProps)
         )}
       </div>
 
-      <h2 className="mt-1.5 font-display text-xl font-bold leading-tight">{segment.sectionName}</h2>
+      <h2 className="mt-1.5 break-words font-display text-xl font-bold leading-tight">{segment.sectionName}</h2>
 
       <p
         className={cn(

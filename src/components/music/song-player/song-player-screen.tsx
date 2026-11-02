@@ -303,8 +303,8 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
       <PlayerHeader song={song} title={title} mode={mode} onCycleMode={cycleMode} role={role} onChangeRole={changeRole} onExit={onExit} />
 
       {/* Portrait phone: stacked. Landscape phone: media left, cards right. Desktop: media + section list left. */}
-      <div className="flex min-h-0 flex-1 flex-col gap-2 max-lg:landscape:grid max-lg:landscape:grid-cols-2 max-lg:landscape:gap-3 lg:grid lg:grid-cols-[1.4fr_1fr] lg:gap-6">
-        <div className="flex shrink-0 flex-col gap-1.5 lg:min-h-0">
+      <div className="flex min-h-0 flex-1 flex-col gap-2 max-lg:landscape:grid max-lg:landscape:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] max-lg:landscape:gap-3 lg:grid lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-6">
+        <div className="flex min-w-0 shrink-0 flex-col gap-1.5 lg:min-h-0">
           {audioUrl ? (
             <div className={cn("flex h-20 shrink-0 items-center gap-3 rounded-xl border p-3", shownGear.chipClass)}>
               <AudioLines className={cn("h-8 w-8 shrink-0", shownGear.textClass)} aria-hidden="true" />
@@ -371,7 +371,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
         </div>
 
         {/* NOW / NEXT / controls */}
-        <div className="flex min-h-0 flex-1 flex-col gap-2">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-2">
           <section
             ref={nowCardRef}
             aria-live="polite"

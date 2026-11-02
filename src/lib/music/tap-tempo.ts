@@ -8,6 +8,9 @@
  * dropped before the final fit.
  */
 
+import type { SongSegment } from "@/lib/constants/timba-song-anatomy";
+import { findSegmentIndexAt } from "./song-timing";
+
 export const MIN_TAPS = 8;
 
 export interface BeatFit {
@@ -80,6 +83,39 @@ export function fitBeatGrid(tapTimes: readonly number[]): BeatFit | null {
 export function salsaCountAt(timeSeconds: number, sectionStartSeconds: number, periodSeconds: number): number {
   const beats = Math.floor((timeSeconds - sectionStartSeconds) / periodSeconds + 1e-9);
   return (((beats % 8) + 8) % 8) + 1;
+}
+
+/** Where "1" falls and how long a beat is: enough to count 1-8 at any media time. */
+export interface CountAnchor {
+  /** Media time of a beat that is "1" */
+  oneAtSeconds: number;
+  periodSeconds: number;
+}
+
+/** Count (1-8) and absolute beat number at a media time, for an anchor. */
+export function countAt(anchor: CountAnchor, timeSeconds: number): { count: number; beat: number } {
+  const beat = Math.floor((timeSeconds - anchor.oneAtSeconds) / anchor.periodSeconds + 1e-9);
+  return { count: salsaCountAt(timeSeconds, anchor.oneAtSeconds, anchor.periodSeconds), beat };
+}
+
+/**
+ * Anchor for counting straight from the song map: the section playing at a time
+ * starts on "1", at the song's BPM. Null where there is no count (a section that
+ * doesn't start on 1, or a no-beat intro).
+ */
+export function sectionStartAnchor(
+  segments: readonly SongSegment[],
+  bpm: number,
+  timeSeconds: number
+): CountAnchor | null {
+  const section = segments[findSegmentIndexAt(segments, timeSeconds)];
+  if (!section || !(bpm > 0) || section.startsOnOne === false || section.timingMode === "Ambient (No Beat)") return null;
+  return { oneAtSeconds: section.startTimeSeconds, periodSeconds: 60 / bpm };
+}
+
+/** Move the "1" by whole beats (e.g. +4 swaps 1 and 5 when the taps started on a 5). */
+export function shiftAnchor(anchor: CountAnchor, beats: number): CountAnchor {
+  return { ...anchor, oneAtSeconds: anchor.oneAtSeconds + beats * anchor.periodSeconds };
 }
 
 /** Nearest beat of a fit to a time, e.g. to snap a section start to the downbeat the taps found. */

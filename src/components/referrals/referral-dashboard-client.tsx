@@ -85,7 +85,7 @@ export function ReferralDashboardClient({
   };
 
   const shareText = encodeURIComponent(
-    `Hey! ${studentName} invited you to dance Cuban Salsa at Salsa Explosion Bournemouth! Use this link to get 1 free class credit at BOH Studios: ${referralUrl}`
+    `Hey! ${studentName} invited you to dance Cuban Salsa at Salsa Explosion Bournemouth! Your friend gets a free class, and so do you, when you join with this code: ${referralUrl}. Use it at the door: the teacher marks it.`
   );
   const whatsappUrl = `https://api.whatsapp.com/send?text=${shareText}`;
 
@@ -103,7 +103,7 @@ export function ReferralDashboardClient({
               Your Personal Dancer Invite Code
             </h2>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-xl">
-              Invite friends to try Cuban Salsa or Rueda de Casino at BOH Studios. They get 1 free welcome credit, and you earn 1 class credit when they join!
+              Your friend gets a free class, and so do you, when they join with your code. Use it at the door: the teacher marks it.
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export function ReferralDashboardClient({
           </h3>
         </div>
         <p className="text-xs text-muted-foreground">
-          Enter an invite code from another dancer to claim your 1 complimentary welcome class credit.
+          Enter an invite code from another dancer to claim your free class to use at the door.
         </p>
 
         {feedback && (
@@ -222,13 +222,13 @@ export function ReferralDashboardClient({
           <CardContent className="p-5 flex items-center justify-between">
             <div>
               <span className="text-xs font-medium text-muted-foreground">
-                Total Earned Credits
+                Total Free Classes
               </span>
               <div className="text-2xl font-black mt-1 text-amber-600">
-                {stats.creditsEarned} {stats.creditsEarned === 1 ? "Credit" : "Credits"}
+                {stats.creditsEarned} {stats.creditsEarned === 1 ? "Class" : "Classes"}
               </div>
               <span className="text-xs text-emerald-600 font-semibold">
-                Available in your studio wallet
+                Use at the door: the teacher marks it
               </span>
             </div>
             <div className="h-10 w-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center">
@@ -244,10 +244,10 @@ export function ReferralDashboardClient({
                 Welcome Bonus Status
               </span>
               <div className="text-lg font-black mt-1 text-foreground">
-                {stats.hasRedeemedWelcomeBonus ? "Claimed (1 Credit)" : "Available to Claim"}
+                {stats.hasRedeemedWelcomeBonus ? "Claimed (1 Class)" : "Available to Claim"}
               </div>
               <span className="text-xs text-muted-foreground">
-                1 bonus credit per student account
+                1 free class per student account
               </span>
             </div>
             <div className="h-10 w-10 rounded-xl bg-gold/15 text-gold flex items-center justify-center">
@@ -275,9 +275,9 @@ export function ReferralDashboardClient({
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-600 font-extrabold text-sm">
               2
             </div>
-            <h4 className="font-bold text-sm">They Get 1 Free Class Credit</h4>
+            <h4 className="font-bold text-sm">They Get 1 Free Class</h4>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              When they create an account and redeem your code, 1 complimentary welcome class credit is credited immediately to their wallet.
+              When they create an account and redeem your code, they get 1 free class to use at the door.
             </p>
           </div>
 
@@ -285,9 +285,9 @@ export function ReferralDashboardClient({
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 font-extrabold text-sm">
               3
             </div>
-            <h4 className="font-bold text-sm">You Get 1 Class Credit</h4>
+            <h4 className="font-bold text-sm">You Get 1 Free Class</h4>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              As soon as your friend redeems your code, you also receive 1 free class credit added directly to your studio balance!
+              As soon as your friend redeems your code, you also get 1 free class. Use it at the door: the teacher marks it.
             </p>
           </div>
         </div>

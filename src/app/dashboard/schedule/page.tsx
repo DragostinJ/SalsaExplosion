@@ -264,7 +264,7 @@ export default async function StudentSchedulePage({
       {(checkoutStatus === "success" || checkoutStatus === "demo_success") && (
         <div className="flex items-center justify-between border-4 border-ink bg-poster-teal p-4 text-xs sm:text-sm font-bold text-ink shadow-[4px_4px_0_0_#161311]">
           <span>
-            Pass activated! Your studio wallet has been updated ({user?.classCredits ?? 0} credits available). Select any class below to book your spot!
+            Pass activated! Check your carnet for your door pass.
           </span>
           <Link href="/dashboard/schedule" className="underline ml-4 text-xs font-black">
             Dismiss
@@ -304,7 +304,9 @@ export default async function StudentSchedulePage({
                 <Sparkles className="h-4 w-4 text-accent-red" />
                 <span>Dancer:</span>
                 <span className="font-black uppercase">{user.currentLevel}</span>
-                <span className="opacity-80">({user.classCredits} credits)</span>
+                {user.classCredits > 0 && (
+                  <span className="opacity-80">({user.classCredits} free {user.classCredits === 1 ? "class" : "classes"})</span>
+                )}
               </div>
             )}
           </div>

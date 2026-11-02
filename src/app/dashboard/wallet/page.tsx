@@ -283,11 +283,14 @@ export default async function StudentWalletPage() {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="border-2 border-ink bg-poster-mustard p-3 text-center min-w-[120px] shadow-[3px_3px_0_var(--color-ink)]">
               <span className="text-xs font-black uppercase tracking-wider text-ink block">
-                Available Credits
+                Free classes
               </span>
               <div className="font-display text-3xl font-black text-ink mt-0.5">
                 {user.classCredits}
               </div>
+              <p className="text-[11px] font-semibold text-ink mt-1 max-w-[180px] leading-tight">
+                Tell the door when you arrive. A teacher marks it on the roster.
+              </p>
             </div>
             <div className="flex flex-col gap-2">
               <Button

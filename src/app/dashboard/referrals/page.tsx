@@ -16,7 +16,7 @@ import { reportError } from "@/lib/monitoring";
 export const metadata = {
   title: "Refer a Dancer | Give 1 Class, Get 1 Class | Salsa Explosion",
   description:
-    "Invite your friends to dance Cuban Salsa at BOH Studios Bournemouth. They get 1 free welcome credit, and you earn 1 credit.",
+    "Your friend gets a free class, and so do you, when they join with your code. Use it at the door: the teacher marks it.",
 };
 
 export default async function ReferralsPage() {
@@ -27,8 +27,8 @@ export default async function ReferralsPage() {
         <PageHeader
           art={MEDIA_MANIFEST.mockupGraphics.ticket}
           title="Invite Friends,"
-          titleHighlight="Earn Free Class Credits"
-          description={`Help grow Bournemouth's authentic Cuban Salsa & Rueda de Casino community at ${VENUE_INFO.name}. When a friend joins their first Thursday or Sunday session using your personal code, you both receive a complimentary class credit.`}
+          titleHighlight="Get Free Classes"
+          description={`Your friend gets a free class, and so do you, when they join with your code. Use it at the door: the teacher marks it.`}
           badge="Give 1 Class, Get 1 Class"
           eyebrow="DANCER REFERRAL NETWORK • BOH STUDIOS"
           backHref="/dashboard/schedule"
@@ -48,14 +48,14 @@ export default async function ReferralsPage() {
               <Sparkles className="h-5 w-5 text-accent-red mb-1" />
               <div className="text-sm font-black uppercase text-ink">2. Friend Joins Class</div>
               <p className="text-xs text-ink">
-                Your friend claims their free welcome credit for Thursday or Sunday at BOH Studios.
+                Your friend gets a free class when they join with your code.
               </p>
             </div>
             <div className="border-2 border-ink bg-paper-light p-4 space-y-1 shadow-[3px_3px_0_var(--color-ink)]">
               <CheckCircle2 className="h-5 w-5 text-accent-teal mb-1" />
-              <div className="text-sm font-black uppercase text-ink">3. Earn Automatic Credit</div>
+              <div className="text-sm font-black uppercase text-ink">3. Use at the Door</div>
               <p className="text-xs text-ink">
-                1 free class credit is added directly to your digital studio wallet.
+                Use it at the door: the teacher marks it on the roster.
               </p>
             </div>
           </div>
@@ -132,7 +132,7 @@ export default async function ReferralsPage() {
         art={MEDIA_MANIFEST.mockupGraphics.ticket}
         title="Refer-a-Dancer"
         titleHighlight="Program"
-        description="Help grow Bournemouth's authentic Cuban salsa scene. Share your link with friends, colleagues, or dance partners."
+        description="Your friend gets a free class, and so do you, when they join with your code. Use it at the door: the teacher marks it."
         badge="Give 1 Class, Get 1 Class"
         eyebrow="DANCER REFERRAL NETWORK • BOH STUDIOS"
         backHref="/dashboard/schedule"

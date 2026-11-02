@@ -119,6 +119,21 @@ export default async function CarnetPage() {
         </div>
       </section>
 
+      {/* FREE CLASSES (bring-a-friend reward, redeemed at the door) */}
+      {user.classCredits > 0 && (
+        <section aria-label="Free classes" className="space-y-4">
+          <TicketStub strip="GRATIS" tone="mustard">
+            <p className="text-xs font-bold uppercase tracking-wider text-ink">Recompensa · Reward</p>
+            <h2 className={`font-display ${TYPE.card} text-ink`}>
+              {user.classCredits} {user.classCredits === 1 ? "free class" : "free classes"}
+            </h2>
+            <p className="text-sm font-semibold text-ink">
+              Tell the door when you arrive. A teacher marks it on the roster.
+            </p>
+          </TicketStub>
+        </section>
+      )}
+
       {/* FESTIVAL AND PARTY PASSES (bought online) */}
       <section aria-labelledby="passes-heading" className="space-y-4">
         <div className="flex items-end justify-between gap-4">

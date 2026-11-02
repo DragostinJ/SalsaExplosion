@@ -67,7 +67,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     }
   });
 
-  test("3. Opening the Made in Cuba Weekend page, ticket tiers, and VIP upsell drawer", async ({
+  test("3. Opening the Made in Cuba Weekend page, ticket tiers, Lead/Follow booking and no extras", async ({
     page,
   }) => {
     // 1. Open Events Directory
@@ -101,28 +101,12 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(page.getByText("£60").first()).toBeVisible();
     await expect(page.getByText("£20").first()).toBeVisible();
 
-    // 3. Test VIP Upsell Drawer Trigger
-    // Every tier now offers Lead and Follow (information only), so target the Full pass's own card:
-    // only congress/full passes open the upsell; party passes go straight to checkout.
-    const bookFullPassBtn = page
-      .locator("article", { hasText: /Full .* Congress Pass/i })
-      .getByRole("button", { name: /Book as Lead/i })
-      .first();
-
-    if (await bookFullPassBtn.isVisible()) {
-      await bookFullPassBtn.click();
-
-      // Verify the VIP Upsell Modal opens
-      await expect(
-        page.getByText("Upgrade Your Pass")
-      ).toBeVisible();
-      await expect(
-        page.getByText("Official 2026 Congress T-Shirt")
-      ).toBeVisible();
-      await expect(
-        page.getByText("Maestro Private Masterclass")
-      ).toBeVisible();
-    }
+    // 3. Every pass offers Lead and Follow (information for the teachers) and goes straight to
+    // checkout: Enrique removed the T-shirt and masterclass extras.
+    const fullPassCard = page.locator("article", { hasText: /Full .* Congress Pass/i }).first();
+    await expect(fullPassCard.getByRole("button", { name: /Book as Lead/i })).toBeVisible();
+    await expect(fullPassCard.getByRole("button", { name: /Book as Follow/i })).toBeVisible();
+    await expect(page.getByText(/Upgrade Your Pass|Congress T-Shirt/i)).toHaveCount(0);
   });
 
   test("4. Venues directory renders BOH Studios Bournemouth, BOH Studio 2, Neptune Hall, and Roundhouse Hotel", async ({

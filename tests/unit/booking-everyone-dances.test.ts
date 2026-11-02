@@ -81,6 +81,15 @@ describe("Enrique's rule: everyone dances, even when the class is busy or uneven
     });
   });
 
+  it("lets a beginner say they're coming to a class above their level (a warning, never a lock)", async () => {
+    tx.classSession.findUnique.mockResolvedValue({ ...crowdedUnevenClass, minLevel: DanceLevel.INTERMEDIATE });
+
+    const res = await bookClassAction({ classSessionId: "class_thu", danceRole: DanceRole.LEAD });
+
+    expect(res.success).toBe(true);
+    expect(tx.booking.upsert).toHaveBeenCalledOnce();
+  });
+
   it("takes no credits and no payment: a reservation only tells the teachers who is coming", async () => {
     const res = await bookClassAction({ classSessionId: "class_thu", danceRole: DanceRole.FOLLOW });
 

@@ -16,7 +16,6 @@ import {
   ActionResponse,
   BookingDomainError,
   CANCELLATION_WINDOW_HOURS,
-  LEVEL_WEIGHT,
 } from "@/lib/constants/booking";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
@@ -104,16 +103,8 @@ export async function bookClassAction(
           );
         }
 
-        // 3c. Enforce Dance Level Hierarchy
-        const userWeight = LEVEL_WEIGHT[user.currentLevel];
-        const requiredWeight = LEVEL_WEIGHT[classSession.minLevel];
-
-        if (userWeight < requiredWeight) {
-          throw new BookingDomainError(
-            "INSUFFICIENT_LEVEL",
-            `This class requires ${classSession.minLevel} level unlocked (your current level: ${user.currentLevel}). Upload a level-up video to advance!`
-          );
-        }
+        // 3c. No level lock (Enrique, 2026-11-02): a dancer may say they're coming to a class above
+        // their level; the schedule card shows a friendly warning instead.
 
         // 3d. Check for existing booking (supports re-booking if previously CANCELLED)
         const existingBooking = await tx.booking.findUnique({

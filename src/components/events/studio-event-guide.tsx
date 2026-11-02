@@ -47,7 +47,7 @@ const STUDIO_FAQS: FaqItem[] = [
   {
     question: "Can I pay at the door or should I reserve online?",
     answer:
-      "Book your pass online with Apple Pay, Google Pay or card to secure it and skip the door queue. Choosing Lead or Follow only helps the teachers plan the rotations; it never limits who can book.",
+      "Both. Book online with Apple Pay, Google Pay or card to secure your pass and skip the queue, or pay at the door (cash or card) while passes last. Choosing Lead or Follow only helps the teachers plan the rotations; it never limits who can book.",
   },
 ];
 

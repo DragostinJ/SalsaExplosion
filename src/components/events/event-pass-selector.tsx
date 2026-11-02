@@ -4,21 +4,13 @@ import { useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { DanceRole } from "@prisma/client";
-import {
-  CheckCircle2,
-  Sparkles,
-  Loader2,
-  Ticket,
-  Shirt,
-  GraduationCap,
-  X,
-} from "lucide-react";
+import { CheckCircle2, Loader2, Ticket } from "lucide-react";
 import { registerForEventTierAction } from "@/actions/management.actions";
 import { createEventCheckoutSessionAction } from "@/actions/checkout.actions";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
 import { VENUE_INFO } from "@/lib/academy-data";
-import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
+import { TYPE, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export interface SerializedEventTier {
   id: string;
@@ -60,40 +52,17 @@ export function EventPassSelector({
     type: "success" | "error";
     text: string;
   } | null>(null);
-  const [upsellTarget, setUpsellTarget] = useState<{
-    tier: SerializedEventTier;
-    role: DanceRole;
-  } | null>(null);
-  const [addShirt, setAddShirt] = useState(false);
-  const [addMasterclass, setAddMasterclass] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
 
+  // Every pass goes straight to checkout: Enrique removed the T-shirt and masterclass extras (2026-11-02)
   const onInitiateBooking = (tier: SerializedEventTier, role: DanceRole) => {
     if (purchasesUnavailable) return;
-    const isCongressPass =
-      tier.name.toLowerCase().includes("full") ||
-      tier.name.toLowerCase().includes("congress") ||
-      tier.name.toLowerCase().includes("weekend") ||
-      tier.name.toLowerCase().includes("bootcamp");
-
-    if (isCongressPass) {
-      setUpsellTarget({ tier, role });
-      setAddShirt(false);
-      setAddMasterclass(false);
-    } else {
-      handleRegister(tier.eventId, tier.id, role, false, false);
-    }
+    handleRegister(tier.eventId, tier.id, role);
   };
 
-  const handleRegister = (
-    eventId: string,
-    ticketTierId: string,
-    role: DanceRole,
-    withShirt = false,
-    withMasterclass = false
-  ) => {
+  const handleRegister = (eventId: string, ticketTierId: string, role: DanceRole) => {
     setBanner(null);
     startTransition(async () => {
       const tier = tiers.find((t) => t.id === ticketTierId);
@@ -104,8 +73,6 @@ export function EventPassSelector({
           eventId,
           ticketTierId,
           role,
-          addShirt: withShirt,
-          addMasterclass: withMasterclass,
         });
 
         if (!checkoutRes.success) {
@@ -376,190 +343,6 @@ export function EventPassSelector({
         <PaymentSecurityTrustBar showRefundPolicy={false} />
       </div>
 
-      {/* Congress VIP Upsell Modal */}
-      {upsellTarget && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/80 p-4 animate-in fade-in duration-200"
-          onClick={() => setUpsellTarget(null)}
-        >
-          <div
-            className="relative w-full max-w-lg border-4 border-ink bg-paper p-6 text-ink shadow-[12px_12px_0_0_#161311] space-y-5 max-h-[90dvh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="flex items-start justify-between pb-3 border-b-4 border-ink">
-              <div>
-                <p className={`${KICKER} text-accent-red`}>VIP Congress Upgrade</p>
-                <h3 className={`font-display ${TYPE.card} text-ink leading-tight mt-1`}>
-                  Upgrade Your Pass
-                </h3>
-                <p className="text-xs font-semibold text-ink/70 mt-1">
-                  Base Selection:{" "}
-                  <span className="font-bold text-ink">
-                    {upsellTarget.tier.name} ({upsellTarget.role}) — £
-                    {(upsellTarget.tier.priceInCents / 100).toFixed(0)}
-                  </span>
-                </p>
-              </div>
-              <button
-                type="button"
-                aria-label="Close dialog"
-                onClick={() => setUpsellTarget(null)}
-                className="border-2 border-ink p-1 text-ink hover:bg-ink hover:text-paper transition-colors"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Add-ons options */}
-            <div className="space-y-3">
-              <span className="text-xs font-bold text-ink/70 uppercase tracking-wider block">
-                Official Festival Add-Ons (Optional):
-              </span>
-
-              {/* Add-on 1: Official Congress T-Shirt */}
-              <div
-                onClick={() => setAddShirt((prev) => !prev)}
-                className={`cursor-pointer border-2 border-ink p-3.5 flex items-start gap-3 transition-colors ${
-                  addShirt
-                    ? "bg-poster-mustard/30 ring-2 ring-ink"
-                    : "bg-paper hover:bg-surface-1"
-                }`}
-              >
-                <div
-                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center border-2 border-ink ${
-                    addShirt ? "bg-ink text-paper" : "bg-paper text-ink"
-                  }`}
-                >
-                  <Shirt className="h-4 w-4" />
-                </div>
-                <div className="flex-1 space-y-0.5 text-xs">
-                  <div className="flex items-center justify-between font-bold">
-                    <span>Official 2026 Congress T-Shirt</span>
-                    <span className="font-display text-base text-accent-red">+£20</span>
-                  </div>
-                  <p className="text-[11px] text-ink/70 leading-relaxed font-medium">
-                    100% organic cotton Salsa Explosion UK festival tee. Sizes S–XXL collected at the BOH Studios welcome desk.
-                  </p>
-                </div>
-                <div
-                  className={`h-5 w-5 border-2 border-ink flex items-center justify-center text-xs font-bold ${
-                    addShirt ? "bg-ink text-paper" : "bg-paper"
-                  }`}
-                >
-                  {addShirt ? "✓" : ""}
-                </div>
-              </div>
-
-              {/* Add-on 2: Maestro Private Masterclass */}
-              <div
-                onClick={() => setAddMasterclass((prev) => !prev)}
-                className={`cursor-pointer border-2 border-ink p-3.5 flex items-start gap-3 transition-colors ${
-                  addMasterclass
-                    ? "bg-poster-mustard/30 ring-2 ring-ink"
-                    : "bg-paper hover:bg-surface-1"
-                }`}
-              >
-                <div
-                  className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center border-2 border-ink ${
-                    addMasterclass ? "bg-ink text-paper" : "bg-paper text-ink"
-                  }`}
-                >
-                  <GraduationCap className="h-4 w-4" />
-                </div>
-                <div className="flex-1 space-y-0.5 text-xs">
-                  <div className="flex items-center justify-between font-bold">
-                    <span>Maestro Private Masterclass</span>
-                    <span className="font-display text-base text-accent-red">+£35</span>
-                  </div>
-                  <p className="text-[11px] text-ink/70 leading-relaxed font-medium">
-                    Exclusive 45-minute small-group footwork & body isolation clinic with Maestro Enrique Perez Valdes. Limited to 12 Casineros.
-                  </p>
-                </div>
-                <div
-                  className={`h-5 w-5 border-2 border-ink flex items-center justify-center text-xs font-bold ${
-                    addMasterclass ? "bg-ink text-paper" : "bg-paper"
-                  }`}
-                >
-                  {addMasterclass ? "✓" : ""}
-                </div>
-              </div>
-            </div>
-
-            {/* Total breakdown */}
-            <div className="border-2 border-ink bg-surface-1 p-3.5 space-y-1.5 text-xs font-semibold">
-              <div className="flex justify-between text-ink/70">
-                <span>{upsellTarget.tier.name} ({upsellTarget.role})</span>
-                <span>£{(upsellTarget.tier.priceInCents / 100).toFixed(0)}</span>
-              </div>
-              {addShirt && (
-                <div className="flex justify-between text-ink/70">
-                  <span>Official Congress T-Shirt</span>
-                  <span>+£20</span>
-                </div>
-              )}
-              {addMasterclass && (
-                <div className="flex justify-between text-ink/70">
-                  <span>Maestro Private Masterclass</span>
-                  <span>+£35</span>
-                </div>
-              )}
-              <div className="pt-2 border-t-2 border-ink flex justify-between font-display text-lg text-ink">
-                <span>Total Amount:</span>
-                <span className="text-accent-red">
-                  £
-                  {upsellTarget.tier.priceInCents / 100 +
-                    (addShirt ? 20 : 0) +
-                    (addMasterclass ? 35 : 0)}
-                </span>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2 border-t-4 border-ink">
-              <button
-                type="button"
-                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper w-full sm:w-auto text-xs`}
-                onClick={() => {
-                  handleRegister(
-                    upsellTarget.tier.eventId,
-                    upsellTarget.tier.id,
-                    upsellTarget.role,
-                    false,
-                    false
-                  );
-                  setUpsellTarget(null);
-                }}
-              >
-                Pass Only (£{(upsellTarget.tier.priceInCents / 100).toFixed(0)})
-              </button>
-              <button
-                type="button"
-                className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} w-full sm:flex-1 text-xs`}
-                onClick={() => {
-                  handleRegister(
-                    upsellTarget.tier.eventId,
-                    upsellTarget.tier.id,
-                    upsellTarget.role,
-                    addShirt,
-                    addMasterclass
-                  );
-                  setUpsellTarget(null);
-                }}
-              >
-                <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-                Confirm & Proceed (£
-                {upsellTarget.tier.priceInCents / 100 +
-                  (addShirt ? 20 : 0) +
-                  (addMasterclass ? 35 : 0)}
-                )
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

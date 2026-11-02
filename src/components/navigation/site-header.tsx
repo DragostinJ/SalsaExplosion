@@ -15,7 +15,6 @@ import {
   QrCode,
   CalendarPlus,
   ShieldCheck,
-  Video,
   Compass,
   Menu,
   ClipboardList,
@@ -172,13 +171,8 @@ export function SiteHeader({
     icon: Compass,
     active: pathname.startsWith("/about"),
   };
-  const recapsLink = {
-    href: "/dashboard/recaps",
-    label: "Recaps",
-    icon: Video,
-    active: pathname.startsWith("/dashboard/recaps"),
-  };
-  const studentLinks = isAuthReady ? [...doorLinks, recapsLink, aboutLink] : [...doorLinks, aboutLink];
+  // Class recaps are "later" (Enrique, 2026-11-02): the page stays, the link comes back when teachers post
+  const studentLinks = [...doorLinks, aboutLink];
 
   const instructorLinks = [
     {

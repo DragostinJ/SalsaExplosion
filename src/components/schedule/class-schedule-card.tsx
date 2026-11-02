@@ -8,11 +8,9 @@ import {
   Clock,
   MapPin,
   Users,
-  Lock,
   CheckCircle2,
   XCircle,
   Loader2,
-  Sparkles,
   AlertTriangle,
   QrCode,
 } from "lucide-react";
@@ -178,9 +176,9 @@ export function ClassScheduleCard({
 
   const startDate = new Date(session.startTime);
 
-  const isLevelUnlocked = isGuest
-    ? true // Allow guests to view and evaluate all levels
-    : LEVEL_WEIGHT[student.currentLevel] >= LEVEL_WEIGHT[session.minLevel];
+  // Never a lock (Enrique's rule): a class above the dancer's level only gets a friendly warning
+  const isAboveLevel =
+    !isGuest && LEVEL_WEIGHT[student.currentLevel] < LEVEL_WEIGHT[session.minLevel];
 
 
   const handleBook = () => {
@@ -266,7 +264,7 @@ export function ClassScheduleCard({
         optimisticState.isBooked
           ? "border-emerald-500/50 bg-emerald-500/[0.02] ring-1 ring-emerald-500/30"
           : ""
-      } ${!isLevelUnlocked ? "opacity-90" : ""}`}
+      }`}
     >
       <CardHeader className="space-y-3 pb-4">
         {/* Top Badges: Level & Status */}
@@ -285,10 +283,10 @@ export function ClassScheduleCard({
               <CheckCircle2 className="mr-1 h-3.5 w-3.5" />
               Booked ({optimisticState.bookedRole})
             </Badge>
-          ) : !isLevelUnlocked ? (
+          ) : isAboveLevel ? (
             <Badge variant="outline" className="border-accent-tangerine/40 text-accent-tangerine">
-              <Lock className="mr-1 h-3 w-3" />
-              Level Locked
+              <AlertTriangle className="mr-1 h-3 w-3" aria-hidden="true" />
+              Above your level
             </Badge>
           ) : (
             <Badge variant="outline" className="text-xs">
@@ -368,7 +366,7 @@ export function ClassScheduleCard({
           </p>
 
           {/* Partner Role Selector */}
-          {!isSoloClass && !optimisticState.isBooked && isLevelUnlocked && (
+          {!isSoloClass && !optimisticState.isBooked && (
             <div className="grid grid-cols-2 gap-2 pt-1.5">
               <button
                 type="button"
@@ -444,14 +442,7 @@ export function ClassScheduleCard({
       </CardContent>
 
       <CardFooter className="border-t bg-muted/10 pt-4">
-        {!isLevelUnlocked ? (
-          <Button asChild variant="outline" className="w-full">
-            <Link href="/dashboard/progression">
-              <Sparkles className="mr-2 h-4 w-4 text-accent-tangerine" />
-              Submit {session.minLevel} Video to Unlock
-            </Link>
-          </Button>
-        ) : optimisticState.isBooked ? (
+        {optimisticState.isBooked ? (
           session.userBooking?.status === BookingStatus.ATTENDED ? (
             <div className="w-full space-y-2">
               <Button
@@ -527,23 +518,31 @@ export function ClassScheduleCard({
             </Button>
           </div>
         ) : (
-          <Button
-            type="button"
-            disabled={isPending || session.isCancelled}
-            onClick={attemptBook}
-            className="w-full font-bold shadow-xs transition-colors h-10 rounded-xl bg-brand hover:bg-brand-hover text-white"
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Securing Spot...
-              </>
-            ) : isSoloClass ? (
-              "I'm coming"
-            ) : (
-              `I'm coming as ${selectedRole === DanceRole.FOLLOW ? "Follow" : "Lead"}`
+          <div className="w-full space-y-2">
+            {isAboveLevel && (
+              <p className="text-xs font-semibold" data-testid="above-level-note">
+                This is a {session.minLevel.toLowerCase()} class. You&apos;re welcome to come; the teachers suggest the{" "}
+                {student.currentLevel.toLowerCase()} class first if the figures feel new.
+              </p>
             )}
-          </Button>
+            <Button
+              type="button"
+              disabled={isPending || session.isCancelled}
+              onClick={attemptBook}
+              className="w-full font-bold shadow-xs transition-colors h-10 rounded-xl bg-brand hover:bg-brand-hover text-white"
+            >
+              {isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Securing Spot...
+                </>
+              ) : isSoloClass ? (
+                "I'm coming"
+              ) : (
+                `I'm coming as ${selectedRole === DanceRole.FOLLOW ? "Follow" : "Lead"}`
+              )}
+            </Button>
+          </div>
         )}
       </CardFooter>
 

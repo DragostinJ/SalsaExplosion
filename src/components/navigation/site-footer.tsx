@@ -84,11 +84,6 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/recaps" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
-                  End-of-Class Recaps
-                </Link>
-              </li>
-              <li>
                 <Link href="/dashboard/progression" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   Cuban Syllabus &amp; Level-Up
                 </Link>

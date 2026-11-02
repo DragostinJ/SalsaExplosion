@@ -11,7 +11,6 @@ import {
   Sparkles,
   CreditCard,
   Award,
-  Video,
   MapPin,
   Compass,
   Users,
@@ -133,7 +132,6 @@ export function MobileNavSheet({
   const memberOnlyLinks = [
     { href: "/dashboard/wallet", label: "Receipts & History", icon: QrCode },
     { href: "/dashboard/progression", label: "Syllabus Progression", icon: Award },
-    { href: "/dashboard/recaps", label: "Class Video Recaps", icon: Video },
     { href: "/dashboard/referrals", label: "Dancer Referral Rewards", icon: Share2 },
   ];
 

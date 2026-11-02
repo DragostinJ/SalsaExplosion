@@ -121,12 +121,15 @@ export default function Home() {
           </dl>
         </section>
 
-        {/* ILLUSTRATION FRIEZE */}
-        <section aria-label="Illustrations" className="grid grid-cols-2 border-y-4 border-ink md:grid-cols-4">
+        {/* ILLUSTRATION FRIEZE: one swipeable row on phones (decoration shouldn't cost four screens), a grid from md up */}
+        <section
+          aria-label="Illustrations"
+          className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto border-y-4 border-ink md:grid md:grid-cols-4 md:overflow-visible"
+        >
           {FRIEZE.map((item, index) => (
             <figure
               key={item.word}
-              className="flex flex-col items-center border-ink px-4 pb-4 max-md:odd:border-r-4 max-md:[&:nth-last-child(n+3)]:border-b-4 md:[&:not(:nth-child(4n))]:border-r-4 md:[&:nth-child(-n+4)]:border-b-4"
+              className="flex w-[42%] shrink-0 snap-start flex-col items-center border-ink px-4 pb-4 max-md:border-r-4 max-md:last:border-r-0 md:w-auto md:[&:not(:nth-child(4n))]:border-r-4 md:[&:nth-child(-n+4)]:border-b-4"
             >
               <Image
                 src={item.art.src}
@@ -381,18 +384,19 @@ export default function Home() {
             <Link href="/moves" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} mt-6`}>
               The move library
             </Link>
-            <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Two columns on phones, so six families don't take three screens */}
+            <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
               {MOVE_FAMILIES.map((family, index) => {
                 const block = POSTER_BLOCKS[index % POSTER_BLOCKS.length];
                 return (
                   <li key={family.name} className={`border-4 border-ink ${block.bg}`}>
-                    <div className="relative m-3 aspect-[4/5] overflow-hidden border-4 border-ink">
-                      <Image src={family.photo.src} alt={family.photo.alt} fill sizes="(max-width: 640px) 100vw, 25vw" className="object-cover" />
+                    <div className="relative m-2 aspect-[4/5] overflow-hidden border-4 border-ink sm:m-3">
+                      <Image src={family.photo.src} alt={family.photo.alt} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover" />
                     </div>
-                    <div className={`px-4 pb-5 ${block.text}`}>
+                    <div className={`px-3 pb-4 sm:px-4 sm:pb-5 ${block.text}`}>
                       <p className={`font-display ${TYPE.number}`}>{String(index + 1).padStart(2, "0")}</p>
                       <h3 className={`mt-1 font-display ${TYPE.card}`}>{family.spanish}</h3>
-                      <p className="mt-2 text-sm font-medium">
+                      <p className="mt-2 hidden text-sm font-medium sm:block">
                         {family.name}: {family.note}
                       </p>
                     </div>

@@ -47,7 +47,6 @@ const BeginnerSafetyHub = dynamic(
   }
 );
 
-import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
 import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
@@ -327,87 +326,6 @@ export default async function StudentSchedulePage({
         </div>
       </section>
 
-      {/* Day & Level Filter Bars */}
-      <div className="space-y-4 border-4 border-ink bg-paper p-4 sm:p-5 text-ink shadow-[4px_4px_0_0_#161311]">
-        {/* Day of Week Filter Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-xs font-bold uppercase tracking-wider text-ink">
-            Select Day:
-          </span>
-          <div className="flex items-center gap-2 flex-wrap">
-            {DAY_TABS.map((tab) => {
-              const isActive = (!dayParam && tab.id === "all") || dayParam === tab.id;
-              return (
-                <Link
-                  key={tab.id}
-                  href={{
-                    pathname: "/dashboard/schedule",
-                    query: {
-                      ...(styleFilter ? { style: styleFilter } : {}),
-                      ...(levelFilter ? { level: levelFilter } : {}),
-                      ...(tab.id !== "all" ? { day: tab.id } : {}),
-                    },
-                  }}
-                  className={`${POSTER_BUTTON} ${
-                    isActive
-                      ? POSTER_BUTTON_COLORS.ink
-                      : `${POSTER_BUTTON_COLORS.outline} bg-paper`
-                  } text-xs font-bold min-h-[40px] px-3 py-1 flex items-center justify-center`}
-                >
-                  {tab.label}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Syllabus Level Filter Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t-2 border-ink">
-          <span className="text-xs font-bold uppercase tracking-wider text-ink">
-            Syllabus Level:
-          </span>
-
-          <div className="flex items-center gap-2 flex-wrap">
-            <Link
-              href={{
-                pathname: "/dashboard/schedule",
-                query: {
-                  ...(styleFilter ? { style: styleFilter } : {}),
-                  ...(dayParam ? { day: dayParam } : {}),
-                },
-              }}
-              className={`${POSTER_BUTTON} ${
-                !levelFilter
-                  ? POSTER_BUTTON_COLORS.mustard
-                  : `${POSTER_BUTTON_COLORS.outline} bg-paper`
-              } text-xs font-bold min-h-[40px] px-3 py-1 flex items-center justify-center`}
-            >
-              All Levels ({filteredClasses.length})
-            </Link>
-            {Object.values(DanceLevel).map((level) => (
-              <Link
-                key={level}
-                href={{
-                  pathname: "/dashboard/schedule",
-                  query: {
-                    ...(styleFilter ? { style: styleFilter } : {}),
-                    ...(dayParam ? { day: dayParam } : {}),
-                    level,
-                  },
-                }}
-                className={`${POSTER_BUTTON} ${
-                  levelFilter === level
-                    ? POSTER_BUTTON_COLORS.mustard
-                    : `${POSTER_BUTTON_COLORS.outline} bg-paper`
-                } text-xs font-bold min-h-[40px] px-3 py-1 flex items-center justify-center`}
-              >
-                {level}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Thursday & Sunday Exhibition Timetable (Primary Schedule Grid with id="schedule-classes-grid") */}
       <div id="schedule-classes-grid" data-testid="schedule-classes-grid" className="space-y-8">
         <TwoDayExhibitionTimetable />
@@ -428,6 +346,86 @@ export default async function StudentSchedulePage({
                 {scheduleItems.length} Sessions Available
               </span>
             </div>
+            {/* Day & level filters for the "I'm coming" cards (the printed timetable above always shows everything) */}
+            <div className="space-y-4 border-4 border-ink bg-paper p-4 sm:p-5 text-ink shadow-[4px_4px_0_0_#161311]">
+              {/* Day of Week Filter Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-ink">
+                  Select Day:
+                </span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  {DAY_TABS.map((tab) => {
+                    const isActive = (!dayParam && tab.id === "all") || dayParam === tab.id;
+                    return (
+                      <Link
+                        key={tab.id}
+                        href={{
+                          pathname: "/dashboard/schedule",
+                          query: {
+                            ...(styleFilter ? { style: styleFilter } : {}),
+                            ...(levelFilter ? { level: levelFilter } : {}),
+                            ...(tab.id !== "all" ? { day: tab.id } : {}),
+                          },
+                        }}
+                        className={`${POSTER_BUTTON} ${
+                          isActive
+                            ? POSTER_BUTTON_COLORS.ink
+                            : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+                        } text-xs font-bold min-h-[40px] px-3 py-1 flex items-center justify-center`}
+                      >
+                        {tab.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Syllabus Level Filter Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t-2 border-ink">
+                <span className="text-xs font-bold uppercase tracking-wider text-ink">
+                  Syllabus Level:
+                </span>
+
+                <div className="flex items-center gap-2 flex-wrap">
+                  <Link
+                    href={{
+                      pathname: "/dashboard/schedule",
+                      query: {
+                        ...(styleFilter ? { style: styleFilter } : {}),
+                        ...(dayParam ? { day: dayParam } : {}),
+                      },
+                    }}
+                    className={`${POSTER_BUTTON} ${
+                      !levelFilter
+                        ? POSTER_BUTTON_COLORS.mustard
+                        : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+                    } text-xs font-bold min-h-[40px] px-3 py-1 flex items-center justify-center`}
+                  >
+                    All Levels ({filteredClasses.length})
+                  </Link>
+                  {Object.values(DanceLevel).map((level) => (
+                    <Link
+                      key={level}
+                      href={{
+                        pathname: "/dashboard/schedule",
+                        query: {
+                          ...(styleFilter ? { style: styleFilter } : {}),
+                          ...(dayParam ? { day: dayParam } : {}),
+                          level,
+                        },
+                      }}
+                      className={`${POSTER_BUTTON} ${
+                        levelFilter === level
+                          ? POSTER_BUTTON_COLORS.mustard
+                          : `${POSTER_BUTTON_COLORS.outline} bg-paper`
+                      } text-xs font-bold min-h-[40px] px-3 py-1 flex items-center justify-center`}
+                    >
+                      {level}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {scheduleItems.map((session) => (
                 <ClassScheduleCard
@@ -441,13 +439,13 @@ export default async function StudentSchedulePage({
         ) : (styleFilter || levelFilter || dayParam) ? (
           <div className="border-4 border-dashed border-ink p-8 text-center bg-paper text-ink">
             <p className="text-sm font-bold">
-              No live database sessions match your current filter selection.
+              No classes match these filters.
             </p>
             <Link
               href="/dashboard/schedule"
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} mt-3 text-xs inline-flex items-center`}
             >
-              Reset Filters
+              Show all classes
             </Link>
           </div>
         ) : null}
@@ -481,11 +479,6 @@ export default async function StudentSchedulePage({
           </div>
         </div>
       </section>
-
-      {/* Weekly Calendar Overview: Days of the Week Only */}
-      <div className="pt-6 border-t-4 border-ink">
-        <WeeklyCalendarOverview />
-      </div>
 
       {/* Multi-Generational UX: Fast-Track Arrival Essentials & 60+ Senior Reassurance */}
       <div className="pt-6 border-t-4 border-ink">

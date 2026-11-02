@@ -297,21 +297,21 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     ).toBeVisible();
   });
 
-  test("16. Weekly recurring schedule calendar overview renders Thursdays and Sundays at BOH Studios", async ({
+  test("16. The timetable shows Thursdays and Sundays at BOH Studios, once", async ({
     page,
   }) => {
     await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
 
     const url = page.url();
     if (!url.includes("sign-in")) {
-      await expect(
-        page.getByText("Weekly Class Calendar").first()
-      ).toBeVisible();
-      await expect(page.getByText(/BOH Studios Bournemouth Weekly Schedule/i).first()).toBeVisible();
-      await expect(page.getByText("Flagship Thursday Night")).toBeVisible();
-      await expect(page.getByText(/Cuban Sunday/i).first()).toBeVisible();
+      await expect(page.getByRole("heading", { name: /Jueves/i }).first()).toBeVisible();
+      await expect(page.getByRole("heading", { name: /Domingo/i }).first()).toBeVisible();
       await expect(page.getByText("BOH Studios Bournemouth").first()).toBeVisible();
       await expect(page.getByText("Moe Flex").first()).toBeVisible();
+      // The second, duplicate weekly calendar was removed
+      await expect(page.getByText(/BOH Studios Bournemouth Weekly Schedule/i)).toHaveCount(0);
+      // Day and level filters belong to the "I'm coming" cards, not the printed timetable
+      await expect(page.getByText(/No live database sessions/i)).toHaveCount(0);
     }
   });
 

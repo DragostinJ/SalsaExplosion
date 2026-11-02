@@ -8,10 +8,10 @@ import {
   Clock,
   CheckCircle2,
   ArrowRight,
-  Video,
+  Music,
   ExternalLink,
   Calendar,
-  QrCode,
+  Ticket,
   Sparkles,
 } from "lucide-react";
 import { Role } from "@prisma/client";
@@ -218,13 +218,13 @@ export default async function AboutPage() {
 
           <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_#161311] space-y-3">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-red text-ink">
-              <QrCode className="h-5 w-5" />
+              <Ticket className="h-5 w-5" />
             </div>
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
-              Instant Digital Passes — Zero Fees
+              Just Turn Up · £12 at the Door
             </h3>
             <p className="text-xs text-ink leading-relaxed font-medium">
-              One-tap Apple Pay, Google Pay, and card checkout with instant QR passes saved straight to your phone for 1-second door check-in at BOH Studios.
+              No booking, no membership, no app needed. Pay £12 for one class or £14 for two at the door, cash or card, and stay for the social. Festival passes are the only thing sold online.
             </p>
           </div>
 
@@ -254,13 +254,13 @@ export default async function AboutPage() {
 
           <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_#161311] space-y-3">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-blue text-paper">
-              <Video className="h-5 w-5" />
+              <Music className="h-5 w-5" />
             </div>
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
-              End-of-Class Video Recaps
+              Practise the Class Songs at Home
             </h3>
             <p className="text-xs text-ink leading-relaxed font-medium">
-              Never lose a routine in your camera roll! After every class, teachers publish a 60-second video recap of the combinations taught. Review footwork in 0.75x slow-mo anytime.
+              Every song from the classes is mapped section by section: the player shows what to dance now and what comes next, timed to the music. Slow it down, loop a section, learn the rueda calls.
             </p>
           </div>
         </div>
@@ -372,7 +372,7 @@ export default async function AboutPage() {
               Our Havana Sanctuary
             </p>
             <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.card}`}>
-              Engineered for Social Dancing
+              Built for Social Dancing
             </h2>
             <p className="text-xs sm:text-sm text-ink leading-relaxed font-medium">
               Dancing salsa properly requires the right space. We designed our studio from the floor up to support fast turns, circular Rueda movement, and vibrant acoustic energy.

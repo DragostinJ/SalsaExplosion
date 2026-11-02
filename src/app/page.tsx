@@ -15,6 +15,7 @@ import {
   halftone,
 } from "@/components/poster/poster-kit";
 import { upcomingCanonicalEvents } from "@/lib/academy-data";
+import { getPublishedMoves } from "@/lib/moves/move-library";
 import { classNightSongList, nextClassNightAny, spanishDate } from "@/lib/cartel";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import {
@@ -406,13 +407,13 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* MOVE LIBRARY TEASER: six mini posters */}
+        {/* MOVE LIBRARY: six mini posters, one per family */}
         <section className="cv-auto px-4 py-14 md:px-10 md:py-20">
           <div className="mx-auto max-w-7xl">
-            <p className={KICKER}>Próximamente · coming soon</p>
+            <p className={KICKER}>Practica en casa · {getPublishedMoves().length} pasos</p>
             <h2 className={`mt-3 ${TYPE.section}`}>La biblioteca de pasos</h2>
             <Link href="/moves" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} mt-6`}>
-              The move library
+              Open the move library →
             </Link>
             {/* Two columns on phones, so six families don't take three screens */}
             <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">

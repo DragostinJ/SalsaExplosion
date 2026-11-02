@@ -73,4 +73,4 @@ flowchart LR
 > 3. Verify safety warnings for any dips, wraps, neck drapes, or arm hooks.
 > 4. Once verified, populate the **`reviewedBy`** field with the teacher's name (e.g. `"Enrique Perez"`).
 > 
-> Unreviewed moves remain tagged as drafts (`reviewedBy` empty or undefined) and will not be displayed on dancer-facing pages.
+> Since 2 November 2026 (owner decision) drafts are public. A move a teacher marks Rejected or Needs Work is hidden; an approved move with checked counts shows "Checked on the music by" its teacher. Unchecked moves say the teachers are still checking them.

@@ -309,11 +309,20 @@ export function getAllMoves(): readonly Move[] {
 }
 
 /**
- * Returns published (approved) moves only, for dancer-facing pages.
- * Never includes drafts, needs-work, or rejected moves.
+ * The moves dancers see. Owner decision (2026-11-02): the whole library is public, drafts
+ * included. A teacher takes a move down by marking it "Rejected" or "Needs work" at the review
+ * desk; approving it with the counts ticked adds "Checked on the music by …" (isTeacherChecked).
  */
 export function getPublishedMoves(): readonly Move[] {
-  return getAllMoves().filter((m) => !isMoveDraft(m));
+  return getAllMoves().filter((m) => {
+    const status = getMoveReviewState(m.id)?.status;
+    return status !== "rejected" && status !== "needs-work";
+  });
+}
+
+/** True once a teacher approved the move with its counts checked on the music. */
+export function isTeacherChecked(move: Move): boolean {
+  return !isMoveDraft(move);
 }
 
 /**

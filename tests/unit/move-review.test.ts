@@ -9,6 +9,7 @@ import {
   type MoveReview,
 } from "@/lib/moves/move-review";
 import {
+  getAllMoves,
   getPublishedMoves,
   getMoveReviewState,
 } from "@/lib/moves/move-library";
@@ -235,17 +236,20 @@ describe("Move Library Integration & getPublishedMoves", () => {
     expect(Array.isArray(STORED_DRAFTS)).toBe(true);
   });
 
-  it("getPublishedMoves returns only approved moves, never drafts, needs-work, or rejected moves", () => {
-    // Currently all 30 seeded moves are drafts, so getPublishedMoves must be empty
+  it("getPublishedMoves shows the whole library except moves a teacher rejected or sent back", () => {
+    // Owner decision (2026-11-02): drafts are public; a teacher takes a move down by rejecting it
     const published = getPublishedMoves();
-    expect(published).toHaveLength(0);
-
     for (const move of published) {
-      expect(move.reviewedBy).toBeDefined();
-      expect(move.reviewedBy?.trim()).not.toBe("");
-      expect(move.tags).not.toContain("counts-unverified");
+      const status = getMoveReviewState(move.id)?.status;
+      expect(status).not.toBe("rejected");
+      expect(status).not.toBe("needs-work");
       expect(move.tags).not.toContain("review-rejected");
     }
+    const hidden = getAllMoves().filter((m) => {
+      const status = getMoveReviewState(m.id)?.status;
+      return status === "rejected" || status === "needs-work";
+    });
+    expect(published.length + hidden.length).toBe(getAllMoves().length);
   });
 
   it("getMoveReviewState returns 'draft' and valid fingerprint for seeded moves", () => {

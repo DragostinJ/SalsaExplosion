@@ -1,7 +1,7 @@
 # Salsa Explosion UK: Maestro Enrique's Move Review Guide
 
 Welcome to the **Faculty Move Review Desk**!  
-Every figure in the curriculum starts as a draft. As our master instructor, you check the text, test the counts against real Cuban music, attach a clear video, and give your approval. Once approved and published, our students see it in their curriculum library.
+Every move in the library is public from the start (owner decision, 2 November 2026). As a teacher you check the text, test the counts against real Cuban music, attach a clear video, and approve it: the move page then says "Checked on the music by" you. If a move is wrong or you don't teach it, mark it **Reject** (or **Needs Work**) and it disappears from the dancers' library.
 
 ---
 

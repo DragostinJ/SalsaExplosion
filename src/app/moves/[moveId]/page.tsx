@@ -5,7 +5,7 @@ import { CATEGORY_INK, CountStrip } from "@/components/moves/move-poster-card";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, TYPE } from "@/components/poster/poster-kit";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
-import { getVisibleMoves, isDraftPreviewEnabled, songSectionsForMove } from "@/lib/moves/move-library";
+import { getVisibleMoves, isDraftPreviewEnabled, isTeacherChecked, songSectionsForMove } from "@/lib/moves/move-library";
 import type { MoveStep } from "@/lib/moves/move-schema";
 import { formatSongTime } from "@/lib/music/song-timing";
 import { buildMoveJsonLd, jsonLdHtml } from "@/lib/seo/move-jsonld";
@@ -91,7 +91,11 @@ export default async function MovePage({ params }: MovePageProps) {
         </h1>
         <p className="mt-4 max-w-2xl text-lg font-medium">{move.summary}</p>
         <CountStrip eightCounts={move.eightCounts} cell={ink.cell} className="mt-6" />
-        <p className="mt-2 text-xs font-bold uppercase tracking-wider">Checked on the music by {move.reviewedBy}</p>
+        <p className="mt-2 text-xs font-bold uppercase tracking-wider">
+          {isTeacherChecked(move)
+            ? `Checked on the music by ${move.reviewedBy}`
+            : "The teachers are still checking this one on the music · spot something off? Tell them in class"}
+        </p>
       </header>
 
       {video && (

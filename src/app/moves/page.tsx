@@ -36,7 +36,7 @@ export default function MovesPage() {
         </h1>
         <p className="mt-4 max-w-2xl text-lg font-medium">
           Every move from the classes: what the leader and the follower do, how many 8-counts it takes, and the songs where it
-          fits. A teacher checks each one on the music before it appears here.
+          fits. The teachers check them on the music: the ones they&apos;ve checked say so.
         </p>
       </header>
 

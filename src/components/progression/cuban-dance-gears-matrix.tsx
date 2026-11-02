@@ -22,6 +22,9 @@ interface CubanDanceGearsMatrixProps {
   initiallyCollapsed?: boolean;
 }
 
+const DEFAULT_TIMBA_SONG_PHASE =
+  TIMBA_SONG_PHASES.find((p) => p.phase === "Tema") ?? TIMBA_SONG_PHASES[0]!;
+
 export function CubanDanceGearsMatrix({
   className = "",
   initiallyCollapsed = false,
@@ -31,7 +34,7 @@ export function CubanDanceGearsMatrix({
   const [activeGearFilter, setActiveGearFilter] = useState<number | "ALL">("ALL");
 
   const currentPhaseData =
-    TIMBA_SONG_PHASES.find((p) => p.phase === selectedPhase) ?? TIMBA_SONG_PHASES[0];
+    TIMBA_SONG_PHASES.find((p) => p.phase === selectedPhase) ?? DEFAULT_TIMBA_SONG_PHASE;
 
   const displayedGears =
     activeGearFilter === "ALL"

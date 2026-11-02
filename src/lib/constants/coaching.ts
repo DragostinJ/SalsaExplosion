@@ -91,3 +91,6 @@ export const COACHING_FOCUS_TOPICS = [
   "Wedding First Dance (Cuban Romance Routine)",
   "Bournemouth Congress Intensive Preparation",
 ] as const;
+
+export const DEFAULT_COACHING_TOPIC: (typeof COACHING_FOCUS_TOPICS)[number] =
+  "Cuban Motion, Ribcage & Afro-Isolation";

@@ -23,18 +23,25 @@ import {
 } from "@/lib/validations/ai-studio.schema";
 import { generateGoogleReviewHelperAction } from "@/actions/ai-studio.actions";
 
+const DEFAULT_FAVORITE_ASPECT: (typeof REVIEW_FAVORITE_ASPECTS)[number] =
+  "Thursday & Sunday Social Vibe";
+const DEFAULT_INSTRUCTOR_HIGHLIGHT: (typeof REVIEW_INSTRUCTOR_HIGHLIGHTS)[number] =
+  "Maestro Enrique";
+const DEFAULT_DANCER_LEVEL: (typeof REVIEW_DANCER_LEVELS)[number] =
+  "Regular Social Dancer";
+
 export function ReviewBoosterClient() {
   const [favoriteAspect, setFavoriteAspect] = useState<
-    typeof REVIEW_FAVORITE_ASPECTS[number]
-  >(REVIEW_FAVORITE_ASPECTS[0]);
+    (typeof REVIEW_FAVORITE_ASPECTS)[number]
+  >(DEFAULT_FAVORITE_ASPECT);
 
   const [instructorHighlight, setInstructorHighlight] = useState<
-    typeof REVIEW_INSTRUCTOR_HIGHLIGHTS[number]
-  >(REVIEW_INSTRUCTOR_HIGHLIGHTS[0]);
+    (typeof REVIEW_INSTRUCTOR_HIGHLIGHTS)[number]
+  >(DEFAULT_INSTRUCTOR_HIGHLIGHT);
 
   const [dancerLevel, setDancerLevel] = useState<
-    typeof REVIEW_DANCER_LEVELS[number]
-  >(REVIEW_DANCER_LEVELS[1]);
+    (typeof REVIEW_DANCER_LEVELS)[number]
+  >(DEFAULT_DANCER_LEVEL);
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [reviewResult, setReviewResult] = useState<GoogleReviewDraftOutput | null>(

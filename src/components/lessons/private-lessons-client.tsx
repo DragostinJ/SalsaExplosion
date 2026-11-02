@@ -13,6 +13,7 @@ import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-t
 import {
   COACHING_INSTRUCTORS_CATALOG,
   COACHING_FOCUS_TOPICS,
+  DEFAULT_COACHING_TOPIC,
   CoachingInstructor,
 } from "@/lib/constants/coaching";
 import { TYPE, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
@@ -40,7 +41,7 @@ export function PrivateLessonsClient({
   const [selectedInstructor, setSelectedInstructor] = useState<"enrique" | "moe" | "justyna" | "arturas" | "jim">("enrique");
   const [selectedPackage, setSelectedPackage] = useState<"SINGLE" | "BLOCK">("SINGLE");
   const [dancerType, setDancerType] = useState<"SOLO" | "COUPLE">("SOLO");
-  const [selectedTopic, setSelectedTopic] = useState<string>(COACHING_FOCUS_TOPICS[0]);
+  const [selectedTopic, setSelectedTopic] = useState<string>(DEFAULT_COACHING_TOPIC);
   const [selectedDay, setSelectedDay] = useState<string>("Thursday Afternoon (BOH Studios)");
   const [notes, setNotes] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);

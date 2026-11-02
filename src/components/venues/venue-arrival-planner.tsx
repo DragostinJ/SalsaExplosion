@@ -37,98 +37,108 @@ interface DestinationInfo {
   };
 }
 
-const DESTINATIONS: DestinationInfo[] = [
-  {
-    id: "boh",
-    name: "BOH Studios (Thursdays & Sundays)",
-    address: "104 Commercial Road, The Triangle, Bournemouth",
-    postcode: "BH2 5LR",
-    googleMapsUrl: "https://maps.google.com/?q=BOH+Studios+Bournemouth+104+Commercial+Rd+BH2+5LR",
-    appleMapsUrl: "https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR",
-    wazeUrl: "https://waze.com/ul?q=104+Commercial+Road+Bournemouth",
-    eveningParking: {
-      title: "Bournemouth Library (Avenue Rd, BH2 5SL) & West Hill (BH2 5PG)",
-      description: "Convenient parking 2-3 mins walk away. Free on-street parking along Commercial Road and surrounding streets after 18:00.",
-      estimatedCost: "£0.00 (FREE after 18:00 on-street)",
-      isFree: true,
-    },
-    daytimeParking: {
-      title: "West Hill Car Park (BH2 5PG)",
-      description: "Large council car park minutes from The Triangle.",
-      estimatedCost: "£1.60 / hour",
-      isFree: false,
-    },
+const BOH_STUDIOS_DESTINATION: DestinationInfo = {
+  id: "boh",
+  name: "BOH Studios (Thursdays & Sundays)",
+  address: "104 Commercial Road, The Triangle, Bournemouth",
+  postcode: "BH2 5LR",
+  googleMapsUrl: "https://maps.google.com/?q=BOH+Studios+Bournemouth+104+Commercial+Rd+BH2+5LR",
+  appleMapsUrl: "https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR",
+  wazeUrl: "https://waze.com/ul?q=104+Commercial+Road+Bournemouth",
+  eveningParking: {
+    title: "Bournemouth Library (Avenue Rd, BH2 5SL) & West Hill (BH2 5PG)",
+    description: "Convenient parking 2-3 mins walk away. Free on-street parking along Commercial Road and surrounding streets after 18:00.",
+    estimatedCost: "£0.00 (FREE after 18:00 on-street)",
+    isFree: true,
   },
-  {
-    id: "boh-studio-2",
-    name: "BOH Studios Studio 2 (Foundation & SB&K Lounge)",
-    address: "104 Commercial Road, The Triangle, Bournemouth BH2 5LR (Tel: 07969 633701)",
-    postcode: "BH2 5LR",
-    googleMapsUrl: "https://maps.google.com/?q=BOH+Studios+Bournemouth+104+Commercial+Rd+BH2+5LR",
-    appleMapsUrl: "https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR",
-    wazeUrl: "https://waze.com/ul?q=104+Commercial+Road+Bournemouth",
-    eveningParking: {
-      title: "Bournemouth Library (Avenue Rd, BH2 5SL) & Commercial Road",
-      description: "Convenient parking minutes from the studio. Free on-street parking along Commercial Road and Poole Hill after 18:00.",
-      estimatedCost: "£0.00 (FREE after 18:00 on-street)",
-      isFree: true,
-    },
-    daytimeParking: {
-      title: "West Hill Car Park (BH2 5PG)",
-      description: "Large council car park adjacent to The Triangle.",
-      estimatedCost: "£1.60 / hour",
-      isFree: false,
-    },
+  daytimeParking: {
+    title: "West Hill Car Park (BH2 5PG)",
+    description: "Large council car park minutes from The Triangle.",
+    estimatedCost: "£1.60 / hour",
+    isFree: false,
   },
-  {
-    id: "neptune",
-    name: "Neptune Hall (Boscombe Pier)",
-    address: "The Neptune Harvester, Undercliff Drive, Boscombe Pier, Bournemouth",
-    postcode: "BH5 1BN",
-    googleMapsUrl: "https://maps.google.com/?q=The+Neptune+Harvester+Undercliff+Drive+Boscombe+Pier+BH5+1BN",
-    appleMapsUrl: "https://maps.apple.com/?address=Undercliff+Drive,Boscombe,BH5+1BN",
-    wazeUrl: "https://waze.com/ul?q=Undercliff+Drive+Boscombe",
-    eveningParking: {
-      title: "Boscombe Undercliff Car Park (Code 59200) & Overcliff Drive",
-      description: "Beachfront function room directly opposite Boscombe Pier with panoramic Poole Bay sea views. Boscombe Undercliff Car Park right next door (PayByPhone Code: 59200, 2.1m height barrier, closes midnight). Free evening street parking along Boscombe Overcliff Drive (2-min walk down the Zig-Zag path).",
-      estimatedCost: "£0.00 (FREE on Overcliff Drive / PayByPhone 59200)",
-      isFree: true,
-    },
-    daytimeParking: {
-      title: "Boscombe Undercliff Car Park (BH5 1BN - Code 59200)",
-      description: "Direct beachfront parking opposite Boscombe Pier. Pay via PayByPhone location code 59200.",
-      estimatedCost: "£2.50 / hour",
-      isFree: false,
-    },
+};
+
+const BOH_STUDIO_2_DESTINATION: DestinationInfo = {
+  id: "boh-studio-2",
+  name: "BOH Studios Studio 2 (Foundation & SB&K Lounge)",
+  address: "104 Commercial Road, The Triangle, Bournemouth BH2 5LR (Tel: 07969 633701)",
+  postcode: "BH2 5LR",
+  googleMapsUrl: "https://maps.google.com/?q=BOH+Studios+Bournemouth+104+Commercial+Rd+BH2+5LR",
+  appleMapsUrl: "https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR",
+  wazeUrl: "https://waze.com/ul?q=104+Commercial+Road+Bournemouth",
+  eveningParking: {
+    title: "Bournemouth Library (Avenue Rd, BH2 5SL) & Commercial Road",
+    description: "Convenient parking minutes from the studio. Free on-street parking along Commercial Road and Poole Hill after 18:00.",
+    estimatedCost: "£0.00 (FREE after 18:00 on-street)",
+    isFree: true,
   },
-  {
-    id: "roundhouse",
-    name: "The Roundhouse Hotel (Congress Hub)",
-    address: "Meyrick Road, Lansdowne",
-    postcode: "BH1 2PR",
-    googleMapsUrl: "https://maps.google.com/?q=The+Roundhouse+Hotel+Meyrick+Road+Bournemouth+BH1+2PR",
-    appleMapsUrl: "https://maps.apple.com/?address=Meyrick+Road,Bournemouth,BH1+2PR",
-    wazeUrl: "https://waze.com/ul?q=The+Roundhouse+Hotel+Bournemouth",
-    eveningParking: {
-      title: "Hotel Forecourt & Cotlands Road (BH1 3JR)",
-      description: "Dedicated hotel guest parking spaces. Overflow parking at Cotlands Road 24h council car park just 300m away.",
-      estimatedCost: "£4.50 evening flat rate (Free for hotel residents)",
-      isFree: false,
-    },
-    daytimeParking: {
-      title: "Cotlands Road Pay & Display (BH1 3JR)",
-      description: "Large 24-hour pay-and-display car park adjacent to Lansdowne roundabout.",
-      estimatedCost: "£2.10 / hour",
-      isFree: false,
-    },
+  daytimeParking: {
+    title: "West Hill Car Park (BH2 5PG)",
+    description: "Large council car park adjacent to The Triangle.",
+    estimatedCost: "£1.60 / hour",
+    isFree: false,
   },
+};
+
+const NEPTUNE_HALL_DESTINATION: DestinationInfo = {
+  id: "neptune",
+  name: "Neptune Hall (Boscombe Pier)",
+  address: "The Neptune Harvester, Undercliff Drive, Boscombe Pier, Bournemouth",
+  postcode: "BH5 1BN",
+  googleMapsUrl: "https://maps.google.com/?q=The+Neptune+Harvester+Undercliff+Drive+Boscombe+Pier+BH5+1BN",
+  appleMapsUrl: "https://maps.apple.com/?address=Undercliff+Drive,Boscombe,BH5+1BN",
+  wazeUrl: "https://waze.com/ul?q=Undercliff+Drive+Boscombe",
+  eveningParking: {
+    title: "Boscombe Undercliff Car Park (Code 59200) & Overcliff Drive",
+    description: "Beachfront function room directly opposite Boscombe Pier with panoramic Poole Bay sea views. Boscombe Undercliff Car Park right next door (PayByPhone Code: 59200, 2.1m height barrier, closes midnight). Free evening street parking along Boscombe Overcliff Drive (2-min walk down the Zig-Zag path).",
+    estimatedCost: "£0.00 (FREE on Overcliff Drive / PayByPhone 59200)",
+    isFree: true,
+  },
+  daytimeParking: {
+    title: "Boscombe Undercliff Car Park (BH5 1BN - Code 59200)",
+    description: "Direct beachfront parking opposite Boscombe Pier. Pay via PayByPhone location code 59200.",
+    estimatedCost: "£2.50 / hour",
+    isFree: false,
+  },
+};
+
+const ROUNDHOUSE_DESTINATION: DestinationInfo = {
+  id: "roundhouse",
+  name: "The Roundhouse Hotel (Congress Hub)",
+  address: "Meyrick Road, Lansdowne",
+  postcode: "BH1 2PR",
+  googleMapsUrl: "https://maps.google.com/?q=The+Roundhouse+Hotel+Meyrick+Road+Bournemouth+BH1+2PR",
+  appleMapsUrl: "https://maps.apple.com/?address=Meyrick+Road,Bournemouth,BH1+2PR",
+  wazeUrl: "https://waze.com/ul?q=The+Roundhouse+Hotel+Bournemouth",
+  eveningParking: {
+    title: "Hotel Forecourt & Cotlands Road (BH1 3JR)",
+    description: "Dedicated hotel guest parking spaces. Overflow parking at Cotlands Road 24h council car park just 300m away.",
+    estimatedCost: "£4.50 evening flat rate (Free for hotel residents)",
+    isFree: false,
+  },
+  daytimeParking: {
+    title: "Cotlands Road Pay & Display (BH1 3JR)",
+    description: "Large 24-hour pay-and-display car park adjacent to Lansdowne roundabout.",
+    estimatedCost: "£2.10 / hour",
+    isFree: false,
+  },
+};
+
+const DEFAULT_DESTINATION = BOH_STUDIOS_DESTINATION;
+
+const DESTINATIONS: readonly DestinationInfo[] = [
+  BOH_STUDIOS_DESTINATION,
+  BOH_STUDIO_2_DESTINATION,
+  NEPTUNE_HALL_DESTINATION,
+  ROUNDHOUSE_DESTINATION,
 ];
 
 export function VenueArrivalPlanner() {
   const [selectedDestId, setSelectedDestId] = useState<string>("boh");
   const [arrivalTime, setArrivalTime] = useState<"evening" | "daytime">("evening");
 
-  const currentDest = DESTINATIONS.find((d) => d.id === selectedDestId) ?? DESTINATIONS[0];
+  const currentDest = DESTINATIONS.find((d) => d.id === selectedDestId) ?? DEFAULT_DESTINATION;
   const activeParking = arrivalTime === "evening" ? currentDest.eveningParking : currentDest.daytimeParking;
 
   return (

@@ -11,9 +11,10 @@ import { VENUE_INFO, DOOR_PRICING } from "@/lib/academy-data";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata: Metadata = {
-  title: "Door Admission & Festival Passes | Salsa Explosion Bournemouth",
+  title: "Prices: £12 at the Door, Festival Passes",
   description:
-    "Transparent door admission for weekly Cuban Salsa classes at BOH Studios Bournemouth (£12 for 1 class / £14 for 2 classes), and online passes for Made in Cuba Dance Weekend.",
+    "Weekly classes are £12 for one or £14 for two, paid at the door with the social included. Festival passes, private lessons and gift vouchers.",
+  alternates: { canonical: "/pricing" },
 };
 
 export default function PricingPage() {

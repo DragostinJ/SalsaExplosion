@@ -16,7 +16,6 @@ describe("H3: SEO, Metadata, Sitemap & Robots Validation", () => {
     expect(urls.some((u) => u.includes("/pricing"))).toBe(true);
     expect(urls.some((u) => u.includes("/venues"))).toBe(true);
     expect(urls.some((u) => u.includes("/music"))).toBe(true);
-    expect(urls.some((u) => u.includes("/shop"))).toBe(true);
     expect(urls.some((u) => u.includes("/how-it-works"))).toBe(true);
     expect(urls.some((u) => u.endsWith("/music/me-dicen-cuba"))).toBe(true);
 
@@ -25,6 +24,10 @@ describe("H3: SEO, Metadata, Sitemap & Robots Validation", () => {
     expect(urls.some((u) => u.includes("/instructor"))).toBe(false);
     expect(urls.some((u) => u.includes("/checkin"))).toBe(false);
     expect(urls.some((u) => u.includes("/dashboard/progression"))).toBe(false);
+
+    // Redirects never belong in a sitemap: /shop goes to /pricing, /review to sign-in
+    expect(urls.some((u) => u.endsWith("/shop"))).toBe(false);
+    expect(urls.some((u) => u.endsWith("/review"))).toBe(false);
   });
 
   it("configures robots.txt disallowing admin, instructor, checkin and private dashboard routes", () => {

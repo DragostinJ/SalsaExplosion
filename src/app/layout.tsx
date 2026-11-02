@@ -34,11 +34,12 @@ const anton = Anton({
 export const metadata: Metadata = {
   metadataBase: getSafeAppUrl(process.env.NEXT_PUBLIC_APP_URL),
   title: {
-    default: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
+    default: "Cuban Salsa Classes in Bournemouth | Salsa Explosion",
     template: "%s | Salsa Explosion",
   },
   description:
-    "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth (£12 for 1 class / £14 for 2 classes at the door), Rueda de Casino, and online festival passes for Made in Cuba Dance Weekend.",
+    "Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. £12 at the door, no partner needed. Practise the class songs at home.",
+  alternates: { canonical: "/" },
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -62,9 +63,9 @@ export const metadata: Metadata = {
     "Dance Classes Dorset",
   ],
   openGraph: {
-    title: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
+    title: "Cuban Salsa Classes in Bournemouth | Salsa Explosion",
     description:
-      "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth, Rueda de Casino, end-of-class recaps, and congress passes.",
+      "Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. £12 at the door, no partner needed. Practise the class songs at home.",
     url: "https://salsaexplosion.co.uk",
     siteName: "Salsa Explosion",
     locale: "en_GB",
@@ -80,9 +81,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Salsa Explosion | Bournemouth's Cuban Salsa & Rueda Academy",
+    title: "Cuban Salsa Classes in Bournemouth | Salsa Explosion",
     description:
-      "Official dance platform for Salsa Explosion UK. Directed by Cuban maestro Enrique Perez Valdes. Weekly classes at BOH Studios Bournemouth.",
+      "Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. £12 at the door, no partner needed. Practise the class songs at home.",
     images: ["/images/opengraph.png"],
   },
 };

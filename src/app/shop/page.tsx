@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export const metadata = {
   title: "Dance Passes & Vouchers | Salsa Explosion Bournemouth",
@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function ShopPage() {
-  redirect("/pricing");
+  permanentRedirect("/pricing");
 }

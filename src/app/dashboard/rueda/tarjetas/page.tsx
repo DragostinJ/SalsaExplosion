@@ -8,7 +8,7 @@ import { RUEDA_CALLS } from "@/lib/rueda/rueda-calls-dictionary";
 const CALLER = MEDIA_MANIFEST.mockupGraphics.caller;
 
 export const metadata = {
-  title: "Rueda Call Flashcards | Salsa Explosion Bournemouth",
+  title: "Rueda Call Flashcards",
   description:
     "Practise the Rueda de Casino calls and hand signals taught at Salsa Explosion with quick flip cards: see the call, recall the signal and the timing.",
   alternates: { canonical: "/dashboard/rueda/tarjetas" },

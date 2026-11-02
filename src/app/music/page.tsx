@@ -6,9 +6,10 @@ import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { SONG_COUNT, VENUE_INFO } from "@/lib/site-content";
 
 export const metadata = {
-  title: "Cuban Music & Social Playlists | Salsa Explosion Bournemouth",
+  title: "Cuban Salsa Songs to Practise",
   description:
-    "Curated Cuban Son, Casino, and Timba music tracks recommended by Maestro Enrique Perez Valdes. Master timing, clave, and find beat 1 on the dance floor.",
+    "The songs from the classes, mapped section by section: what to dance now and next, timed to the music. Practise Cuban salsa at home for free.",
+  alternates: { canonical: "/music" },
 };
 
 const RADIO = MEDIA_MANIFEST.mockupGraphics.radio;

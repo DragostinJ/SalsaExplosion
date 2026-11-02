@@ -9,9 +9,10 @@ import { getPublishedEvents } from "@/lib/stores/published-events-store";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata = {
-  title: "DANZA! 2026 | 2027 & Salsa Explosion Congresses | Bournemouth",
+  title: "Cuban Salsa Festivals & Parties",
   description:
-    "Official DANZA! 2026 | 2027 Cuban Salsa events calendar, weekend dance festivals, and masterclasses directed by Maestro Enrique Perez Valdes at BOH Studios Bournemouth.",
+    "Made in Cuba Dance Weekend, SB&K nights and the Christmas and New Year parties in Bournemouth. Book your festival pass online.",
+  alternates: { canonical: "/events" },
 };
 
 export default async function EventsDirectoryPage() {

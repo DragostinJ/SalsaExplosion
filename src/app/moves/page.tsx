@@ -9,7 +9,7 @@ import { MOVE_FAMILIES } from "@/lib/site-content";
 export const metadata = {
   title: "La biblioteca de pasos: the move library",
   description:
-    "Cuban casino figures, rueda calls, shines and body movement taught at Salsa Explosion, each checked by the teachers on the music: steps for leader and follower, counts and videos.",
+    "Cuban casino figures, rueda calls, shines and body movement from the classes: leader and follower steps, counts and videos, checked by the teachers.",
   alternates: { canonical: "/moves" },
 };
 

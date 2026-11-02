@@ -7,9 +7,10 @@ import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS, POSTER_BLOCKS } from
 import { DOOR_PRICING, VENUE_INFO, WEEKLY_SCHEDULE } from "@/lib/academy-data";
 
 export const metadata = {
-  title: "How It Works | Cuban Salsa Academy • Salsa Explosion",
+  title: "How It Works: Classes, Songs, Festivals",
   description:
-    "Come on Thursday or Sunday, pay at the door (£12 / £14), dance with everyone: no partner and no booking needed. Practise the class songs at home and book festivals online.",
+    "Come on Thursday or Sunday, pay £12 at the door and dance with everyone. No partner or booking needed. Practise the songs at home.",
+  alternates: { canonical: "/how-it-works" },
 };
 
 /** The four doors of the app, in the order a new dancer meets them. */

@@ -85,7 +85,7 @@ const nextConfig: NextConfig = {
       {
         source: "/schedule",
         destination: "/dashboard/schedule",
-        permanent: false,
+        permanent: true,
       },
     ];
   },

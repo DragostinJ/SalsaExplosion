@@ -8,9 +8,10 @@ import { VENUE_INFO } from "@/lib/academy-data";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata = {
-  title: "1-on-1 Private Lessons & Coaching | Salsa Explosion Bournemouth",
+  title: "Private Cuban Salsa Lessons",
   description:
-    "Book bespoke private dance coaching with Cuban Maestro Enrique Perez Valdes, Moe Flex, Justyna, Arturas, or Jim at BOH Studios Bournemouth.",
+    "One-to-one Cuban salsa and rueda lessons in Bournemouth with Enrique and the Salsa Explosion teachers, for beginners and wedding couples.",
+  alternates: { canonical: "/private-lessons" },
 };
 
 export default function PrivateLessonsPage() {

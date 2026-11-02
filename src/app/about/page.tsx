@@ -25,9 +25,10 @@ import { reportError } from "@/lib/monitoring";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata = {
-  title: "About Salsa Explosion | Cuban Salsa Academy & Community • Bournemouth, UK",
+  title: "About Enrique & the Teachers",
   description:
-    "Discover Salsa Explosion UK, founded by Cuban maestro Enrique Perez Valdes. Learn authentic Cuban Salsa (Casino & Rueda de Casino) at BOH Studios Bournemouth.",
+    "Salsa Explosion is Bournemouth's Cuban salsa school, founded by Cuban maestro Enrique Perez Valdes. Meet the teachers and the community.",
+  alternates: { canonical: "/about" },
 };
 
 const CANONICAL_FACULTY = [

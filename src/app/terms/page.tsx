@@ -13,9 +13,10 @@ import { BackButton } from "@/components/navigation/back-button";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata: Metadata = {
-  title: "Terms of Service, UK Consumer Rights & Privacy Policy | Salsa Explosion UK",
+  title: "Terms, Refunds & Privacy",
   description:
-    "Transparent terms of service, 14-day statutory consumer cooling-off rights, class refund policies, duty of care, and UK GDPR privacy notice for Salsa Explosion UK Bournemouth.",
+    "Salsa Explosion terms of service, festival pass refunds, UK consumer rights and how we look after your personal data.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsAndLegalPage() {

@@ -4,9 +4,10 @@ import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { RuedaDictionaryClient } from "@/components/rueda/rueda-dictionary-client";
 
 export const metadata = {
-  title: "Rueda de Casino Call Dictionary | Salsa Explosion UK",
+  title: "Rueda de Casino Calls Dictionary",
   description:
-    "Official Cuban Rueda de Casino calls, hand signals, phonetic pronunciations, and partner rotation rules taught by Maestro Enrique Perez Valdes in Bournemouth.",
+    "Every rueda de casino call taught at Salsa Explosion: what it means, the hand signal, the timing and whether you change partner.",
+  alternates: { canonical: "/dashboard/rueda" },
 };
 
 export default function RuedaDictionaryPage() {

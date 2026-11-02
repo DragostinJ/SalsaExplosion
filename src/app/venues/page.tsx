@@ -15,9 +15,10 @@ import { VenueArrivalPlanner } from "@/components/venues/venue-arrival-planner";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata = {
-  title: "Venues & Parking Guide | BOH Studios Bournemouth | Salsa Explosion",
+  title: "BOH Studios: Directions & Parking",
   description:
-    "Official venue, parking, bus routes, and arrival guide for Salsa Explosion classes and dance weekend festivals at BOH Studios Bournemouth.",
+    "How to find BOH Studios at 104 Commercial Rd, Bournemouth BH2 5LR: parking, buses, trains and hotels nearby for festival weekends.",
+  alternates: { canonical: "/venues" },
 };
 
 export default function VenuesGuidePage() {

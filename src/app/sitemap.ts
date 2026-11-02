@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { getPublishedMoves } from "@/lib/moves/move-library";
+import { upcomingCanonicalEvents } from "@/lib/academy-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://salsaexplosion.co.uk";
@@ -10,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/dashboard/schedule",
     "/events",
-    "/events/made-in-cuba-dance-weekend-2026",
+    ...upcomingCanonicalEvents().map((event) => `/events/${event.slug}`),
     "/pricing",
     "/venues",
     "/music",
@@ -19,13 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/moves",
     ...getPublishedMoves().map((move) => `/moves/${move.id}`),
     ...TIMBA_SONG_ANATOMY_DATA.map((song) => `/music/${song.id}`),
-    "/shop",
     "/about",
     "/how-it-works",
     "/private-lessons",
-    "/review",
     "/terms",
-    "/llms.txt",
   ];
 
   return routes.map((route) => ({

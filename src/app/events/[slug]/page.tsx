@@ -58,12 +58,19 @@ export async function generateMetadata({
     reportError("EventDetailPage:generateMetadata", err);
   }
 
+  // Search snippets stop around 155 characters: cut on a word, never mid-word
+  const snippet = (text: string) => (text.length <= 155 ? text : `${text.slice(0, 154).replace(/\s+\S*$/, "")}…`);
+
   if (!event) {
     const canonical = UPCOMING_EVENTS.find((e) => e.slug === slug);
     if (canonical) {
+      const image = canonical.posterUrl ?? "/opengraph-image";
       return {
         title: canonical.title,
-        description: canonical.description.slice(0, 160),
+        description: snippet(canonical.description),
+        alternates: { canonical: `/events/${slug}` },
+        openGraph: { title: canonical.title, description: snippet(canonical.description), images: [image] },
+        twitter: { card: "summary_large_image", title: canonical.title, images: [image] },
       };
     }
     return {
@@ -71,6 +78,7 @@ export async function generateMetadata({
     };
   }
 
+  // Without its own cover, an event shares the site's poster card rather than no image at all
   const ogImages = event.coverImageUrl
     ? [
         {
@@ -80,23 +88,24 @@ export async function generateMetadata({
           alt: event.title,
         },
       ]
-    : [];
+    : ["/opengraph-image"];
 
   return {
     title: event.title,
-    description:
-      event.description?.slice(0, 160) ||
-      `Official festival pass registration for ${event.title} in Bournemouth with Salsa Explosion.`,
+    description: event.description
+      ? snippet(event.description)
+      : `Festival passes for ${event.title} in Bournemouth with Salsa Explosion.`,
+    alternates: { canonical: `/events/${slug}` },
     openGraph: {
       title: event.title,
-      description: event.description?.slice(0, 160),
+      description: event.description ? snippet(event.description) : undefined,
       images: ogImages,
     },
     twitter: {
       card: "summary_large_image",
       title: event.title,
-      description: event.description?.slice(0, 160),
-      images: event.coverImageUrl ? [event.coverImageUrl] : [],
+      description: event.description ? snippet(event.description) : undefined,
+      images: event.coverImageUrl ? [event.coverImageUrl] : ["/opengraph-image"],
     },
   };
 }

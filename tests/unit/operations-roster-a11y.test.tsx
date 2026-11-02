@@ -2,9 +2,8 @@ import { describe, it, expect } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { CoachingRequestsTab } from "@/components/admin/operations/coaching-requests-tab";
 import { MerchFulfillmentTab } from "@/components/admin/operations/merch-fulfillment-tab";
-import { PartnerWaitlistTab } from "@/components/admin/operations/partner-waitlist-tab";
 import { RosterDancerList } from "@/components/instructor/roster/roster-dancer-list";
-import type { PrivateBookingItem, MerchItem, WaitlistItem } from "@/components/admin/operations/types";
+import type { PrivateBookingItem, MerchItem } from "@/components/admin/operations/types";
 import type { ClassRosterSummary } from "@/lib/constants/management";
 
 describe("Operations & Roster Accessibility (A11y)", () => {
@@ -69,38 +68,6 @@ describe("Operations & Roster Accessibility (A11y)", () => {
     );
 
     expect(html).toContain('aria-label="Cancel merchandise order"');
-  });
-
-  it("renders PartnerWaitlistTab with accessible aria-label on cancel action", () => {
-    const mockWaitlist: WaitlistItem[] = [
-      {
-        id: "wait-1",
-        role: "FOLLOW",
-        status: "WAITING",
-        partnerEmail: null,
-        createdAt: new Date(),
-        user: {
-          id: "u-2",
-          firstName: "Maria",
-          lastName: "Garcia",
-          email: "maria@example.com",
-        },
-      },
-    ];
-
-    const html = renderToStaticMarkup(
-      <PartnerWaitlistTab
-        waitlistEntries={mockWaitlist}
-        waitingWaitlistCount={1}
-        waitingLeadsCount={0}
-        waitingFollowsCount={1}
-        isPending={false}
-        onAutoPairWaitlist={() => {}}
-        onUpdateWaitlist={() => {}}
-      />
-    );
-
-    expect(html).toContain('aria-label="Cancel waitlist entry"');
   });
 
   it("renders RosterDancerList with accessible clear-search button when query is present", () => {

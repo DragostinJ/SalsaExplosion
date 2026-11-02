@@ -4724,15 +4724,15 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     ]
   },
   // -----------------------------------------------------------------
-  // "Homenaje a la Música Cubana" - Orquesta Mercadonegro
+  // "Homenaje a la Música Cubana" - Orquesta Mercadonegro feat. Alexander Abreu (La salsa es mi vida, 2017)
   // Timba • Intermediate • 100 BPM • 2-3 Son/Rumba Clave • 251s
   // Video ID: Wh1zERcDWGM • timings from Argus
-  // Argus in AI Studio 2026-11-02, mapped on the World Latin Congress video of Paolo & Alina dancing it, so the player shows them dancing. Argus unsure: 2:57 (2:55-2:58) and 3:42 (3:41-3:43). Ear-check the drum-only despelote at 2:38 and the soft break at 3:17.
+  // Argus in AI Studio 2026-11-02, mapped on the World Latin Congress video of Paolo & Alina dancing it, so the player shows them dancing. Argus unsure: 2:57 (2:55-2:58) and 3:42 (3:41-3:43). Ear-check the drum-only despelote at 2:38 and the soft break at 3:17. A second AI Studio run that watched the dancing agrees on the despelote (2:35-2:56) but has Paolo & Alina dancing rumba at 2:12-2:35, not at Argus's 1:41 rumba break: check where the 'clave de guaguancó' break really is.
   // -----------------------------------------------------------------
   {
     "id": "homenaje-a-la-musica-cubana",
     "title": "Homenaje a la Música Cubana",
-    "artist": "Orquesta Mercadonegro",
+    "artist": "Orquesta Mercadonegro feat. Alexander Abreu",
     "style": "Timba",
     "bpm": 100,
     "claveType": "2-3 Son/Rumba Clave",

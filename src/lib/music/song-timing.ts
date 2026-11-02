@@ -123,5 +123,6 @@ export function formatSongTime(seconds: number, withTenths = false): string {
   const whole = Math.floor(rest);
   const padded = whole < 10 ? `0${whole}` : `${whole}`;
   if (!withTenths) return `${minutes}:${padded}`;
-  return `${minutes}:${padded}.${Math.floor((rest - whole) * 10)}`;
+  // + 1e-6: 11.6 - 11 is 0.5999… in floating point, which would show as "11.5"
+  return `${minutes}:${padded}.${Math.min(9, Math.floor((rest - whole) * 10 + 1e-6))}`;
 }

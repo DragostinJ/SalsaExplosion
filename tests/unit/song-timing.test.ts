@@ -116,6 +116,10 @@ describe("song player helpers", () => {
     expect(formatSongTime(0)).toBe("0:00");
     expect(formatSongTime(328)).toBe("5:28");
     expect(formatSongTime(65.47, true)).toBe("1:05.4");
+    // floating point: 11.6 - 11 = 0.5999…, still shown as .6
+    expect(formatSongTime(11.6, true)).toBe("0:11.6");
+    expect(formatSongTime(206.6, true)).toBe("3:26.6");
+    expect(formatSongTime(59.99, true)).toBe("0:59.9");
   });
 
   it("hides site chrome only on single-song player routes, the mock-ups and the wall poster", () => {

@@ -60,7 +60,6 @@ export interface ClassScheduleItem {
   bookedCount: number;
   currentLeadsCount: number;
   currentFollowsCount: number;
-  creditCost: number;
   isCancelled: boolean;
   instructor: {
     firstName: string;
@@ -77,8 +76,6 @@ export interface ClassScheduleItem {
 export interface StudentContext {
   currentLevel: DanceLevel;
   preferredRole: DanceRole;
-  classCredits: number;
-  hasActiveSubscription: boolean;
   isGuest?: boolean;
 }
 
@@ -245,15 +242,8 @@ export function ClassScheduleCard({
         return;
       }
 
-      if (result.data.isLateCancellation) {
-        toast.warning(result.message);
-      } else {
-        toast.success(result.message);
-      }
-      setFeedback({
-        type: result.data.isLateCancellation ? "warning" : "success",
-        message: result.message,
-      });
+      toast.success(result.message);
+      setFeedback({ type: "success", message: result.message });
       router.refresh();
     });
   };

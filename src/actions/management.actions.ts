@@ -95,12 +95,6 @@ export async function updateStudentProgressionAction(
   return roster.updateStudentProgressionAction(...args);
 }
 
-export async function adjustStudentCreditsAction(
-  ...args: Parameters<typeof roster.adjustStudentCreditsAction>
-) {
-  return roster.adjustStudentCreditsAction(...args);
-}
-
 export async function createClassSessionAction(
   ...args: Parameters<typeof roster.createClassSessionAction>
 ) {

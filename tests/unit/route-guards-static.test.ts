@@ -59,14 +59,9 @@ describe("M13: Static Route Guard Defence-in-Depth Audit", () => {
     expect(checkinContent).toContain('redirect("/sign-in")');
   });
 
-  it("verifies wallet and referral pages safely handle null user (!user branch)", () => {
+  it("verifies the wallet page safely handles a null user (!user branch)", () => {
     const walletPath = path.join(appRoot, "dashboard", "wallet", "page.tsx");
-    const referralsPath = path.join(appRoot, "dashboard", "referrals", "page.tsx");
-
     const walletContent = fs.readFileSync(walletPath, "utf-8");
-    const referralsContent = fs.readFileSync(referralsPath, "utf-8");
-
     expect(walletContent).toMatch(/if\s*\(!user\)/);
-    expect(referralsContent).toMatch(/if\s*\(!user\)/);
   });
 });

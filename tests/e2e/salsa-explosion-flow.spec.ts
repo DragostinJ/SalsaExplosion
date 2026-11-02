@@ -129,19 +129,12 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(page.getByText(/Commercial Road/i).first()).toBeVisible();
   });
 
-  test("5. Referrals page enforces authentication for dancer rewards", async ({
+  test("5. The retired referrals page (class credits are gone) sends dancers to Mi carnet", async ({
     page,
   }) => {
     await page.goto("/dashboard/referrals", { waitUntil: "domcontentloaded" });
-
-    const url = page.url();
-    if (url.includes("sign-in")) {
-      await expect(page).toHaveURL(/.*sign-in/);
-    } else {
-      await expect(
-        page.getByText("Invite Friends, Earn Free Class Credits")
-      ).toBeVisible();
-    }
+    await expect(page).toHaveURL(/dashboard\/carnet|sign-in/);
+    await expect(page.getByText(/Earn Free Class Credits/i)).toHaveCount(0);
   });
 
   test("6. About page renders Maestro Enrique Perez Valdes heritage, Moe Flex, and authentic faculty", async ({

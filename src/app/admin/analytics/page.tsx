@@ -4,8 +4,6 @@ import {
   DanceRole,
   Role,
   SubmissionStatus,
-  SubscriptionStatus,
-  TransactionType,
 } from "@prisma/client";
 import { ShieldCheck } from "lucide-react";
 import { prisma } from "@/lib/prisma";
@@ -33,8 +31,6 @@ export default async function AdminAnalyticsPage() {
     roleCounts,
     levelCounts,
     eventRegistrations,
-    creditPurchases,
-    activeSubscriptionsCount,
     auditLogs,
     coachingBookings,
     merchReservations,
@@ -58,22 +54,7 @@ export default async function AdminAnalyticsPage() {
     }),
     prisma.eventRegistration.findMany({
       where: { paymentStatus: "PAID" },
-      select: { amountPaidInCents: true },
-    }),
-    prisma.creditLedger.findMany({
-      where: {
-        type: {
-          in: [
-            TransactionType.CREDIT_PACK_PURCHASE,
-            TransactionType.ADMIN_ADJUSTMENT,
-          ],
-        },
-        amount: { gt: 0 },
-      },
-      select: { amount: true },
-    }),
-    prisma.subscription.count({
-      where: { status: SubscriptionStatus.ACTIVE },
+      select: { amountPaidInCents: true, createdAt: true },
     }),
     prisma.auditLog.findMany({
       take: 50,
@@ -148,17 +129,11 @@ export default async function AdminAnalyticsPage() {
     };
   });
 
-  // Calculate Real Revenue Overview (Events + Credit Packs + Unlimited Memberships + Historical Studio Baseline)
+  // Online revenue only (festival passes, private lessons, merch). Weekly classes are paid at the
+  // door and never pass through the site, and class packs / memberships are retired.
   const eventRevenuePounds =
     eventRegistrations.reduce((acc, curr) => acc + curr.amountPaidInCents, 0) /
     100;
-
-  const totalCreditsPurchased = creditPurchases.reduce(
-    (acc, curr) => acc + curr.amount,
-    0
-  );
-  const creditPackRevenuePounds = totalCreditsPurchased * 10;
-  const subscriptionRevenuePounds = activeSubscriptionsCount * 89;
 
   const coachingRevenuePounds = coachingBookings
     .filter((b) => b.status === "COMPLETED" || b.status === "CONFIRMED")
@@ -170,21 +145,23 @@ export default async function AdminAnalyticsPage() {
 
   const currentMonthDynamicPounds =
     eventRevenuePounds +
-    creditPackRevenuePounds +
-    subscriptionRevenuePounds +
     coachingRevenuePounds +
     merchRevenuePounds;
 
-  const totalRevenueInPounds = 4500 + currentMonthDynamicPounds;
+  const totalRevenueInPounds = currentMonthDynamicPounds;
 
-  const revenueByMonth = [
-    { month: "May", amount: 2400 },
-    { month: "Jun", amount: 2850 },
-    { month: "Jul", amount: 3200 },
-    { month: "Aug", amount: 3950 },
-    { month: "Sep", amount: 4500 },
-    { month: "Oct", amount: Math.round(4500 + currentMonthDynamicPounds) },
-  ];
+  // Festival pass sales per month for the last six months, from real paid registrations
+  const monthLabel = new Intl.DateTimeFormat("en-GB", { month: "short", timeZone: "Europe/London" });
+  const monthKey = new Intl.DateTimeFormat("en-CA", { year: "numeric", month: "2-digit", timeZone: "Europe/London" });
+  const nowForChart = new Date();
+  const revenueByMonth = Array.from({ length: 6 }, (_, i) => {
+    const d = new Date(nowForChart.getFullYear(), nowForChart.getMonth() - (5 - i), 15);
+    const key = monthKey.format(d);
+    const pence = eventRegistrations
+      .filter((r) => monthKey.format(r.createdAt) === key)
+      .reduce((acc, r) => acc + r.amountPaidInCents, 0);
+    return { month: monthLabel.format(d), amount: Math.round(pence / 100) };
+  });
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">

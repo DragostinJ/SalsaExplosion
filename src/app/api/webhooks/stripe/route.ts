@@ -5,7 +5,6 @@ import Stripe from "stripe";
 import {
   Prisma,
   SubscriptionStatus,
-  TransactionType,
   TicketPaymentStatus,
   DanceRole,
 } from "@prisma/client";
@@ -186,16 +185,12 @@ export async function POST(req: Request): Promise<NextResponse> {
   try {
     switch (event.type) {
       // ----------------------------------------------------------------
-      // A. CHECKOUT SESSION COMPLETED (Event Tickets, Credit Packs & Subs)
+      // A. CHECKOUT SESSION COMPLETED (festival passes; legacy memberships are only kept in sync)
       // ----------------------------------------------------------------
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
 
         const userId = session.metadata?.userId ?? session.client_reference_id;
-        const customerId =
-          typeof session.customer === "string"
-            ? session.customer
-            : session.customer?.id ?? null;
 
         // Branch 1: Event Ticket Registration Checkout Completed
         if (session.metadata?.mode === "event_registration") {
@@ -296,84 +291,6 @@ export async function POST(req: Request): Promise<NextResponse> {
           }
         }
 
-        // Branch 2: One-Time Class Pass Purchase (Credits)
-        if (session.mode === "payment") {
-          if (session.payment_status !== "paid") {
-            break;
-          }
-
-          const creditAmount = Number.parseInt(
-            session.metadata?.creditAmount ?? "0",
-            10
-          );
-          const packName = session.metadata?.packName ?? "Class Credit Pack";
-          const paymentIntentId =
-            typeof session.payment_intent === "string"
-              ? session.payment_intent
-              : session.payment_intent?.id;
-
-          if (
-            !userId ||
-            !paymentIntentId ||
-            Number.isNaN(creditAmount) ||
-            creditAmount <= 0
-          ) {
-            console.error(
-              "[Stripe Webhook]: Missing userId, paymentIntentId, or valid creditAmount in session metadata:",
-              session.id
-            );
-            return NextResponse.json(
-              { error: "Invalid payment metadata" },
-              { status: 400 }
-            );
-          }
-
-          try {
-            await prisma.$transaction(async (tx) => {
-              const updatedUser = await tx.user.update({
-                where: { id: userId },
-                data: {
-                  classCredits: { increment: creditAmount },
-                  ...(customerId ? { stripeCustomerId: customerId } : {}),
-                },
-                select: { classCredits: true },
-              });
-
-              await tx.creditLedger.create({
-                data: {
-                  userId,
-                  amount: creditAmount,
-                  balanceAfter: updatedUser.classCredits,
-                  type: TransactionType.CREDIT_PACK_PURCHASE,
-                  stripePaymentIntentId: paymentIntentId,
-                  description: `Purchased ${packName} (+${creditAmount} credits)`,
-                },
-              });
-
-              await tx.processedWebhookEvent.create({
-                data: {
-                  id: event.id,
-                  eventType: event.type,
-                },
-              });
-            });
-          } catch (txError) {
-            if (
-              txError instanceof Prisma.PrismaClientKnownRequestError &&
-              txError.code === "P2002"
-            ) {
-              console.info(
-                `[Stripe Webhook]: Idempotent skip — PaymentIntent ${paymentIntentId} already credited.`
-              );
-              return NextResponse.json(
-                { received: true, idempotent: true },
-                { status: 200 }
-              );
-            }
-            throw txError;
-          }
-        }
-
         // Branch 3: Recurring Membership Checkout Completed
         if (session.mode === "subscription" && session.subscription) {
           const subscriptionId =
@@ -410,43 +327,6 @@ export async function POST(req: Request): Promise<NextResponse> {
           const stripeSub = await stripe.subscriptions.retrieve(subscriptionId);
           await upsertSubscriptionFromStripe(stripeSub);
 
-          const rawPayment =
-            invoice.payments?.data?.[0]?.payment?.payment_intent;
-          const paymentIntentId =
-            typeof rawPayment === "string"
-              ? rawPayment
-              : rawPayment?.id ?? invoice.id;
-
-          if (paymentIntentId) {
-            const subRecord = await prisma.subscription.findUnique({
-              where: { stripeSubscriptionId: subscriptionId },
-              include: { user: { select: { id: true, classCredits: true } } },
-            });
-
-            if (subRecord) {
-              await prisma.creditLedger
-                .create({
-                  data: {
-                    userId: subRecord.user.id,
-                    amount: 0,
-                    balanceAfter: subRecord.user.classCredits,
-                    type: TransactionType.SUBSCRIPTION_RENEWAL,
-                    stripePaymentIntentId: paymentIntentId,
-                    description: `Unlimited Membership renewed through ${subRecord.currentPeriodEnd.toLocaleDateString("en-GB")}`,
-                  },
-                })
-                .catch((err: unknown) => {
-                  if (
-                    !(
-                      err instanceof Prisma.PrismaClientKnownRequestError &&
-                      err.code === "P2002"
-                    )
-                  ) {
-                    throw err;
-                  }
-                });
-            }
-          }
         }
 
         await prisma.processedWebhookEvent

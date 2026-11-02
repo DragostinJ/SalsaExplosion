@@ -40,80 +40,7 @@ export interface CsvExportResult {
 }
 
 /**
- * 1. Export Monthly Revenue & Credit Ledger Transactions
- */
-export async function exportRevenueLedgerCsvAction(rawInput?: unknown): Promise<CsvExportResult> {
-  exportInputSchema.parse(rawInput);
-  const admin = await requireRole(ADMIN_ONLY);
-  const identifier = await getRateLimitIdentifier(admin.id);
-
-  return withRateLimit(identifier, "EXPORT", async (): Promise<CsvExportResult> => {
-    try {
-      const transactions = await prisma.creditLedger.findMany({
-        include: {
-          user: {
-            select: {
-              firstName: true,
-              lastName: true,
-              email: true,
-            },
-          },
-        },
-        orderBy: { createdAt: "desc" },
-      });
-
-      const headers = [
-        "Transaction ID",
-        "Date & Time (UTC)",
-        "Student Name",
-        "Student Email",
-        "Transaction Type",
-        "Credit Delta",
-        "Balance After (Credits)",
-        "Description",
-        "Stripe Payment Intent ID",
-        "Linked Booking ID",
-      ];
-
-      const rows = transactions.map((tx) => [
-        tx.id,
-        tx.createdAt.toISOString(),
-        `${tx.user.firstName} ${tx.user.lastName}`.trim(),
-        tx.user.email,
-        tx.type,
-        tx.amount,
-        tx.balanceAfter,
-        tx.description ?? "",
-        tx.stripePaymentIntentId ?? "",
-        tx.bookingId ?? "",
-      ]);
-
-      const csvContent = buildCsv(headers, rows);
-      const dateStamp = new Date().toISOString().split("T")[0];
-      const filename = `salsa-explosion-revenue-ledger-${dateStamp}.csv`;
-
-      await recordAuditLog({
-        actorId: admin.id,
-        action: AuditAction.CSV_EXPORT,
-        targetType: "CSV_EXPORT",
-        targetId: "revenue-ledger",
-        metadata: { filename, rowCount: rows.length },
-      });
-
-      return {
-        success: true,
-        filename,
-        csvContent,
-      };
-    } catch (err: unknown) {
-      console.error("[exportRevenueLedgerCsvAction]", err);
-      return { success: false, filename: "", error: "Failed to generate CSV export. Please try again." };
-    }
-  });
-}
-
-/**
- * 2. Export Active Student Roster & Credit Balances
+ * Export the student roster (levels and roles; classes are paid at the door, so no balances)
  */
 export async function exportStudentRosterCsvAction(rawInput?: unknown): Promise<CsvExportResult> {
   exportInputSchema.parse(rawInput);
@@ -123,9 +50,6 @@ export async function exportStudentRosterCsvAction(rawInput?: unknown): Promise<
   return withRateLimit(identifier, "EXPORT", async (): Promise<CsvExportResult> => {
     try {
       const students = await prisma.user.findMany({
-        include: {
-          subscription: true,
-        },
         orderBy: { createdAt: "desc" },
       });
 
@@ -137,9 +61,6 @@ export async function exportStudentRosterCsvAction(rawInput?: unknown): Promise<
         "System Role",
         "Current Syllabus Level",
         "Preferred Role",
-        "Available Class Credits",
-        "Subscription Status",
-        "Subscription Renews / Ends",
         "Account Created At",
       ];
 
@@ -151,11 +72,6 @@ export async function exportStudentRosterCsvAction(rawInput?: unknown): Promise<
         student.role,
         student.currentLevel,
         student.preferredRole,
-        student.classCredits,
-        student.subscription?.status ?? "NONE",
-        student.subscription?.currentPeriodEnd
-          ? student.subscription.currentPeriodEnd.toISOString()
-          : "",
         student.createdAt.toISOString(),
       ]);
 

@@ -1,9 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Role } from "@prisma/client";
-import {
-  exportRevenueLedgerCsvAction,
-  exportStudentRosterCsvAction,
-} from "@/actions/export.actions";
+import { exportStudentRosterCsvAction } from "@/actions/export.actions";
 import { requireRole } from "@/lib/auth-user";
 import { prisma } from "@/lib/prisma";
 
@@ -23,9 +20,6 @@ vi.mock("@/lib/ratelimit", () => ({
 
 vi.mock("@/lib/prisma", () => ({
   prisma: {
-    creditLedger: {
-      findMany: vi.fn(),
-    },
     user: {
       findMany: vi.fn(),
     },
@@ -46,14 +40,6 @@ describe("H2: Admin Export Actions Authorization & Zod Validation", () => {
     vi.clearAllMocks();
   });
 
-  it("rejects non-admin users attempting to export revenue ledger", async () => {
-    vi.mocked(requireRole).mockRejectedValue(new Error("Unauthorized: ADMIN role required"));
-
-    await expect(exportRevenueLedgerCsvAction()).rejects.toThrow(
-      "Unauthorized: ADMIN role required"
-    );
-  });
-
   it("rejects non-admin users attempting to export student roster", async () => {
     vi.mocked(requireRole).mockRejectedValue(new Error("Unauthorized: ADMIN role required"));
 
@@ -71,7 +57,7 @@ describe("H2: Admin Export Actions Authorization & Zod Validation", () => {
 
     // Pass invalid format (only "csv" is permitted)
     await expect(
-      exportRevenueLedgerCsvAction({ format: "xml" as unknown as "csv" })
+      exportStudentRosterCsvAction({ format: "xml" as unknown as "csv" })
     ).rejects.toThrow();
   });
 
@@ -102,5 +88,7 @@ describe("H2: Admin Export Actions Authorization & Zod Validation", () => {
     expect(result.filename).toMatch(/^salsa-explosion-student-roster-\d{4}-\d{2}-\d{2}\.csv$/);
     expect(result.csvContent).toContain('"User ID","First Name","Last Name","Email Address"');
     expect(result.csvContent).toContain('"Maria"');
+    // Class credits and memberships are retired: the roster never exports them
+    expect(result.csvContent).not.toMatch(/Credit|Subscription/);
   });
 });

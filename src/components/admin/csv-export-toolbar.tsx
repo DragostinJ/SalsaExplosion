@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Download, FileSpreadsheet, Users, Ticket, ShoppingBag, Loader2 } from "lucide-react";
+import { FileSpreadsheet, Users, Ticket, ShoppingBag, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  exportRevenueLedgerCsvAction,
   exportStudentRosterCsvAction,
   exportCongressTicketHoldersCsvAction,
   exportPrivateCoachingAndMerchCsvAction,
@@ -27,28 +26,6 @@ function triggerBrowserDownload(filename: string, content: string) {
 export function CsvExportToolbar() {
   const [downloadingType, setDownloadingType] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
-
-  async function handleExportRevenue() {
-    setDownloadingType("revenue");
-    setStatusMessage(null);
-    try {
-      const res = await exportRevenueLedgerCsvAction();
-      if (res.success && res.csvContent && res.filename) {
-        triggerBrowserDownload(res.filename, res.csvContent);
-        setStatusMessage(`Successfully downloaded ${res.filename}`);
-      } else {
-        const errText =
-          typeof res.error === "string"
-            ? res.error
-            : res.error?.message ?? "Unknown error";
-        setStatusMessage(`Export failed: ${errText}`);
-      }
-    } catch {
-      setStatusMessage("Export failed due to network or server error.");
-    } finally {
-      setDownloadingType(null);
-    }
-  }
 
   async function handleExportRoster() {
     setDownloadingType("roster");
@@ -139,29 +116,7 @@ export function CsvExportToolbar() {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Revenue Ledger Export */}
-          <Button
-            variant="outline"
-            className="flex h-auto flex-col items-start gap-1 p-3.5 text-left border-border hover:border-amber-500/50 hover:bg-amber-500/[0.04]"
-            onClick={handleExportRevenue}
-            disabled={downloadingType !== null}
-          >
-            <div className="flex w-full items-center justify-between">
-              <span className="text-xs font-bold text-foreground">
-                Revenue & Ledger
-              </span>
-              {downloadingType === "revenue" ? (
-                <Loader2 className="h-4 w-4 animate-spin text-amber-500" />
-              ) : (
-                <Download className="h-4 w-4 text-muted-foreground" />
-              )}
-            </div>
-            <span className="text-[11px] text-muted-foreground leading-snug">
-              Monthly revenue, Stripe ledger transactions & credit deductions.
-            </span>
-          </Button>
-
+        <div className="grid gap-3 sm:grid-cols-3">
           {/* Student Roster Export */}
           <Button
             variant="outline"
@@ -180,7 +135,7 @@ export function CsvExportToolbar() {
               )}
             </div>
             <span className="text-[11px] text-muted-foreground leading-snug">
-              Active student roster, syllabus levels, roles & credit balances.
+              Active student roster: syllabus levels and dance roles.
             </span>
           </Button>
 

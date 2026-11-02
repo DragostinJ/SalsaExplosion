@@ -4,7 +4,6 @@ import { COACHING_INSTRUCTORS_CATALOG } from "@/lib/constants/coaching";
 import { SHOP_CATALOG } from "@/lib/constants/shop";
 import { bookPrivateLessonAction } from "@/actions/lessons.actions";
 import { reserveMerchItemAction } from "@/actions/shop.actions";
-import { redeemReferralCodeAction } from "@/actions/referral.actions";
 import { cancelClassSessionWithRefundsAction } from "@/actions/management.actions";
 
 // Mock next/cache
@@ -218,119 +217,32 @@ describe("F12: Catalog Pricing Security & Transaction Integrity Unit Suite", () 
     });
   });
 
-  describe("3. Referral Code Validation & Self-Referral Prevention", () => {
-    it("rejects self-referral codes", async () => {
-      const student = createMockStudent({ id: "usr_student_1234" });
-      vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(student);
-      vi.mocked(prisma.creditLedger.findFirst).mockResolvedValue(null);
-      vi.mocked(prisma.user.findMany).mockResolvedValue([
-        {
-          id: "usr_student_1234",
-          firstName: "Sofia",
-          lastName: "Martinez",
-          email: "sofia@example.com",
-          role: Role.STUDENT,
-          currentLevel: DanceLevel.BEGINNER,
-          preferredRole: DanceRole.FOLLOW,
-          classCredits: 2,
-          clerkId: "clerk_123",
-          avatarUrl: null,
-          bio: null,
-          specialty: null,
-          yearsDancing: 1,
-          stripeCustomerId: null,
-          classRemindersOptOut: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ]);
-
-      // Attempt redeeming own referral code (suffix matches user.id)
-      const res = await redeemReferralCodeAction({
-        code: "SALSA-SOFI-1234",
-      });
-
-      expect(res.success).toBe(false);
-      const errText = typeof res.error === "string" ? res.error : res.error?.message;
-      expect(errText).toMatch(/cannot redeem your own.*referral code/i);
-    });
-
-    it("rejects invalidly formatted referral codes", async () => {
-      const student = createMockStudent();
-      vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(student);
-
-      const res = await redeemReferralCodeAction({
-        code: "INVALID_CODE_XYZ",
-      });
-
-      expect(res.success).toBe(false);
-      const errText = typeof res.error === "string" ? res.error : res.error?.message;
-      expect(errText).toMatch(/valid/i);
-    });
-  });
-
-  describe("4. Class Session Cancellation & Refund Engine", () => {
-    it("refunds only credits a booking really deducted: free door-paid reservations mint no credits", async () => {
+  describe("4. Class Session Cancellation (no credits: classes are paid at the door)", () => {
+    it("releases everyone who said they were coming and never touches credits", async () => {
       const admin = createMockAdmin();
       vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(admin);
 
       const mockSession = {
         id: "class_session_789",
         title: "Thursday Rueda de Casino",
-        creditCost: 1,
         isCancelled: false,
         bookings: [
-          {
-            id: "book_1",
-            userId: "student_regular",
-            user: {
-              id: "student_regular",
-              classCredits: 2,
-              subscription: null, // Older credit-based booking (ledger deduction) -> MUST BE REFUNDED
-            },
-          },
-          {
-            id: "book_2",
-            userId: "student_unlimited",
-            user: {
-              id: "student_unlimited",
-              classCredits: 0,
-              subscription: { status: SubscriptionStatus.ACTIVE }, // Unlimited sub -> NO CREDIT REFUND NEEDED
-            },
-          },
-          {
-            id: "book_3",
-            userId: "student_door",
-            user: {
-              id: "student_door",
-              classCredits: 0,
-              subscription: null, // Free reservation, pays at the door -> NOTHING TO REFUND
-            },
-          },
+          { id: "book_1", userId: "student_a" },
+          { id: "book_2", userId: "student_b" },
+          { id: "book_3", userId: "student_c" },
         ],
       };
-
+      const tx = {
+        classSession: {
+          findUnique: vi.fn().mockResolvedValue(mockSession),
+          update: vi.fn().mockResolvedValue({ ...mockSession, isCancelled: true }),
+        },
+        booking: { update: vi.fn().mockResolvedValue({}) },
+        user: { update: vi.fn() },
+        creditLedger: { findFirst: vi.fn(), create: vi.fn() },
+      };
       vi.mocked(prisma.$transaction).mockImplementation(async (callback) => {
-        const tx = {
-          classSession: {
-            findUnique: vi.fn().mockResolvedValue(mockSession),
-            update: vi.fn().mockResolvedValue({ ...mockSession, isCancelled: true }),
-          },
-          booking: {
-            update: vi.fn().mockResolvedValue({}),
-          },
-          user: {
-            update: vi.fn().mockResolvedValue({ id: "student_regular", classCredits: 3 }),
-          },
-          creditLedger: {
-            // Only book_1 has a deduction on the ledger
-            findFirst: vi.fn(({ where }: { where: { bookingId: string } }) =>
-              Promise.resolve(where.bookingId === "book_1" ? { amount: -1 } : null)
-            ),
-            create: vi.fn().mockResolvedValue({}),
-          },
-        };
-        const fn = callback as (tx: unknown) => Promise<unknown>;
+        const fn = callback as (client: unknown) => Promise<unknown>;
         return fn(tx);
       });
 
@@ -343,8 +255,12 @@ describe("F12: Catalog Pricing Security & Transaction Integrity Unit Suite", () 
       if (!res.success) {
         throw new Error("Expected res.success to be true");
       }
-      expect(res.data.refundedCount).toBe(1); // Only the booking that really paid credits
-      expect(res.message).toMatch(/Refunded 1 student credit/i);
+      expect(res.data.cancelledBookings).toBe(3);
+      expect(tx.booking.update).toHaveBeenCalledTimes(3);
+      expect(tx.user.update).not.toHaveBeenCalled();
+      expect(tx.creditLedger.findFirst).not.toHaveBeenCalled();
+      expect(tx.creditLedger.create).not.toHaveBeenCalled();
+      expect(res.message).not.toMatch(/credit|refund/i);
     });
   });
 });

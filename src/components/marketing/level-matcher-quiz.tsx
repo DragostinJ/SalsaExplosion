@@ -33,7 +33,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
     description:
       "Start with basic footwork (Paso Básico), Cuban frame connection, Dile Que No, and your very first Dame in the Rueda circle. Zero partner needed!",
     classTiming: "Every Thursday 19:00 • BOH Studios",
-    recommendedTrack: "Claim your 1 Free Welcome Credit and join our friendly Thursday cohort with Maestro Enrique.",
+    recommendedTrack: "Come to the Thursday beginners class with Maestro Enrique: £12 at the door, no partner needed.",
     href: "/classes",
   },
   some_basics: {

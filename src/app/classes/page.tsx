@@ -15,7 +15,6 @@ import {
   DanceRole,
   DanceStyle,
   Role,
-  SubscriptionStatus,
 } from "@prisma/client";
 import {
   Sparkles,
@@ -99,27 +98,14 @@ export default async function StudentSchedulePage({
   const targetDayOfWeek =
     dayParam && validDays[dayParam] !== undefined ? validDays[dayParam] : undefined;
 
-  const checkoutStatus = resolvedParams.checkout;
-
-  const now = new Date();
-  const hasActiveSubscription =
-    user?.subscription !== null &&
-    user?.subscription !== undefined &&
-    user?.subscription.status === SubscriptionStatus.ACTIVE &&
-    user?.subscription.currentPeriodEnd > now;
-
   const studentContext: StudentContext | null = user
     ? {
         currentLevel: user.currentLevel,
         preferredRole: user.preferredRole,
-        classCredits: user.classCredits,
-        hasActiveSubscription,
       }
     : {
         currentLevel: DanceLevel.BEGINNER,
         preferredRole: DanceRole.LEAD,
-        classCredits: 0,
-        hasActiveSubscription: false,
         isGuest: true,
       };
 
@@ -138,7 +124,6 @@ export default async function StudentSchedulePage({
     maxLeads: number | null;
     maxFollows: number | null;
     bookedCount: number;
-    creditCost: number;
     isCancelled: boolean;
     instructor: {
       firstName: string | null;
@@ -153,6 +138,7 @@ export default async function StudentSchedulePage({
     }>;
   }> = [];
 
+  const now = new Date();
   try {
     upcomingClasses = await prisma.classSession.findMany({
       where: {
@@ -176,7 +162,6 @@ export default async function StudentSchedulePage({
         maxLeads: true,
         maxFollows: true,
         bookedCount: true,
-        creditCost: true,
         isCancelled: true,
         instructor: {
           select: {
@@ -245,7 +230,6 @@ export default async function StudentSchedulePage({
       bookedCount: session.bookedCount,
       currentLeadsCount,
       currentFollowsCount,
-      creditCost: session.creditCost,
       isCancelled: session.isCancelled,
       instructor: {
         firstName: session.instructor?.firstName ?? "Enrique",
@@ -261,17 +245,6 @@ export default async function StudentSchedulePage({
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-6 sm:space-y-8 px-4 py-4 sm:py-8 overflow-x-hidden w-full">
       {loadFailed && <DataUnavailableNotice />}
-      {(checkoutStatus === "success" || checkoutStatus === "demo_success") && (
-        <div className="flex items-center justify-between border-4 border-ink bg-poster-teal p-4 text-xs sm:text-sm font-bold text-ink shadow-[4px_4px_0_0_#161311]">
-          <span>
-            Pass activated! Your studio wallet has been updated ({user?.classCredits ?? 0} credits available). Select any class below to book your spot!
-          </span>
-          <Link href="/classes" className="underline ml-4 text-xs font-black">
-            Dismiss
-          </Link>
-        </div>
-      )}
-
       {/* Cartelera Poster Hero Header & Door-Pay Policy Bar */}
       <section
         data-testid="page-header"
@@ -304,7 +277,6 @@ export default async function StudentSchedulePage({
                 <Sparkles className="h-4 w-4 text-accent-red" />
                 <span>Dancer:</span>
                 <span className="font-black uppercase">{user.currentLevel}</span>
-                <span className="opacity-80">({user.classCredits} credits)</span>
               </div>
             )}
           </div>

@@ -487,7 +487,7 @@ export function ClassManagerWorkspace({
                         </button>
                       </div>
                       <p className="text-[11px] text-muted-foreground">
-                        This will transition all confirmed bookings to CANCELLED, credit back each student&apos;s class credits via a credit ledger refund, and record an audit trail event.
+                        This cancels the class, releases everyone who said they were coming, and records an audit trail event. Nothing was paid online, so there is nothing to refund.
                       </p>
                       <div className="space-y-1 pt-1">
                         <label className="text-[11px] font-semibold text-foreground">
@@ -521,7 +521,7 @@ export function ClassManagerWorkspace({
                           ) : (
                             <Ban className="mr-1 h-3 w-3" />
                           )}
-                          Confirm Cancellation & Refund Credits
+                          Confirm Cancellation
                         </Button>
                       </div>
                     </div>

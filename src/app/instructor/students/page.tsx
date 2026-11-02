@@ -1,7 +1,6 @@
 import {
   BookingStatus,
   SubmissionStatus,
-  SubscriptionStatus,
 } from "@prisma/client";
 import { Users, Award } from "lucide-react";
 import { prisma } from "@/lib/prisma";
@@ -12,9 +11,9 @@ import { StudentProgressionDirectory } from "@/components/instructor/student-pro
 import { Badge } from "@/components/ui/badge";
 
 export const metadata = {
-  title: "Student Progression & Credit Directory | Salsa Explosion Instructor",
+  title: "Students & Progression | Salsa Explosion Instructor",
   description:
-    "View student Cuban Salsa levels, promote dancers in real time, balance Lead/Follow roles, and manage class credits.",
+    "View student Cuban Salsa levels, promote dancers in real time and see the Lead/Follow mix.",
 };
 
 export default async function InstructorStudentsPage() {
@@ -23,7 +22,6 @@ export default async function InstructorStudentsPage() {
   const allUsers = await prisma.user.findMany({
     orderBy: [{ role: "asc" }, { createdAt: "desc" }],
     include: {
-      subscription: true,
       bookings: {
         select: { status: true },
       },
@@ -34,14 +32,7 @@ export default async function InstructorStudentsPage() {
     },
   });
 
-  const now = new Date();
-
   const serializedStudents: StudentProgressionRow[] = allUsers.map((u) => {
-    const hasActiveSubscription =
-      u.subscription !== null &&
-      u.subscription.status === SubscriptionStatus.ACTIVE &&
-      u.subscription.currentPeriodEnd > now;
-
     const totalBookingsCount = u.bookings.filter(
       (b) =>
         b.status === BookingStatus.CONFIRMED ||
@@ -69,8 +60,6 @@ export default async function InstructorStudentsPage() {
       role: u.role,
       currentLevel: u.currentLevel,
       preferredRole: u.preferredRole,
-      classCredits: u.classCredits,
-      hasActiveSubscription,
       totalBookingsCount,
       attendedClassesCount,
       pendingSubmissionsCount,

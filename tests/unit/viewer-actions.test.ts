@@ -1,9 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { auth } from "@clerk/nextjs/server";
-import { SubscriptionStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import {
-  getMyPassContextAction,
   getMyPrivateLessonBookingsAction,
 } from "@/actions/viewer.actions";
 
@@ -32,51 +30,6 @@ describe("M6: Viewer Actions for Static Marketing Shells", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-  });
-
-  describe("getMyPassContextAction", () => {
-    it("returns signedIn: false when no user is logged in", async () => {
-      mockedAuth.mockResolvedValueOnce({ userId: null } as unknown as MockAuthReturn);
-      const res = await getMyPassContextAction();
-      expect(res).toEqual({
-        signedIn: false,
-        classCredits: 0,
-        hasActiveSubscription: false,
-      });
-      expect(mockedPrismaUser.upsert).not.toHaveBeenCalled();
-    });
-
-    it("returns safe defaults when DB findUnique throws", async () => {
-      mockedAuth.mockResolvedValueOnce({ userId: "clerk-1" } as unknown as MockAuthReturn);
-      mockedPrismaUser.findUnique.mockRejectedValueOnce(new Error("DB timeout"));
-      const res = await getMyPassContextAction();
-      expect(res).toEqual({
-        signedIn: false,
-        classCredits: 0,
-        hasActiveSubscription: false,
-      });
-      expect(mockedPrismaUser.upsert).not.toHaveBeenCalled();
-    });
-
-    it("returns credits and active subscription on happy path", async () => {
-      mockedAuth.mockResolvedValueOnce({ userId: "clerk-2" } as unknown as MockAuthReturn);
-      const future = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
-      mockedPrismaUser.findUnique.mockResolvedValueOnce({
-        classCredits: 6,
-        subscription: {
-          status: SubscriptionStatus.ACTIVE,
-          currentPeriodEnd: future,
-        },
-      } as unknown as Awaited<ReturnType<typeof prisma.user.findUnique>>);
-
-      const res = await getMyPassContextAction();
-      expect(res).toEqual({
-        signedIn: true,
-        classCredits: 6,
-        hasActiveSubscription: true,
-      });
-      expect(mockedPrismaUser.upsert).not.toHaveBeenCalled();
-    });
   });
 
   describe("getMyPrivateLessonBookingsAction", () => {

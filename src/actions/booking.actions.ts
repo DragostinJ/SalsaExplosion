@@ -2,23 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import {
-  AuditAction,
-  BookingStatus,
-  DanceRole,
-  Prisma,
-  SubscriptionStatus,
-  TransactionType,
-} from "@prisma/client";
+import { BookingStatus, DanceRole, Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
-import {
-  ActionResponse,
-  BookingDomainError,
-  CANCELLATION_WINDOW_HOURS,
-} from "@/lib/constants/booking";
+import { ActionResponse, BookingDomainError } from "@/lib/constants/booking";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
-import { recordAuditLog } from "@/lib/audit-log";
 
 // ==========================================
 // ZOD VALIDATION SCHEMAS
@@ -44,12 +32,12 @@ export type CancelBookingInput = z.infer<typeof CancelBookingSchema>;
 
 export async function bookClassAction(
   rawInput: BookClassInput
-): Promise<ActionResponse<{ bookingId: string; usedSubscription: boolean; remainingCredits: number }>> {
+): Promise<ActionResponse<{ bookingId: string }>> {
   // fallback-guard
   const provisionedUser = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(provisionedUser?.id);
 
-  return withRateLimit(identifier, "BOOKING", async (): Promise<ActionResponse<{ bookingId: string; usedSubscription: boolean; remainingCredits: number }>> => {
+  return withRateLimit(identifier, "BOOKING", async (): Promise<ActionResponse<{ bookingId: string }>> => {
     try {
       // 1. Authenticate & Ensure Provisioned User
       if (!provisionedUser) {
@@ -72,10 +60,9 @@ export async function bookClassAction(
     // 3. Execute Atomic Transaction
     const result = await prisma.$transaction(
       async (tx) => {
-        // 3a. Fetch User with Subscription state
+        // 3a. Fetch the dancer
         const user = await tx.user.findUnique({
           where: { id: provisionedUser.id },
-          include: { subscription: true },
         });
 
         if (!user) {
@@ -135,12 +122,8 @@ export async function bookClassAction(
           data: { bookedCount: { increment: 1 } },
         });
 
-        // 3g. Weekly classes are paid at the door (£12 / £14), never online: a booking only
-        // tells the teachers who is coming, so it takes no credits and no payment.
-        const hasActiveSubscription =
-          user.subscription !== null &&
-          user.subscription.status === SubscriptionStatus.ACTIVE &&
-          user.subscription.currentPeriodEnd > now;
+        // 3g. Weekly classes are paid at the door (£12 / £14), never online, and there are no
+        // class credits: a booking only tells the teachers who is coming.
 
         // 3h. Upsert Booking Record (handles both fresh bookings and re-activated cancellations)
         const booking = await tx.booking.upsert({
@@ -163,11 +146,7 @@ export async function bookClassAction(
           },
         });
 
-        return {
-          bookingId: booking.id,
-          usedSubscription: hasActiveSubscription,
-          remainingCredits: user.classCredits,
-        };
+        return { bookingId: booking.id };
       },
       {
         maxWait: 5000,
@@ -215,12 +194,12 @@ export async function bookClassAction(
 
 export async function cancelBookingAction(
   rawInput: CancelBookingInput
-): Promise<ActionResponse<{ refundedCredits: number; remainingCredits: number; isLateCancellation: boolean }>> {
+): Promise<ActionResponse<{ cancelled: true }>> {
   // fallback-guard
   const provisionedUser = await getOrProvisionCurrentUser();
   const identifier = await getRateLimitIdentifier(provisionedUser?.id);
 
-  return withRateLimit(identifier, "BOOKING", async (): Promise<ActionResponse<{ refundedCredits: number; remainingCredits: number; isLateCancellation: boolean }>> => {
+  return withRateLimit(identifier, "BOOKING", async (): Promise<ActionResponse<{ cancelled: true }>> => {
     try {
       // 1. Authenticate & Ensure Provisioned User
       if (!provisionedUser) {
@@ -308,69 +287,9 @@ export async function cancelBookingAction(
         },
       });
 
-      // 3c. Check if the specific booking originally consumed credits
-      const latestDeduction = await tx.creditLedger.findFirst({
-        where: {
-          bookingId: booking.id,
-          userId: user.id,
-          type: TransactionType.CLASS_BOOKING_DEDUCTION,
-        },
-        orderBy: { createdAt: "desc" },
-      });
-
-      const hoursUntilClass =
-        (booking.classSession.startTime.getTime() - now.getTime()) / (1000 * 60 * 60);
-      const isEligibleForRefund = hoursUntilClass >= CANCELLATION_WINDOW_HOURS;
-
-      let refundedCredits = 0;
-      let remainingCredits = user.classCredits;
-
-      if (latestDeduction && isEligibleForRefund) {
-        refundedCredits = Math.abs(latestDeduction.amount);
-
-        const updatedUser = await tx.user.update({
-          where: { id: user.id },
-          data: {
-            classCredits: { increment: refundedCredits },
-          },
-          select: { classCredits: true },
-        });
-
-        remainingCredits = updatedUser.classCredits;
-
-        await tx.creditLedger.create({
-          data: {
-            userId: user.id,
-            amount: refundedCredits,
-            balanceAfter: remainingCredits,
-            type: TransactionType.CLASS_CANCELLATION_REFUND,
-            bookingId: booking.id,
-            description: `Refund for cancelling ${booking.classSession.title} (${hoursUntilClass.toFixed(1)}h notice)`,
-          },
-        });
-      }
-
-      return {
-        classSessionId: booking.classSessionId,
-        refundedCredits,
-        remainingCredits,
-        isLateCancellation: Boolean(latestDeduction && !isEligibleForRefund),
-      };
+      // Nothing was paid online and no credits exist, so cancelling only frees the spot
+      return { classSessionId: booking.classSessionId };
     });
-
-    if (result.refundedCredits > 0) {
-      await recordAuditLog({
-        actorId: provisionedUser.id,
-        action: AuditAction.REFUND,
-        targetType: "BOOKING",
-        targetId: parsed.data.bookingId,
-        metadata: {
-          classSessionId: result.classSessionId,
-          refundedCredits: result.refundedCredits,
-          isLateCancellation: result.isLateCancellation,
-        },
-      });
-    }
 
     // 4. Revalidate Cache Paths
     revalidatePath("/classes");
@@ -382,16 +301,8 @@ export async function cancelBookingAction(
 
     return {
       success: true,
-      data: {
-        refundedCredits: result.refundedCredits,
-        remainingCredits: result.remainingCredits,
-        isLateCancellation: result.isLateCancellation,
-      },
-      message: result.isLateCancellation
-        ? `Booking cancelled. Because the class starts in less than ${CANCELLATION_WINDOW_HOURS} hours, your class credit was not refunded.`
-        : result.refundedCredits > 0
-          ? `Booking cancelled and ${result.refundedCredits} credit(s) refunded to your account.`
-          : "Booking cancelled and your spot has been released.",
+      data: { cancelled: true },
+      message: "Cancelled. The teachers won't expect you this time.",
     };
   } catch (error) {
     if (error instanceof BookingDomainError) {

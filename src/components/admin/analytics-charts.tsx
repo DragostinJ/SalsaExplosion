@@ -79,7 +79,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
               £{data.totalRevenueInPounds.toLocaleString("en-GB", { minimumFractionDigits: 2 })}
             </div>
             <p className="mt-1 text-xs text-muted-foreground">
-              Across credit packs, subs & events
+              Online: festival passes, private lessons and merch
             </p>
           </CardContent>
         </Card>

@@ -4,7 +4,6 @@ import { cancelBookingAction } from "@/actions/booking.actions";
 import { gradeSubmissionAction } from "@/actions/grading.actions";
 import {
   updateStudentProgressionAction,
-  adjustStudentCreditsAction,
   toggleBookingCheckInAction,
   createClassSessionAction,
   createGuestArtistEventAction,
@@ -154,27 +153,6 @@ describe("A5: IDOR & Broken Access Control Security Audit", () => {
       }
     });
 
-    it("proves a STUDENT cannot adjust class credits for themselves or others", async () => {
-      const student = {
-        id: "student-1",
-        role: Role.STUDENT,
-        email: "student1@domain.com",
-      } as unknown as MockUser;
-
-      vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(student);
-
-      const res = await adjustStudentCreditsAction({
-        studentId: "student-1",
-        delta: 50,
-        reason: "Self-granting credits attempt",
-      });
-
-      expect(res.success).toBe(false);
-      if (!res.success) {
-        expect(res.error.code).toBe("FORBIDDEN");
-      }
-    });
-
     it("proves a STUDENT cannot mark bookings as attended via instructor check-in", async () => {
       const student = {
         id: "student-1",
@@ -213,7 +191,6 @@ describe("A5: IDOR & Broken Access Control Security Audit", () => {
         maxCapacity: 30,
         maxLeads: 15,
         maxFollows: 15,
-        creditCost: 1,
       });
 
       expect(res.success).toBe(false);

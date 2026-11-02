@@ -6,21 +6,15 @@ import {
   Search,
   Award,
   Users,
-  PlusCircle,
-  MinusCircle,
   Clock,
   Sparkles,
-  CreditCard,
-  ShieldCheck,
 } from "lucide-react";
 import {
-  adjustStudentCreditsAction,
   updateStudentProgressionAction,
 } from "@/actions/management.actions";
 import { StudentProgressionRow } from "@/lib/constants/management";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 const LEVEL_ORDER: DanceLevel[] = [
@@ -86,34 +80,6 @@ export function StudentProgressionDirectory({
                   currentLevel: res.data.currentLevel,
                   preferredRole: res.data.preferredRole,
                 }
-              : st
-          )
-        );
-        setFeedbackBanner({ type: "success", text: res.message });
-      } else {
-        setFeedbackBanner({ type: "error", text: res.error.message });
-      }
-    });
-  };
-
-  const handleAdjustCredits = (
-    studentId: string,
-    delta: number,
-    reason: string
-  ) => {
-    setFeedbackBanner(null);
-    startTransition(async () => {
-      const res = await adjustStudentCreditsAction({
-        studentId,
-        delta,
-        reason,
-      });
-
-      if (res.success) {
-        setStudents((prev) =>
-          prev.map((st) =>
-            st.id === studentId
-              ? { ...st, classCredits: res.data.classCredits }
               : st
           )
         );
@@ -392,79 +358,10 @@ export function StudentProgressionDirectory({
                       </div>
                     </div>
 
-                    {/* Col 9-12: Wallet Credits & Instant Adjustments */}
-                    <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col justify-between gap-2 rounded-xl border bg-muted/30 p-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-xs font-semibold">
-                          <CreditCard className="h-3.5 w-3.5 text-primary" />
-                          <span>Class Credits:</span>
-                        </div>
-                        {student.hasActiveSubscription ? (
-                          <Badge className="bg-emerald-700 text-white text-xs">
-                            <ShieldCheck className="mr-1 h-3 w-3" />
-                            Unlimited Member
-                          </Badge>
-                        ) : (
-                          <span className="text-base font-extrabold">
-                            {student.classCredits} credits
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-1.5 pt-1">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          disabled={isPending}
-                          onClick={() =>
-                            handleAdjustCredits(
-                              student.id,
-                              1,
-                              "Door Drop-In Pass (+1)"
-                            )
-                          }
-                          className="h-7 flex-1 text-[11px] font-semibold"
-                        >
-                          <PlusCircle className="mr-1 h-3 w-3 text-emerald-600" />
-                          +1 Pass
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          disabled={isPending}
-                          onClick={() =>
-                            handleAdjustCredits(
-                              student.id,
-                              5,
-                              "5-Class Rhythm Pack (+5)"
-                            )
-                          }
-                          className="h-7 flex-1 text-[11px] font-semibold"
-                        >
-                          <PlusCircle className="mr-1 h-3 w-3 text-amber-600" />
-                          +5 Pack
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          aria-label={`Deduct 1 class credit from ${student.firstName} ${student.lastName}`}
-                          title="Deduct 1 Class Credit (-1)"
-                          disabled={isPending || student.classCredits <= 0}
-                          onClick={() =>
-                            handleAdjustCredits(
-                              student.id,
-                              -1,
-                              "Manual Class Deduction (-1)"
-                            )
-                          }
-                          className="h-7 px-2 text-[11px] font-semibold"
-                        >
-                          <MinusCircle className="h-3 w-3 text-rose-600" />
-                        </Button>
-                      </div>
+                    {/* Col 9-12: classes danced (classes are paid at the door; there are no credits) */}
+                    <div className="lg:col-span-4 flex items-center justify-between gap-2 border-2 border-ink bg-paper p-3">
+                      <span className="text-xs font-semibold uppercase tracking-wider">Classes danced</span>
+                      <span className="font-display text-2xl leading-none">{student.attendedClassesCount}</span>
                     </div>
                   </div>
                 </CardContent>

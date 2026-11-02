@@ -5,8 +5,6 @@ import { prisma } from "@/lib/prisma";
 import { isNextControlFlowError } from "@/lib/safe-url";
 import { reportError } from "@/lib/monitoring";
 
-/** Complimentary credits granted to a brand-new student account. */
-export const WELCOME_CREDITS = 1;
 
 export function isFallbackUser(user: { id: string }): boolean {
   return user.id.startsWith("fallback-");
@@ -130,7 +128,6 @@ export async function getOrProvisionCurrentUser() {
         role: isAdmin ? Role.ADMIN : Role.STUDENT,
         currentLevel: DanceLevel.BEGINNER,
         preferredRole: DanceRole.LEAD,
-        classCredits: WELCOME_CREDITS,
       },
       include: { subscription: true },
     });
@@ -153,7 +150,8 @@ export async function getOrProvisionCurrentUser() {
       role: Role.STUDENT,
       currentLevel: DanceLevel.BEGINNER,
       preferredRole: DanceRole.LEAD,
-      classCredits: WELCOME_CREDITS,
+      // Class credits are retired (classes are paid at the door): the column stays 0
+      classCredits: 0,
       stripeCustomerId: null,
       createdAt: new Date(),
       updatedAt: new Date(),

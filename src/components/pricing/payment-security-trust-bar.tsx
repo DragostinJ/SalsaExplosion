@@ -51,7 +51,7 @@ export function PaymentSecurityTrustBar({
           <div className="flex items-center gap-1.5">
             <RotateCcw className="h-4 w-4 text-accent-teal shrink-0" />
             <span>
-              <strong className="text-ink font-bold">24h Cancellation Guarantee:</strong> Instant credit refund before class cutoff.
+              <strong className="text-ink font-bold">Weekly classes:</strong> paid at the door, so there is nothing to cancel or refund online.
             </span>
           </div>
         ) : (

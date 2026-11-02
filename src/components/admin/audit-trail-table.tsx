@@ -96,7 +96,7 @@ export function AuditTrailTable({ logs }: AuditTrailTableProps) {
               Administrative Audit Trail
             </h2>
             <p className="text-xs text-muted-foreground">
-              Immutable forensic log of privilege changes, credit grants, student evaluations, and sensitive exports (Latest 50 events).
+              Immutable forensic log of privilege changes, student evaluations, class changes and sensitive exports (Latest 50 events).
             </p>
           </div>
         </div>

@@ -11,7 +11,6 @@ export default function robots(): MetadataRoute.Robots {
     "/dashboard/progression",
     "/dashboard/recaps",
     "/dashboard/wallet",
-    "/dashboard/referrals",
   ];
 
   return {

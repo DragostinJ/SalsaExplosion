@@ -18,8 +18,6 @@ export interface StudentProgressionRow {
   role: Role;
   currentLevel: DanceLevel;
   preferredRole: DanceRole;
-  classCredits: number;
-  hasActiveSubscription: boolean;
   totalBookingsCount: number;
   attendedClassesCount: number;
   pendingSubmissionsCount: number;

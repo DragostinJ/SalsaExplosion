@@ -6,7 +6,6 @@ import {
   Sparkles,
   Flame,
   ArrowRight,
-  Clock,
   Coins,
   CheckCircle2,
 } from "lucide-react";
@@ -35,7 +34,7 @@ import { PASS_PRICING_LIST, VENUE_INFO } from "@/lib/academy-data";
 export const metadata = {
   title: "My Passes & Digital Wallet | Salsa Explosion Bournemouth",
   description:
-    "View your studio credit balance, active Congress QR door passes, upcoming class bookings, and Click & Collect merch reservations.",
+    "Your festival passes with their door QR codes, the classes you said you're coming to, private lessons and merch reservations.",
 };
 
 export default async function StudentWalletPage() {
@@ -170,23 +169,15 @@ export default async function StudentWalletPage() {
 
   type WalletMerchReservation = Prisma.MerchReservationGetPayload<object>;
   type WalletPrivateLesson = Prisma.PrivateLessonBookingGetPayload<object>;
-  type WalletTransaction = Prisma.CreditLedgerGetPayload<object>;
-  type WalletSubscription = Prisma.SubscriptionGetPayload<object> | null;
-
-  let subscription: WalletSubscription = null;
   let eventRegistrations: WalletEventRegistration[] = [];
   let upcomingBookings: WalletBooking[] = [];
   let merchReservations: WalletMerchReservation[] = [];
   let privateLessons: WalletPrivateLesson[] = [];
-  let transactions: WalletTransaction[] = [];
 
   let loadFailed = isFallbackUser(user);
 
   try {
-    const [sub, reg, book, merch, priv, tx] = await Promise.all([
-      prisma.subscription.findUnique({
-        where: { userId: user.id },
-      }),
+    const [reg, book, merch, priv] = await Promise.all([
       prisma.eventRegistration.findMany({
         where: {
           userId: user.id,
@@ -247,25 +238,16 @@ export default async function StudentWalletPage() {
         orderBy: { createdAt: "desc" },
         take: 5,
       }),
-      prisma.creditLedger.findMany({
-        where: { userId: user.id },
-        orderBy: { createdAt: "desc" },
-        take: 8,
-      }),
     ]);
 
-    subscription = sub;
     eventRegistrations = reg;
     upcomingBookings = book;
     merchReservations = merch;
     privateLessons = priv;
-    transactions = tx;
   } catch (walletErr) {
     loadFailed = true;
     reportError("StudentWalletPage:dataFetch", walletErr);
   }
-
-  const hasActiveSub = subscription?.status === "ACTIVE";
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
@@ -275,20 +257,12 @@ export default async function StudentWalletPage() {
         title={user.firstName ?? "Dancer"}
         titleHighlight={user.lastName ?? "Wallet"}
         description="Show your digital passes and door QR codes at the BOH Studios Bournemouth entrance for instant 1-tap admission."
-        badge={hasActiveSub ? "Unlimited Pass Active" : "BOH Studios Wallet"}
+        badge="BOH Studios Wallet"
         eyebrow="DANCER DIGITAL WALLET • BOH STUDIOS"
         backHref="/classes"
         backLabel="Back to Schedule"
         actions={
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <div className="border-2 border-ink bg-poster-mustard p-3 text-center min-w-[120px] shadow-[3px_3px_0_var(--color-ink)]">
-              <span className="text-xs font-black uppercase tracking-wider text-ink block">
-                Available Credits
-              </span>
-              <div className="font-display text-3xl font-black text-ink mt-0.5">
-                {user.classCredits}
-              </div>
-            </div>
             <div className="flex flex-col gap-2">
               <Button
                 asChild
@@ -578,57 +552,6 @@ export default async function StudentWalletPage() {
           </CardContent>
         </Card>
       </div>
-
-      {/* Credit Ledger History */}
-      <section className="space-y-3">
-        <div className="flex items-center gap-2">
-          <Clock className="h-4 w-4 text-muted-foreground" />
-          <h2 className="text-base font-bold">Recent Wallet Activity</h2>
-        </div>
-
-        <div className="rounded-2xl border bg-card overflow-hidden shadow-xs">
-          {transactions.length === 0 ? (
-            <p className="p-6 text-center text-xs text-muted-foreground">
-              No recent credit transactions on your account.
-            </p>
-          ) : (
-            <div className="divide-y text-xs">
-              {transactions.map((tx) => (
-                <div
-                  key={tx.id}
-                  className="p-3.5 flex items-center justify-between hover:bg-muted/30 transition-colors"
-                >
-                  <div className="space-y-0.5">
-                    <span className="font-semibold text-foreground block">
-                      {tx.description || tx.type}
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      {new Intl.DateTimeFormat("en-GB", {
-                        day: "numeric",
-                        month: "short",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      }).format(new Date(tx.createdAt))}
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <span
-                      className={`font-black text-xs ${
-                        tx.amount > 0 ? "text-success" : "text-danger"
-                      }`}
-                    >
-                      {tx.amount > 0 ? `+${tx.amount}` : tx.amount} Credits
-                    </span>
-                    <span className="text-xs text-muted-foreground block">
-                      Balance: {tx.balanceAfter}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
 
       {/* Trust bar */}
       <PaymentSecurityTrustBar />

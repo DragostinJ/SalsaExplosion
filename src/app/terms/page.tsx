@@ -160,7 +160,7 @@ export default function TermsAndLegalPage() {
                 Under UK law (Regulation 28(1)(h) of the Consumer Contracts Regulations 2013), contracts for leisure activities provided on a specific date or period of performance (such as the <strong>MADE IN CUBA Dance Weekend</strong>, <strong>Halloween Latin Party</strong>, and <strong>DANZA! Special Events</strong>) are exempt from the statutory 14-day cancellation right once purchased.
               </p>
               <p className="text-xs font-bold">
-                <strong>Our Fair Transfer Policy:</strong> While festival tickets are non-refundable, Salsa Explosion permits <strong>100% free name transfers</strong> to another dancer or studio credit conversions up to <strong>48 hours before the event start time</strong>. Contact Enrique on 07969 633701 to arrange a transfer.
+                <strong>Our Fair Transfer Policy:</strong> While festival tickets are non-refundable, Salsa Explosion permits <strong>100% free name transfers</strong> to another dancer up to <strong>48 hours before the event start time</strong>. Contact Enrique on 07969 633701 to arrange a transfer.
               </p>
             </div>
           </div>

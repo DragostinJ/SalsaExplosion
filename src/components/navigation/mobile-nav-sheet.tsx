@@ -23,7 +23,6 @@ import {
   UserCheck,
   Music,
   HelpCircle,
-  Share2,
   ClipboardList,
 } from "lucide-react";
 import { triggerStudioTutorial } from "@/components/onboarding/interactive-tutorial-modal";
@@ -132,7 +131,6 @@ export function MobileNavSheet({
   const memberOnlyLinks = [
     { href: "/dashboard/wallet", label: "Receipts & History", icon: QrCode },
     { href: "/dashboard/progression", label: "Syllabus Progression", icon: Award },
-    { href: "/dashboard/referrals", label: "Dancer Referral Rewards", icon: Share2 },
   ];
 
   // If role is present (user is signed in), include full member tools

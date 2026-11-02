@@ -98,6 +98,12 @@ const nextConfig: NextConfig = {
         destination: "/rueda/:path*",
         permanent: true,
       },
+      // Bring-a-friend credits were retired with the class credit system (2026-11-02)
+      {
+        source: "/dashboard/referrals",
+        destination: "/dashboard/carnet",
+        permanent: true,
+      },
     ];
   },
   async headers() {

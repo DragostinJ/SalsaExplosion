@@ -32,7 +32,7 @@ export function AdminNav() {
     },
     {
       href: "/instructor/students",
-      label: "Student Progression & Credits",
+      label: "Students & Progression",
       icon: Users,
       active: pathname.startsWith("/instructor/students"),
     },

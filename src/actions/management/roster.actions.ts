@@ -14,7 +14,6 @@ import {
   BookingStatus,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { creditsDeductedFor } from "@/lib/booking-credits";
 import { getOrProvisionCurrentUser, canSwitchRoles, isBootstrapAdmin, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { recordAuditLog } from "@/lib/audit-log";
 import { CUBAN_SALSA_SYLLABUS } from "@/lib/constants/submission";
@@ -38,14 +37,6 @@ const UpdateStudentProgressionSchema = z.object({
   preferredRole: z.enum([DanceRole.LEAD, DanceRole.FOLLOW, DanceRole.SOLO]),
 });
 
-const AdjustStudentCreditsSchema = z.object({
-  studentId: z.string().min(1),
-  delta: z.number().int().min(-50).max(100).refine((v) => v !== 0, {
-    message: "Credit adjustment cannot be zero.",
-  }),
-  reason: z.string().trim().min(2).max(200),
-});
-
 const CreateClassSessionSchema = z.object({
   title: z.string().trim().min(4).max(120),
   description: z.string().trim().max(500).optional(),
@@ -59,11 +50,10 @@ const CreateClassSessionSchema = z.object({
   durationMinutes: z.number().int().min(30).max(240),
   room: z.string().trim().min(2).max(80),
   maxCapacity: z.number().int().min(4).max(200),
-  // Lead/Follow caps and credit costs are no longer limits (everyone comes in, classes are paid
-  // at the door), so the form stopped sending them; older callers may still pass them.
+  // Lead/Follow caps are no longer limits (everyone comes in, classes are paid at the door),
+  // so the form stopped sending them; older callers may still pass them.
   maxLeads: z.number().int().min(0).max(100).nullable().optional(),
   maxFollows: z.number().int().min(0).max(100).nullable().optional(),
-  creditCost: z.number().int().min(0).max(10).optional(),
 });
 
 const UpdateMyDanceRoleSchema = z.object({
@@ -288,111 +278,6 @@ export async function updateStudentProgressionAction(rawInput: {
   }
 }
 
-export async function adjustStudentCreditsAction(rawInput: {
-  studentId: string;
-  delta: number;
-  reason: string;
-}): Promise<ManagementActionResponse<{ studentId: string; classCredits: number }>> {
-  try {
-    // fallback-guard
-    const actor = await getOrProvisionCurrentUser();
-    if (!actor || (actor.role !== Role.INSTRUCTOR && actor.role !== Role.ADMIN)) {
-      return {
-        success: false,
-        error: {
-          code: "FORBIDDEN",
-          message: "Only Instructors and Studio Admins can adjust class credits.",
-        },
-      };
-    }
-    if (isFallbackUser(actor)) {
-      return {
-        success: false,
-        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
-      };
-    }
-
-    const parsed = AdjustStudentCreditsSchema.safeParse(rawInput);
-    if (!parsed.success) {
-      return {
-        success: false,
-        error: {
-          code: "VALIDATION_ERROR",
-          message: parsed.error.issues[0]?.message ?? "Invalid credit adjustment.",
-        },
-      };
-    }
-
-    const { studentId, delta, reason } = parsed.data;
-
-    const result = await prisma.$transaction(async (tx) => {
-      const targetUser = await tx.user.findUnique({
-        where: { id: studentId },
-        select: { id: true, firstName: true, lastName: true, classCredits: true },
-      });
-
-      if (!targetUser) {
-        throw new Error("Student not found.");
-      }
-
-      const newBalance = Math.max(0, targetUser.classCredits + delta);
-      const actualDelta = newBalance - targetUser.classCredits;
-
-      const updatedUser = await tx.user.update({
-        where: { id: studentId },
-        data: { classCredits: newBalance },
-        select: { id: true, firstName: true, lastName: true, classCredits: true },
-      });
-
-      if (actualDelta !== 0) {
-        await tx.creditLedger.create({
-          data: {
-            userId: studentId,
-            amount: actualDelta,
-            balanceAfter: newBalance,
-            type: TransactionType.ADMIN_ADJUSTMENT,
-            description: `${reason} (by ${actor.firstName})`,
-          },
-        });
-      }
-
-      return updatedUser;
-    });
-
-    await recordAuditLog({
-      actorId: actor.id,
-      action: AuditAction.CREDIT_ADJUSTMENT,
-      targetType: "USER",
-      targetId: result.id,
-      metadata: {
-        delta: rawInput.delta,
-        reason: rawInput.reason,
-        newBalance: result.classCredits,
-        studentName: `${result.firstName} ${result.lastName}`.trim(),
-      },
-    });
-
-    revalidatePath("/instructor/students");
-    revalidatePath("/admin/analytics");
-    revalidatePath("/classes");
-
-    return {
-      success: true,
-      data: { studentId: result.id, classCredits: result.classCredits },
-      message: `Adjusted credits for ${result.firstName} ${result.lastName}. New balance: ${result.classCredits}.`,
-    };
-  } catch (error) {
-    console.error("[adjustStudentCreditsAction]", error);
-    return {
-      success: false,
-      error: {
-        code: "INTERNAL_ERROR",
-        message: "Failed to adjust student credits.",
-      },
-    };
-  }
-}
-
 export async function createClassSessionAction(rawInput: {
   title: string;
   description?: string;
@@ -403,7 +288,6 @@ export async function createClassSessionAction(rawInput: {
   maxCapacity: number;
   maxLeads?: number | null;
   maxFollows?: number | null;
-  creditCost?: number;
 }): Promise<ManagementActionResponse<{ classId: string }>> {
   try {
     // fallback-guard
@@ -461,7 +345,6 @@ export async function createClassSessionAction(rawInput: {
         maxCapacity: parsed.data.maxCapacity,
         maxLeads: parsed.data.maxLeads ?? null,
         maxFollows: parsed.data.maxFollows ?? null,
-        creditCost: parsed.data.creditCost,
         instructorId: actor.id,
       },
     });
@@ -639,7 +522,7 @@ export async function updateMyDanceRolePreferenceAction(rawInput: {
 
 export async function cancelClassSessionWithRefundsAction(
   rawInput: z.infer<typeof CancelClassSessionSchema>
-): Promise<ManagementActionResponse<{ id: string; refundedCount: number }>> {
+): Promise<ManagementActionResponse<{ id: string; cancelledBookings: number }>> {
   try {
     // fallback-guard
     const user = await getOrProvisionCurrentUser();
@@ -670,13 +553,6 @@ export async function cancelClassSessionWithRefundsAction(
         include: {
           bookings: {
             where: { status: BookingStatus.CONFIRMED },
-            include: {
-              user: {
-                include: {
-                  subscription: true,
-                },
-              },
-            },
           },
         },
       });
@@ -694,8 +570,7 @@ export async function cancelClassSessionWithRefundsAction(
         data: { isCancelled: true },
       });
 
-      let refundedCount = 0;
-
+      // Classes are paid at the door, so cancelling only releases everyone's "I'm coming"
       for (const booking of classSession.bookings) {
         await tx.booking.update({
           where: { id: booking.id },
@@ -704,57 +579,31 @@ export async function cancelClassSessionWithRefundsAction(
             cancelledAt: new Date(),
           },
         });
-
-        const refund = await creditsDeductedFor(tx, booking.id, booking.userId);
-
-        if (refund > 0) {
-          const updatedUser = await tx.user.update({
-            where: { id: booking.userId },
-            data: {
-              classCredits: { increment: refund },
-            },
-            select: { classCredits: true },
-          });
-
-          await tx.creditLedger.create({
-            data: {
-              userId: booking.userId,
-              amount: refund,
-              balanceAfter: updatedUser.classCredits,
-              type: TransactionType.CLASS_CANCELLATION_REFUND,
-              description: `Refund: Class cancellation for "${classSession.title}" (${parsed.data.reason})`,
-              bookingId: booking.id,
-            },
-          });
-
-          refundedCount++;
-        }
       }
 
-      return { classSession, refundedCount, totalBookings: classSession.bookings.length };
+      return { classSession, totalBookings: classSession.bookings.length };
     });
 
     await recordAuditLog({
       actorId: user.id,
-      action: AuditAction.REFUND,
+      action: AuditAction.EVENT_MUTATION,
       targetType: "ClassSession",
       targetId: parsed.data.classSessionId,
       metadata: {
+        operation: "CANCEL_CLASS",
         reason: parsed.data.reason,
-        refundedCreditsCount: result.refundedCount,
         totalBookingsCancelled: result.totalBookings,
       },
     });
 
     revalidatePath("/admin/classes");
     revalidatePath("/classes");
-    revalidatePath("/dashboard/wallet");
     revalidatePath("/instructor/roster");
 
     return {
       success: true,
-      data: { id: parsed.data.classSessionId, refundedCount: result.refundedCount },
-      message: `Class cancelled successfully. Refunded ${result.refundedCount} student credit(s).`,
+      data: { id: parsed.data.classSessionId, cancelledBookings: result.totalBookings },
+      message: `Class cancelled. ${result.totalBookings} dancer(s) who said they were coming are released.`,
     };
   } catch (error) {
     console.error("[cancelClassSessionWithRefundsAction]", error);

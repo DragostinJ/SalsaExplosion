@@ -35,7 +35,7 @@ export function MultiAgeReassuranceBanner({
                 Joining Us Tonight? Quick Arrival Essentials
               </h3>
               <p className="text-xs text-ink mt-1 font-medium leading-relaxed">
-                Book online in 15 seconds or simply pay on arrival at the studio desk.
+                No booking needed: just come along and pay on arrival at the studio desk.
               </p>
             </div>
 
@@ -86,7 +86,7 @@ export function MultiAgeReassuranceBanner({
 
             <div className="border-2 border-ink bg-paper p-3.5 text-xs text-ink font-medium space-y-2">
               <p className="leading-relaxed">
-                If you book online, our door staff can simply look you up by <strong className="font-bold text-ink">your name</strong> on the door sheet. Or turn up and pay cash or card at the desk.
+                Just turn up and pay cash or card at the desk. If you told the teachers you&apos;re coming, they can find <strong className="font-bold text-ink">your name</strong> on the door sheet.
               </p>
               <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2 border-ink">
                 <span className="text-ink font-bold">Need advice or have questions?</span>

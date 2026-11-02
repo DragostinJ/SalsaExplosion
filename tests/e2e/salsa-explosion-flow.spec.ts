@@ -47,7 +47,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(page.getByText("I've never danced Cuban Salsa before")).toBeVisible();
   });
 
-  test("2. Navigating to schedule checks auth protection or Lead/Follow slots", async ({
+  test("2. Schedule is public, door-paid, and welcomes everyone (no Lead/Follow limits)", async ({
     page,
   }) => {
     await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
@@ -61,8 +61,9 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       const heading = page.locator("h1");
       await expect(heading).toBeVisible();
       const bodyText = await page.textContent("body");
-      expect(bodyText).toContain("Lead");
-      expect(bodyText).toContain("Follow");
+      expect(bodyText).toContain("Pay at Door");
+      expect(bodyText).toMatch(/everyone dances, even when the class is uneven/i);
+      expect(bodyText).not.toMatch(/ratio balanced|Ratio Capacity/i);
     }
   });
 
@@ -101,8 +102,11 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(page.getByText("£20").first()).toBeVisible();
 
     // 3. Test VIP Upsell Drawer Trigger
+    // Every tier now offers Lead and Follow (information only), so target the Full pass's own card:
+    // only congress/full passes open the upsell; party passes go straight to checkout.
     const bookFullPassBtn = page
-      .locator("button", { hasText: /Book as Lead|Get Full Congress Pass/i })
+      .locator("article", { hasText: /Full .* Congress Pass/i })
+      .getByRole("button", { name: /Book as Lead/i })
       .first();
 
     if (await bookFullPassBtn.isVisible()) {
@@ -110,7 +114,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
 
       // Verify the VIP Upsell Modal opens
       await expect(
-        page.getByText("Upgrade Your Bournemouth Congress Pass")
+        page.getByText("Upgrade Your Pass")
       ).toBeVisible();
       await expect(
         page.getByText("Official 2026 Congress T-Shirt")

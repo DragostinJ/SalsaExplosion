@@ -1,0 +1,63 @@
+{
+  "type": "object",
+  "properties": {
+    "pieces": {
+      "type": "array",
+      "description": "In time order, never overlapping, 8-30 s each",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "description": "Piece start as \"M:SS\""
+          },
+          "end": {
+            "type": "string",
+            "description": "Piece end as \"M:SS\""
+          },
+          "kind": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "partnerwork",
+              "solo",
+              "rumba",
+              "break",
+              "not-dancing"
+            ],
+            "description": "What happens in this piece"
+          },
+          "label": {
+            "type": "string",
+            "description": "A few plain words about what happens"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "kind",
+          "label"
+        ],
+        "propertyOrdering": [
+          "start",
+          "end",
+          "kind",
+          "label"
+        ]
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "What made the video hard to cut (camera cuts, crowd, no clear figure ends)"
+    }
+  },
+  "required": [
+    "pieces",
+    "notes"
+  ],
+  "propertyOrdering": [
+    "pieces",
+    "notes"
+  ]
+}

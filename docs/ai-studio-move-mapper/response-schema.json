@@ -1,0 +1,437 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "format": "enum",
+      "enum": [
+        "ritmoflow-clip-breakdown"
+      ],
+      "description": "Always this value"
+    },
+    "version": {
+      "type": "integer",
+      "description": "Always 1",
+      "minimum": 1,
+      "maximum": 1
+    },
+    "id": {
+      "type": "string",
+      "description": "The clip id from the user message (kebab-case)"
+    },
+    "youtubeVideoId": {
+      "type": "string",
+      "description": "The 11-character YouTube id from the user message"
+    },
+    "title": {
+      "type": "string",
+      "description": "The video title from the user message, or unknown"
+    },
+    "channelTitle": {
+      "type": "string",
+      "description": "The channel from the user message, or unknown"
+    },
+    "dancers": {
+      "type": "array",
+      "description": "Dancer names from the user message",
+      "items": {
+        "type": "string"
+      }
+    },
+    "songId": {
+      "type": "string",
+      "format": "enum",
+      "enum": [
+        "me-dicen-cuba",
+        "la-cosa-mala",
+        "agua-pa-yemaya",
+        "aguanile",
+        "esto-te-pone-la-cabeza-mala",
+        "pasaporte",
+        "esto-esta",
+        "537-cuba",
+        "toda-una-vida",
+        "tremenda-pinta",
+        "marcando-la-distancia",
+        "baile-inolvidable",
+        "de-la-timba-a-pogolotti",
+        "temba-tumba-timba",
+        "homenaje-a-la-musica-cubana"
+      ],
+      "description": "Only if the user message gives a song id"
+    },
+    "analysis": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Your model name if you know it"
+        },
+        "fps": {
+          "type": "number",
+          "description": "The frame rate you were given, or 1",
+          "minimum": 0.1,
+          "maximum": 60
+        },
+        "notes": {
+          "type": "string",
+          "description": "What limited you: camera cuts, crowd, light, frame rate"
+        }
+      },
+      "required": [
+        "model",
+        "fps",
+        "notes"
+      ],
+      "propertyOrdering": [
+        "model",
+        "fps",
+        "notes"
+      ]
+    },
+    "rows": {
+      "type": "array",
+      "description": "In time order, never overlapping",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "description": "Time in the ORIGINAL video as \"M:SS\" (e.g. \"1:05\", \"12:40\"); one decimal only when sure (\"1:05.5\"); \"H:MM:SS\" past an hour"
+          },
+          "end": {
+            "type": "string",
+            "description": "Time in the ORIGINAL video as \"M:SS\" (e.g. \"1:05\", \"12:40\"); one decimal only when sure (\"1:05.5\"); \"H:MM:SS\" past an hour"
+          },
+          "type": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "figure",
+              "shine",
+              "rumba",
+              "body-movement",
+              "musicality-accent",
+              "show-trick",
+              "other"
+            ],
+            "description": "What kind of dancing this row is"
+          },
+          "mechanics": {
+            "type": "string",
+            "description": "What you SEE, count by count: hand holds and changes, who turns and which way, where the hands travel, the position. Start with \"Name heard: ...\" if the video says the name."
+          },
+          "moveIds": {
+            "type": "array",
+            "description": "Catalogue ids danced in this row, in order; empty if nothing fits",
+            "items": {
+              "type": "string",
+              "format": "enum",
+              "enum": [
+                "guapea",
+                "dile-que-no",
+                "enchufla",
+                "prima",
+                "exhibela",
+                "paso-basico",
+                "rueda-level-1-essentials",
+                "finding-beat-1-conga-tumbao",
+                "setenta",
+                "setenta-complicado",
+                "vacilala",
+                "sombrero",
+                "kentucky",
+                "paseala",
+                "rumba-guaguanco-basics",
+                "son-cubano-contratiempo",
+                "son-clave-direction",
+                "montana",
+                "dedo-el-uno-el-dos",
+                "siete-y-siete-loco",
+                "coca-cola-y-bayamo",
+                "thoracic-isolation-despelote",
+                "afro-cuban-orishas-intro",
+                "timba-4-phase-anatomy",
+                "micro-leading-frame-modulation",
+                "mid-figure-rhythm-reversals",
+                "tembleque",
+                "rumba-columbia-orishas",
+                "rueda-cruzada-pa-fuera",
+                "rumba-clave-syncopation",
+                "abajo-y-arriba",
+                "abanico",
+                "adentro-y-afuera",
+                "adios-doble",
+                "aguajea",
+                "al-centro",
+                "alarde",
+                "americano-americana",
+                "amistad",
+                "arrollao",
+                "babalu-aye",
+                "babosa",
+                "balsero",
+                "bayamo-por-matanzas",
+                "bloqueo-despelote-accent",
+                "botao",
+                "cadena",
+                "cadera-cuban-hip-action",
+                "caja-de-bolas",
+                "cambio-de-pareja",
+                "camina",
+                "caminando",
+                "candado",
+                "cangrejo",
+                "cero",
+                "chachacha-cubano-basics",
+                "changui-basics",
+                "compota",
+                "consorte",
+                "contra-mambo",
+                "cruce",
+                "cubanita",
+                "cubanito",
+                "dame",
+                "dame-dos",
+                "dame-dos-con-cuba",
+                "dame-pa-atras",
+                "dame-por-la-mano",
+                "dame-rapido",
+                "dame-una-arriba",
+                "danzon-basics",
+                "derecha-izquierda",
+                "dile-que-si",
+                "doble-play",
+                "dos-con-dos",
+                "echeverria",
+                "egoista",
+                "el-dedo-con-guarapo-y-bota",
+                "el-puente",
+                "enchufla-con-mambo",
+                "enchufla-con-manolin",
+                "enchufla-con-palma-y-pata",
+                "enchufla-con-rumba",
+                "enchufla-con-vuelta",
+                "enchufla-contra-mambo",
+                "enchufla-moderno",
+                "enchufla-para-hombres",
+                "enchufla-y-adios",
+                "enchufla-y-escondete",
+                "enchufla-y-rodeo",
+                "enchuflense",
+                "enganala",
+                "enroscala",
+                "enroscate",
+                "esquina-de-tejas",
+                "estrella-se-fue",
+                "exhibela-repite",
+                "festival-de-fly-los-tres",
+                "festival-de-pelota",
+                "flor",
+                "fly",
+                "foto",
+                "hombros-shoulder-movement",
+                "indeciso",
+                "isaura",
+                "juana-la-cubana",
+                "la-familia",
+                "la-prima-cruzada",
+                "lazo",
+                "mambo-adelante-y-atras",
+                "media-doble",
+                "media-triple",
+                "mentira",
+                "mujeres-al-centro",
+                "ni-pa-ti-ni-pa-mi",
+                "obatala",
+                "ochenta",
+                "ochenta-y-cuatro",
+                "ochenta-y-ocho",
+                "ocho-para-mujeres",
+                "ochosi",
+                "oggun",
+                "oya",
+                "panque",
+                "parte-el-brazo",
+                "paseala-por-arriba",
+                "paseala-por-bayamo",
+                "paseo",
+                "paso-cruzado",
+                "paso-de-cumbia",
+                "paso-de-son-solo",
+                "patin",
+                "patineta",
+                "pedro-navaja",
+                "pelota",
+                "pelota-loca",
+                "por-mi-por-ti",
+                "preciosa",
+                "prima-con-la-hermana",
+                "prima-doble",
+                "principe-bueno-principe-malo",
+                "puente-doble",
+                "quedatela",
+                "reina",
+                "reparto-basic-step",
+                "reparto-three-class-steps",
+                "rotonda-trafico",
+                "rumba-arms-and-panuelo",
+                "saborea",
+                "saca-la-vecina",
+                "sacala-abajo",
+                "sale-tu",
+                "saloneo",
+                "salsita",
+                "saluda",
+                "seis-y-nueve",
+                "setenta-por-las-manos",
+                "setenta-y-cinco",
+                "setenta-y-dos",
+                "setenta-y-uno",
+                "sombrero-complicado",
+                "sombrero-con-mambo",
+                "sombrero-nuevo",
+                "sombrero-y-plancha",
+                "son-montuno-closed-basic-and-turns",
+                "suzie-q",
+                "tijeras",
+                "tijeras-complicado",
+                "tobillo",
+                "toma-electrica",
+                "triple-play",
+                "tumba-francesa",
+                "un-tarro",
+                "una-media",
+                "una-pa-ti-una-pa-mi",
+                "vacilala-completa",
+                "vacilala-con-bamboleo",
+                "vacilala-con-columbia",
+                "vacilala-y-florea",
+                "vacilense",
+                "vamos-abajo-vamos-arriba",
+                "ya-tu-sabes",
+                "yambu-basics",
+                "yemaya",
+                "yogur"
+              ],
+              "description": "A catalogue move id"
+            }
+          },
+          "match": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "same",
+              "variation",
+              "not-in-library"
+            ],
+            "description": "same, variation, or not-in-library"
+          },
+          "confidence": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ],
+            "description": "high only if you saw the holds and turns clearly"
+          },
+          "musicalMoment": {
+            "type": "string",
+            "description": "Optional: what in the music they react to, and how"
+          },
+          "newMove": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Usual Cuban name if you are sure of it, otherwise a plain English description"
+              },
+              "category": {
+                "type": "string",
+                "format": "enum",
+                "enum": [
+                  "Casino figure",
+                  "Rueda call",
+                  "Shine / suelta",
+                  "Body movement",
+                  "Rumba",
+                  "Son",
+                  "Reparto",
+                  "Afro-Cuban Orishas"
+                ],
+                "description": "Move category"
+              },
+              "level": {
+                "type": "string",
+                "format": "enum",
+                "enum": [
+                  "Beginner",
+                  "Improver",
+                  "Intermediate",
+                  "Advanced"
+                ],
+                "description": "Curriculum level"
+              }
+            },
+            "required": [
+              "name",
+              "category",
+              "level"
+            ],
+            "propertyOrdering": [
+              "name",
+              "category",
+              "level"
+            ]
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "type",
+          "mechanics",
+          "moveIds",
+          "match",
+          "confidence"
+        ],
+        "propertyOrdering": [
+          "start",
+          "end",
+          "type",
+          "mechanics",
+          "moveIds",
+          "match",
+          "confidence",
+          "musicalMoment",
+          "newMove"
+        ]
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "version",
+    "id",
+    "youtubeVideoId",
+    "title",
+    "channelTitle",
+    "dancers",
+    "analysis",
+    "rows"
+  ],
+  "propertyOrdering": [
+    "kind",
+    "version",
+    "id",
+    "youtubeVideoId",
+    "title",
+    "channelTitle",
+    "dancers",
+    "songId",
+    "analysis",
+    "rows"
+  ]
+}

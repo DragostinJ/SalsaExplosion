@@ -12,9 +12,10 @@ import { SEEDED_MOVES } from "./move-library";
  * Regenerate with: npx tsx scripts/ai-studio-move-maker.ts
  */
 
-type JsonSchema =
+/** The OpenAPI subset Gemini's structured output accepts (shared with the move mapper). */
+export type JsonSchema =
   | { type: "string"; description?: string; format?: "enum"; enum?: string[] }
-  | { type: "number" | "integer"; description?: string; minimum?: number }
+  | { type: "number" | "integer"; description?: string; minimum?: number; maximum?: number }
   | { type: "boolean"; description?: string }
   | {
       type: "array";

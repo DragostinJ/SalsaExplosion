@@ -5,7 +5,7 @@ import { CATEGORY_INK, CountStrip } from "@/components/moves/move-poster-card";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, TYPE } from "@/components/poster/poster-kit";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
-import { getPublishedMoves, songSectionsForMove } from "@/lib/moves/move-library";
+import { getVisibleMoves, isDraftPreviewEnabled, songSectionsForMove } from "@/lib/moves/move-library";
 import type { MoveStep } from "@/lib/moves/move-schema";
 import { formatSongTime } from "@/lib/music/song-timing";
 import { displaySongTitle } from "@/lib/music/song-style";
@@ -17,12 +17,12 @@ interface MovePageProps {
 
 // Moves are published by a reviewed data change and a deploy, so every page is built ahead
 export function generateStaticParams() {
-  return getPublishedMoves().map((move) => ({ moveId: move.id }));
+  return getVisibleMoves().map((move) => ({ moveId: move.id }));
 }
 export const dynamicParams = false;
 
 function findPublished(moveId: string) {
-  return getPublishedMoves().find((move) => move.id === moveId);
+  return getVisibleMoves().find((move) => move.id === moveId);
 }
 
 export async function generateMetadata({ params }: MovePageProps): Promise<Metadata> {
@@ -61,7 +61,7 @@ export default async function MovePage({ params }: MovePageProps) {
   const ink = CATEGORY_INK[move.category];
   const video = move.videos[0];
   const sections = songSectionsForMove(move.id);
-  const published = new Map(getPublishedMoves().map((m) => [m.id, m]));
+  const published = new Map(getVisibleMoves().map((m) => [m.id, m]));
   const songTitle = (songId: string) => {
     const song = TIMBA_SONG_ANATOMY_DATA.find((s) => s.id === songId);
     return song ? displaySongTitle(song.title) : songId;
@@ -70,6 +70,11 @@ export default async function MovePage({ params }: MovePageProps) {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-6xl space-y-10 px-2.5 py-6 sm:px-6">
       <CancionesTabs current="/moves" />
+      {isDraftPreviewEnabled() && (
+        <p role="note" className="border-4 border-ink bg-poster-mustard px-4 py-3 text-sm font-bold text-ink">
+          Local preview: this draft hasn&apos;t been checked by the teachers yet. The live site shows approved moves only.
+        </p>
+      )}
 
       {/* The move's poster */}
       <header className={cn("border-[6px] border-ink p-6 shadow-[12px_12px_0_var(--color-ink)] md:p-10", ink.bg, ink.text)}>

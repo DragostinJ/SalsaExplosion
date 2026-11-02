@@ -316,6 +316,21 @@ export function getPublishedMoves(): readonly Move[] {
   return getAllMoves().filter((m) => !isMoveDraft(m));
 }
 
+/**
+ * Local preview of the library "as if live": `MOVE_LIBRARY_PREVIEW=drafts npx next dev` also lists
+ * drafts (never rejected moves) so the owner can see the pages before the teachers approve anything.
+ * Always off in production builds, so the live site only ever shows approved moves.
+ */
+export function isDraftPreviewEnabled(): boolean {
+  return process.env.NODE_ENV !== "production" && process.env.MOVE_LIBRARY_PREVIEW === "drafts";
+}
+
+/** The moves the dancer pages show: approved ones, plus drafts in the local preview. */
+export function getVisibleMoves(): readonly Move[] {
+  if (!isDraftPreviewEnabled()) return getPublishedMoves();
+  return getAllMoves().filter((m) => getMoveReviewState(m.id)?.status !== "rejected");
+}
+
 export interface MoveReviewState {
   status: "draft" | MoveReviewDecision;
   review?: MoveReview;

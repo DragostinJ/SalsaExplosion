@@ -75,35 +75,35 @@ export function ReviewBoosterClient() {
   return (
     <div className="space-y-8">
       {/* Hero Header */}
-      <div className="relative overflow-hidden rounded-3xl border border-line bg-surface-1 p-6 sm:p-10 shadow-2xl text-center">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-semibold text-gold mb-4">
-          <Sparkles className="h-3.5 w-3.5 text-gold" />
+      <div className="border-4 border-ink bg-paper p-6 sm:p-10 shadow-[6px_6px_0_var(--color-ink)] text-center text-ink">
+        <div className="inline-flex items-center gap-1.5 border-2 border-ink bg-poster-mustard px-4 py-1.5 text-xs font-black uppercase text-ink shadow-[2px_2px_0_var(--color-ink)] mb-4">
+          <Sparkles className="h-3.5 w-3.5 text-ink" />
           30-Second BOH Studios Dancer Voice
         </div>
 
-        <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-ivory max-w-2xl mx-auto leading-tight">
+        <h1 className="font-display text-3xl sm:text-5xl uppercase tracking-tight text-ink max-w-2xl mx-auto leading-tight">
           Help Bournemouth Find Real Cuban Salsa
         </h1>
 
-        <div className="flex items-center justify-center gap-1.5 my-3 text-gold">
+        <div className="flex items-center justify-center gap-1.5 my-3 text-poster-red">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className="h-6 w-6 fill-gold text-gold" />
+            <Star key={i} className="h-6 w-6 fill-poster-red text-poster-red" />
           ))}
         </div>
 
-        <p className="text-sm text-ivory-muted max-w-xl mx-auto leading-relaxed">
+        <p className="text-sm text-ink/80 max-w-xl mx-auto leading-relaxed font-medium">
           Leave a genuine 5-star Google review for Maestro Enrique Perez Valdes and the Salsa Explosion family at BOH Studios Bournemouth. Tap 3 options below to draft your review in seconds!
         </p>
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs text-ivory-muted">
-          <span className="flex items-center gap-1.5">
-            <MapPin className="h-3.5 w-3.5 text-gold" />
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs text-ink/80 font-bold">
+          <span className="flex items-center gap-1.5 border-2 border-ink bg-paper-light px-3 py-1 shadow-[2px_2px_0_var(--color-ink)]">
+            <MapPin className="h-3.5 w-3.5 text-poster-red" />
             BOH Studios, 104 Commercial Rd, BH2 5LR
           </span>
           <span className="hidden sm:inline">•</span>
-          <span className="flex items-center gap-1.5">
-            <Calendar className="h-3.5 w-3.5 text-gold" />
-            Thursdays & Sundays Weekly
+          <span className="flex items-center gap-1.5 border-2 border-ink bg-paper-light px-3 py-1 shadow-[2px_2px_0_var(--color-ink)]">
+            <Calendar className="h-3.5 w-3.5 text-poster-red" />
+            Thursdays &amp; Sundays Weekly
           </span>
         </div>
       </div>
@@ -111,10 +111,10 @@ export function ReviewBoosterClient() {
       {/* 3-Step Review Assistant Form */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Form: 3 Taps */}
-        <div className="lg:col-span-6 rounded-3xl border border-line bg-surface-1 p-6 sm:p-8 shadow-xl space-y-6">
+        <div className="lg:col-span-6 border-4 border-ink bg-paper p-6 sm:p-8 shadow-[6px_6px_0_var(--color-ink)] space-y-6 text-ink">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-ivory flex items-center gap-2">
-              <Heart className="h-4 w-4 text-rose-500" />
+            <h2 className="text-base font-black uppercase tracking-wider text-ink flex items-center gap-2">
+              <Heart className="h-4 w-4 text-poster-red" />
               What Did You Enjoy Most?
             </h2>
             <Button
@@ -122,16 +122,16 @@ export function ReviewBoosterClient() {
               variant="outline"
               size="sm"
               onClick={() => setShowQrModal(!showQrModal)}
-              className="border-line bg-surface-2 hover:bg-surface-3 text-ivory text-xs min-h-[36px]"
+              className="border-2 border-ink bg-paper hover:bg-poster-mustard text-ink text-xs font-bold shadow-[2px_2px_0_var(--color-ink)] min-h-[36px] rounded-none"
             >
-              <QrCode className="h-3.5 w-3.5 mr-1.5 text-gold" />
+              <QrCode className="h-3.5 w-3.5 mr-1.5 text-ink" />
               Desk QR
             </Button>
           </div>
 
           {/* Option 1: Favorite Aspect */}
           <div className="space-y-2">
-            <label className="text-xs font-semibold text-ivory">
+            <label className="text-xs font-black uppercase tracking-wider text-ink">
               1. Your Favorite Highlight:
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -140,10 +140,10 @@ export function ReviewBoosterClient() {
                   key={aspect}
                   type="button"
                   onClick={() => setFavoriteAspect(aspect)}
-                  className={`text-left rounded-2xl p-3 text-xs font-semibold transition-all min-h-[44px] ${
+                  className={`text-left p-3 text-xs font-bold transition-all min-h-[44px] border-2 ${
                     favoriteAspect === aspect
-                      ? "bg-gold text-canvas font-bold shadow-md"
-                      : "border border-line bg-surface-2 text-ivory-muted hover:text-ivory hover:bg-surface-3"
+                      ? "border-ink bg-poster-mustard text-ink font-black shadow-[2px_2px_0_var(--color-ink)]"
+                      : "border-ink/40 bg-paper hover:border-ink hover:bg-paper-light text-ink"
                   }`}
                 >
                   {aspect}
@@ -154,7 +154,7 @@ export function ReviewBoosterClient() {
 
           {/* Option 2: Teacher Highlight */}
           <div className="space-y-2">
-            <label className="text-xs font-semibold text-ivory">
+            <label className="text-xs font-black uppercase tracking-wider text-ink">
               2. Who Taught or Inspired You Tonight?
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -163,10 +163,10 @@ export function ReviewBoosterClient() {
                   key={highlight}
                   type="button"
                   onClick={() => setInstructorHighlight(highlight)}
-                  className={`text-center rounded-2xl p-3 text-xs font-semibold transition-all min-h-[44px] ${
+                  className={`text-center p-3 text-xs font-bold transition-all min-h-[44px] border-2 ${
                     instructorHighlight === highlight
-                      ? "bg-gold text-canvas font-bold shadow-md"
-                      : "border border-line bg-surface-2 text-ivory-muted hover:text-ivory hover:bg-surface-3"
+                      ? "border-ink bg-poster-mustard text-ink font-black shadow-[2px_2px_0_var(--color-ink)]"
+                      : "border-ink/40 bg-paper hover:border-ink hover:bg-paper-light text-ink"
                   }`}
                 >
                   {highlight}
@@ -177,7 +177,7 @@ export function ReviewBoosterClient() {
 
           {/* Option 3: Experience Level */}
           <div className="space-y-2">
-            <label className="text-xs font-semibold text-ivory">
+            <label className="text-xs font-black uppercase tracking-wider text-ink">
               3. Your Dance Background:
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -186,10 +186,10 @@ export function ReviewBoosterClient() {
                   key={lvl}
                   type="button"
                   onClick={() => setDancerLevel(lvl)}
-                  className={`text-center rounded-2xl p-3 text-xs font-semibold transition-all min-h-[44px] ${
+                  className={`text-center p-3 text-xs font-bold transition-all min-h-[44px] border-2 ${
                     dancerLevel === lvl
-                      ? "bg-gold text-canvas font-bold shadow-md"
-                      : "border border-line bg-surface-2 text-ivory-muted hover:text-ivory hover:bg-surface-3"
+                      ? "border-ink bg-poster-mustard text-ink font-black shadow-[2px_2px_0_var(--color-ink)]"
+                      : "border-ink/40 bg-paper hover:border-ink hover:bg-paper-light text-ink"
                   }`}
                 >
                   {lvl}
@@ -202,7 +202,7 @@ export function ReviewBoosterClient() {
             type="button"
             onClick={handleGenerateReview}
             disabled={isGenerating}
-            className="w-full rounded-2xl bg-gold hover:bg-gold-light text-canvas font-bold text-sm min-h-[46px] transition-all"
+            className="w-full border-2 border-ink bg-poster-red hover:bg-ink text-paper font-black uppercase tracking-wider text-sm min-h-[46px] shadow-[3px_3px_0_var(--color-ink)] transition-all rounded-none"
           >
             {isGenerating ? (
               <span className="flex items-center gap-2">
@@ -220,16 +220,16 @@ export function ReviewBoosterClient() {
 
         {/* Right Output: Ready-to-Copy Review */}
         <div className="lg:col-span-6 space-y-6">
-          <div className="rounded-3xl border border-line bg-surface-1 p-6 sm:p-8 shadow-xl space-y-5">
+          <div className="border-4 border-ink bg-paper p-6 sm:p-8 shadow-[6px_6px_0_var(--color-ink)] space-y-5 text-ink">
             <div className="flex items-center justify-between">
-              <h2 className="text-base font-bold text-ivory flex items-center gap-2">
-                <Star className="h-4 w-4 fill-gold text-gold" />
+              <h2 className="text-base font-black uppercase tracking-wider text-ink flex items-center gap-2">
+                <Star className="h-4 w-4 fill-poster-red text-poster-red" />
                 Your Custom Review Draft
               </h2>
               {editableReview && (
                 <Badge
                   variant="outline"
-                  className="border-emerald-500/40 bg-emerald-500/10 text-emerald-300 text-xs font-mono"
+                  className="border-2 border-ink bg-poster-teal text-ink text-xs font-black uppercase tracking-wider shadow-[2px_2px_0_var(--color-ink)]"
                 >
                   Ready to Post
                 </Badge>
@@ -242,12 +242,12 @@ export function ReviewBoosterClient() {
                   value={editableReview}
                   onChange={(e) => setEditableReview(e.target.value)}
                   rows={6}
-                  className="w-full rounded-2xl border border-line bg-surface-3 p-4 text-xs text-ivory leading-relaxed placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/50 resize-none font-sans"
+                  className="w-full border-2 border-ink bg-paper-light p-4 text-xs text-ink leading-relaxed font-sans resize-none shadow-inner"
                 />
 
                 {reviewResult && (
                   <div className="space-y-1.5">
-                    <p className="text-[11px] font-semibold text-ivory-muted uppercase tracking-wider">
+                    <p className="text-xs font-black uppercase tracking-wider text-ink">
                       Local SEO Keywords Included:
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -255,7 +255,7 @@ export function ReviewBoosterClient() {
                         <Badge
                           key={i}
                           variant="outline"
-                          className="border-line bg-surface-2 text-[10px] text-gold font-mono"
+                          className="border border-ink bg-poster-mustard/40 text-xs text-ink font-bold font-mono"
                         >
                           {kw}
                         </Badge>
@@ -269,18 +269,18 @@ export function ReviewBoosterClient() {
                   <Button
                     type="button"
                     onClick={handleCopyReview}
-                    className="w-full rounded-2xl bg-surface-2 hover:bg-surface-3 text-ivory font-bold text-xs min-h-[46px] border border-line transition-all flex items-center justify-center gap-2"
+                    className="w-full border-2 border-ink bg-paper hover:bg-ink hover:text-paper text-ink font-black uppercase tracking-wider text-xs min-h-[46px] shadow-[2px_2px_0_var(--color-ink)] transition-all flex items-center justify-center gap-2 rounded-none"
                   >
                     {copied ? (
                       <>
-                        <Check className="h-4 w-4 text-emerald-400" />
-                        <span className="text-emerald-300">
+                        <Check className="h-4 w-4 text-poster-teal" />
+                        <span className="text-poster-teal font-black">
                           1. Review Text Copied to Clipboard! ✓
                         </span>
                       </>
                     ) : (
                       <>
-                        <Copy className="h-4 w-4 text-gold" />
+                        <Copy className="h-4 w-4 text-ink" />
                         <span>1. Copy My Review Text</span>
                       </>
                     )}
@@ -290,21 +290,21 @@ export function ReviewBoosterClient() {
                     href={googleMapsReviewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full rounded-2xl bg-gold hover:bg-gold-light text-canvas font-bold text-sm min-h-[46px] transition-all flex items-center justify-center gap-2 shadow-lg"
+                    className="w-full border-2 border-ink bg-poster-red hover:bg-ink text-paper font-black uppercase tracking-wider text-sm min-h-[46px] shadow-[3px_3px_0_var(--color-ink)] transition-all flex items-center justify-center gap-2"
                   >
-                    <span>2. Open Google Maps & Paste Review</span>
+                    <span>2. Open Google Maps &amp; Paste Review</span>
                     <ExternalLink className="h-4 w-4" />
                   </a>
                 </div>
               </div>
             ) : (
-              <div className="rounded-3xl border border-dashed border-line bg-surface-1/50 p-12 text-center flex flex-col items-center justify-center min-h-[280px]">
-                <Star className="h-10 w-10 text-muted-foreground/30 mb-3" />
-                <p className="text-sm font-semibold text-ivory">
+              <div className="border-2 border-dashed border-ink bg-paper-light p-12 text-center flex flex-col items-center justify-center min-h-[280px]">
+                <Star className="h-10 w-10 text-ink/30 mb-3" />
+                <p className="text-sm font-black uppercase tracking-wider text-ink">
                   Select Your Preferences
                 </p>
-                <p className="text-xs text-ivory-muted mt-1 max-w-sm">
-                  Choose your highlight and experience level on the left, then click <strong className="text-gold font-semibold">Draft My 5-Star Review</strong>.
+                <p className="text-xs text-ink/80 mt-1 max-w-sm font-medium">
+                  Choose your highlight and experience level on the left, then click <strong className="text-poster-red font-bold">Draft My 5-Star Review</strong>.
                 </p>
               </div>
             )}
@@ -312,27 +312,27 @@ export function ReviewBoosterClient() {
 
           {/* Door Desk QR Share Card */}
           {showQrModal && (
-            <div className="rounded-3xl border border-gold/40 bg-surface-2 p-6 shadow-2xl text-center space-y-4 animate-in fade-in duration-200">
+            <div className="border-4 border-ink bg-paper p-6 shadow-[6px_6px_0_var(--color-ink)] text-center space-y-4 animate-in fade-in duration-200">
               <Badge
                 variant="outline"
-                className="border-gold/50 bg-gold/10 text-gold text-xs font-mono"
+                className="border-2 border-ink bg-poster-mustard text-ink text-xs font-black uppercase tracking-wider shadow-[2px_2px_0_var(--color-ink)]"
               >
                 Studio Door Desk Display
               </Badge>
-              <h3 className="text-base font-bold text-ivory">
-                BOH Studios Table QR & Link
+              <h3 className="text-base font-black uppercase tracking-wider text-ink">
+                BOH Studios Table QR &amp; Link
               </h3>
-              <p className="text-xs text-ivory-muted">
+              <p className="text-xs text-ink/80 font-medium">
                 Show this to dancers at the registration desk on Thursday and Sunday nights:
               </p>
-              <div className="rounded-2xl bg-white p-4 inline-block shadow-lg mx-auto">
-                <div className="h-36 w-36 bg-stone-900 rounded-xl flex items-center justify-center text-white text-xs font-mono text-center p-2">
-                  <span className="text-[11px] text-amber-300">
+              <div className="border-2 border-ink bg-paper p-4 inline-block shadow-[4px_4px_0_var(--color-ink)] mx-auto">
+                <div className="h-36 w-36 bg-ink flex items-center justify-center text-paper text-xs font-mono text-center p-2">
+                  <span className="text-xs text-poster-mustard font-bold">
                     salsaexplosion.co.uk/review
                   </span>
                 </div>
               </div>
-              <p className="text-xs font-mono text-gold">
+              <p className="text-xs font-mono font-bold text-ink">
                 URL: https://salsaexplosion-bkgf.vercel.app/review
               </p>
             </div>

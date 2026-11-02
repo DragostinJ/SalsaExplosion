@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { MapPin, CheckCircle2, CreditCard } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   WEEKLY_SCHEDULE,
   VENUE_INFO,
   DOOR_PRICING,
   type CanonicalClassSession,
 } from "@/lib/academy-data";
+import { TYPE, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 function TimetableRow({
   item,
@@ -17,12 +17,12 @@ function TimetableRow({
   day: "thursday" | "sunday";
 }) {
   return (
-    <div className="py-4 sm:py-5 border-b border-white/10 hover:bg-white/[0.02] px-3 sm:px-4 rounded-xl transition-colors">
+    <div className="py-4 border-b-2 border-ink px-2 sm:px-4 hover:bg-black/[0.02] transition-colors">
       {/* Desktop 4-Column Architectural Grid / Mobile Responsive Stack */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 items-start lg:items-center">
         {/* Column 1: Time (col-span-2) */}
         <div className="lg:col-span-2 flex items-center gap-2.5">
-          <span className="font-mono text-lg sm:text-xl font-black text-white tracking-tight whitespace-nowrap">
+          <span className={`font-display tabular-nums ${TYPE.card} text-ink whitespace-nowrap`}>
             {item.time}
           </span>
         </div>
@@ -30,16 +30,16 @@ function TimetableRow({
         {/* Column 2: Level / Category Badge (col-span-3) */}
         <div className="lg:col-span-3 flex items-center gap-2 flex-wrap">
           <span
-            className={`text-xs font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+            className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 border border-ink shadow-[2px_2px_0_0_#161311] ${
               item.isSocial
-                ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
-                : "bg-amber-500/20 text-amber-300 border-amber-500/30"
+                ? "bg-poster-teal text-ink"
+                : "bg-paper text-ink"
             }`}
           >
             {item.level}
           </span>
           {item.badge && (
-            <span className="text-xs font-semibold text-ivory-muted bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">
+            <span className="text-xs font-bold text-ink bg-poster-mustard border border-ink px-2 py-0.5 shadow-[2px_2px_0_0_#161311]">
               {item.badge}
             </span>
           )}
@@ -47,23 +47,23 @@ function TimetableRow({
 
         {/* Column 3: Class Title & Instructor / Hall Details (col-span-5) */}
         <div className="lg:col-span-5 min-w-0 space-y-0.5">
-          <h4 className="text-base sm:text-lg font-black text-white tracking-tight">
+          <h4 className="text-base font-bold text-ink">
             {item.title}
           </h4>
-          <p className="text-xs text-ivory-muted">
+          <p className="text-xs text-ink/75 font-medium">
             Directed by{" "}
             {item.instructorHref ? (
               <Link
                 href={item.instructorHref}
-                className="font-bold text-amber-300 hover:text-amber-200 hover:underline transition-colors"
+                className="font-bold text-poster-red hover:underline transition-colors"
               >
                 {item.instructor}
               </Link>
             ) : (
-              <span className="font-bold text-amber-300">{item.instructor}</span>
+              <span className="font-bold text-poster-red">{item.instructor}</span>
             )}
             {" • "}
-            <span className="text-ivory-muted font-medium">{item.room}</span>
+            <span className="font-medium text-ink/80">{item.room}</span>
           </p>
         </div>
 
@@ -72,11 +72,11 @@ function TimetableRow({
           <Link
             href="/venues"
             data-testid={`timetable-book-${item.id}`}
-            className={
+            className={`${POSTER_BUTTON} ${
               item.isSocial
-                ? "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-4 py-2 border border-white/20 text-white hover:bg-white/10 text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer"
-                : "w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 text-xs font-bold uppercase tracking-[0.14em] rounded-full transition-colors cursor-pointer shadow-xs"
-            }
+                ? "border-poster-teal bg-poster-teal text-ink hover:bg-ink hover:text-paper"
+                : POSTER_BUTTON_COLORS.ink
+            } text-xs font-bold px-3 py-1.5 w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-1.5 min-h-[40px]`}
           >
             <span>{item.isSocial ? "Included / £5 Door" : "Pay at Door • £12 / £14"}</span>
             <span aria-hidden="true">→</span>
@@ -94,141 +94,138 @@ export function TwoDayExhibitionTimetable() {
   return (
     <section
       id="timetable"
-      className="cv-auto py-12 sm:py-16 bg-canvas border-b border-white/10 text-white scroll-mt-20"
+      className="cv-auto border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311] scroll-mt-20 space-y-10"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-10">
-        {/* Main Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/10">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-black uppercase tracking-widest text-amber-300">
-                Official {VENUE_INFO.shortName} Residency • Thursdays &amp; Sundays
+      {/* Main Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b-4 border-ink">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 border-b-2 border-ink pb-2 text-xs font-bold uppercase tracking-[0.25em] text-ink">
+            <span>Official {VENUE_INFO.shortName} Residency • Thursdays &amp; Sundays</span>
+          </div>
+          <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.section} pt-1`}>
+            WEEKLY PROGRAMME{" "}
+            <span className="text-poster-red">
+              LINEUP
+            </span>
+          </h2>
+          <p className="text-xs sm:text-sm text-ink/80 font-medium max-w-xl leading-relaxed">
+            Strictly Thursdays and Sundays at {VENUE_INFO.name}. High-energy partner rotations, authentic Cuban Casino footwork, and zero partner required.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 self-start md:self-auto border-2 border-ink bg-poster-mustard px-4 py-2 text-xs font-bold text-ink shadow-[4px_4px_0_0_#161311]">
+          <MapPin className="h-4 w-4 text-poster-red shrink-0" />
+          <span>
+            {VENUE_INFO.name} • {VENUE_INFO.address}, {VENUE_INFO.postcode}
+          </span>
+        </div>
+      </div>
+
+      {/* ================= THURSDAY CARTELERA TABLE ================= */}
+      <div id="timetable-thursday" className="border-4 border-ink bg-paper p-5 sm:p-7 shadow-[6px_6px_0_0_#161311] space-y-4 scroll-mt-24">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-3 border-b-4 border-ink">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="border border-ink px-2.5 py-0.5 bg-poster-mustard text-ink text-xs font-black tracking-wider uppercase">
+                THURSDAY
+              </span>
+              <span className="text-xs font-bold text-ink/75">
+                {thursdaySchedule.sessions.length} Sessions • Doors {thursdaySchedule.doorsTime} • {VENUE_INFO.floor}
               </span>
             </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-none">
-              WEEKLY PROGRAMME{" "}
-              <span className="font-display font-normal text-amber-300 ">
-                lineup
+            <h3 className={`font-display text-poster-red ${TYPE.section} mt-2`}>
+              JUEVES
+            </h3>
+            <p className="text-xs font-bold uppercase tracking-wider text-ink/80 mt-1">
+              Thursday Havana Residency
+            </p>
+          </div>
+          <p className="text-xs sm:text-sm font-semibold text-ink/80 max-w-sm sm:text-right">
+            {thursdaySchedule.subtitle}
+          </p>
+        </div>
+
+        {/* Table Header (Desktop only) */}
+        <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ink/80 border-b-2 border-ink">
+          <span className="col-span-2">Time</span>
+          <span className="col-span-3">Level / Track</span>
+          <span className="col-span-5">Class &amp; Faculty</span>
+          <span className="col-span-2 text-right">Admission (At Door)</span>
+        </div>
+
+        <div className="border-t-2 border-ink">
+          {thursdaySchedule.sessions.map((item) => (
+            <TimetableRow key={item.id} item={item} day="thursday" />
+          ))}
+        </div>
+      </div>
+
+      {/* ================= SUNDAY CARTELERA TABLE ================= */}
+      <div id="timetable-sunday" className="border-4 border-ink bg-paper p-5 sm:p-7 shadow-[6px_6px_0_0_#161311] space-y-4 scroll-mt-24">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-3 border-b-4 border-ink">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="border border-ink px-2.5 py-0.5 bg-poster-teal text-ink text-xs font-black tracking-wider uppercase">
+                SUNDAY
               </span>
-            </h2>
-            <p className="text-xs sm:text-sm text-ivory-muted font-medium max-w-xl">
-              Strictly Thursdays and Sundays at {VENUE_INFO.name}. High-energy partner rotations, authentic Cuban Casino footwork, and zero partner required.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2 self-start md:self-auto bg-white/5 px-4 py-2.5 rounded-2xl border border-white/10 text-xs font-bold text-ivory-muted">
-            <MapPin className="h-4 w-4 text-amber-400 shrink-0" />
-            <span>
-              {VENUE_INFO.name} • {VENUE_INFO.address}, {VENUE_INFO.postcode}
-            </span>
-          </div>
-        </div>
-
-        {/* ================= THURSDAY 4-COLUMN SWISS ARCHITECTURAL TABLE ================= */}
-        <div id="timetable-thursday" className="space-y-4 scroll-mt-24">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-white/10">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded bg-amber-500 text-stone-950 text-xs font-black tracking-wider">
-                  THURSDAY
-                </span>
-                <span className="text-xs font-bold text-ivory-muted">
-                  {thursdaySchedule.sessions.length} Sessions • Doors {thursdaySchedule.doorsTime} • {VENUE_INFO.floor}
-                </span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white mt-1">
-                Thursday Havana Residency
-              </h3>
+              <span className="text-xs font-bold text-ink/75">
+                Doors {sundaySchedule.doorsTime} • Every Sunday • Masterclass &amp; Social
+              </span>
             </div>
-            <p className="text-xs sm:text-sm font-semibold text-ivory-muted max-w-sm sm:text-right">
-              {thursdaySchedule.subtitle}
+            <h3 className={`font-display text-poster-red ${TYPE.section} mt-2`}>
+              DOMINGO
+            </h3>
+            <p className="text-xs font-bold uppercase tracking-wider text-ink/80 mt-1">
+              Sunday Havana Sessions — {VENUE_INFO.shortName}
             </p>
           </div>
-
-          {/* Table Header (Desktop only) */}
-          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ivory-muted border-b border-white/10">
-            <span className="col-span-2">Time</span>
-            <span className="col-span-3">Level / Track</span>
-            <span className="col-span-5">Class &amp; Faculty</span>
-            <span className="col-span-2 text-right">Admission (At Door)</span>
-          </div>
-
-          <div className="divide-y divide-white/10 border-b border-white/10">
-            {thursdaySchedule.sessions.map((item) => (
-              <TimetableRow key={item.id} item={item} day="thursday" />
-            ))}
-          </div>
+          <p className="text-xs sm:text-sm font-semibold text-ink/80 max-w-sm sm:text-right">
+            {sundaySchedule.subtitle}
+          </p>
         </div>
 
-        {/* ================= SUNDAY 4-COLUMN SWISS ARCHITECTURAL TABLE ================= */}
-        <div id="timetable-sunday" className="space-y-4 pt-4 scroll-mt-24">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-white/10">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded bg-amber-400 text-stone-950 text-xs font-black tracking-wider">
-                  SUNDAY
-                </span>
-                <span className="text-xs font-bold text-ivory-muted">
-                  Doors {sundaySchedule.doorsTime} • Every Sunday • Masterclass &amp; Social
-                </span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white mt-1">
-                Sunday Havana Sessions — {VENUE_INFO.shortName}
-              </h3>
-            </div>
-            <p className="text-xs sm:text-sm font-semibold text-ivory-muted max-w-sm sm:text-right">
-              {sundaySchedule.subtitle}
-            </p>
-          </div>
-
-          {/* Table Header (Desktop only) */}
-          <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ivory-muted border-b border-white/10">
-            <span className="col-span-2">Time</span>
-            <span className="col-span-3">Level / Track</span>
-            <span className="col-span-5">Class &amp; Faculty</span>
-            <span className="col-span-2 text-right">Admission (At Door)</span>
-          </div>
-
-          <div className="divide-y divide-white/10 border-b border-white/10">
-            {sundaySchedule.sessions.map((item) => (
-              <TimetableRow key={item.id} item={item} day="sunday" />
-            ))}
-          </div>
+        {/* Table Header (Desktop only) */}
+        <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ink/80 border-b-2 border-ink">
+          <span className="col-span-2">Time</span>
+          <span className="col-span-3">Level / Track</span>
+          <span className="col-span-5">Class &amp; Faculty</span>
+          <span className="col-span-2 text-right">Admission (At Door)</span>
         </div>
 
-        {/* Bottom Editorial Confidence Strip */}
-        <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-white/10 bg-surface-2">
-          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-ivory-muted font-semibold">
-            <span className="flex items-center gap-1.5 text-amber-300">
-              <CreditCard className="h-3.5 w-3.5" />
-              {DOOR_PRICING.summaryBadge}
-            </span>
-            <span className="flex items-center gap-1.5 text-emerald-400">
-              <CheckCircle2 className="h-3.5 w-3.5" />
-              Cash or Card at Door
-            </span>
-            <span className="flex items-center gap-1.5 text-ivory-muted">
-              <CheckCircle2 className="h-3.5 w-3.5 text-amber-400" />
-              Zero Partner Required
-            </span>
-            <span className="hidden md:flex items-center gap-1.5 text-ivory-muted">
-              <CheckCircle2 className="h-3.5 w-3.5 text-amber-400" />
-              No Online Pre-Booking Needed
-            </span>
-          </div>
-
-          <Button
-            asChild
-            variant="ghost"
-            size="sm"
-            className="text-xs font-bold text-amber-300 hover:text-white p-0 sm:px-2"
-          >
-            <Link href="/dashboard/schedule">
-              Full Schedule &amp; Venue Directions →
-            </Link>
-          </Button>
+        <div className="border-t-2 border-ink">
+          {sundaySchedule.sessions.map((item) => (
+            <TimetableRow key={item.id} item={item} day="sunday" />
+          ))}
         </div>
+      </div>
+
+      {/* Bottom Editorial Confidence Strip */}
+      <div className="flex flex-wrap items-center justify-between gap-4 p-4 border-4 border-ink bg-poster-mustard text-ink shadow-[4px_4px_0_0_#161311]">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-ink font-bold">
+          <span className="flex items-center gap-1.5">
+            <CreditCard className="h-4 w-4" />
+            {DOOR_PRICING.summaryBadge}
+          </span>
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 className="h-4 w-4 text-poster-teal" />
+            Cash or Card at Door
+          </span>
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 className="h-4 w-4 text-poster-teal" />
+            Zero Partner Required
+          </span>
+          <span className="hidden md:flex items-center gap-1.5">
+            <CheckCircle2 className="h-4 w-4 text-poster-teal" />
+            No Online Pre-Booking Needed
+          </span>
+        </div>
+
+        <Link
+          href="/pricing"
+          className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold px-3 py-1.5 min-h-[40px] inline-flex items-center`}
+        >
+          View Door Pricing &amp; Passes →
+        </Link>
       </div>
     </section>
   );

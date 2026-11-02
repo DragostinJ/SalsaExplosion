@@ -52,11 +52,11 @@ export default async function StudentWalletPage() {
           backLabel="Back to Schedule"
         />
 
-        <div className="rounded-2xl border border-line bg-surface-1 p-6 sm:p-10 text-ivory shadow-xl space-y-6">
+        <div className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[6px_6px_0_var(--color-ink)] space-y-6">
           <div className="flex flex-wrap items-center gap-3">
             <Button
               asChild
-              className="bg-brand hover:bg-brand-hover text-white font-bold text-xs sm:text-sm h-11 px-6 rounded-xl"
+              className="border-2 border-ink bg-poster-red hover:bg-ink text-paper font-black text-xs sm:text-sm h-11 px-6 shadow-[2px_2px_0_var(--color-ink)] rounded-none"
             >
               <Link href="/sign-in">
                 Sign In to Access Your Wallet
@@ -66,7 +66,7 @@ export default async function StudentWalletPage() {
             <Button
               asChild
               variant="outline"
-              className="border-line bg-surface-3 hover:bg-surface-2 text-ivory font-bold text-xs sm:text-sm h-11 px-6 rounded-xl"
+              className="border-2 border-ink bg-paper hover:bg-ink hover:text-paper text-ink font-bold text-xs sm:text-sm h-11 px-6 shadow-[2px_2px_0_var(--color-ink)] rounded-none"
             >
               <Link href="/dashboard/schedule">
                 Browse Thursday &amp; Sunday Timetable
@@ -278,18 +278,18 @@ export default async function StudentWalletPage() {
         backLabel="Back to Schedule"
         actions={
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <div className="rounded-xl border border-line bg-surface-2 p-3 text-center min-w-[120px] shadow-xs">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-ivory-muted block">
+            <div className="border-2 border-ink bg-poster-mustard p-3 text-center min-w-[120px] shadow-[3px_3px_0_var(--color-ink)]">
+              <span className="text-xs font-black uppercase tracking-wider text-ink block">
                 Available Credits
               </span>
-              <div className="text-2xl font-black text-ivory mt-0.5">
+              <div className="font-display text-3xl font-black text-ink mt-0.5">
                 {user.classCredits}
               </div>
             </div>
             <div className="flex flex-col gap-2">
               <Button
                 asChild
-                className="bg-brand hover:bg-brand-hover text-white font-bold text-xs shadow-xs"
+                className="border-2 border-ink bg-poster-red hover:bg-ink text-paper font-black text-xs shadow-[2px_2px_0_var(--color-ink)] rounded-none"
               >
                 <Link href="/pricing">
                   <Coins className="mr-1.5 h-3.5 w-3.5" />
@@ -330,7 +330,7 @@ export default async function StudentWalletPage() {
             {eventRegistrations.map((reg) => (
               <Card
                 key={reg.id}
-                className="rounded-2xl border border-line bg-surface-1 p-5 shadow-xs flex flex-col justify-between space-y-4"
+                className="border-2 border-ink bg-paper p-5 shadow-[4px_4px_0_var(--color-ink)] flex flex-col justify-between space-y-4 rounded-none"
               >
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">

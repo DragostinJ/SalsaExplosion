@@ -32,6 +32,7 @@ test.describe("Practice Player Tools & Engagement E2E Suite", () => {
       await expect(styleChip).toBeVisible();
       const chipText = await styleChip.textContent();
       expect(chipText?.trim().length).toBeGreaterThan(0);
+      expect(await row.textContent()).toContain("BPM");
     }
   });
 

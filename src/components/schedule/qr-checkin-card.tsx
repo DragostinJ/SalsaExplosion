@@ -110,15 +110,15 @@ export function QrCheckInCard({
   const isAttended = bookingStatus === BookingStatus.ATTENDED;
 
   return (
-    <Card className="mx-auto max-w-md border-2 shadow-lg overflow-hidden">
-      <div className="bg-surface-2 border-b border-gold/30 p-6 text-white text-center space-y-2">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-xs">
-          <QrCode className="h-6 w-6 text-white" />
+    <Card className="mx-auto max-w-md border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_var(--color-ink)] rounded-none overflow-hidden">
+      <div className="bg-poster-mustard border-b-2 border-ink p-6 text-ink text-center space-y-2">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center border-2 border-ink bg-paper text-ink shadow-[2px_2px_0_var(--color-ink)]">
+          <QrCode className="h-6 w-6 text-ink" />
         </div>
-        <Badge className="bg-black/30 text-white border-none">
+        <Badge className="border-2 border-ink bg-ink text-paper text-xs font-black uppercase tracking-wider rounded-none">
           Salsa Explosion Studio Door Check-In
         </Badge>
-        <h1 className="text-xl font-extrabold leading-snug">{session.title}</h1>
+        <h1 className="font-display text-2xl uppercase tracking-tight text-ink">{session.title}</h1>
       </div>
 
       <CardHeader className="space-y-2 pb-3">
@@ -153,18 +153,18 @@ export function QrCheckInCard({
         )}
 
         {isAttended ? (
-          <div className="rounded-2xl border-2 border-emerald-500/40 bg-emerald-500/[0.06] p-6 text-center space-y-2">
-            <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-500" />
-            <h2 className="text-lg font-extrabold text-emerald-300">
+          <div className="border-2 border-ink bg-poster-teal/20 p-6 text-center space-y-2 shadow-[3px_3px_0_var(--color-ink)]">
+            <CheckCircle2 className="mx-auto h-12 w-12 text-poster-teal" />
+            <h2 className="text-lg font-black uppercase tracking-wider text-ink">
               You Are Checked In!
             </h2>
-            <p className="text-xs text-muted-foreground">
-              Show this green screen to your instructor at the studio door and step onto the dance floor.
+            <p className="text-xs text-ink/80 font-medium">
+              Show this screen to your instructor at the studio door and step onto the dance floor.
             </p>
           </div>
         ) : bookingStatus === BookingStatus.CONFIRMED ? (
           <div className="space-y-3 text-center">
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-ink/80 font-medium">
               Your class reservation is confirmed. Tap below to mark your arrival at the studio.
             </p>
             <Button
@@ -172,7 +172,7 @@ export function QrCheckInCard({
               size="lg"
               disabled={isPending}
               onClick={handleConfirmCheckIn}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold shadow"
+              className="w-full border-2 border-ink bg-poster-teal hover:bg-ink text-ink hover:text-paper font-black uppercase tracking-wider text-sm shadow-[3px_3px_0_var(--color-ink)] rounded-none"
             >
               <CheckCircle2 className="mr-2 h-4 w-4" />
               {isPending ? "Checking In..." : "Confirm Studio Arrival Now"}

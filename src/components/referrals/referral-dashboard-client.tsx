@@ -121,7 +121,7 @@ export function ReferralDashboardClient({
         </div>
 
         {/* Copy Link Input Bar */}
-        <div className="flex flex-col sm:flex-row items-stretch gap-2 bg-background/80 backdrop-blur-xs p-2 rounded-2xl border shadow-inner">
+        <div className="flex flex-col sm:flex-row items-stretch gap-2 bg-background p-2 rounded-2xl border shadow-inner">
           <div className="flex-1 px-3 py-2 font-mono text-xs sm:text-sm text-foreground truncate flex items-center">
             {referralUrl}
           </div>

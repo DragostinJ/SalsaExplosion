@@ -1,6 +1,4 @@
 import { Gift, Phone, MessageSquare, CheckCircle2, MapPin } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 
 interface DanceVouchersShowcaseProps {
   className?: string;
@@ -28,31 +26,27 @@ export function DanceVouchersShowcase({
   return (
     <section
       aria-label="Dance Gift Vouchers"
-      className={`relative overflow-hidden rounded-3xl border border-line bg-surface-2 p-6 sm:p-10 shadow-lg ${className}`}
+      className={`relative border-4 border-ink bg-poster-teal p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311] ${className}`}
     >
-      {/* Decorative background glow */}
-      <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gold/5 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-ember/10 blur-3xl pointer-events-none" />
-
       <div className="relative z-10 grid gap-8 lg:grid-cols-12 items-center">
         {/* Left Column: Authentic Copy & Value Proposition */}
         <div className="space-y-6 lg:col-span-7">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge className="bg-rose-600 text-white font-extrabold text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
-                <Gift className="h-3.5 w-3.5" />
+              <span className="border-2 border-ink bg-paper text-ink font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
+                <Gift className="h-3.5 w-3.5 text-poster-red" />
                 The Perfect Gift
-              </Badge>
-              <Badge variant="outline" className="border-border bg-muted/40 text-muted-foreground font-semibold text-xs">
+              </span>
+              <span className="border-2 border-ink bg-poster-mustard text-ink font-bold text-xs uppercase tracking-wider px-3 py-1">
                 Available Now
-              </Badge>
+              </span>
             </div>
 
-            <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-foreground leading-tight">
+            <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-ink leading-tight">
               DANCE VOUCHERS — THE PERFECT GIFT!
             </h2>
 
-            <p className="text-base sm:text-lg font-medium text-muted-foreground leading-relaxed">
+            <p className="text-sm sm:text-base font-bold text-ink/90 leading-relaxed">
               Looking for a gift that’s a little different? Why not give your friends or family the gift of Cuban Salsa!
             </p>
           </div>
@@ -62,15 +56,15 @@ export function DanceVouchersShowcase({
             {occasions.map((occ) => (
               <span
                 key={occ}
-                className="inline-flex items-center rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-bold text-foreground"
+                className="inline-flex items-center border-2 border-ink bg-paper px-3 py-1 text-xs font-bold text-ink shadow-[2px_2px_0_0_#161311]"
               >
                 {occ}
               </span>
             ))}
           </div>
 
-          <div className="rounded-2xl border bg-card/60 p-5 space-y-3">
-            <p className="text-xs sm:text-sm text-foreground/90 font-medium leading-relaxed">
+          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_#161311]">
+            <p className="text-xs sm:text-sm text-ink font-bold leading-relaxed">
               Cuban Salsa is more than just learning steps — it’s about music, movement, connection and having fun. It’s a brilliant way to:
             </p>
 
@@ -78,11 +72,11 @@ export function DanceVouchersShowcase({
               {benefits.map((benefit, idx) => (
                 <li
                   key={idx}
-                  className={`items-center gap-2 font-semibold text-foreground/90 ${
+                  className={`items-center gap-2 font-semibold text-ink ${
                     idx >= 4 ? "hidden sm:flex" : "flex"
                   }`}
                 >
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-primary-base" />
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-poster-red" />
                   <span>{benefit}</span>
                 </li>
               ))}
@@ -90,17 +84,16 @@ export function DanceVouchersShowcase({
           </div>
 
           {/* Location strip */}
-          <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground">
-            <MapPin className="h-4 w-4 text-rose-500" />
-            <span>Valid across all weekly classes at:</span>
-            <span className="text-foreground">BOH Studios Bournemouth (104 Commercial Rd)</span>
+          <div className="border-2 border-ink bg-poster-mustard p-3 flex items-center gap-2 text-xs font-bold text-ink shadow-[2px_2px_0_0_#161311]">
+            <MapPin className="h-4 w-4 text-poster-red shrink-0" />
+            <span>Valid across all weekly classes at BOH Studios Bournemouth (104 Commercial Rd)</span>
           </div>
 
-          {/* Call to Actions */}
+          {/* Call to Actions - ICAIC Silkscreen Stamp Style */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
             <a
               href="tel:+447969633701"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-base px-6 py-3.5 text-sm font-black text-white shadow-md hover:bg-primary-hover transition-all min-h-11"
+              className="border-4 border-ink bg-poster-red text-paper hover:bg-ink hover:text-paper font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_#161311] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
             >
               <Phone className="h-4 w-4" />
               ORDER NOW: 07969 633701
@@ -109,7 +102,7 @@ export function DanceVouchersShowcase({
               href="https://wa.me/447969633701?text=Hi%20Enrique%2C%20I%20would%20like%20to%20order%20a%20Cuban%20Salsa%20Dance%20Voucher%20please!"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-emerald-500/40 bg-emerald-500/10 px-6 py-3.5 text-sm font-black text-emerald-300 hover:bg-emerald-500/20 transition-all min-h-11"
+              className="border-4 border-ink bg-paper text-ink hover:bg-ink hover:text-paper font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_#161311] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
             >
               <MessageSquare className="h-4 w-4" />
               WhatsApp Maestro Enrique
@@ -119,57 +112,57 @@ export function DanceVouchersShowcase({
 
         {/* Right Column: Physical / Digital Voucher Preview Certificate */}
         <div className="lg:col-span-5 flex justify-center">
-          <Card className="w-full max-w-md overflow-hidden rounded-3xl border border-line bg-surface-1 text-ivory shadow-2xl relative">
-            <div className="absolute top-0 right-0 -mr-12 -mt-12 w-36 h-36 bg-white/10 rounded-full blur-xl pointer-events-none" />
-            
-            <CardContent className="p-6 sm:p-8 space-y-6 flex flex-col justify-between min-h-[360px]">
-              <div className="flex items-start justify-between border-b border-white/20 pb-4">
-                <div>
-                  <span className="text-xs font-black uppercase tracking-widest text-amber-200 block">
-                    Official Gift Certificate
-                  </span>
-                  <h3 className="text-2xl font-black tracking-tight drop-shadow-sm">
-                    SALSA EXPLOSION UK
-                  </h3>
-                  <span className="text-xs text-white/80 font-medium">
-                    Bournemouth Cuban Dance Academy
-                  </span>
-                </div>
-                <div className="h-12 w-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-inner">
-                  <Gift className="h-6 w-6 text-white" />
-                </div>
-              </div>
-
-              <div className="space-y-3 bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
-                <span className="text-xs uppercase font-bold tracking-wider text-amber-200">
-                  Presented To:
+          <div className="w-full max-w-md border-4 border-ink bg-paper text-ink p-6 sm:p-8 shadow-[10px_10px_0_0_#161311] space-y-5 relative">
+            <div className="border-b-4 border-dashed border-ink pb-4 flex items-start justify-between">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-ink/70 block">
+                  Official Gift Certificate
                 </span>
-                <p className="text-lg font-black italic tracking-wide">
-                  Someone Special
-                </p>
-                <p className="text-xs text-white/90 leading-snug">
-                  Entitles recipient to Cuban Salsa Classes & Social Dancing with Maestro Enrique Perez Valdes & Guest Artists.
-                </p>
+                <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
+                  SALSA EXPLOSION UK
+                </h3>
+                <span className="text-xs text-ink/80 font-semibold">
+                  Bournemouth Cuban Dance Academy
+                </span>
               </div>
+              <div className="h-11 w-11 border-2 border-ink bg-poster-mustard flex items-center justify-center shadow-[2px_2px_0_0_#161311]">
+                <Gift className="h-6 w-6 text-ink" />
+              </div>
+            </div>
 
-              <div className="pt-2 border-t border-white/20 flex items-center justify-between text-xs">
-                <div>
-                  <span className="block text-xs text-amber-200 font-bold uppercase">Locations</span>
-                  <span className="font-bold">Bournemouth • Poole</span>
-                </div>
-                <div className="text-right">
-                  <span className="block text-xs text-amber-200 font-bold uppercase">Order Direct</span>
-                  <span className="font-extrabold text-amber-300">07969 633701</span>
-                </div>
-              </div>
+            <div className="space-y-2 border-2 border-ink bg-poster-mustard/20 p-4">
+              <span className="text-xs uppercase font-bold tracking-wider text-ink/70 block">
+                Presented To:
+              </span>
+              <p className="font-display font-black text-xl italic uppercase tracking-wide text-ink">
+                Someone Special
+              </p>
+              <p className="text-xs text-ink/85 font-medium leading-relaxed">
+                Entitles recipient to Cuban Salsa Classes &amp; Social Dancing with Maestro Enrique Perez Valdes &amp; Guest Artists.
+              </p>
+            </div>
 
-              <div className="text-center pt-1">
-                <p className="text-xs font-bold text-amber-100 italic">
-                  &ldquo;Give the gift of dance. Give the gift of Cuban Salsa!&rdquo;
-                </p>
+            <div className="border-2 border-poster-red text-poster-red p-2 font-display font-black text-center text-xs uppercase tracking-widest rotate-[-3deg]">
+              OFFICIAL VOUCHER · SALSA EXPLOSION
+            </div>
+
+            <div className="pt-2 border-t-2 border-ink flex items-center justify-between text-xs font-bold">
+              <div>
+                <span className="block text-ink/70 uppercase">Locations</span>
+                <span>Bournemouth • Poole</span>
               </div>
-            </CardContent>
-          </Card>
+              <div className="text-right">
+                <span className="block text-ink/70 uppercase">Order Direct</span>
+                <span className="text-poster-red">07969 633701</span>
+              </div>
+            </div>
+
+            <div className="text-center pt-1 border-t border-ink/20">
+              <p className="text-xs font-bold text-ink/80 italic">
+                &ldquo;Give the gift of dance. Give the gift of Cuban Salsa!&rdquo;
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

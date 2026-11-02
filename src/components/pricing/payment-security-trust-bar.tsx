@@ -12,53 +12,53 @@ export function PaymentSecurityTrustBar({
   return (
     <div
       data-testid="payment-security-trust-bar"
-      className={`rounded-xl border border-white/10 bg-surface-1 p-4 text-xs text-foreground space-y-2.5 ${className}`}
+      className={`border-2 border-ink bg-paper p-4 text-xs text-ink space-y-2.5 shadow-[4px_4px_0_0_#161311] ${className}`}
     >
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-2.5">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-ink pb-2.5">
         <div className="flex items-center gap-2">
-          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-            <Lock className="h-3.5 w-3.5" />
+          <div className="flex h-7 w-7 items-center justify-center border-2 border-ink bg-poster-teal text-ink font-bold">
+            <Lock className="h-4 w-4" />
           </div>
           <div>
-            <span className="font-extrabold text-[11px] uppercase tracking-wider text-emerald-300">
+            <span className="font-extrabold text-xs uppercase tracking-wider text-ink">
               256-Bit SSL Encrypted Checkout
             </span>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-ink/75 font-medium">
               Official Stripe PCI-DSS Level 1 payment processing.
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground">
-          <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 flex items-center gap-1 shadow-2xs">
-            <CreditCard className="h-3 w-3 text-rose-400" /> Apple Pay / GPay
+        <div className="flex items-center gap-2 text-xs font-bold text-ink">
+          <span className="border border-ink bg-paper px-2 py-1 flex items-center gap-1 shadow-[2px_2px_0_0_#161311]">
+            <CreditCard className="h-3.5 w-3.5 text-poster-red" /> Apple Pay / GPay
           </span>
-          <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 shadow-2xs">
+          <span className="border border-ink bg-paper px-2 py-1 shadow-[2px_2px_0_0_#161311]">
             Visa / Mastercard
           </span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-muted-foreground pt-0.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-ink/80 pt-0.5">
         <div className="flex items-center gap-1.5">
-          <QrCode className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+          <QrCode className="h-4 w-4 text-poster-teal shrink-0" />
           <span>
-            <strong className="text-foreground">Instant Delivery:</strong> Door QR pass generated directly to your account.
+            <strong className="text-ink font-bold">Instant Delivery:</strong> Door QR pass generated directly to your account.
           </span>
         </div>
 
         {showRefundPolicy ? (
           <div className="flex items-center gap-1.5">
-            <RotateCcw className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+            <RotateCcw className="h-4 w-4 text-poster-teal shrink-0" />
             <span>
-              <strong className="text-foreground">24h Cancellation Guarantee:</strong> Instant credit refund before class cutoff.
+              <strong className="text-ink font-bold">24h Cancellation Guarantee:</strong> Instant credit refund before class cutoff.
             </span>
           </div>
         ) : (
           <div className="flex items-center gap-1.5">
-            <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+            <ShieldCheck className="h-4 w-4 text-poster-teal shrink-0" />
             <span>
-              <strong className="text-foreground">Authentic Guarantee:</strong> Direct registration with Salsa Explosion UK.
+              <strong className="text-ink font-bold">Authentic Guarantee:</strong> Direct registration with Salsa Explosion UK.
             </span>
           </div>
         )}

@@ -4,26 +4,37 @@ import { prisma } from "@/lib/prisma";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// ICAIC poster inks
+const PAPER = "#F1E6D0";
+const INK = "#161311";
+const RED = "#E4412B";
+const MUSTARD = "#F4B41A";
+
 export default async function Image({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const event = await prisma.event.findUnique({
-    where: { slug },
-    select: { title: true, startDate: true, venueName: true },
-  });
+  let event = null;
+  try {
+    event = await prisma.event.findUnique({
+      where: { slug },
+      select: { title: true, startDate: true, venueName: true },
+    });
+  } catch {
+    // Fallback handled below
+  }
 
   const title = event?.title || "Salsa Explosion Festival";
-  const location = event?.venueName || "BOH Studios • Bournemouth";
+  const location = event?.venueName || "BOH Studios · Bournemouth";
   const dateFormatted = event?.startDate
     ? new Date(event.startDate).toLocaleDateString("en-GB", {
         day: "numeric",
         month: "long",
         year: "numeric",
       })
-    : "2026 Season";
+    : "Temporada 2026 / 2027";
 
   return new ImageResponse(
     (
@@ -33,48 +44,73 @@ export default async function Image({
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
           justifyContent: "space-between",
-          backgroundColor: "#F1E6D0",
-          padding: 80,
+          position: "relative",
+          backgroundColor: PAPER,
+          padding: 72,
           fontFamily: "sans-serif",
-          color: "#161311",
+          color: INK,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div
-            style={{
-              padding: "8px 16px",
-              backgroundColor: "rgba(223, 122, 36, 0.15)",
-              border: "1px solid rgba(223, 122, 36, 0.4)",
-              borderRadius: 8,
-              fontSize: 18,
-              fontWeight: 700,
-              letterSpacing: "0.2em",
-              color: "#B8301C",
-              textTransform: "uppercase",
-            }}
-          >
-            Festival & Congress
-          </div>
-          <div style={{ fontSize: 18, color: "#4E453B", letterSpacing: "0.15em" }}>
-            {location}
-          </div>
+        {/* Poster shapes: the red sun and a mustard band */}
+        <div
+          style={{
+            position: "absolute",
+            right: -90,
+            top: -60,
+            width: 520,
+            height: 520,
+            borderRadius: 9999,
+            backgroundColor: RED,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            bottom: 150,
+            width: 420,
+            height: 90,
+            backgroundColor: MUSTARD,
+          }}
+        />
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            fontSize: 22,
+            fontWeight: 800,
+            letterSpacing: "0.3em",
+            textTransform: "uppercase",
+          }}
+        >
+          <div style={{ display: "flex" }}>Bournemouth · {location}</div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div style={{ display: "flex", flexDirection: "column", maxWidth: 900, zIndex: 10 }}>
           <div
             style={{
-              fontSize: 56,
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
-              lineHeight: 1.1,
-              color: "#161311",
+              display: "flex",
+              fontSize: 64,
+              fontWeight: 900,
+              lineHeight: 1.0,
+              letterSpacing: "-0.03em",
+              textTransform: "uppercase",
             }}
           >
             {title}
           </div>
-          <div style={{ fontSize: 26, color: "#4E453B" }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 28,
+              fontWeight: 700,
+              marginTop: 16,
+              color: INK,
+            }}
+          >
             {dateFormatted}
           </div>
         </div>
@@ -82,19 +118,18 @@ export default async function Image({
         <div
           style={{
             display: "flex",
-            alignItems: "center",
             justifyContent: "space-between",
             width: "100%",
-            borderTop: "1px solid #161311",
-            paddingTop: 32,
+            borderTop: `6px solid ${INK}`,
+            paddingTop: 24,
+            fontSize: 24,
+            fontWeight: 800,
+            textTransform: "uppercase",
+            zIndex: 10,
           }}
         >
-          <div style={{ fontSize: 20, color: "#C4321C", fontWeight: 600 }}>
-            Online Festival Passes Available
-          </div>
-          <div style={{ fontSize: 20, color: "#4E453B" }}>
-            salsaexplosion.co.uk
-          </div>
+          <div style={{ display: "flex" }}>Online Festival Passes · Salsa Explosion</div>
+          <div style={{ display: "flex" }}>salsaexplosion.co.uk</div>
         </div>
       </div>
     ),

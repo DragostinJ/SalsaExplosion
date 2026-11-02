@@ -330,7 +330,7 @@ export function ClassRosterWorkspace({
                 <Button
                   type="button"
                   onClick={() => setShowQrModal((prev) => !prev)}
-                  className="bg-gradient-to-r from-amber-600 to-orange-500 text-white text-xs font-semibold"
+                  className="bg-poster-red hover:bg-poster-red/90 text-paper text-xs font-bold"
                 >
                   <QrCode className="mr-1.5 h-4 w-4" />
                   {showQrModal ? "Hide QR" : "Door QR"}

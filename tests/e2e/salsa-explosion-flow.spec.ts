@@ -13,19 +13,18 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     // 1. Verify Brand Title & Director Heading
     const heroHeading = page.locator("h1");
     await expect(heroHeading).toContainText("Bournemouth");
-    await expect(heroHeading).toContainText("Enrique Perez Valdes");
+    await expect(page.locator("main")).toContainText("Enrique Perez");
 
-    // 2. Verify Lifetime Achievement Award & BOH Studios residency
+    // 2. Verify Director & BOH Studios residency
     await expect(
-      page.getByText("Directed by Salsa UK Lifetime Achievement Award winner Maestro Enrique Perez Valdes")
+      page.getByText(/Enrique Perez Valdes/i).first()
     ).toBeVisible();
     await expect(
-      page.getByText("BOH Studios Bournemouth Residency")
+      page.getByText(/BOH Studios/i).first()
     ).toBeVisible();
 
     // 3. Verify Community Social Proof
-    await expect(page.getByText("4,200+").first()).toBeVisible();
-    await expect(page.getByText("25+ Years").first()).toBeVisible();
+    await expect(page.getByText(/since 1993|1993/i).first()).toBeVisible();
 
     // 4. Verify Social Media Links to @salsaexplosion & Facebook Community
     const instagramLinks = page.locator('a[href*="instagram.com/salsaexplosion"]');
@@ -36,17 +35,11 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     );
     await expect(facebookLinks.first()).toBeVisible();
 
-    // 5. Verify Social Proof Grid Section
-    await expect(
-      page.getByText("Feel the Energy of Bournemouth's Cuban Community")
-    ).toBeVisible();
-    await expect(
-      page.getByText("Thursday Night Rueda de Casino at BOH Studios")
-    ).toBeVisible();
-    await expect(page.getByText("Mark Townsend")).toBeVisible();
+    // 5. Verify Programme Cartelera on landing page
+    await expect(page.locator("#cartelera")).toBeVisible();
+    await expect(page.getByText("Cartelera semanal")).toBeVisible();
 
-    // 6. Verify theplace-inspired Classes Gateway on landing page and Level Finder Quiz on /dashboard/schedule
-    await expect(page.locator('[data-testid="theplace-classes-gateway"]')).toBeVisible();
+    // 6. Verify Level Finder Quiz on /dashboard/schedule
     await page.goto("/dashboard/schedule");
     await page.waitForLoadState("domcontentloaded");
     await expect(page.getByText("Interactive Level Finder • 15 Seconds")).toBeVisible();
@@ -169,7 +162,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await page.goto("/about", { waitUntil: "domcontentloaded" });
 
     await expect(
-      page.getByText("Bournemouth's Cuban Rhythm.")
+      page.getByText("Bournemouth's Cuban Rhythm")
     ).toBeVisible();
     await expect(
       page.getByText(/Enrique Perez Valdes/i).first()
@@ -202,12 +195,12 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await page.goto("/private-lessons", { waitUntil: "domcontentloaded" });
 
     await expect(
-      page.getByText("1-on-1 Private Lessons & Coaching")
+      page.getByText(/1-on-1 Private/i).first()
     ).toBeVisible();
     await expect(
       page.getByText("Maestro Enrique Perez Valdes").first()
     ).toBeVisible();
-    await expect(page.getByText(/1-Hour/i).first()).toBeVisible();
+    await expect(page.getByText(/Single Lessons/i).first()).toBeVisible();
     await expect(page.getByText(/5-Hour/i).first()).toBeVisible();
   });
 
@@ -328,7 +321,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       ).toBeVisible();
       await expect(page.getByText(/BOH Studios Bournemouth Weekly Schedule/i).first()).toBeVisible();
       await expect(page.getByText("Flagship Thursday Night")).toBeVisible();
-      await expect(page.getByText("Every Sunday Evening")).toBeVisible();
+      await expect(page.getByText(/Cuban Sunday/i).first()).toBeVisible();
       await expect(page.getByText("BOH Studios Bournemouth").first()).toBeVisible();
       await expect(page.getByText("Moe Flex").first()).toBeVisible();
     }
@@ -337,21 +330,15 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   test("17. Dance Vouchers showcase renders authentic gift benefits and phone order CTA", async ({
     page,
   }) => {
-    // 1. Check Homepage
-    await page.goto("/", { waitUntil: "domcontentloaded" });
-    await expect(
-      page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
-    ).toBeVisible();
-    await expect(page.getByText("ORDER NOW: 07969 633701").first()).toBeVisible();
-    await expect(page.getByText("🎂 Birthday presents").first()).toBeVisible();
-
-    // 2. Check Pricing page
+    // 1. Check Pricing page
     await page.goto("/pricing", { waitUntil: "domcontentloaded" });
     await expect(
       page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
     ).toBeVisible();
+    await expect(page.getByText("ORDER NOW: 07969 633701").first()).toBeVisible();
+    await expect(page.getByText(/Birthday presents/i).first()).toBeVisible();
 
-    // 3. Check Shop page
+    // 2. Check Shop page
     await page.goto("/shop", { waitUntil: "domcontentloaded" });
     await expect(
       page.getByText("DANCE VOUCHERS — THE PERFECT GIFT!").first()
@@ -468,9 +455,10 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await venueSection.getByRole("link", { name: /Parking guide/i }).click();
     await expect(page).toHaveURL(/\/venues/);
     await expect(page.getByText(/Bournemouth Central Train Station/i).first()).toBeVisible();
+    await expect(page.getByText(/Door-to-Door Arrival Planner/i).first()).toBeVisible();
   });
 
-  test("25. Pre-pitch competitor kill-shot features (live banner, why cuban comparison, crossover quiz, and mobile roster toggle)", async ({
+  test("25. Pre-pitch competitor kill-shot features (live banner, why cuban comparison, crossover quiz, and mobile roster carousel)", async ({
     page,
   }) => {
     // 1. Visit landing page with Thursday live demo so banner renders on any day of week
@@ -512,18 +500,14 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       page.getByRole("link", { name: /Explore the Timetable & Book Your Session/i })
     ).toBeVisible();
 
-    // 5. Verify Mobile Expand Toggle on mobile viewport
+    // 5. Verify Mobile Carousel Controls on mobile viewport
     await page.goto("/?liveDemo=thursday");
     await page.waitForLoadState("domcontentloaded");
     await page.setViewportSize({ width: 375, height: 667 });
-    const mobileToggle = page.getByRole("button", {
-      name: /Show All 8 Maestros & Guest Artists/i,
+    const nextBtn = page.getByRole("button", {
+      name: /Next artist card/i,
     });
-    await expect(mobileToggle).toBeVisible();
-    await mobileToggle.click();
-    await expect(
-      page.getByRole("button", { name: /Show Fewer Artists/i })
-    ).toBeVisible();
+    await expect(nextBtn).toBeVisible();
   });
 });
 

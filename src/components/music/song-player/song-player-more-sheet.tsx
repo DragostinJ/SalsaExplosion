@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import { Minus, Plus, X } from "lucide-react";
-import type { SongDanceGear, SongSegment, SongStyle } from "@/lib/constants/timba-song-anatomy";
+import type { SongAnatomy, SongDanceGear, SongSegment, SongStyle } from "@/lib/constants/timba-song-anatomy";
 import { DANCE_GEAR_LEGEND, ENERGY_LABELS } from "@/lib/music/dance-gear-legend";
-import { SONG_STYLE_HINTS } from "@/lib/music/song-style";
+import { SONG_STYLE_HINTS, joinDancerNames } from "@/lib/music/song-style";
 import { ShareSectionButton } from "./share-section-button";
 import { formatSongTime } from "@/lib/music/song-timing";
 import { LEAD_IN_CHOICES, type LeadInSeconds } from "@/lib/music/practice-navigation";
@@ -27,6 +27,8 @@ interface SongPlayerMoreSheetProps {
   segment: SongSegment;
   songId: string;
   songStyle: SongStyle;
+  /** Set when the song's video shows dancers (the sections were mapped on their dance). */
+  videoDancers?: SongAnatomy["videoDancers"];
   role: DancerRole;
   latencyOffsetSeconds: number;
   onChangeLatency: (seconds: number) => void;
@@ -51,6 +53,7 @@ export function SongPlayerMoreSheet({
   segment,
   songId,
   songStyle,
+  videoDancers,
   role,
   latencyOffsetSeconds,
   onChangeLatency,
@@ -180,6 +183,17 @@ export function SongPlayerMoreSheet({
             </label>
           )}
         </section>
+
+        {videoDancers && (
+          <section className="mt-5 border-t border-line pt-4">
+            <h3 className="text-[11px] font-bold uppercase tracking-widest text-ivory-muted">In the video</h3>
+            <p className="mt-1 text-sm">
+              <span className="font-bold text-gold">{joinDancerNames(videoDancers.names)}</span> dance this song
+              {videoDancers.event ? ` at ${videoDancers.event}` : ""}. The sections were mapped on their dance: watch what they
+              do in each one, then try it yourself.
+            </p>
+          </section>
+        )}
 
         <section className="mt-5 border-t border-line pt-4">
           <h3 className="text-[11px] font-bold uppercase tracking-widest text-ivory-muted">Song style</h3>

@@ -115,6 +115,16 @@ export const SongAnatomySchema = z.object({
   alternateYoutubeVideoId: z.string().optional(),
   spotifyOrYoutubeEmbedUrl: z.string().optional(),
   /**
+   * When the video shows dancers dancing the song (not just the band): who they are and where.
+   * The song maker mapped the sections on their dance, so the player invites dancers to watch them.
+   */
+  videoDancers: z
+    .object({
+      names: z.array(z.string().min(1)).min(1),
+      event: z.string().min(1).optional(),
+    })
+    .optional(),
+  /**
    * Rights-cleared audio we host ourselves (e.g. a studio recording). When set,
    * the practice player plays this instead of the YouTube video, which unlocks
    * features YouTube's terms forbid on its player. `license` documents the rights.
@@ -4740,6 +4750,7 @@ export const TIMBA_SONG_ANATOMY_DATA: SongAnatomy[] = [
     "durationSeconds": 251,
     "youtubeVideoId": "Wh1zERcDWGM",
     "youtubeUrl": "https://www.youtube.com/watch?v=Wh1zERcDWGM",
+    "videoDancers": { "names": ["Paolo", "Alina"], "event": "the World Latin Congress" },
     "segments": [
       {
         "id": "mn-seg-1",

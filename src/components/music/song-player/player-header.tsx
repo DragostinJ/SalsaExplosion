@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { BookOpen, ChevronLeft, Ear, Maximize2 } from "lucide-react";
 import type { SongAnatomy } from "@/lib/constants/timba-song-anatomy";
+import { joinDancerNames } from "@/lib/music/song-style";
 import { cn } from "@/lib/utils";
 import type { PracticeMode } from "./player-settings";
 import type { DancerRole } from "./song-player-more-sheet";
@@ -46,6 +47,9 @@ export function PlayerHeader({ song, title, mode, onCycleMode, role, onChangeRol
       <div className="min-w-0 flex-1">
         <h1 className="truncate text-sm font-bold">{title}</h1>
         <p className="truncate text-xs text-ivory-muted">
+          {song.videoDancers && (
+            <span className="font-bold text-gold">Watch {joinDancerNames(song.videoDancers.names)} · </span>
+          )}
           {song.style} · {song.artist} · {song.bpm} BPM
         </p>
       </div>

@@ -17,6 +17,12 @@ export function isTimba(style: SongStyle): boolean {
   return style === "Timba";
 }
 
+/** "Paolo & Alina", "Ana, Leo & Mia": the dancers in a song's video, for credits. */
+export function joinDancerNames(names: readonly string[]): string {
+  if (names.length <= 1) return names.join("");
+  return `${names.slice(0, -1).join(", ")} & ${names[names.length - 1]}`;
+}
+
 /** Song title without the YouTube upload tag, e.g. "(Official Video)", "(Video Oficial)" or "(2026 Official Video)". */
 export function displaySongTitle(title: string): string {
   return title.replace(/\s*\((?:\d{4}\s+)?(official video|video oficial|studio video|official audio|audio oficial)\)/i, "");

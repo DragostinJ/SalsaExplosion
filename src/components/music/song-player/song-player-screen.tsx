@@ -487,6 +487,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
         segment={shown}
         songId={song.id}
         songStyle={song.style}
+        videoDancers={song.videoDancers}
         role={role}
         latencyOffsetSeconds={latencyOffsetSeconds}
         onChangeLatency={changeLatency}

@@ -5,7 +5,7 @@ import { PlayerControls } from "@/components/music/song-player/player-controls";
 import { SongPlayerMoreSheet } from "@/components/music/song-player/song-player-more-sheet";
 import { SectionMovesList } from "@/components/music/song-player/section-moves-list";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
-import { displaySongTitle } from "@/lib/music/song-style";
+import { displaySongTitle, joinDancerNames } from "@/lib/music/song-style";
 
 describe("Music Practice Hub Accessibility (A11y & WCAG 2.1)", () => {
   it("renders SongPracticeList rows named by their visible title and artist (label in name)", () => {
@@ -99,6 +99,45 @@ describe("Music Practice Hub Accessibility (A11y & WCAG 2.1)", () => {
     expect(html).toContain('aria-label="Close details"');
     expect(html).toContain('role="radiogroup"');
     expect(html).toContain("focus-visible:outline-gold");
+    expect(html).not.toContain("In the video");
+  });
+
+  it("credits the dancers when a song's video shows them dancing it (list chip and details sheet)", () => {
+    const danced = TIMBA_SONG_ANATOMY_DATA.filter((s) => s.videoDancers);
+    expect(danced.map((s) => s.id)).toContain("homenaje-a-la-musica-cubana");
+
+    const list = renderToStaticMarkup(<SongPracticeList />);
+    expect(list.split('data-testid="song-dancers-chip"').length - 1).toBe(danced.length);
+    expect(list).toContain("Danced by Paolo &amp; Alina");
+
+    const song = danced[0];
+    const sheet = renderToStaticMarkup(
+      <SongPlayerMoreSheet
+        open={true}
+        onClose={() => {}}
+        segment={song.segments[0]}
+        songId={song.id}
+        songStyle={song.style}
+        videoDancers={song.videoDancers}
+        role="leader"
+        latencyOffsetSeconds={0}
+        onChangeLatency={() => {}}
+        mode="learn"
+        onChangeMode={() => {}}
+        leadInSeconds={0}
+        onChangeLeadIn={() => {}}
+        hapticsEnabled={null}
+        onChangeHaptics={() => {}}
+      />
+    );
+    expect(sheet).toContain("In the video");
+    expect(sheet).toContain("at the World Latin Congress");
+  });
+
+  it("joins dancer names the way people say them", () => {
+    expect(joinDancerNames(["Paolo"])).toBe("Paolo");
+    expect(joinDancerNames(["Paolo", "Alina"])).toBe("Paolo & Alina");
+    expect(joinDancerNames(["Ana", "Leo", "Mia"])).toBe("Ana, Leo & Mia");
   });
 
   it("renders SectionMovesList with accessible summary toggle focus rings", () => {

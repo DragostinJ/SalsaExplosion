@@ -4,18 +4,19 @@ import { cn } from "@/lib/utils";
 
 /** One poster ink per move family (with the text colour that reads on it) */
 export const CATEGORY_INK: Record<MoveCategory, { bg: string; text: string; cell: string }> = {
-  "Casino figure": { bg: "bg-poster-teal", text: "text-ink", cell: "bg-ink" },
-  "Rueda call": { bg: "bg-poster-mustard", text: "text-ink", cell: "bg-ink" },
-  "Shine / suelta": { bg: "bg-poster-pink", text: "text-ink", cell: "bg-ink" },
-  "Body movement": { bg: "bg-ink", text: "text-paper", cell: "bg-paper" },
-  Rumba: { bg: "bg-poster-red", text: "text-ink", cell: "bg-ink" },
-  Son: { bg: "bg-poster-blue", text: "text-paper", cell: "bg-paper" },
-  Reparto: { bg: "bg-ink", text: "text-paper", cell: "bg-paper" },
-  "Afro-Cuban Orishas": { bg: "bg-poster-plum", text: "text-paper", cell: "bg-paper" },
+  "Casino figure": { bg: "bg-poster-teal", text: "text-ink", cell: "bg-ink text-paper" },
+  "Rueda call": { bg: "bg-poster-mustard", text: "text-ink", cell: "bg-ink text-paper" },
+  "Shine / suelta": { bg: "bg-poster-pink", text: "text-ink", cell: "bg-ink text-paper" },
+  "Body movement": { bg: "bg-ink", text: "text-paper", cell: "bg-paper text-ink" },
+  Rumba: { bg: "bg-poster-red", text: "text-ink", cell: "bg-ink text-paper" },
+  Son: { bg: "bg-poster-blue", text: "text-paper", cell: "bg-paper text-ink" },
+  Reparto: { bg: "bg-ink", text: "text-paper", cell: "bg-paper text-ink" },
+  "Afro-Cuban Orishas": { bg: "bg-poster-plum", text: "text-paper", cell: "bg-paper text-ink" },
 };
 
 /**
- * The move's length as 8-count bars: steps on 1-2-3 and 5-6-7, the Cuban pauses on 4 and 8.
+ * The move's length as 8-count bars, every count numbered: filled squares are the steps (1-2-3, 5-6-7),
+ * hollow ones the Cuban pauses on 4 and 8.
  * The numbers are the dance count, not timing advice: the teacher verified the bar count.
  */
 export function CountStrip({ eightCounts, cell, className }: { eightCounts: number; cell: string; className?: string }) {
@@ -28,10 +29,10 @@ export function CountStrip({ eightCounts, cell, className }: { eightCounts: numb
               key={count}
               className={cn(
                 "flex h-6 w-5 items-center justify-center text-xs font-bold",
-                count % 4 === 0 ? "border-2 border-current opacity-60" : cn(cell, "text-transparent")
+                count % 4 === 0 ? "border-2 border-current opacity-60" : cell
               )}
             >
-              {count % 4 === 0 ? count : ""}
+              {count}
             </span>
           ))}
         </div>

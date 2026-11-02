@@ -1,10 +1,9 @@
 import Image from "next/image";
-import { MovePosterCard } from "@/components/moves/move-poster-card";
+import { MoveLibraryFilters } from "@/components/moves/move-library-filters";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, POSTER_BLOCKS, TYPE } from "@/components/poster/poster-kit";
 import { getVisibleMoves, isDraftPreviewEnabled } from "@/lib/moves/move-library";
-import { MOVE_CATEGORIES } from "@/lib/moves/move-schema";
 import { MOVE_FAMILIES } from "@/lib/site-content";
 
 export const metadata = {
@@ -18,10 +17,6 @@ export const metadata = {
 export default function MovesPage() {
   const moves = getVisibleMoves();
   const preview = isDraftPreviewEnabled();
-  const families = MOVE_CATEGORIES.map((category) => ({
-    category,
-    moves: moves.filter((move) => move.category === category),
-  })).filter((family) => family.moves.length > 0);
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-10 px-2.5 py-6 sm:px-6 lg:px-8">
@@ -45,7 +40,7 @@ export default function MovesPage() {
         </p>
       </header>
 
-      {families.length === 0 ? (
+      {moves.length === 0 ? (
         <section aria-labelledby="coming-heading" className="space-y-8">
           <div className="flex items-center gap-6 border-4 border-ink bg-poster-mustard p-6 text-ink">
             <div className="flex-1">
@@ -85,20 +80,7 @@ export default function MovesPage() {
           </ul>
         </section>
       ) : (
-        families.map((family) => (
-          <section key={family.category} aria-labelledby={`family-${family.category}`} className="space-y-4">
-            <h2 id={`family-${family.category}`} className={TYPE.section}>
-              {family.category}
-            </h2>
-            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {family.moves.map((move, index) => (
-                <li key={move.id}>
-                  <MovePosterCard move={move} number={index + 1} href={`/moves/${move.id}`} />
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))
+        <MoveLibraryFilters moves={moves} />
       )}
     </main>
   );

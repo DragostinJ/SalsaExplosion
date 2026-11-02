@@ -9,6 +9,8 @@ vi.mock("@/lib/moves/move-library", async (importOriginal) => {
   return {
     ...actual,
     getPublishedMoves: () => published,
+    // The pages read getVisibleMoves (approved moves, plus drafts only in the local preview)
+    getVisibleMoves: () => published,
     songSectionsForMove: () => [{ songId: "me-dicen-cuba", sectionId: "s4", sectionName: "Montuno 1", startTimeSeconds: 155 }],
   };
 });

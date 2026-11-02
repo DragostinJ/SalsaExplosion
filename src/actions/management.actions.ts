@@ -130,3 +130,9 @@ export async function updateClassSessionCapacityAction(
 ) {
   return roster.updateClassSessionCapacityAction(...args);
 }
+
+export async function redeemFreeClassAction(
+  ...args: Parameters<typeof roster.redeemFreeClassAction>
+) {
+  return roster.redeemFreeClassAction(...args);
+}

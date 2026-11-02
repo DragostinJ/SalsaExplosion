@@ -38,6 +38,8 @@ export interface RosterBookingItem {
   danceRole: DanceRole;
   status: BookingStatus;
   checkedInAt: string | null;
+  classCredits: number;
+  freeClassRedeemed?: boolean;
 }
 
 export interface ClassRosterSummary {

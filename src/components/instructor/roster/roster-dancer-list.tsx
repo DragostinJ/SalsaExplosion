@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { BookingStatus, DanceRole } from "@prisma/client";
 import { CheckCircle2, Search, UserCheck, X, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +18,7 @@ interface RosterDancerListProps {
   onFilterChange: (filter: "ALL" | "AWAITING" | "CHECKED_IN" | "LEAD" | "FOLLOW") => void;
   onCheckInAllRemaining: () => void;
   onToggleCheckIn: (classId: string, bookingId: string, currentlyAttended: boolean) => void;
+  onRedeemFreeClass?: (bookingId: string) => void;
 }
 
 export function RosterDancerList({
@@ -30,7 +32,9 @@ export function RosterDancerList({
   onFilterChange,
   onCheckInAllRemaining,
   onToggleCheckIn,
+  onRedeemFreeClass,
 }: RosterDancerListProps) {
+  const [confirmingBookingId, setConfirmingBookingId] = useState<string | null>(null);
   return (
     <div className="space-y-3 pt-2">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-bold uppercase tracking-wider text-muted-foreground pb-1">
@@ -190,7 +194,70 @@ export function RosterDancerList({
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                {booking.freeClassRedeemed ? (
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    disabled
+                    data-testid={`free-class-redeemed-${booking.id}`}
+                    className="border-2 border-ink/40 bg-paper text-ink/70 font-bold text-xs min-h-[40px] rounded-none opacity-80"
+                  >
+                    Free class used ✓
+                  </Button>
+                ) : (booking.classCredits ?? 0) > 0 ? (
+                  confirmingBookingId === booking.id ? (
+                    <div className="flex items-center gap-1.5 border-2 border-ink bg-poster-mustard p-1 shadow-[2px_2px_0_var(--color-ink)]">
+                      <span className="text-xs font-bold text-ink px-1">
+                        Use 1 free class for {booking.firstName}?
+                      </span>
+                      <Button
+                        type="button"
+                        size="sm"
+                        disabled={isPending}
+                        data-testid={`confirm-redeem-${booking.id}`}
+                        onClick={() => {
+                          onRedeemFreeClass?.(booking.id);
+                          setConfirmingBookingId(null);
+                        }}
+                        className="bg-poster-red hover:bg-ink text-ink hover:text-paper border-2 border-ink font-black text-xs min-h-[36px] px-2 rounded-none"
+                      >
+                        Confirm
+                      </Button>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        disabled={isPending}
+                        onClick={() => setConfirmingBookingId(null)}
+                        className="bg-paper hover:bg-muted text-ink border-2 border-ink font-bold text-xs min-h-[36px] px-2 rounded-none"
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1.5">
+                      <Badge
+                        variant="outline"
+                        className="border-2 border-ink bg-poster-mustard text-ink font-bold text-xs px-2 py-0.5 rounded-none"
+                      >
+                        Free class: {booking.classCredits}
+                      </Badge>
+                      <Button
+                        type="button"
+                        size="sm"
+                        disabled={isPending}
+                        data-testid={`use-free-class-btn-${booking.id}`}
+                        onClick={() => setConfirmingBookingId(booking.id)}
+                        className="border-2 border-ink bg-poster-mustard hover:bg-ink text-ink hover:text-paper font-bold text-xs min-h-[40px] px-3 shadow-[2px_2px_0_var(--color-ink)] rounded-none"
+                      >
+                        Use free class
+                      </Button>
+                    </div>
+                  )
+                ) : null}
+
                 <Button
                   type="button"
                   size="sm"

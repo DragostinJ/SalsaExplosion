@@ -40,6 +40,7 @@ export default async function InstructorRosterPage() {
               lastName: true,
               email: true,
               currentLevel: true,
+              classCredits: true,
             },
           },
         },
@@ -47,6 +48,21 @@ export default async function InstructorRosterPage() {
       },
     },
   });
+
+  const allBookingIds = classes.flatMap((cls) => cls.bookings.map((b) => b.id));
+  const redeemedLedgers =
+    allBookingIds.length > 0
+      ? await prisma.creditLedger.findMany({
+          where: {
+            bookingId: { in: allBookingIds },
+            description: { startsWith: "Free class used at the door" },
+          },
+          select: { bookingId: true },
+        })
+      : [];
+  const redeemedBookingIds = new Set(
+    redeemedLedgers.map((l) => l.bookingId).filter((id): id is string => Boolean(id))
+  );
 
   const serializedClasses: ClassRosterSummary[] = classes.map((cls) => {
     const confirmedLeads = cls.bookings.filter(
@@ -95,6 +111,8 @@ export default async function InstructorRosterPage() {
         danceRole: b.danceRole,
         status: b.status,
         checkedInAt: b.checkedInAt ? b.checkedInAt.toISOString() : null,
+        classCredits: b.user.classCredits,
+        freeClassRedeemed: redeemedBookingIds.has(b.id),
       })),
     };
   });

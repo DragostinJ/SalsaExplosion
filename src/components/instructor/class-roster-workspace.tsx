@@ -11,7 +11,10 @@ import {
   Printer,
   Users,
 } from "lucide-react";
-import { toggleBookingCheckInAction } from "@/actions/management.actions";
+import {
+  toggleBookingCheckInAction,
+  redeemFreeClassAction,
+} from "@/actions/management.actions";
 import { attachClassRecapAction } from "@/actions/recap.actions";
 import { ClassRosterSummary } from "@/lib/constants/management";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
@@ -120,6 +123,36 @@ export function ClassRosterWorkspace({
           })
         );
         setStatusMessage(res.message);
+      }
+    });
+  };
+
+  const handleRedeemFreeClass = (bookingId: string) => {
+    if (!activeClass) return;
+    setStatusMessage(null);
+    startTransition(async () => {
+      const res = await redeemFreeClassAction({ bookingId });
+      if (res.success) {
+        setClasses((prev) =>
+          prev.map((cls) => {
+            if (cls.id !== activeClass.id) return cls;
+            return {
+              ...cls,
+              bookings: cls.bookings.map((b) =>
+                b.id === bookingId
+                  ? {
+                      ...b,
+                      classCredits: Math.max(0, b.classCredits - 1),
+                      freeClassRedeemed: true,
+                    }
+                  : b
+              ),
+            };
+          })
+        );
+        setStatusMessage(res.message);
+      } else {
+        setStatusMessage(res.error.message);
       }
     });
   };
@@ -423,6 +456,7 @@ export function ClassRosterWorkspace({
               onFilterChange={setFilterRole}
               onCheckInAllRemaining={handleCheckInAllRemaining}
               onToggleCheckIn={handleToggleCheckIn}
+              onRedeemFreeClass={handleRedeemFreeClass}
             />
           </CardContent>
         </Card>

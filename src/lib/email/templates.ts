@@ -23,6 +23,9 @@ const wrap = (body: string, footer: string) =>
 const link = (href: string, label: string) =>
   `<a href="${escapeHtml(href)}" style="color:#E8462F;font-weight:bold">${escapeHtml(label)}</a>`;
 
+export const button = (href: string, label: string) =>
+  `<a href="${escapeHtml(href)}" style="display:inline-block;padding:8px 16px;background:#E8462F;color:#161311;font-weight:bold;text-decoration:none">${escapeHtml(label)}</a>`;
+
 export interface ClassReminderInput {
   firstName: string;
   classTitle: string;
@@ -144,7 +147,7 @@ export function ownerDigestEmail(input: OwnerDigestInput) {
             .join("") +
           `</ol>`
         : "") +
-      `<p style="font-size:14px">${link(`${app}/admin/analytics`, "Open full analytics")}</p>`,
+      `<p style="font-size:14px;margin-top:24px">${button(`${app}/admin/analytics`, "Open full analytics")}</p>`,
     "Sent every Monday to the studio admins (ADMIN_EMAILS)."
   );
 

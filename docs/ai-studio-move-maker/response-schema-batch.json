@@ -1,0 +1,227 @@
+{
+  "type": "object",
+  "properties": {
+    "moves": {
+      "type": "array",
+      "description": "One complete entry per move requested, in the order requested",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique kebab-case identifier, e.g. \"enchufla-doble\" or \"setenta-con-alarde\""
+          },
+          "name": {
+            "type": "string",
+            "description": "Move name as used in class or social dancing, e.g. \"Enchufla Doble\""
+          },
+          "spanishName": {
+            "type": "string",
+            "description": "Authentic Spanish name or phrase, e.g. \"Enchúfla Doble\""
+          },
+          "category": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "Casino figure",
+              "Rueda call",
+              "Shine / suelta",
+              "Body movement",
+              "Rumba",
+              "Son",
+              "Reparto",
+              "Afro-Cuban Orishas"
+            ],
+            "description": "Canonical dance category"
+          },
+          "level": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "Beginner",
+              "Improver",
+              "Intermediate",
+              "Advanced"
+            ],
+            "description": "Curriculum level"
+          },
+          "eightCounts": {
+            "type": "integer",
+            "description": "How many 8-counts the complete figure takes (minimum 1, usually 1 or 2)"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Concise 1-2 sentence overview of the movement, circular trajectory, and connection"
+          },
+          "leaderSteps": {
+            "type": "array",
+            "description": "Step-by-step breakdown for the leader",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "counts": {
+                  "type": "string",
+                  "description": "Dance count range, e.g. \"1-3\", \"5-7\", or \"1-8\""
+                },
+                "text": {
+                  "type": "string",
+                  "description": "Clear, biomechanical breakdown of what this partner does during these counts"
+                }
+              },
+              "required": [
+                "counts",
+                "text"
+              ],
+              "propertyOrdering": [
+                "counts",
+                "text"
+              ]
+            }
+          },
+          "followerSteps": {
+            "type": "array",
+            "description": "Step-by-step breakdown for the follower",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "counts": {
+                  "type": "string",
+                  "description": "Dance count range, e.g. \"1-3\", \"5-7\", or \"1-8\""
+                },
+                "text": {
+                  "type": "string",
+                  "description": "Clear, biomechanical breakdown of what this partner does during these counts"
+                }
+              },
+              "required": [
+                "counts",
+                "text"
+              ],
+              "propertyOrdering": [
+                "counts",
+                "text"
+              ]
+            }
+          },
+          "commonMistakes": {
+            "type": "array",
+            "description": "Frequent errors made by social dancers (leading with arms, linear pulling, posture)",
+            "items": {
+              "type": "string"
+            }
+          },
+          "prerequisites": {
+            "type": "array",
+            "description": "Kebab-case move IDs that dancers should master before this figure",
+            "items": {
+              "type": "string"
+            }
+          },
+          "variations": {
+            "type": "array",
+            "description": "Common variations or embellishments of this move",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ruedaCall": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "none",
+              "Guapea",
+              "Dile Que No",
+              "Enchufla",
+              "Enchufla Doble",
+              "Dame",
+              "Dame Dos",
+              "Exhíbela",
+              "Prima",
+              "Setenta",
+              "Setenta Complicado",
+              "Vacílala",
+              "Sombrero",
+              "Kentucky",
+              "Paséala",
+              "Montana",
+              "Dedo",
+              "El Uno",
+              "El Dos",
+              "Siete",
+              "Siete Loco",
+              "Coca-Cola",
+              "Bayamo",
+              "Abanico",
+              "Candado",
+              "Tarro",
+              "Rodeo",
+              "Al Medio",
+              "Pa'Fuera"
+            ],
+            "description": "Canonical Rueda call name if shouted in Rueda de Casino, or \"none\""
+          },
+          "curriculumId": {
+            "type": "string",
+            "description": "Curriculum ID if this maps to a 2027 curriculum item (e.g. \"beg-pw-3\"), otherwise empty string"
+          },
+          "tags": {
+            "type": "array",
+            "description": "Descriptive tags, e.g. ['turn', 'hammerlock', 'advanced-wrap']",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "string",
+            "description": "Teacher / mentor notes, including any safety warnings or points of uncertainty"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "spanishName",
+          "category",
+          "level",
+          "eightCounts",
+          "summary",
+          "leaderSteps",
+          "followerSteps",
+          "commonMistakes",
+          "prerequisites",
+          "variations",
+          "ruedaCall",
+          "curriculumId",
+          "tags",
+          "notes"
+        ],
+        "propertyOrdering": [
+          "id",
+          "name",
+          "spanishName",
+          "category",
+          "level",
+          "eightCounts",
+          "summary",
+          "leaderSteps",
+          "followerSteps",
+          "commonMistakes",
+          "prerequisites",
+          "variations",
+          "ruedaCall",
+          "curriculumId",
+          "tags",
+          "notes"
+        ]
+      }
+    }
+  },
+  "required": [
+    "moves"
+  ],
+  "propertyOrdering": [
+    "moves"
+  ]
+}

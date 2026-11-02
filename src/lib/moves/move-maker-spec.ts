@@ -150,3 +150,23 @@ export function buildMoveMakerResponseSchema(): JsonSchema {
     propertyOrdering: rootKeys,
   };
 }
+
+/**
+ * The same move entry wrapped as { moves: [...] }, so one AI Studio run can draft a batch.
+ * The importer at /instructor/moves/import accepts this shape as it is.
+ */
+export function buildMoveMakerBatchResponseSchema(): JsonSchema {
+  return {
+    type: "object",
+    properties: {
+      moves: {
+        type: "array",
+        description: "One complete entry per move requested, in the order requested",
+        minItems: 1,
+        items: buildMoveMakerResponseSchema(),
+      },
+    },
+    required: ["moves"],
+    propertyOrdering: ["moves"],
+  };
+}

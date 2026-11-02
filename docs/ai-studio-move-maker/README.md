@@ -21,7 +21,7 @@ flowchart LR
 1. Open [Google AI Studio](https://aistudio.google.com/) -> Playground.
 2. Select **Gemini 2.5 Pro** or **Gemini 4 Argon**.
 3. Set **System instructions** to the contents of [`system-instructions.txt`](system-instructions.txt).
-4. Turn **Structured outputs** ON and paste [`response-schema.json`](response-schema.json).
+4. Turn **Structured outputs** ON and paste [`response-schema.json`](response-schema.json) (one move per run), or [`response-schema-batch.json`](response-schema-batch.json) to draft a batch as `{ "moves": [...] }`. The batch list for the whole library is in [`docs/move-library/gemini-move-library.md`](../move-library/gemini-move-library.md).
 5. Turn search/code tools OFF.
 6. Prompt Gemini with the move name, level, and category (e.g., *"Draft the Cuban dance entry for 'Enchufla Doble'"*).
 7. Copy the structured JSON response.

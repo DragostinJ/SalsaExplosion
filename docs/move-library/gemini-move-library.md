@@ -308,6 +308,18 @@ Category for all: "Afro-Cuban Orishas". Level for all: "Intermediate".
 6. Oggún: his own entry, beyond the existing introduction
 ```
 
+### Batch 17: Timba footwork and breaks (added 2026-11-02)
+
+These came from watching Paolo & Alina dance Homenaje a la Música Cubana. They were the only things they danced that the library doesn't have.
+
+```text
+Use the category given for each.
+1. Tacón-punta: heel-toe timba footwork danced solo on the brass accents (Shine / suelta, Intermediate). Start notes with "UNSURE:" if the name or counts vary between teachers.
+2. Freezing on a band break: stopping dead on the break, holding, and coming back in on the 1 (Body movement, Improver)
+```
+
+Don't draft Tornillo or Figura 85 yet. They are the two "not in our library" test clips in [the Move Mapper gold set](../ai-studio-move-mapper/gold-set.md). Swap them for two other missing figures there first, then draft them.
+
 ## 5. Already in the library (don't draft again)
 
 Guapea · Dile que no · Enchufla (simple and doble) · Prima (Adiós) · Exhíbela (Sácala) · Paso básico, lateral y atrás · Rueda level 1 essentials · Finding beat 1 and the conga tumbao · Setenta · Setenta complicado · Vacílala · Sombrero · Kentucky · Paséala · Rumba guaguancó basics and the vacunao · Son contratiempo · Son clave direction · Montaña · Dedo, El uno and El dos · Siete and Siete loco · Coca-Cola and Bayamo · Despelote · Orishas intro (Eleguá, Yemayá, Oggún) · Timba anatomy · Micro-leading · Rhythm reversals · Tembleque · Rumba Columbia and orishas (Changó, Ochún) · Rueda cruzada and Pa'fuera · Rumba clave syncopation.

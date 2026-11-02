@@ -12,6 +12,7 @@ import * as waitlist from "./management/waitlist.actions";
 import * as qa from "./management/qa.actions";
 import * as events from "./management/events.actions";
 import * as roster from "./management/roster.actions";
+import * as redemption from "./management/redemption.actions";
 
 export async function toggleBookingCheckInAction(
   ...args: Parameters<typeof checkin.toggleBookingCheckInAction>
@@ -132,7 +133,7 @@ export async function updateClassSessionCapacityAction(
 }
 
 export async function redeemFreeClassAction(
-  ...args: Parameters<typeof roster.redeemFreeClassAction>
+  ...args: Parameters<typeof redemption.redeemFreeClassAction>
 ) {
-  return roster.redeemFreeClassAction(...args);
+  return redemption.redeemFreeClassAction(...args);
 }

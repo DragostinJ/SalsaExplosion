@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Role, TransactionType, AuditAction } from "@prisma/client";
-import { redeemFreeClassAction } from "@/actions/management/roster.actions";
+import { redeemFreeClassAction } from "@/actions/management/redemption.actions";
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { prisma } from "@/lib/prisma";
 import { recordAuditLog } from "@/lib/audit-log";
@@ -116,8 +116,9 @@ describe("redeemFreeClassAction: Door Free Class Redemption", () => {
       user: { updateMany: vi.fn(), findUniqueOrThrow: vi.fn() },
     };
 
-    vi.mocked(prisma.$transaction).mockImplementation(async (cb: (tx: typeof mockTx) => Promise<unknown>) => {
-      return cb(mockTx);
+    vi.mocked(prisma.$transaction).mockImplementation(async (callback) => {
+      const cb = callback as unknown as (tx: unknown) => Promise<unknown>;
+      return cb(mockTx) as never;
     });
 
     const res = await redeemFreeClassAction({ bookingId: "booking_123" });
@@ -147,8 +148,9 @@ describe("redeemFreeClassAction: Door Free Class Redemption", () => {
       user: { updateMany: vi.fn(), findUniqueOrThrow: vi.fn() },
     };
 
-    vi.mocked(prisma.$transaction).mockImplementation(async (cb: (tx: typeof mockTx) => Promise<unknown>) => {
-      return cb(mockTx);
+    vi.mocked(prisma.$transaction).mockImplementation(async (callback) => {
+      const cb = callback as unknown as (tx: unknown) => Promise<unknown>;
+      return cb(mockTx) as never;
     });
 
     const res = await redeemFreeClassAction({ bookingId: "booking_123" });
@@ -176,8 +178,9 @@ describe("redeemFreeClassAction: Door Free Class Redemption", () => {
       user: { updateMany: vi.fn(), findUniqueOrThrow: vi.fn() },
     };
 
-    vi.mocked(prisma.$transaction).mockImplementation(async (cb: (tx: typeof mockTx) => Promise<unknown>) => {
-      return cb(mockTx);
+    vi.mocked(prisma.$transaction).mockImplementation(async (callback) => {
+      const cb = callback as unknown as (tx: unknown) => Promise<unknown>;
+      return cb(mockTx) as never;
     });
 
     const res = await redeemFreeClassAction({ bookingId: "booking_123" });
@@ -211,8 +214,9 @@ describe("redeemFreeClassAction: Door Free Class Redemption", () => {
       },
     };
 
-    vi.mocked(prisma.$transaction).mockImplementation(async (cb: (tx: typeof mockTx) => Promise<unknown>) => {
-      return cb(mockTx);
+    vi.mocked(prisma.$transaction).mockImplementation(async (callback) => {
+      const cb = callback as unknown as (tx: unknown) => Promise<unknown>;
+      return cb(mockTx) as never;
     });
 
     const res = await redeemFreeClassAction({ bookingId: "booking_123" });

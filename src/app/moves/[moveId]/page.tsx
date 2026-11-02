@@ -8,6 +8,7 @@ import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { getVisibleMoves, isDraftPreviewEnabled, songSectionsForMove } from "@/lib/moves/move-library";
 import type { MoveStep } from "@/lib/moves/move-schema";
 import { formatSongTime } from "@/lib/music/song-timing";
+import { buildMoveJsonLd, jsonLdHtml } from "@/lib/seo/move-jsonld";
 import { displaySongTitle } from "@/lib/music/song-style";
 import { cn } from "@/lib/utils";
 
@@ -69,6 +70,7 @@ export default async function MovePage({ params }: MovePageProps) {
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-6xl space-y-10 px-2.5 py-6 sm:px-6">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(buildMoveJsonLd(move)) }} />
       <CancionesTabs current="/moves" />
       {isDraftPreviewEnabled() && (
         <p role="note" className="border-4 border-ink bg-poster-mustard px-4 py-3 text-sm font-bold text-ink">

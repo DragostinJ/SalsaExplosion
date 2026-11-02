@@ -88,7 +88,7 @@ export default async function EventsDirectoryPage() {
 
             <div>
               <p className={KICKER}>Salsa Explosion Congresses &amp; Masterclasses</p>
-              <h1 className="mt-2 text-4xl leading-[0.92] text-ink sm:text-5xl">
+              <h1 className={`mt-2 text-ink ${TYPE.section}`}>
                 DANZA! 2026 | 2027 <span className="text-accent-red">Funciones</span>
               </h1>
               <p className="mt-2 text-sm font-semibold text-ink">

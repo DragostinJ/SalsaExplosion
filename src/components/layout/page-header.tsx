@@ -111,7 +111,7 @@ export function PageHeader({
         )}
 
         <div className="mt-3 sm:mt-4 space-y-2.5 sm:space-y-3 max-w-3xl">
-          <h1 className="text-4xl sm:text-5xl text-ivory leading-[0.92]">
+          <h1 className="text-5xl leading-[0.92] text-ivory md:text-7xl">
             {title}
             {effectiveHighlight && (
               <>

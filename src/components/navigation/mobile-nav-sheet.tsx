@@ -5,27 +5,9 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Role } from "@prisma/client";
-import {
-  X,
-  CalendarDays,
-  Sparkles,
-  CreditCard,
-  Award,
-  MapPin,
-  Compass,
-  Users,
-  ClipboardCheck,
-  QrCode,
-  BarChart3,
-  CalendarPlus,
-  ShieldCheck,
-  Flame,
-  UserCheck,
-  Music,
-  HelpCircle,
-  ClipboardList,
-} from "lucide-react";
+import { X, Compass, Users, ShieldCheck, Flame, UserCheck, HelpCircle } from "lucide-react";
 import { triggerStudioTutorial } from "@/components/onboarding/interactive-tutorial-modal";
+import { dancerLinks, EXPLORE_LINKS, TEACHER_LINKS, OWNER_LINKS } from "@/components/navigation/mobile-nav-links";
 
 interface MobileNavSheetProps {
   isOpen: boolean;
@@ -110,58 +92,8 @@ export function MobileNavSheet({
 
   if (!isOpen || !mounted || typeof document === "undefined") return null;
 
-  // Public explore and community links
-  const exploreLinks = [
-    { href: "/music", label: "Cuban Music & Playlists", icon: Music },
-    { href: "/how-it-works", label: "How It Works", icon: HelpCircle },
-    { href: "/about", label: "About Maestro Enrique", icon: Compass },
-  ];
-
-  // Base public links available to everyone
-  const publicLinks = [
-    { href: "/classes", label: "Schedule & Booking", icon: CalendarDays },
-    { href: "/venues", label: "Bournemouth Venues", icon: MapPin },
-    { href: "/rueda", label: "Rueda Call Dictionary", icon: Users },
-    { href: "/private-lessons", label: "1-on-1 Private Lessons", icon: Flame },
-    { href: "/events", label: "Guest Festivals & Congress", icon: Sparkles },
-    { href: "/pricing", label: "Prices (Pay at the Door)", icon: CreditCard },
-  ];
-
-  // Member-only links shown only when authenticated
-  const memberOnlyLinks = [
-    { href: "/dashboard/wallet", label: "Receipts & History", icon: QrCode },
-    { href: "/dashboard/progression", label: "Syllabus Progression", icon: Award },
-  ];
-
-  // If role is present (user is signed in), include full member tools
-  const coreLinks = role
-    ? [
-        publicLinks[0], // Schedule & Booking
-        memberOnlyLinks[0], // Wallet & QR Passes
-        publicLinks[1], // Venues
-        publicLinks[2], // Rueda Call Dictionary
-        memberOnlyLinks[1], // Progression
-        memberOnlyLinks[2], // Recaps
-        publicLinks[3], // Private Lessons
-        publicLinks[4], // Events
-        publicLinks[5], // Passes
-      ]
-    : publicLinks;
-
-  const teacherLinks = [
-    { href: "/instructor/ai-studio", label: "AI Studio & Copilot", icon: Sparkles },
-    { href: "/instructor/students", label: "Student Roster & Notes", icon: Users },
-    { href: "/instructor/submissions", label: "Video Grading Queue", icon: ClipboardCheck },
-    { href: "/instructor/roster", label: "Live QR Class Check-In", icon: QrCode },
-  ];
-
-  const ownerLinks = [
-    { href: "/instructor/ai-studio", label: "AI Studio & Event Importer", icon: Sparkles },
-    { href: "/admin/operations", label: "Studio Desk Operations", icon: ClipboardList },
-    { href: "/admin/analytics", label: "Executive Analytics", icon: BarChart3 },
-    { href: "/admin/classes", label: "Schedule Class Sessions", icon: CalendarPlus },
-    { href: "/admin/events", label: "Congress & Party Admin", icon: ShieldCheck },
-  ];
+  // A signed-in user (role present) also gets their member pages
+  const coreLinks = dancerLinks(Boolean(role));
 
   return createPortal(
     <div
@@ -285,7 +217,7 @@ export function MobileNavSheet({
               <span>Explore & Community</span>
             </div>
             <nav className="space-y-1">
-              {exploreLinks.map((item) => {
+              {EXPLORE_LINKS.map((item) => {
                 const Icon = item.icon;
                 const isActive = pathname.startsWith(item.href);
                 return (
@@ -315,7 +247,7 @@ export function MobileNavSheet({
                 <span>Teacher Workspace</span>
               </div>
               <nav className="space-y-1">
-                {teacherLinks.map((item) => {
+                {TEACHER_LINKS.map((item) => {
                   const Icon = item.icon;
                   const isActive = pathname.startsWith(item.href);
                   return (
@@ -346,7 +278,7 @@ export function MobileNavSheet({
                 <span>Owner & Studio Admin</span>
               </div>
               <nav className="space-y-1">
-                {ownerLinks.map((item) => {
+                {OWNER_LINKS.map((item) => {
                   const Icon = item.icon;
                   const isActive = pathname.startsWith(item.href);
                   return (

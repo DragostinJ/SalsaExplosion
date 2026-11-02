@@ -50,3 +50,23 @@ describe("class-night poster songs", () => {
     await expect(classNightSongs(new Date("2026-11-05T10:00:00Z"))).resolves.toEqual([]);
   });
 });
+
+describe("the next class night for the home page", () => {
+  it("is today on a Thursday or Sunday, otherwise the nearest of the two", async () => {
+    const { nextClassNightAny } = await import("@/lib/cartel");
+    const day = (d: Date) => new Intl.DateTimeFormat("en-GB", { weekday: "short", timeZone: "Europe/London" }).format(d);
+    expect(day(nextClassNightAny(new Date("2026-11-05T09:00:00Z")))).toBe("Thu"); // Thursday itself
+    expect(day(nextClassNightAny(new Date("2026-11-06T09:00:00Z")))).toBe("Sun"); // Friday → Sunday
+    expect(day(nextClassNightAny(new Date("2026-11-09T09:00:00Z")))).toBe("Thu"); // Monday → Thursday
+  });
+
+  it("links the songs by id as well as title", async () => {
+    vi.resetModules();
+    const findMany = vi.fn().mockResolvedValue([{ practiceSongIds: ["me-dicen-cuba"] }]);
+    vi.doMock("@/lib/prisma", () => ({ prisma: { classSession: { findMany } } }));
+    const { classNightSongList } = await import("@/lib/cartel");
+    await expect(classNightSongList(new Date("2026-11-05T10:00:00Z"))).resolves.toEqual([
+      { id: "me-dicen-cuba", title: "Me Dicen Cuba" },
+    ]);
+  });
+});

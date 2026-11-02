@@ -17,7 +17,11 @@ vi.mock("@/lib/prisma", () => ({
 
 import { getOrProvisionCurrentUser } from "@/lib/auth-user";
 import { prisma } from "@/lib/prisma";
-import { getMySongProgressAction, setSongSectionMasteredAction } from "@/actions/song-progress.actions";
+import {
+  getMyProgressSummaryAction,
+  getMySongProgressAction,
+  setSongSectionMasteredAction,
+} from "@/actions/song-progress.actions";
 
 function user(id: string) {
   return {
@@ -96,5 +100,30 @@ describe("song section progress actions", () => {
     expect(result.success).toBe(false);
     if (!result.success) expect(result.error.code).toBe("SERVICE_UNAVAILABLE");
     expect(prisma.songSectionProgress.upsert).not.toHaveBeenCalled();
+  });
+});
+
+describe("song list progress badges", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("gives signed-out visitors an empty map without touching the database", async () => {
+    vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(null);
+    await expect(getMyProgressSummaryAction()).resolves.toEqual({});
+    expect(prisma.songSectionProgress.findMany).not.toHaveBeenCalled();
+  });
+
+  it("counts only the dancer's own rows, and only sections that still exist", async () => {
+    vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(user("dancer_1"));
+    vi.mocked(prisma.songSectionProgress.findMany).mockResolvedValue([
+      { songId: "me-dicen-cuba", sectionId: "mdc-seg-2" },
+      { songId: "me-dicen-cuba", sectionId: "mdc-seg-3" },
+      { songId: "me-dicen-cuba", sectionId: "an-old-section-id" },
+      { songId: "not-a-song", sectionId: "x" },
+    ] as never);
+
+    await expect(getMyProgressSummaryAction()).resolves.toEqual({ "me-dicen-cuba": 2 });
+    expect(vi.mocked(prisma.songSectionProgress.findMany).mock.calls[0][0]).toMatchObject({ where: { userId: "dancer_1" } });
   });
 });

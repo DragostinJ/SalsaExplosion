@@ -15,6 +15,7 @@ import {
   halftone,
 } from "@/components/poster/poster-kit";
 import { upcomingCanonicalEvents } from "@/lib/academy-data";
+import { classNightSongList, nextClassNightAny, spanishDate } from "@/lib/cartel";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import {
   DOOR_PRICING,
@@ -51,9 +52,12 @@ const FRIEZE = [
 /** Caption inks that read on the paper (mustard doesn't) */
 const FRIEZE_INKS = ["text-poster-red", "text-poster-teal", "text-ink", "text-poster-blue"];
 
-export default function Home() {
+export default async function Home() {
   const events = upcomingCanonicalEvents().slice(0, 3);
   const legend = gearsIn(FEATURED_SONG);
+  // The songs the teachers picked for the next class night: a reason to practise before coming
+  const classNight = nextClassNightAny();
+  const classSongs = await classNightSongList(classNight);
 
   return (
     <div className="flex min-h-screen flex-col text-ink">
@@ -143,6 +147,32 @@ export default function Home() {
             </figure>
           ))}
         </section>
+
+        {/* THIS WEEK'S CLASS SONGS: only when a teacher attached songs to the next class night */}
+        {classSongs.length > 0 && (
+          <section aria-labelledby="class-songs-heading" className="theme-ink bg-canvas px-4 py-10 text-ivory md:px-10">
+            <div className="mx-auto flex max-w-7xl flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className={KICKER}>Esta semana en clase · {spanishDate(classNight)}</p>
+                <h2 id="class-songs-heading" className={`mt-3 ${TYPE.section}`}>
+                  Practica las canciones
+                </h2>
+                <p className="mt-2 max-w-xl font-medium">
+                  The teachers will dance to these on the night. Learn what happens in each section before you come.
+                </p>
+              </div>
+              <ul className="flex flex-wrap gap-3">
+                {classSongs.map((song) => (
+                  <li key={song.id}>
+                    <Link href={`/music/${song.id}`} className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.mustard}`}>
+                      {song.title} →
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
 
         {/* WEEKLY SCHEDULE: the "cartelera" */}
         <section id="cartelera" className="bg-poster-mustard px-4 py-14 md:px-10 md:py-20">

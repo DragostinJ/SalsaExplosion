@@ -67,6 +67,33 @@ export async function getMySongProgressAction(rawSongId: unknown): Promise<SongP
   }
 }
 
+/**
+ * Read-only: how many sections of each song the signed-in dancer has ticked "Got it", for the
+ * badges on the song list. Only sections that still exist in the song data count (re-timed songs
+ * get new section ids). Signed-out or degraded visitors get an empty map.
+ */
+export async function getMyProgressSummaryAction(): Promise<Record<string, number>> {
+  // fallback-guard-exempt: read-only; fallback users get an empty map below
+  const user = await getOrProvisionCurrentUser();
+  if (!user || isFallbackUser(user)) return {};
+
+  try {
+    const rows = await prisma.songSectionProgress.findMany({
+      where: { userId: user.id },
+      select: { songId: true, sectionId: true },
+    });
+    const summary: Record<string, number> = {};
+    for (const row of rows) {
+      if (!isKnownSection(row.songId, row.sectionId)) continue;
+      summary[row.songId] = (summary[row.songId] ?? 0) + 1;
+    }
+    return summary;
+  } catch (err) {
+    reportError("getMyProgressSummaryAction", err);
+    return {};
+  }
+}
+
 export async function setSongSectionMasteredAction(rawInput: unknown): Promise<SongProgressActionResponse> {
   const parsed = SetMasteredSchema.safeParse(rawInput);
   if (!parsed.success || !isKnownSection(parsed.data.songId, parsed.data.sectionId)) {

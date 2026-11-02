@@ -43,11 +43,18 @@ export function spanishDate(date: Date): string {
   return new Intl.DateTimeFormat("es-ES", { weekday: "long", day: "numeric", month: "long", timeZone: LONDON }).format(date);
 }
 
+/** The next class night, Thursday or Sunday, today included (Bournemouth time). */
+export function nextClassNightAny(now: Date = new Date()): Date {
+  const thursday = nextClassNight(4, now);
+  const sunday = nextClassNight(0, now);
+  return thursday.getTime() <= sunday.getTime() ? thursday : sunday;
+}
+
 /**
  * Practice-player songs the teachers attached to that night's classes, in the order they were
- * picked (at most `limit`). The poster still renders without them if the database is down.
+ * picked (at most `limit`), as ids and display titles. Empty if the database is down.
  */
-export async function classNightSongs(night: Date, limit = 3): Promise<string[]> {
+export async function classNightSongList(night: Date, limit = 3): Promise<{ id: string; title: string }[]> {
   const day = new Intl.DateTimeFormat("en-CA", { timeZone: LONDON }).format(night); // YYYY-MM-DD
   try {
     // Classes run in the evening, so 12:00-23:59 UTC covers the London night in GMT and BST
@@ -61,10 +68,15 @@ export async function classNightSongs(night: Date, limit = 3): Promise<string[]>
       .map((id) => TIMBA_SONG_ANATOMY_DATA.find((song) => song.id === id))
       .filter((song): song is (typeof TIMBA_SONG_ANATOMY_DATA)[number] => Boolean(song))
       .slice(0, limit)
-      .map((song) => displaySongTitle(song.title));
+      .map((song) => ({ id: song.id, title: displaySongTitle(song.title) }));
   } catch {
     return [];
   }
+}
+
+/** The same songs as titles only, for the posters. The poster still renders without them. */
+export async function classNightSongs(night: Date, limit = 3): Promise<string[]> {
+  return (await classNightSongList(night, limit)).map((song) => song.title);
 }
 
 /** Fonts and art for ImageResponse, read once per server instance (bundled via outputFileTracingIncludes). */

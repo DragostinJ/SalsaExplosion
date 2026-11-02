@@ -8,6 +8,7 @@ import { ScannableQrCode } from "@/components/ui/scannable-qr-code";
 import { DOOR_PRICING, VENUE_INFO } from "@/lib/academy-data";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
+import { weeklyStreak } from "@/lib/carnet-streak";
 import { reportError } from "@/lib/monitoring";
 import { prisma } from "@/lib/prisma";
 
@@ -71,6 +72,8 @@ export default async function CarnetPage() {
   }
 
   const nextMilestone = MILESTONES.find((m) => m > attendedCount);
+  // Weeks in a row with a class danced: a gentle reason to come back next Thursday or Sunday
+  const streak = weeklyStreak(attended.map((booking) => booking.classSession.startTime));
   const stamps = MILESTONES.filter((m) => m <= attendedCount);
 
   return (
@@ -90,10 +93,14 @@ export default async function CarnetPage() {
             </span>
           </h1>
           <div className="mt-8 flex items-end justify-between gap-4">
-          <dl className="grid max-w-md flex-1 grid-cols-2 gap-4 border-t-4 border-ink pt-4">
+          <dl className="grid max-w-lg flex-1 grid-cols-3 gap-4 border-t-4 border-ink pt-4">
             <div>
               <dt className="text-xs font-bold uppercase tracking-wider">Clases bailadas</dt>
               <dd className={`font-display ${TYPE.number}`}>{attendedCount}</dd>
+            </div>
+            <div>
+              <dt className="text-xs font-bold uppercase tracking-wider">Semanas seguidas</dt>
+              <dd className={`font-display ${TYPE.number}`}>{streak}</dd>
             </div>
             <div>
               <dt className="text-xs font-bold uppercase tracking-wider">Pases de fiesta</dt>

@@ -7,8 +7,8 @@ These 26 clips have a known answer: each one teaches a figure named in its title
 ## How to run it
 
 1. In the Move Mapper app (or an AI Studio chat set up as in the README), analyse each video at 8 frames per second. Long tutorials: let the segmenter cut them first.
-2. Use the header the app asks for: clip id `gold-<video id>`, the title and channel from this table, dancers "unknown", no song id.
-3. Save each answer as `<video id>.json` in one folder and run:
+2. Use the header the app asks for: the clip id, title and channel from this table, dancers "unknown", no song id.
+3. Save each answer as `<clip id>.json` in one folder and run:
 
 ```bash
 npx tsx scripts/score-move-mapper.ts path/to/folder/*.json
@@ -26,33 +26,33 @@ Other confident names are listed for information: tutorials show entries and exi
 
 ## The clips
 
-| # | Figure | Right answer | Video | Channel |
+| Clip id | Figure | Right answer | Video | Channel |
 |---|---|---|---|---|
-| 1 | Dile que no | `dile-que-no` | [Learn Cuban Salsa: Dile Que No!](https://www.youtube.com/watch?v=Jexcy9LGKjo) | Dance Papi |
-| 2 | Enchufla | `enchufla` | [Learn Cuban Salsa: Enchufla](https://www.youtube.com/watch?v=3tUcawE0Bhs) | Dance Papi |
-| 3 | Sácala (Exhíbela) | `exhibela` | [Intermediate Salsa Casino: Sácala en el Dile que No / Cuban Salsa Course 💃 Lesson 04](https://www.youtube.com/watch?v=9t6ceGBk3vA) | Salsaficion |
-| 4 | Vacílala | `vacilala` | [Vacilala - Cuban Casino Fundamental](https://www.youtube.com/watch?v=UdEYSvR7nYg) | Rumbanana Salsa Group |
-| 5 | Sombrero | `sombrero` | [Intermediate Salsa Casino: Sombrero / Cuban Salsa Course 💃 Lesson 02](https://www.youtube.com/watch?v=X0G7rMlBt3M) | Salsaficion |
-| 6 | Kentucky | `kentucky` | [Intermediate Salsa Casino: Kentucky / Cuban Salsa Course 💃 Lesson 12](https://www.youtube.com/watch?v=WjEmeSgWHg0) | Salsaficion |
-| 7 | Kentucky | `kentucky` | [KENTUCKY / Clase de Casino/Salsa cubana / Nivel intermedio.](https://www.youtube.com/watch?v=xF6MEjk1JYg) | Latino Move |
-| 8 | Candado | `candado` | [Intermediate Salsa Casino: Candado / Cuban Salsa Course 💃 Lesson 19](https://www.youtube.com/watch?v=KONXbOQDw0I) | Salsaficion |
-| 9 | Setenta (70) | `setenta` | [Intermediate Salsa Casino: 70 (Setenta) / Cuban Salsa Course 💃 Lesson 21](https://www.youtube.com/watch?v=u4M1h7SmovM) | Salsaficion |
-| 10 | Setenta (70) | `setenta` | [Cuban (Casino) Salsa - Figure Setenta (70)](https://www.youtube.com/watch?v=NWYA8LIWZng) | Jessica Montoya |
-| 11 | Setenta y Uno (71) | `setenta-y-uno` | [Setenta y Uno 💃 Salsa Casino Figures 🕺 Cuban Salsa Course](https://www.youtube.com/watch?v=Ql17KJ77-fE) | Salsaficion |
-| 12 | Figura 72 | `setenta-y-dos` | [Figura 72 Salsa Cubana (Casino) / Paso Fácil y Rápido para Principiantes](https://www.youtube.com/watch?v=GuRcwzX5HuI) | Latino Move |
-| 13 | Setenta por las manos | `setenta-por-las-manos` | [Setenta por los Manos / Rueda de Casino (Improvers Level)](https://www.youtube.com/watch?v=Bmi6Ytxd-ic) | Cuban Vibes Dance School |
-| 14 | Ochenta (80) | `ochenta` | [Cuban Salsa Moves #25 - Ochenta (80)](https://www.youtube.com/watch?v=T0hFRd-aEBA) | Salsa y Sol Dance & Yoga |
-| 15 | Ochenta (80) | `ochenta` | [Ochenta (80) / Rueda de Casino (Improvers Level)](https://www.youtube.com/watch?v=pYHYv2WTCEA) | Cuban Vibes Dance School |
-| 16 | Figura 84 | `ochenta-y-cuatro` | [¡Aprende la FIGURA 84 de Salsa Cubana/Casino paso a paso! 💃🕺/ Ideal para Principiantes e Intermedios](https://www.youtube.com/watch?v=yfExmoHs55s) | Latino Move |
-| 17 | Siete Loco | `siete-y-siete-loco` | [Cuban Salsa Moves #46   Siete Loco by Salsa y Sol Winchester](https://www.youtube.com/watch?v=yJ8sskO-Rhs) | Salsa y Sol Dance & Yoga |
-| 18 | Siete Loco | `siete-y-siete-loco` | [Siete Loco Salsa Casino - Siete Loco Steps, Move, Figura, Turn Demo (7 Loco, Salsa Cubana)](https://www.youtube.com/watch?v=4dBlNnPN0hY) | Casino Con El Pelon |
-| 19 | Coca-Cola | `coca-cola-y-bayamo` | [Salsa Cubana Figures - Coca-Cola](https://www.youtube.com/watch?v=1CIDrXsqIQQ) | SalsaValeTodo |
-| 20 | Abanico | `abanico` | [Salsa Cubana Figures - Abanico](https://www.youtube.com/watch?v=CAzsMHf-At8) | SalsaValeTodo |
-| 21 | Juana la Cubana | `juana-la-cubana` | [Juana la Cubana 💃 Salsa Casino Figures 🕺 Cuban Salsa Course](https://www.youtube.com/watch?v=4tDKLXTxrto) | Salsaficion |
-| 22 | Guaguancó basics | `rumba-guaguanco-basics` | [BASICS OF GUAGUANCO / Cuban Rumba](https://www.youtube.com/watch?v=2FESL7iePec) | Messina Dance |
-| 23 | Son contratiempo | `son-cubano-contratiempo` | [how to dance contratiempo (son cubano)](https://www.youtube.com/watch?v=HvuqVdROT5s) | Messina Dance |
-| 24 | Despelote | `thoracic-isolation-despelote` or `bloqueo-despelote-accent` or `tembleque` | [Jorge Camaguey and Misladys. Timba & Despelote Workshop / Хорхе Камагуэй и Мисладис. Тимба)](https://www.youtube.com/watch?v=WpV1ch3BO24) | Comicucha |
-| 25 | Tornillo | **not-in-library** | [Aprende la Figura Tornillo en Salsa Cubana (Casino) / Cambios de agarre y giros.](https://www.youtube.com/watch?v=DW5DR7E64bY) | Latino Move |
-| 26 | Figura 85 | **not-in-library** | [¿CÓMO HACER PASO A PASO LA FIGURA 85 salsa cubana  con Michael & Neilys zaragozando a lo cubano](https://www.youtube.com/watch?v=ndCkYeUsVlE) | Zaragozando a lo cubano |
+| `gold-01-dile-que-no` | Dile que no | `dile-que-no` | [Learn Cuban Salsa: Dile Que No!](https://www.youtube.com/watch?v=Jexcy9LGKjo) | Dance Papi |
+| `gold-02-enchufla` | Enchufla | `enchufla` | [Learn Cuban Salsa: Enchufla](https://www.youtube.com/watch?v=3tUcawE0Bhs) | Dance Papi |
+| `gold-03-sacala-exhibela` | Sácala (Exhíbela) | `exhibela` | [Intermediate Salsa Casino: Sácala en el Dile que No / Cuban Salsa Course 💃 Lesson 04](https://www.youtube.com/watch?v=9t6ceGBk3vA) | Salsaficion |
+| `gold-04-vacilala` | Vacílala | `vacilala` | [Vacilala - Cuban Casino Fundamental](https://www.youtube.com/watch?v=UdEYSvR7nYg) | Rumbanana Salsa Group |
+| `gold-05-sombrero` | Sombrero | `sombrero` | [Intermediate Salsa Casino: Sombrero / Cuban Salsa Course 💃 Lesson 02](https://www.youtube.com/watch?v=X0G7rMlBt3M) | Salsaficion |
+| `gold-06-kentucky` | Kentucky | `kentucky` | [Intermediate Salsa Casino: Kentucky / Cuban Salsa Course 💃 Lesson 12](https://www.youtube.com/watch?v=WjEmeSgWHg0) | Salsaficion |
+| `gold-07-kentucky` | Kentucky | `kentucky` | [KENTUCKY / Clase de Casino/Salsa cubana / Nivel intermedio.](https://www.youtube.com/watch?v=xF6MEjk1JYg) | Latino Move |
+| `gold-08-candado` | Candado | `candado` | [Intermediate Salsa Casino: Candado / Cuban Salsa Course 💃 Lesson 19](https://www.youtube.com/watch?v=KONXbOQDw0I) | Salsaficion |
+| `gold-09-setenta-70` | Setenta (70) | `setenta` | [Intermediate Salsa Casino: 70 (Setenta) / Cuban Salsa Course 💃 Lesson 21](https://www.youtube.com/watch?v=u4M1h7SmovM) | Salsaficion |
+| `gold-10-setenta-70` | Setenta (70) | `setenta` | [Cuban (Casino) Salsa - Figure Setenta (70)](https://www.youtube.com/watch?v=NWYA8LIWZng) | Jessica Montoya |
+| `gold-11-setenta-y-uno-71` | Setenta y Uno (71) | `setenta-y-uno` | [Setenta y Uno 💃 Salsa Casino Figures 🕺 Cuban Salsa Course](https://www.youtube.com/watch?v=Ql17KJ77-fE) | Salsaficion |
+| `gold-12-figura-72` | Figura 72 | `setenta-y-dos` | [Figura 72 Salsa Cubana (Casino) / Paso Fácil y Rápido para Principiantes](https://www.youtube.com/watch?v=GuRcwzX5HuI) | Latino Move |
+| `gold-13-setenta-por-las-manos` | Setenta por las manos | `setenta-por-las-manos` | [Setenta por los Manos / Rueda de Casino (Improvers Level)](https://www.youtube.com/watch?v=Bmi6Ytxd-ic) | Cuban Vibes Dance School |
+| `gold-14-ochenta-80` | Ochenta (80) | `ochenta` | [Cuban Salsa Moves #25 - Ochenta (80)](https://www.youtube.com/watch?v=T0hFRd-aEBA) | Salsa y Sol Dance & Yoga |
+| `gold-15-ochenta-80` | Ochenta (80) | `ochenta` | [Ochenta (80) / Rueda de Casino (Improvers Level)](https://www.youtube.com/watch?v=pYHYv2WTCEA) | Cuban Vibes Dance School |
+| `gold-16-figura-84` | Figura 84 | `ochenta-y-cuatro` | [¡Aprende la FIGURA 84 de Salsa Cubana/Casino paso a paso! 💃🕺/ Ideal para Principiantes e Intermedios](https://www.youtube.com/watch?v=yfExmoHs55s) | Latino Move |
+| `gold-17-siete-loco` | Siete Loco | `siete-y-siete-loco` | [Cuban Salsa Moves #46   Siete Loco by Salsa y Sol Winchester](https://www.youtube.com/watch?v=yJ8sskO-Rhs) | Salsa y Sol Dance & Yoga |
+| `gold-18-siete-loco` | Siete Loco | `siete-y-siete-loco` | [Siete Loco Salsa Casino - Siete Loco Steps, Move, Figura, Turn Demo (7 Loco, Salsa Cubana)](https://www.youtube.com/watch?v=4dBlNnPN0hY) | Casino Con El Pelon |
+| `gold-19-coca-cola` | Coca-Cola | `coca-cola-y-bayamo` | [Salsa Cubana Figures - Coca-Cola](https://www.youtube.com/watch?v=1CIDrXsqIQQ) | SalsaValeTodo |
+| `gold-20-abanico` | Abanico | `abanico` | [Salsa Cubana Figures - Abanico](https://www.youtube.com/watch?v=CAzsMHf-At8) | SalsaValeTodo |
+| `gold-21-juana-la-cubana` | Juana la Cubana | `juana-la-cubana` | [Juana la Cubana 💃 Salsa Casino Figures 🕺 Cuban Salsa Course](https://www.youtube.com/watch?v=4tDKLXTxrto) | Salsaficion |
+| `gold-22-guaguanco-basics` | Guaguancó basics | `rumba-guaguanco-basics` | [BASICS OF GUAGUANCO / Cuban Rumba](https://www.youtube.com/watch?v=2FESL7iePec) | Messina Dance |
+| `gold-23-son-contratiempo` | Son contratiempo | `son-cubano-contratiempo` | [how to dance contratiempo (son cubano)](https://www.youtube.com/watch?v=HvuqVdROT5s) | Messina Dance |
+| `gold-24-despelote` | Despelote | `thoracic-isolation-despelote` or `bloqueo-despelote-accent` or `tembleque` | [Jorge Camaguey and Misladys. Timba & Despelote Workshop / Хорхе Камагуэй и Мисладис. Тимба)](https://www.youtube.com/watch?v=WpV1ch3BO24) | Comicucha |
+| `gold-25-tornillo` | Tornillo | **not-in-library** | [Aprende la Figura Tornillo en Salsa Cubana (Casino) / Cambios de agarre y giros.](https://www.youtube.com/watch?v=DW5DR7E64bY) | Latino Move |
+| `gold-26-figura-85` | Figura 85 | **not-in-library** | [¿CÓMO HACER PASO A PASO LA FIGURA 85 salsa cubana  con Michael & Neilys zaragozando a lo cubano](https://www.youtube.com/watch?v=ndCkYeUsVlE) | Zaragozando a lo cubano |
 
 These are also good candidates for the move pages' videos. A teacher still picks the clip and the start and end times at /instructor/moves.

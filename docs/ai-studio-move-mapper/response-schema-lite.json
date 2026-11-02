@@ -120,7 +120,7 @@
           },
           "mechanics": {
             "type": "string",
-            "description": "What you SEE, count by count: hand holds and changes, who turns and which way, where the hands travel, the position. Start with \"Name heard: ...\" if the video says the name."
+            "description": "What you SEE, count by count: hand holds and changes, who turns and which way, where the hands travel, the position. Start with \"Name heard: ...\" if the video says the name. 20 to 1,200 characters."
           },
           "moveIds": {
             "type": "array",
@@ -152,7 +152,7 @@
           },
           "musicalMoment": {
             "type": "string",
-            "description": "Optional: what in the music they react to, and how"
+            "description": "Optional: what in the music they react to, and how (at most 300 characters)"
           },
           "newMove": {
             "type": "object",

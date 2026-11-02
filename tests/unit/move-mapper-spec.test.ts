@@ -12,7 +12,8 @@ import {
   buildMoveMapperSegmenterSchema,
   buildMoveMapperSystemInstructions,
 } from "@/lib/moves/move-mapper-spec";
-import { buildGoldSetMarkdown, buildSongMapsMarkdown } from "@/lib/moves/move-mapper-docs";
+import { buildGoldSetMarkdown, buildSongMapsMarkdown, goldClipId } from "@/lib/moves/move-mapper-docs";
+import { KEBAB_CASE_REGEX } from "@/lib/moves/move-schema";
 import { MOVE_MAPPER_GOLD_SET } from "@/lib/moves/move-mapper-gold-set";
 import { parseScoredBreakdown, scoreAgainstGold, scoreGoldSet } from "@/lib/moves/move-mapper-score";
 
@@ -61,10 +62,12 @@ describe("Move Mapper gold set", () => {
   it("has unique, well-formed videos whose answers are real library moves", () => {
     const videoIds = MOVE_MAPPER_GOLD_SET.map((c) => c.youtubeVideoId);
     expect(new Set(videoIds).size).toBe(videoIds.length);
-    for (const clip of MOVE_MAPPER_GOLD_SET) {
+    MOVE_MAPPER_GOLD_SET.forEach((clip, index) => {
       expect(clip.youtubeVideoId).toMatch(/^[A-Za-z0-9_-]{11}$/);
+      expect(goldClipId(index, clip.figure)).toMatch(KEBAB_CASE_REGEX);
       for (const id of clip.expected) expect(library.has(id), `${id} is not in the library`).toBe(true);
-    }
+    });
+    expect(goldClipId(2, "Sácala (Exhíbela)")).toBe("gold-03-sacala-exhibela");
   });
 
   it("keeps the honesty checks honest: their figures really are missing from the library", () => {

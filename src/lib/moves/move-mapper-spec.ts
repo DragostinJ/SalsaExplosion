@@ -85,6 +85,7 @@ HOW TO WORK
    - where the hands travel (over her head, over his head, behind a back, around the neck, at the waist);
    - the position (open, closed, side by side, one behind the other).
    If someone in the video SAYS the move's name, start mechanics with "Name heard: <name>." and still describe what you see.
+   Keep mechanics between 20 and 1,200 characters (about 150 words); a long row is a sign it should be two rows.
    Only then choose moveIds.
 4. Naming:
    - moveIds come only from the catalogue below. Several ids in one row = danced one after the other, in that order.
@@ -97,7 +98,7 @@ HOW TO WORK
    - "low": you are inferring (camera cut, other dancers in the way, out of frame, frames too sparse).
    A famous move is not more likely; never give "high" to a name you did not see happen.
 6. Can't see it? Say where and why in mechanics ("his hands hidden behind her from 1:12 to 1:14") and use "low". Never fill a gap with a likely move.
-7. Musicality. Listen to the music too. When the dancers react to something in it (a break, a brass hit, a drum solo, a coro entry, the montuno or mambo starting, a stop), write in musicalMoment what they hear and what they do, e.g. "brass hits on 1 and 2: both freeze, then she answers with a hip accent on 3". If a song map is given, use its section names. A short reaction that is not a figure is its own row of type "musicality-accent". If the user message says "Focus: musicality", give every reaction to the music its own row, even small ones (a shoulder accent on a conga slap), and keep figure rows brief.
+7. Musicality. Listen to the music too. When the dancers react to something in it (a break, a brass hit, a drum solo, a coro entry, the montuno or mambo starting, a stop), write in musicalMoment (at most 300 characters) what they hear and what they do, e.g. "brass hits on 1 and 2: both freeze, then she answers with a hip accent on 3". If a song map is given, use its section names. A short reaction that is not a figure is its own row of type "musicality-accent". If the user message says "Focus: musicality", give every reaction to the music its own row, even small ones (a shoulder accent on a conga slap), and keep figure rows brief.
 8. Show tricks (dips, drops, lifts, aerials, death drops): type "show-trick", no moveIds, match "not-in-library", no newMove. The school teaches social dancing.
 9. newMove only for a real, teachable social move missing from the catalogue. Not for a combination of catalogue moves (list their ids instead), not for a show trick, not for walking, greeting or posing. Use its usual Cuban name if you know one for sure; otherwise a plain English description. Never invent a Spanish-sounding name.
 10. Never invent YouTube ids, channels, dancer names, song titles or moves.
@@ -146,7 +147,7 @@ export function buildMoveMapperResponseSchema({ moveIdEnum = true }: { moveIdEnu
       end: text(TIME_FORMAT),
       type: choice(CLIP_ROW_TYPES, "What kind of dancing this row is"),
       mechanics: text(
-        'What you SEE, count by count: hand holds and changes, who turns and which way, where the hands travel, the position. Start with "Name heard: ..." if the video says the name.'
+        'What you SEE, count by count: hand holds and changes, who turns and which way, where the hands travel, the position. Start with "Name heard: ..." if the video says the name. 20 to 1,200 characters.'
       ),
       moveIds: {
         type: "array",
@@ -155,7 +156,7 @@ export function buildMoveMapperResponseSchema({ moveIdEnum = true }: { moveIdEnu
       },
       match: choice(CLIP_MATCHES, "same, variation, or not-in-library"),
       confidence: choice(CLIP_CONFIDENCES, "high only if you saw the holds and turns clearly"),
-      musicalMoment: text("Optional: what in the music they react to, and how"),
+      musicalMoment: text("Optional: what in the music they react to, and how (at most 300 characters)"),
       newMove,
     },
     ["start", "end", "type", "mechanics", "moveIds", "match", "confidence"]

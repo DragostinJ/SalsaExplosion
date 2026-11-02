@@ -75,7 +75,7 @@ Use the current Google Gen AI SDK with a public YouTube URL as the video part. N
 - For each row of run A, find the run B rows that overlap it by more than half.
 - If their moveIds differ:
   - set the run A row's confidence to "low";
-  - append ` Second run saw: <ids, or not-in-library>.` to its mechanics.
+  - append ` Second run saw: <ids, or not-in-library>.` to its mechanics, shortening the original text so the total stays at most 1,200 characters.
 - Show the agreement rate at the top: the share of rows where both runs named the same moves.
 
 ## 7. Output
@@ -84,7 +84,9 @@ Before enabling Copy, check:
 - there is at least 1 row;
 - every time parses, and every start is before its end;
 - the rows are sorted and don't overlap;
-- every moveId is in the moveIds enum of MAPPER_SCHEMA.
+- every moveId is in the moveIds enum of MAPPER_SCHEMA;
+- the clip id is kebab-case (lowercase letters, digits and single hyphens);
+- 1 to 6 dancers, 1 to 200 rows, mechanics 20–1,200 characters, musicalMoment at most 300.
 
 Then:
 - List any problems in plain words.

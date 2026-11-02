@@ -30,11 +30,22 @@ ${songs.join("\n\n")}
 }
 
 /** docs/ai-studio-move-mapper/gold-set.md, generated so the table always matches the data. */
+/** Kebab-case clip id for a gold clip, as the clip importer requires ("gold-06-kentucky"). */
+export function goldClipId(index: number, figure: string): string {
+  const slug = figure
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+  return `gold-${String(index + 1).padStart(2, "0")}-${slug}`;
+}
+
 export function buildGoldSetMarkdown(): string {
   const rows = MOVE_MAPPER_GOLD_SET.map((c, i) => {
     const expected = c.expected.length > 0 ? c.expected.map((id) => `\`${id}\``).join(" or ") : "**not-in-library**";
     const title = c.title.replace(/\|/g, "/");
-    return `| ${i + 1} | ${c.figure} | ${expected} | [${title}](https://www.youtube.com/watch?v=${c.youtubeVideoId}) | ${c.channelTitle} |`;
+    return `| \`${goldClipId(i, c.figure)}\` | ${c.figure} | ${expected} | [${title}](https://www.youtube.com/watch?v=${c.youtubeVideoId}) | ${c.channelTitle} |`;
   });
 
   return `# Move Mapper gold set
@@ -46,8 +57,8 @@ These ${MOVE_MAPPER_GOLD_SET.length} clips have a known answer: each one teaches
 ## How to run it
 
 1. In the Move Mapper app (or an AI Studio chat set up as in the README), analyse each video at ${MAPPER_DEFAULT_FPS} frames per second. Long tutorials: let the segmenter cut them first.
-2. Use the header the app asks for: clip id \`gold-<video id>\`, the title and channel from this table, dancers "unknown", no song id.
-3. Save each answer as \`<video id>.json\` in one folder and run:
+2. Use the header the app asks for: the clip id, title and channel from this table, dancers "unknown", no song id.
+3. Save each answer as \`<clip id>.json\` in one folder and run:
 
 \`\`\`bash
 npx tsx scripts/score-move-mapper.ts path/to/folder/*.json
@@ -65,7 +76,7 @@ Other confident names are listed for information: tutorials show entries and exi
 
 ## The clips
 
-| # | Figure | Right answer | Video | Channel |
+| Clip id | Figure | Right answer | Video | Channel |
 |---|---|---|---|---|
 ${rows.join("\n")}
 

@@ -1,23 +1,17 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import {
-  Users,
-  Search,
-  Volume2,
-  Hand,
-  Repeat,
-  Filter,
-  Compass,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Search, Volume2, Repeat } from "lucide-react";
+import { RUEDA_LEVELS, RUEDA_LEVEL_INK } from "@/components/rueda/rueda-level-ink";
 import { RUEDA_CALLS } from "@/lib/rueda/rueda-calls-dictionary";
+import { cn } from "@/lib/utils";
 
+const FILTERS = ["ALL", ...RUEDA_LEVELS] as const;
+
+/** The rueda call dictionary: search and level filters over poster cards, one per call. */
 export function RuedaDictionaryClient() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [levelFilter, setLevelFilter] = useState<string>("ALL");
+  const [levelFilter, setLevelFilter] = useState<(typeof FILTERS)[number]>("ALL");
   const [partnerSwitchOnly, setPartnerSwitchOnly] = useState(false);
 
   const filteredCalls = useMemo(() => {
@@ -39,187 +33,138 @@ export function RuedaDictionaryClient() {
     });
   }, [searchQuery, levelFilter, partnerSwitchOnly]);
 
+  const resetFilters = () => {
+    setSearchQuery("");
+    setLevelFilter("ALL");
+    setPartnerSwitchOnly(false);
+  };
+
   return (
     <div className="space-y-8">
-      {/* Search & Filter Toolbar */}
-      <div className="rounded-2xl border bg-card p-4 sm:p-6 shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <input
-              type="text"
-              aria-label="Search Rueda calls"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by call name (e.g. Enchufla, Setenta, Dame, Sombrero)..."
-              className="w-full rounded-xl border bg-background pl-9 pr-4 py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-            />
-          </div>
+      {/* Search and filters */}
+      <div className="space-y-3 border-4 border-ink bg-paper p-4 sm:p-5">
+        <label className="relative block">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" aria-hidden="true" />
+          <input
+            type="text"
+            aria-label="Search Rueda calls"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search a call (Enchufla, Setenta, Dame, Sombrero…)"
+            className="min-h-[44px] w-full border-2 border-ink bg-paper py-2 pl-9 pr-4 text-sm placeholder:text-ivory-muted"
+          />
+        </label>
 
-          <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-muted-foreground shrink-0 hidden sm:block" />
-            <select
-              aria-label="Filter by syllabus level"
-              value={levelFilter}
-              onChange={(e) => setLevelFilter(e.target.value)}
-              className="rounded-xl border bg-background px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500"
-            >
-              <option value="ALL">All Syllabus Levels</option>
-              <option value="Beginner">Level 1: Beginner</option>
-              <option value="Improver">Level 2: Improver</option>
-              <option value="Intermediate">Level 3: Intermediate</option>
-              <option value="Advanced">Level 4: Advanced</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Quick Filter Buttons & Partner Switch Toggle */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2 border-t">
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap no-scrollbar">
-            {["ALL", "Beginner", "Improver", "Intermediate", "Advanced"].map((lvl) => (
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="no-scrollbar flex items-center gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:pb-0" role="group" aria-label="Level">
+            {FILTERS.map((lvl) => (
               <button
                 key={lvl}
                 type="button"
+                aria-pressed={levelFilter === lvl}
                 onClick={() => setLevelFilter(lvl)}
-                className={`rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap flex items-center justify-center ${
-                  levelFilter === lvl
-                    ? "bg-amber-600 text-white shadow-xs"
-                    : "bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
+                className={cn(
+                  "inline-flex min-h-10 shrink-0 items-center gap-2 whitespace-nowrap border-2 border-ink px-3 text-xs font-bold uppercase tracking-wider",
+                  levelFilter === lvl ? "bg-ink text-paper" : "bg-paper text-ink"
+                )}
               >
-                {lvl === "ALL" ? "All Levels" : lvl}
+                {lvl !== "ALL" && <span className={cn("h-3 w-3 border border-ink", RUEDA_LEVEL_INK[lvl].bg)} aria-hidden="true" />}
+                {lvl === "ALL" ? "All levels" : lvl}
               </button>
             ))}
           </div>
 
           <button
             type="button"
+            aria-pressed={partnerSwitchOnly}
             onClick={() => setPartnerSwitchOnly((prev) => !prev)}
-            className={`inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-bold transition-all min-h-10 shrink-0 whitespace-nowrap ${
-              partnerSwitchOnly
-                ? "bg-gold text-stone-950 font-bold shadow-xs"
-                : "border bg-card text-muted-foreground hover:text-foreground"
-            }`}
+            className={cn(
+              "inline-flex min-h-10 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap border-2 border-ink px-3 text-xs font-bold uppercase tracking-wider",
+              partnerSwitchOnly ? "bg-poster-red text-ink" : "bg-paper text-ink"
+            )}
           >
-            <Repeat className="h-3.5 w-3.5" />
-            <span>Partner Changes Only</span>
+            <Repeat className="h-3.5 w-3.5" aria-hidden="true" />
+            Partner changes only
           </button>
         </div>
       </div>
 
-      {/* Rueda Calls Grid */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {filteredCalls.length === 0 ? (
-          <div className="col-span-2 text-center py-12 rounded-2xl border bg-muted/20">
-            <Users className="mx-auto h-12 w-12 text-muted-foreground/40" />
-            <h3 className="mt-3 font-bold text-base">No Rueda Calls Found</h3>
-            <p className="text-xs text-muted-foreground mt-1">
-              Try adjusting your search query or syllabus level filter.
-            </p>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => {
-                setSearchQuery("");
-                setLevelFilter("ALL");
-                setPartnerSwitchOnly(false);
-              }}
-              className="mt-4 text-xs font-bold"
-            >
-              Reset Filters
-            </Button>
-          </div>
-        ) : (
-          filteredCalls.map((call) => (
-            <Card
-              key={call.name}
-              className="rounded-2xl border bg-card shadow-xs hover:border-amber-500/50 transition-all flex flex-col justify-between overflow-hidden"
-            >
-              <CardContent className="p-6 space-y-4">
-                {/* Header */}
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <h3 className="text-xl font-black tracking-tight text-foreground flex items-center gap-2">
-                      {call.name}
-                    </h3>
-                    <span className="text-xs font-mono font-semibold text-amber-400 flex items-center gap-1 mt-0.5">
-                      <Volume2 className="h-3 w-3" />
-                      &ldquo;{call.phonetic}&rdquo;
-                    </span>
-                  </div>
+      <p className="text-sm font-semibold" aria-live="polite">
+        {filteredCalls.length} of {RUEDA_CALLS.length} calls
+      </p>
 
-                  <div className="flex flex-col items-end gap-1">
-                    <Badge
-                      className={`text-xs font-bold ${
-                        call.level === "Beginner"
-                          ? "bg-info-soft text-info border border-info-line"
-                          : call.level === "Improver"
-                          ? "bg-success-soft text-success border border-success-line"
-                          : call.level === "Intermediate"
-                          ? "bg-gold/15 text-gold border border-gold/30"
-                          : "bg-role-follow-soft text-role-follow border border-role-follow-line"
-                      }`}
-                    >
-                      {call.level}
-                    </Badge>
-
-                    {call.switchesPartner ? (
-                      <span className="text-xs font-semibold text-gold flex items-center gap-1">
-                        <Repeat className="h-3 w-3" />
-                        Switches Partner
-                      </span>
-                    ) : (
-                      <span className="text-xs font-semibold text-muted-foreground">
-                        Same Partner
-                      </span>
+      {/* One poster card per call */}
+      {filteredCalls.length === 0 ? (
+        <div className="border-4 border-ink bg-poster-mustard p-6 text-ink">
+          <h3 className="font-display text-3xl leading-none">Ninguna llamada</h3>
+          <p className="mt-2 font-medium">No call matches. Try another name or clear the filters.</p>
+          <button
+            type="button"
+            onClick={resetFilters}
+            className="mt-4 inline-flex min-h-[44px] items-center border-4 border-ink bg-ink px-4 font-bold uppercase tracking-wider text-paper"
+          >
+            Clear filters
+          </button>
+        </div>
+      ) : (
+        <ul className="grid gap-6 md:grid-cols-2">
+          {filteredCalls.map((call) => {
+            const ink = RUEDA_LEVEL_INK[call.level];
+            return (
+              <li key={call.name}>
+                <article className="flex h-full flex-col border-4 border-ink bg-paper">
+                  <p
+                    className={cn(
+                      "flex items-center justify-between gap-2 border-b-4 border-ink px-4 py-2 text-xs font-bold uppercase tracking-wider",
+                      ink.bg,
+                      ink.text
                     )}
-                  </div>
-                </div>
-
-                {/* Handhold & Entry/Exit Badges */}
-                <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                  <Badge variant="outline" className="text-xs font-semibold border-amber-500/30 bg-amber-500/5 text-amber-300">
-                    <Hand className="mr-1 h-2.5 w-2.5" />
-                    {call.handholdType}
-                  </Badge>
-                  <Badge variant="outline" className="text-xs font-semibold border-blue-500/30 bg-blue-500/5 text-blue-300">
-                    <Compass className="mr-1 h-2.5 w-2.5" />
-                    {call.entryExitGeometry}
-                  </Badge>
-                </div>
-
-                {/* Description */}
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {call.description}
-                </p>
-
-                {/* Hand Signal Callout for noisy clubs */}
-                <div className="rounded-xl border bg-muted/40 p-3 space-y-1">
-                  <span className="text-[11px] font-bold text-foreground flex items-center gap-1.5">
-                    <Hand className="h-3.5 w-3.5 text-amber-600" />
-                    Cantante Visual Hand Signal:
-                  </span>
-                  <p className="text-[11px] text-muted-foreground leading-relaxed">
-                    {call.handSignal}
+                  >
+                    <span>{call.level}</span>
+                    <span className="flex items-center gap-1">
+                      {call.switchesPartner && <Repeat className="h-3.5 w-3.5" aria-hidden="true" />}
+                      {call.switchesPartner ? "Changes partner" : "Same partner"}
+                    </span>
                   </p>
-                </div>
 
-                {/* Clave Timing & Maestro Tip */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 text-[11px]">
-                  <div className="rounded-lg bg-background border p-2.5 space-y-0.5">
-                    <span className="font-bold text-foreground block">Clave Cadence:</span>
-                    <span className="text-muted-foreground">{call.claveTiming}</span>
+                  <div className="flex flex-1 flex-col gap-4 p-5">
+                    <div>
+                      <h3 className="font-display text-4xl leading-none">{call.name}</h3>
+                      <p className="mt-1 flex items-center gap-1 text-sm font-semibold">
+                        <Volume2 className="h-4 w-4" aria-hidden="true" />
+                        &ldquo;{call.phonetic}&rdquo;
+                      </p>
+                    </div>
+
+                    <ul className="flex flex-wrap gap-2 text-xs font-bold" aria-label="Hold and path">
+                      <li className="border-2 border-ink px-2 py-0.5">{call.handholdType}</li>
+                      <li className="border-2 border-ink px-2 py-0.5">{call.entryExitGeometry}</li>
+                    </ul>
+
+                    <p className="text-sm">{call.description}</p>
+
+                    <div className="border-l-4 border-poster-red pl-3">
+                      <p className="text-xs font-bold uppercase tracking-wider">La señal · hand signal</p>
+                      <p className="mt-1 text-sm">{call.handSignal}</p>
+                    </div>
+
+                    <dl className="mt-auto grid gap-3 border-t-2 border-ink pt-3 text-sm sm:grid-cols-2">
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-wider">Clave</dt>
+                        <dd className="mt-1">{call.claveTiming}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-wider">Consejo del cantante</dt>
+                        <dd className="mt-1">{call.cantanteTip}</dd>
+                      </div>
+                    </dl>
                   </div>
-                  <div className="rounded-lg bg-amber-500/[0.04] border border-amber-500/20 p-2.5 space-y-0.5">
-                    <span className="font-bold text-amber-300 block">Maestro Tip:</span>
-                    <span className="text-muted-foreground">{call.cantanteTip}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))
-        )}
-      </div>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }

@@ -4,25 +4,12 @@ import { useMemo, useState, useSyncExternalStore } from "react";
 import { RotateCcw } from "lucide-react";
 import { RUEDA_CALLS, type RuedaCall } from "@/lib/rueda/rueda-calls-dictionary";
 import { POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
+import { RUEDA_LEVELS as LEVELS, RUEDA_LEVEL_INK } from "@/components/rueda/rueda-level-ink";
 import { cn } from "@/lib/utils";
 
 type Level = RuedaCall["level"];
 type Side = "name" | "signal";
 
-const LEVELS: readonly Level[] = ["Beginner", "Improver", "Intermediate", "Advanced"];
-/** One poster ink per level, for the card's offset shadow and chip */
-const LEVEL_INK: Record<Level, string> = {
-  Beginner: "bg-poster-teal",
-  Improver: "bg-poster-mustard",
-  Intermediate: "bg-poster-red",
-  Advanced: "bg-poster-blue",
-};
-const LEVEL_SHADOW: Record<Level, string> = {
-  Beginner: "shadow-[10px_10px_0_var(--color-poster-teal)]",
-  Improver: "shadow-[10px_10px_0_var(--color-poster-mustard)]",
-  Intermediate: "shadow-[10px_10px_0_var(--color-poster-red)]",
-  Advanced: "shadow-[10px_10px_0_var(--color-poster-blue)]",
-};
 const STORAGE_KEY = "ritmoflow-rueda-known";
 /** A card marked "again" comes back after this many other cards */
 const AGAIN_GAP = 3;
@@ -145,7 +132,7 @@ export function RuedaFlashcards() {
                 levels.has(level) ? "bg-ink text-paper" : "bg-paper text-ink"
               )}
             >
-              <span className={cn("h-3 w-3 border border-ink", LEVEL_INK[level])} aria-hidden="true" />
+              <span className={cn("h-3 w-3 border border-ink", RUEDA_LEVEL_INK[level].bg)} aria-hidden="true" />
               {level}
             </button>
           ))}
@@ -180,12 +167,12 @@ export function RuedaFlashcards() {
             aria-pressed={flipped}
             className={cn(
               "block min-h-[320px] w-full border-[6px] border-ink bg-paper p-6 text-left transition-transform active:translate-x-1 active:translate-y-1",
-              LEVEL_SHADOW[card.level]
+              RUEDA_LEVEL_INK[card.level].shadow
             )}
           >
             <span className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.3em]">
               <span>{flipped ? "Respuesta" : front === "name" ? "La llamada" : "La señal"}</span>
-              <span className={cn("border-2 border-ink px-2 py-0.5 tracking-wider text-ink", LEVEL_INK[card.level])}>{card.level}</span>
+              <span className={cn("border-2 border-ink px-2 py-0.5 tracking-wider", RUEDA_LEVEL_INK[card.level].bg, RUEDA_LEVEL_INK[card.level].text)}>{card.level}</span>
             </span>
 
             {!flipped && front === "name" && (

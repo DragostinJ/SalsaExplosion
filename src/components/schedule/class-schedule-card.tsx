@@ -41,7 +41,7 @@ import {
   ETIQUETTE_STORAGE_KEY,
 } from "@/components/beginners/digital-etiquette-modal";
 import { PostClassCheckinModal } from "@/components/beginners/post-class-checkin-modal";
-import { DOOR_PRICING } from "@/lib/academy-data";
+import { DOOR_PRICING, VENUE_INFO } from "@/lib/academy-data";
 
 // ==========================================
 // TYPES & INTERFACES
@@ -292,7 +292,7 @@ export function ClassScheduleCard({
             </Badge>
           ) : (
             <Badge variant="outline" className="text-xs">
-              Pay at the door \u00B7 \u00A3{DOOR_PRICING.oneClassPounds} / \u00A3{DOOR_PRICING.twoClassesPounds}
+              Pay at the door · £{DOOR_PRICING.oneClassPounds} / £{DOOR_PRICING.twoClassesPounds}
             </Badge>
           )}
         </div>
@@ -505,8 +505,8 @@ export function ClassScheduleCard({
               <AddToCalendarButton
                 event={{
                   title: `${session.title} — Salsa Explosion UK`,
-                  description: `Cuban Salsa & Rueda de Casino class at BOH Studios Bournemouth with ${session.instructor.firstName} ${session.instructor.lastName}. Role: ${optimisticState.bookedRole || selectedRole}.`,
-                  location: `BOH Studios Bournemouth, 12-14 Post Office Rd, Bournemouth BH1 1DH, UK`,
+                  description: `Cuban Salsa & Rueda de Casino class at ${VENUE_INFO.name} with ${session.instructor.firstName} ${session.instructor.lastName}. Role: ${optimisticState.bookedRole || selectedRole}.`,
+                  location: `${VENUE_INFO.fullAddress}, UK`,
                   startDate: new Date(session.startTime),
                   endDate: new Date(session.endTime),
                 }}

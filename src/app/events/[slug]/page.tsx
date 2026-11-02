@@ -245,12 +245,12 @@ export default async function EventDetailPage({
     image: event.coverImageUrl || undefined,
     location: {
       "@type": "Place",
-      name: event.venueName || "BOH Studios",
+      name: event.venueName || VENUE_INFO.name,
       address: {
         "@type": "PostalAddress",
-        streetAddress: event.venueAddress || "BOH Studios, 114 Commercial Road",
+        streetAddress: event.venueAddress || VENUE_INFO.streetAddress,
         addressLocality: "Bournemouth",
-        postalCode: "BH2 5LR",
+        postalCode: VENUE_INFO.postcode,
         addressCountry: "GB",
       },
     },

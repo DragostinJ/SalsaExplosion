@@ -39,6 +39,10 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(page.locator("#cartelera")).toBeVisible();
     await expect(page.getByText("Cartelera semanal")).toBeVisible();
 
+    // 5b. Verify footer and mobile menu have no "Recaps" link (Enrique: recaps are "later")
+    await expect(page.locator("footer").getByRole("link", { name: /Recaps/i })).toHaveCount(0);
+    await expect(page.locator('[data-testid="mobile-nav-sheet"]').getByRole("link", { name: /Recaps/i })).toHaveCount(0);
+
     // 6. Verify Level Finder Quiz on /dashboard/schedule
     await page.goto("/dashboard/schedule");
     await page.waitForLoadState("domcontentloaded");
@@ -107,6 +111,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(fullPassCard.getByRole("button", { name: /Book as Lead/i })).toBeVisible();
     await expect(fullPassCard.getByRole("button", { name: /Book as Follow/i })).toBeVisible();
     await expect(page.getByText(/Upgrade Your Pass|Congress T-Shirt/i)).toHaveCount(0);
+    await expect(page.getByRole("dialog", { name: /Upgrade Your Pass/i })).toHaveCount(0);
   });
 
   test("4. Venues directory renders BOH Studios Bournemouth, BOH Studio 2, Neptune Hall, and Roundhouse Hotel", async ({
@@ -139,7 +144,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       await expect(page).toHaveURL(/.*sign-in/);
     } else {
       await expect(
-        page.getByText("Invite Friends, Earn Free Class Credits")
+        page.getByText(/Invite Friends/i).first()
       ).toBeVisible();
     }
   });

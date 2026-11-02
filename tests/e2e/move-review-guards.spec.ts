@@ -38,4 +38,14 @@ test.describe("Move Library Review Staff Route Guards", () => {
 
     await expect(page.getByText("Import Move Maker Drafts")).not.toBeVisible();
   });
+
+  test("4. Anonymous visitor navigating to /instructor/clips redirects to sign-in", async ({
+    page,
+  }) => {
+    await page.goto("/instructor/clips", { waitUntil: "domcontentloaded" });
+    const url = page.url();
+    expect(url).toMatch(/sign-in/);
+
+    await expect(page.getByText("Pro Clips Review Desk")).not.toBeVisible();
+  });
 });

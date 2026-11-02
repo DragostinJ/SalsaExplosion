@@ -176,6 +176,17 @@ export function MoveReviewListConsole({
             </Button>
           </Link>
 
+          <Link href="/instructor/clips">
+            <Button
+              variant="outline"
+              size="sm"
+              className="min-h-[40px] text-xs font-semibold gap-1.5"
+            >
+              <Video className="h-4 w-4 text-amber-400" />
+              Pro clips
+            </Button>
+          </Link>
+
           <Button
             onClick={handleCopyReport}
             disabled={localReviewsCount === 0}

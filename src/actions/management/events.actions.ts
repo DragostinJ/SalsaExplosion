@@ -145,28 +145,7 @@ export async function registerForEventTierAction(rawInput: {
             throw new Error("This ticket tier is completely sold out.");
           }
 
-          if (role === DanceRole.LEAD && tier.maxLeads !== null) {
-            const leadsCount = tier.registrations.filter(
-              (r) => r.role === DanceRole.LEAD
-            ).length;
-            if (leadsCount >= tier.maxLeads) {
-              throw new Error(
-                "Lead spots for this tier are currently full to maintain partner balance."
-              );
-            }
-          }
-
-          if (role === DanceRole.FOLLOW && tier.maxFollows !== null) {
-            const followsCount = tier.registrations.filter(
-              (r) => r.role === DanceRole.FOLLOW
-            ).length;
-            if (followsCount >= tier.maxFollows) {
-              throw new Error(
-                "Follow spots for this tier are currently full to maintain partner balance."
-              );
-            }
-          }
-
+          // Role is information for the teachers only, never a limit
           const isDemoRegistrationAllowed =
             process.env.NODE_ENV !== "production" ||
             process.env.ALLOW_DEMO_EVENT_REGISTRATION === "true";
@@ -219,8 +198,6 @@ export async function registerForEventTierAction(rawInput: {
           "Ticket tier not found.",
           "You already hold an active pass for this tier!",
           "This ticket tier is completely sold out.",
-          "Lead spots for this tier are currently full to maintain partner balance.",
-          "Follow spots for this tier are currently full to maintain partner balance.",
           "Direct registration is only available for free tiers or RSVPs. Paid passes must be purchased via Stripe checkout.",
           ...Object.values(TICKET_SALES_MESSAGES),
         ];
@@ -306,7 +283,6 @@ export async function createGuestArtistEventAction(rawInput: {
       .map((s) => s.trim())
       .filter(Boolean);
 
-    const halfCap = Math.floor(parsed.data.fullPassCapacity / 2);
 
     const created = await prisma.event.create({
       data: {
@@ -327,8 +303,6 @@ export async function createGuestArtistEventAction(rawInput: {
                 "All Guest Artist Masterclasses + Evening Gala Social Party",
               priceInCents: Math.round(parsed.data.fullPassPricePounds * 100),
               totalCapacity: parsed.data.fullPassCapacity,
-              maxLeads: halfCap,
-              maxFollows: parsed.data.fullPassCapacity - halfCap,
               salesEndAt: endDate,
             },
             {
@@ -363,7 +337,7 @@ export async function createGuestArtistEventAction(rawInput: {
     return {
       success: true,
       data: { eventSlug: created.slug },
-      message: `Published "${created.title}" with role-balanced pass tiers!`,
+      message: `Published "${created.title}" with its Full and Party passes.`,
     };
   } catch (error) {
     console.error("[createGuestArtistEventAction]", error);

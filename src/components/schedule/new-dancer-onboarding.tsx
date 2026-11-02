@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { updateMyDanceRolePreferenceAction } from "@/actions/management.actions";
 import { triggerStudioTutorial } from "@/components/onboarding/interactive-tutorial-modal";
+import { DOOR_PRICING } from "@/lib/academy-data";
 
 const ONBOARDING_DISMISS_KEY = "salsa_explosion_onboarding_guide_dismissed_v1";
 
@@ -28,7 +29,6 @@ interface NewDancerOnboardingProps {
   studentName: string;
   currentRole: DanceRole;
   currentLevel: DanceLevel;
-  classCredits: number;
   hasActiveBooking: boolean;
 }
 
@@ -36,7 +36,6 @@ export function NewDancerOnboarding({
   studentName,
   currentRole,
   currentLevel,
-  classCredits,
   hasActiveBooking,
 }: NewDancerOnboardingProps) {
   const [dismissed, setDismissed] = useState(true); // default true to prevent layout shift before hydration
@@ -232,7 +231,7 @@ export function NewDancerOnboarding({
             </div>
           </div>
 
-          {/* Step 2: Your Welcome Level & Credit */}
+          {/* Step 2: Your level, and how paying works (at the door, never online) */}
           <div className="flex flex-col justify-between rounded-xl border bg-card/90 p-3.5 shadow-xs">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
@@ -251,16 +250,16 @@ export function NewDancerOnboarding({
                 {currentLevel} Tier
               </h3>
               <p className="text-[11px] text-muted-foreground leading-snug">
-                You have <strong>{classCredits} Credit(s)</strong> in your wallet. Two left feet are 100% welcome!
+                Two left feet are 100% welcome! Pay at the door, cash or card.
               </p>
             </div>
 
             <div className="mt-3 flex items-center justify-between rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 text-xs">
               <span className="font-semibold text-emerald-200 text-[11px]">
-                Wallet: {classCredits} Pass{classCredits === 1 ? "" : "es"}
+                £{DOOR_PRICING.oneClassPounds} one class · £{DOOR_PRICING.twoClassesPounds} two
               </span>
               <span className="text-xs font-bold text-emerald-300">
-                Active
+                Social free
               </span>
             </div>
           </div>
@@ -273,20 +272,20 @@ export function NewDancerOnboarding({
                   variant="outline"
                   className="border-amber-500/40 bg-amber-500/10 text-amber-400 font-bold text-xs"
                 >
-                  Step 3 • Reserve
+                  Step 3 • Optional
                 </Badge>
                 {hasActiveBooking && (
                   <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400">
-                    <CheckCircle2 className="h-3 w-3" /> Booked!
+                    <CheckCircle2 className="h-3 w-3" /> See you there!
                   </span>
                 )}
               </div>
               <h3 className="text-xs font-bold flex items-center gap-1.5">
                 <CalendarCheck className="h-3.5 w-3.5 text-amber-600" />
-                Reserve Below
+                Tell the teachers
               </h3>
               <p className="text-[11px] text-muted-foreground leading-snug">
-                Select any beginner session below and tap <strong>Book as {roleSelected}</strong>.
+                No booking needed. If you like, tap <strong>I&apos;m coming</strong> on a class below so the teachers know to expect you.
               </p>
             </div>
 

@@ -61,7 +61,7 @@ ${thursdayLines}
 ### Sundays at ${VENUE_INFO.name} (Doors ${WEEKLY_SCHEDULE.sunday.doorsTime})
 ${sundayLines}
 
-## 3. Class Passes & Memberships
+## 3. Prices (weekly classes are paid at the door; festivals are booked online)
 ${pricingLines}
 
 ## 4. Teaching Faculty & Guest Artists

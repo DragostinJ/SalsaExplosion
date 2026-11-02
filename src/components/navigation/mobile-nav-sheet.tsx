@@ -115,7 +115,7 @@ export function MobileNavSheet({
   // Public explore and community links
   const exploreLinks = [
     { href: "/music", label: "Cuban Music & Playlists", icon: Music },
-    { href: "/how-it-works", label: "How QR Passes Work", icon: HelpCircle },
+    { href: "/how-it-works", label: "How It Works", icon: HelpCircle },
     { href: "/about", label: "About Maestro Enrique", icon: Compass },
   ];
 
@@ -126,12 +126,12 @@ export function MobileNavSheet({
     { href: "/dashboard/rueda", label: "Rueda Call Dictionary", icon: Users },
     { href: "/private-lessons", label: "1-on-1 Private Lessons", icon: Flame },
     { href: "/events", label: "Guest Festivals & Congress", icon: Sparkles },
-    { href: "/pricing", label: "Class Passes & Memberships", icon: CreditCard },
+    { href: "/pricing", label: "Prices (Pay at the Door)", icon: CreditCard },
   ];
 
   // Member-only links shown only when authenticated
   const memberOnlyLinks = [
-    { href: "/dashboard/wallet", label: "My Wallet & QR Passes", icon: QrCode },
+    { href: "/dashboard/wallet", label: "Receipts & History", icon: QrCode },
     { href: "/dashboard/progression", label: "Syllabus Progression", icon: Award },
     { href: "/dashboard/recaps", label: "Class Video Recaps", icon: Video },
     { href: "/dashboard/referrals", label: "Dancer Referral Rewards", icon: Share2 },
@@ -232,7 +232,7 @@ export function MobileNavSheet({
             >
               <div className="flex items-center gap-2">
                 <HelpCircle className="h-4 w-4" />
-                <span>Interactive Studio Guide</span>
+                <span>How it works in 4 steps</span>
               </div>
               <span className="text-xs uppercase tracking-wider bg-ink text-paper font-black px-2 py-0.5 border border-ink">
                 Learn

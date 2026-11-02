@@ -216,25 +216,8 @@ export async function createEventCheckoutSessionAction(
       );
     }
 
-    if (role === "LEAD" && tier.maxLeads !== null) {
-      const leads = tier.registrations.filter((r) => r.role === "LEAD").length;
-      if (leads >= tier.maxLeads) {
-        throw new CheckoutDomainError(
-          "PLAN_UNAVAILABLE",
-          "Lead spots for this tier are currently full."
-        );
-      }
-    }
-
-    if (role === "FOLLOW" && tier.maxFollows !== null) {
-      const follows = tier.registrations.filter((r) => r.role === "FOLLOW").length;
-      if (follows >= tier.maxFollows) {
-        throw new CheckoutDomainError(
-          "PLAN_UNAVAILABLE",
-          "Follow spots for this tier are currently full."
-        );
-      }
-    }
+    // The dance role is information for the teachers, never a limit (Enrique: classes and events
+    // welcome everyone, even uneven); only the tier's ticket total can sell out.
 
     const baseUrl = getAppBaseUrl();
 

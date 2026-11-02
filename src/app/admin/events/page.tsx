@@ -79,7 +79,7 @@ export default async function AdminEventsPage() {
             </Badge>
           </div>
           <p className="mt-1 text-sm text-muted-foreground">
-            Publish international workshops, enforce 50/50 Lead/Follow pass caps, and check in dancers at the venue door with zero platform fees.
+            Publish international workshops, see the Lead/Follow mix of who booked, and check in dancers at the venue door with zero platform fees.
           </p>
         </div>
       </div>

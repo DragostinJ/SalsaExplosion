@@ -59,9 +59,11 @@ const CreateClassSessionSchema = z.object({
   durationMinutes: z.number().int().min(30).max(240),
   room: z.string().trim().min(2).max(80),
   maxCapacity: z.number().int().min(4).max(200),
-  maxLeads: z.number().int().min(2).max(100),
-  maxFollows: z.number().int().min(2).max(100),
-  creditCost: z.number().int().min(1).max(10),
+  // Lead/Follow caps and credit costs are no longer limits (everyone comes in, classes are paid
+  // at the door), so the form stopped sending them; older callers may still pass them.
+  maxLeads: z.number().int().min(0).max(100).nullable().optional(),
+  maxFollows: z.number().int().min(0).max(100).nullable().optional(),
+  creditCost: z.number().int().min(0).max(10).optional(),
 });
 
 const UpdateMyDanceRoleSchema = z.object({
@@ -399,9 +401,9 @@ export async function createClassSessionAction(rawInput: {
   durationMinutes: number;
   room: string;
   maxCapacity: number;
-  maxLeads: number;
-  maxFollows: number;
-  creditCost: number;
+  maxLeads?: number | null;
+  maxFollows?: number | null;
+  creditCost?: number;
 }): Promise<ManagementActionResponse<{ classId: string }>> {
   try {
     // fallback-guard
@@ -433,16 +435,6 @@ export async function createClassSessionAction(rawInput: {
       };
     }
 
-    if (parsed.data.maxLeads + parsed.data.maxFollows > parsed.data.maxCapacity) {
-      return {
-        success: false,
-        error: {
-          code: "VALIDATION_ERROR",
-          message: "Sum of max leads and max follows cannot exceed total studio capacity.",
-        },
-      };
-    }
-
     const startTime = new Date(parsed.data.startTimeIso);
     if (Number.isNaN(startTime.getTime())) {
       return {
@@ -467,8 +459,8 @@ export async function createClassSessionAction(rawInput: {
         endTime,
         room: parsed.data.room,
         maxCapacity: parsed.data.maxCapacity,
-        maxLeads: parsed.data.maxLeads,
-        maxFollows: parsed.data.maxFollows,
+        maxLeads: parsed.data.maxLeads ?? null,
+        maxFollows: parsed.data.maxFollows ?? null,
         creditCost: parsed.data.creditCost,
         instructorId: actor.id,
       },

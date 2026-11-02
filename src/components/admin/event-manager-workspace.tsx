@@ -410,7 +410,7 @@ export function EventManagerWorkspace({
                 </CardTitle>
               </div>
               <CardDescription className="text-xs">
-                Create a high-ticket weekend bootcamp or festival with role-balanced Full Passes and Party Passes.
+                Create a high-ticket weekend bootcamp or festival with Full Passes and Party Passes. Dancers pick Lead or Follow as information for the teachers, never as a limit.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -519,7 +519,7 @@ export function EventManagerWorkspace({
                   </div>
                   <div className="space-y-1">
                     <label htmlFor="event-full-pass-cap-input" className="font-semibold">
-                      Full Pass Cap (50/50 L/F)
+                      Full Pass Capacity
                     </label>
                     <input
                       id="event-full-pass-cap-input"

@@ -47,7 +47,7 @@ export default async function StudentWalletPage() {
           art={MEDIA_MANIFEST.mockupGraphics.phone}
           title="Digital Passes &"
           titleHighlight="Studio Wallet"
-          description={`Manage your Thursday & Sunday class credits, Made in Cuba festival passes, and instant 1-tap QR door check-in at ${VENUE_INFO.name} (${VENUE_INFO.address}, ${VENUE_INFO.postcode}).`}
+          description={`Your festival passes with their door QR codes, receipts and history. Thursday & Sunday classes are paid at the door at ${VENUE_INFO.name} (${VENUE_INFO.address}, ${VENUE_INFO.postcode}).`}
           badge="BOH Studios Digital Wallet"
           eyebrow={`INSTANT QR DOOR ADMISSION • ${VENUE_INFO.name}`}
           backHref="/dashboard/schedule"
@@ -80,13 +80,13 @@ export default async function StudentWalletPage() {
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg sm:text-xl font-black tracking-tight text-foreground">
-              Available Class Passes &amp; Memberships
+              Weekly classes: pay at the door
             </h2>
             <Link
               href="/pricing"
               className="text-xs font-bold text-amber-400 hover:underline inline-flex items-center gap-1"
             >
-              Compare All Passes <ArrowRight className="h-3.5 w-3.5" />
+              All prices <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
@@ -124,7 +124,7 @@ export default async function StudentWalletPage() {
                 </div>
 
                 <Button asChild size="sm" className="w-full font-bold text-xs">
-                  <Link href="/pricing">Select Pass →</Link>
+                  <Link href="/pricing">See prices →</Link>
                 </Button>
               </Card>
             ))}
@@ -296,7 +296,7 @@ export default async function StudentWalletPage() {
               >
                 <Link href="/pricing">
                   <Coins className="mr-1.5 h-3.5 w-3.5" />
-                  Top-Up Passes
+                  Door prices
                 </Link>
               </Button>
             </div>

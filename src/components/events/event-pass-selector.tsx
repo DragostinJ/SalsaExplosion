@@ -229,16 +229,6 @@ export function EventPassSelector({
           const isSoldOut = tier.totalBooked >= tier.totalCapacity;
           const remainingSpots = Math.max(0, tier.totalCapacity - tier.totalBooked);
 
-          const remainingLeads =
-            tier.maxLeads !== null
-              ? Math.max(0, tier.maxLeads - tier.bookedLeads)
-              : null;
-          const remainingFollows =
-            tier.maxFollows !== null
-              ? Math.max(0, tier.maxFollows - tier.bookedFollows)
-              : null;
-
-          const hasRoleCap = tier.maxLeads !== null && tier.maxFollows !== null;
 
           return (
             <article
@@ -303,42 +293,7 @@ export function EventPassSelector({
                     </p>
                   </div>
                 ) : (
-                  hasRoleCap && (
-                    <div className="border-2 border-ink bg-surface-1 p-3 space-y-2 text-xs">
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-ink/70">
-                          Lead Spots:
-                        </span>
-                        <span
-                          className={`font-display text-sm ${
-                            remainingLeads !== null && remainingLeads <= 5
-                              ? "text-accent-red"
-                              : "text-ink"
-                          }`}
-                        >
-                          {remainingLeads !== null && remainingLeads > 0
-                            ? `${remainingLeads} available`
-                            : "Full"}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between border-t border-ink/20 pt-1.5">
-                        <span className="font-bold text-ink/70">
-                          Follow Spots:
-                        </span>
-                        <span
-                          className={`font-display text-sm ${
-                            remainingFollows !== null && remainingFollows <= 5
-                              ? "text-accent-red"
-                              : "text-ink"
-                          }`}
-                        >
-                          {remainingFollows !== null && remainingFollows > 0
-                            ? `${remainingFollows} available`
-                            : "Full"}
-                        </span>
-                      </div>
-                    </div>
-                  )
+                  null
                 )}
 
                 {/* Ticket Action Button(s) */}
@@ -352,15 +307,15 @@ export function EventPassSelector({
                       <CheckCircle2 className="mr-1.5 h-4 w-4" />
                       Registered ({tier.userRegistration.qrCodeHash})
                     </button>
-                  ) : hasRoleCap ? (
+                  ) : (
+                    // Lead or Follow is information for the teachers, never a limit
                     <div className="grid grid-cols-2 gap-2 w-full">
                       <button
                         type="button"
                         disabled={
                           purchasesUnavailable ||
                           isPending ||
-                          isSoldOut ||
-                          (remainingLeads !== null && remainingLeads <= 0)
+                          isSoldOut
                         }
                         aria-disabled={purchasesUnavailable || undefined}
                         onClick={() =>
@@ -377,7 +332,7 @@ export function EventPassSelector({
                         ) : (
                           <>
                             <Ticket className="mr-1 h-3.5 w-3.5 shrink-0" />
-                            <span>Book Lead</span>
+                            <span>{isSoldOut ? "Sold out" : "Book as Lead"}</span>
                           </>
                         )}
                       </button>
@@ -386,8 +341,7 @@ export function EventPassSelector({
                         disabled={
                           purchasesUnavailable ||
                           isPending ||
-                          isSoldOut ||
-                          (remainingFollows !== null && remainingFollows <= 0)
+                          isSoldOut
                         }
                         aria-disabled={purchasesUnavailable || undefined}
                         onClick={() =>
@@ -404,24 +358,11 @@ export function EventPassSelector({
                         ) : (
                           <>
                             <Ticket className="mr-1 h-3.5 w-3.5 shrink-0" />
-                            <span>Book Follow</span>
+                            <span>{isSoldOut ? "Sold out" : "Book as Follow"}</span>
                           </>
                         )}
                       </button>
                     </div>
-                  ) : (
-                    <button
-                      type="button"
-                      disabled={purchasesUnavailable || isPending || isSoldOut}
-                      aria-disabled={purchasesUnavailable || undefined}
-                      onClick={() =>
-                        onInitiateBooking(tier, DanceRole.SOLO)
-                      }
-                      className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} w-full text-xs min-h-[44px] py-2.5 px-3`}
-                    >
-                      <Sparkles className="mr-1.5 h-3.5 w-3.5 shrink-0" />
-                      <span>{isSoldOut ? "Tier Sold Out" : `Get ${tier.name}`}</span>
-                    </button>
                   )}
                 </div>
               </div>

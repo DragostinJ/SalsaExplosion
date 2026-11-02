@@ -136,66 +136,16 @@ export async function bookClassAction(
           );
         }
 
-        // 3e. Acquire Row-Level Lock on ClassSession & Enforce Total Capacity
-        // In PostgreSQL, UPDATE acquires a row-level lock until the transaction commits,
-        // preventing concurrent requests from bypassing either total or role-specific limits.
-        const lockedClassUpdate = await tx.classSession.updateMany({
-          where: {
-            id: classSession.id,
-            isCancelled: false,
-            bookedCount: { lt: classSession.maxCapacity },
-          },
-          data: {
-            bookedCount: { increment: 1 },
-          },
+        // 3e. Count the reservation so teachers see who is coming. Enrique's rule: everyone can
+        // come in, even when the class is busy or uneven, so a reservation never blocks on capacity
+        // or on the Lead/Follow mix; the dance role is information for the teachers only.
+        await tx.classSession.update({
+          where: { id: classSession.id },
+          data: { bookedCount: { increment: 1 } },
         });
 
-        if (lockedClassUpdate.count === 0) {
-          throw new BookingDomainError(
-            "CLASS_FULL",
-            "This class just reached maximum capacity."
-          );
-        }
-
-        // 3f. Enforce Partner Role Balance (Max Leads / Max Follows)
-        // Because the ClassSession row is now locked by 3e, no parallel transaction
-        // can insert a conflicting Lead/Follow booking before our count completes.
-        if (danceRole === DanceRole.LEAD && classSession.maxLeads !== null) {
-          const currentLeads = await tx.booking.count({
-            where: {
-              classSessionId: classSession.id,
-              danceRole: DanceRole.LEAD,
-              status: { in: [BookingStatus.CONFIRMED, BookingStatus.ATTENDED] },
-            },
-          });
-
-          if (currentLeads >= classSession.maxLeads) {
-            throw new BookingDomainError(
-              "ROLE_CAPACITY_FULL",
-              "All Lead spots for this class are full to maintain partner balance."
-            );
-          }
-        }
-
-        if (danceRole === DanceRole.FOLLOW && classSession.maxFollows !== null) {
-          const currentFollows = await tx.booking.count({
-            where: {
-              classSessionId: classSession.id,
-              danceRole: DanceRole.FOLLOW,
-              status: { in: [BookingStatus.CONFIRMED, BookingStatus.ATTENDED] },
-            },
-          });
-
-          if (currentFollows >= classSession.maxFollows) {
-            throw new BookingDomainError(
-              "ROLE_CAPACITY_FULL",
-              "All Follow spots for this class are full to maintain partner balance."
-            );
-          }
-        }
-
         // 3g. Weekly classes are paid at the door (£12 / £14), never online: a booking only
-        // reserves a role-balanced spot, so it takes no credits and no payment.
+        // tells the teachers who is coming, so it takes no credits and no payment.
         const hasActiveSubscription =
           user.subscription !== null &&
           user.subscription.status === SubscriptionStatus.ACTIVE &&

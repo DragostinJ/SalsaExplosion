@@ -196,10 +196,10 @@ export default async function AboutPage() {
               <Calendar className="h-5 w-5" />
             </div>
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
-              Balanced Lead &amp; Follow Ratios
+              Everyone Dances
             </h3>
             <p className="text-xs text-ink leading-relaxed font-medium">
-              Our smart real-time booking system automatically caps Lead and Follow tickets so you never spend a class waiting on the sidelines.
+              No partner needed and nobody is turned away when the class is uneven. The teachers rotate partners, casino and rueda style, so you dance with everyone.
             </p>
           </div>
 

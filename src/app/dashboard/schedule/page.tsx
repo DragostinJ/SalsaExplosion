@@ -46,16 +46,6 @@ const BeginnerSafetyHub = dynamic(
   }
 );
 
-const PartnerMatchWaitlist = dynamic(
-  () =>
-    import("@/components/schedule/partner-match-waitlist").then(
-      (m) => m.PartnerMatchWaitlist
-    ),
-  {
-    loading: () => <div className="h-48 rounded-3xl bg-muted/40 animate-pulse my-6" />,
-  }
-);
-
 import { WeeklyCalendarOverview } from "@/components/schedule/weekly-calendar-overview";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTimetable";
@@ -307,7 +297,7 @@ export default async function StudentSchedulePage({
               THU &amp; SUN <span className="text-accent-red">Programme</span>
             </h1>
             <p className="max-w-2xl text-sm font-semibold text-ink leading-relaxed">
-              Weekly Cuban Salsa &amp; Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No pre-booking or partner required. Lead &amp; Follow partner rotations are 100% ratio balanced.
+              Weekly Cuban Salsa &amp; Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No booking or partner required: everyone dances, even when the class is uneven, because the teachers rotate partners.
             </p>
             {user && (
               <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
@@ -427,10 +417,10 @@ export default async function StudentSchedulePage({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
-                  Live Interactive Sessions &amp; Ratio Capacity
+                  Tell the teachers you&apos;re coming
                 </h3>
                 <p className="text-xs text-ink font-medium">
-                  Select your dance role (Lead / Follow) for live ratio-balanced reservation.
+                  Optional and free: pick Lead or Follow so the teachers know who to expect. It never stops anyone from coming in.
                 </p>
               </div>
               <span className="text-xs font-bold text-ink bg-poster-mustard px-3 py-1 border border-ink shadow-[2px_2px_0_0_#161311]">
@@ -580,19 +570,12 @@ export default async function StudentSchedulePage({
           studentName={user.firstName}
           currentRole={user.preferredRole}
           currentLevel={user.currentLevel}
-          classCredits={user.classCredits}
           hasActiveBooking={scheduleItems.some((s) => s.userBooking !== null)}
         />
       )}
 
       {/* Beginner Psychological Safety & Comfort Hub */}
       <BeginnerSafetyHub />
-
-      {/* Partner-Match Priority Waitlist & Bypass Protocol */}
-      <PartnerMatchWaitlist
-        userRole={user?.preferredRole ?? DanceRole.LEAD}
-        userName={user?.firstName ?? "Dancer"}
-      />
     </main>
   );
 }

@@ -634,11 +634,11 @@ export default async function EventDetailPage({
             <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
               <ShieldCheck className="h-5 w-5 text-accent-teal" />
               <h3 className={`font-display ${TYPE.card} text-ink`}>
-                Role-Balanced
+                Everyone Dances
               </h3>
             </div>
             <p className="text-xs text-ink leading-relaxed font-medium">
-              All partner dance workshop tiers strictly enforce balanced Lead/Follow ratios. You will spend your workshop time dancing, not sitting out.
+              Choose Lead or Follow when you book so the teachers can plan the rotations. It is never a limit: no partner needed, and the workshops rotate so nobody sits out.
             </p>
           </article>
 

@@ -62,11 +62,11 @@ export default async function AdminClassesPage() {
             </h1>
             <Badge className="bg-amber-500 text-white font-semibold">
               <CalendarPlus className="mr-1 h-3.5 w-3.5" />
-              Role-Balanced Calendar
+              Pay at the door
             </Badge>
           </div>
           <p className="mt-1 text-sm text-muted-foreground">
-            Publish new Cuban Salsa & Rueda classes, configure strict Lead/Follow caps, and jump straight to the QR door roster.
+            Publish new Cuban Salsa & Rueda classes, see who said they&apos;re coming, and jump straight to the QR door roster.
           </p>
         </div>
       </div>

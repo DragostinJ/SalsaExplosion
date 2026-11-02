@@ -21,13 +21,9 @@ import {
   bookClassAction,
   cancelBookingAction,
 } from "@/actions/booking.actions";
-import {
-  CANCELLATION_WINDOW_HOURS,
-  LEVEL_WEIGHT,
-} from "@/lib/constants/booking";
+import { LEVEL_WEIGHT } from "@/lib/constants/booking";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { triggerQuickBookDrawer } from "@/components/booking/QuickBookDrawer";
 import {
   Card,
   CardContent,
@@ -181,32 +177,11 @@ export function ClassScheduleCard({
   );
 
   const startDate = new Date(session.startTime);
-  const [isWithinCancellationWindow] = React.useState(() => {
-    const startTimeMs = new Date(session.startTime).getTime();
-    const hours = (startTimeMs - Date.now()) / (1000 * 60 * 60);
-    return hours < CANCELLATION_WINDOW_HOURS;
-  });
 
   const isLevelUnlocked = isGuest
     ? true // Allow guests to view and evaluate all levels
     : LEVEL_WEIGHT[student.currentLevel] >= LEVEL_WEIGHT[session.minLevel];
 
-  const isTotalFull = optimisticState.bookedCount >= session.maxCapacity;
-  const isLeadFull =
-    session.maxLeads !== null && optimisticState.leadsCount >= session.maxLeads;
-  const isFollowFull =
-    session.maxFollows !== null &&
-    optimisticState.followsCount >= session.maxFollows;
-
-  const isSelectedRoleFull =
-    isTotalFull ||
-    (selectedRole === DanceRole.LEAD && isLeadFull) ||
-    (selectedRole === DanceRole.FOLLOW && isFollowFull);
-
-  const spotsRemaining = Math.max(
-    0,
-    session.maxCapacity - optimisticState.bookedCount
-  );
 
   const handleBook = () => {
     setFeedback(null);
@@ -378,78 +353,33 @@ export function ClassScheduleCard({
           </div>
         </div>
 
-        {/* Capacity & Partner Ratio Meter */}
+        {/* Who's coming: information for the teachers, never a limit (everyone can come in) */}
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs">
-            <span className="flex items-center gap-1.5 font-medium text-muted-foreground">
-              <Users className="h-3.5 w-3.5" />
-              Class Capacity
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold">
+            <span className="flex items-center gap-1.5">
+              <Users className="h-3.5 w-3.5" aria-hidden="true" />
+              {optimisticState.bookedCount} coming
             </span>
-            <span
-              className={`font-semibold ${
-                spotsRemaining <= 3
-                  ? "text-amber-400"
-                  : "text-foreground"
-              }`}
-            >
-              {spotsRemaining === 0
-                ? "Sold Out"
-                : `${spotsRemaining} of ${session.maxCapacity} spots left`}
-            </span>
-          </div>
-
-          {/* Dual-Color Automated Lead vs Follow Ratio Meter */}
-          <div className="space-y-1.5">
-            <div className="h-2 w-full overflow-hidden rounded-full bg-muted flex">
-              <div
-                title={`Leads booked: ${optimisticState.leadsCount}`}
-                className="h-full bg-sky-400/50 transition-all duration-300"
-                style={{
-                  width: `${Math.min(
-                    100,
-                    session.maxCapacity > 0
-                      ? Math.round((optimisticState.leadsCount / session.maxCapacity) * 100)
-                      : 0
-                  )}%`,
-                }}
-              />
-              <div
-                title={`Follows booked: ${optimisticState.followsCount}`}
-                className="h-full bg-rose-400/50 transition-all duration-300"
-                style={{
-                  width: `${Math.min(
-                    100,
-                    session.maxCapacity > 0
-                      ? Math.round((optimisticState.followsCount / session.maxCapacity) * 100)
-                      : 0
-                  )}%`,
-                }}
-              />
-            </div>
-            <div className="flex items-center justify-between text-xs text-muted-foreground px-0.5">
-              <span className="flex items-center gap-1.5 font-medium text-ivory-muted">
-                <span className="h-2 w-2 rounded-full bg-sky-500/75" />
-                {optimisticState.leadsCount} Leads
+            {!isSoloClass && (
+              <span className="text-muted-foreground">
+                {optimisticState.leadsCount} leads · {optimisticState.followsCount} follows
               </span>
-              <span className="flex items-center gap-1.5 font-medium text-ivory-muted">
-                <span className="h-2 w-2 rounded-full bg-rose-400/75" />
-                {optimisticState.followsCount} Follows
-              </span>
-            </div>
-          </div>
+            )}
+          </p>
 
           {/* Partner Role Selector */}
           {!isSoloClass && !optimisticState.isBooked && isLevelUnlocked && (
             <div className="grid grid-cols-2 gap-2 pt-1.5">
               <button
                 type="button"
-                disabled={isPending || isLeadFull}
+                disabled={isPending}
+                aria-pressed={selectedRole === DanceRole.LEAD}
                 onClick={() => setSelectedRole(DanceRole.LEAD)}
                 className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
                   selectedRole === DanceRole.LEAD
                     ? "border-sky-500/45 bg-sky-500/12 text-sky-100 shadow-xs ring-1 ring-sky-500/20"
                     : "border-border/80 bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground"
-                } ${isLeadFull ? "cursor-not-allowed opacity-50" : ""}`}
+                }`}
               >
                 <span className="flex items-center gap-1.5 font-extrabold tracking-wide">
                   <span
@@ -461,30 +391,18 @@ export function ClassScheduleCard({
                   />
                   Lead
                 </span>
-                {session.maxLeads !== null && (
-                  <span
-                    className={`text-xs font-bold ${
-                      selectedRole === DanceRole.LEAD
-                        ? "text-sky-200/80"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {isLeadFull
-                      ? "Full"
-                      : `${session.maxLeads - optimisticState.leadsCount} left`}
-                  </span>
-                )}
               </button>
 
               <button
                 type="button"
-                disabled={isPending || isFollowFull}
+                disabled={isPending}
+                aria-pressed={selectedRole === DanceRole.FOLLOW}
                 onClick={() => setSelectedRole(DanceRole.FOLLOW)}
                 className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
                   selectedRole === DanceRole.FOLLOW
                     ? "border-rose-400/45 bg-rose-500/12 text-rose-100 shadow-xs ring-1 ring-rose-400/20"
                     : "border-border/80 bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground"
-                } ${isFollowFull ? "cursor-not-allowed opacity-50" : ""}`}
+                }`}
               >
                 <span className="flex items-center gap-1.5 font-extrabold tracking-wide">
                   <span
@@ -496,19 +414,6 @@ export function ClassScheduleCard({
                   />
                   Follow
                 </span>
-                {session.maxFollows !== null && (
-                  <span
-                    className={`text-xs font-bold ${
-                      selectedRole === DanceRole.FOLLOW
-                        ? "text-rose-200/80"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {isFollowFull
-                      ? "Full"
-                      : `${session.maxFollows - optimisticState.followsCount} left`}
-                  </span>
-                )}
               </button>
             </div>
           )}
@@ -594,10 +499,7 @@ export function ClassScheduleCard({
                   ) : (
                     <XCircle className="mr-1.5 h-3.5 w-3.5" />
                   )}
-                  {isWithinCancellationWindow &&
-                  !student?.hasActiveSubscription
-                    ? "Cancel (No Refund)"
-                    : "Cancel Spot"}
+                  Cancel spot
                 </Button>
               </div>
               <AddToCalendarButton
@@ -614,34 +516,20 @@ export function ClassScheduleCard({
           )
         ) : isGuest ? (
           <div className="w-full space-y-2">
-            <Button
-              type="button"
-              onClick={() =>
-                triggerQuickBookDrawer({
-                  title: session.title,
-                  time: startDate.toLocaleTimeString("en-GB", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  }),
-                  level: session.minLevel,
-                  instructor: `${session.instructor.firstName} ${session.instructor.lastName}`.trim(),
-                  day: startDate.getDay() === 0 ? "sunday" : "thursday",
-                })
-              }
-              className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black uppercase text-xs h-10 rounded-xl shadow-md transition-colors"
-            >
-              Instant 2-Tap QuickBook →
-            </Button>
-            <Button asChild variant="outline" size="sm" className="w-full text-xs font-semibold">
+            {/* Guests need nothing to come in: no booking, pay at the door. Signing in only adds "I'm coming". */}
+            <p className="text-sm font-semibold">
+              Just come along and pay at the door. No booking needed.
+            </p>
+            <Button asChild variant="outline" size="sm" className="min-h-[40px] w-full text-xs font-semibold">
               <Link href={`/sign-in?redirect_url=${encodeURIComponent("/dashboard/schedule")}`}>
-                Sign In with Full Account
+                Sign in to tell the teachers you&apos;re coming
               </Link>
             </Button>
           </div>
         ) : (
           <Button
             type="button"
-            disabled={isPending || isSelectedRoleFull || session.isCancelled}
+            disabled={isPending || session.isCancelled}
             onClick={attemptBook}
             className="w-full font-bold shadow-xs transition-colors h-10 rounded-xl bg-brand hover:bg-brand-hover text-white"
           >
@@ -650,10 +538,10 @@ export function ClassScheduleCard({
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Securing Spot...
               </>
-            ) : isSelectedRoleFull ? (
-              `${selectedRole} Spots Full`
+            ) : isSoloClass ? (
+              "I'm coming"
             ) : (
-              `Reserve as ${selectedRole}`
+              `I'm coming as ${selectedRole === DanceRole.FOLLOW ? "Follow" : "Lead"}`
             )}
           </Button>
         )}

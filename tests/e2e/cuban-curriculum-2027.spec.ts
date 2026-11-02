@@ -228,8 +228,8 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
     await expect(tutorialDialog).toBeVisible();
 
     // Verify Step 1
-    await expect(page.getByText(/1\. Partner Balance: No Partner Required!/i)).toBeVisible();
-    await expect(page.getByText(/equal Lead & Follow slot caps/i)).toBeVisible();
+    await expect(page.getByText(/1\. Ven a clase: no partner needed/i)).toBeVisible();
+    await expect(page.getByText(/everyone dances, even when the class is uneven/i)).toBeVisible();
 
     // Verify body overflow is locked
     const overflowLocked = await page.evaluate(() => document.body.style.overflow);
@@ -237,15 +237,15 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
 
     // Click Next -> Step 2
     await page.getByRole("button", { name: /^Next/i }).click();
-    await expect(page.getByText(/2\. Studio Wallet, Credits & Free Refunds/i)).toBeVisible();
+    await expect(page.getByText(/2\. Practica en casa/i)).toBeVisible();
 
     // Click Next -> Step 3
     await page.getByRole("button", { name: /^Next/i }).click();
-    await expect(page.getByText(/3\. Cuban Salsa Levels & AI Video Co-Pilot/i)).toBeVisible();
+    await expect(page.getByText(/3\. Fiestas: festivals online/i)).toBeVisible();
 
     // Click Next -> Step 4
     await page.getByRole("button", { name: /^Next/i }).click();
-    await expect(page.getByText(/4\. 1-Second Door QR Check-In & Badges/i)).toBeVisible();
+    await expect(page.getByText(/4\. Mi carnet: your pass/i)).toBeVisible();
 
     // Click Got It, Let's Dance! button
     const finishBtn = page.getByRole("button", { name: /Got It, Let's Dance!/i });

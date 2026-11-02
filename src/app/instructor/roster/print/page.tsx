@@ -152,7 +152,7 @@ export default async function PrintRosterPage({ searchParams }: PrintRosterPageP
               Level: <span className="font-bold text-zinc-900">{classSession.minLevel}</span>
             </div>
             <div className="text-[11px] font-mono bg-zinc-100 px-2 py-1 rounded border border-zinc-200 inline-block">
-              Ratio: {leads.length} Leads / {follows.length} Follows
+              Mix: {leads.length} Leads / {follows.length} Follows
             </div>
           </div>
         </div>
@@ -164,7 +164,6 @@ export default async function PrintRosterPage({ searchParams }: PrintRosterPageP
               <span className="h-3 w-3 bg-blue-600 print:bg-black inline-block rounded-xs" />
               1. Leads Roster ({leads.length} Registered)
             </h2>
-            <span className="text-[11px] text-zinc-500">Max Leads: {classSession.maxLeads}</span>
           </div>
 
           <table className="w-full text-left border-collapse text-xs">

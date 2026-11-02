@@ -145,7 +145,7 @@ export default function TermsAndLegalPage() {
                 Weekly Class Reservations
               </h3>
               <p className="text-xs">
-                Weekly classes (Thursday or Sunday at BOH Studios) are paid at the door, so nothing is charged online. If you have reserved a spot and can&apos;t come, please cancel your reservation in the app so the Lead/Follow balance stays fair for everyone. If Salsa Explosion cancels a class, reservations are released automatically.
+                Weekly classes (Thursday or Sunday at BOH Studios) are paid at the door, so nothing is charged online. If you have reserved a spot and can&apos;t come, please cancel your reservation in the app so the teachers know who to expect. If Salsa Explosion cancels a class, reservations are released automatically.
               </p>
             </div>
 
@@ -228,7 +228,7 @@ export default function TermsAndLegalPage() {
                 </tr>
                 <tr>
                   <td className="p-3 font-bold border-r-2 border-ink">Dance Role &amp; Level</td>
-                  <td className="p-3 border-r-2 border-ink">Ensuring equal Lead/Follow class ratios and syllabus progression.</td>
+                  <td className="p-3 border-r-2 border-ink">Letting the teachers plan partner rotations, and syllabus progression.</td>
                   <td className="p-3 font-mono">Art. 6(1)(b) Contract</td>
                 </tr>
                 <tr>

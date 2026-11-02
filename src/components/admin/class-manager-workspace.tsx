@@ -67,9 +67,6 @@ export function ClassManagerWorkspace({
   const [room, setRoom] = useState("Main Havana Studio");
   const [durationMinutes, setDurationMinutes] = useState(75);
   const [maxCapacity, setMaxCapacity] = useState(24);
-  const [maxLeads, setMaxLeads] = useState(12);
-  const [maxFollows, setMaxFollows] = useState(12);
-  const [creditCost, setCreditCost] = useState(1);
   const [startTimeIso, setStartTimeIso] = useState(() =>
     new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().slice(0, 16)
   );
@@ -84,8 +81,6 @@ export function ClassManagerWorkspace({
   const [editingClassId, setEditingClassId] = useState<string | null>(null);
   const [editRoom, setEditRoom] = useState("");
   const [editMaxCapacity, setEditMaxCapacity] = useState(24);
-  const [editMaxLeads, setEditMaxLeads] = useState(12);
-  const [editMaxFollows, setEditMaxFollows] = useState(12);
 
   // Cancellation state
   const [cancellingClassId, setCancellingClassId] = useState<string | null>(null);
@@ -104,9 +99,6 @@ export function ClassManagerWorkspace({
         durationMinutes: Number(durationMinutes),
         room,
         maxCapacity: Number(maxCapacity),
-        maxLeads: Number(maxLeads),
-        maxFollows: Number(maxFollows),
-        creditCost: Number(creditCost),
       });
 
       if (res.success) {
@@ -122,8 +114,6 @@ export function ClassManagerWorkspace({
     setEditingClassId(cls.id);
     setEditRoom(cls.room);
     setEditMaxCapacity(cls.maxCapacity);
-    setEditMaxLeads(cls.maxLeads ?? Math.floor(cls.maxCapacity / 2));
-    setEditMaxFollows(cls.maxFollows ?? Math.floor(cls.maxCapacity / 2));
     setCancellingClassId(null);
   };
 
@@ -133,8 +123,9 @@ export function ClassManagerWorkspace({
         classSessionId,
         room: editRoom,
         maxCapacity: Number(editMaxCapacity),
-        maxLeads: Number(editMaxLeads),
-        maxFollows: Number(editMaxFollows),
+        // Role caps are not limits any more: clear any old ones when a class is edited.
+        maxLeads: null,
+        maxFollows: null,
       });
 
       if (res.success) {
@@ -266,63 +257,20 @@ export function ClassManagerWorkspace({
 
               <div className="rounded-xl border bg-muted/30 p-3 space-y-3">
                 <span className="font-bold text-foreground block">
-                  Capacity & Lead/Follow Role Caps
+                  Room size
                 </span>
-
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="space-y-1">
-                    <label className="text-[11px] text-muted-foreground">Hard Cap</label>
-                    <input
-                      type="number"
-                      min={4}
-                      max={100}
-                      aria-label="Hard Cap"
-                      value={maxCapacity}
-                      onChange={(e) => setMaxCapacity(Number(e.target.value))}
-                      className="w-full rounded-lg border bg-background px-2 py-1.5"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[11px] text-muted-foreground">Max Leads</label>
-                    <input
-                      type="number"
-                      min={2}
-                      max={50}
-                      aria-label="Max Leads"
-                      value={maxLeads}
-                      onChange={(e) => setMaxLeads(Number(e.target.value))}
-                      className="w-full rounded-lg border bg-background px-2 py-1.5"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[11px] text-muted-foreground">Max Follows</label>
-                    <input
-                      type="number"
-                      min={2}
-                      max={50}
-                      aria-label="Max Follows"
-                      value={maxFollows}
-                      onChange={(e) => setMaxFollows(Number(e.target.value))}
-                      className="w-full rounded-lg border bg-background px-2 py-1.5"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1.5">
-                  <label className="font-semibold">Credit Cost</label>
+                <div className="space-y-1">
+                  <label className="text-[11px] text-muted-foreground">
+                    How many dancers the room fits. For planning only: nobody is turned away and there is no Lead/Follow limit.
+                  </label>
                   <input
                     type="number"
-                    min={1}
-                    max={5}
-                    required
-                    aria-label="Credit Cost"
-                    value={creditCost}
-                    onChange={(e) => setCreditCost(Number(e.target.value))}
-                    className="w-full rounded-xl border bg-background px-3 py-2"
+                    min={4}
+                    max={100}
+                    aria-label="Room size"
+                    value={maxCapacity}
+                    onChange={(e) => setMaxCapacity(Number(e.target.value))}
+                    className="w-full rounded-lg border bg-background px-2 py-1.5"
                   />
                 </div>
               </div>
@@ -396,11 +344,10 @@ export function ClassManagerWorkspace({
                       <h3 className="text-sm font-bold">{cls.title}</h3>
                       <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground pt-1">
                         <span className="font-semibold text-blue-300">
-                          Leads: {cls.leadsBooked}/{cls.maxLeads ?? cls.maxCapacity}
+                          Leads: {cls.leadsBooked}
                         </span>
                         <span className="font-semibold text-rose-300">
-                          Follows: {cls.followsBooked}/
-                          {cls.maxFollows ?? cls.maxCapacity}
+                          Follows: {cls.followsBooked}
                         </span>
                         <span className="flex items-center gap-1.5 font-medium text-foreground">
                           <TeacherAvatar
@@ -469,7 +416,7 @@ export function ClassManagerWorkspace({
                         </button>
                       </div>
 
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      <div className="grid grid-cols-2 gap-2">
                         <div className="space-y-1">
                           <label className="text-[11px] text-muted-foreground font-semibold">
                             Studio Room
@@ -483,7 +430,7 @@ export function ClassManagerWorkspace({
                         </div>
                         <div className="space-y-1">
                           <label className="text-[11px] text-muted-foreground font-semibold">
-                            Total Capacity
+                            Room size
                           </label>
                           <input
                             type="number"
@@ -491,32 +438,6 @@ export function ClassManagerWorkspace({
                             max={100}
                             value={editMaxCapacity}
                             onChange={(e) => setEditMaxCapacity(Number(e.target.value))}
-                            className="w-full rounded-lg border bg-background px-2.5 py-1.5 text-xs"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[11px] text-muted-foreground font-semibold">
-                            Max Leads
-                          </label>
-                          <input
-                            type="number"
-                            min={2}
-                            max={50}
-                            value={editMaxLeads}
-                            onChange={(e) => setEditMaxLeads(Number(e.target.value))}
-                            className="w-full rounded-lg border bg-background px-2.5 py-1.5 text-xs"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[11px] text-muted-foreground font-semibold">
-                            Max Follows
-                          </label>
-                          <input
-                            type="number"
-                            min={2}
-                            max={50}
-                            value={editMaxFollows}
-                            onChange={(e) => setEditMaxFollows(Number(e.target.value))}
                             className="w-full rounded-lg border bg-background px-2.5 py-1.5 text-xs"
                           />
                         </div>

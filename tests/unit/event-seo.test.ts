@@ -34,6 +34,8 @@ describe("Event and Class SEO Structured Data (schema.org)", () => {
       expect(eventJsonLd.description).toBe(festival.description);
       expect(eventJsonLd.organizer.name).toBe("Salsa Explosion UK");
       expect(eventJsonLd.organizer.url).toBe("https://salsaexplosion.co.uk");
+      expect(eventJsonLd.performer?.name).toBe("Enrique Perez Valdes");
+      expect(eventJsonLd.performer?.jobTitle).toBe("Artistic Director");
 
       // Location verification
       expect(eventJsonLd.location["@type"]).toBe("Place");
@@ -74,6 +76,35 @@ describe("Event and Class SEO Structured Data (schema.org)", () => {
       expect(tiers[0].price).toBe("120.00");
       expect(tiers[1].name).toBe("Saturday Day Pass");
       expect(tiers[1].price).toBe("65.00");
+    });
+
+    it("sets availability to SoldOut when event has finished (isFinished is true)", () => {
+      const eventJsonLd = buildFestivalEventJsonLd({
+        slug: "finished-festival",
+        title: "Finished Festival",
+        startDate: "2025-01-01T18:00:00Z",
+        endDate: "2025-01-03T23:00:00Z",
+        ticketTiers: [
+          { name: "Full Pass", priceInCents: 10000 },
+        ],
+        isFinished: true,
+      });
+
+      const offer = Array.isArray(eventJsonLd.offers) ? eventJsonLd.offers[0] : eventJsonLd.offers;
+      expect(offer.availability).toBe("https://schema.org/SoldOut");
+    });
+
+    it("falls back to VENUE_INFO when venueName or venueAddress are omitted", () => {
+      const eventJsonLd = buildFestivalEventJsonLd({
+        slug: "default-venue-festival",
+        title: "Default Venue Festival",
+        startDate: "2026-11-20T18:00:00Z",
+      });
+
+      expect(eventJsonLd.location.name).toBe(VENUE_INFO.name);
+      expect(eventJsonLd.location.address.streetAddress).toBe(VENUE_INFO.streetAddress);
+      expect(eventJsonLd.location.address.postalCode).toBe(VENUE_INFO.postcode);
+      expect(eventJsonLd.location.address.addressLocality).toBe(VENUE_INFO.city);
     });
   });
 

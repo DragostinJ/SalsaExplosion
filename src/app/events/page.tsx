@@ -6,6 +6,8 @@ import { BackButton } from "@/components/navigation/back-button";
 import { VENUE_INFO, ACADEMY_METRICS, upcomingCanonicalEvents } from "@/lib/academy-data";
 import { reportError } from "@/lib/monitoring";
 import { getPublishedEvents } from "@/lib/stores/published-events-store";
+import { buildFestivalEventJsonLd } from "@/lib/seo/event-jsonld";
+import { jsonLdHtml } from "@/lib/seo/move-jsonld";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata = {
@@ -69,8 +71,25 @@ export default async function EventsDirectoryPage() {
 
   const liveAnnouncements = await getPublishedEvents();
 
+  const eventsJsonLd = displayEvents.map((evt) =>
+    buildFestivalEventJsonLd({
+      slug: evt.slug,
+      title: evt.title,
+      description: evt.description,
+      startDate: evt.startDate,
+      endDate: evt.endDate,
+      coverImageUrl: evt.coverImageUrl,
+      venueName: evt.venueName,
+      venueAddress: evt.venueAddress,
+      ticketTiers: evt.ticketTiers,
+    })
+  );
+
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">
+      {eventsJsonLd.length > 0 && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(eventsJsonLd) }} />
+      )}
       <div>
         <BackButton fallbackUrl="/classes" label="Back to Schedule" />
       </div>

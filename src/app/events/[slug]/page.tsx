@@ -26,6 +26,8 @@ import { StudioEventGuide } from "@/components/events/studio-event-guide";
 import { UPCOMING_EVENTS, VENUE_INFO, canonicalEventEnd } from "@/lib/academy-data";
 import { hasEventEnded } from "@/lib/event-sales";
 import { reportError } from "@/lib/monitoring";
+import { buildFestivalEventJsonLd } from "@/lib/seo/event-jsonld";
+import { jsonLdHtml } from "@/lib/seo/move-jsonld";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 function InstagramIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -244,50 +246,24 @@ export default async function EventDetailPage({
     }
   );
 
-  const eventJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    name: event.title,
-    startDate: new Date(event.startDate).toISOString(),
-    endDate: new Date(event.endDate).toISOString(),
+  const eventJsonLd = buildFestivalEventJsonLd({
+    slug: event.slug,
+    title: event.title,
     description: event.description,
-    image: event.coverImageUrl || undefined,
-    location: {
-      "@type": "Place",
-      name: event.venueName || VENUE_INFO.name,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: event.venueAddress || VENUE_INFO.streetAddress,
-        addressLocality: "Bournemouth",
-        postalCode: VENUE_INFO.postcode,
-        addressCountry: "GB",
-      },
-    },
-    performer: {
-      "@type": "Person",
-      name: "Enrique Perez Valdes",
-      jobTitle: "Artistic Director",
-    },
-    organizer: {
-      "@type": "Organization",
-      name: "Salsa Explosion UK",
-      url: "https://salsaexplosion.co.uk",
-    },
-    offers: event.ticketTiers.map((tier) => ({
-      "@type": "Offer",
-      name: tier.name,
-      price: (tier.priceInCents / 100).toFixed(2),
-      priceCurrency: "GBP",
-      availability: eventFinished ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
-      url: `https://salsaexplosion.co.uk/events/${event.slug}`,
-    })),
-  };
+    startDate: event.startDate,
+    endDate: event.endDate,
+    coverImageUrl: event.coverImageUrl,
+    venueName: event.venueName,
+    venueAddress: event.venueAddress,
+    ticketTiers: event.ticketTiers,
+    isFinished: eventFinished,
+  });
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdHtml(eventJsonLd) }}
       />
       <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-10">
         <div>

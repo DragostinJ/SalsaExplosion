@@ -8,6 +8,7 @@ import {
 } from "@/actions/recap.actions";
 import { ClassRecapVault } from "@/components/recaps/class-recap-vault";
 import { PageHeader } from "@/components/layout/page-header";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import { reportError } from "@/lib/monitoring";
 
@@ -60,6 +61,7 @@ export default async function ClassRecapsPage() {
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
       {loadFailed && <DataUnavailableNotice />}
       <PageHeader
+        art={MEDIA_MANIFEST.mockupGraphics.camera}
         title="Class Recaps &"
         titleHighlight="Attended Figures"
         description="Never forget a routine again! Watch your maestros demonstrate the Cuban combinations practiced at the end of each class, check figure names, and use 0.75x slow-motion to master footwork."

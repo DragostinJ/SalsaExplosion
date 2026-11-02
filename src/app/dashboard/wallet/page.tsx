@@ -14,6 +14,7 @@ import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
 import { PageHeader } from "@/components/layout/page-header";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/ui/status-badge";
@@ -43,6 +44,7 @@ export default async function StudentWalletPage() {
     return (
       <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
         <PageHeader
+          art={MEDIA_MANIFEST.mockupGraphics.phone}
           title="Digital Passes &"
           titleHighlight="Studio Wallet"
           description={`Manage your Thursday & Sunday class credits, Made in Cuba festival passes, and instant 1-tap QR door check-in at ${VENUE_INFO.name} (${VENUE_INFO.address}, ${VENUE_INFO.postcode}).`}
@@ -269,6 +271,7 @@ export default async function StudentWalletPage() {
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
       {loadFailed && <DataUnavailableNotice />}
       <PageHeader
+        art={MEDIA_MANIFEST.mockupGraphics.phone}
         title={user.firstName ?? "Dancer"}
         titleHighlight={user.lastName ?? "Wallet"}
         description="Show your digital passes and door QR codes at the BOH Studios Bournemouth entrance for instant 1-tap admission."

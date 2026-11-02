@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, DoorOpen, Ticket, Sparkles } from "lucide-react";
@@ -58,7 +60,15 @@ export default function PricingPage() {
             </div>
 
             <div className="pt-1">
-              <div className="flex items-baseline gap-2 flex-wrap">
+              <div className="flex items-center gap-3 flex-wrap">
+                <Image
+                  src={MEDIA_MANIFEST.mockupGraphics.ticket.src}
+                  alt=""
+                  width={MEDIA_MANIFEST.mockupGraphics.ticket.width}
+                  height={MEDIA_MANIFEST.mockupGraphics.ticket.height}
+                  sizes="5rem"
+                  className="w-20"
+                />
                 <span className={`font-display font-black ${TYPE.number} text-ink`}>
                   £12
                 </span>

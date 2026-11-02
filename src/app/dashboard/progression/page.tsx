@@ -34,6 +34,7 @@ import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curricu
 import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
 import { PRISMA_TO_CURRICULUM_LEVEL_MAP } from "@/lib/constants/cuban-curriculum-2027";
 import { PageHeader } from "@/components/layout/page-header";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -146,6 +147,7 @@ export default async function ProgressionPage() {
       {loadFailed && <DataUnavailableNotice />}
       {/* Header — Havana Architecture */}
       <PageHeader
+        art={MEDIA_MANIFEST.mockupGraphics.medal}
         title="Cuban Salsa"
         titleHighlight="Progression"
         description="Track your dance milestones, submit technique videos for review, and unlock higher-tier classes."

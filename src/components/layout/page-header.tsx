@@ -1,6 +1,8 @@
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import type { MediaAssetConfig } from "@/lib/media-manifest";
 import { cn } from "@/lib/utils";
 
 export interface PageHeaderProps {
@@ -17,6 +19,8 @@ export interface PageHeaderProps {
   badge?: React.ReactNode;
   compact?: boolean;
   className?: string;
+  /** Optional screen-print illustration beside the headline (decorative) */
+  art?: MediaAssetConfig;
 }
 
 export function PageHeader({
@@ -33,6 +37,7 @@ export function PageHeader({
   badge,
   compact = false,
   className,
+  art,
 }: PageHeaderProps) {
   const effectiveEyebrowLeft = eyebrowLeft ?? eyebrow;
   const effectiveHighlight = highlight ?? titleHighlight;
@@ -110,7 +115,8 @@ export function PageHeader({
           </div>
         )}
 
-        <div className="mt-3 sm:mt-4 space-y-2.5 sm:space-y-3 max-w-3xl">
+        <div className="flex items-end justify-between gap-4">
+        <div className="mt-3 sm:mt-4 min-w-0 flex-1 space-y-2.5 sm:space-y-3 max-w-3xl">
           <h1 className="text-5xl leading-[0.92] text-ivory md:text-7xl">
             {title}
             {effectiveHighlight && (
@@ -134,6 +140,17 @@ export function PageHeader({
               {actions}
             </div>
           )}
+        </div>
+        {art && (
+          <Image
+            src={art.src}
+            alt=""
+            width={art.width}
+            height={art.height}
+            sizes="(max-width: 768px) 5rem, 10rem"
+            className="w-20 shrink-0 sm:w-28 md:w-40"
+          />
+        )}
         </div>
       </div>
     </div>

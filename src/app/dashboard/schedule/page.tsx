@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -289,6 +291,14 @@ export default async function StudentSchedulePage({
           <span>{VENUE_INFO.shortName} BOURNEMOUTH • PAY AT THE DOOR</span>
           <span className="opacity-70">{VENUE_INFO.streetAddress} • {VENUE_INFO.postcode}</span>
         </div>
+        <Image
+          src={MEDIA_MANIFEST.mockupGraphics.clock.src}
+          alt=""
+          width={MEDIA_MANIFEST.mockupGraphics.clock.width}
+          height={MEDIA_MANIFEST.mockupGraphics.clock.height}
+          sizes="9rem"
+          className="pointer-events-none absolute right-6 top-16 hidden w-28 rotate-6 sm:block md:right-10 md:w-36"
+        />
 
         <div className="mt-4 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3">

@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/layout/page-header";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { RuedaDictionaryClient } from "@/components/rueda/rueda-dictionary-client";
 
@@ -13,6 +14,7 @@ export default function RuedaDictionaryPage() {
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
       <CancionesTabs current="/dashboard/rueda" />
       <PageHeader
+        art={MEDIA_MANIFEST.mockupGraphics.caller}
         title="Rueda de Casino"
         titleHighlight="Call Dictionary"
         description="Master the figures called in the Rueda circle at BOH Studios and Bournemouth Havana Fiesta socials. Learn Spanish pronunciations, hand signals for loud dance floors, and exact clave timing."

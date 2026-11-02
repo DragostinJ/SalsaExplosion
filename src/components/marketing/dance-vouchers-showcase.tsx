@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { Gift, Phone, MessageSquare, CheckCircle2, MapPin } from "lucide-react";
 
 interface DanceVouchersShowcaseProps {
@@ -42,9 +44,19 @@ export function DanceVouchersShowcase({
               </span>
             </div>
 
-            <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-ink leading-tight">
-              DANCE VOUCHERS — THE PERFECT GIFT!
-            </h2>
+            <div className="flex items-end justify-between gap-4">
+              <h2 className="font-display font-black text-3xl sm:text-5xl uppercase tracking-tight text-ink leading-tight">
+                DANCE VOUCHERS — THE PERFECT GIFT!
+              </h2>
+              <Image
+                src={MEDIA_MANIFEST.mockupGraphics.gift.src}
+                alt=""
+                width={MEDIA_MANIFEST.mockupGraphics.gift.width}
+                height={MEDIA_MANIFEST.mockupGraphics.gift.height}
+                sizes="8rem"
+                className="w-20 shrink-0 sm:w-32"
+              />
+            </div>
 
             <p className="text-sm sm:text-base font-bold text-ink leading-relaxed">
               Looking for a gift that’s a little different? Why not give your friends or family the gift of Cuban Salsa!

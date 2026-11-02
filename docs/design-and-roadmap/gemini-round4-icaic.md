@@ -69,19 +69,19 @@ and `MEDIA_MANIFEST.editorial` (bannerBigBand, bannerHavana, bannerDoor).
 
 The cut-outs lose their cream interiors on ink, so put them on paper or a light poster ink.
 
-| # | Image | Placed (2026-11-01) | Still to place (pages Antigravity restyled overnight) |
-|---|-------|---------------------|-------------------------------------------------------|
-| 1 | Admission ticket | Home: next to the £12 / £14 door price | /pricing door prices |
-| 2 | Alarm clock | Home: cartelera heading | /dashboard/schedule header |
-| 3 | Pier and palm | Home: venue block | /venues "getting here" |
-| 4 | Phone with a pattern | Mi carnet: "Tus pases" | /how-it-works, /dashboard/wallet |
-| 5 | The caller's hand | Rueda flashcards header | /dashboard/rueda dictionary header |
-| 6 | Gift envelope | Home: gift voucher band | /pricing#vouchers |
-| 7 | Medal on a ribbon | Mi carnet: next to the counts | /dashboard/progression |
-| 8 | Vintage cine camera | /moves "Próximamente" | /dashboard/recaps |
-| 9 | Vinyl record | 404 page ("Se rayó el disco") | empty states |
-| 10 | The big band | Home: "Próximas funciones" | /events hero |
-| 11 | Havana at sunset | none yet | /about hero ("Desde La Habana") |
-| 12 | The dance-hall door | none yet | /private-lessons or /venues hero |
+| # | Image | Where it is |
+|---|-------|-------------|
+| 1 | Admission ticket | Home (door price), /pricing (door block), /dashboard/referrals header |
+| 2 | Alarm clock | Home cartelera heading, /dashboard/schedule hero |
+| 3 | Pier and palm | Home venue block |
+| 4 | Phone with a pattern | Mi carnet "Tus pases", /dashboard/wallet header |
+| 5 | The caller's hand | Rueda flashcards, /dashboard/rueda dictionary header |
+| 6 | Gift envelope | Home voucher band, /pricing vouchers showcase |
+| 7 | Medal on a ribbon | Mi carnet, /dashboard/progression header |
+| 8 | Vintage cine camera | /moves "Próximamente", /dashboard/recaps header |
+| 9 | Vinyl record | 404 page ("Se rayó el disco") |
+| 10 | The big band | Home "Próximas funciones" |
+| 11 | Havana at sunset | /about, under the hero ("Desde La Habana") |
+| 12 | The dance-hall door | /private-lessons, under the hero ("Las puertas abiertas") |
 
 Items 1–9 are cut out to transparent PNGs (1024 px) like rounds 2–3; items 10–12 are optimised JPEGs (max 2400 px). Save Gemini's files into `public/images/editorial/` as before; Claude processes and places them.

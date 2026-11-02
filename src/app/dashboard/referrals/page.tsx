@@ -3,6 +3,7 @@ import { ArrowRight, Users, Sparkles, CheckCircle2 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, isFallbackUser } from "@/lib/auth-user";
 import { PageHeader } from "@/components/layout/page-header";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { DataUnavailableNotice } from "@/components/ui/data-unavailable-notice";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +25,7 @@ export default async function ReferralsPage() {
     return (
       <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
         <PageHeader
+          art={MEDIA_MANIFEST.mockupGraphics.ticket}
           title="Invite Friends,"
           titleHighlight="Earn Free Class Credits"
           description={`Help grow Bournemouth's authentic Cuban Salsa & Rueda de Casino community at ${VENUE_INFO.name}. When a friend joins their first Thursday or Sunday session using your personal code, you both receive a complimentary class credit.`}
@@ -127,6 +129,7 @@ export default async function ReferralsPage() {
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
       {loadFailed && <DataUnavailableNotice />}
       <PageHeader
+        art={MEDIA_MANIFEST.mockupGraphics.ticket}
         title="Refer-a-Dancer"
         titleHighlight="Program"
         description="Help grow Bournemouth's authentic Cuban salsa scene. Share your link with friends, colleagues, or dance partners."

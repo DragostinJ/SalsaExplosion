@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   Flame,
@@ -165,6 +166,18 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
+
+      <figure className="border-4 border-ink bg-paper">
+        <Image
+          src={MEDIA_MANIFEST.editorial.bannerHavana.src}
+          alt={MEDIA_MANIFEST.editorial.bannerHavana.alt}
+          width={MEDIA_MANIFEST.editorial.bannerHavana.width}
+          height={MEDIA_MANIFEST.editorial.bannerHavana.height}
+          sizes="(max-width: 1280px) 100vw, 1280px"
+          className="aspect-[21/9] w-full object-cover"
+        />
+        <figcaption className="border-t-4 border-ink bg-ink px-4 py-2 font-display text-2xl uppercase text-paper">Desde La Habana</figcaption>
+      </figure>
 
       {/* 2. Core Pillars & Academy Capabilities */}
       <section className="space-y-6">

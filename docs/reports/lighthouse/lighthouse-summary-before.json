@@ -1,0 +1,50 @@
+{
+  "root": {
+    "url": "http://localhost:3200/",
+    "perf": 68,
+    "lcp": "8.9 s",
+    "cls": "0",
+    "tbt": "200 ms",
+    "opps": [
+      "Avoid multiple page redirects (Est savings of 1,750 ms)",
+      "Reduce unused JavaScript (Est savings of 395 KiB)",
+      "Minify JavaScript (Est savings of 14 KiB)"
+    ]
+  },
+  "events": {
+    "url": "http://localhost:3200/events",
+    "perf": 89,
+    "lcp": "2.4 s",
+    "cls": "0",
+    "tbt": "240 ms",
+    "opps": [
+      "Avoid multiple page redirects (Est savings of 1,730 ms)",
+      "Minify JavaScript (Est savings of 14 KiB)",
+      "Reduce unused JavaScript (Est savings of 327 KiB)"
+    ]
+  },
+  "music": {
+    "url": "http://localhost:3200/music",
+    "perf": 85,
+    "lcp": "2.3 s",
+    "cls": "0",
+    "tbt": "310 ms",
+    "opps": [
+      "Avoid multiple page redirects (Est savings of 1,720 ms)",
+      "Minify JavaScript (Est savings of 14 KiB)",
+      "Reduce unused JavaScript (Est savings of 351 KiB)"
+    ]
+  },
+  "song": {
+    "url": "http://localhost:3200/music/me-dicen-cuba",
+    "perf": 91,
+    "lcp": "2.4 s",
+    "cls": "0",
+    "tbt": "190 ms",
+    "opps": [
+      "Avoid multiple page redirects (Est savings of 1,740 ms)",
+      "Minify JavaScript (Est savings of 14 KiB)",
+      "Reduce unused JavaScript (Est savings of 338 KiB)"
+    ]
+  }
+}

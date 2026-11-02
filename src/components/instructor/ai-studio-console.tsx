@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import {
   Sparkles,
   Music,
@@ -463,9 +464,12 @@ export function AiStudioConsole() {
 
                 {flyerPreview ? (
                   <div className="relative rounded-2xl border border-gold/40 bg-surface-3 p-3 flex items-center gap-4">
-                    <img
+                    <NextImage
                       src={flyerPreview}
                       alt="Event Flyer Preview"
+                      width={64}
+                      height={80}
+                      unoptimized
                       className="h-20 w-16 object-cover rounded-xl border border-line"
                     />
                     <div className="text-xs space-y-1">

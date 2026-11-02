@@ -1,14 +1,34 @@
 import { describe, it, expect } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import nextConfig from "../../next.config";
+
+/** The headers every route actually sends (not just text in the file: a comment once satisfied that). */
+async function sentHeaders(): Promise<Map<string, string>> {
+  const rules = (await nextConfig.headers?.()) ?? [];
+  const all = rules.find((rule) => rule.source === "/(.*)");
+  return new Map((all?.headers ?? []).map((header) => [header.key, header.value]));
+}
 
 describe("Content Security Policy Guard (Milestone C1 & C2)", () => {
   const nextConfigPath = path.resolve(process.cwd(), "next.config.ts");
 
-  it("ensures next.config.ts exists and defines enforced Content-Security-Policy", () => {
-    expect(fs.existsSync(nextConfigPath)).toBe(true);
-    const content = fs.readFileSync(nextConfigPath, "utf-8");
-    expect(content).toContain('"Content-Security-Policy"');
+  it("sends an enforced Content-Security-Policy on every route", async () => {
+    const headers = await sentHeaders();
+    const csp = headers.get("Content-Security-Policy");
+    expect(csp).toBeDefined();
+    expect(csp).toContain("default-src 'self'");
+    expect(csp).toContain("frame-src");
+    expect(csp).toContain("https://www.youtube.com");
+    expect(csp).toContain("object-src 'none'");
+    expect(headers.has("Content-Security-Policy-Report-Only")).toBe(false);
+  });
+
+  it("keeps the camera available to the site itself (check-in QR scanner) and blocks the rest", async () => {
+    const policy = (await sentHeaders()).get("Permissions-Policy") ?? "";
+    expect(policy).toContain("camera=(self)");
+    expect(policy).toContain("microphone=()");
+    expect(policy).toContain("geolocation=()");
   });
 
   it("verifies removal of broken Content-Security-Policy-Report-Only header that was flooding DevTools", () => {

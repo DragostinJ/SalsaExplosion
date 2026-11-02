@@ -2,10 +2,13 @@ import {
   ACADEMY_METRICS,
   VENUE_INFO,
   WEEKLY_SCHEDULE,
-  PASS_PRICING,
   UPCOMING_EVENTS,
   ACADEMY_FAQS,
 } from "@/lib/academy-data";
+import {
+  buildWeeklyClassCourseJsonLd,
+  buildFestivalEventJsonLd,
+} from "@/lib/seo/event-jsonld";
 
 export function JsonLdSchema() {
   const allSessions = [
@@ -88,53 +91,19 @@ export function JsonLdSchema() {
         ],
         sameAs: [VENUE_INFO.instagramUrl, VENUE_INFO.facebookUrl],
       },
-      ...allSessions.map((session) => ({
-        "@type": "Course",
-        "@id": `https://salsaexplosion.co.uk/#course-${session.id}`,
-        name: `${session.dayName} ${session.time} — ${session.title}`,
-        description: `${session.level} (${session.badge}) directed by ${session.instructor} at ${VENUE_INFO.name}, ${VENUE_INFO.fullAddress}.`,
-        provider: {
-          "@id": "https://salsaexplosion.co.uk/#organization",
-        },
-        offers: {
-          "@type": "Offer",
-          price: PASS_PRICING.PACK_SINGLE.priceInPounds.toFixed(2),
-          priceCurrency: "GBP",
-          availability: "https://schema.org/InStock",
-          url: "https://salsaexplosion.co.uk/dashboard/schedule",
-        },
-      })),
-      ...UPCOMING_EVENTS.map((evt) => ({
-        "@type": "Event",
-        "@id": `https://salsaexplosion.co.uk/events/${evt.slug}`,
-        name: evt.title,
-        startDate: evt.startDateIso,
-        ...(evt.endDateIso ? { endDate: evt.endDateIso } : {}),
-        description: evt.description,
-        location: {
-          "@type": "Place",
-          name: evt.venueName,
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: VENUE_INFO.streetAddress,
-            addressLocality: VENUE_INFO.city,
-            postalCode: VENUE_INFO.postcode,
-            addressCountry: VENUE_INFO.country,
-          },
-        },
-        offers: {
-          "@type": "Offer",
-          price: evt.minPricePounds.toFixed(2),
-          priceCurrency: "GBP",
-          availability: "https://schema.org/InStock",
-          url: `https://salsaexplosion.co.uk/events/${evt.slug}`,
-        },
-        organizer: {
-          "@type": "Organization",
-          name: "Salsa Explosion UK",
-          url: "https://salsaexplosion.co.uk",
-        },
-      })),
+      ...allSessions.map((session) => buildWeeklyClassCourseJsonLd(session)),
+      ...UPCOMING_EVENTS.map((evt) =>
+        buildFestivalEventJsonLd({
+          slug: evt.slug,
+          title: evt.title,
+          description: evt.description,
+          startDate: evt.startDateIso,
+          endDate: evt.endDateIso,
+          coverImageUrl: evt.posterUrl,
+          venueName: evt.venueName,
+          minPricePounds: evt.minPricePounds,
+        })
+      ),
       {
         "@type": "FAQPage",
         "@id": "https://salsaexplosion.co.uk/#faq",

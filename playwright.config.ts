@@ -26,8 +26,5 @@ export default defineConfig({
     url: baseURL,
     reuseExistingServer: true,
     timeout: 120 * 1000,
-    env: {
-      NODE_TLS_REJECT_UNAUTHORIZED: "0",
-    },
   },
 });

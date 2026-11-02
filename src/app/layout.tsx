@@ -118,7 +118,7 @@ export default function RootLayout({
           <ImmersiveRouteGate>
             <SiteHeader />
           </ImmersiveRouteGate>
-          <div className="flex-1 overflow-x-hidden relative z-10">{children}</div>
+          <div className="flex-1 overflow-x-hidden relative z-10 min-h-screen">{children}</div>
           <ImmersiveRouteGate>
             <SiteFooter />
             <MobileBottomNav />

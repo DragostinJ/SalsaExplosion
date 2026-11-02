@@ -26,12 +26,12 @@ export function NextSectionStrip({ next, isGetReady, isQuiz, secondsUntilNext }:
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center gap-2.5 rounded-2xl border px-3 py-2 transition-colors",
+        "flex shrink-0 items-center gap-2.5 border-2 px-3 py-2 transition-colors",
         highlight ? cn(highlight.chipClass, "animate-pulse") : "border-line bg-surface-2"
       )}
     >
       <span
-        className={cn("h-8 w-1.5 shrink-0 rounded-full", gear && !isQuiz ? gear.fillClass : "bg-line")}
+        className={cn("h-8 w-2 shrink-0", gear && !isQuiz ? gear.fillClass : "bg-line")}
         aria-hidden="true"
       />
       <div className="min-w-0 flex-1">

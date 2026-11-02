@@ -30,7 +30,7 @@ export function PlayerHeader({ song, title, mode, onCycleMode, role, onChangeRol
           type="button"
           onClick={onExit}
           aria-label="Close preview"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-2"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-line bg-surface-2"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -38,7 +38,7 @@ export function PlayerHeader({ song, title, mode, onCycleMode, role, onChangeRol
         <Link
           href="/music"
           aria-label="Back to all songs"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-2"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-line bg-surface-2"
         >
           <ChevronLeft className="h-5 w-5" />
         </Link>
@@ -54,11 +54,11 @@ export function PlayerHeader({ song, title, mode, onCycleMode, role, onChangeRol
         onClick={onCycleMode}
         aria-label={`Practice mode: ${mode}. Tap to switch`}
         data-testid="player-mode"
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-surface-2 text-gold"
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-line bg-surface-2 text-gold"
       >
         <ModeIcon className="h-5 w-5" />
       </button>
-      <div className="flex shrink-0 rounded-full border border-line bg-surface-2 p-0.5" role="radiogroup" aria-label="Your role">
+      <div className="flex shrink-0 rounded-full border-2 border-line bg-surface-2 p-0.5" role="radiogroup" aria-label="Your role">
         {(["leader", "follower"] as const).map((option) => (
           <button
             key={option}

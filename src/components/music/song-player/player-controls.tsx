@@ -19,7 +19,7 @@ interface PlayerControlsProps {
   onToggleLoop: () => void;
 }
 
-const roundButton = "flex items-center justify-center rounded-full border border-line bg-surface-2 disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-gold";
+const roundButton = "flex items-center justify-center rounded-full border-2 border-line bg-surface-2 disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-gold";
 
 /** Thumb-zone transport: details · speed · previous · play · next · loop. */
 export function PlayerControls({
@@ -75,7 +75,7 @@ export function PlayerControls({
         onClick={onTogglePlay}
         disabled={!isReady}
         aria-label={isPlaying ? "Pause" : "Play"}
-        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gold text-canvas shadow-lg disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2"
+        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gold text-canvas shadow-[4px_4px_0_0_var(--color-ivory)] disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-gold focus-visible:outline-offset-2"
       >
         {isBuffering ? (
           <Loader2 className="h-7 w-7 animate-spin" />

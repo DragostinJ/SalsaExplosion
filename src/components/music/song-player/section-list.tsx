@@ -28,11 +28,11 @@ export function SectionList({ segments, activeIndex, mastered, onSelectSection, 
               onClick={() => onSelectSection(index)}
               aria-current={isActive ? "step" : undefined}
               className={cn(
-                "flex min-h-[44px] w-full items-center gap-3 rounded-xl border px-3 text-left",
+                "flex min-h-[44px] w-full items-center gap-3 border-2 px-3 text-left",
                 isActive ? cn("border-transparent", gear.chipClass) : "border-line bg-surface-2 hover:bg-surface-3"
               )}
             >
-              <span className={cn("h-7 w-1.5 shrink-0 rounded-full", gear.fillClass)} aria-hidden="true" />
+              <span className={cn("h-7 w-2 shrink-0", gear.fillClass)} aria-hidden="true" />
               <span className="w-10 shrink-0 font-mono text-xs text-ivory-muted">
                 {formatSongTime(segment.startTimeSeconds)}
               </span>

@@ -61,7 +61,7 @@ export function SongMapBar({
                 className={cn(
                   "block w-full rounded-sm transition-all",
                   isConcealed ? "bg-line" : gear.fillClass,
-                  isActive ? "h-4 opacity-100" : "h-2.5 opacity-45",
+                  isActive ? "h-4 opacity-100" : "h-2.5 opacity-75",
                   isPreviewed && "h-4 opacity-100 ring-2 ring-ivory ring-offset-1 ring-offset-canvas"
                 )}
               />
@@ -70,7 +70,7 @@ export function SongMapBar({
         })}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute top-1 bottom-1 w-0.5 rounded-full bg-ivory shadow-[0_0_6px] shadow-ivory/80"
+          className="pointer-events-none absolute top-0 bottom-0 w-[3px] bg-ivory"
           style={{ left: `${progress * 100}%` }}
         />
       </div>

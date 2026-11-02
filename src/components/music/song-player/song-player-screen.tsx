@@ -29,6 +29,7 @@ import { useScreenWakeLock } from "@/lib/hooks/use-screen-wake-lock";
 import { useStoredString, writeStoredString } from "@/lib/hooks/use-stored-string";
 import { displaySongTitle } from "@/lib/music/song-style";
 import { linkedSectionIndex, linkedStartSeconds, readLinkedSectionId } from "@/lib/music/section-link";
+import { GEAR_INKS } from "@/components/poster/poster-kit";
 import { cn } from "@/lib/utils";
 import { SongMapBar } from "./song-map-bar";
 import { SongPlayerMoreSheet, type DancerRole } from "./song-player-more-sheet";
@@ -306,7 +307,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
       <div className="flex min-h-0 flex-1 flex-col gap-2 max-lg:landscape:grid max-lg:landscape:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] max-lg:landscape:gap-3 lg:grid lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-6">
         <div className="flex min-w-0 shrink-0 flex-col gap-1.5 lg:min-h-0">
           {audioUrl ? (
-            <div className={cn("flex h-20 shrink-0 items-center gap-3 rounded-xl border p-3", shownGear.chipClass)}>
+            <div className={cn("flex h-20 shrink-0 items-center gap-3 border-4 p-3", shownGear.chipClass)}>
               <AudioLines className={cn("h-8 w-8 shrink-0", shownGear.textClass)} aria-hidden="true" />
               <div className="min-w-0">
                 <p className="truncate text-sm font-bold">{title}</p>
@@ -315,7 +316,7 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
               {clock.errorCode !== null && <p className="ml-auto text-xs text-danger">Audio failed to load</p>}
             </div>
           ) : (
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-line bg-surface-1">
+            <div className="relative aspect-video w-full overflow-hidden border-4 border-ivory bg-surface-1">
               <div ref={attachVideoHost} className="absolute inset-0" />
               {!clock.isReady && clock.errorCode === null && (
                 <div className="absolute inset-0 flex items-center justify-center text-ivory-muted" aria-hidden="true">
@@ -389,10 +390,11 @@ export function SongPlayerScreen({ song, onExit }: SongPlayerScreenProps) {
               if (direction !== 0) stepPreview(direction);
             }}
             className={cn(
-              "min-h-0 flex-1 touch-pan-y overflow-y-auto rounded-2xl border p-3.5",
+              "mr-[5px] mb-[5px] min-h-0 flex-1 touch-pan-y overflow-y-auto border-4 p-3.5",
               isQuiz && quiz ? "border-line bg-surface-2" : shownGear.chipClass,
               isPreviewing && "border-dashed"
             )}
+            style={isQuiz && quiz ? undefined : { boxShadow: `5px 5px 0 ${GEAR_INKS[shown.danceGear]}` }}
           >
             {isPreviewing ? (
               <div className="mb-2 flex items-center gap-2 rounded-xl bg-canvas/60 p-1.5 pl-2.5">

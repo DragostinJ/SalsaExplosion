@@ -81,7 +81,7 @@ export function WeeklyCalendarOverview() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b-4 border-ink pb-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="border border-ink bg-poster-red text-paper font-bold text-xs uppercase tracking-wider px-2.5 py-0.5 inline-flex items-center gap-1.5">
+            <span className="border border-ink bg-poster-red text-ink font-bold text-xs uppercase tracking-wider px-2.5 py-0.5 inline-flex items-center gap-1.5">
               <CalendarDays className="h-3.5 w-3.5" />
               Weekly Class Calendar
             </span>
@@ -92,7 +92,7 @@ export function WeeklyCalendarOverview() {
           <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.card} pt-1`}>
             BOH Studios Bournemouth Weekly Schedule
           </h2>
-          <p className="text-xs sm:text-sm text-ink/80 font-medium max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-ink font-medium max-w-2xl leading-relaxed">
             Pure weekly rhythm with no fixed date lock-in. Turn up on Thursdays or Sundays, rotate partners in the circle, and learn authentic Cuban Salsa with Maestro Enrique Perez Valdes and guest artists.
           </p>
         </div>
@@ -121,7 +121,7 @@ export function WeeklyCalendarOverview() {
                   <span className="border border-ink bg-ink text-paper font-black text-xs uppercase tracking-wider px-2 py-0.5">
                     {item.day}
                   </span>
-                  <span className="text-xs font-bold text-ink/80 uppercase">
+                  <span className="text-xs font-bold text-ink uppercase">
                     {item.dayBadge}
                   </span>
                 </div>
@@ -132,7 +132,7 @@ export function WeeklyCalendarOverview() {
                       {item.venueName}
                     </h3>
                     <p className="text-xs text-ink/75 font-semibold flex items-center gap-1 mt-0.5">
-                      <MapPin className="h-3.5 w-3.5 text-poster-red shrink-0" />
+                      <MapPin className="h-3.5 w-3.5 text-accent-red shrink-0" />
                       <span>{item.venueAddress}</span>
                     </p>
                   </div>
@@ -140,7 +140,7 @@ export function WeeklyCalendarOverview() {
 
                 {item.specialGuestNotice && (
                   <div className="border border-ink bg-paper p-2.5 flex items-center gap-2 text-xs font-bold text-ink shadow-[2px_2px_0_0_#161311]">
-                    <Flame className="h-4 w-4 text-poster-red shrink-0" />
+                    <Flame className="h-4 w-4 text-accent-red shrink-0" />
                     <span>{item.specialGuestNotice}</span>
                   </div>
                 )}
@@ -159,7 +159,7 @@ export function WeeklyCalendarOverview() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   <div className="absolute bottom-2 left-3 right-3 text-paper text-xs font-bold drop-shadow-sm flex items-center justify-between">
                     <span>{item.venueLocationHighlight}</span>
-                    <BadgeCheck className="h-4 w-4 text-poster-teal shrink-0" />
+                    <BadgeCheck className="h-4 w-4 text-accent-teal shrink-0" />
                   </div>
                 </div>
               )}
@@ -167,7 +167,7 @@ export function WeeklyCalendarOverview() {
               {/* Classes Timetable */}
               <div className="p-5 space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b-2 border-ink text-xs font-bold">
-                  <span className="text-ink/80 uppercase">Teaching Team:</span>
+                  <span className="text-ink uppercase">Teaching Team:</span>
                   <span className="text-ink">
                     {item.teachers}
                   </span>

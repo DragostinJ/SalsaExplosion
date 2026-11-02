@@ -85,24 +85,24 @@ export function ReviewBoosterClient() {
           Help Bournemouth Find Real Cuban Salsa
         </h1>
 
-        <div className="flex items-center justify-center gap-1.5 my-3 text-poster-red">
+        <div className="flex items-center justify-center gap-1.5 my-3 text-accent-red">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className="h-6 w-6 fill-poster-red text-poster-red" />
+            <Star key={i} className="h-6 w-6 fill-poster-red text-accent-red" />
           ))}
         </div>
 
-        <p className="text-sm text-ink/80 max-w-xl mx-auto leading-relaxed font-medium">
+        <p className="text-sm text-ink max-w-xl mx-auto leading-relaxed font-medium">
           Leave a genuine 5-star Google review for Maestro Enrique Perez Valdes and the Salsa Explosion family at BOH Studios Bournemouth. Tap 3 options below to draft your review in seconds!
         </p>
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs text-ink/80 font-bold">
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs text-ink font-bold">
           <span className="flex items-center gap-1.5 border-2 border-ink bg-paper-light px-3 py-1 shadow-[2px_2px_0_var(--color-ink)]">
-            <MapPin className="h-3.5 w-3.5 text-poster-red" />
+            <MapPin className="h-3.5 w-3.5 text-accent-red" />
             BOH Studios, 104 Commercial Rd, BH2 5LR
           </span>
           <span className="hidden sm:inline">•</span>
           <span className="flex items-center gap-1.5 border-2 border-ink bg-paper-light px-3 py-1 shadow-[2px_2px_0_var(--color-ink)]">
-            <Calendar className="h-3.5 w-3.5 text-poster-red" />
+            <Calendar className="h-3.5 w-3.5 text-accent-red" />
             Thursdays &amp; Sundays Weekly
           </span>
         </div>
@@ -114,7 +114,7 @@ export function ReviewBoosterClient() {
         <div className="lg:col-span-6 border-4 border-ink bg-paper p-6 sm:p-8 shadow-[6px_6px_0_var(--color-ink)] space-y-6 text-ink">
           <div className="flex items-center justify-between">
             <h2 className="text-base font-black uppercase tracking-wider text-ink flex items-center gap-2">
-              <Heart className="h-4 w-4 text-poster-red" />
+              <Heart className="h-4 w-4 text-accent-red" />
               What Did You Enjoy Most?
             </h2>
             <Button
@@ -202,7 +202,7 @@ export function ReviewBoosterClient() {
             type="button"
             onClick={handleGenerateReview}
             disabled={isGenerating}
-            className="w-full border-2 border-ink bg-poster-red hover:bg-ink text-paper font-black uppercase tracking-wider text-sm min-h-[46px] shadow-[3px_3px_0_var(--color-ink)] transition-all rounded-none"
+            className="w-full border-2 border-ink bg-poster-red hover:bg-ink text-ink font-black uppercase tracking-wider text-sm min-h-[46px] shadow-[3px_3px_0_var(--color-ink)] transition-all rounded-none"
           >
             {isGenerating ? (
               <span className="flex items-center gap-2">
@@ -223,7 +223,7 @@ export function ReviewBoosterClient() {
           <div className="border-4 border-ink bg-paper p-6 sm:p-8 shadow-[6px_6px_0_var(--color-ink)] space-y-5 text-ink">
             <div className="flex items-center justify-between">
               <h2 className="text-base font-black uppercase tracking-wider text-ink flex items-center gap-2">
-                <Star className="h-4 w-4 fill-poster-red text-poster-red" />
+                <Star className="h-4 w-4 fill-poster-red text-accent-red" />
                 Your Custom Review Draft
               </h2>
               {editableReview && (
@@ -273,8 +273,8 @@ export function ReviewBoosterClient() {
                   >
                     {copied ? (
                       <>
-                        <Check className="h-4 w-4 text-poster-teal" />
-                        <span className="text-poster-teal font-black">
+                        <Check className="h-4 w-4 text-accent-teal" />
+                        <span className="text-accent-teal font-black">
                           1. Review Text Copied to Clipboard! ✓
                         </span>
                       </>
@@ -290,7 +290,7 @@ export function ReviewBoosterClient() {
                     href={googleMapsReviewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full border-2 border-ink bg-poster-red hover:bg-ink text-paper font-black uppercase tracking-wider text-sm min-h-[46px] shadow-[3px_3px_0_var(--color-ink)] transition-all flex items-center justify-center gap-2"
+                    className="w-full border-2 border-ink bg-poster-red hover:bg-ink text-ink font-black uppercase tracking-wider text-sm min-h-[46px] shadow-[3px_3px_0_var(--color-ink)] transition-all flex items-center justify-center gap-2"
                   >
                     <span>2. Open Google Maps &amp; Paste Review</span>
                     <ExternalLink className="h-4 w-4" />
@@ -303,8 +303,8 @@ export function ReviewBoosterClient() {
                 <p className="text-sm font-black uppercase tracking-wider text-ink">
                   Select Your Preferences
                 </p>
-                <p className="text-xs text-ink/80 mt-1 max-w-sm font-medium">
-                  Choose your highlight and experience level on the left, then click <strong className="text-poster-red font-bold">Draft My 5-Star Review</strong>.
+                <p className="text-xs text-ink mt-1 max-w-sm font-medium">
+                  Choose your highlight and experience level on the left, then click <strong className="text-accent-red font-bold">Draft My 5-Star Review</strong>.
                 </p>
               </div>
             )}
@@ -322,7 +322,7 @@ export function ReviewBoosterClient() {
               <h3 className="text-base font-black uppercase tracking-wider text-ink">
                 BOH Studios Table QR &amp; Link
               </h3>
-              <p className="text-xs text-ink/80 font-medium">
+              <p className="text-xs text-ink font-medium">
                 Show this to dancers at the registration desk on Thursday and Sunday nights:
               </p>
               <div className="border-2 border-ink bg-paper p-4 inline-block shadow-[4px_4px_0_var(--color-ink)] mx-auto">

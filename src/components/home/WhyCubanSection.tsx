@@ -41,16 +41,16 @@ export function WhyCubanSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
           <div className="inline-flex items-center gap-1.5 border border-ink bg-poster-mustard text-ink px-3 py-1 text-xs font-bold uppercase tracking-wider shadow-[2px_2px_0_0_#161311]">
-            <Sparkles className="h-3.5 w-3.5 text-poster-red" />
+            <Sparkles className="h-3.5 w-3.5 text-accent-red" />
             THE HEARTBEAT OF HAVANA IN BOURNEMOUTH
           </div>
           <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.section} pt-1`}>
             WHAT MAKES CUBAN CASINO &amp; RUEDA{" "}
-            <span className="text-poster-red">
+            <span className="text-accent-red">
               SO ADDICTIVE?
             </span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-ink/80 font-semibold leading-relaxed">
+          <p className="mt-2 text-xs sm:text-sm text-ink font-semibold leading-relaxed">
             Whether you are taking your very first dance step tonight or you already dance other styles and want to add authentic Cuban flavour to your repertoire—everyone is welcome in our circle.
           </p>
         </div>
@@ -75,7 +75,7 @@ export function WhyCubanSection() {
                 </div>
 
                 {/* 2. Clean Kicker */}
-                <div className={`${KICKER} text-poster-red mb-1.5`}>
+                <div className={`${KICKER} text-accent-red mb-1.5`}>
                   {card.kicker}
                 </div>
 
@@ -85,7 +85,7 @@ export function WhyCubanSection() {
                 </h3>
 
                 {/* 4. Concise 2-Sentence Paragraph */}
-                <p className="text-ink/80 text-xs sm:text-sm leading-relaxed mb-4 font-medium">
+                <p className="text-ink text-xs sm:text-sm leading-relaxed mb-4 font-medium">
                   {card.description}
                 </p>
               </div>
@@ -108,7 +108,7 @@ export function WhyCubanSection() {
         <div className="mt-10 flex flex-col items-center justify-center gap-4 text-center">
           <Link
             href="/dashboard/schedule"
-            className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-paper hover:bg-ink hover:text-paper text-xs sm:text-sm font-black uppercase tracking-wider px-6 py-3 min-h-[44px] shadow-[4px_4px_0_0_#161311] inline-flex items-center`}
+            className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-ink text-xs sm:text-sm font-black uppercase tracking-wider px-6 py-3 min-h-[44px] shadow-[4px_4px_0_0_#161311] inline-flex items-center`}
           >
             Join the Cuban Circle • £12 / £14 at the Door
             <ArrowRight className="ml-2 h-4 w-4" />

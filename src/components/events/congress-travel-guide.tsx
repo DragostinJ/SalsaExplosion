@@ -77,7 +77,7 @@ export function CongressTravelGuide() {
         <h2 className={`font-display ${TYPE.card} sm:text-4xl text-ink leading-tight`}>
           Hotel, Travel &amp; Festival Guide
         </h2>
-        <p className="text-xs sm:text-sm text-ink/80 leading-relaxed font-medium max-w-3xl">
+        <p className="text-xs sm:text-sm text-ink leading-relaxed font-medium max-w-3xl">
           Everything you need for an unforgettable coastal Cuban dance weekend celebrating 25+ years of Salsa Explosion heritage: partner hotel rates, nearby accommodations, full 3-day programme, and transit directions.
         </p>
       </div>
@@ -86,10 +86,10 @@ export function CongressTravelGuide() {
       <div className="border-2 border-ink bg-poster-mustard/20 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
         <div className="space-y-0.5">
           <span className="font-bold text-ink flex items-center gap-1.5 uppercase">
-            <MapPin className="h-4 w-4 text-poster-red shrink-0" />
+            <MapPin className="h-4 w-4 text-accent-red shrink-0" />
             Flagship Venue in Bournemouth Triangle
           </span>
-          <p className="text-ink/80 text-[11px] leading-relaxed">
+          <p className="text-ink text-[11px] leading-relaxed">
             All 3 Days of Workshops, Shows &amp; Socials hosted at <strong className="text-ink">BOH Studios Bournemouth</strong> (104 Commercial Rd, BH2 5LR).
           </p>
         </div>
@@ -107,12 +107,12 @@ export function CongressTravelGuide() {
               <span className="border-2 border-ink bg-poster-teal px-2 py-0.5 text-xs font-bold uppercase text-ink">
                 Recommended Partner
               </span>
-              <span className="text-xs font-bold uppercase text-poster-red">
+              <span className="text-xs font-bold uppercase text-accent-red">
                 Special Rate
               </span>
             </div>
             <h3 className={`font-display ${TYPE.card} text-ink leading-tight mt-2 flex items-center gap-2`}>
-              <Hotel className="h-5 w-5 text-poster-red" />
+              <Hotel className="h-5 w-5 text-accent-red" />
               The Roundhouse Hotel
             </h3>
             <p className="text-xs text-ink/70 flex items-center gap-1 mt-1 font-medium">
@@ -121,26 +121,26 @@ export function CongressTravelGuide() {
             </p>
           </div>
 
-          <p className="text-xs text-ink/80 leading-relaxed font-medium">
+          <p className="text-xs text-ink leading-relaxed font-medium">
             Stay in comfort during the festival weekend! Located just 5-8 minutes from BOH Studios with discounted room rates for Salsa Explosion dancers and late bar access.
           </p>
 
           <div className="border-2 border-ink bg-surface-1 p-3.5 space-y-2 text-xs">
             <div className="flex items-center justify-between font-bold text-ink">
-              <span>Dancer Block (Code: <code className="font-mono text-poster-red">SALSA2026</code>)</span>
-              <span className="font-display text-base text-poster-red">From £69/night</span>
+              <span>Dancer Block (Code: <code className="font-mono text-accent-red">SALSA2026</code>)</span>
+              <span className="font-display text-base text-accent-red">From £69/night</span>
             </div>
-            <ul className="space-y-1 text-[11px] font-semibold text-ink/80">
+            <ul className="space-y-1 text-[11px] font-semibold text-ink">
               <li className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-poster-teal shrink-0" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-accent-teal shrink-0" />
                 <span>Single Room: £69/night (inc. full English breakfast)</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-poster-teal shrink-0" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-accent-teal shrink-0" />
                 <span>Double / Twin Room: £89/night (£44.50 per dancer sharing)</span>
               </li>
               <li className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-poster-teal shrink-0" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-accent-teal shrink-0" />
                 <span>Late 02:30 bar access &amp; complimentary dancer parking permit</span>
               </li>
             </ul>
@@ -172,7 +172,7 @@ export function CongressTravelGuide() {
               Walkable Hotels
             </span>
             <h3 className={`font-display ${TYPE.card} text-ink leading-tight mt-2 flex items-center gap-2`}>
-              <Bed className="h-5 w-5 text-poster-teal" />
+              <Bed className="h-5 w-5 text-accent-teal" />
               Nearby Accommodations
             </h3>
             <p className="text-xs text-ink/70 mt-1 font-medium">
@@ -227,7 +227,7 @@ export function CongressTravelGuide() {
       {/* 3-Day Festival Timetable Overview */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
-          <Calendar className="h-5 w-5 text-poster-red" />
+          <Calendar className="h-5 w-5 text-accent-red" />
           <h3 className={`font-display ${TYPE.card} text-ink`}>
             Festival Timetable Overview
           </h3>
@@ -238,28 +238,28 @@ export function CongressTravelGuide() {
           <div className="border-2 border-ink bg-surface-1 p-4 space-y-3">
             <div className="flex items-center justify-between border-b-2 border-ink pb-2">
               <div>
-                <span className="font-display text-base text-poster-red block">Friday, 4 December</span>
+                <span className="font-display text-base text-accent-red block">Friday, 4 December</span>
                 <span className="text-[11px] font-bold text-ink/70">BOH Studios</span>
               </div>
               <span className="border border-ink bg-paper px-2 py-0.5 text-xs font-bold uppercase text-ink">
                 Day 1
               </span>
             </div>
-            <ul className="space-y-2 text-xs text-ink/80 font-medium">
+            <ul className="space-y-2 text-xs text-ink font-medium">
               <li className="flex items-start gap-2">
-                <Clock className="h-3.5 w-3.5 text-poster-red shrink-0 mt-0.5" />
+                <Clock className="h-3.5 w-3.5 text-accent-red shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-ink">19:00 - 20:00:</span> Registration &amp; Cuban Warm-Up Masterclasses
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <Clock className="h-3.5 w-3.5 text-poster-red shrink-0 mt-0.5" />
+                <Clock className="h-3.5 w-3.5 text-accent-red shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-ink">20:00 - 00:00:</span> Welcome Party &amp; Social Dancing Fiesta
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-3.5 w-3.5 text-poster-teal shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-accent-teal shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-ink">2 Rooms:</span> Room 1 (Salsa &amp; Timba) + Room 2 (Bachata)
                 </div>
@@ -271,28 +271,28 @@ export function CongressTravelGuide() {
           <div className="border-2 border-ink bg-poster-mustard/20 p-4 space-y-3">
             <div className="flex items-center justify-between border-b-2 border-ink pb-2">
               <div>
-                <span className="font-display text-base text-poster-red block">Saturday, 5 December</span>
+                <span className="font-display text-base text-accent-red block">Saturday, 5 December</span>
                 <span className="text-[11px] font-bold text-ink/70">BOH Studios</span>
               </div>
-              <span className="border-2 border-ink bg-poster-red px-2 py-0.5 text-xs font-bold uppercase text-paper">
+              <span className="border-2 border-ink bg-poster-red px-2 py-0.5 text-xs font-bold uppercase text-ink">
                 Gala Day
               </span>
             </div>
-            <ul className="space-y-2 text-xs text-ink/80 font-medium">
+            <ul className="space-y-2 text-xs text-ink font-medium">
               <li className="flex items-start gap-2">
-                <Clock className="h-3.5 w-3.5 text-poster-red shrink-0 mt-0.5" />
+                <Clock className="h-3.5 w-3.5 text-accent-red shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-ink">12:00 - 17:00:</span> Workshops: Casino, Timba &amp; Afro-Cuban
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <Clock className="h-3.5 w-3.5 text-poster-red shrink-0 mt-0.5" />
+                <Clock className="h-3.5 w-3.5 text-accent-red shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-ink">20:00 - 21:00:</span> Evening Masterclasses &amp; Show Previews
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <Clock className="h-3.5 w-3.5 text-poster-red shrink-0 mt-0.5" />
+                <Clock className="h-3.5 w-3.5 text-accent-red shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-ink">21:00 - 02:00:</span> 2 Shows &amp; Social Fiesta Until 02:00 (2 Rooms)
                 </div>
@@ -304,28 +304,28 @@ export function CongressTravelGuide() {
           <div className="border-2 border-ink bg-surface-1 p-4 space-y-3">
             <div className="flex items-center justify-between border-b-2 border-ink pb-2">
               <div>
-                <span className="font-display text-base text-poster-red block">Sunday, 6 December</span>
+                <span className="font-display text-base text-accent-red block">Sunday, 6 December</span>
                 <span className="text-[11px] font-bold text-ink/70">BOH Studios</span>
               </div>
               <span className="border border-ink bg-paper px-2 py-0.5 text-xs font-bold uppercase text-ink">
                 Day 3
               </span>
             </div>
-            <ul className="space-y-2 text-xs text-ink/80 font-medium">
+            <ul className="space-y-2 text-xs text-ink font-medium">
               <li className="flex items-start gap-2">
-                <Clock className="h-3.5 w-3.5 text-poster-red shrink-0 mt-0.5" />
+                <Clock className="h-3.5 w-3.5 text-accent-red shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-ink">18:00 - 19:30:</span> Musicality, Tumbao Drills &amp; Reparto
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <Clock className="h-3.5 w-3.5 text-poster-red shrink-0 mt-0.5" />
+                <Clock className="h-3.5 w-3.5 text-accent-red shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-ink">19:30 - 00:00:</span> Dancing with the Stars &amp; Farewell Fiesta
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-3.5 w-3.5 text-poster-teal shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-accent-teal shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-ink">Closing Social:</span> Celebrating 25+ Years Heritage
                 </div>
@@ -338,7 +338,7 @@ export function CongressTravelGuide() {
       {/* FAQ Accordion Section */}
       <div className="space-y-4 pt-2">
         <div className="flex items-center gap-2">
-          <HelpCircle className="h-5 w-5 text-poster-teal" />
+          <HelpCircle className="h-5 w-5 text-accent-teal" />
           <h3 className={`font-display ${TYPE.card} text-ink`}>
             Frequently Asked Questions
           </h3>
@@ -363,7 +363,7 @@ export function CongressTravelGuide() {
                   )}
                 </button>
                 {isOpen && (
-                  <p className="mt-2.5 text-xs text-ink/80 leading-relaxed font-medium">
+                  <p className="mt-2.5 text-xs text-ink leading-relaxed font-medium">
                     {faq.answer}
                   </p>
                 )}

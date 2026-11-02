@@ -56,7 +56,7 @@ export default async function StudentWalletPage() {
           <div className="flex flex-wrap items-center gap-3">
             <Button
               asChild
-              className="border-2 border-ink bg-poster-red hover:bg-ink text-paper font-black text-xs sm:text-sm h-11 px-6 shadow-[2px_2px_0_var(--color-ink)] rounded-none"
+              className="border-2 border-ink bg-poster-red hover:bg-ink text-ink font-black text-xs sm:text-sm h-11 px-6 shadow-[2px_2px_0_var(--color-ink)] rounded-none"
             >
               <Link href="/sign-in">
                 Sign In to Access Your Wallet
@@ -289,7 +289,7 @@ export default async function StudentWalletPage() {
             <div className="flex flex-col gap-2">
               <Button
                 asChild
-                className="border-2 border-ink bg-poster-red hover:bg-ink text-paper font-black text-xs shadow-[2px_2px_0_var(--color-ink)] rounded-none"
+                className="border-2 border-ink bg-poster-red hover:bg-ink text-ink font-black text-xs shadow-[2px_2px_0_var(--color-ink)] rounded-none"
               >
                 <Link href="/pricing">
                   <Coins className="mr-1.5 h-3.5 w-3.5" />

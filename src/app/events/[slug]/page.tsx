@@ -305,19 +305,19 @@ export default async function EventDetailPage({
               {event.title}
             </h1>
 
-            <p className="text-base sm:text-lg font-medium text-ink/80 leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-lg font-medium text-ink leading-relaxed max-w-2xl">
               {event.description}
             </p>
 
             <div className="flex flex-wrap items-center gap-6 pt-2 text-xs sm:text-sm font-bold text-ink">
               <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-poster-red" />
+                <Calendar className="h-4 w-4 text-accent-red" />
                 <span>
                   {startFormatted} – {endFormatted}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-poster-teal" />
+                <MapPin className="h-4 w-4 text-accent-teal" />
                 <span>
                   {event.venueName}, {event.venueAddress}
                 </span>
@@ -361,10 +361,10 @@ export default async function EventDetailPage({
                   <h2 className={`font-display ${TYPE.section} text-ink leading-tight`}>
                     MADE IN CUBA DANCE FESTIVAL 2026
                   </h2>
-                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-poster-red">
+                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-accent-red">
                     Bournemouth · Friday 4, Saturday 5 &amp; Sunday 6 December 2026
                   </p>
-                  <p className="text-xs sm:text-sm text-ink/80 leading-relaxed font-medium">
+                  <p className="text-xs sm:text-sm text-ink leading-relaxed font-medium">
                     Welcome to <strong>MADE IN CUBA DANCE WEEKEND</strong> — get ready for an unforgettable weekend celebrating authentic Cuban dance, music, culture and community. Three days. Three nights. Incredible dancers. Authentic Cuban flavour. One amazing community!
                   </p>
                 </div>
@@ -407,12 +407,12 @@ export default async function EventDetailPage({
                 {/* 3-Day Weekend Programme */}
                 <div className="border-2 border-ink bg-paper p-4 sm:p-5 space-y-3">
                   <h3 className="font-display text-xl text-ink flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-poster-red" />
+                    <Clock className="h-4 w-4 text-accent-red" />
                     The Weekend Programme (By Venue &amp; Hours):
                   </h3>
                   <div className="grid gap-2.5 sm:grid-cols-3 text-xs">
                     <div className="border-2 border-ink bg-surface-1 p-3 space-y-1">
-                      <span className="font-display text-base text-poster-red uppercase block">
+                      <span className="font-display text-base text-accent-red uppercase block">
                         Friday 4 Dec
                       </span>
                       <p className="font-bold text-ink">19:00 – 00:00</p>
@@ -427,7 +427,7 @@ export default async function EventDetailPage({
                     </div>
 
                     <div className="border-2 border-ink bg-surface-1 p-3 space-y-1">
-                      <span className="font-display text-base text-poster-red uppercase block">
+                      <span className="font-display text-base text-accent-red uppercase block">
                         Saturday 5 Dec
                       </span>
                       <p className="font-bold text-ink">12:00 – 17:00 Workshops</p>
@@ -443,7 +443,7 @@ export default async function EventDetailPage({
                     </div>
 
                     <div className="border-2 border-ink bg-surface-1 p-3 space-y-1">
-                      <span className="font-display text-base text-poster-red uppercase block">
+                      <span className="font-display text-base text-accent-red uppercase block">
                         Sunday 6 Dec
                       </span>
                       <p className="font-bold text-ink">18:00 – 00:00</p>
@@ -466,7 +466,7 @@ export default async function EventDetailPage({
                     <span className="font-bold uppercase text-ink">
                       ARTISTS ANNOUNCEMENT COMING SOON!
                     </span>
-                    <p className="text-[11px] text-ink/80 font-medium">
+                    <p className="text-[11px] text-ink font-medium">
                       Featuring top UK and international Cuban dance maestros, performers and guest DJs.
                     </p>
                   </div>
@@ -496,7 +496,7 @@ export default async function EventDetailPage({
                     href="https://www.instagram.com/salsaexplosion/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-poster-red hover:underline inline-flex items-center gap-1"
+                    className="font-bold text-accent-red hover:underline inline-flex items-center gap-1"
                   >
                     <InstagramIcon className="h-3.5 w-3.5" />
                     <span>@salsaexplosion</span>
@@ -531,7 +531,7 @@ export default async function EventDetailPage({
               <div className="lg:col-span-8 space-y-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b-4 border-ink pb-3">
                   <div>
-                    <span className="border-2 border-ink bg-poster-red px-2 py-0.5 text-xs font-bold uppercase text-paper">
+                    <span className="border-2 border-ink bg-poster-red px-2 py-0.5 text-xs font-bold uppercase text-ink">
                       Best Costume Prizes
                     </span>
                     <h2 className={`font-display ${TYPE.card} sm:text-4xl text-ink leading-tight mt-2`}>
@@ -546,7 +546,7 @@ export default async function EventDetailPage({
                 <div className="grid gap-3 sm:grid-cols-3">
                   <div className="border-2 border-ink bg-poster-mustard/20 p-4 space-y-1 text-center">
                     <span className="text-2xl font-black">🥇</span>
-                    <h3 className="font-display text-lg text-poster-red">1ST PRIZE</h3>
+                    <h3 className="font-display text-lg text-accent-red">1ST PRIZE</h3>
                     <p className="text-xs font-bold text-ink">1 Made in Cuba Weekend Pass</p>
                   </div>
                   <div className="border-2 border-ink bg-paper p-4 space-y-1 text-center">
@@ -563,20 +563,20 @@ export default async function EventDetailPage({
 
                 <div className="border-2 border-ink bg-surface-1 p-5 space-y-3">
                   <h3 className="font-display text-lg text-ink flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-poster-red" />
+                    <Clock className="h-4 w-4 text-accent-red" />
                     Evening Timetable (20:00 – 02:00):
                   </h3>
                   <div className="grid gap-2 sm:grid-cols-3 text-xs">
                     <div className="border border-ink bg-paper p-2.5">
-                      <span className="font-bold text-poster-red block">20:00 · Doors Open</span>
+                      <span className="font-bold text-accent-red block">20:00 · Doors Open</span>
                       <span className="text-ink">20:15 · Bachata Improvers with Alex Spindlove</span>
                     </div>
                     <div className="border border-ink bg-paper p-2.5">
-                      <span className="font-bold text-poster-red block">21:15 · Workshop Rooms</span>
+                      <span className="font-bold text-accent-red block">21:15 · Workshop Rooms</span>
                       <span className="text-ink">Rueda De Casino Int + Salsa/Timba Imp &amp; Int</span>
                     </div>
                     <div className="border border-ink bg-paper p-2.5">
-                      <span className="font-bold text-poster-red block">22:00 – 02:00 · Fiesta</span>
+                      <span className="font-bold text-accent-red block">22:00 – 02:00 · Fiesta</span>
                       <span className="text-ink">SB&amp;K Social Dance Party with DJ Enrique</span>
                     </div>
                   </div>
@@ -607,7 +607,7 @@ export default async function EventDetailPage({
         <div className="grid gap-6 md:grid-cols-3">
           <article className="border-4 border-ink bg-paper p-5 text-ink shadow-[6px_6px_0_0_#161311] space-y-3">
             <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
-              <Flame className="h-5 w-5 text-poster-red" />
+              <Flame className="h-5 w-5 text-accent-red" />
               <h3 className={`font-display ${TYPE.card} text-ink`}>
                 Guest Artists
               </h3>
@@ -618,7 +618,7 @@ export default async function EventDetailPage({
                   key={artist}
                   className="flex items-center gap-2 text-xs font-bold"
                 >
-                  <CheckCircle2 className="h-4 w-4 text-poster-teal" />
+                  <CheckCircle2 className="h-4 w-4 text-accent-teal" />
                   <span>{artist}</span>
                 </div>
               ))}
@@ -632,12 +632,12 @@ export default async function EventDetailPage({
 
           <article className="border-4 border-ink bg-paper p-5 text-ink shadow-[6px_6px_0_0_#161311] space-y-3">
             <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
-              <ShieldCheck className="h-5 w-5 text-poster-teal" />
+              <ShieldCheck className="h-5 w-5 text-accent-teal" />
               <h3 className={`font-display ${TYPE.card} text-ink`}>
                 Role-Balanced
               </h3>
             </div>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               All partner dance workshop tiers strictly enforce balanced Lead/Follow ratios. You will spend your workshop time dancing, not sitting out.
             </p>
           </article>
@@ -649,7 +649,7 @@ export default async function EventDetailPage({
                 Instant Door Pass
               </h3>
             </div>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               Tickets are issued immediately to your account with a cryptographically verified QR code for 1-second entrance scanning on arrival.
             </p>
           </article>
@@ -678,14 +678,14 @@ export default async function EventDetailPage({
           {/* UK Consumer Rights Notice */}
           <div className="border-2 border-ink bg-poster-mustard/30 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-ink">
             <div className="flex items-center gap-2 font-medium">
-              <ShieldCheck className="h-4 w-4 shrink-0 text-poster-teal" />
+              <ShieldCheck className="h-4 w-4 shrink-0 text-accent-teal" />
               <span>
                 <strong className="font-bold">UK Consumer Notice:</strong> Under Regulation 28(1)(h) of the Consumer Contracts Regulations 2013, dated event tickets are exempt from cooling-off refunds; however, Salsa Explosion offers <strong>100% free dancer name transfers</strong> up to 48 hours before the event.
               </span>
             </div>
             <Link
               href="/terms#refunds"
-              className="font-bold uppercase text-poster-red hover:underline shrink-0"
+              className="font-bold uppercase text-accent-red hover:underline shrink-0"
             >
               Transfer Policy →
             </Link>

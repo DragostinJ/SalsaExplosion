@@ -33,9 +33,9 @@ export default function PrivateLessonsPage() {
           <div className="lg:col-span-8 space-y-4">
             <p className={KICKER}>Personalized Cuban Salsa Mastery</p>
             <h1 className={`${TYPE.section} text-ink`}>
-              1-ON-1 PRIVATE <span className="text-poster-red">Coaching</span>
+              1-ON-1 PRIVATE <span className="text-accent-red">Coaching</span>
             </h1>
-            <p className="text-sm font-semibold text-ink/80 leading-relaxed">
+            <p className="text-sm font-semibold text-ink leading-relaxed">
               Accelerate your social dancing, master complex Rueda calls, or prepare an unforgettable wedding first dance under the personal direction of Maestro Enrique Perez Valdes and Salsa Explosion faculty (Moe Flex, Justyna, Arturas, Jim).
             </p>
 
@@ -60,11 +60,11 @@ export default function PrivateLessonsPage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-xs font-bold pt-2 border-t-2 border-ink">
-              <div className="flex items-center gap-1.5 text-poster-red">
+              <div className="flex items-center gap-1.5 text-accent-red">
                 <Sparkles className="h-4 w-4" />
                 <span>Single Lessons from £70 • 5-Hour Blocks £300</span>
               </div>
-              <div className="flex items-center gap-1.5 text-ink/80">
+              <div className="flex items-center gap-1.5 text-ink">
                 <MapPin className="h-4 w-4" />
                 <span>BOH Studios Bournemouth (Canadian Maple Sprung Floor)</span>
               </div>

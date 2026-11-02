@@ -154,17 +154,17 @@ export function QrCheckInCard({
 
         {isAttended ? (
           <div className="border-2 border-ink bg-poster-teal/20 p-6 text-center space-y-2 shadow-[3px_3px_0_var(--color-ink)]">
-            <CheckCircle2 className="mx-auto h-12 w-12 text-poster-teal" />
+            <CheckCircle2 className="mx-auto h-12 w-12 text-accent-teal" />
             <h2 className="text-lg font-black uppercase tracking-wider text-ink">
               You Are Checked In!
             </h2>
-            <p className="text-xs text-ink/80 font-medium">
+            <p className="text-xs text-ink font-medium">
               Show this screen to your instructor at the studio door and step onto the dance floor.
             </p>
           </div>
         ) : bookingStatus === BookingStatus.CONFIRMED ? (
           <div className="space-y-3 text-center">
-            <p className="text-xs text-ink/80 font-medium">
+            <p className="text-xs text-ink font-medium">
               Your class reservation is confirmed. Tap below to mark your arrival at the studio.
             </p>
             <Button

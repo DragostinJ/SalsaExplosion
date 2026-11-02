@@ -137,13 +137,13 @@ export default async function AboutPage() {
           <div className="space-y-3">
             <p className={KICKER}>Bournemouth&apos;s Cuban Rhythm</p>
             <h1 className={`${TYPE.section} text-ink`}>
-              AUTHENTIC CUBAN <span className="text-poster-red">SOUL</span>
+              AUTHENTIC CUBAN <span className="text-accent-red">SOUL</span>
             </h1>
-            <p className="max-w-2xl text-sm font-semibold text-ink/80 leading-relaxed">
+            <p className="max-w-2xl text-sm font-semibold text-ink leading-relaxed">
               Salsa Explosion is the UK&apos;s premier Cuban dance academy and promoter, based in Bournemouth, Dorset. Founded by Cuban maestro Enrique Perez Valdes, we have introduced thousands of dancers to the joy of authentic Casino, dynamic Rueda de Casino, Timba, and Afro-Cuban rhythms for over 32 years.
             </p>
             <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
-              <Sparkles className="h-4 w-4 text-poster-red" />
+              <Sparkles className="h-4 w-4 text-accent-red" />
               <span>Weekly Thursday &amp; Sunday Classes • £12 / £14 at the Door • BOH Studios BH2 5LR</span>
             </div>
           </div>
@@ -169,7 +169,7 @@ export default async function AboutPage() {
       {/* 2. Core Pillars & Academy Capabilities */}
       <section className="space-y-6">
         <div className="text-center space-y-1">
-          <p className={`${KICKER} text-poster-red`}>
+          <p className={`${KICKER} text-accent-red`}>
             Our Dance Philosophy &amp; Capabilities
           </p>
           <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.card}`}>
@@ -185,7 +185,7 @@ export default async function AboutPage() {
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
               Balanced Lead &amp; Follow Ratios
             </h3>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               Our smart real-time booking system automatically caps Lead and Follow tickets so you never spend a class waiting on the sidelines.
             </p>
           </div>
@@ -197,19 +197,19 @@ export default async function AboutPage() {
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
               4-Tier Cuban Salsa Syllabus
             </h3>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               From your first <em>Guapea</em> in Beginner to complex <em>Setenta</em> combinations and Contratiempo musicality in Advanced, our clear syllabus ensures you progress smoothly.
             </p>
           </div>
 
           <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_#161311] space-y-3">
-            <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-red text-paper">
+            <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-red text-ink">
               <QrCode className="h-5 w-5" />
             </div>
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
               Instant Digital Passes — Zero Fees
             </h3>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               One-tap Apple Pay, Google Pay, and card checkout with instant QR passes saved straight to your phone for 1-second door check-in at BOH Studios.
             </p>
           </div>
@@ -221,7 +221,7 @@ export default async function AboutPage() {
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
               The Rueda Circle • No Partner Needed
             </h3>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               In Cuban Salsa, we dance in <em>La Rueda</em>—a dynamic rotating circle where turns are called out by the <em>cantante</em>. Partners switch dynamically, so everyone dances with everyone.
             </p>
           </div>
@@ -233,7 +233,7 @@ export default async function AboutPage() {
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
               Afro-Cuban &amp; Timba Heritage
             </h3>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               Rooted directly in Havana folklore—Batá drums, Guaguancó body isolations, Son Cubano contratiempo timing, and contemporary high-energy Timba musicality.
             </p>
           </div>
@@ -245,7 +245,7 @@ export default async function AboutPage() {
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
               End-of-Class Video Recaps
             </h3>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               Never lose a routine in your camera roll! After every class, teachers publish a 60-second video recap of the combinations taught. Review footwork in 0.75x slow-mo anytime.
             </p>
           </div>
@@ -256,13 +256,13 @@ export default async function AboutPage() {
       <section className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b-4 border-ink pb-3">
           <div>
-            <p className={`${KICKER} text-poster-red`}>
+            <p className={`${KICKER} text-accent-red`}>
               Meet Our Faculty
             </p>
             <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.card} pt-1`}>
               Havana-Trained Maestras &amp; Maestros
             </h2>
-            <p className="text-xs sm:text-sm text-ink/80 font-medium mt-1">
+            <p className="text-xs sm:text-sm text-ink font-medium mt-1">
               Passionate, patient educators dedicated to authentic Cuban styling, musicality, and encouraging every student.
             </p>
           </div>
@@ -294,7 +294,7 @@ export default async function AboutPage() {
                     <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink truncate">
                       {teacher.firstName} {teacher.lastName}
                     </h3>
-                    <p className="text-xs font-bold text-poster-red mt-0.5">
+                    <p className="text-xs font-bold text-accent-red mt-0.5">
                       {teacher.email === "enrique@salsaexplosion.co.uk" || teacher.firstName === "Enrique"
                         ? "Founder & Artistic Director"
                         : "Resident Faculty Instructor"}
@@ -313,7 +313,7 @@ export default async function AboutPage() {
                   </div>
                 )}
 
-                <p className="text-xs leading-relaxed text-ink/80 font-medium pt-1">
+                <p className="text-xs leading-relaxed text-ink font-medium pt-1">
                   {teacher.bio ??
                     "Dedicated Cuban Salsa educator passionate about sharing the vibrant rhythm, partner connection, and social joy of Cuban Casino and Rueda."}
                 </p>
@@ -336,13 +336,13 @@ export default async function AboutPage() {
       {/* 4. Interactive Class Photo & Video Galleries */}
       <section className="space-y-6">
         <div className="border-b-4 border-ink pb-3 space-y-1">
-          <p className={`${KICKER} text-poster-red`}>
+          <p className={`${KICKER} text-accent-red`}>
             Studio Energy &amp; Community
           </p>
           <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.card}`}>
             Class &amp; Event Photo Galleries
           </h2>
-          <p className="text-xs sm:text-sm text-ink/80 font-medium">
+          <p className="text-xs sm:text-sm text-ink font-medium">
             A glimpse into our weekly classes, high-energy Rueda circles, and weekend guest masterclasses. Click any photo to expand.
           </p>
         </div>
@@ -354,37 +354,37 @@ export default async function AboutPage() {
       <section className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311] space-y-6">
         <div className="grid gap-8 lg:grid-cols-12 items-center">
           <div className="lg:col-span-6 space-y-4">
-            <p className={`${KICKER} text-poster-red`}>
+            <p className={`${KICKER} text-accent-red`}>
               Our Havana Sanctuary
             </p>
             <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.card}`}>
               Engineered for Social Dancing
             </h2>
-            <p className="text-xs sm:text-sm text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs sm:text-sm text-ink leading-relaxed font-medium">
               Dancing salsa properly requires the right space. We designed our studio from the floor up to support fast turns, circular Rueda movement, and vibrant acoustic energy.
             </p>
 
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-poster-teal shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-accent-teal shrink-0 mt-0.5" />
                 <span>
                   <strong className="text-ink">Sprung Oak Hardwood Floor:</strong> Absorbs impact and protects knees and ankles during intensive turns and footwork.
                 </span>
               </li>
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-poster-teal shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-accent-teal shrink-0 mt-0.5" />
                 <span>
                   <strong className="text-ink">Full Wall Mirrors:</strong> Dual studio spaces with panoramic mirrors for body isolations and frame refinement.
                 </span>
               </li>
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-poster-teal shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-accent-teal shrink-0 mt-0.5" />
                 <span>
                   <strong className="text-ink">Cuban Timba Acoustic Sound:</strong> High-fidelity sound system calibrated for rich brass, percussion, and clave clarity.
                 </span>
               </li>
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="h-4 w-4 text-poster-teal shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-accent-teal shrink-0 mt-0.5" />
                 <span>
                   <strong className="text-ink">Havana Lounge &amp; Cafe:</strong> Relax before or after class with authentic Cuban espresso, refreshing drinks, and community chatter.
                 </span>
@@ -395,7 +395,7 @@ export default async function AboutPage() {
           <div className="lg:col-span-6 space-y-4">
             <div className="border-4 border-ink bg-poster-mustard/30 p-6 shadow-[4px_4px_0_0_#161311] space-y-4">
               <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
-                <MapPin className="h-4 w-4 text-poster-red" />
+                <MapPin className="h-4 w-4 text-accent-red" />
                 <h3 className="font-display font-black text-lg uppercase text-ink">Studio Location &amp; Hours</h3>
               </div>
               <div className="space-y-3 text-xs">
@@ -411,10 +411,10 @@ export default async function AboutPage() {
 
                 <div className="border-2 border-ink bg-paper p-3 space-y-1">
                   <span className="font-bold flex items-center gap-1 text-ink uppercase">
-                    <Clock className="h-3.5 w-3.5 text-poster-red" />
+                    <Clock className="h-3.5 w-3.5 text-accent-red" />
                     Weekly Class Hours:
                   </span>
-                  <div className="grid grid-cols-2 gap-2 text-ink/80 pt-1 font-medium">
+                  <div className="grid grid-cols-2 gap-2 text-ink pt-1 font-medium">
                     <div>
                       <strong>Thursday Classes:</strong> 19:00 – 23:00
                     </div>
@@ -443,7 +443,7 @@ export default async function AboutPage() {
         <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.section}`}>
           Ready to Step Into the Circle?
         </h2>
-        <p className="max-w-xl mx-auto text-xs sm:text-sm text-ink/80 font-bold leading-relaxed">
+        <p className="max-w-xl mx-auto text-xs sm:text-sm text-ink font-bold leading-relaxed">
           Book your first Cuban Salsa class with Enrique Perez Valdes and the Salsa Explosion team in Bournemouth. Zero experience necessary. We guarantee you&apos;ll be smiling and dancing in your very first hour!
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">

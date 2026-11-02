@@ -40,9 +40,9 @@ export default function TermsAndLegalPage() {
         <div className="mt-4 space-y-3">
           <p className={KICKER}>Statutory Disclosures &amp; Fair Trading</p>
           <h1 className={`${TYPE.section} text-ink`}>
-            TERMS OF SERVICE, <span className="text-poster-red">Consumer Rights &amp; Privacy</span>
+            TERMS OF SERVICE, <span className="text-accent-red">Consumer Rights &amp; Privacy</span>
           </h1>
-          <p className="max-w-3xl text-sm font-semibold text-ink/80 leading-relaxed">
+          <p className="max-w-3xl text-sm font-semibold text-ink leading-relaxed">
             Welcome to Salsa Explosion UK. We believe in clear, fair, and honest business practices. Below you will find our complete terms governing class bookings, festival passes, UK statutory consumer cancellation rights, safety guidelines, and UK GDPR data protection.
           </p>
           <p className="text-xs font-bold text-ink/70 pt-1">
@@ -71,7 +71,7 @@ export default function TermsAndLegalPage() {
       {/* Section 1: Business Identity & E-Commerce */}
       <section id="identity" className="space-y-4 pt-4">
         <div className="flex items-center gap-2 text-ink">
-          <FileText className="h-5 w-5 text-poster-red" />
+          <FileText className="h-5 w-5 text-accent-red" />
           <h2 className="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-ink">
             1. Business Identity &amp; Statutory Details
           </h2>
@@ -86,22 +86,22 @@ export default function TermsAndLegalPage() {
             <div>
               <span className="block font-bold text-ink/75 uppercase text-xs">Trading Name</span>
               <span className="font-extrabold text-ink text-sm">Salsa Explosion UK</span>
-              <span className="block text-ink/80">Directed by Maestro Enrique Perez Valdes</span>
+              <span className="block text-ink">Directed by Maestro Enrique Perez Valdes</span>
             </div>
             <div>
               <span className="block font-bold text-ink/75 uppercase text-xs">Principal Studio Address</span>
               <span className="font-bold text-ink">BOH Studios, 104 Commercial Road</span>
-              <span className="block text-ink/80">The Triangle, Bournemouth, BH2 5LR, United Kingdom</span>
+              <span className="block text-ink">The Triangle, Bournemouth, BH2 5LR, United Kingdom</span>
             </div>
             <div>
               <span className="block font-bold text-ink/75 uppercase text-xs">Email Enquiries</span>
-              <a href="mailto:info@salsaexplosion.co.uk" className="font-bold text-poster-red hover:underline">
+              <a href="mailto:info@salsaexplosion.co.uk" className="font-bold text-accent-red hover:underline">
                 info@salsaexplosion.co.uk
               </a>
             </div>
             <div>
               <span className="block font-bold text-ink/75 uppercase text-xs">Studio Desk Phone &amp; WhatsApp</span>
-              <a href="tel:+447969633701" className="font-bold text-poster-red hover:underline">
+              <a href="tel:+447969633701" className="font-bold text-accent-red hover:underline">
                 07969 633701
               </a>
             </div>
@@ -116,7 +116,7 @@ export default function TermsAndLegalPage() {
       {/* Section 2: Refunds & UK Consumer Contracts Regulations 2013 */}
       <section id="refunds" className="space-y-4 pt-4">
         <div className="flex items-center gap-2 text-ink">
-          <RefreshCw className="h-5 w-5 text-poster-teal" />
+          <RefreshCw className="h-5 w-5 text-accent-teal" />
           <h2 className="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-ink">
             2. Cancellation Rights, Refunds &amp; Consumer Protection
           </h2>
@@ -131,7 +131,7 @@ export default function TermsAndLegalPage() {
             {/* Gift vouchers */}
             <div className="border-2 border-ink bg-poster-teal/20 p-4 space-y-2 text-ink">
               <div className="flex items-center gap-2 font-bold text-sm">
-                <CheckCircle2 className="h-4 w-4 text-poster-teal shrink-0" />
+                <CheckCircle2 className="h-4 w-4 text-accent-teal shrink-0" />
                 <h3 className="font-display uppercase tracking-tight text-base">Gift Vouchers — 14-Day Statutory Cooling-Off Period</h3>
               </div>
               <p className="text-xs">
@@ -152,7 +152,7 @@ export default function TermsAndLegalPage() {
             {/* Dated Congress & Special Events */}
             <div className="border-2 border-ink bg-poster-mustard/30 p-4 space-y-2 text-ink">
               <div className="flex items-center gap-2 font-bold text-sm">
-                <AlertCircle className="h-4 w-4 text-poster-red shrink-0" />
+                <AlertCircle className="h-4 w-4 text-accent-red shrink-0" />
                 <h3 className="font-display uppercase tracking-tight text-base">Dated Events &amp; Weekend Congresses (Regulation 28(1)(h) Exemption)</h3>
               </div>
               <p className="text-xs">
@@ -169,7 +169,7 @@ export default function TermsAndLegalPage() {
       {/* Section 3: Health, Safety & Lawful Duty of Care */}
       <section id="health-safety" className="space-y-4 pt-4">
         <div className="flex items-center gap-2 text-ink">
-          <HeartHandshake className="h-5 w-5 text-poster-red" />
+          <HeartHandshake className="h-5 w-5 text-accent-red" />
           <h2 className="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-ink">
             3. Health, Safety &amp; Lawful Duty of Care
           </h2>
@@ -200,7 +200,7 @@ export default function TermsAndLegalPage() {
       {/* Section 4: UK GDPR & Privacy Notice */}
       <section id="privacy" className="space-y-4 pt-4">
         <div className="flex items-center gap-2 text-ink">
-          <Lock className="h-5 w-5 text-poster-teal" />
+          <Lock className="h-5 w-5 text-accent-teal" />
           <h2 className="font-display font-black text-xl sm:text-2xl uppercase tracking-tight text-ink">
             4. UK GDPR &amp; Data Protection Act 2018 Privacy Notice
           </h2>
@@ -248,14 +248,14 @@ export default function TermsAndLegalPage() {
           <p>
             <strong>Trusted Sub-Processors:</strong> We only use industry-leading, certified infrastructure providers:
           </p>
-          <ul className="text-xs list-disc pl-5 space-y-1 text-ink/80 font-medium">
+          <ul className="text-xs list-disc pl-5 space-y-1 text-ink font-medium">
             <li><strong>Clerk:</strong> Secure user authentication, MFA, and session tokens.</li>
             <li><strong>Stripe UK:</strong> PCI-DSS Level 1 compliant card and Apple/Google Pay processing.</li>
             <li><strong>Supabase:</strong> Encrypted PostgreSQL database hosted within UK/EU jurisdictions.</li>
           </ul>
 
           <p className="font-bold text-ink pt-1">
-            <strong>Your Rights:</strong> Under UK GDPR, you have the right to access your personal data, request correction of errors, or request total account deletion (&ldquo;Right to be Forgotten&rdquo;). To make a Subject Access Request (SAR) or delete your account, email our Data Privacy Officer at <a href="mailto:info@salsaexplosion.co.uk" className="text-poster-red font-bold underline">info@salsaexplosion.co.uk</a>. We respond within 30 days free of charge.
+            <strong>Your Rights:</strong> Under UK GDPR, you have the right to access your personal data, request correction of errors, or request total account deletion (&ldquo;Right to be Forgotten&rdquo;). To make a Subject Access Request (SAR) or delete your account, email our Data Privacy Officer at <a href="mailto:info@salsaexplosion.co.uk" className="text-accent-red font-bold underline">info@salsaexplosion.co.uk</a>. We respond within 30 days free of charge.
           </p>
         </div>
       </section>
@@ -266,7 +266,7 @@ export default function TermsAndLegalPage() {
           <h3 className="font-display font-black text-lg uppercase tracking-tight text-ink">
             Have a Question About Our Terms or a Booking?
           </h3>
-          <p className="text-xs text-ink/80 font-bold mt-0.5">
+          <p className="text-xs text-ink font-bold mt-0.5">
             We are always here to help. Speak directly with Maestro Enrique.
           </p>
         </div>
@@ -282,7 +282,7 @@ export default function TermsAndLegalPage() {
             href="mailto:info@salsaexplosion.co.uk"
             className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper text-xs font-bold px-4 py-2 min-h-[40px] flex items-center gap-1.5`}
           >
-            <Mail className="h-3.5 w-3.5 text-poster-red" />
+            <Mail className="h-3.5 w-3.5 text-accent-red" />
             info@salsaexplosion.co.uk
           </a>
         </div>

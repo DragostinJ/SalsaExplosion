@@ -28,7 +28,7 @@ export default function EventsErrorBoundary({ error, reset }: ErrorProps) {
           <h1 className={`font-display ${TYPE.card} text-ink`}>
             Could Not Load Festival Information
           </h1>
-          <p className="text-sm text-ink/80 leading-relaxed font-medium">
+          <p className="text-sm text-ink leading-relaxed font-medium">
             The festival and congress passes directory encountered an issue while retrieving ticket tiers.
           </p>
           {error?.digest && (

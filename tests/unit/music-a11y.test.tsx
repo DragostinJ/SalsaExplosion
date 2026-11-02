@@ -40,7 +40,7 @@ describe("Music Practice Hub Accessibility (A11y & WCAG 2.1)", () => {
 
     expect(html).toContain('aria-label="Playback"');
     expect(html).toContain('aria-label="Section details and practice settings"');
-    expect(html).toContain('aria-label="Playback speed 1x, tap to change"');
+    expect(html).toContain('aria-label="1× playback speed, tap to change"');
     expect(html).toContain('aria-label="Play"');
     expect(html).toContain('aria-label="Previous section"');
     expect(html).toContain('aria-label="Next section"');
@@ -68,7 +68,7 @@ describe("Music Practice Hub Accessibility (A11y & WCAG 2.1)", () => {
 
     expect(html).toContain('aria-label="Pause"');
     expect(html).toContain('aria-pressed="true"');
-    expect(html).toContain('aria-label="Playback speed 0.75x, tap to change"');
+    expect(html).toContain('aria-label="¾× playback speed, tap to change"');
   });
 
   it("renders SongPlayerMoreSheet with dialog role, modal attribute, and close button", () => {

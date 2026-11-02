@@ -195,12 +195,12 @@ export function MobileNavSheet({
             onClick={onClose}
             className="flex items-center gap-2.5 font-bold tracking-tight text-ink"
           >
-            <div className="flex h-8 w-8 items-center justify-center border-2 border-ink bg-poster-red text-paper shadow-[2px_2px_0_var(--color-ink)]">
+            <div className="flex h-8 w-8 items-center justify-center border-2 border-ink bg-poster-red text-ink shadow-[2px_2px_0_var(--color-ink)]">
               <Flame className="h-4 w-4 fill-current" />
             </div>
             <div className="flex flex-col">
               <span className="font-display text-lg leading-none tracking-tight">
-                Salsa <span className="text-poster-red">Explosion</span>
+                Salsa <span className="text-accent-red">Explosion</span>
               </span>
               <span className="text-xs font-bold uppercase tracking-widest text-ink/70 mt-0.5">
                 Bournemouth • Cuba
@@ -212,7 +212,7 @@ export function MobileNavSheet({
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="border-2 border-ink bg-paper text-ink hover:bg-poster-red hover:text-paper transition-colors min-h-10 min-w-10 flex items-center justify-center shadow-[2px_2px_0_var(--color-ink)]"
+            className="border-2 border-ink bg-paper text-ink hover:bg-poster-red hover:text-ink transition-colors min-h-10 min-w-10 flex items-center justify-center shadow-[2px_2px_0_var(--color-ink)]"
           >
             <X className="h-5 w-5" />
           </button>
@@ -242,7 +242,7 @@ export function MobileNavSheet({
 
           {/* Persona 1: Dancer Workspace */}
           <div>
-            <div className="flex items-center gap-1.5 px-1 mb-2 text-xs font-black uppercase tracking-wider text-poster-red">
+            <div className="flex items-center gap-1.5 px-1 mb-2 text-xs font-black uppercase tracking-wider text-accent-red">
               <Flame className="h-3.5 w-3.5" />
               <span>Dancer Workspace</span>
             </div>
@@ -261,7 +261,7 @@ export function MobileNavSheet({
                         : "border-transparent text-ink hover:border-ink hover:bg-paper-light"
                     }`}
                   >
-                    <Icon className={`h-4 w-4 ${isActive ? "text-poster-red" : "text-ink"}`} />
+                    <Icon className={`h-4 w-4 ${isActive ? "text-accent-red" : "text-ink"}`} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -275,7 +275,7 @@ export function MobileNavSheet({
               <Link
                 href="/sign-in"
                 onClick={onClose}
-                className="flex items-center justify-center gap-2 w-full border-2 border-ink bg-poster-red py-2.5 text-xs font-black uppercase tracking-wider text-paper hover:bg-ink hover:text-paper transition-colors shadow-[2px_2px_0_var(--color-ink)]"
+                className="flex items-center justify-center gap-2 w-full border-2 border-ink bg-poster-red py-2.5 text-xs font-black uppercase tracking-wider text-ink hover:bg-ink hover:text-ink transition-colors shadow-[2px_2px_0_var(--color-ink)]"
               >
                 <span>Student Portal Sign In →</span>
               </Link>
@@ -303,7 +303,7 @@ export function MobileNavSheet({
                         : "border-transparent text-ink hover:border-ink hover:bg-paper-light"
                     }`}
                   >
-                    <Icon className={`h-4 w-4 ${isActive ? "text-poster-red" : "text-ink"}`} />
+                    <Icon className={`h-4 w-4 ${isActive ? "text-accent-red" : "text-ink"}`} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -314,7 +314,7 @@ export function MobileNavSheet({
           {/* Persona 2: Teacher Workspace (Staff only) */}
           {isStaff && (
             <div className="pt-2 border-t-2 border-ink">
-              <div className="flex items-center gap-1.5 px-1 mb-2 text-xs font-black uppercase tracking-wider text-poster-teal">
+              <div className="flex items-center gap-1.5 px-1 mb-2 text-xs font-black uppercase tracking-wider text-accent-teal">
                 <Users className="h-3.5 w-3.5" />
                 <span>Teacher Workspace</span>
               </div>
@@ -399,7 +399,7 @@ export function MobileNavSheet({
                             ? "border-ink bg-poster-mustard text-ink shadow-[2px_2px_0_var(--color-ink)]"
                             : r === "INSTRUCTOR"
                               ? "border-ink bg-poster-teal text-ink shadow-[2px_2px_0_var(--color-ink)]"
-                              : "border-ink bg-poster-red text-paper shadow-[2px_2px_0_var(--color-ink)]"
+                              : "border-ink bg-poster-red text-ink shadow-[2px_2px_0_var(--color-ink)]"
                           : "border-transparent text-ink/70 hover:text-ink hover:border-ink"
                       } ${isPending ? "opacity-60 cursor-wait" : ""}`}
                     >
@@ -422,7 +422,7 @@ export function MobileNavSheet({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center border-2 border-ink bg-paper text-ink hover:bg-poster-red hover:text-paper shadow-[2px_2px_0_var(--color-ink)] transition-colors"
+                className="flex h-9 w-9 items-center justify-center border-2 border-ink bg-paper text-ink hover:bg-poster-red hover:text-ink shadow-[2px_2px_0_var(--color-ink)] transition-colors"
                 title="@salsaexplosion on Instagram"
               >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -434,7 +434,7 @@ export function MobileNavSheet({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook Page"
-                className="flex h-9 w-9 items-center justify-center border-2 border-ink bg-paper text-ink hover:bg-poster-red hover:text-paper shadow-[2px_2px_0_var(--color-ink)] transition-colors"
+                className="flex h-9 w-9 items-center justify-center border-2 border-ink bg-paper text-ink hover:bg-poster-red hover:text-ink shadow-[2px_2px_0_var(--color-ink)] transition-colors"
                 title="Salsa Explosion Facebook Page"
               >
                 <svg className="h-4 w-4 fill-current" viewBox="0 0 24 24">

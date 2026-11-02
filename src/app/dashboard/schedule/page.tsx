@@ -294,14 +294,14 @@ export default async function StudentSchedulePage({
           <div className="space-y-3">
             <p className={KICKER}>Thursdays &amp; Sundays · BOH Studios</p>
             <h1 className={`${TYPE.section} text-ink`}>
-              THU &amp; SUN <span className="text-poster-red">Programme</span>
+              THU &amp; SUN <span className="text-accent-red">Programme</span>
             </h1>
-            <p className="max-w-2xl text-sm font-semibold text-ink/80 leading-relaxed">
+            <p className="max-w-2xl text-sm font-semibold text-ink leading-relaxed">
               Weekly Cuban Salsa &amp; Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No pre-booking or partner required. Lead &amp; Follow partner rotations are 100% ratio balanced.
             </p>
             {user && (
               <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
-                <Sparkles className="h-4 w-4 text-poster-red" />
+                <Sparkles className="h-4 w-4 text-accent-red" />
                 <span>Dancer:</span>
                 <span className="font-black uppercase">{user.currentLevel}</span>
                 <span className="opacity-80">({user.classCredits} credits)</span>
@@ -312,7 +312,7 @@ export default async function StudentSchedulePage({
           <div className="flex flex-wrap items-center gap-3">
             <Link
               href="/events"
-              className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-paper hover:bg-ink hover:text-paper text-xs font-bold min-h-[40px] px-3.5 inline-flex items-center justify-center`}
+              className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-ink text-xs font-bold min-h-[40px] px-3.5 inline-flex items-center justify-center`}
             >
               Book Festivals Online →
             </Link>
@@ -330,7 +330,7 @@ export default async function StudentSchedulePage({
       <div className="space-y-4 border-4 border-ink bg-paper p-4 sm:p-5 text-ink shadow-[4px_4px_0_0_#161311]">
         {/* Day of Week Filter Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-xs font-bold uppercase tracking-wider text-ink/80">
+          <span className="text-xs font-bold uppercase tracking-wider text-ink">
             Select Day:
           </span>
           <div className="flex items-center gap-2 flex-wrap">
@@ -362,7 +362,7 @@ export default async function StudentSchedulePage({
 
         {/* Syllabus Level Filter Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t-2 border-ink">
-          <span className="text-xs font-bold uppercase tracking-wider text-ink/80">
+          <span className="text-xs font-bold uppercase tracking-wider text-ink">
             Syllabus Level:
           </span>
 
@@ -419,7 +419,7 @@ export default async function StudentSchedulePage({
                 <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
                   Live Interactive Sessions &amp; Ratio Capacity
                 </h3>
-                <p className="text-xs text-ink/80 font-medium">
+                <p className="text-xs text-ink font-medium">
                   Select your dance role (Lead / Follow) for live ratio-balanced reservation.
                 </p>
               </div>
@@ -462,20 +462,20 @@ export default async function StudentSchedulePage({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <div className="border-2 border-ink bg-paper p-3 text-xs text-ink">
-              <span className="font-bold text-poster-red block">Footwear</span>
-              <span className="text-ink/80 font-medium">Comfortable flat shoes or trainers</span>
+              <span className="font-bold text-accent-red block">Footwear</span>
+              <span className="text-ink font-medium">Comfortable flat shoes or trainers</span>
             </div>
             <div className="border-2 border-ink bg-paper p-3 text-xs text-ink">
-              <span className="font-bold text-poster-red block">No Partner Needed</span>
-              <span className="text-ink/80 font-medium">Zero partner required (we rotate continuously)</span>
+              <span className="font-bold text-accent-red block">No Partner Needed</span>
+              <span className="text-ink font-medium">Zero partner required (we rotate continuously)</span>
             </div>
             <div className="border-2 border-ink bg-paper p-3 text-xs text-ink">
-              <span className="font-bold text-poster-red block">Studio Bar &amp; Lounge</span>
-              <span className="text-ink/80 font-medium">Refreshments &amp; social lounge at BOH Studios</span>
+              <span className="font-bold text-accent-red block">Studio Bar &amp; Lounge</span>
+              <span className="text-ink font-medium">Refreshments &amp; social lounge at BOH Studios</span>
             </div>
             <div className="border-2 border-ink bg-paper p-3 text-xs text-ink">
-              <span className="font-bold text-poster-red block">Town-Centre Parking</span>
-              <span className="text-ink/80 font-medium">Easy parking nearby (The Triangle, BH2 5LR)</span>
+              <span className="font-bold text-accent-red block">Town-Centre Parking</span>
+              <span className="text-ink font-medium">Easy parking nearby (The Triangle, BH2 5LR)</span>
             </div>
           </div>
         </div>
@@ -496,7 +496,7 @@ export default async function StudentSchedulePage({
         <div className="grid gap-4 md:grid-cols-2 pt-4">
           <div className="flex flex-col justify-between gap-3 border-4 border-ink bg-poster-teal p-4 text-ink sm:flex-row sm:items-center shadow-[4px_4px_0_0_#161311]">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-ink/80 block">
+              <span className="text-xs font-bold uppercase tracking-wider text-ink block">
                 Instructor Portal
               </span>
               <h2 className="text-sm font-bold">
@@ -530,7 +530,7 @@ export default async function StudentSchedulePage({
 
           <div className="flex flex-col justify-between gap-3 border-4 border-ink bg-poster-mustard p-4 text-ink sm:flex-row sm:items-center shadow-[4px_4px_0_0_#161311]">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-ink/80 block">
+              <span className="text-xs font-bold uppercase tracking-wider text-ink block">
                 Studio Owner Admin
               </span>
               <h2 className="text-sm font-bold">

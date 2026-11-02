@@ -168,7 +168,7 @@ export function EventPassSelector({
         >
           <div>
             <p className="font-display text-2xl text-ink">This event has finished</p>
-            <p className="text-xs sm:text-sm font-semibold text-ink/80 mt-1">
+            <p className="text-xs sm:text-sm font-semibold text-ink mt-1">
               Thank you to everyone who danced with us. Passes for the next parties and weekenders are on sale now.
             </p>
           </div>
@@ -192,7 +192,7 @@ export function EventPassSelector({
               <p className="font-display text-2xl text-ink">
                 Online Booking Opening Soon
               </p>
-              <p className="text-xs sm:text-sm font-semibold text-ink/80 mt-1">
+              <p className="text-xs sm:text-sm font-semibold text-ink mt-1">
                 Online booking is temporarily unavailable. Please check back shortly or message us on WhatsApp.
               </p>
             </div>
@@ -215,7 +215,7 @@ export function EventPassSelector({
           className={`border-4 border-ink p-4 text-xs font-bold ${
             banner.type === "success"
               ? "bg-poster-teal text-ink"
-              : "bg-poster-red text-paper"
+              : "bg-poster-red text-ink"
           }`}
         >
           {banner.text}
@@ -258,7 +258,7 @@ export function EventPassSelector({
                       Pass Active
                     </span>
                   ) : isSoldOut ? (
-                    <span className="mt-2 inline-block border-2 border-ink bg-poster-red px-2 py-0.5 text-xs font-bold uppercase text-paper">
+                    <span className="mt-2 inline-block border-2 border-ink bg-poster-red px-2 py-0.5 text-xs font-bold uppercase text-ink">
                       Sold Out
                     </span>
                   ) : (
@@ -269,7 +269,7 @@ export function EventPassSelector({
                 </div>
 
                 <div className="text-right shrink-0">
-                  <span className={`font-display ${TYPE.number} text-poster-red leading-none block`}>
+                  <span className={`font-display ${TYPE.number} text-accent-red leading-none block`}>
                     £{price}
                   </span>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-ink/70">
@@ -281,7 +281,7 @@ export function EventPassSelector({
               {/* Ticket Stub Body */}
               <div className="flex flex-1 flex-col justify-between p-5 gap-4">
                 {tier.description && (
-                  <p className="text-xs font-medium text-ink/80 leading-relaxed line-clamp-3">
+                  <p className="text-xs font-medium text-ink leading-relaxed line-clamp-3">
                     {tier.description}
                   </p>
                 )}
@@ -295,7 +295,7 @@ export function EventPassSelector({
                         label={tier.userRegistration.qrCodeHash}
                       />
                     </div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-poster-red">
+                    <div className="text-xs font-bold uppercase tracking-wider text-accent-red">
                       Verified Door QR Pass ({tier.userRegistration.role})
                     </div>
                     <p className="text-xs font-medium text-ink/70">
@@ -312,7 +312,7 @@ export function EventPassSelector({
                         <span
                           className={`font-display text-sm ${
                             remainingLeads !== null && remainingLeads <= 5
-                              ? "text-poster-red"
+                              ? "text-accent-red"
                               : "text-ink"
                           }`}
                         >
@@ -328,7 +328,7 @@ export function EventPassSelector({
                         <span
                           className={`font-display text-sm ${
                             remainingFollows !== null && remainingFollows <= 5
-                              ? "text-poster-red"
+                              ? "text-accent-red"
                               : "text-ink"
                           }`}
                         >
@@ -450,7 +450,7 @@ export function EventPassSelector({
             {/* Header */}
             <div className="flex items-start justify-between pb-3 border-b-4 border-ink">
               <div>
-                <p className={`${KICKER} text-poster-red`}>VIP Congress Upgrade</p>
+                <p className={`${KICKER} text-accent-red`}>VIP Congress Upgrade</p>
                 <h3 className={`font-display ${TYPE.card} text-ink leading-tight mt-1`}>
                   Upgrade Your Pass
                 </h3>
@@ -497,7 +497,7 @@ export function EventPassSelector({
                 <div className="flex-1 space-y-0.5 text-xs">
                   <div className="flex items-center justify-between font-bold">
                     <span>Official 2026 Congress T-Shirt</span>
-                    <span className="font-display text-base text-poster-red">+£20</span>
+                    <span className="font-display text-base text-accent-red">+£20</span>
                   </div>
                   <p className="text-[11px] text-ink/70 leading-relaxed font-medium">
                     100% organic cotton Salsa Explosion UK festival tee. Sizes S–XXL collected at the BOH Studios welcome desk.
@@ -531,7 +531,7 @@ export function EventPassSelector({
                 <div className="flex-1 space-y-0.5 text-xs">
                   <div className="flex items-center justify-between font-bold">
                     <span>Maestro Private Masterclass</span>
-                    <span className="font-display text-base text-poster-red">+£35</span>
+                    <span className="font-display text-base text-accent-red">+£35</span>
                   </div>
                   <p className="text-[11px] text-ink/70 leading-relaxed font-medium">
                     Exclusive 45-minute small-group footwork & body isolation clinic with Maestro Enrique Perez Valdes. Limited to 12 Casineros.
@@ -567,7 +567,7 @@ export function EventPassSelector({
               )}
               <div className="pt-2 border-t-2 border-ink flex justify-between font-display text-lg text-ink">
                 <span>Total Amount:</span>
-                <span className="text-poster-red">
+                <span className="text-accent-red">
                   £
                   {upsellTarget.tier.priceInCents / 100 +
                     (addShirt ? 20 : 0) +

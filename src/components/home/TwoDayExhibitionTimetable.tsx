@@ -55,15 +55,15 @@ function TimetableRow({
             {item.instructorHref ? (
               <Link
                 href={item.instructorHref}
-                className="font-bold text-poster-red hover:underline transition-colors"
+                className="font-bold text-accent-red hover:underline transition-colors"
               >
                 {item.instructor}
               </Link>
             ) : (
-              <span className="font-bold text-poster-red">{item.instructor}</span>
+              <span className="font-bold text-accent-red">{item.instructor}</span>
             )}
             {" • "}
-            <span className="font-medium text-ink/80">{item.room}</span>
+            <span className="font-medium text-ink">{item.room}</span>
           </p>
         </div>
 
@@ -104,17 +104,17 @@ export function TwoDayExhibitionTimetable() {
           </div>
           <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.section} pt-1`}>
             WEEKLY PROGRAMME{" "}
-            <span className="text-poster-red">
+            <span className="text-accent-red">
               LINEUP
             </span>
           </h2>
-          <p className="text-xs sm:text-sm text-ink/80 font-medium max-w-xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-ink font-medium max-w-xl leading-relaxed">
             Strictly Thursdays and Sundays at {VENUE_INFO.name}. High-energy partner rotations, authentic Cuban Casino footwork, and zero partner required.
           </p>
         </div>
 
         <div className="flex items-center gap-2 self-start md:self-auto border-2 border-ink bg-poster-mustard px-4 py-2 text-xs font-bold text-ink shadow-[4px_4px_0_0_#161311]">
-          <MapPin className="h-4 w-4 text-poster-red shrink-0" />
+          <MapPin className="h-4 w-4 text-accent-red shrink-0" />
           <span>
             {VENUE_INFO.name} • {VENUE_INFO.address}, {VENUE_INFO.postcode}
           </span>
@@ -133,20 +133,20 @@ export function TwoDayExhibitionTimetable() {
                 {thursdaySchedule.sessions.length} Sessions • Doors {thursdaySchedule.doorsTime} • {VENUE_INFO.floor}
               </span>
             </div>
-            <h3 className={`font-display text-poster-red ${TYPE.section} mt-2`}>
+            <h3 className={`font-display text-accent-red ${TYPE.section} mt-2`}>
               JUEVES
             </h3>
-            <p className="text-xs font-bold uppercase tracking-wider text-ink/80 mt-1">
+            <p className="text-xs font-bold uppercase tracking-wider text-ink mt-1">
               Thursday Havana Residency
             </p>
           </div>
-          <p className="text-xs sm:text-sm font-semibold text-ink/80 max-w-sm sm:text-right">
+          <p className="text-xs sm:text-sm font-semibold text-ink max-w-sm sm:text-right">
             {thursdaySchedule.subtitle}
           </p>
         </div>
 
         {/* Table Header (Desktop only) */}
-        <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ink/80 border-b-2 border-ink">
+        <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ink border-b-2 border-ink">
           <span className="col-span-2">Time</span>
           <span className="col-span-3">Level / Track</span>
           <span className="col-span-5">Class &amp; Faculty</span>
@@ -172,20 +172,20 @@ export function TwoDayExhibitionTimetable() {
                 Doors {sundaySchedule.doorsTime} • Every Sunday • Masterclass &amp; Social
               </span>
             </div>
-            <h3 className={`font-display text-poster-red ${TYPE.section} mt-2`}>
+            <h3 className={`font-display text-accent-red ${TYPE.section} mt-2`}>
               DOMINGO
             </h3>
-            <p className="text-xs font-bold uppercase tracking-wider text-ink/80 mt-1">
+            <p className="text-xs font-bold uppercase tracking-wider text-ink mt-1">
               Sunday Havana Sessions — {VENUE_INFO.shortName}
             </p>
           </div>
-          <p className="text-xs sm:text-sm font-semibold text-ink/80 max-w-sm sm:text-right">
+          <p className="text-xs sm:text-sm font-semibold text-ink max-w-sm sm:text-right">
             {sundaySchedule.subtitle}
           </p>
         </div>
 
         {/* Table Header (Desktop only) */}
-        <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ink/80 border-b-2 border-ink">
+        <div className="hidden lg:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-black uppercase tracking-wider text-ink border-b-2 border-ink">
           <span className="col-span-2">Time</span>
           <span className="col-span-3">Level / Track</span>
           <span className="col-span-5">Class &amp; Faculty</span>
@@ -207,15 +207,15 @@ export function TwoDayExhibitionTimetable() {
             {DOOR_PRICING.summaryBadge}
           </span>
           <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-4 w-4 text-poster-teal" />
+            <CheckCircle2 className="h-4 w-4 text-accent-teal" />
             Cash or Card at Door
           </span>
           <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-4 w-4 text-poster-teal" />
+            <CheckCircle2 className="h-4 w-4 text-accent-teal" />
             Zero Partner Required
           </span>
           <span className="hidden md:flex items-center gap-1.5">
-            <CheckCircle2 className="h-4 w-4 text-poster-teal" />
+            <CheckCircle2 className="h-4 w-4 text-accent-teal" />
             No Online Pre-Booking Needed
           </span>
         </div>

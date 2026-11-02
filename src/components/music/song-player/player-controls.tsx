@@ -50,7 +50,8 @@ export function PlayerControls({
         type="button"
         onClick={onCycleRate}
         disabled={!isReady}
-        aria-label={`Playback speed ${playbackRate}x, tap to change`}
+        // The visible "1×" starts the accessible name (WCAG 2.5.3 label in name)
+        aria-label={`${formatPlaybackRate(playbackRate)} playback speed, tap to change`}
         data-testid="player-speed"
         className={cn(
           roundButton,

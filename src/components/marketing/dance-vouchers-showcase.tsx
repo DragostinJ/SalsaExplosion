@@ -34,7 +34,7 @@ export function DanceVouchersShowcase({
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
               <span className="border-2 border-ink bg-paper text-ink font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-1">
-                <Gift className="h-3.5 w-3.5 text-poster-red" />
+                <Gift className="h-3.5 w-3.5 text-accent-red" />
                 The Perfect Gift
               </span>
               <span className="border-2 border-ink bg-poster-mustard text-ink font-bold text-xs uppercase tracking-wider px-3 py-1">
@@ -46,7 +46,7 @@ export function DanceVouchersShowcase({
               DANCE VOUCHERS — THE PERFECT GIFT!
             </h2>
 
-            <p className="text-sm sm:text-base font-bold text-ink/90 leading-relaxed">
+            <p className="text-sm sm:text-base font-bold text-ink leading-relaxed">
               Looking for a gift that’s a little different? Why not give your friends or family the gift of Cuban Salsa!
             </p>
           </div>
@@ -76,7 +76,7 @@ export function DanceVouchersShowcase({
                     idx >= 4 ? "hidden sm:flex" : "flex"
                   }`}
                 >
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-poster-red" />
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-accent-red" />
                   <span>{benefit}</span>
                 </li>
               ))}
@@ -85,7 +85,7 @@ export function DanceVouchersShowcase({
 
           {/* Location strip */}
           <div className="border-2 border-ink bg-poster-mustard p-3 flex items-center gap-2 text-xs font-bold text-ink shadow-[2px_2px_0_0_#161311]">
-            <MapPin className="h-4 w-4 text-poster-red shrink-0" />
+            <MapPin className="h-4 w-4 text-accent-red shrink-0" />
             <span>Valid across all weekly classes at BOH Studios Bournemouth (104 Commercial Rd)</span>
           </div>
 
@@ -93,7 +93,7 @@ export function DanceVouchersShowcase({
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
             <a
               href="tel:+447969633701"
-              className="border-4 border-ink bg-poster-red text-paper hover:bg-ink hover:text-paper font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_#161311] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
+              className="border-4 border-ink bg-poster-red text-ink hover:bg-ink hover:text-ink font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_#161311] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
             >
               <Phone className="h-4 w-4" />
               ORDER NOW: 07969 633701
@@ -121,7 +121,7 @@ export function DanceVouchersShowcase({
                 <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
                   SALSA EXPLOSION UK
                 </h3>
-                <span className="text-xs text-ink/80 font-semibold">
+                <span className="text-xs text-ink font-semibold">
                   Bournemouth Cuban Dance Academy
                 </span>
               </div>
@@ -137,12 +137,12 @@ export function DanceVouchersShowcase({
               <p className="font-display font-black text-xl italic uppercase tracking-wide text-ink">
                 Someone Special
               </p>
-              <p className="text-xs text-ink/85 font-medium leading-relaxed">
+              <p className="text-xs text-ink font-medium leading-relaxed">
                 Entitles recipient to Cuban Salsa Classes &amp; Social Dancing with Maestro Enrique Perez Valdes &amp; Guest Artists.
               </p>
             </div>
 
-            <div className="border-2 border-poster-red text-poster-red p-2 font-display font-black text-center text-xs uppercase tracking-widest rotate-[-3deg]">
+            <div className="border-2 border-accent-red text-accent-red p-2 font-display font-black text-center text-xs uppercase tracking-widest rotate-[-3deg]">
               OFFICIAL VOUCHER · SALSA EXPLOSION
             </div>
 
@@ -153,12 +153,12 @@ export function DanceVouchersShowcase({
               </div>
               <div className="text-right">
                 <span className="block text-ink/70 uppercase">Order Direct</span>
-                <span className="text-poster-red">07969 633701</span>
+                <span className="text-accent-red">07969 633701</span>
               </div>
             </div>
 
             <div className="text-center pt-1 border-t border-ink/20">
-              <p className="text-xs font-bold text-ink/80 italic">
+              <p className="text-xs font-bold text-ink italic">
                 &ldquo;Give the gift of dance. Give the gift of Cuban Salsa!&rdquo;
               </p>
             </div>

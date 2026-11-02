@@ -41,13 +41,13 @@ export default function VenuesGuidePage() {
           <div className="space-y-3">
             <p className={KICKER}>Bournemouth Town Centre Studio Hub</p>
             <h1 className={`${TYPE.section} text-ink`}>
-              VENUES &amp; <span className="text-poster-red">Parking Guide</span>
+              VENUES &amp; <span className="text-accent-red">Parking Guide</span>
             </h1>
-            <p className="max-w-2xl text-sm font-semibold text-ink/80 leading-relaxed">
+            <p className="max-w-2xl text-sm font-semibold text-ink leading-relaxed">
               Everything you need for a smooth arrival at Maestro Enrique Perez Valdes&apos; weekly classes at BOH Studios and Salsa Explosion dance weekend festivals across Bournemouth.
             </p>
             <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
-              <Sparkles className="h-4 w-4 text-poster-red" />
+              <Sparkles className="h-4 w-4 text-accent-red" />
               <span>Thu &amp; Sun Classes at BOH Studios: £12 (1 Class) / £14 (2 Classes) at the Door</span>
             </div>
           </div>
@@ -92,24 +92,24 @@ export default function VenuesGuidePage() {
                 <h2 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
                   BOH Studios Bournemouth
                 </h2>
-                <p className="text-xs text-ink/80 font-bold mt-0.5">
+                <p className="text-xs text-ink font-bold mt-0.5">
                   104 Commercial Road, The Triangle, Bournemouth BH2 5LR
                 </p>
               </div>
             </div>
 
             <div className="p-6 space-y-4 text-xs">
-              <p className="text-ink/80 leading-relaxed font-medium">
+              <p className="text-ink leading-relaxed font-medium">
                 Salsa Explosion UK proudly hires BOH Studios as our flagship home base in Bournemouth town centre. Featuring a state-of-the-art sprung Canadian maple dance floor, full-length mirror wall, professional acoustic sound, licensed bar, and vibrant social dance floor.
               </p>
 
               {/* Parking Info */}
               <div className="border-2 border-ink bg-poster-mustard/20 p-4 space-y-2">
                 <h3 className="font-bold flex items-center gap-2 text-ink uppercase tracking-wider text-xs">
-                  <Car className="h-4 w-4 text-poster-red" />
+                  <Car className="h-4 w-4 text-accent-red" />
                   Parking Advice:
                 </h3>
-                <ul className="text-ink/85 space-y-1 list-disc pl-4 font-medium">
+                <ul className="text-ink space-y-1 list-disc pl-4 font-medium">
                   <li>
                     <strong>Bournemouth Library (Avenue Rd, BH2 5SL):</strong> 2-minute walk from the studio doors.
                   </li>
@@ -125,10 +125,10 @@ export default function VenuesGuidePage() {
               {/* Transit Info */}
               <div className="border-2 border-ink bg-poster-teal/20 p-4 space-y-2">
                 <h3 className="font-bold flex items-center gap-2 text-ink uppercase tracking-wider text-xs">
-                  <Bus className="h-4 w-4 text-poster-teal" />
+                  <Bus className="h-4 w-4 text-accent-teal" />
                   Public Transit &amp; Buses:
                 </h3>
-                <ul className="text-ink/85 space-y-1 list-disc pl-4 font-medium">
+                <ul className="text-ink space-y-1 list-disc pl-4 font-medium">
                   <li>
                     <strong>The Triangle Bus Hub:</strong> Virtually all MoreBus lines (M1, M2, 1, 3, 5, 6) stop at The Triangle (30 seconds walk).
                   </li>
@@ -183,24 +183,24 @@ export default function VenuesGuidePage() {
                 <h2 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
                   BOH Studios Studio 2
                 </h2>
-                <p className="text-xs text-ink/80 font-bold mt-0.5">
+                <p className="text-xs text-ink font-bold mt-0.5">
                   104 Commercial Rd, Bournemouth BH2 5LR • Tel: 07969 633701
                 </p>
               </div>
             </div>
 
             <div className="p-6 space-y-4 text-xs">
-              <p className="text-ink/80 leading-relaxed font-medium">
+              <p className="text-ink leading-relaxed font-medium">
                 Intimate secondary studio and social lounge for Level 0 beginners foundation drills, Bachata Sensual styling, and multi-room festival parties. Featuring mirror walls, high-definition sound, and sprung dance flooring.
               </p>
 
               {/* Parking Info */}
               <div className="border-2 border-ink bg-poster-teal/20 p-4 space-y-2">
                 <h3 className="font-bold flex items-center gap-2 text-ink uppercase tracking-wider text-xs">
-                  <Car className="h-4 w-4 text-poster-teal" />
+                  <Car className="h-4 w-4 text-accent-teal" />
                   Parking &amp; Venue Features:
                 </h3>
-                <ul className="text-ink/85 space-y-1 list-disc pl-4 font-medium">
+                <ul className="text-ink space-y-1 list-disc pl-4 font-medium">
                   <li>
                     <strong>Bournemouth Library (BH2 5SL):</strong> 2-minute flat walk from the studio entrance.
                   </li>
@@ -216,10 +216,10 @@ export default function VenuesGuidePage() {
               {/* Session Timetable */}
               <div className="border-2 border-ink bg-poster-mustard/20 p-4 space-y-2">
                 <h3 className="font-bold flex items-center gap-2 text-ink uppercase tracking-wider text-xs">
-                  <Clock className="h-4 w-4 text-poster-red" />
+                  <Clock className="h-4 w-4 text-accent-red" />
                   Session Timetable:
                 </h3>
-                <ul className="text-ink/85 space-y-1 list-disc pl-4 font-medium">
+                <ul className="text-ink space-y-1 list-disc pl-4 font-medium">
                   <li>
                     <strong>Thursdays &amp; Sundays:</strong> 19:00 – 23:00 Beginners Foundation, Bachata Sensual &amp; Festival Multi-Room Fiestas.
                   </li>
@@ -278,7 +278,7 @@ export default function VenuesGuidePage() {
             </div>
 
             <div className="p-6 space-y-4 text-xs">
-              <p className="text-ink/80 leading-relaxed font-medium">
+              <p className="text-ink leading-relaxed font-medium">
                 Atmospheric beachfront function room setting directly opposite <strong>Boscombe Pier</strong> with panoramic sea views over Poole Bay. Selected home for special seasonal workshops, outdoor summer socials, and private Latin party bookings.
               </p>
 
@@ -288,7 +288,7 @@ export default function VenuesGuidePage() {
                   <Car className="h-4 w-4 text-poster-blue" />
                   Verified Parking &amp; Seafront Access:
                 </h3>
-                <ul className="text-ink/85 space-y-1 list-disc pl-4 font-medium">
+                <ul className="text-ink space-y-1 list-disc pl-4 font-medium">
                   <li>
                     <strong>Boscombe Undercliff Car Park (BH5 1BN):</strong> PayByPhone Code <strong>59200</strong>. Direct beach level access. Note: 2.1m height barrier.
                   </li>
@@ -301,10 +301,10 @@ export default function VenuesGuidePage() {
               {/* Events Info */}
               <div className="border-2 border-ink bg-poster-mustard/20 p-4 space-y-2">
                 <h3 className="font-bold flex items-center gap-2 text-ink uppercase tracking-wider text-xs">
-                  <Clock className="h-4 w-4 text-poster-red" />
+                  <Clock className="h-4 w-4 text-accent-red" />
                   Seasonal Schedule:
                 </h3>
-                <ul className="text-ink/85 space-y-1 list-disc pl-4 font-medium">
+                <ul className="text-ink space-y-1 list-disc pl-4 font-medium">
                   <li>
                     <strong>Special Events:</strong> Special seasonal socials, beachfront workshops, and party dates announced in our live event calendar.
                   </li>
@@ -342,7 +342,7 @@ export default function VenuesGuidePage() {
         {/* Venue 4: The Roundhouse Hotel */}
         <div className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_#161311] flex flex-col justify-between">
           <div>
-            <div className="bg-poster-red p-6 border-b-4 border-ink text-paper flex flex-col justify-between space-y-3">
+            <div className="bg-poster-red p-6 border-b-4 border-ink text-ink flex flex-col justify-between space-y-3">
               <div className="flex items-center justify-between">
                 <span className="border border-paper bg-ink text-paper text-xs font-black uppercase tracking-wider px-2 py-0.5">
                   Festival Accommodation Partner
@@ -353,27 +353,27 @@ export default function VenuesGuidePage() {
               </div>
 
               <div>
-                <h2 className="font-display font-black text-2xl uppercase tracking-tight text-paper">
+                <h2 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
                   The Roundhouse Hotel
                 </h2>
-                <p className="text-xs text-paper/85 font-bold mt-0.5">
+                <p className="text-xs text-ink font-bold mt-0.5">
                   Meyrick Road, Lansdowne, Bournemouth BH1 2PR
                 </p>
               </div>
             </div>
 
             <div className="p-6 space-y-4 text-xs">
-              <p className="text-ink/80 leading-relaxed font-medium">
+              <p className="text-ink leading-relaxed font-medium">
                 Recommended accommodation partner for Salsa Explosion dance weekend festivals and visiting dancers. Featuring ballroom facilities, discounted dancer rates (Code: SALSA2026), full hotel bar, and easy transit to BOH Studios.
               </p>
 
               {/* Parking Info */}
               <div className="border-2 border-ink bg-poster-mustard/20 p-4 space-y-2">
                 <h3 className="font-bold flex items-center gap-2 text-ink uppercase tracking-wider text-xs">
-                  <Car className="h-4 w-4 text-poster-red" />
+                  <Car className="h-4 w-4 text-accent-red" />
                   Parking Advice:
                 </h3>
-                <ul className="text-ink/85 space-y-1 list-disc pl-4 font-medium">
+                <ul className="text-ink space-y-1 list-disc pl-4 font-medium">
                   <li>
                     <strong>On-Site Hotel Car Park:</strong> Dedicated guest parking right in front of the hotel (discounted rates for congress pass holders).
                   </li>
@@ -386,10 +386,10 @@ export default function VenuesGuidePage() {
               {/* Transit Info */}
               <div className="border-2 border-ink bg-poster-teal/20 p-4 space-y-2">
                 <h3 className="font-bold flex items-center gap-2 text-ink uppercase tracking-wider text-xs">
-                  <Bus className="h-4 w-4 text-poster-teal" />
+                  <Bus className="h-4 w-4 text-accent-teal" />
                   Transit &amp; Walking Distance:
                 </h3>
-                <ul className="text-ink/85 space-y-1 list-disc pl-4 font-medium">
+                <ul className="text-ink space-y-1 list-disc pl-4 font-medium">
                   <li>
                     <strong>Bournemouth Central Train Station:</strong> Only a 5-minute walk (400 meters) straight down Holdenhurst Road.
                   </li>
@@ -438,7 +438,7 @@ export default function VenuesGuidePage() {
             <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-ink">
               Nearby Hotels for Dance Weekends &amp; DANZA! Festivals
             </h2>
-            <p className="text-xs sm:text-sm text-ink/85 font-semibold mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-ink font-semibold mt-1 max-w-2xl leading-relaxed">
               Travelling from London, Bristol, Southampton, or abroad for our weekend festivals? These verified walkable hotels are all within 3 to 10 minutes of BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR).
             </p>
           </div>
@@ -455,11 +455,11 @@ export default function VenuesGuidePage() {
                 <span className="border border-ink bg-poster-mustard text-ink text-xs font-bold px-2 py-0.5">
                   4-Star Premium
                 </span>
-                <span className="text-xs font-bold text-poster-red">3–5 min walk</span>
+                <span className="text-xs font-bold text-accent-red">3–5 min walk</span>
               </div>
               <h3 className="font-display font-black text-base uppercase text-ink">Hilton Bournemouth</h3>
               <p className="text-xs text-ink/75 font-medium">Terrace Rd, Bournemouth BH2 5EL</p>
-              <p className="text-xs text-ink/80 leading-relaxed font-medium">
+              <p className="text-xs text-ink leading-relaxed font-medium">
                 Closest upscale hotel to BOH Studios with secure on-site parking, Schpoons &amp; Forx restaurant, heated indoor pool, and luxury rooms.
               </p>
             </div>
@@ -475,11 +475,11 @@ export default function VenuesGuidePage() {
                 <span className="border border-ink bg-poster-teal text-ink text-xs font-bold px-2 py-0.5">
                   Hot Breakfast
                 </span>
-                <span className="text-xs font-bold text-poster-red">5 min walk</span>
+                <span className="text-xs font-bold text-accent-red">5 min walk</span>
               </div>
               <h3 className="font-display font-black text-base uppercase text-ink">Hampton by Hilton</h3>
               <p className="text-xs text-ink/75 font-medium">Upper Terrace Rd, Bournemouth BH2 5NW</p>
-              <p className="text-xs text-ink/80 leading-relaxed font-medium">
+              <p className="text-xs text-ink leading-relaxed font-medium">
                 Modern dancer favorite! Includes complimentary hot breakfast, 24/7 fitness center, on-site parking, and spacious rooms just around the corner from The Triangle.
               </p>
             </div>
@@ -495,11 +495,11 @@ export default function VenuesGuidePage() {
                 <span className="border border-ink bg-poster-mustard text-ink text-xs font-bold px-2 py-0.5">
                   Top Value
                 </span>
-                <span className="text-xs font-bold text-poster-red">8 min walk</span>
+                <span className="text-xs font-bold text-accent-red">8 min walk</span>
               </div>
               <h3 className="font-display font-black text-base uppercase text-ink">Premier Inn Central</h3>
               <p className="text-xs text-ink/75 font-medium">Westover Rd, Bournemouth BH1 2BZ</p>
-              <p className="text-xs text-ink/80 leading-relaxed font-medium">
+              <p className="text-xs text-ink leading-relaxed font-medium">
                 Superb central location overlooking Lower Gardens and 2 minutes from the pier. King-size Hypnos beds, quiet rooms, and very budget-friendly rates.
               </p>
             </div>
@@ -515,11 +515,11 @@ export default function VenuesGuidePage() {
                 <span className="border border-ink bg-poster-blue text-paper text-xs font-bold px-2 py-0.5">
                   Full Service
                 </span>
-                <span className="text-xs font-bold text-poster-red">10 min walk</span>
+                <span className="text-xs font-bold text-accent-red">10 min walk</span>
               </div>
               <h3 className="font-display font-black text-base uppercase text-ink">Holiday Inn Bournemouth</h3>
               <p className="text-xs text-ink/75 font-medium">Bath Rd, Lansdowne, Bournemouth BH1 2NT</p>
-              <p className="text-xs text-ink/80 leading-relaxed font-medium">
+              <p className="text-xs text-ink leading-relaxed font-medium">
                 Convenient direct road access via Wessex Way with large on-site car park, open-lobby lounge bar, and full hot buffet breakfast.
               </p>
             </div>
@@ -533,7 +533,7 @@ export default function VenuesGuidePage() {
       {/* Newcomer Arrival & Etiquette Guide */}
       <div className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[6px_6px_0_0_#161311] space-y-6">
         <div className="border-b-4 border-ink pb-3 space-y-1">
-          <p className={`${KICKER} text-poster-red`}>
+          <p className={`${KICKER} text-accent-red`}>
             First-Timer FAQs
           </p>
           <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.card}`}>
@@ -547,7 +547,7 @@ export default function VenuesGuidePage() {
               <Footprints className="h-5 w-5" />
             </div>
             <h3 className="font-display font-black text-base uppercase text-ink">Footwear &amp; Attire</h3>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               Wear comfortable shoes with smooth soles (leather or suede soles are best). Avoid high-traction running sneakers so your knees can pivot freely during spins. Comfortable casual wear is perfect.
             </p>
           </div>
@@ -557,7 +557,7 @@ export default function VenuesGuidePage() {
               <Sparkles className="h-5 w-5" />
             </div>
             <h3 className="font-display font-black text-base uppercase text-ink">No Partner Needed</h3>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               Over 70% of dancers arrive on their own! In Cuban Casino and Rueda de Casino, we rotate partners continuously so everyone gets to dance and practice both leading and following.
             </p>
           </div>
@@ -567,7 +567,7 @@ export default function VenuesGuidePage() {
               <Clock className="h-5 w-5" />
             </div>
             <h3 className="font-display font-black text-base uppercase text-ink">1-Second Door Arrival</h3>
-            <p className="text-xs text-ink/80 leading-relaxed font-medium">
+            <p className="text-xs text-ink leading-relaxed font-medium">
               Arrive 10 minutes before class. Simply pay cash or card at the desk or pull up your digital pass on your phone for immediate check-in at the BOH Studios door.
             </p>
           </div>

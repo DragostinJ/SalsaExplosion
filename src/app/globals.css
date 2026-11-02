@@ -46,7 +46,8 @@
   --color-brand: #EA4A33;
   --color-brand-hover: #F05B44;
   /* Red for headline text (the poster red is for blocks; this one reads on every surface) */
-  --color-accent-red: #BF311C;
+  --color-accent-red: #A82A17;
+  --color-accent-teal: #055A56;
 
   /* Status */
   --color-success: #055A56;
@@ -359,6 +360,7 @@
   --color-brand: #C4321C;
   --color-brand-hover: #A92A16;
   --color-accent-red: #F06A52;
+  --color-accent-teal: #5FC4C0;
 
   /* Status */
   --color-success: #3DBDB4;

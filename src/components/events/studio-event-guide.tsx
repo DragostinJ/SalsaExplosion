@@ -79,7 +79,7 @@ export function StudioEventGuide({
         <h2 className={`font-display ${TYPE.card} sm:text-4xl text-ink leading-tight`}>
           Everything You Need to Know for {eventTitle}
         </h2>
-        <p className="text-xs sm:text-sm text-ink/80 max-w-2xl leading-relaxed font-medium">
+        <p className="text-xs sm:text-sm text-ink max-w-2xl leading-relaxed font-medium">
           Direct directions, parking, floor etiquette, and party schedule for an authentic Cuban dance night in the heart of Bournemouth.
         </p>
       </div>
@@ -87,27 +87,27 @@ export function StudioEventGuide({
       {/* Guide Pillars */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <article className="border-2 border-ink bg-surface-1 p-4 space-y-1 text-xs">
-          <div className="flex items-center gap-1.5 text-poster-red font-bold uppercase mb-2">
+          <div className="flex items-center gap-1.5 text-accent-red font-bold uppercase mb-2">
             <MapPin className="h-4 w-4" />
             <h3 className="font-display text-base text-ink">Location</h3>
           </div>
           <p className="font-bold text-ink">{venueName}</p>
-          <p className="text-ink/80">104 Commercial Road</p>
-          <p className="text-ink/80">Bournemouth, BH2 5LR</p>
-          <p className="text-[11px] font-bold text-poster-red pt-1">
+          <p className="text-ink">104 Commercial Road</p>
+          <p className="text-ink">Bournemouth, BH2 5LR</p>
+          <p className="text-[11px] font-bold text-accent-red pt-1">
             Next to The Triangle
           </p>
         </article>
 
         <article className="border-2 border-ink bg-surface-1 p-4 space-y-1 text-xs">
-          <div className="flex items-center gap-1.5 text-poster-teal font-bold uppercase mb-2">
+          <div className="flex items-center gap-1.5 text-accent-teal font-bold uppercase mb-2">
             <Car className="h-4 w-4" />
             <h3 className="font-display text-base text-ink">Parking</h3>
           </div>
           <p className="font-bold text-ink">Triangle Car Park</p>
-          <p className="text-ink/80">2 mins walk (BH2 5RH)</p>
-          <p className="text-ink/80">Avenue Rd Multi-Storey</p>
-          <p className="text-[11px] font-bold text-poster-teal pt-1">
+          <p className="text-ink">2 mins walk (BH2 5RH)</p>
+          <p className="text-ink">Avenue Rd Multi-Storey</p>
+          <p className="text-[11px] font-bold text-accent-teal pt-1">
             Free on-street after 18:00
           </p>
         </article>
@@ -118,22 +118,22 @@ export function StudioEventGuide({
             <h3 className="font-display text-base text-ink">Licensed Bar</h3>
           </div>
           <p className="font-bold text-ink">Authentic Cuban Rum</p>
-          <p className="text-ink/80">Havana Club 3 &amp; 7 Años</p>
-          <p className="text-ink/80">Cold Beers, Ciders &amp; Softs</p>
+          <p className="text-ink">Havana Club 3 &amp; 7 Años</p>
+          <p className="text-ink">Cold Beers, Ciders &amp; Softs</p>
           <p className="text-[11px] font-bold text-ink/70 pt-1">
             Contactless accepted
           </p>
         </article>
 
         <article className="border-2 border-ink bg-surface-1 p-4 space-y-1 text-xs">
-          <div className="flex items-center gap-1.5 text-poster-red font-bold uppercase mb-2">
+          <div className="flex items-center gap-1.5 text-accent-red font-bold uppercase mb-2">
             <Music2 className="h-4 w-4" />
             <h3 className="font-display text-base text-ink">Cuban Music</h3>
           </div>
           <p className="font-bold text-ink">Curated by DJ Enrique</p>
-          <p className="text-ink/80">Timba, Son, Salsa &amp; Reparto</p>
-          <p className="text-ink/80">Sensual Bachata Room</p>
-          <p className="text-[11px] font-bold text-poster-red pt-1">
+          <p className="text-ink">Timba, Son, Salsa &amp; Reparto</p>
+          <p className="text-ink">Sensual Bachata Room</p>
+          <p className="text-[11px] font-bold text-accent-red pt-1">
             Top Sound &amp; Sprung Wood
           </p>
         </article>
@@ -142,14 +142,14 @@ export function StudioEventGuide({
       {/* Evening Timetable Breakdown */}
       <div className="border-2 border-ink bg-surface-1 p-6 space-y-4">
         <div className="flex items-center gap-2">
-          <Clock className="h-5 w-5 text-poster-red" />
+          <Clock className="h-5 w-5 text-accent-red" />
           <h3 className={`font-display ${TYPE.card} text-ink`}>
             Evening Format &amp; Flow
           </h3>
         </div>
         <div className="grid gap-3 sm:grid-cols-3 text-xs">
           <div className="border border-ink bg-paper p-4 space-y-1">
-            <span className="font-bold uppercase text-poster-red block">
+            <span className="font-bold uppercase text-accent-red block">
               Phase 1 · 19:30
             </span>
             <p className="font-bold text-ink">Warm-up &amp; Technique</p>
@@ -158,7 +158,7 @@ export function StudioEventGuide({
             </p>
           </div>
           <div className="border border-ink bg-paper p-4 space-y-1">
-            <span className="font-bold uppercase text-poster-red block">
+            <span className="font-bold uppercase text-accent-red block">
               Phase 2 · 20:30
             </span>
             <p className="font-bold text-ink">Partnerwork Combinations</p>
@@ -167,7 +167,7 @@ export function StudioEventGuide({
             </p>
           </div>
           <div className="border border-ink bg-paper p-4 space-y-1">
-            <span className="font-bold uppercase text-poster-red block">
+            <span className="font-bold uppercase text-accent-red block">
               Phase 3 · 21:30 – Late
             </span>
             <p className="font-bold text-ink">Social Party Fiesta</p>
@@ -181,7 +181,7 @@ export function StudioEventGuide({
       {/* FAQ Accordion Section */}
       <div className="space-y-4 pt-2">
         <div className="flex items-center gap-2">
-          <HelpCircle className="h-5 w-5 text-poster-teal" />
+          <HelpCircle className="h-5 w-5 text-accent-teal" />
           <h3 className={`font-display ${TYPE.card} text-ink`}>
             Frequently Asked Questions
           </h3>
@@ -206,7 +206,7 @@ export function StudioEventGuide({
                   )}
                 </button>
                 {isOpen && (
-                  <p className="mt-2.5 text-xs text-ink/80 leading-relaxed font-medium">
+                  <p className="mt-2.5 text-xs text-ink leading-relaxed font-medium">
                     {faq.answer}
                   </p>
                 )}

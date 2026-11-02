@@ -34,26 +34,26 @@ export function MultiAgeReassuranceBanner({
               <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
                 Joining Us Tonight? Quick Arrival Essentials
               </h3>
-              <p className="text-xs text-ink/80 mt-1 font-medium leading-relaxed">
+              <p className="text-xs text-ink mt-1 font-medium leading-relaxed">
                 Book online in 15 seconds or simply pay on arrival at the studio desk.
               </p>
             </div>
 
             <div className="border-t-2 border-ink pt-2 space-y-2 text-xs font-medium">
               <div className="flex items-start gap-2">
-                <CreditCard className="h-4 w-4 text-poster-teal shrink-0 mt-0.5" />
+                <CreditCard className="h-4 w-4 text-accent-teal shrink-0 mt-0.5" />
                 <span>
                   <strong className="font-bold text-ink">Door Pricing:</strong> £12 for 1 class • £14 for 2 classes &amp; social fiesta (Card or Cash at the Door).
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 text-poster-red shrink-0 mt-0.5" />
+                <MapPin className="h-4 w-4 text-accent-red shrink-0 mt-0.5" />
                 <span>
                   <strong className="font-bold text-ink">Home Hub &amp; Parking:</strong> BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR) • Free on-street parking after 18:00 &amp; nearby Library Car Park.
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-poster-teal shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-accent-teal shrink-0 mt-0.5" />
                 <span>
                   <strong className="font-bold text-ink">What to Wear:</strong> Casual comfortable clothes &amp; smooth-soled shoes or trainers.
                 </span>
@@ -66,7 +66,7 @@ export function MultiAgeReassuranceBanner({
         {(variant === "all" || variant === "senior-only") && (
           <div className="border-4 border-ink bg-poster-mustard p-5 sm:p-6 shadow-[6px_6px_0_0_#161311] text-ink space-y-3.5">
             <div className="flex items-center justify-between gap-2 border-b-2 border-ink pb-2.5">
-              <span className="border border-ink bg-poster-red text-paper font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-2.5 py-0.5">
+              <span className="border border-ink bg-poster-red text-ink font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-2.5 py-0.5">
                 <HeartHandshake className="h-3.5 w-3.5" />
                 Everyone Welcome
               </span>
@@ -79,7 +79,7 @@ export function MultiAgeReassuranceBanner({
               <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
                 Prefer Not to Use Apps or QR Codes?
               </h3>
-              <p className="text-xs text-ink/90 font-medium leading-relaxed mt-1">
+              <p className="text-xs text-ink font-medium leading-relaxed mt-1">
                 You never need a smartphone or app to dance with Salsa Explosion!
               </p>
             </div>
@@ -89,7 +89,7 @@ export function MultiAgeReassuranceBanner({
                 If you book online, our door staff can simply look you up by <strong className="font-bold text-ink">your name</strong> on the door sheet. Or turn up and pay cash or card at the desk.
               </p>
               <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2 border-ink">
-                <span className="text-ink/80 font-bold">Need advice or have questions?</span>
+                <span className="text-ink font-bold">Need advice or have questions?</span>
                 <a
                   href="tel:+447969633701"
                   className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs px-2.5 py-1 min-h-[40px] flex items-center gap-1`}

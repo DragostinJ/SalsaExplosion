@@ -36,23 +36,23 @@ export default async function ReferralsPage() {
         <div className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[6px_6px_0_var(--color-ink)] space-y-6">
           <div className="grid gap-4 sm:grid-cols-3 pt-2">
             <div className="border-2 border-ink bg-paper-light p-4 space-y-1 shadow-[3px_3px_0_var(--color-ink)]">
-              <Users className="h-5 w-5 text-poster-red mb-1" />
+              <Users className="h-5 w-5 text-accent-red mb-1" />
               <div className="text-sm font-black uppercase text-ink">1. Share Your Code</div>
-              <p className="text-xs text-ink/80">
+              <p className="text-xs text-ink">
                 Send your personal Salsa Explosion invite link via WhatsApp or Instagram.
               </p>
             </div>
             <div className="border-2 border-ink bg-paper-light p-4 space-y-1 shadow-[3px_3px_0_var(--color-ink)]">
-              <Sparkles className="h-5 w-5 text-poster-red mb-1" />
+              <Sparkles className="h-5 w-5 text-accent-red mb-1" />
               <div className="text-sm font-black uppercase text-ink">2. Friend Joins Class</div>
-              <p className="text-xs text-ink/80">
+              <p className="text-xs text-ink">
                 Your friend claims their free welcome credit for Thursday or Sunday at BOH Studios.
               </p>
             </div>
             <div className="border-2 border-ink bg-paper-light p-4 space-y-1 shadow-[3px_3px_0_var(--color-ink)]">
-              <CheckCircle2 className="h-5 w-5 text-poster-teal mb-1" />
+              <CheckCircle2 className="h-5 w-5 text-accent-teal mb-1" />
               <div className="text-sm font-black uppercase text-ink">3. Earn Automatic Credit</div>
-              <p className="text-xs text-ink/80">
+              <p className="text-xs text-ink">
                 1 free class credit is added directly to your digital studio wallet.
               </p>
             </div>
@@ -61,7 +61,7 @@ export default async function ReferralsPage() {
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <Button
               asChild
-              className="border-2 border-ink bg-poster-red hover:bg-ink text-paper font-black text-xs sm:text-sm h-11 px-6 shadow-[2px_2px_0_var(--color-ink)] rounded-none"
+              className="border-2 border-ink bg-poster-red hover:bg-ink text-ink font-black text-xs sm:text-sm h-11 px-6 shadow-[2px_2px_0_var(--color-ink)] rounded-none"
             >
               <Link href="/sign-in">
                 Sign In to Get Your Referral Code

@@ -20,13 +20,13 @@ export function DataUnavailableNotice({
           <p className="text-sm font-black uppercase tracking-wider text-ink">
             {title}
           </p>
-          <p className="text-xs text-ink/90 leading-relaxed font-medium">
+          <p className="text-xs text-ink leading-relaxed font-medium">
             {description}
           </p>
         </div>
         <a
           href=""
-          className="inline-flex items-center justify-center border-2 border-ink bg-ink px-3.5 py-1.5 text-xs font-black uppercase tracking-wider text-paper hover:bg-poster-red transition-colors shadow-[2px_2px_0_var(--color-ink)]"
+          className="inline-flex items-center justify-center border-2 border-ink bg-ink px-3.5 py-1.5 text-xs font-black uppercase tracking-wider text-ink hover:bg-poster-red transition-colors shadow-[2px_2px_0_var(--color-ink)]"
         >
           Reload
         </a>

@@ -131,7 +131,7 @@ export function PrivateLessonsClient({
         <div className="border-4 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_#161311] text-ink">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink pb-2">
             <h3 className="font-bold text-sm flex items-center gap-2">
-              <Clock className="h-4 w-4 text-poster-red" />
+              <Clock className="h-4 w-4 text-accent-red" />
               Your Private Coaching Requests ({bookings.length})
             </h3>
             <span className="text-xs text-ink/70 font-semibold">
@@ -177,7 +177,7 @@ export function PrivateLessonsClient({
                     </span>
                   </div>
 
-                  <div className="text-xs text-ink/80 font-medium">
+                  <div className="text-xs text-ink font-medium">
                     <div>
                       <strong className="text-ink">Focus:</strong> {booking.focusTopic}
                     </div>
@@ -192,7 +192,7 @@ export function PrivateLessonsClient({
                         type="button"
                         disabled={cancellingId === booking.id}
                         onClick={() => handleCancelBooking(booking.id)}
-                        className="text-xs text-poster-red font-bold hover:underline flex items-center gap-1"
+                        className="text-xs text-accent-red font-bold hover:underline flex items-center gap-1"
                       >
                         <XCircle className="h-3.5 w-3.5" />
                         {cancellingId === booking.id ? "Cancelling..." : "Cancel Request"}
@@ -214,7 +214,7 @@ export function PrivateLessonsClient({
           <h2 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
             Private Lesson Request Received!
           </h2>
-          <p className="text-xs sm:text-sm text-ink/80 max-w-lg mx-auto leading-relaxed font-semibold">
+          <p className="text-xs sm:text-sm text-ink max-w-lg mx-auto leading-relaxed font-semibold">
             Thank you! Maestro {activeInstructor.name} and the BOH Studios Bournemouth desk will confirm your {selectedPackage === "SINGLE" ? "1-Hour Lesson" : "5-Hour Intensive Package"} ({selectedDay}) within 24 hours.
           </p>
           <div className="border-2 border-ink bg-paper p-4 max-w-md mx-auto text-xs space-y-1.5 text-left text-ink shadow-[2px_2px_0_0_#161311]">
@@ -228,7 +228,7 @@ export function PrivateLessonsClient({
             </div>
             <div>
               <span className="font-bold text-ink/70">Package Total:</span>{" "}
-              <span className="font-bold text-poster-red">£{price}.00</span>
+              <span className="font-bold text-accent-red">£{price}.00</span>
             </div>
             <div>
               <span className="font-bold text-ink/70">Studio Location:</span>{" "}
@@ -276,7 +276,7 @@ export function PrivateLessonsClient({
                         </div>
                       </div>
 
-                      <p className="text-xs text-ink/80 leading-relaxed font-medium line-clamp-3">
+                      <p className="text-xs text-ink leading-relaxed font-medium line-clamp-3">
                         {inst.bio}
                       </p>
 
@@ -300,7 +300,7 @@ export function PrivateLessonsClient({
                         </span>
                         <span className="text-xs text-ink/70">/hr</span>
                       </div>
-                      <span className={`text-xs font-bold ${isSelected ? "text-poster-red uppercase" : "text-ink/70"}`}>
+                      <span className={`text-xs font-bold ${isSelected ? "text-accent-red uppercase" : "text-ink/70"}`}>
                         {isSelected ? "Selected" : "Select Coach"}
                       </span>
                     </div>
@@ -332,10 +332,10 @@ export function PrivateLessonsClient({
                     £{activeInstructor.hourlyRatePounds}
                   </span>
                 </div>
-                <p className="text-xs text-ink/80 leading-relaxed font-medium">
+                <p className="text-xs text-ink leading-relaxed font-medium">
                   Fast diagnosis and targeted corrections for specific figures, styling habits, or musical timing.
                 </p>
-                <div className="text-xs font-bold text-poster-red">
+                <div className="text-xs font-bold text-accent-red">
                   Ideal for quick tune-ups before a social party.
                 </div>
               </div>
@@ -359,10 +359,10 @@ export function PrivateLessonsClient({
                     £{activeInstructor.blockRatePounds}
                   </span>
                 </div>
-                <p className="text-xs text-ink/80 leading-relaxed font-medium">
+                <p className="text-xs text-ink leading-relaxed font-medium">
                   Comprehensive syllabus transformation: body isolations, dynamic leading tension, and musical interpretation.
                 </p>
-                <div className="text-xs font-bold text-poster-teal">
+                <div className="text-xs font-bold text-accent-teal">
                   Recommended for rapid level advancement or wedding routines.
                 </div>
               </div>
@@ -457,25 +457,25 @@ export function PrivateLessonsClient({
               <div className="font-display font-black text-xl uppercase tracking-tight text-ink mt-0.5">
                 {activeInstructor.name} • {selectedPackage === "SINGLE" ? "1-Hour Lesson" : "5-Hour Block"}
               </div>
-              <span className="text-xs text-ink/80 font-medium">
+              <span className="text-xs text-ink font-medium">
                 Studio: BOH Studios Bournemouth • {dancerType === "SOLO" ? "1 Dancer" : "Couple"}
               </span>
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 w-full sm:w-auto">
               {errorMessage && (
-                <span className="text-xs font-bold text-poster-red">
+                <span className="text-xs font-bold text-accent-red">
                   {errorMessage}
                 </span>
               )}
               <div className="text-left sm:text-right">
                 <span className={`font-display font-black ${TYPE.number} text-ink block`}>£{price}.00</span>
-                <span className="text-xs text-ink/80 font-semibold">No upfront payment required</span>
+                <span className="text-xs text-ink font-semibold">No upfront payment required</span>
               </div>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-paper hover:bg-ink hover:text-paper font-display text-sm font-black uppercase tracking-wider px-7 min-h-[48px] shadow-[4px_4px_0_0_#161311] flex items-center justify-center`}
+                className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-ink font-display text-sm font-black uppercase tracking-wider px-7 min-h-[48px] shadow-[4px_4px_0_0_#161311] flex items-center justify-center`}
               >
                 {isSubmitting ? "Submitting..." : "Request Coaching Slot"}
                 <ArrowRight className="ml-2 h-4 w-4" />

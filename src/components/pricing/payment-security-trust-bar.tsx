@@ -31,7 +31,7 @@ export function PaymentSecurityTrustBar({
 
         <div className="flex items-center gap-2 text-xs font-bold text-ink">
           <span className="border border-ink bg-paper px-2 py-1 flex items-center gap-1 shadow-[2px_2px_0_0_#161311]">
-            <CreditCard className="h-3.5 w-3.5 text-poster-red" /> Apple Pay / GPay
+            <CreditCard className="h-3.5 w-3.5 text-accent-red" /> Apple Pay / GPay
           </span>
           <span className="border border-ink bg-paper px-2 py-1 shadow-[2px_2px_0_0_#161311]">
             Visa / Mastercard
@@ -39,9 +39,9 @@ export function PaymentSecurityTrustBar({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-ink/80 pt-0.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-ink pt-0.5">
         <div className="flex items-center gap-1.5">
-          <QrCode className="h-4 w-4 text-poster-teal shrink-0" />
+          <QrCode className="h-4 w-4 text-accent-teal shrink-0" />
           <span>
             <strong className="text-ink font-bold">Instant Delivery:</strong> Door QR pass generated directly to your account.
           </span>
@@ -49,14 +49,14 @@ export function PaymentSecurityTrustBar({
 
         {showRefundPolicy ? (
           <div className="flex items-center gap-1.5">
-            <RotateCcw className="h-4 w-4 text-poster-teal shrink-0" />
+            <RotateCcw className="h-4 w-4 text-accent-teal shrink-0" />
             <span>
               <strong className="text-ink font-bold">24h Cancellation Guarantee:</strong> Instant credit refund before class cutoff.
             </span>
           </div>
         ) : (
           <div className="flex items-center gap-1.5">
-            <ShieldCheck className="h-4 w-4 text-poster-teal shrink-0" />
+            <ShieldCheck className="h-4 w-4 text-accent-teal shrink-0" />
             <span>
               <strong className="text-ink font-bold">Authentic Guarantee:</strong> Direct registration with Salsa Explosion UK.
             </span>

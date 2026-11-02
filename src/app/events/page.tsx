@@ -91,7 +91,7 @@ export default async function EventsDirectoryPage() {
               <h1 className="mt-2 text-4xl leading-[0.92] text-ink sm:text-5xl">
                 DANZA! 2026 | 2027 <span className="text-accent-red">Funciones</span>
               </h1>
-              <p className="mt-2 text-sm font-semibold text-ink/80">
+              <p className="mt-2 text-sm font-semibold text-ink">
                 Directed by {ACADEMY_METRICS.founderTitleName}
               </p>
             </div>
@@ -106,7 +106,7 @@ export default async function EventsDirectoryPage() {
                 &ldquo;We have an extraordinary season of special events coming up at {VENUE_INFO.name} — from Cuban Salsa, Rueda, Son Cubano, Afro-Cuban, Bachata, Kizomba, and Timba to flagship parties, guest maestros, dance weekends, and late-night social dancing.&rdquo;
               </p>
               <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2 border-ink text-xs font-bold">
-                <span className="text-poster-red">
+                <span className="text-accent-red">
                   Enrique &amp; The Salsa Explosion Team
                 </span>
                 <span className="opacity-70 font-medium">
@@ -116,11 +116,11 @@ export default async function EventsDirectoryPage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-xs pt-1 font-bold">
-              <div className="flex items-center gap-1.5 text-poster-red">
+              <div className="flex items-center gap-1.5 text-accent-red">
                 <Sparkles className="h-4 w-4 shrink-0" />
                 <span>12 Exclusive Parties &amp; Weekenders</span>
               </div>
-              <div className="flex items-center gap-1.5 text-poster-teal">
+              <div className="flex items-center gap-1.5 text-accent-teal">
                 <ShieldCheck className="h-4 w-4 shrink-0" />
                 <span>Instant Digital Passes &amp; Stripe Checkout</span>
               </div>
@@ -195,19 +195,19 @@ export default async function EventsDirectoryPage() {
                         <span className="border border-ink bg-paper px-2 py-0.5">
                           {liveEvt.bookingType === "ONLINE_TICKET" ? "ONLINE TICKET" : "DOOR ENTRY"}
                         </span>
-                        <span className="font-display text-base text-poster-red">{liveEvt.priceDisplay}</span>
+                        <span className="font-display text-base text-accent-red">{liveEvt.priceDisplay}</span>
                       </div>
                     )}
 
                     <div className="flex flex-1 flex-col justify-between p-5 gap-3">
                       <div>
-                        <p className="text-xs font-bold uppercase tracking-wider text-poster-red">
+                        <p className="text-xs font-bold uppercase tracking-wider text-accent-red">
                           {liveEvt.dateDisplay}
                         </p>
                         <h3 className={`mt-1 font-display ${TYPE.card} leading-none text-ink`}>
                           {liveEvt.title}
                         </h3>
-                        <p className="mt-2 text-xs font-medium text-ink/80 line-clamp-2">
+                        <p className="mt-2 text-xs font-medium text-ink line-clamp-2">
                           {liveEvt.subtitle}
                         </p>
                         <div className="mt-3 flex items-start gap-1.5 text-xs font-semibold text-ink/70">
@@ -273,7 +273,7 @@ export default async function EventsDirectoryPage() {
             <section className="space-y-6">
               <div className="border-b-4 border-ink pb-3 flex flex-wrap items-baseline justify-between gap-2">
                 <div className="flex items-baseline gap-3">
-                  <span className="border-2 border-ink bg-poster-red px-2 py-0.5 font-display text-lg uppercase text-paper">
+                  <span className="border-2 border-ink bg-poster-red px-2 py-0.5 font-display text-lg uppercase text-ink">
                     2027
                   </span>
                   <h2 className={`font-display ${TYPE.card} sm:text-4xl text-ink leading-none`}>
@@ -369,7 +369,7 @@ function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
             </div>
           )}
 
-          <p className="mt-2 line-clamp-2 text-xs font-medium text-ink/80 leading-relaxed">
+          <p className="mt-2 line-clamp-2 text-xs font-medium text-ink leading-relaxed">
             {evt.description}
           </p>
         </div>
@@ -382,7 +382,7 @@ function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
 
           <div className="flex flex-col items-end gap-1">
             {isCanonicalFallback && (
-              <span className="text-[10px] font-bold uppercase text-poster-red">
+              <span className="text-[10px] font-bold uppercase text-accent-red">
                 Opening soon
               </span>
             )}

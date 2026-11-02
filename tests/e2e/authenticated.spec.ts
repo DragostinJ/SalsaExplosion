@@ -43,6 +43,7 @@ test.describe("M14: Authenticated Dancers Flow & Signed-In Experience", () => {
       "/classes",
       "/dashboard/wallet",
       "/dashboard/progression",
+      "/dashboard/carnet",
       "/events",
       "/pricing",
     ];
@@ -91,5 +92,49 @@ test.describe("M14: Authenticated Dancers Flow & Signed-In Experience", () => {
       (v) => v.impact === "critical" || v.impact === "serious"
     );
     expect(walletViolations).toEqual([]);
+  });
+
+  test("verifies signed-in mobile menu opens cleanly without crashing across core routes at 390x844", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+
+    const username = process.env.E2E_CLERK_USER_USERNAME!;
+    const password = process.env.E2E_CLERK_USER_PASSWORD!;
+
+    const consoleErrors: string[] = [];
+    page.on("pageerror", (err) => consoleErrors.push(err.message));
+
+    // Sign in via standard form
+    await page.goto("/sign-in");
+    await page.fill('input[name="identifier"]', username);
+    await page.click('button:has-text("Continue")');
+    await page.fill('input[name="password"]', password);
+    await page.click('button:has-text("Continue")');
+
+    await page.waitForURL("**/dashboard**", { timeout: 15000 });
+
+    const routes = ["/", "/music", "/classes", "/events", "/dashboard/carnet"];
+
+    for (const route of routes) {
+      await page.goto(route, { waitUntil: "load" });
+
+      await page.click('button[aria-label="Open mobile navigation menu"]');
+
+      const dialog = page.locator('div[role="dialog"]');
+      await expect(dialog).toBeVisible();
+
+      const bodyText = (await page.textContent("body")) || "";
+      expect(bodyText.toLowerCase()).not.toContain("application error");
+      expect(bodyText).not.toContain("A Misstep on the Floor");
+      expect(bodyText).not.toContain("The studio platform encountered an unexpected hiccup");
+      expect(consoleErrors).toEqual([]);
+
+      await expect(dialog.locator('a[href="/dashboard/wallet"]')).toBeVisible();
+      await expect(dialog.locator('a[href="/dashboard/progression"]')).toBeVisible();
+
+      await page.click('button[aria-label="Close menu"]');
+      await expect(dialog).not.toBeVisible();
+    }
   });
 });

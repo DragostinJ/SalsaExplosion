@@ -11,13 +11,13 @@ export const metadata = {
   title: "Rueda Call Flashcards",
   description:
     "Practise the Rueda de Casino calls and hand signals taught at Salsa Explosion with quick flip cards: see the call, recall the signal and the timing.",
-  alternates: { canonical: "/dashboard/rueda/tarjetas" },
+  alternates: { canonical: "/rueda/tarjetas" },
 };
 
 export default function RuedaFlashcardsPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-8 px-2.5 py-6 sm:px-6 lg:px-8">
-      <CancionesTabs current="/dashboard/rueda/tarjetas" />
+      <CancionesTabs current="/rueda/tarjetas" />
       <header className="grid items-end gap-4 px-1.5 md:grid-cols-12">
         <div className="md:col-span-8">
         <p className={KICKER}>Practica en casa · {RUEDA_CALLS.length} llamadas</p>

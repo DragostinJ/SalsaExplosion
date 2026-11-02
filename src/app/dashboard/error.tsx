@@ -55,7 +55,7 @@ export default function DashboardErrorBoundary({ error, reset }: ErrorProps) {
             variant="outline"
             className="w-full sm:w-auto border-white/10 text-ivory-muted hover:bg-white/5"
           >
-            <Link href="/dashboard/schedule">
+            <Link href="/classes">
               <Calendar className="mr-2 h-4 w-4" />
               View Timetable
             </Link>

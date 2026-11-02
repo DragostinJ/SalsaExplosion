@@ -1,6 +1,6 @@
 /**
  * The Rueda de Casino call dictionary taught at Salsa Explosion: canonical data for the
- * dictionary (/dashboard/rueda) and the flashcards (/dashboard/rueda/tarjetas).
+ * dictionary (/rueda) and the flashcards (/rueda/tarjetas).
  */
 export interface RuedaCall {
   name: string;

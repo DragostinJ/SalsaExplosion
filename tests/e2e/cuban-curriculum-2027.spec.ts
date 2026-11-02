@@ -214,7 +214,7 @@ test.describe("H5: Progressive Disclosure, Reassurance Banner & Accessibility E2
   }) => {
     // 1366x768 laptop resolution (common breakpoint where flex overflow was reported)
     await page.setViewportSize({ width: 1366, height: 768 });
-    await page.goto("/dashboard/schedule");
+    await page.goto("/classes");
     await page.waitForLoadState("domcontentloaded");
 
     // Verify modal is not mounted yet

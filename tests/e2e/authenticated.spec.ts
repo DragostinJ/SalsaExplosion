@@ -40,7 +40,7 @@ test.describe("M14: Authenticated Dancers Flow & Signed-In Experience", () => {
 
     const routes = [
       "/",
-      "/dashboard/schedule",
+      "/classes",
       "/dashboard/wallet",
       "/dashboard/progression",
       "/events",
@@ -72,7 +72,7 @@ test.describe("M14: Authenticated Dancers Flow & Signed-In Experience", () => {
   test("WCAG 2.1 AA accessibility audit on signed-in student schedule and wallet", async ({
     page,
   }) => {
-    await page.goto("/dashboard/schedule");
+    await page.goto("/classes");
     const scheduleAxe = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
       .disableRules(["color-contrast"])

@@ -202,7 +202,7 @@ export async function submitPostClassFeedbackAction(
           },
         });
 
-        revalidatePath("/dashboard/schedule");
+        revalidatePath("/classes");
         revalidatePath("/dashboard/recaps");
 
         return {

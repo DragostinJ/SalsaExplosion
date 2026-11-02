@@ -54,7 +54,7 @@ export function classReminderEmail(input: ClassReminderInput) {
           songLines.map((song) => `<li style="margin:6px 0">${link(song.href, song.label)}</li>`).join("") +
           `</ul>`
         : "") +
-      `<p style="font-size:14px">Can't make it? ${link(`${app}/dashboard/schedule`, "Cancel your booking")} so someone else can dance.</p>`,
+      `<p style="font-size:14px">Can't make it? ${link(`${app}/classes`, "Cancel your booking")} so someone else can dance.</p>`,
     `You get this because you booked a class at Salsa Explosion. ${link(input.unsubscribeUrl, "Stop class reminders")}`
   );
 
@@ -64,7 +64,7 @@ export function classReminderEmail(input: ClassReminderInput) {
     "Pay at the door as usual (cash or card).",
     ...(songLines.length ? ["", "Songs for this class:", ...songLines.map((song) => `- ${song.label}: ${song.href}`)] : []),
     "",
-    `Can't make it? Cancel so someone else can dance: ${app}/dashboard/schedule`,
+    `Can't make it? Cancel so someone else can dance: ${app}/classes`,
     "",
     `Stop class reminders: ${input.unsubscribeUrl}`,
   ].join("\n");

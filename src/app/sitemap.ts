@@ -9,14 +9,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "",
-    "/dashboard/schedule",
+    "/classes",
     "/events",
     ...upcomingCanonicalEvents().map((event) => `/events/${event.slug}`),
     "/pricing",
     "/venues",
     "/music",
-    "/dashboard/rueda",
-    "/dashboard/rueda/tarjetas",
+    "/rueda",
+    "/rueda/tarjetas",
     "/moves",
     ...getPublishedMoves().map((move) => `/moves/${move.id}`),
     ...TIMBA_SONG_ANATOMY_DATA.map((song) => `/music/${song.id}`),
@@ -30,11 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: now,
     changeFrequency:
-      route === "" || route === "/dashboard/schedule" ? ("daily" as const) : ("weekly" as const),
+      route === "" || route === "/classes" ? ("daily" as const) : ("weekly" as const),
     priority:
       route === ""
         ? 1.0
-        : route === "/dashboard/schedule" || route === "/events" || route === "/llms.txt"
+        : route === "/classes" || route === "/events" || route === "/llms.txt"
         ? 0.9
         : 0.8,
   }));

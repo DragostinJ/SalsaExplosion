@@ -18,7 +18,7 @@ const STEPS = [
   {
     title: "1. Ven a clase: no partner needed",
     text: `Thursdays and Sundays at ${VENUE_INFO.shortName}. Pay at the door (£${DOOR_PRICING.oneClassPounds} one class, £${DOOR_PRICING.twoClassesPounds} two, the social included). No partner and no booking needed: everyone dances, even when the class is uneven, because the teachers rotate partners.`,
-    href: "/dashboard/schedule",
+    href: "/classes",
     cta: "See the timetable",
   },
   {

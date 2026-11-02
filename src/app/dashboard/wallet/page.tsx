@@ -50,7 +50,7 @@ export default async function StudentWalletPage() {
           description={`Your festival passes with their door QR codes, receipts and history. Thursday & Sunday classes are paid at the door at ${VENUE_INFO.name} (${VENUE_INFO.address}, ${VENUE_INFO.postcode}).`}
           badge="BOH Studios Digital Wallet"
           eyebrow={`INSTANT QR DOOR ADMISSION • ${VENUE_INFO.name}`}
-          backHref="/dashboard/schedule"
+          backHref="/classes"
           backLabel="Back to Schedule"
         />
 
@@ -70,7 +70,7 @@ export default async function StudentWalletPage() {
               variant="outline"
               className="border-2 border-ink bg-paper hover:bg-ink hover:text-paper text-ink font-bold text-xs sm:text-sm h-11 px-6 shadow-[2px_2px_0_var(--color-ink)] rounded-none"
             >
-              <Link href="/dashboard/schedule">
+              <Link href="/classes">
                 Browse Thursday &amp; Sunday Timetable
               </Link>
             </Button>
@@ -277,7 +277,7 @@ export default async function StudentWalletPage() {
         description="Show your digital passes and door QR codes at the BOH Studios Bournemouth entrance for instant 1-tap admission."
         badge={hasActiveSub ? "Unlimited Pass Active" : "BOH Studios Wallet"}
         eyebrow="DANCER DIGITAL WALLET • BOH STUDIOS"
-        backHref="/dashboard/schedule"
+        backHref="/classes"
         backLabel="Back to Schedule"
         actions={
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -403,7 +403,7 @@ export default async function StudentWalletPage() {
             <h2 className="text-lg font-bold">Upcoming Confirmed Classes</h2>
           </div>
           <Link
-            href="/dashboard/schedule"
+            href="/classes"
             className="text-xs font-bold text-amber-400 hover:underline flex items-center gap-1"
           >
             Full Timetable <ArrowRight className="h-3 w-3" />
@@ -414,7 +414,7 @@ export default async function StudentWalletPage() {
           <Card className="border border-dashed p-6 text-center text-xs text-muted-foreground space-y-2">
             <p>You have no upcoming class bookings booked right now.</p>
             <Button asChild size="sm" variant="outline" className="text-xs">
-              <Link href="/dashboard/schedule">Browse Live Timetable</Link>
+              <Link href="/classes">Browse Live Timetable</Link>
             </Button>
           </Card>
         ) : (

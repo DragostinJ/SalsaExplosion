@@ -67,7 +67,7 @@ export default async function ClassRecapsPage() {
         description="Never forget a routine again! Watch your maestros demonstrate the Cuban combinations practiced at the end of each class, check figure names, and use 0.75x slow-motion to master footwork."
         badge={`${myRecaps.length} Saved Recaps`}
         eyebrow="STUDENT CLASS RECAPS • 4-TIER SYLLABUS"
-        backHref="/dashboard/schedule"
+        backHref="/classes"
         backLabel="Back to Schedule"
       />
 

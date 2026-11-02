@@ -93,7 +93,7 @@ export function WhyCubanSection() {
               {/* 5. Clean Bottom Link */}
               <div className="pt-3 border-t-2 border-ink">
                 <Link
-                  href="/dashboard/schedule"
+                  href="/classes"
                   className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold w-full inline-flex items-center justify-center gap-1.5 min-h-[40px]`}
                 >
                   <span>Explore Classes</span>
@@ -107,7 +107,7 @@ export function WhyCubanSection() {
         {/* Bottom CTA & Reassurance Bar */}
         <div className="mt-10 flex flex-col items-center justify-center gap-4 text-center">
           <Link
-            href="/dashboard/schedule"
+            href="/classes"
             className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-ink text-xs sm:text-sm font-black uppercase tracking-wider px-6 py-3 min-h-[44px] shadow-[4px_4px_0_0_#161311] inline-flex items-center`}
           >
             Join the Cuban Circle • £12 / £14 at the Door

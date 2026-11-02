@@ -31,7 +31,7 @@ export default async function ReferralsPage() {
           description={`Help grow Bournemouth's authentic Cuban Salsa & Rueda de Casino community at ${VENUE_INFO.name}. When a friend joins their first Thursday or Sunday session using your personal code, you both receive a complimentary class credit.`}
           badge="Give 1 Class, Get 1 Class"
           eyebrow="DANCER REFERRAL NETWORK • BOH STUDIOS"
-          backHref="/dashboard/schedule"
+          backHref="/classes"
           backLabel="Back to Schedule"
         />
 
@@ -75,7 +75,7 @@ export default async function ReferralsPage() {
               variant="outline"
               className="border-2 border-ink bg-paper hover:bg-ink hover:text-paper text-ink font-bold text-xs sm:text-sm h-11 px-6 shadow-[2px_2px_0_var(--color-ink)] rounded-none"
             >
-              <Link href="/dashboard/schedule">
+              <Link href="/classes">
                 Explore Thursday &amp; Sunday Schedule
               </Link>
             </Button>
@@ -135,7 +135,7 @@ export default async function ReferralsPage() {
         description="Help grow Bournemouth's authentic Cuban salsa scene. Share your link with friends, colleagues, or dance partners."
         badge="Give 1 Class, Get 1 Class"
         eyebrow="DANCER REFERRAL NETWORK • BOH STUDIOS"
-        backHref="/dashboard/schedule"
+        backHref="/classes"
         backLabel="Back to Schedule"
       />
 

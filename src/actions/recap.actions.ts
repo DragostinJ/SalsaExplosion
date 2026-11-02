@@ -230,7 +230,7 @@ export async function attachClassRecapAction(rawInput: AttachRecapInput) {
       revalidatePath("/dashboard/recaps");
       revalidatePath("/instructor/roster");
       revalidatePath("/admin/classes");
-      revalidatePath("/dashboard/schedule");
+      revalidatePath("/classes");
 
       return {
         success: true as const,

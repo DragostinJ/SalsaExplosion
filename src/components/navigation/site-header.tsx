@@ -274,9 +274,9 @@ export function SiteHeader({
             {isAdmin ? (
               <>
                 <Link
-                  href="/dashboard/schedule"
+                  href="/classes"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold transition-colors shrink-0 ${
-                    pathname === "/dashboard/schedule"
+                    pathname === "/classes"
                       ? "bg-ink text-paper font-bold"
                       : "text-ink hover:bg-ink/10"
                   }`}
@@ -325,9 +325,9 @@ export function SiteHeader({
             ) : isInstructor ? (
               <>
                 <Link
-                  href="/dashboard/schedule"
+                  href="/classes"
                   className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
-                    pathname === "/dashboard/schedule"
+                    pathname === "/classes"
                       ? "bg-ink text-paper font-bold"
                       : "text-ink hover:bg-ink/10"
                   }`}

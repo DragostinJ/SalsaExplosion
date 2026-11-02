@@ -21,7 +21,7 @@ export default function PricingPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
       <div>
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
       </div>
 
       {/* Cartelera Architectural Poster Hero */}
@@ -95,7 +95,7 @@ export default function PricingPage() {
 
           <div className="pt-3 border-t-2 border-ink">
             <Link
-              href="/dashboard/schedule"
+              href="/classes"
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold w-full sm:w-auto inline-flex items-center justify-center`}
             >
               View Class Schedule →

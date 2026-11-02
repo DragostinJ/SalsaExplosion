@@ -59,7 +59,7 @@ export function AdminNav() {
   return (
     <div className="mb-8 space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
         <Badge
           variant="outline"
           className="border-amber-500/40 bg-amber-500/15 text-amber-300 font-extrabold px-3 py-1 flex items-center gap-1.5"

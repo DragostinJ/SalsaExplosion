@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Cuban Salsa Classes: Thursday & Sunday",
   description:
     "Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. Beginners welcome, no partner needed, £12 at the door.",
-  alternates: { canonical: "/dashboard/schedule" },
+  alternates: { canonical: "/classes" },
 };
 import {
   BookingStatus,
@@ -266,7 +266,7 @@ export default async function StudentSchedulePage({
           <span>
             Pass activated! Your studio wallet has been updated ({user?.classCredits ?? 0} credits available). Select any class below to book your spot!
           </span>
-          <Link href="/dashboard/schedule" className="underline ml-4 text-xs font-black">
+          <Link href="/classes" className="underline ml-4 text-xs font-black">
             Dismiss
           </Link>
         </div>
@@ -360,7 +360,7 @@ export default async function StudentSchedulePage({
                       <Link
                         key={tab.id}
                         href={{
-                          pathname: "/dashboard/schedule",
+                          pathname: "/classes",
                           query: {
                             ...(styleFilter ? { style: styleFilter } : {}),
                             ...(levelFilter ? { level: levelFilter } : {}),
@@ -389,7 +389,7 @@ export default async function StudentSchedulePage({
                 <div className="flex items-center gap-2 flex-wrap">
                   <Link
                     href={{
-                      pathname: "/dashboard/schedule",
+                      pathname: "/classes",
                       query: {
                         ...(styleFilter ? { style: styleFilter } : {}),
                         ...(dayParam ? { day: dayParam } : {}),
@@ -407,7 +407,7 @@ export default async function StudentSchedulePage({
                     <Link
                       key={level}
                       href={{
-                        pathname: "/dashboard/schedule",
+                        pathname: "/classes",
                         query: {
                           ...(styleFilter ? { style: styleFilter } : {}),
                           ...(dayParam ? { day: dayParam } : {}),
@@ -442,7 +442,7 @@ export default async function StudentSchedulePage({
               No classes match these filters.
             </p>
             <Link
-              href="/dashboard/schedule"
+              href="/classes"
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} mt-3 text-xs inline-flex items-center`}
             >
               Show all classes

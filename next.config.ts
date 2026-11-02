@@ -84,7 +84,18 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/schedule",
-        destination: "/dashboard/schedule",
+        destination: "/classes",
+        permanent: true,
+      },
+      // The public pages left /dashboard (2026-11-02): old links, printed QR codes and search results land here
+      {
+        source: "/dashboard/schedule",
+        destination: "/classes",
+        permanent: true,
+      },
+      {
+        source: "/dashboard/rueda/:path*",
+        destination: "/rueda/:path*",
         permanent: true,
       },
     ];

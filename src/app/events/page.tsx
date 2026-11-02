@@ -72,7 +72,7 @@ export default async function EventsDirectoryPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">
       <div>
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
       </div>
 
       {/* DANZA! 2026 | 2027 Official Calendar Hero Showcase */}

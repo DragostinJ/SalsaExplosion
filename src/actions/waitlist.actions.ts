@@ -72,7 +72,7 @@ export async function joinPartnerWaitlistAction(rawInput: {
         },
       });
 
-      revalidatePath("/dashboard/schedule");
+      revalidatePath("/classes");
 
       return {
         success: true,
@@ -151,7 +151,7 @@ export async function invitePartnerBypassAction(rawInput: {
         },
       });
 
-      revalidatePath("/dashboard/schedule");
+      revalidatePath("/classes");
 
       return {
         success: true,

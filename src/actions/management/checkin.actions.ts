@@ -202,7 +202,7 @@ export async function selfCheckInClassQrAction(rawInput: {
 
       revalidatePath(`/checkin/${parsed.data.classSessionId}`);
       revalidatePath("/instructor/roster");
-      revalidatePath("/dashboard/schedule");
+      revalidatePath("/classes");
 
       return {
         success: true,

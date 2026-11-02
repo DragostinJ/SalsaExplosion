@@ -152,7 +152,7 @@ export default async function AboutPage() {
 
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/dashboard/schedule"
+              href="/classes"
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold min-h-[40px] px-4 inline-flex items-center justify-center gap-1.5`}
             >
               <span>View Class Schedule</span>
@@ -335,7 +335,7 @@ export default async function AboutPage() {
 
               <div className="border-t-2 border-ink bg-surface-1 p-4">
                 <Link
-                  href="/dashboard/schedule"
+                  href="/classes"
                   className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} w-full text-xs font-bold min-h-[40px] flex items-center justify-center gap-1.5`}
                 >
                   <span>Dance with {teacher.firstName}</span>
@@ -462,7 +462,7 @@ export default async function AboutPage() {
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Link
-            href="/dashboard/schedule"
+            href="/classes"
             className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs sm:text-sm font-bold min-h-[44px] px-6 inline-flex items-center`}
           >
             Explore Class Schedule

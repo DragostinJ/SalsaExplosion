@@ -193,7 +193,7 @@ export default async function MovePage({ params }: MovePageProps) {
       {move.ruedaCall && (
         <p className="border-4 border-ink bg-poster-mustard p-4 font-medium text-ink">
           In the rueda this is called <strong>{move.ruedaCall}</strong>.{" "}
-          <Link href="/dashboard/rueda/tarjetas" className="font-bold underline underline-offset-4">
+          <Link href="/rueda/tarjetas" className="font-bold underline underline-offset-4">
             Practise the calls →
           </Link>
         </p>

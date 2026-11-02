@@ -50,7 +50,7 @@ export default function MusicErrorBoundary({ error, reset }: ErrorProps) {
             variant="outline"
             className="w-full sm:w-auto border-white/10 text-ivory-muted hover:bg-white/5"
           >
-            <Link href="/dashboard/schedule">
+            <Link href="/classes">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Class Schedule
             </Link>

@@ -475,7 +475,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
                   size="sm"
                   className="text-primary-base hover:text-primary-hover font-bold h-8 px-2"
                 >
-                  <Link href="/dashboard/schedule">
+                  <Link href="/classes">
                     See All Weekly Classes at BOH Studios →
                   </Link>
                 </Button>

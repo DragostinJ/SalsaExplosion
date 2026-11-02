@@ -7,13 +7,13 @@ export const metadata = {
   title: "Rueda de Casino Calls Dictionary",
   description:
     "Every rueda de casino call taught at Salsa Explosion: what it means, the hand signal, the timing and whether you change partner.",
-  alternates: { canonical: "/dashboard/rueda" },
+  alternates: { canonical: "/rueda" },
 };
 
 export default function RuedaDictionaryPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-6">
-      <CancionesTabs current="/dashboard/rueda" />
+      <CancionesTabs current="/rueda" />
       <PageHeader
         art={MEDIA_MANIFEST.mockupGraphics.caller}
         title="Rueda de Casino"

@@ -222,7 +222,7 @@ export async function gradeSubmissionAction(
     revalidatePath("/instructor/students");
     revalidatePath("/admin/analytics");
     revalidatePath("/dashboard/progression");
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
 
     const message =
       result.newStatus === SubmissionStatus.APPROVED

@@ -4,7 +4,7 @@ import AxeBuilder from "@axe-core/playwright";
 test.describe("B5: Accessibility (WCAG 2.1 AA) Axe Audits", () => {
   const routes = [
     { name: "Homepage", path: "/" },
-    { name: "Class Schedule", path: "/dashboard/schedule" },
+    { name: "Class Schedule", path: "/classes" },
     { name: "Congress & Events", path: "/events" },
     { name: "Pricing & Passes", path: "/pricing" },
     { name: "Shop Redirect", path: "/shop" },

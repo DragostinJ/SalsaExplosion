@@ -79,7 +79,7 @@ export function SiteFooter() {
             </h4>
             <ul className="space-y-1.5">
               <li>
-                <Link href="/dashboard/schedule" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
+                <Link href="/classes" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   Thursday &amp; Sunday Timetable
                 </Link>
               </li>
@@ -89,7 +89,7 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/rueda" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
+                <Link href="/rueda" className="inline-flex items-center py-1 text-xs text-ivory-muted font-bold hover:text-gold transition-colors">
                   Rueda de Casino Dictionary
                 </Link>
               </li>

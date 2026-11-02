@@ -176,7 +176,7 @@ export async function requireRole(allowed: Role[]): Promise<CurrentUser> {
     redirect("/sign-in");
   }
   if (!allowed.includes(user.role)) {
-    redirect("/dashboard/schedule");
+    redirect("/classes");
   }
   return user;
 }

@@ -32,7 +32,7 @@ export default function NotFound() {
           the 1. Pick a door:
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link href="/dashboard/schedule" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink}`}>
+          <Link href="/classes" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink}`}>
             Clases
           </Link>
           <Link href="/music" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper`}>

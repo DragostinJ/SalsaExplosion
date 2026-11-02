@@ -153,7 +153,7 @@ export default async function ProgressionPage() {
         description="Track your dance milestones, submit technique videos for review, and unlock higher-tier classes."
         badge="Casino & Rueda"
         eyebrow="STUDENT MASTERY ROADMAP • 4 SYLLABUS TIERS"
-        backHref="/dashboard/schedule"
+        backHref="/classes"
         backLabel="Back to Schedule"
         actions={
           <div className="flex items-center gap-2 rounded-xl border border-line bg-surface-2 px-4 py-2 text-xs font-medium text-stone-200">
@@ -217,7 +217,7 @@ export default async function ProgressionPage() {
                 </CardHeader>
                 <CardContent>
                   <Button asChild>
-                    <Link href="/dashboard/schedule">
+                    <Link href="/classes">
                       Browse Full Schedule
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>

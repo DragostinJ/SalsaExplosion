@@ -168,7 +168,7 @@ export default async function CarnetPage() {
         {upcoming.length === 0 ? (
           <p className="max-w-xl">
             No class reserved. You don&apos;t need to: just come on Thursday or Sunday.{" "}
-            <Link href="/dashboard/schedule" className="font-bold underline underline-offset-4">
+            <Link href="/classes" className="font-bold underline underline-offset-4">
               Timetable →
             </Link>
           </p>

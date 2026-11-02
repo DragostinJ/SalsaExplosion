@@ -49,7 +49,7 @@ export default function EventsErrorBoundary({ error, reset }: ErrorProps) {
           </button>
 
           <Link
-            href="/dashboard/schedule"
+            href="/classes"
             className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper w-full sm:w-auto text-xs`}
           >
             <ArrowLeft className="mr-2 h-4 w-4" />

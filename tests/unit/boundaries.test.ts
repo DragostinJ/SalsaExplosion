@@ -16,7 +16,7 @@ describe("H4: Localized Route Error Boundaries", () => {
 
     expect(html).toContain("Operations Workspace Unavailable");
     expect(html).toContain("Retry Workspace");
-    expect(html).toContain("/dashboard/schedule");
+    expect(html).toContain("/classes");
   });
 
   it("renders InstructorErrorBoundary with localized copy and reload button", () => {

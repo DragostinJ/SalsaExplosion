@@ -4,7 +4,7 @@ const ROUTES_TO_TEST = [
   "/",
   "/events",
   "/pricing",
-  "/dashboard/schedule",
+  "/classes",
 ];
 
 const VIEWPORTS = [

@@ -1,6 +1,6 @@
 /**
  * Salsa Explosion UK — Canonical Single Source of Truth (SSOT)
- * All pages (/ , /dashboard/schedule, /events, /pricing, /venues, /about, /llms.txt, SiteFooter, JsonLdSchema)
+ * All pages (/ , /classes, /events, /pricing, /venues, /about, /llms.txt, SiteFooter, JsonLdSchema)
  * import their metrics, weekly schedule, pricing, venue details, and gallery assets from this module.
  */
 

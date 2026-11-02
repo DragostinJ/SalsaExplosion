@@ -7,7 +7,7 @@ test.describe("V5: Visual Design Synchronization & Drift Prevention", () => {
     { name: "Venues & Parking", path: "/venues" },
     { name: "Congress & Events", path: "/events" },
     { name: "Pricing & Passes", path: "/pricing" },
-    { name: "Class Timetable", path: "/dashboard/schedule" },
+    { name: "Class Timetable", path: "/classes" },
     { name: "Cuban Music Hub", path: "/music" },
   ];
 

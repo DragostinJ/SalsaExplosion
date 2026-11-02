@@ -4,7 +4,7 @@ test.describe("B4 & M8: Responsive Mobile Navigation Sheet & Full Viewport asser
   test("opens slide-in drawer on mobile (375x812), verifies bounding box height >= 750px, persona routes, and closes on Escape", async ({ page }) => {
     // Set standard mobile viewport (iPhone X/12/13/14: 375x812)
     await page.setViewportSize({ width: 375, height: 812 });
-    await page.goto("/dashboard/schedule");
+    await page.goto("/classes");
     await page.waitForLoadState("domcontentloaded");
 
     // Hamburger button should be visible on mobile
@@ -46,7 +46,7 @@ test.describe("B4 & M8: Responsive Mobile Navigation Sheet & Full Viewport asser
   test("opens slide-in drawer on tablet (768x1024) and closes on close button click", async ({ page }) => {
     // Set tablet viewport (iPad Mini / Portrait Tablet)
     await page.setViewportSize({ width: 768, height: 1024 });
-    await page.goto("/dashboard/schedule");
+    await page.goto("/classes");
     await page.waitForLoadState("domcontentloaded");
 
     const hamburgerBtn = page.getByRole("button", { name: /open mobile navigation menu/i });

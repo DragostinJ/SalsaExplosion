@@ -365,7 +365,7 @@ export function ClassRecapVault({
                       asChild
                       className="mt-3 text-xs font-bold"
                     >
-                      <Link href="/dashboard/schedule">View Schedule</Link>
+                      <Link href="/classes">View Schedule</Link>
                     </Button>
                   )}
                 </CardContent>

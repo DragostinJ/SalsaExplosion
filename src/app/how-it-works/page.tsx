@@ -19,7 +19,7 @@ const STEPS = [
     word: "Ven a clase",
     english: "Come to class",
     text: `Thursdays (doors ${WEEKLY_SCHEDULE.thursday.doorsTime}) and Sundays (doors ${WEEKLY_SCHEDULE.sunday.doorsTime}) at ${VENUE_INFO.shortName}. £${DOOR_PRICING.oneClassPounds} for one class, £${DOOR_PRICING.twoClassesPounds} for two, the social included, cash or card at the door. No partner and no booking needed: everyone dances, even when the class is uneven, because the teachers rotate partners.`,
-    href: "/dashboard/schedule",
+    href: "/classes",
     cta: "Clases",
   },
   {
@@ -68,7 +68,7 @@ export default function HowItWorksPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-12 px-4 py-8 sm:px-6 lg:px-8">
       <div>
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
       </div>
 
       {/* Hero */}
@@ -82,7 +82,7 @@ export default function HowItWorksPage() {
           festivals online.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link href="/dashboard/schedule" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} gap-1.5`}>
+          <Link href="/classes" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} gap-1.5`}>
             Thu &amp; Sun classes
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
@@ -206,7 +206,7 @@ export default function HowItWorksPage() {
         <h2 className={TYPE.section}>Nos vemos en la pista</h2>
         <p className="mx-auto max-w-xl font-semibold">See you on the dance floor, Thursday or Sunday at {VENUE_INFO.shortName}.</p>
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-          <Link href="/dashboard/schedule" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink}`}>
+          <Link href="/classes" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink}`}>
             Timetable
           </Link>
           <Link href="/venues" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline}`}>

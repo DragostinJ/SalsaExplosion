@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 /** The rooms behind the Canciones door: everything you practise at home. */
 const CANCIONES_TABS = [
   { href: "/music", label: "Canciones", english: "Songs" },
-  { href: "/dashboard/rueda", label: "Rueda", english: "Calls" },
-  { href: "/dashboard/rueda/tarjetas", label: "Tarjetas", english: "Flashcards" },
+  { href: "/rueda", label: "Rueda", english: "Calls" },
+  { href: "/rueda/tarjetas", label: "Tarjetas", english: "Flashcards" },
   { href: "/moves", label: "Pasos", english: "Moves" },
 ] as const;
 

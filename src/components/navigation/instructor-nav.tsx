@@ -80,7 +80,7 @@ export function InstructorNav() {
   return (
     <div className="mb-8 space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
         <Badge
           variant="outline"
           className="border-emerald-500/30 bg-emerald-500/10 text-emerald-300 font-semibold px-3 py-1 flex items-center gap-1.5"

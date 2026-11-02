@@ -512,7 +512,7 @@ export function ClassScheduleCard({
               Just come along and pay at the door. No booking needed.
             </p>
             <Button asChild variant="outline" size="sm" className="min-h-[40px] w-full text-xs font-semibold">
-              <Link href={`/sign-in?redirect_url=${encodeURIComponent("/dashboard/schedule")}`}>
+              <Link href={`/sign-in?redirect_url=${encodeURIComponent("/classes")}`}>
                 Sign in to tell the teachers you&apos;re coming
               </Link>
             </Button>

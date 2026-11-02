@@ -11,7 +11,7 @@ describe("H3: SEO, Metadata, Sitemap & Robots Validation", () => {
     // Base URL comes from NEXT_PUBLIC_APP_URL when set (Prisma-backed imports load .env)
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://salsaexplosion.co.uk";
     expect(urls.some((u) => u === baseUrl || u.endsWith("/"))).toBe(true);
-    expect(urls.some((u) => u.includes("/dashboard/schedule"))).toBe(true);
+    expect(urls.some((u) => u.includes("/classes"))).toBe(true);
     expect(urls.some((u) => u.includes("/events"))).toBe(true);
     expect(urls.some((u) => u.includes("/pricing"))).toBe(true);
     expect(urls.some((u) => u.includes("/venues"))).toBe(true);

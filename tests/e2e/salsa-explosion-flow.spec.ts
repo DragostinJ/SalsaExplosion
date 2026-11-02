@@ -39,8 +39,8 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(page.locator("#cartelera")).toBeVisible();
     await expect(page.getByText("Cartelera semanal")).toBeVisible();
 
-    // 6. Verify Level Finder Quiz on /dashboard/schedule
-    await page.goto("/dashboard/schedule");
+    // 6. Verify Level Finder Quiz on /classes
+    await page.goto("/classes");
     await page.waitForLoadState("domcontentloaded");
     await expect(page.getByText("Interactive Level Finder • 15 Seconds")).toBeVisible();
     await expect(page.getByText("Not Sure Which Cuban Salsa Level to Book?")).toBeVisible();
@@ -50,7 +50,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   test("2. Schedule is public, door-paid, and welcomes everyone (no Lead/Follow limits)", async ({
     page,
   }) => {
-    await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
+    await page.goto("/classes", { waitUntil: "domcontentloaded" });
 
     const url = page.url();
     if (url.includes("sign-in")) {
@@ -167,7 +167,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   test("7. Rueda de Casino Call Dictionary renders authentic calls, hand signals, and level filter", async ({
     page,
   }) => {
-    await page.goto("/dashboard/rueda", { waitUntil: "domcontentloaded" });
+    await page.goto("/rueda", { waitUntil: "domcontentloaded" });
 
     await expect(
       page.getByText("Rueda de Casino Call Dictionary")
@@ -300,7 +300,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   test("16. The timetable shows Thursdays and Sundays at BOH Studios, once", async ({
     page,
   }) => {
-    await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
+    await page.goto("/classes", { waitUntil: "domcontentloaded" });
 
     const url = page.url();
     if (!url.includes("sign-in")) {
@@ -381,7 +381,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   test("22. Class schedule renders Multi-Age Fast-Track and 60+ Senior reassurance banners", async ({
     page,
   }) => {
-    await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
+    await page.goto("/classes", { waitUntil: "domcontentloaded" });
     const banner = page.locator('[data-testid="multi-age-ux-banner"]');
     await expect(banner).toBeVisible();
     await expect(page.getByText("15-Second Quick Guide").first()).toBeVisible();
@@ -471,8 +471,8 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(whyCuban.getByText(/The Magic of the Rueda Circle/i)).toBeVisible();
     await expect(whyCuban.getByText(/Pure Havana Rhythm, Timba & Afro-Rumba/i)).toBeVisible();
 
-    // 4. Verify Cross-Over Dancer Option in Level Matcher Quiz on /dashboard/schedule
-    await page.goto("/dashboard/schedule");
+    // 4. Verify Cross-Over Dancer Option in Level Matcher Quiz on /classes
+    await page.goto("/classes");
     await page.waitForLoadState("domcontentloaded");
     const crossoverBtn = page.getByRole("button", {
       name: /I Dance Other Styles/i,

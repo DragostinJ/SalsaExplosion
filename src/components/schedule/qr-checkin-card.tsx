@@ -213,7 +213,7 @@ export function QrCheckInCard({
 
       <CardFooter className="border-t pt-4 flex justify-between text-xs">
         <Link
-          href="/dashboard/schedule"
+          href="/classes"
           className="text-muted-foreground hover:text-foreground font-medium"
         >
           ← Schedule

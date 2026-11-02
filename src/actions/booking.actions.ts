@@ -177,7 +177,7 @@ export async function bookClassAction(
     );
 
     // 4. Revalidate Cache Paths
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
     revalidatePath("/instructor/roster");
     revalidatePath("/instructor/students");
     revalidatePath("/admin/classes");
@@ -373,7 +373,7 @@ export async function cancelBookingAction(
     }
 
     // 4. Revalidate Cache Paths
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
     revalidatePath("/instructor/roster");
     revalidatePath("/instructor/students");
     revalidatePath("/admin/classes");

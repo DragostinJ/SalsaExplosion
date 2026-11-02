@@ -21,11 +21,11 @@ test.describe("Proxy & Role Route Guards (A4)", () => {
     expect(url).toMatch(/sign-in/);
   });
 
-  test("3. Guest user can access /dashboard/schedule without redirect, but /dashboard/progression redirects to sign-in", async ({
+  test("3. Guest user can access /classes without redirect, but /dashboard/progression redirects to sign-in", async ({
     page,
   }) => {
     // Guest browsing schedule
-    await page.goto("/dashboard/schedule", { waitUntil: "domcontentloaded" });
+    await page.goto("/classes", { waitUntil: "domcontentloaded" });
     expect(page.url()).not.toMatch(/sign-in/);
     await expect(page.getByRole("heading", { name: /THU & SUN/i })).toBeVisible();
 
@@ -63,14 +63,14 @@ test.describe("Proxy & Role Route Guards (A4)", () => {
     page,
   }) => {
     await page.goto("/dashboard", { waitUntil: "domcontentloaded" });
-    await page.waitForURL("**/dashboard/schedule");
+    await page.waitForURL("**/classes");
     expect(page.url()).not.toMatch(/sign-in/);
-    expect(page.url()).toContain("/dashboard/schedule");
+    expect(page.url()).toContain("/classes");
 
     await page.goto("/schedule", { waitUntil: "domcontentloaded" });
-    await page.waitForURL("**/dashboard/schedule");
+    await page.waitForURL("**/classes");
     expect(page.url()).not.toMatch(/sign-in/);
-    expect(page.url()).toContain("/dashboard/schedule");
+    expect(page.url()).toContain("/classes");
   });
 
   test("6. I4: Core routes return status < 400 and never render Application Error crash screen", async ({

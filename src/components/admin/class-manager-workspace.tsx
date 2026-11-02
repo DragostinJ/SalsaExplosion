@@ -306,7 +306,7 @@ export function ClassManagerWorkspace({
             Active Studio Classes ({initialClasses.length})
           </h2>
           <Button variant="outline" size="sm" asChild className="text-xs">
-            <Link href="/dashboard/schedule">View Student Schedule →</Link>
+            <Link href="/classes">View Student Schedule →</Link>
           </Button>
         </div>
 

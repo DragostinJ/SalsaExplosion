@@ -24,7 +24,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
     classTiming: "Every Thursday 19:00 (Solo Musicality / Beginners) & 20:15 Partnerwork • BOH Studios",
     recommendedTrack:
       "Start with Moe Flex's All-Levels Musicality & Pasitos at 19:00, followed by Justyna's Improvers or Enrique's Foundation to master fluid circular transitions.",
-    href: "/dashboard/schedule",
+    href: "/classes",
     ctaLabel: "Explore the Timetable & Book Your Session →",
   },
   absolute_beginner: {
@@ -34,7 +34,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
       "Start with basic footwork (Paso Básico), Cuban frame connection, Dile Que No, and your very first Dame in the Rueda circle. Zero partner needed!",
     classTiming: "Every Thursday 19:00 • BOH Studios",
     recommendedTrack: "Claim your 1 Free Welcome Credit and join our friendly Thursday cohort with Maestro Enrique.",
-    href: "/dashboard/schedule",
+    href: "/classes",
   },
   some_basics: {
     levelTitle: "Beginner 2 / Improver • Casino Turn Patterns",
@@ -43,7 +43,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
       "Master Vacílala, Enchúfla doble, Sombrero, and fluid partner lead/follow technique with Cuban musicality on Clave.",
     classTiming: "Every Thursday 20:15 & Sunday 18:30",
     recommendedTrack: "Great fit to build confidence with turn patterns and fast Rueda transitions with Justyna.",
-    href: "/dashboard/schedule",
+    href: "/classes",
   },
   rueda_regular: {
     levelTitle: "Intermediate • Complex Setenta & Dynamic Rueda",
@@ -52,7 +52,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
       "Tackle Setenta Complicada, El Dedo, Bayamo, fast partner switches, and body isolations (Despelote).",
     classTiming: "Every Thursday 20:15 • BOH Studios",
     recommendedTrack: "High-energy Cuban Timba dancing with Maestro Enrique's advanced cohort.",
-    href: "/dashboard/schedule",
+    href: "/classes",
   },
   experienced_timbero: {
     levelTitle: "Advanced / Masterclass • Contratiempo, Son & Afro-Cuban",

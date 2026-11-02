@@ -86,7 +86,7 @@ export default function Home() {
                 for one class, £{DOOR_PRICING.twoClassesPounds} for two, paid at the door. Then practise every song at home.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/dashboard/schedule" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink}`}>
+                <Link href="/classes" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink}`}>
                   Thu &amp; Sun classes
                 </Link>
                 <Link href="/music" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper`}>
@@ -196,7 +196,7 @@ export default function Home() {
               <p className="max-w-xl font-semibold">
                 {DOOR_PRICING.summaryBadge}. {DOOR_PRICING.paymentMethodNote}.
               </p>
-              <Link href="/dashboard/schedule" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} md:ml-auto`}>
+              <Link href="/classes" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} md:ml-auto`}>
                 Full timetable
               </Link>
             </div>

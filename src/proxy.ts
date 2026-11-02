@@ -5,6 +5,9 @@ const isPublicRoute = createRouteMatcher([
   "/",
   "/schedule(.*)",
   "/dashboard",
+  "/classes(.*)",
+  "/rueda(.*)",
+  // Old addresses of the two pages above: they only redirect, so never send them to sign-in
   "/dashboard/schedule(.*)",
   "/dashboard/rueda(.*)",
   "/dashboard/wallet(.*)",

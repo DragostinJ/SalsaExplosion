@@ -129,7 +129,7 @@ export async function switchMyAccountRoleAction(rawInput: {
     });
 
     revalidatePath("/", "layout");
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
     revalidatePath("/instructor/submissions");
     revalidatePath("/instructor/students");
     revalidatePath("/instructor/roster");
@@ -264,7 +264,7 @@ export async function updateStudentProgressionAction(rawInput: {
 
     revalidatePath("/instructor/students");
     revalidatePath("/admin/analytics");
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
     revalidatePath("/dashboard/progression");
 
     return {
@@ -374,7 +374,7 @@ export async function adjustStudentCreditsAction(rawInput: {
 
     revalidatePath("/instructor/students");
     revalidatePath("/admin/analytics");
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
 
     return {
       success: true,
@@ -479,7 +479,7 @@ export async function createClassSessionAction(rawInput: {
       },
     });
 
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
     revalidatePath("/instructor/roster");
     revalidatePath("/admin/classes");
 
@@ -620,7 +620,7 @@ export async function updateMyDanceRolePreferenceAction(rawInput: {
       select: { preferredRole: true },
     });
 
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
     revalidatePath("/dashboard/progression");
 
     return {
@@ -747,7 +747,7 @@ export async function cancelClassSessionWithRefundsAction(
     });
 
     revalidatePath("/admin/classes");
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
     revalidatePath("/dashboard/wallet");
     revalidatePath("/instructor/roster");
 
@@ -827,7 +827,7 @@ export async function updateClassSessionCapacityAction(
     });
 
     revalidatePath("/admin/classes");
-    revalidatePath("/dashboard/schedule");
+    revalidatePath("/classes");
 
     return {
       success: true,

@@ -180,7 +180,7 @@ export async function redeemReferralCodeAction(rawInput: {
         });
 
         revalidatePath("/dashboard/referrals");
-        revalidatePath("/dashboard/schedule");
+        revalidatePath("/classes");
         revalidatePath("/dashboard/wallet");
 
         return {

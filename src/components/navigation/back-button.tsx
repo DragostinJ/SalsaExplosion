@@ -11,7 +11,7 @@ interface BackButtonProps {
 }
 
 export function BackButton({
-  fallbackUrl = "/dashboard/schedule",
+  fallbackUrl = "/classes",
   label = "Back to Schedule",
   className = "",
 }: BackButtonProps) {

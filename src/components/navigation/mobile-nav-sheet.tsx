@@ -120,9 +120,9 @@ export function MobileNavSheet({
 
   // Base public links available to everyone
   const publicLinks = [
-    { href: "/dashboard/schedule", label: "Schedule & Booking", icon: CalendarDays },
+    { href: "/classes", label: "Schedule & Booking", icon: CalendarDays },
     { href: "/venues", label: "Bournemouth Venues", icon: MapPin },
-    { href: "/dashboard/rueda", label: "Rueda Call Dictionary", icon: Users },
+    { href: "/rueda", label: "Rueda Call Dictionary", icon: Users },
     { href: "/private-lessons", label: "1-on-1 Private Lessons", icon: Flame },
     { href: "/events", label: "Guest Festivals & Congress", icon: Sparkles },
     { href: "/pricing", label: "Prices (Pay at the Door)", icon: CreditCard },
@@ -189,7 +189,7 @@ export function MobileNavSheet({
         {/* Drawer Header */}
         <div className="flex h-16 items-center justify-between border-b-2 border-ink px-5 shrink-0 bg-paper">
           <Link
-            href="/dashboard/schedule"
+            href="/classes"
             onClick={onClose}
             className="flex items-center gap-2.5 font-bold tracking-tight text-ink"
           >

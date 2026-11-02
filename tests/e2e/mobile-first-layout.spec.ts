@@ -4,7 +4,7 @@ import AxeBuilder from "@axe-core/playwright";
 test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite", () => {
   const publicRoutes = [
     { name: "Homepage", path: "/" },
-    { name: "Class Timetable", path: "/dashboard/schedule" },
+    { name: "Class Timetable", path: "/classes" },
     { name: "Events & Festivals Hub", path: "/events" },
     { name: "Congress Event Details", path: "/events/made-in-cuba-dance-weekend-2026" },
     { name: "Pricing & Passes", path: "/pricing" },
@@ -14,7 +14,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     { name: "How QR Passes Work", path: "/how-it-works" },
     { name: "Venues & Parking", path: "/venues" },
     { name: "About Academy", path: "/about" },
-    { name: "Rueda Dictionary", path: "/dashboard/rueda" },
+    { name: "Rueda Dictionary", path: "/rueda" },
     { name: "Student Wallet & Passes", path: "/dashboard/wallet" },
     { name: "Desk Operations", path: "/admin/operations" },
     { name: "Terms & UK Legal", path: "/terms" },
@@ -113,7 +113,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     }
 
     // 3. Day of week filter buttons meet minimum touch target
-    await page.goto("/dashboard/schedule");
+    await page.goto("/classes");
     await page.waitForLoadState("domcontentloaded");
     const schedulePills = page.locator("button:has-text('All Days'), button:has-text('Thursdays'), button:has-text('Sundays')");
     const pillCount = await schedulePills.count();
@@ -130,7 +130,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
 
   test("verifies WCAG 2.1 AA mobile accessibility on schedule and events", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
-    await page.goto("/dashboard/schedule");
+    await page.goto("/classes");
     await page.waitForLoadState("domcontentloaded");
 
     const scanResults = await new AxeBuilder({ page })
@@ -171,7 +171,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     await expect(eventTrustBar).toBeVisible();
 
     // 3. Class timetable grid renders near top of mobile viewport (y < 750px with day filter)
-    await page.goto("/dashboard/schedule");
+    await page.goto("/classes");
     await page.waitForLoadState("domcontentloaded");
     const scheduleGrid = page.locator('[data-testid="schedule-classes-grid"]');
     await expect(scheduleGrid).toBeVisible();

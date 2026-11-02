@@ -30,7 +30,7 @@ export default function robots(): MetadataRoute.Robots {
           "PerplexityBot",
           "Google-Extended",
         ],
-        allow: ["/", "/llms.txt", "/dashboard/schedule", "/events", "/pricing", "/venues", "/about"],
+        allow: ["/", "/llms.txt", "/classes", "/events", "/pricing", "/venues", "/about"],
         disallow: disallowedPrivatePaths,
       },
     ],

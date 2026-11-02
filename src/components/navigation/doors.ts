@@ -13,8 +13,8 @@ export interface Door {
 }
 
 export const DOORS: readonly Door[] = [
-  { id: "clases", label: "Clases", english: "Classes", href: "/dashboard/schedule", matches: ["/dashboard/schedule", "/schedule", "/venues", "/pricing"] },
-  { id: "canciones", label: "Canciones", english: "Songs & practice", href: "/music", matches: ["/music", "/dashboard/rueda", "/moves"] },
+  { id: "clases", label: "Clases", english: "Classes", href: "/classes", matches: ["/classes", "/schedule", "/venues", "/pricing"] },
+  { id: "canciones", label: "Canciones", english: "Songs & practice", href: "/music", matches: ["/music", "/rueda", "/moves"] },
   { id: "fiestas", label: "Fiestas", english: "Festivals & parties", href: "/events", matches: ["/events"] },
   { id: "carnet", label: "Mi carnet", english: "My pass", href: "/dashboard/carnet", matches: ["/dashboard/carnet", "/dashboard/wallet", "/dashboard/progression"] },
 ];

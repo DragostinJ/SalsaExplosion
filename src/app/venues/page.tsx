@@ -25,7 +25,7 @@ export default function VenuesGuidePage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">
       <div>
-        <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
+        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
       </div>
 
       {/* Cartelera Poster Hero Header */}
@@ -55,7 +55,7 @@ export default function VenuesGuidePage() {
 
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/dashboard/schedule"
+              href="/classes"
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold min-h-[40px] px-4 inline-flex items-center justify-center gap-1.5`}
             >
               <span>View Class Schedule</span>

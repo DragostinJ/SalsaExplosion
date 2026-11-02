@@ -243,7 +243,7 @@ export default async function StudentSchedulePage({
   const userCanManage = user?.role === Role.INSTRUCTOR || user?.role === Role.ADMIN || canSwitchRoles(user?.email);
 
   return (
-    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-6 sm:space-y-8 px-4 py-4 sm:py-8 overflow-x-hidden w-full">
+    <main id="main-content" tabIndex={-1} className="min-h-screen mx-auto max-w-7xl space-y-6 sm:space-y-8 px-4 py-4 sm:py-8 overflow-x-hidden w-full">
       {loadFailed && <DataUnavailableNotice />}
       {/* Cartelera Poster Hero Header & Door-Pay Policy Bar */}
       <section

@@ -32,6 +32,11 @@ export interface EventJsonLd {
   description?: string;
   image?: string;
   location: EventJsonLdLocation;
+  performer?: {
+    "@type": "Person";
+    name: string;
+    jobTitle?: string;
+  };
   organizer: {
     "@type": "Organization";
     name: string;
@@ -65,11 +70,17 @@ export function buildFestivalEventJsonLd(params: {
   endDate?: Date | string;
   coverImageUrl?: string | null;
   venueName?: string;
+  venueAddress?: string;
   ticketTiers?: Array<{
     name: string;
     priceInCents: number;
   }>;
   minPricePounds?: number;
+  isFinished?: boolean;
+  performer?: {
+    name: string;
+    jobTitle?: string;
+  };
 }): EventJsonLd {
   const startIso =
     typeof params.startDate === "string"
@@ -87,6 +98,10 @@ export function buildFestivalEventJsonLd(params: {
       : `https://salsaexplosion.co.uk${params.coverImageUrl}`
     : undefined;
 
+  const availability = params.isFinished
+    ? "https://schema.org/SoldOut"
+    : "https://schema.org/InStock";
+
   let offers: EventJsonLdOffer | EventJsonLdOffer[];
   if (params.ticketTiers && params.ticketTiers.length > 0) {
     offers = params.ticketTiers.map((tier) => ({
@@ -94,7 +109,7 @@ export function buildFestivalEventJsonLd(params: {
       name: tier.name,
       price: (tier.priceInCents / 100).toFixed(2),
       priceCurrency: "GBP",
-      availability: "https://schema.org/InStock",
+      availability,
       url: `https://salsaexplosion.co.uk/events/${params.slug}`,
     }));
   } else {
@@ -102,10 +117,22 @@ export function buildFestivalEventJsonLd(params: {
       "@type": "Offer",
       price: (params.minPricePounds ?? 0).toFixed(2),
       priceCurrency: "GBP",
-      availability: "https://schema.org/InStock",
+      availability,
       url: `https://salsaexplosion.co.uk/events/${params.slug}`,
     };
   }
+
+  const performer = params.performer
+    ? {
+        "@type": "Person" as const,
+        name: params.performer.name,
+        ...(params.performer.jobTitle ? { jobTitle: params.performer.jobTitle } : {}),
+      }
+    : {
+        "@type": "Person" as const,
+        name: "Enrique Perez Valdes",
+        jobTitle: "Artistic Director",
+      };
 
   return {
     "@context": "https://schema.org",
@@ -121,12 +148,13 @@ export function buildFestivalEventJsonLd(params: {
       name: params.venueName || VENUE_INFO.name,
       address: {
         "@type": "PostalAddress",
-        streetAddress: VENUE_INFO.streetAddress,
+        streetAddress: params.venueAddress || VENUE_INFO.streetAddress,
         addressLocality: VENUE_INFO.city,
         postalCode: VENUE_INFO.postcode,
         addressCountry: VENUE_INFO.country,
       },
     },
+    performer,
     organizer: {
       "@type": "Organization",
       name: "Salsa Explosion UK",

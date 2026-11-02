@@ -6,6 +6,7 @@ import { BackButton } from "@/components/navigation/back-button";
 import { VENUE_INFO, ACADEMY_METRICS, upcomingCanonicalEvents } from "@/lib/academy-data";
 import { reportError } from "@/lib/monitoring";
 import { getPublishedEvents } from "@/lib/stores/published-events-store";
+import { buildFestivalEventJsonLd } from "@/lib/seo/event-jsonld";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata = {
@@ -68,8 +69,27 @@ export default async function EventsDirectoryPage() {
 
   const liveAnnouncements = await getPublishedEvents();
 
+  const eventsJsonLd = displayEvents.map((evt) =>
+    buildFestivalEventJsonLd({
+      slug: evt.slug,
+      title: evt.title,
+      description: evt.description,
+      startDate: evt.startDate,
+      endDate: evt.endDate,
+      coverImageUrl: evt.coverImageUrl,
+      venueName: evt.venueName,
+      venueAddress: evt.venueAddress,
+      ticketTiers: evt.ticketTiers,
+    })
+  );
+
   return (
-    <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsJsonLd) }}
+      />
+      <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">
       <div>
         <BackButton fallbackUrl="/dashboard/schedule" label="Back to Schedule" />
       </div>
@@ -82,8 +102,8 @@ export default async function EventsDirectoryPage() {
         <div className="grid gap-8 lg:grid-cols-12 items-center">
           <div className="lg:col-span-7 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
-              <span>Cartelera · Online Box Office</span>
-              <span className="opacity-70">{VENUE_INFO.shortName} · BOURNEMOUTH</span>
+              <span>Cartelera В· Online Box Office</span>
+              <span className="opacity-70">{VENUE_INFO.shortName} В· BOURNEMOUTH</span>
             </div>
 
             <div>
@@ -98,12 +118,12 @@ export default async function EventsDirectoryPage() {
 
             {/* Official Online Ticket Booking Callout */}
             <div className="border-2 border-ink bg-poster-mustard p-3.5 sm:p-4 text-xs font-bold text-ink leading-relaxed">
-              🎟️ <strong>Official Online Ticket Booking:</strong> Reserve Made in Cuba 2026, SB&amp;K Extravaganza and party passes online below with instant digital ticketing. (Regular weekly Thursday &amp; Sunday classes are £12/£14 paid at the door).
+              рџЋџпёЏ <strong>Official Online Ticket Booking:</strong> Reserve Made in Cuba 2026, SB&amp;K Extravaganza and party passes online below with instant digital ticketing. (Regular weekly Thursday &amp; Sunday classes are ВЈ12/ВЈ14 paid at the door).
             </div>
 
             <div className="border-2 border-ink bg-surface-1 p-4 sm:p-5 space-y-2 text-ink">
               <p className="text-xs sm:text-sm leading-relaxed italic">
-                &ldquo;We have an extraordinary season of special events coming up at {VENUE_INFO.name} — from Cuban Salsa, Rueda, Son Cubano, Afro-Cuban, Bachata, Kizomba, and Timba to flagship parties, guest maestros, dance weekends, and late-night social dancing.&rdquo;
+                &ldquo;We have an extraordinary season of special events coming up at {VENUE_INFO.name} вЂ” from Cuban Salsa, Rueda, Son Cubano, Afro-Cuban, Bachata, Kizomba, and Timba to flagship parties, guest maestros, dance weekends, and late-night social dancing.&rdquo;
               </p>
               <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t-2 border-ink text-xs font-bold">
                 <span className="text-accent-red">
@@ -229,7 +249,7 @@ export default async function EventsDirectoryPage() {
                           href={liveEvt.ctaUrl || "/events"}
                           className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-3 text-xs`}
                         >
-                          <span>Details →</span>
+                          <span>Details в†’</span>
                         </Link>
                       </div>
                     </div>
@@ -248,7 +268,7 @@ export default async function EventsDirectoryPage() {
                     2026
                   </span>
                   <h2 className={`font-display ${TYPE.card} sm:text-4xl text-ink leading-none`}>
-                    Temporada 2026 · Autumn &amp; Festive Special Events
+                    Temporada 2026 В· Autumn &amp; Festive Special Events
                   </h2>
                 </div>
                 <span className="text-xs font-bold uppercase tracking-wider text-ink/70">
@@ -277,7 +297,7 @@ export default async function EventsDirectoryPage() {
                     2027
                   </span>
                   <h2 className={`font-display ${TYPE.card} sm:text-4xl text-ink leading-none`}>
-                    Temporada 2027 · Spring &amp; Summer Masterclasses &amp; Weekenders
+                    Temporada 2027 В· Spring &amp; Summer Masterclasses &amp; Weekenders
                   </h2>
                 </div>
                 <span className="text-xs font-bold uppercase tracking-wider text-ink/70">
@@ -299,6 +319,7 @@ export default async function EventsDirectoryPage() {
         </div>
       )}
     </main>
+    </>
   );
 }
 
@@ -309,7 +330,7 @@ interface EventCardProps {
 
 function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
   const minPrice = evt.ticketTiers[0]?.priceInCents
-    ? `£${(evt.ticketTiers[0].priceInCents / 100).toFixed(0)}`
+    ? `ВЈ${(evt.ticketTiers[0].priceInCents / 100).toFixed(0)}`
     : "TBA";
 
   const dateObj = new Date(evt.startDate);
@@ -363,7 +384,7 @@ function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
                   key={artist}
                   className="border border-ink bg-poster-teal/20 px-1.5 py-0.5 text-[10px] font-bold uppercase text-ink"
                 >
-                  ★ {artist}
+                  в… {artist}
                 </span>
               ))}
             </div>
@@ -390,7 +411,7 @@ function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
               href={`/events/${evt.slug}`}
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-3 text-xs w-full sm:w-auto text-center justify-center`}
             >
-              <span>Passes &amp; Tickets →</span>
+              <span>Passes &amp; Tickets в†’</span>
             </Link>
           </div>
         </div>

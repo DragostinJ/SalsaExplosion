@@ -304,7 +304,7 @@ export function parseClipBreakdownInput(raw: string): ParseClipBreakdownResult {
 }
 
 // ==========================================
-// 4. REVIEW REPORT SCHEMAS
+// 4. REVIEW REPORT SCHEMAS & PARSER
 // ==========================================
 
 export const ClipReviewDecisionTypeSchema = z.enum([
@@ -338,8 +338,44 @@ export const ClipReviewReportSchema = z
   .strict();
 export type ClipReviewReport = z.infer<typeof ClipReviewReportSchema>;
 
+/**
+ * Parses raw JSON string (supporting optional markdown fences) into a validated ClipReviewReport.
+ */
+export function parseClipReviewReport(raw: string): {
+  ok: boolean;
+  report?: ClipReviewReport;
+  error?: string;
+} {
+  if (typeof raw !== "string" || !raw.trim()) {
+    return { ok: false, error: "Report payload cannot be empty." };
+  }
+
+  const fenced = raw.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+  const text = (fenced && fenced[1] ? fenced[1] : raw).trim();
+
+  let json: unknown;
+  try {
+    json = JSON.parse(text);
+  } catch (err) {
+    return {
+      ok: false,
+      error: `JSON syntax error: ${err instanceof Error ? err.message : String(err)}`,
+    };
+  }
+
+  const parsed = ClipReviewReportSchema.safeParse(json);
+  if (!parsed.success) {
+    const details = parsed.error.issues
+      .map((i) => `${i.path.join(".") || "(root)"}: ${i.message}`)
+      .join("; ");
+    return { ok: false, error: `Invalid clip review report: ${details}` };
+  }
+
+  return { ok: true, report: parsed.data };
+}
+
 // ==========================================
-// 5. STORED PRO CLIPS SCHEMA & DATA HELPERS
+// 5. STORED PRO CLIPS SCHEMA, APPLICATION & HELPERS
 // ==========================================
 
 export const StoredProClipRowSchema = z
@@ -370,6 +406,142 @@ export const StoredProClipSchema = z
   .strict();
 export type StoredProClip = z.infer<typeof StoredProClipSchema>;
 
+export interface ApplyClipReviewResult {
+  ok: boolean;
+  updatedClips: StoredProClip[];
+  counts: {
+    confirmed: number;
+    unsure: number;
+    rejected: number;
+  };
+  errors: string[];
+}
+
+/**
+ * Pure function: applies an audited ClipReviewReport to an existing collection of stored pro clips.
+ *   - Verifies all move IDs in decisions exist in the library.
+ *   - Only confirmed rows are retained.
+ *   - The teacher's edited moveIds win over AI Studio suggestions.
+ *   - Idempotently replaces any existing clip sharing the same id.
+ *   - Sorts clips alphabetically by id with confirmed rows sorted by startSeconds.
+ */
+export function applyClipReviewReport(input: {
+  report: ClipReviewReport;
+  existingClips: readonly StoredProClip[];
+  validMoveIds?: Set<string>;
+}): ApplyClipReviewResult {
+  const { report, existingClips } = input;
+  const validMoveIds = input.validMoveIds ?? new Set(getAllMoves().map((m) => m.id));
+
+  const errors: string[] = [];
+  let confirmed = 0;
+  let unsure = 0;
+  let rejected = 0;
+
+  // Build decision lookup by row index
+  const decisionByRow = new Map<number, ClipRowDecision>();
+  for (const dec of report.decisions) {
+    decisionByRow.set(dec.row, dec);
+
+    // Verify move IDs against canonical library
+    const unknown = dec.moveIds.filter((id) => !validMoveIds.has(id));
+    if (unknown.length > 0) {
+      errors.push(
+        `Row ${dec.row + 1}: unknown move ID(s) in report decision: ${unknown.join(", ")}`
+      );
+    }
+  }
+
+  // Count decision types
+  for (let idx = 0; idx < report.clip.rows.length; idx++) {
+    const decision = decisionByRow.get(idx);
+    const type = decision?.decision ?? "unsure";
+    if (type === "confirmed") confirmed++;
+    else if (type === "rejected") rejected++;
+    else unsure++;
+  }
+
+  if (errors.length > 0) {
+    return {
+      ok: false,
+      updatedClips: [...existingClips],
+      counts: { confirmed, unsure, rejected },
+      errors,
+    };
+  }
+
+  // Construct confirmed rows only
+  const confirmedRows: StoredProClipRow[] = [];
+  for (let idx = 0; idx < report.clip.rows.length; idx++) {
+    const row = report.clip.rows[idx]!;
+    const decision = decisionByRow.get(idx);
+    if (decision?.decision !== "confirmed") continue;
+
+    const startParse = parseClipTimestamp(row.start);
+    const endParse = parseClipTimestamp(row.end);
+    if (!startParse.ok || !endParse.ok) {
+      errors.push(`Row ${idx + 1}: timestamp parse failure during review application.`);
+      continue;
+    }
+
+    // Teacher's edited moveIds win over the AI's
+    const effectiveMoveIds = decision.moveIds;
+
+    confirmedRows.push({
+      startSeconds: startParse.seconds,
+      endSeconds: endParse.seconds,
+      type: row.type,
+      moveIds: effectiveMoveIds,
+      mechanics: row.mechanics,
+      ...(row.musicalMoment ? { musicalMoment: row.musicalMoment } : {}),
+      ...(decision.note ? { note: decision.note } : {}),
+    });
+  }
+
+  if (errors.length > 0) {
+    return {
+      ok: false,
+      updatedClips: [...existingClips],
+      counts: { confirmed, unsure, rejected },
+      errors,
+    };
+  }
+
+  // Sort rows chronologically by startSeconds
+  confirmedRows.sort((a, b) => a.startSeconds - b.startSeconds);
+
+  const updatedClip: StoredProClip = {
+    id: report.clip.id,
+    youtubeVideoId: report.clip.youtubeVideoId,
+    title: report.clip.title,
+    channelTitle: report.clip.channelTitle,
+    dancers: report.clip.dancers,
+    ...(report.clip.songId ? { songId: report.clip.songId } : {}),
+    reviewedBy: report.reviewedBy,
+    reviewedAt: report.reviewedAt,
+    rows: confirmedRows,
+  };
+
+  // Idempotent replacement: map by clip id
+  const clipsMap = new Map<string, StoredProClip>();
+  for (const c of existingClips) {
+    clipsMap.set(c.id, c);
+  }
+  clipsMap.set(updatedClip.id, updatedClip);
+
+  // Return sorted by clip id
+  const sortedClips = Array.from(clipsMap.values()).sort((a, b) =>
+    a.id.localeCompare(b.id)
+  );
+
+  return {
+    ok: true,
+    updatedClips: sortedClips,
+    counts: { confirmed, unsure, rejected },
+    errors: [],
+  };
+}
+
 const STORED_PRO_CLIPS: readonly StoredProClip[] = (
   storedProClipsData as unknown[]
 ).map((raw) => StoredProClipSchema.parse(raw));
@@ -381,7 +553,7 @@ export function getProClips(): readonly StoredProClip[] {
   return STORED_PRO_CLIPS;
 }
 
-export interface ProClipWithMatchingRows {
+export interface ProClipWithMatchingRows extends StoredProClip {
   clip: StoredProClip;
   matchingRows: readonly StoredProClipRow[];
 }
@@ -391,17 +563,19 @@ export interface ProClipWithMatchingRows {
  * with matching rows ordered by start time.
  */
 export function getProClipsForMove(
-  moveId: string
+  moveId: string,
+  clips: readonly StoredProClip[] = getProClips()
 ): readonly ProClipWithMatchingRows[] {
   const result: ProClipWithMatchingRows[] = [];
 
-  for (const clip of STORED_PRO_CLIPS) {
+  for (const clip of clips) {
     const matchingRows = clip.rows
       .filter((r) => r.moveIds.includes(moveId))
       .sort((a, b) => a.startSeconds - b.startSeconds);
 
     if (matchingRows.length > 0) {
       result.push({
+        ...clip,
         clip,
         matchingRows,
       });
@@ -413,19 +587,21 @@ export function getProClipsForMove(
 
 /**
  * Returns all pro clips recorded to a specific song ID,
- * with rows ordered by start time.
+ * with matching rows ordered by start time.
  */
 export function getProClipsForSong(
-  songId: string
+  songId: string,
+  clips: readonly StoredProClip[] = getProClips()
 ): readonly ProClipWithMatchingRows[] {
   const result: ProClipWithMatchingRows[] = [];
 
-  for (const clip of STORED_PRO_CLIPS) {
+  for (const clip of clips) {
     if (clip.songId === songId) {
       const sortedRows = [...clip.rows].sort(
         (a, b) => a.startSeconds - b.startSeconds
       );
       result.push({
+        ...clip,
         clip,
         matchingRows: sortedRows,
       });

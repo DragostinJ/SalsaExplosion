@@ -2,7 +2,13 @@ import { describe, it, expect } from "vitest";
 import {
   parseClipTimestamp,
   parseClipBreakdownInput,
+  parseClipReviewReport,
+  applyClipReviewReport,
+  getProClipsForMove,
+  getProClipsForSong,
   type ClipBreakdown,
+  type ClipReviewReport,
+  type StoredProClip,
 } from "@/lib/moves/pro-clips";
 
 describe("Strict Clip Timestamp Parser", () => {
@@ -229,5 +235,247 @@ describe("Clip Breakdown Format & Parser (AI Studio Move Mapper)", () => {
         expect.stringMatching(/Field "songId": song "non-existent-track" not found in TIMBA_SONG_ANATOMY_DATA/),
       ])
     );
+  });
+});
+
+describe("Pro Clip Review Application & Query Helpers", () => {
+  const baseBreakdown: ClipBreakdown = {
+    kind: "ritmoflow-clip-breakdown",
+    version: 1,
+    id: "paolo-alina-homenaje",
+    youtubeVideoId: "Wh1zERcDWGM",
+    title: "Paolo & Alina - Homenaje a la Música Cubana",
+    channelTitle: "World Latin Dance Cup",
+    dancers: ["Paolo", "Alina"],
+    songId: "homenaje-a-la-musica-cubana",
+    rows: [
+      {
+        start: "0:00",
+        end: "0:15",
+        type: "figure",
+        mechanics: "Open guapea basic step maintaining elastic hand connection.",
+        moveIds: ["guapea"],
+        match: "same",
+        confidence: "high",
+      },
+      {
+        start: "0:15",
+        end: "0:30",
+        type: "figure",
+        mechanics: "Leader initiates Dile Que No cross-body lead with crisp rotation.",
+        moveIds: ["dile-que-no"],
+        match: "same",
+        confidence: "high",
+      },
+      {
+        start: "0:30",
+        end: "0:45",
+        type: "figure",
+        mechanics: "Leader presents follower into Exhibela turn with high hand lead.",
+        moveIds: ["exhibela"],
+        match: "variation",
+        confidence: "medium",
+      },
+      {
+        start: "0:45",
+        end: "1:00",
+        type: "figure",
+        mechanics: "Two-hand hold entry into classic Setenta hammerlock wrap.",
+        moveIds: ["setenta"],
+        match: "same",
+        confidence: "high",
+      },
+    ],
+  };
+
+  const sampleReport: ClipReviewReport = {
+    kind: "ritmoflow-clip-review",
+    version: 1,
+    reviewedBy: "Enrique Perez Valdes",
+    reviewedAt: "2026-11-02T22:00:00.000Z",
+    clip: baseBreakdown,
+    decisions: [
+      { row: 0, decision: "confirmed", moveIds: ["guapea"] },
+      { row: 1, decision: "unsure", moveIds: ["dile-que-no"], note: "Check timing on count 3" },
+      { row: 2, decision: "rejected", moveIds: ["exhibela"], note: "Hand hold is non-standard" },
+      { row: 3, decision: "confirmed", moveIds: ["setenta", "setenta-complicado"] },
+    ],
+  };
+
+  it("parses valid clip review report and strips markdown fences", () => {
+    const raw = "```json\n" + JSON.stringify(sampleReport) + "\n```";
+    const res = parseClipReviewReport(raw);
+    expect(res.ok).toBe(true);
+    expect(res.report?.reviewedBy).toBe("Enrique Perez Valdes");
+  });
+
+  it("only confirmed rows are stored, and decisions counts are reported accurately", () => {
+    const res = applyClipReviewReport({
+      report: sampleReport,
+      existingClips: [],
+      validMoveIds: new Set(["guapea", "dile-que-no", "exhibela", "setenta", "setenta-complicado"]),
+    });
+
+    expect(res.ok).toBe(true);
+    expect(res.counts).toEqual({ confirmed: 2, unsure: 1, rejected: 1 });
+    expect(res.updatedClips).toHaveLength(1);
+
+    const storedClip = res.updatedClips[0]!;
+    expect(storedClip.rows).toHaveLength(2);
+    expect(storedClip.rows[0]!.moveIds).toEqual(["guapea"]);
+    expect(storedClip.rows[0]!.startSeconds).toBe(0);
+    expect(storedClip.rows[0]!.endSeconds).toBe(15);
+    expect(storedClip.rows[1]!.moveIds).toEqual(["setenta", "setenta-complicado"]);
+  });
+
+  it("the teacher's edited moveIds win over the AI's", () => {
+    const editedReport = structuredClone(sampleReport);
+    // AI proposed ["guapea"], teacher overrides with ["exhibela", "dile-que-no"]
+    editedReport.decisions[0]!.moveIds = ["exhibela", "dile-que-no"];
+
+    const res = applyClipReviewReport({
+      report: editedReport,
+      existingClips: [],
+      validMoveIds: new Set(["guapea", "dile-que-no", "exhibela", "setenta", "setenta-complicado"]),
+    });
+
+    expect(res.ok).toBe(true);
+    const storedRow0 = res.updatedClips[0]!.rows[0]!;
+    expect(storedRow0.moveIds).toEqual(["exhibela", "dile-que-no"]);
+  });
+
+  it("unknown move ids in a review report are refused without modifying existing clips", () => {
+    const badReport = structuredClone(sampleReport);
+    badReport.decisions[0]!.moveIds = ["unknown-invented-figure"];
+
+    const existing: StoredProClip[] = [
+      {
+        id: "existing-clip",
+        youtubeVideoId: "12345678901",
+        title: "Existing Clip",
+        channelTitle: "Channel",
+        dancers: ["Dancer A"],
+        reviewedBy: "Teacher",
+        reviewedAt: "2026-11-01T00:00:00Z",
+        rows: [],
+      },
+    ];
+
+    const res = applyClipReviewReport({
+      report: badReport,
+      existingClips: existing,
+      validMoveIds: new Set(["guapea", "dile-que-no", "exhibela", "setenta"]),
+    });
+
+    expect(res.ok).toBe(false);
+    expect(res.errors[0]).toContain('unknown move ID(s) in report decision: unknown-invented-figure');
+    expect(res.updatedClips).toEqual(existing);
+  });
+
+  it("idempotently replaces an existing clip sharing the same clip id", () => {
+    const firstApply = applyClipReviewReport({
+      report: sampleReport,
+      existingClips: [],
+      validMoveIds: new Set(["guapea", "dile-que-no", "exhibela", "setenta", "setenta-complicado"]),
+    });
+    expect(firstApply.updatedClips).toHaveLength(1);
+
+    const reReport = structuredClone(sampleReport);
+    reReport.reviewedAt = "2026-11-02T23:30:00.000Z";
+    reReport.decisions[0]!.note = "Updated teacher note on guapea";
+
+    const secondApply = applyClipReviewReport({
+      report: reReport,
+      existingClips: firstApply.updatedClips,
+      validMoveIds: new Set(["guapea", "dile-que-no", "exhibela", "setenta", "setenta-complicado"]),
+    });
+
+    expect(secondApply.updatedClips).toHaveLength(1);
+    expect(secondApply.updatedClips[0]!.reviewedAt).toBe("2026-11-02T23:30:00.000Z");
+    expect(secondApply.updatedClips[0]!.rows[0]!.note).toBe("Updated teacher note on guapea");
+  });
+
+  it("query helpers filter and sort matching rows chronologically by start time", () => {
+    const mockClips: StoredProClip[] = [
+      {
+        id: "clip-b",
+        youtubeVideoId: "Wh1zERcDWGM",
+        title: "Paolo & Alina Clip",
+        channelTitle: "WLDC",
+        dancers: ["Paolo", "Alina"],
+        songId: "homenaje-a-la-musica-cubana",
+        reviewedBy: "Enrique",
+        reviewedAt: "2026-11-02T00:00:00Z",
+        rows: [
+          {
+            startSeconds: 45,
+            endSeconds: 60,
+            type: "figure",
+            moveIds: ["setenta"],
+            mechanics: "Setenta hammerlock",
+          },
+          {
+            startSeconds: 5,
+            endSeconds: 20,
+            type: "figure",
+            moveIds: ["guapea"],
+            mechanics: "Guapea basic step",
+          },
+        ],
+      },
+      {
+        id: "clip-a",
+        youtubeVideoId: "abcdefghijk",
+        title: "Other Social Clip",
+        channelTitle: "Social Dance TV",
+        dancers: ["Yoandi", "Diana"],
+        songId: "otra-cancion",
+        reviewedBy: "Justyna",
+        reviewedAt: "2026-11-02T00:00:00Z",
+        rows: [
+          {
+            startSeconds: 30,
+            endSeconds: 45,
+            type: "figure",
+            moveIds: ["guapea"],
+            mechanics: "Guapea variation",
+          },
+          {
+            startSeconds: 10,
+            endSeconds: 25,
+            type: "figure",
+            moveIds: ["guapea"],
+            mechanics: "Guapea intro",
+          },
+        ],
+      },
+    ];
+
+    // Query for move "guapea": both clips have guapea rows
+    const guapeaClips = getProClipsForMove("guapea", mockClips);
+    expect(guapeaClips).toHaveLength(2);
+
+    // Rows must be ordered by startSeconds
+    expect(guapeaClips[0]!.matchingRows).toHaveLength(1);
+    expect(guapeaClips[0]!.matchingRows[0]!.startSeconds).toBe(5);
+
+    expect(guapeaClips[1]!.matchingRows).toHaveLength(2);
+    expect(guapeaClips[1]!.matchingRows[0]!.startSeconds).toBe(10);
+    expect(guapeaClips[1]!.matchingRows[1]!.startSeconds).toBe(30);
+
+    // Query for move "setenta": only clip-b matches
+    const setentaClips = getProClipsForMove("setenta", mockClips);
+    expect(setentaClips).toHaveLength(1);
+    expect(setentaClips[0]!.id).toBe("clip-b");
+
+    // Query for non-existent move
+    expect(getProClipsForMove("non-existent-move", mockClips)).toEqual([]);
+
+    // Query for song
+    const songClips = getProClipsForSong("homenaje-a-la-musica-cubana", mockClips);
+    expect(songClips).toHaveLength(1);
+    expect(songClips[0]!.id).toBe("clip-b");
+    expect(songClips[0]!.matchingRows[0]!.startSeconds).toBe(5); // sorted 5s < 45s
+    expect(songClips[0]!.matchingRows[1]!.startSeconds).toBe(45);
   });
 });

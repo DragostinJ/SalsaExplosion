@@ -156,7 +156,7 @@ export default async function ProgressionPage() {
         backHref="/classes"
         backLabel="Back to Schedule"
         actions={
-          <div className="flex items-center gap-2 rounded-xl border border-line bg-surface-2 px-4 py-2 text-xs font-medium text-stone-200">
+          <div className="flex items-center gap-2 border-2 border-ink bg-paper px-4 py-2 text-xs font-medium text-ink">
             <Award className="h-4 w-4 text-gold" />
             <span>Current Level:</span>
             <Badge variant="gold" className="font-bold text-xs">
@@ -203,7 +203,7 @@ export default async function ProgressionPage() {
           <div className="space-y-6">
             {/* State 1: Max Level Reached */}
             {isMaxLevel ? (
-              <Card className="border-amber-500/40 bg-amber-500/[0.03]">
+              <Card className="rounded-none border-4 border-ink bg-poster-mustard text-ink shadow-[6px_6px_0_var(--color-ink)]">
                 <CardHeader className="text-center sm:text-left">
                   <div className="flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-amber-500" />
@@ -226,7 +226,7 @@ export default async function ProgressionPage() {
               </Card>
             ) : pendingSubmission ? (
               /* State 2: Active Pending Submission */
-              <Card className="border-primary/40 bg-primary/[0.02]">
+              <Card className="rounded-none border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_var(--color-ink)]">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -249,7 +249,7 @@ export default async function ProgressionPage() {
                 </CardHeader>
                 {pendingSubmission.studentNotes && (
                   <CardContent>
-                    <div className="rounded-lg border bg-muted/30 p-3 text-xs">
+                    <div className="border-2 border-ink bg-paper p-3 text-xs">
                       <span className="font-semibold text-muted-foreground uppercase tracking-wider">
                         Your Notes:
                       </span>
@@ -270,7 +270,7 @@ export default async function ProgressionPage() {
               </h2>
 
               {submissions.length === 0 ? (
-                <Card className="border-dashed py-12 text-center">
+                <Card className="rounded-none border-4 border-dashed border-ink bg-paper py-12 text-center text-ink">
                   <CardContent>
                     <p className="text-sm font-medium">No past submissions yet.</p>
                     <p className="mt-1 text-xs text-muted-foreground">
@@ -285,7 +285,7 @@ export default async function ProgressionPage() {
                     const isRejected = sub.status === SubmissionStatus.REJECTED;
 
                     return (
-                      <Card key={sub.id} className="transition-all">
+                      <Card key={sub.id} className="rounded-none border-4 border-ink bg-paper text-ink transition-all">
                         <CardHeader className="pb-3">
                           <div className="flex flex-wrap items-center justify-between gap-2">
                             <div className="flex items-center gap-2">

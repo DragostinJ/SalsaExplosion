@@ -57,7 +57,7 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
       await expect(page).toHaveURL(/.*sign-in/);
       await expect(page.locator("body")).toBeVisible();
     } else {
-      await expect(page).toHaveURL(/.*dashboard\/schedule/);
+      await expect(page).toHaveURL(/.*classes/);
       const heading = page.locator("h1");
       await expect(heading).toBeVisible();
       const bodyText = await page.textContent("body");

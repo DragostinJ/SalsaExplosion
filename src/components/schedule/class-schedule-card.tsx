@@ -260,10 +260,10 @@ export function ClassScheduleCard({
 
   return (
     <Card
-      className={`flex flex-col justify-between transition-all ${
+      className={`flex flex-col justify-between rounded-none border-4 border-ink bg-paper text-ink transition-all ${
         optimisticState.isBooked
-          ? "border-emerald-500/50 bg-emerald-500/[0.02] ring-1 ring-emerald-500/30"
-          : ""
+          ? "shadow-[6px_6px_0_var(--color-poster-teal)]"
+          : "shadow-[6px_6px_0_var(--color-ink)]"
       }`}
     >
       <CardHeader className="space-y-3 pb-4">
@@ -304,7 +304,7 @@ export function ClassScheduleCard({
             className="mt-0.5 shrink-0"
           />
           <div className="min-w-0">
-            <CardTitle className="text-base sm:text-lg leading-snug font-bold">
+            <CardTitle className="font-display text-2xl uppercase leading-none">
               {session.title}
             </CardTitle>
             <CardDescription className="text-xs mt-1 font-medium text-muted-foreground flex items-center gap-1">
@@ -316,7 +316,7 @@ export function ClassScheduleCard({
 
       <CardContent className="space-y-4 pb-4 text-sm">
         {/* Time, Studio Room & Partner Reassurance Metadata */}
-        <div className="rounded-xl border border-border/70 bg-muted/25 p-3.5 text-xs space-y-2">
+        <div className="border-2 border-ink bg-paper p-3.5 text-xs space-y-2">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-muted-foreground shrink-0" />
@@ -375,8 +375,8 @@ export function ClassScheduleCard({
                 onClick={() => setSelectedRole(DanceRole.LEAD)}
                 className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
                   selectedRole === DanceRole.LEAD
-                    ? "border-sky-500/45 bg-sky-500/12 text-sky-100 shadow-xs ring-1 ring-sky-500/20"
-                    : "border-border/80 bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground"
+                    ? "border-ink bg-ink text-paper"
+                    : "border-ink bg-paper text-ink hover:bg-ink/5"
                 }`}
               >
                 <span className="flex items-center gap-1.5 font-extrabold tracking-wide">
@@ -398,8 +398,8 @@ export function ClassScheduleCard({
                 onClick={() => setSelectedRole(DanceRole.FOLLOW)}
                 className={`flex items-center justify-between rounded-xl border-2 px-3.5 py-2 text-xs font-bold transition-all min-h-[40px] ${
                   selectedRole === DanceRole.FOLLOW
-                    ? "border-rose-400/45 bg-rose-500/12 text-rose-100 shadow-xs ring-1 ring-rose-400/20"
-                    : "border-border/80 bg-muted/20 text-muted-foreground hover:bg-muted/40 hover:text-foreground"
+                    ? "border-ink bg-ink text-paper"
+                    : "border-ink bg-paper text-ink hover:bg-ink/5"
                 }`}
               >
                 <span className="flex items-center gap-1.5 font-extrabold tracking-wide">
@@ -441,7 +441,7 @@ export function ClassScheduleCard({
         )}
       </CardContent>
 
-      <CardFooter className="border-t bg-muted/10 pt-4">
+      <CardFooter className="border-t-4 border-ink pt-4">
         {optimisticState.isBooked ? (
           session.userBooking?.status === BookingStatus.ATTENDED ? (
             <div className="w-full space-y-2">
@@ -529,7 +529,7 @@ export function ClassScheduleCard({
               type="button"
               disabled={isPending || session.isCancelled}
               onClick={attemptBook}
-              className="w-full font-bold shadow-xs transition-colors h-10 rounded-xl bg-brand hover:bg-brand-hover text-white"
+              className="h-11 w-full rounded-none border-4 border-ink bg-poster-red font-bold uppercase tracking-wider text-ink shadow-[3px_3px_0_var(--color-ink)] transition-transform hover:-translate-y-0.5 hover:bg-poster-red"
             >
               {isPending ? (
                 <>

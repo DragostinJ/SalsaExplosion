@@ -84,7 +84,7 @@ export function NewDancerOnboarding({
 
   if (dismissed) {
     return (
-      <div className="flex items-center justify-between rounded-xl border border-amber-500/20 bg-amber-500/[0.04] px-4 py-2 text-xs">
+      <div className="flex items-center justify-between border-2 border-ink bg-poster-mustard px-4 py-2 text-xs text-ink">
         <span className="flex items-center gap-1.5 text-muted-foreground">
           <Flame className="h-3.5 w-3.5 text-amber-600" />
           <span>Need a refresher on partner roles or passes?</span>
@@ -114,7 +114,7 @@ export function NewDancerOnboarding({
   }
 
   return (
-    <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-gold/35 bg-surface-2 p-4 sm:p-6 shadow-xs">
+    <section className="relative overflow-hidden border-4 border-ink bg-paper p-4 text-ink shadow-[6px_6px_0_var(--color-ink)] sm:p-6">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
         <div className="space-y-1">
           <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-0.5 text-[11px] font-bold text-amber-300">
@@ -134,7 +134,7 @@ export function NewDancerOnboarding({
             type="button"
             size="sm"
             onClick={triggerStudioTutorial}
-            className="h-7 sm:h-8 bg-brand hover:bg-brand-hover text-white text-xs font-bold shadow-xs px-2.5 sm:px-3"
+            className="min-h-[40px] rounded-none border-2 border-ink bg-ink px-3 text-xs font-bold text-paper hover:bg-ink"
           >
             <HelpCircle className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1" />
             <span className="hidden xs:inline">Interactive</span> Tour
@@ -177,7 +177,7 @@ export function NewDancerOnboarding({
       {isExpanded && (
         <div className="mt-4 grid gap-3 sm:grid-cols-3 animate-in fade-in duration-200">
           {/* Step 1: Choose Lead / Follow Role */}
-          <div className="flex flex-col justify-between rounded-xl border bg-card/90 p-3.5 shadow-xs">
+          <div className="flex flex-col justify-between border-2 border-ink bg-paper p-3.5">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <Badge
@@ -232,7 +232,7 @@ export function NewDancerOnboarding({
           </div>
 
           {/* Step 2: Your level, and how paying works (at the door, never online) */}
-          <div className="flex flex-col justify-between rounded-xl border bg-card/90 p-3.5 shadow-xs">
+          <div className="flex flex-col justify-between border-2 border-ink bg-paper p-3.5">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <Badge
@@ -265,7 +265,7 @@ export function NewDancerOnboarding({
           </div>
 
           {/* Step 3: Tap Book below & Show QR at Door */}
-          <div className="flex flex-col justify-between rounded-xl border bg-card/90 p-3.5 shadow-xs">
+          <div className="flex flex-col justify-between border-2 border-ink bg-paper p-3.5">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <Badge

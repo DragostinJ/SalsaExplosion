@@ -13,7 +13,7 @@ import { getClaveStrokeBeats, CubanRhythmSynth } from "@/lib/audio/cuban-rhythm-
 
 describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dataset", () => {
   it("validates every production song map against SongAnatomySchema and checks valid youtubeVideoId & youtubeUrl", () => {
-    expect(TIMBA_SONG_ANATOMY_DATA.length).toBe(14);
+    expect(TIMBA_SONG_ANATOMY_DATA.length).toBe(15);
 
     for (const song of TIMBA_SONG_ANATOMY_DATA) {
       const parsed = SongAnatomySchema.safeParse(song);
@@ -115,7 +115,7 @@ describe("T2, B1 & M1: Frame-Accurate Timba Song Anatomy Schema & Production Dat
 
   it("checks helper functions getSongAnatomyById and getAllSongAnatomies", () => {
     const all = getAllSongAnatomies();
-    expect(all.length).toBe(14);
+    expect(all.length).toBe(15);
 
     const aguanile = getSongAnatomyById("aguanile");
     expect(aguanile).toBe(TIMBA_SONG_ANATOMY_DATA.find((song) => song.id === "aguanile"));

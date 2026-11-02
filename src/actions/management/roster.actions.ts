@@ -10,7 +10,6 @@ import {
   DanceRole,
   DanceStyle,
   Role,
-  TransactionType,
   BookingStatus,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";

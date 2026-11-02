@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { Role, DanceLevel, DanceRole, SubscriptionStatus } from "@prisma/client";
+import { Role, DanceLevel, DanceRole } from "@prisma/client";
 import { COACHING_INSTRUCTORS_CATALOG } from "@/lib/constants/coaching";
 import { SHOP_CATALOG } from "@/lib/constants/shop";
 import { bookPrivateLessonAction } from "@/actions/lessons.actions";

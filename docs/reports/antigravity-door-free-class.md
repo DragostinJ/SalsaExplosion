@@ -6,6 +6,8 @@
 **Execution Mode:** Senior Engineering Mentor Autonomous Implementation  
 **Status:** All 6 Tasks Completed, 4 Quality Gates Passed, E2E Verified
 
+> **Merge note (2026-11-02, branch `feat/moves-batch-2`):** Tasks 1 and 2 were not merged. Enrique retired the class credit system the same day (no welcome credit, no bring-a-friend reward), so there is no free class to redeem and no credit copy to keep. Tasks 3 to 6 were merged. The event structured-data commit was re-applied by hand: it had passed `src/app/events/page.tsx` through the Windows-1251 codepage, turning every ·, £, → and emoji on /events into mojibake.
+
 ---
 
 ## 1. Executive Summary & Context

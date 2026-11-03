@@ -57,8 +57,8 @@ Use the current Google Gen AI SDK with a public YouTube URL as the video part. N
   Focus: <moves|musicality>
   ```
 - Show progress ("piece 3 of 12"). Add a Stop button.
-- After every call, show the response's `usageMetadata` (promptTokenCount, candidatesTokenCount, totalTokenCount) next to the piece, with the model and fps actually sent. Show the run total at the top of pass 2.
-- On 429 or 503 errors, retry up to 3 times with backoff. Keep the pieces that succeeded and mark failed pieces so I can re-run only those.
+- After every call, show the response's `usageMetadata` (promptTokenCount, candidatesTokenCount, totalTokenCount) next to the piece, with the fps sent and the model that answered (the response's `modelVersion`). Show the run total at the top of pass 2.
+- On 429 or 503 errors, retry up to 3 times with backoff, always with the model I picked. Keep the pieces that succeeded and mark failed pieces so I can re-run only those.
 - Time normalisation, per piece:
   - Parse every time ("M:SS", "M:SS.s", "H:MM:SS").
   - The clip-relative test: the piece starts after 0:05 and every row lies between 0 and (piece length + 2 s). If it holds, the model answered relative to the clip, so add the start offset to every time and show a small "times shifted" note on that piece.
@@ -66,7 +66,7 @@ Use the current Google Gen AI SDK with a public YouTube URL as the video part. N
 
 ## 5. Merge into one breakdown
 - Header fields (kind, version 1, id, youtubeVideoId, title, channelTitle, dancers, songId) come from MY inputs, never from the model.
-- `analysis`: the model name, my fps, and the notes of all pieces joined together.
+- `analysis`: the model that answered (the responses' `modelVersion`, not the picker), my fps, and the notes of all pieces joined together.
 - `rows`: all rows sorted by start.
   - Pieces are sent with 1 s of padding, so a figure on the border between two pieces can come back twice, once from each piece. If a row from one piece overlaps or nearly touches (gap under 1 s) a row from the next piece, and both have the same type and moveIds, make them one row: the earlier start, the later end, and the mechanics and confidence of the longer row.
   - Then, where two rows overlap, end the earlier row where the later one starts.
@@ -101,4 +101,5 @@ Then:
 ## 9. Don'ts
 - Never invent a title, channel, dancer or move id. They come from my inputs or the schema.
 - Never put an API key in the code. Use AI Studio's built-in key handling.
+- Never switch to another model on your own, not even after a quota error. If the model I picked keeps failing, stop and show the error.
 - Never mix extra audio over the video or hide the player while it plays.

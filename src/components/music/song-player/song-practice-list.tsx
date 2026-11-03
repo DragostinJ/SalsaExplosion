@@ -2,7 +2,7 @@ import Link from "next/link";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { DANCE_GEAR_LEGEND } from "@/lib/music/dance-gear-legend";
 import { formatSongTime } from "@/lib/music/song-timing";
-import { displaySongTitle } from "@/lib/music/song-style";
+import { displaySongTitle, joinDancerNames } from "@/lib/music/song-style";
 import { cn } from "@/lib/utils";
 import { SongProgressBadge, SongProgressProvider } from "./song-progress-badges";
 
@@ -46,6 +46,11 @@ export function SongPracticeList() {
                 <span className="col-span-2 flex flex-wrap gap-2 text-xs font-bold uppercase md:col-span-1 md:justify-end">
                   <SongProgressBadge songId={song.id} total={song.segments.length} />
                   <span data-testid="song-style-chip" className="border-2 border-ink px-2 py-0.5">{song.style}</span>
+                  {song.videoDancers && (
+                    <span data-testid="song-dancers-chip" className="border-2 border-ink bg-poster-teal px-2 py-0.5 text-ink">
+                      Danced by {joinDancerNames(song.videoDancers.names)}
+                    </span>
+                  )}
                   <span className="px-1 py-0.5">{song.difficultyLevel}</span>
                   <span className="px-1 py-0.5 tabular-nums">
                     {formatSongTime(song.durationSeconds)} · {song.bpm} BPM

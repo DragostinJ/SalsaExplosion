@@ -1,0 +1,249 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "format": "enum",
+      "enum": [
+        "ritmoflow-clip-breakdown"
+      ],
+      "description": "Always this value"
+    },
+    "version": {
+      "type": "integer",
+      "description": "Always 1",
+      "minimum": 1,
+      "maximum": 1
+    },
+    "id": {
+      "type": "string",
+      "description": "The clip id from the user message (kebab-case)"
+    },
+    "youtubeVideoId": {
+      "type": "string",
+      "description": "The 11-character YouTube id from the user message"
+    },
+    "title": {
+      "type": "string",
+      "description": "The video title from the user message, or unknown"
+    },
+    "channelTitle": {
+      "type": "string",
+      "description": "The channel from the user message, or unknown"
+    },
+    "dancers": {
+      "type": "array",
+      "description": "Dancer names from the user message",
+      "items": {
+        "type": "string"
+      }
+    },
+    "songId": {
+      "type": "string",
+      "format": "enum",
+      "enum": [
+        "me-dicen-cuba",
+        "la-cosa-mala",
+        "agua-pa-yemaya",
+        "aguanile",
+        "esto-te-pone-la-cabeza-mala",
+        "pasaporte",
+        "esto-esta",
+        "537-cuba",
+        "toda-una-vida",
+        "tremenda-pinta",
+        "marcando-la-distancia",
+        "baile-inolvidable",
+        "de-la-timba-a-pogolotti",
+        "temba-tumba-timba",
+        "homenaje-a-la-musica-cubana"
+      ],
+      "description": "Only if the user message gives a song id"
+    },
+    "analysis": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Your model name if you know it"
+        },
+        "fps": {
+          "type": "number",
+          "description": "The frame rate you were given, or 1",
+          "minimum": 0.1,
+          "maximum": 60
+        },
+        "notes": {
+          "type": "string",
+          "description": "What limited you: camera cuts, crowd, light, frame rate"
+        }
+      },
+      "required": [
+        "model",
+        "fps",
+        "notes"
+      ],
+      "propertyOrdering": [
+        "model",
+        "fps",
+        "notes"
+      ]
+    },
+    "rows": {
+      "type": "array",
+      "description": "In time order, never overlapping",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "description": "Time in the ORIGINAL video as \"M:SS\" (e.g. \"1:05\", \"12:40\"); one decimal only when sure (\"1:05.5\"); \"H:MM:SS\" past an hour"
+          },
+          "end": {
+            "type": "string",
+            "description": "Time in the ORIGINAL video as \"M:SS\" (e.g. \"1:05\", \"12:40\"); one decimal only when sure (\"1:05.5\"); \"H:MM:SS\" past an hour"
+          },
+          "type": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "figure",
+              "shine",
+              "rumba",
+              "body-movement",
+              "musicality-accent",
+              "show-trick",
+              "other"
+            ],
+            "description": "What kind of dancing this row is"
+          },
+          "mechanics": {
+            "type": "string",
+            "description": "What you SEE, count by count: hand holds and changes, who turns and which way, where the hands travel, the position. Start with \"Name heard: ...\" if the video says the name. 20 to 1,200 characters."
+          },
+          "moveIds": {
+            "type": "array",
+            "description": "Catalogue ids danced in this row, in order; empty if nothing fits",
+            "items": {
+              "type": "string",
+              "description": "A catalogue move id"
+            }
+          },
+          "match": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "same",
+              "variation",
+              "not-in-library"
+            ],
+            "description": "same, variation, or not-in-library"
+          },
+          "confidence": {
+            "type": "string",
+            "format": "enum",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ],
+            "description": "high only if you saw the holds and turns clearly"
+          },
+          "musicalMoment": {
+            "type": "string",
+            "description": "Optional: what in the music they react to, and how (at most 300 characters)"
+          },
+          "newMove": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Usual Cuban name if you are sure of it, otherwise a plain English description"
+              },
+              "category": {
+                "type": "string",
+                "format": "enum",
+                "enum": [
+                  "Casino figure",
+                  "Rueda call",
+                  "Shine / suelta",
+                  "Body movement",
+                  "Rumba",
+                  "Son",
+                  "Reparto",
+                  "Afro-Cuban Orishas"
+                ],
+                "description": "Move category"
+              },
+              "level": {
+                "type": "string",
+                "format": "enum",
+                "enum": [
+                  "Beginner",
+                  "Improver",
+                  "Intermediate",
+                  "Advanced"
+                ],
+                "description": "Curriculum level"
+              }
+            },
+            "required": [
+              "name",
+              "category",
+              "level"
+            ],
+            "propertyOrdering": [
+              "name",
+              "category",
+              "level"
+            ]
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "type",
+          "mechanics",
+          "moveIds",
+          "match",
+          "confidence"
+        ],
+        "propertyOrdering": [
+          "start",
+          "end",
+          "type",
+          "mechanics",
+          "moveIds",
+          "match",
+          "confidence",
+          "musicalMoment",
+          "newMove"
+        ]
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "version",
+    "id",
+    "youtubeVideoId",
+    "title",
+    "channelTitle",
+    "dancers",
+    "analysis",
+    "rows"
+  ],
+  "propertyOrdering": [
+    "kind",
+    "version",
+    "id",
+    "youtubeVideoId",
+    "title",
+    "channelTitle",
+    "dancers",
+    "songId",
+    "analysis",
+    "rows"
+  ]
+}

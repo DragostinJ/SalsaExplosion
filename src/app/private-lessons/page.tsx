@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import { PosterBanner } from "@/components/poster/poster-art";
 import { MessageSquare, Phone, Sparkles, MapPin } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { PrivateLessonsClient } from "@/components/lessons/private-lessons-client";
@@ -110,17 +111,7 @@ export default function PrivateLessonsPage() {
         </div>
       </section>
 
-      <figure className="border-4 border-ink bg-paper">
-        <Image
-          src={MEDIA_MANIFEST.editorial.bannerDoor.src}
-          alt={MEDIA_MANIFEST.editorial.bannerDoor.alt}
-          width={MEDIA_MANIFEST.editorial.bannerDoor.width}
-          height={MEDIA_MANIFEST.editorial.bannerDoor.height}
-          sizes="(max-width: 1280px) 100vw, 1280px"
-          className="aspect-[21/9] w-full object-cover"
-        />
-        <figcaption className="border-t-4 border-ink bg-ink px-4 py-2 font-display text-2xl uppercase text-paper">Las puertas abiertas</figcaption>
-      </figure>
+      <PosterBanner image={MEDIA_MANIFEST.editorial.bannerDoor} caption="Las puertas abiertas" />
 
       {/* Private Lessons Booking Wizard */}
       <PrivateLessonsClient initialBookings={[]} />

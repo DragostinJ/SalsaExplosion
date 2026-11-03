@@ -24,6 +24,7 @@ import {
 } from "@/lib/validations/ai-studio.schema";
 import { generateGoogleReviewHelperAction } from "@/actions/ai-studio.actions";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import { siteUrl } from "@/lib/safe-url";
 
 const DEFAULT_FAVORITE_ASPECT: (typeof REVIEW_FAVORITE_ASPECTS)[number] =
   "Thursday & Sunday Social Vibe";
@@ -340,12 +341,12 @@ export function ReviewBoosterClient() {
               <div className="border-2 border-ink bg-paper p-4 inline-block shadow-[4px_4px_0_var(--color-ink)] mx-auto">
                 <div className="h-36 w-36 bg-ink flex items-center justify-center text-paper text-xs font-mono text-center p-2">
                   <span className="text-xs text-poster-mustard font-bold">
-                    salsaexplosion.co.uk/review
+                    {siteUrl("/review").replace(/^https?:\/\//, "")}
                   </span>
                 </div>
               </div>
               <p className="text-xs font-mono font-bold text-ink">
-                URL: https://salsaexplosion-bkgf.vercel.app/review
+                URL: {siteUrl("/review")}
               </p>
             </div>
           )}

@@ -7,7 +7,7 @@ import { MobileBottomNav } from "@/components/navigation/mobile-bottom-nav";
 import { ImmersiveRouteGate } from "@/components/navigation/immersive-route-gate";
 import { JsonLdSchema } from "@/components/seo/JsonLdSchema";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
-import { getSafeAppUrl } from "@/lib/safe-url";
+import { getSiteOrigin } from "@/lib/safe-url";
 import "./globals.css";
 
 // ICAIC Poster type: Anton for the headlines, Archivo for everything else
@@ -32,7 +32,7 @@ const anton = Anton({
 });
 
 export const metadata: Metadata = {
-  metadataBase: getSafeAppUrl(process.env.NEXT_PUBLIC_APP_URL),
+  metadataBase: new URL(getSiteOrigin()),
   title: {
     default: "Cuban Salsa Classes in Bournemouth | Salsa Explosion",
     template: "%s | Salsa Explosion",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     title: "Cuban Salsa Classes in Bournemouth | Salsa Explosion",
     description:
       "Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. £12 at the door, no partner needed. Practise the class songs at home.",
-    url: "https://salsaexplosion.co.uk",
+    url: getSiteOrigin(),
     siteName: "Salsa Explosion",
     locale: "en_GB",
     type: "website",

@@ -1,3 +1,4 @@
+import { getSiteOrigin } from "@/lib/safe-url";
 import { NextResponse } from "next/server";
 import { BookingStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -25,7 +26,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "https://salsaexplosion.co.uk").trim();
+  const appUrl = getSiteOrigin();
   const now = new Date();
   const until = new Date(now.getTime() + REMINDER_WINDOW_HOURS * 3_600_000);
 

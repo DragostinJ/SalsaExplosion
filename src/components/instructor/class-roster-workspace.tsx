@@ -15,6 +15,7 @@ import { toggleBookingCheckInAction } from "@/actions/management.actions";
 import { attachClassRecapAction } from "@/actions/recap.actions";
 import { ClassRosterSummary } from "@/lib/constants/management";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
+import { siteUrl } from "@/lib/safe-url";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -374,7 +375,7 @@ export function ClassRosterWorkspace({
               <div className="rounded-2xl border-2 border-dashed border-amber-500/40 bg-amber-500/[0.03] p-6 text-center space-y-4">
                 <div className="flex justify-center">
                   <ScannableQrCode
-                    value={`https://salsaexplosion.co.uk${checkInPath}`}
+                    value={siteUrl(checkInPath)}
                     size={160}
                     label={activeClass.title}
                   />

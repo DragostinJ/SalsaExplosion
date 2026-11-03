@@ -90,6 +90,7 @@ export const ALLOWED_CTA_DOMAINS = [
   "salsaexplosion.co.uk",
   "www.salsaexplosion.co.uk",
   "salsa-explosion-bkgf.vercel.app",
+  "salsa-explosion.vercel.app",
   "www.fatsoma.com",
   "fatsoma.com",
   "www.eventbrite.co.uk",

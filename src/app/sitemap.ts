@@ -1,10 +1,11 @@
+import { getSiteOrigin } from "@/lib/safe-url";
 import type { MetadataRoute } from "next";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { getPublishedMoves } from "@/lib/moves/move-library";
 import { upcomingCanonicalEvents } from "@/lib/academy-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://salsaexplosion.co.uk";
+  const baseUrl = getSiteOrigin();
   const now = new Date();
 
   const routes = [

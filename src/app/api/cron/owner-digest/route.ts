@@ -1,3 +1,4 @@
+import { getSiteOrigin } from "@/lib/safe-url";
 import { NextResponse } from "next/server";
 import { Role, TicketPaymentStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -51,7 +52,7 @@ export async function GET(request: Request) {
     .filter((email) => email.includes("@"));
   if (recipients.length === 0) return NextResponse.json({ error: "ADMIN_EMAILS is empty" }, { status: 500 });
 
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL ?? "https://salsaexplosion.co.uk").trim();
+  const appUrl = getSiteOrigin();
   const end = new Date();
   const start = new Date(end.getTime() - 7 * DAY_MS);
   const previousStart = new Date(start.getTime() - 7 * DAY_MS);

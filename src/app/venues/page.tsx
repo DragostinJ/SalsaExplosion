@@ -15,6 +15,7 @@ import { BackButton } from "@/components/navigation/back-button";
 import { VenueArrivalPlanner } from "@/components/venues/venue-arrival-planner";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import { WEEKLY_SCHEDULE } from "@/lib/academy-data";
 
 export const metadata = {
   title: "BOH Studios: Directions & Parking",
@@ -232,7 +233,7 @@ export default function VenuesGuidePage() {
                 </h3>
                 <ul className="text-ink space-y-1 list-disc pl-4 font-medium">
                   <li>
-                    <strong>Thursdays &amp; Sundays:</strong> 19:00 – 23:00 Beginners Foundation, Bachata Sensual &amp; Festival Multi-Room Fiestas.
+                    <strong>Thursdays from {WEEKLY_SCHEDULE.thursday.sessions[0].time}, Sundays from {WEEKLY_SCHEDULE.sunday.sessions[0].time}:</strong> Cuban salsa and rueda classes, then the Havana Social Fiesta. Festival weekends use more rooms.
                   </li>
                 </ul>
               </div>

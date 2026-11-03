@@ -23,7 +23,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
       "Welcome to our circle! Because you already have natural rhythm and partner frame from other styles, you'll pick up Cuban Casino with ease. We warmly guide your transition into circular Guapea, Dile Que No, and high-energy Rueda de Casino calls with zero ego and pure fun.",
     classTiming: "Every Thursday 19:00 (Solo Musicality / Beginners) & 20:15 Partnerwork • BOH Studios",
     recommendedTrack:
-      "Start with Moe Flex's All-Levels Musicality & Pasitos at 19:00, followed by Justyna's Improvers or Enrique's Foundation to master fluid circular transitions.",
+      "Start with Moe Flex's Solo Salsa: Musicality, Pasitos & Rhythm at 19:00, then stay for Justyna's Improvers Partnerwork at 20:15 to learn the circular Cuban partner work.",
     href: "/classes",
     ctaLabel: "Explore the Timetable & Book Your Session →",
   },
@@ -51,7 +51,7 @@ const LEVEL_RECOMMENDATIONS: Record<string, LevelResult> = {
     description:
       "Tackle Setenta Complicada, El Dedo, Bayamo, fast partner switches, and body isolations (Despelote).",
     classTiming: "Every Thursday 20:15 • BOH Studios",
-    recommendedTrack: "High-energy Cuban Timba dancing with Maestro Enrique's advanced cohort.",
+    recommendedTrack: "High-energy Cuban timba and Rueda de Casino in the Thursday 20:15 Intermediates class with Arturas, Moe Flex & Jim.",
     href: "/classes",
   },
   experienced_timbero: {

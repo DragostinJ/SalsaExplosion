@@ -165,6 +165,49 @@ export function eventReminderEmail(input: EventReminderInput) {
   };
 }
 
+export interface RecapNudgeInput {
+  firstName: string;
+  classes: readonly { title: string; startTime: Date; checkedIn: number }[];
+  recapsUrl: string;
+  unsubscribeUrl: string;
+}
+
+/** The morning after class, to a teacher whose class has no recap yet. */
+export function recapNudgeEmail(input: RecapNudgeInput) {
+  const line = (c: RecapNudgeInput["classes"][number]) => {
+    const when = c.startTime.toLocaleString("en-GB", { timeZone: TIME_ZONE, weekday: "long", hour: "2-digit", minute: "2-digit" });
+    return `${c.title} (${when}${c.checkedIn ? `, ${c.checkedIn} checked in` : ""})`;
+  };
+  const many = input.classes.length > 1;
+  const subject = many ? `Add the recaps for ${input.classes.length} classes` : `Add the recap: ${input.classes[0]?.title ?? "last night's class"}`;
+
+  const html = wrap(
+    `<p style="font-size:16px">Hi ${escapeHtml(input.firstName)},</p>` +
+      `<p style="font-size:16px">Dancers can practise ${many ? "these classes" : "last night's class"} at home once the recap is up: ` +
+      `the video, the figures you taught and the songs you used.</p><ul>` +
+      input.classes.map((c) => `<li style="margin:6px 0;font-size:14px">${escapeHtml(line(c))}</li>`).join("") +
+      `</ul><p style="font-size:14px;margin-top:20px">${button(input.recapsUrl, "Add the recap")}</p>`,
+    `You get this because you taught the class. ${link(input.unsubscribeUrl, "Stop these emails")}`
+  );
+
+  const text = [
+    `Hi ${input.firstName},`,
+    `Dancers can practise ${many ? "these classes" : "last night's class"} at home once the recap is up: the video, the figures you taught and the songs you used.`,
+    ...input.classes.map((c) => `- ${line(c)}`),
+    "",
+    `Add the recap: ${input.recapsUrl}`,
+    "",
+    `Stop these emails: ${input.unsubscribeUrl}`,
+  ].join("\n");
+
+  return {
+    subject,
+    html,
+    text,
+    headers: { "List-Unsubscribe": `<${input.unsubscribeUrl}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
+  };
+}
+
 export interface PrivateLessonRequestInput {
   dancerName: string;
   dancerEmail: string;

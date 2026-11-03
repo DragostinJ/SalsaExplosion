@@ -1,5 +1,5 @@
 import { MOVE_CATEGORIES, MoveCategorySchema } from "./move-schema";
-import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-2027";
+import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-schema";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { getPublishedMoves } from "./move-library";
 import type { JsonSchema } from "./move-maker-spec";

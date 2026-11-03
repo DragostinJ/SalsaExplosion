@@ -2,7 +2,7 @@ import {
   MOVE_CATEGORIES,
   MoveCategorySchema,
 } from "./move-schema";
-import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-2027";
+import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-schema";
 import { NO_RUEDA_CALL, RUEDA_CALLS } from "@/lib/music/rueda-calls";
 import { SEEDED_MOVES } from "./move-library";
 

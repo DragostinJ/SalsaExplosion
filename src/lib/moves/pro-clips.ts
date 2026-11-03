@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { KEBAB_CASE_REGEX, MoveCategorySchema } from "./move-schema";
-import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-2027";
+import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-schema";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { getAllMoves } from "./move-library";
 import storedProClipsData from "./data/pro-clips.json";

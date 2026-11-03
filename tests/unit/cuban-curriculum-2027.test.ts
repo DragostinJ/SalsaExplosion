@@ -4,13 +4,15 @@ import {
   CUBAN_DANCE_GEARS,
   TIMBA_SONG_PHASES,
   CURRICULUM_REFERENCE_SONGS,
+  CurriculumLevel,
+  CurriculumPillar,
+} from "@/lib/constants/cuban-curriculum-2027";
+import {
   CurriculumSkillItemSchema,
   DanceGearShiftSchema,
   TimbaSongPhaseSchema,
   CurriculumReferenceSongSchema,
-  CurriculumLevel,
-  CurriculumPillar,
-} from "@/lib/constants/cuban-curriculum-2027";
+} from "@/lib/constants/cuban-curriculum-schema";
 
 const ALL_LEVELS: CurriculumLevel[] = [
   "Beginner",

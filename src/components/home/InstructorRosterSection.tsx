@@ -23,7 +23,6 @@ function InstagramIcon({ className = "h-4 w-4" }: { className?: string }) {
 }
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { sitePhotos } from "@/lib/site-photos";
 import {
   INSTRUCTORS,
   type InstructorProfile,
@@ -43,6 +42,8 @@ const SPOTLIGHT_GRADIENTS: Record<string, string> = {
 
 interface InstructorRosterSectionProps {
   id?: string;
+  /** Teacher id -> photo, i.e. sitePhotos.instructors, passed from the server page so the media manifest stays off the browser. */
+  photos: Readonly<Record<string, string>>;
 }
 
 const CATEGORIES: { key: InstructorCategory | "all"; label: string }[] = [
@@ -52,7 +53,7 @@ const CATEGORIES: { key: InstructorCategory | "all"; label: string }[] = [
   { key: "boh_special", label: "BOH Venue Partner & Special Events" },
 ];
 
-export function InstructorRosterSection({ id = "instructors" }: InstructorRosterSectionProps) {
+export function InstructorRosterSection({ id = "instructors", photos }: InstructorRosterSectionProps) {
   const [activeCategory, setActiveCategory] = useState<InstructorCategory | "all">("all");
   const [selectedInstructor, setSelectedInstructor] = useState<InstructorProfile | null>(null);
   const [activeMobileIndex, setActiveMobileIndex] = useState(0);
@@ -210,7 +211,7 @@ export function InstructorRosterSection({ id = "instructors" }: InstructorRoster
           className="flex sm:grid overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none gap-4 sm:gap-6 pb-2 sm:pb-0 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid-cols-2 lg:grid-cols-4"
         >
           {filteredInstructors.map((instructor) => {
-            const photoSrc = sitePhotos.instructors[instructor.id as keyof typeof sitePhotos.instructors];
+            const photoSrc = photos[instructor.id];
             return (
               <div
                 key={instructor.id}

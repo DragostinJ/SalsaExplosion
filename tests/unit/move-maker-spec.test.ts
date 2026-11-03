@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { MoveCategorySchema } from "@/lib/moves/move-schema";
-import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-2027";
+import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-schema";
 import { RUEDA_CALLS, NO_RUEDA_CALL } from "@/lib/music/rueda-calls";
 import {
   buildMoveMakerBatchResponseSchema,

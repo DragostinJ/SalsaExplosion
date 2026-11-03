@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
+import { sitePhotos } from "@/lib/site-photos";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
 import { ClaveMark, HeroPicture, PosterBanner, SongStripes } from "@/components/poster/poster-art";
 import {
@@ -368,7 +369,7 @@ export default async function Home() {
         </section>
 
         {/* The teaching team */}
-        <InstructorRosterSection id="instructors" />
+        <InstructorRosterSection id="instructors" photos={sitePhotos.instructors} />
 
         {/* THE VENUE (real photo); the full arrival guide lives on /venues */}
         <section data-testid="home-venue" className="cv-auto grid border-y-4 border-ink md:grid-cols-2">

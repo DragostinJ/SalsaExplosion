@@ -2,7 +2,7 @@ import { z } from "zod";
 import {
   CurriculumLevelSchema,
   type CurriculumLevel,
-} from "@/lib/constants/cuban-curriculum-2027";
+} from "@/lib/constants/cuban-curriculum-schema";
 import {
   SongDanceGearSchema,
   type SongDanceGear,

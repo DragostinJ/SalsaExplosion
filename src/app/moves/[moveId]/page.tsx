@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CATEGORY_INK, CountStrip } from "@/components/moves/move-poster-card";
+import { ProClipsSection } from "@/components/moves/pro-clips-section";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, TYPE } from "@/components/poster/poster-kit";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
@@ -124,6 +125,8 @@ export default async function MovePage({ params }: MovePageProps) {
         <Steps title="El que lleva" english="Leader" steps={move.leaderSteps} />
         <Steps title="La que sigue" english="Follower" steps={move.followerSteps} />
       </div>
+
+      <ProClipsSection moveId={move.id} />
 
       {sections.length > 0 && (
         <section aria-labelledby="songs-heading" className="space-y-4">

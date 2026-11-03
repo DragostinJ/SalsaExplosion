@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { RotateCcw, Home } from "lucide-react";
-import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { Button } from "@/components/ui/button";
 import { reportError } from "@/lib/monitoring";
+import { ERROR_ART } from "@/lib/error-art";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -23,10 +23,10 @@ export default function ErrorBoundary({ error, reset }: ErrorProps) {
     <main className="min-h-[70vh] flex items-center justify-center px-4 py-16">
       <div className="max-w-md w-full text-center space-y-6">
         <Image
-          src={MEDIA_MANIFEST.mockupGraphics.dizzyDrum.src}
+          src={ERROR_ART.src}
           alt=""
-          width={MEDIA_MANIFEST.mockupGraphics.dizzyDrum.width}
-          height={MEDIA_MANIFEST.mockupGraphics.dizzyDrum.height}
+          width={ERROR_ART.width}
+          height={ERROR_ART.height}
           sizes="10rem"
           className="mx-auto w-32 sm:w-40"
         />

@@ -6,7 +6,7 @@ import { Search } from "lucide-react";
 import { CATEGORY_INK, MovePosterCard, type MoveCardData } from "@/components/moves/move-poster-card";
 import { RUEDA_LEVELS, RUEDA_LEVEL_INK } from "@/components/rueda/rueda-level-ink";
 import { TYPE } from "@/components/poster/poster-kit";
-import { MOVE_CATEGORIES, type MoveCategory } from "@/lib/moves/move-schema";
+import { MOVE_CATEGORIES, type MoveCategory } from "@/lib/moves/move-categories";
 import type { CurriculumLevel } from "@/lib/constants/cuban-curriculum-2027";
 import { cn } from "@/lib/utils";
 

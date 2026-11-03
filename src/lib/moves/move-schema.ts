@@ -8,25 +8,15 @@ import {
   type SongDanceGear,
 } from "@/lib/constants/song-dance-gear";
 import { RUEDA_CALLS } from "@/lib/music/rueda-calls";
+import { MOVE_CATEGORIES, hasUnsureNote } from "@/lib/moves/move-categories";
 
 /**
  * Valid kebab-case identifier (e.g. 'dile-que-no', 'setenta-complicado').
  */
 export const KEBAB_CASE_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-/**
- * Canonical move categories representing the breadth of Cuban dance.
- */
-export const MOVE_CATEGORIES = [
-  "Casino figure",
-  "Rueda call",
-  "Shine / suelta",
-  "Body movement",
-  "Rumba",
-  "Son",
-  "Reparto",
-  "Afro-Cuban Orishas",
-] as const;
+/** The move families and the "Gemini was unsure" check live in move-categories.ts (no zod, for browser code). */
+export { MOVE_CATEGORIES, hasUnsureNote };
 
 export const MoveCategorySchema = z.enum(MOVE_CATEGORIES);
 export type MoveCategory = z.infer<typeof MoveCategorySchema>;
@@ -112,11 +102,6 @@ export const MoveSchema = z.object({
   notes: z.string().max(2000).optional(),
 });
 export type Move = z.infer<typeof MoveSchema>;
-
-/** True when the draft's note says Gemini wasn't sure (a teacher should check it first). */
-export function hasUnsureNote(move: Pick<Move, "notes">): boolean {
-  return /\bUNSURE\b/i.test(move.notes ?? "");
-}
 
 /**
  * Ordered sequence of moves forming a musical combination.

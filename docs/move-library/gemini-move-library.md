@@ -320,6 +320,93 @@ Use the category given for each.
 
 Don't draft Tornillo or Figura 85 yet. They are the two "not in our library" test clips in [the Move Mapper gold set](../ai-studio-move-mapper/gold-set.md). Swap them for two other missing figures there first, then draft them.
 
+### Batches 18–22: the rest of the rueda calls (added 2026-11-03)
+
+On 2026-11-03 the 185 moves in the library were compared with Rueda.Casino's lists (see [Sources](#sources)). Every casino figure there is in the library already. These are the rueda calls it lists that the library doesn't have, with its levels. Combinations written there with ">" (for example "Cubanito > sombrero") are left out, because they chain calls the library already has.
+
+### Batch 18: Rueda calls, Beginner and Improver (4)
+
+```text
+Category for all: "Rueda call". Use the level given for each.
+1. Dame directo (Beginner)
+2. Enchufla y quédate (Beginner)
+3. Paséala para abajo (Improver)
+4. Dame una con una, una con dos (Improver)
+5. Hombres derecha y mujeres izquierda (Improver)
+6. Mujeres derecha, mujeres izquierda (Improver)
+7. A lo cortico (Improver)
+8. Cadena complicada (Improver)
+9. Dos tarros (Improver)
+10. ¡Dícelo!: the call that follows a dile que no (Improver)
+```
+
+### Batch 19: Rueda calls, Improver (5)
+
+```text
+Category for all: "Rueda call". Level for all: "Improver".
+1. Cero doble
+2. Dos fly
+3. Echeverría con vuelta
+4. Festival de pelota con vuelta
+5. Patín doble
+6. Pelota hasta cinco
+7. Saca la vecina doble
+8. Vacílala con cero
+9. Vacílala y dame
+10. Síguelo: the follow-up call that repeats or continues the last figure (as in "Enchufla con mambo > síguelo")
+```
+
+### Batch 20: Rueda calls, Intermediate (4)
+
+```text
+Category for all: "Rueda call". Level for all: "Intermediate".
+1. Se viró
+2. Amistad complicada
+3. Espresso
+4. Festival de enchufla complicado
+5. Paséala y al revés
+6. Paséala caminando
+7. Pelota moderna
+8. Saluda a lo moderno
+9. Vacílense los dos
+10. Enchufla y cadeneta
+```
+
+### Batch 21: Rueda calls, Intermediate (5)
+
+```text
+Category for all: "Rueda call". Level for all: "Intermediate".
+1. Abanico y cadeneta
+2. Coca-Cola con puente y arriba
+3. Dame rápido con vuelta
+4. Familia y quédate
+5. Ni pa' ti ni pa' mí con vuelta
+6. Patín pa' arriba
+7. Prima con la vecina
+8. Prima y quédate
+9. Un tarro sin soltar
+10. Sho'boun' (German mesa). Start notes with "UNSURE:": the name is unusual and the teachers should confirm it.
+```
+
+### Batch 22: Rueda calls, Advanced (2)
+
+```text
+Category for all: "Rueda call". Level for all: "Advanced".
+1. Enchufla y al medio
+2. Paséala por abajo
+3. Toma eléctrica complicado
+4. Tumba francesa complicado
+5. Carousel con sabor
+6. Dos con Cuba sin soltar (se fue)
+7. Enchufla contra-mambo doble
+8. Festival de media
+9. Ocho para mujeres doble
+10. Patín con bamboleo
+11. Patineta con bamboleo
+12. Patineta doble
+13. Vacílala y florea doble
+```
+
 ## 5. Already in the library (don't draft again)
 
 Guapea · Dile que no · Enchufla (simple and doble) · Prima (Adiós) · Exhíbela (Sácala) · Paso básico, lateral y atrás · Rueda level 1 essentials · Finding beat 1 and the conga tumbao · Setenta · Setenta complicado · Vacílala · Sombrero · Kentucky · Paséala · Rumba guaguancó basics and the vacunao · Son contratiempo · Son clave direction · Montaña · Dedo, El uno and El dos · Siete and Siete loco · Coca-Cola and Bayamo · Despelote · Orishas intro (Eleguá, Yemayá, Oggún) · Timba anatomy · Micro-leading · Rhythm reversals · Tembleque · Rumba Columbia and orishas (Changó, Ochún) · Rueda cruzada and Pa'fuera · Rumba clave syncopation.

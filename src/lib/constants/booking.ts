@@ -9,6 +9,15 @@ export const LEVEL_WEIGHT: Record<DanceLevel, number> = {
 
 export const CANCELLATION_WINDOW_HOURS = 12;
 
+/**
+ * Solo classes (footwork, pasitos, suelta) say so in their title, e.g. "Solo Salsa: Musicality,
+ * Pasitos & Rhythm". Lead/Follow caps used to mark the partner classes, but the class manager
+ * clears them now that they are never limits, so they can't tell the two apart any more.
+ */
+export function isSoloClassTitle(title: string): boolean {
+  return /\b(solo|pasitos|suelta)\b/i.test(title);
+}
+
 export type BookingErrorCode =
   | "UNAUTHORIZED"
   | "VALIDATION_ERROR"

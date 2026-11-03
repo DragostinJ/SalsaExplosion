@@ -19,7 +19,7 @@ import {
   bookClassAction,
   cancelBookingAction,
 } from "@/actions/booking.actions";
-import { LEVEL_WEIGHT } from "@/lib/constants/booking";
+import { isSoloClassTitle, LEVEL_WEIGHT } from "@/lib/constants/booking";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -106,8 +106,7 @@ export function ClassScheduleCard({
   student,
 }: ClassScheduleCardProps) {
   const router = useRouter();
-  const isSoloClass =
-    session.maxLeads === null && session.maxFollows === null;
+  const isSoloClass = isSoloClassTitle(session.title);
 
   const isGuest = !student || student.isGuest;
   const [selectedRole, setSelectedRole] = React.useState<DanceRole>(
@@ -198,8 +197,10 @@ export function ClassScheduleCard({
         return;
       }
 
-      toast.success("You're in! See you on the floor!", {
-        description: `${session.title} secured as ${selectedRole}.`,
+      const roleLabel =
+        selectedRole === DanceRole.SOLO ? "" : ` as ${selectedRole === DanceRole.FOLLOW ? "Follow" : "Lead"}`;
+      toast.success("The teachers know you're coming. See you on the floor!", {
+        description: `${session.title}${roleLabel}. Pay at the door.`,
       });
       setFeedback({
         type: "success",
@@ -524,7 +525,7 @@ export function ClassScheduleCard({
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Securing Spot...
+                  Telling the teachers...
                 </>
               ) : isSoloClass ? (
                 "I'm coming"

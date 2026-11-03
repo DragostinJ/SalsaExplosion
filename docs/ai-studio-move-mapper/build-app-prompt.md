@@ -57,6 +57,7 @@ Use the current Google Gen AI SDK with a public YouTube URL as the video part. N
   Focus: <moves|musicality>
   ```
 - Show progress ("piece 3 of 12"). Add a Stop button.
+- After every call, show the response's `usageMetadata` (promptTokenCount, candidatesTokenCount, totalTokenCount) next to the piece, with the model and fps actually sent. Show the run total at the top of pass 2.
 - On 429 or 503 errors, retry up to 3 times with backoff. Keep the pieces that succeeded and mark failed pieces so I can re-run only those.
 - Time normalisation, per piece:
   - Parse every time ("M:SS", "M:SS.s", "H:MM:SS").
@@ -67,7 +68,8 @@ Use the current Google Gen AI SDK with a public YouTube URL as the video part. N
 - Header fields (kind, version 1, id, youtubeVideoId, title, channelTitle, dancers, songId) come from MY inputs, never from the model.
 - `analysis`: the model name, my fps, and the notes of all pieces joined together.
 - `rows`: all rows sorted by start.
-  - Where two rows overlap, end the earlier row where the later one starts.
+  - Pieces are sent with 1 s of padding, so a figure on the border between two pieces can come back twice, once from each piece. If a row from one piece overlaps or nearly touches (gap under 1 s) a row from the next piece, and both have the same type and moveIds, make them one row: the earlier start, the later end, and the mechanics and confidence of the longer row.
+  - Then, where two rows overlap, end the earlier row where the later one starts.
   - Drop rows shorter than 1 s.
 
 ## 6. Second opinion (when ticked)

@@ -249,7 +249,7 @@ export default async function StudentSchedulePage({
       {/* Cartelera Poster Hero Header & Door-Pay Policy Bar */}
       <section
         data-testid="page-header"
-        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
           <span>{VENUE_INFO.shortName} BOURNEMOUTH • PAY AT THE DOOR</span>
@@ -274,7 +274,7 @@ export default async function StudentSchedulePage({
               Weekly Cuban Salsa &amp; Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No booking or partner required: everyone dances, even when the class is uneven, because the teachers rotate partners.
             </p>
             {user && (
-              <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
+              <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_var(--color-ink)]">
                 <Sparkles className="h-4 w-4 text-accent-red" />
                 <span>Dancer:</span>
                 <span className="font-black uppercase">{user.currentLevel}</span>
@@ -315,12 +315,12 @@ export default async function StudentSchedulePage({
                   Optional and free: pick Lead or Follow so the teachers know who to expect. It never stops anyone from coming in.
                 </p>
               </div>
-              <span className="text-xs font-bold text-ink bg-poster-mustard px-3 py-1 border border-ink shadow-[2px_2px_0_0_#161311]">
+              <span className="text-xs font-bold text-ink bg-poster-mustard px-3 py-1 border border-ink shadow-[2px_2px_0_0_var(--color-ink)]">
                 {scheduleItems.length} Sessions Available
               </span>
             </div>
             {/* Day & level filters for the "I'm coming" cards (the printed timetable above always shows everything) */}
-            <div className="space-y-4 border-4 border-ink bg-paper p-4 sm:p-5 text-ink shadow-[4px_4px_0_0_#161311]">
+            <div className="space-y-4 border-4 border-ink bg-paper p-4 sm:p-5 text-ink shadow-[4px_4px_0_0_var(--color-ink)]">
               {/* Day of Week Filter Bar */}
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="text-xs font-bold uppercase tracking-wider text-ink">
@@ -427,10 +427,10 @@ export default async function StudentSchedulePage({
       <PosterBanner image={MEDIA_MANIFEST.editorial.bannerStudio} caption="Jueves y domingos en BOH Studios" />
 
       {/* Interactive Level Matcher & First-Timer Quick Guide */}
-      <section className="border-4 border-ink bg-paper p-5 sm:p-8 text-ink shadow-[6px_6px_0_0_#161311] space-y-6">
+      <section className="border-4 border-ink bg-paper p-5 sm:p-8 text-ink shadow-[6px_6px_0_0_var(--color-ink)] space-y-6">
         <LevelMatcherQuiz />
 
-        <div className="border-2 border-ink bg-poster-mustard/20 p-4 shadow-[3px_3px_0_0_#161311]">
+        <div className="border-2 border-ink bg-poster-mustard/20 p-4 shadow-[3px_3px_0_0_var(--color-ink)]">
           <div className="text-xs font-bold uppercase tracking-wider text-ink mb-3 text-center sm:text-left">
             First-Timer Quick Guide
           </div>
@@ -463,7 +463,7 @@ export default async function StudentSchedulePage({
       {/* Instructor & Studio Admin Quick-Access Command Bar (Shown only to Staff/Admin) */}
       {userCanManage && (
         <div className="grid gap-4 md:grid-cols-2 pt-4">
-          <div className="flex flex-col justify-between gap-3 border-4 border-ink bg-poster-teal p-4 text-ink sm:flex-row sm:items-center shadow-[4px_4px_0_0_#161311]">
+          <div className="flex flex-col justify-between gap-3 border-4 border-ink bg-poster-teal p-4 text-ink sm:flex-row sm:items-center shadow-[4px_4px_0_0_var(--color-ink)]">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-ink block">
                 Instructor Portal
@@ -497,7 +497,7 @@ export default async function StudentSchedulePage({
             </div>
           </div>
 
-          <div className="flex flex-col justify-between gap-3 border-4 border-ink bg-poster-mustard p-4 text-ink sm:flex-row sm:items-center shadow-[4px_4px_0_0_#161311]">
+          <div className="flex flex-col justify-between gap-3 border-4 border-ink bg-poster-mustard p-4 text-ink sm:flex-row sm:items-center shadow-[4px_4px_0_0_var(--color-ink)]">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-ink block">
                 Studio Owner Admin

@@ -18,7 +18,7 @@ export default function EventsErrorBoundary({ error, reset }: ErrorProps) {
 
   return (
     <main className="min-h-[60vh] flex items-center justify-center px-4 py-12">
-      <div className="max-w-lg w-full border-4 border-ink bg-paper p-6 sm:p-8 text-center text-ink shadow-[8px_8px_0_0_#161311] space-y-6">
+      <div className="max-w-lg w-full border-4 border-ink bg-paper p-6 sm:p-8 text-center text-ink shadow-[8px_8px_0_0_var(--color-ink)] space-y-6">
         <div className="mx-auto flex h-14 w-14 items-center justify-center border-4 border-ink bg-poster-red text-ink">
           <AlertCircle className="h-8 w-8" />
         </div>

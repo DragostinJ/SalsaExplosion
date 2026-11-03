@@ -24,7 +24,7 @@ export default function PrivateLessonsPage() {
       {/* Poster Architectural Hero with Framed Photo & Dancing Shoes Woodcut */}
       <section
         data-testid="page-header"
-        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
           <span>MAESTRO-LEVEL MENTORSHIP &amp; BESPOKE COACHING</span>
@@ -47,7 +47,7 @@ export default function PrivateLessonsPage() {
                 href="https://wa.me/447969633701?text=Hi%20Enrique%2C%20I%20would%20like%20to%20inquire%20about%20a%20private%20dance%20lesson%20please!"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${POSTER_BUTTON} border-poster-teal bg-poster-teal text-ink hover:bg-ink hover:text-paper text-xs font-black uppercase tracking-wider px-4 py-2.5 min-h-[44px] shadow-[4px_4px_0_0_#161311] inline-flex items-center gap-2`}
+                className={`${POSTER_BUTTON} border-poster-teal bg-poster-teal text-ink hover:bg-ink hover:text-paper text-xs font-black uppercase tracking-wider px-4 py-2.5 min-h-[44px] shadow-[4px_4px_0_0_var(--color-ink)] inline-flex items-center gap-2`}
               >
                 <MessageSquare className="h-4 w-4" />
                 WhatsApp Maestro Enrique: 07969 633701
@@ -75,7 +75,7 @@ export default function PrivateLessonsPage() {
 
           {/* Right Column: Framed Enrique Portrait with Dancing Shoes Woodcut Stamp */}
           <div className="lg:col-span-4 flex flex-col items-center justify-center relative">
-            <div className="relative w-48 sm:w-56 aspect-[3/4] border-4 border-ink bg-ink shadow-[8px_8px_0_0_#161311] rotate-[-2deg]">
+            <div className="relative w-48 sm:w-56 aspect-[3/4] border-4 border-ink bg-ink shadow-[8px_8px_0_0_var(--color-ink)] rotate-[-2deg]">
               <Image
                 src="/images/instructors/enrique.jpg"
                 alt="Maestro Enrique Perez Valdes"
@@ -84,14 +84,14 @@ export default function PrivateLessonsPage() {
                 className="object-cover"
                 priority
               />
-              <div className="absolute -bottom-3 -right-3 bg-poster-mustard border-2 border-ink px-2.5 py-0.5 text-xs font-black uppercase tracking-wider text-ink shadow-[2px_2px_0_0_#161311]">
+              <div className="absolute -bottom-3 -right-3 bg-poster-mustard border-2 border-ink px-2.5 py-0.5 text-xs font-black uppercase tracking-wider text-ink shadow-[2px_2px_0_0_var(--color-ink)]">
                 Maestro Enrique
               </div>
             </div>
 
             {/* ICAIC Dancing Shoes Woodcut Element */}
             {GRAPHICS.shoes && (
-              <div className="mt-4 flex items-center gap-2 border-2 border-ink bg-paper px-3 py-1.5 shadow-[3px_3px_0_0_#161311]">
+              <div className="mt-4 flex items-center gap-2 border-2 border-ink bg-paper px-3 py-1.5 shadow-[3px_3px_0_0_var(--color-ink)]">
                 <div className="relative h-10 w-10 shrink-0">
                   <Image
                     src={GRAPHICS.shoes.src}

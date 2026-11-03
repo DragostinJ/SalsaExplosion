@@ -64,7 +64,7 @@ export function StudioEventGuide({
   }
 
   return (
-    <section className="mt-12 space-y-8 border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]">
+    <section className="mt-12 space-y-8 border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]">
       {/* Header */}
       <div className="space-y-2 border-b-4 border-ink pb-4">
         <div className="flex flex-wrap items-center gap-2">

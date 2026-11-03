@@ -19,7 +19,7 @@ export function MultiAgeReassuranceBanner({
       <div className="grid gap-6 md:grid-cols-2">
         {/* Card 1: Fast-Track Arrival (Busy 35–55 Professionals who want instant clarity) */}
         {(variant === "all" || variant === "fast-track-only") && (
-          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[6px_6px_0_0_#161311] text-ink space-y-3.5">
+          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[6px_6px_0_0_var(--color-ink)] text-ink space-y-3.5">
             <div className="flex items-center justify-between gap-2 border-b-2 border-ink pb-2.5">
               <span className="border border-ink bg-ink text-paper font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-2.5 py-0.5">
                 <Zap className="h-3.5 w-3.5 fill-current" />
@@ -64,7 +64,7 @@ export function MultiAgeReassuranceBanner({
 
         {/* Card 2: Senior & Non-Digital Friendly Reassurance (60+ Dancers & Casual Guests) */}
         {(variant === "all" || variant === "senior-only") && (
-          <div className="border-4 border-ink bg-poster-mustard p-5 sm:p-6 shadow-[6px_6px_0_0_#161311] text-ink space-y-3.5">
+          <div className="border-4 border-ink bg-poster-mustard p-5 sm:p-6 shadow-[6px_6px_0_0_var(--color-ink)] text-ink space-y-3.5">
             <div className="flex items-center justify-between gap-2 border-b-2 border-ink pb-2.5">
               <span className="border border-ink bg-poster-red text-ink font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-2.5 py-0.5">
                 <HeartHandshake className="h-3.5 w-3.5" />

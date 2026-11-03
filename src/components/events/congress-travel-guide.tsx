@@ -62,7 +62,7 @@ export function CongressTravelGuide() {
   }
 
   return (
-    <section className="space-y-8 border-4 border-ink bg-paper p-6 sm:p-8 text-ink shadow-[8px_8px_0_0_#161311]">
+    <section className="space-y-8 border-4 border-ink bg-paper p-6 sm:p-8 text-ink shadow-[8px_8px_0_0_var(--color-ink)]">
       {/* Section Header */}
       <div className="border-b-4 border-ink pb-4 space-y-2">
         <div className="flex flex-wrap items-center gap-2">
@@ -101,7 +101,7 @@ export function CongressTravelGuide() {
       {/* Grid: Official Hotel & B&B Options */}
       <div className="grid gap-6 md:grid-cols-2">
         {/* The Roundhouse Hotel Dancer Block */}
-        <article className="border-4 border-ink bg-paper p-5 space-y-4 text-ink shadow-[6px_6px_0_0_#161311]">
+        <article className="border-4 border-ink bg-paper p-5 space-y-4 text-ink shadow-[6px_6px_0_0_var(--color-ink)]">
           <div className="border-b-2 border-ink pb-3">
             <div className="flex items-center justify-between">
               <span className="border-2 border-ink bg-poster-teal px-2 py-0.5 text-xs font-bold uppercase text-ink">
@@ -166,7 +166,7 @@ export function CongressTravelGuide() {
         </article>
 
         {/* Nearby Walkable BOH Studios & Seafront Hotels */}
-        <article className="border-4 border-ink bg-paper p-5 space-y-4 text-ink shadow-[6px_6px_0_0_#161311]">
+        <article className="border-4 border-ink bg-paper p-5 space-y-4 text-ink shadow-[6px_6px_0_0_var(--color-ink)]">
           <div className="border-b-2 border-ink pb-3">
             <span className="border-2 border-ink bg-poster-mustard px-2 py-0.5 text-xs font-bold uppercase text-ink">
               Walkable Hotels

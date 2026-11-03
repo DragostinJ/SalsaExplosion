@@ -274,7 +274,7 @@ export default async function EventDetailPage({
         {/* Poster Hero Banner */}
         <section
           data-testid="page-header"
-          className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+          className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
         >
           <div className="max-w-4xl space-y-4">
             <div className="flex flex-wrap items-center gap-2 border-b-4 border-ink pb-3">
@@ -329,7 +329,7 @@ export default async function EventDetailPage({
         {event.slug.includes("made-in-cuba") && (
           <section
             data-testid="made-in-cuba-festival-showcase"
-            className="border-4 border-ink bg-paper p-6 sm:p-8 space-y-6 shadow-[8px_8px_0_0_#161311] text-ink"
+            className="border-4 border-ink bg-paper p-6 sm:p-8 space-y-6 shadow-[8px_8px_0_0_var(--color-ink)] text-ink"
           >
             <div className="grid gap-8 lg:grid-cols-12 items-center">
               {/* Left Content Column */}
@@ -492,7 +492,7 @@ export default async function EventDetailPage({
 
               {/* Right Poster Display Column */}
               <div className="lg:col-span-5 flex flex-col items-center justify-center">
-                <div className="relative w-full max-w-[340px] aspect-square rotate-[-2deg] border-[6px] border-ink shadow-[10px_10px_0_0_#161311] bg-ink">
+                <div className="relative w-full max-w-[340px] aspect-square rotate-[-2deg] border-[6px] border-ink shadow-[10px_10px_0_0_var(--color-ink)] bg-ink">
                   <Image
                     src="/images/made-in-cuba-2026-poster.jpg"
                     alt="MADE IN CUBA Dance Festival 2026 Bournemouth Official Poster"
@@ -512,7 +512,7 @@ export default async function EventDetailPage({
 
         {/* Special Halloween Prizes & Party Schedule Banner */}
         {event.slug.includes("halloween") && (
-          <section className="border-4 border-ink bg-paper p-6 sm:p-8 space-y-6 shadow-[8px_8px_0_0_#161311] text-ink">
+          <section className="border-4 border-ink bg-paper p-6 sm:p-8 space-y-6 shadow-[8px_8px_0_0_var(--color-ink)] text-ink">
             <div className="grid gap-6 lg:grid-cols-12 items-center">
               <div className="lg:col-span-8 space-y-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b-4 border-ink pb-3">
@@ -575,7 +575,7 @@ export default async function EventDetailPage({
               </div>
 
               <div className="lg:col-span-4 flex justify-center">
-                <div className="relative w-full max-w-[280px] aspect-[3/4] rotate-[2deg] border-[6px] border-ink shadow-[10px_10px_0_0_#161311] bg-ink">
+                <div className="relative w-full max-w-[280px] aspect-[3/4] rotate-[2deg] border-[6px] border-ink shadow-[10px_10px_0_0_var(--color-ink)] bg-ink">
                   <Image
                     src="/images/halloween-latin-party-poster.png"
                     alt="Halloween Latin Party Poster"
@@ -591,7 +591,7 @@ export default async function EventDetailPage({
 
         {/* Guest Maestros & Highlights */}
         <div className="grid gap-6 md:grid-cols-3">
-          <article className="border-4 border-ink bg-paper p-5 text-ink shadow-[6px_6px_0_0_#161311] space-y-3">
+          <article className="border-4 border-ink bg-paper p-5 text-ink shadow-[6px_6px_0_0_var(--color-ink)] space-y-3">
             <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
               <Flame className="h-5 w-5 text-accent-red" />
               <h3 className={`font-display ${TYPE.card} text-ink`}>
@@ -616,7 +616,7 @@ export default async function EventDetailPage({
             </div>
           </article>
 
-          <article className="border-4 border-ink bg-paper p-5 text-ink shadow-[6px_6px_0_0_#161311] space-y-3">
+          <article className="border-4 border-ink bg-paper p-5 text-ink shadow-[6px_6px_0_0_var(--color-ink)] space-y-3">
             <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
               <ShieldCheck className="h-5 w-5 text-accent-teal" />
               <h3 className={`font-display ${TYPE.card} text-ink`}>
@@ -628,7 +628,7 @@ export default async function EventDetailPage({
             </p>
           </article>
 
-          <article className="border-4 border-ink bg-paper p-5 text-ink shadow-[6px_6px_0_0_#161311] space-y-3">
+          <article className="border-4 border-ink bg-paper p-5 text-ink shadow-[6px_6px_0_0_var(--color-ink)] space-y-3">
             <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
               <Clock className="h-5 w-5 text-poster-mustard" />
               <h3 className={`font-display ${TYPE.card} text-ink`}>

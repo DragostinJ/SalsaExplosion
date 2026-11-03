@@ -21,6 +21,11 @@ const ROUTES = [
   { slug: "events", path: "/events" },
   { slug: "schedule", path: "/classes" },
   { slug: "rueda", path: "/rueda" },
+  { slug: "venues", path: "/venues" },
+  { slug: "pricing", path: "/pricing" },
+  { slug: "how-it-works", path: "/how-it-works" },
+  { slug: "terms", path: "/terms" },
+  { slug: "about", path: "/about" },
   // Full-screen practice player: must fit one mobile screen with zero page scroll
   { slug: "song-player", path: "/music/me-dicen-cuba", zeroScroll: true },
 ];

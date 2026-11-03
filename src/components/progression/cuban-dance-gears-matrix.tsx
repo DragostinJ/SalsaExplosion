@@ -128,7 +128,7 @@ export function CubanDanceGearsMatrix({
               <Music className="h-3.5 w-3.5 text-rose-500" />
               Timba Song Anatomy Timeline (Click a Phase to Explore)
             </span>
-            <span className="hidden sm:inline font-mono text-[11px] text-amber-300">
+            <span className="hidden sm:inline font-mono text-xs text-amber-300">
               Verse → Chorus → Horns → Bass Drop
             </span>
           </div>
@@ -148,7 +148,7 @@ export function CubanDanceGearsMatrix({
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-mono font-extrabold uppercase tracking-widest">
+                    <span className="text-xs font-mono font-extrabold uppercase tracking-widest">
                       Phase {index + 1}
                     </span>
                     {isSelected && (
@@ -167,7 +167,7 @@ export function CubanDanceGearsMatrix({
           <div className="rounded-2xl border-2 border-primary-base/30 bg-card p-3.5 sm:p-5 space-y-2.5 sm:space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-rose-200">
+                <span className="text-xs font-bold uppercase tracking-wider text-rose-200">
                   Active Song Phase
                 </span>
                 <h3 className="text-base sm:text-lg font-black text-foreground">
@@ -181,7 +181,7 @@ export function CubanDanceGearsMatrix({
 
             <div className="grid gap-3 sm:grid-cols-3 text-xs">
               <div className="rounded-xl border bg-muted/40 p-3 space-y-1">
-                <span className="font-bold text-muted-foreground uppercase text-[11px] block">
+                <span className="font-bold text-muted-foreground uppercase text-xs block">
                   What the Band is Playing
                 </span>
                 <p className="text-foreground font-medium leading-relaxed">
@@ -190,7 +190,7 @@ export function CubanDanceGearsMatrix({
               </div>
 
               <div className="rounded-xl border bg-muted/40 p-3 space-y-1">
-                <span className="font-bold text-muted-foreground uppercase text-[11px] block">
+                <span className="font-bold text-muted-foreground uppercase text-xs block">
                   How Dancers Should Respond
                 </span>
                 <p className="text-foreground font-medium leading-relaxed">
@@ -199,7 +199,7 @@ export function CubanDanceGearsMatrix({
               </div>
 
               <div className="rounded-xl border border-primary-base/30 bg-primary-base/5 p-3 space-y-1">
-                <span className="font-bold text-rose-200 uppercase text-[11px] block">
+                <span className="font-bold text-rose-200 uppercase text-xs block">
                   Recommended Dance Gear
                 </span>
                 <p className="text-foreground font-extrabold leading-relaxed">
@@ -264,10 +264,10 @@ export function CubanDanceGearsMatrix({
             >
               <CardHeader className="pb-3 space-y-2">
                 <div className="flex items-center justify-between">
-                  <Badge className="bg-gold text-stone-950 font-black text-[11px] uppercase tracking-wider">
+                  <Badge className="bg-gold text-stone-950 font-black text-xs uppercase tracking-wider">
                     Gear {gear.gearNumber}
                   </Badge>
-                  <span className="text-[11px] font-mono font-extrabold text-amber-300">
+                  <span className="text-xs font-mono font-extrabold text-amber-300">
                     {gear.musicalTiming}
                   </span>
                 </div>
@@ -285,14 +285,14 @@ export function CubanDanceGearsMatrix({
               <CardContent className="space-y-3 text-xs leading-relaxed flex-1 flex flex-col justify-between">
                 <div className="space-y-2.5">
                   <div className="rounded-xl border bg-muted/30 p-2.5 space-y-1">
-                    <span className="font-extrabold text-[11px] text-muted-foreground uppercase tracking-wider block">
+                    <span className="font-extrabold text-xs text-muted-foreground uppercase tracking-wider block">
                       When to Shift Here
                     </span>
                     <p className="text-foreground/90 font-medium">{gear.whenToShift}</p>
                   </div>
 
                   <div className="rounded-xl border bg-muted/30 p-2.5 space-y-1">
-                    <span className="font-extrabold text-[11px] text-muted-foreground uppercase tracking-wider block">
+                    <span className="font-extrabold text-xs text-muted-foreground uppercase tracking-wider block">
                       Body Biomechanics
                     </span>
                     <p className="text-foreground/90 font-medium">{gear.bodyBiomechanics}</p>
@@ -301,7 +301,7 @@ export function CubanDanceGearsMatrix({
 
                 {/* Un-Confuser Diagnostic Warning Box */}
                 <div className="rounded-xl border-2 border-rose-500/40 bg-rose-500/5 p-3 space-y-1.5 mt-2">
-                  <div className="flex items-center gap-1.5 text-rose-300 font-black text-[11px] uppercase tracking-wider">
+                  <div className="flex items-center gap-1.5 text-rose-300 font-black text-xs uppercase tracking-wider">
                     <ShieldAlert className="h-3.5 w-3.5 text-rose-400 shrink-0" />
                     <span>Un-Confuser Diagnostic:</span>
                   </div>

@@ -183,7 +183,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
               <div>
                 <CardTitle className="text-base font-bold">Revenue & Ticket Volume</CardTitle>
                 <CardDescription className="text-xs">
-                  Monthly cash collection and subscription earnings
+                  Monthly ticket sales and event earnings
                 </CardDescription>
               </div>
               <Badge variant="outline" className="text-xs text-emerald-600 border-emerald-500/30">

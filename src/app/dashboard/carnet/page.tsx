@@ -80,7 +80,7 @@ export default async function CarnetPage() {
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl space-y-12 px-4 py-8 sm:px-6">
       {loadFailed && <DataUnavailableNotice />}
 
-      {/* THE CARNET: a membership card in poster colours */}
+      {/* THE CARNET: a digital dancer carnet in poster colours */}
       <section className="relative overflow-hidden border-[6px] border-ink bg-poster-mustard p-6 text-ink shadow-[12px_12px_0_var(--color-ink)] md:p-10">
         <div aria-hidden="true" className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-poster-red md:h-72 md:w-72" />
         <div aria-hidden="true" className="absolute bottom-0 right-0 h-24 w-1/2" style={halftone(POSTER_INK.mustard)} />

@@ -1,5 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { isUnknownRoute } from "@/lib/route-segments";
 
 const isPublicRoute = createRouteMatcher([
   "/",
@@ -45,6 +46,12 @@ const isPublicRoute = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, req) => {
   if (isPublicRoute(req)) {
+    return NextResponse.next();
+  }
+
+  // A typo or an old link isn't a page: show "page not found", not a sign-in wall
+  // (search engines would otherwise index sign-in pages for broken links).
+  if (isUnknownRoute(req.nextUrl.pathname)) {
     return NextResponse.next();
   }
 

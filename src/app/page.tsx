@@ -129,6 +129,8 @@ export default async function Home() {
         {/* ILLUSTRATION FRIEZE: one swipeable row on phones (decoration shouldn't cost four screens), a grid from md up */}
         <section
           aria-label="Illustrations"
+          // Focusable so keyboard users can scroll the row on phones (it has no links of its own)
+          tabIndex={0}
           className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto border-y-4 border-ink md:grid md:grid-cols-4 md:overflow-visible"
         >
           {FRIEZE.map((item, index) => (

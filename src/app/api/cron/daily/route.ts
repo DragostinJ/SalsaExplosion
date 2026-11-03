@@ -4,13 +4,15 @@ import { isAuthorizedCronRequest } from "@/lib/cron-auth";
 import { reportError } from "@/lib/monitoring";
 import { ensureWeeklySessions } from "@/lib/schedule/ensure-weekly-sessions";
 import { GET as sendClassReminders } from "../class-reminders/route";
+import { GET as sendEventReminders } from "../event-reminders/route";
 import { GET as sendOwnerDigest } from "../owner-digest/route";
 
 /**
  * The one daily Vercel Cron (vercel.json, 09:00 UTC), so the project stays
  * within Hobby cron limits: the next 4 weeks of Thursday and Sunday classes
- * from the timetable, class reminders every day, and the owner digest on
- * Mondays (London time). Each job can also be called on its own.
+ * from the timetable, class reminders every day, festival reminders two days
+ * ahead, and the owner digest on Mondays (London time). Each job can also be
+ * called on its own.
  */
 
 export const dynamic = "force-dynamic";
@@ -36,7 +38,8 @@ export async function GET(request: Request) {
   }
 
   const reminders: unknown = await (await sendClassReminders(request)).json();
+  const eventReminders: unknown = await (await sendEventReminders(request)).json();
   const weekday = new Date().toLocaleDateString("en-GB", { timeZone: "Europe/London", weekday: "long" });
   const digest: unknown = weekday === "Monday" ? await (await sendOwnerDigest(request)).json() : "only on Mondays";
-  return NextResponse.json({ weeklyClasses, reminders, digest });
+  return NextResponse.json({ weeklyClasses, reminders, eventReminders, digest });
 }

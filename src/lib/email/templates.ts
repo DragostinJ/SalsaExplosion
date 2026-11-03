@@ -117,6 +117,54 @@ export function classCancelledEmail(input: ClassCancelledInput) {
   return { subject, html, text };
 }
 
+export interface EventReminderInput {
+  firstName: string;
+  eventTitle: string;
+  startDate: Date;
+  venueName: string;
+  venueAddress: string;
+  passNames: readonly string[];
+  appUrl: string;
+  eventSlug: string;
+  unsubscribeUrl: string;
+}
+
+/** Two days before a festival or party, to everyone with a paid pass. */
+export function eventReminderEmail(input: EventReminderInput) {
+  const day = input.startDate.toLocaleDateString("en-GB", { timeZone: TIME_ZONE, weekday: "long", day: "numeric", month: "long" });
+  const time = input.startDate.toLocaleTimeString("en-GB", { timeZone: TIME_ZONE, hour: "2-digit", minute: "2-digit" });
+  const app = input.appUrl.replace(/\/$/, "");
+  const passes = input.passNames.join(", ");
+  const subject = `${input.eventTitle}: ${day} at ${time}`;
+
+  const html = wrap(
+    `<p style="font-size:16px">Hi ${escapeHtml(input.firstName)},</p>` +
+      `<p style="font-size:16px"><strong>${escapeHtml(input.eventTitle)}</strong> starts ${escapeHtml(day)} at ` +
+      `<strong>${escapeHtml(time)}</strong>, ${escapeHtml(input.venueName)}, ${escapeHtml(input.venueAddress)}.</p>` +
+      `<p style="font-size:14px">Your pass${input.passNames.length > 1 ? "es" : ""}: ${escapeHtml(passes)}. ` +
+      `It's in ${link(`${app}/dashboard/carnet`, "Mi carnet")}: show it at the door.</p>` +
+      `<p style="font-size:14px;margin-top:20px">${button(`${app}/events/${input.eventSlug}`, "Times, parking and the programme")}</p>`,
+    `You get this because you have a pass for this event. ${link(input.unsubscribeUrl, "Stop reminders")}`
+  );
+
+  const text = [
+    `Hi ${input.firstName},`,
+    `${input.eventTitle} starts ${day} at ${time}, ${input.venueName}, ${input.venueAddress}.`,
+    `Your pass${input.passNames.length > 1 ? "es" : ""}: ${passes}. It's in Mi carnet: show it at the door (${app}/dashboard/carnet).`,
+    "",
+    `Times, parking and the programme: ${app}/events/${input.eventSlug}`,
+    "",
+    `Stop reminders: ${input.unsubscribeUrl}`,
+  ].join("\n");
+
+  return {
+    subject,
+    html,
+    text,
+    headers: { "List-Unsubscribe": `<${input.unsubscribeUrl}>`, "List-Unsubscribe-Post": "List-Unsubscribe=One-Click" },
+  };
+}
+
 export interface PrivateLessonRequestInput {
   dancerName: string;
   dancerEmail: string;

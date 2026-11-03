@@ -27,7 +27,7 @@ export default async function ProClipsReviewPage() {
     <div className="min-h-screen bg-canvas text-ivory py-8 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl space-y-6">
         <InstructorNav />
-        <div className="border-4 border-ink bg-paper p-6 text-ink shadow-[8px_8px_0_0_#161311]">
+        <div className="border-4 border-ink bg-paper p-6 text-ink shadow-[8px_8px_0_var(--color-ink)]">
           <p className={KICKER}>Faculty Choreography &amp; Performance Desk</p>
           <h1 className={`mt-1 font-display ${TYPE.hero} leading-none text-ink`}>
             Pro Clips Review Desk

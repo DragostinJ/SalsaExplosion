@@ -1,13 +1,6 @@
 import { z } from "zod";
-import {
-  KEBAB_CASE_REGEX,
-  MoveCategorySchema,
-  type MoveCategory,
-} from "./move-schema";
-import {
-  CurriculumLevelSchema,
-  type CurriculumLevel,
-} from "@/lib/constants/cuban-curriculum-2027";
+import { KEBAB_CASE_REGEX, MoveCategorySchema } from "./move-schema";
+import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-2027";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { getAllMoves } from "./move-library";
 import storedProClipsData from "./data/pro-clips.json";
@@ -159,6 +152,65 @@ export function parseClipTimestamp(
 // 3. CLIP BREAKDOWN PARSER & VALIDATOR
 // ==========================================
 
+/**
+ * The rules about the clip as a whole: a known songId, and rows whose times parse, run
+ * forwards (start < end), are sorted by start and never overlap (touching is fine).
+ * Shared by the breakdown parser and by applying a review report, whose clip is re-checked.
+ */
+export function clipTimelineErrors(clip: Pick<ClipBreakdown, "songId" | "rows">): string[] {
+  const errors: string[] = [];
+
+  if (clip.songId && !TIMBA_SONG_ANATOMY_DATA.some((s) => s.id === clip.songId)) {
+    errors.push(`Field "songId": song "${clip.songId}" not found in TIMBA_SONG_ANATOMY_DATA`);
+  }
+
+  let prevStartSec: number | null = null;
+  let prevEndSec: number | null = null;
+
+  for (let i = 0; i < clip.rows.length; i++) {
+    const row = clip.rows[i]!;
+    const rowNum = i + 1;
+
+    const startParse = parseClipTimestamp(row.start);
+    if (!startParse.ok) {
+      errors.push(`Row ${rowNum}, field "start": ${startParse.error}`);
+    }
+
+    const endParse = parseClipTimestamp(row.end);
+    if (!endParse.ok) {
+      errors.push(`Row ${rowNum}, field "end": ${endParse.error}`);
+    }
+
+    if (startParse.ok && endParse.ok) {
+      // Rule: start < end
+      if (startParse.seconds >= endParse.seconds) {
+        errors.push(
+          `Row ${rowNum}, field "end": end time (${row.end}) must be greater than start time (${row.start})`
+        );
+      }
+
+      // Rule: sorted by start time
+      if (prevStartSec !== null && startParse.seconds < prevStartSec) {
+        errors.push(
+          `Row ${rowNum}, field "start": rows must be sorted chronologically by start time (${row.start} < ${clip.rows[i - 1]!.start})`
+        );
+      }
+
+      // Rule: not overlapping (touching is fine: start >= prevEnd)
+      if (prevEndSec !== null && startParse.seconds < prevEndSec) {
+        errors.push(
+          `Row ${rowNum}, field "start": row start (${row.start}) overlaps with previous row end (${clip.rows[i - 1]!.end})`
+        );
+      }
+
+      prevStartSec = startParse.seconds;
+      prevEndSec = endParse.seconds;
+    }
+  }
+
+  return errors;
+}
+
 export interface ParseClipBreakdownResult {
   ok: boolean;
   clip?: ClipBreakdown;
@@ -211,64 +263,15 @@ export function parseClipBreakdownInput(raw: string): ParseClipBreakdownResult {
   }
 
   const clip = zodResult.data;
-  const errors: string[] = [];
-
-  // Verify songId if provided
-  if (clip.songId) {
-    const validSongIds = new Set(TIMBA_SONG_ANATOMY_DATA.map((s) => s.id));
-    if (!validSongIds.has(clip.songId)) {
-      errors.push(
-        `Field "songId": song "${clip.songId}" not found in TIMBA_SONG_ANATOMY_DATA`
-      );
-    }
-  }
+  const errors: string[] = clipTimelineErrors(clip);
 
   // Canonical move library verification
   const validMoves = getAllMoves();
   const validMoveIds = new Set(validMoves.map((m) => m.id));
 
-  let prevStartSec: number | null = null;
-  let prevEndSec: number | null = null;
-
   for (let i = 0; i < clip.rows.length; i++) {
     const row = clip.rows[i]!;
     const rowNum = i + 1;
-
-    const startParse = parseClipTimestamp(row.start);
-    if (!startParse.ok) {
-      errors.push(`Row ${rowNum}, field "start": ${startParse.error}`);
-    }
-
-    const endParse = parseClipTimestamp(row.end);
-    if (!endParse.ok) {
-      errors.push(`Row ${rowNum}, field "end": ${endParse.error}`);
-    }
-
-    if (startParse.ok && endParse.ok) {
-      // Rule: start < end
-      if (startParse.seconds >= endParse.seconds) {
-        errors.push(
-          `Row ${rowNum}, field "end": end time (${row.end}) must be greater than start time (${row.start})`
-        );
-      }
-
-      // Rule: sorted by start time
-      if (prevStartSec !== null && startParse.seconds < prevStartSec) {
-        errors.push(
-          `Row ${rowNum}, field "start": rows must be sorted chronologically by start time (${row.start} < ${clip.rows[i - 1]!.start})`
-        );
-      }
-
-      // Rule: not overlapping (touching is fine: start >= prevEnd)
-      if (prevEndSec !== null && startParse.seconds < prevEndSec) {
-        errors.push(
-          `Row ${rowNum}, field "start": row start (${row.start}) overlaps with previous row end (${clip.rows[i - 1]!.end})`
-        );
-      }
-
-      prevStartSec = startParse.seconds;
-      prevEndSec = endParse.seconds;
-    }
 
     // Rule: every moveId exists in getAllMoves()
     const unknownMoveIds = row.moveIds.filter((id) => !validMoveIds.has(id));
@@ -433,14 +436,25 @@ export function applyClipReviewReport(input: {
   const { report, existingClips } = input;
   const validMoveIds = input.validMoveIds ?? new Set(getAllMoves().map((m) => m.id));
 
-  const errors: string[] = [];
+  // The report's clip must still pass the whole-clip rules (it may have been edited by hand)
+  const errors: string[] = clipTimelineErrors(report.clip);
   let confirmed = 0;
   let unsure = 0;
   let rejected = 0;
 
-  // Build decision lookup by row index
+  // Build decision lookup by row index. Every row needs exactly one decision, so a partial or
+  // hand-edited report can never drop rows quietly.
+  const rowCount = report.clip.rows.length;
   const decisionByRow = new Map<number, ClipRowDecision>();
   for (const dec of report.decisions) {
+    if (dec.row >= rowCount) {
+      errors.push(`Decision for row ${dec.row + 1}: the clip only has ${rowCount} rows`);
+      continue;
+    }
+    if (decisionByRow.has(dec.row)) {
+      errors.push(`Row ${dec.row + 1}: decided more than once in the report`);
+      continue;
+    }
     decisionByRow.set(dec.row, dec);
 
     // Verify move IDs against canonical library
@@ -453,11 +467,14 @@ export function applyClipReviewReport(input: {
   }
 
   // Count decision types
-  for (let idx = 0; idx < report.clip.rows.length; idx++) {
+  for (let idx = 0; idx < rowCount; idx++) {
     const decision = decisionByRow.get(idx);
-    const type = decision?.decision ?? "unsure";
-    if (type === "confirmed") confirmed++;
-    else if (type === "rejected") rejected++;
+    if (!decision) {
+      errors.push(`Row ${idx + 1}: no decision in the report`);
+      continue;
+    }
+    if (decision.decision === "confirmed") confirmed++;
+    else if (decision.decision === "rejected") rejected++;
     else unsure++;
   }
 

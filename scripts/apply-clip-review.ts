@@ -7,13 +7,17 @@
  *   cat report.json | npx tsx scripts/apply-clip-review.ts -      # read from stdin
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { z } from "zod";
 import {
   parseClipReviewReport,
   applyClipReviewReport,
+  StoredProClipSchema,
   type StoredProClip,
 } from "../src/lib/moves/pro-clips";
+
+const StoredProClipsSchema = z.array(StoredProClipSchema);
 
 const PRO_CLIPS_FILE = path.resolve(
   __dirname,
@@ -56,12 +60,20 @@ async function main() {
   console.log(` Reviewed by: ${report.reviewedBy} at ${report.reviewedAt}`);
   console.log(`========================================================\n`);
 
+  // Start empty only when the file doesn't exist. A file that can't be read or parsed stops the
+  // script: carrying on with [] and --write would erase every clip already stored.
   let existingClips: StoredProClip[] = [];
-  try {
-    const rawClips = readFileSync(PRO_CLIPS_FILE, "utf8");
-    existingClips = JSON.parse(rawClips);
-  } catch (err) {
-    console.warn(`Could not read existing pro clips file (${err}). Starting empty.`);
+  if (existsSync(PRO_CLIPS_FILE)) {
+    try {
+      existingClips = StoredProClipsSchema.parse(JSON.parse(readFileSync(PRO_CLIPS_FILE, "utf8")));
+    } catch (err) {
+      console.error(
+        `\n✗ ${path.basename(PRO_CLIPS_FILE)} is not a valid list of pro clips, so nothing was changed: ${
+          err instanceof Error ? err.message : String(err)
+        }\n`
+      );
+      process.exit(1);
+    }
   }
 
   const result = applyClipReviewReport({

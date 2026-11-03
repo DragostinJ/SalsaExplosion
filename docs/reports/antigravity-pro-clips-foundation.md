@@ -37,18 +37,17 @@ Strict system and boundary constraints were preserved throughout:
 
 ### Task 2: Mojibake Guard (`tests/unit/no-mojibake.test.ts`)
 - **Automated Text File Encoding Audit:** Added a dedicated unit test that executes `git ls-files` across `src/`, `tests/`, `scripts/`, `docs/`, `AGENTS.md`, and `README.md` (filtering out binaries, fonts, and images).
-- **Detection Patterns:** Scans for UTF-8-read-as-Windows-1251 and UTF-8-read-as-CP1252 sequences:
-  `В·`, `ВЈ`, `В«`, `В»`, `вЂ`, `Г©`, `Г±`, `Гі`, `Г¡`, `Гє`, `Ã©`, `Ã±`, `Ã³`, `Ã¡`, `Ãº`, `â€`, `Â·`, `Â£`.
+- **Detection Patterns:** Scans for 18 UTF-8-read-as-Windows-1251 and UTF-8-read-as-CP1252 sequences (the list lives only in `tests/unit/no-mojibake.test.ts`; writing them anywhere else, this report included, fails the guard).
 - **Failure Feedback:** Any corrupted character immediately fails the test with the exact file path, line number, and offending substring.
 - **Current Tree Status:** Clean scan across all tracked repository files (0 mojibake occurrences).
 
 ### Task 3: Positional-Pick Refactoring & `--noUncheckedIndexedAccess` Audit
 - **Elimination of Fragile Array Indexing:** Replaced hardcoded positional indexing (`list[index]`) on fixed UI element collections with explicit named constants:
-  - `src/components/review/review-booster-client.tsx`: Defined `FEEDBACK_STEPS` (`RATING`, `DETAILS_FORM`, `SUMMARY_CHOICE`, `COMPLETED`).
-  - `src/components/venues/venue-arrival-planner.tsx`: Defined `DEFAULT_VENUE_DIRECTIONS_INDEX` and named tab access.
-  - `src/components/lessons/private-lessons-client.tsx`: Defined `DEFAULT_PACKAGE_SELECTION_INDEX`.
-  - `src/components/progression/cuban-dance-gears-matrix.tsx`: Defined `GEAR_DRAWER_INDICES` (`DEFAULT_INITIAL_GEAR`, `EXPANDED_GEAR_DETAILS`).
-  - `src/lib/constants/coaching.ts`: Replaced index picks with named keys.
+  - `src/components/review/review-booster-client.tsx`: `DEFAULT_FAVORITE_ASPECT`, `DEFAULT_INSTRUCTOR_HIGHLIGHT` and `DEFAULT_DANCER_LEVEL`, typed as members of their option lists.
+  - `src/components/venues/venue-arrival-planner.tsx`: one named constant per venue (`BOH_STUDIOS_DESTINATION`, `BOH_STUDIO_2_DESTINATION`, `NEPTUNE_HALL_DESTINATION`, `ROUNDHOUSE_DESTINATION`) and `DEFAULT_DESTINATION`.
+  - `src/components/lessons/private-lessons-client.tsx` and `src/lib/constants/coaching.ts`: `DEFAULT_COACHING_TOPIC`.
+  - `src/components/progression/cuban-dance-gears-matrix.tsx`: `DEFAULT_TIMBA_SONG_PHASE` (found by name, "Tema").
+  - Claude checked that every default is the same value the old index picked, so nothing changes for users. (This list was corrected in review: the first version named constants that don't exist.)
 - **`--noUncheckedIndexedAccess` Audit:**
   Executed experimental `npx tsc --noEmit --noUncheckedIndexedAccess` without modifying `tsconfig.json`. Found 267 total type errors across the project:
   - `.next/`: 8 errors
@@ -68,7 +67,7 @@ Strict system and boundary constraints were preserved throughout:
   - Library ID verification: every `moveId` must exist in `getAllMoves()`; unknown IDs are listed in error outputs rather than silently stripped.
   - Matches of type `"same"` or `"variation"` require at least one valid `moveId`.
   - `newMove` is permitted only when `match === "not-in-library"`.
-- **Strict Timestamp Parser (`parseTimestampToSeconds`):**
+- **Strict Timestamp Parser (`parseClipTimestamp`):**
   - Accepts `M:SS`, `MM:SS`, `H:MM:SS` (with optional decimal fractions).
   - Explicitly rejects invalid formatting, negative values, and illegal minutes/seconds (`118`, `1:78`).
 - **Markdown-Safe Input Parser (`parseClipBreakdownInput`):**
@@ -94,7 +93,7 @@ Strict system and boundary constraints were preserved throughout:
 
 ### Task 6: Apply Script & Read Helpers (`scripts/apply-clip-review.ts`, `src/lib/moves/pro-clips.ts`)
 - **Report Schema & Store Schema:**
-  - `ClipReviewReportSchema` and `StoredProClipsFileSchema` enforcing strict storage structure.
+  - `ClipReviewReportSchema` and `StoredProClipSchema` enforcing strict storage structure.
   - Only confirmed rows are persisted, with timestamps converted to seconds (`startSeconds`, `endSeconds`).
   - Teacher-edited move IDs take precedence over AI suggestions.
 - **Apply Script (`scripts/apply-clip-review.ts`):**
@@ -137,16 +136,16 @@ Copy and paste this AI Studio breakdown into the input area:
 {
   "kind": "ritmoflow-clip-breakdown",
   "version": 1,
-  "id": "paolo-alina-homenaje-2024",
+  "id": "hand-test-do-not-save",
   "youtubeVideoId": "Wh1zERcDWGM",
-  "title": "Paolo & Alina - Homenaje a la Musica Cubana Social",
-  "channelTitle": "Cuban Salsa Festival",
+  "title": "Paolo & Alina [Homenaje a la Música Cubana - Orq. Mercadonegro] Salsa @WorldLatinCongress",
+  "channelTitle": "World Latin Congress",
   "dancers": ["Paolo", "Alina"],
   "songId": "homenaje-a-la-musica-cubana",
   "analysis": {
-    "model": "gemini-1.5-pro",
-    "fps": 1.0,
-    "notes": "Fast tempo social dancing with complex multi-turn figures."
+    "model": "hand test",
+    "fps": 1,
+    "notes": "A made-up breakdown for testing the desk. Never save it."
   },
   "rows": [
     {
@@ -173,7 +172,7 @@ Copy and paste this AI Studio breakdown into the input area:
       "start": "0:28",
       "end": "0:42",
       "type": "figure",
-      "mechanics": "Cross-body lead with inside turn back to open position dile que no finish.",
+      "mechanics": "Closed position: he leads her across in front of him on 1-3 and they open out on 5-7 (dile que no).",
       "moveIds": ["dile-que-no"],
       "match": "same",
       "confidence": "high"
@@ -188,22 +187,18 @@ Copy and paste this AI Studio breakdown into the input area:
 3. Click **"Play this row"** on Row 1: verify the video seeks to 0:00 and loops/stops at 0:14.
 4. Set decisions:
    - Row 1: Click **Confirm**.
-   - Row 2: In the Move IDs field, change `exhibela` to `setenta`, then click **Confirm**.
+   - Row 2: In the Move IDs field, type `setentaa` (a typo): the row shows "Unknown move ID(s)" and Copy stays disabled. Correct it to `setenta`, then click **Confirm**.
    - Row 3: Click **Reject** and add an optional note (*"Not a clean Dile Que No"*).
 
-### Step 4: Export and Apply Review
+### Step 4: Export and dry-run the review (never --write this fixture)
 1. Once all rows have a decision, click **"Copy report"**.
-2. Save the copied JSON to a local file, e.g. `test-review.json`.
+2. Save the copied JSON to a local file outside the repo, e.g. `Desktop\test-review.json`.
 3. In your terminal, run the dry run:
    ```bash
    npx tsx scripts/apply-clip-review.ts test-review.json
    ```
-   Verify it reports: `2 confirmed, 0 unsure, 1 rejected`.
-4. Apply the report to storage:
-   ```bash
-   npx tsx scripts/apply-clip-review.ts test-review.json --write
-   ```
-5. Inspect `src/lib/moves/data/pro-clips.json` to confirm the two approved rows are saved with seconds timestamps and updated move IDs.
+   Verify it reports: `2 confirmed, 0 unsure, 1 rejected`, and that it modified no files.
+4. Do NOT add `--write` for this fixture. It is made up, and anything saved to `src/lib/moves/data/pro-clips.json` shows on the move pages ("Bailado por los pros"). Use `--write` only for real breakdowns a teacher checked against the video.
 
 ---
 
@@ -220,3 +215,19 @@ Commits:
 5. `d83c4e2` - `feat(instructor): build pro clips review desk at /instructor/clips and staff navigation`
 6. `6eb140e` - `feat(pro-clips): build apply-clip-review script, review report schema and read helpers`
 7. *(This commit)* - `docs: add antigravity pro clips foundation report and update AGENTS.md test counts`
+
+---
+
+## 6. Claude's review (2026-11-03, branch `feat/pro-clips-reviewed`)
+
+Reviewed commit by commit and merged with `feat/move-mapper-v2` (the AI Studio Move Mapper kit that produces these breakdowns). The work stayed inside the brief: no schema, Stripe, song or move-data changes, and nothing dancer-facing. Fixed in review:
+
+- **Applying a report could drop rows quietly.** A decision for a row past the end, a row decided twice, or an undecided row (counted as "unsure") went through. Now every row needs exactly one decision or nothing is applied.
+- **The clip inside a review report was not re-checked.** A wrong song id or overlapping rows were saved. The whole-clip rules now live in `clipTimelineErrors()`, used by both the parser and the apply step.
+- **`apply-clip-review.ts` could erase the data file.** If `pro-clips.json` couldn't be read or parsed, it said "Starting empty", and `--write` would then overwrite every stored clip. Now it starts empty only when the file doesn't exist, validates the file with `StoredProClipSchema`, and otherwise stops.
+- **Copy report worked with unknown move ids typed in.** The warning showed but did not block, and the apply script would refuse the report later. Copy is now disabled until they are fixed, and the bar says which rows.
+- Hard-coded `#161311` shadows and `bg-black` became the ink token. Two unused type imports were removed.
+- The hand-test no longer tells the teacher to `--write` a made-up fixture (it would have appeared on the move pages). Its header now uses the video's real title and channel, and its third row uses Cuban terms. Section 3's list of renamed constants was corrected.
+- The Move Mapper kit now takes its row types, match and confidence values from `pro-clips.ts`, and a test checks that what the mapper asks Gemini for is exactly what this importer accepts.
+
+Added by Claude: "Bailado por los pros" on move pages (`src/components/moves/pro-clips-section.tsx`). It lists teacher-confirmed moments from `pro-clips.json` with the official embed and credit, and shows nothing while the file is empty.

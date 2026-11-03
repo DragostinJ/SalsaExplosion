@@ -3,6 +3,7 @@ import { CurriculumLevelSchema } from "@/lib/constants/cuban-curriculum-2027";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { getPublishedMoves } from "./move-library";
 import type { JsonSchema } from "./move-maker-spec";
+import { CLIP_ROW_TYPES, ClipBreakdownSchema, ClipRowConfidenceSchema, ClipRowMatchSchema } from "./pro-clips";
 
 /**
  * Setup for the Google AI Studio "Move Mapper": it watches a YouTube clip of dancers and writes a
@@ -12,18 +13,11 @@ import type { JsonSchema } from "./move-maker-spec";
  * Regenerate the AI Studio files with: npx tsx scripts/ai-studio-move-mapper.ts
  */
 
-export const CLIP_BREAKDOWN_KIND = "ritmoflow-clip-breakdown";
-export const CLIP_ROW_TYPES = [
-  "figure",
-  "shine",
-  "rumba",
-  "body-movement",
-  "musicality-accent",
-  "show-trick",
-  "other",
-] as const;
-export const CLIP_MATCHES = ["same", "variation", "not-in-library"] as const;
-export const CLIP_CONFIDENCES = ["high", "medium", "low"] as const;
+/** The importer's vocabulary (src/lib/moves/pro-clips.ts), so the two can never drift apart. */
+export const CLIP_BREAKDOWN_KIND = ClipBreakdownSchema.shape.kind.value;
+export { CLIP_ROW_TYPES };
+export const CLIP_MATCHES = ClipRowMatchSchema.options;
+export const CLIP_CONFIDENCES = ClipRowConfidenceSchema.options;
 export const CLIP_PIECE_KINDS = ["partnerwork", "solo", "rumba", "break", "not-dancing"] as const;
 
 /** Frame rate the mapper pass should use: hand changes take less than a second. */

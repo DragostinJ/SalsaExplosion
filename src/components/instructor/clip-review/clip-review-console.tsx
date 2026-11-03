@@ -182,8 +182,24 @@ export function ClipReviewConsole({
 
   const allRowsDecided = totalRows > 0 && decisionsCount === totalRows;
 
+  // Rows whose typed move ids include one the library doesn't have: the apply script would
+  // refuse the whole report, so Copy waits until they are fixed.
+  const rowsWithUnknownIds = useMemo(() => {
+    const rows: number[] = [];
+    for (let i = 0; i < totalRows; i++) {
+      const ids = (rowStates[i]?.moveIdsInput ?? "")
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
+      if (ids.some((id) => !validMoveIdsSet.has(id))) rows.push(i + 1);
+    }
+    return rows;
+  }, [totalRows, rowStates, validMoveIdsSet]);
+
+  const canCopy = allRowsDecided && rowsWithUnknownIds.length === 0;
+
   const handleCopyReport = async () => {
-    if (!clip || !allRowsDecided) return;
+    if (!clip || !canCopy) return;
 
     const report: ClipReviewReport = {
       kind: "ritmoflow-clip-review",
@@ -235,7 +251,7 @@ export function ClipReviewConsole({
   return (
     <div className="space-y-8">
       {/* 1. Input & Validation Card */}
-      <Card className="border-4 border-ink bg-paper p-6 text-ink shadow-[6px_6px_0_0_#161311] space-y-4">
+      <Card className="border-4 border-ink bg-paper p-6 text-ink shadow-[6px_6px_0_var(--color-ink)] space-y-4">
         <div className="flex items-center gap-2 border-b-2 border-ink pb-3">
           <Film className="h-5 w-5 text-poster-red" />
           <h2 className={`font-display ${TYPE.card} uppercase text-ink`}>
@@ -302,7 +318,7 @@ export function ClipReviewConsole({
       {clip && (
         <div className="space-y-6">
           {/* Clip Metadata & Reviewer Card */}
-          <div className="border-4 border-ink bg-paper p-6 text-ink shadow-[6px_6px_0_0_#161311] space-y-4">
+          <div className="border-4 border-ink bg-paper p-6 text-ink shadow-[6px_6px_0_var(--color-ink)] space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-ink pb-3">
               <div>
                 <span className={KICKER}>Clip Breakdown Desk</span>
@@ -353,8 +369,8 @@ export function ClipReviewConsole({
           </div>
 
           {/* YouTube Nocookie Player Embed (compliant >= 200x200, strictly unobscured) */}
-          <div className="border-4 border-ink bg-black p-2 shadow-[6px_6px_0_0_#161311]">
-            <div className="relative w-full aspect-video min-w-[200px] min-h-[200px] bg-black overflow-hidden select-none">
+          <div className="border-4 border-ink bg-ink p-2 shadow-[6px_6px_0_var(--color-ink)]">
+            <div className="relative w-full aspect-video min-w-[200px] min-h-[200px] bg-ink overflow-hidden select-none">
               <iframe
                 key={playerKey}
                 src={`https://www.youtube-nocookie.com/embed/${clip.youtubeVideoId}${
@@ -414,7 +430,7 @@ export function ClipReviewConsole({
               return (
                 <article
                   key={idx}
-                  className={`border-4 border-ink bg-paper p-5 transition-colors shadow-[4px_4px_0_0_#161311] ${
+                  className={`border-4 border-ink bg-paper p-5 transition-colors shadow-[4px_4px_0_var(--color-ink)] ${
                     isConfirmed
                       ? "border-l-8 border-l-emerald-600"
                       : isRejected
@@ -570,7 +586,7 @@ export function ClipReviewConsole({
                           onClick={() => handleSetDecision(idx, "confirmed")}
                           className={`min-h-[40px] px-3.5 text-xs font-bold gap-1.5 border-2 border-ink transition-colors ${
                             isConfirmed
-                              ? "bg-emerald-600 text-white shadow-[2px_2px_0_0_#161311]"
+                              ? "bg-emerald-600 text-white shadow-[2px_2px_0_var(--color-ink)]"
                               : "bg-paper text-ink hover:bg-emerald-600/10"
                           }`}
                         >
@@ -585,7 +601,7 @@ export function ClipReviewConsole({
                           onClick={() => handleSetDecision(idx, "unsure")}
                           className={`min-h-[40px] px-3.5 text-xs font-bold gap-1.5 border-2 border-ink transition-colors ${
                             isUnsure
-                              ? "bg-poster-mustard text-ink shadow-[2px_2px_0_0_#161311]"
+                              ? "bg-poster-mustard text-ink shadow-[2px_2px_0_var(--color-ink)]"
                               : "bg-paper text-ink hover:bg-poster-mustard/20"
                           }`}
                         >
@@ -600,7 +616,7 @@ export function ClipReviewConsole({
                           onClick={() => handleSetDecision(idx, "rejected")}
                           className={`min-h-[40px] px-3.5 text-xs font-bold gap-1.5 border-2 border-ink transition-colors ${
                             isRejected
-                              ? "bg-poster-red text-white shadow-[2px_2px_0_0_#161311]"
+                              ? "bg-poster-red text-white shadow-[2px_2px_0_var(--color-ink)]"
                               : "bg-paper text-ink hover:bg-poster-red/20"
                           }`}
                         >
@@ -623,24 +639,26 @@ export function ClipReviewConsole({
           </div>
 
           {/* Sticky Bottom Review Summary Bar */}
-          <div className="sticky bottom-4 z-20 border-4 border-ink bg-paper p-4 text-ink shadow-[8px_8px_0_0_#161311] flex flex-wrap items-center justify-between gap-4">
+          <div className="sticky bottom-4 z-20 border-4 border-ink bg-paper p-4 text-ink shadow-[8px_8px_0_var(--color-ink)] flex flex-wrap items-center justify-between gap-4">
             <div>
               <div className="text-xs font-bold uppercase tracking-wider text-ink">
                 Review Progress: {decisionsCount} / {totalRows} Rows Decided
               </div>
-              <p className="text-[11px] text-ink/70">
-                {allRowsDecided
-                  ? "All rows evaluated. Ready to copy review report payload."
-                  : "Every row must be marked as Confirmed, Unsure, or Rejected to copy report."}
+              <p className="text-[11px] text-ink/70" aria-live="polite">
+                {!allRowsDecided
+                  ? "Every row must be marked as Confirmed, Unsure, or Rejected to copy report."
+                  : rowsWithUnknownIds.length > 0
+                    ? `Fix the unknown move IDs in row ${rowsWithUnknownIds.join(", ")} to copy the report.`
+                    : "All rows evaluated. Ready to copy review report payload."}
               </p>
             </div>
 
             <Button
               type="button"
-              disabled={!allRowsDecided}
+              disabled={!canCopy}
               onClick={handleCopyReport}
               className={`${POSTER_BUTTON} ${
-                allRowsDecided ? POSTER_BUTTON_COLORS.mustard : POSTER_BUTTON_COLORS.ink
+                canCopy ? POSTER_BUTTON_COLORS.mustard : POSTER_BUTTON_COLORS.ink
               } min-h-[40px] px-6 text-xs font-bold gap-2`}
             >
               {copied ? (

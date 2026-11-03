@@ -1,5 +1,55 @@
 [
   {
+    "id": "a-lo-cortico",
+    "name": "A lo Cortico",
+    "spanishName": "A lo Cortico",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "A musicality and styling Rueda call where couples shrink their step size to ultra-compact, grounded micro-steps in closed or close hold to match a quiet or breakdown section of the song, without changing partners.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Transition into closed social hold (or compact Guapea) and compress the step size to tiny, grounded transfers directly underneath the hips on 1-2-3 and 5-6-7, softening the frame."
+      },
+      {
+        "counts": "9-16",
+        "text": "Continue the compact groove with subtle Cuban hip and ribcage isolation on 1-2-3 (counts 9-11), then open out or lead a gentle Dile Que No on 5-6-7 (counts 13-15) when the caller releases the call."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Match the leader's lowered energy and close proximity by taking miniature steps directly underneath the body on 1-2-3 and 5-6-7, maintaining a light, responsive frame."
+      },
+      {
+        "counts": "9-16",
+        "text": "Maintain the small, rhythmic footwork on 1-2-3 (counts 9-11) and expand smoothly back to normal stride length during the Dile Que No exit on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Stopping the feet completely instead of keeping the 1-2-3, 5-6-7 weight transfers alive underneath the hips.",
+      "Hunching the shoulders forward when making the steps smaller.",
+      "Continuing to take wide Guapea rock steps that break the unified visual effect of the Rueda."
+    ],
+    "prerequisites": [
+      "paso-basico",
+      "guapea",
+      "dile-que-no",
+      "micro-leading-frame-modulation"
+    ],
+    "variations": [
+      "Enchufla a lo cortico (doing tiny half-turns in close proximity without full arm extensions)."
+    ],
+    "tags": [
+      "rueda",
+      "musicality",
+      "styling",
+      "no-partner-change"
+    ],
+    "videos": []
+  },
+  {
     "id": "abajo-y-arriba",
     "name": "Abajo y Arriba (Closed-Position Basic)",
     "spanishName": "Abajo y arriba",
@@ -108,6 +158,76 @@
       "circular-flow",
       "sweeping",
       "elegance"
+    ],
+    "videos": []
+  },
+  {
+    "id": "abanico-y-cadeneta",
+    "name": "Abanico y Cadeneta",
+    "spanishName": "Abanico y Cadeneta",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 4,
+    "summary": "A Rueda combination that opens with the circular Abanico figure and flows directly into a travelling Cadeneta chain around the circle, finishing with a partner change into Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Initiate Abanico on 1-2-3 by leading the follower's turn and stepping into the fan-like circular check on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the Abanico unwrapping turn on 1-2-3 (counts 9-11), and instead of closing in Dile Que No, transition on 5-6-7 (counts 13-15) into the Cadeneta chain with the next follower."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, weave counter-clockwise through the Cadeneta on 1-2-3 and 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, pick up the final follower on 1-2-3 and lead her through Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Follow the opening Abanico turn on 1-2-3 and walk around the leader in the circular fan trajectory on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the Abanico turn on 1-2-3 (counts 9-11) and enter the Cadeneta weave on 5-6-7 (counts 13-15) with the incoming leader."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, continue weaving clockwise from leader to leader on 1-2-3 and 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, connect with the final leader on 1-2-3 and complete Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Maintain a thumb-free hook grip during the Abanico turns and Cadeneta transitions to prevent wrist twisting.",
+      "Forgetting to transition into the Cadeneta on count 13 and accidentally doing a standard Dile Que No after Abanico.",
+      "Letting the Abanico take too much space in the center before the chain begins."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "setenta",
+      "enchufla-y-cadeneta",
+      "abanico"
+    ],
+    "variations": [
+      "Shorter 3-eight-count version if Abanico is condensed into 1.5 eight-counts."
+    ],
+    "ruedaCall": "Abanico",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "abanico",
+      "cadeneta",
+      "chain"
     ],
     "videos": []
   },
@@ -482,6 +602,75 @@
       "partner-change",
       "handshake-hold",
       "intermediate-rueda"
+    ],
+    "videos": []
+  },
+  {
+    "id": "amistad-complicada",
+    "name": "Amistad Complicada",
+    "spanishName": "Amistad Complicada",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 4,
+    "summary": "An intricate multi-couple Rueda weave building on the 'Amistad' handshake connection, combining cross-hand Enchuflas, follower exchanges with the neighbouring couple, and a partner change at the end.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Switch to a right-to-right handshake hold on 1-2-3, lead an Enchufla with a leader turn or behind-the-back hand change on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Lead the follower into a wrap or check on 1-2-3 (counts 9-11), then release her to interact or swap with the neighbouring follower on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, receive the incoming follower in right-to-right hold on 1-2-3 and lead an inside turn with a dual-hand wrap on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "Unwind the follower on 1-2-3 (counts 25-27) and finish with a clean Dile Que No on 5-6-7 (counts 29-31)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Connect right-to-right on 1-2-3 and turn left in the Enchufla on 5-6-7 while maintaining frame awareness."
+      },
+      {
+        "counts": "9-16",
+        "text": "Step into the check on 1-2-3 (counts 9-11) and travel to the neighbouring leader on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, connect with the new leader on 1-2-3 and turn smoothly into the wrap on 5-6-7, keeping elbows down in the safe zone."
+      },
+      {
+        "counts": "25-32",
+        "text": "Unwind on 1-2-3 (counts 25-27) and travel through Dile Que No on 5-6-7 (counts 29-31)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Forcing the follower's arm behind her back during the wrap or right-to-right turn—keep the hand at waist level and release immediately if timing is lost.",
+      "Starting with standard left-to-right hold instead of the 'Amistad' right-to-right handshake hold.",
+      "Losing the circle geometry during the partner exchange."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "setenta",
+      "sombrero",
+      "amistad"
+    ],
+    "variations": [
+      "Returning to the original partner on counts 17-24 before doing a final Dame."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "handshake-hold",
+      "wrap",
+      "intermediate"
     ],
     "videos": []
   },
@@ -899,6 +1088,57 @@
     "videos": []
   },
   {
+    "id": "cadena-complicada",
+    "name": "Cadena Complicada",
+    "spanishName": "Cadena Complicada",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "An intertwined Rueda chain where leaders and followers weave around the circle alternating Enchufla turns and back-to-back or hand-change passes, resulting in a partner change down the line.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 with the current partner, then instead of settling into Dile Que No, step forward along the circle on 5-6-7 to catch the next follower's right hand (or left hand) and turn her past."
+      },
+      {
+        "counts": "9-16",
+        "text": "Execute a leader turn or behind-the-back hand change on 1-2-3 (counts 9-11) as the next follower passes, then collect the following partner and finish with Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the opening Enchufla on 1-2-3, then travel clockwise along the circle on 5-6-7 while turning under the next leader's raised arm."
+      },
+      {
+        "counts": "9-16",
+        "text": "Continue weaving to the next leader on 1-2-3 (counts 9-11) with a turn, then connect into closed hold on count 12 and complete Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Gripping the partner's thumb or twisting the wrist during the travelling turns—always use a hook grip without thumb pressure so hands can rotate freely.",
+      "Losing the circular geometry of the Rueda and collapsing into the center during the chain.",
+      "Forgetting to count how many partners are passed before the Dile Que No exit."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "cadena"
+    ],
+    "variations": [
+      "Continuous Cadena until the caller shouts 'Dile Que No'."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "chain",
+      "turn"
+    ],
+    "videos": []
+  },
+  {
     "id": "cadera-cuban-hip-action",
     "name": "Cadera (Cuban Hip Action from the Knees)",
     "spanishName": "Movimiento de cadera",
@@ -1274,6 +1514,73 @@
     "videos": []
   },
   {
+    "id": "carousel-con-sabor",
+    "name": "Carousel con Sabor",
+    "spanishName": "Carrusel con Sabor",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 4,
+    "summary": "A dynamic Rueda wheel figure where dancers link into a rotating central carousel (star/wheel formation), revolve around the circle with stylized Cuban 'sabor' body movement accents, and release to a new partner in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 to bring the couple toward the center, and on 5-6-7 link hands/wrists in the middle to form the rotating Carousel wheel with the follower positioned on the outer spoke."
+      },
+      {
+        "counts": "9-16",
+        "text": "Walk forward in the rotating wheel on 1-2-3 (counts 9-11) and pause/groove on 5-6-7 (counts 13-15) with a synchronized 'con sabor' hip/ribcage isolation or vocal accent."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, continue or reverse the Carousel rotation on 1-2-3 and lead the follower through an underarm turn on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, release the center wheel, pick up the next follower on 1-2-3, and lead her through Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the Enchufla on 1-2-3 and connect into the outer spoke of the Carousel wheel on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Walk along the outer circumference on 1-2-3 (counts 9-11) matching the inner wheel's angular speed, and hit the 'con sabor' body movement break on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, walk with the wheel on 1-2-3 and turn cleanly under the connected arm on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, connect with the incoming leader on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: In a multi-person Carousel wheel, never lock fingers or pull downward on linked wrists—if the wheel moves too fast for the outer ring, release immediately.",
+      "Leaders in the inner ring taking massive steps, forcing followers on the outer ring to sprint.",
+      "Missing the synchronized 'sabor' break on counts 13-15."
+    ],
+    "prerequisites": [
+      "enchufla",
+      "dile-que-no",
+      "paseala",
+      "thoracic-isolation-despelote"
+    ],
+    "variations": [
+      "Followers forming the inner wheel while leaders travel on the outside."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "wheel",
+      "musicality",
+      "advanced"
+    ],
+    "videos": []
+  },
+  {
     "id": "cero",
     "name": "Cero",
     "spanishName": "El cero",
@@ -1325,6 +1632,65 @@
       "partner-change",
       "circular-orbit",
       "enchufla-family"
+    ],
+    "videos": []
+  },
+  {
+    "id": "cero-doble",
+    "name": "Cero Doble",
+    "spanishName": "Cero Doble",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 3,
+    "summary": "A Rueda call where the leader initiates an Enchufla, circles completely around the follower twice (two full 'zero' loops) while she marks time in place, and finishes with a partner change via Dame on the final eight-count.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 to swap places, then instead of going to the next partner, circle all the way around your current follower's back on 5-6-7 to complete the first loop ('un cero')."
+      },
+      {
+        "counts": "9-16",
+        "text": "Continue jogging/stepping smoothly in a second full circle around the same follower on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) to complete the double zero."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, travel onward to the next follower on the right on 1-2-3 and lead her through a Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the opening Enchufla on 1-2-3, then mark basic steps in place on 5-6-7 (often tapping the index finger to the temple or tracing a '0' in the air) while the leader circles around you."
+      },
+      {
+        "counts": "9-16",
+        "text": "Continue marking Cuban basic in place with hip movement on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) as the leader completes his second orbit."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, step in place on 1-2-3 to receive the incoming leader from the left and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Followers travelling or turning out of place while the leader is trying to circle around them, making the orbit too wide.",
+      "Leaders running out of rhythm and colliding with neighbouring leaders in tight Ruedas.",
+      "Forgetting whether Cero ends with the same partner or advances to the next partner on the final count."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "cero"
+    ],
+    "variations": [
+      "Cero con alarde (followers styling with afro/rumba shoulders while leaders circle)."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "orbit"
     ],
     "videos": []
   },
@@ -1420,6 +1786,66 @@
       "oriental-cuba",
       "cultural-heritage",
       "syncopation"
+    ],
+    "videos": []
+  },
+  {
+    "id": "coca-cola-con-puente-y-arriba",
+    "name": "Coca-Cola con Puente y Arriba",
+    "spanishName": "Coca-Cola con Puente y Arriba",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 3,
+    "summary": "A Rueda figure combining a Dile Que No with Coca-Cola turn, a two-hand overhead bridge ('puente') that the leader ducks under, and a reverse progression upstream ('arriba', clockwise) to change partners.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead a Dile Que No on 1-2-3 and guide the follower into the sweeping 360-degree Coca-Cola turn on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Connect both hands overhead to form an arch ('puente') on 1-2-3 (counts 9-11), duck cleanly underneath the bridge while turning on 5-6-7 (counts 13-15), and release toward the upstream ('arriba', clockwise) follower."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, connect with the previous/upstream follower on 1-2-3 and lead her through a Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step through the opening preparation on 1-2-3 and execute the sweeping counter-clockwise Coca-Cola turn across the slot on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Maintain rounded, supportive arms overhead to form the 'puente' on 1-2-3 (counts 9-11) while the leader ducks underneath on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, receive the leader arriving from the upstream ('arriba') direction on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Leaders must bend at the knees and keep the spine vertical when ducking under the 'puente' arch, never pulling down on the follower's raised arms.",
+      "Moving in the standard Dame direction (counter-clockwise) instead of 'arriba' (clockwise/upstream).",
+      "Cutting the Coca-Cola turn short on 5-6-7."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "coca-cola-y-bayamo",
+      "enchufla"
+    ],
+    "variations": [
+      "Keeping the same partner and walking together 'arriba' if no partner change is intended."
+    ],
+    "ruedaCall": "Coca-Cola",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "coca-cola",
+      "duck-under",
+      "arriba"
     ],
     "videos": []
   },
@@ -1807,6 +2233,57 @@
     "videos": []
   },
   {
+    "id": "dame-directo",
+    "name": "Dame Directo",
+    "spanishName": "Dame Directo",
+    "category": "Rueda call",
+    "level": "Beginner",
+    "eightCounts": 1,
+    "summary": "A fast, direct partner change in Rueda where leaders travel immediately to the next follower on their right on counts 1-3 and finish with Dile Que No on 5-7 without a full Guapea rock step.",
+    "leaderSteps": [
+      {
+        "counts": "1-3",
+        "text": "Instead of stepping into a standard Guapea away from the partner, release the current follower and walk directly counter-clockwise around the inside of the circle toward the next follower on the right, establishing closed or Dile Que No hold by count 3. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Lead the new follower through the second half of Dile Que No on 5-6-7, rotating counter-clockwise to face her in the new slot. Pause on 8."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-3",
+        "text": "Step in place or slightly forward along the circle edge on 1-2-3 while angling the torso toward the center to receive the incoming leader coming from the left. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Travel across the new leader's slot in a standard Dile Que No trajectory on 5-6-7, pivoting on 7 to face the new partner. Pause on 8."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders taking too long to release the previous partner on count 1, arriving late to the new follower on count 5.",
+      "Followers walking backward out of the circle on 1-3 instead of holding the circumference of the Rueda.",
+      "Pulling the new follower's arm on count 3 before establishing a proper visual and frame connection."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "rueda-level-1-essentials",
+      "dame"
+    ],
+    "variations": [
+      "Chained consecutive Dame Directo calls ('Dame directo, directo, directo') where leaders change partners every single eight-count."
+    ],
+    "ruedaCall": "Dame",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "dile-que-no",
+      "beginner"
+    ],
+    "videos": []
+  },
+  {
     "id": "dame-dos",
     "name": "Dame Dos",
     "spanishName": "Dame dos",
@@ -2056,6 +2533,58 @@
     "videos": []
   },
   {
+    "id": "dame-rapido-con-vuelta",
+    "name": "Dame Rápido con Vuelta",
+    "spanishName": "Dame Rápido con Vuelta",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 1,
+    "summary": "A high-speed Rueda partner change where leaders release their current partner immediately on count 1, execute a solo 360-degree travelling spin ('con vuelta') toward the next follower on 1-3, and lead her through Dile Que No on 5-7.",
+    "leaderSteps": [
+      {
+        "counts": "1-3",
+        "text": "Release the current partner immediately on count 1 and execute a travelling 360-degree turn counter-clockwise along the inside of the circle on 1-2-3 to arrive in front of the next follower by count 3. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Connect smoothly with the new follower on count 4 and lead her across the slot in a Dile Que No on 5-6-7. Pause on 8."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-3",
+        "text": "Execute a solo turn in place along the perimeter on 1-2-3 (or hold a poised Guapea check facing the center) while spotting the incoming spinning leader. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Connect in frame on count 4 and travel through a clean Dile Que No on 5-6-7 with the new leader. Pause on 8."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders spinning blindly on 1-2-3 without spotting the new follower, resulting in a rough or late grab on count 5.",
+      "Taking 2 eight-counts instead of executing the immediate 'rápido' change on counts 1-3.",
+      "Letting centrifugal force swing the elbows out during the travelling spin."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "dame-rapido",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Both leaders and followers turning on 1-3, or adding an Exhíbela turn for the follower on 5-6-7."
+    ],
+    "ruedaCall": "Dame",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "fast",
+      "turn",
+      "dame"
+    ],
+    "videos": []
+  },
+  {
     "id": "dame-una-arriba",
     "name": "Dame Una Arriba",
     "spanishName": "Dame una arriba",
@@ -2099,6 +2628,73 @@
       "partner-change",
       "reverse-direction",
       "arriba"
+    ],
+    "videos": []
+  },
+  {
+    "id": "dame-una-con-una-una-con-dos",
+    "name": "Dame Una con Una, Una con Dos",
+    "spanishName": "Dame Una con Una, Una con Dos",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 4,
+    "summary": "A two-part Rueda partner-change sequence combining a single Dame accented by one clap ('con una') followed immediately by a second Dame accented by a double clap ('con dos'), advancing the leader two partners in total.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step Guapea on 1-2-3, release the current follower, clap once sharply on count 4 (or count 7/8 per local convention), and travel counter-clockwise to lead the next follower through Dile Que No on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Dance one basic Guapea and Dile Que No (or immediate transition) with the new partner to establish rhythm before the second half of the call."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, initiate another Dame on 1-2-3, execute two quick claps ('con dos') during the transition, and collect the next follower down the line on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "Complete the Dile Que No with the final partner on counts 25-32 and settle into Guapea."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step Guapea on 1-2-3, clap once with the group on the accented beat, and receive the new leader arriving from the left into Dile Que No on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the transition or stabilizing basic with the new partner."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, step Guapea on 1-2-3, perform two crisp claps ('con dos'), and travel through Dile Que No on 5-6-7 with the second incoming leader."
+      },
+      {
+        "counts": "25-32",
+        "text": "Finish the Dile Que No and re-establish Guapea frame on counts 25-32."
+      }
+    ],
+    "commonMistakes": [
+      "Clapping out of time with the rest of the circle or letting the clap delay the footwork on count 5.",
+      "Confusing 'Dame una con dos' (advance 1 partner, clap 2 times) with 'Dame dos con una' (skip 1 partner to advance 2 partners, clap 1 time).",
+      "Leaders grabbing the new follower's arm late because their hands are still occupied clapping on count 5."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "rueda-level-1-essentials",
+      "dame"
+    ],
+    "variations": [
+      "Continuous seamless version in 2 eight-counts total (1-8 for 'Dame una con una', 9-16 directly into 'Una con dos')."
+    ],
+    "ruedaCall": "Dame",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "claps",
+      "rhythmic"
     ],
     "videos": []
   },
@@ -2193,6 +2789,55 @@
       "group-geometry",
       "reaction-call",
       "lateral"
+    ],
+    "videos": []
+  },
+  {
+    "id": "dicelo",
+    "name": "¡Dícelo!",
+    "spanishName": "¡Dícelo!",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 1,
+    "summary": "A high-energy Rueda call shouted right after a Dile Que No (or during a partner change), prompting the couple to repeat or accent the Dile Que No cross-slot walk with a vocal shout or playful attitude, without changing partners.",
+    "leaderSteps": [
+      {
+        "counts": "1-3",
+        "text": "From the end of the previous Dile Que No, step back-side-together on 1-2-3 while opening the frame and checking the follower into a second immediate Dile Que No preparation (or playful Guapea check). Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Lead the follower across the slot in a snappy Dile Que No on 5-6-7 while joining the circle's vocal call or clap accent. Pause on 8."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-3",
+        "text": "Instead of settling into a passive Guapea, use the momentum of the previous figure to rock back-side-together on 1-2-3 with engaged frame tension. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Travel briskly across the slot in a Dile Que No arc on 5-6-7, adding Cuban hip motion and matching the vocal accent of the call. Pause on 8."
+      }
+    ],
+    "commonMistakes": [
+      "Dropping the right-hand frame connection on count 8 of the previous Dile Que No, leaving no tension to initiate '¡Dícelo!' on count 1.",
+      "Pulling the follower's left hand on count 3 instead of leading from the right hand on her upper back.",
+      "Confusing '¡Dícelo!' with a partner change and releasing the follower."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Adding a synchronized foot stomp or vocal shout ('¡Que no!') on count 1 or count 4."
+    ],
+    "tags": [
+      "rueda",
+      "dile-que-no",
+      "no-partner-change",
+      "call-and-response"
     ],
     "videos": []
   },
@@ -2302,6 +2947,66 @@
     "videos": []
   },
   {
+    "id": "dos-con-cuba-sin-soltar-se-fue",
+    "name": "Dos con Cuba sin Soltar (Se Fue)",
+    "spanishName": "Dos con Cuba sin Soltar (Se Fue)",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 3,
+    "summary": "A deceptive Rueda call that begins like 'Dame Dos con Cuba' (rhythmic 'Cu-ba' accent while retaining the current partner's hand 'sin soltar'), then suddenly releases on '¡Se fue!' to execute the actual partner change into Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla or Dame initiation on 1-2-3 with the 'con Cuba' rhythmic step/clap accent on 5-6-7, keeping the left-to-right hand connection ('sin soltar') so the follower rebounds back."
+      },
+      {
+        "counts": "9-16",
+        "text": "Execute the rebound turn/check with the same follower on 1-2-3 (counts 9-11), then on the call '¡Se fue!' release her cleanly on 5-6-7 (counts 13-15) and travel counter-clockwise to the new partner."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, connect with the new follower on 1-2-3 and lead her through a Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step through the opening turn on 1-2-3 and hit the 'con Cuba' accent on 5-6-7 while maintaining a light, elastic hand connection ('sin soltar') with the leader."
+      },
+      {
+        "counts": "9-16",
+        "text": "Follow the rebound turn on 1-2-3 (counts 9-11), then release on 5-6-7 (counts 13-15) when the leader travels away on '¡Se fue!'."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, receive the incoming leader on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Leaders must not travel two partners away while still holding the original follower's hand ('sin soltar')—stay within arm's reach during the fake-out and only travel once the hand is released on '¡Se fue!'.",
+      "Letting go of the hand on the first eight-count before 'sin soltar' is completed.",
+      "Missing the '¡Se fue!' release cue and staying with the original partner at the end."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "un-tarro-sin-soltar",
+      "dame-dos-con-cuba"
+    ],
+    "variations": [
+      "Skipping two partners on the '¡Se fue!' exit to honour the 'Dos' in the call."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "fake-out",
+      "sin-soltar",
+      "advanced"
+    ],
+    "videos": []
+  },
+  {
     "id": "dos-con-dos",
     "name": "Dos con Dos",
     "spanishName": "Dos con dos",
@@ -2359,6 +3064,111 @@
     "videos": []
   },
   {
+    "id": "dos-fly",
+    "name": "Dos Fly",
+    "spanishName": "Dos Fly",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "A playful baseball-themed Rueda call where leaders perform an Enchufla, clap twice overhead as if catching two high fly balls ('dos fly') while advancing down the circle, and finish with a partner change in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3, release the follower, and on 5-6-7 step toward the center/next partner while jumping or reaching up to clap once overhead ('un fly')."
+      },
+      {
+        "counts": "9-16",
+        "text": "Step on 1-2-3 (counts 9-11) while clapping overhead a second time ('dos fly') as you arrive at the new follower, then lead her through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the Enchufla on 1-2-3, then mark basic steps in place along the circle on 5-6-7 while clapping overhead once ('un fly') with the group."
+      },
+      {
+        "counts": "9-16",
+        "text": "Mark in place on 1-2-3 (counts 9-11) with the second overhead clap ('dos fly'), connect with the incoming leader on count 12, and execute Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: If adding a small hop on the 'fly' catch, land softly on the balls of the feet with bent knees and check vertical clearance so raised elbows do not strike a partner.",
+      "Clapping in front of the chest like a regular Dame con una instead of reaching high overhead as if catching a baseball.",
+      "Being late to connect on count 12 for the Dile Que No exit."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "fly"
+    ],
+    "variations": [
+      "Un fly (single overhead catch in 1 eight-count: Enchufla on 1-3, catch on 4/5, Dile Que No on 5-7).",
+      "Tres fly (extending the sequence for an extra count)."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "claps",
+      "enchufla",
+      "baseball"
+    ],
+    "videos": []
+  },
+  {
+    "id": "dos-tarros",
+    "name": "Dos Tarros",
+    "spanishName": "Dos Tarros",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "A dynamic Rueda partner-change call where leaders advance two partners counter-clockwise by performing two consecutive 'Tarro' (bull-horn/underarm) transitions without pausing for Dile Que No in between.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "On 1-2-3, step forward and raise the left arm to turn the current follower as you duck or pass underneath toward the next partner ('un tarro'); on 5-6-7, immediately catch the next follower and repeat the pass toward the second follower ('dos tarros')."
+      },
+      {
+        "counts": "9-16",
+        "text": "Connect with the second new follower on 1-2-3 (counts 9-11) to stabilize in closed hold, then lead her cleanly through a Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step and turn in place along the outside of the circle on 1-2-3 as the first leader passes through, then repeat the turn/frame connection on 5-6-7 as the next leader passes."
+      },
+      {
+        "counts": "9-16",
+        "text": "Connect in closed frame on 1-2-3 (counts 9-11) with the arriving leader and travel through a standard Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Leaders bending at the waist with the head down during the duck-under instead of bending at the knees and keeping the spine upright to avoid elbow collisions.",
+      "Stopping to do a Dile Que No with the first follower instead of flowing directly to the second partner.",
+      "Followers wandering inward off the circle perimeter, blocking the leaders' travelling lane."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "un-tarro"
+    ],
+    "variations": [
+      "Tarro de mentira (faking the second pass and returning to the first partner)."
+    ],
+    "ruedaCall": "Tarro",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "duck-under",
+      "tarro"
+    ],
+    "videos": []
+  },
+  {
     "id": "echeverria",
     "name": "Echeverría",
     "spanishName": "Echeverría",
@@ -2410,6 +3220,58 @@
       "partner-change",
       "enchufla-family",
       "rueda-classic"
+    ],
+    "videos": []
+  },
+  {
+    "id": "echeverria-con-vuelta",
+    "name": "Echeverría con Vuelta",
+    "spanishName": "Echeverría con Vuelta",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "An extended variation of the Echeverría Rueda call combining an Enchufla, a rhythmic foot-tap/clap break with a solo 360-degree turn ('con vuelta'), and a partner change into Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 to face the center of the Rueda, then perform the signature Echeverría syncopated step-tap/clap pattern on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Execute a crisp solo 360-degree turn on 1-2-3 (counts 9-11) while travelling to the next follower on the right, and lead her through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Complete the Enchufla left turn on 1-2-3, then mirror the rhythmic Echeverría step-tap/clap break in place on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Execute a solo 360-degree turn in place on 1-2-3 (counts 9-11), connect with the incoming leader on count 12, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Spinning too fast on counts 9-11 and losing sight of the new partner before the Dile Que No connection on count 12.",
+      "Forgetting to advance to the next partner during the solo turn.",
+      "Rushing the rhythmic break on 5-6-7."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "echeverria"
+    ],
+    "variations": [
+      "Adding a vocal chant during the 5-6-7 break before the turn."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "turn",
+      "suelta"
     ],
     "videos": []
   },
@@ -2929,6 +3791,68 @@
     "videos": []
   },
   {
+    "id": "enchufla-contra-mambo-doble",
+    "name": "Enchufla Contra-Mambo Doble",
+    "spanishName": "Enchúfla Contra-Mambo Doble",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 3,
+    "summary": "A syncopated Rueda call where couples execute an Enchufla on counts 1-3, perform two consecutive rounds of contratiempo/syncopated mambo footwork checks ('contra-mambo doble') facing the center, and change partners into Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 to swap places and face the center, then execute the first syncopated contra-mambo footwork break on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Repeat the contra-mambo footwork break with opposite/alternating directional checks on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) for the 'doble' extension."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, travel counter-clockwise to the next follower on 1-2-3 and lead her cleanly through Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the opening Enchufla on 1-2-3, then execute the first syncopated contra-mambo footwork break in place on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Perform the second round of contra-mambo footwork on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) with sharp ribcage contrapunto."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, connect with the incoming leader on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Drifting back onto standard 1-3-5-7 flat mambo taps instead of hitting the contratiempo/syncopated 'contra-mambo' accents.",
+      "Exiting to the new partner after the first mambo break instead of completing the 'doble'.",
+      "Looking at the floor during the footwork and losing awareness of the circle."
+    ],
+    "prerequisites": [
+      "enchufla",
+      "dile-que-no",
+      "son-cubano-contratiempo",
+      "mid-figure-rhythm-reversals",
+      "enchufla-contra-mambo"
+    ],
+    "variations": [
+      "Maintaining single-hand connection with the partner during the contra-mambo checks."
+    ],
+    "ruedaCall": "Enchufla",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "mambo",
+      "contratiempo",
+      "footwork"
+    ],
+    "videos": []
+  },
+  {
     "id": "enchufla-moderno",
     "name": "Enchufla Moderno",
     "spanishName": "Enchufla moderno",
@@ -3099,6 +4023,118 @@
     "videos": []
   },
   {
+    "id": "enchufla-y-al-medio",
+    "name": "Enchufla y al Medio",
+    "spanishName": "Enchúfla y al Medio",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 2,
+    "summary": "A Rueda call where leaders execute an Enchufla on counts 1-3, bring the action or rhythmic footwork tightly into the center of the circle ('al medio') on 5-7, and transition to the next partner in Dile Que No on the second eight-count.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 to swap places, then step forward into the tight center ring ('al medio') on 5-6-7 to perform the center footwork/clap accent with the other leaders."
+      },
+      {
+        "counts": "9-16",
+        "text": "Step back out of the center on 1-2-3 (counts 9-11) toward the next follower on the right, and lead her cleanly through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the Enchufla on 1-2-3, then mark Cuban basic in place along the outer perimeter (or step slightly inward if all dancers go 'al medio') on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Step back-side-together on 1-2-3 (counts 9-11) as the new leader steps out from the center to connect, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders staying too deep in the center on count 11 and having to lunge to reach the new follower for Dile Que No.",
+      "Followers drifting inward while the leaders are in the middle, leaving no space for the Dile Que No slot.",
+      "Losing the basic timing while improvising in the center."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Holding the center groove across multiple eight-counts if followed by 'Síguelo'."
+    ],
+    "ruedaCall": "Al Medio",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "al-medio",
+      "center"
+    ],
+    "videos": []
+  },
+  {
+    "id": "enchufla-y-cadeneta",
+    "name": "Enchufla y Cadeneta",
+    "spanishName": "Enchúfla y Cadeneta",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 3,
+    "summary": "A Rueda call starting with an Enchufla on 1-3 that transitions immediately into a continuous linked-arm or alternating-hand chain ('cadeneta') around the circle, ending with a partner change in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 with the current follower, then on 5-6-7 hook or connect with the next follower in line to initiate the alternating Cadeneta weave."
+      },
+      {
+        "counts": "9-16",
+        "text": "Continue weaving counter-clockwise through the Cadeneta on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15), exchanging places with each passing follower."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, collect the designated follower on 1-2-3 and lead her through a Dile Que No on 5-6-7 to re-form the circle."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the opening Enchufla on 1-2-3, then on 5-6-7 connect with the next leader to begin travelling clockwise through the Cadeneta chain."
+      },
+      {
+        "counts": "9-16",
+        "text": "Weave smoothly from leader to leader on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15), keeping the arm connection light and responsive."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, connect in closed frame on 1-2-3 with the final leader and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Hooking elbows rigidly during the Cadeneta weave—use hands or soft forearm contact so no one's shoulder is pulled if a dancer steps off time.",
+      "Breaking the circular shape of the Rueda by cutting across the middle.",
+      "Rushing the weave steps instead of stepping strictly on 1-2-3 and 5-6-7."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Continuing the Cadeneta indefinitely until the caller shouts 'Dile Que No'."
+    ],
+    "ruedaCall": "Enchufla",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "chain",
+      "cadeneta"
+    ],
+    "videos": []
+  },
+  {
     "id": "enchufla-y-escondete",
     "name": "Enchufla y Escóndete",
     "spanishName": "Enchufla y escóndete",
@@ -3151,6 +4187,57 @@
       "playful",
       "spatial-awareness",
       "enchufla-family"
+    ],
+    "videos": []
+  },
+  {
+    "id": "enchufla-y-quedate",
+    "name": "Enchufla y Quédate",
+    "spanishName": "Enchúfla y Quédate",
+    "category": "Rueda call",
+    "level": "Beginner",
+    "eightCounts": 1,
+    "summary": "A Rueda call where the couple executes an Enchufla on counts 1-3, the leader cancels the usual partner change after the call '¡Quédate!', and keeps the same partner by finishing with Dile Que No in place on 5-7.",
+    "leaderSteps": [
+      {
+        "counts": "1-3",
+        "text": "Step back-side-together on 1-2-3, raising the left arm to lead the follower into an inside left turn while exchanging places with her. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Instead of releasing and moving to the next partner in the circle, stay with the current follower, connect in closed hold on 4, and lead her through a Dile Que No on 5-6-7. Pause on 8."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-3",
+        "text": "Step forward and turn left under the leader's raised left arm on 1-2-3 to swap places, facing the leader by count 3. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Remain with the same leader, allowing him to connect on the back/shoulder on 4, and walk through the Dile Que No arc on 5-6-7 to return to Guapea. Pause on 8."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders running off toward the next woman on count 4 out of habit before hearing the 'y quédate' modifier.",
+      "Followers turning away toward the outside of the circle on count 4 expecting a partner change instead of keeping eyes on their current leader.",
+      "Taking two full eight-counts by adding an extra basic in the middle instead of flowing directly into Dile Que No on 5-6-7."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Enchufla y Quédate en Cerrado (finishing in closed hold on 5-7 ready for Prima or Sacala instead of Dile Que No)."
+    ],
+    "ruedaCall": "Enchufla",
+    "tags": [
+      "rueda",
+      "enchufla",
+      "no-partner-change",
+      "fake-out"
     ],
     "videos": []
   },
@@ -3434,6 +4521,56 @@
     "videos": []
   },
   {
+    "id": "espresso",
+    "name": "Espresso",
+    "spanishName": "Espresso",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A fast-paced Rueda partner-change call where leaders weave rapidly past multiple followers (like an express train) along the circle before settling into Dile Que No with a new partner.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an opening Enchufla on 1-2-3, then accelerate counter-clockwise along the inside of the circle on 5-6-7, passing the first available follower with a quick hand tap or check."
+      },
+      {
+        "counts": "9-16",
+        "text": "Continue to the next follower down the line on 1-2-3 (counts 9-11), connect in closed frame, and decelerate smoothly into a Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the opening Enchufla on 1-2-3, then travel clockwise (or mark along the outer perimeter) on 5-6-7 while offering a light hand check to the passing leader."
+      },
+      {
+        "counts": "9-16",
+        "text": "Connect with the arriving leader on 1-2-3 (counts 9-11) and complete a grounded Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Yanking the intermediate follower's arm while jogging past at high speed.",
+      "Failing to decelerate on counts 9-11, causing the final Dile Que No to swing wide out of the circle.",
+      "Losing the 1-2-3, 5-6-7 pulse during the fast travel."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Doble Espresso (continuing the fast weave for an additional eight-count)."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "traveling",
+      "fast"
+    ],
+    "videos": []
+  },
+  {
     "id": "esquina-de-tejas",
     "name": "Esquina de Tejas",
     "spanishName": "Esquina de Tejas",
@@ -3602,6 +4739,144 @@
     "videos": []
   },
   {
+    "id": "familia-y-quedate",
+    "name": "Familia y Quédate",
+    "spanishName": "Familia y Quédate",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A Rueda call starting like 'Prima con la Familia' (an Enchufla/Prima entry toward the center of the circle to greet the group), but instead of advancing to the next partner, the leader stays ('y quédate') with his original follower and finishes with Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead the opening Prima/Enchufla check on 1-2-3 and bring the follower inward to face the center of the circle with the group on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Instead of releasing and moving to the next partner as in standard Familia, keep hold of your own follower on 1-2-3 (counts 9-11) and lead her through a Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step through the opening Prima/Enchufla check on 1-2-3 and pivot to join the inner ring on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Stay connected to the same leader on 1-2-3 (counts 9-11) rather than looking for the incoming leader, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders automatically releasing their partner on count 8 to change partners because they didn't process 'y quédate'.",
+      "Followers turning away toward the previous leader expecting a partner change.",
+      "Collapsing the circle too tightly in the center on counts 5-7."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "prima",
+      "enchufla",
+      "enchufla-y-quedate",
+      "la-familia"
+    ],
+    "variations": [
+      "Adding a group clap or vocal greeting in the center on count 8 before returning to the same partner."
+    ],
+    "ruedaCall": "Prima",
+    "tags": [
+      "rueda",
+      "prima",
+      "no-partner-change",
+      "fake-out"
+    ],
+    "videos": []
+  },
+  {
+    "id": "festival-de-enchufla-complicado",
+    "name": "Festival de Enchufla Complicado",
+    "spanishName": "Festival de Enchúfla Complicado",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 6,
+    "summary": "A multi-part Rueda sequence chaining three distinct Enchufla variations (such as Enchufla Doble, Enchufla con Alarde/Vuelta, and Enchufla con Mambo/Claps) with partner changes across the sequence.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Execute part one: lead an Enchufla on 1-2-3 and check the follower back to her place on 5-6-7 (Enchufla Doble initiation)."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the third Enchufla swap on 1-2-3 (counts 9-11), advance to the next follower, and lead Dile Que No on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, execute part two with the new partner: Enchufla on 1-2-3 followed by a leader hook-turn or Ronde/Alarde on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "Advance to the second new partner on 1-2-3 (counts 25-27) and lead Dile Que No on 5-6-7 (counts 29-31)."
+      },
+      {
+        "counts": "33-40",
+        "text": "On counts 33-40, execute part three: Enchufla on 1-2-3 with a double-hand wrap or syncopated footwork break on 5-6-7."
+      },
+      {
+        "counts": "41-48",
+        "text": "Advance to the third partner on 1-2-3 (counts 41-43) and close the festival with Dile Que No on 5-6-7 (counts 45-47)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Execute part one: turn left in the Enchufla on 1-2-3 and check back in the reverse turn on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Turn left again on 1-2-3 (counts 9-11), receive the incoming leader, and dance Dile Que No on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, execute the second Enchufla variation on 1-2-3 and 5-6-7 with the new leader."
+      },
+      {
+        "counts": "25-32",
+        "text": "Receive the second incoming leader on 1-2-3 (counts 25-27) and dance Dile Que No on 5-6-7 (counts 29-31)."
+      },
+      {
+        "counts": "33-40",
+        "text": "On counts 33-40, execute the third Enchufla variation on 1-2-3 and 5-6-7."
+      },
+      {
+        "counts": "41-48",
+        "text": "Receive the final incoming leader on 1-2-3 (counts 41-43) and finish with Dile Que No on 5-6-7 (counts 45-47)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: If the complication includes a neck wrap or hammerlock, keep tension light and release the lower hand before leading the partner change.",
+      "Mixing up the order of the three Enchufla variations.",
+      "Falling behind the music during the transitions between sections."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "sombrero",
+      "setenta"
+    ],
+    "variations": [
+      "Changing partners only at the very end of the festival rather than after each of the three parts."
+    ],
+    "ruedaCall": "Enchufla",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "festival",
+      "enchufla",
+      "intermediate"
+    ],
+    "videos": []
+  },
+  {
     "id": "festival-de-fly-los-tres",
     "name": "Festival de Fly (Los Tres)",
     "spanishName": "Festival de fly (los tres)",
@@ -3662,6 +4937,90 @@
       "clap",
       "festival-sequence",
       "baseball-theme"
+    ],
+    "videos": []
+  },
+  {
+    "id": "festival-de-media",
+    "name": "Festival de Media",
+    "spanishName": "Festival de Media",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 6,
+    "summary": "A fast-paced Rueda festival sequence chaining multiple 'Media' (half-Enchufla / half-turn direction-reversal) variations in succession with partner changes across the circle.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Execute part one: lead a 'Media' check on 1-2-3 (stopping the Enchufla halfway so both partners rebound), then complete the swap and advance to the next partner on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Lead the first new partner through Dile Que No on counts 9-16 (or transition directly into part two)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, execute part two ('Media Doble'): two half-checks on 1-2-3 and 5-6-7 before completing the Enchufla pass."
+      },
+      {
+        "counts": "25-32",
+        "text": "Advance to the second new partner and lead Dile Que No on counts 25-32."
+      },
+      {
+        "counts": "33-40",
+        "text": "On counts 33-40, execute part three ('Media Complicada / con Vuelta'): half-check on 1-2-3 followed by a full turn and pass on 5-6-7."
+      },
+      {
+        "counts": "41-48",
+        "text": "Advance to the third partner on 1-2-3 (counts 41-43) and finish the festival with Dile Que No on 5-6-7 (counts 45-47)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Execute part one: step into the half-Enchufla check on 1-2-3, rebound cleanly from the core, and complete the turn on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Dance Dile Que No with the first incoming leader on counts 9-16."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, execute the double half-check on 1-2-3 and 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "Complete the pass and dance Dile Que No with the second incoming leader on counts 25-32."
+      },
+      {
+        "counts": "33-40",
+        "text": "On counts 33-40, execute the third Media variation with a crisp turn on 5-6-7."
+      },
+      {
+        "counts": "41-48",
+        "text": "Connect with the final incoming leader on 1-2-3 (counts 41-43) and finish with Dile Que No on 5-6-7 (counts 45-47)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Never yank the follower's arm to create the 'Media' half-check—use a flat palm-to-palm or forearm frame check at chest level.",
+      "Followers completing the full Enchufla turn on counts 1-3 instead of feeling the midway check.",
+      "Losing track of which of the three festival parts is currently active."
+    ],
+    "prerequisites": [
+      "enchufla",
+      "dile-que-no",
+      "micro-leading-frame-modulation",
+      "mid-figure-rhythm-reversals",
+      "media-doble"
+    ],
+    "variations": [
+      "Running all three Media variations back-to-back with a single Dile Que No at the very end."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "festival",
+      "check",
+      "advanced"
     ],
     "videos": []
   },
@@ -3727,6 +5086,90 @@
       "clap",
       "festival-sequence",
       "enchufla-family"
+    ],
+    "videos": []
+  },
+  {
+    "id": "festival-de-pelota-con-vuelta",
+    "name": "Festival de Pelota con Vuelta",
+    "spanishName": "Festival de Pelota con Vuelta",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 6,
+    "summary": "A celebratory sequence combining Pelota Una, Pelota Dos, and Pelota Tres in succession, adding a solo turn ('con vuelta') after each clap sequence and changing partners along the Rueda.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3, clap once on 4 ('Pelota una'), and execute a solo turn on 5-6-7 while advancing to the next follower (or preparing Dile Que No)."
+      },
+      {
+        "counts": "9-16",
+        "text": "Lead the new partner through Dile Que No on 1-2-3 and 5-6-7 (counts 9-16) to set up the second part."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, lead an Enchufla on 1-2-3, clap twice ('Pelota dos'), and execute a solo turn on 5-6-7 while advancing to the next follower."
+      },
+      {
+        "counts": "25-32",
+        "text": "Complete Dile Que No with the second new partner on counts 25-32."
+      },
+      {
+        "counts": "33-40",
+        "text": "On counts 33-40, lead an Enchufla on 1-2-3, clap three times ('Pelota tres'), and turn on 5-6-7 toward the third follower."
+      },
+      {
+        "counts": "41-48",
+        "text": "Finish the festival with a clean Dile Que No on counts 41-48."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn in the Enchufla on 1-2-3, clap once on 4, and execute a solo turn in place on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Dance Dile Que No with the arriving leader on counts 9-16."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, turn in the Enchufla on 1-2-3, clap twice, and execute a solo turn in place on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "Dance Dile Que No with the second arriving leader on counts 25-32."
+      },
+      {
+        "counts": "33-40",
+        "text": "On counts 33-40, turn in the Enchufla on 1-2-3, clap three times, and execute a solo turn in place on 5-6-7."
+      },
+      {
+        "counts": "41-48",
+        "text": "Complete the final Dile Que No on counts 41-48."
+      }
+    ],
+    "commonMistakes": [
+      "Losing count of which Pelota (1, 2, or 3 claps) the group is currently on.",
+      "Letting the solo turn pull the dancer off balance so they miss the Dile Que No connection.",
+      "Adding an extra Guapea between sections when the school runs the festival back-to-back."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "festival-de-pelota"
+    ],
+    "variations": [
+      "Compact 4-eight-count version where Pelota 1 and 2 happen without intermediate Dile Que Nos, finishing with Dile Que No only after Pelota 3."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "festival",
+      "claps",
+      "turn"
     ],
     "videos": []
   },
@@ -3886,6 +5329,108 @@
       "freeze",
       "playful",
       "enchufla-family"
+    ],
+    "videos": []
+  },
+  {
+    "id": "freezing-on-a-band-break",
+    "name": "Freezing on a Band Break",
+    "spanishName": "Pausa en el Corte Musical",
+    "category": "Body movement",
+    "level": "Improver",
+    "eightCounts": 1,
+    "summary": "Musicality drill where both partners arrest all momentum instantaneously on a sudden musical break (corte/bloque), hold stillness with active frame tension, and resume smoothly on beat 1.",
+    "leaderSteps": [
+      {
+        "counts": "1-3",
+        "text": "Anticipate the musical break on count 1 (or count 4/5 depending on the song's arrangement) by absorbing momentum into a grounded, bent-knee stance and signalling a gentle, unmistakable compression through the frame without yanking the follower's arms."
+      },
+      {
+        "counts": "5-7",
+        "text": "Hold the freeze or fill the silent space with subtle thoracic breath/attitude while keeping weight clearly committed to one foot, then prep the frame on count 8 to step cleanly back into timing on the next beat 1."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-3",
+        "text": "Match the leader's frame compression and the musical hit by settling weight completely over the standing foot, engaging the core to stop rotational or travelling momentum immediately."
+      },
+      {
+        "counts": "5-7",
+        "text": "Maintain poise and active frame connection during the hold (adding subtle shoulder or head styling if appropriate without shifting the feet), staying ready to feel which foot the leader initiates on count 1."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Leaders forcibly pulling or jerking the follower's arms or shoulders to force a stop, which can strain wrists or rotator cuffs—the stop must come from core deceleration and clear chest-frame resistance.",
+      "Freezing with weight split 50/50 between both feet, leaving neither partner sure which foot is free to step on count 1.",
+      "Rushing back into the step on count 7 or 8 before the band actually drops back into the groove on 1."
+    ],
+    "prerequisites": [
+      "finding-beat-1-conga-tumbao",
+      "paso-basico",
+      "guapea",
+      "timba-4-phase-anatomy"
+    ],
+    "variations": [
+      "Adding a slow thoracic isolation or tembleque during the silent hold before locking back into the 1.",
+      "Breaking partner hold completely on the hit to strike complementary solo poses."
+    ],
+    "tags": [
+      "musicality",
+      "connection",
+      "frame",
+      "timba",
+      "stop"
+    ],
+    "videos": []
+  },
+  {
+    "id": "hombres-derecha-y-mujeres-izquierda",
+    "name": "Hombres Derecha y Mujeres Izquierda",
+    "spanishName": "Hombres Derecha y Mujeres Izquierda",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "A Rueda call where leaders and followers release into concentric circles or weave past each other—leaders travelling counter-clockwise (to their right) and followers travelling clockwise (to their left)—before reconnecting with a new partner via Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Execute an Enchufla or open release on 1-2-3 to face the center, then travel counter-clockwise (to the right) around the inside of the circle on 5-6-7, passing one or more followers moving in the opposite direction."
+      },
+      {
+        "counts": "9-16",
+        "text": "Pick up the designated follower on 1-2-3 (counts 9-11) and lead her through a Dile Que No on 5-6-7 (counts 13-15) to restore the Rueda."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Complete the opening Enchufla or release on 1-2-3, then travel clockwise (to the left along the outside track) on 5-6-7 while leaders move in the opposite direction on the inside."
+      },
+      {
+        "counts": "9-16",
+        "text": "Connect with the incoming leader on 1-2-3 (counts 9-11) and step through a standard Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders and followers travelling in the same lane instead of keeping leaders on the inner ring and followers on the outer ring, causing collisions.",
+      "Losing the 1-2-3, 5-6-7 stepping cadence and breaking into an unstructured jog around the circle.",
+      "Grabbing a partner abruptly while both people are moving in opposite directions—decelerate on counts 9-11 before leading Dile Que No."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Weaving in and out (cadena/slalom style) as leaders and followers pass each other."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "traveling",
+      "circle"
     ],
     "videos": []
   },
@@ -4541,6 +6086,56 @@
     "videos": []
   },
   {
+    "id": "mujeres-derecha-mujeres-izquierda",
+    "name": "Mujeres Derecha, Mujeres Izquierda",
+    "spanishName": "Mujeres Derecha, Mujeres Izquierda",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "A Rueda call where leaders hold the circle stations while followers travel first to the right (counter-clockwise) on the first eight-count and then reverse to the left (clockwise) on the second eight-count, finishing with Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 to send the current follower to the right (counter-clockwise), then stay in place marking time on 5-6-7 while receiving and passing the incoming follower."
+      },
+      {
+        "counts": "9-16",
+        "text": "Redirect the follower back to the left (clockwise) on 1-2-3 (counts 9-11), catch the returning partner, and lead her through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn under the leader's arm on 1-2-3 and travel to the right (counter-clockwise) around the circle on 5-6-7 to the adjacent leader."
+      },
+      {
+        "counts": "9-16",
+        "text": "Pivot and reverse direction to the left (clockwise) on 1-2-3 (counts 9-11), returning to the previous leader (or next designated leader), and complete Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders travelling around the circle when only the followers ('mujeres') are called to move.",
+      "Followers overturning on the direction change at count 8/9 and losing balance.",
+      "Leaders pulling the follower's arm to reverse her trajectory instead of offering a clear open-palm check."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Ending on a different partner if the caller extends one direction longer than the other."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "followers-travel",
+      "direction-change"
+    ],
+    "videos": []
+  },
+  {
     "id": "ni-pa-ti-ni-pa-mi",
     "name": "Ni Pa' Ti Ni Pa' Mí",
     "spanishName": "Ni pa' ti ni pa' mí",
@@ -4592,6 +6187,58 @@
       "partner-change",
       "skip-one",
       "enchufla-family",
+      "playful"
+    ],
+    "videos": []
+  },
+  {
+    "id": "ni-pa-ti-ni-pa-mi-con-vuelta",
+    "name": "Ni Pa' Ti Ni Pa' Mí con Vuelta",
+    "spanishName": "Ni Pa' Ti Ni Pa' Mí con Vuelta",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A playful Rueda partner-change figure where the leader leads an Enchufla, claps and wags a finger ('neither for you nor for me!') while skipping past the immediate follower with a solo turn ('con vuelta'), and picks up the next partner in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3, release the current follower, and on 5-6-7 gesture/clap toward her and the next follower ('ni pa' ti, ni pa' mí')."
+      },
+      {
+        "counts": "9-16",
+        "text": "Execute a solo 360-degree turn on 1-2-3 (counts 9-11) while travelling past to the designated new partner, and lead her through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the Enchufla on 1-2-3, then mark basic steps in place on 5-6-7 while performing the playful 'ni pa' ti, ni pa' mí' clap/gesture."
+      },
+      {
+        "counts": "9-16",
+        "text": "Execute a solo 360-degree turn in place on 1-2-3 (counts 9-11), connect with the arriving leader on count 12, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Stopping with the first follower instead of advancing to the correct partner.",
+      "Losing the 1-2-3 timing during the solo spin on counts 9-11.",
+      "Forgetting the playful attitude and eye contact that give the call its name."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "ni-pa-ti-ni-pa-mi"
+    ],
+    "variations": [
+      "Performing a double clap before the finger wag on counts 5-7."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "turn",
       "playful"
     ],
     "videos": []
@@ -4878,6 +6525,73 @@
     "videos": []
   },
   {
+    "id": "ocho-para-mujeres-doble",
+    "name": "Ocho para Mujeres Doble",
+    "spanishName": "Ocho para Mujeres Doble",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 4,
+    "summary": "An advanced Rueda figure where leaders stay stationed as posts while each follower weaves in a figure-eight ('ocho') pattern around her leader and the neighbouring leader twice ('doble'), finishing with Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead the follower into an opening Enchufla/pass on 1-2-3, then hold your station in the circle on 5-6-7 while guiding the passing followers along the first loop of the figure-eight."
+      },
+      {
+        "counts": "9-16",
+        "text": "Maintain clear visual and hand-offer cues in place on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) to redirect the follower around the back and toward the neighbouring leader."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, guide the follower through the second complete figure-eight loop ('doble') around the two leader stations on 1-2-3 and 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, collect the returning (or next) follower on 1-2-3 and lead her through a clean Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Enter the weave on 1-2-3 and travel in a smooth figure-eight loop around your leader's back and toward the neighbouring leader on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Loop around the neighbouring leader on 1-2-3 (counts 9-11) and cross back through the center of the figure-eight on 5-6-7 (counts 13-15) to complete the first 'ocho'."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, trace a second full figure-eight ('doble') around the two leaders on 1-2-3 and 5-6-7, keeping steps small and controlled."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, connect in closed frame on 1-2-3 and finish with Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders wandering out of their stations while the followers are trying to weave around them, destroying the figure-eight geometry.",
+      "Followers taking overly wide loops and running out of counts before the second 'ocho' finishes.",
+      "Collisions in the crossing lane between two leaders—followers must keep to the right of each other when passing."
+    ],
+    "prerequisites": [
+      "enchufla",
+      "dile-que-no",
+      "ocho-para-mujeres",
+      "mujeres-derecha-mujeres-izquierda"
+    ],
+    "variations": [
+      "Ending on the neighbouring leader on count 25 to create a partner change."
+    ],
+    "tags": [
+      "rueda",
+      "followers-travel",
+      "ocho",
+      "weave",
+      "advanced"
+    ],
+    "videos": []
+  },
+  {
     "id": "ochosi",
     "name": "Ochosi (Orisha of the Hunt, Forest & Divine Justice)",
     "spanishName": "Ochosi",
@@ -5123,6 +6837,162 @@
     "videos": []
   },
   {
+    "id": "paseala-caminando",
+    "name": "Paséala Caminando",
+    "spanishName": "Paséala Caminando",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A travelling Rueda call where couples walk together in Paséala formation around the perimeter of the circle, maintaining continuous circular progression before closing with Dile Que No (or changing partners if called).",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Connect in semi-closed Paséala hold on 1-2-3 and walk forward along the Rueda circumference alongside the follower on 5-6-7, matching the group's stride length."
+      },
+      {
+        "counts": "9-16",
+        "text": "Check the forward progression on 1-2-3 (counts 9-11) with an Exhíbela or frame pivot, and lead the follower through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step into the Paséala promenade walk on 1-2-3 and continue walking gracefully along the circle on 5-6-7 with Cuban hip movement and upright posture."
+      },
+      {
+        "counts": "9-16",
+        "text": "Turn or pivot on 1-2-3 (counts 9-11) as the leader checks the walk, and step through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Walking on every beat (1-2-3-4-5-6-7-8) instead of preserving the Cuban 1-2-3 (pause 4), 5-6-7 (pause 8) cadence.",
+      "Overtaking the couple in front and distorting the spacing of the circle.",
+      "Leaders leaning forward at the waist while walking."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "paseala",
+      "exhibela"
+    ],
+    "variations": [
+      "Paséala caminando con alarde (adding synchronized arm styling on counts 4 and 8)."
+    ],
+    "ruedaCall": "Paséala",
+    "tags": [
+      "rueda",
+      "paseala",
+      "traveling",
+      "no-partner-change"
+    ],
+    "videos": []
+  },
+  {
+    "id": "paseala-para-abajo",
+    "name": "Paséala para Abajo",
+    "spanishName": "Paséala para Abajo",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "A Rueda call where the leader guides the follower in a circular Paseo walk backward ('down the line' clockwise) on the first eight-count before bringing her back across in a Dile Que No without changing partners.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "From closed hold or after Dile Que No, step in a tight pivot at the center of the couple's axis on 1-2-3 and 5-6-7 while guiding the follower in a smooth clockwise circular walk around the outside."
+      },
+      {
+        "counts": "9-16",
+        "text": "Check the backward circular momentum gently on 1-2-3 (counts 9-11), open the frame, and lead the follower forward across the slot in a Dile Que No on 5-6-7 (counts 13-15) to resume Guapea."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Walk smoothly along the circular circumference on 1-2-3 and 5-6-7, keeping the torso connected to the leader's right arm or hand while travelling clockwise ('para abajo')."
+      },
+      {
+        "counts": "9-16",
+        "text": "Step back-side-together on 1-2-3 (counts 9-11) as the leader redirects the energy, then travel forward in a standard Dile Que No arc on 5-6-7 (counts 13-15) to face the same partner."
+      }
+    ],
+    "commonMistakes": [
+      "Followers rushing or taking overly large steps on 1-8, pulling the leader off his central axis.",
+      "Leaders using arm strength to drag the follower around rather than rotating their own ribcage and hips.",
+      "Confusing 'para abajo' (clockwise/backward along the Rueda line of dance) with 'para arriba' (counter-clockwise)."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "paseala",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Adding a follower turn (Exhíbela) on counts 9-11 before the final Dile Que No.",
+      "Finishing with a Dame on counts 13-15 if the caller shouts 'y dame' at the end."
+    ],
+    "ruedaCall": "Paséala",
+    "tags": [
+      "rueda",
+      "paseo",
+      "circular",
+      "no-partner-change"
+    ],
+    "videos": []
+  },
+  {
+    "id": "paseala-por-abajo",
+    "name": "Paséala por Abajo",
+    "spanishName": "Paséala por Abajo",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 2,
+    "summary": "A circular Rueda figure where the leader guides the follower in a Paséala trajectory combined with a duck-under ('por abajo') or low circular pass before finishing with Dile Que No (or changing partners).",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead the follower into a circular Paséala walk on 1-2-3, then raise the connected arm on 5-6-7 to duck underneath ('por abajo') while keeping the circular flow alive."
+      },
+      {
+        "counts": "9-16",
+        "text": "Emerge from the duck-under on 1-2-3 (counts 9-11) to lead an Exhíbela check (or advance along the circle), and finish with Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Walk smoothly around the leader in the Paséala arc on 1-2-3, keeping the connected arm rounded overhead on 5-6-7 as the leader passes underneath."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the turn/check on 1-2-3 (counts 9-11) and travel cleanly across the slot in a Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Whoever ducks 'por abajo' must bend at the knees and keep the head and chest upright rather than hinging at the waist, never pulling down on the partner's arm.",
+      "Stopping the circular Paseo momentum when preparing the duck-under.",
+      "Confusing 'por abajo' (underneath the arm / low level) with 'para abajo' (direction down the Rueda line)."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "paseala",
+      "exhibela",
+      "paseala-para-abajo"
+    ],
+    "variations": [
+      "Follower ducking under the leader's arm ('por abajo') during the Paseo walk."
+    ],
+    "ruedaCall": "Paséala",
+    "tags": [
+      "rueda",
+      "paseala",
+      "duck-under",
+      "circular",
+      "no-partner-change"
+    ],
+    "videos": []
+  },
+  {
     "id": "paseala-por-arriba",
     "name": "Paséala por Arriba",
     "spanishName": "Paséala por arriba",
@@ -5232,6 +7102,66 @@
       "walking",
       "circular-flow",
       "bayamo-family"
+    ],
+    "videos": []
+  },
+  {
+    "id": "paseala-y-al-reves",
+    "name": "Paséala y al Revés",
+    "spanishName": "Paséala y al Revés",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 3,
+    "summary": "A circular Rueda figure where the couple walks through a standard Paséala arc in one direction on the first eight-count, reverses the circular trajectory ('al revés') on the second eight-count, and finishes with Exhíbela and Dile Que No without changing partners.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead the follower into a circular Paséala walk forward/counter-clockwise around your right side on 1-2-3, checking gently on 5-6-7 while pivoting in the center."
+      },
+      {
+        "counts": "9-16",
+        "text": "Redirect the frame smoothly on 1-2-3 (counts 9-11) to guide the follower in the opposite circular direction ('al revés', clockwise) around your axis through 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, lead the follower through an Exhíbela turn on 1-2-3 and finish with a standard Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Walk smoothly in the circular Paséala trajectory on 1-2-3 and prepare for the direction check on 5-6-7 while maintaining frame connection."
+      },
+      {
+        "counts": "9-16",
+        "text": "Pivot cleanly on 1-2-3 (counts 9-11) as the leader reverses the lead, walking around the arc in the opposite direction on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, execute the Exhíbela right turn on 1-2-3 and travel across in Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Jerking the follower's shoulder or hand on count 8/9 to reverse her direction instead of absorbing her momentum with the core.",
+      "Stepping in straight lines instead of maintaining a continuous circular arc around the couple's center.",
+      "Drifting into neighbouring couples' stations during the reverse walk."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "paseala",
+      "exhibela"
+    ],
+    "variations": [
+      "Finishing with 'y dame' on counts 21-23 to change partners at the end."
+    ],
+    "ruedaCall": "Paséala",
+    "tags": [
+      "rueda",
+      "paseala",
+      "direction-change",
+      "circular",
+      "no-partner-change"
     ],
     "videos": []
   },
@@ -5482,6 +7412,176 @@
     "videos": []
   },
   {
+    "id": "patin-con-bamboleo",
+    "name": "Patín con Bamboleo",
+    "spanishName": "Patín con Bamboleo",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 3,
+    "summary": "A Rueda combination pairing the center skating slide of Patín with a deep circular thoracic/hip sway ('con bamboleo') before advancing to the next partner in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3, release the follower, and step into the center of the circle on 5-6-7 with the lateral Patín skating slide."
+      },
+      {
+        "counts": "9-16",
+        "text": "Plant the feet in a wide grounded stance in the center on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) to execute a full circular 'bamboleo' torso and hip sway."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, exit the center counter-clockwise toward the next follower on 1-2-3 and lead her through Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the opening Enchufla on 1-2-3, then mark basic steps or match the skating slide along the outer perimeter on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Match the grounded circular 'bamboleo' body sway and ribcage roll on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) on the outer ring."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, connect with the incoming leader on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Support the lower back with core engagement during the deep 'bamboleo' sway, and keep knees soft during the skating slide.",
+      "Rushing out of the Bamboleo groove before count 17.",
+      "Performing the Bamboleo only from the neck instead of engaging the ribcage and pelvis."
+    ],
+    "prerequisites": [
+      "enchufla",
+      "dile-que-no",
+      "patin",
+      "thoracic-isolation-despelote"
+    ],
+    "variations": [
+      "Adding synchronized overhead arm waves during the Bamboleo on counts 9-15."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "patin",
+      "body-movement",
+      "timba"
+    ],
+    "videos": []
+  },
+  {
+    "id": "patin-doble",
+    "name": "Patín Doble",
+    "spanishName": "Patín Doble",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 3,
+    "summary": "An extended Rueda figure where leaders step into the center for two rounds of 'skating' slide steps (Patín) before picking up a new partner and exiting with Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3, release the follower, and step into the center of the circle on 5-6-7 to begin the first skating slide motion."
+      },
+      {
+        "counts": "9-16",
+        "text": "Perform a full eight-count of rhythmic skating/sliding steps ('patín') in the center on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15), shifting weight smoothly side-to-side."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, exit the center toward the next designated follower on 1-2-3 and lead her through a Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the opening Enchufla on 1-2-3, then mark basic steps in place along the outside ring on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Maintain the outer circle by dancing Cuban basic or matching skating slides in place on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) while the leaders perform Patín in the center."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, connect with the incoming leader on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Over-extending the lateral slide on a sticky or slippery dance floor, which can strain the groin or knee—keep the slide controlled under the hips.",
+      "Leaders losing spatial orientation in the center and returning to the wrong follower.",
+      "Coming out of the center one eight-count too early (doing regular Patín instead of Patín Doble)."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "patin"
+    ],
+    "variations": [
+      "Followers joining the skating motion on the outside ring."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "suelta",
+      "center"
+    ],
+    "videos": []
+  },
+  {
+    "id": "patin-pa-arriba",
+    "name": "Patín Pa' Arriba",
+    "spanishName": "Patín Pa' Arriba",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A variation of the Patín Rueda call where leaders perform the center skating slide after an Enchufla, then exit upstream ('pa' arriba', clockwise) to change partners with the previous follower in the circle.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3, release the follower, and step into the center of the circle on 5-6-7 with the lateral skating slide ('patín')."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the second skating slide on 1-2-3 (counts 9-11) while angling clockwise ('pa' arriba') toward the previous follower, and lead her through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the Enchufla on 1-2-3, then mark basic steps in place along the outer ring on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Mark in place on 1-2-3 (counts 9-11) while looking to your right (downstream) to receive the leader coming 'pa' arriba', and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Keep the lateral skating slide controlled with bent knees so you do not slip or collide with leaders in the center.",
+      "Exiting counter-clockwise (normal Dame direction) out of habit instead of going clockwise ('pa' arriba').",
+      "Followers looking to their left for the new leader when he is actually arriving from their right."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "patin"
+    ],
+    "variations": [
+      "Continuous Patín pa' arriba walking groove around the circle."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "arriba",
+      "patin",
+      "center"
+    ],
+    "videos": []
+  },
+  {
     "id": "patineta",
     "name": "Patineta",
     "spanishName": "La patineta",
@@ -5534,6 +7634,125 @@
       "playful",
       "footwork-styling",
       "enchufla-family"
+    ],
+    "videos": []
+  },
+  {
+    "id": "patineta-con-bamboleo",
+    "name": "Patineta con Bamboleo",
+    "spanishName": "Patineta con Bamboleo",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 3,
+    "summary": "A playful Rueda variation where dancers mimic pushing a skateboard ('patineta') after an Enchufla, transition into a deep circular 'bamboleo' body sway, and change partners into Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3, then pivot sideways on 5-6-7 with one foot planted on the 'board' and the free foot pushing the floor twice like riding a skateboard ('patineta')."
+      },
+      {
+        "counts": "9-16",
+        "text": "Settle into a wide grounded stance on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) to perform the sweeping circular 'bamboleo' torso and hip sway."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, travel to the next follower on 1-2-3 and lead her through a Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the opening Enchufla on 1-2-3, then perform the matching 'patineta' skateboard push in place along the circle on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Execute the full circular 'bamboleo' ribcage and hip roll on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, connect with the arriving leader on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Confusing 'Patín' (side-to-side roller/ice skating slide) with 'Patineta' (single-leg skateboard push).",
+      "Losing balance on the standing leg during the skateboard push on 5-6-7.",
+      "Forgetting to advance to the new partner on count 17."
+    ],
+    "prerequisites": [
+      "enchufla",
+      "dile-que-no",
+      "patin-con-bamboleo",
+      "thoracic-isolation-despelote",
+      "patineta"
+    ],
+    "variations": [
+      "Using the 'patineta' push to actually travel counter-clockwise around the inside of the circle."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "suelta",
+      "body-movement",
+      "playful"
+    ],
+    "videos": []
+  },
+  {
+    "id": "patineta-doble",
+    "name": "Patineta Doble",
+    "spanishName": "Patineta Doble",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 3,
+    "summary": "An extended Rueda call where dancers perform an Enchufla followed by two full sets of 'patineta' (skateboard-push) shines before advancing to the next partner in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3, release the follower, and perform the first set of 'patineta' skateboard pushes toward the center on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Execute a second full eight-count of 'patineta' pushes (switching sides or travelling along the inner ring) on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, connect with the next follower on 1-2-3 and lead her through Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the Enchufla on 1-2-3, then perform or mark the first 'patineta' phrase along the outer ring on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Continue with the second 'patineta' phrase in place on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, receive the incoming leader on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Locking the standing knee during the repeated skateboard pushes, which fatigues the hip and looks rigid.",
+      "Exiting to Dile Que No on count 9 instead of completing the 'doble' repetition.",
+      "Drifting too far across the center and losing the target partner."
+    ],
+    "prerequisites": [
+      "enchufla",
+      "dile-que-no",
+      "patineta",
+      "patineta-con-bamboleo"
+    ],
+    "variations": [
+      "Doing an Enchufla between the first and second Patineta."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "suelta",
+      "footwork"
     ],
     "videos": []
   },
@@ -5650,6 +7869,66 @@
     "videos": []
   },
   {
+    "id": "pelota-hasta-cinco",
+    "name": "Pelota Hasta Cinco",
+    "spanishName": "Pelota Hasta Cinco",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 3,
+    "summary": "A progressive Rueda clapping sequence after an Enchufla that counts claps from one all the way up to five across consecutive phrases, finishing with a partner change into Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 to swap places and face the center, then begin the progressive clap sequence starting with 1 clap on the first pause/phrase and 2 claps on the next."
+      },
+      {
+        "counts": "9-16",
+        "text": "Continue marking basic footwork in place while executing the 3-clap and 4-clap rhythmic patterns in unison with the circle."
+      },
+      {
+        "counts": "17-24",
+        "text": "On the final phrase, execute the 5-clap syncopated burst ('uno-dos-tres-cuatro-cinco'), advance to the next follower on the right, and lead her through Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the Enchufla on 1-2-3, then mark basic footwork along the circle while executing the 1-clap and 2-clap phrases."
+      },
+      {
+        "counts": "9-16",
+        "text": "Maintain the basic step in place while performing the 3-clap and 4-clap sequences with Cuban hip motion."
+      },
+      {
+        "counts": "17-24",
+        "text": "Complete the 5-clap burst, connect with the incoming leader from the left, and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Stopping the feet while concentrating on the 4-clap and 5-clap rhythms.",
+      "Speeding up the claps so they fall off the clave/tumbao pulse.",
+      "Moving to the new partner before the 5-clap sequence is finished."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "pelota"
+    ],
+    "variations": [
+      "Doing an Enchufla swap between every single number (1 through 5) instead of staying in the center until 5."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "claps",
+      "enchufla",
+      "rhythmic"
+    ],
+    "videos": []
+  },
+  {
     "id": "pelota-loca",
     "name": "Pelota Loca",
     "spanishName": "Pelota loca",
@@ -5702,6 +7981,58 @@
       "clap",
       "baseball-theme",
       "high-energy"
+    ],
+    "videos": []
+  },
+  {
+    "id": "pelota-moderna",
+    "name": "Pelota Moderna",
+    "spanishName": "Pelota Moderna",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A stylized contemporary variation of the Pelota Rueda call combining an Enchufla with syncopated body/chest taps or modern timba footwork accents before advancing to the next partner in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 to face the center, then execute the modern syncopated clap/chest-hit and footwork groove on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the rhythmic break on 1-2-3 (counts 9-11) while travelling counter-clockwise to the next follower, and lead her through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the Enchufla on 1-2-3, then perform the matching syncopated clap and body-percussion pattern in place on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Finish the groove on 1-2-3 (counts 9-11), connect with the incoming leader on count 12, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Doing standard Pelota claps instead of the stylized modern pattern.",
+      "Losing the beat 1 timing after the syncopated hits on counts 9-11.",
+      "Arriving late to the new follower on count 12."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "thoracic-isolation-despelote",
+      "pelota"
+    ],
+    "variations": [
+      "Adding a low Squat/Despelote groove on counts 9-11."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "claps",
+      "timba",
+      "suelta"
     ],
     "videos": []
   },
@@ -5873,6 +8204,58 @@
     "videos": []
   },
   {
+    "id": "prima-con-la-vecina",
+    "name": "Prima con la Vecina",
+    "spanishName": "Prima con la Vecina",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A Rueda call where the leader executes a Prima (Adiós) check with his current partner on counts 1-3, then pivots to perform an Enchufla/greeting pass with the neighbouring follower ('la vecina') before changing partners in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step into the Prima check with your current partner on 1-2-3, raising the left arm as you pass under on 5-6-7, and immediately orient toward the neighbouring follower."
+      },
+      {
+        "counts": "9-16",
+        "text": "Lead an Enchufla or check with the neighbouring follower on 1-2-3 (counts 9-11) and finish by leading the designated new partner through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step into the Prima check on 1-2-3 and pivot on 5-6-7 as the leader passes under his arm."
+      },
+      {
+        "counts": "9-16",
+        "text": "Execute the Enchufla/turn with the neighbouring leader on 1-2-3 (counts 9-11), connect in closed frame on count 12, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Leaders must bend their knees and keep their chest upright when ducking under their own arm during the Prima on counts 5-7.",
+      "Confusing 'Prima con la hermana' and 'Prima con la vecina'—listen carefully to whether the school turns the current follower first or goes straight to the neighbour.",
+      "Pulling the neighbour off the circle perimeter on counts 9-11."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "prima",
+      "enchufla"
+    ],
+    "variations": [
+      "Prima con la vecina y quédate (staying with the neighbour at the end)."
+    ],
+    "ruedaCall": "Prima",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "prima",
+      "vecina",
+      "duck-under"
+    ],
+    "videos": []
+  },
+  {
     "id": "prima-doble",
     "name": "Prima Doble",
     "spanishName": "Prima doble",
@@ -5925,6 +8308,57 @@
       "prima-family",
       "duck-under",
       "double-pass"
+    ],
+    "videos": []
+  },
+  {
+    "id": "prima-y-quedate",
+    "name": "Prima y Quédate",
+    "spanishName": "Prima y Quédate",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 1,
+    "summary": "A Rueda call where the couple performs a Prima (Adiós) on counts 1-3, and upon the call '¡y quédate!' the leader cancels the partner change and keeps the same partner by leading Dile Que No on 5-7.",
+    "leaderSteps": [
+      {
+        "counts": "1-3",
+        "text": "Step forward into the closed Prima check on 1-2, then raise the left arm on 3 to duck underneath while turning clockwise to face the partner. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Instead of releasing and moving to the next partner (as when Prima is used as 'Adiós' in some Ruedas), stay connected with the current follower and lead her through Dile Que No on 5-6-7. Pause on 8."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-3",
+        "text": "Step back-side-together in the Prima check on 1-2-3 while keeping the right arm softly rounded as the leader ducks under. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Remain with the same leader, connecting into his right arm on count 4, and travel across in a standard Dile Que No on 5-6-7. Pause on 8."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Leaders pulling down on the follower's right arm while ducking under on count 3-4—maintain your own posture and bend at the knees.",
+      "Releasing the left-to-right hand hold on count 4 out of habit.",
+      "Rushing the duck-under on count 2 before completing the forward check."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "prima",
+      "enchufla-y-quedate"
+    ],
+    "variations": [
+      "2-eight-count version ('Prima con la hermana y quédate') where the leader adds the right-hand Enchufla on 5-7 and closes with Dile Que No on 9-15."
+    ],
+    "ruedaCall": "Prima",
+    "tags": [
+      "rueda",
+      "prima",
+      "no-partner-change",
+      "duck-under"
     ],
     "videos": []
   },
@@ -6469,6 +8903,67 @@
     "videos": []
   },
   {
+    "id": "saca-la-vecina-doble",
+    "name": "Saca la Vecina Doble",
+    "spanishName": "Saca la Vecina Doble",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 3,
+    "summary": "A Rueda call where each leader turns horizontally to the neighbouring follower on his left ('la vecina'), leads her through two consecutive Exhíbela (Sacala) right turns, and then returns to his own partner (or changes partner as called).",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "From Guapea or open hold, release your own partner on 1-2-3 to connect with the follower on your left ('la vecina'), and lead her into a first Exhíbela right turn on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Step back-side-together on 1-2-3 (counts 9-11) to check the neighbour, then lead her into a second Exhíbela right turn on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, either keep the neighbour or pivot back to your original partner on 1-2-3 and finish with a clean Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "On 1-2-3, connect with the neighbouring leader to your right and step through a first Exhíbela right turn under his raised arm on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Step back-side-together in the check on 1-2-3 (counts 9-11) and execute a second Exhíbela right turn on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, reconnect on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Turning to the wrong side—'la vecina' is the neighbouring follower (typically to the leader's left / behind in the Rueda line of dance).",
+      "Pulling the neighbour off her spot during the two Exhíbelas so the circle spacing collapses.",
+      "Confusion on count 17 over whether the leader stays with the neighbour ('partner-change') or returns to his original partner."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "exhibela",
+      "rueda-level-1-essentials",
+      "saca-la-vecina"
+    ],
+    "variations": [
+      "Finishing with 'y quédate con ella' to stay with the neighbour as a permanent backward partner change."
+    ],
+    "ruedaCall": "Exhíbela",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "vecina",
+      "exhibela",
+      "turn"
+    ],
+    "videos": []
+  },
+  {
     "id": "sacala-abajo",
     "name": "Sácala Abajo",
     "spanishName": "Sácala abajo",
@@ -6728,6 +9223,109 @@
       "partner-change",
       "playful",
       "enchufla-family"
+    ],
+    "videos": []
+  },
+  {
+    "id": "saluda-a-lo-moderno",
+    "name": "Saluda a lo Moderno",
+    "spanishName": "Saluda a lo Moderno",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A playful Rueda call where leaders perform an Enchufla, greet the neighbouring follower (or the center) with a modern urban handshake/chest-bump or stylized gesture, and change partners into Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3, then turn toward the neighbouring follower (or new partner) on 5-6-7 to execute the stylized 'modern greeting' (e.g. dap/fist-bump/shoulder brush)."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the greeting transition on 1-2-3 (counts 9-11), connect in closed hold with the new partner, and lead Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the Enchufla on 1-2-3, then turn on 5-6-7 to perform the synchronized modern greeting with the incoming or neighbouring leader."
+      },
+      {
+        "counts": "9-16",
+        "text": "Finish the gesture on 1-2-3 (counts 9-11), connect in frame on count 12, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Getting carried away with the greeting gesture and missing the count 13 Dile Que No.",
+      "Stopping the basic footwork pulse while performing the hand/body greeting.",
+      "Turning to the wrong side of the circle for the greeting."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials",
+      "saluda"
+    ],
+    "variations": [
+      "Greeting the neighbour on the left first on 5-7, then greeting the new partner on the right on 9-11."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "styling",
+      "social"
+    ],
+    "videos": []
+  },
+  {
+    "id": "se-viro",
+    "name": "Se Viró",
+    "spanishName": "Se Viró",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 1,
+    "summary": "A Rueda orientation-flip call ('it turned inside out!') that reverses the circle from standard inward-facing Rueda to outward-facing Rueda (Pa'Fuera), or vice versa, without changing partners.",
+    "leaderSteps": [
+      {
+        "counts": "1-3",
+        "text": "From standard Guapea, step 1-2-3 while pivoting 180 degrees with the partner (or leading an inside turn pivot) so that your back now faces the center of the Rueda circle. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Execute a Dile Que No on 5-6-7 along the new outward-facing orientation (Rueda Pa'Fuera), establishing Guapea facing the outside of the room. Pause on 8."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-3",
+        "text": "Follow the leader's frame rotation on 1-2-3 to pivot 180 degrees so that you are oriented for outward-facing Rueda. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Travel through Dile Que No on 5-6-7 along the inverted circle geometry, finishing on 7 facing the leader with the center of the circle behind him. Pause on 8."
+      }
+    ],
+    "commonMistakes": [
+      "Trying to turn back toward the center of the circle during the Dile Que No on 5-6-7 out of habit.",
+      "Confusing which direction 'Dame' goes once the Rueda is flipped inside-out.",
+      "Backing too far into the center of the circle and colliding with other leaders' backs."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-cruzada-pa-fuera"
+    ],
+    "variations": [
+      "Calling 'Se viró' a second time to flip the Rueda from Pa'Fuera back to normal."
+    ],
+    "ruedaCall": "Pa'Fuera",
+    "tags": [
+      "rueda",
+      "pa-fuera",
+      "orientation-change",
+      "no-partner-change"
     ],
     "videos": []
   },
@@ -7011,6 +9609,108 @@
       "setenta-family",
       "hammerlock",
       "two-hand-hold"
+    ],
+    "videos": []
+  },
+  {
+    "id": "shoboun",
+    "name": "Sho'boun' (German Mesa)",
+    "spanishName": "Sho'boun'",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A stylized Rueda call combining an Enchufla entry with a rhythmic tabletop/bouncing groove ('German mesa' variation) in the center before advancing to the next partner with Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Lead an Enchufla on 1-2-3 to swap places and face the center of the circle, then drop into the signature rhythmic knee-bend/tabletop ('mesa') groove with arm styling on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the second half of the rhythmic groove on 1-2-3 (counts 9-11) while travelling counter-clockwise to the next follower, and lead her through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Turn left in the opening Enchufla on 1-2-3, then mirror the rhythmic 'mesa' groove and body bounce along the outer ring on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Finish the groove on 1-2-3 (counts 9-11), connect with the arriving leader on count 12, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Bending forward from the lower back with a rounded spine during the 'mesa' groove instead of hinging at the hips and knees with a supported core.",
+      "Losing the count 12 connection for the final Dile Que No.",
+      "Forgetting whether the call advances one partner or returns to the same partner."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "thoracic-isolation-despelote"
+    ],
+    "variations": [
+      "Adding a vocal chant on counts 5-7 and 9-11."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "enchufla",
+      "styling",
+      "suelta"
+    ],
+    "videos": []
+  },
+  {
+    "id": "siguelo",
+    "name": "Síguelo",
+    "spanishName": "Síguelo",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 1,
+    "summary": "A continuation modifier call in Rueda ('keep it going!') that instructs dancers to stay in the current groove, mambo step, or repeating pattern instead of exiting into Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-3",
+        "text": "Instead of initiating the usual exit or Dile Que No, maintain the active footwork or body movement pattern from the preceding call (e.g. mambo steps, rumba guaguancó, or continuous Enchuflas) on 1-2-3. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Continue the repeating pattern on 5-6-7 while listening for the caller's next exit cue (such as 'Dile Que No' or 'Dame'). Pause on 8."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-3",
+        "text": "Keep executing the current groove or repeating figure on 1-2-3 rather than prepping for a Dile Que No exit. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Continue matching the pattern on 5-6-7 while maintaining visual and frame awareness for when the caller ends the loop. Pause on 8."
+      }
+    ],
+    "commonMistakes": [
+      "Exiting automatically into Dile Que No on count 5 because the dancer memorized a fixed length for the previous move instead of listening to the caller.",
+      "Letting the energy or step precision drop during the extended repetition.",
+      "Leaders giving mixed frame signals when transitioning from 'Síguelo' back into the exit call."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "rueda-level-1-essentials"
+    ],
+    "variations": [
+      "Enchufla con mambo > Síguelo (holding the center mambo shine across multiple eight-counts).",
+      "Dame > Síguelo (continuing to change partners on every eight-count)."
+    ],
+    "tags": [
+      "rueda",
+      "modifier",
+      "musicality",
+      "continuation"
     ],
     "videos": []
   },
@@ -7336,6 +10036,58 @@
     "videos": []
   },
   {
+    "id": "tacon-punta",
+    "name": "Tacón-Punta",
+    "spanishName": "Tacón-Punta",
+    "category": "Shine / suelta",
+    "level": "Intermediate",
+    "eightCounts": 1,
+    "summary": "Solo Cuban timba footwork alternating crisp heel digs and toe taps to accent brass hits and syncopated rhythms during suelta or mambo sections.",
+    "leaderSteps": [
+      {
+        "counts": "1-3",
+        "text": "Strike the left heel forward on 1 (toe flexed upward), tap the left toe back or beside the standing right foot on 2, and step onto the left foot in place on 3 with grounded knee flexion. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Strike the right heel forward on 5, tap the right toe beside the left foot on 6, and transfer full weight onto the right foot on 7. Pause on 8."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-3",
+        "text": "Mirror or perform the same solo footwork: dig the right (or left, if dancing in unison) heel forward on 1, tap the toe back on 2, and step onto the working foot in place on 3. Pause on 4."
+      },
+      {
+        "counts": "5-7",
+        "text": "Dig the opposite heel forward on 5, tap the toe in on 6, and step firmly onto that foot on 7 while allowing natural Cuban hip and ribcage movement. Pause on 8."
+      }
+    ],
+    "commonMistakes": [
+      "Locking the standing knee during the heel strike, which makes the upper body stiff and bounces the head.",
+      "Placing full body weight onto the heel or toe taps on counts 1-2 or 5-6 instead of keeping weight over the standing leg until count 3 and 7.",
+      "Looking down at the feet instead of maintaining posture and visual connection with the partner or group."
+    ],
+    "prerequisites": [
+      "paso-basico",
+      "finding-beat-1-conga-tumbao",
+      "timba-4-phase-anatomy"
+    ],
+    "variations": [
+      "Double-time syncopated taps (1-and-2-and-3) during high-energy mambo brass riffs.",
+      "Angling the torso 45 degrees left and right to match the working foot.",
+      "Adding a slight hop or chassé transition on count 4 and 8."
+    ],
+    "tags": [
+      "suelta",
+      "footwork",
+      "musicality",
+      "mambo",
+      "timba"
+    ],
+    "videos": []
+  },
+  {
     "id": "tijeras",
     "name": "Tijeras",
     "spanishName": "Las Tijeras",
@@ -7561,6 +10313,76 @@
     "videos": []
   },
   {
+    "id": "toma-electrica-complicado",
+    "name": "Toma Eléctrica Complicado",
+    "spanishName": "Toma Eléctrica Complicado",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 4,
+    "summary": "An advanced Rueda figure building on Toma Eléctrica with two-hand wraps, duck-unders, a high-frequency body-vibration/shock accent ('eléctrica'), and a partner change into Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Connect both hands on 1-2-3 to lead a Setenta/Sombrero-style entry, wrapping the follower on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Duck under the raised arm bridge on 1-2-3 (counts 9-11) into a close side-by-side or shadow check, and trigger the 'eléctrica' tembleque/shock accent on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, unwind the follower with an Enchufla-style hand switch on 1-2-3 and send her into an outside turn on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, release to advance to the next follower on 1-2-3 and finish with Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Take the two-hand connection on 1-2-3 and turn into the wrap on 5-6-7 while keeping elbows relaxed and in front of the ribcage."
+      },
+      {
+        "counts": "9-16",
+        "text": "Maintain the overhead arch as the leader ducks under on 1-2-3 (counts 9-11), then hit the 'eléctrica' body vibration/tembleque accent with him on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, follow the unwrapping turn on 1-2-3 and complete the free or guided turn on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, receive the incoming leader on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: During the wrap and duck-under, keep a light hook grip without thumbs and never yank the follower's arm during the 'eléctrica' vibration.",
+      "Hitting the 'eléctrica' shock accent through the arms instead of isolating it in the ribcage and shoulders.",
+      "Rushing the unwrapping turns on counts 17-24."
+    ],
+    "prerequisites": [
+      "setenta",
+      "setenta-complicado",
+      "sombrero",
+      "tembleque",
+      "enchufla",
+      "toma-electrica"
+    ],
+    "variations": [
+      "Keeping the same partner on counts 25-32 if called without Dame."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "wrap",
+      "duck-under",
+      "tembleque",
+      "advanced"
+    ],
+    "videos": []
+  },
+  {
     "id": "triple-play",
     "name": "Triple Play",
     "spanishName": "Triple play",
@@ -7671,6 +10493,74 @@
     "videos": []
   },
   {
+    "id": "tumba-francesa-complicado",
+    "name": "Tumba Francesa Complicado",
+    "spanishName": "Tumba Francesa Complicado",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 4,
+    "summary": "An intricate Rueda call combining elegant Franco-Haitian/Oriente-inspired paseo turns, multi-hand wraps, and synchronized curtsy/bow checks before changing partners in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Initiate with an elegant cross-hand or two-hand Paseo turn on 1-2-3, wrapping the follower into a side-by-side promenade check on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Lead a synchronized directional pivot and stately Mason/Tumba Francesa bow check on 1-2-3 (counts 9-11), then unwind the follower across the front on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, execute a leader hook turn under the raised arm on 1-2-3 followed by a follower Exhíbela on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, release to advance to the next partner on 1-2-3 and close with a smooth Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step through the opening turn on 1-2-3 and settle into the side-by-side wrap on 5-6-7 with tall, regal posture."
+      },
+      {
+        "counts": "9-16",
+        "text": "Match the directional pivot and subtle curtsy/skirt-flair accent on 1-2-3 (counts 9-11), then unwind smoothly on 5-6-7 (counts 13-15)."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, maintain frame as the leader turns on 1-2-3, then execute the Exhíbela turn on 5-6-7."
+      },
+      {
+        "counts": "25-32",
+        "text": "On counts 25-32, connect with the arriving leader on 1-2-3 and travel through Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Keep all wrap and behind-the-back hand changes at waist level with soft wrists so the follower's shoulder is never hyperextended.",
+      "Dancing the figure with heavy, hunched posture instead of the upright, elegant carriage referencing Tumba Francesa.",
+      "Losing the circular Rueda station during the promenade section."
+    ],
+    "prerequisites": [
+      "paseala",
+      "setenta-complicado",
+      "sombrero",
+      "exhibela",
+      "tumba-francesa"
+    ],
+    "variations": [
+      "Finishing with the same partner if no Dame is called at the end."
+    ],
+    "tags": [
+      "rueda",
+      "partner-change",
+      "wrap",
+      "paseo",
+      "advanced"
+    ],
+    "videos": []
+  },
+  {
     "id": "un-tarro",
     "name": "Un Tarro",
     "spanishName": "Un tarro",
@@ -7716,6 +10606,58 @@
       "partner-change",
       "closed-hold",
       "fast-switch"
+    ],
+    "videos": []
+  },
+  {
+    "id": "un-tarro-sin-soltar",
+    "name": "Un Tarro sin Soltar",
+    "spanishName": "Un Tarro sin Soltar",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A Rueda variation of Tarro where the leader ducks under his raised left arm as if moving to the next partner, but never lets go of his current follower's hand ('sin soltar'), bringing her back into Dile Que No without changing partners.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step forward on 1-2-3 raising the left arm to duck underneath in the Tarro motion toward the next partner, but maintain the left-to-right hand hold ('sin soltar') and pivot on 5-6-7 to face your original follower."
+      },
+      {
+        "counts": "9-16",
+        "text": "Lead your original follower into an inside turn or stabilizing check on 1-2-3 (counts 9-11) and finish with Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Keep a light, continuous hook connection in the right hand as the leader ducks under on 1-2-3, and turn smoothly in place on 5-6-7 without releasing him."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the return turn on 1-2-3 (counts 9-11) into closed hold and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Safety: Leaders travelling too far toward the next follower while still holding their original partner's hand, which yanks the original follower's shoulder—stay close when executing 'sin soltar' and keep knees bent during the duck-under.",
+      "Followers letting go of the hand on count 3 out of muscle memory from regular Tarro.",
+      "Twisting the follower's wrist during the underarm duck—use a loose finger hook so the hand swivels freely."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "enchufla",
+      "un-tarro"
+    ],
+    "variations": [
+      "1-eight-count compact version (Tarro sin soltar on 1-3, immediate Dile Que No on 5-7, similar to Prima)."
+    ],
+    "ruedaCall": "Tarro",
+    "tags": [
+      "rueda",
+      "tarro",
+      "duck-under",
+      "no-partner-change",
+      "fake-out"
     ],
     "videos": []
   },
@@ -7944,6 +10886,58 @@
     "videos": []
   },
   {
+    "id": "vacilala-con-cero",
+    "name": "Vacílala con Cero",
+    "spanishName": "Vacílala con Cero",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "A Rueda combination where the leader initiates a Vacílala turn for the follower on counts 1-3, then circles completely around her ('con cero') while she finishes her turn, before changing partners or closing with Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Prep on 1 and give a gentle right-to-right (or left-to-right) impulse on 2-3 to send the follower into a free Vacílala right turn, then immediately travel in a full 360-degree loop ('cero') around her on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Complete the orbit on 1-2-3 (counts 9-11), advancing to the next follower (or reconnecting with the current follower), and lead Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step 1-2-3 into a free clockwise Vacílala turn, then step forward-side-together in place along the circle on 5-6-7 while the leader orbits around you."
+      },
+      {
+        "counts": "9-16",
+        "text": "Mark in place on 1-2-3 (counts 9-11) as the leader finishes the loop, connect into closed hold on count 12, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders starting their circular orbit too early on count 2 and cutting across the follower's turning path.",
+      "Followers travelling too far forward during the Vacílala on 5-6-7 instead of staying on the circle perimeter so the leader has room to orbit.",
+      "Over-spinning the follower with a heavy arm push on count 3."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "vacilala",
+      "rueda-level-1-essentials",
+      "cero"
+    ],
+    "variations": [
+      "Vacílala con cero y dame (explicitly advancing to the next partner after completing the orbit)."
+    ],
+    "ruedaCall": "Vacílala",
+    "tags": [
+      "rueda",
+      "vacilala",
+      "orbit",
+      "turn"
+    ],
+    "videos": []
+  },
+  {
     "id": "vacilala-con-columbia",
     "name": "Vacílala con Columbia",
     "spanishName": "Vacílala con Columbia",
@@ -7998,6 +10992,58 @@
       "rumba-columbia",
       "shines",
       "musicality"
+    ],
+    "videos": []
+  },
+  {
+    "id": "vacilala-y-dame",
+    "name": "Vacílala y Dame",
+    "spanishName": "Vacílala y Dame",
+    "category": "Rueda call",
+    "level": "Improver",
+    "eightCounts": 2,
+    "summary": "A classic Rueda partner-change figure where the leader leads his current follower into a free Vacílala right turn on the first eight-count, leaves her to travel to the next follower on his right, and finishes with Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step back on 1, give a clear, light Vacílala turn impulse on 2-3 releasing the follower to turn solo, and on 5-6-7 walk counter-clockwise toward the next follower in the circle."
+      },
+      {
+        "counts": "9-16",
+        "text": "Connect with the new follower in closed hold on 1-2-3 (counts 9-11) and lead her across the slot in a Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Execute a smooth clockwise right turn on 1-2-3 and continue stepping along the outside circumference on 5-6-7 while turning to face the center."
+      },
+      {
+        "counts": "9-16",
+        "text": "Step back-side-together on 1-2-3 (counts 9-11) as the new leader connects from the left, then travel through Dile Que No on 5-6-7 (counts 13-15)."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders abandoning the current follower on count 1 before actually giving her the Vacílala turn lead on 2-3.",
+      "Followers continuing to walk forward into the next couple's space on 5-6-7 instead of turning in their own station to face the incoming leader.",
+      "Rushing the Dame into 1 eight-count instead of letting the Vacílala breathe on 1-8 and completing the Dile Que No on 9-16."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "vacilala",
+      "rueda-level-1-essentials",
+      "dame"
+    ],
+    "variations": [
+      "Fast 1-eight-count version where the leader sends the follower on 1-3 and immediately catches the next follower into Dile Que No on 5-6-7."
+    ],
+    "ruedaCall": "Vacílala",
+    "tags": [
+      "rueda",
+      "partner-change",
+      "vacilala",
+      "dame"
     ],
     "videos": []
   },
@@ -8060,6 +11106,68 @@
     "videos": []
   },
   {
+    "id": "vacilala-y-florea-doble",
+    "name": "Vacílala y Florea Doble",
+    "spanishName": "Vacílala y Florea Doble",
+    "category": "Rueda call",
+    "level": "Advanced",
+    "eightCounts": 3,
+    "summary": "A showy Rueda figure where the leader leads a Vacílala turn on counts 1-3, then both partners perform two full phrases of expressive solo styling/shines ('florea doble') before reconnecting (or changing partners) in Dile Que No.",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step back on 1 and give a clear Vacílala turn lead on 2-3, releasing the follower to turn solo while you open into your first 'florea' (Rumba/Orisha/Timba solo styling) on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Continue improvising a second full eight-count of expressive solo styling ('florea doble') on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15), maintaining visual interplay."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, step in to collect the follower (or the next follower if called with Dame) on 1-2-3 and lead her through Dile Que No on 5-6-7."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Execute the clockwise Vacílala turn on 1-2-3 and flow directly into your first 'florea' solo styling phrase (arm styling, hip circularity, or rumba accents) on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Perform a second full eight-count of solo 'florea' expression on 1-2-3 (counts 9-11) and 5-6-7 (counts 13-15) while staying on your Rueda station."
+      },
+      {
+        "counts": "17-24",
+        "text": "On counts 17-24, reconnect with the leader's frame on 1-2-3 and travel cleanly across in Dile Que No on 5-6-7."
+      }
+    ],
+    "commonMistakes": [
+      "Followers wandering off the circle perimeter during the two eight-counts of free styling.",
+      "Losing the 1-2-3, 5-6-7 internal pulse while improvising the 'florea' and missing the count 17 pickup.",
+      "Leaders grabbing the follower abruptly on count 17 instead of offering a clear visual and frame invitation on counts 15-16."
+    ],
+    "prerequisites": [
+      "vacilala",
+      "dile-que-no",
+      "rumba-guaguanco-basics",
+      "thoracic-isolation-despelote",
+      "vacilala-y-florea"
+    ],
+    "variations": [
+      "Vacílala y florea doble con dame (leaders travel to the next partner during the second eight-count of florea)."
+    ],
+    "ruedaCall": "Vacílala",
+    "tags": [
+      "rueda",
+      "vacilala",
+      "suelta",
+      "styling",
+      "musicality",
+      "advanced"
+    ],
+    "videos": []
+  },
+  {
     "id": "vacilense",
     "name": "Vacílense",
     "spanishName": "Vacílense",
@@ -8106,6 +11214,59 @@
       "both-turn",
       "circular",
       "suelta-feel"
+    ],
+    "videos": []
+  },
+  {
+    "id": "vacilense-los-dos",
+    "name": "Vacílense los Dos",
+    "spanishName": "Vacílense los Dos",
+    "category": "Rueda call",
+    "level": "Intermediate",
+    "eightCounts": 2,
+    "summary": "A Rueda and Casino figure where both leader and follower execute simultaneous solo turns on counts 1-3 (mirroring a mutual Vacílala), then reconnect on 5-7 to finish with Dile Que No (or advance to the next partner if called with Dame).",
+    "leaderSteps": [
+      {
+        "counts": "1-8",
+        "text": "Step back on 1, give a light Vacílala lead on 2 while releasing the hand, and execute your own solo left (or right) turn on 2-3 alongside the follower; step forward on 5-6-7 to collect the follower in closed hold."
+      },
+      {
+        "counts": "9-16",
+        "text": "If staying with the same partner (or after stabilizing on 9-11), lead the follower cleanly across in a Dile Que No on 5-6-7 (or 1-8 total if done in 1 eight-count; 2 eight-counts if adding a Paseo/Exhibela check)."
+      }
+    ],
+    "followerSteps": [
+      {
+        "counts": "1-8",
+        "text": "Take the Vacílala prep on 1 and execute a smooth clockwise right turn on 2-3 while the leader turns simultaneously, continuing around the circle arc on 5-6-7."
+      },
+      {
+        "counts": "9-16",
+        "text": "Reconnect with the leader's frame and complete the Dile Que No exit to return to Guapea."
+      }
+    ],
+    "commonMistakes": [
+      "Leaders throwing their own turn on count 1 before giving the follower her clear lead, causing the follower to just do a basic.",
+      "Both partners drifting apart during the simultaneous turns and missing the reconnection.",
+      "Over-rotating and losing visual spotting of the partner."
+    ],
+    "prerequisites": [
+      "guapea",
+      "dile-que-no",
+      "vacilala",
+      "vacilense"
+    ],
+    "variations": [
+      "1-eight-count social Casino version (simultaneous turns on 1-3, Dile Que No directly on 5-6-7).",
+      "Vacílense los dos y dame (leader turns toward the next follower in the Rueda to change partners)."
+    ],
+    "ruedaCall": "Vacílala",
+    "tags": [
+      "rueda",
+      "vacilala",
+      "turn",
+      "suelta",
+      "no-partner-change"
     ],
     "videos": []
   },

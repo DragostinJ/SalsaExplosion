@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { Search } from "lucide-react";
 import { CATEGORY_INK, MovePosterCard } from "@/components/moves/move-poster-card";
 import { RUEDA_LEVELS, RUEDA_LEVEL_INK } from "@/components/rueda/rueda-level-ink";
@@ -21,8 +22,19 @@ const fold = (value: string) =>
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase();
 
+/** A screen-print picture per move family, shown beside its heading (passed in so the client bundle skips the media manifest). */
+export type FamilyArt = Partial<Record<MoveCategory, { src: string; width: number; height: number }>>;
+
+/** Decorative: the heading beside it names the family. */
+function FamilyPicture({ art }: { art?: { src: string; width: number; height: number } }) {
+  if (!art) return null;
+  return (
+    <Image src={art.src} alt="" width={art.width} height={art.height} sizes="5rem" className="h-16 w-16 shrink-0 sm:h-20 sm:w-20" />
+  );
+}
+
 /** The move library with search, level and family filters over the poster cards. */
-export function MoveLibraryFilters({ moves }: { moves: readonly Move[] }) {
+export function MoveLibraryFilters({ moves, familyArt = {} }: { moves: readonly Move[]; familyArt?: FamilyArt }) {
   const [query, setQuery] = useState("");
   const [level, setLevel] = useState<LevelFilter>("ALL");
   const [family, setFamily] = useState<FamilyFilter>("ALL");
@@ -124,9 +136,12 @@ export function MoveLibraryFilters({ moves }: { moves: readonly Move[] }) {
       ) : (
         sections.map((section) => (
           <section key={section.category} aria-labelledby={`family-${section.category}`} className="space-y-4">
-            <h2 id={`family-${section.category}`} className={TYPE.section}>
-              {section.category}
-            </h2>
+            <div className="flex items-center gap-4">
+              <FamilyPicture art={familyArt[section.category]} />
+              <h2 id={`family-${section.category}`} className={TYPE.section}>
+                {section.category}
+              </h2>
+            </div>
             <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {section.moves.map((move, index) => (
                 <li key={move.id}>

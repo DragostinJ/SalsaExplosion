@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { BookingStatus, DanceRole } from "@prisma/client";
 import { QrCode, Users } from "lucide-react";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { prisma } from "@/lib/prisma";
 import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import { ClassRosterSummary } from "@/lib/constants/management";
@@ -105,19 +107,29 @@ export default async function InstructorRosterPage() {
 
       {/* Header */}
       <div className="flex flex-col justify-between gap-4 rounded-2xl border bg-card p-6 shadow-sm sm:flex-row sm:items-center">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Live Class Roster & QR Check-In Desk
-            </h1>
-            <Badge className="bg-amber-500 text-white font-semibold">
-              <QrCode className="mr-1 h-3.5 w-3.5" />
-              Zero-Friction Desk
-            </Badge>
+        <div className="flex items-center gap-4">
+          <Image
+            src={MEDIA_MANIFEST.mockupGraphics.clipboard.src}
+            alt=""
+            width={MEDIA_MANIFEST.mockupGraphics.clipboard.width}
+            height={MEDIA_MANIFEST.mockupGraphics.clipboard.height}
+            sizes="5rem"
+            className="h-16 w-16 shrink-0 sm:h-20 sm:w-20"
+          />
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                Live Class Roster & QR Check-In Desk
+              </h1>
+              <Badge className="bg-amber-500 text-white font-semibold">
+                <QrCode className="mr-1 h-3.5 w-3.5" />
+                Zero-Friction Desk
+              </Badge>
+            </div>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Verify student arrivals at the door, monitor real-time Lead vs. Follow counts on the dance floor, and display the class QR code.
+            </p>
           </div>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Verify student arrivals at the door, monitor real-time Lead vs. Follow counts on the dance floor, and display the class QR code.
-          </p>
         </div>
 
         <Badge variant="secondary" className="px-3 py-1.5 text-xs font-bold">

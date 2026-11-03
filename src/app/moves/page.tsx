@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MoveLibraryFilters } from "@/components/moves/move-library-filters";
+import { MoveLibraryFilters, type FamilyArt } from "@/components/moves/move-library-filters";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, POSTER_BLOCKS, TYPE } from "@/components/poster/poster-kit";
@@ -11,6 +11,19 @@ export const metadata = {
   description:
     "Cuban casino figures, rueda calls, shines and body movement from the classes: leader and follower steps, counts and videos, checked by the teachers.",
   alternates: { canonical: "/moves" },
+};
+
+const art = MEDIA_MANIFEST.mockupGraphics;
+const pick = ({ src, width, height }: { src: string; width: number; height: number }) => ({ src, width, height });
+const FAMILY_ART: FamilyArt = {
+  "Casino figure": pick(art.familyCasino),
+  "Rueda call": pick(art.familyRueda),
+  "Shine / suelta": pick(art.familyShine),
+  "Body movement": pick(art.familyBody),
+  Rumba: pick(art.familyRumba),
+  Son: pick(art.familySon),
+  Reparto: pick(art.familyReparto),
+  "Afro-Cuban Orishas": pick(art.familyOrishas),
 };
 
 /** Dancers only ever see moves a teacher approved with the counts checked on the music. */
@@ -80,7 +93,7 @@ export default function MovesPage() {
           </ul>
         </section>
       ) : (
-        <MoveLibraryFilters moves={moves} />
+        <MoveLibraryFilters moves={moves} familyArt={FAMILY_ART} />
       )}
     </main>
   );

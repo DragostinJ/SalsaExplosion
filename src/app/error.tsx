@@ -2,7 +2,9 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { RotateCcw, Home, AlertCircle } from "lucide-react";
+import Image from "next/image";
+import { RotateCcw, Home } from "lucide-react";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { Button } from "@/components/ui/button";
 import { reportError } from "@/lib/monitoring";
 
@@ -20,9 +22,14 @@ export default function ErrorBoundary({ error, reset }: ErrorProps) {
   return (
     <main className="min-h-[70vh] flex items-center justify-center px-4 py-16">
       <div className="max-w-md w-full text-center space-y-6">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-destructive/10 text-destructive border border-destructive/20 shadow-xs">
-          <AlertCircle className="h-8 w-8" />
-        </div>
+        <Image
+          src={MEDIA_MANIFEST.mockupGraphics.dizzyDrum.src}
+          alt=""
+          width={MEDIA_MANIFEST.mockupGraphics.dizzyDrum.width}
+          height={MEDIA_MANIFEST.mockupGraphics.dizzyDrum.height}
+          sizes="10rem"
+          className="mx-auto w-32 sm:w-40"
+        />
 
         <div className="space-y-2">
           <span className="text-xs font-bold uppercase tracking-widest text-destructive">

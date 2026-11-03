@@ -33,7 +33,7 @@ export default function TermsAndLegalPage() {
       {/* Header Hub with Poster Hero */}
       <section
         data-testid="page-header"
-        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
           <span>UK LEGAL &amp; CONSUMER PROTECTION</span>
@@ -63,7 +63,7 @@ export default function TermsAndLegalPage() {
       </section>
 
       {/* Quick Navigation Jump Bar */}
-      <div className="flex flex-wrap items-center gap-2 border-4 border-ink bg-paper p-3.5 text-xs font-bold text-ink shadow-[4px_4px_0_0_#161311]">
+      <div className="flex flex-wrap items-center gap-2 border-4 border-ink bg-paper p-3.5 text-xs font-bold text-ink shadow-[4px_4px_0_0_var(--color-ink)]">
         <span className="text-ink/75 uppercase tracking-wider text-xs mr-1">Jump to:</span>
         <a href="#identity" className="border-2 border-ink bg-paper px-3 py-1 text-ink hover:bg-ink hover:text-paper transition-colors">
           1. Business Identity
@@ -88,7 +88,7 @@ export default function TermsAndLegalPage() {
           </h2>
         </div>
 
-        <div className="border-4 border-ink bg-paper p-6 text-xs sm:text-sm text-ink leading-relaxed shadow-[6px_6px_0_0_#161311] space-y-4 font-medium">
+        <div className="border-4 border-ink bg-paper p-6 text-xs sm:text-sm text-ink leading-relaxed shadow-[6px_6px_0_0_var(--color-ink)] space-y-4 font-medium">
           <p>
             In accordance with the <strong>Electronic Commerce (EC Directive) Regulations 2002</strong> and the <strong>Companies (Trading Disclosures) Regulations 2008</strong>, our full trading and contact details are as follows:
           </p>
@@ -133,7 +133,7 @@ export default function TermsAndLegalPage() {
           </h2>
         </div>
 
-        <div className="border-4 border-ink bg-paper p-6 text-xs sm:text-sm text-ink leading-relaxed shadow-[6px_6px_0_0_#161311] space-y-6 font-medium">
+        <div className="border-4 border-ink bg-paper p-6 text-xs sm:text-sm text-ink leading-relaxed shadow-[6px_6px_0_0_var(--color-ink)] space-y-6 font-medium">
           <p>
             Your rights when buying festival and special-event passes or gift vouchers are protected under the <strong>Consumer Rights Act 2015</strong> and the <strong>Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013</strong>.
           </p>
@@ -186,7 +186,7 @@ export default function TermsAndLegalPage() {
           </h2>
         </div>
 
-        <div className="border-4 border-ink bg-paper p-6 text-xs sm:text-sm text-ink leading-relaxed shadow-[6px_6px_0_0_#161311] space-y-4 font-medium">
+        <div className="border-4 border-ink bg-paper p-6 text-xs sm:text-sm text-ink leading-relaxed shadow-[6px_6px_0_0_var(--color-ink)] space-y-4 font-medium">
           <p>
             Under Section 65 of the <strong>Consumer Rights Act 2015</strong> and the <strong>Unfair Contract Terms Act 1977</strong>, Salsa Explosion UK does not, and cannot legally, exclude or restrict liability for death or personal injury resulting from its own negligence.
           </p>
@@ -217,7 +217,7 @@ export default function TermsAndLegalPage() {
           </h2>
         </div>
 
-        <div className="border-4 border-ink bg-paper p-6 text-xs sm:text-sm text-ink leading-relaxed shadow-[6px_6px_0_0_#161311] space-y-4 font-medium">
+        <div className="border-4 border-ink bg-paper p-6 text-xs sm:text-sm text-ink leading-relaxed shadow-[6px_6px_0_0_var(--color-ink)] space-y-4 font-medium">
           <p>
             Salsa Explosion UK respects your privacy and is committed to protecting your personal data in strict compliance with the <strong>UK General Data Protection Regulation (UK GDPR)</strong> and the <strong>Data Protection Act 2018</strong>.
           </p>
@@ -272,7 +272,7 @@ export default function TermsAndLegalPage() {
       </section>
 
       {/* Support Strip */}
-      <div className="border-4 border-ink bg-poster-mustard p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-ink shadow-[6px_6px_0_0_#161311]">
+      <div className="border-4 border-ink bg-poster-mustard p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-ink shadow-[6px_6px_0_0_var(--color-ink)]">
         <div>
           <h3 className="font-display font-black text-lg uppercase tracking-tight text-ink">
             Have a Question About Our Terms or a Booking?

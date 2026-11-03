@@ -4,7 +4,7 @@ export default function EventsLoading() {
       <div className="h-6 w-32 border-2 border-ink bg-surface-2" />
 
       {/* Header Skeleton */}
-      <div className="border-4 border-ink bg-paper p-8 shadow-[8px_8px_0_0_#161311] space-y-4">
+      <div className="border-4 border-ink bg-paper p-8 shadow-[8px_8px_0_0_var(--color-ink)] space-y-4">
         <div className="h-4 w-48 bg-surface-2" />
         <div className="h-14 w-80 bg-surface-2" />
         <div className="h-12 w-full max-w-xl bg-surface-2" />

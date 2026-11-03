@@ -27,7 +27,7 @@ export default function PricingPage() {
       {/* Cartelera Architectural Poster Hero */}
       <section
         data-testid="page-header"
-        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
           <span>Cartelera · Studio Admission &amp; Box Office</span>
@@ -48,7 +48,7 @@ export default function PricingPage() {
       {/* 2-Column Cartelera Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Door Pricing Cartelera Block */}
-        <div className="border-4 border-ink bg-poster-mustard p-6 text-ink shadow-[6px_6px_0_0_#161311] flex flex-col justify-between space-y-4">
+        <div className="border-4 border-ink bg-poster-mustard p-6 text-ink shadow-[6px_6px_0_0_var(--color-ink)] flex flex-col justify-between space-y-4">
           <div className="space-y-3">
             <div className="flex items-center justify-between gap-2 border-b-2 border-ink pb-2">
               <span className="border border-ink bg-poster-red text-ink font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-2.5 py-0.5">
@@ -104,7 +104,7 @@ export default function PricingPage() {
         </div>
 
         {/* Festival Passes & Online Tickets */}
-        <div className="border-4 border-ink bg-paper p-6 text-ink shadow-[6px_6px_0_0_#161311] flex flex-col justify-between space-y-4">
+        <div className="border-4 border-ink bg-paper p-6 text-ink shadow-[6px_6px_0_0_var(--color-ink)] flex flex-col justify-between space-y-4">
           <div className="space-y-3">
             <div className="flex items-center justify-between gap-2 border-b-2 border-ink pb-2">
               <span className="border border-ink bg-poster-teal text-ink font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 px-2.5 py-0.5">
@@ -149,7 +149,7 @@ export default function PricingPage() {
       </div>
 
       {/* Summary Notes Bar */}
-      <div className="border-2 border-ink bg-paper p-3.5 flex flex-wrap items-center justify-between gap-4 text-xs font-bold text-ink shadow-[2px_2px_0_0_#161311]">
+      <div className="border-2 border-ink bg-paper p-3.5 flex flex-wrap items-center justify-between gap-4 text-xs font-bold text-ink shadow-[2px_2px_0_0_var(--color-ink)]">
         <div className="flex items-center gap-1.5 text-accent-red">
           <Sparkles className="h-4 w-4 shrink-0" />
           <span>{DOOR_PRICING.summaryBadge}</span>
@@ -160,7 +160,7 @@ export default function PricingPage() {
       </div>
 
       {/* UK Consumer Rights Pre-Checkout Guarantee */}
-      <div className="border-2 border-ink bg-poster-teal/15 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-ink shadow-[2px_2px_0_0_#161311]">
+      <div className="border-2 border-ink bg-poster-teal/15 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-ink shadow-[2px_2px_0_0_var(--color-ink)]">
         <div className="flex items-center gap-2 font-medium">
           <ShieldCheck className="h-4 w-4 text-accent-teal shrink-0" />
           <span>

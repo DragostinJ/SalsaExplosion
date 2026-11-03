@@ -28,7 +28,7 @@ export function DanceVouchersShowcase({
   return (
     <section
       aria-label="Dance Gift Vouchers"
-      className={`relative border-4 border-ink bg-poster-teal p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311] ${className}`}
+      className={`relative border-4 border-ink bg-poster-teal p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)] ${className}`}
     >
       <div className="relative z-10 grid gap-8 lg:grid-cols-12 items-center">
         {/* Left Column: Authentic Copy & Value Proposition */}
@@ -68,14 +68,14 @@ export function DanceVouchersShowcase({
             {occasions.map((occ) => (
               <span
                 key={occ}
-                className="inline-flex items-center border-2 border-ink bg-paper px-3 py-1 text-xs font-bold text-ink shadow-[2px_2px_0_0_#161311]"
+                className="inline-flex items-center border-2 border-ink bg-paper px-3 py-1 text-xs font-bold text-ink shadow-[2px_2px_0_0_var(--color-ink)]"
               >
                 {occ}
               </span>
             ))}
           </div>
 
-          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_#161311]">
+          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_var(--color-ink)]">
             <p className="text-xs sm:text-sm text-ink font-bold leading-relaxed">
               Cuban Salsa is more than just learning steps — it’s about music, movement, connection and having fun. It’s a brilliant way to:
             </p>
@@ -96,7 +96,7 @@ export function DanceVouchersShowcase({
           </div>
 
           {/* Location strip */}
-          <div className="border-2 border-ink bg-poster-mustard p-3 flex items-center gap-2 text-xs font-bold text-ink shadow-[2px_2px_0_0_#161311]">
+          <div className="border-2 border-ink bg-poster-mustard p-3 flex items-center gap-2 text-xs font-bold text-ink shadow-[2px_2px_0_0_var(--color-ink)]">
             <MapPin className="h-4 w-4 text-accent-red shrink-0" />
             <span>Valid across all weekly classes at BOH Studios Bournemouth (104 Commercial Rd)</span>
           </div>
@@ -105,7 +105,7 @@ export function DanceVouchersShowcase({
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
             <a
               href="tel:+447969633701"
-              className="border-4 border-ink bg-poster-red text-ink hover:bg-ink hover:text-ink font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_#161311] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
+              className="border-4 border-ink bg-poster-red text-ink hover:bg-ink hover:text-ink font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_var(--color-ink)] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
             >
               <Phone className="h-4 w-4" />
               ORDER NOW: 07969 633701
@@ -114,7 +114,7 @@ export function DanceVouchersShowcase({
               href="https://wa.me/447969633701?text=Hi%20Enrique%2C%20I%20would%20like%20to%20order%20a%20Cuban%20Salsa%20Dance%20Voucher%20please!"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-4 border-ink bg-paper text-ink hover:bg-ink hover:text-paper font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_#161311] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
+              className="border-4 border-ink bg-paper text-ink hover:bg-ink hover:text-paper font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_var(--color-ink)] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
             >
               <MessageSquare className="h-4 w-4" />
               WhatsApp Maestro Enrique
@@ -124,7 +124,7 @@ export function DanceVouchersShowcase({
 
         {/* Right Column: Physical / Digital Voucher Preview Certificate */}
         <div className="lg:col-span-5 flex justify-center">
-          <div className="w-full max-w-md border-4 border-ink bg-paper text-ink p-6 sm:p-8 shadow-[10px_10px_0_0_#161311] space-y-5 relative">
+          <div className="w-full max-w-md border-4 border-ink bg-paper text-ink p-6 sm:p-8 shadow-[10px_10px_0_0_var(--color-ink)] space-y-5 relative">
             <div className="border-b-4 border-dashed border-ink pb-4 flex items-start justify-between">
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest text-ink/70 block">
@@ -137,7 +137,7 @@ export function DanceVouchersShowcase({
                   Bournemouth Cuban Dance Academy
                 </span>
               </div>
-              <div className="h-11 w-11 border-2 border-ink bg-poster-mustard flex items-center justify-center shadow-[2px_2px_0_0_#161311]">
+              <div className="h-11 w-11 border-2 border-ink bg-poster-mustard flex items-center justify-center shadow-[2px_2px_0_0_var(--color-ink)]">
                 <Gift className="h-6 w-6 text-ink" />
               </div>
             </div>

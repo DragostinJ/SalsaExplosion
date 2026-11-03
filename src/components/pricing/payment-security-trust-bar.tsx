@@ -12,7 +12,7 @@ export function PaymentSecurityTrustBar({
   return (
     <div
       data-testid="payment-security-trust-bar"
-      className={`border-2 border-ink bg-paper p-4 text-xs text-ink space-y-2.5 shadow-[4px_4px_0_0_#161311] ${className}`}
+      className={`border-2 border-ink bg-paper p-4 text-xs text-ink space-y-2.5 shadow-[4px_4px_0_0_var(--color-ink)] ${className}`}
     >
       <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-ink pb-2.5">
         <div className="flex items-center gap-2">
@@ -30,10 +30,10 @@ export function PaymentSecurityTrustBar({
         </div>
 
         <div className="flex items-center gap-2 text-xs font-bold text-ink">
-          <span className="border border-ink bg-paper px-2 py-1 flex items-center gap-1 shadow-[2px_2px_0_0_#161311]">
+          <span className="border border-ink bg-paper px-2 py-1 flex items-center gap-1 shadow-[2px_2px_0_0_var(--color-ink)]">
             <CreditCard className="h-3.5 w-3.5 text-accent-red" /> Apple Pay / GPay
           </span>
-          <span className="border border-ink bg-paper px-2 py-1 shadow-[2px_2px_0_0_#161311]">
+          <span className="border border-ink bg-paper px-2 py-1 shadow-[2px_2px_0_0_var(--color-ink)]">
             Visa / Mastercard
           </span>
         </div>

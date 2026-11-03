@@ -131,7 +131,7 @@ export function EventPassSelector({
         <div
           data-testid="event-finished"
           role="status"
-          className="border-4 border-ink bg-poster-mustard p-5 text-ink shadow-[6px_6px_0_0_#161311] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+          className="border-4 border-ink bg-poster-mustard p-5 text-ink shadow-[6px_6px_0_0_var(--color-ink)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
         >
           <div>
             <p className="font-display text-2xl text-ink">This event has finished</p>
@@ -152,7 +152,7 @@ export function EventPassSelector({
         <div
           data-testid="event-purchases-unavailable"
           role="status"
-          className="border-4 border-ink bg-poster-mustard p-5 text-ink shadow-[6px_6px_0_0_#161311] space-y-2"
+          className="border-4 border-ink bg-poster-mustard p-5 text-ink shadow-[6px_6px_0_0_var(--color-ink)] space-y-2"
         >
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
@@ -200,7 +200,7 @@ export function EventPassSelector({
           return (
             <article
               key={tier.id}
-              className={`flex flex-col border-4 border-ink bg-paper text-ink transition-transform hover:-translate-y-0.5 shadow-[6px_6px_0_0_#161311] ${
+              className={`flex flex-col border-4 border-ink bg-paper text-ink transition-transform hover:-translate-y-0.5 shadow-[6px_6px_0_0_var(--color-ink)] ${
                 tier.userRegistration ? "ring-4 ring-poster-teal" : ""
               }`}
             >

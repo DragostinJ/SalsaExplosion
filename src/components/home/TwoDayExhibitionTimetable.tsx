@@ -30,7 +30,7 @@ function TimetableRow({
         {/* Column 2: Level / Category Badge (col-span-3) */}
         <div className="lg:col-span-3 flex items-center gap-2 flex-wrap">
           <span
-            className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 border border-ink shadow-[2px_2px_0_0_#161311] ${
+            className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 border border-ink shadow-[2px_2px_0_0_var(--color-ink)] ${
               item.isSocial
                 ? "bg-poster-teal text-ink"
                 : "bg-paper text-ink"
@@ -39,7 +39,7 @@ function TimetableRow({
             {item.level}
           </span>
           {item.badge && (
-            <span className="text-xs font-bold text-ink bg-poster-mustard border border-ink px-2 py-0.5 shadow-[2px_2px_0_0_#161311]">
+            <span className="text-xs font-bold text-ink bg-poster-mustard border border-ink px-2 py-0.5 shadow-[2px_2px_0_0_var(--color-ink)]">
               {item.badge}
             </span>
           )}
@@ -94,7 +94,7 @@ export function TwoDayExhibitionTimetable() {
   return (
     <section
       id="timetable"
-      className="cv-auto border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311] scroll-mt-20 space-y-10"
+      className="cv-auto border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)] scroll-mt-20 space-y-10"
     >
       {/* Main Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b-4 border-ink">
@@ -113,7 +113,7 @@ export function TwoDayExhibitionTimetable() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 self-start md:self-auto border-2 border-ink bg-poster-mustard px-4 py-2 text-xs font-bold text-ink shadow-[4px_4px_0_0_#161311]">
+        <div className="flex items-center gap-2 self-start md:self-auto border-2 border-ink bg-poster-mustard px-4 py-2 text-xs font-bold text-ink shadow-[4px_4px_0_0_var(--color-ink)]">
           <MapPin className="h-4 w-4 text-accent-red shrink-0" />
           <span>
             {VENUE_INFO.name} • {VENUE_INFO.address}, {VENUE_INFO.postcode}
@@ -122,7 +122,7 @@ export function TwoDayExhibitionTimetable() {
       </div>
 
       {/* ================= THURSDAY CARTELERA TABLE ================= */}
-      <div id="timetable-thursday" className="border-4 border-ink bg-paper p-5 sm:p-7 shadow-[6px_6px_0_0_#161311] space-y-4 scroll-mt-24">
+      <div id="timetable-thursday" className="border-4 border-ink bg-paper p-5 sm:p-7 shadow-[6px_6px_0_0_var(--color-ink)] space-y-4 scroll-mt-24">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-3 border-b-4 border-ink">
           <div>
             <div className="flex items-center gap-2">
@@ -161,7 +161,7 @@ export function TwoDayExhibitionTimetable() {
       </div>
 
       {/* ================= SUNDAY CARTELERA TABLE ================= */}
-      <div id="timetable-sunday" className="border-4 border-ink bg-paper p-5 sm:p-7 shadow-[6px_6px_0_0_#161311] space-y-4 scroll-mt-24">
+      <div id="timetable-sunday" className="border-4 border-ink bg-paper p-5 sm:p-7 shadow-[6px_6px_0_0_var(--color-ink)] space-y-4 scroll-mt-24">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-3 border-b-4 border-ink">
           <div>
             <div className="flex items-center gap-2">
@@ -200,7 +200,7 @@ export function TwoDayExhibitionTimetable() {
       </div>
 
       {/* Bottom Editorial Confidence Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-4 p-4 border-4 border-ink bg-poster-mustard text-ink shadow-[4px_4px_0_0_#161311]">
+      <div className="flex flex-wrap items-center justify-between gap-4 p-4 border-4 border-ink bg-poster-mustard text-ink shadow-[4px_4px_0_0_var(--color-ink)]">
         <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-ink font-bold">
           <span className="flex items-center gap-1.5">
             <CreditCard className="h-4 w-4" />

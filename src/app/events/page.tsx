@@ -99,7 +99,7 @@ export default async function EventsDirectoryPage() {
       {/* DANZA! 2026 | 2027 Official Calendar Hero Showcase */}
       <section
         data-testid="page-header"
-        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="grid gap-8 lg:grid-cols-12 items-center">
           <div className="lg:col-span-7 space-y-4">
@@ -150,7 +150,7 @@ export default async function EventsDirectoryPage() {
           </div>
 
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm rotate-[-2deg] border-[6px] border-ink shadow-[12px_12px_0_0_#161311]">
+            <div className="relative w-full max-w-sm rotate-[-2deg] border-[6px] border-ink shadow-[12px_12px_0_0_var(--color-ink)]">
               <div className="relative aspect-[4/5] w-full bg-ink">
                 <Image
                   src="/images/danza-2026-2027-calendar.png"

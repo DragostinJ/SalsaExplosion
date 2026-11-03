@@ -128,7 +128,7 @@ export default async function AboutPage() {
       {/* 1. Hero Section — Poster Architecture */}
       <section
         data-testid="page-header"
-        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
           <span>SALSA EXPLOSION UK • FOUNDED 1994</span>
@@ -144,7 +144,7 @@ export default async function AboutPage() {
             <p className="max-w-2xl text-sm font-semibold text-ink leading-relaxed">
               Salsa Explosion is the UK&apos;s premier Cuban dance academy and promoter, based in Bournemouth, Dorset. Founded by Cuban maestro Enrique Perez Valdes, we have introduced thousands of dancers to the joy of authentic Casino, dynamic Rueda de Casino, Timba, and Afro-Cuban rhythms for over 32 years.
             </p>
-            <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
+            <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_var(--color-ink)]">
               <Sparkles className="h-4 w-4 text-accent-red" />
               <span>Weekly Thursday &amp; Sunday Classes • £12 / £14 at the Door • BOH Studios BH2 5LR</span>
             </div>
@@ -192,7 +192,7 @@ export default async function AboutPage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_#161311] space-y-3">
+          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_var(--color-ink)] space-y-3">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-teal text-ink">
               <Calendar className="h-5 w-5" />
             </div>
@@ -204,7 +204,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_#161311] space-y-3">
+          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_var(--color-ink)] space-y-3">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-mustard text-ink">
               <Award className="h-5 w-5" />
             </div>
@@ -216,7 +216,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_#161311] space-y-3">
+          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_var(--color-ink)] space-y-3">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-red text-ink">
               <Ticket className="h-5 w-5" />
             </div>
@@ -228,7 +228,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_#161311] space-y-3">
+          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_var(--color-ink)] space-y-3">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-teal text-ink">
               <Users className="h-5 w-5" />
             </div>
@@ -240,7 +240,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_#161311] space-y-3">
+          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_var(--color-ink)] space-y-3">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-mustard text-ink">
               <Flame className="h-5 w-5" />
             </div>
@@ -252,7 +252,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_#161311] space-y-3">
+          <div className="border-4 border-ink bg-paper p-5 sm:p-6 shadow-[4px_4px_0_0_var(--color-ink)] space-y-3">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-blue text-paper">
               <Music className="h-5 w-5" />
             </div>
@@ -281,7 +281,7 @@ export default async function AboutPage() {
             </p>
           </div>
 
-          <span className="border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold text-ink shrink-0 shadow-[2px_2px_0_0_#161311]">
+          <span className="border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold text-ink shrink-0 shadow-[2px_2px_0_0_var(--color-ink)]">
             {teachers.length} Certified Instructors
           </span>
         </div>
@@ -290,7 +290,7 @@ export default async function AboutPage() {
           {teachers.map((teacher) => (
             <div
               key={teacher.id}
-              className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_#161311] flex flex-col justify-between"
+              className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_var(--color-ink)] flex flex-col justify-between"
             >
               <div className="p-5 space-y-3">
                 <div className="flex items-start gap-4">
@@ -365,7 +365,7 @@ export default async function AboutPage() {
       </section>
 
       {/* 5. Studio Location, Facilities & Amenities */}
-      <section className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311] space-y-6">
+      <section className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)] space-y-6">
         <div className="grid gap-8 lg:grid-cols-12 items-center">
           <div className="lg:col-span-6 space-y-4">
             <p className={`${KICKER} text-accent-red`}>
@@ -407,7 +407,7 @@ export default async function AboutPage() {
           </div>
 
           <div className="lg:col-span-6 space-y-4">
-            <div className="border-4 border-ink bg-poster-mustard/30 p-6 shadow-[4px_4px_0_0_#161311] space-y-4">
+            <div className="border-4 border-ink bg-poster-mustard/30 p-6 shadow-[4px_4px_0_0_var(--color-ink)] space-y-4">
               <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
                 <MapPin className="h-4 w-4 text-accent-red" />
                 <h3 className="font-display font-black text-lg uppercase text-ink">Studio Location &amp; Hours</h3>
@@ -453,7 +453,7 @@ export default async function AboutPage() {
       <WhyCubanSection />
 
       {/* 6. Call to Action Banner */}
-      <section className="border-4 border-ink bg-poster-mustard p-6 sm:p-12 text-ink text-center shadow-[8px_8px_0_0_#161311] space-y-4">
+      <section className="border-4 border-ink bg-poster-mustard p-6 sm:p-12 text-ink text-center shadow-[8px_8px_0_0_var(--color-ink)] space-y-4">
         <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.section}`}>
           Ready to Step Into the Circle?
         </h2>

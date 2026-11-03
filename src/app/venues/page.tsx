@@ -33,7 +33,7 @@ export default function VenuesGuidePage() {
       {/* Cartelera Poster Hero Header */}
       <section
         data-testid="page-header"
-        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311]"
+        className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
           <span>BOURNEMOUTH STUDIO HUB &amp; FESTIVAL PARTNER VENUES</span>
@@ -57,7 +57,7 @@ export default function VenuesGuidePage() {
             <p className="max-w-2xl text-sm font-semibold text-ink leading-relaxed">
               Everything you need for a smooth arrival at Maestro Enrique Perez Valdes&apos; weekly classes at BOH Studios and Salsa Explosion dance weekend festivals across Bournemouth.
             </p>
-            <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
+            <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_var(--color-ink)]">
               <Sparkles className="h-4 w-4 text-accent-red" />
               <span>Thu &amp; Sun Classes at BOH Studios: £12 (1 Class) / £14 (2 Classes) at the Door</span>
             </div>
@@ -87,14 +87,14 @@ export default function VenuesGuidePage() {
       {/* Venues Grid */}
       <div className="grid gap-8 lg:grid-cols-2">
         {/* Venue 1: BOH Studios Bournemouth */}
-        <div className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_#161311] flex flex-col justify-between">
+        <div className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_var(--color-ink)] flex flex-col justify-between">
           <div>
             <div className="bg-poster-mustard p-6 border-b-4 border-ink text-ink flex flex-col justify-between space-y-3">
               <div className="flex items-center justify-between">
                 <span className="border border-ink bg-ink text-paper text-xs font-black uppercase tracking-wider px-2 py-0.5">
                   Thursdays &amp; Sundays Hub
                 </span>
-                <span className="border border-ink bg-paper px-2.5 py-0.5 text-xs font-bold text-ink shadow-[2px_2px_0_0_#161311]">
+                <span className="border border-ink bg-paper px-2.5 py-0.5 text-xs font-bold text-ink shadow-[2px_2px_0_0_var(--color-ink)]">
                   The Triangle, Bournemouth
                 </span>
               </div>
@@ -178,14 +178,14 @@ export default function VenuesGuidePage() {
         </div>
 
         {/* Venue 2: BOH Studios Studio 2 Bournemouth */}
-        <div className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_#161311] flex flex-col justify-between">
+        <div className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_var(--color-ink)] flex flex-col justify-between">
           <div>
             <div className="bg-poster-teal p-6 border-b-4 border-ink text-ink flex flex-col justify-between space-y-3">
               <div className="flex items-center justify-between">
                 <span className="border border-ink bg-ink text-paper text-xs font-black uppercase tracking-wider px-2 py-0.5">
                   BOH Studios • Studio 2
                 </span>
-                <span className="border border-ink bg-paper px-2.5 py-0.5 text-xs font-bold text-ink shadow-[2px_2px_0_0_#161311]">
+                <span className="border border-ink bg-paper px-2.5 py-0.5 text-xs font-bold text-ink shadow-[2px_2px_0_0_var(--color-ink)]">
                   The Triangle, Bournemouth
                 </span>
               </div>
@@ -266,14 +266,14 @@ export default function VenuesGuidePage() {
         </div>
 
         {/* Venue 3: Neptune Hall Boscombe */}
-        <div className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_#161311] flex flex-col justify-between">
+        <div className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_var(--color-ink)] flex flex-col justify-between">
           <div>
             <div className="bg-poster-blue p-6 border-b-4 border-ink text-paper flex flex-col justify-between space-y-3">
               <div className="flex items-center justify-between">
                 <span className="border border-paper bg-ink text-paper text-xs font-black uppercase tracking-wider px-2 py-0.5">
                   Special Events Venue
                 </span>
-                <span className="border border-paper bg-paper text-ink px-2.5 py-0.5 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
+                <span className="border border-paper bg-paper text-ink px-2.5 py-0.5 text-xs font-bold shadow-[2px_2px_0_0_var(--color-ink)]">
                   Boscombe Seafront
                 </span>
               </div>
@@ -351,14 +351,14 @@ export default function VenuesGuidePage() {
         </div>
 
         {/* Venue 4: The Roundhouse Hotel */}
-        <div className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_#161311] flex flex-col justify-between">
+        <div className="border-4 border-ink bg-paper text-ink shadow-[6px_6px_0_0_var(--color-ink)] flex flex-col justify-between">
           <div>
             <div className="bg-poster-red p-6 border-b-4 border-ink text-ink flex flex-col justify-between space-y-3">
               <div className="flex items-center justify-between">
                 <span className="border border-paper bg-ink text-paper text-xs font-black uppercase tracking-wider px-2 py-0.5">
                   Festival Accommodation Partner
                 </span>
-                <span className="border border-paper bg-paper text-ink px-2.5 py-0.5 text-xs font-bold shadow-[2px_2px_0_0_#161311]">
+                <span className="border border-paper bg-paper text-ink px-2.5 py-0.5 text-xs font-bold shadow-[2px_2px_0_0_var(--color-ink)]">
                   Lansdowne, Bournemouth
                 </span>
               </div>
@@ -440,10 +440,10 @@ export default function VenuesGuidePage() {
       </div>
 
       {/* Dedicated Nearby Hotels for Dance Weekends Section */}
-      <div className="border-4 border-ink bg-poster-teal p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_#161311] space-y-6">
+      <div className="border-4 border-ink bg-poster-teal p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)] space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b-4 border-ink pb-4">
           <div>
-            <span className="border-2 border-ink bg-paper text-ink text-xs font-bold uppercase tracking-wider px-3 py-1 inline-block mb-2 shadow-[2px_2px_0_0_#161311]">
+            <span className="border-2 border-ink bg-paper text-ink text-xs font-bold uppercase tracking-wider px-3 py-1 inline-block mb-2 shadow-[2px_2px_0_0_var(--color-ink)]">
               Visiting Dancer Guide
             </span>
             <h2 className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tight text-ink">
@@ -453,14 +453,14 @@ export default function VenuesGuidePage() {
               Travelling from London, Bristol, Southampton, or abroad for our weekend festivals? These verified walkable hotels are all within 3 to 10 minutes of BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR).
             </p>
           </div>
-          <span className="border-2 border-ink bg-poster-mustard text-ink text-xs font-bold px-3 py-1 shrink-0 shadow-[2px_2px_0_0_#161311]">
+          <span className="border-2 border-ink bg-poster-mustard text-ink text-xs font-bold px-3 py-1 shrink-0 shadow-[2px_2px_0_0_var(--color-ink)]">
             Walking Distance to BOH Studios
           </span>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {/* Hotel 1: Hilton Bournemouth */}
-          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_#161311] flex flex-col justify-between text-ink">
+          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_var(--color-ink)] flex flex-col justify-between text-ink">
             <div className="space-y-2">
               <div className="flex items-center justify-between border-b border-ink pb-2">
                 <span className="border border-ink bg-poster-mustard text-ink text-xs font-bold px-2 py-0.5">
@@ -480,7 +480,7 @@ export default function VenuesGuidePage() {
           </div>
 
           {/* Hotel 2: Hampton by Hilton */}
-          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_#161311] flex flex-col justify-between text-ink">
+          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_var(--color-ink)] flex flex-col justify-between text-ink">
             <div className="space-y-2">
               <div className="flex items-center justify-between border-b border-ink pb-2">
                 <span className="border border-ink bg-poster-teal text-ink text-xs font-bold px-2 py-0.5">
@@ -500,7 +500,7 @@ export default function VenuesGuidePage() {
           </div>
 
           {/* Hotel 3: Premier Inn Bournemouth Central */}
-          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_#161311] flex flex-col justify-between text-ink">
+          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_var(--color-ink)] flex flex-col justify-between text-ink">
             <div className="space-y-2">
               <div className="flex items-center justify-between border-b border-ink pb-2">
                 <span className="border border-ink bg-poster-mustard text-ink text-xs font-bold px-2 py-0.5">
@@ -520,7 +520,7 @@ export default function VenuesGuidePage() {
           </div>
 
           {/* Hotel 4: Holiday Inn Bournemouth */}
-          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_#161311] flex flex-col justify-between text-ink">
+          <div className="border-2 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_var(--color-ink)] flex flex-col justify-between text-ink">
             <div className="space-y-2">
               <div className="flex items-center justify-between border-b border-ink pb-2">
                 <span className="border border-ink bg-poster-blue text-paper text-xs font-bold px-2 py-0.5">
@@ -542,7 +542,7 @@ export default function VenuesGuidePage() {
       </div>
 
       {/* Newcomer Arrival & Etiquette Guide */}
-      <div className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[6px_6px_0_0_#161311] space-y-6">
+      <div className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[6px_6px_0_0_var(--color-ink)] space-y-6">
         <div className="border-b-4 border-ink pb-3 space-y-1">
           <p className={`${KICKER} text-accent-red`}>
             First-Timer FAQs
@@ -553,7 +553,7 @@ export default function VenuesGuidePage() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="border-2 border-ink bg-poster-mustard/20 p-5 space-y-2 shadow-[2px_2px_0_0_#161311]">
+          <div className="border-2 border-ink bg-poster-mustard/20 p-5 space-y-2 shadow-[2px_2px_0_0_var(--color-ink)]">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-mustard text-ink">
               <Footprints className="h-5 w-5" />
             </div>
@@ -563,7 +563,7 @@ export default function VenuesGuidePage() {
             </p>
           </div>
 
-          <div className="border-2 border-ink bg-poster-teal/20 p-5 space-y-2 shadow-[2px_2px_0_0_#161311]">
+          <div className="border-2 border-ink bg-poster-teal/20 p-5 space-y-2 shadow-[2px_2px_0_0_var(--color-ink)]">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-teal text-ink">
               <Sparkles className="h-5 w-5" />
             </div>
@@ -573,7 +573,7 @@ export default function VenuesGuidePage() {
             </p>
           </div>
 
-          <div className="border-2 border-ink bg-poster-blue/10 p-5 space-y-2 shadow-[2px_2px_0_0_#161311]">
+          <div className="border-2 border-ink bg-poster-blue/10 p-5 space-y-2 shadow-[2px_2px_0_0_var(--color-ink)]">
             <div className="flex h-10 w-10 items-center justify-center border-2 border-ink bg-poster-blue text-paper">
               <Clock className="h-5 w-5" />
             </div>

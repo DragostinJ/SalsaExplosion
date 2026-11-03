@@ -129,7 +129,7 @@ export function PrivateLessonsClient({
     <div className="space-y-8">
       {/* Existing Student Requests Drawer / Queue */}
       {bookings.length > 0 && (
-        <div className="border-4 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_#161311] text-ink">
+        <div className="border-4 border-ink bg-paper p-5 space-y-3 shadow-[4px_4px_0_0_var(--color-ink)] text-ink">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink pb-2">
             <h3 className="font-bold text-sm flex items-center gap-2">
               <Clock className="h-4 w-4 text-accent-red" />
@@ -208,8 +208,8 @@ export function PrivateLessonsClient({
       )}
 
       {isSubmitted ? (
-        <div className="border-4 border-ink bg-poster-teal/20 p-8 text-center space-y-4 shadow-[8px_8px_0_0_#161311] text-ink">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center border-4 border-ink bg-poster-teal text-ink shadow-[4px_4px_0_0_#161311]">
+        <div className="border-4 border-ink bg-poster-teal/20 p-8 text-center space-y-4 shadow-[8px_8px_0_0_var(--color-ink)] text-ink">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center border-4 border-ink bg-poster-teal text-ink shadow-[4px_4px_0_0_var(--color-ink)]">
             <CheckCircle2 className="h-8 w-8" />
           </div>
           <h2 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
@@ -218,7 +218,7 @@ export function PrivateLessonsClient({
           <p className="text-xs sm:text-sm text-ink max-w-lg mx-auto leading-relaxed font-semibold">
             Thank you! Maestro {activeInstructor.name} and the BOH Studios Bournemouth desk will confirm your {selectedPackage === "SINGLE" ? "1-Hour Lesson" : "5-Hour Intensive Package"} ({selectedDay}) within 24 hours.
           </p>
-          <div className="border-2 border-ink bg-paper p-4 max-w-md mx-auto text-xs space-y-1.5 text-left text-ink shadow-[2px_2px_0_0_#161311]">
+          <div className="border-2 border-ink bg-paper p-4 max-w-md mx-auto text-xs space-y-1.5 text-left text-ink shadow-[2px_2px_0_0_var(--color-ink)]">
             <div>
               <span className="font-bold text-ink/70">Instructor:</span>{" "}
               <span className="font-bold text-ink">{activeInstructor.name}</span>
@@ -260,7 +260,7 @@ export function PrivateLessonsClient({
                   <div
                     key={inst.id}
                     onClick={() => setSelectedInstructor(inst.id)}
-                    className={`cursor-pointer border-4 border-ink p-5 transition-all flex flex-col justify-between space-y-4 shadow-[4px_4px_0_0_#161311] ${
+                    className={`cursor-pointer border-4 border-ink p-5 transition-all flex flex-col justify-between space-y-4 shadow-[4px_4px_0_0_var(--color-ink)] ${
                       isSelected
                         ? "bg-poster-mustard/30 ring-2 ring-poster-red"
                         : "bg-paper hover:bg-black/5"
@@ -321,7 +321,7 @@ export function PrivateLessonsClient({
             <div className="grid gap-4 sm:grid-cols-2">
               <div
                 onClick={() => setSelectedPackage("SINGLE")}
-                className={`cursor-pointer border-4 border-ink p-5 transition-all space-y-2 shadow-[4px_4px_0_0_#161311] ${
+                className={`cursor-pointer border-4 border-ink p-5 transition-all space-y-2 shadow-[4px_4px_0_0_var(--color-ink)] ${
                   selectedPackage === "SINGLE"
                     ? "bg-poster-mustard/30 ring-2 ring-poster-red"
                     : "bg-paper hover:bg-black/5"
@@ -343,7 +343,7 @@ export function PrivateLessonsClient({
 
               <div
                 onClick={() => setSelectedPackage("BLOCK")}
-                className={`cursor-pointer border-4 border-ink p-5 transition-all space-y-2 shadow-[4px_4px_0_0_#161311] ${
+                className={`cursor-pointer border-4 border-ink p-5 transition-all space-y-2 shadow-[4px_4px_0_0_var(--color-ink)] ${
                   selectedPackage === "BLOCK"
                     ? "bg-poster-mustard/30 ring-2 ring-poster-red"
                     : "bg-paper hover:bg-black/5"
@@ -450,7 +450,7 @@ export function PrivateLessonsClient({
           </div>
 
           {/* Checkout & Summary Bar */}
-          <div className="border-4 border-ink bg-poster-mustard p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[6px_6px_0_0_#161311] text-ink">
+          <div className="border-4 border-ink bg-poster-mustard p-6 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[6px_6px_0_0_var(--color-ink)] text-ink">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-ink/75 block">
                 Lesson Summary
@@ -476,7 +476,7 @@ export function PrivateLessonsClient({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-ink font-display text-sm font-black uppercase tracking-wider px-7 min-h-[48px] shadow-[4px_4px_0_0_#161311] flex items-center justify-center`}
+                className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-ink font-display text-sm font-black uppercase tracking-wider px-7 min-h-[48px] shadow-[4px_4px_0_0_var(--color-ink)] flex items-center justify-center`}
               >
                 {isSubmitting ? "Submitting..." : "Request Coaching Slot"}
                 <ArrowRight className="ml-2 h-4 w-4" />

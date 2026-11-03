@@ -45,8 +45,10 @@ export default async function ClassRecapsPage() {
   let activeClassesForStaff: Array<{ id: string; title: string; minLevel: DanceLevel }> = [];
   if (isStaff) {
     try {
+      // Classes that have started, newest first: classes are now created 4 weeks ahead, so without
+      // the date limit these 15 slots would all be future classes with nothing to recap yet.
       activeClassesForStaff = await prisma.classSession.findMany({
-        where: { isCancelled: false },
+        where: { isCancelled: false, startTime: { lte: new Date() } },
         orderBy: { startTime: "desc" },
         take: 15,
         select: { id: true, title: true, minLevel: true },

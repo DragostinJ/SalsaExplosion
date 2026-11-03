@@ -39,16 +39,19 @@ interface ClassRosterWorkspaceProps {
   initialClasses: ClassRosterSummary[];
   /** Practice-player songs a teacher can link to a class (resolved on the server) */
   songOptions?: ClassSongSummary[];
+  /** The class to open first: tonight's or the next one (picked on the server, so it can't differ at hydration) */
+  initialSelectedId?: string;
 }
 
 export function ClassRosterWorkspace({
   initialClasses,
   songOptions = [],
+  initialSelectedId,
 }: ClassRosterWorkspaceProps) {
   const { schedule: scheduleTimeout } = useTimeout();
   const [classes, setClasses] = useState<ClassRosterSummary[]>(initialClasses);
   const [selectedClassId, setSelectedClassId] = useState<string>(
-    initialClasses[0]?.id ?? ""
+    initialSelectedId ?? initialClasses[0]?.id ?? ""
   );
   const [showQrModal, setShowQrModal] = useState<boolean>(false);
   const [showRecapModal, setShowRecapModal] = useState<boolean>(false);

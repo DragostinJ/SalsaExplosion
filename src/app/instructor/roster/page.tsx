@@ -20,10 +20,13 @@ export const metadata = {
 export default async function InstructorRosterPage() {
   await requireRole(STAFF_ROLES);
 
+  // Last week's classes (for recaps) and the ones coming up. Without the date limit this showed
+  // the 25 oldest classes ever, so once classes were created every week tonight's would vanish.
+  const now = new Date();
   const classes = await prisma.classSession.findMany({
-    where: { isCancelled: false },
+    where: { isCancelled: false, startTime: { gte: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000) } },
     orderBy: { startTime: "asc" },
-    take: 25,
+    take: 30,
     include: {
       instructor: {
         select: { firstName: true, lastName: true, avatarUrl: true },
@@ -141,6 +144,10 @@ export default async function InstructorRosterPage() {
       <ClassRosterWorkspace
         initialClasses={serializedClasses}
         songOptions={summarizeClassSongs(TIMBA_SONG_ANATOMY_DATA.map((song) => song.id))}
+        // Tonight's class (until an hour after it ends), else the next one, else the latest
+        initialSelectedId={
+          (classes.find((c) => c.endTime.getTime() >= now.getTime() - 60 * 60 * 1000) ?? classes[classes.length - 1])?.id
+        }
       />
     </main>
   );

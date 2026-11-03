@@ -391,7 +391,7 @@ export function ClassManagerWorkspace({
                           setEditingClassId(null);
                         }}
                         className="text-xs h-8 px-2 text-rose-600 hover:text-rose-700 hover:bg-rose-500/10"
-                        title="Cancel Class & Refund Students"
+                        title="Cancel this class"
                       >
                         <Ban className="h-3.5 w-3.5" />
                       </Button>
@@ -469,13 +469,13 @@ export function ClassManagerWorkspace({
                     </div>
                   )}
 
-                  {/* Inline Class Cancellation & Refund Prompt */}
+                  {/* Inline class cancellation prompt */}
                   {isCancelling && (
                     <div className="rounded-xl border border-rose-500/30 bg-rose-500/[0.06] p-3.5 space-y-2 mt-1 text-xs animate-in fade-in duration-150">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-rose-400 flex items-center gap-1.5">
                           <Ban className="h-4 w-4" />
-                          Cancel Class & Automatically Refund {cls.leadsBooked + cls.followsBooked} Student(s)
+                          Cancel this class and email the {cls.leadsBooked + cls.followsBooked} dancer(s) coming
                         </span>
                         <button
                           type="button"
@@ -487,7 +487,7 @@ export function ClassManagerWorkspace({
                         </button>
                       </div>
                       <p className="text-[11px] text-muted-foreground">
-                        This cancels the class, releases everyone who said they were coming, and records an audit trail event. Nothing was paid online, so there is nothing to refund.
+                        This cancels the class and emails everyone who said they were coming, with the reason you type. Classes are paid at the door, so there is nothing to refund. It won&apos;t be added again automatically.
                       </p>
                       <div className="space-y-1 pt-1">
                         <label className="text-[11px] font-semibold text-foreground">

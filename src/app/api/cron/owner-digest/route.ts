@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { isAuthorizedCronRequest } from "@/lib/cron-auth";
 import { isEmailConfigured, sendEmail } from "@/lib/email/send-email";
 import { ownerDigestEmail, type DigestNumbers } from "@/lib/email/templates";
+import { ownerEmails } from "@/lib/email/notify-owner";
 import { rankPracticeHotspots } from "@/lib/music/practice-hotspots";
 import { reportError } from "@/lib/monitoring";
 
@@ -46,10 +47,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  const recipients = (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((email) => email.trim())
-    .filter((email) => email.includes("@"));
+  const recipients = ownerEmails();
   if (recipients.length === 0) return NextResponse.json({ error: "ADMIN_EMAILS is empty" }, { status: 500 });
 
   const appUrl = getSiteOrigin();

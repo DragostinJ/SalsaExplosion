@@ -80,6 +80,91 @@ export function classReminderEmail(input: ClassReminderInput) {
   };
 }
 
+export interface ClassCancelledInput {
+  firstName: string;
+  classTitle: string;
+  startTime: Date;
+  reason: string;
+  appUrl: string;
+}
+
+/** Sent to everyone who said they were coming when a teacher cancels the class (a service message, not a reminder). */
+export function classCancelledEmail(input: ClassCancelledInput) {
+  const time = input.startTime.toLocaleTimeString("en-GB", { timeZone: TIME_ZONE, hour: "2-digit", minute: "2-digit" });
+  const day = input.startTime.toLocaleDateString("en-GB", { timeZone: TIME_ZONE, weekday: "long", day: "numeric", month: "long" });
+  const classesUrl = `${input.appUrl.replace(/\/$/, "")}/classes`;
+  const subject = `Cancelled: ${input.classTitle}, ${day} ${time}`;
+
+  const html = wrap(
+    `<p style="font-size:16px">Hi ${escapeHtml(input.firstName)},</p>` +
+      `<p style="font-size:16px">Sorry, <strong>${escapeHtml(input.classTitle)}</strong> on ${escapeHtml(day)} at ` +
+      `<strong>${escapeHtml(time)}</strong> is cancelled.</p>` +
+      `<p style="font-size:14px">${escapeHtml(input.reason)}</p>` +
+      `<p style="font-size:14px;color:#59534c">You don't need to do anything: classes are paid at the door, so there is nothing to refund.</p>` +
+      `<p style="font-size:14px;margin-top:20px">${button(classesUrl, "See the other classes")}</p>`,
+    "You get this because you said you were coming to this class at Salsa Explosion."
+  );
+
+  const text = [
+    `Hi ${input.firstName},`,
+    `Sorry, ${input.classTitle} on ${day} at ${time} is cancelled.`,
+    input.reason,
+    "You don't need to do anything: classes are paid at the door, so there is nothing to refund.",
+    "",
+    `See the other classes: ${classesUrl}`,
+  ].join("\n");
+
+  return { subject, html, text };
+}
+
+export interface PrivateLessonRequestInput {
+  dancerName: string;
+  dancerEmail: string;
+  coachName: string;
+  packageLabel: string;
+  pricePounds: number;
+  preferredSlot: string;
+  focusTopic: string;
+  notes: string | null;
+  deskUrl: string;
+}
+
+/** To the owner, the moment a dancer asks for a private lesson. Replying goes straight to the dancer. */
+export function privateLessonRequestEmail(input: PrivateLessonRequestInput) {
+  const subject = `Private lesson request: ${input.dancerName} with ${input.coachName}`;
+  const rows: [string, string][] = [
+    ["Dancer", `${input.dancerName} (${input.dancerEmail})`],
+    ["Coach", input.coachName],
+    ["Lesson", `${input.packageLabel}, £${input.pricePounds}`],
+    ["When", input.preferredSlot],
+    ["Focus", input.focusTopic],
+    ...(input.notes ? ([["Notes", input.notes]] as [string, string][]) : []),
+  ];
+
+  const html = wrap(
+    `<p style="font-size:16px"><strong>${escapeHtml(input.dancerName)}</strong> asked for a private lesson.</p>` +
+      `<table style="font-size:14px;border-collapse:collapse">` +
+      rows
+        .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;font-weight:bold;vertical-align:top">${escapeHtml(k)}</td><td style="padding:4px 0">${escapeHtml(v)}</td></tr>`)
+        .join("") +
+      `</table>` +
+      `<p style="font-size:14px;margin-top:20px">Reply to this email to answer ${escapeHtml(input.dancerName)} directly.</p>` +
+      `<p style="font-size:14px">${button(input.deskUrl, "Open the studio desk")}</p>`,
+    "Sent by the Salsa Explosion website when a dancer asks for a private lesson."
+  );
+
+  const text = [
+    `${input.dancerName} asked for a private lesson.`,
+    "",
+    ...rows.map(([k, v]) => `${k}: ${v}`),
+    "",
+    `Reply to this email to answer ${input.dancerName} directly.`,
+    `Studio desk: ${input.deskUrl}`,
+  ].join("\n");
+
+  return { subject, html, text };
+}
+
 export interface DigestNumbers {
   classesHeld: number;
   checkIns: number;

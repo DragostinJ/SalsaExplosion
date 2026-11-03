@@ -8,6 +8,7 @@ import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE 
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
 import { COACHING_INSTRUCTORS_CATALOG } from "@/lib/constants/coaching";
+import { notifyOwnerOfPrivateLessonRequest } from "@/lib/email/notify-owner";
 
 const BookPrivateLessonSchema = z.object({
   instructorId: z.enum(["enrique", "moe", "justyna", "arturas", "jim"]),
@@ -111,6 +112,18 @@ export async function bookPrivateLessonAction(
         revalidatePath("/private-lessons");
         revalidatePath("/dashboard/wallet");
         revalidatePath("/admin/operations");
+
+        // Tell the owner straight away, instead of waiting for him to check the studio desk.
+        await notifyOwnerOfPrivateLessonRequest({
+          dancerName: [user.firstName, user.lastName].filter(Boolean).join(" ") || user.email,
+          dancerEmail: user.email,
+          coachName: instructor.name,
+          packageLabel: packageType === "SINGLE_1HR" ? "1 hour" : "Block of 5 hours",
+          pricePounds: serverPricePounds,
+          preferredSlot: booking.preferredSlot,
+          focusTopic,
+          notes: notes ?? null,
+        });
 
         return {
           success: true,

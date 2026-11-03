@@ -15,6 +15,7 @@ import {
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, canSwitchRoles, isBootstrapAdmin, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { recordAuditLog } from "@/lib/audit-log";
+import { notifyClassCancelled } from "@/lib/email/notify-class-cancelled";
 import { CUBAN_SALSA_SYLLABUS } from "@/lib/constants/submission";
 import type {
   AiRubricEvaluation,
@@ -552,6 +553,7 @@ export async function cancelClassSessionWithRefundsAction(
         include: {
           bookings: {
             where: { status: BookingStatus.CONFIRMED },
+            include: { user: { select: { email: true, firstName: true } } },
           },
         },
       });
@@ -599,10 +601,26 @@ export async function cancelClassSessionWithRefundsAction(
     revalidatePath("/classes");
     revalidatePath("/instructor/roster");
 
+    // Tell everyone who said they were coming, so nobody has to message each dancer by hand.
+    const notice = await notifyClassCancelled({
+      classTitle: result.classSession.title,
+      startTime: result.classSession.startTime,
+      reason: parsed.data.reason,
+      dancers: result.classSession.bookings.flatMap((b) => (b.user ? [b.user] : [])),
+    });
+    const told =
+      result.totalBookings === 0
+        ? " Nobody had said they were coming yet."
+        : notice.emailed > 0
+          ? ` ${notice.emailed} dancer(s) who said they were coming have been emailed.`
+          : notice.emailOff
+            ? ` Email isn't set up, so please tell the ${result.totalBookings} dancer(s) who said they were coming.`
+            : ` ${result.totalBookings} dancer(s) who said they were coming are released.`;
+
     return {
       success: true,
       data: { id: parsed.data.classSessionId, cancelledBookings: result.totalBookings },
-      message: `Class cancelled. ${result.totalBookings} dancer(s) who said they were coming are released.`,
+      message: `Class cancelled.${told}`,
     };
   } catch (error) {
     console.error("[cancelClassSessionWithRefundsAction]", error);

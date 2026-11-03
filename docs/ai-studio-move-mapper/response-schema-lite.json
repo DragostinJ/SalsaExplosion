@@ -120,7 +120,7 @@
           },
           "mechanics": {
             "type": "string",
-            "description": "What you SEE, count by count: hand holds and changes, who turns and which way, where the hands travel, the position. Start with \"Name heard: ...\" if the video says the name. 20 to 1,200 characters."
+            "description": "What you SEE, never the move name: \"Hold: ...\", then one sentence per count group (\"1-3: ...\", \"5-7: ...\"), then \"Travel: ...\" and \"Ends: ...\". Start with \"Name heard: ...\" only if the video says the name. 20 to 1,200 characters."
           },
           "moveIds": {
             "type": "array",

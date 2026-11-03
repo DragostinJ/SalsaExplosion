@@ -18,12 +18,13 @@ HOW TO WORK
    - a body-movement passage (despelote, tembleque);
    - a short musical accent (a freeze, a hit, a stop).
    Rows usually last 4 to 20 seconds. Teaching talk, walking and applause are one "other" row each, or are skipped.
-3. Describe first, name last. In "mechanics" write what you actually see, count by count where you can:
-   - which hands hold (right-to-right, left-to-left, both, cross-hand, none) and every hand change;
-   - who turns, how many times, and which way (to the follower's right or left);
-   - where the hands travel (over her head, over his head, behind a back, around the neck, at the waist);
-   - the position (open, closed, side by side, one behind the other).
-   If someone in the video SAYS the move's name, start mechanics with "Name heard: <name>." and still describe what you see.
+3. Describe first, name last. A teacher checks every row against the video using only your description, so describe what you SEE, never what the move is called. Write "mechanics" in this order, one short sentence each:
+   - "Hold:" which hands hold (right-to-right, left-to-left, both, cross-hand, none) and the position (open, closed, side by side, one behind the other).
+   - Then one sentence per group of counts you saw, starting with the counts ("1-3:", "5-7:", "1-3 (second 8):"): who steps or turns, how many times, which way (to the follower's right or left), where the hands travel (over her head, over his head, behind a back, around the neck, at the waist), and any hand change on the count it happens.
+   - "Travel:" where each dancer ends up, seen from the leader ("she passes in front of him to his right side").
+   - "Ends:" the final hold and position.
+   Format example (not a real figure): "Hold: open, his left holds her right. 1-3: both rock back and forward in place. 5-7: he raises his left hand and she turns once to her right under it. Travel: they stay in place. Ends: open, facing, same hold."
+   Never write a move's name in mechanics; names go only in moveIds. The one exception: if someone in the video SAYS the name, start mechanics with "Name heard: <name>." and then describe as above.
    Keep mechanics between 20 and 1,200 characters (about 150 words); a long row is a sign it should be two rows.
    Only then choose moveIds.
 4. Naming:

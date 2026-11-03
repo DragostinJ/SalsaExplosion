@@ -1,4 +1,4 @@
-import { getImageProps } from "next/image";
+import Image, { getImageProps } from "next/image";
 import type { SongAnatomy } from "@/lib/constants/timba-song-anatomy";
 import type { MediaAssetConfig } from "@/lib/media-manifest";
 import type { GearPalette } from "@/lib/site-content";
@@ -37,6 +37,33 @@ export function HeroPicture({
       <source srcSet={mobileSet} />
       <img {...rest} alt={desktop.alt} className={className} />
     </picture>
+  );
+}
+
+/** A screen-print poster banner in a 4px ink frame, with an optional ink caption bar. */
+export function PosterBanner({
+  image,
+  caption,
+  className,
+}: {
+  image: MediaAssetConfig;
+  caption?: string;
+  className?: string;
+}) {
+  return (
+    <figure className={cn("border-4 border-ink bg-paper", className)}>
+      <Image
+        src={image.src}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        sizes="(max-width: 1280px) 100vw, 1280px"
+        className="aspect-[21/9] w-full object-cover"
+      />
+      {caption && (
+        <figcaption className="border-t-4 border-ink bg-ink px-4 py-2 font-display text-2xl uppercase text-paper">{caption}</figcaption>
+      )}
+    </figure>
   );
 }
 

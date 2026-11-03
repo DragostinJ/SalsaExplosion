@@ -117,9 +117,19 @@ export default function PricingPage() {
             </div>
 
             <div className="pt-1 space-y-2">
-              <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
-                Festivals &amp; Special Events
-              </h3>
+              <div className="flex items-center gap-3">
+                <Image
+                  src={MEDIA_MANIFEST.mockupGraphics.bag.src}
+                  alt=""
+                  width={MEDIA_MANIFEST.mockupGraphics.bag.width}
+                  height={MEDIA_MANIFEST.mockupGraphics.bag.height}
+                  sizes="5rem"
+                  className="w-20 shrink-0"
+                />
+                <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink">
+                  Festivals &amp; Special Events
+                </h3>
+              </div>
               <p className="text-xs text-ink font-medium leading-relaxed">
                 Official online passes for Made in Cuba Dance Weekend, SB&amp;K Nights and the seasonal parties, paid securely with Stripe. Gift vouchers are ordered from Enrique directly (below).
               </p>

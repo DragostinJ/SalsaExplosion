@@ -63,21 +63,23 @@ A dance teacher seen from behind as a bold silhouette, clapping the count, facin
 
 ## Where each image goes (for Claude, not for Gemini)
 
-Every page below had no illustration on 2026-11-03 (checked with a search for `mockupGraphics` and `GRAPHICS` in `src/`). Save Gemini's files into `public/images/editorial/` as before; Claude processes and places them.
+Delivered 2026-11-03 and processed into `public/images/editorial/` (`icaic-*.png` cut-outs, `banner-*.jpg`), registered in `MEDIA_MANIFEST.mockupGraphics` (maracas, map, calendar, stars, bag, letter, key, footprints, claves) and `MEDIA_MANIFEST.editorial` (bannerFestival, bannerStudio, bannerTeacher).
 
-| # | Image | Where it goes |
-|---|-------|---------------|
-| 1 | Maracas | /events/[slug], the party and pass section |
-| 2 | Map and pin | /venues ("Directions & Parking") |
-| 3 | Tear-off calendar | /dashboard, the dancer's week |
-| 4 | Five stars | /review (Google review) |
-| 5 | Shopping bag | /shop (passes and vouchers) |
-| 6 | Pen and sealed letter | /terms |
-| 7 | Door key | /checkin/[sessionId] (door check-in) |
-| 8 | Dance footprints | /moves/[moveId], beside "El que lleva / La que sigue" |
-| 9 | Clave sticks | /sign-in and /sign-up |
-| 10 | Festival by the sea | /events hero |
-| 11 | The studio at night | /schedule |
-| 12 | The teacher's count | /how-it-works |
+The brief aimed at pages with no illustration. Three of them turned out to be redirects (`/shop` → /pricing, `/schedule` and `/dashboard` → /classes), so those pictures went to the page people land on instead.
 
-Items 1–9 are cut out to transparent PNGs (1024 px) like rounds 2–4, and keep their cream interiors, so put them on paper or a light poster ink. Items 10–12 are optimised JPEGs (max 2400 px).
+| # | Image | Where it is |
+|---|-------|-------------|
+| 1 | Maracas | /events/[slug], beside "Available Passes" |
+| 2 | Map and pin | /venues hero |
+| 3 | Tear-off calendar | /cartel header (the class-night posters, which carry the next class date) |
+| 4 | Five stars | /review hero, in place of the five star icons |
+| 5 | Shopping bag | /pricing, the "Festivals & Special Events" card |
+| 6 | Pen and sealed letter | /terms hero |
+| 7 | Door key | /checkin/[sessionId], above the check-in card (not on its mustard header, where the key's mustard would vanish) |
+| 8 | Dance footprints | /moves/[moveId], above "El que lleva / La que sigue" |
+| 9 | Clave sticks | /sign-in and /sign-up, above the Clerk form |
+| 10 | Festival by the sea | /events, under the hero ("Fiesta junto al mar") |
+| 11 | The studio at night | /classes, after the timetable ("Jueves y domingos en BOH Studios") |
+| 12 | The teacher's count | /how-it-works, under the hero ("Uno, dos, tres") |
+
+Banners use `PosterBanner` from `src/components/poster/poster-art.tsx`. Items 1–9 are transparent PNGs (1024 px) like rounds 2–4; their black outlines vanish on ink, so keep them on paper or a light poster ink. Items 10–12 are JPEGs at 2400 px wide.

@@ -29,6 +29,7 @@ import { reportError } from "@/lib/monitoring";
 import { buildFestivalEventJsonLd } from "@/lib/seo/event-jsonld";
 import { jsonLdHtml } from "@/lib/seo/move-jsonld";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 function InstagramIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
@@ -643,9 +644,19 @@ export default async function EventDetailPage({
         {/* Interactive Pass Selection & QR Pass Issuance */}
         <div className="space-y-6">
           <div className="border-b-4 border-ink pb-3 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className={`font-display ${TYPE.section} text-ink leading-tight`}>
-              {eventFinished ? "Passes & Tickets" : "Available Passes"}
-            </h2>
+            <div className="flex items-center gap-3">
+              <Image
+                src={MEDIA_MANIFEST.mockupGraphics.maracas.src}
+                alt=""
+                width={MEDIA_MANIFEST.mockupGraphics.maracas.width}
+                height={MEDIA_MANIFEST.mockupGraphics.maracas.height}
+                sizes="5rem"
+                className="w-16 shrink-0 sm:w-20"
+              />
+              <h2 className={`font-display ${TYPE.section} text-ink leading-tight`}>
+                {eventFinished ? "Passes & Tickets" : "Available Passes"}
+              </h2>
+            </div>
             <p className="text-xs font-bold uppercase tracking-wider text-ink/70">
               {eventFinished
                 ? "Online sales closed."

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   Flame,
@@ -21,6 +20,7 @@ import { StudioGallery } from "@/components/about/studio-gallery";
 import { BackButton } from "@/components/navigation/back-button";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import { PosterBanner } from "@/components/poster/poster-art";
 import { reportError } from "@/lib/monitoring";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
@@ -168,17 +168,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <figure className="border-4 border-ink bg-paper">
-        <Image
-          src={MEDIA_MANIFEST.editorial.bannerHavana.src}
-          alt={MEDIA_MANIFEST.editorial.bannerHavana.alt}
-          width={MEDIA_MANIFEST.editorial.bannerHavana.width}
-          height={MEDIA_MANIFEST.editorial.bannerHavana.height}
-          sizes="(max-width: 1280px) 100vw, 1280px"
-          className="aspect-[21/9] w-full object-cover"
-        />
-        <figcaption className="border-t-4 border-ink bg-ink px-4 py-2 font-display text-2xl uppercase text-paper">Desde La Habana</figcaption>
-      </figure>
+      <PosterBanner image={MEDIA_MANIFEST.editorial.bannerHavana} caption="Desde La Habana" />
 
       {/* 2. Core Pillars & Academy Capabilities */}
       <section className="space-y-6">

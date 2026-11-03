@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { InstructorRosterSection } from "@/components/home/InstructorRosterSection";
 import { LiveTonightBanner } from "@/components/home/LiveTonightBanner";
-import { ClaveMark, HeroPicture, SongStripes } from "@/components/poster/poster-art";
+import { ClaveMark, HeroPicture, PosterBanner, SongStripes } from "@/components/poster/poster-art";
 import {
   GEAR_INKS,
   KICKER,
@@ -298,16 +298,7 @@ export default async function Home() {
             <div className="mx-auto max-w-7xl">
               <p className={KICKER}>Festivals &amp; parties · book online</p>
               <h2 className={`mt-3 ${TYPE.section}`}>Próximas funciones</h2>
-              <figure className="mt-8 border-4 border-ink bg-paper">
-                <Image
-                  src={BANNERS.bannerBigBand.src}
-                  alt={BANNERS.bannerBigBand.alt}
-                  width={BANNERS.bannerBigBand.width}
-                  height={BANNERS.bannerBigBand.height}
-                  sizes="(max-width: 1280px) 100vw, 1280px"
-                  className="aspect-[21/9] w-full object-cover"
-                />
-              </figure>
+              <PosterBanner image={BANNERS.bannerBigBand} className="mt-8" />
               <ul className="mt-8 grid gap-5 md:grid-cols-3">
                 {events.map((event, index) => (
                   <li key={event.slug} className="flex border-4 border-ink bg-paper">

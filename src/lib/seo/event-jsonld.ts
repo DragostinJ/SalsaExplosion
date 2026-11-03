@@ -1,3 +1,4 @@
+import { getSiteOrigin } from "@/lib/safe-url";
 import { VENUE_INFO } from "@/lib/academy-data";
 
 export interface EventJsonLdLocation {
@@ -95,7 +96,7 @@ export function buildFestivalEventJsonLd(params: {
   const fullImageUrl = params.coverImageUrl
     ? params.coverImageUrl.startsWith("http")
       ? params.coverImageUrl
-      : `https://salsaexplosion.co.uk${params.coverImageUrl}`
+      : `${getSiteOrigin()}${params.coverImageUrl}`
     : undefined;
 
   const availability = params.isFinished
@@ -110,7 +111,7 @@ export function buildFestivalEventJsonLd(params: {
       price: (tier.priceInCents / 100).toFixed(2),
       priceCurrency: "GBP",
       availability,
-      url: `https://salsaexplosion.co.uk/events/${params.slug}`,
+      url: `${getSiteOrigin()}/events/${params.slug}`,
     }));
   } else {
     offers = {
@@ -118,7 +119,7 @@ export function buildFestivalEventJsonLd(params: {
       price: (params.minPricePounds ?? 0).toFixed(2),
       priceCurrency: "GBP",
       availability,
-      url: `https://salsaexplosion.co.uk/events/${params.slug}`,
+      url: `${getSiteOrigin()}/events/${params.slug}`,
     };
   }
 
@@ -137,7 +138,7 @@ export function buildFestivalEventJsonLd(params: {
   return {
     "@context": "https://schema.org",
     "@type": "Event",
-    "@id": `https://salsaexplosion.co.uk/events/${params.slug}`,
+    "@id": `${getSiteOrigin()}/events/${params.slug}`,
     name: params.title,
     startDate: startIso,
     ...(endIso ? { endDate: endIso } : {}),
@@ -158,7 +159,7 @@ export function buildFestivalEventJsonLd(params: {
     organizer: {
       "@type": "Organization",
       name: "Salsa Explosion UK",
-      url: "https://salsaexplosion.co.uk",
+      url: getSiteOrigin(),
     },
     offers,
   };
@@ -175,11 +176,11 @@ export function buildWeeklyClassCourseJsonLd(session: {
 }): ClassCourseJsonLd {
   return {
     "@type": "Course",
-    "@id": `https://salsaexplosion.co.uk/#course-${session.id}`,
+    "@id": `${getSiteOrigin()}/#course-${session.id}`,
     name: `${session.dayName} ${session.time} — ${session.title}`,
     description: `${session.level} (${session.badge}) directed by ${session.instructor} at ${VENUE_INFO.name}, ${VENUE_INFO.fullAddress}.`,
     provider: {
-      "@id": "https://salsaexplosion.co.uk/#organization",
+      "@id": `${getSiteOrigin()}/#organization`,
     },
     offers: {
       "@type": "Offer",

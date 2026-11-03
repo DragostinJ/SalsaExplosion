@@ -1,7 +1,8 @@
+import { getSiteOrigin } from "@/lib/safe-url";
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://salsaexplosion.co.uk";
+  const baseUrl = getSiteOrigin();
   const disallowedPrivatePaths = [
     "/api/",
     "/api/webhooks/",

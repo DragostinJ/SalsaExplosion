@@ -1,13 +1,13 @@
+import { getSiteOrigin } from "@/lib/safe-url";
 import type { Move } from "@/lib/moves/move-schema";
 
-const SITE = "https://salsaexplosion.co.uk";
 
 /**
  * Structured data for an approved move page: a breadcrumb (Moves › family › move) and a
  * LearningResource that ties the page to the school, so search engines can show the move as
  * a lesson from Salsa Explosion. Only ever built for moves a teacher approved.
  */
-export function buildMoveJsonLd(move: Move, baseUrl: string = process.env.NEXT_PUBLIC_APP_URL || SITE) {
+export function buildMoveJsonLd(move: Move, baseUrl: string = getSiteOrigin()) {
   const url = `${baseUrl}/moves/${move.id}`;
   const name = move.spanishName ?? move.name;
   return {
@@ -34,7 +34,7 @@ export function buildMoveJsonLd(move: Move, baseUrl: string = process.env.NEXT_P
         teaches: `${move.category}: ${name}`,
         keywords: [move.category, move.level, ...move.tags].join(", "),
         isPartOf: { "@type": "CreativeWork", name: "La biblioteca de pasos", url: `${baseUrl}/moves` },
-        provider: { "@id": `${SITE}/#organization` },
+        provider: { "@id": `${getSiteOrigin()}/#organization` },
         reviewedBy: move.reviewedBy ? { "@type": "Person", name: move.reviewedBy } : undefined,
       },
     ],

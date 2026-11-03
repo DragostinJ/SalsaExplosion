@@ -25,6 +25,25 @@ export function getSafeAppUrl(
 }
 
 /**
+ * The site's public origin, e.g. "https://salsa-explosion.vercel.app". It comes from
+ * NEXT_PUBLIC_APP_URL (set in Vercel), then Vercel's production domain, then the school's
+ * domain. Canonical tags, the sitemap, JSON-LD, door QR codes and emails all use it, so one
+ * setting moves every absolute link.
+ */
+export function getSiteOrigin(): string {
+  return getSafeAppUrl(
+    process.env.NEXT_PUBLIC_APP_URL ||
+      process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ||
+      process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ).origin;
+}
+
+/** An absolute link to a page on this site, e.g. siteUrl("/checkin/abc"). */
+export function siteUrl(path: string): string {
+  return `${getSiteOrigin()}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+/**
  * Determines whether an error thrown during render is a Next.js internal control-flow signal
  * (such as a redirect, notFound, or dynamic rendering bailout) that MUST be rethrown.
  */

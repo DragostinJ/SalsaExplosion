@@ -1,3 +1,4 @@
+import { getSiteOrigin } from "@/lib/safe-url";
 import {
   ACADEMY_METRICS,
   VENUE_INFO,
@@ -21,12 +22,12 @@ export function JsonLdSchema() {
     "@graph": [
       {
         "@type": ["DanceSchool", "LocalBusiness", "PerformingArtsTheater"],
-        "@id": "https://salsaexplosion.co.uk/#organization",
+        "@id": `${getSiteOrigin()}/#organization`,
         name: "Salsa Explosion UK — Cuban Salsa & Rueda de Casino Bournemouth",
         alternateName: "Salsa Explosion UK — Bournemouth Cuban Salsa Academy",
         description:
           "Bournemouth's authentic Cuban Salsa & Rueda de Casino academy directed by Maestro Enrique Perez Valdes. Strictly Thursdays and Sundays at BOH Studios Bournemouth. Drop-in welcome, no partner required.",
-        url: "https://salsaexplosion.co.uk",
+        url: getSiteOrigin(),
         telephone: VENUE_INFO.phoneE164,
         priceRange: "£12 - £14",
         founder: {
@@ -106,7 +107,7 @@ export function JsonLdSchema() {
       ),
       {
         "@type": "FAQPage",
-        "@id": "https://salsaexplosion.co.uk/#faq",
+        "@id": `${getSiteOrigin()}/#faq`,
         mainEntity: ACADEMY_FAQS.map((faq) => ({
           "@type": "Question",
           name: faq.question,

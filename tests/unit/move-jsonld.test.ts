@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { SEEDED_MOVES } from "@/lib/moves/move-library";
 import { buildMoveJsonLd, jsonLdHtml } from "@/lib/seo/move-jsonld";
+import { getSiteOrigin } from "@/lib/safe-url";
 
 describe("move page structured data", () => {
   const move = { ...SEEDED_MOVES[0], reviewedBy: "Maestro Enrique Perez Valdes" };
@@ -13,7 +14,8 @@ describe("move page structured data", () => {
       "@type": "LearningResource",
       url: `https://example.test/moves/${move.id}`,
       educationalLevel: move.level,
-      provider: { "@id": "https://salsaexplosion.co.uk/#organization" },
+      // the same Organization node the site-wide JSON-LD declares
+      provider: { "@id": `${getSiteOrigin()}/#organization` },
       reviewedBy: { "@type": "Person", name: "Maestro Enrique Perez Valdes" },
     });
   });

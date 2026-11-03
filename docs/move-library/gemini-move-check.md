@@ -38,6 +38,20 @@ Rules for fixes:
 
 ## How Claude applies the answers
 
-- The answers land in Downloads as `gemini-code-*.json`, one per batch.
-- A fix is applied only when its "from" text is found exactly once in the named field. Hold, direction and count fixes are read one by one against the rest of the move. A fix that changes what a dancer does, and that Claude can't confirm, becomes an "UNSURE:" note instead.
-- Flags become "UNSURE:" notes on the move, for the teachers.
+- The answers land in Downloads as `gemini-code-*.json`, one per batch. Copy them into one folder (other Gemini files in it are ignored).
+- Dry run, which writes nothing and lists every fix with a key such as `check-03#7`, grouped by kind:
+
+  ```bash
+  npx tsx scripts/apply-move-check.ts <answers folder>
+  ```
+
+- A fix is applied only when its "from" text is found exactly once in the named field, the edited move still passes the schema, and no teacher has reviewed that move yet. Hold, direction, counts and contradiction fixes are read one by one against the rest of the move; the key of any that can't be confirmed goes in a skip file (one per line, comments after the key are fine).
+- Apply, then regenerate the Move Mapper files and test:
+
+  ```bash
+  npx tsx scripts/apply-move-check.ts <answers folder> --skip skip.txt --write
+  npx tsx scripts/ai-studio-move-mapper.ts
+  npm test
+  ```
+
+- Skipped fixes and every flag become "UNSURE (check):" notes on the move. Notes are for the teachers only: the review desk shows them above the move and can list just the moves Gemini was unsure about. Dancers never see them.

@@ -20,6 +20,7 @@ import { StudioGallery } from "@/components/about/studio-gallery";
 import { BackButton } from "@/components/navigation/back-button";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import { WEEKLY_SCHEDULE } from "@/lib/academy-data";
 import { PosterBanner } from "@/components/poster/poster-art";
 import { reportError } from "@/lib/monitoring";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
@@ -420,16 +421,16 @@ export default async function AboutPage() {
                   </span>
                   <div className="grid grid-cols-2 gap-2 text-ink pt-1 font-medium">
                     <div>
-                      <strong>Thursday Classes:</strong> 19:00 – 23:00
+                      <strong>Thursday Classes:</strong> {WEEKLY_SCHEDULE.thursday.sessions[0].time} – Late
                     </div>
                     <div>
-                      <strong>Sunday Masterclasses:</strong> 18:30 – 22:00
+                      <strong>Sunday Classes:</strong> {WEEKLY_SCHEDULE.sunday.sessions[0].time} – Late
                     </div>
                     <div>
-                      <strong>Monthly Social Fiesta:</strong> 20:00 – 01:00
+                      <strong>Havana Social Fiesta:</strong> after class, every Thursday and Sunday
                     </div>
                     <div>
-                      <strong>Weekend Congresses:</strong> Annual Summer Festival
+                      <strong>Festivals &amp; Parties:</strong> Made in Cuba Dance Weekend and special nights
                     </div>
                   </div>
                 </div>

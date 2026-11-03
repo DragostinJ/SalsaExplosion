@@ -35,10 +35,10 @@ It also has to be honest:
 ## Step 1: measure it on the gold set (do this first)
 
 1. Build the app with `build-app-prompt.md`.
-2. Run the 26 clips in `gold-set.md`, saving each answer as `<video id>.json`.
-3. Score them:
+2. Run the 26 clips in `gold-set.md`, saving each answer as `<clip id>.json` in one folder outside the repo, for example `../mapper-answers`.
+3. Score them (pass the folder; PowerShell does not expand `*.json`):
    ```bash
-   npx tsx scripts/score-move-mapper.ts answers/*.json
+   npx tsx scripts/score-move-mapper.ts ../mapper-answers
    ```
 4. Send Claude the score and the misses. Each miss shows what to fix in the instructions; we change them, regenerate, and run again.
 

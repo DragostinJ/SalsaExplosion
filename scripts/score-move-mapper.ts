@@ -1,18 +1,34 @@
 /**
  * Scores AI Studio Move Mapper answers against the gold set:
  *
- *   npx tsx scripts/score-move-mapper.ts answers/*.json
+ *   npx tsx scripts/score-move-mapper.ts path/to/answers
  *
+ * Pass a folder (every .json file in it is read) or the files themselves. A folder works in
+ * PowerShell too, which does not expand `*.json` for other programs.
  * Each file holds one breakdown, as copied from AI Studio (a ```json fence is fine).
  * See docs/ai-studio-move-mapper/gold-set.md for what the verdicts mean.
  */
-import { readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { join } from "node:path";
 import { parseScoredBreakdown, scoreGoldSet, type ScoredBreakdown } from "../src/lib/moves/move-mapper-score";
 
-const files = process.argv.slice(2);
-if (files.length === 0) {
-  console.error("Usage: npx tsx scripts/score-move-mapper.ts <breakdown.json> [...]");
+const args = process.argv.slice(2);
+if (args.length === 0) {
+  console.error("Usage: npx tsx scripts/score-move-mapper.ts <answers folder | breakdown.json ...>");
   process.exit(1);
+}
+
+const files: string[] = [];
+for (const arg of args) {
+  if (!existsSync(arg)) {
+    console.error(`Not found: ${arg}. Pass the answers folder, e.g. npx tsx scripts/score-move-mapper.ts ../mapper-answers`);
+    process.exit(1);
+  }
+  if (statSync(arg).isDirectory()) {
+    files.push(...readdirSync(arg).filter((name) => name.toLowerCase().endsWith(".json")).sort().map((name) => join(arg, name)));
+  } else {
+    files.push(arg);
+  }
 }
 
 const breakdowns: ScoredBreakdown[] = [];

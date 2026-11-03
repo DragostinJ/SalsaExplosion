@@ -58,11 +58,13 @@ These ${MOVE_MAPPER_GOLD_SET.length} clips have a known answer: each one teaches
 
 1. In the Move Mapper app (or an AI Studio chat set up as in the README), analyse each video at ${MAPPER_DEFAULT_FPS} frames per second. Long tutorials: let the segmenter cut them first.
 2. Use the header the app asks for: the clip id, title and channel from this table, dancers "unknown", no song id.
-3. Save each answer as \`<clip id>.json\` in one folder and run:
+3. Save each answer as \`<clip id>.json\` in one folder outside the repo, for example \`../mapper-answers\`, and run:
 
 \`\`\`bash
-npx tsx scripts/score-move-mapper.ts path/to/folder/*.json
+npx tsx scripts/score-move-mapper.ts ../mapper-answers
 \`\`\`
+
+You can score after every few clips: the last line lists the clips still to run.
 
 ## What the score means
 

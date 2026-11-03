@@ -6,7 +6,7 @@ import {
 import {
   SongDanceGearSchema,
   type SongDanceGear,
-} from "@/lib/constants/timba-song-anatomy";
+} from "@/lib/constants/song-dance-gear";
 import { RUEDA_CALLS } from "@/lib/music/rueda-calls";
 
 /**

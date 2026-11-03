@@ -32,6 +32,7 @@ import { reportError } from "@/lib/monitoring";
 import { ProgressionJourneyTabs } from "@/components/progression/progression-journey-tabs";
 import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curriculum-skill-tree";
 import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
+import { SongPracticeList } from "@/components/music/song-player/song-practice-list";
 import { PRISMA_TO_CURRICULUM_LEVEL_MAP } from "@/lib/constants/cuban-curriculum-2027";
 import { PageHeader } from "@/components/layout/page-header";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
@@ -177,7 +178,7 @@ export default async function ProgressionPage() {
               studentName={user.firstName}
             />
 
-            <CubanDanceGearsMatrix initiallyCollapsed={true} />
+            <CubanDanceGearsMatrix initiallyCollapsed={true} practiceList={<SongPracticeList />} />
           </div>
         }
         milestonesTabContent={

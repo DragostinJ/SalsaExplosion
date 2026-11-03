@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   Compass,
   Music,
@@ -15,11 +15,12 @@ import {
   TimbaSongPhase,
   DanceGearShift,
 } from "@/lib/constants/cuban-curriculum-2027";
-import { SongPracticeList } from "@/components/music/song-player/song-practice-list";
 
 interface CubanDanceGearsMatrixProps {
   className?: string;
   initiallyCollapsed?: boolean;
+  /** <SongPracticeList />, rendered by the server page so the song timing data stays off the browser. */
+  practiceList: ReactNode;
 }
 
 const DEFAULT_TIMBA_SONG_PHASE =
@@ -28,6 +29,7 @@ const DEFAULT_TIMBA_SONG_PHASE =
 export function CubanDanceGearsMatrix({
   className = "",
   initiallyCollapsed = false,
+  practiceList,
 }: CubanDanceGearsMatrixProps) {
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed);
   const [selectedPhase, setSelectedPhase] = useState<TimbaSongPhase["phase"]>("Tema");
@@ -316,7 +318,7 @@ export function CubanDanceGearsMatrix({
 
         {/* 3. Practise the gears on real songs in the full-screen player */}
         <div className="pt-4 border-t">
-          <SongPracticeList />
+          {practiceList}
         </div>
       </div>
     </section>

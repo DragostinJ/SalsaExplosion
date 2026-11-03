@@ -3,6 +3,7 @@ import { Flame, Users, QrCode, ArrowRight } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curriculum-skill-tree";
 import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
+import { SongPracticeList } from "@/components/music/song-player/song-practice-list";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS, POSTER_BLOCKS } from "@/components/poster/poster-kit";
 import { DOOR_PRICING, VENUE_INFO, WEEKLY_SCHEDULE } from "@/lib/academy-data";
 import { PosterBanner } from "@/components/poster/poster-art";
@@ -136,7 +137,7 @@ export default function HowItWorksPage() {
 
         <CubanCurriculumSkillTree defaultLevel="Beginner" />
 
-        <CubanDanceGearsMatrix initiallyCollapsed={true} />
+        <CubanDanceGearsMatrix initiallyCollapsed={true} practiceList={<SongPracticeList />} />
       </section>
 
       {/* Staff & Faculty Operations Guide */}

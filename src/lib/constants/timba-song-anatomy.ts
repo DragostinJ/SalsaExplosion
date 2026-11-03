@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { SongDanceGearSchema, type SongDanceGear } from "@/lib/constants/song-dance-gear";
 
 // ==========================================
 // 1. ZOD SCHEMAS & TYPES
@@ -38,17 +39,8 @@ export type SongStyle = z.infer<typeof SongStyleSchema>;
 export const SongSectionNameSchema = z.string().min(1);
 export type SongSectionName = z.infer<typeof SongSectionNameSchema>;
 
-export const SongDanceGearSchema = z.enum([
-  "Wait / Breathe",
-  "Son Cubano",
-  "Casino (Smooth)",
-  "Casino (Flow)",
-  "Rumba Guaguancó",
-  "Afro-Cuban Orishas",
-  "Suelta / Shines",
-  "Despelote / Reparto",
-]);
-export type SongDanceGear = z.infer<typeof SongDanceGearSchema>;
+// Defined in its own small file so browser code can use it without this file's song data.
+export { SongDanceGearSchema, type SongDanceGear };
 
 export const SegmentColorThemeSchema = z.enum([
   "slate",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, type ReactNode } from "react";
 import Link from "next/link";
 import {
   Music,
@@ -21,9 +21,12 @@ import {
   CurriculumReferenceSong,
   CurriculumLevel,
 } from "@/lib/constants/cuban-curriculum-2027";
-import { SongPracticeList } from "@/components/music/song-player/song-practice-list";
 
-export function CubanMusicHubClient() {
+/**
+ * practiceList is <SongPracticeList />, rendered by the server page and passed in, so the song
+ * timing data it reads never ships to the browser.
+ */
+export function CubanMusicHubClient({ practiceList }: { practiceList: ReactNode }) {
   const [selectedLevel, setSelectedLevel] = useState<CurriculumLevel | "ALL">("ALL");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -47,7 +50,7 @@ export function CubanMusicHubClient() {
   return (
     <div className="space-y-8">
       {/* Practice mode: full-screen section-by-section player per song */}
-      <SongPracticeList />
+      {practiceList}
 
       {/* Musicality Guide from Maestro Enrique */}
       <div className="rounded-3xl border border-border/80 bg-muted/20 p-6 sm:p-8 space-y-4">

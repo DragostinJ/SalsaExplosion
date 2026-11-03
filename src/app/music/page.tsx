@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CubanMusicHubClient } from "@/components/music/cuban-music-hub-client";
+import { SongPracticeList } from "@/components/music/song-player/song-practice-list";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, TYPE } from "@/components/poster/poster-kit";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
@@ -44,7 +45,7 @@ export default function CubanMusicPage() {
         </div>
       </header>
 
-      <CubanMusicHubClient />
+      <CubanMusicHubClient practiceList={<SongPracticeList />} />
     </main>
   );
 }

@@ -47,7 +47,8 @@
       "styling",
       "no-partner-change"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools use 'A lo cortico' as a continuous groove modifier (like 'por el piso' or 'chiquitico'), while others use it for a specific clipped Enchufla check on counts 1-3 and 5-7. Verify which version your curriculum teaches."
   },
   {
     "id": "abajo-y-arriba",
@@ -102,7 +103,8 @@
       "rotation",
       "foundation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In Rueda de Casino, 'Vamos Arriba' and 'Vamos Abajo' also refer to marching forward or backing up around the circle; in partnerwork, it refers to the closed-hold rotational basic."
   },
   {
     "id": "abanico",
@@ -159,7 +161,8 @@
       "sweeping",
       "elegance"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'El Abanico' has two common syllabus versions (one based on a Setenta/Sombrero knot, another based on a sweeping fan walk). Teacher should confirm BOH Studios' version."
   },
   {
     "id": "abanico-y-cadeneta",
@@ -229,7 +232,8 @@
       "cadeneta",
       "chain"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Verify the exact eight-count length of your school's Abanico entry (2 vs 3 eight-counts before the Cadeneta)."
   },
   {
     "id": "adentro-y-afuera",
@@ -277,7 +281,8 @@
       "center-work",
       "rueda-improver"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools teach 'Adentro y Afuera' as an Enchufla into the center followed by an outward turn, while others teach it as a closed-hold sweep in and out. Teacher should verify BOH Studios' version."
   },
   {
     "id": "adios-doble",
@@ -334,7 +339,8 @@
       "duck-under",
       "double-pass"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Ensure tall leaders use deep knee flexion rather than rounding the upper spine on both duck-unders."
   },
   {
     "id": "aguajea",
@@ -382,7 +388,8 @@
       "musicality",
       "attitude"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Aguajea' comes from 'aguaje' (Cuban swagger/showmanship). Check if BOH Studios teaches a specific choreographed footwork pattern for Aguajea or uses it as a styled Paseo/Guapea break."
   },
   {
     "id": "al-centro",
@@ -438,7 +445,8 @@
       "closed-hold",
       "rueda-foundation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Maps directly to the canonical 'Al Medio' enum value in the Rueda call list."
   },
   {
     "id": "alarde",
@@ -493,7 +501,8 @@
       "styling",
       "showmanship"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Hand signal: caller sweeps an open hand behind the back of the head/neck."
   },
   {
     "id": "americano-americana",
@@ -548,7 +557,8 @@
       "underarm-turn",
       "role-variation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Americano/Americana' varies significantly across Rueda schools (sometimes a reverse Enchufla, sometimes a Cero/cross-body style pass). Teacher must verify BOH Studios' choreography."
   },
   {
     "id": "amistad",
@@ -603,7 +613,8 @@
       "handshake-hold",
       "intermediate-rueda"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Amistad' is taught as a right-to-right handshake wrap in some syllabi and a group neighbour embrace in others. Teacher should verify BOH Studios' version."
   },
   {
     "id": "amistad-complicada",
@@ -672,7 +683,8 @@
       "wrap",
       "intermediate"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Amistad Complicada' is a school-specific combination whose exact sequence of wraps and neighbour swaps varies across instructors. Teacher must verify the exact 8-count choreography and whether it ends with a partner change."
   },
   {
     "id": "arrollao",
@@ -719,7 +731,8 @@
       "carnival",
       "musicality"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Whenever a Timba band drops into a carnival conga rhythm (like in Los Van Van or Havana D'Primera), Cuban dancers immediately switch to El Arrollao."
   },
   {
     "id": "babalu-aye",
@@ -766,7 +779,8 @@
       "afro-cuban",
       "cultural-heritage"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Sacred in Regla de Ocha and Arará traditions: Babalú Ayé wears sackcloth/burlap (yute) with purple and royal/black-and-white beads; his attributes are the 'ja' (palm broom), crutches, and two dogs."
   },
   {
     "id": "babosa",
@@ -822,7 +836,8 @@
       "playful",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios teaches 'La Babosa' as an arm/shoulder slide or a slow body-roll Enchufla."
   },
   {
     "id": "balsero",
@@ -870,7 +885,8 @@
       "continuous-flow",
       "circular"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'El Balsero' has several regional choreographies (some include a rowing/wave arm motion or a specific Sombrero entry). Teacher should confirm BOH Studios' version."
   },
   {
     "id": "bayamo-por-matanzas",
@@ -927,7 +943,8 @@
       "hand-change",
       "bayamo-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Regional advanced figure; teacher should check the exact count of the Matanzas hand switch used by Enrique."
   },
   {
     "id": "bloqueo-despelote-accent",
@@ -975,7 +992,8 @@
       "musicality",
       "bloque"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Contrast is everything in Timba: the sharper the bloqueo freeze, the smoother the circular roll right after it looks."
   },
   {
     "id": "botao",
@@ -1021,7 +1039,8 @@
       "vacunao",
       "follower-technique"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Builds directly on 'rumba-guaguanco-basics' by naming and drilling the follower's specific defensive mechanics."
   },
   {
     "id": "cadena",
@@ -1085,7 +1104,8 @@
       "chain",
       "continuous-progression"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "One of the most joyful group-flow figures in Rueda de Casino; remind dancers to keep their eyes up to see the next hand coming."
   },
   {
     "id": "cadena-complicada",
@@ -1136,7 +1156,8 @@
       "chain",
       "turn"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Cadena Complicada' varies widely between schools (some weave left- and right-hand Enchuflas continuously, others link Enchufla with an arm-hook switch). Teacher should confirm exact hand holds and total eight-counts."
   },
   {
     "id": "cadera-cuban-hip-action",
@@ -1184,7 +1205,8 @@
       "biomechanics",
       "foundation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Rule #1 of Cuban motion: the hip movement is the result of the knee bend and floor pressure, never an isolated hula-hoop swing on locked legs."
   },
   {
     "id": "caja-de-bolas",
@@ -1247,7 +1269,8 @@
       "group-geometry",
       "rueda-formation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Caja de bolas' (Cuban Spanish for ball bearing) is taught either as a concentric rotating ring formation or a continuous multi-turn knot. Verify with Enrique."
   },
   {
     "id": "cambio-de-pareja",
@@ -1295,7 +1318,8 @@
       "reaction-call",
       "role-reversal"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some European/Cuban Rueda schools 'Cambio de pareja' is a role-reversal (leader becomes follower, follower becomes leader), while in others it is a direct partner switch. Verify BOH Studios' house rule."
   },
   {
     "id": "camina",
@@ -1350,7 +1374,8 @@
       "circular",
       "group-geometry"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools use 'Camina' synonymously with 'Me La Llevo' (fast closed-hold walking around the circle), while others use it as a 3-step forward walk inside a turn pattern. Verify with Enrique."
   },
   {
     "id": "caminando",
@@ -1398,7 +1423,8 @@
       "arm-coordination",
       "foundation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Essential warmup drill for teaching students how the upper body and arms move organically from the ground up."
   },
   {
     "id": "candado",
@@ -1456,7 +1482,8 @@
       "wrap",
       "rueda-classic"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Crucial safety cue for leaders: keep a tiny circular radius during Candado so the follower's elbows stay comfortably bent."
   },
   {
     "id": "cangrejo",
@@ -1511,7 +1538,8 @@
       "footwork-styling",
       "playful"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Great lower-body quad and hip conditioning inside a playful Rueda call."
   },
   {
     "id": "carousel-con-sabor",
@@ -1578,7 +1606,8 @@
       "musicality",
       "advanced"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether 'Carousel con Sabor' in your curriculum forms a central star wheel or an individual couple rodeo/carousel spin."
   },
   {
     "id": "cero",
@@ -1633,7 +1662,8 @@
       "circular-orbit",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Hand signal: caller draws a circle ('0') in the air with an index finger or forms an 'O' with thumb and index finger. Confirm whether BOH Studios keeps the same partner or switches on Cero."
   },
   {
     "id": "cero-doble",
@@ -1692,7 +1722,8 @@
       "enchufla",
       "orbit"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools execute both orbits faster within 2 eight-counts (one loop on 5-7, second loop on 9-11, Dile Que No on 13-15), and some keep the same partner unless 'con dame' is called. Confirm whether your school uses 2 or 3 eight-counts and whether it changes partner."
   },
   {
     "id": "chachacha-cubano-basics",
@@ -1739,7 +1770,8 @@
       "suelta",
       "partnerwork"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Enrique Jorrín named the dance after the whispering sound of dancers' shoes brushing the floor on the triple step ('cha-cha-chá')."
   },
   {
     "id": "changui-basics",
@@ -1787,7 +1819,8 @@
       "cultural-heritage",
       "syncopation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Essential whenever dancing to Elito Revé y su Charangón ('El Changüí de Guantánamo')!"
   },
   {
     "id": "coca-cola-con-puente-y-arriba",
@@ -1847,7 +1880,8 @@
       "duck-under",
       "arriba"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether 'con puente y arriba' in your school means the leader ducks under a bridge and advances 'arriba' (to the previous partner), or whether 'arriba' refers to continuous walking up the circle. Includes duck-under safety guidance."
   },
   {
     "id": "compota",
@@ -1902,7 +1936,8 @@
       "advanced-wrap",
       "knot-figure"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Verify exact count-by-count hand switches for Compota with Enrique."
   },
   {
     "id": "consorte",
@@ -1957,7 +1992,8 @@
       "wrap",
       "promenade"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Regional definitions of 'Consorte' vary; teacher should confirm BOH Studios' exact handhold and whether it changes partner."
   },
   {
     "id": "contra-mambo",
@@ -2012,7 +2048,8 @@
       "mambo",
       "rhythm-reversal"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios teaches 'Contra Mambo' as opposing footwork directions (one forward, one back) or as a contratiempo (On2) rhythm shift."
   },
   {
     "id": "cruce",
@@ -2067,7 +2104,8 @@
       "cross-circle",
       "group-geometry"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Works best when the Rueda has an even number of couples (4, 6, or 8 couples) so every leader has an exact opposite station."
   },
   {
     "id": "cubanita",
@@ -2123,7 +2161,8 @@
       "wrap",
       "follower-turn"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Regional variations exist between Havana and European Rueda syllabi on whether Cubanita uses a neck drape or a double-hand window. Verify with Enrique."
   },
   {
     "id": "cubanito",
@@ -2180,7 +2219,8 @@
       "wrap",
       "circular"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools teach Cubanito from a single right-to-right shake-hands hold (like El Dedo), while others use a two-hand hold. Teachers should confirm BOH Studios' preferred handhold."
   },
   {
     "id": "dame",
@@ -2230,7 +2270,8 @@
       "rueda-foundation",
       "dile-que-no-exit"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Hand signal: caller raises one index finger in the air (or points toward the next follower)."
   },
   {
     "id": "dame-directo",
@@ -2281,7 +2322,8 @@
       "dile-que-no",
       "beginner"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools call 'Dame Directo' when transitioning straight from a closed-hold figure into a partner change on 5-6-7 without an intervening Guapea, while others use it for rapid-fire 1-eight-count Dames. Confirm your school's exact trigger beat."
   },
   {
     "id": "dame-dos",
@@ -2330,7 +2372,8 @@
       "rueda-foundation",
       "skip-one"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Hand signal: caller raises two fingers in a V-shape above the head."
   },
   {
     "id": "dame-dos-con-cuba",
@@ -2387,7 +2430,8 @@
       "rumba-guaguanco",
       "dame-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm whether BOH Studios uses 'con Cuba' as a 4-count Rumba break or a specific clap-and-hip check."
   },
   {
     "id": "dame-pa-atras",
@@ -2434,7 +2478,8 @@
       "reverse-direction",
       "spatial-awareness"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Hand signal: caller jerks a thumb backward over the shoulder."
   },
   {
     "id": "dame-por-la-mano",
@@ -2482,7 +2527,8 @@
       "hand-connection",
       "dame-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some schools 'Dame por la Mano' means switching partners without Dile Que No (picking up directly in open Guapea hand-to-hand on 5-7). Teacher should confirm BOH Studios' definition."
   },
   {
     "id": "dame-rapido",
@@ -2530,7 +2576,8 @@
       "fast-switch",
       "reflex-drill"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Tests the Rueda's ability to keep a tight circle diameter so 3 steps are enough to reach the next partner."
   },
   {
     "id": "dame-rapido-con-vuelta",
@@ -2582,7 +2629,8 @@
       "turn",
       "dame"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether 'con vuelta' applies to the leader spinning while travelling on 1-3, the follower turning during the Dile Que No on 5-7, or both."
   },
   {
     "id": "dame-una-arriba",
@@ -2629,7 +2677,8 @@
       "reverse-direction",
       "arriba"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools only call 'Dame Arriba' while marching in closed position (Vamos Arriba), while others also call it from open Guapea. Teacher should verify BOH Studios' convention."
   },
   {
     "id": "dame-una-con-una-una-con-dos",
@@ -2696,7 +2745,8 @@
       "claps",
       "rhythmic"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether your teachers execute the two Dames back-to-back in 2 eight-counts (1-8 and 9-16) or with a stabilizing basic in between (4 eight-counts), and whether the claps fall on count 4, count 7, or counts 7-8-1."
   },
   {
     "id": "danzon-basics",
@@ -2743,7 +2793,8 @@
       "elegance",
       "closed-hold"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Historical connection for students: Danzón -> Danzonete -> Danzón-Mambo -> Cha-Cha-Chá -> Son/Casino."
   },
   {
     "id": "derecha-izquierda",
@@ -2790,7 +2841,8 @@
       "reaction-call",
       "lateral"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Verify whether BOH Studios uses 'Derecha / Izquierda' while facing the center in a single circle or as a partner-change direction."
   },
   {
     "id": "dicelo",
@@ -2839,7 +2891,8 @@
       "no-partner-change",
       "call-and-response"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some schools, '¡Dícelo!' is a call-and-response vocal/clap flourish or an immediate second Dile Que No ('Dile que no > ¡Dícelo!'), whereas in others it triggers a quick Vacílala or Sacala check. Verify the exact footwork response taught in Bournemouth."
   },
   {
     "id": "dile-que-si",
@@ -2888,7 +2941,8 @@
       "foundation",
       "circular-slot"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Often used to transition from open Casino figures back into Son or romantic Tema sections. Teachers should verify whether BOH Studios teaches the entry from standard Guapea on 1 or as a pickup on 5-6-7."
   },
   {
     "id": "doble-play",
@@ -2944,7 +2998,8 @@
       "skip-one",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools execute Doble Play as two full Enchuflas with two consecutive followers before Dile Que No (3 eight-counts), while others do a 2-eight-count tap-and-pass. Verify BOH Studios' version."
   },
   {
     "id": "dos-con-cuba-sin-soltar-se-fue",
@@ -3004,7 +3059,8 @@
       "sin-soltar",
       "advanced"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether 'Dos con Cuba sin soltar (se fue)' advances 1 partner or 2 partners when 'se fue' is triggered, and verify the exact 'con Cuba' rhythmic footwork."
   },
   {
     "id": "dos-con-dos",
@@ -3061,7 +3117,8 @@
       "rhythmic",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some Rueda systems 'Dos con Dos' means 'Dame Dos with 2 claps' (1 eight-count), while in others it is an Enchufla variation with 2 claps. Teacher should confirm BOH Studios' exact counts."
   },
   {
     "id": "dos-fly",
@@ -3114,7 +3171,8 @@
       "enchufla",
       "baseball"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Named after catching a fly ball in Cuban baseball ('un fly'). Ensure dancers keep the overhead clap crisp so they are ready to connect on count 12."
   },
   {
     "id": "dos-tarros",
@@ -3166,7 +3224,8 @@
       "duck-under",
       "tarro"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Safety note: Ensure leaders keep their free hand up as a guard and bend their knees rather than hinging their neck forward when ducking under the arm."
   },
   {
     "id": "echeverria",
@@ -3221,7 +3280,8 @@
       "enchufla-family",
       "rueda-classic"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Echeverría' varies between Cuban and European Rueda traditions (sometimes taught as a fake Dame / Engáñala, sometimes as an Enchufla with a footwork tap). Verify with Enrique."
   },
   {
     "id": "echeverria-con-vuelta",
@@ -3273,7 +3333,8 @@
       "turn",
       "suelta"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Echeverría' choreography varies between Cuban and European Rueda lineages (some do side-chassé claps, others do a backward kick-hitch before the turn). Teacher should verify the exact counts 5-7 footwork used in class."
   },
   {
     "id": "egoista",
@@ -3328,7 +3389,8 @@
       "playful",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Does NOT change partner—the leader 'selfishly' keeps his own partner!"
   },
   {
     "id": "el-dedo-con-guarapo-y-bota",
@@ -3393,7 +3455,8 @@
       "duck-under",
       "advanced-combination"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Directly extends the 'dedo-el-uno-el-dos' curriculum module into a full Rueda showpiece."
   },
   {
     "id": "el-puente",
@@ -3448,7 +3511,8 @@
       "duck-under",
       "two-hand-hold"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm whether BOH Studios uses 'El Puente' as a partner-change Rueda call or stays with the same partner."
   },
   {
     "id": "enchufla-con-mambo",
@@ -3505,7 +3569,8 @@
       "enchufla-family",
       "mambo-shine"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Check with BOH Studios teachers whether the Mambo section lasts 1 slow four-count (5-6-7) before Dile Que No on the next 1-3, or a full 8-count."
   },
   {
     "id": "enchufla-con-manolin",
@@ -3562,7 +3627,8 @@
       "playful",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Different schools use slightly different hand gestures for 'Manolín' (rolling fists overhead vs pumping one hand). Teacher should confirm BOH Studios' gesture."
   },
   {
     "id": "enchufla-con-palma-y-pata",
@@ -3619,7 +3685,8 @@
       "clap",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "'Patá' is the Cuban coastal contraction of 'patada' (kick/stomp). Emphasize low, safe footwork in crowded circles."
   },
   {
     "id": "enchufla-con-rumba",
@@ -3676,7 +3743,8 @@
       "musicality",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm whether BOH Studios dances the Rumba break for 4 counts (5-6-7) or 12 counts (5-7 + 1-7) before Dile Que No."
   },
   {
     "id": "enchufla-con-vuelta",
@@ -3732,7 +3800,8 @@
       "solo-turn",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Clarify with students whether only the leader turns on 5-7 or both leader and follower execute the solo vuelta."
   },
   {
     "id": "enchufla-contra-mambo",
@@ -3788,7 +3857,8 @@
       "rhythm-reversal",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Pairs with 'Contra Mambo' from Batch 9."
   },
   {
     "id": "enchufla-contra-mambo-doble",
@@ -3850,7 +3920,8 @@
       "contratiempo",
       "footwork"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether 'Contra-Mambo' in your syllabus is danced solo facing the center or in partner check hold (pushing/checking against each other's frame in contrapunto)."
   },
   {
     "id": "enchufla-moderno",
@@ -3906,7 +3977,8 @@
       "enchufla-family",
       "hand-transfers"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Different instructors teach slightly different hand switches for 'Enchufla Moderno'. Teacher should verify BOH Studios' exact sequence."
   },
   {
     "id": "enchufla-para-hombres",
@@ -3963,7 +4035,8 @@
       "leader-turn",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Tests whether followers are truly listening to the caller rather than turning automatically on every 'Enchufla...' call."
   },
   {
     "id": "enchufla-y-adios",
@@ -4020,7 +4093,8 @@
       "prima-family",
       "duck-under"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Reinforces the connection between the two most important foundational moves in Rueda: Enchufla and Prima (Adiós)."
   },
   {
     "id": "enchufla-y-al-medio",
@@ -4072,7 +4146,8 @@
       "al-medio",
       "center"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Level note: Rueda.Casino lists it as Advanced, though the mechanics are accessible to Improver/Intermediate dancers; in an Advanced class, emphasize tight musical syncopation in the center and razor-sharp spacing."
   },
   {
     "id": "enchufla-y-cadeneta",
@@ -4132,7 +4207,8 @@
       "chain",
       "cadeneta"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm how many partners are passed in the fixed-length version of 'Enchufla y Cadeneta' before the Dile Que No exit."
   },
   {
     "id": "enchufla-y-escondete",
@@ -4188,7 +4264,8 @@
       "spatial-awareness",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Crucial safety cue for followers: on 'Escóndete', keep your 5-6-7 steps directly underneath your hips, never back."
   },
   {
     "id": "enchufla-y-quedate",
@@ -4239,7 +4316,8 @@
       "no-partner-change",
       "fake-out"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In standard Rueda, a bare 'Enchufla' implies a partner change ('Enchufla y Dame'). 'Enchufla y Quédate' tests whether dancers are truly listening to the cantante rather than running on autopilot."
   },
   {
     "id": "enchufla-y-rodeo",
@@ -4296,7 +4374,8 @@
       "circular-orbit",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Maps directly to the canonical 'Rodeo' enum value in the Rueda call list."
   },
   {
     "id": "enchuflense",
@@ -4352,7 +4431,8 @@
       "both-turn",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Check if BOH Studios teaches 'Enchúflense' as a simultaneous double-turn on 1-3 or as leader-turns-then-follower-turns."
   },
   {
     "id": "enganala",
@@ -4407,7 +4487,8 @@
       "no-partner-change",
       "playful"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Closely related to '¡Mentira!', except 'Engáñala' is called upfront before the figure starts, whereas '¡Mentira!' is shouted mid-move as a surprise cancellation."
   },
   {
     "id": "enroscala",
@@ -4462,7 +4543,8 @@
       "coil",
       "follower-turn"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm whether BOH Studios changes partners on 'Enróscala' by default or stays with the same partner."
   },
   {
     "id": "enroscate",
@@ -4518,7 +4600,8 @@
       "wrap",
       "spiral"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Great for teaching leaders how to turn on their own axis without pulling on the follower's frame."
   },
   {
     "id": "espresso",
@@ -4568,7 +4651,8 @@
       "traveling",
       "fast"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Espresso' (or 'Expreso') varies by Rueda lineage—some use it as a rapid multi-partner weave, others as a compact fast Coca-Cola/Enchufla combo. Teacher should confirm the exact choreography."
   },
   {
     "id": "esquina-de-tejas",
@@ -4632,7 +4716,8 @@
       "advanced-wrap",
       "havana-classic"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Named after Havana's historic Esquina de Tejas; exact choreography varies between Havana instructors. Teacher must verify the BOH Studios sequence."
   },
   {
     "id": "estrella-se-fue",
@@ -4687,7 +4772,8 @@
       "star-formation",
       "group-geometry"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "The caller can keep the Estrella rotating for as many bars as the musical section lasts before calling '¡Se fue!' or '¡Dile que no!'."
   },
   {
     "id": "exhibela-repite",
@@ -4736,7 +4822,8 @@
       "repetition",
       "frame-control"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Essential beginner drill for teaching followers to wait for the leader's frame on count 1 rather than assuming every Exhíbela ends in Guapea."
   },
   {
     "id": "familia-y-quedate",
@@ -4789,7 +4876,8 @@
       "no-partner-change",
       "fake-out"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some schools 'Familia' is an Enchufla into a group hands-in-the-middle greeting, while in others it is 'Prima con la hermana/familia'. Confirm the exact first eight-count entry."
   },
   {
     "id": "festival-de-enchufla-complicado",
@@ -4874,7 +4962,8 @@
       "enchufla",
       "intermediate"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Every Rueda school defines the 3 sub-parts of 'Festival de Enchufla Complicado' slightly differently. Teacher must check and edit the three specific Enchufla variations to match the Bournemouth syllabus."
   },
   {
     "id": "festival-de-fly-los-tres",
@@ -4938,7 +5027,8 @@
       "festival-sequence",
       "baseball-theme"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios switches partners after each of the 3 Flys or only at the end of the third Fly."
   },
   {
     "id": "festival-de-media",
@@ -5022,7 +5112,8 @@
       "check",
       "advanced"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Festival de Media' (or 'Festival de Media Naranja / Media Vuelta') varies by school. Teacher must confirm the exact 3 sub-figures and whether Dile Que No happens after each part or only at the end."
   },
   {
     "id": "festival-de-pelota",
@@ -5087,7 +5178,8 @@
       "festival-sequence",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Schools differ on whether 'Festival de Pelota' switches partners after each Pelota (1, 2, 3) or stays with the same partner until Pelota Tres. Teacher should confirm BOH Studios' house rule."
   },
   {
     "id": "festival-de-pelota-con-vuelta",
@@ -5171,7 +5263,8 @@
       "claps",
       "turn"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools condense 'Festival de Pelota' so that the partner change and Dile Que No happen only at the very end, while others change partners on every Pelota (1, 2, and 3). Verify exact total eight-counts with the instructor."
   },
   {
     "id": "flor",
@@ -5226,7 +5319,8 @@
       "group-geometry",
       "center-work"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some Rueda schools, 'La Flor' is a 1-bar styling flourish during Vamos Abajo/Al Centro rather than an Enchufla variation. Teacher should verify BOH Studios' version."
   },
   {
     "id": "fly",
@@ -5273,7 +5367,8 @@
       "clap",
       "baseball-theme"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Cuban Rueda vocabulary borrows heavily from baseball (Pelota, Fly, Doble Play, Triple Play, Rolling)."
   },
   {
     "id": "foto",
@@ -5330,7 +5425,8 @@
       "playful",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Check if BOH Studios switches partners after 'Foto' or returns to the same partner via Dile Que No."
   },
   {
     "id": "freezing-on-a-band-break",
@@ -5382,7 +5478,8 @@
       "timba",
       "stop"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In Timba, breaks (efectos/bloques) often happen on count 1, count 4, or count 8-and-1. Practice freezing on both odd and even phrases so students always know which foot is free when the rhythm resumes."
   },
   {
     "id": "hombres-derecha-y-mujeres-izquierda",
@@ -5432,7 +5529,8 @@
       "traveling",
       "circle"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Different Rueda groups use this call either for a 2-count opposite-direction pass (resulting in advancing two partners) or a continuous walking groove until the caller shouts 'Con la que te toque, Dile Que No'. Verify how many partners are skipped in your class."
   },
   {
     "id": "hombros-shoulder-movement",
@@ -5480,7 +5578,8 @@
       "shoulders",
       "foundation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Key biomechanical cue: initiate the movement from the ribcage and shoulder blades (scapulae), not by flapping the hands."
   },
   {
     "id": "indeciso",
@@ -5536,7 +5635,8 @@
       "comedy",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios finishes 'El Indeciso' with the next follower on the right or back with the original follower."
   },
   {
     "id": "isaura",
@@ -5591,7 +5691,8 @@
       "two-hand-hold",
       "cultural-reference"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: The telenovela *La Esclava Isaura* was a massive cultural phenomenon in Cuba; check with Enrique which exact wrist-wrap variation BOH Studios teaches under this name."
   },
   {
     "id": "juana-la-cubana",
@@ -5647,7 +5748,8 @@
       "wrap",
       "party-figure"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Named after the famous Fito Olivares / Cuban party track; different academies teach distinct 2- or 3-eight-count sequences under this name. Teacher must verify BOH Studios' exact counts."
   },
   {
     "id": "la-familia",
@@ -5703,7 +5805,8 @@
       "playful",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools teach 'La Familia' as the 3rd part of 'Prima -> Prima con la Hermana -> Con toda la Familia'. Teacher should confirm BOH Studios' sequence."
   },
   {
     "id": "la-prima-cruzada",
@@ -5759,7 +5862,8 @@
       "two-hand-hold",
       "duck-under"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios teaches 'La Prima Cruzada' as a two-hand crossed Prima or a Prima that crosses the center of the Rueda."
   },
   {
     "id": "lazo",
@@ -5815,7 +5919,8 @@
       "overhead-loop",
       "circular"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Emphasize neck safety in class: the overhead loop should float with zero downward pressure on the neck."
   },
   {
     "id": "mambo-adelante-y-atras",
@@ -5862,7 +5967,8 @@
       "mambo",
       "foundation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In solo Suelta warmups, everyone typically starts with the left foot forward on 1; inside partnerwork or Rueda, followers mirror on the right foot."
   },
   {
     "id": "media-doble",
@@ -5917,7 +6023,8 @@
       "enchufla-family",
       "intermediate-rueda"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Prerequisite for 'Media Triple' in Batch 13."
   },
   {
     "id": "media-triple",
@@ -5972,7 +6079,8 @@
       "enchufla-family",
       "advanced-rueda"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Completes the Una Media -> Media Doble -> Media Triple progression."
   },
   {
     "id": "mentira",
@@ -6027,7 +6135,8 @@
       "reaction-call",
       "playful"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Does NOT change partner—its whole purpose is cancelling an in-progress partner change!"
   },
   {
     "id": "mujeres-al-centro",
@@ -6083,7 +6192,8 @@
       "center-work",
       "shines"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "One of the best calls for highlighting the followers during a musical breakdown."
   },
   {
     "id": "mujeres-derecha-mujeres-izquierda",
@@ -6133,7 +6243,8 @@
       "followers-travel",
       "direction-change"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether the follower returns to her original partner (net zero partner change) or advances one partner depending on whether 'derecha' starts from an Enchufla swap. Add or remove 'partner-change' tag during teacher review if needed."
   },
   {
     "id": "ni-pa-ti-ni-pa-mi",
@@ -6189,7 +6300,8 @@
       "enchufla-family",
       "playful"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Some schools execute 'Ni pa' ti ni pa' mí' as a double-clap in the center between two leaders before taking the second partner. Teacher should confirm BOH Studios' version."
   },
   {
     "id": "ni-pa-ti-ni-pa-mi-con-vuelta",
@@ -6241,7 +6353,8 @@
       "turn",
       "playful"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether the leader skips one follower (like Dame Dos) or advances to the immediate next follower after teasing both."
   },
   {
     "id": "obatala",
@@ -6288,7 +6401,8 @@
       "afro-cuban",
       "cultural-heritage"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Sacred in Regla de Ocha: Obatalá's colour is pure white (and silver); his number is 8, and his attribute is the white iruke and silver agogó bell. Never present the elder paths as parody."
   },
   {
     "id": "ochenta",
@@ -6344,7 +6458,8 @@
       "knot-figure",
       "hammerlock"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: As with 84 and 88, exact count-by-count hand switches for Ochenta (80) vary slightly by school. Verify with Enrique."
   },
   {
     "id": "ochenta-y-cuatro",
@@ -6400,7 +6515,8 @@
       "hammerlock",
       "numbered-figure"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Numbered figures (71, 72, 75, 84, 88) vary slightly in sequence between Havana schools. Verify the exact 2nd eight-count hand sequence with Enrique before publishing."
   },
   {
     "id": "ochenta-y-ocho",
@@ -6466,7 +6582,8 @@
       "double-hammerlock",
       "advanced-knot"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Strict safety rule in class: drill the double-hammerlock proximity at slow tempo first so neither partner ever feels shoulder tension."
   },
   {
     "id": "ocho-para-mujeres",
@@ -6522,7 +6639,8 @@
       "circular-orbit",
       "followers-feature"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Remind leaders that in standard 'Ocho' the leaders walk the figure-8 around two followers, whereas in 'Ocho para Mujeres' the roles reverse so leaders stay anchored."
   },
   {
     "id": "ocho-para-mujeres-doble",
@@ -6589,7 +6707,8 @@
       "weave",
       "advanced"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether the follower finishes the second figure-eight with her original leader (no partner change) or advances to the neighbouring leader (partner change)."
   },
   {
     "id": "ochosi",
@@ -6636,7 +6755,8 @@
       "afro-cuban",
       "cultural-heritage"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Sacred in Regla de Ocha: Ochosi's colours are cobalt/indigo blue and amber/yellow (or coral); his attributes are the bow and arrow (arco y flecha), hunting dogs, and deer antlers."
   },
   {
     "id": "oggun",
@@ -6684,7 +6804,8 @@
       "afro-cuban",
       "cultural-heritage"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Sacred in Regla de Ocha: Oggún's colours are forest green and black (with numbers 3 and 7); his attributes are the iron cauldron (caldero), machete, anvil, hammer, and railroad spikes."
   },
   {
     "id": "oya",
@@ -6732,7 +6853,8 @@
       "afro-cuban",
       "cultural-heritage"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Sacred in Regla de Ocha (Santería): Oyá's colours are burgundy/wine red and nine distinct colours (representing the number 9); her attributes are the iruke (horsetail whisk), copper crown, and machete/centella (lightning). Always teach and dance with deep cultural respect."
   },
   {
     "id": "panque",
@@ -6779,7 +6901,8 @@
       "playful",
       "rueda-improver"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Panqué' has very different regional meanings (in some schools a quick Enchufla-style hand flip, in others a clap/hip pat). Teacher must verify BOH Studios' version."
   },
   {
     "id": "parte-el-brazo",
@@ -6834,7 +6957,8 @@
       "setenta-family",
       "safety-critical"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Always preface this move in class with a strict shoulder-safety reminder: soft elbows, loose two-finger hook, and waist-level back hand."
   },
   {
     "id": "paseala-caminando",
@@ -6885,7 +7009,8 @@
       "traveling",
       "no-partner-change"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some Rueda circles, 'Paséala caminando' keeps the same partner while rotating the whole wheel, whereas in others the followers walk past the leaders to effect a partner change. Confirm whether a partner change occurs in your curriculum."
   },
   {
     "id": "paseala-para-abajo",
@@ -6937,7 +7062,8 @@
       "circular",
       "no-partner-change"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Depending on the Rueda school, 'Paséala para abajo' can mean walking the follower backward in closed/semi-closed paseo around the couple's axis, or passing the follower to the previous leader ('abajo' in the Rueda). Verify whether your curriculum keeps the same partner or results in a backward partner change."
   },
   {
     "id": "paseala-por-abajo",
@@ -6990,7 +7116,8 @@
       "circular",
       "no-partner-change"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether 'Paséala por abajo' in your curriculum means ducking under the arm bridge during Paséala, dancing the Paséala in a low bent-knee crouch ('por el piso / por abajo'), or passing the follower down the circle (partner change)."
   },
   {
     "id": "paseala-por-arriba",
@@ -7047,7 +7174,8 @@
       "circular",
       "elegance"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Keep the overhead arch soft and slightly in front of the follower's forehead line, never behind their head."
   },
   {
     "id": "paseala-por-bayamo",
@@ -7103,7 +7231,8 @@
       "circular-flow",
       "bayamo-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Connects the Improver 'paseala' and Intermediate 'coca-cola-y-bayamo' curriculum modules."
   },
   {
     "id": "paseala-y-al-reves",
@@ -7163,7 +7292,8 @@
       "circular",
       "no-partner-change"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Focus on smooth deceleration at the end of the first eight-count so the reversal ('al revés') feels effortless for the follower."
   },
   {
     "id": "paseo",
@@ -7214,7 +7344,8 @@
       "son-feel",
       "breathing-space"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Connects directly to the existing 'paseala' curriculum move; this entry isolates the foundational Paseo walking mechanics."
   },
   {
     "id": "paso-cruzado",
@@ -7260,7 +7391,8 @@
       "footwork",
       "cross-step"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Great for building dissociation between the pelvis and the ribcage."
   },
   {
     "id": "paso-de-cumbia",
@@ -7306,7 +7438,8 @@
       "footwork",
       "back-cross"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Also used inside partnerwork during Guapea and Exhíbela variations."
   },
   {
     "id": "paso-de-son-solo",
@@ -7354,7 +7487,8 @@
       "foundation",
       "contratiempo"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In strict Son Cubano, steps fall on 2-3-4 (pause 1) and 6-7-8 (pause 5); under our Casino count-grouping rules, teachers can drill both A Tiempo (1-3, 5-7) and Contratiempo emphasis."
   },
   {
     "id": "patin",
@@ -7409,7 +7543,8 @@
       "footwork-styling",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some Rueda circles, 'Patín' crosses to the opposite side of the circle (like Cruce), while in others it moves one partner anticlockwise. Verify with Enrique."
   },
   {
     "id": "patin-con-bamboleo",
@@ -7468,7 +7603,8 @@
       "body-movement",
       "timba"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Great call to hit during a heavy timba montuno or mambo groove (especially songs by Bamboleo)."
   },
   {
     "id": "patin-doble",
@@ -7528,7 +7664,8 @@
       "suelta",
       "center"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some schools, 'Patín Doble' means two Enchuflas with two skating slides back-to-back, while in others it doubles the duration of the skating groove in the center. Confirm which version is taught."
   },
   {
     "id": "patin-pa-arriba",
@@ -7579,7 +7716,8 @@
       "patin",
       "center"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In Cuban Rueda terminology, moving counter-clockwise (standard Dame) is going 'abajo', while moving clockwise to the previous partner is going 'arriba'."
   },
   {
     "id": "patineta",
@@ -7635,7 +7773,8 @@
       "footwork-styling",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm with Enrique whether Patineta moves 1 partner anticlockwise or crosses the circle."
   },
   {
     "id": "patineta-con-bamboleo",
@@ -7695,7 +7834,8 @@
       "body-movement",
       "playful"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether both leaders and followers perform the 'patineta' skateboard motion in your school, or if followers join the center for this call."
   },
   {
     "id": "patineta-doble",
@@ -7754,7 +7894,8 @@
       "suelta",
       "footwork"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Level note: Rueda.Casino lists it as Advanced; mechanics are similar to Patín Doble, so focus on crisp syncopation and weight control on the standing leg."
   },
   {
     "id": "pedro-navaja",
@@ -7810,7 +7951,8 @@
       "salsa-classics",
       "no-hands"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Directly references the famous lyric from *Pedro Navaja*: 'Las manos siempre dentro del gabán' (hands always inside the coat pockets)."
   },
   {
     "id": "pelota",
@@ -7866,7 +8008,8 @@
       "baseball-theme",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm whether BOH Studios claps on counts 5, 5-6, 5-6-7 or on counts 7, 7-8, 7-and-8."
   },
   {
     "id": "pelota-hasta-cinco",
@@ -7926,7 +8069,8 @@
       "enchufla",
       "rhythmic"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether your teachers perform an Enchufla before every number (which takes 6 to 10 eight-counts) or hold the center after one Enchufla and count the claps 1-2-3-4-5 across 3 to 4 eight-counts."
   },
   {
     "id": "pelota-loca",
@@ -7982,7 +8126,8 @@
       "baseball-theme",
       "high-energy"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm the exact clap/turn rhythm BOH Studios uses for Pelota Loca."
   },
   {
     "id": "pelota-moderna",
@@ -8034,7 +8179,8 @@
       "timba",
       "suelta"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Pelota Moderna' is a stylized call whose exact clap/tap rhythm differs between instructors. Teacher should verify the exact counts 5-11 choreography."
   },
   {
     "id": "por-mi-por-ti",
@@ -8089,7 +8235,8 @@
       "alternating-turns",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios teaches 'Por mí, por ti' as alternating turns or a specific clap/tap pattern."
   },
   {
     "id": "preciosa",
@@ -8145,7 +8292,8 @@
       "presentation",
       "musicality"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Preciosa' is taught differently across schools (sometimes as a sweetheart wrap, sometimes as a variation of Sombrero/Evelyn). Teacher should verify exact handwork."
   },
   {
     "id": "prima-con-la-hermana",
@@ -8201,7 +8349,8 @@
       "prima-family",
       "duck-under"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some Rueda schools, 'Prima con la Hermana' stays with the original partner after an Enchufla, while in others it changes partner to 'the sister' (the next follower). Verify BOH Studios' rule."
   },
   {
     "id": "prima-con-la-vecina",
@@ -8253,7 +8402,8 @@
       "vecina",
       "duck-under"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Depending on the Rueda lineage, 'Prima con la vecina' either starts with Prima on your own partner and then interacts with the next woman, or initiates Prima directly with the woman on the left ('la vecina'). Confirm exact choreography."
   },
   {
     "id": "prima-doble",
@@ -8309,7 +8459,8 @@
       "duck-under",
       "double-pass"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Great preparation before attempting the Advanced 'Adiós Doble' partner-change figure."
   },
   {
     "id": "prima-y-quedate",
@@ -8360,7 +8511,8 @@
       "no-partner-change",
       "duck-under"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In Rueda lineages where 'Adiós / Prima' normally changes partner, 'Prima y quédate' cancels the change. In lineages where bare 'Prima' already keeps the partner, 'Prima y quédate' often refers to cancelling the partner change at the end of 'Prima con la hermana'."
   },
   {
     "id": "principe-bueno-principe-malo",
@@ -8416,7 +8568,8 @@
       "playful",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Verify whether BOH Studios keeps the greeted follower on 'Príncipe Malo' or skips her to take the next one."
   },
   {
     "id": "puente-doble",
@@ -8473,7 +8626,8 @@
       "two-hand-hold",
       "advanced-wrap"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Because I am 194 cm tall, duck-under bridges like Puente Doble require deep knee flexion (squat mechanics) rather than rounding the upper back—great teaching point for taller leaders!"
   },
   {
     "id": "quedatela",
@@ -8528,7 +8682,8 @@
       "reaction-call",
       "modifier"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Essential Rueda listening drill so leaders don't automatically switch partners on every Enchufla."
   },
   {
     "id": "reina",
@@ -8585,7 +8740,8 @@
       "musicality",
       "wrap"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'La Reina' has multiple choreographed variations across Cuban schools. Teacher should confirm BOH Studios' exact hand-hold sequence."
   },
   {
     "id": "reparto-basic-step",
@@ -8633,7 +8789,8 @@
       "suelta",
       "despelote"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Essential for the 'Despelote / Reparto' gear in our interactive Timba Song Player!"
   },
   {
     "id": "reparto-three-class-steps",
@@ -8681,7 +8838,8 @@
       "urban-cuban",
       "suelta"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Street Reparto step names evolve constantly across Havana barrios and teachers (e.g. El Taco, El Choco, La Batidora, El Molote, La Moto). Teachers at BOH Studios should rename or customize these three sub-steps to match their exact class callouts."
   },
   {
     "id": "rotonda-trafico",
@@ -8744,7 +8902,8 @@
       "group-geometry",
       "continuous-progression"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm the exact lane rules for 'Rotonda' and 'Tráfico' taught at BOH Studios."
   },
   {
     "id": "rumba-arms-and-panuelo",
@@ -8790,7 +8949,8 @@
       "arm-styling",
       "panuelo"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Even when dancing social Timba without a prop, Cuban dancers use these exact pañuelo and skirt arm trajectories during Rumba sections."
   },
   {
     "id": "saborea",
@@ -8845,7 +9005,8 @@
       "musicality",
       "timba-groove"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm whether BOH Studios switches partners on 'Saborea' or keeps the same partner."
   },
   {
     "id": "saca-la-vecina",
@@ -8900,7 +9061,8 @@
       "exhibela-family",
       "spatial-awareness"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios defines 'la vecina' as the clockwise (left) or anticlockwise (right) neighbour, and whether it changes partner permanently."
   },
   {
     "id": "saca-la-vecina-doble",
@@ -8961,7 +9123,8 @@
       "exhibela",
       "turn"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Schools differ on whether 'Saca la vecina' keeps the neighbour at the end (partner change to the left) or returns to the original partner on the final Dile Que No. Confirm your school's default exit."
   },
   {
     "id": "sacala-abajo",
@@ -9010,7 +9173,8 @@
       "follower-turn",
       "frame-control"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some Rueda schools, 'Sácala Abajo' also includes a low duck or knee bend on count 3 or 7. Verify with Enrique which styling is taught at BOH Studios."
   },
   {
     "id": "sale-tu",
@@ -9065,7 +9229,8 @@
       "duck-under",
       "advanced-rueda"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios uses 'Sale tú' as a specific turn-exit call or a spotlight center solo call."
   },
   {
     "id": "saloneo",
@@ -9114,7 +9279,8 @@
       "musicality",
       "closed-hold"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Derived from the traditional Cuban Danzón 'paseo/saloneo' where couples walked and socialized during instrumental flute/violin sections."
   },
   {
     "id": "salsita",
@@ -9169,7 +9335,8 @@
       "shines",
       "musicality"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Many schools have a custom choreographed shine for 'Salsita'; teacher should confirm BOH Studios' exact counts."
   },
   {
     "id": "saluda",
@@ -9224,7 +9391,8 @@
       "playful",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Simple, high-spirit social icebreaker call for Improver Rueda circles."
   },
   {
     "id": "saluda-a-lo-moderno",
@@ -9276,7 +9444,8 @@
       "styling",
       "social"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm the exact greeting gesture (fist bump, hip bump, or two-part neighbour greeting) used in the Bournemouth classes."
   },
   {
     "id": "se-viro",
@@ -9327,7 +9496,8 @@
       "orientation-change",
       "no-partner-change"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some Rueda systems 'Se viró' flips the circle to Rueda Pa'Fuera (backs to center), while in others it is a sudden mid-step 180-degree direction reversal during a walking call (like 'Paséala > se viró'). Confirm which usage applies here."
   },
   {
     "id": "seis-y-nueve",
@@ -9382,7 +9552,8 @@
       "hammerlock",
       "two-hand-hold"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios teaches 'Seis y Nueve' as an opposite-facing double hammerlock or a 2-bar Enchufla partner switch."
   },
   {
     "id": "setenta-por-las-manos",
@@ -9440,7 +9611,8 @@
       "micro-leading",
       "technical"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Setenta por las manos' (or 'por abajo') varies by teacher; confirm with Enrique which exact hand-switch sequence is canonical at BOH Studios."
   },
   {
     "id": "setenta-y-cinco",
@@ -9497,7 +9669,8 @@
       "hammerlock",
       "two-hand-hold"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Numbered Setenta variations (71, 72, 75) have slight regional differences in whether the leader or follower turns on 9-11 vs 13-15. Teacher should verify BOH Studios' exact count breakdown."
   },
   {
     "id": "setenta-y-dos",
@@ -9554,7 +9727,8 @@
       "hammerlock",
       "advanced-wrap"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Verify exact count-by-count hand switches for 72 with Enrique, as schools differ on 72 vs 75."
   },
   {
     "id": "setenta-y-uno",
@@ -9610,7 +9784,8 @@
       "hammerlock",
       "two-hand-hold"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Safety reminder: both dancers must keep a rotating hook grip (no thumbs clamped) whenever both hands stay connected past count 8."
   },
   {
     "id": "shoboun",
@@ -9661,7 +9836,8 @@
       "styling",
       "suelta"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: The name 'Sho'boun' (German mesa)' is unusual and specific to a local or festival routine. Teachers should confirm the exact spelling, vocal call, arm choreography, and whether it changes partners."
   },
   {
     "id": "siguelo",
@@ -9712,7 +9888,8 @@
       "musicality",
       "continuation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Does not change partners on its own unless attached to a partner-changing loop (like 'Dame > síguelo'). Teach students to treat 'Síguelo' as an infinite loop until the caller gives a termination call."
   },
   {
     "id": "sombrero-complicado",
@@ -9769,7 +9946,8 @@
       "hammerlock",
       "combination"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "A staple intermediate social floor combination; teachers should check whether the BOH Studios version is 2 or 3 eight-counts."
   },
   {
     "id": "sombrero-con-mambo",
@@ -9826,7 +10004,8 @@
       "two-hand-hold",
       "musicality"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "No partner change unless followed by 'Dame'. Great for teaching students not to rush out of wraps."
   },
   {
     "id": "sombrero-nuevo",
@@ -9883,7 +10062,8 @@
       "two-hand-hold",
       "wrap"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Verify whether BOH Studios defines 'Sombrero Nuevo' as Sombrero Doble (both heads) or Sombrero with an inside leader turn on 1-3."
   },
   {
     "id": "sombrero-y-plancha",
@@ -9939,7 +10119,8 @@
       "two-hand-hold",
       "styling"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some Cuban schools 'plancha' is a horizontal ironing hand-slide across the chest/stomach after Sombrero, while in others it is a torso lean check. Verify with Enrique."
   },
   {
     "id": "son-montuno-closed-basic-and-turns",
@@ -9987,7 +10168,8 @@
       "closed-hold",
       "elegance"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "When a modern Timba track opens with a traditional piano/tres intro (like Havana D'Primera or Pupy), starting in Son Montuno before switching to A Tiempo Casino on the montuno drop is top-tier musicality."
   },
   {
     "id": "suzie-q",
@@ -10033,7 +10215,8 @@
       "shines",
       "footwork"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In Cuban Suelta, Suzie Q is danced lower into the knees with more ribcage isolation than the upright ballroom/NY mambo version."
   },
   {
     "id": "tacon-punta",
@@ -10085,7 +10268,8 @@
       "mambo",
       "timba"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Teachers vary on whether Tacón-Punta starts on the left or right foot in suelta lines, and whether it is taught as heel-toe-step (1-2-3) or double heel-toe across 1-2-3-4. Confirm preferred school footwork phrasing."
   },
   {
     "id": "tijeras",
@@ -10141,7 +10325,8 @@
       "arm-work",
       "intermediate-wrap"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Tijeras' refers to a specific two-hand scissor wrap in some schools and a split/scissor footwork check in others. Teacher should verify which version is taught at BOH Studios."
   },
   {
     "id": "tijeras-complicado",
@@ -10197,7 +10382,8 @@
       "duck-under",
       "two-hand-hold"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm the exact 2nd eight-count variation of Tijeras Complicado taught at BOH Studios."
   },
   {
     "id": "tobillo",
@@ -10253,7 +10439,8 @@
       "playful",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Hand signal: caller points down toward the ankle or lifts a foot slightly to tap the ankle. UNSURE: Confirm whether BOH Studios taps the ankle of the outgoing partner on 7 or the incoming partner."
   },
   {
     "id": "toma-electrica",
@@ -10310,7 +10497,8 @@
       "bloque",
       "high-energy"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether BOH Studios teaches Toma Eléctrica as a partner wrap with Tembleque or a specific Rueda partner-switch call."
   },
   {
     "id": "toma-electrica-complicado",
@@ -10380,7 +10568,8 @@
       "tembleque",
       "advanced"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Toma Eléctrica Complicado' is a signature routine call whose exact hand switches and count length vary by school. Teacher should verify the exact 8-count breakdown."
   },
   {
     "id": "triple-play",
@@ -10435,7 +10624,8 @@
       "baseball-theme",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Requires at least 4–5 couples in the Rueda circle to feel spacious."
   },
   {
     "id": "tumba-francesa",
@@ -10490,7 +10680,8 @@
       "styling",
       "oriental-cuba"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: In some Rueda circles 'Tumba Francesa' is a specific 2-bar turn/pass pattern rather than a folkloric styling break. Teacher should verify BOH Studios' version."
   },
   {
     "id": "tumba-francesa-complicado",
@@ -10558,7 +10749,8 @@
       "paseo",
       "advanced"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Tumba Francesa Complicado' choreography varies significantly between Rueda masters (some emphasize a hammerlock promenade, others a multi-couple star/wheel). Teacher must confirm the exact sequence taught in class."
   },
   {
     "id": "un-tarro",
@@ -10607,7 +10799,8 @@
       "closed-hold",
       "fast-switch"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Hand signal: caller places index and pinky fingers (or two index fingers) on the forehead like bull horns ('poner los tarros' is Cuban slang for cheating on a partner!)."
   },
   {
     "id": "un-tarro-sin-soltar",
@@ -10659,7 +10852,8 @@
       "no-partner-change",
       "fake-out"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Mechanically very close to Prima, except the leader sells the body language of a travelling Tarro before rebounding back to his partner."
   },
   {
     "id": "una-media",
@@ -10714,7 +10908,8 @@
       "half-turn",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: 'Una Media' varies between Rueda syllabi (in some a half-turn Enchufla check, in others a Sock/Ankle touch play on 'media' = sock). Teacher should verify BOH Studios' version."
   },
   {
     "id": "una-pa-ti-una-pa-mi",
@@ -10769,7 +10964,8 @@
       "alternating-turns",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Closely related to 'Por mí, por ti'; verify any count differences in the BOH Studios syllabus."
   },
   {
     "id": "vacilala-completa",
@@ -10825,7 +11021,8 @@
       "free-turn",
       "circular"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm whether BOH Studios uses 'Vacílala Completa' to distinguish a 2-bar Vacílala + Dile Que No from a 1-bar Vacílala."
   },
   {
     "id": "vacilala-con-bamboleo",
@@ -10883,7 +11080,8 @@
       "musicality",
       "suelta"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Named in homage to Lazarito Valdés y Bamboleo and the swaying Timba body isolation style."
   },
   {
     "id": "vacilala-con-cero",
@@ -10935,7 +11133,8 @@
       "orbit",
       "turn"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Verify whether your school keeps the same partner at the end of 'Vacílala con Cero' or automatically transitions into a Dame partner change on counts 9-15."
   },
   {
     "id": "vacilala-con-columbia",
@@ -10993,7 +11192,8 @@
       "shines",
       "musicality"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Ideal for Timba tracks that feature a sudden Rumba or 6/8 percussion break mid-montuno."
   },
   {
     "id": "vacilala-y-dame",
@@ -11045,7 +11245,8 @@
       "vacilala",
       "dame"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm whether your classes teach the 1-eight-count fast transition (Vacílala on 1-3, Dame on 5-7) or the 2-eight-count standard transition (Vacílala on 1-7, Dame on 9-15)."
   },
   {
     "id": "vacilala-y-florea",
@@ -11103,7 +11304,8 @@
       "improvisation",
       "suelta"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In Cuban dance slang, 'florear' means to adorn, show off, and play musically with your partner without rushing back into turn patterns."
   },
   {
     "id": "vacilala-y-florea-doble",
@@ -11165,7 +11367,8 @@
       "musicality",
       "advanced"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Confirm whether 'Vacílala y Florea Doble' in your Rueda keeps the same partner at the end or advances to the next partner (add 'partner-change' tag if it advances)."
   },
   {
     "id": "vacilense",
@@ -11215,7 +11418,8 @@
       "circular",
       "suelta-feel"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "In Rueda de Casino, 'Vacílense' (or 'Vacílala los dos') means both leaders and followers turn simultaneously without holding hands."
   },
   {
     "id": "vacilense-los-dos",
@@ -11268,7 +11472,8 @@
       "suelta",
       "no-partner-change"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: the library already has Vacílense, where both partners turn too. Teachers should say how Vacílense los dos differs, or merge the two. In 1 eight-count, the turns happen on 1-3 and Dile Que No on 5-7. In Rueda, if combined with a Paseo or Dame, it spans 2 eight-counts. Check whether your teachers count this as 1 or 2 eight-counts in the Rueda syllabus."
   },
   {
     "id": "vamos-abajo-vamos-arriba",
@@ -11316,7 +11521,8 @@
       "directional-march",
       "rueda-foundation"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "To exit Vamos Abajo / Vamos Arriba back into open Rueda, the caller shouts 'Dile Que No'."
   },
   {
     "id": "ya-tu-sabes",
@@ -11371,7 +11577,8 @@
       "timba-culture",
       "party-figure"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "UNSURE: Because 'Ya tú sabes' is a classic Cuban catchphrase, almost every Rueda school attaches its own signature mini-routine to it. Teacher must verify BOH Studios' exact sequence."
   },
   {
     "id": "yambu-basics",
@@ -11418,7 +11625,8 @@
       "cultural-heritage",
       "elegance"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Key cultural quiz point for students: Yambú, Guaguancó, and Columbia are the three main styles of Cuban Rumba, and Yambú is distinguished by its slower tempo and the absence of the vacunao."
   },
   {
     "id": "yemaya",
@@ -11466,7 +11674,8 @@
       "afro-cuban",
       "cultural-heritage"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Sacred in Regla de Ocha: Yemayá's colours are ocean blue and crystal/white (alternating in patterns of 7, her sacred number); her attributes include the silver/peacock fan (abanico), seashells, anchor, and half-moon."
   },
   {
     "id": "yogur",
@@ -11522,6 +11731,7 @@
       "playful",
       "enchufla-family"
     ],
-    "videos": []
+    "videos": [],
+    "notes": "Confirm whether BOH Studios performs the Yogur wave with the outgoing partner on 5-7 before moving, or with the incoming partner."
   }
 ]

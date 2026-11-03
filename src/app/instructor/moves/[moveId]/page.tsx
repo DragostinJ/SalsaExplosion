@@ -41,6 +41,13 @@ export default async function MoveReviewDetailPage({ params }: MoveDetailPagePro
     <div className="min-h-screen bg-canvas text-ivory py-8 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
         <InstructorNav />
+        {move.notes && (
+          // Teachers only: what Gemini wasn't sure of when it drafted this move. Dancers never see it.
+          <aside aria-label="Note from the draft" className="mb-6 border-4 border-ink bg-poster-mustard p-4 text-ink">
+            <p className="text-xs font-bold uppercase tracking-[0.2em]">Note from the draft · check this first</p>
+            <p className="mt-2 text-sm font-medium">{move.notes}</p>
+          </aside>
+        )}
         <MoveReviewDetailConsole
           move={move}
           reviewState={reviewState}

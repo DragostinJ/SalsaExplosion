@@ -105,8 +105,18 @@ export const MoveSchema = z.object({
   tags: z.array(z.string()),
   videos: z.array(MoveVideoSchema),
   reviewedBy: z.string().optional(),
+  /**
+   * For the teachers only, never shown to dancers: what the draft's writer (Gemini) was unsure of,
+   * usually starting "UNSURE:". Not part of moveFingerprint, so editing it never undoes an approval.
+   */
+  notes: z.string().max(2000).optional(),
 });
 export type Move = z.infer<typeof MoveSchema>;
+
+/** True when the draft's note says Gemini wasn't sure (a teacher should check it first). */
+export function hasUnsureNote(move: Pick<Move, "notes">): boolean {
+  return /\bUNSURE\b/i.test(move.notes ?? "");
+}
 
 /**
  * Ordered sequence of moves forming a musical combination.

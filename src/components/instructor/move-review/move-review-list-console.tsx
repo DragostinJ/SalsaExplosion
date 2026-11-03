@@ -20,6 +20,7 @@ import { Card } from "@/components/ui/card";
 import {
   type Move,
   MOVE_CATEGORIES,
+  hasUnsureNote,
 } from "@/lib/moves/move-schema";
 import { type MoveReviewState } from "@/lib/moves/move-library";
 import { type MoveReview, type MoveReviewReport } from "@/lib/moves/move-review";
@@ -63,6 +64,9 @@ export function MoveReviewListConsole({
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [levelFilter, setLevelFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  // "unsure": only the drafts whose note says Gemini wasn't sure, the ones to check first
+  const [noteFilter, setNoteFilter] = useState<string>("all");
+  const unsureCount = moves.filter(hasUnsureNote).length;
 
   const [localReviews] = useState<Record<string, MoveReview>>(loadLocalReviews);
   const [copied, setCopied] = useState<boolean>(false);
@@ -95,6 +99,7 @@ export function MoveReviewListConsole({
     if (statusFilter !== "all" && status !== statusFilter) return false;
     if (categoryFilter !== "all" && move.category !== categoryFilter) return false;
     if (levelFilter !== "all" && move.level !== levelFilter) return false;
+    if (noteFilter === "unsure" && !hasUnsureNote(move)) return false;
 
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
@@ -321,9 +326,20 @@ export function MoveReviewListConsole({
             <option value="Advanced">Advanced</option>
           </select>
 
+          <select
+            aria-label="Gemini's notes"
+            value={noteFilter}
+            onChange={(e) => setNoteFilter(e.target.value)}
+            className="min-h-[40px] rounded-xl border bg-background px-3 py-2 text-xs text-foreground focus:outline-hidden focus:ring-2 focus:ring-amber-500/30"
+          >
+            <option value="all">Any note</option>
+            <option value="unsure">Gemini was unsure ({unsureCount})</option>
+          </select>
+
           {(statusFilter !== "all" ||
             categoryFilter !== "all" ||
             levelFilter !== "all" ||
+            noteFilter !== "all" ||
             searchQuery.trim() !== "") && (
             <Button
               variant="ghost"
@@ -332,6 +348,7 @@ export function MoveReviewListConsole({
                 setStatusFilter("all");
                 setCategoryFilter("all");
                 setLevelFilter("all");
+                setNoteFilter("all");
                 setSearchQuery("");
               }}
               className="min-h-[40px] text-xs text-muted-foreground hover:text-foreground"
@@ -397,6 +414,12 @@ export function MoveReviewListConsole({
                         {hasUnverified && currentStatus !== "approved" && (
                           <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30 text-xs">
                             Counts Unverified
+                          </Badge>
+                        )}
+
+                        {hasUnsureNote(move) && currentStatus !== "approved" && (
+                          <Badge className="bg-red-500/20 text-red-300 border-red-500/30 text-xs" title={move.notes}>
+                            Gemini unsure
                           </Badge>
                         )}
 

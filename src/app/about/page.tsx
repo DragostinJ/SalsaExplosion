@@ -224,7 +224,7 @@ export default async function AboutPage() {
               Just Turn Up · £12 at the Door
             </h3>
             <p className="text-xs text-ink leading-relaxed font-medium">
-              No booking, no membership, no app needed. Pay £12 for one class or £14 for two at the door, cash or card, and stay for the social. Festival passes are the only thing sold online.
+              No booking, no contracts, no app needed. Pay £12 for one class or £14 for two at the door, cash or card, and stay for the social. Festival passes are the only thing sold online.
             </p>
           </div>
 

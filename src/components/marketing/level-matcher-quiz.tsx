@@ -183,7 +183,7 @@ export function LevelMatcherQuiz() {
                 className="bg-primary-base hover:bg-primary-hover text-white font-extrabold shadow-sm text-xs min-h-10"
               >
                 <Link href={result.href}>
-                  <span>{result.ctaLabel || "Book This Level • Free Welcome Pass"}</span>
+                  <span>{result.ctaLabel || "See This Level's Classes • Pay at the Door"}</span>
                   <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                 </Link>
               </Button>

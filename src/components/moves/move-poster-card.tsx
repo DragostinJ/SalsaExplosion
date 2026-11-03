@@ -2,6 +2,13 @@ import Link from "next/link";
 import type { Move, MoveCategory } from "@/lib/moves/move-schema";
 import { cn } from "@/lib/utils";
 
+/** What a poster card and the library search need: a fraction of a whole move, so /moves stays light. */
+export type MoveCardData = Pick<Move, "id" | "name" | "spanishName" | "category" | "level" | "summary" | "eightCounts" | "variations">;
+
+export function toMoveCardData({ id, name, spanishName, category, level, summary, eightCounts, variations }: Move): MoveCardData {
+  return { id, name, spanishName, category, level, summary, eightCounts, variations };
+}
+
 /** One poster ink per move family (with the text colour that reads on it) */
 export const CATEGORY_INK: Record<MoveCategory, { bg: string; text: string; cell: string }> = {
   "Casino figure": { bg: "bg-poster-teal", text: "text-ink", cell: "bg-ink text-paper" },
@@ -42,7 +49,7 @@ export function CountStrip({ eightCounts, cell, className }: { eightCounts: numb
 }
 
 /** A move as a mini ICAIC poster, for the dancer library and the teacher's review preview. */
-export function MovePosterCard({ move, number, href }: { move: Move; number?: number; href?: string }) {
+export function MovePosterCard({ move, number, href }: { move: MoveCardData; number?: number; href?: string }) {
   const ink = CATEGORY_INK[move.category];
   const title = move.spanishName ?? move.name;
   const body = (

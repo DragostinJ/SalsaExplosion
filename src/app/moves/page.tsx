@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { MoveLibraryFilters, type FamilyArt } from "@/components/moves/move-library-filters";
+import { toMoveCardData } from "@/components/moves/move-poster-card";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, POSTER_BLOCKS, TYPE } from "@/components/poster/poster-kit";
@@ -26,9 +27,11 @@ const FAMILY_ART: FamilyArt = {
   "Afro-Cuban Orishas": pick(art.familyOrishas),
 };
 
-/** Dancers only ever see moves a teacher approved with the counts checked on the music. */
+/** The whole library is public (owner, 2026-11-02) except moves a teacher rejected or marked as needing work. */
 export default function MovesPage() {
-  const moves = getVisibleMoves();
+  // Only the fields the cards and the search use: the full moves (steps, notes, mistakes) would
+  // triple the size of this page.
+  const moves = getVisibleMoves().map(toMoveCardData);
   const preview = isDraftPreviewEnabled();
 
   return (
@@ -36,7 +39,7 @@ export default function MovesPage() {
       <CancionesTabs current="/moves" />
       {preview && (
         <p role="note" className="border-4 border-ink bg-poster-mustard px-4 py-3 text-sm font-bold text-ink">
-          Local preview: these are drafts the teachers haven&apos;t checked yet. The live site shows approved moves only.
+          Local preview: this also shows moves a teacher marked as needing work. The live site hides those and rejected ones.
         </p>
       )}
       <header className="px-1.5">

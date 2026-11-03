@@ -3,10 +3,10 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { Search } from "lucide-react";
-import { CATEGORY_INK, MovePosterCard } from "@/components/moves/move-poster-card";
+import { CATEGORY_INK, MovePosterCard, type MoveCardData } from "@/components/moves/move-poster-card";
 import { RUEDA_LEVELS, RUEDA_LEVEL_INK } from "@/components/rueda/rueda-level-ink";
 import { TYPE } from "@/components/poster/poster-kit";
-import { MOVE_CATEGORIES, type Move, type MoveCategory } from "@/lib/moves/move-schema";
+import { MOVE_CATEGORIES, type MoveCategory } from "@/lib/moves/move-schema";
 import type { CurriculumLevel } from "@/lib/constants/cuban-curriculum-2027";
 import { cn } from "@/lib/utils";
 
@@ -34,7 +34,7 @@ function FamilyPicture({ art }: { art?: { src: string; width: number; height: nu
 }
 
 /** The move library with search, level and family filters over the poster cards. */
-export function MoveLibraryFilters({ moves, familyArt = {} }: { moves: readonly Move[]; familyArt?: FamilyArt }) {
+export function MoveLibraryFilters({ moves, familyArt = {} }: { moves: readonly MoveCardData[]; familyArt?: FamilyArt }) {
   const [query, setQuery] = useState("");
   const [level, setLevel] = useState<LevelFilter>("ALL");
   const [family, setFamily] = useState<FamilyFilter>("ALL");

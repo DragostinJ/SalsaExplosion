@@ -9,6 +9,8 @@ import { getPublishedEvents } from "@/lib/stores/published-events-store";
 import { buildFestivalEventJsonLd } from "@/lib/seo/event-jsonld";
 import { jsonLdHtml } from "@/lib/seo/move-jsonld";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
+import { PosterBanner } from "@/components/poster/poster-art";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 export const metadata = {
   title: "Cuban Salsa Festivals & Parties",
@@ -163,6 +165,8 @@ export default async function EventsDirectoryPage() {
           </div>
         </div>
       </section>
+
+      <PosterBanner image={MEDIA_MANIFEST.editorial.bannerFestival} caption="Fiesta junto al mar" />
 
       {/* Event Grid by Season */}
       {displayEvents.length === 0 && liveAnnouncements.length === 0 ? (

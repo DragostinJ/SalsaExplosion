@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   Star,
   Sparkles,
@@ -22,6 +23,7 @@ import {
   GoogleReviewDraftOutput,
 } from "@/lib/validations/ai-studio.schema";
 import { generateGoogleReviewHelperAction } from "@/actions/ai-studio.actions";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 const DEFAULT_FAVORITE_ASPECT: (typeof REVIEW_FAVORITE_ASPECTS)[number] =
   "Thursday & Sunday Social Vibe";
@@ -92,11 +94,14 @@ export function ReviewBoosterClient() {
           Help Bournemouth Find Real Cuban Salsa
         </h1>
 
-        <div className="flex items-center justify-center gap-1.5 my-3 text-accent-red">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="h-6 w-6 fill-poster-red text-accent-red" />
-          ))}
-        </div>
+        <Image
+          src={MEDIA_MANIFEST.mockupGraphics.stars.src}
+          alt="Five stars"
+          width={MEDIA_MANIFEST.mockupGraphics.stars.width}
+          height={MEDIA_MANIFEST.mockupGraphics.stars.height}
+          sizes="8rem"
+          className="mx-auto my-3 w-28 sm:w-32"
+        />
 
         <p className="text-sm text-ink max-w-xl mx-auto leading-relaxed font-medium">
           Leave a genuine 5-star Google review for Maestro Enrique Perez Valdes and the Salsa Explosion family at BOH Studios Bournemouth. Tap 3 options below to draft your review in seconds!

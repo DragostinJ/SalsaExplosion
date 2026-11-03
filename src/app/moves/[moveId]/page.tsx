@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CATEGORY_INK, CountStrip } from "@/components/moves/move-poster-card";
@@ -6,6 +7,7 @@ import { ProClipsSection } from "@/components/moves/pro-clips-section";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
 import { KICKER, TYPE } from "@/components/poster/poster-kit";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { getVisibleMoves, isDraftPreviewEnabled, isTeacherChecked, songSectionsForMove } from "@/lib/moves/move-library";
 import type { MoveStep } from "@/lib/moves/move-schema";
 import { formatSongTime } from "@/lib/music/song-timing";
@@ -121,9 +123,22 @@ export default async function MovePage({ params }: MovePageProps) {
         </section>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <Steps title="El que lleva" english="Leader" steps={move.leaderSteps} />
-        <Steps title="La que sigue" english="Follower" steps={move.followerSteps} />
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
+          <Image
+            src={MEDIA_MANIFEST.mockupGraphics.footprints.src}
+            alt=""
+            width={MEDIA_MANIFEST.mockupGraphics.footprints.width}
+            height={MEDIA_MANIFEST.mockupGraphics.footprints.height}
+            sizes="5rem"
+            className="w-16 shrink-0 sm:w-20"
+          />
+          <p className={KICKER}>Paso a paso · step by step</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          <Steps title="El que lleva" english="Leader" steps={move.leaderSteps} />
+          <Steps title="La que sigue" english="Follower" steps={move.followerSteps} />
+        </div>
       </div>
 
       <ProClipsSection moveId={move.id} />

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 export const metadata: Metadata = {
   title: "Fast-Track Door Check-In",
@@ -61,6 +63,15 @@ export default async function StudentQrCheckInPage({
           label="Back to Studio Roster"
         />
       </div>
+
+      <Image
+        src={MEDIA_MANIFEST.mockupGraphics.key.src}
+        alt=""
+        width={MEDIA_MANIFEST.mockupGraphics.key.width}
+        height={MEDIA_MANIFEST.mockupGraphics.key.height}
+        sizes="6rem"
+        className="mx-auto mb-4 w-20 sm:w-24"
+      />
 
       <QrCheckInCard
         session={{

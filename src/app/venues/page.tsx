@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   MapPin,
@@ -13,6 +14,7 @@ import {
 import { BackButton } from "@/components/navigation/back-button";
 import { VenueArrivalPlanner } from "@/components/venues/venue-arrival-planner";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 export const metadata = {
   title: "BOH Studios: Directions & Parking",
@@ -37,6 +39,14 @@ export default function VenuesGuidePage() {
           <span>BOURNEMOUTH STUDIO HUB &amp; FESTIVAL PARTNER VENUES</span>
           <span className="opacity-70">TRAVEL, PARKING &amp; ARRIVAL GUIDE</span>
         </div>
+        <Image
+          src={MEDIA_MANIFEST.mockupGraphics.map.src}
+          alt=""
+          width={MEDIA_MANIFEST.mockupGraphics.map.width}
+          height={MEDIA_MANIFEST.mockupGraphics.map.height}
+          sizes="9rem"
+          className="pointer-events-none absolute right-6 top-16 hidden w-28 -rotate-3 sm:block md:right-10 md:w-36"
+        />
 
         <div className="mt-4 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3">

@@ -51,6 +51,7 @@ import { TwoDayExhibitionTimetable } from "@/components/home/TwoDayExhibitionTim
 import { LevelMatcherQuiz } from "@/components/marketing/level-matcher-quiz";
 import { VENUE_INFO } from "@/lib/academy-data";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
+import { PosterBanner } from "@/components/poster/poster-art";
 
 interface SchedulePageProps {
   searchParams: Promise<{
@@ -422,6 +423,8 @@ export default async function StudentSchedulePage({
           </div>
         ) : null}
       </div>
+
+      <PosterBanner image={MEDIA_MANIFEST.editorial.bannerStudio} caption="Jueves y domingos en BOH Studios" />
 
       {/* Interactive Level Matcher & First-Timer Quick Guide */}
       <section className="border-4 border-ink bg-paper p-5 sm:p-8 text-ink shadow-[6px_6px_0_0_#161311] space-y-6">

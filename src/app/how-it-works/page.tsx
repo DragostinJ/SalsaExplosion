@@ -5,6 +5,8 @@ import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curricu
 import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS, POSTER_BLOCKS } from "@/components/poster/poster-kit";
 import { DOOR_PRICING, VENUE_INFO, WEEKLY_SCHEDULE } from "@/lib/academy-data";
+import { PosterBanner } from "@/components/poster/poster-art";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 export const metadata = {
   title: "How It Works: Classes, Songs, Festivals",
@@ -91,6 +93,8 @@ export default function HowItWorksPage() {
           </Link>
         </div>
       </section>
+
+      <PosterBanner image={MEDIA_MANIFEST.editorial.bannerTeacher} caption="Uno, dos, tres" />
 
       {/* The four doors */}
       <section aria-labelledby="steps-heading" className="space-y-6">

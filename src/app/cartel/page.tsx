@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS, TYPE } from "@/components/poster/poster-kit";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import { CartelDaySchema, cartelSchedule, nextClassNight, spanishDate, type CartelDay } from "@/lib/cartel";
 
 export const metadata = {
@@ -15,18 +17,28 @@ export const revalidate = 3600;
 export default function CartelPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-6xl space-y-10 px-4 py-8 sm:px-6">
-      <header>
-        <p className={KICKER}>Para Instagram · for Instagram</p>
-        <h1 className={`mt-3 ${TYPE.section}`}>
-          Carteles de la noche
-          <span className="mt-3 block font-sans text-lg font-bold normal-case leading-snug tracking-normal">
-            Class-night posters, made from the timetable
-          </span>
-        </h1>
-        <p className="mt-4 max-w-2xl text-lg font-medium">
-          Each poster shows the next class night&apos;s date, classes, teachers and the door price. Download it on your phone and
-          post it as a story or in the feed. If the timetable changes, the posters change with it.
-        </p>
+      <header className="flex items-start justify-between gap-6">
+        <div>
+          <p className={KICKER}>Para Instagram · for Instagram</p>
+          <h1 className={`mt-3 ${TYPE.section}`}>
+            Carteles de la noche
+            <span className="mt-3 block font-sans text-lg font-bold normal-case leading-snug tracking-normal">
+              Class-night posters, made from the timetable
+            </span>
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg font-medium">
+            Each poster shows the next class night&apos;s date, classes, teachers and the door price. Download it on your phone and
+            post it as a story or in the feed. If the timetable changes, the posters change with it.
+          </p>
+        </div>
+        <Image
+          src={MEDIA_MANIFEST.mockupGraphics.calendar.src}
+          alt=""
+          width={MEDIA_MANIFEST.mockupGraphics.calendar.width}
+          height={MEDIA_MANIFEST.mockupGraphics.calendar.height}
+          sizes="(max-width: 768px) 5rem, 10rem"
+          className="w-20 shrink-0 sm:w-28 md:w-40"
+        />
       </header>
 
       <ul className="grid gap-10 md:grid-cols-2">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import {
   RefreshCw,
   HeartHandshake,
@@ -11,6 +12,7 @@ import {
 } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
+import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
 export const metadata: Metadata = {
   title: "Terms, Refunds & Privacy",
@@ -37,8 +39,16 @@ export default function TermsAndLegalPage() {
           <span>UK LEGAL &amp; CONSUMER PROTECTION</span>
           <span className="opacity-70">100% TRANSPARENCY GUARANTEE</span>
         </div>
+        <Image
+          src={MEDIA_MANIFEST.mockupGraphics.letter.src}
+          alt=""
+          width={MEDIA_MANIFEST.mockupGraphics.letter.width}
+          height={MEDIA_MANIFEST.mockupGraphics.letter.height}
+          sizes="9rem"
+          className="pointer-events-none absolute right-6 top-16 hidden w-28 rotate-3 md:block md:right-10 md:w-32"
+        />
 
-        <div className="mt-4 space-y-3">
+        <div className="mt-4 space-y-3 md:pr-40">
           <p className={KICKER}>Statutory Disclosures &amp; Fair Trading</p>
           <h1 className={`${TYPE.section} text-ink`}>
             TERMS OF SERVICE, <span className="text-accent-red">Consumer Rights &amp; Privacy</span>

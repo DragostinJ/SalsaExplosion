@@ -96,22 +96,11 @@ export function TwoDayExhibitionTimetable() {
       id="timetable"
       className="cv-auto border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)] scroll-mt-20 space-y-10"
     >
-      {/* Main Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b-4 border-ink">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 border-b-2 border-ink pb-2 text-xs font-bold uppercase tracking-[0.25em] text-ink">
-            <span>Official {VENUE_INFO.shortName} Residency • Thursdays &amp; Sundays</span>
-          </div>
-          <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.section} pt-1`}>
-            WEEKLY PROGRAMME{" "}
-            <span className="text-accent-red">
-              LINEUP
-            </span>
-          </h2>
-          <p className="text-xs sm:text-sm text-ink font-medium max-w-xl leading-relaxed">
-            Strictly Thursdays and Sundays at {VENUE_INFO.name}. High-energy partner rotations, authentic Cuban Casino footwork, and zero partner required.
-          </p>
-        </div>
+      {/* Section header: kept small, because the page hero right above already says Thursdays & Sundays */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b-4 border-ink">
+        <h2 className={`font-display uppercase tracking-tight text-ink ${TYPE.card}`}>
+          The weekly <span className="text-accent-red">timetable</span>
+        </h2>
 
         <div className="flex items-center gap-2 self-start md:self-auto border-2 border-ink bg-poster-mustard px-4 py-2 text-xs font-bold text-ink shadow-[4px_4px_0_0_var(--color-ink)]">
           <MapPin className="h-4 w-4 text-accent-red shrink-0" />

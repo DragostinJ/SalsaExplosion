@@ -137,7 +137,7 @@ export interface MergeResult {
 const AnswerSchema = z
   .object({
     rows: z.array(z.unknown()),
-    analysis: z.object({ model: z.string().optional(), notes: z.string().optional() }).passthrough().optional(),
+    analysis: z.object({ notes: z.string().optional() }).passthrough().optional(),
   })
   .passthrough();
 
@@ -160,7 +160,7 @@ function sameMoves(a: readonly string[], b: readonly string[]): boolean {
 }
 
 /** Reads one piece's answer and puts its rows on the original video's clock. */
-function timedRows(answer: PieceAnswer, notes: string[]): { rows: TimedRow[]; model?: string; analysisNotes?: string } {
+function timedRows(answer: PieceAnswer, notes: string[]): { rows: TimedRow[]; analysisNotes?: string } {
   const label = `Piece ${answer.piece.number}`;
   let parsed: unknown;
   try {
@@ -210,7 +210,7 @@ function timedRows(answer: PieceAnswer, notes: string[]): { rows: TimedRow[]; mo
     const end = Math.min(answer.piece.end, r.end + shift);
     if (end - start >= MIN_ROW_SECONDS) timed.push({ row: r.row, start, end, piece: answer.piece.number });
   }
-  return { rows: timed, model: shape.data.analysis?.model, analysisNotes: shape.data.analysis?.notes };
+  return { rows: timed, analysisNotes: shape.data.analysis?.notes };
 }
 
 /** Joins figures split across a piece border, then makes sure no two rows overlap. */
@@ -244,19 +244,14 @@ export function mergePieceAnswers(manifest: MapperChatManifest, answers: readonl
   const missing = answers.filter((a) => !a.raw.trim()).map((a) => a.piece.number);
   const all: TimedRow[] = [];
   const pieceNotes: string[] = [];
-  const modelsSaid = new Set<string>();
 
+  // The model is the one picked in AI Studio. The chat's own analysis.model is ignored: Gemini 4
+  // Argon calls itself "gemini-2.5-pro" (seen on 2026-11-04 with Argon picked), so it proves nothing.
   for (const answer of answers) {
     if (!answer.raw.trim()) continue;
     const result = timedRows(answer, notes);
     all.push(...result.rows);
-    if (result.model?.trim()) modelsSaid.add(result.model.trim());
     if (result.analysisNotes?.trim()) pieceNotes.push(`Piece ${answer.piece.number}: ${result.analysisNotes.trim()}`);
-  }
-
-  const squash = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, "");
-  if (modelsSaid.size > 0 && ![...modelsSaid].some((m) => squash(m).includes(squash(manifest.model)))) {
-    notes.push(`The chat called itself ${[...modelsSaid].join(", ")}, but the run was set up for ${manifest.model}. Check the model picker.`);
   }
 
   const rows = joinRows(all);

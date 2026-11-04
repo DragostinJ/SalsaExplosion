@@ -160,13 +160,13 @@ describe("Move Mapper chat: joining the answers", () => {
     expect(result.notes.join("\n")).toMatch(/row 3 left out: its times "40"/);
   });
 
-  it("warns when the chat says it is a different model from the one picked", () => {
+  it("records the model picked in AI Studio, not the name the chat gives itself", () => {
+    // Argon calls itself gemini-2.5-pro
     const result = mergePieceAnswers(manifest, [
-      { piece: manifest.pieces[0], raw: answer([row("0:30", "0:40", ["dile-que-no"])], "gemini-3.1-flash-lite") },
+      { piece: manifest.pieces[0], raw: answer([row("0:30", "0:40", ["dile-que-no"])], "gemini-2.5-pro") },
     ]);
-    expect(result.notes.join(" ")).toContain("Check the model picker");
-    const same = mergePieceAnswers(manifest, [{ piece: manifest.pieces[0], raw: answer([row("0:30", "0:40", ["dile-que-no"])]) }]);
-    expect(same.notes.join(" ")).not.toContain("Check the model picker");
+    expect(result.breakdown?.analysis?.model).toBe("Gemini 4 Argon");
+    expect(result.notes.join(" ")).not.toContain("gemini-2.5-pro");
   });
 
   it("says so when an answer is not JSON", () => {

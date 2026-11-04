@@ -24,7 +24,8 @@ It makes `../mapper-answers/chat/<clip id>/` with:
 
 Follow `messages.md`. Two rules:
 - **Clear the chat between pieces** (or delete the last message and its answer). A chat sends its whole history every turn, so the old piece's video frames would be paid for again.
-- **Check the model before each piece.** The chat names itself in `analysis.model`; the join step warns if it doesn't match.
+- **Check the model picker before each piece.** Don't trust the name in the answer's `analysis.model`: Argon calls itself "gemini-2.5-pro". The join step records the model you picked (`--model`, default Gemini 4 Argon).
+- **Type the video settings as AI Studio wants them:** `0h0m3s`, `0h1m8s`. `messages.md` writes them that way.
 
 If the video settings have no frame-rate box, run the piece anyway and say so: Gemini then sees 1 frame a second, which is too few for hand changes, and we'll know the chat can't replace the app for fast figures.
 

@@ -75,9 +75,21 @@ export function planPieces(from: number, to: number, maxPieceSeconds: number): M
   }));
 }
 
-/** What to type in the chat's video settings for a piece: 1 s either side, never before 0:00. */
+/**
+ * What to type in the chat's video settings for a piece: 1 s either side, never before 0:00, in
+ * whole seconds (AI Studio's boxes take whole seconds, so the merge adds exactly what was typed).
+ */
 export function clipWindow(piece: MapperPiece): { start: number; end: number } {
-  return { start: Math.max(0, piece.start - PIECE_PADDING_SECONDS), end: piece.end + PIECE_PADDING_SECONDS };
+  return {
+    start: Math.max(0, Math.floor(piece.start - PIECE_PADDING_SECONDS)),
+    end: Math.ceil(piece.end + PIECE_PADDING_SECONDS),
+  };
+}
+
+/** A time the way AI Studio's video settings want it: "0h0m3s", "0h1m8s". */
+export function aiStudioTime(seconds: number): string {
+  const whole = Math.round(seconds);
+  return `${Math.floor(whole / 3600)}h${Math.floor((whole % 3600) / 60)}m${whole % 60}s`;
 }
 
 /** The user message for one piece, line for line what the Build app sends. */

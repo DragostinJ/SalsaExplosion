@@ -21,6 +21,7 @@ import { parseArgs } from "node:util";
 import {
   MAPPER_FOCUSES,
   MapperChatManifestSchema,
+  aiStudioTime,
   chatMessage,
   clipWindow,
   formatMapperTime,
@@ -72,7 +73,7 @@ function messagesMarkdown(manifest: MapperChatManifest, dir: string): string {
     return `## Piece ${piece.number} of ${manifest.pieces.length} · ${formatMapperTime(piece.start)} to ${formatMapperTime(piece.end)}
 
 1. ${piece.number === 1 ? "Start from the set-up chat (step 0)." : "Clear the chat (or delete the last message and its answer), so the last piece's video isn't sent again. Keep the system instructions and settings."}
-2. Add the video https://www.youtube.com/watch?v=${manifest.youtubeVideoId} and open its video settings: start **${formatMapperTime(window.start)}**, end **${formatMapperTime(window.end)}**, frame rate **${manifest.fps}**.
+2. Add the video https://www.youtube.com/watch?v=${manifest.youtubeVideoId} and open its video settings: start **${aiStudioTime(window.start)}**, end **${aiStudioTime(window.end)}** (${formatMapperTime(window.start)} to ${formatMapperTime(window.end)}), frame rate **${manifest.fps}**.
 3. Paste this as the message and run it:
 
 \`\`\`text
@@ -187,7 +188,7 @@ async function prepare(argv: string[]) {
   console.log(`\n${manifest.title} · ${manifest.channelTitle}`);
   for (const piece of manifest.pieces) {
     const w = clipWindow(piece);
-    console.log(`  piece ${piece.number}: ${formatMapperTime(piece.start)}-${formatMapperTime(piece.end)}  (video settings ${formatMapperTime(w.start)}-${formatMapperTime(w.end)})`);
+    console.log(`  piece ${piece.number}: ${formatMapperTime(piece.start)}-${formatMapperTime(piece.end)}  (video settings ${aiStudioTime(w.start)} to ${aiStudioTime(w.end)})`);
   }
   console.log(`\nOpen ${path.join(dir, "messages.md")} and follow it.\n`);
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  aiStudioTime,
   chatMessage,
   clipWindow,
   formatMapperTime,
@@ -58,9 +59,17 @@ describe("Move Mapper chat: pieces and messages", () => {
     expect(formatMapperTime(59.96)).toBe("1:00");
   });
 
-  it("pads the clip by a second either side, never before 0:00", () => {
+  it("pads the clip by a second either side, in whole seconds, never before 0:00", () => {
     expect(clipWindow({ number: 1, start: 29, end: 48 })).toEqual({ start: 28, end: 49 });
     expect(clipWindow({ number: 1, start: 0.5, end: 10 })).toEqual({ start: 0, end: 11 });
+    expect(clipWindow({ number: 2, start: 16.7, end: 33.3 })).toEqual({ start: 15, end: 35 });
+  });
+
+  it("writes the video settings the way AI Studio asks for them", () => {
+    expect(aiStudioTime(3)).toBe("0h0m3s");
+    expect(aiStudioTime(20)).toBe("0h0m20s");
+    expect(aiStudioTime(68)).toBe("0h1m8s");
+    expect(aiStudioTime(3725)).toBe("1h2m5s");
   });
 
   it("sends the same message as the Build app, with the song map only when given", () => {

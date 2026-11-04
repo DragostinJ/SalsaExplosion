@@ -282,18 +282,25 @@ export default async function StudentSchedulePage({
             )}
           </div>
 
+          {/* The weekly classes come first on this page; festivals have their own page */}
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/events"
-              className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-ink text-xs font-bold min-h-[40px] px-3.5 inline-flex items-center justify-center`}
+              href={scheduleItems.length > 0 ? "#im-coming" : "#schedule-classes-grid"}
+              className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-paper text-xs font-bold min-h-[40px] px-3.5 inline-flex items-center justify-center`}
             >
-              Book Festivals Online →
+              {scheduleItems.length > 0 ? "Tell us you're coming ↓" : "See the timetable ↓"}
             </Link>
             <Link
               href="/venues"
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold min-h-[40px] px-3.5 inline-flex items-center justify-center`}
             >
               Directions &amp; Parking
+            </Link>
+            <Link
+              href="/events"
+              className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper text-xs font-bold min-h-[40px] px-3.5 inline-flex items-center justify-center`}
+            >
+              Festivals &amp; Passes
             </Link>
           </div>
         </div>
@@ -305,7 +312,7 @@ export default async function StudentSchedulePage({
 
         {/* Live Interactive Database Sessions (When Scheduled) */}
         {scheduleItems.length > 0 ? (
-          <div className="space-y-4 pt-6 border-t-4 border-ink">
+          <div id="im-coming" className="scroll-mt-24 space-y-4 pt-6 border-t-4 border-ink">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <h3 className="font-display font-black text-2xl uppercase tracking-tight text-ink">

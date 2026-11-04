@@ -203,7 +203,7 @@ export function MobileNavSheet({
               <Link
                 href="/sign-in"
                 onClick={onClose}
-                className="flex items-center justify-center gap-2 w-full border-2 border-ink bg-poster-red py-2.5 text-xs font-black uppercase tracking-wider text-ink hover:bg-ink hover:text-ink transition-colors shadow-[2px_2px_0_var(--color-ink)]"
+                className="flex items-center justify-center gap-2 w-full border-2 border-ink bg-poster-red py-2.5 text-xs font-black uppercase tracking-wider text-ink hover:bg-ink hover:text-paper transition-colors shadow-[2px_2px_0_var(--color-ink)]"
               >
                 <span>Student Portal Sign In →</span>
               </Link>

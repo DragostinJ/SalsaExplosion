@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { Search, Volume2, Repeat } from "lucide-react";
 import { RUEDA_LEVELS, RUEDA_LEVEL_INK } from "@/components/rueda/rueda-level-ink";
 import { RUEDA_CALLS } from "@/lib/rueda/rueda-calls-dictionary";
@@ -8,8 +9,11 @@ import { cn } from "@/lib/utils";
 
 const FILTERS = ["ALL", ...RUEDA_LEVELS] as const;
 
-/** The rueda call dictionary: search and level filters over poster cards, one per call. */
-export function RuedaDictionaryClient() {
+/**
+ * The rueda call dictionary: search and level filters over poster cards, one per call.
+ * moveLinks maps a call's name to its move page id, for the "Full steps" link (built on the server).
+ */
+export function RuedaDictionaryClient({ moveLinks = {} }: { moveLinks?: Readonly<Record<string, string>> }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [levelFilter, setLevelFilter] = useState<(typeof FILTERS)[number]>("ALL");
   const [partnerSwitchOnly, setPartnerSwitchOnly] = useState(false);
@@ -158,6 +162,15 @@ export function RuedaDictionaryClient() {
                         <dd className="mt-1">{call.cantanteTip}</dd>
                       </div>
                     </dl>
+
+                    {moveLinks[call.name] && (
+                      <Link
+                        href={`/moves/${moveLinks[call.name]}`}
+                        className="inline-flex min-h-[40px] items-center self-start text-sm font-bold underline underline-offset-4"
+                      >
+                        Leader and follower steps →
+                      </Link>
+                    )}
                   </div>
                 </article>
               </li>

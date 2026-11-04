@@ -6,7 +6,19 @@ import { RuedaDictionaryClient } from "@/components/rueda/rueda-dictionary-clien
 import { RUEDA_LEVEL_INK } from "@/components/rueda/rueda-level-ink";
 import { KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS, TYPE } from "@/components/poster/poster-kit";
 import { callOfTheDay } from "@/lib/rueda/call-of-the-day";
+import { RUEDA_CALLS } from "@/lib/rueda/rueda-calls-dictionary";
+import { moveIdForCall } from "@/lib/rueda/call-move-links";
+import { getVisibleMoves } from "@/lib/moves/move-library";
 import { cn } from "@/lib/utils";
+
+// Each call's full leader and follower steps, where the move library has them
+const MOVE_IDS = new Set(getVisibleMoves().map((m) => m.id));
+const MOVE_LINKS: Record<string, string> = Object.fromEntries(
+  RUEDA_CALLS.flatMap((call) => {
+    const id = moveIdForCall(call.name, MOVE_IDS);
+    return id ? [[call.name, id]] : [];
+  })
+);
 
 // The call of the day changes at midnight: re-render the page hourly
 export const revalidate = 3600;
@@ -30,7 +42,7 @@ export default function RuedaDictionaryPage() {
         titleHighlight="Call Dictionary"
         description="Master the figures called in the Rueda circle at BOH Studios and Bournemouth Havana Fiesta socials. Learn Spanish pronunciations, hand signals for loud dance floors, and exact clave timing."
         badge="Cuban Syllabus"
-        eyebrow="CANTANTE COMMAND HANDBOOK • 16+ AUTHENTIC CALLS • BOH STUDIOS"
+        eyebrow={`CANTANTE COMMAND HANDBOOK • ${RUEDA_CALLS.length} CALLS • BOH STUDIOS`}
       />
 
       {/* La llamada del día: one call a day to learn, a small reason to come back */}
@@ -54,7 +66,7 @@ export default function RuedaDictionaryPage() {
       </section>
 
       {/* Dictionary Client Component */}
-      <RuedaDictionaryClient />
+      <RuedaDictionaryClient moveLinks={MOVE_LINKS} />
     </main>
   );
 }

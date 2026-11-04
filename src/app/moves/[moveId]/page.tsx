@@ -84,7 +84,8 @@ export default async function MovePage({ params }: MovePageProps) {
       {/* The move's poster */}
       <header className={cn("border-[6px] border-ink p-6 shadow-[12px_12px_0_var(--color-ink)] md:p-10", ink.bg, ink.text)}>
         <p className={KICKER}>
-          {move.category} · {move.level} · {move.eightCounts} × 8
+          {move.category} · {move.level} ·{" "}
+          <span className="whitespace-nowrap">{move.eightCounts} × 8</span>
         </p>
         <h1 className={`mt-3 ${TYPE.section}`}>
           {move.spanishName ?? move.name}

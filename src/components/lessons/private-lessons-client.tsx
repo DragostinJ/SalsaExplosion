@@ -476,7 +476,7 @@ export function PrivateLessonsClient({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-ink font-display text-sm font-black uppercase tracking-wider px-7 min-h-[48px] shadow-[4px_4px_0_0_var(--color-ink)] flex items-center justify-center`}
+                className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-paper font-display text-sm font-black uppercase tracking-wider px-7 min-h-[48px] shadow-[4px_4px_0_0_var(--color-ink)] flex items-center justify-center`}
               >
                 {isSubmitting ? "Submitting..." : "Request Coaching Slot"}
                 <ArrowRight className="ml-2 h-4 w-4" />

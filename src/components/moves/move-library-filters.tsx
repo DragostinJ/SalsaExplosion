@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Search } from "lucide-react";
 import { CATEGORY_INK, MovePosterCard, type MoveCardData } from "@/components/moves/move-poster-card";
 import { RUEDA_LEVELS, RUEDA_LEVEL_INK } from "@/components/rueda/rueda-level-ink";
@@ -12,6 +13,9 @@ import { cn } from "@/lib/utils";
 
 type LevelFilter = "ALL" | CurriculumLevel;
 type FamilyFilter = "ALL" | MoveCategory;
+
+/** Posters shown per family before the rest are listed by name (until the dancer searches or filters). */
+const PREVIEW_POSTERS = 4;
 
 const PILL =
   "inline-flex min-h-10 shrink-0 items-center gap-2 whitespace-nowrap border-2 border-ink px-3 text-xs font-bold uppercase tracking-wider";
@@ -62,6 +66,11 @@ export function MoveLibraryFilters({ moves, familyArt = {} }: { moves: readonly 
   const sections = familiesPresent
     .map((category) => ({ category, moves: filtered.filter((move) => move.category === category) }))
     .filter((section) => section.moves.length > 0);
+
+  // Unfiltered, a family shows its first few posters and lists the rest by name: 240 posters made
+  // the page over 100 phone screens long. Searching or filtering shows every match as a poster.
+  const [expanded, setExpanded] = useState<ReadonlySet<MoveCategory>>(() => new Set());
+  const filtering = query.trim() !== "" || level !== "ALL" || family !== "ALL";
 
   const reset = () => {
     setQuery("");
@@ -134,23 +143,54 @@ export function MoveLibraryFilters({ moves, familyArt = {} }: { moves: readonly 
           </button>
         </div>
       ) : (
-        sections.map((section) => (
-          <section key={section.category} aria-labelledby={`family-${section.category}`} className="space-y-4">
-            <div className="flex items-center gap-4">
-              <FamilyPicture art={familyArt[section.category]} />
-              <h2 id={`family-${section.category}`} className={TYPE.section}>
-                {section.category}
-              </h2>
-            </div>
-            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {section.moves.map((move, index) => (
-                <li key={move.id}>
-                  <MovePosterCard move={move} number={index + 1} href={`/moves/${move.id}`} />
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))
+        sections.map((section) => {
+          const showAll = filtering || expanded.has(section.category) || section.moves.length <= PREVIEW_POSTERS + 2;
+          const posters = showAll ? section.moves : section.moves.slice(0, PREVIEW_POSTERS);
+          const rest = showAll ? [] : section.moves.slice(PREVIEW_POSTERS);
+          return (
+            <section key={section.category} aria-labelledby={`family-${section.category}`} className="space-y-4">
+              <div className="flex items-center gap-4">
+                <FamilyPicture art={familyArt[section.category]} />
+                <h2 id={`family-${section.category}`} className={TYPE.section}>
+                  {section.category}
+                </h2>
+              </div>
+              <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {posters.map((move, index) => (
+                  <li key={move.id}>
+                    <MovePosterCard move={move} number={index + 1} href={`/moves/${move.id}`} />
+                  </li>
+                ))}
+              </ul>
+              {rest.length > 0 && (
+                <div className="border-t-4 border-ink pt-4">
+                  <p className="text-sm font-bold uppercase tracking-wider">
+                    {rest.length} more · {section.category}
+                  </p>
+                  <ul className="mt-2 grid grid-cols-2 gap-x-4 sm:grid-cols-3 lg:grid-cols-4">
+                    {rest.map((move) => (
+                      <li key={move.id}>
+                        <Link
+                          href={`/moves/${move.id}`}
+                          className="inline-flex min-h-[40px] items-center text-sm font-semibold underline-offset-4 hover:underline"
+                        >
+                          {move.spanishName ?? move.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    type="button"
+                    onClick={() => setExpanded((open) => new Set(open).add(section.category))}
+                    className="mt-3 inline-flex min-h-[44px] items-center border-4 border-ink bg-paper px-4 text-sm font-bold uppercase tracking-wider text-ink"
+                  >
+                    Show all {section.moves.length} as posters
+                  </button>
+                </div>
+              )}
+            </section>
+          );
+        })
       )}
     </div>
   );

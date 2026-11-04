@@ -139,7 +139,7 @@ export default function PricingPage() {
           <div className="pt-3 border-t-2 border-ink">
             <Link
               href="/events"
-              className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-ink text-xs font-bold w-full sm:w-auto inline-flex items-center justify-center gap-1.5`}
+              className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-paper text-xs font-bold w-full sm:w-auto inline-flex items-center justify-center gap-1.5`}
             >
               <Ticket className="h-3.5 w-3.5" />
               Book Festival Passes Online →

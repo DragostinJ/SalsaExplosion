@@ -105,7 +105,7 @@ export function DanceVouchersShowcase({
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
             <a
               href="tel:+447969633701"
-              className="border-4 border-ink bg-poster-red text-ink hover:bg-ink hover:text-ink font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_var(--color-ink)] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
+              className="border-4 border-ink bg-poster-red text-ink hover:bg-ink hover:text-paper font-display text-sm font-black uppercase tracking-wider px-6 py-3.5 shadow-[4px_4px_0_0_var(--color-ink)] min-h-[44px] flex items-center justify-center gap-2 transition-colors"
             >
               <Phone className="h-4 w-4" />
               ORDER NOW: 07969 633701

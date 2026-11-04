@@ -13,7 +13,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { BookingStatus, Role } from "@prisma/client";
+import { AuditAction, BookingStatus, Role } from "@prisma/client";
 import {
   toggleBookingCheckInAction,
   selfCheckInClassQrAction,
@@ -35,6 +35,15 @@ vi.mock("@/lib/auth-user", () => ({
   isFallbackUser: vi.fn((user: { id: string }) => user.id.startsWith("fallback-")),
   SERVICE_UNAVAILABLE_MESSAGE:
     "We can't reach our booking system right now. Please try again in a minute.",
+}));
+
+// Mock audit-log
+const { recordAuditLogMock } = vi.hoisted(() => ({
+  recordAuditLogMock: vi.fn().mockResolvedValue(true),
+}));
+
+vi.mock("@/lib/audit-log", () => ({
+  recordAuditLog: recordAuditLogMock,
 }));
 
 // Mock ratelimit
@@ -163,6 +172,41 @@ describe("src/actions/management/checkin.actions.ts", () => {
         })
       );
     });
+
+    it.fails("writes an EVENT_MUTATION audit log record when toggling booking attendance", async () => {
+      getOrProvisionCurrentUserMock.mockResolvedValue({
+        id: "staff-1",
+        role: Role.INSTRUCTOR,
+      });
+      prismaBookingMock.findUnique.mockResolvedValue({
+        id: "b-1",
+        status: BookingStatus.CONFIRMED,
+      });
+      prismaBookingMock.update.mockResolvedValue({
+        id: "b-1",
+        status: BookingStatus.ATTENDED,
+        user: { firstName: "Sofia", lastName: "Reyes" },
+      });
+
+      await toggleBookingCheckInAction({
+        bookingId: "b-1",
+        markAttended: true,
+      });
+
+      expect(recordAuditLogMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          actorId: "staff-1",
+          action: AuditAction.EVENT_MUTATION,
+          targetType: "Booking",
+          targetId: "b-1",
+          metadata: {
+            kind: "ATTENDANCE_CHECK_IN",
+            from: BookingStatus.CONFIRMED,
+            to: BookingStatus.ATTENDED,
+          },
+        })
+      );
+    });
   });
 
   // =========================================================================
@@ -247,6 +291,36 @@ describe("src/actions/management/checkin.actions.ts", () => {
             checkedIn: true,
             checkedInAt: expect.any(Date),
           }),
+        })
+      );
+    });
+
+    it.fails("writes an EVENT_MUTATION audit log record when toggling event registration check-in", async () => {
+      getOrProvisionCurrentUserMock.mockResolvedValue({
+        id: "staff-1",
+        role: Role.ADMIN,
+      });
+      prismaEventRegistrationMock.update.mockResolvedValue({
+        id: "reg-1",
+        checkedIn: true,
+        user: { firstName: "David", lastName: "Silva" },
+      });
+
+      await toggleEventRegistrationCheckInAction({
+        registrationId: "reg-1",
+        checkedIn: true,
+      });
+
+      expect(recordAuditLogMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          actorId: "staff-1",
+          action: AuditAction.EVENT_MUTATION,
+          targetType: "EventRegistration",
+          targetId: "reg-1",
+          metadata: {
+            kind: "ATTENDANCE_CHECK_IN",
+            checkedIn: true,
+          },
         })
       );
     });
@@ -437,6 +511,35 @@ describe("src/actions/management/checkin.actions.ts", () => {
           checkedInAt: expect.any(Date),
         }),
       });
+    });
+
+    it("never writes an audit log record on dancer self-check-in (self-check-in is not an override)", async () => {
+      getOrProvisionCurrentUserMock.mockResolvedValue({
+        id: "usr-1",
+        firstName: "Elena",
+        role: Role.STUDENT,
+      });
+      const validStart = new Date(Date.now() + 30 * 60 * 1000);
+      const validEnd = new Date(Date.now() + 90 * 60 * 1000);
+
+      prismaBookingMock.findUnique.mockResolvedValue({
+        id: "b-valid-99",
+        status: BookingStatus.CONFIRMED,
+        classSession: {
+          title: "Thursday Casino Partnerwork",
+          isCancelled: false,
+          startTime: validStart,
+          endTime: validEnd,
+        },
+      });
+      prismaBookingMock.update.mockResolvedValue({
+        id: "b-valid-99",
+        status: BookingStatus.ATTENDED,
+      });
+
+      await selfCheckInClassQrAction({ classSessionId: "class-active" });
+
+      expect(recordAuditLogMock).not.toHaveBeenCalled();
     });
   });
 });

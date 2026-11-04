@@ -10,7 +10,10 @@
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import {
+  buildIcsContent,
   downloadIcsFile,
+  escapeIcsText,
+  foldIcsLine,
   getGoogleCalendarUrl,
   type CalendarEventDetails,
 } from "@/lib/calendar-export";
@@ -82,7 +85,8 @@ describe("calendar-export: iCalendar (.ics) Generation", () => {
     expect(lines).toContain("METHOD:PUBLISH");
     expect(lines).toContain("BEGIN:VEVENT");
     expect(lines).toContain("SUMMARY:Cuban Salsa Beginners Foundation");
-    expect(lines).toContain("LOCATION:BOH Studios Bournemouth, 104 Commercial Rd, BH2 5LR");
+    // RFC 5545 §3.3.11: commas in TEXT values are escaped
+    expect(lines).toContain("LOCATION:BOH Studios Bournemouth\\, 104 Commercial Rd\\, BH2 5LR");
     expect(lines).toContain("BEGIN:VALARM");
     expect(lines).toContain("TRIGGER:-PT2H");
     expect(lines).toContain("ACTION:DISPLAY");
@@ -144,7 +148,8 @@ describe("calendar-export: iCalendar (.ics) Generation", () => {
 
     downloadIcsFile(event);
 
-    expect(capturedIcs).toContain(
+    // The line is over 75 octets, so it is folded (RFC 5545 §3.1); unfold before checking
+    expect(capturedIcs.replace(/\r\n /g, "")).toContain(
       "DESCRIPTION:Line 1: Warmup & Pasitos\\nLine 2: Rueda de Casino calls\\nLine 3: Social dancing"
     );
   });
@@ -169,5 +174,78 @@ describe("calendar-export: Google Calendar URL Builder", () => {
     expect(parsed.searchParams.get("dates")).toBe("20261108T183000Z/20261108T220000Z");
     expect(parsed.searchParams.get("details")).toBe("Join Maestro Enrique at BOH Studios.");
     expect(parsed.searchParams.get("location")).toBe("BOH Studios Bournemouth");
+  });
+});
+
+describe("calendar-export: RFC 5545 text rules", () => {
+  const unfold = (ics: string) => ics.replace(/\r\n /g, "");
+
+  it("escapes backslash first, then semicolons, commas and line breaks", () => {
+    expect(escapeIcsText("Salsa, Rueda; Son")).toBe("Salsa\\, Rueda\\; Son");
+    expect(escapeIcsText("a\\b")).toBe("a\\\\b");
+    // A backslash already in the text is doubled; the one added for the comma is not
+    expect(escapeIcsText("\\,")).toBe("\\\\\\,");
+    expect(escapeIcsText("one\r\ntwo\nthree\rfour")).toBe("one\\ntwo\\nthree\\nfour");
+  });
+
+  it("escapes SUMMARY, DESCRIPTION and LOCATION in the file", () => {
+    const ics = unfold(
+      buildIcsContent({
+        title: "Salsa, Rueda & Son",
+        description: "Bring water; wear soft shoes",
+        location: "BOH Studios, 104 Commercial Rd",
+        startDate: new Date("2026-11-05T19:00:00.000Z"),
+        endDate: new Date("2026-11-05T20:15:00.000Z"),
+      })
+    );
+    const lines = ics.split("\r\n");
+    expect(lines).toContain("SUMMARY:Salsa\\, Rueda & Son");
+    expect(lines).toContain("DESCRIPTION:Bring water\\; wear soft shoes");
+    expect(lines).toContain("LOCATION:BOH Studios\\, 104 Commercial Rd");
+  });
+
+  it("folds lines over 75 octets without splitting a multi-byte character", () => {
+    const encoder = new TextEncoder();
+    const long = "DESCRIPTION:" + "Clase de casino en Bournemouth con Enrique y Moé. ".repeat(4);
+    const folded = foldIcsLine(long);
+    const physical = folded.split("\r\n");
+
+    expect(physical.length).toBeGreaterThan(1);
+    for (const line of physical) {
+      expect(encoder.encode(line).length).toBeLessThanOrEqual(75);
+    }
+    physical.slice(1).forEach((line) => expect(line.startsWith(" ")).toBe(true));
+    expect(folded.replace(/\r\n /g, "")).toBe(long);
+    expect(foldIcsLine("SUMMARY:Short")).toBe("SUMMARY:Short");
+
+    // "é" is 2 bytes: at byte 75 it would straddle the limit, so it moves whole to the next line
+    expect(foldIcsLine("X".repeat(74) + "é")).toBe("X".repeat(74) + "\r\n é");
+    // Exactly 75 octets stays on one line
+    expect(foldIcsLine("X".repeat(75))).toBe("X".repeat(75));
+  });
+
+  it("keeps the same UID for the same class, so adding it twice does not duplicate it", () => {
+    const event: CalendarEventDetails = {
+      title: "Thursday Improvers",
+      description: "Casino",
+      location: "BOH Studios",
+      startDate: new Date("2026-11-05T19:00:00.000Z"),
+      endDate: new Date("2026-11-05T20:15:00.000Z"),
+    };
+    const uid = (ics: string) => ics.split("\r\n").find((l) => l.startsWith("UID:"));
+
+    const first = uid(buildIcsContent(event, new Date("2026-11-01T10:00:00.000Z")));
+    const second = uid(buildIcsContent(event, new Date("2026-11-03T18:00:00.000Z")));
+    const nextWeek = uid(
+      buildIcsContent({
+        ...event,
+        startDate: new Date("2026-11-12T19:00:00.000Z"),
+        endDate: new Date("2026-11-12T20:15:00.000Z"),
+      })
+    );
+
+    expect(first).toBe("UID:20261105T190000Z-thursday-improvers@salsaexplosion.co.uk");
+    expect(second).toBe(first);
+    expect(nextWeek).not.toBe(first);
   });
 });

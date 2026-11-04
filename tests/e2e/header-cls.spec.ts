@@ -55,8 +55,10 @@ test.describe("M5: Header Layout-Shift (CLS) Stability", () => {
         const res = await page.goto(path, { waitUntil: "load" });
         expect(res?.status()).toBeLessThan(400);
 
-        // Wait ~2.5s for hydration and late layout settlement
-        await page.waitForTimeout(2500);
+        // Web-first wait for header and fonts settlement
+        const header = page.locator("header");
+        await expect(header).toBeVisible();
+        await page.evaluate(() => document.fonts.ready);
 
         const cls = await page.evaluate(() => {
           const win = window as unknown as WindowWithCls;

@@ -66,18 +66,15 @@ test.describe("All Songs Browser E2E Suite", () => {
         `Expected 200 OK for /music/${song.id}, received ${response?.status()}`
       ).toBeLessThan(400);
 
-      // Wait for load plus ~2 seconds (YouTube iframe never goes networkidle)
-      await page.waitForTimeout(2000);
+      // Step B: The NOW card shows the first section's sectionName (web-first wait)
+      const nowCard = page.locator('section[aria-label="What to dance now"]');
+      await expect(nowCard).toBeVisible();
+      await expect(nowCard.getByText(firstSegment.sectionName).first()).toBeVisible();
 
       expect(
         consoleErrors,
         `Console errors encountered on /music/${song.id}: ${consoleErrors.join("; ")}`
       ).toEqual([]);
-
-      // Step B: The NOW card shows the first section's sectionName
-      const nowCard = page.locator('section[aria-label="What to dance now"]');
-      await expect(nowCard).toBeVisible();
-      await expect(nowCard.getByText(firstSegment.sectionName).first()).toBeVisible();
 
       // Step C: Zero scroll: document.documentElement.scrollHeight <= innerHeight and scrollWidth <= innerWidth
       const dimensions = await page.evaluate(() => ({
@@ -105,8 +102,6 @@ test.describe("All Songs Browser E2E Suite", () => {
         previewResponse?.status(),
         `Expected 200 OK for preview on /music/${song.id}?section=${middleSegment.id}, received ${previewResponse?.status()}`
       ).toBeLessThan(400);
-
-      await page.waitForTimeout(500);
 
       const previewCard = page.locator('section[aria-label="Section preview"]');
       await expect(previewCard).toBeVisible();

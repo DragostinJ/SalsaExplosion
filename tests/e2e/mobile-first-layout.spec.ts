@@ -233,7 +233,11 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
     await expect(footer).toHaveClass(/cv-auto/);
 
     // 3. Layout Shift (CLS) on initial mobile load is < 0.25 (Core Web Vitals compliant)
-    await page.waitForTimeout(500);
+    await page.waitForLoadState("networkidle");
+    await expect.poll(
+      () => page.evaluate(() => (window as unknown as { __clsScore: number }).__clsScore || 0),
+      { timeout: 2000 }
+    ).toBeLessThan(0.25);
     const clsScore = await page.evaluate(
       () => (window as unknown as { __clsScore: number }).__clsScore || 0
     );

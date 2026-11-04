@@ -196,8 +196,8 @@ test.describe("Task 4: Accessibility Coverage & WCAG 2.1 AA Audits", () => {
             const el = document.activeElement;
             if (!el || el === document.body) return null;
 
-            // Scroll if needed to verify viewport visibility
-            el.scrollIntoViewIfNeeded ? el.scrollIntoViewIfNeeded() : el.scrollIntoView();
+            // Scroll into view if needed to verify viewport visibility
+            el.scrollIntoView({ block: "nearest", inline: "nearest" });
             const rect = el.getBoundingClientRect();
             const style = window.getComputedStyle(el);
 
@@ -255,7 +255,7 @@ test.describe("Task 4: Accessibility Coverage & WCAG 2.1 AA Audits", () => {
             return { isIframe: true };
           }
 
-          el.scrollIntoViewIfNeeded ? el.scrollIntoViewIfNeeded() : el.scrollIntoView();
+          el.scrollIntoView({ block: "nearest", inline: "nearest" });
           const rect = el.getBoundingClientRect();
           const style = window.getComputedStyle(el);
 

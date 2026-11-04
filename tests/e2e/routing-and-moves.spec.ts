@@ -58,7 +58,7 @@ test.describe("Move Library (/moves) Screen-Print Family Art", () => {
       const heading = section.locator("h2[id^='family-']");
       await heading.scrollIntoViewIfNeeded();
 
-      const img = section.locator("div.flex.items-center.gap-4 img").first();
+      const img = section.locator('[data-testid="family-art-image"]').first();
       await expect(img).toBeVisible();
 
       // Verify the image loaded and has real dimensions

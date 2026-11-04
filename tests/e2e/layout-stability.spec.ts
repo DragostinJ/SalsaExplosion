@@ -28,6 +28,21 @@ const VIEWPORTS = [
   { name: "Desktop (1440x900)", width: 1440, height: 900 },
 ];
 
+interface LayoutShiftEntry extends PerformanceEntry {
+  hadRecentInput: boolean;
+  value: number;
+}
+
+interface LargestContentfulPaintEntry extends PerformanceEntry {
+  element?: Element | null;
+  startTime: number;
+}
+
+interface WindowWithPerformanceAudits extends Window {
+  __clsScore?: number;
+  __lcpEntry?: LargestContentfulPaintEntry | null;
+}
+
 test.describe("Task 5: Layout Stability & CLS/LCP Audits", () => {
   for (const vp of VIEWPORTS) {
     test.describe(`${vp.name}`, () => {
@@ -40,13 +55,15 @@ test.describe("Task 5: Layout Stability & CLS/LCP Audits", () => {
 
           // Setup PerformanceObserver for layout-shift and LCP
           await page.evaluate(() => {
-            window.__clsScore = 0;
-            window.__lcpEntry = null;
+            const win = window as unknown as WindowWithPerformanceAudits;
+            win.__clsScore = 0;
+            win.__lcpEntry = null;
 
             const clsObserver = new PerformanceObserver((list) => {
               for (const entry of list.getEntries()) {
-                if (!entry.hadRecentInput) {
-                  window.__clsScore += entry.value;
+                const shift = entry as unknown as LayoutShiftEntry;
+                if (!shift.hadRecentInput) {
+                  win.__clsScore = (win.__clsScore ?? 0) + shift.value;
                 }
               }
             });
@@ -55,7 +72,7 @@ test.describe("Task 5: Layout Stability & CLS/LCP Audits", () => {
             const lcpObserver = new PerformanceObserver((list) => {
               const entries = list.getEntries();
               if (entries.length > 0) {
-                window.__lcpEntry = entries[entries.length - 1];
+                win.__lcpEntry = entries[entries.length - 1] as unknown as LargestContentfulPaintEntry;
               }
             });
             lcpObserver.observe({ type: "largest-contentful-paint", buffered: true });
@@ -68,17 +85,18 @@ test.describe("Task 5: Layout Stability & CLS/LCP Audits", () => {
             currentScroll += vp.height;
             await page.evaluate((y) => window.scrollTo(0, y), currentScroll);
             await page.waitForLoadState("networkidle").catch(() => {});
-            await page.waitForTimeout(100);
+            await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(resolve)));
           }
 
           // Retrieve CLS score, LCP element, and inspect all visible images
           const metrics = await page.evaluate(() => {
-            const lcp = window.__lcpEntry;
+            const win = window as unknown as WindowWithPerformanceAudits;
+            const lcp = win.__lcpEntry;
             let lcpInfo = null;
             if (lcp) {
-              const el = lcp.element;
+              const el = lcp.element as HTMLElement | null;
               const tag = el ? el.tagName : "UNKNOWN";
-              const src = el ? (el.src || el.getAttribute("src") || "") : "";
+              const src = el ? (el.getAttribute("src") || (el as HTMLImageElement).src || "") : "";
               const text = el ? (el.textContent || "").trim().slice(0, 50) : "";
               lcpInfo = {
                 startTime: lcp.startTime,
@@ -101,8 +119,12 @@ test.describe("Task 5: Layout Stability & CLS/LCP Audits", () => {
               const hasHeightAttr = img.hasAttribute("height") && img.getAttribute("height") !== "";
               const imgAspect = Boolean(style.aspectRatio && style.aspectRatio !== "auto");
 
-              const parentStyle = window.getComputedStyle(img.parentElement);
-              const parentAspect = Boolean(parentStyle.aspectRatio && parentStyle.aspectRatio !== "auto");
+              const parent = img.parentElement;
+              const parentAspect = Boolean(
+                parent &&
+                window.getComputedStyle(parent).aspectRatio &&
+                window.getComputedStyle(parent).aspectRatio !== "auto"
+              );
 
               if (!hasWidthAttr && !hasHeightAttr && !imgAspect && !parentAspect) {
                 unconstrainedImgs.push({
@@ -113,7 +135,7 @@ test.describe("Task 5: Layout Stability & CLS/LCP Audits", () => {
             }
 
             return {
-              cls: window.__clsScore,
+              cls: win.__clsScore ?? 0,
               lcp: lcpInfo,
               unconstrainedImgs,
             };

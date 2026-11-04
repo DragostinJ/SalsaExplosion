@@ -33,7 +33,15 @@ export type FamilyArt = Partial<Record<MoveCategory, { src: string; width: numbe
 function FamilyPicture({ art }: { art?: { src: string; width: number; height: number } }) {
   if (!art) return null;
   return (
-    <Image src={art.src} alt="" width={art.width} height={art.height} sizes="5rem" className="h-16 w-16 shrink-0 sm:h-20 sm:w-20" />
+    <Image
+      src={art.src}
+      alt=""
+      width={art.width}
+      height={art.height}
+      sizes="5rem"
+      data-testid="family-art-image"
+      className="h-16 w-16 shrink-0 sm:h-20 sm:w-20"
+    />
   );
 }
 

@@ -283,7 +283,7 @@ describe("Multimodal Flyer Upload & AI Vision Defense-in-Depth Security Suite", 
       vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(mockUser(Role.STUDENT, "user_student_1"));
       const studentPublish = await approveAndPublishEventAction(card);
       expect(studentPublish.success).toBe(false);
-      expect(studentPublish.error).toContain("Only instructors and owners");
+      expect(studentPublish.error).toContain("Only teachers and the owner");
 
       vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(null);
       const anonRemove = await removePublishedEventAction("fake-party");

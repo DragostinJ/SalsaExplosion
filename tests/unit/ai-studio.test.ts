@@ -1,4 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { Role } from "@prisma/client";
+import { resetAiRateLimitStore } from "@/lib/security/upload-and-ai-guard";
+
+// Who is signed in. A plain function (not vi.fn) so restoreAllMocks can't reset it.
+const session = vi.hoisted(() => ({
+  user: null as null | { id: string; role: "STUDENT" | "INSTRUCTOR" | "ADMIN" },
+}));
+vi.mock("@/lib/auth-user", async (importOriginal) => {
+  const mod = await importOriginal<typeof import("@/lib/auth-user")>();
+  return { ...mod, getOrProvisionCurrentUser: async () => session.user };
+});
+
 import {
   AiCoachingInputSchema,
   AiCoachingOutputSchema,
@@ -18,6 +30,8 @@ import {
 describe("AI Studio Validations & Server Actions", () => {
   beforeEach(() => {
     vi.restoreAllMocks();
+    resetAiRateLimitStore();
+    session.user = { id: "teacher-1", role: Role.INSTRUCTOR };
   });
 
   describe("Zod Validation Schemas", () => {
@@ -245,6 +259,44 @@ describe("AI Studio Validations & Server Actions", () => {
       expect(res.data).toBeDefined();
       expect(res.data?.reviewText).toContain("Bournemouth");
       expect(res.data?.localSeoKeywordsIncluded.length).toBeGreaterThanOrEqual(2);
+    });
+  });
+
+  // Server actions are public endpoints: anyone can call them, so each Gemini action
+  // checks who's asking before it spends quota.
+  describe("who may use the AI actions", () => {
+    const coaching = { level: "Beginner", danceStyle: "Cuban Salsa", struggle: "Losing the count in Dile Que No" } as const;
+    const video = { studentName: "Elena", level: "Intermediate", moveOrSong: "Setenta", videoDurationSeconds: 25 } as const;
+    const review = {
+      favoriteAspect: "Enrique's Authentic Cuban Teaching",
+      instructorHighlight: "Maestro Enrique",
+      dancerLevel: "First-Timer / Beginner",
+    } as const;
+
+    it("refuses the teacher tools to someone signed out", async () => {
+      session.user = null;
+      expect(await generateCoachingPlanAction(coaching)).toMatchObject({ success: false, error: expect.stringMatching(/signed in/) });
+      expect(await preCheckStudentVideoAction(video)).toMatchObject({ success: false, error: expect.stringMatching(/signed in/) });
+    });
+
+    it("refuses the teacher tools to a dancer", async () => {
+      session.user = { id: "dancer-1", role: Role.STUDENT };
+      expect(await generateCoachingPlanAction(coaching)).toMatchObject({ success: false, error: expect.stringMatching(/teachers/) });
+      expect(await preCheckStudentVideoAction(video)).toMatchObject({ success: false, error: expect.stringMatching(/teachers/) });
+    });
+
+    it("lets a signed-in dancer draft a review, five a minute", async () => {
+      session.user = null;
+      expect(await generateGoogleReviewHelperAction(review)).toMatchObject({ success: false, error: expect.stringMatching(/Sign in/) });
+
+      session.user = { id: "dancer-1", role: Role.STUDENT };
+      for (let i = 0; i < 5; i++) {
+        expect((await generateGoogleReviewHelperAction(review)).success).toBe(true);
+      }
+      expect(await generateGoogleReviewHelperAction(review)).toMatchObject({ success: false, error: expect.stringMatching(/minute/) });
+      // Someone else still has their own five
+      session.user = { id: "dancer-2", role: Role.STUDENT };
+      expect((await generateGoogleReviewHelperAction(review)).success).toBe(true);
     });
   });
 });

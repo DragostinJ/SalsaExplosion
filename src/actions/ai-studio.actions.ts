@@ -60,21 +60,24 @@ type StaffGuardResult =
 
 /**
  * Server actions are public endpoints, so page-level requireRole() is not enough.
- * Every mutating AI Studio action must call this before touching shared state.
+ * Every AI Studio action that changes shared state or spends Gemini quota must call this first.
  */
 async function requireAiStudioStaff(): Promise<StaffGuardResult> {
   const user = await getOrProvisionCurrentUser(); // fallback-guard
   if (!user) {
-    return { ok: false, error: "You must be signed in to manage events." };
+    return { ok: false, error: "You must be signed in to use the AI tools." };
   }
   if (isFallbackUser(user)) {
     return { ok: false, error: SERVICE_UNAVAILABLE_MESSAGE };
   }
   if (!STAFF_ROLES.includes(user.role)) {
-    return { ok: false, error: "Only instructors and owners can manage published events." };
+    return { ok: false, error: "Only teachers and the owner can use the AI tools." };
   }
   return { ok: true, userId: user.id };
 }
+
+/** Gemini calls a dancer may make per minute (the review helper). */
+const DANCER_AI_CALLS_PER_MINUTE = 5;
 
 /**
  * AI Syllabus & Musicality Copilot Action
@@ -82,6 +85,11 @@ async function requireAiStudioStaff(): Promise<StaffGuardResult> {
 export async function generateCoachingPlanAction(
   rawInput: AiCoachingInput
 ): Promise<AiActionResponse<AiCoachingOutput>> {
+  const staff = await requireAiStudioStaff();
+  if (!staff.ok) {
+    return { success: false, error: staff.error };
+  }
+
   const parsedInput = AiCoachingInputSchema.safeParse(rawInput);
   if (!parsedInput.success) {
     const errorMsg = parsedInput.error.issues[0]?.message || "Invalid input";
@@ -512,6 +520,11 @@ export async function getLivePublishedEventsAction(): Promise<
 export async function preCheckStudentVideoAction(
   rawInput: VideoPreCheckInput
 ): Promise<AiActionResponse<VideoPreCheckAssessment>> {
+  const staff = await requireAiStudioStaff();
+  if (!staff.ok) {
+    return { success: false, error: staff.error };
+  }
+
   const parsedInput = VideoPreCheckInputSchema.safeParse(rawInput);
   if (!parsedInput.success) {
     const errorMsg = parsedInput.error.issues[0]?.message || "Invalid input";
@@ -629,6 +642,16 @@ export async function generateGoogleReviewHelperAction(
   if (!parsedInput.success) {
     const errorMsg = parsedInput.error.issues[0]?.message || "Invalid input";
     return { success: false, error: errorMsg };
+  }
+
+  // fallback-guard-exempt: drafting text changes nothing, but it spends Gemini quota, so it
+  // needs a signed-in dancer and a per-person limit
+  const user = await getOrProvisionCurrentUser();
+  if (!user) {
+    return { success: false, error: "Sign in to draft a review." };
+  }
+  if (!checkAiRateLimit(`review-helper:${user.id}`, DANCER_AI_CALLS_PER_MINUTE, 60).allowed) {
+    return { success: false, error: "That's a lot of drafts. Wait a minute and try again." };
   }
 
   const { favoriteAspect, instructorHighlight, dancerLevel } = parsedInput.data;

@@ -79,7 +79,7 @@
       },
       {
         "counts": "5-7",
-        "text": "Step left foot forward between/around the leader's stance on 5, pivot slightly on 6, and close left foot on 7."
+        "text": "Step left foot forward between/around the leader's stance on 5, rock onto right foot on 6, and close left foot on 7."
       },
       {
         "counts": "9-15",
@@ -282,7 +282,7 @@
       "rueda-improver"
     ],
     "videos": [],
-    "notes": "UNSURE: Some schools teach 'Adentro y Afuera' as an Enchufla into the center followed by an outward turn, while others teach it as a closed-hold sweep in and out. Teacher should verify BOH Studios' version."
+    "notes": "UNSURE: Some schools teach 'Adentro y Afuera' as an Enchufla into the center followed by an outward turn, while others teach it as a closed-hold sweep in and out. Teacher should verify BOH Studios' version. UNSURE (check): Confirm whether Adentro y Afuera keeps the same partner or changes partner on the outward Dile Que No."
   },
   {
     "id": "adios-doble",
@@ -367,7 +367,7 @@
       },
       {
         "counts": "5-7",
-        "text": "Circle opposite the leader on 5-6-7 with confident posture and reconnect on count 7."
+        "text": "Circle clockwise with the leader on 5-6-7 with confident posture and reconnect on count 7."
       }
     ],
     "commonMistakes": [
@@ -389,7 +389,7 @@
       "attitude"
     ],
     "videos": [],
-    "notes": "UNSURE: 'Aguajea' comes from 'aguaje' (Cuban swagger/showmanship). Check if BOH Studios teaches a specific choreographed footwork pattern for Aguajea or uses it as a styled Paseo/Guapea break."
+    "notes": "UNSURE: 'Aguajea' comes from 'aguaje' (Cuban swagger/showmanship). Check if BOH Studios teaches a specific choreographed footwork pattern for Aguajea or uses it as a styled Paseo/Guapea break. UNSURE (check): Confirm whether Aguajea has a specific footwork pattern in the school syllabus or is taught as a styled circular groove."
   },
   {
     "id": "al-centro",
@@ -558,7 +558,7 @@
       "role-variation"
     ],
     "videos": [],
-    "notes": "UNSURE: 'Americano/Americana' varies significantly across Rueda schools (sometimes a reverse Enchufla, sometimes a Cero/cross-body style pass). Teacher must verify BOH Studios' choreography."
+    "notes": "UNSURE: 'Americano/Americana' varies significantly across Rueda schools (sometimes a reverse Enchufla, sometimes a Cero/cross-body style pass). Teacher must verify BOH Studios' choreography. UNSURE (check): Confirm the exact handhold and whether Americano / Americana changes partners in the school syllabus."
   },
   {
     "id": "amistad",
@@ -1053,11 +1053,11 @@
     "leaderSteps": [
       {
         "counts": "1-8",
-        "text": "Lead an Enchufla with your right hand on 1-3, then keep your left hand connected (or reach forward with your left hand) on 5-7 to pass the next incoming follower on the inside/outside track."
+        "text": "Lead an Enchufla with your left hand on 1-3, then reach forward with your right hand on 5-7 to pass the next incoming follower on the inside/outside track."
       },
       {
         "counts": "9-16",
-        "text": "Continue weaving anticlockwise around the circle, alternating right-hand Enchufla passes on 1-3 and left-hand passes on 5-7."
+        "text": "Continue weaving anticlockwise around the circle, alternating left-to-right Enchufla passes on 1-3 and right-to-left passes on 5-7."
       },
       {
         "counts": "17-24",
@@ -1105,7 +1105,7 @@
       "continuous-progression"
     ],
     "videos": [],
-    "notes": "One of the most joyful group-flow figures in Rueda de Casino; remind dancers to keep their eyes up to see the next hand coming."
+    "notes": "One of the most joyful group-flow figures in Rueda de Casino; remind dancers to keep their eyes up to see the next hand coming. UNSURE (check): Confirm which hands leaders and followers connect on 1-3 and 5-7 in the school's Cadena (e.g. left-to-right Enchufla vs right-to-right/left-to-left)."
   },
   {
     "id": "cadena-complicada",
@@ -1132,7 +1132,7 @@
       },
       {
         "counts": "9-16",
-        "text": "Continue weaving to the next leader on 1-2-3 (counts 9-11) with a turn, then connect into closed hold on count 12 and complete Dile Que No on 5-6-7 (counts 13-15)."
+        "text": "Continue weaving to the next leader on 1-2-3 (counts 9-11) with a turn, then connect into closed hold and complete Dile Que No on 5-6-7 (counts 13-15)."
       }
     ],
     "commonMistakes": [
@@ -1358,7 +1358,7 @@
       }
     ],
     "commonMistakes": [
-      " SAFETY: Overtaking the couple in front of you and stepping on their heels.",
+      "SAFETY: Overtaking the couple in front of you and stepping on their heels.",
       "Walking with stiff knees instead of a grounded Cuban stride."
     ],
     "prerequisites": [
@@ -1375,7 +1375,7 @@
       "group-geometry"
     ],
     "videos": [],
-    "notes": "UNSURE: Some schools use 'Camina' synonymously with 'Me La Llevo' (fast closed-hold walking around the circle), while others use it as a 3-step forward walk inside a turn pattern. Verify with Enrique."
+    "notes": "UNSURE: Some schools use 'Camina' synonymously with 'Me La Llevo' (fast closed-hold walking around the circle), while others use it as a 3-step forward walk inside a turn pattern. Verify with Enrique. UNSURE (check): Confirm whether Camina is taught in closed hold or as an open walking figure after Enchufla."
   },
   {
     "id": "caminando",
@@ -1663,7 +1663,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "Hand signal: caller draws a circle ('0') in the air with an index finger or forms an 'O' with thumb and index finger. Confirm whether BOH Studios keeps the same partner or switches on Cero."
+    "notes": "Hand signal: caller draws a circle ('0') in the air with an index finger or forms an 'O' with thumb and index finger. Confirm whether BOH Studios keeps the same partner or switches on Cero. UNSURE (check): Confirm whether Cero ends with the original partner or advances to the next follower in the school syllabus."
   },
   {
     "id": "cero-doble",
@@ -1732,7 +1732,7 @@
     "category": "Son",
     "level": "Beginner",
     "eightCounts": 1,
-    "summary": "Created by Cuban violinist Enrique Jorrín in the early 1950s: danced on contratiempo (breaking on 2 and 6) with a compact, grounded triple-step shuffle ('cha-cha-chá' on 4-and-1 / 8-and-5) and playful knees-bent groove.",
+    "summary": "Created by Cuban violinist Enrique Jorrín in the early 1950s: danced on contratiempo (breaking on 2 and 6) with a compact, grounded triple-step shuffle ('cha-cha-chá' on 4-and-5 / 8-and-1) and playful knees-bent groove.",
     "leaderSteps": [
       {
         "counts": "1-3",
@@ -1771,7 +1771,7 @@
       "partnerwork"
     ],
     "videos": [],
-    "notes": "Enrique Jorrín named the dance after the whispering sound of dancers' shoes brushing the floor on the triple step ('cha-cha-chá')."
+    "notes": "Enrique Jorrín named the dance after the whispering sound of dancers' shoes brushing the floor on the triple step ('cha-cha-chá'). UNSURE (check): Confirm whether the step count labels should remain '1-3' and '5-7' when the text inside them describes actions through '4-and-5' and '8-and-1'."
   },
   {
     "id": "changui-basics",
@@ -2049,7 +2049,7 @@
       "rhythm-reversal"
     ],
     "videos": [],
-    "notes": "UNSURE: Confirm whether BOH Studios teaches 'Contra Mambo' as opposing footwork directions (one forward, one back) or as a contratiempo (On2) rhythm shift."
+    "notes": "UNSURE: Confirm whether BOH Studios teaches 'Contra Mambo' as opposing footwork directions (one forward, one back) or as a contratiempo (On2) rhythm shift. UNSURE (check): Confirm whether Contra Mambo is danced as opposing footwork directions or on contratiempo timing in the school syllabus."
   },
   {
     "id": "cruce",
@@ -2162,7 +2162,7 @@
       "follower-turn"
     ],
     "videos": [],
-    "notes": "UNSURE: Regional variations exist between Havana and European Rueda syllabi on whether Cubanita uses a neck drape or a double-hand window. Verify with Enrique."
+    "notes": "UNSURE: Regional variations exist between Havana and European Rueda syllabi on whether Cubanita uses a neck drape or a double-hand window. Verify with Enrique. UNSURE (check): Confirm the exact handhold and whether Cubanita takes 1 or 2 eight-counts in the school syllabus."
   },
   {
     "id": "cubanito",
@@ -2175,7 +2175,7 @@
     "leaderSteps": [
       {
         "counts": "1-3",
-        "text": "From a right-to-right or crossed two-hand hold (right over left), lead an Enchufla-style exchange on 1-2 and duck under the raised right arm on 3, turning to face the follower."
+        "text": "Switch to a right-to-right handshake hold or crossed two-hand hold (right over left), lead an Enchufla-style exchange on 1-2 and duck under the raised right arm on 3, turning to face the follower."
       },
       {
         "counts": "5-7",
@@ -2220,7 +2220,7 @@
       "circular"
     ],
     "videos": [],
-    "notes": "UNSURE: Some schools teach Cubanito from a single right-to-right shake-hands hold (like El Dedo), while others use a two-hand hold. Teachers should confirm BOH Studios' preferred handhold."
+    "notes": "UNSURE: Some schools teach Cubanito from a single right-to-right shake-hands hold (like El Dedo), while others use a two-hand hold. Teachers should confirm BOH Studios' preferred handhold. UNSURE (check): Confirm whether BOH Studios teaches Cubanito from a right-to-right handshake hold or a crossed two-hand hold, and whether counts 9-11 are a separate unwrap or already Dile Que No."
   },
   {
     "id": "dame",
@@ -2271,7 +2271,7 @@
       "dile-que-no-exit"
     ],
     "videos": [],
-    "notes": "Hand signal: caller raises one index finger in the air (or points toward the next follower)."
+    "notes": "Hand signal: caller raises one index finger in the air (or points toward the next follower). UNSURE (check): Confirm whether Dame is taught in 1 eight-count (releasing on 2, Dile Que No on 5-7) or 2 eight-counts (traveling on 1-7, Dile Que No on 9-15)."
   },
   {
     "id": "dame-directo",
@@ -2373,7 +2373,7 @@
       "skip-one"
     ],
     "videos": [],
-    "notes": "Hand signal: caller raises two fingers in a V-shape above the head."
+    "notes": "Hand signal: caller raises two fingers in a V-shape above the head. UNSURE (check): Confirm whether skipping a partner in Dame Dos is completed in 1 eight-count or 2 eight-counts."
   },
   {
     "id": "dame-dos-con-cuba",
@@ -2528,7 +2528,7 @@
       "dame-family"
     ],
     "videos": [],
-    "notes": "UNSURE: In some schools 'Dame por la Mano' means switching partners without Dile Que No (picking up directly in open Guapea hand-to-hand on 5-7). Teacher should confirm BOH Studios' definition."
+    "notes": "UNSURE: In some schools 'Dame por la Mano' means switching partners without Dile Que No (picking up directly in open Guapea hand-to-hand on 5-7). Teacher should confirm BOH Studios' definition. UNSURE (check): Confirm whether Dame por la Mano ends with a Dile Que No or picks up directly in open hand-to-hand hold."
   },
   {
     "id": "dame-rapido",
@@ -2746,7 +2746,7 @@
       "rhythmic"
     ],
     "videos": [],
-    "notes": "UNSURE: Confirm whether your teachers execute the two Dames back-to-back in 2 eight-counts (1-8 and 9-16) or with a stabilizing basic in between (4 eight-counts), and whether the claps fall on count 4, count 7, or counts 7-8-1."
+    "notes": "UNSURE: Confirm whether your teachers execute the two Dames back-to-back in 2 eight-counts (1-8 and 9-16) or with a stabilizing basic in between (4 eight-counts), and whether the claps fall on count 4, count 7, or counts 7-8-1. UNSURE (check): Confirm whether this call takes 4 eight-counts (with a basic in between) or 2 eight-counts in the school syllabus, and which beats the claps land on."
   },
   {
     "id": "danzon-basics",
@@ -2842,7 +2842,7 @@
       "lateral"
     ],
     "videos": [],
-    "notes": "UNSURE: Verify whether BOH Studios uses 'Derecha / Izquierda' while facing the center in a single circle or as a partner-change direction."
+    "notes": "UNSURE: Verify whether BOH Studios uses 'Derecha / Izquierda' while facing the center in a single circle or as a partner-change direction. UNSURE (check): Confirm whether Derecha / Izquierda changes partners or shifts the entire circle laterally in closed/single-ring hold."
   },
   {
     "id": "dicelo",
@@ -2909,7 +2909,7 @@
       },
       {
         "counts": "5-7",
-        "text": "Step right foot back/in-place on 5, rotate slightly clockwise on 6, and close left foot near right on 7 while placing your right hand gently onto the follower's left shoulder blade in closed hold."
+        "text": "Step right foot back/in-place on 5, transfer weight to left foot on 6, and close right foot on 7 while placing your right hand gently onto the follower's left shoulder blade in closed hold."
       }
     ],
     "followerSteps": [
@@ -3118,7 +3118,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "UNSURE: In some Rueda systems 'Dos con Dos' means 'Dame Dos with 2 claps' (1 eight-count), while in others it is an Enchufla variation with 2 claps. Teacher should confirm BOH Studios' exact counts."
+    "notes": "UNSURE: In some Rueda systems 'Dos con Dos' means 'Dame Dos with 2 claps' (1 eight-count), while in others it is an Enchufla variation with 2 claps. Teacher should confirm BOH Studios' exact counts. UNSURE (check): Confirm whether Dos con Dos starts with an Enchufla or is a Dame Dos with two claps, and how many partners are skipped."
   },
   {
     "id": "dos-fly",
@@ -3145,13 +3145,13 @@
       },
       {
         "counts": "9-16",
-        "text": "Mark in place on 1-2-3 (counts 9-11) with the second overhead clap ('dos fly'), connect with the incoming leader on count 12, and execute Dile Que No on 5-6-7 (counts 13-15)."
+        "text": "Mark in place on 1-2-3 (counts 9-11) with the second overhead clap ('dos fly'), connect with the incoming leader and execute Dile Que No on 5-6-7 (counts 13-15)."
       }
     ],
     "commonMistakes": [
       "Safety: If adding a small hop on the 'fly' catch, land softly on the balls of the feet with bent knees and check vertical clearance so raised elbows do not strike a partner.",
       "Clapping in front of the chest like a regular Dame con una instead of reaching high overhead as if catching a baseball.",
-      "Being late to connect on count 12 for the Dile Que No exit."
+      "Being late to connect on count 13 for the Dile Que No exit."
     ],
     "prerequisites": [
       "guapea",
@@ -3225,7 +3225,7 @@
       "tarro"
     ],
     "videos": [],
-    "notes": "Safety note: Ensure leaders keep their free hand up as a guard and bend their knees rather than hinging their neck forward when ducking under the arm."
+    "notes": "Safety note: Ensure leaders keep their free hand up as a guard and bend their knees rather than hinging their neck forward when ducking under the arm. UNSURE (check): Confirm whether Dos Tarros is taught as an underarm pass ending in Dile Que No on counts 9-16, or as two direct backward/anticlockwise switches in closed hold (like Un Tarro) in 1 eight-count."
   },
   {
     "id": "echeverria",
@@ -3281,7 +3281,7 @@
       "rueda-classic"
     ],
     "videos": [],
-    "notes": "UNSURE: 'Echeverría' varies between Cuban and European Rueda traditions (sometimes taught as a fake Dame / Engáñala, sometimes as an Enchufla with a footwork tap). Verify with Enrique."
+    "notes": "UNSURE: 'Echeverría' varies between Cuban and European Rueda traditions (sometimes taught as a fake Dame / Engáñala, sometimes as an Enchufla with a footwork tap). Verify with Enrique. UNSURE (check): Confirm the exact counts 5-7 footwork/check pattern taught for Echeverría."
   },
   {
     "id": "echeverria-con-vuelta",
@@ -3308,11 +3308,11 @@
       },
       {
         "counts": "9-16",
-        "text": "Execute a solo 360-degree turn in place on 1-2-3 (counts 9-11), connect with the incoming leader on count 12, and travel through Dile Que No on 5-6-7 (counts 13-15)."
+        "text": "Execute a solo 360-degree turn in place on 1-2-3 (counts 9-11), connect with the incoming leader and travel through Dile Que No on 5-6-7 (counts 13-15)."
       }
     ],
     "commonMistakes": [
-      "Spinning too fast on counts 9-11 and losing sight of the new partner before the Dile Que No connection on count 12.",
+      "Spinning too fast on counts 9-11 and losing sight of the new partner before the Dile Que No connection on count 13.",
       "Forgetting to advance to the next partner during the solo turn.",
       "Rushing the rhythmic break on 5-6-7."
     ],
@@ -3334,7 +3334,7 @@
       "suelta"
     ],
     "videos": [],
-    "notes": "UNSURE: 'Echeverría' choreography varies between Cuban and European Rueda lineages (some do side-chassé claps, others do a backward kick-hitch before the turn). Teacher should verify the exact counts 5-7 footwork used in class."
+    "notes": "UNSURE: 'Echeverría' choreography varies between Cuban and European Rueda lineages (some do side-chassé claps, others do a backward kick-hitch before the turn). Teacher should verify the exact counts 5-7 footwork used in class. UNSURE (check): Confirm whether Echeverría con Vuelta takes 2 eight-counts and whether the solo turn happens on counts 9-11."
   },
   {
     "id": "egoista",
@@ -3628,7 +3628,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "UNSURE: Different schools use slightly different hand gestures for 'Manolín' (rolling fists overhead vs pumping one hand). Teacher should confirm BOH Studios' gesture."
+    "notes": "UNSURE: Different schools use slightly different hand gestures for 'Manolín' (rolling fists overhead vs pumping one hand). Teacher should confirm BOH Studios' gesture. UNSURE (check): Confirm whether Enchufla con Manolín changes partner on count 9 in the school syllabus."
   },
   {
     "id": "enchufla-con-palma-y-pata",
@@ -3686,7 +3686,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "'Patá' is the Cuban coastal contraction of 'patada' (kick/stomp). Emphasize low, safe footwork in crowded circles."
+    "notes": "'Patá' is the Cuban coastal contraction of 'patada' (kick/stomp). Emphasize low, safe footwork in crowded circles. UNSURE (check): Confirm whether Enchufla con Palma y Patá changes partner on count 9."
   },
   {
     "id": "enchufla-con-rumba",
@@ -3744,7 +3744,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "Confirm whether BOH Studios dances the Rumba break for 4 counts (5-6-7) or 12 counts (5-7 + 1-7) before Dile Que No."
+    "notes": "Confirm whether BOH Studios dances the Rumba break for 4 counts (5-6-7) or 12 counts (5-7 + 1-7) before Dile Que No. UNSURE (check): Confirm whether Enchufla con Rumba changes partner on count 9."
   },
   {
     "id": "enchufla-con-vuelta",
@@ -3801,7 +3801,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "Clarify with students whether only the leader turns on 5-7 or both leader and follower execute the solo vuelta."
+    "notes": "Clarify with students whether only the leader turns on 5-7 or both leader and follower execute the solo vuelta. UNSURE (check): Confirm whether Enchufla con Vuelta changes partner on count 9 and whether the solo turn is executed by the leader or both dancers."
   },
   {
     "id": "enchufla-contra-mambo",
@@ -4265,7 +4265,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "Crucial safety cue for followers: on 'Escóndete', keep your 5-6-7 steps directly underneath your hips, never back."
+    "notes": "Crucial safety cue for followers: on 'Escóndete', keep your 5-6-7 steps directly underneath your hips, never back. UNSURE (check): Confirm whether Enchufla y Escóndete changes partner to the follower you hide behind or stays with the same partner."
   },
   {
     "id": "enchufla-y-quedate",
@@ -4317,7 +4317,7 @@
       "fake-out"
     ],
     "videos": [],
-    "notes": "In standard Rueda, a bare 'Enchufla' implies a partner change ('Enchufla y Dame'). 'Enchufla y Quédate' tests whether dancers are truly listening to the cantante rather than running on autopilot."
+    "notes": "In standard Rueda, a bare 'Enchufla' implies a partner change ('Enchufla y Dame'). 'Enchufla y Quédate' tests whether dancers are truly listening to the cantante rather than running on autopilot. UNSURE (check): Confirm whether Enchufla y Quédate is danced in 1 eight-count (Dile Que No on 5-7) or 2 eight-counts (holding on 5-7, Dile Que No on 9-15)."
   },
   {
     "id": "enchufla-y-rodeo",
@@ -4432,7 +4432,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "UNSURE: Check if BOH Studios teaches 'Enchúflense' as a simultaneous double-turn on 1-3 or as leader-turns-then-follower-turns."
+    "notes": "UNSURE: Check if BOH Studios teaches 'Enchúflense' as a simultaneous double-turn on 1-3 or as leader-turns-then-follower-turns. UNSURE (check): Confirm whether Enchúflense changes partner on count 9."
   },
   {
     "id": "enganala",
@@ -4488,7 +4488,7 @@
       "playful"
     ],
     "videos": [],
-    "notes": "Closely related to '¡Mentira!', except 'Engáñala' is called upfront before the figure starts, whereas '¡Mentira!' is shouted mid-move as a surprise cancellation."
+    "notes": "Closely related to '¡Mentira!', except 'Engáñala' is called upfront before the figure starts, whereas '¡Mentira!' is shouted mid-move as a surprise cancellation. UNSURE (check): Confirm whether Engáñala returns to the original partner or advances to the next partner after the feint."
   },
   {
     "id": "enroscala",
@@ -4786,7 +4786,7 @@
     "leaderSteps": [
       {
         "counts": "1-8",
-        "text": "From closed hold or Dile Que No pickup, step back/open on 1-3 and lead the follower through a clean clockwise Exhíbela turn under your raised right arm on 5-7."
+        "text": "From closed hold or Dile Que No pickup, step back/open on 1-3 and lead the follower through a clean clockwise Exhíbela turn under your raised left arm on 5-7."
       },
       {
         "counts": "9-16",
@@ -4796,7 +4796,7 @@
     "followerSteps": [
       {
         "counts": "1-8",
-        "text": "Step forward on 1-3 to open out and execute a smooth clockwise turn under the leader's raised right arm on 5-6-7."
+        "text": "Step forward on 1-3 to open out and execute a smooth clockwise turn under the leader's raised left arm on 5-6-7."
       },
       {
         "counts": "9-16",
@@ -5028,7 +5028,7 @@
       "baseball-theme"
     ],
     "videos": [],
-    "notes": "UNSURE: Confirm whether BOH Studios switches partners after each of the 3 Flys or only at the end of the third Fly."
+    "notes": "UNSURE: Confirm whether BOH Studios switches partners after each of the 3 Flys or only at the end of the third Fly. UNSURE (check): Confirm whether Festival de Fly (Los Tres) changes partners after each fly or only at the end of the sequence."
   },
   {
     "id": "festival-de-media",
@@ -5179,7 +5179,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "UNSURE: Schools differ on whether 'Festival de Pelota' switches partners after each Pelota (1, 2, 3) or stays with the same partner until Pelota Tres. Teacher should confirm BOH Studios' house rule."
+    "notes": "UNSURE: Schools differ on whether 'Festival de Pelota' switches partners after each Pelota (1, 2, 3) or stays with the same partner until Pelota Tres. Teacher should confirm BOH Studios' house rule. UNSURE (check): Confirm whether Festival de Pelota takes 4 eight-counts (changing partner only at the end) or 6 eight-counts (changing partner after each Pelota)."
   },
   {
     "id": "festival-de-pelota-con-vuelta",
@@ -5264,7 +5264,7 @@
       "turn"
     ],
     "videos": [],
-    "notes": "UNSURE: Some schools condense 'Festival de Pelota' so that the partner change and Dile Que No happen only at the very end, while others change partners on every Pelota (1, 2, and 3). Verify exact total eight-counts with the instructor."
+    "notes": "UNSURE: Some schools condense 'Festival de Pelota' so that the partner change and Dile Que No happen only at the very end, while others change partners on every Pelota (1, 2, and 3). Verify exact total eight-counts with the instructor. UNSURE (check): Confirm the exact bar count and whether this variation is standard in the school syllabus."
   },
   {
     "id": "flor",
@@ -5320,7 +5320,7 @@
       "center-work"
     ],
     "videos": [],
-    "notes": "UNSURE: In some Rueda schools, 'La Flor' is a 1-bar styling flourish during Vamos Abajo/Al Centro rather than an Enchufla variation. Teacher should verify BOH Studios' version."
+    "notes": "UNSURE: In some Rueda schools, 'La Flor' is a 1-bar styling flourish during Vamos Abajo/Al Centro rather than an Enchufla variation. Teacher should verify BOH Studios' version. UNSURE (check): Confirm whether Flor changes partner on count 9 or returns to the original partner."
   },
   {
     "id": "fly",
@@ -5368,7 +5368,7 @@
       "baseball-theme"
     ],
     "videos": [],
-    "notes": "Cuban Rueda vocabulary borrows heavily from baseball (Pelota, Fly, Doble Play, Triple Play, Rolling)."
+    "notes": "Cuban Rueda vocabulary borrows heavily from baseball (Pelota, Fly, Doble Play, Triple Play, Rolling). UNSURE (check): Confirm whether Fly is taught in 1 eight-count (from Guapea/Dame) or 2 eight-counts (Enchufla on 1-3, overhead clap on 7, Dile Que No on 9-15)."
   },
   {
     "id": "foto",
@@ -6516,7 +6516,7 @@
       "numbered-figure"
     ],
     "videos": [],
-    "notes": "UNSURE: Numbered figures (71, 72, 75, 84, 88) vary slightly in sequence between Havana schools. Verify the exact 2nd eight-count hand sequence with Enrique before publishing."
+    "notes": "UNSURE: Numbered figures (71, 72, 75, 84, 88) vary slightly in sequence between Havana schools. Verify the exact 2nd eight-count hand sequence with Enrique before publishing. UNSURE (check): Confirm the exact hand sequence on counts 9-16 and whether the leader unwraps the follower with the left hand before bringing the right hand over his own head."
   },
   {
     "id": "ochenta-y-ocho",
@@ -8293,7 +8293,7 @@
       "musicality"
     ],
     "videos": [],
-    "notes": "UNSURE: 'Preciosa' is taught differently across schools (sometimes as a sweetheart wrap, sometimes as a variation of Sombrero/Evelyn). Teacher should verify exact handwork."
+    "notes": "UNSURE: 'Preciosa' is taught differently across schools (sometimes as a sweetheart wrap, sometimes as a variation of Sombrero/Evelyn). Teacher should verify exact handwork. UNSURE (check): Confirm whether Preciosa in the school syllabus is a sweetheart wrap or a variation of Sombrero/Evelyn."
   },
   {
     "id": "prima-con-la-hermana",
@@ -8333,7 +8333,7 @@
     ],
     "commonMistakes": [
       "SAFETY: Ducking under the Prima arm with a bent neck instead of lowering with the knees.",
-      "Pulling on the first follower's left hand while already stepping toward the second follower on count 4."
+      "Pulling on the first follower's right hand while already stepping toward the second follower on count 4."
     ],
     "prerequisites": [
       "prima",
@@ -8350,7 +8350,7 @@
       "duck-under"
     ],
     "videos": [],
-    "notes": "UNSURE: In some Rueda schools, 'Prima con la Hermana' stays with the original partner after an Enchufla, while in others it changes partner to 'the sister' (the next follower). Verify BOH Studios' rule."
+    "notes": "UNSURE: In some Rueda schools, 'Prima con la Hermana' stays with the original partner after an Enchufla, while in others it changes partner to 'the sister' (the next follower). Verify BOH Studios' rule. UNSURE (check): Confirm whether Prima con la Hermana keeps the original partner (leading a right-hand Enchufla with her on 5-7) or changes to the next follower."
   },
   {
     "id": "prima-con-la-vecina",
@@ -9785,7 +9785,7 @@
       "two-hand-hold"
     ],
     "videos": [],
-    "notes": "Safety reminder: both dancers must keep a rotating hook grip (no thumbs clamped) whenever both hands stay connected past count 8."
+    "notes": "Safety reminder: both dancers must keep a rotating hook grip (no thumbs clamped) whenever both hands stay connected past count 8. UNSURE (check): In a Setenta hammerlock, the leader's right hand holds the follower's right hand behind her back, so his left hand (holding her left) must be raised over her head to unwrap. (it suggested \"Raise the left hand over the follower's head on 1-3 to unwrap the hammerlock, then on 5-7 drape\" for \"Raise the right hand over the follower's head on 1-3 to unwrap the hammerlock, then on 5-7 drape\"). UNSURE (check): The follower's right hand is in the hammerlock at her lower back, so she turns under her raised left hand (held by the leader's left). (it suggested \"Turn under the raised left hand on 1-3\" for \"Turn under the raised right hand on 1-3\")."
   },
   {
     "id": "shoboun",
@@ -10800,7 +10800,7 @@
       "fast-switch"
     ],
     "videos": [],
-    "notes": "Hand signal: caller places index and pinky fingers (or two index fingers) on the forehead like bull horns ('poner los tarros' is Cuban slang for cheating on a partner!)."
+    "notes": "Hand signal: caller places index and pinky fingers (or two index fingers) on the forehead like bull horns ('poner los tarros' is Cuban slang for cheating on a partner!). UNSURE (check): Confirm whether Un Tarro is danced from closed position (stepping back on 1-3 without Dile Que No) or from open position ducking under the raised arm."
   },
   {
     "id": "un-tarro-sin-soltar",

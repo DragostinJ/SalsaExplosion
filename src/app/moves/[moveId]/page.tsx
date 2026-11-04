@@ -3,6 +3,7 @@ import { clampDescription, moveTitle } from "@/lib/seo/search-snippets";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { MoveBackBar, TrailLink } from "@/components/moves/move-back-bar";
 import { CATEGORY_INK, CountStrip } from "@/components/moves/move-poster-card";
 import { ProClipsSection } from "@/components/moves/pro-clips-section";
 import { CancionesTabs } from "@/components/navigation/door-tabs";
@@ -82,26 +83,30 @@ export default async function MovePage({ params }: MovePageProps) {
         </p>
       )}
 
-      {/* The move's poster */}
-      <header className={cn("border-[6px] border-ink p-6 shadow-[12px_12px_0_var(--color-ink)] md:p-10", ink.bg, ink.text)}>
-        <p className={KICKER}>
-          {move.category} · {move.level} ·{" "}
-          <span className="whitespace-nowrap">{move.eightCounts} × 8</span>
-        </p>
-        <h1 className={`mt-3 ${TYPE.section}`}>
-          {move.spanishName ?? move.name}
-          {move.spanishName && move.spanishName !== move.name && (
-            <span className="mt-2 block font-sans text-lg font-bold normal-case leading-snug tracking-normal">{move.name}</span>
-          )}
-        </h1>
-        <p className="mt-4 max-w-2xl text-lg font-medium">{move.summary}</p>
-        <CountStrip eightCounts={move.eightCounts} cell={ink.cell} className="mt-6" />
-        <p className="mt-2 text-xs font-bold uppercase tracking-wider">
-          {isTeacherChecked(move)
-            ? `Checked on the music by ${move.reviewedBy}`
-            : "The teachers are still checking this one on the music · spot something off? Tell them in class"}
-        </p>
-      </header>
+      <div className="space-y-3">
+        <MoveBackBar moveId={move.id} moveName={move.spanishName ?? move.name} />
+
+        {/* The move's poster */}
+        <header className={cn("border-[6px] border-ink p-6 shadow-[12px_12px_0_var(--color-ink)] md:p-10", ink.bg, ink.text)}>
+          <p className={KICKER}>
+            {move.category} · {move.level} ·{" "}
+            <span className="whitespace-nowrap">{move.eightCounts} × 8</span>
+          </p>
+          <h1 className={`mt-3 ${TYPE.section}`}>
+            {move.spanishName ?? move.name}
+            {move.spanishName && move.spanishName !== move.name && (
+              <span className="mt-2 block font-sans text-lg font-bold normal-case leading-snug tracking-normal">{move.name}</span>
+            )}
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg font-medium">{move.summary}</p>
+          <CountStrip eightCounts={move.eightCounts} cell={ink.cell} className="mt-6" />
+          <p className="mt-2 text-xs font-bold uppercase tracking-wider">
+            {isTeacherChecked(move)
+              ? `Checked on the music by ${move.reviewedBy}`
+              : "The teachers are still checking this one on the music · spot something off? Tell them in class"}
+          </p>
+        </header>
+      </div>
 
       {video && (
         <section aria-labelledby="video-heading" className="space-y-3">
@@ -201,9 +206,13 @@ export default async function MovePage({ params }: MovePageProps) {
                   return (
                     <li key={id}>
                       {before ? (
-                        <Link href={`/moves/${before.id}`} className="inline-flex min-h-[40px] items-center font-bold underline underline-offset-4">
+                        <TrailLink
+                          fromMoveId={move.id}
+                          href={`/moves/${before.id}`}
+                          className="inline-flex min-h-[40px] items-center font-bold underline underline-offset-4"
+                        >
                           {before.spanishName ?? before.name}
-                        </Link>
+                        </TrailLink>
                       ) : (
                         id
                       )}

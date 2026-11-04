@@ -76,9 +76,9 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   }) => {
     // 1. Open Events Directory
     await page.goto("/events", { waitUntil: "domcontentloaded" });
-    await expect(
-      page.getByText("Salsa Explosion Congresses & Masterclasses")
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /Danza!/i })).toBeVisible();
+    // The next festival is on the first screen with its date
+    await expect(page.getByRole("link", { name: /Next up/i })).toBeVisible();
 
     // 2. Open Congress/Weekend Festival Detail Page
     await page.goto("/events/made-in-cuba-dance-weekend-2026", {
@@ -147,9 +147,9 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
   }) => {
     await page.goto("/about", { waitUntil: "domcontentloaded" });
 
-    await expect(
-      page.getByText("Bournemouth's Cuban Rhythm")
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: /Authentic Cuban/i })).toBeVisible();
+    // The founding year comes from ACADEMY_METRICS, not page copy
+    await expect(page.getByText(/since 1993/i).first()).toBeVisible();
     await expect(
       page.getByText(/Enrique Perez Valdes/i).first()
     ).toBeVisible();
@@ -186,7 +186,8 @@ test.describe("Salsa Explosion UK — End-to-End User Flow", () => {
     await expect(
       page.getByText("Maestro Enrique Perez Valdes").first()
     ).toBeVisible();
-    await expect(page.getByText(/Single Lessons/i).first()).toBeVisible();
+    // Hero prices are the cheapest coach rates in coaching.ts
+    await expect(page.getByText(/One hour from £50/i).first()).toBeVisible();
     await expect(page.getByText(/5-Hour/i).first()).toBeVisible();
   });
 

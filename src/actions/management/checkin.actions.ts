@@ -2,10 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { BookingStatus, Role } from "@prisma/client";
+import { AuditAction, BookingStatus, Role } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
+import { recordAuditLog } from "@/lib/audit-log";
 import type { ManagementActionResponse } from "@/lib/constants/management";
 
 const ToggleBookingCheckInSchema = z.object({
@@ -56,6 +57,14 @@ export async function toggleBookingCheckInAction(rawInput: {
       };
     }
 
+    const existing = await prisma.booking.findUnique({
+      where: { id: parsed.data.bookingId },
+      select: { status: true },
+    });
+    const fromStatus =
+      existing?.status ??
+      (parsed.data.markAttended ? BookingStatus.CONFIRMED : BookingStatus.ATTENDED);
+
     const newStatus = parsed.data.markAttended
       ? BookingStatus.ATTENDED
       : BookingStatus.CONFIRMED;
@@ -68,6 +77,18 @@ export async function toggleBookingCheckInAction(rawInput: {
       },
       include: {
         user: { select: { firstName: true, lastName: true } },
+      },
+    });
+
+    await recordAuditLog({
+      actorId: actor.id,
+      action: AuditAction.EVENT_MUTATION,
+      targetType: "Booking",
+      targetId: updated.id,
+      metadata: {
+        kind: "ATTENDANCE_CHECK_IN",
+        from: fromStatus,
+        to: updated.status,
       },
     });
 
@@ -258,6 +279,17 @@ export async function toggleEventRegistrationCheckInAction(rawInput: {
       },
       include: {
         user: { select: { firstName: true, lastName: true } },
+      },
+    });
+
+    await recordAuditLog({
+      actorId: actor.id,
+      action: AuditAction.EVENT_MUTATION,
+      targetType: "EventRegistration",
+      targetId: updated.id,
+      metadata: {
+        kind: "ATTENDANCE_CHECK_IN",
+        checkedIn: updated.checkedIn,
       },
     });
 

@@ -173,7 +173,7 @@ describe("src/actions/management/checkin.actions.ts", () => {
       );
     });
 
-    it.fails("writes an EVENT_MUTATION audit log record when toggling booking attendance", async () => {
+    it("writes an EVENT_MUTATION audit log record when toggling booking attendance", async () => {
       getOrProvisionCurrentUserMock.mockResolvedValue({
         id: "staff-1",
         role: Role.INSTRUCTOR,
@@ -295,7 +295,7 @@ describe("src/actions/management/checkin.actions.ts", () => {
       );
     });
 
-    it.fails("writes an EVENT_MUTATION audit log record when toggling event registration check-in", async () => {
+    it("writes an EVENT_MUTATION audit log record when toggling event registration check-in", async () => {
       getOrProvisionCurrentUserMock.mockResolvedValue({
         id: "staff-1",
         role: Role.ADMIN,

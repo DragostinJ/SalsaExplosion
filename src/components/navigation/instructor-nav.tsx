@@ -13,6 +13,7 @@ import {
   Flame,
   Image as ImageIcon,
   CheckSquare,
+  Sun,
 } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
@@ -20,58 +21,65 @@ import { Badge } from "@/components/ui/badge";
 export function InstructorNav() {
   const pathname = usePathname();
 
+  // Plain words, in the order teachers need them most
   const tabs = [
     {
-      href: "/instructor/ai-studio",
-      label: "AI Studio & Copilot",
-      icon: Sparkles,
-      active: pathname.startsWith("/instructor/ai-studio"),
+      href: "/instructor",
+      label: "Today",
+      icon: Sun,
+      active: pathname === "/instructor",
     },
     {
-      href: "/instructor/song-maps",
-      label: "Song Map Importer",
-      icon: Music,
-      active: pathname.startsWith("/instructor/song-maps"),
+      href: "/instructor/roster",
+      label: "Door check-in",
+      icon: QrCode,
+      active: pathname.startsWith("/instructor/roster"),
     },
     {
       href: "/instructor/moves",
-      label: "Move Library Review",
+      label: "Moves to check",
       icon: CheckSquare,
       active: pathname.startsWith("/instructor/moves"),
     },
     {
+      href: "/instructor/submissions",
+      label: "Video assessments",
+      icon: Video,
+      active: pathname.startsWith("/instructor/submissions"),
+    },
+    {
+      href: "/instructor/students",
+      label: "Students",
+      icon: Users,
+      active: pathname.startsWith("/instructor/students"),
+    },
+    {
       href: "/cartel",
-      label: "Class-Night Posters",
+      label: "Instagram posters",
       icon: ImageIcon,
       active: pathname.startsWith("/cartel"),
     },
     {
       href: "/instructor/practice-insights",
-      label: "Practice Hotspots",
+      label: "What dancers practise",
       icon: Flame,
       active: pathname.startsWith("/instructor/practice-insights"),
     },
     {
-      href: "/instructor/students",
-      label: "Students & Progression",
-      icon: Users,
-      active: pathname.startsWith("/instructor/students"),
+      href: "/instructor/song-maps",
+      label: "Song timings",
+      icon: Music,
+      active: pathname.startsWith("/instructor/song-maps"),
     },
     {
-      href: "/instructor/submissions",
-      label: "Video Assessments Queue",
-      icon: Video,
-      active: pathname.startsWith("/instructor/submissions"),
-    },
-    {
-      href: "/instructor/roster",
-      label: "Live Class Roster & QR Check-In",
-      icon: QrCode,
-      active: pathname.startsWith("/instructor/roster"),
+      href: "/instructor/ai-studio",
+      label: "AI tools",
+      icon: Sparkles,
+      active: pathname.startsWith("/instructor/ai-studio"),
     },
     {
       href: "/admin/analytics",
-      label: "Studio Analytics",
+      label: "Numbers",
       icon: BarChart3,
       active: pathname.startsWith("/admin/analytics"),
     },
@@ -86,7 +94,7 @@ export function InstructorNav() {
           className="border-emerald-500/30 bg-emerald-500/10 text-emerald-300 font-semibold px-3 py-1 flex items-center gap-1.5"
         >
           <ShieldCheck className="h-3.5 w-3.5" />
-          Instructor & Teaching Desk Portal
+          Teachers
         </Badge>
       </div>
 
@@ -97,7 +105,7 @@ export function InstructorNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className={`shrink-0 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all ${
+              className={`shrink-0 inline-flex min-h-[40px] items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all ${
                 tab.active
                   ? "bg-background text-foreground shadow-sm ring-1 ring-border font-bold"
                   : "text-muted-foreground hover:bg-background/60 hover:text-foreground"

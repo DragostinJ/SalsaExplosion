@@ -20,6 +20,7 @@ import {
   ClipboardList,
   Music,
   Image as ImageIcon,
+  Sun,
 } from "lucide-react";
 
 import dynamic from "next/dynamic";
@@ -174,12 +175,19 @@ export function SiteHeader({
   // Class recaps are "later" (Enrique, 2026-11-02): the page stays, the link comes back when teachers post
   const studentLinks = [...doorLinks, aboutLink];
 
+  // Staff start at Today: tonight's classes and only what needs someone
   const instructorLinks = [
     {
-      href: "/instructor/ai-studio",
-      label: "AI Studio",
-      icon: Sparkles,
-      active: pathname.startsWith("/instructor/ai-studio"),
+      href: "/instructor",
+      label: "Today",
+      icon: Sun,
+      active: pathname === "/instructor",
+    },
+    {
+      href: "/instructor/roster",
+      label: "Check-in",
+      icon: QrCode,
+      active: pathname.startsWith("/instructor/roster"),
     },
     {
       href: "/instructor/students",
@@ -189,37 +197,31 @@ export function SiteHeader({
     },
     {
       href: "/instructor/submissions",
-      label: "Grading",
+      label: "Videos",
       icon: ClipboardCheck,
       active: pathname.startsWith("/instructor/submissions"),
-    },
-    {
-      href: "/instructor/roster",
-      label: "QR Roster",
-      icon: QrCode,
-      active: pathname.startsWith("/instructor/roster"),
     },
   ];
 
   const adminLinks = [
     {
-      href: "/instructor/ai-studio",
-      shortLabel: "AI Studio",
-      fullLabel: "AI Studio",
-      icon: Sparkles,
-      active: pathname.startsWith("/instructor/ai-studio"),
+      href: "/instructor",
+      shortLabel: "Today",
+      fullLabel: "Today",
+      icon: Sun,
+      active: pathname === "/instructor",
     },
     {
       href: "/admin/operations",
-      shortLabel: "Ops",
-      fullLabel: "Operations",
+      shortLabel: "Requests",
+      fullLabel: "Lesson requests",
       icon: ClipboardList,
       active: pathname.startsWith("/admin/operations"),
     },
     {
       href: "/admin/analytics",
-      shortLabel: "Analytics",
-      fullLabel: "Analytics",
+      shortLabel: "Numbers",
+      fullLabel: "Numbers",
       icon: BarChart3,
       active: pathname.startsWith("/admin/analytics"),
     },

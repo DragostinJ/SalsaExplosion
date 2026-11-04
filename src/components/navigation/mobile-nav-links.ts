@@ -15,6 +15,7 @@ import {
   Music,
   HelpCircle,
   ClipboardList,
+  Sun,
   type LucideIcon,
 } from "lucide-react";
 
@@ -51,17 +52,19 @@ export const EXPLORE_LINKS: readonly MobileNavLink[] = [
   { href: "/about", label: "About Maestro Enrique", icon: Compass },
 ];
 
+// Staff menus start at Today (tonight's classes and what needs doing), in plain words
 export const TEACHER_LINKS: readonly MobileNavLink[] = [
-  { href: "/instructor/ai-studio", label: "AI Studio & Copilot", icon: Sparkles },
-  { href: "/instructor/students", label: "Student Roster & Notes", icon: Users },
-  { href: "/instructor/submissions", label: "Video Grading Queue", icon: ClipboardCheck },
-  { href: "/instructor/roster", label: "Live QR Class Check-In", icon: QrCode },
+  { href: "/instructor", label: "Today", icon: Sun },
+  { href: "/instructor/roster", label: "Door check-in", icon: QrCode },
+  { href: "/instructor/moves", label: "Moves to check", icon: ClipboardCheck },
+  { href: "/instructor/submissions", label: "Video assessments", icon: Sparkles },
+  { href: "/instructor/students", label: "Students", icon: Users },
 ];
 
 export const OWNER_LINKS: readonly MobileNavLink[] = [
-  { href: "/instructor/ai-studio", label: "AI Studio & Event Importer", icon: Sparkles },
-  { href: "/admin/operations", label: "Studio Desk Operations", icon: ClipboardList },
-  { href: "/admin/analytics", label: "Executive Analytics", icon: BarChart3 },
-  { href: "/admin/classes", label: "Schedule Class Sessions", icon: CalendarPlus },
-  { href: "/admin/events", label: "Congress & Party Admin", icon: ShieldCheck },
+  { href: "/instructor", label: "Today", icon: Sun },
+  { href: "/admin/classes", label: "Classes", icon: CalendarPlus },
+  { href: "/admin/events", label: "Festivals & tickets", icon: ShieldCheck },
+  { href: "/admin/operations", label: "Lesson requests & shop", icon: ClipboardList },
+  { href: "/admin/analytics", label: "Numbers", icon: BarChart3 },
 ];

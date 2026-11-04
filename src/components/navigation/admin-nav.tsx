@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   QrCode,
   ClipboardList,
+  Sun,
 } from "lucide-react";
 import { BackButton } from "@/components/navigation/back-button";
 import { Badge } from "@/components/ui/badge";
@@ -17,42 +18,49 @@ import { Badge } from "@/components/ui/badge";
 export function AdminNav() {
   const pathname = usePathname();
 
+  // Plain words, in the order the owner needs them most
   const tabs = [
     {
-      href: "/admin/operations",
-      label: "Studio Desk Operations",
-      icon: ClipboardList,
-      active: pathname.startsWith("/admin/operations"),
+      href: "/instructor",
+      label: "Today",
+      icon: Sun,
+      active: pathname === "/instructor",
     },
     {
-      href: "/admin/analytics",
-      label: "Executive Analytics & Charts",
-      icon: BarChart3,
-      active: pathname.startsWith("/admin/analytics"),
-    },
-    {
-      href: "/instructor/students",
-      label: "Students & Progression",
-      icon: Users,
-      active: pathname.startsWith("/instructor/students"),
+      href: "/instructor/roster",
+      label: "Door check-in",
+      icon: QrCode,
+      active: pathname.startsWith("/instructor/roster"),
     },
     {
       href: "/admin/classes",
-      label: "Weekly Class Manager",
+      label: "Classes",
       icon: CalendarPlus,
       active: pathname.startsWith("/admin/classes"),
     },
     {
       href: "/admin/events",
-      label: "Guest Artist Events & Door Passes",
+      label: "Festivals & tickets",
       icon: Sparkles,
       active: pathname.startsWith("/admin/events"),
     },
     {
-      href: "/instructor/roster",
-      label: "Live QR Class Roster",
-      icon: QrCode,
-      active: pathname.startsWith("/instructor/roster"),
+      href: "/admin/operations",
+      label: "Lesson requests & shop",
+      icon: ClipboardList,
+      active: pathname.startsWith("/admin/operations"),
+    },
+    {
+      href: "/instructor/students",
+      label: "Students",
+      icon: Users,
+      active: pathname.startsWith("/instructor/students"),
+    },
+    {
+      href: "/admin/analytics",
+      label: "Numbers",
+      icon: BarChart3,
+      active: pathname.startsWith("/admin/analytics"),
     },
   ];
 
@@ -65,7 +73,7 @@ export function AdminNav() {
           className="border-amber-500/40 bg-amber-500/15 text-amber-300 font-extrabold px-3 py-1 flex items-center gap-1.5"
         >
           <ShieldCheck className="h-3.5 w-3.5 text-amber-400" />
-          Studio Owner & Admin Command Center
+          Studio owner
         </Badge>
       </div>
 
@@ -76,7 +84,7 @@ export function AdminNav() {
             <Link
               key={tab.href}
               href={tab.href}
-              className={`shrink-0 inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all ${
+              className={`shrink-0 inline-flex min-h-[40px] items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-semibold transition-all ${
                 tab.active
                   ? "bg-background text-foreground shadow-sm ring-1 ring-border font-bold"
                   : "text-muted-foreground hover:bg-background/60 hover:text-foreground"

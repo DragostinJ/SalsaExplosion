@@ -85,6 +85,16 @@ function studioDate(at: Date): { year: number; month: number; day: number } {
   return { year: get("year"), month: get("month"), day: get("day") };
 }
 
+/** Midnight to midnight of the studio's calendar day containing `at`, as UTC instants (end exclusive). */
+export function studioDayBounds(at: Date): { start: Date; end: Date } {
+  const { year, month, day } = studioDate(at);
+  const next = new Date(Date.UTC(year, month - 1, day + 1));
+  return {
+    start: studioTimeToUtc(year, month, day, "00:00"),
+    end: studioTimeToUtc(next.getUTCFullYear(), next.getUTCMonth() + 1, next.getUTCDate(), "00:00"),
+  };
+}
+
 /** "19:00" or "21:30 – Late" -> "19:00" */
 function startOf(time: string): string {
   return time.trim().slice(0, 5);

@@ -5,6 +5,7 @@ import {
   missingSessions,
   pickInstructorId,
   planWeeklySessions,
+  studioDayBounds,
   studioTimeToUtc,
 } from "@/lib/schedule/weekly-sessions";
 
@@ -181,5 +182,20 @@ describe("ensureWeeklySessions", () => {
     const result = await ensureWeeklySessions({ now: new Date("2026-11-03T12:00:00Z") });
     expect(result.error).toMatch(/No teacher/);
     expect(prisma.$transaction).not.toHaveBeenCalled();
+  });
+});
+
+describe("studioDayBounds", () => {
+  it("runs midnight to midnight London time, including the clock-change days", () => {
+    const winter = studioDayBounds(new Date("2026-11-05T21:00:00Z"));
+    expect(winter.start.toISOString()).toBe("2026-11-05T00:00:00.000Z");
+    expect(winter.end.toISOString()).toBe("2026-11-06T00:00:00.000Z");
+    // Clocks go forward at 01:00 UTC on 28 March 2027: that day is 23 hours long
+    const spring = studioDayBounds(new Date("2027-03-28T12:00:00Z"));
+    expect(spring.start.toISOString()).toBe("2027-03-28T00:00:00.000Z");
+    expect(spring.end.toISOString()).toBe("2027-03-28T23:00:00.000Z");
+    // 23:30 London in summer is still the same London day, though it's the next UTC hour
+    const lateSummer = studioDayBounds(new Date("2027-07-01T22:30:00Z"));
+    expect(lateSummer.start.toISOString()).toBe("2027-06-30T23:00:00.000Z");
   });
 });

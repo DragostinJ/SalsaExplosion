@@ -2,13 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Sparkles, ShieldCheck } from "lucide-react";
 import { getCachedUpcomingEvents } from "@/lib/cached-queries";
-import { BackButton } from "@/components/navigation/back-button";
-import { VENUE_INFO, ACADEMY_METRICS, upcomingCanonicalEvents } from "@/lib/academy-data";
+import { VENUE_INFO, ACADEMY_METRICS, DOOR_PRICING, upcomingCanonicalEvents } from "@/lib/academy-data";
 import { reportError } from "@/lib/monitoring";
 import { getPublishedEvents } from "@/lib/stores/published-events-store";
 import { buildFestivalEventJsonLd } from "@/lib/seo/event-jsonld";
 import { jsonLdHtml } from "@/lib/seo/move-jsonld";
-import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
+import { TYPE, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 import { PosterBanner } from "@/components/poster/poster-art";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
@@ -18,6 +17,9 @@ export const metadata = {
     "Made in Cuba Dance Weekend, SB&K nights and the Christmas and New Year parties in Bournemouth. Book your festival pass online.",
   alternates: { canonical: "/events" },
 };
+
+const festivalDate = (d: Date) =>
+  new Date(d).toLocaleDateString("en-GB", { timeZone: "Europe/London", weekday: "short", day: "numeric", month: "long" });
 
 export default async function EventsDirectoryPage() {
   let events: Awaited<ReturnType<typeof getCachedUpcomingEvents>> = [];
@@ -73,6 +75,12 @@ export default async function EventsDirectoryPage() {
 
   const liveAnnouncements = await getPublishedEvents();
 
+  const nextEvent = [...displayEvents].sort(
+    (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  )[0];
+  const nextPrices = nextEvent?.ticketTiers.map((t) => t.priceInCents).filter((p) => p > 0) ?? [];
+  const nextFromPounds = nextPrices.length > 0 ? Math.round(Math.min(...nextPrices) / 100) : null;
+
   const eventsJsonLd = displayEvents.map((evt) =>
     buildFestivalEventJsonLd({
       slug: evt.slug,
@@ -92,9 +100,6 @@ export default async function EventsDirectoryPage() {
       {eventsJsonLd.length > 0 && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdHtml(eventsJsonLd) }} />
       )}
-      <div>
-        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
-      </div>
 
       {/* DANZA! 2026 | 2027 Official Calendar Hero Showcase */}
       <section
@@ -109,8 +114,7 @@ export default async function EventsDirectoryPage() {
             </div>
 
             <div>
-              <p className={KICKER}>Salsa Explosion Congresses &amp; Masterclasses</p>
-              <h1 className={`mt-2 text-ink ${TYPE.section}`}>
+              <h1 className={`text-ink ${TYPE.section}`}>
                 DANZA! 2026 | 2027 <span className="text-accent-red">Funciones</span>
               </h1>
               <p className="mt-2 text-sm font-semibold text-ink">
@@ -118,10 +122,25 @@ export default async function EventsDirectoryPage() {
               </p>
             </div>
 
-            {/* Official Online Ticket Booking Callout */}
-            <div className="border-2 border-ink bg-poster-mustard p-3.5 sm:p-4 text-xs font-bold text-ink leading-relaxed">
-              🎟️ <strong>Official Online Ticket Booking:</strong> Reserve Made in Cuba 2026, SB&amp;K Extravaganza and party passes online below with instant digital ticketing. (Regular weekly Thursday &amp; Sunday classes are £12/£14 paid at the door).
-            </div>
+            {/* The next festival, so a phone shows a date and a way in on the first screen */}
+            {nextEvent && (
+              <Link
+                href={`/events/${nextEvent.slug}`}
+                className="block border-4 border-ink bg-poster-mustard p-4 text-ink shadow-[4px_4px_0_0_var(--color-ink)] transition-colors hover:bg-ink hover:text-paper"
+              >
+                <span className="block text-xs font-bold uppercase tracking-wider">
+                  Next up · {festivalDate(nextEvent.startDate)}
+                </span>
+                <span className={`mt-1 block font-display ${TYPE.card}`}>{nextEvent.title}</span>
+                <span className="mt-1 block text-sm font-bold">
+                  {nextFromPounds !== null && `Passes from £${nextFromPounds} · `}Book online →
+                </span>
+              </Link>
+            )}
+            <p className="text-xs font-semibold text-ink">
+              Festivals and parties are booked here. Weekly Thursday &amp; Sunday classes aren&apos;t: they&apos;re £
+              {DOOR_PRICING.oneClassPounds} / £{DOOR_PRICING.twoClassesPounds} at the door.
+            </p>
 
             <div className="border-2 border-ink bg-surface-1 p-4 sm:p-5 space-y-2 text-ink">
               <p className="text-xs sm:text-sm leading-relaxed italic">
@@ -140,7 +159,9 @@ export default async function EventsDirectoryPage() {
             <div className="flex flex-wrap items-center gap-4 text-xs pt-1 font-bold">
               <div className="flex items-center gap-1.5 text-accent-red">
                 <Sparkles className="h-4 w-4 shrink-0" />
-                <span>12 Exclusive Parties &amp; Weekenders</span>
+                <span>
+                  {displayEvents.length} {displayEvents.length === 1 ? "party or weekender" : "parties & weekenders"} coming up
+                </span>
               </div>
               <div className="flex items-center gap-1.5 text-accent-teal">
                 <ShieldCheck className="h-4 w-4 shrink-0" />

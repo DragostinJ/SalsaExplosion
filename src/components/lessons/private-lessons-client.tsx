@@ -9,7 +9,6 @@ import {
   cancelPrivateLessonBookingAction,
 } from "@/actions/lessons.actions";
 import { getMyPrivateLessonBookingsAction } from "@/actions/viewer.actions";
-import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 import {
   COACHING_INSTRUCTORS_CATALOG,
   COACHING_FOCUS_TOPICS,
@@ -28,6 +27,15 @@ export interface SerializedPrivateLessonBooking {
   status: string;
   createdAtIso: string;
 }
+
+/**
+ * A choice card: the whole card is clickable through its heading's button, stretched over the
+ * card, so the choice also works from the keyboard and reads as a pressed button.
+ */
+const CHOICE_CARD =
+  "relative border-4 border-ink p-5 transition-all shadow-[4px_4px_0_0_var(--color-ink)] has-[:focus-visible]:outline has-[:focus-visible]:outline-4 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-poster-blue";
+const CHOICE_BUTTON =
+  "text-left uppercase after:absolute after:inset-0 after:content-[''] focus-visible:outline-none";
 
 interface PrivateLessonsClientProps {
   initialBookings?: SerializedPrivateLessonBooking[];
@@ -68,6 +76,8 @@ export function PrivateLessonsClient({
     selectedPackage === "SINGLE"
       ? activeInstructor.hourlyRatePounds
       : activeInstructor.blockRatePounds;
+  // Five single hours against the block price, so the badge is right for every teacher
+  const blockSaving = 5 * activeInstructor.hourlyRatePounds - activeInstructor.blockRatePounds;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -216,7 +226,7 @@ export function PrivateLessonsClient({
             Private Lesson Request Received!
           </h2>
           <p className="text-xs sm:text-sm text-ink max-w-lg mx-auto leading-relaxed font-semibold">
-            Thank you! Maestro {activeInstructor.name} and the BOH Studios Bournemouth desk will confirm your {selectedPackage === "SINGLE" ? "1-Hour Lesson" : "5-Hour Intensive Package"} ({selectedDay}) within 24 hours.
+            Thank you! {activeInstructor.name} and the BOH Studios Bournemouth desk will confirm your {selectedPackage === "SINGLE" ? "1-Hour Lesson" : "5-Hour Intensive Package"} ({selectedDay}) within 24 hours.
           </p>
           <div className="border-2 border-ink bg-paper p-4 max-w-md mx-auto text-xs space-y-1.5 text-left text-ink shadow-[2px_2px_0_0_var(--color-ink)]">
             <div>
@@ -259,8 +269,7 @@ export function PrivateLessonsClient({
                 return (
                   <div
                     key={inst.id}
-                    onClick={() => setSelectedInstructor(inst.id)}
-                    className={`cursor-pointer border-4 border-ink p-5 transition-all flex flex-col justify-between space-y-4 shadow-[4px_4px_0_0_var(--color-ink)] ${
+                    className={`${CHOICE_CARD} flex flex-col justify-between space-y-4 ${
                       isSelected
                         ? "bg-poster-mustard/30 ring-2 ring-poster-red"
                         : "bg-paper hover:bg-black/5"
@@ -270,7 +279,16 @@ export function PrivateLessonsClient({
                       <div className="flex items-center gap-3">
                         <TeacherAvatar name={inst.name} avatarUrl={inst.avatarUrl} size="md" className="border-2 border-ink" />
                         <div>
-                          <h4 className="font-display font-black text-base uppercase text-ink">{inst.name}</h4>
+                          <h4 className="font-display font-black text-base uppercase text-ink">
+                            <button
+                              type="button"
+                              aria-pressed={isSelected}
+                              onClick={() => setSelectedInstructor(inst.id)}
+                              className={CHOICE_BUTTON}
+                            >
+                              {inst.name}
+                            </button>
+                          </h4>
                           <span className="text-xs text-ink/75 font-semibold block line-clamp-1">
                             {inst.title}
                           </span>
@@ -320,15 +338,23 @@ export function PrivateLessonsClient({
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div
-                onClick={() => setSelectedPackage("SINGLE")}
-                className={`cursor-pointer border-4 border-ink p-5 transition-all space-y-2 shadow-[4px_4px_0_0_var(--color-ink)] ${
+                className={`${CHOICE_CARD} space-y-2 ${
                   selectedPackage === "SINGLE"
                     ? "bg-poster-mustard/30 ring-2 ring-poster-red"
                     : "bg-paper hover:bg-black/5"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <h4 className="font-display font-black text-base uppercase text-ink">1-Hour Intensive Session</h4>
+                  <h4 className="font-display font-black text-base uppercase text-ink">
+                    <button
+                      type="button"
+                      aria-pressed={selectedPackage === "SINGLE"}
+                      onClick={() => setSelectedPackage("SINGLE")}
+                      className={CHOICE_BUTTON}
+                    >
+                      1-Hour Intensive Session
+                    </button>
+                  </h4>
                   <span className={`font-display font-black text-2xl text-ink ${TYPE.card}`}>
                     £{activeInstructor.hourlyRatePounds}
                   </span>
@@ -342,8 +368,7 @@ export function PrivateLessonsClient({
               </div>
 
               <div
-                onClick={() => setSelectedPackage("BLOCK")}
-                className={`cursor-pointer border-4 border-ink p-5 transition-all space-y-2 shadow-[4px_4px_0_0_var(--color-ink)] ${
+                className={`${CHOICE_CARD} space-y-2 ${
                   selectedPackage === "BLOCK"
                     ? "bg-poster-mustard/30 ring-2 ring-poster-red"
                     : "bg-paper hover:bg-black/5"
@@ -351,10 +376,21 @@ export function PrivateLessonsClient({
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <h4 className="font-display font-black text-base uppercase text-ink">5-Hour Mastery Block</h4>
-                    <span className="border border-ink bg-poster-teal text-ink font-bold text-xs px-1.5 py-0">
-                      Save £50
-                    </span>
+                    <h4 className="font-display font-black text-base uppercase text-ink">
+                      <button
+                        type="button"
+                        aria-pressed={selectedPackage === "BLOCK"}
+                        onClick={() => setSelectedPackage("BLOCK")}
+                        className={CHOICE_BUTTON}
+                      >
+                        5-Hour Mastery Block
+                      </button>
+                    </h4>
+                    {blockSaving > 0 && (
+                      <span className="border border-ink bg-poster-teal text-ink font-bold text-xs px-1.5 py-0">
+                        Save £{blockSaving}
+                      </span>
+                    )}
                   </div>
                   <span className={`font-display font-black text-2xl text-ink ${TYPE.card}`}>
                     £{activeInstructor.blockRatePounds}
@@ -471,7 +507,7 @@ export function PrivateLessonsClient({
               )}
               <div className="text-left sm:text-right">
                 <span className={`font-display font-black ${TYPE.number} text-ink block`}>£{price}.00</span>
-                <span className="text-xs text-ink font-semibold">No upfront payment required</span>
+                <span className="text-xs text-ink font-semibold">Nothing to pay online. We confirm the time with you.</span>
               </div>
               <button
                 type="submit"
@@ -482,10 +518,6 @@ export function PrivateLessonsClient({
                 <ArrowRight className="ml-2 h-4 w-4" />
               </button>
             </div>
-          </div>
-
-          <div className="pt-2">
-            <PaymentSecurityTrustBar showRefundPolicy={false} />
           </div>
         </form>
       )}

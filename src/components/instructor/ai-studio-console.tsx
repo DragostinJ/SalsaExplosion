@@ -915,7 +915,7 @@ export function AiStudioConsole() {
               <div>
                 <h2 className="text-base font-bold text-ivory flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-gold" />
-                  Personalized Pedagogical Plan
+                  Personalised Teaching Plan
                 </h2>
                 <p className="text-xs text-ivory-muted mt-0.5">
                   Micro-drills with timing triggers and WhatsApp-ready student note.

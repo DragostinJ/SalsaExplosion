@@ -17,10 +17,9 @@ import { Role } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { TeacherAvatar } from "@/components/ui/teacher-avatar";
 import { StudioGallery } from "@/components/about/studio-gallery";
-import { BackButton } from "@/components/navigation/back-button";
 import { WhyCubanSection } from "@/components/home/WhyCubanSection";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
-import { WEEKLY_SCHEDULE } from "@/lib/academy-data";
+import { ACADEMY_METRICS, DOOR_PRICING, VENUE_INFO, WEEKLY_SCHEDULE } from "@/lib/academy-data";
 import { PosterBanner } from "@/components/poster/poster-art";
 import { reportError } from "@/lib/monitoring";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
@@ -122,32 +121,32 @@ export default async function AboutPage() {
 
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-14">
-      <div>
-        <BackButton fallbackUrl="/" label="Back to Homepage" />
-      </div>
-
       {/* 1. Hero Section — Poster Architecture */}
       <section
         data-testid="page-header"
         className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
-          <span>SALSA EXPLOSION UK • FOUNDED 1994</span>
-          <span className="opacity-70">DIRECTED BY ENRIQUE PEREZ VALDES (CUBA)</span>
+          <span>Salsa Explosion UK · since {ACADEMY_METRICS.establishedYear}</span>
+          <span className="opacity-70">Directed by {ACADEMY_METRICS.founderName} (Cuba)</span>
         </div>
 
         <div className="mt-4 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3">
-            <p className={KICKER}>Bournemouth&apos;s Cuban Rhythm</p>
             <h1 className={`${TYPE.section} text-ink`}>
               AUTHENTIC CUBAN <span className="text-accent-red">SOUL</span>
             </h1>
             <p className="max-w-2xl text-sm font-semibold text-ink leading-relaxed">
-              Salsa Explosion is the UK&apos;s premier Cuban dance academy and promoter, based in Bournemouth, Dorset. Founded by Cuban maestro Enrique Perez Valdes, we have introduced thousands of dancers to the joy of authentic Casino, dynamic Rueda de Casino, Timba, and Afro-Cuban rhythms for over 32 years.
+              Salsa Explosion is a Cuban dance school and festival promoter in Bournemouth, Dorset. Founded by Cuban maestro{" "}
+              {ACADEMY_METRICS.founderName}, it has taught thousands of dancers authentic Casino, Rueda de Casino, Timba and
+              Afro-Cuban rhythms since {ACADEMY_METRICS.establishedYear}.
             </p>
             <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_var(--color-ink)]">
               <Sparkles className="h-4 w-4 text-accent-red" />
-              <span>Weekly Thursday &amp; Sunday Classes • £12 / £14 at the Door • BOH Studios BH2 5LR</span>
+              <span>
+                Thursdays &amp; Sundays · £{DOOR_PRICING.oneClassPounds} / £{DOOR_PRICING.twoClassesPounds} at the door ·{" "}
+                {VENUE_INFO.shortName} {VENUE_INFO.postcode}
+              </span>
             </div>
           </div>
 

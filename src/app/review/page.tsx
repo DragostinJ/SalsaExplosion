@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ReviewBoosterClient } from "@/components/review/review-booster-client";
 
 export const metadata: Metadata = {
-  title: "Leave a 5-Star Google Review | Salsa Explosion UK Bournemouth",
+  title: { absolute: "Review Salsa Explosion on Google" },
   description:
     "Support Maestro Enrique Perez Valdes and Salsa Explosion UK. Leave a quick 30-second Google review for our weekly Cuban Salsa & Rueda de Casino classes at BOH Studios Bournemouth.",
   openGraph: {

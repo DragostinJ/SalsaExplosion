@@ -24,6 +24,7 @@ import {
 } from "@/lib/validations/ai-studio.schema";
 import { generateGoogleReviewHelperAction } from "@/actions/ai-studio.actions";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
+import { VENUE_INFO } from "@/lib/academy-data";
 import { siteUrl } from "@/lib/safe-url";
 
 const DEFAULT_FAVORITE_ASPECT: (typeof REVIEW_FAVORITE_ASPECTS)[number] =
@@ -54,9 +55,7 @@ export function ReviewBoosterClient() {
   const [copied, setCopied] = useState(false);
   const [showQrModal, setShowQrModal] = useState(false);
 
-  // Direct Google Maps write-review query URL for BOH Studios / Salsa Explosion UK
-  const googleMapsReviewUrl =
-    "https://search.google.com/local/writereview?placeid=ChIJwWv97XFcc0gRh1F2qF25Mv4";
+  const googleMapsReviewUrl = VENUE_INFO.googleReviewUrl;
 
   const handleGenerateReview = async () => {
     setIsGenerating(true);
@@ -105,7 +104,7 @@ export function ReviewBoosterClient() {
         />
 
         <p className="text-sm text-ink max-w-xl mx-auto leading-relaxed font-medium">
-          Leave a genuine 5-star Google review for Maestro Enrique Perez Valdes and the Salsa Explosion family at BOH Studios Bournemouth. Tap 3 options below to draft your review in seconds!
+          Tell other dancers what classes with Maestro Enrique Perez Valdes and the Salsa Explosion family at BOH Studios Bournemouth are like, in a Google review. Pick 3 options below for a draft to start from, then make it your own.
         </p>
 
         <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs text-ink font-bold">
@@ -225,7 +224,7 @@ export function ReviewBoosterClient() {
             ) : (
               <span className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4" />
-                Draft My 5-Star Review
+                Draft My Review
               </span>
             )}
           </Button>
@@ -317,7 +316,7 @@ export function ReviewBoosterClient() {
                   Select Your Preferences
                 </p>
                 <p className="text-xs text-ink mt-1 max-w-sm font-medium">
-                  Choose your highlight and experience level on the left, then click <strong className="text-accent-red font-bold">Draft My 5-Star Review</strong>.
+                  Choose your highlight and experience level on the left, then click <strong className="text-accent-red font-bold">Draft My Review</strong>.
                 </p>
               </div>
             )}

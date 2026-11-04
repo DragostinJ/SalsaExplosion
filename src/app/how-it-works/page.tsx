@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Flame, Users, QrCode, ArrowRight } from "lucide-react";
-import { BackButton } from "@/components/navigation/back-button";
 import { CubanCurriculumSkillTree } from "@/components/progression/cuban-curriculum-skill-tree";
 import { CubanDanceGearsMatrix } from "@/components/progression/cuban-dance-gears-matrix";
 import { SongPracticeList } from "@/components/music/song-player/song-practice-list";
@@ -70,10 +69,6 @@ const FAQS = [
 export default function HowItWorksPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl space-y-12 px-4 py-8 sm:px-6 lg:px-8">
-      <div>
-        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
-      </div>
-
       {/* Hero */}
       <section data-testid="page-header" className="border-4 border-ink bg-paper p-6 text-ink shadow-[8px_8px_0_0_var(--color-ink)] sm:p-10">
         <p className={KICKER}>Cómo funciona · how it works</p>

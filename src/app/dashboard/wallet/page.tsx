@@ -49,8 +49,8 @@ export default async function StudentWalletPage() {
           description={`Your festival passes with their door QR codes, receipts and history. Thursday & Sunday classes are paid at the door at ${VENUE_INFO.name} (${VENUE_INFO.address}, ${VENUE_INFO.postcode}).`}
           badge="BOH Studios Digital Wallet"
           eyebrow={`INSTANT QR DOOR ADMISSION • ${VENUE_INFO.name}`}
-          backHref="/classes"
-          backLabel="Back to Schedule"
+          backHref="/dashboard/carnet"
+          backLabel="Back to Mi carnet"
         />
 
         <div className="border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[6px_6px_0_var(--color-ink)] space-y-6">
@@ -259,8 +259,8 @@ export default async function StudentWalletPage() {
         description="Show your digital passes and door QR codes at the BOH Studios Bournemouth entrance for instant 1-tap admission."
         badge="BOH Studios Wallet"
         eyebrow="DANCER DIGITAL WALLET • BOH STUDIOS"
-        backHref="/classes"
-        backLabel="Back to Schedule"
+        backHref="/dashboard/carnet"
+        backLabel="Back to Mi carnet"
         actions={
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="flex flex-col gap-2">

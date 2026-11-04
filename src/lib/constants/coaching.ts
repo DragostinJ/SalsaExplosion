@@ -53,7 +53,7 @@ export const COACHING_INSTRUCTORS_CATALOG: Record<
       "Guapea Frame Sensitivity",
       "Beginner-to-Social Confidence",
     ],
-    bio: "Resident Salsa Explosion instructor specializing in fluid Cuban Salsa partnerwork, follower body movement, and social styling at BOH Studios.",
+    bio: "Resident Salsa Explosion instructor specialising in fluid Cuban Salsa partnerwork, follower body movement, and social styling at BOH Studios.",
   },
   arturas: {
     id: "arturas",

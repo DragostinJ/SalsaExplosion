@@ -11,11 +11,10 @@ import {
   ArrowRight,
   Navigation,
 } from "lucide-react";
-import { BackButton } from "@/components/navigation/back-button";
 import { VenueArrivalPlanner } from "@/components/venues/venue-arrival-planner";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
-import { WEEKLY_SCHEDULE } from "@/lib/academy-data";
+import { VENUE_INFO, WEEKLY_SCHEDULE } from "@/lib/academy-data";
 
 export const metadata = {
   title: "BOH Studios: Directions & Parking",
@@ -27,18 +26,14 @@ export const metadata = {
 export default function VenuesGuidePage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-12">
-      <div>
-        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
-      </div>
-
-      {/* Cartelera Poster Hero Header */}
+      {/* Cartelera Poster Hero Header: the address and directions come first */}
       <section
         data-testid="page-header"
         className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
-          <span>BOURNEMOUTH STUDIO HUB &amp; FESTIVAL PARTNER VENUES</span>
-          <span className="opacity-70">TRAVEL, PARKING &amp; ARRIVAL GUIDE</span>
+          <span>Dónde bailamos · Where we dance</span>
+          <span className="opacity-70">Travel, parking &amp; arrival</span>
         </div>
         <Image
           src={MEDIA_MANIFEST.mockupGraphics.map.src}
@@ -51,32 +46,35 @@ export default function VenuesGuidePage() {
 
         <div className="mt-4 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3">
-            <p className={KICKER}>Bournemouth Town Centre Studio Hub</p>
             <h1 className={`${TYPE.section} text-ink`}>
               VENUES &amp; <span className="text-accent-red">Parking Guide</span>
             </h1>
             <p className="max-w-2xl text-sm font-semibold text-ink leading-relaxed">
-              Everything you need for a smooth arrival at Maestro Enrique Perez Valdes&apos; weekly classes at BOH Studios and Salsa Explosion dance weekend festivals across Bournemouth.
+              Weekly classes and socials are at {VENUE_INFO.fullAddress}. Below: parking, buses and trains, and where
+              to stay for a festival weekend.
             </p>
             <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_var(--color-ink)]">
-              <Sparkles className="h-4 w-4 text-accent-red" />
-              <span>Thu &amp; Sun Classes at BOH Studios: £12 (1 Class) / £14 (2 Classes) at the Door</span>
+              <Car className="h-4 w-4 shrink-0" />
+              <span>{VENUE_INFO.parkingSummary}</span>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Link
-              href="/classes"
+            <a
+              href={VENUE_INFO.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} text-xs font-bold min-h-[40px] px-4 inline-flex items-center justify-center gap-1.5`}
             >
-              <span>View Class Schedule</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+              <Navigation className="h-4 w-4" />
+              <span>Directions in Google Maps</span>
+            </a>
             <Link
-              href="/events"
-              className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper text-xs font-bold min-h-[40px] px-4 inline-flex items-center justify-center`}
+              href="/classes"
+              className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper text-xs font-bold min-h-[40px] px-4 inline-flex items-center justify-center gap-1.5`}
             >
-              Festival Passes &amp; Info
+              <span>Class times</span>
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
@@ -105,7 +103,7 @@ export default function VenuesGuidePage() {
                   BOH Studios Bournemouth
                 </h2>
                 <p className="text-xs text-ink font-bold mt-0.5">
-                  104 Commercial Road, The Triangle, Bournemouth BH2 5LR
+                  {VENUE_INFO.address}, {VENUE_INFO.city} {VENUE_INFO.postcode}
                 </p>
               </div>
             </div>
@@ -153,7 +151,7 @@ export default function VenuesGuidePage() {
           </div>
 
           <div className="p-6 pt-0 border-t-2 border-ink mt-2 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-xs text-ink/70 font-bold">Postcode: BH2 5LR</span>
+            <span className="text-xs text-ink/70 font-bold">Postcode: {VENUE_INFO.postcode}</span>
             <div className="flex items-center gap-2">
               <a
                 href="https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR"
@@ -196,7 +194,7 @@ export default function VenuesGuidePage() {
                   BOH Studios Studio 2
                 </h2>
                 <p className="text-xs text-ink font-bold mt-0.5">
-                  104 Commercial Rd, Bournemouth BH2 5LR • Tel: 07969 633701
+                  {VENUE_INFO.streetAddress}, {VENUE_INFO.city} {VENUE_INFO.postcode} · Tel: {VENUE_INFO.phoneDisplay}
                 </p>
               </div>
             </div>
@@ -241,7 +239,7 @@ export default function VenuesGuidePage() {
           </div>
 
           <div className="p-6 pt-0 border-t-2 border-ink mt-2 flex flex-wrap items-center justify-between gap-3">
-            <span className="text-xs text-ink/70 font-bold">Postcode: BH2 5LR • Tel: 07969 633701</span>
+            <span className="text-xs text-ink/70 font-bold">Postcode: {VENUE_INFO.postcode} · Tel: {VENUE_INFO.phoneDisplay}</span>
             <div className="flex items-center gap-2">
               <a
                 href="https://maps.apple.com/?address=104+Commercial+Road,Bournemouth,BH2+5LR"

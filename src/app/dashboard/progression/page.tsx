@@ -154,8 +154,8 @@ export default async function ProgressionPage() {
         description="Track your dance milestones, submit technique videos for review, and unlock higher-tier classes."
         badge="Casino & Rueda"
         eyebrow="STUDENT MASTERY ROADMAP • 4 SYLLABUS TIERS"
-        backHref="/classes"
-        backLabel="Back to Schedule"
+        backHref="/dashboard/carnet"
+        backLabel="Back to Mi carnet"
         actions={
           <div className="flex items-center gap-2 border-2 border-ink bg-paper px-4 py-2 text-xs font-medium text-ink">
             <Award className="h-4 w-4 text-gold" />

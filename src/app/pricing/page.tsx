@@ -3,12 +3,11 @@ import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, DoorOpen, Ticket, Sparkles } from "lucide-react";
-import { BackButton } from "@/components/navigation/back-button";
 import { DanceVouchersShowcase } from "@/components/marketing/dance-vouchers-showcase";
 import { PaymentSecurityTrustBar } from "@/components/pricing/payment-security-trust-bar";
 import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reassurance-banner";
 import { VENUE_INFO, DOOR_PRICING } from "@/lib/academy-data";
-import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
+import { TYPE, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
 export const metadata: Metadata = {
   title: "Prices: £12 at the Door, Festival Passes",
@@ -20,27 +19,26 @@ export const metadata: Metadata = {
 export default function PricingPage() {
   return (
     <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
-      <div>
-        <BackButton fallbackUrl="/classes" label="Back to Schedule" />
-      </div>
-
-      {/* Cartelera Architectural Poster Hero */}
+      {/* Cartelera Architectural Poster Hero: the price is the headline */}
       <section
         data-testid="page-header"
         className="relative overflow-hidden border-4 border-ink bg-paper p-6 sm:p-10 text-ink shadow-[8px_8px_0_0_var(--color-ink)]"
       >
         <div className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-ink pb-3 text-xs font-bold uppercase tracking-[0.3em] text-ink">
-          <span>Cartelera · Studio Admission &amp; Box Office</span>
-          <span className="opacity-70">{VENUE_INFO.shortName} · BOURNEMOUTH BH2 5LR</span>
+          <span>Precios · Prices</span>
+          <span className="opacity-70">
+            {VENUE_INFO.shortName} · {VENUE_INFO.city} {VENUE_INFO.postcode}
+          </span>
         </div>
 
         <div className="mt-4 space-y-3">
-          <p className={KICKER}>Transparent Studio Admission &amp; Festival Passes</p>
           <h1 className={`${TYPE.section} text-ink`}>
-            DOOR ADMISSION &amp; <span className="text-accent-red">Festival Passes</span>
+            £{DOOR_PRICING.oneClassPounds} a class, <span className="text-accent-red">paid at the door</span>
           </h1>
           <p className="max-w-3xl text-sm font-semibold text-ink leading-relaxed">
-            Weekly classes on Thursdays &amp; Sundays at {VENUE_INFO.name} are paid at the door. Festivals and special events are booked online with secure Stripe checkout.
+            One class is £{DOOR_PRICING.oneClassPounds} and two are £{DOOR_PRICING.twoClassesPounds}, with the social
+            afterwards included. Pay cash or card when you arrive on Thursday or Sunday at {VENUE_INFO.name}. Festivals and
+            special events are booked online.
           </p>
         </div>
       </section>

@@ -43,6 +43,8 @@ export const VENUE_INFO = {
   facebookUrl: "https://www.facebook.com/salsaexplosion",
   googleMapsUrl:
     "https://maps.google.com/?q=BOH+Studios+104+Commercial+Road+Bournemouth+BH2+5LR",
+  /** Google's "write a review" form for the studio's listing */
+  googleReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJwWv97XFcc0gRh1F2qF25Mv4",
 } as const;
 
 export const DOOR_PRICING = {

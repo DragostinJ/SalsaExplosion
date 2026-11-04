@@ -337,9 +337,19 @@ export async function getMyAttendedClassRecapsAction() {
 
 /**
  * Get all studio recaps published across the curriculum (for exploration / preview).
+ * Dancers only, like the /dashboard/recaps page that shows them: the class videos aren't public.
  */
 export async function getAllPublishedClassRecapsAction() {
   try {
+    // fallback-guard-exempt: read-only published recap list
+    const user = await getOrProvisionCurrentUser();
+    if (!user) {
+      return {
+        success: false as const,
+        error: { code: "UNAUTHORIZED", message: "Please sign in to view recaps." },
+      };
+    }
+
     const classes = await prisma.classSession.findMany({
       where: {
         recapPublished: true,

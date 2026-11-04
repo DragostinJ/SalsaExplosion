@@ -211,3 +211,20 @@ Following Claude's optimization pass on 2026-11-03 that reduced public JavaScrip
  tests/unit/submission-actions.test.ts              | 357 ++++++++++++++++++
  10 files changed, 2113 insertions(+), 1 deletion(-)
 ```
+
+---
+
+## 7. Follow-up review (Claude, branch `fix/calendar-ics-escaping`)
+
+**RFC 5545 bug, fixed.** `src/lib/calendar-export.ts` now escapes backslash, `;`, `,` and line breaks in `SUMMARY`, `DESCRIPTION` and `LOCATION`, folds lines over 75 octets without splitting a UTF-8 character, and builds the `UID` from the start time and title (it was `Date.now()`, so adding the same class twice made two calendar entries). The live class location ("BOH Studios Bournemouth, 104 Commercial Rd, BH2 5LR") was affected. The strict assertion is now in the suite, with tests for folding and the stable UID.
+
+**JavaScript budget, corrected.** The figures in sections 1 and 3 came from `PerformanceResourceTiming.transferSize`, which is 0 for cross-origin scripts without `Timing-Allow-Origin`. Clerk's bot-protection script reported 0 and Clerk's main bundle was only partly counted. Measured on the wire with Playwright `request.sizes()` (compressed body bytes) against `next start`:
+
+| Route | Our own JS | Third-party (Clerk) | Total |
+|---|---|---|---|
+| `/` | 304 KB | 392 KB | 696 KB |
+| `/moves` | 339 KB | 392 KB | 731 KB |
+| `/music` | 385 KB | 392 KB | 777 KB |
+| `/classes` | 366 KB | 392 KB | 758 KB |
+
+The test now asserts our own JS at 450 KB or less and records the third-party size as a test annotation. It does not assert the third-party size, because Clerk serves the newest `clerk-js@5` from its CDN, so that size changes without any change in this repo. The test skips on `next dev`, which serves unminified chunks, and ignores `blob:` scripts, which are not network downloads.

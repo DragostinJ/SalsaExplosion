@@ -8,7 +8,9 @@
  * 2. Move library screen-print visuals:
  *    - /moves displays a screen-print picture beside every move family heading with naturalWidth > 0.
  * 3. JavaScript budget protection:
- *    - Total script transferSize on key public routes (/, /moves, /music, /classes) must not exceed 650 KB.
+ *    - Our own compressed JavaScript on key public routes (/, /moves, /music, /classes) stays <= 450 KB.
+ *    - Third-party scripts (Clerk, about 390 KB) are reported, not asserted: Clerk serves the
+ *      newest clerk-js 5.x from its CDN, so its size changes without a change in this repo.
  */
 
 import { test, expect } from "@playwright/test";
@@ -75,34 +77,59 @@ test.describe("Move Library (/moves) Screen-Print Family Art", () => {
   });
 });
 
-test.describe("JavaScript Transfer Size Budget (<= 650 KB)", () => {
+test.describe("JavaScript budget (our own code <= 450 KB compressed)", () => {
   const ROUTES = ["/", "/moves", "/music", "/classes"] as const;
+  const OWN_BUDGET_KB = 450;
+
+  interface ScriptLoad {
+    sameOrigin: boolean;
+    bodyBytes: number;
+    immutable: boolean;
+  }
 
   for (const route of ROUTES) {
-    test(`route "${route}" loads <= 650 KB of JavaScript transfer size`, async ({
+    test(`route "${route}" ships <= ${OWN_BUDGET_KB} KB of our own JavaScript`, async ({
       page,
+      baseURL,
     }) => {
-      await page.goto(route, { waitUntil: "networkidle" });
-
-      const totalScriptBytes = await page.evaluate(() => {
-        const entries = performance.getEntriesByType(
-          "resource"
-        ) as PerformanceResourceTiming[];
-
-        return entries
-          .filter(
-            (e) =>
-              e.initiatorType === "script" ||
-              e.name.endsWith(".js") ||
-              e.name.includes(".js?")
-          )
-          .reduce((sum, e) => sum + (e.transferSize || 0), 0);
+      // Bytes as they came over the network. The Performance API reports 0 for cross-origin
+      // scripts without Timing-Allow-Origin, which hid most of Clerk's 390 KB from the old count.
+      const origin = new URL(baseURL ?? "http://localhost:3000").origin;
+      const loads: Promise<ScriptLoad>[] = [];
+      page.on("requestfinished", (request) => {
+        if (request.resourceType() !== "script") return;
+        // blob: workers are built in the page from code already downloaded; no network bytes
+        if (!/^https?:/.test(request.url())) return;
+        loads.push(
+          Promise.all([request.sizes(), request.response()]).then(([sizes, response]) => ({
+            sameOrigin: new URL(request.url()).origin === origin,
+            bodyBytes: sizes.responseBodySize,
+            immutable: (response?.headers()["cache-control"] ?? "").includes("immutable"),
+          }))
+        );
       });
 
-      const totalScriptKb = Math.round(totalScriptBytes / 1024);
-      console.log(`[JS Transfer Size] ${route}: ${totalScriptKb} KB (${totalScriptBytes} bytes)`);
+      await page.goto(route, { waitUntil: "networkidle" });
+      const scripts = await Promise.all(loads);
+      const own = scripts.filter((s) => s.sameOrigin);
 
-      expect(totalScriptKb).toBeLessThanOrEqual(650);
+      // `next dev` serves unminified, uncached chunks; the budget is for production builds.
+      test.skip(
+        own.length === 0 || own.some((s) => !s.immutable),
+        "JS budget needs a production server (next start)"
+      );
+
+      const kb = (list: ScriptLoad[]) =>
+        Math.round(list.reduce((sum, s) => sum + s.bodyBytes, 0) / 1024);
+      const ownKb = kb(own);
+      const thirdPartyKb = kb(scripts.filter((s) => !s.sameOrigin));
+
+      test.info().annotations.push({
+        type: "js-size",
+        description: `${route}: own ${ownKb} KB, third-party ${thirdPartyKb} KB, total ${ownKb + thirdPartyKb} KB`,
+      });
+
+      expect(ownKb).toBeLessThanOrEqual(OWN_BUDGET_KB);
     });
   }
 });

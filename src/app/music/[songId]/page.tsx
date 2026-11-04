@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { clampDescription, fitTitle } from "@/lib/seo/search-snippets";
 import { notFound } from "next/navigation";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { SongPlayerScreen } from "@/components/music/song-player/song-player-screen";
@@ -24,8 +25,8 @@ export async function generateMetadata({ params }: SongPlayerPageProps): Promise
   const title = displaySongTitle(song.title);
   const style = isTimba(song.style) ? "timba" : song.style;
   return {
-    title: `${title} – What to Dance in Every Section`,
-    description: `Section-by-section ${style} guide for ${title} by ${song.artist}: what to dance in every section, with leader and follower cues.`,
+    title: fitTitle(`${title} – What to Dance in Every Section`),
+    description: clampDescription(`Section-by-section ${style} guide for ${title} by ${song.artist}: what to dance in every section, with leader and follower cues.`),
     alternates: { canonical: `/music/${song.id}` },
   };
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { clampDescription, moveTitle } from "@/lib/seo/search-snippets";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -33,8 +34,8 @@ export async function generateMetadata({ params }: MovePageProps): Promise<Metad
   const move = findPublished((await params).moveId);
   if (!move) return {};
   return {
-    title: `${move.spanishName ?? move.name}: how to dance it`,
-    description: `${move.category} · ${move.level}. ${move.summary}`.slice(0, 160),
+    title: moveTitle(move.spanishName ?? move.name),
+    description: clampDescription(`${move.category} · ${move.level}. ${move.summary}`),
     alternates: { canonical: `/moves/${move.id}` },
   };
 }

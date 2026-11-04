@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle } from "@/lib/seo/search-snippets";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -69,7 +70,7 @@ export async function generateMetadata({
     if (canonical) {
       const image = canonical.posterUrl ?? "/opengraph-image";
       return {
-        title: canonical.title,
+        title: fitTitle(canonical.title),
         description: snippet(canonical.description),
         alternates: { canonical: `/events/${slug}` },
         openGraph: { title: canonical.title, description: snippet(canonical.description), images: [image] },
@@ -94,7 +95,7 @@ export async function generateMetadata({
     : ["/opengraph-image"];
 
   return {
-    title: event.title,
+    title: fitTitle(event.title),
     description: event.description
       ? snippet(event.description)
       : `Festival passes for ${event.title} in Bournemouth with Salsa Explosion.`,

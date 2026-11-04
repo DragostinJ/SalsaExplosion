@@ -1,0 +1,23 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/app/**/page.{ts,tsx}",
+    "src/app/**/layout.{ts,tsx}",
+    "src/app/**/route.{ts,tsx}",
+    "src/app/**/loading.{ts,tsx}",
+    "src/app/**/error.{ts,tsx}",
+    "src/app/**/not-found.{ts,tsx}",
+    "src/app/**/opengraph-image.{ts,tsx}",
+    "src/app/**/robots.{ts,tsx}",
+    "src/app/**/sitemap.{ts,tsx}",
+    "src/app/**/manifest.{ts,tsx}",
+    "src/middleware.ts",
+    "scripts/**/*.{ts,mjs,js}",
+    "tests/**/*.{ts,tsx}"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}",
+    "scripts/**/*.{ts,mjs,js}",
+    "tests/**/*.{ts,tsx}"
+  ]
+}

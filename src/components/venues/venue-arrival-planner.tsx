@@ -263,7 +263,7 @@ export function VenueArrivalPlanner() {
             <Button
               asChild
               variant="outline"
-              className="text-xs h-9 font-bold border-border hover:border-blue-500 hover:bg-blue-500/10"
+              className="text-xs min-h-[40px] font-bold border-border hover:border-blue-500 hover:bg-blue-500/10 px-3"
             >
               <a href={currentDest.googleMapsUrl} target="_blank" rel="noopener noreferrer">
                 <Navigation className="mr-1.5 h-3.5 w-3.5 text-blue-600" />
@@ -275,7 +275,7 @@ export function VenueArrivalPlanner() {
             <Button
               asChild
               variant="outline"
-              className="text-xs h-9 font-bold border-border hover:border-info-line hover:bg-info-soft"
+              className="text-xs min-h-[40px] font-bold border-border hover:border-info-line hover:bg-info-soft px-3"
             >
               <a href={currentDest.appleMapsUrl} target="_blank" rel="noopener noreferrer">
                 <Navigation className="mr-1.5 h-3.5 w-3.5 text-info" />
@@ -287,7 +287,7 @@ export function VenueArrivalPlanner() {
             <Button
               asChild
               variant="outline"
-              className="text-xs h-9 font-bold border-border hover:border-role-lead-line hover:bg-role-lead-soft"
+              className="text-xs min-h-[40px] font-bold border-border hover:border-role-lead-line hover:bg-role-lead-soft px-3"
             >
               <a href={currentDest.wazeUrl} target="_blank" rel="noopener noreferrer">
                 <Navigation className="mr-1.5 h-3.5 w-3.5 text-role-lead" />
@@ -319,7 +319,7 @@ export function VenueArrivalPlanner() {
               Need directions or running 5 minutes late for door check-in? Message Maestro Enrique Perez Valdes directly:
             </p>
             <div className="flex items-center gap-2 pt-1">
-              <Button asChild size="sm" className="bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold h-7 flex-1">
+              <Button asChild size="sm" className="bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold min-h-[40px] px-3 flex-1">
                 <a
                   href="https://wa.me/447969633701?text=Hi%20Enrique,%20I'm%20on%20my%20way%20to%20Salsa%20Explosion%20and%20need%20assistance!"
                   target="_blank"
@@ -329,7 +329,7 @@ export function VenueArrivalPlanner() {
                   WhatsApp
                 </a>
               </Button>
-              <Button asChild size="sm" variant="outline" className="text-xs font-bold h-7 flex-1 border-border">
+              <Button asChild size="sm" variant="outline" className="text-xs font-bold min-h-[40px] px-3 flex-1 border-border">
                 <a href="tel:+447969633701">
                   <Phone className="mr-1 h-3 w-3" />
                   07969 633701

@@ -47,12 +47,15 @@ export async function diagnosePage(
     }
     window.scrollTo(0, 0);
 
-    // Ensure all images are decoded
+    // Ensure all images are decoded (with a 500ms safety timeout per image so it never hangs)
     const imgs = Array.from(document.querySelectorAll("img"));
     for (const img of imgs) {
-      if (!img.complete) {
+      if (!img.complete && img.src) {
         try {
-          await img.decode();
+          await Promise.race([
+            img.decode(),
+            new Promise((_, reject) => setTimeout(() => reject(new Error("decode timeout")), 500))
+          ]);
         } catch {}
       }
     }
@@ -111,6 +114,8 @@ export async function diagnosePage(
 
       function isExcluded(el: Element | null): boolean {
         if (!el) return true;
+        // Non-rendered elements
+        if (/^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/i.test(el.tagName)) return true;
         // YouTube iframe or inside iframe
         if (el.tagName === "IFRAME" || el.closest("iframe")) return true;
         // Clerk elements
@@ -177,14 +182,39 @@ export async function diagnosePage(
           const xClipped = el.scrollWidth > el.clientWidth + 2;
           const yClipped = el.scrollHeight > el.clientHeight + 2;
 
-          // Check if vertical clipping is due to intentional line-clamp or truncate
+          // Check if clipping is due to intentional line-clamp or truncate
+          const isTruncated =
+            el.classList.contains("truncate") ||
+            style.textOverflow === "ellipsis" ||
+            Boolean(el.closest(".truncate"));
+
           const isLineClamped =
             el.className.includes("line-clamp") ||
             (style as unknown as { webkitLineClamp?: string }).webkitLineClamp !== "none" ||
-            el.closest("[class*='line-clamp']");
+            Boolean(el.closest("[class*='line-clamp']"));
 
-          // Horizontal clipping is never intentional with line-clamp or normal boxes
-          const hasClips = xClipped || (yClipped && !isLineClamped);
+          let hasActualTextXClipped = false;
+          if (xClipped && !isTruncated) {
+            const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+            let tNode = walker.nextNode();
+            while (tNode) {
+              if (tNode.parentElement && !isExcluded(tNode.parentElement)) {
+                const range = document.createRange();
+                range.selectNodeContents(tNode);
+                const rects = range.getClientRects();
+                for (let i = 0; i < rects.length; i++) {
+                  if (rects[i].right > rect.right + 2) {
+                    hasActualTextXClipped = true;
+                    break;
+                  }
+                }
+              }
+              if (hasActualTextXClipped) break;
+              tNode = walker.nextNode();
+            }
+          }
+
+          const hasClips = hasActualTextXClipped || (yClipped && !isLineClamped && !isTruncated);
 
           if (hasClips && !el.closest(".no-scrollbar")) {
             // Verify there is actual text clipping
@@ -265,10 +295,12 @@ export async function diagnosePage(
                   for (let i = 0; i < lineRects.length; i++) {
                     const line = lineRects[i];
                     if (line.width <= 0 || line.height <= 0) continue;
-                    const spilledLeft = line.left < rect.left - 2;
-                    const spilledRight = line.right > rect.right + 2;
-                    const spilledTop = line.top < rect.top - 2;
-                    const spilledBottom = line.bottom > rect.bottom + 2;
+                    const isXScrollable = style.overflowX === "auto" || style.overflowX === "scroll" || style.overflowX === "hidden";
+                    const isYScrollable = style.overflowY === "auto" || style.overflowY === "scroll" || style.overflowY === "hidden";
+                    const spilledLeft = !isXScrollable && line.left < rect.left - 2;
+                    const spilledRight = !isXScrollable && line.right > rect.right + 2;
+                    const spilledTop = !isYScrollable && line.top < rect.top - 2;
+                    const spilledBottom = !isYScrollable && line.bottom > rect.bottom + 2;
 
                     if (spilledLeft || spilledRight || spilledTop || spilledBottom) {
                       problems.push({
@@ -319,8 +351,17 @@ export async function diagnosePage(
             const range = document.createRange();
             range.selectNodeContents(el);
             const lineRects = range.getClientRects();
-            if (lineRects.length >= 4) {
-              const wordsPerLine = words.length / lineRects.length;
+            const distinctTops: number[] = [];
+            for (let i = 0; i < lineRects.length; i++) {
+              const r = lineRects[i];
+              if (r.width <= 0 || r.height <= 0) continue;
+              if (!distinctTops.some((t) => Math.abs(t - r.top) < 4)) {
+                distinctTops.push(r.top);
+              }
+            }
+            const lineCount = distinctTops.length;
+            if (lineCount >= 4) {
+              const wordsPerLine = words.length / lineCount;
               if (wordsPerLine < 1.7) {
                 problems.push({
                   route: currentRoute,
@@ -330,7 +371,7 @@ export async function diagnosePage(
                   textPreview: preview,
                   measured: {
                     wordCount: words.length,
-                    lineCount: lineRects.length,
+                    lineCount,
                     wordsPerLine: Math.round(wordsPerLine * 10) / 10,
                   },
                 });
@@ -356,6 +397,9 @@ export async function diagnosePage(
           for (const jp of JUNK_PATTERNS) {
             if (jp.pattern.test(textContent)) {
               if (jp.name === "raw_enum" && /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/.test(textContent)) {
+                continue;
+              }
+              if (jp.name === "empty_or_zero_price" && /free/i.test(textContent)) {
                 continue;
               }
               problems.push({
@@ -426,7 +470,14 @@ export async function diagnosePage(
             // Skip footer directory links (which are text links in columns) unless they are CTA buttons
             const isFooterDirectoryLink = Boolean(el.closest("footer") && !el.classList.contains("bg-brand"));
 
-            if (!isInline && !isFooterDirectoryLink && rect.width > 0) {
+            // Skip buttons/links with stretched click overlays covering their parent card
+            const hasStretchedOverlay =
+              el.className.includes("after:inset-0") ||
+              el.className.includes("before:inset-0") ||
+              el.className.includes("after:absolute") ||
+              el.className.includes("stretched");
+
+            if (!isInline && !isFooterDirectoryLink && !hasStretchedOverlay && rect.width > 0) {
               if (rect.height < 39) {
                 problems.push({
                   route: currentRoute,
@@ -522,7 +573,11 @@ export async function diagnosePage(
             const isSelfOrDescendantOrAncestor =
               topEl === candidate || candidate.contains(topEl) || topEl.contains(candidate);
 
-            if (!isSelfOrDescendantOrAncestor && !isExcluded(topEl)) {
+            const isFixedChrome = Boolean(
+              topEl.closest('[class*="fixed"], [class*="sticky"], [data-testid="mobile-bottom-nav"]')
+            );
+
+            if (!isSelfOrDescendantOrAncestor && !isExcluded(topEl) && !isFixedChrome) {
               problems.push({
                 route: currentRoute,
                 width: currentWidth,

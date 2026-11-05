@@ -312,18 +312,20 @@ export function ClassScheduleCard({
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-muted-foreground shrink-0" />
               <span className="font-semibold text-foreground">
-                Every {startDate.toLocaleDateString("en-GB", { weekday: "long" })}
+                Every {startDate.toLocaleDateString("en-GB", { timeZone: "Europe/London", weekday: "long" })}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4 text-muted-foreground shrink-0" />
               <span className="text-foreground/90 font-medium">
                 {startDate.toLocaleTimeString("en-GB", {
+                  timeZone: "Europe/London",
                   hour: "2-digit",
                   minute: "2-digit",
                 })}{" "}
                 –{" "}
                 {new Date(session.endTime).toLocaleTimeString("en-GB", {
+                  timeZone: "Europe/London",
                   hour: "2-digit",
                   minute: "2-digit",
                 })}

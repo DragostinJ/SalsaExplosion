@@ -30,6 +30,7 @@ export default async function Image({
   const location = event?.venueName || "BOH Studios · Bournemouth";
   const dateFormatted = event?.startDate
     ? new Date(event.startDate).toLocaleDateString("en-GB", {
+        timeZone: "Europe/London",
         day: "numeric",
         month: "long",
         year: "numeric",

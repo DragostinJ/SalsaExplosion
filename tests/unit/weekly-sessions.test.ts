@@ -40,6 +40,27 @@ describe("studioTimeToUtc", () => {
     expect(studioTimeToUtc(2027, 3, 28, "18:30").toISOString()).toBe("2027-03-28T17:30:00.000Z");
     expect(studioTimeToUtc(2027, 10, 31, "18:30").toISOString()).toBe("2027-10-31T18:30:00.000Z");
   });
+
+  it("verifies Sunday 28 March 2027 clock change sessions and BST summer events display at correct UK times across timezones", () => {
+    // 1. Clock change Sunday: 28 March 2027 (clocks go forward at 01:00 UTC to BST)
+    const sundaySessionUtc = studioTimeToUtc(2027, 3, 28, "18:30");
+    expect(sundaySessionUtc.toISOString()).toBe("2027-03-28T17:30:00.000Z");
+
+    const formatInUkTime = (date: Date) =>
+      date.toLocaleTimeString("en-GB", { timeZone: "Europe/London", hour: "2-digit", minute: "2-digit" });
+
+    expect(formatInUkTime(sundaySessionUtc)).toBe("18:30");
+
+    // 2. BST event: Saturday 3 April 2027 (starts at 19:30 BST / 18:30 UTC)
+    const aprilEventUtc = studioTimeToUtc(2027, 4, 3, "19:30");
+    expect(aprilEventUtc.toISOString()).toBe("2027-04-03T18:30:00.000Z");
+    expect(formatInUkTime(aprilEventUtc)).toBe("19:30");
+
+    // 3. BST event: Saturday 1 May 2027 (starts at 19:30 BST / 18:30 UTC)
+    const mayEventUtc = studioTimeToUtc(2027, 5, 1, "19:30");
+    expect(mayEventUtc.toISOString()).toBe("2027-05-01T18:30:00.000Z");
+    expect(formatInUkTime(mayEventUtc)).toBe("19:30");
+  });
 });
 
 describe("planWeeklySessions", () => {

@@ -156,15 +156,15 @@ export default async function MovePage({ params }: MovePageProps) {
           <h2 id="songs-heading" className={TYPE.section}>
             En las canciones
           </h2>
-          <ul className="grid gap-3 md:grid-cols-2">
+          <ul className="grid min-w-0 max-w-full gap-3 md:grid-cols-2">
             {sections.map((link) => (
-              <li key={`${link.songId}-${link.sectionId}`}>
+              <li key={`${link.songId}-${link.sectionId}`} className="min-w-0 max-w-full">
                 <Link
                   href={`/music/${link.songId}?section=${link.sectionId}`}
-                  className="flex min-h-[64px] items-center gap-4 border-4 border-ink bg-paper px-4 py-3 hover:bg-poster-mustard"
+                  className="flex min-h-[64px] min-w-0 max-w-full items-center gap-4 border-4 border-ink bg-paper px-4 py-3 hover:bg-poster-mustard"
                 >
-                  <span className="font-display text-xl tabular-nums">{formatSongTime(link.startTimeSeconds)}</span>
-                  <span className="min-w-0">
+                  <span className="font-display text-xl tabular-nums shrink-0">{formatSongTime(link.startTimeSeconds)}</span>
+                  <span className="min-w-0 flex-1">
                     <span className="block truncate font-bold">{songTitle(link.songId)}</span>
                     <span className="block truncate text-sm">{link.sectionName}</span>
                   </span>

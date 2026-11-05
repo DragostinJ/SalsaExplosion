@@ -103,7 +103,7 @@ export default async function MovePage({ params }: MovePageProps) {
           <p className="mt-2 text-xs font-bold uppercase tracking-wider">
             {isTeacherChecked(move)
               ? `Checked on the music by ${move.reviewedBy}`
-              : "The teachers are still checking this one on the music · spot something off? Tell them in class"}
+              : "Draft: a teacher hasn't checked this one on the music yet · spot something off? Tell them in class"}
           </p>
         </header>
       </div>

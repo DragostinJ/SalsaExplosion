@@ -10,7 +10,7 @@ import { MOVE_FAMILIES } from "@/lib/site-content";
 export const metadata = {
   title: "La biblioteca de pasos: the move library",
   description:
-    "Cuban casino figures, rueda calls, shines and body movement from the classes: leader and follower steps, counts and videos, checked by the teachers.",
+    "Cuban casino figures, rueda calls, shines and body movement: what the leader and the follower do, how many 8-counts it takes, and the songs where it fits.",
   alternates: { canonical: "/moves" },
 };
 
@@ -51,8 +51,8 @@ export default function MovesPage() {
           <span className="mt-3 block font-sans text-lg font-bold normal-case leading-snug tracking-normal">The move library</span>
         </h1>
         <p className="mt-4 max-w-2xl text-lg font-medium">
-          Every move from the classes: what the leader and the follower do, how many 8-counts it takes, and the songs where it
-          fits. The teachers check them on the music: the ones they&apos;ve checked say so.
+          Casino figures, rueda calls, shines and more: what the leader and the follower do, how many 8-counts it takes, and the
+          songs where it fits. Each one stays a draft until a teacher has checked it on the music, and the checked ones say so.
         </p>
       </header>
 

@@ -35,7 +35,6 @@ describe("Component File Size & Modularization Budget (Milestone H7)", () => {
       "src/components/recaps/vault/recap-staff-modal.tsx",
       "src/components/admin/operations/types.ts",
       "src/components/admin/operations/coaching-requests-tab.tsx",
-      "src/components/admin/operations/merch-fulfillment-tab.tsx",
       "src/components/admin/operations/sentiment-feedback-tab.tsx",
       "src/components/instructor/roster/roster-sidebar.tsx",
       "src/components/instructor/roster/roster-balance-meters.tsx",

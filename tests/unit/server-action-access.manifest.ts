@@ -102,9 +102,9 @@ export const SERVER_ACTION_MANIFEST: Record<string, ActionAccessManifestEntry> =
     access: "owner",
     reason: "Studio owner only CSV export of congress ticket holders via requireRole(ADMIN_ONLY).",
   },
-  "src/actions/export.actions.ts#exportPrivateCoachingAndMerchCsvAction": {
+  "src/actions/export.actions.ts#exportPrivateCoachingCsvAction": {
     access: "owner",
-    reason: "Studio owner only CSV export of coaching and merchandise data via requireRole(ADMIN_ONLY).",
+    reason: "Studio owner only CSV export of private coaching data via requireRole(ADMIN_ONLY).",
   },
 
   // src/actions/grading.actions.ts
@@ -139,10 +139,6 @@ export const SERVER_ACTION_MANIFEST: Record<string, ActionAccessManifestEntry> =
   "src/actions/management.actions.ts#updatePrivateLessonBookingStatusAction": {
     access: "delegates",
     reason: "Delegates to coaching.updatePrivateLessonBookingStatusAction in management/coaching.actions.",
-  },
-  "src/actions/management.actions.ts#updateMerchReservationStatusAction": {
-    access: "delegates",
-    reason: "Delegates to merch.updateMerchReservationStatusAction in management/merch.actions.",
   },
   "src/actions/management.actions.ts#replyAnonymousQuestionAction": {
     access: "delegates",
@@ -217,12 +213,6 @@ export const SERVER_ACTION_MANIFEST: Record<string, ActionAccessManifestEntry> =
   "src/actions/management/events.actions.ts#createGuestArtistEventAction": {
     access: "owner",
     reason: "Studio owner (Role.ADMIN) only action to publish new guest artist festival events.",
-  },
-
-  // src/actions/management/merch.actions.ts
-  "src/actions/management/merch.actions.ts#updateMerchReservationStatusAction": {
-    access: "staff",
-    reason: "Staff only studio desk pickup fulfillment for merchandise reservations.",
   },
 
   // src/actions/management/qa.actions.ts
@@ -309,16 +299,6 @@ export const SERVER_ACTION_MANIFEST: Record<string, ActionAccessManifestEntry> =
   "src/actions/recap.actions.ts#getAllPublishedClassRecapsAction": {
     access: "signed-in",
     reason: "Signed-in dancer queries all published class recaps; requires authenticated user session.",
-  },
-
-  // src/actions/shop.actions.ts
-  "src/actions/shop.actions.ts#reserveMerchItemAction": {
-    access: "signed-in",
-    reason: "Signed-in dancer reserves studio merchandise; scopes reservation strictly to user.id.",
-  },
-  "src/actions/shop.actions.ts#cancelMerchReservationAction": {
-    access: "signed-in",
-    reason: "Signed-in dancer or staff cancels a merchandise reservation; scopes update to owner or staff.",
   },
 
   // src/actions/song-progress.actions.ts

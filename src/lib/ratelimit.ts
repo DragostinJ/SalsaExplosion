@@ -18,7 +18,6 @@ export const RATE_LIMIT_RULES: Record<string, RateLimitConfig> = {
   BOOKING: { maxRequests: 20, windowSeconds: 60 },
   CHECKIN: { maxRequests: 10, windowSeconds: 60 },
   ANONYMOUS_QUESTION: { maxRequests: 3, windowSeconds: 600 },
-  SHOP_RESERVATION: { maxRequests: 5, windowSeconds: 600 },
   LESSON_RESERVATION: { maxRequests: 5, windowSeconds: 600 },
   EXPORT: { maxRequests: 10, windowSeconds: 3600 },
   ROLE_SWITCH: { maxRequests: 3, windowSeconds: 60 },

@@ -107,20 +107,6 @@ describe("Rate Limiting Layer", () => {
       });
     });
 
-    it("SHOP_RESERVATION: rejects the 6th call in the window (limit 5/10min)", async () => {
-      const id = "shop-user-1";
-      for (let i = 0; i < 5; i++) {
-        const res = await withRateLimit(id, "SHOP_RESERVATION", async () => ({ success: true }));
-        expect(res).toEqual({ success: true });
-      }
-
-      const sixthCall = await withRateLimit(id, "SHOP_RESERVATION", async () => ({ success: true }));
-      expect(sixthCall).toMatchObject({
-        success: false,
-        error: { code: "RATE_LIMITED" },
-      });
-    });
-
     it("LESSON_RESERVATION: rejects the 6th call in the window (limit 5/10min)", async () => {
       const id = "lesson-user-1";
       for (let i = 0; i < 5; i++) {

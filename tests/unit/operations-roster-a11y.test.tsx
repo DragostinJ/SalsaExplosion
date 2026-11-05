@@ -1,9 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { CoachingRequestsTab } from "@/components/admin/operations/coaching-requests-tab";
-import { MerchFulfillmentTab } from "@/components/admin/operations/merch-fulfillment-tab";
 import { RosterDancerList } from "@/components/instructor/roster/roster-dancer-list";
-import type { PrivateBookingItem, MerchItem } from "@/components/admin/operations/types";
+import type { PrivateBookingItem } from "@/components/admin/operations/types";
 import type { ClassRosterSummary } from "@/lib/constants/management";
 
 describe("Operations & Roster Accessibility (A11y)", () => {
@@ -37,37 +36,6 @@ describe("Operations & Roster Accessibility (A11y)", () => {
     );
 
     expect(html).toContain('aria-label="Cancel coaching request"');
-  });
-
-  it("renders MerchFulfillmentTab with accessible aria-label on cancel action", () => {
-    const mockMerch: MerchItem[] = [
-      {
-        id: "merch-1",
-        itemId: "item-1",
-        itemName: "Official Havana Clave T-Shirt",
-        size: "L",
-        pricePounds: 25,
-        status: "RESERVED",
-        createdAt: new Date(),
-        user: {
-          id: "u-1",
-          firstName: "Carlos",
-          lastName: "Santana",
-          email: "carlos@example.com",
-        },
-      },
-    ];
-
-    const html = renderToStaticMarkup(
-      <MerchFulfillmentTab
-        merchReservations={mockMerch}
-        pendingMerchCount={1}
-        isPending={false}
-        onUpdateMerch={() => {}}
-      />
-    );
-
-    expect(html).toContain('aria-label="Cancel merchandise order"');
   });
 
   it("renders RosterDancerList with accessible clear-search button when query is present", () => {

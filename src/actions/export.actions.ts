@@ -192,57 +192,41 @@ export async function exportCongressTicketHoldersCsvAction(rawInput?: unknown): 
 }
 
 /**
- * 4. Export Private Coaching & Merch Click & Collect Orders
+ * 4. Export Private Coaching Orders
  */
-export async function exportPrivateCoachingAndMerchCsvAction(rawInput?: unknown): Promise<CsvExportResult> {
+export async function exportPrivateCoachingCsvAction(rawInput?: unknown): Promise<CsvExportResult> {
   exportInputSchema.parse(rawInput);
   const admin = await requireRole(ADMIN_ONLY);
   const identifier = await getRateLimitIdentifier(admin.id);
 
   return withRateLimit(identifier, "EXPORT", async (): Promise<CsvExportResult> => {
     try {
-      const [privateBookings, merchReservations] = await Promise.all([
-        prisma.privateLessonBooking.findMany({
-          include: {
-            student: {
-              select: {
-                firstName: true,
-                lastName: true,
-                email: true,
-              },
+      const privateBookings = await prisma.privateLessonBooking.findMany({
+        include: {
+          student: {
+            select: {
+              firstName: true,
+              lastName: true,
+              email: true,
             },
           },
-          orderBy: { createdAt: "desc" },
-        }),
-        prisma.merchReservation.findMany({
-          include: {
-            user: {
-              select: {
-                firstName: true,
-                lastName: true,
-                email: true,
-              },
-            },
-          },
-          orderBy: { createdAt: "desc" },
-        }),
-      ]);
+        },
+        orderBy: { createdAt: "desc" },
+      });
 
       const headers = [
-        "Order Type",
         "Order ID",
         "Date Created (UTC)",
         "Customer Name",
         "Customer Email",
-        "Item / Description",
-        "Package / Size",
-        "Preferred Slot / Notes",
+        "Teacher & Focus",
+        "Package",
+        "Preferred Slot",
         "Amount (£)",
         "Status",
       ];
 
-      const coachingRows = privateBookings.map((b) => [
-        "PRIVATE_COACHING",
+      const rows = privateBookings.map((b) => [
         b.id,
         b.createdAt.toISOString(),
         `${b.student.firstName} ${b.student.lastName}`.trim(),
@@ -254,30 +238,16 @@ export async function exportPrivateCoachingAndMerchCsvAction(rawInput?: unknown)
         b.status,
       ]);
 
-      const merchRows = merchReservations.map((m) => [
-        "MERCH_CLICK_AND_COLLECT",
-        m.id,
-        m.createdAt.toISOString(),
-        `${m.user.firstName} ${m.user.lastName}`.trim(),
-        m.user.email,
-        m.itemName,
-        m.size ?? "N/A",
-        "Studio Desk Collection",
-        m.pricePounds.toFixed(2),
-        m.status,
-      ]);
-
-      const allRows = [...coachingRows, ...merchRows];
-      const csvContent = buildCsv(headers, allRows);
+      const csvContent = buildCsv(headers, rows);
       const dateStamp = new Date().toISOString().split("T")[0];
-      const filename = `salsa-explosion-coaching-merch-${dateStamp}.csv`;
+      const filename = `salsa-explosion-private-coaching-${dateStamp}.csv`;
 
       await recordAuditLog({
         actorId: admin.id,
         action: AuditAction.CSV_EXPORT,
         targetType: "CSV_EXPORT",
-        targetId: "coaching-merch-orders",
-        metadata: { filename, rowCount: allRows.length },
+        targetId: "private-coaching-orders",
+        metadata: { filename, rowCount: rows.length },
       });
 
       return {
@@ -286,7 +256,7 @@ export async function exportPrivateCoachingAndMerchCsvAction(rawInput?: unknown)
         csvContent,
       };
     } catch (err: unknown) {
-      console.error("[exportPrivateCoachingAndMerchCsvAction]", err);
+      console.error("[exportPrivateCoachingCsvAction]", err);
       return { success: false, filename: "", error: "Failed to generate CSV export. Please try again." };
     }
   });

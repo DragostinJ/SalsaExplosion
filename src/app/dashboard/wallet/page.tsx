@@ -2,7 +2,6 @@ import Link from "next/link";
 import {
   QrCode,
   Calendar,
-  ShoppingBag,
   Sparkles,
   Flame,
   ArrowRight,
@@ -34,7 +33,7 @@ import { PASS_PRICING_LIST, VENUE_INFO } from "@/lib/academy-data";
 export const metadata = {
   title: "My Passes & Digital Wallet | Salsa Explosion Bournemouth",
   description:
-    "Your festival passes with their door QR codes, the classes you said you're coming to, private lessons and merch reservations.",
+    "Your festival passes with their door QR codes, the classes you said you're coming to and your private lessons.",
 };
 
 export default async function StudentWalletPage() {
@@ -167,17 +166,15 @@ export default async function StudentWalletPage() {
     };
   }>;
 
-  type WalletMerchReservation = Prisma.MerchReservationGetPayload<object>;
   type WalletPrivateLesson = Prisma.PrivateLessonBookingGetPayload<object>;
   let eventRegistrations: WalletEventRegistration[] = [];
   let upcomingBookings: WalletBooking[] = [];
-  let merchReservations: WalletMerchReservation[] = [];
   let privateLessons: WalletPrivateLesson[] = [];
 
   let loadFailed = isFallbackUser(user);
 
   try {
-    const [reg, book, merch, priv] = await Promise.all([
+    const [reg, book, priv] = await Promise.all([
       prisma.eventRegistration.findMany({
         where: {
           userId: user.id,
@@ -224,13 +221,6 @@ export default async function StudentWalletPage() {
         },
         take: 5,
       }),
-      prisma.merchReservation.findMany({
-        where: {
-          userId: user.id,
-          status: "RESERVED",
-        },
-        orderBy: { createdAt: "desc" },
-      }),
       prisma.privateLessonBooking.findMany({
         where: {
           studentId: user.id,
@@ -242,7 +232,6 @@ export default async function StudentWalletPage() {
 
     eventRegistrations = reg;
     upcomingBookings = book;
-    merchReservations = merch;
     privateLessons = priv;
   } catch (walletErr) {
     loadFailed = true;
@@ -448,110 +437,58 @@ export default async function StudentWalletPage() {
         )}
       </section>
 
-      {/* Merch Pickup & Private Coaching Drawer Grid */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Merch Click & Collect Queue */}
-        <Card className="rounded-2xl border shadow-xs">
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <ShoppingBag className="h-4 w-4 text-brand" />
-                <CardTitle className="text-base">
-                  BOH Studios Merch Pickup ({merchReservations.length})
-                </CardTitle>
-              </div>
-              <Link
-                href="/pricing"
-                className="text-xs font-semibold text-brand hover:underline"
-              >
-                Gift Vouchers
-              </Link>
+      {/* Private Coaching Requests */}
+      <Card className="rounded-2xl border shadow-xs">
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Flame className="h-4 w-4 text-amber-600" />
+              <CardTitle className="text-base">
+                Private Coaching ({privateLessons.length})
+              </CardTitle>
             </div>
-            <CardDescription className="text-xs">
-              Pay and collect items at the studio desk.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {merchReservations.length === 0 ? (
-              <p className="text-xs text-muted-foreground py-2 text-center">
-                No active merchandise reservations.
-              </p>
-            ) : (
-              merchReservations.map((item) => (
-                <div
-                  key={item.id}
-                  className="rounded-xl border bg-muted/20 p-2.5 flex items-center justify-between text-xs"
-                >
-                  <div>
-                    <span className="font-bold text-foreground">
-                      {item.itemName}
-                    </span>
-                    <span className="text-muted-foreground text-[11px] block">
-                      {item.size ? `Size ${item.size} • ` : ""}£{item.pricePounds}.00
-                    </span>
-                  </div>
-                  <Badge variant="secondary" className="text-xs font-bold">
-                    Desk Pickup
-                  </Badge>
-                </div>
-              ))
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Private Coaching Requests */}
-        <Card className="rounded-2xl border shadow-xs">
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Flame className="h-4 w-4 text-amber-600" />
-                <CardTitle className="text-base">
-                  Private Coaching ({privateLessons.length})
-                </CardTitle>
-              </div>
-              <Link
-                href="/private-lessons"
-                className="text-xs font-semibold text-amber-400 hover:underline"
+            <Link
+              href="/private-lessons"
+              className="text-xs font-semibold text-amber-400 hover:underline"
+            >
+              Request Slot
+            </Link>
+          </div>
+          <CardDescription className="text-xs">
+            1-on-1 mentorship with Maestro Enrique & faculty.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          {privateLessons.length === 0 ? (
+            <p className="text-xs text-muted-foreground py-2 text-center">
+              No active private lesson requests.
+            </p>
+          ) : (
+            privateLessons.map((l) => (
+              <div
+                key={l.id}
+                className="rounded-xl border bg-muted/20 p-2.5 flex items-center justify-between text-xs"
               >
-                Request Slot
-              </Link>
-            </div>
-            <CardDescription className="text-xs">
-              1-on-1 mentorship with Maestro Enrique & faculty.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {privateLessons.length === 0 ? (
-              <p className="text-xs text-muted-foreground py-2 text-center">
-                No active private lesson requests.
-              </p>
-            ) : (
-              privateLessons.map((l) => (
-                <div
-                  key={l.id}
-                  className="rounded-xl border bg-muted/20 p-2.5 flex items-center justify-between text-xs"
-                >
-                  <div>
-                    <span className="font-bold text-foreground">
-                      {l.instructorName}
-                    </span>
-                    <span className="text-muted-foreground text-[11px] block">
-                      {l.packageType === "SINGLE_1HR" ? "1-Hour" : "5-Hour Block"} • £
-                      {l.totalPricePounds}
-                    </span>
-                  </div>
-                  <StatusBadge
-                    tone={coachingStatusTone(l.status)}
-                    className="text-xs"
-                  >
-                    {l.status}
-                  </StatusBadge>
+                <div>
+                  <span className="font-bold text-foreground">
+                    {l.instructorName}
+                  </span>
+                  <span className="text-muted-foreground text-[11px] block">
+                    {l.packageType === "SINGLE_1HR" ? "1-Hour" : "5-Hour Block"} • £
+                    {l.totalPricePounds}
+                  </span>
                 </div>
-              ))
-            )}
-          </CardContent>
-        </Card>
-      </div>
+                <StatusBadge
+                  tone={coachingStatusTone(l.status)}
+                  className="text-xs"
+                >
+                  {l.status}
+                </StatusBadge>
+              </div>
+            ))
+          )}
+        </CardContent>
+      </Card>
 
       {/* Trust bar */}
       <PaymentSecurityTrustBar />

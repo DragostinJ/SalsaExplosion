@@ -33,7 +33,6 @@ export default async function AdminAnalyticsPage() {
     eventRegistrations,
     auditLogs,
     coachingBookings,
-    merchReservations,
   ] = await Promise.all([
     prisma.user.count({ where: { role: Role.STUDENT } }),
     prisma.booking.count({
@@ -73,9 +72,6 @@ export default async function AdminAnalyticsPage() {
     }),
     prisma.privateLessonBooking.findMany({
       select: { totalPricePounds: true, status: true },
-    }),
-    prisma.merchReservation.findMany({
-      select: { pricePounds: true, status: true },
     }),
   ]);
 
@@ -129,7 +125,7 @@ export default async function AdminAnalyticsPage() {
     };
   });
 
-  // Online revenue only (festival passes, private lessons, merch). Weekly classes are paid at the
+  // Online revenue only (festival passes and private lessons). Weekly classes are paid at the
   // door and never pass through the site, and class packs / memberships are retired.
   const eventRevenuePounds =
     eventRegistrations.reduce((acc, curr) => acc + curr.amountPaidInCents, 0) /
@@ -139,14 +135,7 @@ export default async function AdminAnalyticsPage() {
     .filter((b) => b.status === "COMPLETED" || b.status === "CONFIRMED")
     .reduce((acc, curr) => acc + curr.totalPricePounds, 0);
 
-  const merchRevenuePounds = merchReservations
-    .filter((m) => m.status === "COLLECTED" || m.status === "RESERVED")
-    .reduce((acc, curr) => acc + curr.pricePounds, 0);
-
-  const currentMonthDynamicPounds =
-    eventRevenuePounds +
-    coachingRevenuePounds +
-    merchRevenuePounds;
+  const currentMonthDynamicPounds = eventRevenuePounds + coachingRevenuePounds;
 
   const totalRevenueInPounds = currentMonthDynamicPounds;
 
@@ -205,7 +194,6 @@ export default async function AdminAnalyticsPage() {
           activeBookingsCount,
           pendingReviewsCount,
           coachingRevenuePounds,
-          merchRevenuePounds,
         }}
       />
 

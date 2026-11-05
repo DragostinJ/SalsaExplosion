@@ -9,7 +9,6 @@ import {
   Video,
   Check,
   ChevronRight,
-  ShoppingBag,
   CalendarPlus,
   HeartHandshake,
   HelpCircle,
@@ -80,8 +79,6 @@ export function AdminNotificationBell() {
         return <Ticket className="h-4 w-4 text-gold" />;
       case "coaching":
         return <CalendarPlus className="h-4 w-4 text-info" />;
-      case "merch":
-        return <ShoppingBag className="h-4 w-4 text-danger" />;
       case "grading":
         return <Video className="h-4 w-4 text-success" />;
       case "sentiment":

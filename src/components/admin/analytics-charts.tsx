@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { Users, TrendingUp, Award, DollarSign, Download, CalendarPlus, ShoppingBag } from "lucide-react";
+import { Users, TrendingUp, Award, DollarSign, Download, CalendarPlus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -16,7 +16,6 @@ interface AnalyticsData {
   activeBookingsCount: number;
   pendingReviewsCount: number;
   coachingRevenuePounds?: number;
-  merchRevenuePounds?: number;
 }
 
 export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
@@ -63,9 +62,9 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
         </Button>
       </div>
 
-      {/* 6 Top KPI Cards */}
+      {/* 5 Top KPI Cards: revenue is wider so the grid has no gap */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <Card className="border shadow-sm">
+        <Card className="border shadow-sm sm:col-span-2">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Total Revenue
@@ -79,7 +78,7 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
               £{data.totalRevenueInPounds.toLocaleString("en-GB", { minimumFractionDigits: 2 })}
             </div>
             <p className="mt-1 text-xs text-muted-foreground">
-              Online: festival passes, private lessons and merch
+              Online: festival passes and private lessons
             </p>
           </CardContent>
         </Card>
@@ -150,25 +149,6 @@ export function AnalyticsCharts({ data }: { data: AnalyticsData }) {
             </div>
             <p className="mt-1 text-xs text-muted-foreground">
               1-on-1 private lessons & intensives
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              Merch Desk Sales
-            </CardTitle>
-            <div className="rounded-lg bg-rose-500/10 p-2 text-rose-400">
-              <ShoppingBag className="h-4 w-4" />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold tracking-tight">
-              £{(data.merchRevenuePounds ?? 0).toLocaleString("en-GB", { minimumFractionDigits: 2 })}
-            </div>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Click & collect hoodies, tees & shoes
             </p>
           </CardContent>
         </Card>

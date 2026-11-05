@@ -4,30 +4,25 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import {
   CalendarPlus,
-  ShoppingBag,
   MessageSquare,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
   updatePrivateLessonBookingStatusAction,
-  updateMerchReservationStatusAction,
   replyAnonymousQuestionAction,
 } from "@/actions/management.actions";
 import { toast } from "sonner";
 import type {
   PrivateBookingItem,
-  MerchItem,
   SentimentItem,
   QuestionItem,
 } from "./operations/types";
 import { CoachingRequestsTab } from "./operations/coaching-requests-tab";
-import { MerchFulfillmentTab } from "./operations/merch-fulfillment-tab";
 import { SentimentFeedbackTab } from "./operations/sentiment-feedback-tab";
 
 export type {
   PrivateBookingItem,
-  MerchItem,
   SentimentItem,
   QuestionItem,
 };
@@ -35,7 +30,6 @@ export type {
 interface StudioOperationsWorkspaceProps {
   initialTab?: string;
   privateBookings: PrivateBookingItem[];
-  merchReservations: MerchItem[];
   sentimentFeedbacks: SentimentItem[];
   anonymousQuestions: QuestionItem[];
 }
@@ -43,7 +37,6 @@ interface StudioOperationsWorkspaceProps {
 export function StudioOperationsWorkspace({
   initialTab = "coaching",
   privateBookings,
-  merchReservations,
   sentimentFeedbacks,
   anonymousQuestions,
 }: StudioOperationsWorkspaceProps) {
@@ -60,18 +53,6 @@ export function StudioOperationsWorkspace({
         router.refresh();
       } else {
         toast.error(res.error?.message ?? "Failed to update booking.");
-      }
-    });
-  };
-
-  const handleUpdateMerch = (reservationId: string, status: "COLLECTED" | "CANCELLED") => {
-    startTransition(async () => {
-      const res = await updateMerchReservationStatusAction({ reservationId, status });
-      if (res.success) {
-        toast.success(res.message);
-        router.refresh();
-      } else {
-        toast.error(res.error?.message ?? "Failed to update reservation.");
       }
     });
   };
@@ -101,11 +82,6 @@ export function StudioOperationsWorkspace({
     .filter((b) => b.status === "PENDING" || b.status === "CONFIRMED")
     .reduce((sum, b) => sum + (b.totalPricePounds || 0), 0);
 
-  const pendingMerchCount = merchReservations.filter((m) => m.status === "RESERVED").length;
-  const pendingMerchRevenue = merchReservations
-    .filter((m) => m.status === "RESERVED")
-    .reduce((sum, m) => sum + (m.pricePounds || 0), 0);
-
   const unansweredQCount = anonymousQuestions.filter((q) => q.status !== "ANSWERED").length;
 
   return (
@@ -113,7 +89,7 @@ export function StudioOperationsWorkspace({
       {/* Tonight's Desk & Revenue Summary Strip */}
       <div
         data-testid="tonights-desk-summary-strip"
-        className="grid gap-3 sm:grid-cols-2"
+        className="grid gap-3 sm:max-w-md"
       >
         <Card className="rounded-2xl border border-border/80 bg-card p-4 shadow-xs">
           <div className="flex items-center justify-between">
@@ -130,25 +106,6 @@ export function StudioOperationsWorkspace({
             </h4>
             <span className="text-xs text-muted-foreground font-medium">
               Due Cash/Card
-            </span>
-          </div>
-        </Card>
-
-        <Card className="rounded-2xl border border-border/80 bg-card p-4 shadow-xs">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] uppercase font-bold tracking-wider text-muted-foreground">
-              Merch Collection Due
-            </span>
-            <Badge variant="outline" className="text-xs font-mono">
-              {pendingMerchCount} Reserved
-            </Badge>
-          </div>
-          <div className="mt-2 flex items-baseline justify-between">
-            <h4 className="text-2xl font-black text-foreground">
-              £{pendingMerchRevenue}.00
-            </h4>
-            <span className="text-xs text-muted-foreground font-medium">
-              Awaiting Desk Pickup
             </span>
           </div>
         </Card>
@@ -170,24 +127,6 @@ export function StudioOperationsWorkspace({
           {pendingCoachingCount > 0 && (
             <Badge className="bg-rose-600 text-white text-xs h-4 px-1.5 font-bold">
               {pendingCoachingCount}
-            </Badge>
-          )}
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab("merch")}
-          className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all ${
-            activeTab === "merch"
-              ? "bg-surface-3 text-ivory ring-1 ring-gold/40 shadow-xs font-bold"
-              : "bg-surface-1 text-ivory-muted hover:bg-surface-2 hover:text-ivory"
-          }`}
-        >
-          <ShoppingBag className="h-4 w-4" />
-          <span>Click & Collect Merch</span>
-          {pendingMerchCount > 0 && (
-            <Badge className="bg-rose-600 text-white text-xs h-4 px-1.5 font-bold">
-              {pendingMerchCount}
             </Badge>
           )}
         </button>
@@ -221,17 +160,7 @@ export function StudioOperationsWorkspace({
         />
       )}
 
-      {/* Tab 2: Merch Click & Collect */}
-      {activeTab === "merch" && (
-        <MerchFulfillmentTab
-          merchReservations={merchReservations}
-          pendingMerchCount={pendingMerchCount}
-          isPending={isPending}
-          onUpdateMerch={handleUpdateMerch}
-        />
-      )}
-
-      {/* Tab 4: Beginner Sentiment & Anonymous Q&A */}
+      {/* Tab 2: Beginner Sentiment & Anonymous Q&A */}
       {activeTab === "qa" && (
         <SentimentFeedbackTab
           sentimentFeedbacks={sentimentFeedbacks}

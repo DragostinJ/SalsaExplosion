@@ -7,7 +7,6 @@
  */
 import * as checkin from "./management/checkin.actions";
 import * as coaching from "./management/coaching.actions";
-import * as merch from "./management/merch.actions";
 import * as qa from "./management/qa.actions";
 import * as events from "./management/events.actions";
 import * as roster from "./management/roster.actions";
@@ -34,12 +33,6 @@ export async function updatePrivateLessonBookingStatusAction(
   ...args: Parameters<typeof coaching.updatePrivateLessonBookingStatusAction>
 ) {
   return coaching.updatePrivateLessonBookingStatusAction(...args);
-}
-
-export async function updateMerchReservationStatusAction(
-  ...args: Parameters<typeof merch.updateMerchReservationStatusAction>
-) {
-  return merch.updateMerchReservationStatusAction(...args);
 }
 
 export async function replyAnonymousQuestionAction(

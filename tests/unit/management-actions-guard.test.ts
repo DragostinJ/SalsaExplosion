@@ -8,7 +8,6 @@ describe("Management Actions Security & Modularization Guard", () => {
     "checkin.actions.ts",
     "coaching.actions.ts",
     "events.actions.ts",
-    "merch.actions.ts",
     "qa.actions.ts",
     "roster.actions.ts",
   ];
@@ -45,7 +44,6 @@ describe("Management Actions Security & Modularization Guard", () => {
     expect(content).toContain('"use server"');
     expect(content).toContain('from "./management/checkin.actions"');
     expect(content).toContain('from "./management/coaching.actions"');
-    expect(content).toContain('from "./management/merch.actions"');
     expect(content).toContain('from "./management/qa.actions"');
     expect(content).toContain('from "./management/events.actions"');
     expect(content).toContain('from "./management/roster.actions"');

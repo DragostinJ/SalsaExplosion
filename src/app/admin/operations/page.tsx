@@ -6,7 +6,7 @@ import { StudioOperationsWorkspace } from "@/components/admin/studio-operations-
 
 export const metadata: Metadata = {
   title: "Studio Desk Operations | Salsa Explosion Admin",
-  description: "Fulfill private lesson requests, manage merchandise click & collect, and respond to beginner student sentiment.",
+  description: "Fulfill private lesson requests and respond to beginner student sentiment.",
 };
 
 interface AdminOperationsPageProps {
@@ -23,7 +23,6 @@ export default async function AdminOperationsPage({
 
   const [
     privateBookings,
-    merchReservations,
     sentimentFeedbacks,
     anonymousQuestions,
   ] = await Promise.all([
@@ -31,19 +30,6 @@ export default async function AdminOperationsPage({
       orderBy: { createdAt: "desc" },
       include: {
         student: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-          },
-        },
-      },
-    }),
-    prisma.merchReservation.findMany({
-      orderBy: { createdAt: "desc" },
-      include: {
-        user: {
           select: {
             id: true,
             firstName: true,
@@ -84,14 +70,13 @@ export default async function AdminOperationsPage({
           Studio Desk Operations Hub
         </h1>
         <p className="text-sm text-muted-foreground">
-          Centralized command center to confirm 1-on-1 private coaching, hand out reserved studio gear, and address beginner questions.
+          Centralized command center to confirm 1-on-1 private coaching and address beginner questions.
         </p>
       </div>
 
       <StudioOperationsWorkspace
-        initialTab={tab || "coaching"}
+        initialTab={tab === "qa" ? "qa" : "coaching"}
         privateBookings={privateBookings}
-        merchReservations={merchReservations}
         sentimentFeedbacks={sentimentFeedbacks}
         anonymousQuestions={anonymousQuestions}
       />

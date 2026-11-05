@@ -15,22 +15,6 @@ export interface PrivateBookingItem {
   };
 }
 
-export interface MerchItem {
-  id: string;
-  itemId: string;
-  itemName: string;
-  size: string | null;
-  pricePounds: number;
-  status: string;
-  createdAt: Date;
-  user: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-  };
-}
-
 export interface WaitlistItem {
   id: string;
   role: string;

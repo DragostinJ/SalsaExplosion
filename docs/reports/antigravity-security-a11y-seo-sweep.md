@@ -244,10 +244,10 @@ Also merged: `feat/move-back-links` and `feat/move-mapper-chat` (one-line `AGENT
 
 ### Left for the owner to decide
 
-- **The merch code has no screen left:** with `shop-client.tsx` gone, only tests import `src/actions/shop.actions.ts` and `src/lib/constants/shop.ts`. Dancers see no change, because `/shop` already redirected to `/pricing` and nothing rendered that component.
 - **The two actions that stay public are fine as they are:** `submitAnonymousQuestionAction` (beginners' questions) and `recordPracticeEventAction` (practice stats) are both rate-limited and neither calls Gemini.
 
 ### Dead code outcome (2026-11-05, owner's decision)
 
 - **Deleted:** the 7 unused files listed in section 3. Nothing else referred to them, and knip finds no new orphans.
 - **Kept: `@tailwindcss/turbopack`. The finding in section 3 is wrong.** `next.config.ts` runs it on every `*.css` file and the project has no PostCSS config, so it is the only thing compiling Tailwind. A test build without it exited 0 with no warning, but the CSS fell from 184 KB to 36 KB and `.flex` and `.grid` were gone, so the site would have shipped unstyled. knip 6.44.1 does not flag the package; the sweep's `knip@5` run did.
+- **Merch removed as well.** Enrique has no plans to sell merch and the production `MerchReservation` table was empty, so the whole feature went: the dancer and staff actions, the catalogue, the operations tab, the wallet box, the analytics tile, the notification and the merch half of the CSV export. `/shop` still redirects to `/pricing`, gift vouchers are unaffected, and the empty table stays in the database because dropping it needs a migration.

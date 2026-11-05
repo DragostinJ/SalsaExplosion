@@ -29,9 +29,6 @@ vi.mock("@/lib/prisma", () => ({
     privateLessonBooking: {
       findMany: vi.fn(),
     },
-    merchReservation: {
-      findMany: vi.fn(),
-    },
   },
 }));
 

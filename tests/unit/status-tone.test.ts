@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
   bookingStatusTone,
-  merchStatusTone,
   waitlistStatusTone,
   coachingStatusTone,
   sentimentTone,
@@ -35,26 +34,6 @@ describe("Semantic Status Tone Mapping (Milestone Q1)", () => {
       expect(bookingStatusTone("UNKNOWN_VAL")).toBe("neutral");
       expect(bookingStatusTone(null)).toBe("neutral");
       expect(bookingStatusTone(undefined)).toBe("neutral");
-    });
-  });
-
-  describe("merchStatusTone", () => {
-    it("maps collected to success", () => {
-      expect(merchStatusTone("COLLECTED")).toBe("success");
-    });
-
-    it("maps reserved to warning", () => {
-      expect(merchStatusTone("RESERVED")).toBe("warning");
-    });
-
-    it("maps cancelled to danger", () => {
-      expect(merchStatusTone("CANCELLED")).toBe("danger");
-      expect(merchStatusTone("CANCELED")).toBe("danger");
-    });
-
-    it("maps unknown to neutral", () => {
-      expect(merchStatusTone("UNKNOWN")).toBe("neutral");
-      expect(merchStatusTone(null)).toBe("neutral");
     });
   });
 

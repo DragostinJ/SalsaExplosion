@@ -15,7 +15,7 @@ export type NotificationsQuery = z.infer<typeof notificationsQuerySchema>;
 
 export interface StudioNotificationItem {
   id: string;
-  type: "congress" | "ratio" | "grading" | "coaching" | "merch" | "sentiment" | "question";
+  type: "congress" | "ratio" | "grading" | "coaching" | "sentiment" | "question";
   title: string;
   detail: string;
   timestamp: string;
@@ -52,7 +52,6 @@ export async function getAdminNotificationsAction(rawInput?: unknown): Promise<{
     const [
       pendingVideos,
       pendingCoaching,
-      reservedMerch,
       paidRegistrations,
       overwhelmedCheckins,
       unansweredQuestions,
@@ -68,12 +67,6 @@ export async function getAdminNotificationsAction(rawInput?: unknown): Promise<{
         take: 4,
         orderBy: { createdAt: "desc" },
         include: { student: { select: { firstName: true, lastName: true } } },
-      }),
-      prisma.merchReservation.findMany({
-        where: { status: "RESERVED" },
-        take: 4,
-        orderBy: { createdAt: "desc" },
-        include: { user: { select: { firstName: true, lastName: true } } },
       }),
       prisma.eventRegistration.findMany({
         where: { paymentStatus: "PAID" },
@@ -133,22 +126,7 @@ export async function getAdminNotificationsAction(rawInput?: unknown): Promise<{
       });
     }
 
-    // 3. Merch Click & Collect
-    for (const m of reservedMerch) {
-      const studentName = `${m.user.firstName} ${m.user.lastName}`.trim();
-      items.push({
-        id: `merch-${m.id}`,
-        type: "merch",
-        title: "Merch Reserved for Desk Pickup",
-        detail: `${studentName} reserved ${m.itemName}${m.size ? ` (${m.size})` : ""} — £${m.pricePounds} to collect at desk.`,
-        timestamp: formatRelativeTime(m.createdAt),
-        href: "/admin/operations?tab=merch",
-        isRead: false,
-        priority: "medium",
-      });
-    }
-
-    // 4. Congress Passes
+    // 3. Congress Passes
     for (const reg of paidRegistrations) {
       const studentName = `${reg.user.firstName} ${reg.user.lastName}`.trim();
       const amount = (reg.ticketTier.priceInCents / 100).toFixed(2);
@@ -164,7 +142,7 @@ export async function getAdminNotificationsAction(rawInput?: unknown): Promise<{
       });
     }
 
-    // 5. Overwhelmed Feedback
+    // 4. Overwhelmed Feedback
     for (const fb of overwhelmedCheckins) {
       const studentName = `${fb.user.firstName} ${fb.user.lastName}`.trim();
       items.push({
@@ -179,7 +157,7 @@ export async function getAdminNotificationsAction(rawInput?: unknown): Promise<{
       });
     }
 
-    // 6. Anonymous Questions
+    // 5. Anonymous Questions
     for (const q of unansweredQuestions) {
       items.push({
         id: `q-${q.id}`,

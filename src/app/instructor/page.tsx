@@ -54,17 +54,16 @@ export default async function TodayPage() {
   let loadFailed = false;
   let tonight: ClassRow[] = [];
   let upcoming: ClassRow[] = [];
-  let counts = { lessonRequests: 0, recapsMissing: 0, assessments: 0, merch: 0 };
+  let counts = { lessonRequests: 0, recapsMissing: 0, assessments: 0 };
   let festival: { title: string; startDate: Date; sold: number } | null = null;
 
   try {
-    const [today, next, lessonRequests, recapsMissing, assessments, merch, nextFestival] = await Promise.all([
+    const [today, next, lessonRequests, recapsMissing, assessments, nextFestival] = await Promise.all([
       loadClasses(start, end, 10),
       loadClasses(end, null, 6),
       prisma.privateLessonBooking.count({ where: { status: "PENDING" } }),
       prisma.classSession.count({ where: { isCancelled: false, recapRecordedAt: null, endTime: { gte: weekAgo, lt: now } } }),
       prisma.videoSubmission.count({ where: { status: SubmissionStatus.PENDING } }),
-      prisma.merchReservation.count({ where: { status: "RESERVED" } }),
       prisma.event.findFirst({
         where: { status: EventStatus.PUBLISHED, endDate: { gte: now } },
         orderBy: { startDate: "asc" },
@@ -79,7 +78,7 @@ export default async function TodayPage() {
     // When nothing is on today, show the next class day
     const nextDay = next[0] ? studioDayBounds(next[0].startTime) : null;
     upcoming = nextDay ? next.filter((c) => c.startTime < nextDay.end) : [];
-    counts = { lessonRequests, recapsMissing, assessments, merch };
+    counts = { lessonRequests, recapsMissing, assessments };
     festival = nextFestival
       ? { title: nextFestival.title, startDate: nextFestival.startDate, sold: nextFestival._count.registrations }
       : null;
@@ -96,7 +95,6 @@ export default async function TodayPage() {
     { count: counts.lessonRequests, label: "private lesson requests to answer", href: "/admin/operations" },
     { count: counts.recapsMissing, label: "classes this week without a recap", href: "/dashboard/recaps" },
     { count: counts.assessments, label: "video assessments waiting", href: "/instructor/submissions" },
-    { count: counts.merch, label: "shop items waiting to be collected", href: "/admin/operations" },
     { count: drafts.length, label: `moves to check (start with the ${unsure} where Gemini wasn't sure)`, href: "/instructor/moves" },
   ].filter((item) => item.count > 0);
 

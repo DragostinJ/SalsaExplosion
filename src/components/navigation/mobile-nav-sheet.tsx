@@ -224,7 +224,7 @@ export function MobileNavSheet({
             </div>
           )}
 
-          {/* Explore Hub (Music, Merch, FAQs, Community) */}
+          {/* Explore Hub (Music, FAQs, Community) */}
           <div className="pt-2 border-t-2 border-ink">
             <div className="flex items-center gap-1.5 px-1 mb-2 text-xs font-black uppercase tracking-wider text-ink/70">
               <Compass className="h-3.5 w-3.5" />

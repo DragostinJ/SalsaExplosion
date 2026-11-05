@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { FileSpreadsheet, Users, Ticket, ShoppingBag, Loader2 } from "lucide-react";
+import { FileSpreadsheet, Users, Ticket, CalendarPlus, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   exportStudentRosterCsvAction,
   exportCongressTicketHoldersCsvAction,
-  exportPrivateCoachingAndMerchCsvAction,
+  exportPrivateCoachingCsvAction,
 } from "@/actions/export.actions";
 
 function triggerBrowserDownload(filename: string, content: string) {
@@ -71,11 +71,11 @@ export function CsvExportToolbar() {
     }
   }
 
-  async function handleExportCoachingMerch() {
-    setDownloadingType("coaching-merch");
+  async function handleExportCoaching() {
+    setDownloadingType("coaching");
     setStatusMessage(null);
     try {
-      const res = await exportPrivateCoachingAndMerchCsvAction();
+      const res = await exportPrivateCoachingCsvAction();
       if (res.success && res.csvContent && res.filename) {
         triggerBrowserDownload(res.filename, res.csvContent);
         setStatusMessage(`Successfully downloaded ${res.filename}`);
@@ -161,25 +161,25 @@ export function CsvExportToolbar() {
             </span>
           </Button>
 
-          {/* Private Coaching & Merch Export */}
+          {/* Private Coaching Export */}
           <Button
             variant="outline"
             className="flex h-auto flex-col items-start gap-1 p-3.5 text-left border-border hover:border-sky-500/50 hover:bg-sky-500/[0.04]"
-            onClick={handleExportCoachingMerch}
+            onClick={handleExportCoaching}
             disabled={downloadingType !== null}
           >
             <div className="flex w-full items-center justify-between">
               <span className="text-xs font-bold text-foreground">
-                Coaching & Merch
+                Private Coaching
               </span>
-              {downloadingType === "coaching-merch" ? (
+              {downloadingType === "coaching" ? (
                 <Loader2 className="h-4 w-4 animate-spin text-sky-500" />
               ) : (
-                <ShoppingBag className="h-4 w-4 text-muted-foreground" />
+                <CalendarPlus className="h-4 w-4 text-muted-foreground" />
               )}
             </div>
             <span className="text-[11px] text-muted-foreground leading-snug">
-              Private coaching packages, click & collect merch orders & status.
+              Private coaching packages, prices & status.
             </span>
           </Button>
         </div>

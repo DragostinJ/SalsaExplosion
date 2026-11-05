@@ -1,9 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Role, DanceLevel, DanceRole } from "@prisma/client";
 import { COACHING_INSTRUCTORS_CATALOG } from "@/lib/constants/coaching";
-import { SHOP_CATALOG } from "@/lib/constants/shop";
 import { bookPrivateLessonAction } from "@/actions/lessons.actions";
-import { reserveMerchItemAction } from "@/actions/shop.actions";
 import { cancelClassSessionWithRefundsAction } from "@/actions/management.actions";
 
 // Mock next/cache
@@ -38,11 +36,6 @@ vi.mock("@/lib/prisma", () => ({
       update: vi.fn(),
     },
     privateLessonBooking: {
-      create: vi.fn(),
-      findUnique: vi.fn(),
-      update: vi.fn(),
-    },
-    merchReservation: {
       create: vi.fn(),
       findUnique: vi.fn(),
       update: vi.fn(),
@@ -170,50 +163,6 @@ describe("F12: Catalog Pricing Security & Transaction Integrity Unit Suite", () 
       const errText = typeof res.error === "string" ? res.error : res.error?.message;
       expect(errText).toBeDefined();
       expect(prisma.privateLessonBooking.create).not.toHaveBeenCalled();
-    });
-  });
-
-  describe("2. Merch Catalog Server Price & Sizing Enforcement", () => {
-    it("enforces server pricing and mandates size for wearable merchandise", async () => {
-      const student = createMockStudent();
-      vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(student);
-
-      // Attempt reserving a hoodie without specifying a size
-      const failRes = await reserveMerchItemAction({
-        itemId: "hoodie",
-        size: undefined,
-      });
-
-      expect(failRes.success).toBe(false);
-      const failText = typeof failRes.error === "string" ? failRes.error : failRes.error?.message;
-      expect(failText).toMatch(/valid size/i);
-
-      // Now reserve with size
-      vi.mocked(prisma.merchReservation.create).mockResolvedValue({
-        id: "merch_123",
-        userId: student.id,
-        itemId: "hoodie",
-        itemName: SHOP_CATALOG.hoodie.name,
-        size: "L",
-        pricePounds: SHOP_CATALOG.hoodie.pricePounds,
-        status: "RESERVED",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
-
-      const successRes = await reserveMerchItemAction({
-        itemId: "hoodie",
-        size: "L",
-      });
-
-      expect(successRes.success).toBe(true);
-      expect(prisma.merchReservation.create).toHaveBeenCalledWith({
-        data: expect.objectContaining({
-          userId: student.id,
-          pricePounds: 40, // Server catalog rate £40 for hoodie
-          size: "L",
-        }),
-      });
     });
   });
 

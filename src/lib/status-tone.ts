@@ -28,25 +28,6 @@ export function bookingStatusTone(status: string | null | undefined): StatusTone
   }
 }
 
-export function merchStatusTone(status: string | null | undefined): StatusTone {
-  if (!status) return "neutral";
-  const s = status.toUpperCase().trim();
-  switch (s) {
-    case "COLLECTED":
-    case "FULFILLED":
-    case "PAID":
-      return "success";
-    case "RESERVED":
-    case "PENDING":
-      return "warning";
-    case "CANCELLED":
-    case "CANCELED":
-      return "danger";
-    default:
-      return "neutral";
-  }
-}
-
 export function waitlistStatusTone(status: string | null | undefined): StatusTone {
   if (!status) return "neutral";
   const s = status.toUpperCase().trim();

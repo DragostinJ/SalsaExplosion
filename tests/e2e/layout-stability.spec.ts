@@ -6,8 +6,9 @@ import { test, expect } from "@playwright/test";
  * Requirements:
  * - At 390x844 and 1440x900 on /, /classes, /events, /moves, /music, /pricing, /about:
  *   - Collect layout-shift entries with a PerformanceObserver (buffered: true, ignore hadRecentInput).
- *   - Scroll to the bottom in steps of one viewport, waiting for network to go idle after each.
- *   - Assert total CLS below 0.1 (or document causes outside Limit C in test annotations).
+ *   - Once the page has finished loading, scroll to the bottom in steps of one viewport,
+ *     waiting for network to go idle after each.
+ *   - Assert total CLS below 0.1, with no exceptions.
  * - On the same pages, every visible <img> must have width and height attributes,
  *   or a computed aspect-ratio other than "auto" (or aspect-ratio on container per AGENTS.md 1.3).
  * - Record the LCP element (tag plus src or text start) and LCP time as test annotations.
@@ -51,7 +52,14 @@ test.describe("Task 5: Layout Stability & CLS/LCP Audits", () => {
       for (const route of TARGET_PAGES) {
         test(`layout stability and image constraints on ${route.name} (${route.path})`, async ({ page }) => {
           await page.goto(route.path);
-          await page.waitForLoadState("domcontentloaded");
+          // Wait until the page has finished arriving before scrolling. On /classes the class list
+          // streams in about a second after DOMContentLoaded; scrolling to the footer before that
+          // made the test watch the footer being pushed down (0.47), a shift no visitor at the top
+          // of the page sees (measured 0 from a normal start on 2026-11-05).
+          await page.waitForLoadState("networkidle");
+          await expect
+            .poll(() => page.evaluate(() => document.querySelector("main")?.getBoundingClientRect().height ?? 0))
+            .toBeGreaterThan(200);
 
           // Setup PerformanceObserver for layout-shift and LCP
           await page.evaluate(() => {
@@ -152,16 +160,8 @@ test.describe("Task 5: Layout Stability & CLS/LCP Audits", () => {
           // Assert every visible <img> has width/height or computed aspect-ratio constraint
           expect(metrics.unconstrainedImgs).toEqual([]);
 
-          // Assert CLS: Assert CLS < 0.1, or record finding when caused by streaming footer displacement outside Limit C
-          if (metrics.cls > 0.1) {
-            test.info().annotations.push({
-              type: "CLS Finding",
-              description: `${route.path} [${vp.name}]: CLS is ${metrics.cls.toFixed(4)} due to initial footer displacement upon Next.js streaming content resolution. Structural layout fix is outside Limit C (reported).`,
-            });
-            expect(metrics.cls).toBeLessThan(1.0);
-          } else {
-            expect(metrics.cls).toBeLessThan(0.1);
-          }
+          // Google's "good" threshold, with no exceptions: a passing test must mean a stable page
+          expect(metrics.cls, `${route.path} [${vp.name}] layout shift`).toBeLessThan(0.1);
         });
       }
     });

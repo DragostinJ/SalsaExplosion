@@ -56,7 +56,7 @@ export function BeginnerSafetyHub() {
             variant="outline"
             size="sm"
             onClick={() => setIsHubExpanded((prev) => !prev)}
-            className="h-8 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40 shrink-0"
+            className="min-h-[40px] px-3.5 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40 shrink-0"
           >
             {isHubExpanded ? "Hide Comfort Hub ▲" : "Beginner Comfort Guides & FAQ ▼"}
           </Button>
@@ -71,7 +71,7 @@ export function BeginnerSafetyHub() {
               variant="outline"
               size="sm"
               onClick={() => setIsPrepVideoOpen(true)}
-              className="h-8 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
+              className="min-h-[40px] px-3.5 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
             >
               <Video className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
               1-Min Video Prep
@@ -81,7 +81,7 @@ export function BeginnerSafetyHub() {
               variant="outline"
               size="sm"
               onClick={() => setIsDressCodeOpen(true)}
-              className="h-8 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
+              className="min-h-[40px] px-3.5 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
             >
               <Footprints className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
               What to Wear
@@ -91,7 +91,7 @@ export function BeginnerSafetyHub() {
               variant="outline"
               size="sm"
               onClick={() => setIsEtiquetteOpen(true)}
-              className="h-8 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
+              className="min-h-[40px] px-3.5 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
             >
               <ShieldCheck className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
               Studio Etiquette

@@ -167,7 +167,7 @@ export default function PricingPage() {
         </div>
         <Link
           href="/terms#refunds"
-          className="font-bold underline text-ink shrink-0 hover:text-poster-red"
+          className="inline-flex items-center min-h-[40px] py-2 font-bold underline text-ink shrink-0 hover:text-poster-red"
         >
           Read Refund Policy →
         </Link>

@@ -84,7 +84,7 @@ Environment variables are configuration switches stored safely in Vercel. They a
 | Variable Name | Required? | Where to Set | What It Does | What Breaks If Missing |
 | :--- | :--- | :--- | :--- | :--- |
 | `DATABASE_URL` | **Required** | Vercel (Production/Preview) | Supabase PostgreSQL database connection pooler URL. | The entire database goes offline; schedule, roster, and bookings show errors. |
-| `NEXT_PUBLIC_APP_URL` | **Required** | Vercel (All environments) | Canonical site domain (`https://salsaexplosion.co.uk`). | OpenGraph preview cards, SEO schemas, and Stripe return redirects break. |
+| `NEXT_PUBLIC_APP_URL` | Optional on the live site | Vercel (Preview), `.env` (local) | The site's address on previews and local machines. The live site uses Vercel's own production domain instead, so a wrong value here can't break it. | On a preview: share cards, SEO schemas and Stripe return links use the wrong address. |
 | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | **Required** | Vercel (All environments) | Clerk frontend public key for student sign-in and user profiles. | Student sign-in buttons fail to load. |
 | `CLERK_SECRET_KEY` | **Required** | Vercel (All environments) | Clerk backend secret key for validating authenticated server actions. | Instructors and admins cannot view protected student rosters or studio tools. |
 | `CLERK_WEBHOOK_SECRET` | **Required** | Vercel (Production) | Secret used to verify identity sync webhooks from Clerk. | New student accounts created on Clerk will not sync into your database. |

@@ -16,23 +16,10 @@ import {
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
 import { ticketSalesBlockReason } from "@/lib/event-sales";
+import { getCheckoutBaseUrl } from "@/lib/safe-url";
 
 /** The retired class-pack request shape (kept so stale clients get a clear refusal) */
 export type CreateCheckoutInput = { packageId: PackageId };
-
-// ==========================================
-// HELPER: RESOLVE APP BASE URL
-// ==========================================
-
-function getAppBaseUrl(): string {
-  if (process.env.NEXT_PUBLIC_APP_URL) {
-    return process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, "");
-  }
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-  return "http://localhost:3000";
-}
 
 function isLiveStripeConfigured(priceId: string): boolean {
   const key = process.env.STRIPE_SECRET_KEY ?? "";
@@ -94,7 +81,7 @@ export async function createBillingPortalSessionAction(): Promise<CheckoutAction
         );
       }
 
-      const baseUrl = getAppBaseUrl();
+      const baseUrl = getCheckoutBaseUrl();
       const portalSession = await stripe.billingPortal.sessions.create({
         customer: user.stripeCustomerId,
         return_url: `${baseUrl}/pricing`,
@@ -217,7 +204,7 @@ export async function createEventCheckoutSessionAction(
     // The dance role is information for the teachers, never a limit (Enrique: classes and events
     // welcome everyone, even uneven); only the tier's ticket total can sell out.
 
-    const baseUrl = getAppBaseUrl();
+    const baseUrl = getCheckoutBaseUrl();
 
     // The pass is the only thing sold (no extras), at the server's price, never the client's
     const totalAmountInCents = tier.priceInCents;

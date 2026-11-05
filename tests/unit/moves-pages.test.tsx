@@ -66,6 +66,15 @@ describe("dancer move library (/moves)", () => {
     expect(html).toContain('href="/music/me-dicen-cuba?section=s4"');
   });
 
+  it("opens every move page with a way back to the list (the browser fills in 'Back to …')", async () => {
+    const move = await approvedMove();
+    published.push(move);
+    const page = await import("@/app/moves/[moveId]/page");
+    const html = renderToStaticMarkup(await page.default({ params: Promise.resolve({ moveId: move.id }) }));
+    expect(html).toMatch(/<nav aria-label="Back"[^>]*>.*href="\/moves".*All moves/);
+    expect(html).not.toContain("Back to ");
+  });
+
   it("404s a move that isn't approved", async () => {
     const page = await import("@/app/moves/[moveId]/page");
     await expect(page.default({ params: Promise.resolve({ moveId: "guapea" }) })).rejects.toThrow();

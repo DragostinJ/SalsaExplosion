@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search } from "lucide-react";
@@ -8,11 +8,24 @@ import { CATEGORY_INK, MovePosterCard, type MoveCardData } from "@/components/mo
 import { RUEDA_LEVELS, RUEDA_LEVEL_INK } from "@/components/rueda/rueda-level-ink";
 import { TYPE } from "@/components/poster/poster-kit";
 import { MOVE_CATEGORIES, type MoveCategory } from "@/lib/moves/move-categories";
+import { MOVES_LIST_URL_KEY, moveFiltersSearch, parseMoveFilters, type MoveFilters } from "@/lib/moves/move-filters-url";
 import type { CurriculumLevel } from "@/lib/constants/cuban-curriculum-2027";
 import { cn } from "@/lib/utils";
 
 type LevelFilter = "ALL" | CurriculumLevel;
 type FamilyFilter = "ALL" | MoveCategory;
+
+// replaceState doesn't fire an event, so filter changes announce themselves; back/forward fire popstate
+const addressListeners = new Set<() => void>();
+function subscribeToAddress(listener: () => void) {
+  addressListeners.add(listener);
+  window.addEventListener("popstate", listener);
+  return () => {
+    addressListeners.delete(listener);
+    window.removeEventListener("popstate", listener);
+  };
+}
+const notifyAddress = () => addressListeners.forEach((listener) => listener());
 
 /** Posters shown per family before the rest are listed by name (until the dancer searches or filters). */
 const PREVIEW_POSTERS = 4;
@@ -47,14 +60,34 @@ function FamilyPicture({ art }: { art?: { src: string; width: number; height: nu
 
 /** The move library with search, level and family filters over the poster cards. */
 export function MoveLibraryFilters({ moves, familyArt = {} }: { moves: readonly MoveCardData[]; familyArt?: FamilyArt }) {
-  const [query, setQuery] = useState("");
-  const [level, setLevel] = useState<LevelFilter>("ALL");
-  const [family, setFamily] = useState<FamilyFilter>("ALL");
-
   const familiesPresent = useMemo(
     () => MOVE_CATEGORIES.filter((category) => moves.some((move) => move.category === category)),
     [moves]
   );
+
+  // The address is the single source of truth, so back, reload and "All moves" bring the list back
+  const search = useSyncExternalStore(subscribeToAddress, () => window.location.search, () => "");
+  const filters = useMemo(() => parseMoveFilters(search, RUEDA_LEVELS, familiesPresent), [search, familiesPresent]);
+  const { query, level, family } = filters;
+  const expanded = useMemo<ReadonlySet<MoveCategory>>(() => new Set(filters.open), [filters.open]);
+
+  const update = (patch: Partial<MoveFilters<CurriculumLevel, MoveCategory>>) => {
+    const next = { ...filters, ...patch };
+    window.history.replaceState(null, "", `${window.location.pathname}${moveFiltersSearch(next)}`);
+    notifyAddress();
+  };
+  const setQuery = (value: string) => update({ query: value });
+  const setLevel = (value: LevelFilter) => update({ level: value });
+  const setFamily = (value: FamilyFilter) => update({ family: value });
+
+  // Remembered for the "All moves" link on each move page
+  useEffect(() => {
+    try {
+      window.sessionStorage.setItem(MOVES_LIST_URL_KEY, `${window.location.pathname}${search}`);
+    } catch {
+      // Storage blocked: "All moves" just opens the plain list
+    }
+  }, [search]);
 
   const filtered = useMemo(() => {
     const q = fold(query.trim());
@@ -77,14 +110,9 @@ export function MoveLibraryFilters({ moves, familyArt = {} }: { moves: readonly 
 
   // Unfiltered, a family shows its first few posters and lists the rest by name: 240 posters made
   // the page over 100 phone screens long. Searching or filtering shows every match as a poster.
-  const [expanded, setExpanded] = useState<ReadonlySet<MoveCategory>>(() => new Set());
   const filtering = query.trim() !== "" || level !== "ALL" || family !== "ALL";
 
-  const reset = () => {
-    setQuery("");
-    setLevel("ALL");
-    setFamily("ALL");
-  };
+  const reset = () => update({ query: "", level: "ALL", family: "ALL" });
 
   return (
     <div className="space-y-10">
@@ -189,7 +217,7 @@ export function MoveLibraryFilters({ moves, familyArt = {} }: { moves: readonly 
                   </ul>
                   <button
                     type="button"
-                    onClick={() => setExpanded((open) => new Set(open).add(section.category))}
+                    onClick={() => update({ open: [...expanded, section.category] })}
                     className="mt-3 inline-flex min-h-[44px] items-center border-4 border-ink bg-paper px-4 text-sm font-bold uppercase tracking-wider text-ink"
                   >
                     Show all {section.moves.length} as posters

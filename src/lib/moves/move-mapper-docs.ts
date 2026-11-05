@@ -7,11 +7,15 @@ import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
  * Move Mapper run ("Song map:"), so musicality rows use the player's section names. The times
  * belong to the song's own video; another upload of the same song is cut differently.
  */
+/** One song's sections as "Song map:" lines, or null for an unknown song id. */
+export function songMapLines(songId: string): string[] | null {
+  const song = TIMBA_SONG_ANATOMY_DATA.find((s) => s.id === songId);
+  return song ? song.segments.map((s) => `${s.formattedRange} ${s.sectionName} [${s.danceGear}]: ${s.musicalTrigger}`) : null;
+}
+
 export function buildSongMapsMarkdown(): string {
   const songs = TIMBA_SONG_ANATOMY_DATA.map((song) => {
-    const lines = song.segments.map(
-      (s) => `${s.formattedRange} ${s.sectionName} [${s.danceGear}]: ${s.musicalTrigger}`
-    );
+    const lines = songMapLines(song.id) ?? [];
     return `## ${song.title} (\`${song.id}\`)
 
 Only for https://www.youtube.com/watch?v=${song.youtubeVideoId}

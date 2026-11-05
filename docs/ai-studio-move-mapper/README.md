@@ -2,7 +2,7 @@
 
 The Move Mapper watches a YouTube clip of dancers and writes down what they dance, row by row: the figures, shines, rumba, body movement, and how they react to the music. A teacher checks every row against the video before any dancer sees it.
 
-Everything here except this README and `build-app-prompt.md` is generated from the app's move library and songs:
+Everything here except this README, `build-app-prompt.md` and `chat-version.md` is generated from the app's move library and songs:
 
 ```bash
 npx tsx scripts/ai-studio-move-mapper.ts   # re-run after the library or the songs change
@@ -10,7 +10,8 @@ npx tsx scripts/ai-studio-move-mapper.ts   # re-run after the library or the son
 
 | File | What it is |
 |---|---|
-| `build-app-prompt.md` | Paste into AI Studio **Build** to (re)build the Move Mapper app. Start here. |
+| `build-app-prompt.md` | Paste into AI Studio **Build** to (re)build the Move Mapper app. It runs on the free API key (20 requests a day on 3.8 Flash, no Argon). |
+| `chat-version.md` | The same job in a plain AI Studio chat, on the Google AI Pro allowance with Argon. `scripts/move-mapper-chat.ts` cuts the pieces and joins the answers. |
 | `system-instructions.txt` | Pass 2, the mapper: how to describe and name what is danced, plus the catalogue of every move dancers can see. |
 | `response-schema.json` | Pass 2 structured output. Gemini can only answer with real move ids. |
 | `response-schema-lite.json` | The same without the move-id list. Use it only if AI Studio says the schema is too big. |
@@ -64,6 +65,8 @@ Congress workshop demos are ideal, because the teachers dance the combination sl
 Set Focus to **musicality**. If the clip is one of our songs' own videos, paste that song's block from `song-maps.md` as the song map. Every reaction to the music becomes its own row, for example "brass hits on 1 and 2: both freeze". This is where pros teach the most, and it is easier for Gemini than hand changes, because the whole body moves.
 
 ## Without the app (plain AI Studio chat)
+
+Use `chat-version.md`: a script writes every message below for you and joins the answers. By hand:
 
 1. Choose the strongest Gemini model that accepts video.
 2. Set System instructions to `system-instructions.txt`.

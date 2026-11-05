@@ -70,7 +70,7 @@ export default async function Home() {
         <section className="relative overflow-hidden px-4 pb-10 pt-8 md:px-10 md:pb-14 md:pt-12">
           <div
             aria-hidden="true"
-            className="absolute -right-28 top-16 h-[380px] w-[380px] rounded-full bg-poster-red md:right-[8%] md:top-10 md:h-[600px] md:w-[600px]"
+            className="absolute right-0 translate-x-1/3 top-16 h-[380px] w-[380px] rounded-full bg-poster-red md:right-[8%] md:translate-x-0 md:top-10 md:h-[600px] md:w-[600px]"
           />
           <div aria-hidden="true" className="absolute left-0 top-[52%] h-40 w-3/4 md:top-24 md:h-64 md:w-1/3" style={halftone(POSTER_INK.mustard)} />
 

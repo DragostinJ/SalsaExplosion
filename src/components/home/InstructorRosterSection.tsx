@@ -332,7 +332,7 @@ export function InstructorRosterSection({ id = "instructors", photos }: Instruct
                     type="button"
                     aria-label={`View ${inst.name}`}
                     onClick={() => scrollToCard(idx)}
-                    className="p-2 min-h-[40px] min-w-[38px] inline-flex items-center justify-center cursor-pointer"
+                    className="p-1 min-h-[40px] min-w-[20px] inline-flex items-center justify-center cursor-pointer"
                   >
                     <span
                       className={`h-2 rounded-full transition-all duration-300 ${

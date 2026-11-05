@@ -421,7 +421,7 @@ export function CubanCurriculumSkillTree({
                 type="button"
                 data-testid="toggle-all-maestro-tips"
                 onClick={() => setExpandAllTips(!expandAllTips)}
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-300 hover:underline"
+                className="inline-flex min-h-[40px] items-center gap-1.5 py-1.5 text-xs font-extrabold text-amber-300 hover:underline"
               >
                 <HelpCircle className="h-3.5 w-3.5" />
                 <span>{expandAllTips ? "Collapse All Maestro Tips" : "Expand All Maestro Tips"}</span>

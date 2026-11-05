@@ -242,10 +242,52 @@ function analyzeActionCalls(
   return events;
 }
 
+/** The source of every top-level function in a file, so a local guard's own role check can be read. */
+function topLevelFunctionTexts(sf: ts.SourceFile): Map<string, string> {
+  const texts = new Map<string, string>();
+  for (const stmt of sf.statements) {
+    if (ts.isFunctionDeclaration(stmt) && stmt.name && stmt.body) {
+      texts.set(stmt.name.text, stmt.body.getText(sf));
+    } else if (ts.isVariableStatement(stmt)) {
+      for (const decl of stmt.declarationList.declarations) {
+        if (
+          ts.isIdentifier(decl.name) &&
+          decl.initializer &&
+          (ts.isArrowFunction(decl.initializer) || ts.isFunctionExpression(decl.initializer))
+        ) {
+          texts.set(decl.name.text, decl.initializer.body.getText(sf));
+        }
+      }
+    }
+  }
+  return texts;
+}
+
+/**
+ * Finding out WHO the caller is (getOrProvisionCurrentUser) is not the same as checking WHAT they
+ * may do. A "staff" or "owner" action must also check the role, in its own body or in a local
+ * guard it calls; otherwise any signed-in dancer could call it (server actions are public endpoints).
+ */
+const STAFF_ROLE_CHECK = /requireRole\s*\(|STAFF_ROLES|ADMIN_ONLY|Role\.(INSTRUCTOR|ADMIN)\b|canSwitchRoles\s*\(/;
+const OWNER_ROLE_CHECK = /ADMIN_ONLY|canSwitchRoles\s*\(|requireRole\s*\(\s*\[\s*Role\.ADMIN\s*\]/;
+
+function roleCheckText(action: ExportedAction, localGuards: Set<string>, functionTexts: Map<string, string>): string {
+  const own = action.node.body?.getText(action.sourceFile) ?? "";
+  const guards = [...localGuards].filter((name) => new RegExp(`\\b${name}\\s*\\(`).test(own));
+  return [own, ...guards.map((name) => functionTexts.get(name) ?? "")].join("\n");
+}
+
+/** True when the code only lets Role.ADMIN through (an owner check), not instructors too. */
+function checksOwner(text: string): boolean {
+  if (OWNER_ROLE_CHECK.test(text)) return true;
+  return /Role\.ADMIN\b/.test(text) && !/Role\.INSTRUCTOR\b|STAFF_ROLES/.test(text);
+}
+
 describe("Server Action Access Guard", () => {
   const serverFiles = discoverServerActionFiles();
   const allActions: ExportedAction[] = [];
   const fileLocalGuards = new Map<string, Set<string>>();
+  const fileFunctionTexts = new Map<string, Map<string, string>>();
 
   for (const relPath of serverFiles) {
     const fullPath = path.join(REPO_ROOT, relPath);
@@ -253,6 +295,7 @@ describe("Server Action Access Guard", () => {
     const sf = ts.createSourceFile(fullPath, content, ts.ScriptTarget.Latest, true);
     const { localGuards } = discoverLocalGuards(sf);
     fileLocalGuards.set(relPath, localGuards);
+    fileFunctionTexts.set(relPath, topLevelFunctionTexts(sf));
 
     const actions = extractExportedActions(relPath, sf);
     allActions.push(...actions);
@@ -331,6 +374,21 @@ describe("Server Action Access Guard", () => {
             violations.push(
               `[${key}] declared as "${entry.access}" invokes sensitive operation [${firstSensitive.expressionText}] BEFORE calling auth guard [${firstAuth.expressionText}]. Fix: move the auth check to precede all database, AI, and email calls.`
             );
+          }
+
+          // Staff and owner actions must also check the caller's role, not only who they are
+          if (entry.access === "staff" || entry.access === "owner") {
+            const text = roleCheckText(action, localGuards, fileFunctionTexts.get(action.file) ?? new Map());
+            if (entry.access === "staff" && !STAFF_ROLE_CHECK.test(text)) {
+              violations.push(
+                `[${key}] declared as "staff" but never checks the caller's role (requireRole, STAFF_ROLES or Role.INSTRUCTOR/ADMIN). Fix: refuse dancers before doing anything.`
+              );
+            }
+            if (entry.access === "owner" && !checksOwner(text)) {
+              violations.push(
+                `[${key}] declared as "owner" but lets teachers through or never checks the role. Fix: requireRole(ADMIN_ONLY).`
+              );
+            }
           }
           break;
         }

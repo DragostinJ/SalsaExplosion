@@ -29,8 +29,8 @@ export const SERVER_ACTION_MANIFEST: Record<string, ActionAccessManifestEntry> =
     reason: "Staff only AI coaching plan generator validated against syllabus figures via requireAiStudioStaff.",
   },
   "src/actions/ai-studio.actions.ts#parseFacebookPostToEventAction": {
-    access: "public",
-    reason: "Public read-only AI event flyer extraction preview open to guest instructors; protected by checkAiRateLimit.",
+    access: "staff",
+    reason: "Staff only flyer reader on the AI Studio page via requireAiStudioStaff; every call spends the site's Gemini allowance (was open to anyone until the 2026-11-05 review).",
   },
   "src/actions/ai-studio.actions.ts#approveAndPublishEventAction": {
     access: "staff",

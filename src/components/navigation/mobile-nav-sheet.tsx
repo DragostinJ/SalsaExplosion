@@ -80,23 +80,29 @@ export function MobileNavSheet({
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
 
-    // Remember what opened the menu (the ☰ button), so closing it hands focus back there
-    // instead of dropping keyboard users at the top of the page (WCAG 2.4.3 focus order)
-    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
-    // Initial focus on sheet container or close button
-    const closeBtn = sheetRef.current?.querySelector<HTMLButtonElement>("button");
-    closeBtn?.focus();
-
     return () => {
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  // Focus moves only when the menu opens or closes. The effect above re-runs whenever the parent
+  // passes a new onClose (e.g. when the sign-in check finishes while the menu is open), so focus
+  // handling there pulled focus back to ✕ mid-use and lost track of the ☰ button.
+  useEffect(() => {
+    if (!isOpen) return;
+    // Remember what opened the menu (the ☰ button), so closing it hands focus back there
+    // instead of dropping keyboard users at the top of the page (WCAG 2.4.3 focus order)
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    sheetRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+
+    return () => {
       // The sheet is gone by now, so focus fell to <body>; put it back on the opener
       if (opener?.isConnected && (!document.activeElement || document.activeElement === document.body)) {
         opener.focus();
       }
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   if (!isOpen || !mounted || typeof document === "undefined") return null;
 

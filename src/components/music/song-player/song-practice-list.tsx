@@ -28,7 +28,7 @@ export function SongPracticeList() {
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="min-w-0">
-                  <span className="block truncate font-display text-3xl leading-none group-hover:underline">
+                  <span className="block truncate font-display text-3xl leading-normal py-0.5 group-hover:underline">
                     {displaySongTitle(song.title)}
                   </span>
                   <span className="mt-1 block truncate text-sm font-medium">{song.artist}</span>

@@ -21,7 +21,9 @@ export function JsonLdSchema() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["DanceSchool", "LocalBusiness", "PerformingArtsTheater"],
+        // Real schema.org types only: "DanceSchool" does not exist (schema.org/DanceSchool is a 404),
+        // and PerformingArtsTheater means a theatre building; the school rents studios at BOH Studios.
+        "@type": ["LocalBusiness", "EducationalOrganization"],
         "@id": `${getSiteOrigin()}/#organization`,
         name: "Salsa Explosion UK — Cuban Salsa & Rueda de Casino Bournemouth",
         alternateName: "Salsa Explosion UK — Bournemouth Cuban Salsa Academy",

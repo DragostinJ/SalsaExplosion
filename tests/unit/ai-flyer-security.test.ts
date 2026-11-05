@@ -266,6 +266,20 @@ describe("Multimodal Flyer Upload & AI Vision Defense-in-Depth Security Suite", 
       expect(JSON.stringify(live.data)).not.toContain("base64");
     });
 
+    it("blocks students and anonymous visitors from reading flyers with Gemini (it spends the site's allowance)", async () => {
+      const post = { rawFacebookText: "SALSA PARTY at BOH Studios on Saturday with Maestro Enrique!" };
+
+      vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(mockUser(Role.STUDENT, "user_student_1"));
+      const studentParse = await parseFacebookPostToEventAction(post);
+      expect(studentParse.success).toBe(false);
+      expect(studentParse.error).toContain("Only teachers and the owner");
+
+      vi.mocked(getOrProvisionCurrentUser).mockResolvedValue(null);
+      const anonParse = await parseFacebookPostToEventAction(post);
+      expect(anonParse.success).toBe(false);
+      expect(anonParse.error).toContain("signed in");
+    });
+
     it("blocks students and anonymous visitors from publishing or removing events", async () => {
       const card = ParsedEventCardSchema.parse({
         id: "fake-party",

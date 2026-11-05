@@ -183,16 +183,20 @@ Generate:
 export async function parseFacebookPostToEventAction(
   rawInput: FlyerAndPostImportInput
 ): Promise<AiActionResponse<ParsedEventCard>> {
+  // Staff only: it is used on the staff AI Studio page, and every call spends the site's Gemini
+  // allowance. Server actions are public endpoints, so an open one let anyone burn that allowance.
+  const staff = await requireAiStudioStaff();
+  if (!staff.ok) {
+    return { success: false, error: staff.error };
+  }
+
   const parsedInput = FlyerAndPostImportInputSchema.safeParse(rawInput);
   if (!parsedInput.success) {
     const errorMsg = parsedInput.error.issues[0]?.message || "Invalid input";
     return { success: false, error: errorMsg };
   }
 
-  // fallback-guard-exempt: Read-only AI extraction action open to guest preview
-  const user = await getOrProvisionCurrentUser();
-  const identifier = user?.id || "anonymous-instructor-session";
-  const rateLimitResult = checkAiRateLimit(identifier, 10, 60);
+  const rateLimitResult = checkAiRateLimit(staff.userId, 10, 60);
 
   if (!rateLimitResult.allowed) {
     return {

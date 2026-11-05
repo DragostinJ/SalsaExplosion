@@ -682,7 +682,7 @@ export default async function EventDetailPage({
             </div>
             <Link
               href="/terms#refunds"
-              className="font-bold uppercase text-accent-red hover:underline shrink-0"
+              className="inline-flex items-center min-h-[40px] py-2 font-bold uppercase text-accent-red hover:underline shrink-0"
             >
               Transfer Policy →
             </Link>

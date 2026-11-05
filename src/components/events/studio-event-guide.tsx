@@ -191,10 +191,10 @@ export function StudioEventGuide({
           {STUDIO_FAQS.map((faq, index) => {
             const isOpen = openFaqIndices.includes(index);
             return (
-              <div key={faq.question} className="p-4">
+              <div key={faq.question} className="px-4 py-1.5">
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between text-left text-sm font-bold text-ink hover:text-poster-red transition-colors"
+                  className="flex min-h-[44px] w-full items-center justify-between py-2 text-left text-sm font-bold text-ink hover:text-poster-red transition-colors"
                   onClick={() => toggleFaq(index)}
                   aria-expanded={isOpen}
                 >

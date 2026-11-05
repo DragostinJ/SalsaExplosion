@@ -20,7 +20,7 @@ export function BackButton({
       variant="ghost"
       size="sm"
       asChild
-      className={`inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground ${className}`}
+      className={`min-h-[40px] inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground ${className}`}
     >
       <Link href={fallbackUrl}>
         <ArrowLeft className="h-4 w-4" />

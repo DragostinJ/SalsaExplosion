@@ -33,7 +33,7 @@ export function AddToCalendarButton({
         size={size}
         variant={variant}
         onClick={() => setShowOptions((prev) => !prev)}
-        className={`text-xs font-semibold ${className}`}
+        className={`min-h-[40px] text-xs font-semibold ${className}`}
       >
         <Calendar className="mr-1.5 h-3.5 w-3.5 text-amber-600" />
         Add to Calendar

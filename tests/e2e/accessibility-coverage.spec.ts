@@ -309,9 +309,10 @@ test.describe("Task 4: Accessibility Coverage & WCAG 2.1 AA Audits", () => {
       const sheet = page.locator('[data-testid="mobile-nav-panel"]');
       await expect(sheet).toBeVisible();
 
-      // Escape key closes it
+      // Escape key closes it and hands focus back to the menu button (WCAG 2.4.3)
       await page.keyboard.press("Escape");
       await expect(sheet).not.toBeVisible();
+      await expect(menuBtn).toBeFocused();
     });
   });
 });

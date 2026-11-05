@@ -80,6 +80,10 @@ export function MobileNavSheet({
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
 
+    // Remember what opened the menu (the ☰ button), so closing it hands focus back there
+    // instead of dropping keyboard users at the top of the page (WCAG 2.4.3 focus order)
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
     // Initial focus on sheet container or close button
     const closeBtn = sheetRef.current?.querySelector<HTMLButtonElement>("button");
     closeBtn?.focus();
@@ -87,6 +91,10 @@ export function MobileNavSheet({
     return () => {
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
+      // The sheet is gone by now, so focus fell to <body>; put it back on the opener
+      if (opener?.isConnected && (!document.activeElement || document.activeElement === document.body)) {
+        opener.focus();
+      }
     };
   }, [isOpen, onClose]);
 

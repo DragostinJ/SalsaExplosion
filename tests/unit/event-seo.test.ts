@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { afterEach, beforeEach, describe, it, expect, vi } from "vitest";
 import {
   buildFestivalEventJsonLd,
   buildWeeklyClassCourseJsonLd,
@@ -10,6 +10,22 @@ import {
   WEEKLY_SCHEDULE,
   VENUE_INFO,
 } from "@/lib/academy-data";
+
+// These tests expect the school's fallback address, so they must not depend on the machine's
+// settings: CI sets NEXT_PUBLIC_APP_URL, and on Vercel the site address comes from Vercel.
+beforeEach(() => {
+  for (const name of [
+    "NEXT_PUBLIC_APP_URL",
+    "NEXT_PUBLIC_VERCEL_ENV",
+    "VERCEL_ENV",
+    "NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL",
+    "VERCEL_PROJECT_PRODUCTION_URL",
+  ]) {
+    vi.stubEnv(name, "");
+  }
+});
+
+afterEach(() => vi.unstubAllEnvs());
 
 describe("Event and Class SEO Structured Data (schema.org)", () => {
   describe("Festival and Special Event JSON-LD", () => {

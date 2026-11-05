@@ -159,7 +159,7 @@ Knip dead-code analysis (`npx knip@5 --reporter compact`) identified the followi
 7. `src/lib/hooks/use-prefers-reduced-motion.ts`: Unused accessibility hook.
 
 #### Unused devDependencies (1)
-- `@tailwindcss/turbopack`: Redundant dependency; Next.js 15+ Turbopack handles Tailwind CSS natively.
+- `@tailwindcss/turbopack`: Redundant dependency; Next.js 15+ Turbopack handles Tailwind CSS natively. **Wrong: see "Dead code outcome" in section 6. Do not remove this package.**
 
 #### Unlisted Dependencies (1)
 - `scripts/visual-audit.mjs: playwright`: Imports `playwright` directly while `@playwright/test` is declared in devDependencies.
@@ -238,11 +238,16 @@ The sweep stayed inside its limits: the only source changes are the check-in aud
 | `5b8552e` | The layout test waits for the page to finish loading before it scrolls, and asserts CLS < 0.1 on every page with no exceptions (14/14 pass). |
 | `74a2981` + next | Closing the phone menu (Escape, ✕ or backdrop) returns focus to the ☰ button; the keyboard e2e test asserts it (10/10 repeats). Focus now moves only when the menu opens or closes: the old effect re-ran whenever the parent passed a new `onClose` (e.g. when the sign-in check finished), which pulled focus back to ✕ mid-use. |
 
-**Gates after the review:** `tsc` 0 errors; ESLint 0 problems; Vitest 111 files / 720 tests; production build 0 warnings; design audit 11 routes pass; Playwright 175 passed, 4 skipped (signed-in), in about 5 minutes on a production build (port 3100). One run had a single 45-second page-load timeout on `/` (outside services such as Clerk); that test passed 9/9 on re-run.
+**Gates after the review:** `tsc` 0 errors; ESLint 0 errors and 1 warning (an unused type import in `server-action-access.test.ts`, left from the sweep, first misreported here as 0 problems, and removed with the dead code); Vitest 111 files / 720 tests; production build 0 warnings; design audit 11 routes pass; Playwright 175 passed, 4 skipped (signed-in), in about 5 minutes on a production build (port 3100). One run had a single 45-second page-load timeout on `/` (outside services such as Clerk); that test passed 9/9 on re-run.
 
 Also merged: `feat/move-back-links` and `feat/move-mapper-chat` (one-line `AGENTS.md` conflict).
 
 ### Left for the owner to decide
 
-- **Dead code from knip:** the 7 unused files and `@tailwindcss/turbopack` are listed above. Nothing was deleted.
+- **The merch code has no screen left:** with `shop-client.tsx` gone, only tests import `src/actions/shop.actions.ts` and `src/lib/constants/shop.ts`. Dancers see no change, because `/shop` already redirected to `/pricing` and nothing rendered that component.
 - **The two actions that stay public are fine as they are:** `submitAnonymousQuestionAction` (beginners' questions) and `recordPracticeEventAction` (practice stats) are both rate-limited and neither calls Gemini.
+
+### Dead code outcome (2026-11-05, owner's decision)
+
+- **Deleted:** the 7 unused files listed in section 3. Nothing else referred to them, and knip finds no new orphans.
+- **Kept: `@tailwindcss/turbopack`. The finding in section 3 is wrong.** `next.config.ts` runs it on every `*.css` file and the project has no PostCSS config, so it is the only thing compiling Tailwind. A test build without it exited 0 with no warning, but the CSS fell from 184 KB to 36 KB and `.flex` and `.grid` were gone, so the site would have shipped unstyled. knip 6.44.1 does not flag the package; the sweep's `knip@5` run did.

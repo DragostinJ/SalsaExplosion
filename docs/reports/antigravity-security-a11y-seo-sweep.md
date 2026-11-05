@@ -208,3 +208,41 @@ Knip dead-code analysis (`npx knip@5 --reporter compact`) identified the followi
  tests/unit/server-action-access.test.ts            | 387 +++++++++++++
  19 files changed, 3548 insertions(+), 16 deletions(-)
 ```
+
+---
+
+## 6. Review (Claude, branch `chore/sweep-reviewed`, 2026-11-05)
+
+The sweep stayed inside its limits: the only source changes are the check-in audit log (Limit A) and one `data-testid` (Limit D). The tests call the real actions and pass. Parts of this report, however, describe code that does not exist, and three findings were wrong. Corrections first, then what the review changed.
+
+### Corrections to this report
+
+- **Action names (Tasks 2 and 3) are invented.** None of these 14 names exist in `src`: `lookupStudentForCheckinAction`, `checkinStudentAction`, `markStudentNoShowAction`, `undoStudentCheckinAction`, `getStudentRosterAction`, `getStudentProfileDetailsAction`, `promoteStudentLevelAction`, `updateStudentNotesAction`, `getTeacherQuestionsAction`, `answerTeacherQuestionAction`, `getMerchCatalogAction`, `updateMerchStockAction`, `getCoachingNotesAction`, `saveCoachingNoteAction`. The real actions the new test files cover:
+  - check-in: `toggleBookingCheckInAction`, `selfCheckInClassQrAction`, `toggleEventRegistrationCheckInAction` (19 tests);
+  - roster: `switchMyAccountRoleAction`, `getCurrentUserRoleAction`, `updateStudentProgressionAction`, `createClassSessionAction`, `analyzeSubmissionWithAiAction`, `updateMyDanceRolePreferenceAction`, `cancelClassSessionWithRefundsAction`, `updateClassSessionCapacityAction` (19 tests);
+  - Q&A `replyAnonymousQuestionAction`, merch `updateMerchReservationStatusAction`, coaching `updatePrivateLessonBookingStatusAction` (5 tests each).
+- **The audit fix (Task 3)** is in `toggleBookingCheckInAction` (metadata `kind`, `from`, `to`) and `toggleEventRegistrationCheckInAction` (`kind`, `checkedIn`). The self check-in by QR is left unlogged, as the brief asked.
+- **Access levels** in the manifest are `public`, `signed-in`, `staff`, `owner`, `refuses` and `delegates`, not "ANONYMOUS / AUTHENTICATED / ADMIN_INSTRUCTOR".
+- **The guard did not enforce roles.** "Staff mutations cannot be executed without role verification" was not true: a staff or owner action only had to look up the caller (`getOrProvisionCurrentUser`), which any signed-in dancer passes.
+- **The CLS numbers (0.47, 0.62, 0.92) are a test artefact.** The test scrolled to the footer right after DOMContentLoaded, while `/classes` was still streaming its class list in, and then accepted anything under 1.0. From a normal start these pages measure 0 (separate script, production build, 2026-11-05).
+- **`DanceSchool` is not a schema.org type** (schema.org/DanceSchool is a 404). "Standardise to DanceSchool" would have left the business entity with no valid type at all.
+- **Missed access mismatch:** `parseFacebookPostToEventAction` was recorded as `public`, but it calls Gemini and is only used on the staff AI Studio page.
+
+### What the review changed
+
+| Commit | Change |
+|---|---|
+| `67fcb39` | The flyer reader is staff only (`requireAiStudioStaff`) and rate-limited per user; any visitor could previously spend the site's Gemini allowance. Tests for student and anonymous callers. |
+| `b26bdfb` | The access guard now requires a real role check: `staff` needs `requireRole`, `STAFF_ROLES` or `Role.INSTRUCTOR/ADMIN`; `owner` must admit only admins. Proved with a scratch leak (reverted): removing the role check from `replyAnonymousQuestionAction`, and downgrading `exportStudentRosterCsvAction` to `STAFF_ROLES`, both fail. All 27 staff and owner actions pass. |
+| `085ee9c` | Business JSON-LD typed `["LocalBusiness", "EducationalOrganization"]`; a unit test fails on any `@type` outside a checked list. |
+| `5b8552e` | The layout test waits for the page to finish loading before it scrolls, and asserts CLS < 0.1 on every page with no exceptions (14/14 pass). |
+| `74a2981` + next | Closing the phone menu (Escape, ✕ or backdrop) returns focus to the ☰ button; the keyboard e2e test asserts it (10/10 repeats). Focus now moves only when the menu opens or closes: the old effect re-ran whenever the parent passed a new `onClose` (e.g. when the sign-in check finished), which pulled focus back to ✕ mid-use. |
+
+**Gates after the review:** `tsc` 0 errors; ESLint 0 problems; Vitest 111 files / 720 tests; production build 0 warnings; design audit 11 routes pass; Playwright 175 passed, 4 skipped (signed-in), in about 5 minutes on a production build (port 3100). One run had a single 45-second page-load timeout on `/` (outside services such as Clerk); that test passed 9/9 on re-run.
+
+Also merged: `feat/move-back-links` and `feat/move-mapper-chat` (one-line `AGENTS.md` conflict).
+
+### Left for the owner to decide
+
+- **Dead code from knip:** the 7 unused files and `@tailwindcss/turbopack` are listed above. Nothing was deleted.
+- **The two actions that stay public are fine as they are:** `submitAnonymousQuestionAction` (beginners' questions) and `recordPracticeEventAction` (practice stats) are both rate-limited and neither calls Gemini.

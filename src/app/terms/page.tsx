@@ -65,16 +65,16 @@ export default function TermsAndLegalPage() {
       {/* Quick Navigation Jump Bar */}
       <div className="flex flex-wrap items-center gap-2 border-4 border-ink bg-paper p-3.5 text-xs font-bold text-ink shadow-[4px_4px_0_0_var(--color-ink)]">
         <span className="text-ink/75 uppercase tracking-wider text-xs mr-1">Jump to:</span>
-        <a href="#identity" className="border-2 border-ink bg-paper px-3 py-1 text-ink hover:bg-ink hover:text-paper transition-colors">
+        <a href="#identity" className="inline-flex items-center min-h-[40px] border-2 border-ink bg-paper px-3 py-2 text-ink hover:bg-ink hover:text-paper transition-colors">
           1. Business Identity
         </a>
-        <a href="#refunds" className="border-2 border-ink bg-paper px-3 py-1 text-ink hover:bg-ink hover:text-paper transition-colors">
+        <a href="#refunds" className="inline-flex items-center min-h-[40px] border-2 border-ink bg-paper px-3 py-2 text-ink hover:bg-ink hover:text-paper transition-colors">
           2. Refunds &amp; Consumer Rights
         </a>
-        <a href="#health-safety" className="border-2 border-ink bg-paper px-3 py-1 text-ink hover:bg-ink hover:text-paper transition-colors">
+        <a href="#health-safety" className="inline-flex items-center min-h-[40px] border-2 border-ink bg-paper px-3 py-2 text-ink hover:bg-ink hover:text-paper transition-colors">
           3. Health &amp; Safety Duty of Care
         </a>
-        <a href="#privacy" className="border-2 border-ink bg-paper px-3 py-1 text-ink hover:bg-ink hover:text-paper transition-colors">
+        <a href="#privacy" className="inline-flex items-center min-h-[40px] border-2 border-ink bg-paper px-3 py-2 text-ink hover:bg-ink hover:text-paper transition-colors">
           4. UK GDPR Privacy Notice
         </a>
       </div>
@@ -106,13 +106,13 @@ export default function TermsAndLegalPage() {
             </div>
             <div>
               <span className="block font-bold text-ink/75 uppercase text-xs">Email Enquiries</span>
-              <a href="mailto:info@salsaexplosion.co.uk" className="font-bold text-accent-red hover:underline">
+              <a href="mailto:info@salsaexplosion.co.uk" className="inline-flex items-center min-h-[40px] py-1 font-bold text-accent-red hover:underline">
                 info@salsaexplosion.co.uk
               </a>
             </div>
             <div>
               <span className="block font-bold text-ink/75 uppercase text-xs">Studio Desk Phone &amp; WhatsApp</span>
-              <a href="tel:+447969633701" className="font-bold text-accent-red hover:underline">
+              <a href="tel:+447969633701" className="inline-flex items-center min-h-[40px] py-1 font-bold text-accent-red hover:underline">
                 07969 633701
               </a>
             </div>

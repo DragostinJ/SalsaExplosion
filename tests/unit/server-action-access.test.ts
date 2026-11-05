@@ -18,10 +18,7 @@ import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import ts from "typescript";
-import {
-  SERVER_ACTION_MANIFEST,
-  type ActionAccessLevel,
-} from "./server-action-access.manifest";
+import { SERVER_ACTION_MANIFEST } from "./server-action-access.manifest";
 
 const REPO_ROOT = path.resolve(__dirname, "../../");
 

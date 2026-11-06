@@ -262,10 +262,10 @@ export function SiteHeader({
               <Flame className="h-5 w-5 fill-ink" />
             </div>
             <div className="flex flex-col shrink-0 whitespace-nowrap">
-              <span className="font-display text-2xl leading-none whitespace-nowrap">
+              <span className="font-display text-[min(1.5rem,24px)] leading-none whitespace-nowrap">
                 Salsa <span className="text-poster-red">Explosion</span>
               </span>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] mt-0.5 whitespace-nowrap">
+              <span className="text-[min(0.75rem,12px)] font-bold uppercase tracking-[0.25em] mt-0.5 whitespace-nowrap">
                 Bournemouth • Cuba
               </span>
             </div>

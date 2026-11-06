@@ -116,8 +116,10 @@ export async function getOrProvisionCurrentUser() {
 
     const primaryAddress = clerkUser?.primaryEmailAddress;
     if (primaryAddress?.emailAddress && primaryAddress.verification?.status === "verified") {
-      const relinked = await relinkUserByVerifiedEmail(clerkId, primaryAddress.emailAddress);
-      if (relinked) return relinked;
+      if (await relinkUserByVerifiedEmail(clerkId, primaryAddress.emailAddress)) {
+        const relinked = await prisma.user.findUnique({ where: { clerkId }, include: { subscription: true } });
+        if (relinked) return relinked;
+      }
     }
 
     const isAdmin = isBootstrapAdmin(primaryEmail);

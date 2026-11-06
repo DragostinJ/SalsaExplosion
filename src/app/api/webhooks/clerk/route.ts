@@ -78,8 +78,9 @@ export async function POST(req: Request) {
 
       // The same person on a new Clerk instance: keep their account, passes and role
       if (email_addresses?.[0]?.verification?.status === "verified") {
-        const relinked = await relinkUserByVerifiedEmail(id, primaryEmail);
-        if (relinked) return NextResponse.json({ success: true, relinked: true }, { status: 200 });
+        if (await relinkUserByVerifiedEmail(id, primaryEmail)) {
+          return NextResponse.json({ success: true, relinked: true }, { status: 200 });
+        }
       }
 
       // Security: Roles are server-controlled. Only whitelisted emails can become ADMIN.

@@ -62,7 +62,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
           <Link
             key={item.href}
             href={item.href}
-            className={`relative flex flex-col items-center justify-center flex-1 h-full py-1 text-xs font-bold transition-all ${
+            className={`relative flex min-w-0 flex-col items-center justify-center flex-1 h-full py-1 text-[min(0.75rem,12px)] font-bold transition-all ${
               item.isActive
                 ? "text-ink font-black"
                 : "text-ivory-muted hover:text-ink"
@@ -86,7 +86,7 @@ export function MobileBottomNav({ onOpenMenu }: MobileBottomNavProps) {
         type="button"
         onClick={triggerDrawer}
         aria-label="Open More Menu"
-        className="flex flex-col items-center justify-center flex-1 h-full py-1 text-xs font-bold text-ivory-muted hover:text-ivory transition-all active:scale-95"
+        className="flex min-w-0 flex-col items-center justify-center flex-1 h-full py-1 text-[min(0.75rem,12px)] font-bold text-ivory-muted hover:text-ivory transition-all active:scale-95"
       >
         <Menu className="h-4.5 w-4.5 mb-0.5 text-ivory-muted" />
         <span className="leading-tight tracking-tight">Menu</span>

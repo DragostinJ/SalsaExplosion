@@ -40,26 +40,34 @@ describe("studioTimeToUtc", () => {
     expect(studioTimeToUtc(2027, 3, 28, "18:30").toISOString()).toBe("2027-03-28T17:30:00.000Z");
     expect(studioTimeToUtc(2027, 10, 31, "18:30").toISOString()).toBe("2027-10-31T18:30:00.000Z");
   });
+});
 
-  it("verifies Sunday 28 March 2027 clock change sessions and BST summer events display at correct UK times across timezones", () => {
-    // 1. Clock change Sunday: 28 March 2027 (clocks go forward at 01:00 UTC to BST)
-    const sundaySessionUtc = studioTimeToUtc(2027, 3, 28, "18:30");
-    expect(sundaySessionUtc.toISOString()).toBe("2027-03-28T17:30:00.000Z");
+describe("planWeeklySessions across the clock change on 28 March 2027", () => {
+  const ukTime = (date: Date) =>
+    date.toLocaleTimeString("en-GB", { timeZone: "Europe/London", hour: "2-digit", minute: "2-digit" });
+  const firstClassOn = (planned: { startTime: Date }[], isoDay: string) =>
+    planned
+      .filter((p) => p.startTime.toISOString().startsWith(isoDay))
+      .map((p) => p.startTime)
+      .sort((x, y) => x.getTime() - y.getTime())[0];
 
-    const formatInUkTime = (date: Date) =>
-      date.toLocaleTimeString("en-GB", { timeZone: "Europe/London", hour: "2-digit", minute: "2-digit" });
+  const { planned } = planWeeklySessions({ now: new Date("2027-03-22T12:00:00Z"), weeks: 2 });
 
-    expect(formatInUkTime(sundaySessionUtc)).toBe("18:30");
+  it("keeps the 7pm Thursday class at 7pm London the week before and the week after", () => {
+    const before = firstClassOn(planned, "2027-03-25");
+    const after = firstClassOn(planned, "2027-04-01");
+    expect(ukTime(before)).toBe("19:00");
+    expect(ukTime(after)).toBe("19:00");
+    // Same wall clock, an hour apart in UTC: that hour is the clock change
+    expect(before.toISOString()).toBe("2027-03-25T19:00:00.000Z");
+    expect(after.toISOString()).toBe("2027-04-01T18:00:00.000Z");
+  });
 
-    // 2. BST event: Saturday 3 April 2027 (starts at 19:30 BST / 18:30 UTC)
-    const aprilEventUtc = studioTimeToUtc(2027, 4, 3, "19:30");
-    expect(aprilEventUtc.toISOString()).toBe("2027-04-03T18:30:00.000Z");
-    expect(formatInUkTime(aprilEventUtc)).toBe("19:30");
-
-    // 3. BST event: Saturday 1 May 2027 (starts at 19:30 BST / 18:30 UTC)
-    const mayEventUtc = studioTimeToUtc(2027, 5, 1, "19:30");
-    expect(mayEventUtc.toISOString()).toBe("2027-05-01T18:30:00.000Z");
-    expect(formatInUkTime(mayEventUtc)).toBe("19:30");
+  it("keeps a class on the Sunday the clocks change at its London time", () => {
+    const sunday = firstClassOn(planned, "2027-03-28");
+    const sundayBefore = firstClassOn(planWeeklySessions({ now: new Date("2027-03-15T12:00:00Z"), weeks: 1 }).planned, "2027-03-21");
+    expect(ukTime(sunday)).toBe(ukTime(sundayBefore));
+    expect(sunday.getUTCHours()).toBe(sundayBefore.getUTCHours() - 1);
   });
 });
 

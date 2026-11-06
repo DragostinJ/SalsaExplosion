@@ -2,618 +2,302 @@ import type { Page } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 
-export interface CardDoctorProblem {
-  route: string;
-  width: number;
-  kind:
-    | "page_overflow"
-    | "spill"
-    | "clipping"
-    | "overlap"
-    | "squeezed_text"
-    | "bad_image"
-    | "junk_text"
-    | "touch_target";
+export type CardProblemKind =
+  | "page_overflow"
+  | "text_off_screen"
+  | "text_spill"
+  | "text_clipped"
+  | "control_off_screen"
+  | "word_broken"
+  | "img_broken"
+  | "img_no_alt"
+  | "img_stretched"
+  | "junk"
+  | "empty_box"
+  | "target_small"
+  | "overlap"
+  // Recorded so they stay visible, but they don't fail a test (see BLOCKING_KINDS)
+  | "squeezed"
+  | "text_truncated"
+  | "text_line_clamped"
+  | "target_small_footer";
+
+/** A dancer would see these as broken. Shortened text and tight columns are listed, not failed. */
+export const BLOCKING_KINDS: ReadonlySet<CardProblemKind> = new Set<CardProblemKind>([
+  "page_overflow",
+  "text_off_screen",
+  "text_spill",
+  "text_clipped",
+  "control_off_screen",
+  "word_broken",
+  "img_broken",
+  "img_no_alt",
+  "img_stretched",
+  "junk",
+  "empty_box",
+  "target_small",
+  "overlap",
+]);
+
+export interface CardProblem {
+  kind: CardProblemKind;
   selector: string;
-  textPreview: string;
-  measured: Record<string, unknown>;
-  screenshotPath?: string;
+  text: string;
+  measured: Record<string, string | number>;
 }
 
-/**
- * Diagnostics function that runs inside the page to identify broken cards,
- * text spills, clipping, overlaps, image defects, junk text, and bad touch targets.
- */
-export async function diagnosePage(
-  page: Page,
-  route: string,
-  width: number,
-  options: { takeScreenshots?: boolean; screenshotDir?: string } = {}
-): Promise<CardDoctorProblem[]> {
-  const screenshotDir =
-    options.screenshotDir || path.resolve(process.cwd(), ".audit-screenshots/site-check");
+export interface PageDiagnosis {
+  problems: CardProblem[];
+  scrollWidth: number;
+  scrollHeight: number;
+  innerWidth: number;
+  innerHeight: number;
+}
 
-  if (options.takeScreenshots && !fs.existsSync(screenshotDir)) {
-    fs.mkdirSync(screenshotDir, { recursive: true });
+/** Runs inside the browser, so it must not use anything from outside this function. */
+function diagnoseInPage({ checkOverlap }: { checkOverlap: boolean }): PageDiagnosis {
+  const problems: CardProblem[] = [];
+  const W = window.innerWidth;
+
+  const clean = (s: string | null | undefined) => (s ?? "").replace(/\s+/g, " ").trim();
+  const describe = (el: Element) => {
+    const classes = typeof el.className === "string" ? el.className.split(/\s+/).filter((c) => c && !c.includes(":")).slice(0, 3).join(".") : "";
+    const testId = el.getAttribute("data-testid");
+    return `${el.tagName.toLowerCase()}${testId ? `[${testId}]` : ""}${classes ? `.${classes}` : ""}`;
+  };
+  const add = (kind: CardProblemKind, el: Element, text: string | null | undefined, measured: Record<string, string | number> = {}) =>
+    problems.push({ kind, selector: describe(el), text: clean(text).slice(0, 70), measured });
+
+  const hiddenCache = new Map<Element, boolean>();
+  const isHidden = (el: Element): boolean => {
+    const cached = hiddenCache.get(el);
+    if (cached !== undefined) return cached;
+    let hidden = Boolean(el.closest("[aria-hidden='true'], iframe, svg, details:not([open]) > :not(summary)"));
+    for (let e: Element | null = el; e && !hidden; e = e.parentElement) {
+      // Clerk's own widgets aren't ours to check
+      if (typeof e.className === "string" && /(^|\s)cl-/.test(e.className)) hidden = true;
+      const s = getComputedStyle(e);
+      if (s.display === "none" || s.visibility === "hidden" || parseFloat(s.opacity) === 0 || e.classList.contains("sr-only")) hidden = true;
+    }
+    hiddenCache.set(el, hidden);
+    return hidden;
+  };
+  const inSideScroller = (el: Element) => {
+    for (let e = el.parentElement; e; e = e.parentElement) {
+      const o = getComputedStyle(e).overflowX;
+      if (o === "auto" || o === "scroll") return true;
+    }
+    return false;
+  };
+  const hasFill = (s: CSSStyleDeclaration) =>
+    (s.backgroundColor !== "rgba(0, 0, 0, 0)" && s.backgroundColor !== "transparent") ||
+    (parseFloat(s.borderLeftWidth) > 0 && s.borderLeftStyle !== "none" && parseFloat(s.borderRightWidth) > 0);
+  const hasStretchedOverlay = (el: Element) => getComputedStyle(el, "::after").position === "absolute";
+
+  if (document.documentElement.scrollWidth > W + 1) {
+    let widest: { right: number; el: Element } | null = null;
+    for (const el of document.body.querySelectorAll("*")) {
+      const right = el.getBoundingClientRect().right;
+      if (right > W + 1 && !inSideScroller(el) && (!widest || right > widest.right)) widest = { right, el };
+    }
+    add("page_overflow", widest ? widest.el : document.documentElement, widest?.el.textContent, { scrollWidth: document.documentElement.scrollWidth, W });
   }
 
-  // 1. Step-scroll to trigger lazy images, animations, and deferred elements
+  const JUNK: readonly (readonly [RegExp, string])[] = [
+    [/\bundefined\b/, "undefined"],
+    [/\bnull\b/, "null"],
+    [/\bNaN\b/, "NaN"],
+    [/\[object Object\]/, "object"],
+    [/Invalid Date/, "invalid date"],
+    [/lorem ipsum/i, "lorem"],
+    [/\bTODO\b/, "todo"],
+    [/\b[A-Z]{3,}_[A-Z0-9_]{3,}\b/, "raw enum"],
+    [/\u00C3.|\u00C2.|\u00E2\u20AC/, "mojibake"],
+    [/£\s*0(?![\d.])/, "£0"],
+    [/^[a-z]+(-[a-z0-9]+){1,}$/, "raw slug"],
+  ];
+
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    const raw = node.textContent ?? "";
+    if (!raw.trim()) continue;
+    const parent = node.parentElement;
+    if (!parent || /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE|TITLE)$/.test(parent.tagName) || isHidden(parent)) continue;
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    const rects = [...range.getClientRects()].filter((r) => r.width > 0 && r.height > 0);
+    if (rects.length === 0) continue;
+
+    for (const [pattern, name] of JUNK) {
+      if (pattern.test(raw.trim())) {
+        add("junk", parent, raw, { name });
+        break;
+      }
+    }
+    // A £ drawn in its own span next to the number is fine; a £ with no number nearby is not
+    if (/£\s*(?:$|[A-Za-z])/.test(raw.trim()) && !/\d/.test(parent.parentElement?.textContent ?? "")) add("junk", parent, raw, { name: "£ with no number" });
+
+    const parentStyle = getComputedStyle(parent);
+    const shortened = parentStyle.textOverflow === "ellipsis";
+    const clamped = Boolean(parentStyle.webkitLineClamp) && parentStyle.webkitLineClamp !== "none";
+    if (shortened && parent.scrollWidth > parent.clientWidth + 1) add("text_truncated", parent, raw, { full: parent.scrollWidth, shown: parent.clientWidth });
+    if (clamped && parent.scrollHeight > parent.clientHeight + 2) add("text_line_clamped", parent, raw, { full: parent.scrollHeight, shown: parent.clientHeight });
+
+    if (!inSideScroller(parent) && !shortened && !clamped) {
+      const maxRight = Math.max(...rects.map((r) => r.right));
+      const minLeft = Math.min(...rects.map((r) => r.left));
+      if (maxRight > W + 1 || minLeft < -1) add("text_off_screen", parent, raw, { right: Math.round(maxRight), left: Math.round(minLeft), W });
+
+      // Past the edge of a box it belongs to, or cut off by a clipping ancestor
+      let found = false;
+      for (let e: Element | null = parent; e && e !== document.body && !found; e = e.parentElement) {
+        const s = getComputedStyle(e);
+        const clips = /hidden|clip/.test(s.overflowX) || /hidden|clip/.test(s.overflowY);
+        if (!clips && !hasFill(s)) continue;
+        const box = e.getBoundingClientRect();
+        if (box.width < 40 || box.height < 16) continue;
+        for (const r of rects) {
+          // Tall display type legitimately pokes a few pixels above and below its line box
+          if (r.right - box.right > 1 || box.left - r.left > 1 || r.bottom - box.bottom > 3 || box.top - r.top > 3) {
+            add(clips ? "text_clipped" : "text_spill", parent, raw, { by: describe(e), over: Math.round(Math.max(r.right - box.right, box.left - r.left, r.bottom - box.bottom, box.top - r.top)) });
+            found = true;
+            break;
+          }
+        }
+      }
+    }
+
+    if (rects.length > 1 && raw.length < 500) {
+      for (const m of raw.matchAll(/[A-Za-zÀ-ÿ]{4,}/g)) {
+        const word = document.createRange();
+        word.setStart(node, m.index);
+        word.setEnd(node, m.index + m[0].length);
+        const tops = new Set([...word.getClientRects()].filter((r) => r.width > 0).map((r) => Math.round(r.top)));
+        if (tops.size > 1) {
+          add("word_broken", parent, m[0], { in: clean(raw).slice(0, 50) });
+          break;
+        }
+      }
+    }
+
+    const words = clean(raw).split(" ").length;
+    const lines = new Set(rects.map((r) => Math.round(r.top))).size;
+    const parentWidth = parent.getBoundingClientRect().width;
+    if (words >= 8 && lines >= 4 && words / lines < 2) add("squeezed", parent, raw, { words, lines });
+    else if (words >= 6 && parentWidth > 0 && parentWidth < 100) add("squeezed", parent, raw, { width: Math.round(parentWidth), words });
+  }
+
+  for (const img of document.querySelectorAll("img")) {
+    if (isHidden(img)) continue;
+    const r = img.getBoundingClientRect();
+    if (r.width < 2 || r.height < 2) continue;
+    if (img.complete && img.naturalWidth === 0) add("img_broken", img, img.getAttribute("src"));
+    if (!img.hasAttribute("alt")) add("img_no_alt", img, img.getAttribute("src"));
+    const fit = getComputedStyle(img).objectFit;
+    if (img.naturalWidth > 0 && fit !== "cover" && fit !== "contain") {
+      const natural = img.naturalWidth / img.naturalHeight;
+      const off = Math.abs(r.width / r.height - natural) / natural;
+      if (off > 0.02) add("img_stretched", img, img.getAttribute("src"), { percent: Math.round(off * 100) });
+    }
+  }
+
+  if (W <= 430) {
+    for (const control of document.querySelectorAll("a[href], button, summary, [role='button'], [role='tab']")) {
+      if (isHidden(control)) continue;
+      const r = control.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) continue;
+      const label = control.textContent || control.getAttribute("aria-label");
+      const inSentence = getComputedStyle(control).display === "inline" && clean(control.parentElement?.textContent).length > clean(control.textContent).length + 8;
+      if (!inSentence && r.height < 39.5 && !hasStretchedOverlay(control)) {
+        add(control.closest("footer") ? "target_small_footer" : "target_small", control, label, { height: Math.round(r.height) });
+      }
+      if (!inSideScroller(control) && (r.right > W + 1 || r.left < -1)) add("control_off_screen", control, label, { left: Math.round(r.left), right: Math.round(r.right), W });
+    }
+  }
+
+  for (const el of document.querySelectorAll("main div, main section, main article, main li")) {
+    const r = el.getBoundingClientRect();
+    if (r.width < 40 || r.height < 40) continue;
+    if (el.textContent?.trim() || el.querySelector("img,svg,canvas,video,iframe,picture,input,textarea,select")) continue;
+    const s = getComputedStyle(el);
+    const visible = (s.backgroundColor !== "rgba(0, 0, 0, 0)" && s.backgroundColor !== "transparent") || parseFloat(s.borderTopWidth) > 0;
+    if (visible && s.backgroundImage === "none" && !isHidden(el)) add("empty_box", el, "", { width: Math.round(r.width), height: Math.round(r.height) });
+  }
+
+  if (checkOverlap) {
+    // Scroll each sample to the middle of the screen: the top element there must be its own, or the header or nav is covering it.
+    const samples = [...document.querySelectorAll("main h1, main h2, main h3, main p, main a[href], main button, main li")].filter((e) => !isHidden(e) && e.getBoundingClientRect().height > 0);
+    const step = Math.max(1, Math.floor(samples.length / 40));
+    for (let i = 0; i < samples.length; i += step) {
+      const el = samples[i];
+      // Taller than the space under the header: its first line can't sit in the middle of the screen
+      if (el.getBoundingClientRect().height > window.innerHeight - 200) continue;
+      el.scrollIntoView({ block: "center", behavior: "instant" });
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const r = range.getClientRects()[0] ?? el.getBoundingClientRect();
+      const x = r.left + r.width / 2;
+      const y = r.top + r.height / 2;
+      if (x < 0 || y < 0 || x >= W || y >= window.innerHeight) continue;
+      const top = document.elementFromPoint(x, y);
+      if (!top || top === el || el.contains(top) || top.contains(el) || isHidden(top)) continue;
+      // A stretched card link, or a huge headline's hit area reaching over the small label above it: nothing visibly overlaps.
+      if (getComputedStyle(top).pointerEvents === "none" || hasStretchedOverlay(top) || top.closest("h1, h2")) continue;
+      add("overlap", el, el.textContent, { by: describe(top) });
+    }
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
+  return {
+    problems,
+    scrollWidth: document.documentElement.scrollWidth,
+    scrollHeight: document.documentElement.scrollHeight,
+    innerWidth: W,
+    innerHeight: window.innerHeight,
+  };
+}
+
+/** Waits for fonts and streamed content, then scrolls through so lazy images load. */
+export async function settlePage(page: Page, route: string, options: { scroll?: boolean } = {}): Promise<void> {
+  await page.goto(route, { waitUntil: "load", timeout: 45_000 });
+  await page.evaluate(() => document.fonts.ready.then(() => undefined));
+  await page.waitForTimeout(150);
+  if (options.scroll === false) return;
   await page.evaluate(async () => {
-    const scrollHeight = document.body.scrollHeight;
-    const step = window.innerHeight || 800;
-    for (let y = 0; y < scrollHeight; y += step) {
-      window.scrollTo(0, y);
-      await new Promise((resolve) => setTimeout(resolve, 50));
+    const height = document.documentElement.scrollHeight;
+    for (let y = 0; y < height; y += window.innerHeight) {
+      window.scrollTo({ top: y, behavior: "instant" });
+      await new Promise((resolve) => setTimeout(resolve, 40));
     }
-    window.scrollTo(0, 0);
-
-    // Ensure all images are decoded (with a 500ms safety timeout per image so it never hangs)
-    const imgs = Array.from(document.querySelectorAll("img"));
-    for (const img of imgs) {
-      if (!img.complete && img.src) {
-        try {
-          await Promise.race([
-            img.decode(),
-            new Promise((_, reject) => setTimeout(() => reject(new Error("decode timeout")), 500))
-          ]);
-        } catch {}
-      }
-    }
-
-    // Wait for fonts and paint
-    await (document.fonts ? document.fonts.ready : Promise.resolve());
+    window.scrollTo({ top: 0, behavior: "instant" });
+    const pending = [...document.images].filter((img) => !img.complete);
+    await Promise.all(pending.map((img) => Promise.race([img.decode().catch(() => undefined), new Promise((resolve) => setTimeout(resolve, 1500))])));
   });
+}
 
-  // 2. Execute in-page diagnostics
-  const rawProblems = await page.evaluate(
-    ({ currentRoute, currentWidth }) => {
-      const problems: Array<{
-        route: string;
-        width: number;
-        kind:
-          | "page_overflow"
-          | "spill"
-          | "clipping"
-          | "overlap"
-          | "squeezed_text"
-          | "bad_image"
-          | "junk_text"
-          | "touch_target";
-        selector: string;
-        textPreview: string;
-        measured: Record<string, unknown>;
-      }> = [];
+export async function diagnosePage(page: Page, options: { checkOverlap?: boolean } = {}): Promise<PageDiagnosis> {
+  return page.evaluate(diagnoseInPage, { checkOverlap: options.checkOverlap ?? true });
+}
 
-      function getReadableSelector(el: Element): string {
-        try {
-          if (el.id) return `#${el.id}`;
-          const testId = el.getAttribute("data-testid");
-          if (testId) return `[data-testid="${testId}"]`;
-          const ariaLabel = el.getAttribute("aria-label");
-          if (ariaLabel) return `${el.tagName.toLowerCase()}[aria-label="${ariaLabel.slice(0, 30)}"]`;
-          const role = el.getAttribute("role");
-          if (role) return `${el.tagName.toLowerCase()}[role="${role}"]`;
+/** The blocking problems on a page, one per distinct element and text. */
+export function blockingProblems(diagnosis: PageDiagnosis): CardProblem[] {
+  const seen = new Set<string>();
+  return diagnosis.problems.filter((p) => {
+    const key = `${p.kind}|${p.selector}|${p.text}`;
+    if (!BLOCKING_KINDS.has(p.kind) || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
 
-          let selector = el.tagName.toLowerCase();
-          const classes = Array.from(el.classList)
-            .filter((c) => !c.includes(":") && !c.includes("[") && !c.includes("/"))
-            .slice(0, 2);
-          if (classes.length > 0) {
-            selector += `.${classes.join(".")}`;
-          }
+export function formatProblems(route: string, width: number, problems: readonly CardProblem[]): string {
+  return problems.map((p) => `[${p.kind}] ${route} at ${width}px: ${p.selector} "${p.text}" ${JSON.stringify(p.measured)}`).join("\n");
+}
 
-          if (el.parentElement && el.parentElement !== document.body) {
-            const parentSel = getReadableSelector(el.parentElement);
-            return `${parentSel} > ${selector}`;
-          }
-          return selector;
-        } catch {
-          return el.tagName ? el.tagName.toLowerCase() : "unknown";
-        }
-      }
-
-      function isExcluded(el: Element | null): boolean {
-        if (!el) return true;
-        // Non-rendered elements
-        if (/^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/i.test(el.tagName)) return true;
-        // YouTube iframe or inside iframe
-        if (el.tagName === "IFRAME" || el.closest("iframe")) return true;
-        // Clerk elements
-        if (el.closest('[class*="cl-"]') || el.classList?.contains("cl-internal-phiz3e")) return true;
-        // Aria hidden decoration
-        if (el.closest('[aria-hidden="true"]')) return true;
-        // Sideways scrolling rails (overflow-x auto or scroll)
-        const rail = el.closest(".no-scrollbar, [class*='overflow-x-auto'], [class*='overflow-x-scroll']");
-        if (rail && rail !== el) {
-          const style = window.getComputedStyle(rail);
-          if (style.overflowX === "auto" || style.overflowX === "scroll") return true;
-        }
-        // Closed details content
-        if (el.closest("details:not([open])") && !el.closest("summary")) return true;
-        // Hidden elements or sr-only
-        if (el.classList?.contains("sr-only")) return true;
-        const style = window.getComputedStyle(el);
-        if (style.display === "none" || style.visibility === "hidden" || parseFloat(style.opacity || "1") === 0) {
-          return true;
-        }
-        return false;
-      }
-
-      // Check a: Page horizontal overflow
-      const docScrollWidth = document.documentElement.scrollWidth;
-      const windowWidth = window.innerWidth;
-      if (docScrollWidth > windowWidth + 1.5) {
-        problems.push({
-          route: currentRoute,
-          width: currentWidth,
-          kind: "page_overflow",
-          selector: "html",
-          textPreview: document.title.slice(0, 60),
-          measured: {
-            scrollWidth: docScrollWidth,
-            innerWidth: windowWidth,
-            overflowPixels: docScrollWidth - windowWidth,
-          },
-        });
-      }
-
-      // Collect candidate box elements
-      const allElements = Array.from(document.body.querySelectorAll("*"));
-
-      for (const el of allElements) {
-        if (isExcluded(el)) continue;
-
-        const rect = el.getBoundingClientRect();
-        const style = window.getComputedStyle(el);
-        const textContent = (el.textContent || "").trim();
-        const preview = textContent.replace(/\s+/g, " ").slice(0, 60);
-
-        // Check c: Clipping
-        // An element with overflow hidden or clip whose scrollWidth or scrollHeight exceeds its client size by > 1px and holds text
-        const isOverflowClipped =
-          style.overflow === "hidden" ||
-          style.overflow === "clip" ||
-          style.overflowX === "hidden" ||
-          style.overflowX === "clip" ||
-          style.overflowY === "hidden" ||
-          style.overflowY === "clip";
-
-        if (isOverflowClipped && textContent.length > 0 && rect.width > 20 && rect.height > 20) {
-          const xClipped = el.scrollWidth > el.clientWidth + 2;
-          const yClipped = el.scrollHeight > el.clientHeight + 2;
-
-          // Check if clipping is due to intentional line-clamp or truncate
-          const isTruncated =
-            el.classList.contains("truncate") ||
-            style.textOverflow === "ellipsis" ||
-            Boolean(el.closest(".truncate"));
-
-          const isLineClamped =
-            el.className.includes("line-clamp") ||
-            (style as unknown as { webkitLineClamp?: string }).webkitLineClamp !== "none" ||
-            Boolean(el.closest("[class*='line-clamp']"));
-
-          let hasActualTextXClipped = false;
-          if (xClipped && !isTruncated) {
-            const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-            let tNode = walker.nextNode();
-            while (tNode) {
-              if (tNode.parentElement && !isExcluded(tNode.parentElement)) {
-                const range = document.createRange();
-                range.selectNodeContents(tNode);
-                const rects = range.getClientRects();
-                for (let i = 0; i < rects.length; i++) {
-                  if (rects[i].right > rect.right + 2) {
-                    hasActualTextXClipped = true;
-                    break;
-                  }
-                }
-              }
-              if (hasActualTextXClipped) break;
-              tNode = walker.nextNode();
-            }
-          }
-
-          const hasClips = hasActualTextXClipped || (yClipped && !isLineClamped && !isTruncated);
-
-          if (hasClips && !el.closest(".no-scrollbar")) {
-            // Verify there is actual text clipping
-            const hasText = Array.from(el.childNodes).some(
-              (n) => n.nodeType === Node.TEXT_NODE && (n.textContent || "").trim().length > 0
-            );
-            if (hasText || xClipped) {
-              problems.push({
-                route: currentRoute,
-                width: currentWidth,
-                kind: "clipping",
-                selector: getReadableSelector(el),
-                textPreview: preview,
-                measured: {
-                  scrollWidth: el.scrollWidth,
-                  clientWidth: el.clientWidth,
-                  scrollHeight: el.scrollHeight,
-                  clientHeight: el.clientHeight,
-                  xClipped,
-                  yClipped,
-                },
-              });
-            }
-          }
-        }
-
-        // Check b: Spill
-        // Box definition: visible background or border, wider and taller than 40px
-        const hasBg =
-          style.backgroundColor &&
-          style.backgroundColor !== "transparent" &&
-          style.backgroundColor !== "rgba(0, 0, 0, 0)";
-        const hasBorder =
-          style.borderStyle !== "none" &&
-          parseFloat(style.borderWidth) > 0 &&
-          style.borderColor !== "transparent" &&
-          style.borderColor !== "rgba(0, 0, 0, 0)";
-
-        const isBox = (hasBg || hasBorder) && rect.width >= 40 && rect.height >= 40;
-
-        if (isBox && textContent.length > 0) {
-          const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
-          let textNode = walker.nextNode();
-          while (textNode) {
-            const parent = textNode.parentElement;
-            if (parent && !isExcluded(parent)) {
-              // If parent or an ancestor within the box has overflow:hidden/clip/truncate,
-              // then the text is clipped by CSS inside that container, not visually spilling out of the box
-              let isContainedByOverflow = false;
-              let curr: HTMLElement | null = parent;
-              while (curr && curr !== el) {
-                const s = window.getComputedStyle(curr);
-                if (
-                  s.overflow === "hidden" ||
-                  s.overflowX === "hidden" ||
-                  s.overflowY === "hidden" ||
-                  curr.classList.contains("truncate") ||
-                  curr.classList.contains("line-clamp-1") ||
-                  curr.classList.contains("line-clamp-2") ||
-                  curr.classList.contains("line-clamp-3")
-                ) {
-                  const currRect = curr.getBoundingClientRect();
-                  // As long as that overflow container is inside the box, the text cannot visually escape the box
-                  if (currRect.right <= rect.right + 2 && currRect.left >= rect.left - 2) {
-                    isContainedByOverflow = true;
-                    break;
-                  }
-                }
-                curr = curr.parentElement;
-              }
-
-              if (!isContainedByOverflow) {
-                const nodeText = (textNode.textContent || "").trim();
-                if (nodeText.length > 0) {
-                  const range = document.createRange();
-                  range.selectNodeContents(textNode);
-                  const lineRects = range.getClientRects();
-                  for (let i = 0; i < lineRects.length; i++) {
-                    const line = lineRects[i];
-                    if (line.width <= 0 || line.height <= 0) continue;
-                    const isXScrollable = style.overflowX === "auto" || style.overflowX === "scroll" || style.overflowX === "hidden";
-                    const isYScrollable = style.overflowY === "auto" || style.overflowY === "scroll" || style.overflowY === "hidden";
-                    const spilledLeft = !isXScrollable && line.left < rect.left - 2;
-                    const spilledRight = !isXScrollable && line.right > rect.right + 2;
-                    const spilledTop = !isYScrollable && line.top < rect.top - 2;
-                    const spilledBottom = !isYScrollable && line.bottom > rect.bottom + 2;
-
-                    if (spilledLeft || spilledRight || spilledTop || spilledBottom) {
-                      problems.push({
-                        route: currentRoute,
-                        width: currentWidth,
-                        kind: "spill",
-                        selector: getReadableSelector(parent),
-                        textPreview: nodeText.slice(0, 60),
-                        measured: {
-                          box: { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, width: rect.width, height: rect.height },
-                          line: { left: line.left, right: line.right, top: line.top, bottom: line.bottom, width: line.width, height: line.height },
-                        },
-                      });
-                      break;
-                    }
-                  }
-                }
-              }
-            }
-            textNode = walker.nextNode();
-          }
-        }
-
-        // Check e: Squeezed text
-        if (
-          isBox &&
-          rect.width < 140 &&
-          textContent.length >= 20 &&
-          textContent.split(/\s+/).length >= 4 &&
-          !el.closest("nav, aside, dl, footer")
-        ) {
-          problems.push({
-            route: currentRoute,
-            width: currentWidth,
-            kind: "squeezed_text",
-            selector: getReadableSelector(el),
-            textPreview: preview,
-            measured: {
-              boxWidth: rect.width,
-              characterCount: textContent.length,
-            },
-          });
-        }
-
-        if (el.tagName === "P" && textContent.length > 30 && !el.closest("footer")) {
-          const words = textContent.split(/\s+/).filter(Boolean);
-          if (words.length >= 8) {
-            const range = document.createRange();
-            range.selectNodeContents(el);
-            const lineRects = range.getClientRects();
-            const distinctTops: number[] = [];
-            for (let i = 0; i < lineRects.length; i++) {
-              const r = lineRects[i];
-              if (r.width <= 0 || r.height <= 0) continue;
-              if (!distinctTops.some((t) => Math.abs(t - r.top) < 4)) {
-                distinctTops.push(r.top);
-              }
-            }
-            const lineCount = distinctTops.length;
-            if (lineCount >= 4) {
-              const wordsPerLine = words.length / lineCount;
-              if (wordsPerLine < 1.7) {
-                problems.push({
-                  route: currentRoute,
-                  width: currentWidth,
-                  kind: "squeezed_text",
-                  selector: getReadableSelector(el),
-                  textPreview: preview,
-                  measured: {
-                    wordCount: words.length,
-                    lineCount,
-                    wordsPerLine: Math.round(wordsPerLine * 10) / 10,
-                  },
-                });
-              }
-            }
-          }
-        }
-
-        // Check g: Junk text in visible text
-        if (el.children.length === 0 && textContent.length > 0) {
-          const JUNK_PATTERNS: Array<{ name: string; pattern: RegExp }> = [
-            { name: "undefined", pattern: /\bundefined\b/ },
-            { name: "NaN", pattern: /\bNaN\b/ },
-            { name: "[object Object]", pattern: /\[object Object\]/ },
-            { name: "Invalid Date", pattern: /\bInvalid Date\b/ },
-            { name: "empty_or_zero_price", pattern: /(?:^|\s)£\s*(?:0(?:\.00)?(?!\d)|(?=[^\d]|$))/ },
-            { name: "lorem", pattern: /\blorem ipsum\b/i },
-            { name: "TODO", pattern: /\bTODO\b/ },
-            { name: "raw_enum", pattern: /\b[A-Z]{3,}_[A-Z0-9_]{3,}\b/ },
-            { name: "mojibake", pattern: /[ÃÂâ]€|[ÃÂ][\u0080-\u00BF]/ },
-          ];
-
-          for (const jp of JUNK_PATTERNS) {
-            if (jp.pattern.test(textContent)) {
-              if (jp.name === "raw_enum" && /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/.test(textContent)) {
-                continue;
-              }
-              if (jp.name === "empty_or_zero_price" && /free/i.test(textContent)) {
-                continue;
-              }
-              problems.push({
-                route: currentRoute,
-                width: currentWidth,
-                kind: "junk_text",
-                selector: getReadableSelector(el),
-                textPreview: preview,
-                measured: { detected: jp.name },
-              });
-              break;
-            }
-          }
-
-          // Raw slug shown as label check
-          if (
-            (el.tagName === "H1" || el.tagName === "H2" || el.tagName === "H3" || el.tagName === "BUTTON") &&
-            /^[a-z0-9]+(-[a-z0-9]+){2,}$/.test(textContent)
-          ) {
-            problems.push({
-              route: currentRoute,
-              width: currentWidth,
-              kind: "junk_text",
-              selector: getReadableSelector(el),
-              textPreview: preview,
-              measured: { detected: "raw_slug_as_label" },
-            });
-          }
-        }
-
-        // Empty box with no text and no image
-        const isReplacedTag = /^(IMG|PICTURE|SVG|VIDEO|CANVAS|INPUT|TEXTAREA|SELECT|HR|IFRAME)$/i.test(el.tagName);
-        if (
-          !isReplacedTag &&
-          isBox &&
-          textContent.length === 0 &&
-          el.querySelectorAll("img, svg, canvas, video, iframe, picture").length === 0 &&
-          !el.getAttribute("aria-hidden") &&
-          !el.classList.contains("border-t-4") &&
-          !el.classList.contains("border-b-4") &&
-          !style.backgroundImage?.includes("url") &&
-          rect.width >= 40 &&
-          rect.height >= 40
-        ) {
-          problems.push({
-            route: currentRoute,
-            width: currentWidth,
-            kind: "junk_text",
-            selector: getReadableSelector(el),
-            textPreview: "[EMPTY BOX]",
-            measured: { width: rect.width, height: rect.height },
-          });
-        }
-
-        // Check h: Touch targets at phone widths (<= 430px)
-        if (currentWidth <= 430) {
-          const isButton = el.tagName === "BUTTON";
-          const isLink = el.tagName === "A";
-
-          if (isButton || isLink) {
-            // Check if inline link inside a body paragraph
-            const isInline =
-              style.display === "inline" &&
-              el.parentElement &&
-              el.parentElement.tagName === "P" &&
-              (el.parentElement.textContent || "").length > textContent.length + 5;
-
-            // Skip footer directory links (which are text links in columns) unless they are CTA buttons
-            const isFooterDirectoryLink = Boolean(el.closest("footer") && !el.classList.contains("bg-brand"));
-
-            // Skip buttons/links with stretched click overlays covering their parent card
-            const hasStretchedOverlay =
-              el.className.includes("after:inset-0") ||
-              el.className.includes("before:inset-0") ||
-              el.className.includes("after:absolute") ||
-              el.className.includes("stretched");
-
-            if (!isInline && !isFooterDirectoryLink && !hasStretchedOverlay && rect.width > 0) {
-              if (rect.height < 39) {
-                problems.push({
-                  route: currentRoute,
-                  width: currentWidth,
-                  kind: "touch_target",
-                  selector: getReadableSelector(el),
-                  textPreview: preview,
-                  measured: {
-                    height: Math.round(rect.height * 10) / 10,
-                    width: Math.round(rect.width * 10) / 10,
-                  },
-                });
-              }
-            }
-          }
-        }
-      }
-
-      // Check f: Images
-      const images = Array.from(document.querySelectorAll("img"));
-      for (const img of images) {
-        if (isExcluded(img)) continue;
-        const rect = img.getBoundingClientRect();
-        const style = window.getComputedStyle(img);
-
-        // Missing alt attribute
-        if (!img.hasAttribute("alt")) {
-          problems.push({
-            route: currentRoute,
-            width: currentWidth,
-            kind: "bad_image",
-            selector: getReadableSelector(img),
-            textPreview: img.getAttribute("src") || "",
-            measured: { defect: "missing_alt" },
-          });
-        }
-
-        // Broken image (naturalWidth === 0 after load)
-        if (rect.width > 0 && rect.height > 0 && img.naturalWidth === 0) {
-          problems.push({
-            route: currentRoute,
-            width: currentWidth,
-            kind: "bad_image",
-            selector: getReadableSelector(img),
-            textPreview: img.getAttribute("src") || "",
-            measured: { defect: "naturalWidth_0" },
-          });
-        }
-
-        // Aspect ratio distortion > 2.5% without object-fit cover or contain
-        if (img.naturalWidth > 0 && img.naturalHeight > 0 && rect.width > 10 && rect.height > 10) {
-          const objFit = style.objectFit;
-          if (objFit !== "cover" && objFit !== "contain") {
-            const naturalRatio = img.naturalWidth / img.naturalHeight;
-            const renderedRatio = rect.width / rect.height;
-            const distortion = Math.abs(renderedRatio - naturalRatio) / naturalRatio;
-            if (distortion > 0.025) {
-              problems.push({
-                route: currentRoute,
-                width: currentWidth,
-                kind: "bad_image",
-                selector: getReadableSelector(img),
-                textPreview: img.getAttribute("src") || "",
-                measured: {
-                  defect: "aspect_ratio_distortion",
-                  distortionPercent: Math.round(distortion * 1000) / 10,
-                  naturalRatio: Math.round(naturalRatio * 100) / 100,
-                  renderedRatio: Math.round(renderedRatio * 100) / 100,
-                },
-              });
-            }
-          }
-        }
-      }
-
-      // Check d: Overlap
-      const textCandidates = Array.from(
-        document.querySelectorAll("h1, h2, h3, button, main p.text-lg, main a.bg-ink, main a.bg-poster-red")
-      ).slice(0, 30);
-
-      for (const candidate of textCandidates) {
-        if (isExcluded(candidate)) continue;
-        const rect = candidate.getBoundingClientRect();
-        if (rect.width <= 0 || rect.height <= 0) continue;
-
-        const midX = rect.left + rect.width / 2;
-        const midY = rect.top + rect.height / 2;
-
-        if (midX > 0 && midX < window.innerWidth && midY > 0 && midY < window.innerHeight) {
-          const elementsAtPoint = document.elementsFromPoint(midX, midY);
-          if (elementsAtPoint.length > 0) {
-            const topEl = elementsAtPoint[0];
-            const isSelfOrDescendantOrAncestor =
-              topEl === candidate || candidate.contains(topEl) || topEl.contains(candidate);
-
-            const isFixedChrome = Boolean(
-              topEl.closest('[class*="fixed"], [class*="sticky"], [data-testid="mobile-bottom-nav"]')
-            );
-
-            if (!isSelfOrDescendantOrAncestor && !isExcluded(topEl) && !isFixedChrome) {
-              problems.push({
-                route: currentRoute,
-                width: currentWidth,
-                kind: "overlap",
-                selector: getReadableSelector(candidate),
-                textPreview: (candidate.textContent || "").trim().slice(0, 60),
-                measured: {
-                  point: { x: Math.round(midX), y: Math.round(midY) },
-                  coveredBy: getReadableSelector(topEl),
-                },
-              });
-            }
-          }
-        }
-      }
-
-      return problems;
-    },
-    { currentRoute: route, currentWidth: width }
-  );
-
-  const problems: CardDoctorProblem[] = [];
-  let problemIdx = 0;
-
-  for (const p of rawProblems) {
-    let screenshotPath: string | undefined;
-    if (options.takeScreenshots) {
-      try {
-        const safeSlug = route.replace(/[^a-zA-Z0-9_-]/g, "_") || "home";
-        const filename = `${safeSlug}_w${width}_${p.kind}_${problemIdx++}.png`;
-        screenshotPath = path.join(screenshotDir, filename);
-        await page.screenshot({ path: screenshotPath, fullPage: false });
-      } catch {}
-    }
-    problems.push({ ...p, screenshotPath });
-  }
-
-  return problems;
+/** Saves a screenshot to the git-ignored audit folder, so a failure can be looked at. */
+export async function saveProblemShot(page: Page, route: string, width: number): Promise<void> {
+  const dir = path.resolve(process.cwd(), ".audit-screenshots/site-check");
+  fs.mkdirSync(dir, { recursive: true });
+  const name = `${route.replace(/[^a-zA-Z0-9_-]+/g, "_") || "home"}_w${width}.png`;
+  await page.screenshot({ path: path.join(dir, name) }).catch(() => undefined);
 }

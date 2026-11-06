@@ -31,11 +31,21 @@ test.describe("Task 3: Broken Links, Images, and Console Errors Sweep", () => {
     request,
     baseURL,
   }) => {
-    const origin = baseURL || "http://localhost:3200";
+    // The sitemap only lists the canonical events; /events links to all of them
+    const eventsHtml = await (await request.get("/events")).text();
+    const eventRoutes = [...new Set([...eventsHtml.matchAll(/href="(\/events\/[a-z0-9-]+)/g)].map((m) => m[1]))];
+    expect(eventRoutes.length).toBeGreaterThan(0);
 
     const consoleErrors: Array<{ route: string; message: string }> = [];
     const hydrationWarnings: Array<{ route: string; message: string }> = [];
     const pageErrors: Array<{ route: string; error: string }> = [];
+    const failedResponses: Array<{ route: string; url: string; status: number }> = [];
+
+    page.on("response", (response) => {
+      if (response.status() >= 400 && !/youtube|ytimg|clerk/.test(response.url())) {
+        failedResponses.push({ route: page.url(), url: response.url(), status: response.status() });
+      }
+    });
 
     page.on("console", (msg) => {
       const text = msg.text();
@@ -59,10 +69,10 @@ test.describe("Task 3: Broken Links, Images, and Console Errors Sweep", () => {
     // Collect all public routes: static + events + sample moves + songs
     const allRoutes = [
       ...STATIC_ROUTES,
-      ...upcomingCanonicalEvents().map((e) => `/events/${e.slug}`),
+      ...eventRoutes,
       ...TIMBA_SONG_ANATOMY_DATA.map((s) => `/music/${s.id}`),
-      // Representative sample of moves across categories
-      ...getPublishedMoves().slice(0, 15).map((m) => `/moves/${m.id}`),
+      // A sample of moves in the normal run, all of them with FULL_SWEEP=1
+      ...getPublishedMoves().slice(0, process.env.FULL_SWEEP ? undefined : 15).map((m) => `/moves/${m.id}`),
     ];
 
     const discoveredInternalLinks = new Set<string>();
@@ -136,8 +146,8 @@ test.describe("Task 3: Broken Links, Images, and Console Errors Sweep", () => {
           continue;
         }
 
-        // Clean query/hash
-        const cleanHref = href.split("#")[0].split("?")[0];
+        // Keep the query string: /music/<song>?section=<id> links are checked as they are
+        const cleanHref = href.split("#")[0];
         if (cleanHref && cleanHref.startsWith("/")) {
           discoveredInternalLinks.add(cleanHref);
         }
@@ -171,45 +181,59 @@ test.describe("Task 3: Broken Links, Images, and Console Errors Sweep", () => {
     expect(brokenImages, `Broken images found: ${JSON.stringify(brokenImages)}`).toEqual([]);
     expect(hydrationWarnings, `Hydration warnings: ${JSON.stringify(hydrationWarnings)}`).toEqual([]);
     expect(pageErrors, `Page errors: ${JSON.stringify(pageErrors)}`).toEqual([]);
+    expect(consoleErrors, `Console errors: ${JSON.stringify(consoleErrors)}`).toEqual([]);
+    expect(failedResponses, `Failed requests: ${JSON.stringify(failedResponses)}`).toEqual([]);
   });
 
-  test("audits social share previews (OpenGraph) on homepage and SB&K Night event", async ({
-    page,
-    request,
-    baseURL,
-  }) => {
-    const origin = baseURL || "http://localhost:3200";
-
-    const testRoutes = ["/", "/events/sbk-night-extravaganza-nov-2026"];
-
-    for (const route of testRoutes) {
-      await page.goto(route, { waitUntil: "domcontentloaded" });
-
-      const ogMeta = await page.evaluate(() => {
-        const getMeta = (prop: string) =>
-          document.querySelector(`meta[property="${prop}"]`)?.getAttribute("content") ||
-          document.querySelector(`meta[name="${prop}"]`)?.getAttribute("content") ||
-          "";
-
-        return {
-          title: getMeta("og:title") || getMeta("twitter:title"),
-          description: getMeta("og:description") || getMeta("twitter:description"),
-          image: getMeta("og:image") || getMeta("twitter:image"),
-        };
-      });
-
-      console.log(`OG preview for ${route}:`, ogMeta);
-
-      expect(ogMeta.title.length, `og:title on ${route} must not be empty`).toBeGreaterThan(5);
-      expect(ogMeta.description.length, `og:description on ${route} must not be empty`).toBeGreaterThan(10);
-      expect(ogMeta.image.length, `og:image on ${route} must not be empty`).toBeGreaterThan(5);
-
-      // Verify og:image resolves to HTTP 200 on test origin
-      const targetUrl = new URL(ogMeta.image, origin);
-      targetUrl.port = new URL(origin).port;
-      targetUrl.hostname = new URL(origin).hostname;
-      const imgRes = await request.get(targetUrl.toString());
-      expect(imgRes.status(), `og:image ${targetUrl.toString()} must return 200`).toBe(200);
+  test("old addresses redirect to the right pages", async ({ request }) => {
+    for (const [from, to] of [["/schedule", "/classes"], ["/shop", "/pricing"], ["/dashboard/schedule", "/classes"]]) {
+      const response = await request.get(from, { maxRedirects: 0 });
+      expect(response.status(), from).toBe(308);
+      expect(response.headers().location, from).toBe(to);
     }
+  });
+
+  test("shared links show that page's own title and picture", async ({ page, request, baseURL }) => {
+    const origin = baseURL || "http://localhost:3200";
+    const [event] = upcomingCanonicalEvents();
+    const [move] = getPublishedMoves();
+    const [song] = TIMBA_SONG_ANATOMY_DATA;
+
+    const readTags = async (route: string) => {
+      await page.goto(route, { waitUntil: "domcontentloaded" });
+      return page.evaluate(() => {
+        const meta = (property: string) => document.querySelector(`meta[property="${property}"]`)?.getAttribute("content") ?? "";
+        return { title: meta("og:title"), description: meta("og:description"), image: meta("og:image") };
+      });
+    };
+    const expectImageLoads = async (image: string) => {
+      const url = new URL(image, origin);
+      const response = await request.get(`${origin}${url.pathname}${url.search}`);
+      expect(response.status(), image).toBe(200);
+      expect(response.headers()["content-type"], image).toContain("image/");
+    };
+
+    const home = await readTags("/");
+    expect(home.title.length).toBeGreaterThan(5);
+    expect(home.description.length).toBeGreaterThan(10);
+    await expectImageLoads(home.image);
+
+    // An event without its own cover shares its own card, never the general school poster
+    const eventTags = await readTags(`/events/${event.slug}`);
+    expect(eventTags.title).not.toBe(home.title);
+    expect(eventTags.image).toContain(`/events/${event.slug}`);
+    await expectImageLoads(eventTags.image);
+
+    const moveTags = await readTags(`/moves/${move.id}`);
+    expect(moveTags.title).not.toBe(home.title);
+    expect(moveTags.description).not.toBe(home.description);
+    expect(moveTags.image).toContain(`/moves/${move.id}`);
+    await expectImageLoads(moveTags.image);
+
+    const songTags = await readTags(`/music/${song.id}`);
+    expect(songTags.title).not.toBe(home.title);
+    expect(songTags.description).not.toBe(home.description);
+    expect(songTags.image).toContain(`/music/${song.id}`);
+    await expectImageLoads(songTags.image);
   });
 });

@@ -3,6 +3,7 @@ import { fitTitle } from "@/lib/seo/search-snippets";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { onlineTicketSalesOpen } from "@/lib/payments/online-sales";
 import { DanceRole } from "@prisma/client";
 import {
   Calendar,
@@ -200,6 +201,7 @@ export default async function EventDetailPage({
 
   // Past events stay viewable (old links, posters) but can't be booked
   const eventFinished = hasEventEnded(new Date(event.endDate));
+  const payAtDoor = !onlineTicketSalesOpen();
 
   const startFormatted = new Intl.DateTimeFormat("en-GB", {
     weekday: "long",
@@ -297,7 +299,7 @@ export default async function EventDetailPage({
 
             {!eventFinished && (
               <a href="#passes" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-4 text-xs`}>
-                Get tickets ↓
+                {payAtDoor ? "See prices ↓" : "Get tickets ↓"}
               </a>
             )}
 
@@ -670,7 +672,9 @@ export default async function EventDetailPage({
             <p className="text-xs font-bold uppercase tracking-wider text-ink/70">
               {eventFinished
                 ? "Online sales closed."
-                : "Instant digital ticketing · Pay securely with Stripe"}
+                : payAtDoor
+                  ? "Pay at the door on the night"
+                  : "Instant digital ticketing · Pay securely with Stripe"}
             </p>
           </div>
 
@@ -679,6 +683,7 @@ export default async function EventDetailPage({
             defaultPreferredRole={currentUser?.preferredRole ?? DanceRole.LEAD}
             purchasesUnavailable={isCanonicalFallback}
             eventFinished={eventFinished}
+            payAtDoor={payAtDoor}
           />
 
           {/* UK Consumer Rights Notice */}

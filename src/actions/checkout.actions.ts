@@ -7,6 +7,7 @@ import Stripe from "stripe";
 import { prisma } from "@/lib/prisma";
 import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE } from "@/lib/auth-user";
 import { stripe } from "@/lib/stripe";
+import { onlineTicketSalesOpen } from "@/lib/payments/online-sales";
 import {
   CLASSES_PAY_AT_DOOR_MESSAGE,
   CheckoutDomainError,
@@ -22,8 +23,7 @@ import { getCheckoutBaseUrl } from "@/lib/safe-url";
 export type CreateCheckoutInput = { packageId: PackageId };
 
 function isLiveStripeConfigured(priceId: string): boolean {
-  const key = process.env.STRIPE_SECRET_KEY ?? "";
-  if (!key || key.includes("placeholder") || key.includes("...")) {
+  if (!onlineTicketSalesOpen()) {
     return false;
   }
   if (!priceId || priceId.includes("placeholder") || priceId.includes("...")) {
@@ -211,13 +211,14 @@ export async function createEventCheckoutSessionAction(
 
     // Check if live Stripe is configured
     if (!isLiveStripeConfigured("live")) {
+      // The live site never writes a demo pass, whatever the settings say
       if (
-        process.env.NODE_ENV === "production" &&
-        process.env.ALLOW_DEMO_PAYMENTS !== "true"
+        process.env.VERCEL_ENV === "production" ||
+        (process.env.NODE_ENV === "production" && process.env.ALLOW_DEMO_PAYMENTS !== "true")
       ) {
         throw new CheckoutDomainError(
           "MISSING_STRIPE_CONFIG",
-          "Live payment processing is not configured for this pass. Contact the studio administrator."
+          "Online tickets aren't open yet. Please pay at the door on the night."
         );
       }
 

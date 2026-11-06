@@ -1,3 +1,4 @@
+import { onlineTicketSalesOpen } from "@/lib/payments/online-sales";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Sparkles, ShieldCheck } from "lucide-react";
@@ -165,7 +166,7 @@ export default async function EventsDirectoryPage() {
               </div>
               <div className="flex items-center gap-1.5 text-accent-teal">
                 <ShieldCheck className="h-4 w-4 shrink-0" />
-                <span>Instant Digital Passes &amp; Stripe Checkout</span>
+                <span>{onlineTicketSalesOpen() ? "Instant Digital Passes & Stripe Checkout" : "Pay at the door on the night"}</span>
               </div>
             </div>
           </div>
@@ -435,7 +436,7 @@ function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
               href={`/events/${evt.slug}`}
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-3 text-xs w-full sm:w-auto text-center justify-center`}
             >
-              <span>Passes &amp; Tickets →</span>
+              <span>{onlineTicketSalesOpen() ? "Passes & Tickets →" : "Prices & Details →"}</span>
             </Link>
           </div>
         </div>

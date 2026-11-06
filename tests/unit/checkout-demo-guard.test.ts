@@ -108,7 +108,20 @@ describe("H2: Checkout Demo-Payment Production Guards", () => {
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.error.code).toBe("MISSING_STRIPE_CONFIG");
-      expect(result.error.message).toMatch(/Live payment processing is not configured for this pass/);
+      expect(result.error.message).toMatch(/Online tickets aren't open yet/);
+    }
+  });
+
+  it("never charges or writes a demo pass on the live site with a test key, even with demo payments on", async () => {
+    Object.assign(process.env, { NODE_ENV: "production", VERCEL_ENV: "production", ALLOW_DEMO_PAYMENTS: "true", STRIPE_SECRET_KEY: "sk_test_realistic_key" });
+    vi.mocked(prisma.eventTicketTier.findUnique).mockResolvedValue(congressTier());
+    try {
+      const result = await createEventCheckoutSessionAction({ eventId: "evt_123", ticketTierId: "tier_made_in_cuba_pass", role: "LEAD" });
+      expect(result.success).toBe(false);
+      if (!result.success) expect(result.error.code).toBe("MISSING_STRIPE_CONFIG");
+    } finally {
+      delete process.env.VERCEL_ENV;
+      delete process.env.ALLOW_DEMO_PAYMENTS;
     }
   });
 

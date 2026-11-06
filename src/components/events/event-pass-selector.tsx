@@ -38,6 +38,8 @@ interface EventPassSelectorProps {
   purchasesUnavailable?: boolean;
   /** The event is over: show it as finished and disable every booking button. */
   eventFinished?: boolean;
+  /** Online sales aren't open (no live Stripe key yet): show the prices and say to pay on the night */
+  payAtDoor?: boolean;
 }
 
 export function EventPassSelector({
@@ -45,8 +47,9 @@ export function EventPassSelector({
   defaultPreferredRole,
   purchasesUnavailable: bookingOffline = false,
   eventFinished = false,
+  payAtDoor = false,
 }: EventPassSelectorProps) {
-  const purchasesUnavailable = bookingOffline || eventFinished;
+  const purchasesUnavailable = bookingOffline || payAtDoor || eventFinished;
   const [tiers, setTiers] = useState<SerializedEventTier[]>(initialTiers);
   const [banner, setBanner] = useState<{
     type: "success" | "error";
@@ -145,6 +148,19 @@ export function EventPassSelector({
           >
             See what&apos;s on next →
           </Link>
+        </div>
+      )}
+
+      {payAtDoor && !eventFinished && (
+        <div
+          data-testid="event-pay-at-door"
+          role="status"
+          className="border-4 border-ink bg-poster-mustard p-5 text-ink shadow-[6px_6px_0_0_var(--color-ink)] space-y-2"
+        >
+          <p className="font-display text-2xl text-ink">Pay at the Door</p>
+          <p className="text-xs sm:text-sm font-semibold text-ink">
+            Online tickets aren&apos;t open yet. Come along and pay at the door on the night.
+          </p>
         </div>
       )}
 
@@ -274,6 +290,10 @@ export function EventPassSelector({
                       <CheckCircle2 className="mr-1.5 h-4 w-4" />
                       Registered ({tier.userRegistration.qrCodeHash})
                     </button>
+                  ) : payAtDoor && !eventFinished ? (
+                    <p className="w-full border-2 border-ink bg-paper p-3 text-center text-xs font-bold uppercase text-ink">
+                      {isSoldOut ? "Sold out" : "Pay at the door"}
+                    </p>
                   ) : (
                     // Lead or Follow is information for the teachers, never a limit
                     <div className="grid grid-cols-2 gap-2 w-full">
@@ -339,9 +359,11 @@ export function EventPassSelector({
       </div>
 
       {/* Payment Security Trust Bar */}
-      <div className="pt-2">
-        <PaymentSecurityTrustBar showRefundPolicy={false} />
-      </div>
+      {!payAtDoor && (
+        <div className="pt-2">
+          <PaymentSecurityTrustBar showRefundPolicy={false} />
+        </div>
+      )}
 
     </div>
   );

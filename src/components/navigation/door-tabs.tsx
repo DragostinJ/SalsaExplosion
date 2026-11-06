@@ -23,11 +23,11 @@ export function CancionesTabs({ current, className }: { current: CancionesTab; c
             href={tab.href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "flex min-h-[48px] flex-1 flex-col items-center justify-center px-2 text-center leading-tight [&:not(:last-child)]:border-r-4 [&:not(:last-child)]:border-ink",
+              "flex min-h-[48px] min-w-0 flex-1 flex-col items-center justify-center px-1 text-center leading-tight sm:px-2 [&:not(:last-child)]:border-r-4 [&:not(:last-child)]:border-ink",
               active ? "bg-ink text-paper" : "bg-paper text-ink hover:bg-poster-mustard"
             )}
           >
-            <span className="font-display text-lg leading-none sm:text-2xl">{tab.label}</span>
+            <span className="font-display text-lg leading-none max-[360px]:text-base sm:text-2xl">{tab.label}</span>
             <span className="text-xs font-semibold">{tab.english}</span>
           </Link>
         );

@@ -63,7 +63,7 @@ export function LiveTonightBanner() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs">
           {/* Status Message */}
           <div className="flex items-center gap-2.5 flex-wrap justify-center sm:justify-start text-center sm:text-left min-w-0 max-w-full">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-0.5 text-[11px] sm:text-xs font-extrabold text-emerald-300 uppercase tracking-normal sm:tracking-wider max-w-full text-center text-wrap break-words">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 px-2.5 py-0.5 text-xs font-extrabold text-emerald-300 uppercase tracking-wider max-w-full text-center text-wrap break-words">
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse shrink-0" aria-hidden="true" />
               CLASSES LIVE TONIGHT AT BOH STUDIOS
             </span>

@@ -51,9 +51,9 @@ export function CubanDanceGearsMatrix({
         className={`rounded-3xl border border-gold/30 bg-surface-2 p-4 sm:p-8 space-y-3 sm:space-y-4 shadow-sm ${className}`}
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1.5 max-w-2xl">
+          <div className="min-w-0 space-y-1.5 max-w-2xl">
             <div className="flex flex-wrap items-center gap-2">
-              <Badge className="bg-gold text-stone-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-0.5">
+              <Badge className="w-fit whitespace-normal sm:whitespace-normal bg-gold text-stone-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 px-3 py-0.5">
                 <Compass className="h-3.5 w-3.5" />
                 Optional Deep-Dive • Best for Improvers &amp; Social Dancers
               </Badge>
@@ -73,7 +73,7 @@ export function CubanDanceGearsMatrix({
             type="button"
             data-testid="toggle-dance-gears-guide"
             onClick={() => setIsCollapsed(false)}
-            className="min-h-[40px] shrink-0 bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-sm px-4"
+            className="h-auto min-h-[40px] w-full shrink-0 whitespace-normal sm:whitespace-normal bg-brand hover:bg-brand-hover text-white font-extrabold text-xs shadow-sm px-4 sm:w-56"
           >
             Open Interactive Musicality &amp; Gears Guide
           </Button>

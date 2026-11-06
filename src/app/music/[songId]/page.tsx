@@ -24,10 +24,15 @@ export async function generateMetadata({ params }: SongPlayerPageProps): Promise
   if (!song) return {};
   const title = displaySongTitle(song.title);
   const style = isTimba(song.style) ? "timba" : song.style;
+  const pageTitle = fitTitle(`${title} – What to Dance in Every Section`);
+  const description = clampDescription(`Section-by-section ${style} guide for ${title} by ${song.artist}: what to dance in every section, with leader and follower cues.`);
   return {
-    title: fitTitle(`${title} – What to Dance in Every Section`),
-    description: clampDescription(`Section-by-section ${style} guide for ${title} by ${song.artist}: what to dance in every section, with leader and follower cues.`),
+    title: pageTitle,
+    description,
     alternates: { canonical: `/music/${song.id}` },
+    // Without these, a shared link shows the site's general title and description
+    openGraph: { title: pageTitle, description, url: `/music/${song.id}`, siteName: "Salsa Explosion", locale: "en_GB", type: "website" },
+    twitter: { card: "summary_large_image", title: pageTitle, description, images: [`/music/${song.id}/opengraph-image`] },
   };
 }
 

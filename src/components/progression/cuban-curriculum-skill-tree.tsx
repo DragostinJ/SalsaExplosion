@@ -270,7 +270,7 @@ export function CubanCurriculumSkillTree({
                   setSelectedPillar("ALL");
                 }
               }}
-              className={`shrink-0 font-extrabold text-xs transition-all ${
+              className={`h-auto min-h-[40px] max-w-full whitespace-normal sm:whitespace-normal font-extrabold text-xs transition-all ${
                 focusFirstNight
                   ? "bg-amber-800 text-white hover:bg-amber-900 shadow-sm"
                   : "border-amber-500/50 bg-background text-foreground hover:bg-amber-500/10"
@@ -330,7 +330,7 @@ export function CubanCurriculumSkillTree({
           <span className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground block">
             Select Syllabus Level:
           </span>
-          <div role="tablist" aria-label="Curriculum Levels" className="grid grid-cols-4 gap-1.5 sm:gap-2">
+          <div role="tablist" aria-label="Curriculum Levels" className="grid grid-cols-2 gap-1.5 sm:gap-2 md:grid-cols-4">
             {LEVELS.map((lvl) => {
               const isSelected = selectedLevel === lvl;
               return (
@@ -353,7 +353,7 @@ export function CubanCurriculumSkillTree({
                     {lvl === "Beginner" ? "Lvl 1" : lvl === "Improver" ? "Lvl 2" : lvl === "Intermediate" ? "Lvl 3" : "Lvl 4"}
                   </span>
                   <div className="font-black text-xs sm:text-sm text-foreground flex items-center justify-between">
-                    <span className="truncate">{lvl}</span>
+                    <span className="min-w-0 break-words">{lvl}</span>
                     {lvl === "Beginner" && (
                       <span className="text-[8px] sm:text-xs bg-amber-500/20 text-amber-200 px-1 py-0.2 sm:px-1.5 sm:py-0.5 rounded font-bold uppercase hidden sm:inline">
                         Start
@@ -387,7 +387,7 @@ export function CubanCurriculumSkillTree({
               size="sm"
               variant={selectedPillar === "ALL" ? "default" : "outline"}
               onClick={() => setSelectedPillar("ALL")}
-              className={`text-xs font-bold h-8 shrink-0 ${
+              className={`text-xs font-bold min-h-[40px] shrink-0 ${
                 selectedPillar === "ALL" ? "bg-primary-base text-white" : "bg-card text-foreground"
               }`}
             >
@@ -400,7 +400,7 @@ export function CubanCurriculumSkillTree({
                 size="sm"
                 variant={selectedPillar === pil ? "default" : "outline"}
                 onClick={() => setSelectedPillar(pil)}
-                className={`text-xs font-bold h-8 shrink-0 ${
+                className={`text-xs font-bold min-h-[40px] shrink-0 ${
                   selectedPillar === pil ? "bg-primary-base text-white" : "bg-card text-foreground"
                 }`}
               >

@@ -96,7 +96,7 @@ export function ReviewBoosterClient() {
 
         <Image
           src={MEDIA_MANIFEST.mockupGraphics.stars.src}
-          alt="Five stars"
+          alt=""
           width={MEDIA_MANIFEST.mockupGraphics.stars.width}
           height={MEDIA_MANIFEST.mockupGraphics.stars.height}
           sizes="8rem"
@@ -236,20 +236,23 @@ export function ReviewBoosterClient() {
             <div className="flex items-center justify-between">
               <h2 className="text-base font-black uppercase tracking-wider text-ink flex items-center gap-2">
                 <Star className="h-4 w-4 fill-poster-red text-accent-red" />
-                Your Custom Review Draft
+                A Draft to Make Your Own
               </h2>
               {editableReview && (
                 <Badge
                   variant="outline"
                   className="border-2 border-ink bg-poster-teal text-ink text-xs font-black uppercase tracking-wider shadow-[2px_2px_0_var(--color-ink)]"
                 >
-                  Ready to Post
+                  Edit before posting
                 </Badge>
               )}
             </div>
 
             {editableReview ? (
               <div className="space-y-4">
+                <p className="text-xs font-medium text-ink">
+                  This is only a starting point. Change it so it says what really happened for you, and choose your own stars on Google.
+                </p>
                 <textarea
                   value={editableReview}
                   onChange={(e) => setEditableReview(e.target.value)}

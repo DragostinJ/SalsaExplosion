@@ -670,14 +670,12 @@ export async function generateGoogleReviewHelperAction(
     const ai = new GoogleGenAI({ apiKey });
 
     const systemInstruction = `You are a genuine, friendly dancer writing a real Google Review for Salsa Explosion UK and Maestro Enrique Perez Valdes at BOH Studios Bournemouth.
-Write natural, human, conversational 5-star reviews that naturally mention Cuban Salsa in Bournemouth, BOH Studios, and the friendly community. Avoid sounding like a marketing robot.`;
+Write natural, human, conversational words based only on what the dancer tells you. Never mention stars or ratings, never invent details, and avoid sounding like a marketing robot.`;
 
-    const prompt = `Write a short 5-star Google Review (2-3 sentences) based on:
+    const prompt = `Write a short draft of a Google Review (2-3 sentences) for the dancer to edit, based on:
 Favorite aspect: ${favoriteAspect}
 Instructor highlight: ${instructorHighlight}
-Dancer experience: ${dancerLevel}
-
-Include relevant local search keywords naturally.`;
+Dancer experience: ${dancerLevel}`;
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",

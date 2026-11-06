@@ -26,7 +26,7 @@ Every agent must respect canonical data registries. **Never duplicate, hardcode,
 The commercial model reflects the real-world operational requirements of Salsa Explosion UK and BOH Studios Bournemouth:
 
 1. **Weekly Classes at BOH Studios:**
-   - **Pricing:** Strictly **£12 for 1 Class** or **£14 for 2 Classes** (Classes + Free Social).
+   - **Pricing:** **£13 for 1 Class**, **£15 for 2 Classes** (Classes + Free Social), or **£6 for the social only**.
    - **Payment Channel:** Strictly **Pay at the Door** (Cash or Card on arrival).
    - **Invariant:** Agents must **never** wire Stripe checkout buttons or payment gateways for weekly Thursday or Sunday classes. That includes class-credit packs, memberships and subscriptions: they were retired on 2026-11-01 and `createCheckoutSessionAction` always refuses. Class credits are gone too (2026-11-02): no welcome credit, no bring-a-friend reward, no free-class redemption. The `classCredits` column and `CreditLedger` table stay in the database but nothing reads or writes them.
    - **Reservations:** booking a class only tells the teachers who is coming. Enrique's rule: everyone dances, even when the class is busy or uneven, so Lead/Follow is information for the teachers and never a limit (classes and festivals alike). It is free and takes no credits; dancers pay at the door, so cancelling never refunds anything.

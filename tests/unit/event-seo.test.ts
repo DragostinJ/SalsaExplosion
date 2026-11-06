@@ -144,7 +144,7 @@ describe("Event and Class SEO Structured Data (schema.org)", () => {
 
       // Strict door policy check
       expect(courseJsonLd.offers["@type"]).toBe("Offer");
-      expect(courseJsonLd.offers.price).toBe("12.00");
+      expect(courseJsonLd.offers.price).toBe("13.00");
       expect(courseJsonLd.offers.priceCurrency).toBe("GBP");
       expect(courseJsonLd.offers.description).toMatch(/Pay at the door/i);
       expect(courseJsonLd.offers.availability).toBe("https://schema.org/InStoreOnly");

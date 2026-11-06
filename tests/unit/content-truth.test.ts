@@ -113,7 +113,7 @@ describe("H1: Content Truth & Fact Consistency Guard", () => {
 
     expect(
       violations,
-      `Found 'unlimited monthly' violations. Weekly classes are pay-at-the-door (£12/£14):\n${violations
+      `Found 'unlimited monthly' violations. Weekly classes are pay-at-the-door:\n${violations
         .map((v) => `  ${v.file}:${v.line} -> ${v.text}`)
         .join("\n")}`
     ).toEqual([]);

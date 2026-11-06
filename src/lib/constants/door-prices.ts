@@ -3,9 +3,9 @@
  * pages, share cards, search data and messages all read them from this file.
  */
 export const DOOR_PRICES = {
-  oneClass: 12,
-  twoClasses: 14,
-  socialOnly: 5,
+  oneClass: 13,
+  twoClasses: 15,
+  socialOnly: 6,
 } as const;
 
 /** The same prices, ready to show */

@@ -8,7 +8,7 @@ import path from "node:path";
  *
  * As of 2026-11-01 / 2026-11-02, Maestro Enrique formalized Salsa Explosion UK's
  * real-world business model (AGENTS.md section 2):
- * - Weekly classes at BOH Studios are strictly paid at the door (£12 for 1 class, £14 for 2).
+ * - Weekly classes at BOH Studios are strictly paid at the door.
  * - There are NO online class credits, class-credit packs, monthly memberships, subscriptions,
  *   welcome credits, free welcome passes, or referral rewards.
  * - Booking a class only tells the teachers who is coming; it is free and takes no credits.

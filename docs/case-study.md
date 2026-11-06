@@ -27,7 +27,7 @@ coming next**, timed to the music.
   player. That means following YouTube's terms: the video is never covered, never hidden while playing, never
   smaller than 200×200 px, and no other audio is mixed over it.
 - **Timing is the whole product.** A card that changes 3 seconds late is worse than no card.
-- **A real business with fixed rules.** Weekly classes are paid at the door (£12 / £14), never online; only
+- **A real business with fixed rules.** Weekly classes are paid at the door, never online; only
   festivals sell tickets online.
 
 ---

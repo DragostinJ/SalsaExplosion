@@ -3,7 +3,7 @@ import {
   ACADEMY_METRICS,
   VENUE_INFO,
   WEEKLY_SCHEDULE,
-  UPCOMING_EVENTS,
+  upcomingCanonicalEvents,
   ACADEMY_FAQS,
 } from "@/lib/academy-data";
 import {
@@ -95,7 +95,7 @@ export function JsonLdSchema() {
         sameAs: [VENUE_INFO.instagramUrl, VENUE_INFO.facebookUrl],
       },
       ...allSessions.map((session) => buildWeeklyClassCourseJsonLd(session)),
-      ...UPCOMING_EVENTS.map((evt) =>
+      ...upcomingCanonicalEvents().map((evt) =>
         buildFestivalEventJsonLd({
           slug: evt.slug,
           title: evt.title,

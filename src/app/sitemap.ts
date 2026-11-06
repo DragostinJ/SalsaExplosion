@@ -3,8 +3,23 @@ import type { MetadataRoute } from "next";
 import { TIMBA_SONG_ANATOMY_DATA } from "@/lib/constants/timba-song-anatomy";
 import { getPublishedMoves } from "@/lib/moves/move-library";
 import { upcomingCanonicalEvents } from "@/lib/academy-data";
+import { prisma } from "@/lib/prisma";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+/** Most events live in the database, with the canonical list as the fallback if it can't be read */
+async function upcomingEventSlugs(now: Date): Promise<string[]> {
+  const canonical = upcomingCanonicalEvents(now).map((event) => event.slug);
+  try {
+    const events = await prisma.event.findMany({
+      where: { status: "PUBLISHED", endDate: { gte: now } },
+      select: { slug: true },
+    });
+    return [...new Set([...canonical, ...events.map((event) => event.slug)])];
+  } catch {
+    return canonical;
+  }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getSiteOrigin();
   const now = new Date();
 
@@ -12,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/classes",
     "/events",
-    ...upcomingCanonicalEvents().map((event) => `/events/${event.slug}`),
+    ...(await upcomingEventSlugs(now)).map((slug) => `/events/${slug}`),
     "/pricing",
     "/venues",
     "/music",

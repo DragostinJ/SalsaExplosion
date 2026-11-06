@@ -7,6 +7,7 @@ import { CartelDaySchema, cartelSchedule, nextClassNight, spanishDate, type Cart
 export const metadata = {
   title: "Carteles: class-night posters",
   description: "Ready-to-post Instagram posters for the Thursday and Sunday class nights at BOH Studios, and the wall poster for the studio.",
+  alternates: { canonical: "/cartel" },
   robots: { index: false },
 };
 

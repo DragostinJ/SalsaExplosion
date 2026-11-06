@@ -18,25 +18,7 @@ export interface MediaAssetConfig {
 export const MEDIA_MANIFEST = {
   // ==========================================
   // HERO & ATMOSPHERIC STUDIO BACKGROUNDS
-  // ==========================================
-  hero: {
-    src: "/images/bournemouth-beach-hero.png",
-    alt: "Bournemouth Coastline and Salsa Explosion Studio Culture",
-    width: 1920,
-    height: 1080,
-    aspectRatio: "16/9",
-    sizes: "100vw",
-    priority: true,
-  },
-  studioHeroBg: {
-    src: "/images/studio-hero-bg.png",
-    alt: "BOH Studios Atmospheric Dance Hall",
-    width: 1920,
-    height: 1080,
-    aspectRatio: "16/9",
-    sizes: "100vw",
-    priority: false,
-  },
+  // ==========================================
   /**
    * Hero Right-Column Architectural Dance Portrait (Aspect 4/3)
    * Authentic Cuban Salsa Social Dancing at BOH Studios Bournemouth
@@ -627,8 +609,8 @@ export const MEDIA_MANIFEST = {
     danzaCalendar: {
       src: "/images/danza-2026-2027-calendar.png",
       alt: "DANZA! 2026 | 2027 Official Calendar of Cuban Salsa Events",
-      width: 1200,
-      height: 1600,
+      width: 693,
+      height: 601,
       aspectRatio: "3/4",
       sizes: "(max-width: 768px) 100vw, 50vw",
       priority: true,
@@ -636,8 +618,8 @@ export const MEDIA_MANIFEST = {
     madeInCuba2026: {
       src: "/images/made-in-cuba-2026-poster.jpg",
       alt: "Made in Cuba Dance Weekend 2026 Official Festival Poster",
-      width: 1200,
-      height: 1600,
+      width: 928,
+      height: 909,
       aspectRatio: "3/4",
       sizes: "(max-width: 768px) 100vw, 50vw",
       priority: false,
@@ -645,8 +627,8 @@ export const MEDIA_MANIFEST = {
     weeklyClasses: {
       src: "/images/thursdays-moe-flex-poster.png",
       alt: "Thursday & Sunday Weekly Classes Poster",
-      width: 1200,
-      height: 1600,
+      width: 960,
+      height: 567,
       aspectRatio: "3/4",
       sizes: "(max-width: 768px) 100vw, 50vw",
       priority: false,
@@ -654,8 +636,8 @@ export const MEDIA_MANIFEST = {
     halloweenParty: {
       src: "/images/halloween-latin-party-poster.png",
       alt: "Halloween Latin Party Poster",
-      width: 1200,
-      height: 1600,
+      width: 634,
+      height: 589,
       aspectRatio: "3/4",
       sizes: "(max-width: 768px) 100vw, 50vw",
       priority: false,
@@ -663,8 +645,8 @@ export const MEDIA_MANIFEST = {
     weeklyCalendar: {
       src: "/images/weekly-calendar-poster.png",
       alt: "Official Salsa Explosion Weekly Timetable Poster",
-      width: 1200,
-      height: 1600,
+      width: 385,
+      height: 555,
       aspectRatio: "3/4",
       sizes: "(max-width: 768px) 100vw, 50vw",
       priority: false,
@@ -679,32 +661,32 @@ export const MEDIA_MANIFEST = {
     weeklyClasses: {
       src: "/images/photos/classes-gateway.jpg",
       alt: "Weekly Cuban Salsa & Rueda de Casino Classes at BOH Studios Bournemouth",
-      width: 1000,
-      height: 625,
+      width: 960,
+      height: 600,
       aspectRatio: "16/10",
       sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
     festivals: {
       src: "/images/photos/festivals-gateway.jpg",
       alt: "Made in Cuba Dance Weekend 2026 Official Festival Passes",
-      width: 1000,
-      height: 625,
+      width: 2048,
+      height: 1536,
       aspectRatio: "16/10",
       sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
     rueda: {
       src: "/images/photos/rueda-circle.jpg",
       alt: "Authentic Cuban Rueda de Casino Dance Circle Action",
-      width: 1000,
-      height: 625,
+      width: 2048,
+      height: 1784,
       aspectRatio: "16/10",
       sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },
     timba: {
       src: "/images/photos/timba-connection.jpg",
       alt: "Cuban Salsa Percussion Clave & Timba Musicality",
-      width: 1000,
-      height: 625,
+      width: 1536,
+      height: 2048,
       aspectRatio: "16/10",
       sizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
     },

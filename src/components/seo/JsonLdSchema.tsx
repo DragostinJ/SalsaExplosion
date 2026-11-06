@@ -11,6 +11,7 @@ import {
   buildFestivalEventJsonLd,
 } from "@/lib/seo/event-jsonld";
 
+import { DOOR } from "@/lib/constants/door-prices";
 export function JsonLdSchema() {
   const allSessions = [
     ...WEEKLY_SCHEDULE.thursday.sessions.map((s) => ({ ...s, dayName: "Thursday" })),
@@ -31,7 +32,7 @@ export function JsonLdSchema() {
           "Bournemouth's authentic Cuban Salsa & Rueda de Casino academy directed by Maestro Enrique Perez Valdes. Strictly Thursdays and Sundays at BOH Studios Bournemouth. Drop-in welcome, no partner required.",
         url: getSiteOrigin(),
         telephone: VENUE_INFO.phoneE164,
-        priceRange: "£12 - £14",
+        priceRange: `${DOOR.one} - ${DOOR.two}`,
         founder: {
           "@type": "Person",
           name: "Maestro Enrique Perez Valdes",

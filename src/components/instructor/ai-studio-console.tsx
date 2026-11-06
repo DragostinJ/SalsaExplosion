@@ -44,6 +44,7 @@ import {
   getLivePublishedEventsAction,
 } from "@/actions/ai-studio.actions";
 
+import { DOOR } from "@/lib/constants/door-prices";
 // Realistic sample post written in Maestro Enrique's distinct social style
 const SAMPLE_ENRIQUE_FACEBOOK_POST = `🇨🇺🔥 HAVANA NIGHTS CUBAN FIESTA AT BOH STUDIOS! 🔥🇨🇺
 
@@ -61,7 +62,7 @@ Maestro Enrique Perez Valdes (UK Lifetime Achievement Award) invites you to our 
 • 21:45 till Midnight - Non-stop Timba, Son, Bachata & Salsa Social Fiesta with DJ Enrique!
 
 🎟️ ADMISSION AT THE DOOR:
-£12 (1 Class + Social) | £14 (2 Classes + Social) | £5 Social Dancing Only after 21:45
+${DOOR.one} (1 Class + Social) | ${DOOR.two} (2 Classes + Social) | ${DOOR.social} Social Dancing Only after 21:45
 Cash or Card at the door. ZERO PARTNER REQUIRED! Come alone or with friends!
 
 Tag your dance partners and see you on the dance floor! Dale mambo! 🇨🇺✨`;

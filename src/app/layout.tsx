@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     template: "%s | Salsa Explosion",
   },
   description:
-    "Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. £12 at the door, no partner needed. Practise the class songs at home.",
+    `Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. ${DOOR.one} at the door, no partner needed. Practise the class songs at home.`,
   alternates: { canonical: "/" },
   icons: {
     icon: [
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Cuban Salsa Classes in Bournemouth | Salsa Explosion",
     description:
-      "Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. £12 at the door, no partner needed. Practise the class songs at home.",
+      `Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. ${DOOR.one} at the door, no partner needed. Practise the class songs at home.`,
     url: getSiteOrigin(),
     siteName: "Salsa Explosion",
     locale: "en_GB",
@@ -83,13 +83,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Cuban Salsa Classes in Bournemouth | Salsa Explosion",
     description:
-      "Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. £12 at the door, no partner needed. Practise the class songs at home.",
+      `Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. ${DOOR.one} at the door, no partner needed. Practise the class songs at home.`,
     images: ["/images/opengraph.png"],
   },
 };
 
 import { Toaster } from "sonner";
 
+import { DOOR } from "@/lib/constants/door-prices";
 export default function RootLayout({
   children,
 }: Readonly<{

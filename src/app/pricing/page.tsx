@@ -9,10 +9,11 @@ import { MultiAgeReassuranceBanner } from "@/components/marketing/multi-age-reas
 import { VENUE_INFO, DOOR_PRICING } from "@/lib/academy-data";
 import { TYPE, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
+import { DOOR } from "@/lib/constants/door-prices";
 export const metadata: Metadata = {
-  title: "Prices: £12 at the Door, Festival Passes",
+  title: `Prices: ${DOOR.one} at the Door, Festival Passes`,
   description:
-    "Weekly classes are £12 for one or £14 for two, paid at the door with the social included. Festival passes, private lessons and gift vouchers.",
+    `Weekly classes are ${DOOR.one} for one or ${DOOR.two} for two, paid at the door with the social included. Festival passes, private lessons and gift vouchers.`,
   alternates: { canonical: "/pricing" },
 };
 
@@ -69,14 +70,14 @@ export default function PricingPage() {
                   className="w-20"
                 />
                 <span className={`font-display font-black ${TYPE.number} text-ink`}>
-                  £12
+                  {DOOR.one}
                 </span>
                 <span className="text-xs font-bold uppercase tracking-wider text-ink">
                   1 Class
                 </span>
                 <span className="mx-1 text-ink/50 font-bold text-xl">/</span>
                 <span className={`font-display font-black ${TYPE.number} text-ink`}>
-                  £14
+                  {DOOR.two}
                 </span>
                 <span className="text-xs font-bold uppercase tracking-wider text-ink">
                   2 Classes &amp; Fiesta

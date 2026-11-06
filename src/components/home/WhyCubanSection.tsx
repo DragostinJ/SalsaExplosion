@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { sitePhotos } from "@/lib/site-photos";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
+import { DOOR } from "@/lib/constants/door-prices";
 const CELEBRATION_CARDS = [
   {
     kicker: "Rueda de Casino",
@@ -108,7 +109,7 @@ export function WhyCubanSection() {
             href="/classes"
             className={`${POSTER_BUTTON} border-poster-red bg-poster-red text-ink hover:bg-ink hover:text-paper text-xs sm:text-sm font-black uppercase tracking-wider px-6 py-3 min-h-[44px] shadow-[4px_4px_0_0_var(--color-ink)] inline-flex items-center`}
           >
-            Join the Cuban Circle • £12 / £14 at the Door
+            Join the Cuban Circle • {DOOR.one} / {DOOR.two} at the Door
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>

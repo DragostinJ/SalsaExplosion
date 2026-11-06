@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import { POSTER_HEX } from "@/components/poster/poster-kit";
 import { cartelAssets } from "@/lib/cartel";
 
+import { DOOR } from "@/lib/constants/door-prices";
 export const alt = "Salsa Explosion — Bournemouth Cuban Salsa & Rueda Academy";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -54,7 +55,7 @@ export default async function Image() {
             textTransform: "uppercase",
           }}
         >
-          <div style={{ display: "flex" }}>Thursdays &amp; Sundays · £12 / £14 at the door</div>
+          <div style={{ display: "flex" }}>{`Thursdays & Sundays · ${DOOR.one} / ${DOOR.two} at the door`}</div>
           <div style={{ display: "flex" }}>Maestro Enrique</div>
         </div>
       </div>

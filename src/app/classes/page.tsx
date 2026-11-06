@@ -6,7 +6,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Cuban Salsa Classes: Thursday & Sunday",
   description:
-    "Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. Beginners welcome, no partner needed, £12 at the door.",
+    `Cuban salsa and rueda classes every Thursday and Sunday at BOH Studios, Bournemouth. Beginners welcome, no partner needed, ${DOOR.one} at the door.`,
   alternates: { canonical: "/classes" },
 };
 import {
@@ -53,6 +53,7 @@ import { VENUE_INFO } from "@/lib/academy-data";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 import { PosterBanner } from "@/components/poster/poster-art";
 
+import { DOOR } from "@/lib/constants/door-prices";
 interface SchedulePageProps {
   searchParams: Promise<{
     style?: string;
@@ -271,7 +272,7 @@ export default async function StudentSchedulePage({
               THU &amp; SUN <span className="text-accent-red">Programme</span>
             </h1>
             <p className="max-w-2xl text-sm font-semibold text-ink leading-relaxed">
-              Weekly Cuban Salsa &amp; Rueda classes are paid directly at the door (£12 for 1 class, £14 for 2 classes — includes the late-night Havana Social Fiesta). No booking or partner required: everyone dances, even when the class is uneven, because the teachers rotate partners.
+              Weekly Cuban Salsa &amp; Rueda classes are paid directly at the door ({DOOR.one} for 1 class, {DOOR.two} for 2 classes — includes the late-night Havana Social Fiesta). No booking or partner required: everyone dances, even when the class is uneven, because the teachers rotate partners.
             </p>
             {user && (
               <div className="inline-flex items-center gap-2 border-2 border-ink bg-poster-mustard px-3 py-1 text-xs font-bold shadow-[2px_2px_0_0_var(--color-ink)]">

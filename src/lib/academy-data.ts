@@ -1,3 +1,4 @@
+import { DOOR, DOOR_PRICES } from "./constants/door-prices";
 /**
  * Salsa Explosion UK — Canonical Single Source of Truth (SSOT)
  * All pages (/ , /classes, /events, /pricing, /venues, /about, /llms.txt, SiteFooter, JsonLdSchema)
@@ -48,12 +49,12 @@ export const VENUE_INFO = {
 } as const;
 
 export const DOOR_PRICING = {
-  oneClassPounds: 12,
-  twoClassesPounds: 14,
-  socialOnlyPounds: 5,
-  oneClassDisplay: "£12 (1 Class)",
-  twoClassesDisplay: "£14 (2 Classes)",
-  summaryBadge: "£12 for 1 Class • £14 for 2 Classes (Includes Social Fiesta)",
+  oneClassPounds: DOOR_PRICES.oneClass,
+  twoClassesPounds: DOOR_PRICES.twoClasses,
+  socialOnlyPounds: DOOR_PRICES.socialOnly,
+  oneClassDisplay: `${DOOR.one} (1 Class)`,
+  twoClassesDisplay: `${DOOR.two} (2 Classes)`,
+  summaryBadge: `${DOOR.one} for 1 Class • ${DOOR.two} for 2 Classes (Includes Social Fiesta)`,
   paymentMethodNote: "Cash or Card Accepted at the Door • No Pre-Booking Required",
 } as const;
 
@@ -106,8 +107,8 @@ export const WEEKLY_SCHEDULE: Record<"thursday" | "sunday", CanonicalDaySchedule
         instructor: "Moe Flex",
         instructorHref: "#instructors-moe-flex",
         room: "BOH Studios Main Hall",
-        priceDisplay: "£12 (1 Class) / £14 (2 Classes)",
-        ctaLabel: "Pay at Door (£12 / £14)",
+        priceDisplay: `${DOOR.one} (1 Class) / ${DOOR.two} (2 Classes)`,
+        ctaLabel: `Pay at Door (${DOOR.one} / ${DOOR.two})`,
       },
       {
         id: "thu-1900-beginners",
@@ -118,8 +119,8 @@ export const WEEKLY_SCHEDULE: Record<"thursday" | "sunday", CanonicalDaySchedule
         instructor: "Maestro Enrique Perez Valdes",
         instructorHref: "#instructors-enrique",
         room: "BOH Studios Main Hall",
-        priceDisplay: "£12 (1 Class) / £14 (2 Classes)",
-        ctaLabel: "Pay at Door (£12 / £14)",
+        priceDisplay: `${DOOR.one} (1 Class) / ${DOOR.two} (2 Classes)`,
+        ctaLabel: `Pay at Door (${DOOR.one} / ${DOOR.two})`,
       },
       {
         id: "thu-2015-improvers",
@@ -130,8 +131,8 @@ export const WEEKLY_SCHEDULE: Record<"thursday" | "sunday", CanonicalDaySchedule
         instructor: "Justyna",
         instructorHref: "#instructors-justyna",
         room: "BOH Studios Main Hall",
-        priceDisplay: "£12 (1 Class) / £14 (2 Classes)",
-        ctaLabel: "Pay at Door (£12 / £14)",
+        priceDisplay: `${DOOR.one} (1 Class) / ${DOOR.two} (2 Classes)`,
+        ctaLabel: `Pay at Door (${DOOR.one} / ${DOOR.two})`,
       },
       {
         id: "thu-2015-intermediate",
@@ -142,8 +143,8 @@ export const WEEKLY_SCHEDULE: Record<"thursday" | "sunday", CanonicalDaySchedule
         instructor: "Arturas, Moe Flex & Jim",
         instructorHref: "#instructors-arturas",
         room: "BOH Studios Main Hall",
-        priceDisplay: "£12 (1 Class) / £14 (2 Classes)",
-        ctaLabel: "Pay at Door (£12 / £14)",
+        priceDisplay: `${DOOR.one} (1 Class) / ${DOOR.two} (2 Classes)`,
+        ctaLabel: `Pay at Door (${DOOR.one} / ${DOOR.two})`,
       },
       {
         id: "thu-2130-social",
@@ -154,7 +155,7 @@ export const WEEKLY_SCHEDULE: Record<"thursday" | "sunday", CanonicalDaySchedule
         instructor: "DJ Enrique & Resident Team",
         instructorHref: "#instructors-enrique",
         room: "BOH Studios Main Hall",
-        priceDisplay: "Included w/ Class or £5",
+        priceDisplay: `Included w/ Class or ${DOOR.social}`,
         ctaLabel: "Drop-In Welcome",
         isSocial: true,
       },
@@ -181,8 +182,8 @@ export const WEEKLY_SCHEDULE: Record<"thursday" | "sunday", CanonicalDaySchedule
         instructor: "Maestro Enrique Perez Valdes & Team",
         instructorHref: "#instructors-enrique",
         room: "BOH Studios Main Hall",
-        priceDisplay: "£12 (1 Class) / £14 (2 Classes)",
-        ctaLabel: "Pay at Door (£12 / £14)",
+        priceDisplay: `${DOOR.one} (1 Class) / ${DOOR.two} (2 Classes)`,
+        ctaLabel: `Pay at Door (${DOOR.one} / ${DOOR.two})`,
       },
       {
         id: "sun-1930-social",
@@ -193,7 +194,7 @@ export const WEEKLY_SCHEDULE: Record<"thursday" | "sunday", CanonicalDaySchedule
         instructor: "Maestro Enrique",
         instructorHref: "#instructors-enrique",
         room: "BOH Studios Main Hall",
-        priceDisplay: "Included w/ Class or £5",
+        priceDisplay: `Included w/ Class or ${DOOR.social}`,
         ctaLabel: "Drop-In Welcome",
         isSocial: true,
       },
@@ -226,14 +227,14 @@ export const PASS_PRICING: Record<"first-timer" | "PACK_SINGLE", CanonicalPassTi
     id: "first-timer",
     name: "Weekly Class Door Admission (1 or 2 Classes)",
     shortLabel: "Pay at Door",
-    priceDisplay: "£12 / £14",
+    priceDisplay: `${DOOR.one} / ${DOOR.two}`,
     priceInPounds: 12,
-    perClassNote: "£12 for 1 class • £14 for 2 classes at door",
+    perClassNote: `${DOOR.one} for 1 class • ${DOOR.two} for 2 classes at door`,
     description:
       "Weekly Cuban Salsa and Rueda classes at BOH Studios Bournemouth. Pay directly at the door with cash or contactless card. Includes the Havana Social Fiesta.",
     features: [
-      "£12 for 1 Class + Havana Social Fiesta",
-      "£14 for 2 Classes + Havana Social Fiesta",
+      `${DOOR.one} for 1 Class + Havana Social Fiesta`,
+      `${DOOR.two} for 2 Classes + Havana Social Fiesta`,
       "Zero partner required — rotating circle",
     ],
   },
@@ -241,14 +242,14 @@ export const PASS_PRICING: Record<"first-timer" | "PACK_SINGLE", CanonicalPassTi
     id: "PACK_SINGLE",
     name: "Weekly Class Door Admission (1 or 2 Classes)",
     shortLabel: "Pay at Door",
-    priceDisplay: "£12 / £14",
+    priceDisplay: `${DOOR.one} / ${DOOR.two}`,
     priceInPounds: 12,
-    perClassNote: "£12 for 1 class • £14 for 2 classes at the door",
+    perClassNote: `${DOOR.one} for 1 class • ${DOOR.two} for 2 classes at the door`,
     description:
       "Pay directly at the door on Thursday or Sunday at BOH Studios Bournemouth. No online pre-booking required — includes the evening Havana Social Fiesta.",
     features: [
-      "£12 for 1 Class + Havana Social Fiesta",
-      "£14 for 2 Classes + Havana Social Fiesta",
+      `${DOOR.one} for 1 Class + Havana Social Fiesta`,
+      `${DOOR.two} for 2 Classes + Havana Social Fiesta`,
       "Cash or contactless card accepted at the door",
     ],
   },
@@ -402,7 +403,7 @@ export const ACADEMY_FAQS = [
   {
     question: "How much do classes cost and do I need to create an account?",
     answer:
-      "Weekly Thursday and Sunday classes are paid directly at the door at BOH Studios — no online pre-booking or account is required. Admission is £12 for 1 class or £14 for 2 classes on the same evening (both include the late-night Havana Social Fiesta). Online ticket booking is reserved exclusively for our special events and weekend festivals like Made in Cuba.",
+      `Weekly Thursday and Sunday classes are paid directly at the door at BOH Studios — no online pre-booking or account is required. Admission is ${DOOR.one} for 1 class or ${DOOR.two} for 2 classes on the same evening (both include the late-night Havana Social Fiesta). Online ticket booking is reserved exclusively for our special events and weekend festivals like Made in Cuba.`,
   },
   {
     question: "What shoes should I wear and where do I park?",

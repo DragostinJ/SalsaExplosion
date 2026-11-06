@@ -8,10 +8,11 @@ import { DOOR_PRICING, VENUE_INFO, WEEKLY_SCHEDULE } from "@/lib/academy-data";
 import { PosterBanner } from "@/components/poster/poster-art";
 import { MEDIA_MANIFEST } from "@/lib/media-manifest";
 
+import { DOOR } from "@/lib/constants/door-prices";
 export const metadata = {
   title: "How It Works: Classes, Songs, Festivals",
   description:
-    "Come on Thursday or Sunday, pay £12 at the door and dance with everyone. No partner or booking needed. Practise the songs at home.",
+    `Come on Thursday or Sunday, pay ${DOOR.one} at the door and dance with everyone. No partner or booking needed. Practise the songs at home.`,
   alternates: { canonical: "/how-it-works" },
 };
 

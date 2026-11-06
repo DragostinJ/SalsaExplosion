@@ -8,6 +8,7 @@ import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE 
 import { ActionResponse, BookingDomainError } from "@/lib/constants/booking";
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 
+import { DOOR } from "@/lib/constants/door-prices";
 // ==========================================
 // ZOD VALIDATION SCHEMAS
 // ==========================================
@@ -122,7 +123,7 @@ export async function bookClassAction(
           data: { bookedCount: { increment: 1 } },
         });
 
-        // 3g. Weekly classes are paid at the door (£12 / £14), never online, and there are no
+        // 3g. Weekly classes are paid at the door, never online, and there are no
         // class credits: a booking only tells the teachers who is coming.
 
         // 3h. Upsert Booking Record (handles both fresh bookings and re-activated cancellations)
@@ -166,7 +167,7 @@ export async function bookClassAction(
     return {
       success: true,
       data: result,
-      message: "Spot reserved! Pay at the door when you arrive (£12 for 1 class, £14 for 2).",
+      message: `Spot reserved! Pay at the door when you arrive (${DOOR.one} for 1 class, ${DOOR.two} for 2).`,
     };
   } catch (error) {
     if (error instanceof BookingDomainError) {

@@ -24,6 +24,7 @@ import { PosterBanner } from "@/components/poster/poster-art";
 import { reportError } from "@/lib/monitoring";
 import { TYPE, KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
+import { DOOR } from "@/lib/constants/door-prices";
 export const metadata = {
   title: "About Enrique & the Teachers",
   description:
@@ -211,10 +212,10 @@ export default async function AboutPage() {
               <Ticket className="h-5 w-5" />
             </div>
             <h3 className="font-display font-black text-xl uppercase tracking-tight text-ink">
-              Just Turn Up · £12 at the Door
+              Just Turn Up · {DOOR.one} at the Door
             </h3>
             <p className="text-xs text-ink leading-relaxed font-medium">
-              No booking, no contracts, no app needed. Pay £12 for one class or £14 for two at the door, cash or card, and stay for the social. Festival passes are the only thing sold online.
+              No booking, no contracts, no app needed. Pay {DOOR.one} for one class or {DOOR.two} for two at the door, cash or card, and stay for the social. Festival passes are the only thing sold online.
             </p>
           </div>
 

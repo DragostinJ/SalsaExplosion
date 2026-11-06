@@ -1,6 +1,7 @@
 import { getSiteOrigin } from "@/lib/safe-url";
 import { VENUE_INFO } from "@/lib/academy-data";
 
+import { DOOR, DOOR_PRICES } from "@/lib/constants/door-prices";
 export interface EventJsonLdLocation {
   "@type": "Place";
   name: string;
@@ -184,10 +185,10 @@ export function buildWeeklyClassCourseJsonLd(session: {
     },
     offers: {
       "@type": "Offer",
-      price: "12.00",
+      price: `${DOOR_PRICES.oneClass}.00`,
       priceCurrency: "GBP",
       description:
-        "Pay at the door (£12 for 1 class / £14 for 2 classes). Cash or card accepted at the door. No online pre-booking required.",
+        `Pay at the door (${DOOR.one} for 1 class / ${DOOR.two} for 2 classes). Cash or card accepted at the door. No online pre-booking required.`,
       availability: "https://schema.org/InStoreOnly",
     },
   };

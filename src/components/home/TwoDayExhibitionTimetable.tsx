@@ -10,6 +10,7 @@ import {
 } from "@/lib/academy-data";
 import { TYPE, POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
+import { DOOR } from "@/lib/constants/door-prices";
 function TimetableRow({
   item,
 }: {
@@ -78,7 +79,7 @@ function TimetableRow({
                 : POSTER_BUTTON_COLORS.ink
             } text-xs font-bold px-3 py-1.5 w-full md:w-auto inline-flex items-center justify-between md:justify-center gap-1.5 min-h-[40px]`}
           >
-            <span>{item.isSocial ? "Included / £5 Door" : "Pay at Door • £12 / £14"}</span>
+            <span>{item.isSocial ? `Included / ${DOOR.social} Door` : `Pay at Door • ${DOOR.one} / ${DOOR.two}`}</span>
             <span aria-hidden="true">→</span>
           </Link>
         </div>

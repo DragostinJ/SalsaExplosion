@@ -1,6 +1,7 @@
 import { Zap, HeartHandshake, Phone, MapPin, CreditCard, CheckCircle2 } from "lucide-react";
 import { POSTER_BUTTON, POSTER_BUTTON_COLORS } from "@/components/poster/poster-kit";
 
+import { DOOR } from "@/lib/constants/door-prices";
 interface MultiAgeReassuranceBannerProps {
   className?: string;
   variant?: "all" | "fast-track-only" | "senior-only";
@@ -43,7 +44,7 @@ export function MultiAgeReassuranceBanner({
               <div className="flex items-start gap-2">
                 <CreditCard className="h-4 w-4 text-accent-teal shrink-0 mt-0.5" />
                 <span>
-                  <strong className="font-bold text-ink">Door Pricing:</strong> £12 for 1 class • £14 for 2 classes &amp; social fiesta (Card or Cash at the Door).
+                  <strong className="font-bold text-ink">Door Pricing:</strong> {DOOR.one} for 1 class • {DOOR.two} for 2 classes &amp; social fiesta (Card or Cash at the Door).
                 </span>
               </div>
               <div className="flex items-start gap-2">

@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { Role } from "@prisma/client";
 import { isBootstrapAdmin } from "@/lib/auth-user";
 
+import { relinkUserByVerifiedEmail } from "@/lib/user-relink";
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
 
@@ -73,6 +74,12 @@ export async function POST(req: Request) {
 
       if (!primaryEmail) {
         return NextResponse.json({ error: "Missing email address in payload" }, { status: 400 });
+      }
+
+      // The same person on a new Clerk instance: keep their account, passes and role
+      if (email_addresses?.[0]?.verification?.status === "verified") {
+        const relinked = await relinkUserByVerifiedEmail(id, primaryEmail);
+        if (relinked) return NextResponse.json({ success: true, relinked: true }, { status: 200 });
       }
 
       // Security: Roles are server-controlled. Only whitelisted emails can become ADMIN.

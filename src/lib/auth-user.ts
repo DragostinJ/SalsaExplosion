@@ -6,6 +6,7 @@ import { isNextControlFlowError } from "@/lib/safe-url";
 import { reportError } from "@/lib/monitoring";
 
 
+import { relinkUserByVerifiedEmail } from "@/lib/user-relink";
 export function isFallbackUser(user: { id: string }): boolean {
   return user.id.startsWith("fallback-");
 }
@@ -112,6 +113,12 @@ export async function getOrProvisionCurrentUser() {
       clerkUser?.primaryEmailAddress?.emailAddress ??
       clerkUser?.emailAddresses?.[0]?.emailAddress ??
       `${clerkId}@salsaexplosion.local`;
+
+    const primaryAddress = clerkUser?.primaryEmailAddress;
+    if (primaryAddress?.emailAddress && primaryAddress.verification?.status === "verified") {
+      const relinked = await relinkUserByVerifiedEmail(clerkId, primaryAddress.emailAddress);
+      if (relinked) return relinked;
+    }
 
     const isAdmin = isBootstrapAdmin(primaryEmail);
 

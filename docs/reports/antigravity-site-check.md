@@ -76,6 +76,8 @@ Antigravity's layout fixes were mostly real and are kept. Its report wasn't reli
 - Every song section fits one screen at 390x844, 360x640 and 320x568.
 - No console errors in Chromium except the deliberate 404 page. WebKit logged aborted requests during fast navigation, which need a check on a real iPhone.
 
+After the fixes, `FULL_SWEEP=1` passes all 6 groups in about 17 minutes. That covers static pages at 10 widths, every event, every move, every song section, the iPhone browser, and the large text list. Large text problems are listed, not failed.
+
 ## Not checked
 
 Signed-in pages, the player's More sheet, the level quiz, selecting a pass, and a real phone.

@@ -45,15 +45,13 @@ Antigravity's layout fixes were mostly real and are kept. Its report wasn't reli
 
 ## Still open
 
+Updated after `feat/before-sbk`, which fixed large text, the sitemap, the past event in search data, the image manifest and the review page's 5-star prompt.
+
 1. **Live event times:** 1 May shows 8pm on the page but 21:00 in calendars and Google data, and 3 April shows 12:00 but 13:00. Correcting the rows is a production write, waiting on the owner's hours and approval.
-2. **Door prices and class times:** the owner confirmed Meetup's, but the site still has the old ones. Search for `£12`, `£14`, `£5`, `20:15`, `21:30`, `18:30` and `19:30`. Files: `src/lib/academy-data.ts`, `src/lib/data/instructors.ts`, `src/components/marketing/level-matcher-quiz.tsx`, `src/components/home/LiveTonightBanner.tsx`, `src/components/home/TwoDayExhibitionTimetable.tsx`, `src/components/home/WhyCubanSection.tsx`, `src/components/marketing/multi-age-reassurance-banner.tsx`, `src/components/instructor/ai-studio-console.tsx`, `src/components/seo/JsonLdSchema.tsx`, `src/lib/seo/event-jsonld.ts`, `src/lib/security/ai-studio-fallbacks.ts`, `src/actions/booking.actions.ts`, `src/actions/ai-studio.actions.ts`, `src/app/layout.tsx`, `src/app/opengraph-image.tsx`, `src/app/pricing/page.tsx`, `src/app/classes/page.tsx`, `src/app/about/page.tsx`, `src/app/how-it-works/page.tsx`, and `AGENTS.md` section 2.
+2. **Door prices and class times:** the owner confirmed Meetup's prices. They're now one edit in `src/lib/constants/door-prices.ts`, and branch `feat/door-prices-13-15-6` has it ready. Class times still appear in several files and wait for the owner's list.
 3. **Refund wording:** the site says no refunds. The stated rule is a refund up to 7 days before, and a name change up to 48 hours before. Waiting on the owner's confirmation.
 4. **SB&K times:** the tickets say 8pm and the programme box says 19:30, 20:30 and 21:30. The box is hard-coded in `src/components/events/studio-event-guide.tsx` and appears on every party page.
-5. **Large text:** at 150% on a 360px phone, every page scrolls sideways by 27px because of the bottom nav.
-6. **Search data:** the sitemap lists 2 of the 11 events (`src/app/sitemap.ts`), and every page's JSON-LD includes the past Halloween event (`src/components/seo/JsonLdSchema.tsx`).
-7. **Image manifest:** 8 entries state the wrong shape, and `hero` and `studioHeroBg` point at files that don't exist.
-8. **Teachers removing a move:** a Rejected mark takes effect after the report is applied. Making it instant needs one small database table.
-9. **Review page:** it still asks Gemini to write a 5-star review, which risks breaking Google's rules.
+5. **Teachers removing a move:** a Rejected mark takes effect after the report is applied. Making it instant needs one small database table.
 
 ## What was wrong in the original report
 

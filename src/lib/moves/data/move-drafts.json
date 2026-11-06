@@ -3403,7 +3403,7 @@
     "leaderSteps": [
       {
         "counts": "1-8",
-        "text": "Execute El Dedo: from a right-to-right hold, turn the follower on 1-3 and duck under the raised right arm on 5-7."
+        "text": "Execute El Dedo: switch to a right-to-right hold, turn the follower on 1-3 and duck under the raised right arm on 5-7."
       },
       {
         "counts": "9-16",
@@ -5113,7 +5113,7 @@
       "advanced"
     ],
     "videos": [],
-    "notes": "UNSURE: 'Festival de Media' (or 'Festival de Media Naranja / Media Vuelta') varies by school. Teacher must confirm the exact 3 sub-figures and whether Dile Que No happens after each part or only at the end. UNSURE (check): Confirm the exact multi-bar bar counts and variations for Festival de Media."
+    "notes": "UNSURE: 'Festival de Media' (or 'Festival de Media Naranja / Media Vuelta') varies by school. Teacher must confirm the exact 3 sub-figures and whether Dile Que No happens after each part or only at the end. UNSURE (check): Confirm the exact multi-bar bar counts and variations for Festival de Media. UNSURE (check): Confirm the exact multi-bar sequence and whether Media means a half-Enchufla check or ankle touch in the school syllabus."
   },
   {
     "id": "festival-de-pelota",
@@ -6033,7 +6033,7 @@
     "category": "Rueda call",
     "level": "Advanced",
     "eightCounts": 3,
-    "summary": "The advanced triple-phrase extension of Una Media and Media Doble, chaining three consecutive half-turn checks or multi-partner passes before resolving into Dile Que No.",
+    "summary": "The advanced triple-phrase extension of Una Media and Media Doble, chaining three consecutive half-turn checks or multi-partner passes before switching partners into Dile Que No.",
     "leaderSteps": [
       {
         "counts": "1-8",
@@ -6080,7 +6080,7 @@
       "advanced-rueda"
     ],
     "videos": [],
-    "notes": "Completes the Una Media -> Media Doble -> Media Triple progression."
+    "notes": "Completes the Una Media -> Media Doble -> Media Triple progression. UNSURE (check): Confirm whether Media Triple in the school syllabus means three half-turn checks or three ankle/sock taps."
   },
   {
     "id": "mentira",
@@ -6640,7 +6640,7 @@
       "followers-feature"
     ],
     "videos": [],
-    "notes": "Remind leaders that in standard 'Ocho' the leaders walk the figure-8 around two followers, whereas in 'Ocho para Mujeres' the roles reverse so leaders stay anchored."
+    "notes": "Remind leaders that in standard 'Ocho' the leaders walk the figure-8 around two followers, whereas in 'Ocho para Mujeres' the roles reverse so leaders stay anchored. UNSURE (check): Confirm whether the follower weaves around her leader and the leader on his right or left, and whether it ends with the original partner."
   },
   {
     "id": "ocho-para-mujeres-doble",
@@ -6708,7 +6708,7 @@
       "advanced"
     ],
     "videos": [],
-    "notes": "UNSURE: Confirm whether the follower finishes the second figure-eight with her original leader (no partner change) or advances to the neighbouring leader (partner change)."
+    "notes": "UNSURE: Confirm whether the follower finishes the second figure-eight with her original leader (no partner change) or advances to the neighbouring leader (partner change). UNSURE (check): Confirm whether two full figure-eight loops fit comfortably into 4 eight-counts or require more bars in the school syllabus."
   },
   {
     "id": "ochosi",
@@ -7952,7 +7952,7 @@
       "no-hands"
     ],
     "videos": [],
-    "notes": "Directly references the famous lyric from *Pedro Navaja*: 'Las manos siempre dentro del gabán' (hands always inside the coat pockets)."
+    "notes": "Directly references the famous lyric from *Pedro Navaja*: 'Las manos siempre dentro del gabán' (hands always inside the coat pockets). UNSURE (check): Confirm whether Pedro Navaja stays with the original partner or changes partner on count 17."
   },
   {
     "id": "pelota",
@@ -8236,7 +8236,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "UNSURE: Confirm whether BOH Studios teaches 'Por mí, por ti' as alternating turns or a specific clap/tap pattern."
+    "notes": "UNSURE: Confirm whether BOH Studios teaches 'Por mí, por ti' as alternating turns or a specific clap/tap pattern. UNSURE (check): Confirm whether Por Mí, Por Ti changes partners or stays with the same partner on count 9."
   },
   {
     "id": "preciosa",
@@ -9336,7 +9336,7 @@
       "musicality"
     ],
     "videos": [],
-    "notes": "UNSURE: Many schools have a custom choreographed shine for 'Salsita'; teacher should confirm BOH Studios' exact counts."
+    "notes": "UNSURE: Many schools have a custom choreographed shine for 'Salsita'; teacher should confirm BOH Studios' exact counts. UNSURE (check): Confirm the exact shine footwork and whether Salsita takes 2 or 3 eight-counts in the school syllabus."
   },
   {
     "id": "saluda",
@@ -10965,7 +10965,7 @@
       "enchufla-family"
     ],
     "videos": [],
-    "notes": "Closely related to 'Por mí, por ti'; verify any count differences in the BOH Studios syllabus."
+    "notes": "Closely related to 'Por mí, por ti'; verify any count differences in the BOH Studios syllabus. UNSURE (check): Confirm whether Una Pa' Ti, Una Pa' Mí in the school syllabus is alternating turns or alternating Pelota claps, and whether it takes 2 or 3 eight-counts."
   },
   {
     "id": "vacilala-completa",
@@ -11346,7 +11346,7 @@
     "commonMistakes": [
       "Followers wandering off the circle perimeter during the two eight-counts of free styling.",
       "Losing the 1-2-3, 5-6-7 internal pulse while improvising the 'florea' and missing the count 17 pickup.",
-      "Leaders grabbing the follower abruptly on count 17 instead of offering a clear visual and frame invitation on counts 15-16."
+      "Leaders grabbing the follower abruptly on count 17 instead of offering a clear visual and frame invitation on count 15."
     ],
     "prerequisites": [
       "vacilala",

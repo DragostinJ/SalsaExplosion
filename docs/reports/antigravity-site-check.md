@@ -34,7 +34,7 @@ Antigravity's layout fixes were mostly real and are kept. Its report wasn't reli
 
 **Moves**
 - All moves are live with no "Draft" wording (owner decision, 6 November). A page only says "Checked on the music by" when a teacher really did. Teachers aren't given a list to work through, and the to-do on the staff page is gone.
-- Gemini check batches 8 to 18 applied: 34 corrections and 68 teacher-only notes. Two hand-hold fixes on `setenta-y-uno` were left out because the hand varies between teachers; they're kept as notes. Batches 7, 19 and 20 haven't come back yet.
+- Gemini check batches 8 to 18 applied: 34 corrections and 68 teacher-only notes. Two hand-hold fixes on `setenta-y-uno` were left out because the hand varies between teachers; they're kept as notes. Batches 19 and 20 and a re-run of 18 came back later the same day: 3 corrections and 8 more notes. Only batch 7 (10 moves) hasn't come back yet.
 - The 30 core moves no longer put leader advice in the follower's steps. The advice stays under common mistakes. These moves still need properly written steps.
 
 **Tests**

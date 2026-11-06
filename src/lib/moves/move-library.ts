@@ -158,7 +158,7 @@ function deriveSteps(item: CurriculumSkillItem): {
       ],
       followerSteps: [
         { counts: "1-3", text: `Follower response: ${item.claveSync}` },
-        { counts: "5-7", text: `Follower finish: ${item.unConfuserTip}` },
+        { counts: "5-7", text: `Follower finish: ${item.entryExitGeometry || "Maintain circular flow"}` },
       ],
     };
   }
@@ -168,7 +168,7 @@ function deriveSteps(item: CurriculumSkillItem): {
       { counts: "1-8", text: item.summary },
     ],
     followerSteps: [
-      { counts: "1-8", text: item.unConfuserTip || item.summary },
+      { counts: "1-8", text: item.summary },
     ],
   };
 }
@@ -255,7 +255,7 @@ function seedMoves(): Move[] {
       curriculumId: item.id,
       tags,
       videos: [],
-      reviewedBy: undefined, // Draft by default per anti-tutorial protocol
+      reviewedBy: undefined, // Live by default. Set only when a teacher really checks it on the music
     };
 
     return MoveSchema.parse(rawMove);

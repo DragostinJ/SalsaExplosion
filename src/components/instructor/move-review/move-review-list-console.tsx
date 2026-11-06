@@ -224,7 +224,7 @@ export function MoveReviewListConsole({
           }`}
         >
           <div className="flex items-center justify-between text-muted-foreground">
-            <span className="text-xs font-medium">Drafts</span>
+            <span className="text-xs font-medium">Live, unchecked</span>
             <Clock className="h-4 w-4 text-amber-400" />
           </div>
           <p className="text-2xl font-bold mt-1 text-foreground">{counts.draft}</p>
@@ -295,7 +295,7 @@ export function MoveReviewListConsole({
             className="min-h-[40px] rounded-xl border bg-background px-3 py-2 text-xs text-foreground focus:outline-hidden focus:ring-2 focus:ring-amber-500/30"
           >
             <option value="all">All Statuses ({counts.total})</option>
-            <option value="draft">Drafts Only</option>
+            <option value="draft">Live, unchecked</option>
             <option value="approved">Approved Only</option>
             <option value="needs-work">Needs Work</option>
             <option value="rejected">Rejected</option>
@@ -454,7 +454,7 @@ export function MoveReviewListConsole({
                       ) : (
                         <Badge className="bg-amber-500/10 text-amber-300 border-amber-500/20 gap-1 px-2.5 py-1 text-xs">
                           <Clock className="h-3.5 w-3.5" />
-                          Draft (Unreviewed)
+                          Live, unchecked
                         </Badge>
                       )}
 

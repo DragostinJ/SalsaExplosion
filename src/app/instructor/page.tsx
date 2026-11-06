@@ -5,8 +5,6 @@ import { prisma } from "@/lib/prisma";
 import { requireRole, STAFF_ROLES } from "@/lib/auth-user";
 import { InstructorNav } from "@/components/navigation/instructor-nav";
 import { KICKER, POSTER_BUTTON, POSTER_BUTTON_COLORS, TYPE } from "@/components/poster/poster-kit";
-import { getAllMoves, getMoveReviewState } from "@/lib/moves/move-library";
-import { hasUnsureNote } from "@/lib/moves/move-categories";
 import { studioDayBounds, STUDIO_TIME_ZONE } from "@/lib/schedule/weekly-sessions";
 import { reportError } from "@/lib/monitoring";
 
@@ -87,15 +85,11 @@ export default async function TodayPage() {
     reportError("TodayPage", error);
   }
 
-  const drafts = getAllMoves().filter((m) => (getMoveReviewState(m.id)?.status ?? "draft") === "draft");
-  const unsure = drafts.filter(hasUnsureNote).length;
-
   const shown = tonight.length > 0 ? tonight : upcoming;
   const todo = [
     { count: counts.lessonRequests, label: "private lesson requests to answer", href: "/admin/operations" },
     { count: counts.recapsMissing, label: "classes this week without a recap", href: "/dashboard/recaps" },
     { count: counts.assessments, label: "video assessments waiting", href: "/instructor/submissions" },
-    { count: drafts.length, label: `moves to check (start with the ${unsure} where Gemini wasn't sure)`, href: "/instructor/moves" },
   ].filter((item) => item.count > 0);
 
   const classesHeading =

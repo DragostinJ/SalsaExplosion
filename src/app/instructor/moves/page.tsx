@@ -10,8 +10,8 @@ import {
 import { MoveReviewListConsole } from "@/components/instructor/move-review/move-review-list-console";
 
 export const metadata: Metadata = {
-  title: "Move Library Review | Salsa Explosion Faculty",
-  description: "Review, audit, and approve curriculum dance moves and attach verified YouTube video breakdowns.",
+  title: "Moves on the Site | Salsa Explosion Faculty",
+  description: "Every move is live. Teachers fix a move or take it down if it is wrong.",
   robots: { index: false, follow: false },
 };
 
@@ -35,9 +35,9 @@ export default async function MoveReviewListPage() {
       <div className="mx-auto max-w-5xl">
         <InstructorNav />
         <div className="mb-6">
-          <h1 className="font-display text-2xl font-bold">Move Library Review Desk</h1>
+          <h1 className="font-display text-2xl font-bold">Moves on the Site</h1>
           <p className="mt-1 text-sm text-ivory-muted">
-            Inspect AI drafts, count movements against benchmark timba tracks, and approve figures for the dancer curriculum.
+            Every move is live, and there&apos;s no list to work through. If one looks wrong, open it and mark it Rejected or Needs Work: it comes off the site once the report is applied.
           </p>
         </div>
         <MoveReviewListConsole

@@ -52,7 +52,7 @@ export default function MovesPage() {
         </h1>
         <p className="mt-4 max-w-2xl text-lg font-medium">
           Casino figures, rueda calls, shines and more: what the leader and the follower do, how many 8-counts it takes, and the
-          songs where it fits. Each one stays a draft until a teacher has checked it on the music, and the checked ones say so.
+          songs where it fits. Spot something off? Tell a teacher in class and they&apos;ll fix it or take it down.
         </p>
       </header>
 

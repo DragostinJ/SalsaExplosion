@@ -34,10 +34,15 @@ function findPublished(moveId: string) {
 export async function generateMetadata({ params }: MovePageProps): Promise<Metadata> {
   const move = findPublished((await params).moveId);
   if (!move) return {};
+  const title = moveTitle(move.spanishName ?? move.name);
+  const description = clampDescription(`${move.category} · ${move.level}. ${move.summary}`);
   return {
-    title: moveTitle(move.spanishName ?? move.name),
-    description: clampDescription(`${move.category} · ${move.level}. ${move.summary}`),
+    title,
+    description,
     alternates: { canonical: `/moves/${move.id}` },
+    // Without these, a shared link shows the site's general title and description
+    openGraph: { title, description, url: `/moves/${move.id}`, siteName: "Salsa Explosion", locale: "en_GB", type: "website" },
+    twitter: { card: "summary_large_image", title, description, images: [`/moves/${move.id}/opengraph-image`] },
   };
 }
 
@@ -103,7 +108,7 @@ export default async function MovePage({ params }: MovePageProps) {
           <p className="mt-2 text-xs font-bold uppercase tracking-wider">
             {isTeacherChecked(move)
               ? `Checked on the music by ${move.reviewedBy}`
-              : "Draft: a teacher hasn't checked this one on the music yet · spot something off? Tell them in class"}
+              : "Spot something off? Tell a teacher in class"}
           </p>
         </header>
       </div>
@@ -165,8 +170,8 @@ export default async function MovePage({ params }: MovePageProps) {
                 >
                   <span className="font-display text-xl tabular-nums shrink-0">{formatSongTime(link.startTimeSeconds)}</span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate font-bold">{songTitle(link.songId)}</span>
-                    <span className="block truncate text-sm">{link.sectionName}</span>
+                    <span className="block break-words font-bold">{songTitle(link.songId)}</span>
+                    <span className="block break-words text-sm">{link.sectionName}</span>
                   </span>
                 </Link>
               </li>

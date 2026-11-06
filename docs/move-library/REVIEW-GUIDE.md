@@ -1,5 +1,7 @@
 # Salsa Explosion UK: Maestro Enrique's Move Review Guide
 
+> **Every move is live (decision of 6 November 2026), and teachers aren't asked to work through a list.** If a move looks wrong, open it at `/instructor/moves` and mark it Rejected or Needs Work. It comes off the site once the report is applied. Approving a move is optional: it adds "Checked on the music by" your name.
+
 Welcome to the **Faculty Move Review Desk**!  
 Every move in the library is public from the start (owner decision, 2 November 2026). As a teacher you check the text, test the counts against real Cuban music, attach a clear video, and approve it: the move page then says "Checked on the music by" you. If a move is wrong or you don't teach it, mark it **Reject** (or **Needs Work**) and it disappears from the dancers' library.
 

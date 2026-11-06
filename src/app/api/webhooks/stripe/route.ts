@@ -342,6 +342,35 @@ export async function POST(req: Request): Promise<NextResponse> {
       }
 
       // ----------------------------------------------------------------
+      // REFUNDED: a fully refunded pass no longer gets in at the door, and its place goes back on sale
+      // ----------------------------------------------------------------
+      case "charge.refunded": {
+        const charge = event.data.object as Stripe.Charge;
+        const paymentIntentId = typeof charge.payment_intent === "string" ? charge.payment_intent : charge.payment_intent?.id;
+        if (charge.refunded && paymentIntentId) {
+          const sessions = await stripe.checkout.sessions.list({ payment_intent: paymentIntentId, limit: 1 });
+          const sessionId = sessions.data[0]?.id;
+          if (sessionId) {
+            await prisma.eventRegistration.updateMany({
+              where: { stripeSessionId: sessionId },
+              data: { paymentStatus: TicketPaymentStatus.REFUNDED },
+            });
+          }
+        }
+
+        await prisma.processedWebhookEvent
+          .create({
+            data: {
+              id: event.id,
+              eventType: event.type,
+            },
+          })
+          .catch(() => {});
+
+        break;
+      }
+
+      // ----------------------------------------------------------------
       // C. SUBSCRIPTION UPDATED OR DELETED (Upgrades, Cancellations, Past Due)
       // ----------------------------------------------------------------
       case "customer.subscription.updated":

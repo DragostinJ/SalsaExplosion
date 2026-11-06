@@ -205,7 +205,7 @@ export function EventPassSelector({
               }`}
             >
               {/* Ticket Stub Perforated Header */}
-              <div className="flex items-start justify-between gap-3 border-b-4 border-dashed border-ink bg-poster-mustard/20 p-5">
+              <div className="flex flex-wrap items-start justify-between gap-3 border-b-4 border-dashed border-ink bg-poster-mustard/20 p-5">
                 <div>
                   <span className={`font-display ${TYPE.card} leading-none text-ink block`}>
                     {tier.name}

@@ -99,7 +99,7 @@ export function CongressTravelGuide() {
       </div>
 
       {/* Grid: Official Hotel & B&B Options */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* The Roundhouse Hotel Dancer Block */}
         <article className="border-4 border-ink bg-paper p-5 space-y-4 text-ink shadow-[6px_6px_0_0_var(--color-ink)]">
           <div className="border-b-2 border-ink pb-3">
@@ -126,7 +126,7 @@ export function CongressTravelGuide() {
           </p>
 
           <div className="border-2 border-ink bg-surface-1 p-3.5 space-y-2 text-xs">
-            <div className="flex items-center justify-between font-bold text-ink">
+            <div className="flex flex-wrap items-center justify-between gap-x-2 font-bold text-ink">
               <span>Dancer Block (Code: <code className="font-mono text-accent-red">SALSA2026</code>)</span>
               <span className="font-display text-base text-accent-red">From £69/night</span>
             </div>
@@ -146,7 +146,7 @@ export function CongressTravelGuide() {
             </ul>
           </div>
 
-          <div className="flex items-center gap-2 pt-1">
+          <div className="flex flex-wrap items-center gap-2 pt-1">
             <a
               href="tel:+441202554444"
               className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-3 text-xs`}
@@ -171,7 +171,7 @@ export function CongressTravelGuide() {
             <span className="border-2 border-ink bg-poster-mustard px-2 py-0.5 text-xs font-bold uppercase text-ink">
               Walkable Hotels
             </span>
-            <h3 className={`font-display ${TYPE.card} text-ink leading-tight mt-2 flex items-center gap-2`}>
+            <h3 className={`font-display ${TYPE.card} text-ink leading-tight mt-2 flex items-center gap-2 max-[360px]:text-2xl`}>
               <Bed className="h-5 w-5 text-accent-teal" />
               Nearby Accommodations
             </h3>
@@ -182,7 +182,7 @@ export function CongressTravelGuide() {
 
           <div className="space-y-2.5 text-xs">
             <div className="border border-ink bg-surface-1 p-3 space-y-1">
-              <div className="flex items-center justify-between font-bold text-ink">
+              <div className="flex flex-wrap items-center justify-between gap-x-2 font-bold text-ink">
                 <span>Hilton Bournemouth (4-Star Premium)</span>
                 <span className="text-ink/70 text-[11px]">3–5 min walk</span>
               </div>
@@ -192,7 +192,7 @@ export function CongressTravelGuide() {
             </div>
 
             <div className="border border-ink bg-surface-1 p-3 space-y-1">
-              <div className="flex items-center justify-between font-bold text-ink">
+              <div className="flex flex-wrap items-center justify-between gap-x-2 font-bold text-ink">
                 <span>Hampton by Hilton Bournemouth</span>
                 <span className="text-ink/70 text-[11px]">5 min walk</span>
               </div>
@@ -202,7 +202,7 @@ export function CongressTravelGuide() {
             </div>
 
             <div className="border border-ink bg-surface-1 p-3 space-y-1">
-              <div className="flex items-center justify-between font-bold text-ink">
+              <div className="flex flex-wrap items-center justify-between gap-x-2 font-bold text-ink">
                 <span>Premier Inn Bournemouth Central</span>
                 <span className="text-ink/70 text-[11px]">8 min walk</span>
               </div>
@@ -212,7 +212,7 @@ export function CongressTravelGuide() {
             </div>
 
             <div className="border border-ink bg-surface-1 p-3 space-y-1">
-              <div className="flex items-center justify-between font-bold text-ink">
+              <div className="flex flex-wrap items-center justify-between gap-x-2 font-bold text-ink">
                 <span>Holiday Inn Bournemouth</span>
                 <span className="text-ink/70 text-[11px]">10 min walk</span>
               </div>
@@ -233,7 +233,7 @@ export function CongressTravelGuide() {
           </h3>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {/* Friday */}
           <div className="border-2 border-ink bg-surface-1 p-4 space-y-3">
             <div className="flex items-center justify-between border-b-2 border-ink pb-2">

@@ -62,13 +62,16 @@ export async function generateMetadata({
     reportError("EventDetailPage:generateMetadata", err);
   }
 
+  // The share card from opengraph-image.tsx in this folder
+  const eventCard = `/events/${slug}/opengraph-image`;
+
   // Search snippets stop around 155 characters: cut on a word, never mid-word
   const snippet = (text: string) => (text.length <= 155 ? text : `${text.slice(0, 154).replace(/\s+\S*$/, "")}…`);
 
   if (!event) {
     const canonical = UPCOMING_EVENTS.find((e) => e.slug === slug);
     if (canonical) {
-      const image = canonical.posterUrl ?? "/opengraph-image";
+      const image = canonical.posterUrl ?? eventCard;
       return {
         title: fitTitle(canonical.title),
         description: snippet(canonical.description),
@@ -82,7 +85,7 @@ export async function generateMetadata({
     };
   }
 
-  // Without its own cover, an event shares the site's poster card rather than no image at all
+  // Without its own cover, an event shares its own card (name and date), not the general school poster
   const ogImages = event.coverImageUrl
     ? [
         {
@@ -92,7 +95,7 @@ export async function generateMetadata({
           alt: event.title,
         },
       ]
-    : ["/opengraph-image"];
+    : [{ url: eventCard, width: 1200, height: 630, alt: event.title }];
 
   return {
     title: fitTitle(event.title),
@@ -109,7 +112,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: event.title,
       description: event.description ? snippet(event.description) : undefined,
-      images: event.coverImageUrl ? [event.coverImageUrl] : ["/opengraph-image"],
+      images: event.coverImageUrl ? [event.coverImageUrl] : [eventCard],
     },
   };
 }
@@ -288,7 +291,7 @@ export default async function EventDetailPage({
             </div>
 
             <p className={KICKER}>Salsa Explosion UK · BOH Studios</p>
-            <h1 className={`font-display ${TYPE.section} text-ink leading-tight`}>
+            <h1 className={`font-display ${TYPE.section} text-ink leading-tight max-[360px]:text-4xl`}>
               {event.title}
             </h1>
 
@@ -311,7 +314,12 @@ export default async function EventDetailPage({
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              {!eventFinished && (
+                <a href="#passes" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-4 text-xs`}>
+                  Get tickets ↓
+                </a>
+              )}
               <AddToCalendarButton
                 event={{
                   title: event.title,
@@ -332,9 +340,9 @@ export default async function EventDetailPage({
             data-testid="made-in-cuba-festival-showcase"
             className="border-4 border-ink bg-paper p-6 sm:p-8 space-y-6 shadow-[8px_8px_0_0_var(--color-ink)] text-ink"
           >
-            <div className="grid gap-8 lg:grid-cols-12 items-center">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 items-center">
               {/* Left Content Column */}
-              <div className="lg:col-span-7 space-y-5">
+              <div className="min-w-0 lg:col-span-7 space-y-5">
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="border-2 border-ink bg-poster-mustard px-2.5 py-0.5 text-xs font-bold uppercase text-ink">
@@ -461,19 +469,19 @@ export default async function EventDetailPage({
 
                 {/* Contact & Enquiries Bar */}
                 <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1 border-t-2 border-ink">
-                  <div className="flex items-center gap-2">
+                  <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2">
                     <a
                       href="https://wa.me/447969633701?text=Hi%20Enrique,%20I'd%20like%20more%20info%20about%20the%20Made%20in%20Cuba%20Dance%20Festival%202026%20please!"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-3 py-1 text-xs`}
+                      className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] max-w-full whitespace-normal px-3 py-1 text-xs`}
                     >
                       <Phone className="h-3.5 w-3.5 mr-1.5" />
                       <span>WhatsApp Enrique: 07969 633701</span>
                     </a>
                     <a
                       href="mailto:info@salsaexplosion.co.uk"
-                      className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper min-h-[40px] px-3 py-1 text-xs`}
+                      className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.outline} bg-paper min-h-[40px] max-w-full whitespace-normal px-3 py-1 text-xs`}
                     >
                       <Mail className="h-3.5 w-3.5 mr-1.5" />
                       <span>info@salsaexplosion.co.uk</span>
@@ -483,7 +491,7 @@ export default async function EventDetailPage({
                     href="https://www.instagram.com/salsaexplosion/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-accent-red hover:underline inline-flex items-center gap-1"
+                    className="font-bold text-accent-red hover:underline inline-flex min-h-[40px] items-center gap-1"
                   >
                     <InstagramIcon className="h-3.5 w-3.5" />
                     <span>@salsaexplosion</span>
@@ -492,7 +500,7 @@ export default async function EventDetailPage({
               </div>
 
               {/* Right Poster Display Column */}
-              <div className="lg:col-span-5 flex flex-col items-center justify-center">
+              <div className="min-w-0 lg:col-span-5 flex flex-col items-center justify-center">
                 <div className="relative w-full max-w-[340px] aspect-square rotate-[-2deg] border-[6px] border-ink shadow-[10px_10px_0_0_var(--color-ink)] bg-ink">
                   <Image
                     src="/images/made-in-cuba-2026-poster.jpg"
@@ -643,7 +651,7 @@ export default async function EventDetailPage({
         </div>
 
         {/* Interactive Pass Selection & QR Pass Issuance */}
-        <div className="space-y-6">
+        <div id="passes" className="scroll-mt-24 space-y-6">
           <div className="border-b-4 border-ink pb-3 flex flex-wrap items-baseline justify-between gap-2">
             <div className="flex items-center gap-3">
               <Image

@@ -966,7 +966,7 @@ async function main() {
         "World-renowned Cuban dance superstar Barbara Jiménez comes to BOH Studios Bournemouth! 2 days of world-class Afro-Cuban movement, Cuban styling, Casino partnerwork masterclasses, and Saturday night Gala Fiesta.",
       venueName: "BOH Studios Bournemouth",
       venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
-      startDate: new Date("2027-04-03T12:00:00Z"),
+      startDate: new Date("2027-04-03T11:00:00Z"), // 12 noon BST
       endDate: new Date("2027-04-04T23:00:00Z"),
       guestArtists: ["Barbara Jiménez", "Enrique Perez Valdes", "DJ Enrique"],
       status: EventStatus.PUBLISHED,
@@ -1012,8 +1012,8 @@ async function main() {
         "Celebrate the May Bank Holiday weekend with Salsa Explosion! An evening dedicated to Cuban dance, music & culture with Rueda de Casino, Son, and Timba at BOH Studios Bournemouth.",
       venueName: "BOH Studios Bournemouth",
       venueAddress: "104 Commercial Road, Bournemouth, BH2 5LR",
-      startDate: new Date("2027-05-01T20:00:00Z"),
-      endDate: new Date("2027-05-02T02:00:00Z"),
+      startDate: new Date("2027-05-01T19:00:00Z"), // 8pm BST
+      endDate: new Date("2027-05-02T01:00:00Z"), // 2am BST
       guestArtists: ["Enrique Perez Valdes", "Moe Flex", "Arturas", "DJ Enrique"],
       status: EventStatus.PUBLISHED,
       ticketTiers: {

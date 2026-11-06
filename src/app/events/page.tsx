@@ -382,7 +382,7 @@ function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
       </div>
 
       {/* Ticket Body */}
-      <div className="flex flex-1 flex-col justify-between p-4 sm:p-5 gap-3">
+      <div className="flex min-w-0 flex-1 flex-col justify-between p-4 sm:p-5 gap-3">
         <div>
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-bold uppercase tracking-wider text-ink/70">
             <span>{startFormatted}</span>
@@ -419,7 +419,7 @@ function EventCard({ evt, isCanonicalFallback = false }: EventCardProps) {
           </p>
         </div>
 
-        <div className="border-t-2 border-ink pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div className="border-t-2 border-ink pt-3 flex flex-col sm:flex-row sm:flex-wrap sm:items-center justify-between gap-2">
           <div className="flex items-center gap-1.5 text-xs font-bold text-ink/70">
             <MapPin className="h-3.5 w-3.5 shrink-0" />
             <span className="truncate max-w-[150px]">{evt.venueName}</span>

@@ -6,8 +6,7 @@ import {
   Footprints,
   RotateCw,
   HelpCircle,
-  Video,
-  Users,
+  DoorOpen,
   Heart,
   ChevronDown,
   ChevronUp,
@@ -18,15 +17,14 @@ import { DigitalEtiquetteModal } from "@/components/beginners/digital-etiquette-
 import { VisualDressCodeModal } from "@/components/beginners/visual-dress-code-modal";
 import { FirstClassPrepModal } from "@/components/beginners/first-class-prep-modal";
 import { RotationMechanicsCard } from "@/components/beginners/rotation-mechanics-card";
-import { FloorAmbassadorsCard } from "@/components/beginners/floor-ambassadors-card";
 import { AnonymousQuestionBox } from "@/components/beginners/anonymous-question-box";
 
 export function BeginnerSafetyHub() {
   const [isHubExpanded, setIsHubExpanded] = useState(false);
   const [isEtiquetteOpen, setIsEtiquetteOpen] = useState(false);
   const [isDressCodeOpen, setIsDressCodeOpen] = useState(false);
-  const [isPrepVideoOpen, setIsPrepVideoOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<"NONE" | "ROTATION" | "AMBASSADORS" | "QUESTIONS">("NONE");
+  const [isFirstNightOpen, setIsFirstNightOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<"NONE" | "ROTATION" | "QUESTIONS">("NONE");
 
   return (
     <div className="space-y-4">
@@ -70,11 +68,11 @@ export function BeginnerSafetyHub() {
               type="button"
               variant="outline"
               size="sm"
-              onClick={() => setIsPrepVideoOpen(true)}
+              onClick={() => setIsFirstNightOpen(true)}
               className="min-h-[40px] px-3.5 text-xs font-bold border-secondary-base/40 text-secondary-base hover:bg-secondary-light/40"
             >
-              <Video className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
-              1-Min Video Prep
+              <DoorOpen className="mr-1.5 h-3.5 w-3.5 text-secondary-base" />
+              Your First Night
             </Button>
             <Button
               type="button"
@@ -116,20 +114,6 @@ export function BeginnerSafetyHub() {
 
           <button
             type="button"
-            onClick={() => setActiveTab(activeTab === "AMBASSADORS" ? "NONE" : "AMBASSADORS")}
-            className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
-              activeTab === "AMBASSADORS"
-                ? "bg-emerald-600 text-white shadow-xs"
-                : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
-            }`}
-          >
-            <Users className="h-3.5 w-3.5" />
-            <span>Meet Floor Ambassadors</span>
-            {activeTab === "AMBASSADORS" ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
-          </button>
-
-          <button
-            type="button"
             onClick={() => setActiveTab(activeTab === "QUESTIONS" ? "NONE" : "QUESTIONS")}
             className={`rounded-lg px-3 py-1.5 font-bold transition-all flex items-center gap-1.5 ${
               activeTab === "QUESTIONS"
@@ -147,12 +131,6 @@ export function BeginnerSafetyHub() {
         {activeTab === "ROTATION" && (
           <div className="mt-4 pt-1 animate-in fade-in duration-200">
             <RotationMechanicsCard />
-          </div>
-        )}
-
-        {activeTab === "AMBASSADORS" && (
-          <div className="mt-4 pt-1 animate-in fade-in duration-200">
-            <FloorAmbassadorsCard />
           </div>
         )}
 
@@ -176,8 +154,8 @@ export function BeginnerSafetyHub() {
         onClose={() => setIsDressCodeOpen(false)}
       />
       <FirstClassPrepModal
-        isOpen={isPrepVideoOpen}
-        onClose={() => setIsPrepVideoOpen(false)}
+        isOpen={isFirstNightOpen}
+        onClose={() => setIsFirstNightOpen(false)}
       />
     </div>
   );

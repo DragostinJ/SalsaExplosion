@@ -31,7 +31,7 @@ const COMMON_QUESTIONS = [
     category: "PARTNER_ANXIETY" as QuestionCategory,
     question: "Do I have to bring a partner, or will I be the only single one?",
     answer:
-      "Sofia (Floor Ambassador): Over 75% of dancers arrive solo! We rotate in a circle every 60 seconds, so everyone dances with everyone with zero awkwardness.",
+      "Maestro Enrique: Plenty of dancers come on their own. We rotate partners in a circle, so everyone dances with everyone.",
   },
   {
     category: "FOOTWEAR" as QuestionCategory,

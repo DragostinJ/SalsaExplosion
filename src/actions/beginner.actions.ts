@@ -58,7 +58,7 @@ const CATEGORY_REASSURANCES: Record<string, string> = {
   PARTNER_ANXIETY:
     "Never fear: In Cuban Salsa and Rueda de Casino, we rotate in a circle every 60 seconds. You dance with everyone, no partner needed, and every advanced dancer in the room remembers their very first class.",
   VENUE_ARRIVING:
-    "Arrive 10–15 minutes early at BOH Studios (104 Commercial Rd). Grab a water or mint at the desk, say hello to our Floor Ambassador in the yellow badge, and take a breath—you're among friends!",
+    "Arrive 10–15 minutes early at BOH Studios (104 Commercial Rd). Check in with your QR code or pay at the door, put your jacket in the wardrobe, and get a drink from the bar if you want. You're among friends!",
   GENERAL:
     "Welcome to the Salsa Explosion family! There are no silly questions in our studio. Leave perfectionism at the door and come ready to smile.",
 };

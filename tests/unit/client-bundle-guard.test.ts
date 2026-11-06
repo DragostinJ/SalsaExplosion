@@ -54,8 +54,6 @@ const ALLOWED_CLIENT_IMPORTERS: Record<ForbiddenTarget, Record<string, string>> 
       "Studio photo gallery on /about showing venue and party photos with intrinsic dimensions.",
     "src/components/beginners/beginner-safety-hub.tsx":
       "Beginner safety hub lazily loaded on /classes opening the first-class prep modal.",
-    "src/components/beginners/first-class-prep-modal.tsx":
-      "First class prep orientation modal on /classes displaying intro video poster.",
     "src/components/review/review-booster-client.tsx":
       "Signed-in review booster client displaying venue illustration.",
   },

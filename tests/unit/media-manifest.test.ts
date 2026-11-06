@@ -54,7 +54,6 @@ describe("H5: Media Manifest & Asset Weight Integrity", () => {
       "src/app/page.tsx",
       "src/app/music/page.tsx",
       "src/components/about/studio-gallery.tsx",
-      "src/components/beginners/first-class-prep-modal.tsx",
     ];
 
     for (const relPath of filesToCheck) {

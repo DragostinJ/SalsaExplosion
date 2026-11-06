@@ -772,7 +772,6 @@ export const MEDIA_MANIFEST = {
   // To replace: drop .mp4 into public/videos/ or use YouTube embed URLs
   // ==========================================
   videos: {
-    beginnerWelcome: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     sampleStudentSubmission: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     demoRecapThumbnail: "/images/photos/classes-gateway.jpg",
   },

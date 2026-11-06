@@ -42,7 +42,7 @@ const STUDIO_FAQS: FaqItem[] = [
   {
     question: "What is the dress code and shoe policy?",
     answer:
-      "Smart casual / comfortable dancewear. BOH Studios has a pristine sprung wooden dance floor, so please bring clean suede-sole dance shoes, smooth leather shoes, or clean dance sneakers. Stiletto metal heels without protective caps are not permitted.",
+      "Smart casual / comfortable dancewear. BOH Studios has a wooden dance floor, so please bring clean suede-sole dance shoes, smooth leather shoes, or clean dance sneakers. Stiletto metal heels without protective caps are not permitted.",
   },
   {
     question: "Can I pay at the door or should I reserve online?",

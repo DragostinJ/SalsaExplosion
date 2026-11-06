@@ -7,9 +7,9 @@
 export const ACADEMY_METRICS = {
   yearsInUk: "25+ Years",
   yearsInUkLabel: "UK Teaching Heritage",
-  dancersTrained: "4,200+",
+  dancersTrained: "Thousands",
   dancersTrainedLabel: "Dancers Mentored",
-  dancersMentored: "4,200+",
+  dancersMentored: "Thousands",
   dancersMentoredLabel: "Dancers Mentored",
   partnerPolicy: "Zero Partner",
   partnerPolicyLabel: "Required to Join",
@@ -407,7 +407,7 @@ export const ACADEMY_FAQS = [
   {
     question: "What shoes should I wear and where do I park?",
     answer:
-      "Wear comfortable flat shoes, trainers, or dance shoes that slide smoothly on our Canadian sprung maple floor. Free on-street parking is available after 18:00 on surrounding streets, plus Bournemouth Library Car Park (BH2 5SL) is a 2-minute walk away.",
+      "Wear comfortable flat shoes, trainers, or dance shoes that slide smoothly on the wooden floor. Free on-street parking is available after 18:00 on surrounding streets, plus Bournemouth Library Car Park (BH2 5SL) is a 2-minute walk away.",
   },
 ] as const;
 

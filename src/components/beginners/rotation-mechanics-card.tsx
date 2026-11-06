@@ -116,7 +116,7 @@ export function RotationMechanicsCard() {
                   <HeartHandshake className="h-3 w-3 text-blue-500" /> Can I come with a partner and not rotate?
                 </span>
                 <p>
-                  Couples are welcome to stay together during partner drills if preferred, but rotating for at least 15 minutes is proven to build lead/follow confidence 3x faster!
+                  Couples are welcome to stay together during partner drills if preferred, but rotating is one of the best ways to build your confidence.
                 </p>
               </div>
             </div>

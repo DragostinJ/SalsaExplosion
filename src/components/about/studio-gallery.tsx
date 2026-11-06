@@ -27,9 +27,9 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "photo-boh-ballroom",
-    title: "BOH Studios Main Ballroom & Rueda Floor",
+    title: "DANZA! 2026 | 2027 Calendar",
     caption:
-      "Flagship Made in Cuba Dance Festival & weekly classes venue with Enrique Perez Valdes. Gorgeous sprung Canadian maple ballroom for 100+ dancers.",
+      "The season's parties and weekenders at a glance.",
     category: "STUDIO_LIFE",
     imageUrl: MEDIA_MANIFEST.posters.danzaCalendar.src,
     location: "BOH Studios Bournemouth (104 Commercial Rd)",

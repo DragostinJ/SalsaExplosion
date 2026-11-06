@@ -448,7 +448,7 @@ export default async function AboutPage() {
           Ready to Step Into the Circle?
         </h2>
         <p className="max-w-xl mx-auto text-xs sm:text-sm text-ink font-bold leading-relaxed">
-          Book your first Cuban Salsa class with Enrique Perez Valdes and the Salsa Explosion team in Bournemouth. Zero experience necessary. We guarantee you&apos;ll be smiling and dancing in your very first hour!
+          Book your first Cuban Salsa class with Enrique Perez Valdes and the Salsa Explosion team in Bournemouth. Zero experience necessary. You&apos;ll be dancing in your very first class.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Link

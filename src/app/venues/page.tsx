@@ -110,7 +110,7 @@ export default function VenuesGuidePage() {
 
             <div className="p-6 space-y-4 text-xs">
               <p className="text-ink leading-relaxed font-medium">
-                Salsa Explosion UK proudly hires BOH Studios as our flagship home base in Bournemouth town centre. Featuring a state-of-the-art sprung Canadian maple dance floor, full-length mirror wall, professional acoustic sound, licensed bar, and vibrant social dance floor.
+                Salsa Explosion UK proudly hires BOH Studios as our flagship home base in Bournemouth town centre. With a wooden dance floor, a licensed bar, and a social after class.
               </p>
 
               {/* Parking Info */}
@@ -201,7 +201,7 @@ export default function VenuesGuidePage() {
 
             <div className="p-6 space-y-4 text-xs">
               <p className="text-ink leading-relaxed font-medium">
-                Intimate secondary studio and social lounge for Level 0 beginners foundation drills, Bachata Sensual styling, and multi-room festival parties. Featuring mirror walls, high-definition sound, and sprung dance flooring.
+                BOH&apos;s second room, used for beginners classes and for parties with two rooms.
               </p>
 
               {/* Parking Info */}
@@ -449,7 +449,7 @@ export default function VenuesGuidePage() {
               Nearby Hotels for Dance Weekends &amp; DANZA! Festivals
             </h2>
             <p className="text-xs sm:text-sm text-ink font-semibold mt-1 max-w-2xl leading-relaxed">
-              Travelling from London, Bristol, Southampton, or abroad for our weekend festivals? These verified walkable hotels are all within 3 to 10 minutes of BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR).
+              Travelling from London, Bristol, Southampton, or abroad for our weekend festivals? These hotels are all within 3 to 10 minutes of BOH Studios Bournemouth (104 Commercial Rd, BH2 5LR).
             </p>
           </div>
           <span className="border-2 border-ink bg-poster-mustard text-ink text-xs font-bold px-3 py-1 shrink-0 shadow-[2px_2px_0_0_var(--color-ink)]">
@@ -490,7 +490,7 @@ export default function VenuesGuidePage() {
               <h3 className="font-display font-black text-base uppercase text-ink">Hampton by Hilton</h3>
               <p className="text-xs text-ink/75 font-medium">Upper Terrace Rd, Bournemouth BH2 5NW</p>
               <p className="text-xs text-ink leading-relaxed font-medium">
-                Modern dancer favorite! Includes complimentary hot breakfast, 24/7 fitness center, on-site parking, and spacious rooms just around the corner from The Triangle.
+                Includes complimentary hot breakfast, 24/7 fitness center, on-site parking, and spacious rooms just around the corner from The Triangle.
               </p>
             </div>
             <div className="pt-2 border-t border-ink text-xs font-bold text-ink/70">
@@ -568,7 +568,7 @@ export default function VenuesGuidePage() {
             </div>
             <h3 className="font-display font-black text-base uppercase text-ink">No Partner Needed</h3>
             <p className="text-xs text-ink leading-relaxed font-medium">
-              Over 70% of dancers arrive on their own! In Cuban Casino and Rueda de Casino, we rotate partners continuously so everyone gets to dance and practice both leading and following.
+              Plenty of dancers come on their own. In Cuban Casino and Rueda de Casino, we rotate partners continuously so everyone gets to dance and practice both leading and following.
             </p>
           </div>
 

@@ -43,7 +43,7 @@ export function VisualDressCodeModal({
             What to Wear: Visual Beginner Guide
           </h2>
           <p className="text-xs text-muted-foreground leading-relaxed">
-            No expensive ballroom shoes or formal Cuban guayaberas are needed for your first classes! Here is what works best on our sprung ballroom floor at BOH Studios Bournemouth.
+            No expensive ballroom shoes or formal Cuban guayaberas are needed for your first classes! Here is what works best on the floor at BOH Studios Bournemouth.
           </p>
         </div>
 

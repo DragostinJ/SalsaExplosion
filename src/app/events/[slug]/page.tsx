@@ -636,7 +636,9 @@ export default async function EventDetailPage({
               </h3>
             </div>
             <p className="text-xs text-ink leading-relaxed font-medium">
-              Choose Lead or Follow when you book so the teachers can plan the rotations. It is never a limit: no partner needed, and the workshops rotate so nobody sits out.
+              {payAtDoor
+                ? "No partner needed, and the workshops rotate so nobody sits out."
+                : "Choose Lead or Follow when you book so the teachers can plan the rotations. It is never a limit: no partner needed, and the workshops rotate so nobody sits out."}
             </p>
           </article>
 
@@ -644,11 +646,13 @@ export default async function EventDetailPage({
             <div className="flex items-center gap-2 border-b-2 border-ink pb-2">
               <Clock className="h-5 w-5 text-poster-mustard" />
               <h3 className={`font-display ${TYPE.card} text-ink`}>
-                Instant Door Pass
+                {payAtDoor ? "Pay on the Night" : "Instant Door Pass"}
               </h3>
             </div>
             <p className="text-xs text-ink leading-relaxed font-medium">
-              Tickets are issued immediately to your account with a cryptographically verified QR code for 1-second entrance scanning on arrival.
+              {payAtDoor
+                ? "Pay at the door when you arrive."
+                : "Your ticket goes to your account straight away, with a QR code to show at the door."}
             </p>
           </article>
         </div>

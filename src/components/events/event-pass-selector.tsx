@@ -272,7 +272,7 @@ export function EventPassSelector({
                       Verified Door QR Pass ({tier.userRegistration.role})
                     </div>
                     <p className="text-xs font-medium text-ink/70">
-                      Show this code at the festival entrance for 1-second check-in.
+                      Show this code at the door.
                     </p>
                   </div>
                 ) : (

@@ -140,7 +140,7 @@ export function ProgressionJourneyTabs({
                 Video Submissions are 100% Optional
               </span>
               <p className="text-muted-foreground">
-                Over 95% of student promotions at Salsa Explosion happen naturally during weekly classes at BOH Studios when Maestro Enrique and our instructors see your partner connection and timing. This video check-in is purely an extra convenience if you practice at home and want personal feedback from our faculty!
+                Most student promotions at Salsa Explosion happen naturally during weekly classes at BOH Studios when Maestro Enrique and our instructors see your partner connection and timing. This video check-in is purely an extra convenience if you practice at home and want personal feedback from our faculty!
               </p>
             </div>
           </div>

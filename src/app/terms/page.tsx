@@ -196,7 +196,7 @@ export default function TermsAndLegalPage() {
               <strong>Physical Exercise Self-Assessment:</strong> Cuban Salsa, Rueda de Casino, and Afro-Cuban dance involve cardiovascular exercise, turns, and partnerwork. Participants are responsible for ensuring they are in reasonable physical health to participate. If you have an existing injury or medical condition, please consult your doctor and notify your instructor prior to class.
             </li>
             <li>
-              <strong>Appropriate Footwear:</strong> For your comfort and safety on hardwood and sprung ballroom floors, please wear smooth-soled dance shoes, jazz shoes, or clean indoor trainers that allow smooth pivoting. Stiletto heels without protective caps are strictly prohibited to protect sprung dance floors.
+              <strong>Appropriate Footwear:</strong> For your comfort and safety on wooden dance floors, please wear smooth-soled dance shoes, jazz shoes, or clean indoor trainers that allow smooth pivoting. Stiletto heels without protective caps are strictly prohibited to protect sprung dance floors.
             </li>
             <li>
               <strong>Respectful Dance Floor Conduct:</strong> Salsa Explosion is a friendly, inclusive family. Harassment, unwanted physical contact, or disrespectful behaviour will result in immediate removal from the venue without refund.

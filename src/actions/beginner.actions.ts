@@ -54,9 +54,9 @@ const CATEGORY_REASSURANCES: Record<string, string> = {
   FOOTWEAR:
     "Maestro Enrique says: Clean smooth-soled shoes or leather-bottom sneakers are perfect for your first night at BOH Studios! Avoid deep rubber running treads that grip the wood. No special dance shoes needed on day 1.",
   RHYTHM:
-    "Remember: Nobody is born with Cuban clave in their ears! In Level 0, we count out loud together ('1-2-3, 5-6-7') so your feet find the pulse naturally within 20 minutes.",
+    "Remember: Nobody is born with Cuban clave in their ears! In Level 0, we count out loud together ('1-2-3, 5-6-7') so your feet find the pulse naturally.",
   PARTNER_ANXIETY:
-    "Never fear: In Cuban Salsa and Rueda de Casino, we rotate in a circle every 60 seconds. You dance with everyone, no partner needed, and every advanced dancer in the room remembers their very first class.",
+    "Never fear: In Cuban Salsa and Rueda de Casino, we rotate partners in a circle. You dance with everyone, no partner needed, and every advanced dancer in the room remembers their very first class.",
   VENUE_ARRIVING:
     "Arrive 10–15 minutes early at BOH Studios (104 Commercial Rd). Check in with your QR code or pay at the door, put your jacket in the wardrobe, and get a drink from the bar if you want. You're among friends!",
   GENERAL:

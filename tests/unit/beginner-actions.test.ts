@@ -142,7 +142,7 @@ describe("beginner.actions: Anonymous Question Guard (Rate-Limiting & Validation
       }),
     });
     if (res.success && res.data) {
-      expect(res.data.reassurance).toMatch(/rotate in a circle every 60 seconds/i);
+      expect(res.data.reassurance).toMatch(/rotate partners in a circle/i);
     }
   });
 });

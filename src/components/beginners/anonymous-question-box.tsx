@@ -25,7 +25,7 @@ const COMMON_QUESTIONS = [
     category: "RHYTHM" as QuestionCategory,
     question: "What if I have two left feet and can't find the beat?",
     answer:
-      "Maestro Enrique: Nobody is born with Cuban rhythm! In Level 0, we count out loud ('1-2-3, 5-6-7') and tap feet in a simple march. In 20 minutes, your body syncs naturally.",
+      "Maestro Enrique: Nobody is born with Cuban rhythm! In Level 0, we count out loud ('1-2-3, 5-6-7') and tap feet in a simple march.",
   },
   {
     category: "PARTNER_ANXIETY" as QuestionCategory,
@@ -37,7 +37,7 @@ const COMMON_QUESTIONS = [
     category: "FOOTWEAR" as QuestionCategory,
     question: "I don't have dance shoes yet. What should I wear on day 1?",
     answer:
-      "David (Rhythm Guide): Any smooth-soled shoes, flat canvas sneakers (like Toms/Converse), or leather loafers work great. Just avoid heavy running trainers that stick to the floor.",
+      "Maestro Enrique: Any smooth-soled shoes, flat canvas sneakers (like Toms/Converse), or leather loafers work great. Just avoid heavy running trainers that stick to the floor.",
   },
 ];
 

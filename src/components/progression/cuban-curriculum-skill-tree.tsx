@@ -196,11 +196,11 @@ export function CubanCurriculumSkillTree({
           </div>
 
           {/* Progress Overview Pill */}
-          <div className="flex items-center gap-3 bg-muted/40 border p-2.5 rounded-2xl shrink-0">
+          <div className="flex max-w-full items-center gap-3 bg-muted/40 border p-2.5 rounded-2xl">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-500/10 text-rose-300 font-black">
               <Award className="h-5 w-5" />
             </div>
-            <div className="text-xs">
+            <div className="min-w-0 text-xs">
               <div className="font-extrabold text-foreground">
                 {masteredCount} of {levelAllSkills.length} Mastered
               </div>
@@ -477,7 +477,7 @@ export function CubanCurriculumSkillTree({
                         <button
                           type="button"
                           onClick={() => handleToggleStatus(skill.id)}
-                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black transition-all ${
+                          className={`inline-flex min-h-[40px] items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black transition-all ${
                             isMastered
                               ? "bg-emerald-600 text-white shadow-xs"
                               : isLearning

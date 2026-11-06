@@ -124,6 +124,7 @@ test.describe("Card integrity", () => {
       await page.setViewportSize(size);
       for (const route of routes) {
         await settlePage(page, route, { scroll: false });
+        await page.locator("[data-testid='song-player-screen']").waitFor();
         const diagnosis = await diagnosePage(page, { checkOverlap: false });
         if (diagnosis.scrollHeight > diagnosis.innerHeight + 1) tooTall.push(`${route} at ${size.width}x${size.height}: ${diagnosis.scrollHeight}px`);
       }

@@ -173,7 +173,7 @@ export function CubanMusicHubClient({ practiceList }: { practiceList: ReactNode 
       </div>
 
       {/* Tracks Grid */}
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         {filteredTracks.length === 0 ? (
           <div className="col-span-2 text-center py-12 rounded-2xl border bg-muted/20">
             <Radio className="mx-auto h-12 w-12 text-muted-foreground/40" />
@@ -202,8 +202,8 @@ export function CubanMusicHubClient({ practiceList }: { practiceList: ReactNode 
               <CardContent className="p-5 space-y-4 flex-1 flex flex-col justify-between">
                 <div className="space-y-3">
                   {/* Top Bar: Title, Artist, Badges */}
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div className="min-w-0">
                       <h3 className="font-extrabold text-base text-foreground flex items-center gap-1.5">
                         <Music className="h-4 w-4 text-amber-500 shrink-0" />
                         <span>{track.title}</span>
@@ -213,8 +213,8 @@ export function CubanMusicHubClient({ practiceList }: { practiceList: ReactNode 
                       </span>
                     </div>
 
-                    <div className="flex flex-col items-end gap-1 shrink-0">
-                      <div className="flex items-center gap-1">
+                    <div className="flex min-w-0 max-w-full flex-col items-start gap-1">
+                      <div className="flex flex-wrap items-center gap-1">
                         <Badge
                           className={`text-xs font-bold ${
                             track.level === "Beginner"

@@ -167,7 +167,7 @@ test.describe("M8: Mobile-First Responsive Layout & No-Horizontal-Overflow Suite
 
     await page.goto("/events/made-in-cuba-dance-weekend-2026");
     await page.waitForLoadState("domcontentloaded");
-    const eventTrustBar = page.locator('[data-testid="payment-security-trust-bar"]');
+    const eventTrustBar = page.locator('[data-testid="payment-security-trust-bar"]:visible');
     await expect(eventTrustBar).toBeVisible();
 
     // 3. Class timetable grid renders near top of mobile viewport (y < 750px with day filter)

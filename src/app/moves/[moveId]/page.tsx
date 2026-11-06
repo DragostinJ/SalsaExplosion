@@ -97,7 +97,7 @@ export default async function MovePage({ params }: MovePageProps) {
             {move.category} · {move.level} ·{" "}
             <span className="whitespace-nowrap">{move.eightCounts} × 8</span>
           </p>
-          <h1 className={`mt-3 ${TYPE.section}`}>
+          <h1 className={`mt-3 ${TYPE.section} max-[360px]:text-4xl`}>
             {move.spanishName ?? move.name}
             {move.spanishName && move.spanishName !== move.name && (
               <span className="mt-2 block font-sans text-lg font-bold normal-case leading-snug tracking-normal">{move.name}</span>

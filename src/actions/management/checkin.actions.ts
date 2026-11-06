@@ -8,6 +8,7 @@ import { getOrProvisionCurrentUser, isFallbackUser, SERVICE_UNAVAILABLE_MESSAGE 
 import { withRateLimit, getRateLimitIdentifier } from "@/lib/ratelimit";
 import { recordAuditLog } from "@/lib/audit-log";
 import type { ManagementActionResponse } from "@/lib/constants/management";
+import { classifyDoorPass, type DoorPassVerdict } from "@/lib/events/door-pass";
 
 const ToggleBookingCheckInSchema = z.object({
   bookingId: z.string().min(1),
@@ -16,6 +17,11 @@ const ToggleBookingCheckInSchema = z.object({
 
 const SelfCheckInClassQrSchema = z.object({
   classSessionId: z.string().min(1),
+});
+
+const VerifyEventPassSchema = z.object({
+  code: z.string().trim().min(3).max(80),
+  eventId: z.string().min(1),
 });
 
 const ToggleEventCheckInSchema = z.object({
@@ -238,6 +244,70 @@ export async function selfCheckInClassQrAction(rawInput: {
       };
     }
   });
+}
+
+/** Looks a scanned pass up at the moment of the scan, so a pass bought a minute ago works. Changes nothing. */
+export async function verifyEventPassAction(rawInput: {
+  code: string;
+  eventId: string;
+}): Promise<ManagementActionResponse<DoorPassVerdict>> {
+  try {
+    // fallback-guard
+    const actor = await getOrProvisionCurrentUser();
+    if (!actor || (actor.role !== Role.INSTRUCTOR && actor.role !== Role.ADMIN)) {
+      return {
+        success: false,
+        error: { code: "FORBIDDEN", message: "Unauthorized door scanner access." },
+      };
+    }
+    if (isFallbackUser(actor)) {
+      return {
+        success: false,
+        error: { code: "SERVICE_UNAVAILABLE", message: SERVICE_UNAVAILABLE_MESSAGE },
+      };
+    }
+
+    const parsed = VerifyEventPassSchema.safeParse(rawInput);
+    if (!parsed.success) {
+      return {
+        success: false,
+        error: { code: "VALIDATION_ERROR", message: "That doesn't look like a pass code." },
+      };
+    }
+
+    const registration = await prisma.eventRegistration.findFirst({
+      where: { qrCodeHash: { equals: parsed.data.code, mode: "insensitive" } },
+      include: {
+        user: { select: { firstName: true, lastName: true } },
+        event: { select: { id: true, title: true } },
+        ticketTier: { select: { name: true } },
+      },
+    });
+
+    const verdict = classifyDoorPass(
+      registration && {
+        id: registration.id,
+        eventId: registration.event.id,
+        eventTitle: registration.event.title,
+        tierName: registration.ticketTier.name,
+        dancerName: `${registration.user.firstName} ${registration.user.lastName}`,
+        role: registration.role,
+        paymentStatus: registration.paymentStatus,
+        checkedIn: registration.checkedIn,
+        checkedInAt: registration.checkedInAt,
+      },
+      parsed.data.eventId,
+      parsed.data.code
+    );
+
+    return { success: true, data: verdict, message: "Pass checked." };
+  } catch (error) {
+    console.error("[verifyEventPassAction]", error);
+    return {
+      success: false,
+      error: { code: "INTERNAL_ERROR", message: "Couldn't check that pass. Try again, or find the name in the list." },
+    };
+  }
 }
 
 export async function toggleEventRegistrationCheckInAction(rawInput: {

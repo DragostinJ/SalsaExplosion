@@ -132,6 +132,10 @@ export const SERVER_ACTION_MANIFEST: Record<string, ActionAccessManifestEntry> =
     access: "delegates",
     reason: "Delegates to checkin.selfCheckInClassQrAction in management/checkin.actions.",
   },
+  "src/actions/management.actions.ts#verifyEventPassAction": {
+    access: "delegates",
+    reason: "Delegates to checkin.verifyEventPassAction in management/checkin.actions.",
+  },
   "src/actions/management.actions.ts#toggleEventRegistrationCheckInAction": {
     access: "delegates",
     reason: "Delegates to checkin.toggleEventRegistrationCheckInAction in management/checkin.actions.",
@@ -193,6 +197,10 @@ export const SERVER_ACTION_MANIFEST: Record<string, ActionAccessManifestEntry> =
   "src/actions/management/checkin.actions.ts#selfCheckInClassQrAction": {
     access: "signed-in",
     reason: "Signed-in dancer self-check-in via studio QR code scan; scopes check-in strictly to studentId: user.id.",
+  },
+  "src/actions/management/checkin.actions.ts#verifyEventPassAction": {
+    access: "staff",
+    reason: "Staff only lookup of a scanned festival pass at the door. Changes nothing.",
   },
   "src/actions/management/checkin.actions.ts#toggleEventRegistrationCheckInAction": {
     access: "staff",

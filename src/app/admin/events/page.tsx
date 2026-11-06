@@ -43,6 +43,7 @@ export default async function AdminEventsPage() {
     slug: ev.slug,
     title: ev.title,
     startDateIso: ev.startDate.toISOString(),
+    endDateIso: ev.endDate.toISOString(),
     venueName: ev.venueName,
     guestArtists: ev.guestArtists,
     totalRegistrations: ev.registrations.length,

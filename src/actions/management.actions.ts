@@ -23,6 +23,12 @@ export async function selfCheckInClassQrAction(
   return checkin.selfCheckInClassQrAction(...args);
 }
 
+export async function verifyEventPassAction(
+  ...args: Parameters<typeof checkin.verifyEventPassAction>
+) {
+  return checkin.verifyEventPassAction(...args);
+}
+
 export async function toggleEventRegistrationCheckInAction(
   ...args: Parameters<typeof checkin.toggleEventRegistrationCheckInAction>
 ) {

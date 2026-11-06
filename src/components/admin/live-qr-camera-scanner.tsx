@@ -4,36 +4,21 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Camera, CameraOff, Sparkles, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTimeout } from "@/lib/hooks/use-timeout";
+import { createQrFrameReader } from "@/lib/qr/frame-reader";
 
 interface LiveQrCameraScannerProps {
   onDetected: (scannedCode: string) => void;
   className?: string;
   buttonLabel?: string;
-}
-
-interface DetectedBarcode {
-  rawValue?: string;
-  format?: string;
-}
-
-interface BarcodeDetectorLike {
-  detect(image: ImageBitmapSource): Promise<DetectedBarcode[]>;
-}
-
-interface BarcodeDetectorConstructor {
-  new (options?: { formats: string[] }): BarcodeDetectorLike;
-}
-
-declare global {
-  interface Window {
-    BarcodeDetector?: BarcodeDetectorConstructor;
-  }
+  /** Keep the camera open and read one dancer after another */
+  continuous?: boolean;
 }
 
 export function LiveQrCameraScanner({
   onDetected,
   className = "",
   buttonLabel = "Open Camera Scanner",
+  continuous = false,
 }: LiveQrCameraScannerProps) {
   const { schedule: scheduleTimeout } = useTimeout();
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +30,7 @@ export function LiveQrCameraScanner({
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const lastReadRef = useRef<{ code: string; at: number } | null>(null);
 
   const stopCamera = useCallback(() => {
     if (intervalRef.current) {
@@ -65,6 +51,14 @@ export function LiveQrCameraScanner({
     (code: string) => {
       const cleanCode = code.trim();
       if (!cleanCode) return;
+      if (continuous) {
+        // The same phone stays in view for a while: only read it once
+        const last = lastReadRef.current;
+        if (last && last.code === cleanCode && Date.now() - last.at < 5000) return;
+        lastReadRef.current = { code: cleanCode, at: Date.now() };
+        onDetected(cleanCode);
+        return;
+      }
       setLastScanned(cleanCode);
       onDetected(cleanCode);
       // Small pause before closing or next scan
@@ -73,7 +67,7 @@ export function LiveQrCameraScanner({
         setIsOpen(false);
       }, 1200);
     },
-    [onDetected, stopCamera, scheduleTimeout]
+    [onDetected, stopCamera, scheduleTimeout, continuous]
   );
 
   const startCamera = async () => {
@@ -103,24 +97,22 @@ export function LiveQrCameraScanner({
       }
       setCameraActive(true);
 
-      // Check if native BarcodeDetector API is available (modern Android Chrome, iOS 17+)
-      if (typeof window !== "undefined" && window.BarcodeDetector) {
-        const barcodeDetector = new window.BarcodeDetector({
-          formats: ["qr_code"],
-        });
-
-        intervalRef.current = setInterval(async () => {
-          if (!videoRef.current || videoRef.current.readyState < 2) return;
-          try {
-            const barcodes = await barcodeDetector.detect(videoRef.current);
-            if (barcodes.length > 0 && barcodes[0].rawValue) {
-              handleScanSuccess(barcodes[0].rawValue);
-            }
-          } catch {
-            // Ignore frame decode errors
-          }
-        }, 300);
-      }
+      // Android Chrome has a built-in reader. iPhones and other browsers use a small decoder.
+      const readFrame = await createQrFrameReader();
+      let busy = false;
+      intervalRef.current = setInterval(async () => {
+        const video = videoRef.current;
+        if (busy || !video || video.readyState < 2) return;
+        busy = true;
+        try {
+          const code = await readFrame(video);
+          if (code) handleScanSuccess(code);
+        } catch {
+          // A frame that can't be read is normal: try the next one
+        } finally {
+          busy = false;
+        }
+      }, 300);
     } catch (err) {
       console.warn("[LiveQrCameraScanner] Camera error:", err);
       const isDenied = err instanceof DOMException && err.name === "NotAllowedError";
@@ -194,7 +186,7 @@ export function LiveQrCameraScanner({
             <div className="py-6 text-center space-y-2">
               <CheckCircle2 className="h-10 w-10 text-emerald-400 mx-auto animate-bounce" />
               <p className="text-sm font-black text-emerald-300">
-                Pass Verified!
+                Code read
               </p>
               <code className="text-xs bg-white/10 px-2 py-1 rounded font-mono text-white block">
                 {lastScanned}
@@ -205,17 +197,6 @@ export function LiveQrCameraScanner({
               <div className="flex items-start gap-2 text-rose-300 text-xs">
                 <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
                 <p>{errorMsg}</p>
-              </div>
-              <div className="pt-2 border-t border-white/10 text-center">
-                <Button
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                  onClick={() => handleScanSuccess("RF-PASS-SOFIA-001")}
-                  className="text-xs border-amber-400/40 bg-white/5 text-amber-200 hover:bg-white/10"
-                >
-                  Simulate QR Pass Scan (Test Demo)
-                </Button>
               </div>
             </div>
           ) : (
@@ -243,13 +224,6 @@ export function LiveQrCameraScanner({
 
               <div className="flex items-center justify-between text-[11px] text-ivory-muted">
                 <span>Align student&apos;s phone QR inside box</span>
-                <button
-                  type="button"
-                  onClick={() => handleScanSuccess("RF-PASS-SOFIA-001")}
-                  className="text-amber-300 underline font-semibold hover:text-amber-200"
-                >
-                  Test Demo Scan
-                </button>
               </div>
             </div>
           )}

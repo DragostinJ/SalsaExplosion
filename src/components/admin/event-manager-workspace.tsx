@@ -25,7 +25,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { LiveQrCameraScanner } from "@/components/admin/live-qr-camera-scanner";
+import { DoorPassScanner } from "@/components/admin/door-pass-scanner";
 
 export interface AdminEventRegistrationItem {
   id: string;
@@ -44,6 +44,7 @@ export interface AdminEventSummary {
   slug: string;
   title: string;
   startDateIso: string;
+  endDateIso: string;
   venueName: string;
   guestArtists: string[];
   totalRegistrations: number;
@@ -65,16 +66,12 @@ export function EventManagerWorkspace({
   const [searchQrOrName, setSearchQrOrName] = useState("");
 
   // New Event Form State
-  const [title, setTitle] = useState("Cuban Timba & Son Mastery Weekender");
-  const [slug, setSlug] = useState("cuban-timba-son-weekender");
-  const [description, setDescription] = useState(
-    "2-day intensive masterclass covering authentic Son Cubano timing, Contratiempo footwork, and dynamic Casino partnerwork with international guest artists."
-  );
-  const [venueName, setVenueName] = useState("Gran Teatro Havana Hall");
-  const [venueAddress, setVenueAddress] = useState("142 Rhythm Way, London");
-  const [guestArtistsCsv, setGuestArtistsCsv] = useState(
-    "Maestro Yoannis Tamayo, Maestra Indira Perez"
-  );
+  const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
+  const [description, setDescription] = useState("");
+  const [venueName, setVenueName] = useState("");
+  const [venueAddress, setVenueAddress] = useState("");
+  const [guestArtistsCsv, setGuestArtistsCsv] = useState("");
   const [fullPassPricePounds, setFullPassPricePounds] = useState(95);
   const [fullPassCapacity, setFullPassCapacity] = useState(80);
   const [partyPassPricePounds, setPartyPassPricePounds] = useState(20);
@@ -264,28 +261,28 @@ export function EventManagerWorkspace({
                     </CardTitle>
                   </div>
                   <CardDescription className="text-xs mt-1">
-                    Scan or type a dancer&apos;s QR code (e.g., RF-PASS-SOFIA-001) to verify their pass in 1 second.
+                    Scan a dancer&apos;s QR code, or type it, to check their pass.
                   </CardDescription>
                 </div>
               </div>
             </CardHeader>
 
             <CardContent className="space-y-4">
-              <LiveQrCameraScanner
-                onDetected={(code) => {
-                  setSearchQrOrName(code);
-                }}
-                buttonLabel="Open Camera Pass Scanner"
+              <DoorPassScanner
+                events={initialEvents}
+                onCheckedIn={(id) =>
+                  setRegistrations((prev) => prev.map((r) => (r.id === id ? { ...r, checkedIn: true } : r)))
+                }
               />
 
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <input
                   type="text"
-                  aria-label="Scan or search QR hash or dancer name"
+                  aria-label="Find a dancer by name, email or code"
                   value={searchQrOrName}
                   onChange={(e) => setSearchQrOrName(e.target.value)}
-                  placeholder="Scan or search QR hash (RF-PASS-...) or dancer name..."
+                  placeholder="Find a dancer by name, email or code..."
                   className="w-full rounded-xl border bg-background pl-9 pr-4 py-2.5 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
               </div>

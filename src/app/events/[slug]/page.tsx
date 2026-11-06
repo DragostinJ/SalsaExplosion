@@ -295,6 +295,12 @@ export default async function EventDetailPage({
               {event.title}
             </h1>
 
+            {!eventFinished && (
+              <a href="#passes" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-4 text-xs`}>
+                Get tickets ↓
+              </a>
+            )}
+
             <p className="text-base sm:text-lg font-medium text-ink leading-relaxed max-w-2xl">
               {event.description}
             </p>
@@ -314,12 +320,7 @@ export default async function EventDetailPage({
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              {!eventFinished && (
-                <a href="#passes" className={`${POSTER_BUTTON} ${POSTER_BUTTON_COLORS.ink} min-h-[40px] px-4 text-xs`}>
-                  Get tickets ↓
-                </a>
-              )}
+            <div className="pt-2">
               <AddToCalendarButton
                 event={{
                   title: event.title,
